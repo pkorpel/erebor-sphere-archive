@@ -382,7 +382,11 @@ id=c_man
 name=Hlidac Nastaveni NEMAZAT!!
 can=0
 
+TEVENTS=e_character
+
 on=@create
+NPC=brain_human
+KARMA=-1000
 item=i_nastaveni_guardian_timer
 kermel.delayedmessage("Cas: <servertime> hlidac nastaveni <uid> vytvoren - tvurce <src>-<src.name>(<src.account.name>)")
 
