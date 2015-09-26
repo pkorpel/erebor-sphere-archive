@@ -52,7 +52,7 @@ NAME=Neaktivni runa
 TYPE=T_GEM
 VALUE={16 20}
 WEIGHT=1.0
-RESOURCES=1 i_ingot_mithril, 5 i_gem_ruby, 5 i_gem_citrine, 5 i_gem_amethyst
+RESOURCES=1 i_ingot_adamantinum
 SKILLMAKE=TINKERING 99.0,t_tinker_tools
 
 CATEGORY=Unique Items

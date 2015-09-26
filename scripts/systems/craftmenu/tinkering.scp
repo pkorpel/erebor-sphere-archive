@@ -2,7 +2,7 @@
 newTOPOBJ(Tinkering)
 
 cm_newitem(i_bottle_empty)
-cm_newitem(i_rune_marker)
+cm_newitem(i_rune_tinker)
 
 cm_newsection(0,"Containers",i_barrel_open)
  cm_newitem(i_box_brass)
