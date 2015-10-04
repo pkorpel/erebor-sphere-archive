@@ -1,11 +1,3 @@
-[events e_onDeath_negateSpawn]
-on=@death
-arg(spwn,<uid.memoryfindtype(MEMORY_ISPAWNED).link>)
-arg(firstnumb,<StrGetTok("<spwn.moreP>",0,",")>)
-arg(secondnumb,<StrGetTok("<spwn.moreP>",1,",")>)
-arg(rndnumb,<eval {<firstnumb> <secondnumb>}>)
-spwn.timer=<rndnumb>*60
-
 [events e_mithril]
 on=@Created
 on=@DrinkingPotion

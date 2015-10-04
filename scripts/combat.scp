@@ -374,7 +374,7 @@ endif
 //ensures minimal damage for wrestling dmg
 [function f_dmgFinal_PvX_minimalDMG]
 if (src.isplayer)
-  if(<src.tag(atskill)>==43)&&(!src.findlayer(1))&&(!src.findlayer(2))&&(!<src.tag(hypno_mystik)>)  //wrestling, beze zbrane
+  if(<eval src.tag(atskill)>==43)&&(!src.findlayer(1))&&(!src.findlayer(2))&&(!<eval src.tag(hypno_mystik)>)  //wrestling, beze zbrane
     if (!<var(absoluteResist)>) //low dmg was caused due to the enemy's absolute resist against the attack
       if (!<var(ubrano)>)
         var(ubrano,1) //kvuli odparovani a mozna taky klerici si nejakej ten exp privydelaj!

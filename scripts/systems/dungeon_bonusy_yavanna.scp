@@ -2939,7 +2939,6 @@ return 1
 
 on=@TargOn_Item
 if (src.targ.type==t_spawn_char)
-  src.targ.tag(negateOnDeath,1)
   link.tag(spawn[<eval more1>],<src.targ>)
   link.tag(pocetSpawnu,<eval link.tag(pocetSpawnu)>+<more2>)
 else

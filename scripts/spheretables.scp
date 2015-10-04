@@ -161,15 +161,16 @@ scripts\systems\ctf.scp
 scripts\systems\regbox.scp
 scripts\systems\lagr.scp
 scripts\systems\lagr_afk.scp
-scripts\systems\treasures.scp
 scripts\systems\necrobook.scp
 scripts\systems\pergameny.scp
 scripts\systems\poklady.scp
 scripts\systems\random_camps.scp
 scripts\systems\runebook.scp
+scripts\systems\spawns.scp
 scripts\systems\sheep_game.scp
 scripts\systems\svitkovac.scp
 scripts\systems\toulec.scp
+scripts\systems\treasures.scp
 scripts\systems\tresty.scp
 scripts\systems\travelstone.scp
 scripts\systems\uniques.scp
