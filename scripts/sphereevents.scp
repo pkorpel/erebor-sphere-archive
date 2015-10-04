@@ -956,9 +956,9 @@ events=-e_noclick
 if (profession==prof_undeclared)||(tag(prevest))
   go 4764,1362,10
 elseif (region.flags==06d9f)
-elseif (tag(level)<3) // && !(strlen(<tag(presel)>)) //prestup osetren na lvl 15
-  go tutorial
-  home=5412,2555,13,35 //tutorial
+//elseif (tag(level)<3) // && !(strlen(<tag(presel)>)) //prestup osetren na lvl 15
+//  go tutorial
+//  home=5412,2555,13,35 //tutorial
 elseif (f_check_tag_realm) // tag realm is not damaged (some are)
   if !(<src.tag(realm)>)
     go tutorial
