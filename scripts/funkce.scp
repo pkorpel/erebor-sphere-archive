@@ -117,37 +117,6 @@ if (isplayer)
  zakladstats //resetovat
 endif
 
-[function respawncertain] //args - id monster
-if (strlen(<args>))
- nukeall(respawnspawns(<args>))
-else
- nukeall(respawnspawns)
-endif
-
-[function respawnspawns]
-if (type==t_spawn_char)
-  if (strlen(<args>))
-    if (<more1>==<args>)
-      if (tag(lastspawned).ischar)
-        tag(lastspawned).remove   
-      endif
-      timer=1
-    else
-    endif
-  else //vsechny spawny
-    if (tag(lastspawned))
-      if (finduid(<tag(lastspawned)>))
-        if (finduid(<tag(lastspawned)>).ischar)
-          finduid(<tag(lastspawned)>).remove    
-        endif
-      endif
-    endif
-    srccome
-    dclick
-    spawnfull 
-  endif
-endif
-
 [function keyswipe]
 //findlayer(101).emptycont
 if (cont.layer==101)
@@ -2486,35 +2455,6 @@ src.act.bounce
 src.targ.remove
 remove
 
-
-
-
-[function tempspawn]//id, amount, homedist
-newitemsafe(i_spawnfull_timer)
-lastnew.timer=1
-lastnew.p=<p>
-lastnew.more1=0
-arg(timeruid,<lastnew>)
-newitemsafe(01ea7)
-lastnew.events +t_char_tempspawn
-lastnew.P=<P>
-lastnew.type=34
-lastnew.more=<argv(0)>
-lastnew.amount=<argv(1)>
-lastnew.morep=1,2,<argv(2)>
-lastnew.ATTR=0b0
-finduid(<arg(timeruid)>).link=<lastnew>
-
-[typedef t_char_tempspawn]
-on=@timer
-if (morem)
- if !(more2)
-  remove
- endif
-endif
-morem=<morem>+1
-return 0
-
 [function myaction]
 if (action!=-1)
  if (action==067)
@@ -3406,7 +3346,6 @@ return 1
 on=@targon_item
 if (more1)
  if (src.targ.type==t_spawn_char)
-  src.targ.tag(negateOnDeath,1)
   link=<more1>
   link.link=<src.targ>
   link=""
@@ -5405,12 +5344,12 @@ on=@create
 attr=attr_invis
 
 on=@timer
-if (<link.amount>><link.more2>)&&(link.type==t_spawn_char)//&&(<eval <more1>><100)
-more1=<eval <more1>+1>
-link.timer=0
-timer 1
+if ( (<link.amount>><link.more2>)&&(link.type==t_spawn_char) )
+  more1=<eval <more1>+1>
+  link.timer=0
+  timer 1
 else
- remove
+  remove
 endif
 return 1
 

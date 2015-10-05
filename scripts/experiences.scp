@@ -376,7 +376,7 @@ dialog d_class_info
 if !(isplayer)
   return 0
 endif
-if !(tag(experience))
+if !(<eval tag(experience)>)
   tag(experience,0)
 endif
 if !(tag(level))

@@ -300,6 +300,11 @@ tag(row_ret[tag(rowcount)],"<hval return_flag>","<return_prop>","<argv(7)>","<ar
 on=@userclick
 spawnname_<src.tag(clienttype)>
 
+on=@timer
+if (<more2> >= amount)
+  return 1
+endif
+
 [function spawnname_old]
 message("<amount> <findres(chardef,more).defname> (<findres(chardef,more).name>)")
 message("Min:<morex> Max:<morey> Homedist:<morez>")
@@ -324,105 +329,6 @@ return 0
 
 [function resourcename_]
 return 0
-
-[FUNCTION spawn]
-IF !(strcmpi(<ARGs>,?))
-	SYSMESSAGE Opens up the spawn creation dialog.
-	SYSMESSAGE Format: spawn ARGUMENT
-	SYSMESSAGE Where ARGUMENT can be 1 or 2.  1 will recreate the last spawn point set up.
-	SYSMESSAGE 2 will clear spawn settings.
-	RETURN 1
-ELSEIF (ARGs==1)
-	f_spawninit
-	RETURN 1	
-ELSEIF (ARGs==2)||(strlen(<tag(spawdl_data)>)==0)
-        tag(spawdl_data,"1,c_man,1,10,1")
-	MESSAGE="Spawn settings cleared."
-	RETURN 1
-ENDIF
-DIALOG(d_spawner,<tag(spawdl_data)>)
-RETURN 1
-
-[DIALOG d_spawner]
-100,100
-argo.tag(sirka,400)
-argo.tag(vyska,<eval 23+(5*d_def_radek_vyska)+(2*d_def_skvira)+(2*d_def_okraj)>)
-argo.dialog_prvni
-argo.dialog_pozadi(<argo.tag(nexty)>,5,75)
-argo.dialog_zpruhledni
-
-argo.texta(<argo.dialog_textpos(0,0)>,0481,Amount)
-argo.texta(lastxpos,lastypos+d_def_radek_vyska,0481,BASEID)
-argo.texta(lastxpos,lastypos+(2*d_def_radek_vyska),0481,Mintime)
-argo.texta(lastxpos,lastypos+(3*d_def_radek_vyska),0481,Maxtime)
-argo.texta(lastxpos,lastypos+(4*d_def_radek_vyska),0481,Homedist)
-
-argo.settext(101,"<argv(0)>")
-argo.settext(102,"<argv(1)>")
-argo.settext(103,"<argv(2)>")
-argo.settext(104,"<argv(3)>")
-argo.settext(105,"<argv(4)>")
-
-argo.textentry(<argo.dialog_textpos(0,1)>,200,d_def_radek_vyska,0481,			1,101)
-argo.textentry(lastxpos,lastypos+d_def_radek_vyska,200,d_def_radek_vyska,0481,		2,102)
-argo.textentry(lastxpos,lastypos+(2*d_def_radek_vyska),200,d_def_radek_vyska,0481,	3,103)
-argo.textentry(lastxpos,lastypos+(3*d_def_radek_vyska),200,d_def_radek_vyska,0481,	4,104)
-argo.textentry(lastxpos,lastypos+(4*d_def_radek_vyska),200,d_def_radek_vyska,0481,	5,105)
-
-argo.button(<d_def_okraj>,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb7,0fb9,1,0,1)//ok
-argo.button(<d_def_okraj>+33,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb1,0fb3,1,0,0)//cancel
-
-[DIALOG d_spawner BUTTON]
-ON=0
-SYSMESSAGE Spawning Cancelled
-RETURN 0
-ON=1
-safe(arg(monsterid,<findres(chardef,argtxt(2)).defname>))
-if (arg(monsterid))
-  tag(spawdl_data,"<eval argtxt(1)>,<arg(monsterid)>,<eval argtxt(3)>,<eval argtxt(4)>,<eval argtxt(5)>,")
-  f_spawninit(<tag(spawdl_data)>)
-else
-  tag(spawdl_data,"<eval argtxt(1)>,<argtxt(2)>,<eval argtxt(3)>,<eval argtxt(4)>,<eval argtxt(5)>,")
-  src.Redmessage("Bad monster ID")
-  DIALOG(d_spawner,<tag(spawdl_data)>)
-endif
-RETURN 0
-
-[function f_spawninit]
-NEWITEMsafe(01ea7)
-lastnew.P=<P>
-lastnew.TYPE=34
-lastnew.AMOUNT=<argv(0)>
-lastnew.MORE=<argv(1)>
-lastnew.MOREX=<argv(2)>
-lastnew.MOREY=<argv(3)>
-lastnew.MOREZ=<argv(4)>
-lastnew.ATTR=0b0
-lastnew.timer=1
-var(spawnuid,<lastnew>)
-var(spawnuid).spawnfull
-newitemsafe(i_badspawncheck)
-lastnew.cont=<src>
-lastnew.link=<var(spawnuid)>
-lastnew.timer=2
-
-[itemdef i_badspawncheck]
-id=i_memory
-type=t_eq_script
-name=badspawncheck
-
-on=@timer
-if (link.more1==0)||(link.timer<0)||link.more2==0)
-  link.remove
-  if (cont.isGM)
-    cont.sysMessage("Spatny spawn - smazan")
-  endif
-elseif (cont.isGM)
-    cont.sysMessage("Spawn nastaven a inicializovan v poradku")
-  endif
-endif
-remove
-return 1
 
 [FUNCTION removeall]
 VAR(P,<P>)

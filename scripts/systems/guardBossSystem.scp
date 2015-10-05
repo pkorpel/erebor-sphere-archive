@@ -151,7 +151,6 @@ else
   arg(inactivePosition,<f_canAddOnSpawnEvent>)
   if (<arg(inactivePosition)> > 0) // new spawn add event can be added to the spawn
     tag(spawnevent<eval arg(inactivePosition)>,"e_guardBossSystem_Boss") // adding next npc spawn event to the spawn - ie. this event is added to every new spawned npc.
-    tag(negateOnDeath,1) // set's the spawn to reset the spawn's timer after each kill of it's npc
   else
     redMessage("Tento spawn je plne vytizeny a nelze na nej pridat dalsi eventy tohoto typu.")
   endif
@@ -206,7 +205,6 @@ if (src.targ.type==t_spawn_char)
     return 1
   else // targetting guard's spawn
     tag(spawnID).f_spawnLinks_add(<src.targ>,"guardSpawn") // adds new link to this spawn to the boss' spawn
-    src.targ.tag(negateOnDeath,1) // set's the spawn to reset the spawn's timer after each kill of it's npc
     src.sysMessage("Spawn pridan")
   endif
 else
