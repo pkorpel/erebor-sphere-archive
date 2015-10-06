@@ -17,7 +17,7 @@ if(<tag(srcmagicals)> >= 5)
     arg(i,#+1)
   endwhile
   //tag(kolik_vybral,<eval (<tag(kolik_vybral)>+5)>)
-  finduid(#0402D472F).tag(collected_items,#+5)
+  finduid(#0400075A4).tag(collected_items,#+5)
   tag.remove(srcmagicals)
   return 1
 else
@@ -871,7 +871,7 @@ on=@create
 type=mit_main
 color=0430
 Name=Pytlik s magickym predmetem
-finduid(#0402D472F).tag(padnute_zelene,#+1)
+finduid(#0400075A4).tag(padnute_zelene,#+1)
 
 on=@userclick
 return"<allcontainersClick>"
@@ -884,7 +884,7 @@ type=mit_main
 color=045d
 Name=Pytlik s magickym predmetem
 more1=1
-finduid(#0402D472F).tag(padnute_hnede,#+1)
+finduid(#0400075A4).tag(padnute_hnede,#+1)
 
 on=@userclick
 return"<allcontainersClick>"
@@ -897,7 +897,7 @@ type=mit_main
 color=0455
 Name=Pytlik s magickym predmetem
 more1=2
-finduid(#0402D472F).tag(padnute_cierne,#+1)
+finduid(#0400075A4).tag(padnute_cierne,#+1)
 
 on=@userclick
 return"<allcontainersClick>"
@@ -911,31 +911,31 @@ on=@userdclick
 arg(uid,<uid>)
 if (src.tag(realm) == 1)
 	if (more1 == 1)
-    finduid(#0402D472F).tag(gondori_hnede,#+1)
+    finduid(#0400075A4).tag(gondori_hnede,#+1)
   elseif (more1 == 2)
-    finduid(#0402D472F).tag(gondori_cierne,#+1)
+    finduid(#0400075A4).tag(gondori_cierne,#+1)
   else  	
-    finduid(#0402D472F).tag(gondori_zelene,#+1)
+    finduid(#0400075A4).tag(gondori_zelene,#+1)
   endif
 elseif (src.tag(realm) == 2)
 	if (more1 == 1)
-    finduid(#0402D472F).tag(mordori_hnede,#+1)
+    finduid(#0400075A4).tag(mordori_hnede,#+1)
   elseif (more1 == 2)
-    finduid(#0402D472F).tag(mordori_cierne,#+1)
+    finduid(#0400075A4).tag(mordori_cierne,#+1)
   else  	
-    finduid(#0402D472F).tag(mordori_zelene,#+1)
+    finduid(#0400075A4).tag(mordori_zelene,#+1)
   endif
 endif
 f_mif_create
 logmsg("postava <src.uid> (meno: <src.name>, acc: <src.account.name>) rozbaluje magicky vacek <arg(uid)> a vznika predmet <lastnewitem.name> s <lastnewitem.uid>")
 if (lastnewitem.color == 098b)
-	finduid(#0402D472F).tag(padnute_mithil,#+1)
+	finduid(#0400075A4).tag(padnute_mithil,#+1)
 elseif (lastnewitem.color == 07d6)
-	finduid(#0402D472F).tag(padnute_elven,#+1)
+	finduid(#0400075A4).tag(padnute_elven,#+1)
 elseif (lastnewitem.color == 0999)
-	finduid(#0402D472F).tag(padnute_ada,#+1)
+	finduid(#0400075A4).tag(padnute_ada,#+1)
 elseif (lastnewitem.color == 0774)
-	finduid(#0402D472F).tag(padnute_eben,#+1)
+	finduid(#0400075A4).tag(padnute_eben,#+1)
 endif
 return 0
 
@@ -998,8 +998,8 @@ endif
 arg(cena,<tag.Price>)
 if (src.targ.tag(unidentified)==1)
  if (src.pay(<eval arg(cena)>))
-    if (finduid(#0402D472F)) && !(src.isgm)
-     finduid(#0402D472F).tag(payedgold,#+<cena>)
+    if (finduid(#0400075A4)) && !(src.isgm)
+     finduid(#0400075A4).tag(payedgold,#+<cena>)
     endif
    src.targ.tag(unidentified,"")
    src.targ.mif_finishitem
@@ -1029,7 +1029,7 @@ return 0
 
 [function getidentifygold]
 if (isgm)
- sysmessage("Za identifikaci itemu bylo doposud zaplaceno <finduid(#0402D472F).tag(payedgold)> zlata.")
+ sysmessage("Za identifikaci itemu bylo doposud zaplaceno <finduid(#0400075A4).tag(payedgold)> zlata.")
 endif
 
 [function mif_finishitem]

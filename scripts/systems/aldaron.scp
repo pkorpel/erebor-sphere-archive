@@ -2743,52 +2743,52 @@ argo.dialog_pozadi(<argo.tag(nexty)>,1,123,138,138)
 argo.dialog_zpruhledni
 
 argo.texta(<argo.dialog_textpos(0,0)>,42,"VETESNIK")
-argo.texta(lastxpos+333,lastypos+20,<d_def_readcolor>,"Od 22.1.2012:")
+argo.texta(lastxpos+333,lastypos+20,<d_def_readcolor>,"Od 8.10.2015:")
 argo.texta(<argo.dialog_textpos(1,0)>,<d_def_readcolor>,"Prachy za ident:")
-argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(payedgold)>")
-argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval <finduid(#0402D472F).tag(payedgold)>-704996000>")
+argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(payedgold)>")
+argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(payedgold)>-704996000>")
 argo.texta(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Identifik. itemy:")
-argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<eval <finduid(#0402D472F).tag(payedgold)>/5000>")
-argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval (<finduid(#0402D472F).tag(payedgold)>/5000)-(704996000/5000)>")
+argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(payedgold)>/5000>")
+argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval (<finduid(#0400075A4).tag(payedgold)>/5000)-(704996000/5000)>")
 argo.texta(<argo.dialog_textpos(3,0)>,<d_def_readcolor>,"Vymena:")
 argo.texta(<argo.dialog_textpos(4,0)>,<d_def_readcolor>,"Vybrali itemov:")
-argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(collected_items)>")
-argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval <finduid(#0402D472F).tag(collected_items)>-1490>")
+argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(collected_items)>")
+argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(collected_items)>-1490>")
 argo.texta(<argo.dialog_textpos(5,0)>,<d_def_readcolor>,"Rozdali itemov:")
-argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<eval <finduid(#0402D472F).tag(collected_items)>/5>")
-argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval (<finduid(#0402D472F).tag(collected_items)>/5)-(1490/5)>")
+argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(collected_items)>/5>")
+argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval (<finduid(#0400075A4).tag(collected_items)>/5)-(1490/5)>")
 argo.texta(<argo.dialog_textpos(6,0)>,42,"MAGICKE ITEMY")
 argo.texta(<argo.dialog_textpos(7,1)>,<d_def_readcolor>,"Zelene")
 argo.texta(lastxpos+140,lastypos,<d_def_readcolor>,"Hnede")
 argo.texta(<argo.dialog_textpos(7,3)>,<d_def_readcolor>,"Cierne")
 argo.texta(<argo.dialog_textpos(8,0)>,<d_def_readcolor>,"Padli:")
-argo.texta(<argo.dialog_textpos(8,1)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(padnute_zelene)>")
-argo.texta(lastxpos+140,lastypos,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(padnute_hnede)>")
-argo.texta(<argo.dialog_textpos(8,3)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(padnute_cierne)>")
+argo.texta(<argo.dialog_textpos(8,1)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(padnute_zelene)>")
+argo.texta(lastxpos+140,lastypos,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(padnute_hnede)>")
+argo.texta(<argo.dialog_textpos(8,3)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(padnute_cierne)>")
 argo.texta(<argo.dialog_textpos(9,0)>,<d_def_readcolor>,"Boli rozklikane:")
-argo.texta(<argo.dialog_textpos(9,1)>,<d_def_writecolor>,"<eval <eval finduid(#0402D472F).tag(gondori_zelene)>+<eval finduid(#0402D472F).tag(mordori_zelene)>>")
-argo.texta(lastxpos+140,lastypos,<d_def_writecolor>,"<eval <eval finduid(#0402D472F).tag(gondori_hnede)>+<eval finduid(#0402D472F).tag(mordori_hnede)>>")
-argo.texta(<argo.dialog_textpos(9,3)>,<d_def_writecolor>,"<eval <eval finduid(#0402D472F).tag(gondori_cierne)>+<eval finduid(#0402D472F).tag(mordori_cierne)>>")
+argo.texta(<argo.dialog_textpos(9,1)>,<d_def_writecolor>,"<eval <eval finduid(#0400075A4).tag(gondori_zelene)>+<eval finduid(#0400075A4).tag(mordori_zelene)>>")
+argo.texta(lastxpos+140,lastypos,<d_def_writecolor>,"<eval <eval finduid(#0400075A4).tag(gondori_hnede)>+<eval finduid(#0400075A4).tag(mordori_hnede)>>")
+argo.texta(<argo.dialog_textpos(9,3)>,<d_def_writecolor>,"<eval <eval finduid(#0400075A4).tag(gondori_cierne)>+<eval finduid(#0400075A4).tag(mordori_cierne)>>")
 argo.texta(<argo.dialog_textpos(10,1)>,<d_def_readcolor>,"Gondori rozklikali:")
 argo.texta(lastxpos+210,lastypos,<d_def_readcolor>,"Mordori rozklikali:")
 argo.texta(<argo.dialog_textpos(11,0)>,<d_def_readcolor>,"Zelene:")
-argo.texta(<argo.dialog_textpos(11,1)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(gondori_zelene)>")
-argo.texta(lastxpos+210,lastypos,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(mordori_zelene)>")
+argo.texta(<argo.dialog_textpos(11,1)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(gondori_zelene)>")
+argo.texta(lastxpos+210,lastypos,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(mordori_zelene)>")
 argo.texta(<argo.dialog_textpos(12,0)>,<d_def_readcolor>,"Hnede:")
-argo.texta(<argo.dialog_textpos(12,1)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(gondori_hnede)>")
-argo.texta(lastxpos+210,lastypos,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(mordori_hnede)>")
+argo.texta(<argo.dialog_textpos(12,1)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(gondori_hnede)>")
+argo.texta(lastxpos+210,lastypos,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(mordori_hnede)>")
 argo.texta(<argo.dialog_textpos(13,0)>,<d_def_readcolor>,"Cierne:")
-argo.texta(<argo.dialog_textpos(13,1)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(gondori_cierne)>")
-argo.texta(lastxpos+210,lastypos,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(mordori_cierne)>")
+argo.texta(<argo.dialog_textpos(13,1)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(gondori_cierne)>")
+argo.texta(lastxpos+210,lastypos,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(mordori_cierne)>")
 argo.texta(<argo.dialog_textpos(14,0)>,<d_def_readcolor>,"Podla materialu:")
 argo.texta(<argo.dialog_textpos(15,0)>,<d_def_readcolor>,"Mithril:")
-argo.texta(<argo.dialog_textpos(15,1)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(padnute_mithil)>")
+argo.texta(<argo.dialog_textpos(15,1)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(padnute_mithil)>")
 argo.texta(lastxpos+140,lastypos,<d_def_readcolor>,"Elven:")
-argo.texta(<argo.dialog_textpos(15,3)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(padnute_elven)>")
+argo.texta(<argo.dialog_textpos(15,3)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(padnute_elven)>")
 argo.texta(<argo.dialog_textpos(16,0)>,<d_def_readcolor>,"Adamantium:")
-argo.texta(<argo.dialog_textpos(16,1)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(padnute_ada)>")
+argo.texta(<argo.dialog_textpos(16,1)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(padnute_ada)>")
 argo.texta(lastxpos+140,lastypos,<d_def_readcolor>,"Eben:")
-argo.texta(<argo.dialog_textpos(16,3)>,<d_def_writecolor>,"<eval finduid(#0402D472F).tag(padnute_eben)>")
+argo.texta(<argo.dialog_textpos(16,3)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(padnute_eben)>")
 
 ////////////////////////////////
 //// mapy menu
@@ -2820,23 +2820,23 @@ argo.dialog_pozadi(<argo.tag(nexty)>,1,163)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,163)
 argo.dialog_zpruhledni
 
-argo.texta(<argo.dialog_textpos(0,0)>,42,"TAJOMNE MAPY (22.1.2012)")
+argo.texta(<argo.dialog_textpos(0,0)>,42,"TAJOMNE MAPY (8.10.2015)")
 argo.texta(<argo.dialog_textpos(1,0)>,<d_def_readcolor>,"Padlo:")
-argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(padnute_mapy)>")
+argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(padnute_mapy)>")
 argo.texta(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Z fishingu:")
-argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(padnute_mapy_fishing)>")
+argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(padnute_mapy_fishing)>")
 argo.texta(<argo.dialog_textpos(3,0)>,<d_def_readcolor>,"Lusknute:")
-argo.texta(<argo.dialog_textpos(3,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(vylustene_mapy)>")
+argo.texta(<argo.dialog_textpos(3,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(vylustene_mapy)>")
 argo.texta(<argo.dialog_textpos(4,0)>,<d_def_readcolor>,"Vykopane:")
-argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(vykopane_mapy)>")
+argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(vykopane_mapy)>")
 argo.texta(<argo.dialog_textpos(5,0)>,<d_def_readcolor>,"Padnute bonus:")
-argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(padnute_mapy_bonus)>")
+argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(padnute_mapy_bonus)>")
 argo.texta(<argo.dialog_textpos(6,0)>,<d_def_readcolor>,"Lusknute bonus:")
-argo.texta(<argo.dialog_textpos(6,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(vylustene_mapy_bonus)>")
+argo.texta(<argo.dialog_textpos(6,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(vylustene_mapy_bonus)>")
 argo.texta(<argo.dialog_textpos(7,0)>,<d_def_readcolor>,"Vykopane bonus:")
-argo.texta(<argo.dialog_textpos(7,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(vykopane_mapy_bonus)>")
+argo.texta(<argo.dialog_textpos(7,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(vykopane_mapy_bonus)>")
 argo.texta(<argo.dialog_textpos(8,0)>,<d_def_readcolor>,"Nacate fishing spawny: ")
-argo.texta(<argo.dialog_textpos(8,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(fishing_area_started)>")
+argo.texta(<argo.dialog_textpos(8,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(fishing_area_started)>")
 
 ////////////////////////////////
 //// mapy menu
@@ -2868,22 +2868,22 @@ argo.dialog_pozadi(<argo.tag(nexty)>,1,163)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,163)
 argo.dialog_zpruhledni
 
-argo.texta(<argo.dialog_textpos(0,0)>,42,"CRAFT INFO (9.3.2012 - 22:00)")
+argo.texta(<argo.dialog_textpos(0,0)>,42,"CRAFT INFO (8.10.2015)")
 argo.texta(<argo.dialog_textpos(1,0)>,<d_def_readcolor>,"Pocet spawnov LJ")
-argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(lumber_area_started)>")
+argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(lumber_area_started)>")
 argo.texta(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Pocet spawnov mining")
-argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(mining_area_started)>")
+argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(mining_area_started)>")
 argo.texta(<argo.dialog_textpos(3,0)>,42,"Padlo:")
 argo.texta(<argo.dialog_textpos(4,0)>,<d_def_readcolor>,"Maha:")
-argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(lumber_maha)>")
+argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(lumber_maha)>")
 argo.texta(<argo.dialog_textpos(5,0)>,<d_def_readcolor>,"Eben:")
-argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(lumber_eben)>")
+argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(lumber_eben)>")
 argo.texta(<argo.dialog_textpos(6,0)>,<d_def_readcolor>,"Elven:")
-argo.texta(<argo.dialog_textpos(6,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(lumber_elven)>")
+argo.texta(<argo.dialog_textpos(6,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(lumber_elven)>")
 argo.texta(<argo.dialog_textpos(7,0)>,<d_def_readcolor>,"Obsid:")
-argo.texta(<argo.dialog_textpos(7,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(mining_obs)>")
+argo.texta(<argo.dialog_textpos(7,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(mining_obs)>")
 argo.texta(<argo.dialog_textpos(8,0)>,<d_def_readcolor>,"Ada:")
-argo.texta(<argo.dialog_textpos(8,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(mining_ada)>")
+argo.texta(<argo.dialog_textpos(8,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(mining_ada)>")
 
 //////////////////////////////
 //// DRACI OHEN
@@ -6082,41 +6082,41 @@ argo.dialog_pozadi(<argo.tag(nexty)>,1,163)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,163)
 argo.dialog_zpruhledni
 
-argo.texta(<argo.dialog_textpos(0,0)>,42,"Dragons quest info")
+argo.texta(<argo.dialog_textpos(0,0)>,42,"Dragons quest info (8.10.2015)")
 argo.texta(<argo.dialog_textpos(1,0)>,<d_def_readcolor>,"Precitali svitok: ")
-argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_1)>")
+argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_1)>")
 argo.texta(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Povedali meno: ")
-argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_2)>")
+argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_2)>")
 argo.texta(<argo.dialog_textpos(3,0)>,<d_def_readcolor>,"Priniesli hlavu: ")
-argo.texta(<argo.dialog_textpos(3,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_3)>")
+argo.texta(<argo.dialog_textpos(3,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_3)>")
 argo.texta(<argo.dialog_textpos(4,0)>,<d_def_readcolor>,"Priniesli bahnaka")
-argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_4)>")
+argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_4)>")
 argo.texta(<argo.dialog_textpos(5,0)>,<d_def_readcolor>,"Zabili hnedeho: ")
-argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_6)>")
+argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_6)>")
 argo.texta(<argo.dialog_textpos(6,0)>,<d_def_readcolor>,"Zabili zeleneho: ")
-argo.texta(<argo.dialog_textpos(6,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_8)>")
+argo.texta(<argo.dialog_textpos(6,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_8)>")
 argo.texta(<argo.dialog_textpos(7,0)>,<d_def_readcolor>,"Zabili ohniveho: ")
-argo.texta(<argo.dialog_textpos(7,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_10)>")
+argo.texta(<argo.dialog_textpos(7,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_10)>")
 argo.texta(<argo.dialog_textpos(8,0)>,<d_def_readcolor>,"Zabili ladoveho: ")
-argo.texta(<argo.dialog_textpos(8,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_12)>")
+argo.texta(<argo.dialog_textpos(8,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_12)>")
 argo.texta(<argo.dialog_textpos(9,0)>,<d_def_readcolor>,"Zabili cierneho: ")
-argo.texta(<argo.dialog_textpos(9,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_14)>")
+argo.texta(<argo.dialog_textpos(9,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_14)>")
 argo.texta(<argo.dialog_textpos(10,0)>,<d_def_readcolor>,"Zabili bieleho: ")
-argo.texta(<argo.dialog_textpos(10,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_16)>")
+argo.texta(<argo.dialog_textpos(10,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_16)>")
 argo.texta(<argo.dialog_textpos(11,0)>,<d_def_readcolor>,"Zabili zlateho: ")
-argo.texta(<argo.dialog_textpos(11,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_18)>")
+argo.texta(<argo.dialog_textpos(11,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_18)>")
 argo.texta(<argo.dialog_textpos(12,0)>,<d_def_readcolor>,"Zabili zapomenuteho: ")
-argo.texta(<argo.dialog_textpos(12,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_20)>")
+argo.texta(<argo.dialog_textpos(12,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_20)>")
 argo.texta(<argo.dialog_textpos(13,0)>,<d_def_readcolor>,"Priniesli hlavu PS: ")
-argo.texta(<argo.dialog_textpos(13,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_kovar)>")
+argo.texta(<argo.dialog_textpos(13,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_kovar)>")
 argo.texta(<argo.dialog_textpos(14,0)>,<d_def_readcolor>,"Splnili alchymistu: ")
-argo.texta(<argo.dialog_textpos(14,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_alch)>")
+argo.texta(<argo.dialog_textpos(14,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_alch)>")
 argo.texta(<argo.dialog_textpos(15,0)>,<d_def_readcolor>,"Dali zlatu supinu: ")
-argo.texta(<argo.dialog_textpos(15,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_scale)>")
+argo.texta(<argo.dialog_textpos(15,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_scale)>")
 argo.texta(<argo.dialog_textpos(16,0)>,<d_def_readcolor>,"Odmietli Doormana: ")
-argo.texta(<argo.dialog_textpos(16,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_50)>")
+argo.texta(<argo.dialog_textpos(16,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_50)>")
 argo.texta(<argo.dialog_textpos(17,0)>,<d_def_readcolor>,"Dali doormanovi ingy: ")
-argo.texta(<argo.dialog_textpos(17,1)>,<d_def_writecolor>,"<finduid(#0402D472F).tag(dragons_ingots)>")
+argo.texta(<argo.dialog_textpos(17,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(dragons_ingots)>")
 
 // dragon poison event
 
@@ -6574,838 +6574,7 @@ if (tag(vampir))
 	endif
 endif
 
-///////////// obnova veci barbora a spol:
 
-//// masy
-
-[template tmp_draky_masy] 
-container=i_bag
-
-// 12
-item=i_dress_full
-Name="Exhausting Fancy dress of Dragonslayer"
-Age=0401B6B9
-Changer=karath
-Tag.imi_other_present="102, 113, "
-Tag.imi_value_102=15
-Tag.imi_value_113=4
-Events=tmi_info
-Events=tmi_102
-Events=tmi_113
-DispId=01F00
-MORE1=019001C
-
-// 13
-item=i_cape
-Name="Cloak of Fox and of Dragonslayer"
-Age=01046142
-Changer=Pikon
-Tag.imi_other_present="62, 102, "
-Tag.imi_value_102=12
-Tag.imi_value_62=5
-Events=tmi_info
-Events=tmi_62
-Events=tmi_102
-MORE1=021000B
-
-//14
-item=i_bone_gloves_Valorite
-Name="Bone gloves of Fox and of Meditation"
-Color=0985
-Age=013ACD23
-Changer=verbes3
-Tag.OMadded=630
-Tag.imi_other_present="62, 72, "
-Tag.imi_value_62=4
-Tag.imi_value_72=5
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_62
-Events=tmi_72
-MORE1=090008
-
-/// 15. valo bone helma (regen many a hp ale nevim kolik) (pokovany)
-item=i_bone_helmet_Valorite
-Name="Draci brneni"
-Color=09CE
-Age=05205F8C
-Changer=lubosik
-Tag.OMadded=1260
-Tag.imi_other_present="70, 72, "
-Tag.imi_value_70=3
-Tag.imi_value_72=5
-Tag.dragon_resist=8
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_70
-Events=tmi_72
-Events=t_dragon_armor
-DispId=01456
-MORE1=0120010
-
-//16
-item=i_staff_gnarled_mithril
-Color=07D6
-Age=047441E2
-Changer=harryval
-Tag.craftedby=#018DC84
-Events=t_allweapons
-Events=t_allstaves
-DispId=013F9
-MORE1=08340811
-MORE2=012C
-Quality=148
-
-//17
-item=i_necklace_silver
-Name="Dragonslaying Necklace of Pickpocket"
-Age=082BC18
-Changer=mikmajk
-Tag.imi_skill_present="28, "
-Tag.imi_other_present="102, "
-Tag.imi_value_102=15
-Tag.imi_value_28=3
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_102
-
-//18
-item=i_bracelet_gold
-Name="Dragonslaying Bracelet"
-Age=0833CA72
-Changer=snipes29
-Tag.imi_other_present="102, "
-Tag.imi_value_102=11
-Events=tmi_info
-Events=tmi_102
-
-// 19
-item=i_earrings_gold
-Name="Dragonslaying Earrings"
-Age=083D1FCF
-Changer=snipes29
-Tag.imi_other_present="102, "
-Tag.imi_value_102=15
-Events=tmi_info
-Events=tmi_102
-
-// 20
-item=i_sash
-Name="Mediums Body sash of Dragonslayer"
-Age=039A8DE8
-Changer=arkan
-Tag.imi_skill_present="32, "
-Tag.imi_other_present="102, "
-Tag.imi_value_32=1
-Tag.imi_value_102=15
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_102
-MORE1=014000E
-
-//21
-item=i_ring_silver
-Name="Dragonslaying Ring of Pickpocket"
-Age=06AA852D
-Changer=snipes29
-Tag.imi_skill_present="28, "
-Tag.imi_other_present="102, "
-Tag.imi_value_102=15
-Tag.imi_value_28=2
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_102
-
-//22
-item=i_bone_arms_Verite
-Name="Meditating and Regenerating Bone arms"
-Color=097F
-Age=02151E3D
-Changer=favorit
-Tag.OMadded=280
-Tag.imi_other_present="70, 72, "
-Tag.imi_value_70=5
-Tag.imi_value_72=5
-Events=t_allarmors
-Events=t_uneq_5
-Events=tmi_info
-Events=tmi_70
-Events=tmi_72
-MORE1=01D001C
-
-
-//// cinnort
-
-[template tmp_draky_cinnort] 
-container=i_bag
-
-//1
-item=i_IRON_CHAINMAIL_COIF
-Name="Draci brneni"
-Color=09CE
-Age=0133A8EA
-Changer=Maldius
-Tag.imi_skill_present="17, "
-Tag.imi_other_present="70, "
-Tag.imi_value_70=5
-Tag.imi_value_17=5
-Tag.dragon_resist=8
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-Events=t_dragon_armor
-MORE1=0F000B
-
-
-//2
-item=i_Valorite_CHAINMAIL_gorget
-Name="Draci brneni"
-Color=09CE
-Age=0D1669C
-Changer=karath
-Tag.imi_skill_present="17, "
-Tag.imi_other_present="70, "
-Tag.imi_value_70=4
-Tag.imi_value_17=5
-Tag.dragon_resist=5
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-Events=t_dragon_armor
-MORE1=010000B
-
-//3
-item=i_ADAMANTINUM_RINGMAIL_GLOVES
-Name="Draci brneni"
-Color=09CE
-Age=0C707B3
-Changer=modrin
-Tag.OMadded=1225
-Tag.imi_skill_present="17, "
-Tag.imi_other_present="70, "
-Tag.imi_value_70=3
-Tag.imi_value_17=5
-Tag.dragon_resist=8
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-Events=t_dragon_armor
-MORE1=0180011
-
-//4
-item=i_IRON_PLATEMAIL_ARMS
-Name="Regenerating and Healers Platemail arms"
-Color=0763
-Age=047F1B3C
-Changer=hatatitla01
-Tag.OMadded=210
-Tag.imi_skill_present="17, "
-Tag.imi_other_present="70, "
-Tag.imi_value_70=3
-Tag.imi_value_17=5
-Events=t_allarmors
-Events=t_uneq_5
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-MORE1=0110011
-
-//5
-item=i_VERITE_PLATEMAIL
-Name="Healers Platemail of Relaxation"
-Color=097F
-Age=0408388
-Changer=Eldzey
-Tag.OMadded=720
-Tag.imi_skill_present="17, "
-Tag.imi_value_71=3
-Tag.imi_other_present="71, "
-Tag.imi_value_17=5
-Events=t_allarmors
-Events=t_uneq_5
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_71
-DispId=01416
-MORE1=04B0048
-
-//6
-item=i_mace_adamantinum
-Name="Mace of Dragonslayer and of Lifeleech"
-Color=0999
-Age=0113E384
-Changer=mohnil
-Tag.iic_owner=#02D2768
-Tag.imi_other_present="102, 111, "
-Tag.imi_value_102=18
-Tag.imi_value_111=7
-Events=t_allweapons
-Events=t_cm_blacksmithing_target
-Events=tmi_info
-Events=tmi_102
-Events=tmi_111
-Events=t_magicflagger
-Events=t_item_in_corpse
-DispId=0F5D
-MORE1=03DE03D6
-
-//7
-item=i_boots_calf
-Name="Relaxating Boots"
-Color=031C
-Age=077CD1E5
-Changer=snipes29
-Tag.imi_value_71=5
-Tag.imi_other_present="71, "
-Events=tmi_info
-Events=tmi_71
-MORE1=01D0016
-
-//8
-item=i_plast_bojovnika
-Name="Druhy plast bojovnika"
-Color=098F
-Age=02B765D
-Changer=snipes27
-Tag.craftedby=#02D2768
-Tag.owner=#02D2768
-Tag.imi_other_present="70, 102, "
-Tag.imi_value_102=20
-Tag.imi_value_70=10
-Events=tmi_info
-Events=tmi_70
-Events=tmi_102
-MORE1=0640064
-
-//9
-item=i_bracelet_silver
-Name="Bracelet of Regeneration and of Relaxation"
-Age=03D7E65B
-Changer=Donnelly
-Tag.imi_value_71=2
-Tag.imi_other_present="70, 71, "
-Tag.imi_value_70=5
-Events=tmi_info
-Events=tmi_70
-Events=tmi_71
-
-//10
-item=i_VERITE_CHAINMAIL_LEGGINGS
-Name="Healers Chainmail leggings of Magic Reflection"
-Color=097F
-Age=0918D382
-Changer=bohus
-Tag.OMadded=460
-Tag.imi_skill_present="17, "
-Tag.imi_other_present="133, "
-Tag.imi_value_17=5
-Tag.imi_value_133=3
-Events=t_allarmors
-Events=t_uneq_24
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_133
-MORE1=028001B
-
-//11
-item=i_earrings_gold
-Name="Regenerating Earrings of Mage"
-Age=0921FF1A
-Changer=snipes29
-Tag.imi_skill_present="25, "
-Tag.imi_other_present="70, "
-Tag.imi_value_25=4
-Tag.imi_value_70=5
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-
-
-
-//// maud
-
-[template tmp_draky_maud] 
-container=i_bag
-
-//23
-item=i_VALORITE_RINGMAIL_GLOVES
-Name="Draci brneni"
-Color=09CE
-Age=02E7EA23
-Changer=divenewbie
-Tag.OMadded=630
-Tag.imi_other_present="62, 72, "
-Tag.imi_value_62=5
-Tag.imi_value_72=5
-Tag.dragon_resist=8
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_62
-Events=tmi_72
-Events=t_dragon_armor
-MORE1=0C000C
-
-//24
-item=i_OBSIDIAN_RINGMAIL_GLOVES
-Name="Physical Reflecting and Healers Ringmail gloves"
-Color=0989
-Age=0483F5A
-Changer=Lejla
-Tag.imi_skill_present="17, "
-Tag.imi_other_present="131, "
-Tag.imi_value_131=4
-Tag.imi_value_17=5
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_131
-DispId=013F2
-MORE1=0100010
-
-//25
-item=i_VERITE_METAL_SHIELD
-Name="Metal shield of Healer and of Regeneration"
-Color=097F
-Age=0BDD63E
-Changer=Javor
-Tag.imi_skill_present="17, "
-Tag.imi_other_present="70, "
-Tag.imi_value_70=4
-Tag.imi_value_17=5
-Events=t_allshields
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-MORE1=0360036
-
-//26
-item=i_VERITE_RINGMAIL_TUNIC
-Name="Healers Ringmail tunic"
-Color=097F
-Age=0B1D3CA
-Changer=danecek
-Tag.OMadded=720
-Tag.imi_skill_present="17, "
-Tag.imi_value_17=5
-Events=t_allarmors
-Events=t_uneq_5
-Events=tmi_info
-Events=tmi_skills
-MORE1=02B0027
-
-//27
-item=i_Valorite_RINGMAIL_helm
-Name="Draci brneni"
-Color=09CE
-Age=094B940
-Changer=gadzo
-Tag.OMadded=1260
-Tag.imi_skill_present="17, "
-Tag.imi_other_present="134, "
-Tag.imi_value_134=10
-Tag.imi_value_17=5
-Tag.dragon_resist=8
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_134
-Events=t_dragon_armor
-DispId=0140B
-MORE1=0190015
-
-//28 
-item=i_Valorite_CHAINMAIL_sleeves
-Name="Healers Leather sleeves"
-Color=0985
-Age=015C87C6
-Changer=Snowik
-Tag.OMadded=1260
-Tag.imi_skill_present="17, "
-Tag.imi_value_17=5
-Events=t_allarmors
-Events=t_uneq_5
-Events=tmi_info
-Events=tmi_skills
-MORE1=0250025
-
-//29
-item=i_Valorite_CHAINMAIL_gorget
-Name="Draci brneni"
-Color=09CE
-Age=04087A15
-Changer=elba
-Tag.OMadded=540
-Tag.imi_skill_present="1, 17, "
-Tag.imi_value_17=5
-Tag.imi_value_1=4
-Tag.dragon_resist=5
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_skills
-Events=t_dragon_armor
-MORE1=010000E
-
-//30
-item=i_boots_calf
-Name="Relaxating Boots"
-Color=0129
-Age=077CD1E6
-Changer=stevenson
-Tag.imi_value_71=5
-Tag.imi_other_present="71, "
-Events=tmi_info
-Events=tmi_71
-MORE1=01A0014
-
-//31
-item=i_ring_gold
-Name="Relaxating and Bards Ring"
-Age=028676F3
-Changer=Anar
-Tag.imi_skill_present="15, "
-Tag.imi_value_71=5
-Tag.imi_other_present="71, "
-Tag.imi_value_15=3
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_71
-
-//// barbora
-
-[template tmp_draky_barbora] 
-container=i_bag
-
-//32 
-item=i_ADAMANTINUM_BASCINET
-Name="Draci brneni"
-Color=09CE
-Age=02098F
-Changer=wolfkiller21
-Tag.OMadded=2450
-Tag.imi_other_present="72, 134, "
-Tag.imi_value_134=8
-Tag.imi_value_72=1
-Tag.dragon_resist=8
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_72
-Events=tmi_134
-Events=t_dragon_armor
-DispId=0140D
-MORE1=0580058
-
-//33
-item=i_VALORITE_PLATEMAIL_GORGET
-Name="Draci brneni"
-Color=09CE
-Age=04F0BA4
-Changer=tocivejjoe
-Tag.OMadded=540
-Tag.imi_other_present="62, 134, "
-Tag.imi_value_134=8
-Tag.imi_value_62=4
-Tag.dragon_resist=5
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_62
-Events=tmi_134
-Events=t_dragon_armor
-MORE1=0110010
-
-//34
-item=i_VALORITE_PLATEMAIL_ARMS
-Name="Foxes Platemail arms of Physical Block"
-Color=0985
-Age=08CBEA
-Changer=Johyf
-Tag.OMadded=1260
-Tag.imi_other_present="62, 134, "
-Tag.imi_value_134=7
-Tag.imi_value_62=3
-Events=t_allarmors
-Events=t_uneq_5
-Events=tmi_info
-Events=tmi_62
-Events=tmi_134
-MORE1=02C002C
-
-//35
-item=i_OBSIDIAN_PLATEMAIL_GAUNTLETS
-Name="Draci brneni"
-Color=09CE
-Age=01BE2606
-Changer=elfa
-Tag.OMadded=1015
-Tag.imi_skill_present="5, "
-Tag.imi_other_present="134, "
-Tag.imi_value_134=5
-Tag.imi_value_5=4
-Tag.dragon_resist=8
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_134
-Events=t_dragon_armor
-MORE1=01C001C
-
-//36
-item=i_VALORITE_FEMALE_PLATEMAIL
-Name="Physical Blocking and Regenerating Plate armor"
-Color=0985
-Age=0D89927
-Changer=basketak
-Tag.OMadded=3240
-Tag.imi_other_present="70, 134, "
-Tag.imi_value_134=7
-Tag.imi_value_70=4
-Events=t_allarmors
-Events=t_uneq_5
-Events=tmi_info
-Events=tmi_70
-Events=tmi_134
-DispId=01C05
-MORE1=071006F
-
-//37
-item=i_VERITE_PLATEMAIL_leggings
-Name="Platemail legs of Regeneration and of Physical Block"
-Color=097F
-Age=0EED81C
-Changer=anarchil
-Tag.OMadded=460
-Tag.imi_other_present="70, 134, "
-Tag.imi_value_134=8
-Tag.imi_value_70=5
-Events=t_allarmors
-Events=t_uneq_24
-Events=tmi_info
-Events=tmi_70
-Events=tmi_134
-MORE1=030002E
-
-//38
-item=i_mace_war_mithril
-Name="Crusher War mace vyroben od HandyCraft"
-Color=098B
-Age=0B8C1BA
-Changer=harryval
-Tag.craftedby=#018DC84
-Tag.imi_skill_present="41, "
-Tag.imi_value_41=20
-Events=t_allweapons
-Events=t_cm_blacksmithing_target
-Events=tmi_info
-Events=tmi_skills
-Events=t_magicflagger
-DispId=01407
-MORE1=06D606AA
-Quality=181
-
-// 39
-item=i_plast_bojovnika
-Name="Prvni plast bojovnika"
-Color=098F
-Age=0405030
-Changer=enrico
-Tag.owner=#06BF63
-Tag.imi_other_present="70, 102, "
-Tag.imi_value_102=20
-Tag.imi_value_70=10
-Events=tmi_info
-Events=tmi_70
-Events=tmi_102
-DispId=01530
-MORE1=0640064
-
-//40
-item=i_robe
-Name="Regenerating Robe of Crushe"
-Color=025
-Age=04ED89C9
-Changer=vaci
-Tag.iic_owner=#06BF63
-Tag.imi_skill_present="41, "
-Tag.imi_other_present="70, "
-Tag.imi_value_41=2
-Tag.imi_value_70=5
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-Events=t_item_in_corpse
-DispId=01F04
-MORE1=01B0027
-
-//41
-item=i_ring_gold
-Name="Tamers Ring of Regeneration"
-Age=042B38F3
-Changer=frajer123
-Tag.iic_owner=#06BF63
-Tag.imi_skill_present="35, "
-Tag.imi_other_present="70, "
-Tag.imi_value_35=2
-Tag.imi_value_70=5
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-Events=t_item_in_corpse
-
-//42
-item=i_bracelet_silver
-Name="Bards Bracelet of Regeneration"
-Age=0699D31F
-Changer=elfi
-Tag.iic_owner=#06BF63
-Tag.imi_skill_present="22, "
-Tag.imi_other_present="70, "
-Tag.imi_value_22=5
-Tag.imi_value_70=5
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_70
-Events=t_item_in_corpse
-
-//43
-item=i_sash
-Name="Body sash of Regeneration and of Ogrekiller"
-Age=07F5C7CB
-Changer=martinsson
-Tag.iic_owner=#06BF63
-Tag.imi_other_present="70, 103, "
-Tag.imi_value_103=5
-Tag.imi_value_70=5
-Events=tmi_info
-Events=tmi_70
-Events=tmi_103
-Events=t_item_in_corpse
-DispId=01542
-MORE1=0270026
-
-//// arjan
-
-[template tmp_draky_arjan] 
-container=i_bag
-
-//44
-item=i_crossbow_mithril
-Name="Knights Crossbow"
-Color=07D6
-Age=06EE4F2
-Changer=wolfkiller
-Tag.imi_other_present="51, "
-Tag.imi_value_51=10
-Events=t_allweapons
-Events=t_allbows
-Events=tmi_info
-Events=tmi_51
-Events=t_magicflagger
-MORE1=0690068E
-
-// 45
-item=i_Adamantinum_RINGMAIL_helm
-Name="Draci brneni"
-Color=09CE
-Age=03C1E2F
-Changer=elbi
-Tag.OMadded=2450
-Tag.imi_skill_present="1, "
-Tag.imi_other_present="60, "
-Tag.imi_value_60=3
-Tag.imi_value_1=1
-Tag.dragon_resist=8
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_60
-Events=t_dragon_armor
-DispId=0140B
-MORE1=0320032
-
-//46
-item=i_Obsidian_RINGMAIL_gorget
-Name="Draci brneni"
-Color=09CE
-Age=01176246
-Changer=mohnil
-Tag.OMadded=870
-Tag.imi_other_present="60, 70, "
-Tag.imi_value_60=4
-Tag.imi_value_70=5
-Tag.dragon_resist=5
-Events=t_allarmors
-Events=tmi_info
-Events=tmi_60
-Events=tmi_70
-Events=t_dragon_armor
-MORE1=0E000D
-
-//47
-item=i_ring_gold
-Name="Ring of Snake and of Dragonslayer"
-Age=011718ED
-Changer=wolfkiller
-Tag.iic_owner=#0DA9BC
-Tag.imi_other_present="61, 102, "
-Tag.imi_value_61=5
-Tag.imi_value_102=13
-Events=tmi_info
-Events=tmi_61
-Events=tmi_102
-Events=t_item_in_corpse
-
-//48
-item=i_sash
-Name="Bards Body sash of Dragonslayer"
-Color=0E8
-Age=0169BAD0
-Changer=OlDirtyShimmy
-Tag.iic_owner=#0DA9BC
-Tag.imi_skill_present="15, "
-Tag.imi_other_present="102, "
-Tag.imi_value_102=15
-Tag.imi_value_15=5
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_102
-Events=t_item_in_corpse
-DispId=01542
-MORE1=01D001A
-
-//49
-item=i_cape
-Name="Dragonslaying and Mages Cloak"
-Color=0E8
-Age=043E6976
-Changer=qqq
-Tag.imi_skill_present="25, "
-Tag.imi_other_present="102, "
-Tag.imi_value_25=3
-Tag.imi_value_102=15
-Events=tmi_info
-Events=tmi_skills
-Events=tmi_102
-DispId=01530
-MORE1=028001F
-
-//50
-item=i_VALORITE_RINGMAIL_SLEEVES
-Name="Titans Ringmail sleeves of Physical Reflection"
-Color=0985
-Age=01B4A199
-Changer=OlDirtyShimmy
-Tag.OMadded=1260
-Tag.imi_other_present="60, 131, "
-Tag.imi_value_60=4
-Tag.imi_value_131=2
-Events=t_allarmors
-Events=t_uneq_5
-Events=tmi_info
-Events=tmi_60
-Events=tmi_131
-MORE1=0190019
 
 //////////////////////////////////////////////////
 /// hladanie pokladu: "mapa"

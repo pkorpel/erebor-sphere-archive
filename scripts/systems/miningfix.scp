@@ -93,11 +93,11 @@ act.events t_allresources
 //say tezim <act.amount> <act.more1>
 actarg2=1 //zrychleni tezby
 if ((ACT.TYPE == t_water)&&(Act.color==0))
-  finduid(#0402D472F).tag(fishing_area_started,#+1) // write into statistics
+  finduid(#0400075A4).tag(fishing_area_started,#+1) // write into statistics
 elseif ((ACT.TYPE==t_tree)&&(Act.color==0))
-  finduid(#0402D472F).tag(lumber_area_started,#+1) // write into statistics
+  finduid(#0400075A4).tag(lumber_area_started,#+1) // write into statistics
 elseif ((ACT.TYPE==t_rock)&&(Act.color==0))
-  finduid(#0402D472F).tag(mining_area_started,#+1) // write into statistics
+  finduid(#0400075A4).tag(mining_area_started,#+1) // write into statistics
 endif
 if (profession==class_craft)
   arg(succ,0)
@@ -137,15 +137,15 @@ if (profession==class_craft)
   endif
 endif
 if (act.more1 == l_mithril)
-	finduid(#0402D472F).tag(lumber_elven,#+1) 
+	finduid(#0400075A4).tag(lumber_elven,#+1) 
 elseif (act.more1 == l_adamantinum)
-	finduid(#0402D472F).tag(lumber_eben,#+1)
+	finduid(#0400075A4).tag(lumber_eben,#+1)
 elseif (act.more1 == l_obsidian)
-	finduid(#0402D472F).tag(lumber_maha,#+1)
+	finduid(#0400075A4).tag(lumber_maha,#+1)
 elseif (act.more1 == o_adamantinum)
-	finduid(#0402D472F).tag(mining_ada,#+1)
+	finduid(#0400075A4).tag(mining_ada,#+1)
 elseif (act.more1 == o_obsidian)
-	finduid(#0402D472F).tag(mining_obs,#+1)
+	finduid(#0400075A4).tag(mining_obs,#+1)
 endif
 fixresource
 
@@ -491,7 +491,7 @@ enddo
 if ({1 100} < tag(map))
   remove
   src.giveitem(i_u_treasure_map)
-  finduid(#0402D472F).tag(padnute_mapy_fishing,#+1)
+  finduid(#0400075A4).tag(padnute_mapy_fishing,#+1)
   //finduid(09fa43).tag(pocetvylovenychobyc,<finduid(09fa43).tag(pocetvylovenychobyc)>+1)
   // finduid(09fa43).delayedmessage(<servertime> Mapka obyc <lastnew> vylovil <src.name>-<src.account.name>. Vylv mapek na morii: <finduid(09fa43).tag(pocetvylovenychobyc)>) 
   src.sysMessage("Mapa v lahvi!")

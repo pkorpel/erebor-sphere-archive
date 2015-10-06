@@ -58,7 +58,7 @@ IF !(tag(vylusteno))
  tag(vylusteno,1)
  NAME="mapa k pokladu"
  TYPE=T_MAP
- finduid(#0402D472F).tag(vylustene_mapy,#+1)
+ finduid(#0400075A4).tag(vylustene_mapy,#+1)
  SRC.NEWITEM(randfern)//Place trigger random tile on UO Map
  src.say(Ano, to misto poznavam.)
  more1=<tag(map)>
@@ -125,7 +125,7 @@ if (SRC.MINING >  TAG(MAP))&&(nolightfizz(1))
   endif 
  endif
  SRC.MESSAGE="Hura poklad !!"
- finduid(#0402D472F).tag(vykopane_mapy,#+1)
+ finduid(#0400075A4).tag(vykopane_mapy,#+1)
  LINK.REMOVE			//remove linked deciphered map
  REMOVE				//remove trigger plant
  RETURN 1
@@ -169,7 +169,7 @@ ON=@CREATE
 more2={0 65535}
 TYPE=T_unidentified_MAP
 TAG.MAP=<eval {300 1000}>
-finduid(#0402D472F).tag(padnute_mapy,#+1)
+finduid(#0400075A4).tag(padnute_mapy,#+1)
 f_Map_GetCoords
 
 [FUNCTION f_Map_GetCoords]
@@ -258,7 +258,7 @@ more2={0 65535}
 color=098a
 TYPE=T_unidentified_bonus_MAP
 TAG.MAP=1000
-finduid(#0402D472F).tag(padnute_mapy_bonus,#+1)
+finduid(#0400075A4).tag(padnute_mapy_bonus,#+1)
 f_Map_GetCoords
 
 
@@ -272,7 +272,7 @@ IF !(tag(vylusteno))
  tag(vylusteno,1)
  NAME="mapa k pokladu"
  TYPE=T_bonus_MAP
- finduid(#0402D472F).tag(vylustene_mapy_bonus,#+1)
+ finduid(#0400075A4).tag(vylustene_mapy_bonus,#+1)
  SRC.NEWITEM(randfern)
  src.say(Ano, to misto poznavam.)
  more1=<tag(map)>
@@ -309,7 +309,7 @@ if (SRC.MINING >=  1200)&&(nolightfizz(1))
    endif 
  endif
  SRC.MESSAGE="Hura poklad !!"
- finduid(#0402D472F).tag(vykopane_mapy_bonus,#+1)
+ finduid(#0400075A4).tag(vykopane_mapy_bonus,#+1)
  LINK.REMOVE			//remove linked deciphered map
  REMOVE				//remove trigger plant
  RETURN 1

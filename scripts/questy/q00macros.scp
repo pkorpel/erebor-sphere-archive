@@ -67,9 +67,9 @@ elseif !(src.findid(i_qf_sign)) //tady dame quest po vygenerovani hraci
 elseif (<eval src.findid(i_qf_sign).tag(qfcount)> >= 3) // tady odmenime uspesne lovce
   src.sysmessage("Odmena ti byla poslana do banky.")
   say("<src.name> <src.sex("ulovil","ulovila")> jsi <eval src.findid(i_qf_sign).tag(qfcount)> monster. Dostanes odmenu.")
-  if safe.finduid(#0274EA9)
-    finduid(#0274EA9).tag(givenexps,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
-    finduid(#0274EA9).tag(givengold,#+<eval ((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)>)
+  if safe.finduid(#0402D472F)
+    finduid(#0402D472F).tag(givenexps,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
+    finduid(#0402D472F).tag(givengold,#+<eval ((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)>)
   endif
   tag(givengold,#+<eval ((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)>)
   tag(givenexps,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
@@ -214,8 +214,8 @@ endwhile
 on=0
 
 [function getquestvyveska]
-if safe.finduid(#0274EA9) && (isgm)
- sysmessage("Quest-vyveskami bylo vydano <finduid(#0274EA9).tag(givenexps)> expu a <finduid(#0274EA9).tag(givengold)> gp.")
+if safe.finduid(#0402D472F) && (isgm)
+ sysmessage("Quest-vyveskami bylo vydano <finduid(#0402D472F).tag(givenexps)> expu a <finduid(#0402D472F).tag(givengold)> gp.")
 endif
 
 [itemdef i_qf_sign]
@@ -1039,8 +1039,8 @@ if safe.finduid(<tag(npchrac)>)
   src=<arg(hrac)> // nutne kvuli accmsg - jinak hodi error kvuli pravoum clienta
   hrac.sysmessage("Souper hodil celkem <tag(npccelkem)>.")
   if (<tag(npccelkem)>)<(<tag(hraccelkem)>)
-    if safe.finduid(#0274EA9)
-      finduid(#0274EA9).tag(vyhrano,#+<tag(vsazeno)*2>)
+    if safe.finduid(#0402D472F)
+      finduid(#0402D472F).tag(vyhrano,#+<tag(vsazeno)*2>)
     endif
     tag(vyhrano,#+<tag(vsazeno)*2>)
     hrac.say("<hrac.sex VYHRAL JSEM!,VYHRALA JSEM!>")
@@ -1057,8 +1057,8 @@ if safe.finduid(<tag(npchrac)>)
     hrac.accMsg("Hrac <hrac.name> (<arg(hrac)>, <arg(hrac).account.name>) vsadil v kostkach <tag(vsazeno)>gp a remizoval - navracen mesec <lastnew> s <eval lastnew.more1>gp.")
   else
     npchrac.say("VYHRAL JSEM!")
-    if safe.finduid(#0274EA9)
-      finduid(#0274EA9).tag(prohrano,#+<tag(vsazeno)*2>)
+    if safe.finduid(#0402D472F)
+      finduid(#0402D472F).tag(prohrano,#+<tag(vsazeno)*2>)
     endif
     hrac.accMsg("Hrac <hrac.name> (<arg(hrac)>, <arg(hrac).account.name>) vsadil v kostkach <tag(vsazeno)>gp a prohral.")
   endif
@@ -1093,8 +1093,8 @@ return 0
 
 [function kostkygold]
 if (isgm)
-  if safe.finduid(#0274EA9)
-    sysmessage("Hraci prozatim vyhrali <finduid(#0274EA9).tag(vyhrano)> zlata a prohrali <finduid(#0274EA9).tag(prohrano)> zlata. Celkove prinesli do ekonomiky <eval(<finduid(#0274EA9).tag(vyhrano)>-<finduid(#0274EA9).tag(prohrano)>)> zlata.")
+  if safe.finduid(#0402D472F)
+    sysmessage("Hraci prozatim vyhrali <finduid(#0402D472F).tag(vyhrano)> zlata a prohrali <finduid(#0402D472F).tag(prohrano)> zlata. Celkove prinesli do ekonomiky <eval(<finduid(#0402D472F).tag(vyhrano)>-<finduid(#0402D472F).tag(prohrano)>)> zlata.")
   endif
 endif
 

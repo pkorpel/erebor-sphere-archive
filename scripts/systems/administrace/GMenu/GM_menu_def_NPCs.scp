@@ -6,7 +6,7 @@
 ///////////////////////////
 
 [defnames def_GM_Menu_NPCs]
-def_GM_Menu_NPC_totalAmount 4
+def_GM_Menu_NPC_totalAmount 7
 def_GM_Menu_NPC_sectionName  "NPCs"
 
 def_GM_Menu_NPC_name[0]      "Oci"
@@ -28,6 +28,21 @@ def_GM_Menu_NPC_name[3]      "Jezditka"
 def_GM_Menu_NPC_object[3]    "NPC_Mounts" //subdialog section name
 def_GM_Menu_NPC_type[3]      def_GM_Menu_subdialog
 def_GM_Menu_NPC_help[3]      "" // no help
+
+def_GM_Menu_NPC_name[4]      "Draci"
+def_GM_Menu_NPC_object[4]    "NPC_Dragons" //subdialog section name
+def_GM_Menu_NPC_type[4]      def_GM_Menu_subdialog
+def_GM_Menu_NPC_help[4]      "" // no help
+
+def_GM_Menu_NPC_name[5]      "Humanoidi"
+def_GM_Menu_NPC_object[5]    "NPC_Humanoids" //subdialog section name
+def_GM_Menu_NPC_type[5]      def_GM_Menu_subdialog
+def_GM_Menu_NPC_help[5]      "" // no help
+
+def_GM_Menu_NPC_name[6]      "Golemove"
+def_GM_Menu_NPC_object[6]    "NPC_Golems" //subdialog section name
+def_GM_Menu_NPC_type[6]      def_GM_Menu_subdialog
+def_GM_Menu_NPC_help[6]      "" // no help
 
 ///////////////////////////
 //        (eyes)         //
@@ -247,7 +262,7 @@ def_GM_Menu_NPC_Spirits_help[15]      "" // no help
 //       (jezditka / mounti)       //
 /////////////////////////////////////
 
-def_GM_Menu_NPC_Mounts_totalAmount 7
+def_GM_Menu_NPC_Mounts_totalAmount 24
 def_GM_Menu_NPC_Mounts_sectionName  "NPC - Jezditka"
 
 def_GM_Menu_NPC_Mounts_name[0]      "Lama (c_llama)"
@@ -265,24 +280,383 @@ def_GM_Menu_NPC_Mounts_object[2]    "c_horse_brown_dk" //chardef
 def_GM_Menu_NPC_Mounts_type[2]      def_GM_Menu_npc
 def_GM_Menu_NPC_Mounts_help[2]      "" // no help
 
-def_GM_Menu_NPC_Mounts_name[3]      "Horse tan (c_horse_borwn_lt)"
-def_GM_Menu_NPC_Mounts_object[3]    "c_horse_borwn_lt" //chardef
+def_GM_Menu_NPC_Mounts_name[3]      "Horse tan (c_horse_brown_lt)"
+def_GM_Menu_NPC_Mounts_object[3]    "c_horse_brown_lt" //chardef
 def_GM_Menu_NPC_Mounts_type[3]      def_GM_Menu_npc
 def_GM_Menu_NPC_Mounts_help[3]      "" // no help
 
-def_GM_Menu_NPC_Mounts_name[4]      "Ridgeback (c_m_ridgeback)"
-def_GM_Menu_NPC_Mounts_object[4]    "c_m_ridgeback" //chardef
+def_GM_Menu_NPC_Mounts_name[4]      "Horse gray (c_horse_gray)"
+def_GM_Menu_NPC_Mounts_object[4]    "c_horse_gray" //chardef
 def_GM_Menu_NPC_Mounts_type[4]      def_GM_Menu_npc
 def_GM_Menu_NPC_Mounts_help[4]      "" // no help
 
-def_GM_Menu_NPC_Mounts_name[5]      "Ridgeback Savage (c_m_ridgeback_savage)"
-def_GM_Menu_NPC_Mounts_object[5]    "c_m_ridgeback_savage" //chardef
+def_GM_Menu_NPC_Mounts_name[5]      "Mustang Roan (C_A_MUSTANG_ROAN)"
+def_GM_Menu_NPC_Mounts_object[5]    "C_A_MUSTANG_ROAN" //chardef
 def_GM_Menu_NPC_Mounts_type[5]      def_GM_Menu_npc
 def_GM_Menu_NPC_Mounts_help[5]      "" // no help
 
-def_GM_Menu_NPC_Mounts_name[6]      "Zostrich (c_ostard_zostrich)"
-def_GM_Menu_NPC_Mounts_object[6]    "c_ostard_zostich" //chardef
+def_GM_Menu_NPC_Mounts_name[6]      "Mustang Wimmimate (C_A_MUSTANG_WIMMIMATE)"
+def_GM_Menu_NPC_Mounts_object[6]    "C_A_MUSTANG_WIMMIMATE" //chardef
 def_GM_Menu_NPC_Mounts_type[6]      def_GM_Menu_npc
 def_GM_Menu_NPC_Mounts_help[6]      "" // no help
 
+def_GM_Menu_NPC_Mounts_name[7]      "Mustang Red Roan (C_A_MUSTANG_REDROAN)"
+def_GM_Menu_NPC_Mounts_object[7]    "C_A_MUSTANG_REDROAN" //chardef
+def_GM_Menu_NPC_Mounts_type[7]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[7]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[8]      "Mustang Chocolate (C_A_MUSTANG_CHOCOLATE)"
+def_GM_Menu_NPC_Mounts_object[8]    "C_A_MUSTANG_CHOCOLATE" //chardef
+def_GM_Menu_NPC_Mounts_type[8]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[8]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[9]      "Mustang Pamamino (C_A_MUSTANG_PAMAMINO)"
+def_GM_Menu_NPC_Mounts_object[9]    "C_A_MUSTANG_PAMAMINO" //chardef
+def_GM_Menu_NPC_Mounts_type[9]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[9]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[10]      "Mustang Sky (C_A_MUSTANG_SKY)"
+def_GM_Menu_NPC_Mounts_object[10]    "C_A_MUSTANG_SKY" //chardef
+def_GM_Menu_NPC_Mounts_type[10]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[10]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[11]      "Mustang Grey (C_A_MUSTANG_GREY)"
+def_GM_Menu_NPC_Mounts_object[11]    "C_A_MUSTANG_GREY" //chardef
+def_GM_Menu_NPC_Mounts_type[11]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[11]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[12]      "Mustang Sky Gray (C_A_MUSTANG_SKYGRAY)"
+def_GM_Menu_NPC_Mounts_object[12]    "C_A_MUSTANG_SKYGRAY" //chardef
+def_GM_Menu_NPC_Mounts_type[12]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[12]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[13]      "Mustang Crimson (C_A_MUSTANG_CRIMSON)"
+def_GM_Menu_NPC_Mounts_object[13]    "C_A_MUSTANG_CRIMSON" //chardef
+def_GM_Menu_NPC_Mounts_type[13]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[13]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[14]      "Mustang Black (C_A_MUSTANG_BLACK)"
+def_GM_Menu_NPC_Mounts_object[14]    "C_A_MUSTANG_BLACK" //chardef
+def_GM_Menu_NPC_Mounts_type[14]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[14]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[15]      "Oclock (c_ostard_desert)"
+def_GM_Menu_NPC_Mounts_object[15]    "c_ostard_desert" //chardef
+def_GM_Menu_NPC_Mounts_type[15]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[15]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[16]      "Orn (c_ostard_forest)"
+def_GM_Menu_NPC_Mounts_object[16]    "c_ostard_forest" //chardef
+def_GM_Menu_NPC_Mounts_type[16]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[16]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[17]      "Ridgeback (c_m_ridgeback)"
+def_GM_Menu_NPC_Mounts_object[17]    "c_m_ridgeback" //chardef
+def_GM_Menu_NPC_Mounts_type[17]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[17]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[18]      "Ridgeback Savage (c_m_ridgeback_savage)"
+def_GM_Menu_NPC_Mounts_object[18]    "c_m_ridgeback_savage" //chardef
+def_GM_Menu_NPC_Mounts_type[18]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[18]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[19]      "Zostrich (c_ostard_zostrich)"
+def_GM_Menu_NPC_Mounts_object[19]    "c_ostard_zostrich" //chardef
+def_GM_Menu_NPC_Mounts_type[19]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[19]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[20]      "Zostrich Green (c_ostard_zostrich_green)"
+def_GM_Menu_NPC_Mounts_object[20]    "c_ostard_zostrich_green" //chardef
+def_GM_Menu_NPC_Mounts_type[20]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[20]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[21]      "Zostrich Mud (?)  (c_ostard_zostrich_JMENO1)"
+def_GM_Menu_NPC_Mounts_object[21]    "c_ostard_zostrich_JMENO1" //chardef
+def_GM_Menu_NPC_Mounts_type[21]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[21]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[22]      "Zostrich Lava (?) (c_ostard_zostrich_JMENO2)"
+def_GM_Menu_NPC_Mounts_object[22]    "c_ostard_zostrich_JMENO2" //chardef
+def_GM_Menu_NPC_Mounts_type[22]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[22]      "" // no help
+
+def_GM_Menu_NPC_Mounts_name[23]      "Zostrich Pisecny (c_ostard_zostrich_JMENO3)"
+def_GM_Menu_NPC_Mounts_object[23]    "c_ostard_zostrich_JMENO3" //chardef
+def_GM_Menu_NPC_Mounts_type[23]      def_GM_Menu_npc
+def_GM_Menu_NPC_Mounts_help[23]      "" // no help
+
+///////////////////////////
+//        (Dragons)      //
+///////////////////////////
+
+def_GM_Menu_NPC_Dragons_totalAmount 22
+def_GM_Menu_NPC_Dragons_sectionName  "NPC - Draci"
+
+def_GM_Menu_NPC_Dragons_name[0]      "Dragon swamp (c_dragon_swamp)"
+def_GM_Menu_NPC_Dragons_object[0]    "c_dragon_swamp" //chardef
+def_GM_Menu_NPC_Dragons_type[0]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[0]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[1]      "Dragon (c_drake_base)"
+def_GM_Menu_NPC_Dragons_object[1]    "c_drake_base" //chardef
+def_GM_Menu_NPC_Dragons_type[1]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[1]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[2]      "Green Drake (c_drake_green)"
+def_GM_Menu_NPC_Dragons_object[2]    "c_drake_green" //chardef
+def_GM_Menu_NPC_Dragons_type[2]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[2]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[3]      "Red Drake (c_drake_red)"
+def_GM_Menu_NPC_Dragons_object[3]    "c_drake_red" //chardef
+def_GM_Menu_NPC_Dragons_type[3]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[3]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[4]      "Blue Drake (c_drake_blue)"
+def_GM_Menu_NPC_Dragons_object[4]    "c_drake_blue" //chardef
+def_GM_Menu_NPC_Dragons_type[4]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[4]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[5]      "Copper Drake (c_drake_copper)"
+def_GM_Menu_NPC_Dragons_object[5]    "c_drake_copper" //chardef
+def_GM_Menu_NPC_Dragons_type[5]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[5]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[6]      "Silver Drake (c_drake_silver)"
+def_GM_Menu_NPC_Dragons_object[6]    "c_drake_silver" //chardef
+def_GM_Menu_NPC_Dragons_type[6]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[6]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[7]      "Gold Drake (c_drake_gold)"
+def_GM_Menu_NPC_Dragons_object[7]    "c_drake_gold" //chardef
+def_GM_Menu_NPC_Dragons_type[7]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[7]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[8]      "Ice Drake (c_drake_ice)"
+def_GM_Menu_NPC_Dragons_object[8]    "c_drake_ice" //chardef
+def_GM_Menu_NPC_Dragons_type[8]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[8]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[9]      "Black Drake (c_drake_black)"
+def_GM_Menu_NPC_Dragons_object[9]    "c_drake_black" //chardef
+def_GM_Menu_NPC_Dragons_type[9]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[9]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[10]      "Wyvern (c_wyvern)"
+def_GM_Menu_NPC_Dragons_object[10]    "c_wyvern" //chardef
+def_GM_Menu_NPC_Dragons_type[10]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[10]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[11]      "Green Dragon (c_dragon_green)"
+def_GM_Menu_NPC_Dragons_object[11]    "c_dragon_green" //chardef
+def_GM_Menu_NPC_Dragons_type[11]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[11]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[12]      "Red Dragon (c_dragon_red)"
+def_GM_Menu_NPC_Dragons_object[12]    "c_dragon_red" //chardef
+def_GM_Menu_NPC_Dragons_type[12]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[12]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[13]      "Blue Dragon (c_dragon_blue)"
+def_GM_Menu_NPC_Dragons_object[13]    "c_dragon_blue" //chardef
+def_GM_Menu_NPC_Dragons_type[13]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[13]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[14]      "Copper Dragon (c_dragon_copper)"
+def_GM_Menu_NPC_Dragons_object[14]    "c_dragon_copper" //chardef
+def_GM_Menu_NPC_Dragons_type[14]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[14]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[15]      "Silver Dragon (c_dragon_silver)"
+def_GM_Menu_NPC_Dragons_object[15]    "c_dragon_silver" //chardef
+def_GM_Menu_NPC_Dragons_type[15]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[15]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[16]      "Gold Dragon (c_dragon_gold)"
+def_GM_Menu_NPC_Dragons_object[16]    "c_dragon_gold" //chardef
+def_GM_Menu_NPC_Dragons_type[16]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[16]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[17]      "Ice Dragon (c_dragon_ice)"
+def_GM_Menu_NPC_Dragons_object[17]    "c_dragon_ice" //chardef
+def_GM_Menu_NPC_Dragons_type[17]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[17]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[18]      "Black Dragon (c_dragon_black)"
+def_GM_Menu_NPC_Dragons_object[18]    "c_dragon_black" //chardef
+def_GM_Menu_NPC_Dragons_type[18]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[18]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[19]      "Wyrm (c_wyrm)"
+def_GM_Menu_NPC_Dragons_object[19]    "c_wyrm" //chardef
+def_GM_Menu_NPC_Dragons_type[19]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[19]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[20]      "Dragon Lord (c_dragon_lord)"
+def_GM_Menu_NPC_Dragons_object[20]    "c_dragon_lord" //chardef
+def_GM_Menu_NPC_Dragons_type[20]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[20]      "" // no help
+
+def_GM_Menu_NPC_Dragons_name[21]      "Dragon Lord_Beridor (c_dragon_beridor)"
+def_GM_Menu_NPC_Dragons_object[21]    "c_dragon_beridor" //chardef
+def_GM_Menu_NPC_Dragons_type[21]      def_GM_Menu_npc
+def_GM_Menu_NPC_Dragons_help[21]      "" // no help
+
+
+///////////////////////////
+//     (Humanoidi)       //
+///////////////////////////
+def_GM_Menu_NPC_Humanoids_totalAmount 19
+def_GM_Menu_NPC_Humanoids_sectionName  "NPC - Humanoidi"
+
+def_GM_Menu_NPC_Humanoids_name[0]      "Troll (c_troll)"
+def_GM_Menu_NPC_Humanoids_object[0]    "c_troll" //chardef
+def_GM_Menu_NPC_Humanoids_type[0]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[0]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[1]      "Troll ranger (c_troll_ranger)"
+def_GM_Menu_NPC_Humanoids_object[1]    "c_troll_ranger" //chardef
+def_GM_Menu_NPC_Humanoids_type[1]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[1]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[2]      "Troll mace (c_troll_mace)"
+def_GM_Menu_NPC_Humanoids_object[2]    "c_troll_mace" //chardef
+def_GM_Menu_NPC_Humanoids_type[2]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[2]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[3]      "Troll axe (c_troll_axe)"
+def_GM_Menu_NPC_Humanoids_object[3]    "c_troll_axe" //chardef
+def_GM_Menu_NPC_Humanoids_type[3]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[3]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[4]      "Ettin (c_ettin)"
+def_GM_Menu_NPC_Humanoids_object[4]    "c_ettin" //chardef
+def_GM_Menu_NPC_Humanoids_type[4]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[4]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[5]      "Ettin axe (c_ettin_axe)"
+def_GM_Menu_NPC_Humanoids_object[5]    "c_ettin_axe" //chardef
+def_GM_Menu_NPC_Humanoids_type[5]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[5]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[6]      "Ettin Lord (c_ettin_lord)"
+def_GM_Menu_NPC_Humanoids_object[6]    "c_ettin_lord" //chardef
+def_GM_Menu_NPC_Humanoids_type[6]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[6]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[7]      "Zlobr (c_ogre)"
+def_GM_Menu_NPC_Humanoids_object[7]    "c_ogre" //chardef
+def_GM_Menu_NPC_Humanoids_type[7]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[7]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[8]      "Zlobr Mag (c_ogre_mage)"
+def_GM_Menu_NPC_Humanoids_object[8]    "c_ogre_mage" //chardef
+def_GM_Menu_NPC_Humanoids_type[8]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[8]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[9]      "Zlobr Valecnik (c_ogre_lord)"
+def_GM_Menu_NPC_Humanoids_object[9]    "c_ogre_lord" //chardef
+def_GM_Menu_NPC_Humanoids_type[9]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[9]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[10]      "Zlobr Vudce - Boss (c_Ogre_boss)"
+def_GM_Menu_NPC_Humanoids_object[10]    "c_Ogre_boss" //chardef
+def_GM_Menu_NPC_Humanoids_type[10]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[10]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[11]      "Cyclops (c_cyclops)"
+def_GM_Menu_NPC_Humanoids_object[11]    "c_cyclops" //chardef
+def_GM_Menu_NPC_Humanoids_type[11]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[11]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[12]      "Cyclops Mag (c_cyclops_mage)"
+def_GM_Menu_NPC_Humanoids_object[12]    "c_cyclops_mage" //chardef
+def_GM_Menu_NPC_Humanoids_type[12]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[12]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[13]      "Cyclops King (c_cyclops_king)"
+def_GM_Menu_NPC_Humanoids_object[13]    "c_cyclops_king" //chardef
+def_GM_Menu_NPC_Humanoids_type[13]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[13]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[14]      "Titan (c_titan)"
+def_GM_Menu_NPC_Humanoids_object[14]    "c_titan" //chardef
+def_GM_Menu_NPC_Humanoids_type[14]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[14]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[15]      "Titanka (c_titan_ranger)"
+def_GM_Menu_NPC_Humanoids_object[15]    "c_titan_ranger" //chardef
+def_GM_Menu_NPC_Humanoids_type[15]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[15]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[16]      "Titan Mage (c_titan_mage)"
+def_GM_Menu_NPC_Humanoids_object[16]    "c_titan_mage" //chardef
+def_GM_Menu_NPC_Humanoids_type[16]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[16]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[17]      "Titan Lord (c_titan_lord)"
+def_GM_Menu_NPC_Humanoids_object[17]    "c_titan_lord" //chardef
+def_GM_Menu_NPC_Humanoids_type[17]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[17]      "" // no help
+
+def_GM_Menu_NPC_Humanoids_name[18]      "Titan Overlord - Boss (c_titan_overlord)"
+def_GM_Menu_NPC_Humanoids_object[18]    "c_titan_overlord" //chardef
+def_GM_Menu_NPC_Humanoids_type[18]      def_GM_Menu_npc
+def_GM_Menu_NPC_Humanoids_help[18]      "" // no help
+
+///////////////////////////
+//        (Golems)       //
+///////////////////////////
+def_GM_Menu_NPC_Golems_totalAmount 10
+def_GM_Menu_NPC_Golems_sectionName  "NPC - Golemove"
+
+def_GM_Menu_NPC_Golems_name[0]      "Copper Golem (c_golem_copper)"
+def_GM_Menu_NPC_Golems_object[0]    "c_golem_copper" //chardef
+def_GM_Menu_NPC_Golems_type[0]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[0]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[1]      "Iron Golem (c_golem_iron)"
+def_GM_Menu_NPC_Golems_object[1]    "c_golem_iron" //chardef
+def_GM_Menu_NPC_Golems_type[1]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[1]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[2]      "Silver Golem (c_golem_silver)"
+def_GM_Menu_NPC_Golems_object[2]    "c_golem_silver" //chardef
+def_GM_Menu_NPC_Golems_type[2]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[2]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[3]      "Golden Golem (c_golem_golden)"
+def_GM_Menu_NPC_Golems_object[3]    "c_golem_golden" //chardef
+def_GM_Menu_NPC_Golems_type[3]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[3]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[4]      "Verite Golem (c_golem_verite)"
+def_GM_Menu_NPC_Golems_object[4]    "c_golem_verite" //chardef
+def_GM_Menu_NPC_Golems_type[4]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[4]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[5]      "Valorite Golem (c_golem_valorite)"
+def_GM_Menu_NPC_Golems_object[5]    "c_golem_valorite" //chardef
+def_GM_Menu_NPC_Golems_type[5]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[5]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[6]      "Obsidian Golem (c_golem_obsidian)"
+def_GM_Menu_NPC_Golems_object[6]    "c_golem_obsidian" //chardef
+def_GM_Menu_NPC_Golems_type[6]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[6]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[7]      "Adamantinum Golem (c_golem_adamantinum)"
+def_GM_Menu_NPC_Golems_object[7]    "c_golem_adamantinum" //chardef
+def_GM_Menu_NPC_Golems_type[7]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[7]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[8]      "Shadow Golem (c_golem_shadow)"
+def_GM_Menu_NPC_Golems_object[8]    "c_golem_shadow" //chardef
+def_GM_Menu_NPC_Golems_type[8]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[8]      "" // no help
+
+def_GM_Menu_NPC_Golems_name[9]      "Mithrill Golem (c_golem_mithril)"
+def_GM_Menu_NPC_Golems_object[9]    "c_golem_mithril" //chardef
+def_GM_Menu_NPC_Golems_type[9]      def_GM_Menu_npc
+def_GM_Menu_NPC_Golems_help[9]      "" // no help
 [EOF]

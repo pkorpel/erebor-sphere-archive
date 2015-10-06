@@ -261,7 +261,7 @@ endif
 if (<argn> == argo.dialog_linkButton("q040_dont_tell_name"))
   say("Dobre, je to tva volba.")
   src.qtag(q040_dragons,50,46)
-	finduid(#0402D472F).tag(dragons_50,#+1)
+	finduid(#0400075A4).tag(dragons_50,#+1)
 elseif (<argn> == argo.dialog_linkButton("q040_accept_ps_boss"))
   say("At se ti dari...")
   src.qtag(q040_dragons,1,46)
@@ -271,7 +271,7 @@ elseif (<argn> == argo.dialog_linkButton("q040_give_skull_head"))
     src.f_q040_consume_skull_head
     src.qtag(q040_dragons,2,46)
 	  src.addexp(4000)
-	  finduid(#0402D472F).tag(dragons_3,#+1)
+	  finduid(#0400075A4).tag(dragons_3,#+1)
   else
   	say("Vzdyt nemas, co jsem chtel! Mam te brat za lhare?")
   endif
@@ -288,7 +288,7 @@ elseif (<argn> == argo.dialog_linkButton("q040_give_poison_bag"))
     src.qtag(q040_dragons,4,46)
 	  src.addexp(3000)
     src.consume(i_q040_poison_bag_collector)
-	  finduid(#0402D472F).tag(dragons_4,#+1)
+	  finduid(#0400075A4).tag(dragons_4,#+1)
   else
   	say("Vzdyt nemas, co jsem chtel! Mam te brat za lhare?")
   endif 
@@ -307,7 +307,7 @@ elseif (<argn> == argo.dialog_linkButton("q040_give_ingots"))
     if (src.tag(dragons_doorman_refuse))
       src.tag.remove(dragons_doorman_refuse)
     endif
-	  finduid(#0402D472F).tag(dragons_ingots,#+1)
+	  finduid(#0400075A4).tag(dragons_ingots,#+1)
   else
   	say("Vzdyt nemas, co jsem chtel! Mam te brat za lhare?")
   endif 
@@ -355,7 +355,7 @@ on=1 // ok
 if (<STRCMPI(<src.tag(q040_dragons_name)>,<argtxt(1)>)>==0)
   src.sysMessage("Prvni zkousku jsi splnil!")
   src.qtag(q040_dragons,101,46)
-  finduid(#0402D472F).tag(dragons_2,#+1)
+  finduid(#0400075A4).tag(dragons_2,#+1)
 else
  src.redMessage("Jmeno neni spravne !")
 endif
@@ -717,7 +717,7 @@ elseif (<argn> == argo.dialog_linkButton("q040_has_the_head"))
   	say("Konecne jsem se dockal! Mam tu par ostrych hrebiku, tak si budeme hrat!")
   	src.qtag(q040_dragons_kovar,2,50)
   	src.consume(1,i_boss_skull_ps)
-    finduid(#0402D472F).tag(dragons_kovar,#+1)
+    finduid(#0400075A4).tag(dragons_kovar,#+1)
   else
   	say(Nelzi mi! Nemas ji!!!")
   endif
@@ -1384,7 +1384,7 @@ on=@death
 //else
 //	memoryfindtype(Memory_ISpawned).link.tag(killer).redmessage("Nebol si pri smrti draka.")
 //endif
-finduid(#0402D472F).tag(dragons_<tag(q040_dragons_qtag_wanted)>,#+1)
+finduid(#0400075A4).tag(dragons_<tag(q040_dragons_qtag_wanted)>,#+1)
 
 //////////////////////////// alchymista
 
@@ -1585,7 +1585,7 @@ elseif (<argn> == argo.dialog_linkButton("q040_give_potions"))
     say("Dekuji mockrat!")
     src.q040_dragons_consume_potions
     src.qtag(q040_dragons_alchymista,2,47)    
-    finduid(#0402D472F).tag(dragons_alch,#+1)
+    finduid(#0400075A4).tag(dragons_alch,#+1)
   else
   	say("Vzdyt to neni pravda! Nemas to, o co jsem te zadal!")
   endif
@@ -1876,7 +1876,7 @@ elseif (<argn> == argo.dialog_linkButton("q40_i_have_scale"))
     src.newitem(i_mi_bag_superhigh)
     src.act.bounce
     src.qtag(q040_dragons_rakchin,2,48)
-    finduid(#0402D472F).tag(dragons_scale,#+1)
+    finduid(#0400075A4).tag(dragons_scale,#+1)
   else
   	say("Vzdyt to neni pravda! Nemas to, o co jsem te zadal!")
   endif

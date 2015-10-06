@@ -442,7 +442,7 @@ on=@userdclick
 if (<src.qtag(q040_dragons)> == 0)
   src.f_q040_pergamen_savename
   src.qtag(q040_dragons,100,46)
-  finduid(#0402D472F).tag(dragons_1,#+1)
+  finduid(#0400075A4).tag(dragons_1,#+1)
 endif
 tag(radek_343,"volbe byl zvolen novym vudce <src.tag(q040_dragons_name)> z jezerniho lidu. ")
 dialog d_pergamen_dragons
