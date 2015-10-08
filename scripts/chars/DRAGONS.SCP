@@ -476,7 +476,7 @@ maxstam={160 200}
 maxmana=0
 
 
-tag.experience=<eval {85.0 105.0}
+tag.experience=<eval {85.0 105.0}>
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
