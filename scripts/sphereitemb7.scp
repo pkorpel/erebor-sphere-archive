@@ -9476,4 +9476,27 @@ NAME=sud
 [ITEMDEF 0390A]
 NAME=stojan
 
+[ITEMDEF i_ress_ankh]
+ID=i_ankh
+TYPE=t_ress_ankh
+NAME=Kamen oziveni
+
+CATEGORY=GM
+SUBSECTION=Ozivovaci kameny
+DESCRIPTION=univerzalni
+
+ON=@Create
+attr=attr_move_never
+COLOR=00
+
+[typedef t_ress_ankh]
+ON=@userClick
+src.sysmessage "Duchove poutniku jez se obnovi do stavu predeslemu obtiznemu boji."
+if (src.flag_dead)
+	if (distance<5)
+		src.dospell_final(59,1000)
+	endif
+endif
+return 1
+
 [EOF]

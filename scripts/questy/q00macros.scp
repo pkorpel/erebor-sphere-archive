@@ -67,9 +67,9 @@ elseif !(src.findid(i_qf_sign)) //tady dame quest po vygenerovani hraci
 elseif (<eval src.findid(i_qf_sign).tag(qfcount)> >= 3) // tady odmenime uspesne lovce
   src.sysmessage("Odmena ti byla poslana do banky.")
   say("<src.name> <src.sex("ulovil","ulovila")> jsi <eval src.findid(i_qf_sign).tag(qfcount)> monster. Dostanes odmenu.")
-  if safe.finduid(#0402D472F)
-    finduid(#0402D472F).tag(givenexps,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
-    finduid(#0402D472F).tag(givengold,#+<eval ((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)>)
+  if safe.finduid(#0400075A4)
+    finduid(#0400075A4).tag(givenexps,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
+    finduid(#0400075A4).tag(givengold,#+<eval ((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)>)
   endif
   tag(givengold,#+<eval ((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)>)
   tag(givenexps,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
