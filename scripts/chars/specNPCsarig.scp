@@ -1839,6 +1839,8 @@ peacemaking=100
 
 tag(noanimate,1)
 
+ITEMnewbie=i_monster_create
+
 ON=@NPCRESTOCK 
 itemnewbie=i_robe
 color=5000
@@ -2693,6 +2695,7 @@ WRESTLING=100.0
 MAGERY=150.0
 EI=120.0
 SpiritSpeak=160.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 //addspell=s_paralyze

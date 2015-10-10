@@ -82,6 +82,8 @@ SpiritSpeak=55.0
 peacemaking=100.0
 provocation=100.0
 
+ITEMnewbie=i_monster_create
+
 ON=@NPCRestock
 ITEM=loot_DAEMON
 item=i_gold

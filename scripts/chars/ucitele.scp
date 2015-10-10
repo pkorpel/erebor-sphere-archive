@@ -32,6 +32,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -41,7 +42,7 @@ ITEMnewbie=i_robe
 COLOR=0481
 
 on=@userclick
-tag(ucimskill,anatomy)
+tag(ucimskill,anatomy)  
 
 ////////////////////////////////////////
 
@@ -80,6 +81,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -128,6 +130,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -180,6 +183,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -227,6 +231,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -274,6 +279,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -321,6 +327,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -370,6 +377,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -419,6 +427,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -468,6 +477,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -517,6 +527,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -564,6 +575,8 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
+
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
 COLOR=0481
@@ -613,6 +626,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -662,6 +676,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -711,6 +726,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -761,6 +777,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -810,6 +827,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -861,6 +879,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -912,6 +931,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -961,6 +981,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1010,6 +1031,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1059,6 +1081,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1108,6 +1131,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1157,6 +1181,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1206,6 +1231,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1254,6 +1280,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1303,6 +1330,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1352,6 +1380,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1401,6 +1430,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1451,6 +1481,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1501,6 +1532,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1551,6 +1583,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1602,6 +1635,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1651,6 +1685,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1702,6 +1737,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1751,6 +1787,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=0481
 ITEMNEWBIE=random_facial_hair
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -1801,6 +1838,7 @@ ITEMnewbie=i_robe
 COLOR=0481
 ITEMnewbie=i_hammer_sledge
 COLOR=0481
+ITEMnewbie=i_monster_create
 
 ////////////////////////////////////////
 [chardef c_mistr_craft_log_gondor]
@@ -1843,6 +1881,7 @@ itemnewbie=i_bracelet_gold
 itemnewbie=i_necklace_silver
 itemnewbie=i_apron_half
 ITEMnewbie=i_hammer_sledge
+ITEMnewbie=i_monster_create
 
 on=@userdclick
 if (src.isdead)
@@ -1893,6 +1932,7 @@ itemnewbie=i_bracelet_gold
 itemnewbie=i_necklace_silver
 itemnewbie=i_apron_full
 ITEMnewbie=i_hammer_sledge
+ITEMnewbie=i_monster_create
 
 on=@userdclick
 if (src.isdead)

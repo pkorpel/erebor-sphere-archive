@@ -237,6 +237,7 @@ name=Brneni krvaveho prisluhovace
 ITEMNEWBIE=i_sword_viking
 color=098c
 name=mec krvaveho prisluhovace
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEM=i_gold
@@ -748,6 +749,7 @@ ITEMNEWBIE=i_sandals
 COLOR=01b6 
 ITEMNEWBIE=i_pants_long 
 COLOR=08f  
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock 
 item=i_detheanorus_invul //jinak to nepujde !

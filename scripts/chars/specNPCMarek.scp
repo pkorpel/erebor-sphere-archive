@@ -2207,6 +2207,7 @@ itemnewbie=i_bone_leggings
 Color=098A
 itemnewbie=i_bone_chest
 Color=098A
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock 
 ITEM=i_gold

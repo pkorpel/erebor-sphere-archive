@@ -2228,3 +2228,7 @@ TACTICS=250.0
 WRESTLING=250.0
 
 tag.experience=0
+
+ITEMnewbie=i_monster_create
+
+[eof]

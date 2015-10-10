@@ -503,6 +503,7 @@ WRESTLING=100.0
 MAGERY=140.0
 EI=110.0
 SpiritSpeak=100.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_poison

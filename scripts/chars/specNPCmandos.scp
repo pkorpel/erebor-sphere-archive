@@ -27,6 +27,8 @@ TACTICS{40.0 60.0}
 flag_invul(1)
 tag(noanimate,1)
 
+ITEMnewbie=i_monster_create
+
 ON=@NPCRESTOCK 
 ITEMNEWBIE=i_armor_female_skirt
 COLOR=0999
@@ -131,7 +133,7 @@ ITEMnewbie=i_cape
 ITEMnewbie=i_ringmail_sleeves
 ITEMnewbie=i_ringmail_tunic
 ITEMnewbie=i_chainmail_leggings 
-
+ITEMnewbie=i_monster_create
 
 ////////////////////////////////////////////
 
@@ -179,6 +181,7 @@ COLOR=098B
 ITEMnewbie=i_golden_nose_helm 
 ITEMnewbie=i_spear_mithril 
 COLOR=099A 
+ITEMnewbie=i_monster_create
 
 //////////////////////////////////////
 
@@ -222,6 +225,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=colors_hair
 ITEMNEWBIE=random_facial_hair
 COLOR=match_hair
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_bardiche_iron
@@ -280,6 +284,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=colors_hair
 ITEMNEWBIE=random_facial_hair
 COLOR=match_hair
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_bardiche_iron
@@ -446,6 +451,7 @@ KARMA=100
 
 ITEMNEWBIE=random_male_hair
 ITEMNEWBIE=random_facial_hair
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_sandals

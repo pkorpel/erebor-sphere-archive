@@ -183,6 +183,7 @@ TACTICS=10
 
 ITEMNEWBIE=random_male_hair
 ITEMNEWBIE=random_facial_hair
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMnewbie=i_hat_wizards
@@ -276,7 +277,7 @@ SpiritSpeak=85.0
 WRESTLING={120.0 150.0}
 Parrying=150.0
 tactics=150.0
-
+ITEMnewbie=i_monster_create
 
 
 ON=@NPCRestock
@@ -327,6 +328,7 @@ SpiritSpeak=85.0
 WRESTLING={120.0 150.0}
 Parrying=150.0
 tactics=150.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_flamestrike
@@ -497,6 +499,7 @@ foodtype=3 t_food, t_fruit
 
 anim=0ffc78c7f
 tevents=e_undiscovered
+TEVENTS=e_monster
 
 CATEGORY=Dungy
 SUBSECTION=Hrobka cernych Numerojcu
@@ -526,6 +529,7 @@ on=@create
      fame={1200 2375}
      karma={-5000 -5999}
 
+     ITEMnewbie=i_monster_create
 on=@death
      newloot=loot_sphinx
 

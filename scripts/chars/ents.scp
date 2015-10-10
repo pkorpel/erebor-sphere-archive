@@ -120,6 +120,8 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 tag(monstertype,reaper)
 tag(monstertype2,undead,80)
 
+ITEMnewbie=i_monster_create
+
 ON=@NPCRestock
 
 ON=@NPCRefuseItem
@@ -206,6 +208,8 @@ addspell=s_lightning
 addspell=s_mind_blast
 addspell=s_magic_reflection
 addspell=s_flamestrike
+
+ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEMNEWBIE=i_sandals

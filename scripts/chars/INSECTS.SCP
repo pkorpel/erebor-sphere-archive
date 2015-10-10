@@ -4218,7 +4218,6 @@ addspell=s_poison
 addspell=s_magic_reflection
 addspell=s_fireball
 
-ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEM=i_gold

@@ -1193,6 +1193,7 @@ WRESTLING={80.0 90.0}
 MAGERY=100.0
 EI=100.0
 SpiritSpeak=30.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_fireball
@@ -1282,6 +1283,7 @@ WRESTLING={70.0 80.0}
 MAGERY=100.0
 EI=100.0
 SpiritSpeak=35.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_lightning
@@ -1373,6 +1375,7 @@ WRESTLING={80.0 90.0}
 MAGERY=100.0
 EI=100.0
 SpiritSpeak=40.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_lightning
@@ -1465,6 +1468,7 @@ WRESTLING=100.0
 MAGERY=100.0
 EI=100.0
 SpiritSpeak=45.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_lightning
@@ -1557,6 +1561,7 @@ WRESTLING=100.0
 MAGERY=130.0
 EI=100.0
 SpiritSpeak=55.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_lightning
@@ -1657,6 +1662,7 @@ WRESTLING=100.0
 MAGERY=140.0
 EI=110.0
 SpiritSpeak=100.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_poison
@@ -1757,6 +1763,7 @@ WRESTLING=100.0
 MAGERY=120.0
 EI=120.0
 SpiritSpeak=190.0
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_spellbook
 addspell=s_lightning

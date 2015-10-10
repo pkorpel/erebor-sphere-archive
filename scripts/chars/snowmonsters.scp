@@ -4022,6 +4022,7 @@ ITEMNEWBIE=i_tunic
 COLOR=0994
 ITEMNEWBIE=i_bandana
 COLOR=0994
+ITEMnewbie=i_monster_create
 
 ITEMNEWBIE=i_light_source
 ITEMNEWBIE=i_spear_short
@@ -4090,7 +4091,7 @@ ITEMNEWBIE=i_robe
 COLOR=0990
 ITEMNEWBIE=i_hat_wizards
 COLOR=0990
-
+ITEMnewbie=i_monster_create
 ITEMNEWBIE=i_light_source
 
 ON=@userDClick
