@@ -32,7 +32,11 @@ on=*Dobry den*
 if (<distance> > 3)
  src.sysMessage("Na takovou vzdalenost s tebou jednat nebude")
 else
- f_q31_kuchar
+ if (<eval src.tag.reaml> ==1)
+   f_q31_kuchar
+ else
+   f_q31_kuchar_mordor
+  endif    
 endif
 
 [FUNCTION f_q31_kuchar]
@@ -48,7 +52,18 @@ elseif (<eval src.tag.q31_kuchar> ==2)
   dialog(d_q31_kuchar_3)
 endif
 
-      
+[FUNCTION f_q31_kuchar_mordor]
+if (<eval src.tag.realm> ==1) 
+  say("AAAAAA, Gondori !!! Zachran se kdo muzes !!!")
+elseif (<eval src.tag.q31_neuspel> ==1)
+  say("S tebou se uz nemam o cem bavit. Nerus me prosim mam praci!")
+elseif  (<eval src.tag.q31_kuchar> ==0) 
+  dialog(d_q31_kuchar_1)
+elseif (<eval src.tag.q31_kuchar> ==1) 
+  dialog(d_q31_kuchar_2)
+elseif (<eval src.tag.q31_kuchar> ==2)
+  dialog(d_q31_kuchar_3)
+endif      
       
       
       

@@ -2,6 +2,7 @@
 id=c_man
 name=Mastickar Gregoriel
 
+TEVENTS=e_character
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TSPEECH=spk_q010_mastickar
@@ -50,6 +51,7 @@ ITEMnewbie=i_hat_cape_2
 COLOR=016c
 ITEMnewbie=i_cape
 COLOR=016c
+ITEMnewbie=i_monster_create
 
 SELL=VENDOR_S_HEALER
 

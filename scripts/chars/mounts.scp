@@ -1620,6 +1620,8 @@ WRESTLING={40.0 54.0}
 TAMING={99.0 104.0}
 ANIMALLORE=99.0
 
+itemnewbie=i_monster_create
+
 ////////////////////////////////////////////////
 
 [CHARDEF c_ostard_zostrich_JMENO2]
@@ -1671,6 +1673,8 @@ TACTICS={29.0 44.0}
 WRESTLING={40.0 54.0}
 TAMING={99.0 104.0}
 ANIMALLORE=99.0
+
+itemnewbie=i_monster_create
 
 ////////////////////////////////////////////////
 
@@ -1724,6 +1728,8 @@ WRESTLING={40.0 54.0}
 TAMING={99.0 104.0}
 ANIMALLORE=99.0
 
+itemnewbie=i_monster_create
+
 ////////////////////////////////////////////////
 
 [chardef 07a]
@@ -1773,6 +1779,7 @@ magery={65.6 89.5}
 meditation={49.1 60.0}
 taming={195.1}
 peacemaking=99.9
+itemnewbie=i_monster_create
 
 //typ monstra
 tag(monstertype,animal)

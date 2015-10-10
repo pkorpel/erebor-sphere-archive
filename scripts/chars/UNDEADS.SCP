@@ -3408,6 +3408,8 @@ tag(monstertype2,humanoid,20)
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
 
+itemnewbie=i_monster_create
+
 ON=@NPCRestock
 ITEM=loot_undead
 ITEM=i_gold

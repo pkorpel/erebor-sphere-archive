@@ -2190,6 +2190,8 @@ on=@getHit
 tag(combatSource,<src>)
 
 on=@death
+f_monsterRefreshSpwn         //potrebna funkce pro refreshnuti timeru spawneru (zkopceno z npc_systems)
+findlayer(25).remove
 tag(lastmurderbyf,<act>)
 arg(monstdeathact,<act>)
 if (flag_conjured)
@@ -2830,7 +2832,8 @@ if (action==Skill_fencing)||(tag(isstabbing))
   			  	if ((<arg(distance)> == 1)||(<arg(distance)> == 2))
   				  	arg(body,<tag(ra_utok_do_zad)>)
   					  arg(bonus,0)
-    					classmessage("Uder do zad!")
+    					classmessage("Uder do zad!")
+
     					if (<arg(body)> <= 10)
   	  					arg(bonus,<eval <arg(body)>*10>)
   		  			elseif (<arg(body)> > 10)
