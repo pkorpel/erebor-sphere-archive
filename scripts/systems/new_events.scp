@@ -333,7 +333,7 @@ if (<finduid(<tag(mrtvola)>).tag(rozrezano)>) //je li nalezene telo rozrezane
 else
   //pomocne "zvedaci" NPCcko
   //arg(vrah,<finduid(<tag(lastmurderbyf)>)>)
-  arg(vrah,<finduid(0109145)>)
+  arg(vrah,<finduid(08C91)>)
   vrah.invis=1
   vrah.tag(oldp,<vrah.p>)
   vrah.p=<tag(pozice)>  
