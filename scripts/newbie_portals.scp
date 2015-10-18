@@ -1385,7 +1385,7 @@ return 0
 //if (canbeclass(<?races_<args>?>))
 tag(level,0)
 promazat
-givegold(500)
+givegold(2000)
 giveitem(i_rune_base)
 giveitem(i_crystal_<tag.class>)
 newloot(tm_<tag.class>newbie)
