@@ -157,6 +157,8 @@ sell=i_bandana,{0 5}
 price=100
 sell=i_bandage,{150 250}
 price=3
+sell=i_sewing_kit{3 5}
+price=200
 
 
 [TEMPLATE 102142]
@@ -273,17 +275,18 @@ sell=i_clock_parts,{0 3}
 //sell=i_lockpick,{0 3}
 //price=15
 sell=i_tinker_tools,{4 10}
+sell=i_saw,{5 10}
 //sell=i_froe,{0 3}
 //sell=i_inshave,{0 3}
 //sell=i_scorp,{0 3}
 sell=i_scissors,{3 5}
 //sell=i_tongs,{0 3}
 //sell=i_saw_dovetail,{0 3}
-//sell=i_saw,{0 3}
 //sell=i_plane_moulding,{0 3}
 //sell=i_plane_smoothing,{0 3}
 //sell=i_plane_jointing,{0 3}
 sell=i_pickaxe,{5 7}
+sell=i_hammer_smith,{5 7}
 //sell=i_drum,{0 3}
 //sell=i_tambourine,{0 3}
 //sell=i_lyre,{0 3}
@@ -291,7 +294,7 @@ sell=i_pickaxe,{5 7}
 //sell=i_knife_skinning,{0 3}
 //sell=i_hatchet,{0 3}
 //sell=i_key_magic,{1 5}
-price=2000
+//price=2000
 
 
 
