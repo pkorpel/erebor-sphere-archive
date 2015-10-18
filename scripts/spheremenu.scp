@@ -69,7 +69,7 @@ ENDIF
 ON=0 Herni prikazy
 MENU MENU_HERNI_PRIKAZY
 
-ON=0 Moria encyklopedia
+ON=0 Erebor encyklopedia
 MENU MENU_MORIA_ENCYKLOPEDIA
 
 ON=0 Zprava pro GM (page): pred zaslanim zpravy si radne prostudujte pravidla posilani zprav. Zpravy jasne nevyjadrujici problem budou mazany.
@@ -122,7 +122,7 @@ ON=0 Informace o spawnech v okoli
 spawncount
 
 
-ON=0 Informace o Moria serveru
+ON=0 Informace o serveru Erebor
 serv.INFORMATION
 
 
@@ -147,7 +147,7 @@ DIALOG d_chat_options
 ON=0 Kdo jsem?
 whoami
 
-ON=0 Informace o Moria serveru.
+ON=0 Informace o serveru Erebor.
 serv.INFORMATION
 
 ON=0 Predchozi
@@ -160,7 +160,7 @@ Umoznuje prednastaveni hernich zalezitosti.
 ON=0 Jak jsem hladovy?
 hungry
 
-ON=0 Informace o Moria serveru.
+ON=0 Informace o serveru Erebor.
 serv.INFORMATION
 
 ON=0 Predchozi
@@ -193,10 +193,10 @@ MENU MENU_help
 /////////////
 
 [MENU MENU_MORIA_ENCYKLOPEDIA_POVOLANI]
-Moria encyklopedia
+Erebpr encyklopedia
 
 ON=0 Aktualni informace na webu
-WEBLINK http:\\www.moria.cz/www/page=7
+WEBLINK http://www.uoerebor.cz/
 
 ON=0 Remeslnik (craft)
 MENU MENU_MORIA_ENCYKLOPEDIA_POVOLANI
@@ -231,19 +231,19 @@ MENU MENU_MORIA_ENCYKLOPEDIA
 ////////////////
 
 [MENU MENU_MORIA_ENCYKLOPEDIA_ODKAZY]
-Odkazy na Webove stranky tykajici se se shardu Moria 
+Odkazy na Webove stranky tykajici se se shardu Erebor 
 
-ON=0 Domovska stranka shardu Moria
-WEBLINK http://www.moria.cz/www/
+ON=0 Domovska stranka shardu Erebor
+WEBLINK http://www.erebor.cz/
 
-ON=0 Moriawiki - oficialni informacni web
-WEBLINK http://www.moria.cz/wiki/
+ON=0 Erebor wiki - oficialni informacni web
+WEBLINK http://wiki.uoerebor.cz/
 
-ON=0 Vyveska - stranka o volnem pokecu o hre na Morii, srazech hracu a naslednych svizelich :o) a nejen to.
-WEBLINK http://vyveska.kec.cz/vyveska/
+ON=0 Vyveska - stranka o volnem pokecu o hre na Ereboru, srazech hracu a naslednych svizelich :o) a nejen to.
+WEBLINK http://vyveska.uoerebor.cz/
 
-ON=0 Forum, kde se muzete podelit s tvurci shardu Moria o sve napady a pripominky ke hre.
-WEBLINK http://kec.cz/forum/
+ON=0 Forum, kde se muzete podelit s tvurci shardu Erebor o sve napady a pripominky ke hre.
+WEBLINK http://forum.uoerebor.cz/
 
 ON=0 Odkazy na spratelene servry
 MENU MENU_MORIA_ENCYKLOPEDIA_ODKAZY_SPRATELENE
