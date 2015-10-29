@@ -5,7 +5,8 @@
 id=c_man
 name=Farin
 TSPEECH=spk_q022_velitel
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 CATEGORY=Moria Questy
 SUBSECTION=Transport
 DESCRIPTION=Velitel strazi (gondor)
@@ -51,7 +52,8 @@ endif
 id=c_man
 name=Velitel strazi
 TSPEECH=spk_q022_velitel
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 CATEGORY=Moria Questy
 SUBSECTION=Transport
 DESCRIPTION=Velitel strazi (mordor)
@@ -104,7 +106,8 @@ endif
 id=c_man
 name=Miro
 TSPEECH=spk_q022_truhlar
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 CATEGORY=Moria Questy
 SUBSECTION=Transport
 DESCRIPTION=Truhlar
@@ -146,7 +149,8 @@ endif
 id=c_man
 name=Valduk
 TSPEECH=spk_q022_hornik
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 CATEGORY=Moria Questy
 SUBSECTION=Transport
 DESCRIPTION=Hornik
@@ -192,7 +196,8 @@ endif
 id=c_man
 name=Jindra Jecminek
 TSPEECH=spk_q022_kuchar
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 CATEGORY=Moria Questy
 SUBSECTION=Transport
 DESCRIPTION=Kuchar

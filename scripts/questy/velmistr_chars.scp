@@ -67,6 +67,7 @@ ID=C_WOMAN
 TSPEECH=spk_q000_elvira
 
 TEVENTS=e_character
+TEVENTS=e_monster 
 
 
 CATEGORY=Moria Questy
@@ -112,6 +113,7 @@ ID=C_WOMAN
 TSPEECH=spk_q000_elmira
 
 TEVENTS=e_character
+TEVENTS=e_monster 
 
 CATEGORY=Moria Questy
 SUBSECTION=M3 - Velmistrovsky quest
@@ -155,6 +157,7 @@ ID=C_WOMAN
 TSPEECH=spk_q000_elqira
 
 TEVENTS=e_character
+TEVENTS=e_monster 
 
 CATEGORY=Moria Questy
 SUBSECTION=M3 - Velmistrovsky quest

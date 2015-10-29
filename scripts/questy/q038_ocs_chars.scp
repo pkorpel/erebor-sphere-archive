@@ -4,6 +4,7 @@ name=Hospodsky
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_hospodsky
 
 CATEGORY=Moria dungy
@@ -63,6 +64,7 @@ name=Edgar
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_edgar
 
 CATEGORY=Moria dungy
@@ -121,6 +123,7 @@ name=Zalarnik
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_zalarnik
 
 CATEGORY=Moria dungy
@@ -176,6 +179,7 @@ name=Arnost
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_arnost
 
 CATEGORY=Moria dungy
@@ -230,6 +234,7 @@ name=Melichar
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_melichar
 
 CATEGORY=Moria dungy
@@ -285,6 +290,7 @@ name=Karena
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_liecitelka
 
 CATEGORY=Moria dungy
@@ -339,6 +345,7 @@ name=Johana
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_johana
 
 CATEGORY=Moria dungy
@@ -389,6 +396,7 @@ name=Baltazar
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_baltazar
 
 CATEGORY=Moria dungy
@@ -443,6 +451,7 @@ name=Adrian
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_adrian
 
 CATEGORY=Moria dungy
@@ -497,6 +506,7 @@ name=Neferity
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_carodejnica
 
 CATEGORY=Moria dungy
@@ -551,6 +561,7 @@ name=Hungar
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_ocs_capitan
 TSPEECH=spk_q038_ocs_hungar
 
@@ -606,6 +617,7 @@ name=Traig
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_traig
 
 CATEGORY=Moria dungy
@@ -663,6 +675,7 @@ name=Traig
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_traig
 
 CATEGORY=Moria dungy
@@ -717,6 +730,7 @@ name=Umogon
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_umogon
 
 CATEGORY=Moria dungy
@@ -771,6 +785,7 @@ name=Kubrogin
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q038_ocs_kubrogin
 
 CATEGORY=Moria dungy

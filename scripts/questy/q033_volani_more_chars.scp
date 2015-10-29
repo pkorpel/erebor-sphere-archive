@@ -6,6 +6,7 @@ NAME=Vetesnik Ignac
 ID=C_MAN
 TSPEECH=spk_q033_vetesnikignac
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q033 - Volani More
@@ -140,6 +141,7 @@ NAME=Pirat Renfer
 ID=C_MAN
 TSPEECH=spk_q033_piratrenfer
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q033 - Volani More
@@ -185,6 +187,7 @@ NAME=Rybar Volek
 ID=C_MAN
 TSPEECH=spk_q033_rybarvolek
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q033 - Volani More

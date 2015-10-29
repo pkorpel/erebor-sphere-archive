@@ -82,6 +82,9 @@ ID=c_man
 
 TSPEECH=joptravel0
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@CREATE 
 COLOR=color_elf
 STR={400 500} 

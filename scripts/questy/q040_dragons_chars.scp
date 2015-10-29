@@ -4,8 +4,8 @@ name=Drakobijec
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_critic              //sance na kritik melee
-//TEVENTS=e_npc_leaper
 TSPEECH=spk_q040_dragons_doorman
 
 CATEGORY=Moria Questy
@@ -102,6 +102,7 @@ name=Vartian
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_sniper              //Pøidá dmg k útoku po ránì def= 50
 TSPEECH=spk_q040_dragons_vartian
 
@@ -194,8 +195,8 @@ name=Kovar
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_critic              //sance na kritik melee
-//TEVENTS=e_npc_leaper
 TSPEECH=spk_q040_dragons_kovar
 
 CATEGORY=Moria Questy
@@ -279,8 +280,8 @@ name=Dratenik
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_critic              //sance na kritik melee
-//TEVENTS=e_npc_leaper
 TSPEECH=spk_q040_dragons_kovar
 
 CATEGORY=Moria Questy
@@ -373,6 +374,7 @@ name=Predstaveny
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_curse               //vsechny viditelne zrani o dmg
 TSPEECH=spk_q040_dragons_predstaveny
 
@@ -474,6 +476,7 @@ name=Alchymista
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_curse               //vsechny viditelne zrani o dmg
 TSPEECH=spk_q040_dragons_alchymista
 
@@ -564,6 +567,7 @@ name=Ortlion
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_critic              //sance na kritik melee
 TSPEECH=spk_q040_dragons_ortlion
 
@@ -660,6 +664,7 @@ name=Rakchin
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_critic              //sance na kritik melee
 TSPEECH=spk_q040_dragons_Rakchin
 
@@ -756,6 +761,7 @@ name=Blazen
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_curse               //vsechny viditelne zrani o dmg
 TSPEECH=spk_q040_dragons_blazen
 

@@ -75,6 +75,7 @@ tag.guardhire=500000
 
 TSPEECH=spk_guard
 TEVENTS=e_guard_ent
+TEVENTS=e_monster
 TEVENTS=e_character
 
 CATEGORY=Civilized
@@ -149,6 +150,7 @@ tag.guardhire=500000
 
 TSPEECH=spk_guard
 TEVENTS=e_guard_ent
+TEVENTS=e_monster
 TEVENTS=e_character
 
 CATEGORY=Civilized

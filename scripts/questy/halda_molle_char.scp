@@ -5,6 +5,7 @@ name=Malica
 moverate=4
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_malica_help
 TSPEECH=spk_hm_malica
 
@@ -46,6 +47,7 @@ name=Kaloc
 moverate=4
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_kaloc_help
 TSPEECH=spk_hm_kaloc
 
@@ -93,6 +95,7 @@ ARMOR=100
 moverate=4
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_hm_pruvodce
 
 CATEGORY=Dungy

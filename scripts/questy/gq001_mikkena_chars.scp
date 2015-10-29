@@ -5,7 +5,10 @@ id=c_woman
 name=Mikkena
 
 Tspeech=spk_healer,spk_gq001_mikkena,spk_shopkeep
-TEVENTS=e_character,e_healer,e_item_refuser
+TEVENTS=e_character
+TEVENTS=e_healer
+TEVENTS=e_item_refuser
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=GQ001 - Mikkena
@@ -53,6 +56,7 @@ TSPEECH=spk_shopkeep,spk_gq001_edwin
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_item_refuser
 ON=@Create
 NPC=brain_vendor
@@ -103,6 +107,7 @@ TSPEECH=spk_shopkeep,spk_gq001_charton
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_item_refuser
 ON=@Create
 NPC=brain_vendor

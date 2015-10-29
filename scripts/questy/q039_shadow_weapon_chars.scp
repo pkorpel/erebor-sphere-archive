@@ -8,6 +8,7 @@ name=Kovar
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q039_shadow_weapon_kovar
 
 CATEGORY=Moria Questy

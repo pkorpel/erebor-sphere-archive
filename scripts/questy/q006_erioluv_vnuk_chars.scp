@@ -6,6 +6,7 @@ ID=c_man
 NAME=Eriol
 TSPEECH=spk_q006_eriol
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=quests
 SUBSECTION=q006_erioluv_vnuk

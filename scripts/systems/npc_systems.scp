@@ -63,9 +63,9 @@ timer=5
 return 1
 
 [events e_monster]
-on=@Death //kun smazat
+on=@Death
 f_monsterRefreshSpwn
-findlayer(25).remove
+findlayer(25).remove //smazat kone
 
 on=@npcseenewplayer
 if(<tag(karma)>)

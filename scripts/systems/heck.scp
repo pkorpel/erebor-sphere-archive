@@ -1286,6 +1286,7 @@ ARMOR=80
 moverate=4
 CAN=MT_WALK|mt_run
 TEVENTS=e_character
+TEVENTS=e_monster 
 
 CATEGORY=Moria
 SUBSECTION=(systemova NPC)

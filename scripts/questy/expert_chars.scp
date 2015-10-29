@@ -5,6 +5,7 @@ ID=C_MAN
 TSPEECH=spk_quest_expert
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=M1 - Expert quest

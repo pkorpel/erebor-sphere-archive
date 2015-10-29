@@ -10,6 +10,7 @@ ID=c_man
 NAME=Odlier
 TSPEECH=spk_nb001
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=MoriaNewbieRoom
 SUBSECTION=nb001-Lovec
@@ -66,6 +67,7 @@ NAME=Mirana
 ID=c_woman
 TSPEECH=spk_nb002
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=MoriaNewbieRoom
 SUBSECTION=nb002-Akolytka
@@ -122,6 +124,7 @@ ID=c_man
 NAME=Beorgrad
 TSPEECH=spk_nb003
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=MoriaNewbieRoom
 SUBSECTION=nb003-Kopac
@@ -176,6 +179,7 @@ ID=c_man
 NAME=Grarad
 TSPEECH=spk_nb004
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=MoriaNewbieRoom
 SUBSECTION=nb004-Lesnik
@@ -230,6 +234,7 @@ ID=c_man
 NAME=Broket
 TSPEECH=spk_nb005
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=MoriaNewbieRoom
 SUBSECTION=nb005-Rybar
@@ -283,8 +288,8 @@ ItemNewbie=i_fishing_pole
 [CHARDEF c_nb006]
 ID=c_man
 NAME=Necromancer
-//TSPEECH=spk_nb_porter
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=MoriaNewbieRoom
 SUBSECTION=nbNecromancer
@@ -335,6 +340,7 @@ ID=c_man
 NAME=Imro
 TSPEECH=spk_nb007
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=MoriaNewbieRoom
 SUBSECTION=nb007-Remeslnik
@@ -390,8 +396,8 @@ ItemNewbie=i_hammer_smith
 [CHARDEF c_nb_gatekeeper]
 ID=c_man
 NAME=Gatekeeper
-//TSPEECH=spk_nb_porter
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=MoriaNewbieRoom
 SUBSECTION=nbgatekeeper

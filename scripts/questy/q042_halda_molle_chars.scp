@@ -7,6 +7,7 @@ ARMOR=70
 moverate=4
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_critic
 TEVENTS=e_summoneater
 TEVENTS=e_hatlend

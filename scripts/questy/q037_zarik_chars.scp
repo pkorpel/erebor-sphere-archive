@@ -4,6 +4,7 @@ name=Zarik
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q037_zarik
 
 CATEGORY=Moria Questy
@@ -57,6 +58,7 @@ name=Hospodskeho Pomocnik
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q037_zarik_hospodsky
 
 
@@ -115,6 +117,7 @@ name=Sabrina
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q037_zarik_sabrina
 
 
@@ -174,6 +177,7 @@ name=Urmughorg
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q037_zarik_urmughorg
 
 
@@ -235,6 +239,7 @@ name=Wohy
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q037_zarik_wohy
 
 
@@ -300,6 +305,7 @@ name=Varjusa
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q037_zarik_varjusa
 
 

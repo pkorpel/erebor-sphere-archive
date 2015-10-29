@@ -11,6 +11,9 @@ RESOURCES=10 i_ribs_raw,4 i_fur_light
 CAN=MT_WALK|MT_RUN
 FOODTYPE=6 t_FISH,5 t_fruit, 15 t_meat_raw
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 CATEGORY=Mounts
 SUBSECTION=Unusual Mounts
 DESCRIPTION=Grizzly Bear
@@ -43,6 +46,9 @@ RESOURCES=11 i_ribs_raw,5 i_fur_light
 CAN=MT_WALK|MT_RUN
 FOODTYPE=6 t_FISH,5 t_fruit, 15 t_meat_raw
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 CATEGORY=Mounts
 SUBSECTION=Unusual Mounts
 DESCRIPTION=Polar Bear
@@ -73,6 +79,9 @@ ARMOR=8
 RESOURCES=9 i_ribs_raw
 FOODTYPE=5 t_FISH, 5 t_fruit, 15 t_meat_raw
 CAN=MT_WALK|MT_RUN
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 
 CATEGORY=Mounts

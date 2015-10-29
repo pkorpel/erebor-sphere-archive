@@ -8,6 +8,7 @@ moverate=5
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q041_paserak
 TEVENTS=e_summoneater                          //smaze summona, co zasahne
 TEVENTS=e_npc_sniper                           //Pøidá dmg k útoku po ránì def= 50
@@ -95,6 +96,7 @@ moverate=3
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_sniper        //Pøidá dmg k útoku po ránì
 
 CATEGORY=Moria Questy

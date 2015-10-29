@@ -4,6 +4,7 @@ NAME=Quake
 ID=C_MAN
 TSPEECH=spk_q034_quake
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q024
@@ -69,6 +70,7 @@ NAME=Zasmusily muz
 ID=C_MAN
 TSPEECH=spk_q034_fenix
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -143,6 +145,7 @@ NAME=Drevorubec                             ///// ZDE upravit
 ID=C_MAN
 TSPEECH=spk_q034_sekyra                     ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -217,6 +220,7 @@ NAME=Norbert                                ///// ZDE upravit
 ID=C_MAN
 TSPEECH=spk_q034_krysyg                     ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -291,6 +295,7 @@ NAME=Robert                                ///// ZDE upravit
 ID=C_MAN
 TSPEECH=spk_q034_krysym                     ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -366,6 +371,7 @@ NAME=Arcimag                               ///// ZDE upravit
 ID=C_MAN
 TSPEECH=spk_q034_TT1                       ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -441,6 +447,7 @@ NAME=Hlavni Saman                               ///// ZDE upravit
 ID=C_MAN
 TSPEECH=spk_q034_TT_shaman                       ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -518,6 +525,7 @@ NAME=Podivny muz                                ///// ZDE upravit
 ID=C_MAN
 TSPEECH=spk_q034_spiderG                         ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -595,6 +603,7 @@ NAME=Podivny muz                                ///// ZDE upravit
 ID=C_MAN
 TSPEECH=spk_q034_spiderM                         ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -1000,6 +1009,7 @@ NAME=Placici Zena                                ///// ZDE upravit
 ID=C_Woman
 TSPEECH=spk_q034_Ghost                         ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -1079,6 +1089,7 @@ NAME=Smutna divka                                  ///// ZDE upravit
 ID=C_Woman
 TSPEECH=spk_q034_LizardG                         ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034
@@ -1158,6 +1169,7 @@ NAME=Tajemny dobrodruh                           ///// ZDE upravit
 ID=C_man
 TSPEECH=spk_q034_LizardM                         ///// ZDE upravit
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q034

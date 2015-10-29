@@ -191,6 +191,7 @@ TSPEECH=Hrobus
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-005 Irbisova vejce
@@ -255,6 +256,7 @@ TSPEECH=Irbis
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-005 Irbisova vejce

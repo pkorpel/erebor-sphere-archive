@@ -6,6 +6,7 @@ NAME=Valecnik Gregor
 ID=C_MAN
 TSPEECH=spk_q024_valecnik_gregor
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q024 - Zasnubni prsten
@@ -54,6 +55,7 @@ NAME=Zlodejicek Boris
 ID=C_MAN
 TSPEECH=spk_q024_zlodej_boris
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q024 - Zasnubni prsten
@@ -100,6 +102,7 @@ NAME=Fiflena
 ID=C_WOMAN
 TSPEECH=spk_q024_fiflena
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q024 - Zasnubni prsten
@@ -147,6 +150,7 @@ NAME=Klenotnik Hugo
 ID=C_MAN
 TSPEECH=spk_q024_klenotnik
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=q024 - Zasnubni prsten

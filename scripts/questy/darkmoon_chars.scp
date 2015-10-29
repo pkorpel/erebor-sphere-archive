@@ -577,3 +577,117 @@ tag.weapflag=dam_slashing|dam_physical|dam_fire
 
 MAGERY=450.0
 EI=130.0
+
+/////////////////////////////////////////////
+///////// LENNOR - pritel HERMANA ///////////
+////////////////////////////////////////////
+
+[chardef c_darkmoon_doktor]
+id=c_man
+name=Lennor
+
+TEVENTS=e_character
+TEVENTS=e_monster
+TSPEECH=spk_q039_first_quest
+
+on=@UserDclick
+f_q039_first_quest
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=doktor, alchemista
+
+tag(noanimate,1)
+
+ITEMNEWBIE=i_robe
+color=00989
+ITEMNEWBIE=i_hair_short
+color=00976
+ITEMNEWBIE=i_q039_lennor_speech
+
+[function f_q039_first_quest]
+if(<distance> > 3)
+  src.sysmessage("Na takovou vzdalenost s tebou komunikovat nebude.")
+  return 1
+endif
+if (<src.flags>&statf_dead)
+  return 1
+else
+  DIALOG(d_q039_first_quest)
+endif
+
+///////////////////////////////////////
+/////////////HERMAN -> ATTACK CITY//////////
+//////////////////////////////////////
+
+[chardef c_darkmoon_poskok]
+id=c_man
+name=Kester
+
+TEVENTS=e_character
+TEVENTS=e_monster
+TEVENTS=e_miniq_kun
+
+on=@UserDclick
+f_darkmoon_poskok_bug_attack
+
+on=@create
+tag(time,<serv.time>)
+NPC=brain_human
+COLOR=06D3
+STR=1000
+DEX=1000
+INT=1000
+Title=Posel
+
+tag(noanimate,1)
+
+ITEMNEWBIE=i_robe
+color=044e
+ITEMNEWBIE=i_shoes_plain
+ITEMNEWBIE=i_beard_short
+color=00758
+ITEMNEWBIE=i_bonnet
+color=020
+
+ITEM=i_npc_mount
+tag.mount=i_mt_horse_brown_dk
+tag.mountcolor=0729
+
+[chardef c_darkmoon_poskok_m]
+id=c_man
+name=Gilthol
+
+TEVENTS=e_character
+TEVENTS=e_monster
+TEVENTS=e_miniq_kun
+
+on=@UserDclick
+f_darkmoon_poskok_bug_attack
+
+on=@create
+tag(time,<serv.time>)
+NPC=brain_human
+COLOR=06D3
+STR=1000
+DEX=1000
+INT=1000
+Title=Posel
+
+tag(noanimate,1)
+
+ITEMNEWBIE=i_robe
+color=044e
+ITEMNEWBIE=i_shoes_plain
+ITEMNEWBIE=i_beard_short
+color=00758
+ITEMNEWBIE=i_bonnet
+color=020
+
+ITEM=i_npc_mount
+tag.mount=i_mt_horse_brown_dk
+tag.mountcolor=0729

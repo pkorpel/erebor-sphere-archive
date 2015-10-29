@@ -7,6 +7,7 @@ name=Menegil
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_menegil
 TSPEECH=spk_healer
 
@@ -70,6 +71,7 @@ name=Kapitan
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_kapitan
 TSPEECH=spk_healer
 
@@ -133,6 +135,7 @@ name=Hospodsky
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_hospodsky
 TSPEECH=spk_healer
 
@@ -194,6 +197,7 @@ name=Darthan
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_rybar
 TSPEECH=spk_healer
 
@@ -253,6 +257,7 @@ name=Rhalla
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_latkarka
 TSPEECH=spk_healer
 
@@ -316,6 +321,7 @@ name=Siran
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_latkarka_pomocnik
 TSPEECH=spk_healer
 
@@ -377,6 +383,7 @@ name=Herrar
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_prevozca
 TSPEECH=spk_healer
 
@@ -440,6 +447,7 @@ name=Tomald
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_prevozca_pomocnik
 TSPEECH=spk_healer
 
@@ -500,6 +508,7 @@ name=Skladnik
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_skladnik
 TSPEECH=spk_healer
 
@@ -562,6 +571,7 @@ name=Elurien
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq032_skladnik_manzelka
 TSPEECH=spk_healer
 

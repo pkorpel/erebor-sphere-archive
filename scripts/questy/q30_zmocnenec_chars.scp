@@ -8,6 +8,7 @@ ARMOR=95
 ATTACK=100
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 NPC=brain_vendor
@@ -58,6 +59,7 @@ ARMOR=95
 ATTACK=100
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 FAME=100

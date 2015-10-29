@@ -13,6 +13,9 @@ SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@CREATE
 COLOR=07db
 PARRYING={75.0 85.0}
@@ -41,6 +44,9 @@ SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@CREATE
 COLOR=079b
 PARRYING={75.0 85.0}
@@ -68,6 +74,9 @@ SHELTER=r_stables,spk_human_prime
 DESIRES=e_OSTARDS,c_man,c_woman
 AVERSIONS=e_carnivores3
 ANIM=01fff
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Mounts
 SUBSECTION=Ostards
@@ -101,6 +110,9 @@ DESIRES=e_OSTARDS,c_man,c_woman
 AVERSIONS=e_carnivores3
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 COLOR=078a
 NPC=brain_animal
@@ -130,6 +142,9 @@ FOODTYPE=55 t_crops, 55 t_fruit, 64 t_grass
 SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@CREATE
 COLOR=07fff
@@ -162,6 +177,9 @@ DESIRES=e_OSTARDS,c_man,c_woman
 AVERSIONS=e_carnivores3
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 COLOR=0455
 NPC=brain_animal
@@ -193,6 +211,9 @@ DESIRES=e_OSTARDS,c_man,c_woman
 AVERSIONS=e_carnivores3
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 COLOR=0799
 NPC=brain_animal
@@ -223,6 +244,9 @@ SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@CREATE
 STR=1000
 DEX=600
@@ -252,6 +276,9 @@ FOODTYPE=55 t_crops, 55 t_fruit, 64 t_grass
 SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@CREATE
 STR=1000
@@ -285,6 +312,9 @@ FOODTYPE=55 t_crops, 55 t_fruit, 64 t_grass
 SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@CREATE
 STR=1000
@@ -320,6 +350,9 @@ SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@CREATE
 COLOR=0452
 PARRYING={75.0 85.0}
@@ -347,6 +380,9 @@ SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@CREATE
 COLOR=077a
 PARRYING={75.0 85.0}
@@ -368,6 +404,9 @@ ID=00d2
 ATT=7-15 
 DEF=9 
 RESOURCES=15 
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@CREATE 
 COLOR=0784 
@@ -407,6 +446,9 @@ SHELTER=r_stables
 DESIRES=e_OSTARDS
 ANIM=01fff
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 CATEGORY=Mounts
 SUBSECTION=Ostards
 DESCRIPTION=Ghost ostard
@@ -433,6 +475,9 @@ ID=00d2
 ATT=7-15 
 DEF=9 
 RESOURCES=15 
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@CREATE 
 COLOR=0795 
@@ -461,6 +506,9 @@ NAME=Snow Horse
 SOUND=snd_ANIMALS_HORSE1 
 ID=00CC 
 ICON=02121 
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create 
 COLOR=0481 
@@ -497,6 +545,9 @@ DAM=34
 ARMOR=51
 CAN=MT_WALK|MT_RUN
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 NPC=brain_monster
 COLOR=007c2
@@ -526,6 +577,9 @@ DAM=30,40
 ARMOR=20
 CAN=MT_WALK|MT_RUN
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 COLOR=0044
 NPC=brain_monster
@@ -553,6 +607,9 @@ CAN=MT_WALK|MT_RUN
 ANIM=01fff
 DAM=320
 ARMOR=190
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Mounts
 SUBSECTION=Llama
@@ -587,6 +644,9 @@ FOODTYPE=5 t_meat_raw
 SHELTER=r_caves,r_dungeon 
 DESIRES=i_gold 
 AVERSIONS=r_civilization,r_water 
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create 
 COLOR=026 
@@ -627,6 +687,9 @@ FOODTYPE=5 t_meat_raw
 SHELTER=r_caves,r_dungeon 
 DESIRES=i_gold 
 AVERSIONS=r_civilization,r_water 
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create 
 COLOR=0591 
@@ -670,6 +733,9 @@ SHELTER=r_caves,r_dungeon
 DESIRES=i_gold 
 AVERSIONS=r_civilization,r_water 
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create 
 COLOR=0455 
 STR={400 625} 
@@ -708,6 +774,9 @@ ICON=i_pet_horse_brown_dk
 CAN=MT_WALK|MT_RUN
 FOODTYPE=55 t_crops, 55 t_fruit, 55 t_grain, 64 t_grass
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 CATEGORY=Mounts
 SUBSECTION=Horses 
 DESCRIPTION=Acid Unicorn 
@@ -741,6 +810,9 @@ FOODTYPE=5 t_meat_raw
 SHELTER=r_caves,r_dungeon
 DESIRES=i_gold
 AVERSIONS=r_civilization,r_water
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 COLOR=08a5
@@ -780,6 +852,9 @@ SHELTER=r_caves,r_dungeon
 DESIRES=i_gold
 AVERSIONS=r_civilization,r_water
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 COLOR=077a
 STR={855 995}
@@ -816,6 +891,9 @@ FOODTYPE=5 t_meat_raw
 SHELTER=r_caves,r_dungeon
 DESIRES=i_gold
 AVERSIONS=r_civilization,r_water
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 COLOR=0480
@@ -854,6 +932,9 @@ SHELTER=r_caves,r_dungeon
 DESIRES=i_gold
 AVERSIONS=r_civilization,r_water
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 COLOR=0481
 STR={855 995}
@@ -889,6 +970,9 @@ FOODTYPE=5 t_meat_raw
 SHELTER=r_caves,r_dungeon
 DESIRES=i_gold
 AVERSIONS=r_civilization,r_water
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 COLOR=07bd
@@ -927,6 +1011,9 @@ SHELTER=r_caves,r_dungeon
 DESIRES=i_gold
 AVERSIONS=r_civilization,r_water
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 COLOR=0791
 STR={855 995}
@@ -940,6 +1027,9 @@ TAMING=125.0
 NPC=brain_monster
 FAME={1000 2000}
 KARMA={-5000 -5555}
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@NPCRestock
 ITEM=loot_STEED
@@ -957,6 +1047,9 @@ ICON=i_pet_horse_brown_dk
 CAN=MT_WALK|MT_RUN
 DAM=9,29
 ARMOR=30
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Mounts
 SUBSECTION=Horses
@@ -993,6 +1086,9 @@ TEVENTS=e_horses
 SHELTER=r_caves,r_dungeon
 AVERSIONS=e_carnivores3
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 CATEGORY=Mounts
 SUBSECTION=Horses
 DESCRIPTION=Darkmare
@@ -1027,6 +1123,9 @@ DESIRES=i_gold
 TEVENTS=e_horses
 SHELTER=r_caves,r_dungeon
 AVERSIONS=e_carnivores3
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Mounts
 SUBSECTION=Horses
@@ -1084,6 +1183,8 @@ KARMA={-10000}
 ITEM=i_deathshroud
 ITEM=loot_MARE
 
+TEVENTS=e_character
+TEVENTS=e_monster
 
 [CHARDEF c_hells_deathmare]
 DEFNAME=c_m_hells_deathmare
@@ -1100,6 +1201,9 @@ DESIRES=i_gold
 TEVENTS=e_horses
 SHELTER=r_caves,r_dungeon
 AVERSIONS=e_carnivores3
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Mounts
 SUBSECTION=Horses

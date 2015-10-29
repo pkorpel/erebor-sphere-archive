@@ -57,6 +57,9 @@ CAN=MT_WALK|MT_RUN|MT_FLY
 dam=30
 armor=100
 
+TEVENTS=e_character
+TEVENTS=e_monster 
+
 ON=@Create 
 karma=-10000
 NPC=brain_monster

@@ -7,6 +7,7 @@ id=c_man
 name=Kuchar Mrkvicka
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q31_kuchar
 
 CATEGORY=Moria Questy
@@ -50,6 +51,7 @@ id=c_man
 name=Kuchar Mrkvicka
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q31_kuchar
 
 CATEGORY=Moria Questy

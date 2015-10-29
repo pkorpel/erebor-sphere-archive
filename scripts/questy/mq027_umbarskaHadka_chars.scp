@@ -5,6 +5,7 @@ id=c_man
 name=Antonio
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq027_Antonio
 
 CATEGORY=Moria Questy
@@ -39,6 +40,7 @@ id=c_man
 name=Vincent
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq027_Vincent
 
 CATEGORY=Moria Questy

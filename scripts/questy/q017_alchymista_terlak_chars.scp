@@ -7,6 +7,7 @@ attack=65
 ARMOR=20
 CAN=MT_WALK|mt_run
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_npc_detect
  
 CATEGORY=Kvesty
@@ -77,7 +78,8 @@ attack
 id=c_man
 name=Sberatel
 TSPEECH=spk_q017_sberatel
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=Terlak

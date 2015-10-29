@@ -1,11 +1,6 @@
-
 ///////////////////////////////////////////////////
 /////////   NEPOUZIVAT, NEVYLADENO ////////////////
 ///////////////////////////////////////////////////
-
-
-
-
 
 
 
@@ -133,7 +128,7 @@ DESCRIPTION=Jeskynni Vlk
 SUBSECTION=Dungeons
 CATEGORY=Animals
 
-bTEVENTS=e_monster
+TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_NPC_Bleed
 

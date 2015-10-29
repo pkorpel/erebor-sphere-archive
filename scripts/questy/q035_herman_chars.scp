@@ -3,6 +3,7 @@ id=c_man
 name=Herman
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q035_herman
 
 CATEGORY=Moria Questy
@@ -39,6 +40,3 @@ on = *zdravim*
 on = *ahoj*
 
 f_q035_herman
-
-
-

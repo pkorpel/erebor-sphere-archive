@@ -799,6 +799,9 @@ ID=c_orc
 TSPEECH=spk_poskok_bratrstva
 TSPEECH=spk_kecy_a_drby
 
+TEVENTS=e_monster
+TEVENTS=e_character
+
 CATEGORY=Kvesty
 SUBSECTION=Kvest Mordor-002 Reyla a Akhbar
 DESCRIPTION=poskok bratrstva
@@ -853,6 +856,9 @@ ID=c_orc
 
 TSPEECH=spk_kecy_a_drby
 TSPEECH spk_poskok_barad_kasarny
+
+TEVENTS=e_monster
+TEVENTS=e_character
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Mordor-003 Lek pro Liguka
@@ -911,6 +917,7 @@ TEVENTS=e_npc_mag
 //TEVENTS=e_undead
 TEVENTS=e_Lihe_Sarfeos
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_kvest001_Liche_Sarfeos
 
 
@@ -985,11 +992,9 @@ RESOURCES=10 i_ribs_raw
 //ALIGNMENT=EVIL
 CAN=MT_WALK|MT_USEHANDS|MT_RUN|MT_FIRE_IMMUNE
 FOODTYPE=15 t_meat_raw
-//=r_forests,r_mountains
-//=C_OGRE
-//=r_civilization
-//TEVENTS=e_monster
+
 TEVENTS=e_character
+TEVENTS=e_monster
 NPC=brain_vendor
 
 

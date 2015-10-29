@@ -13,6 +13,7 @@ TSPEECH=spk_q007_haradir
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-007 Haradirovo Selatko
@@ -72,6 +73,7 @@ TSPEECH=spk_q007_hospodsky
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-007 Haradirovo Selatko
@@ -128,6 +130,7 @@ TSPEECH=spk_q007_Carodejnice
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-007 Haradirovo Selatko
@@ -179,6 +182,7 @@ TSPEECH=spk_q007_kovar
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-007 Haradirovo Selatko
@@ -228,6 +232,7 @@ TSPEECH=spk_q007_maginscript
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-007 Haradirovo Selatko
@@ -311,6 +316,7 @@ TSPEECH=spk_q007_divous
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-007 Haradirovo Selatko
@@ -358,6 +364,7 @@ TSPEECH=spk_q007_rodrigo
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-007 Haradirovo Selatko

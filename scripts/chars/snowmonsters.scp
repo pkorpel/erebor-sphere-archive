@@ -3956,6 +3956,7 @@ moverate=4
 BLOODCOLOR=020
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=strazce_studny
 
 CATEGORY=Dungy
@@ -4045,6 +4046,7 @@ moverate=4
 BLOODCOLOR=020
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=snow_poustevnik
 
 CATEGORY=Dungy

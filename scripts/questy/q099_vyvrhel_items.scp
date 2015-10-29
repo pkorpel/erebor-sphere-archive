@@ -10,7 +10,8 @@ attack=50
 armor=40
 
 tspeech=spk_q099_vyvrhel
-tevents=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 
 category=Moria
 subsection=NPC na vyvrhela

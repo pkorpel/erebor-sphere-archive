@@ -3,6 +3,7 @@ id=c_woman
 name=Malica
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mo_malicia
 
 CATEGORY=Dungy

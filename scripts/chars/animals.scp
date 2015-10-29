@@ -2903,24 +2903,24 @@ SUBSECTION=Animals
 description=Aligator - lbr
 
 on=@create
-     npc=brain_monster
+npc=brain_monster
 
-     str={225 250}
-     dex={156 175}
-     int={90 156}
+str={225 250}
+dex={156 175}
+int={90 156}
 
-     maxhits={225 300}
-     maxstam={156 175}
-     maxmana={90 156}
+maxhits={225 300}
+maxstam={156 175}
+maxmana={90 156}
 
-     parrying={48.0 82.0}
-     resist={55.0 70.0}
-     tactics={60.0 80.0}
-     wrestling={60.0 80.0}
-     SpiritSpeak=25.0
+parrying={48.0 82.0}
+resist={55.0 70.0}
+tactics={60.0 80.0}
+wrestling={60.0 80.0}
+SpiritSpeak=25.0
 
-     fame={2990 5990}
-     karma={-6000 -7909}
+fame={2990 5990}
+karma={-6000 -7909}
 
 tag.experience=<eval {5.0 8.0}>
 tag(hypnotizable,0)

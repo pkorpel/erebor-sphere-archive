@@ -5,6 +5,7 @@ id=c_man
 name=Borek
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_gq002_borek
 
 CATEGORY=Moria Questy
@@ -46,6 +47,7 @@ TSPEECH=spk_gq002_kovar//,spk_q1_kovar
 //TSPEECH=spk_q22_kovar,spk_gq002_kovar 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_item_refuser
 ON=@Create
 NPC=brain_vendor

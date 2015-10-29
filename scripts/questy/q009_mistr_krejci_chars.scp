@@ -5,6 +5,7 @@ ID=C_WOMAN
 TSPEECH=spk_q009_krejci
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_item_refuser
 
 CATEGORY=Kvesty

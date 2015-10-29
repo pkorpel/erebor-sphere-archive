@@ -19,6 +19,7 @@ id=c_man
 name=Namornik Murlay
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_item_refuser
 TSPEECH=spk_q029_murlay_namornik
 
@@ -76,6 +77,7 @@ ID=C_MAN
 TSPEECH=spk_q029_murlay_etiras
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_item_refuser
 
 ON=@Create
@@ -122,6 +124,7 @@ ID=C_WOMAN
 TSPEECH=spk_q029_murlay_sevedia
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_item_refuser
 
 ON=@Create

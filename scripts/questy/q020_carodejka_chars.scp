@@ -5,7 +5,8 @@
 id=c_man
 name=Bard
 TSPEECH=spk_q020_bard
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 CATEGORY=Moria Questy
 SUBSECTION=Q020 - Carodejka
 DESCRIPTION=Kurdosaj
@@ -39,7 +40,8 @@ endif
 id=c_woman
 name=Roxana
 TSPEECH=spk_q020_roxana,spk_q022_roxana
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 CATEGORY=Moria Questy
 SUBSECTION=q020 - Carodejka
 DESCRIPTION=Roxana

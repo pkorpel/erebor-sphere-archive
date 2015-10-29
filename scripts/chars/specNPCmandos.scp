@@ -6,6 +6,8 @@ ID=c_man
 
 TSPEECH=spk_strazcelagru
 
+TEVENTS=e_monster
+
 CATEGORY=Moria
 SUBSECTION=(systemova NPC)
 DESCRIPTION=Strazce lagru
@@ -57,6 +59,9 @@ say("U me muzes ziskat pilu, svetlo a vymenit drevo za propousteci zlataky.")
 id=c_man
 name=definice pokladu
 can=0
+
+TEVENTS=e_monster
+
 category=Moria
 subsection=(systemova NPC)
 description=Pokladnik (dynamicky poklad)
@@ -101,7 +106,8 @@ ARMOR=40
 moverate=4
 
 TSPEECH=spk_erebor_opilec
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Klajovi NPC
@@ -146,7 +152,8 @@ ARMOR=40
 moverate=4
 
 TSPEECH=spk_harad_opilec 
-TEVENTs=e_character 
+TEVENTS=e_character 
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Klajovi NPC
@@ -196,6 +203,7 @@ moverate=4
 CAN=MT_WALK|mt_run
 TSPEECH=spk_hlavakrvaka
 TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 NAME=#NAMES_HUMANMALE
@@ -254,6 +262,7 @@ moverate=4
 
 TSPEECH=spk_hlavakrvaka
 TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 NAME=#NAMES_HUMANMALE
@@ -314,6 +323,7 @@ ARMOR=80
 moverate=4
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=(systemova NPC)
@@ -431,7 +441,8 @@ DAM=100
 CAN=MT_WALK|MT_run
 
 TEVENTS=e_character
-tevents=e_brinbor
+TEVENTS=e_monster
+TEVENTS=e_brinbor
 TSPEECH=brinborkecy
 
 CATEGORY=Dungy

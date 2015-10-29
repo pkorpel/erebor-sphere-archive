@@ -9,6 +9,7 @@ CAN=MT_WALK|mt_run
 TSPEECH=spk_crunch_arenavchod
  
 TEVENTS=e_character
+TEVENTS=e_monster
 
 
 
@@ -56,8 +57,7 @@ CAN=MT_WALK|mt_run|
 TSPEECH=spk_crunch_strazceareny
  
 TEVENTS=e_character 
-
- 
+TEVENTS=e_monster
  
 ON=@Create 
 STR=600 

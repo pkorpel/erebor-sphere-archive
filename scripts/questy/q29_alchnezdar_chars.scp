@@ -5,6 +5,9 @@ CAN=MT_WALK, MT_SPEAK
 
 TSPEECH=spk_q029_alchnezdar
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 NPC=brain_vendor
 COLOR=colors_skin

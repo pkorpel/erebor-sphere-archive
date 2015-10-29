@@ -193,6 +193,7 @@ CAN=MT_WALK|mt_run//|MT_poison_immune
 TSPEECH=crunch_Karenus 
  
 TEVENTS=e_character 
+TEVENTS=e_monster
  
 CATEGORY=Kvesty 
 SUBSECTION=Neutral quest 008 - knihy pravdy
@@ -278,6 +279,7 @@ AVERSIONS=t_TRAP,t_eerie_stuff
 
 TSPEECH=crunch_Bvutannus
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty 
 SUBSECTION=Neutral quest 008 - knihy pravdy
@@ -333,6 +335,7 @@ AVERSIONS=t_TRAP,t_eerie_stuff
 
 TSPEECH=crunch_Gurmug
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty 
 SUBSECTION=Neutral quest 008 - knihy pravdy
@@ -396,6 +399,7 @@ AVERSIONS=t_TRAP,t_eerie_stuff
 
 TSPEECH=crunch_Hurtan
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty 
 SUBSECTION=Neutral quest 008 - knihy pravdy

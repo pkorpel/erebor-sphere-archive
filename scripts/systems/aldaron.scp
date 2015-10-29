@@ -995,6 +995,7 @@ CAN=MT_EQUIP|MT_WALK|MT_RUN|MT_USEHANDS
 
 TEVENTS=e_ocs_guard_npc
 TEVENTS=e_character
+TEVENTS=e_monster 
 
 CATEGORY=Dungeons
 SUBSECTION=OCS

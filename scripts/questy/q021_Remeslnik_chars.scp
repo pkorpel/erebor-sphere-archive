@@ -5,7 +5,8 @@
 id=c_man
 name=Navin
 TSPEECH=spk_q021_remeslnik
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 CATEGORY=Moria Questy
 SUBSECTION=q021 - Remeslnik
 DESCRIPTION=Stary remeslnik
@@ -59,6 +60,7 @@ TSPEECH=spk_shopkeep
 TSPEECH=spk_q021_lecitel
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
  
 ON=@Create
 NAME=Horad

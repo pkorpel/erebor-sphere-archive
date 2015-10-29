@@ -6,6 +6,7 @@ id=c_man
 name=Lecitel Ceren
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q1_lavovyjester_lecitel
 
 CATEGORY=Moria Questy

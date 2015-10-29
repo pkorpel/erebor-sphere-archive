@@ -162,6 +162,7 @@ ID=C_MAN
 
 
 TEVENTS=e_sumoner_Strazce_spicich
+TEVENTS=e_monster
 
 
 CATEGORY=Dungy

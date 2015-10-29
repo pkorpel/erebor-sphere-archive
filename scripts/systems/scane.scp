@@ -187,6 +187,7 @@ id=c_man
 name=Scane
 
 TEVENTS=e_character
+TEVENTS=e_monster 
 
 on=@create
 f_copyitemplayer(scylla)
@@ -566,6 +567,7 @@ id=c_woman
 name=Akaratha
 
 TEVENTS=e_character
+TEVENTS=e_monster 
 TEVENTS=e_miniq_kun
 TSPEECH=spk_miniquest
 

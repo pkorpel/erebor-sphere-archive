@@ -722,7 +722,9 @@ ID=c_man
 ATTACK=60 
 ARMOR=80 
 CAN=MT_WALK|mt_run
+
 TSPEECH=crunch_Detheanorus
+TEVENTS=e_monster
 TEVENTS=e_character 
  
 CATEGORY=Dungy

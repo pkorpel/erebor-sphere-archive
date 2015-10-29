@@ -9,6 +9,7 @@ id=c_woman
 name=Ambra
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q100_hobitin_ambra
 
 CATEGORY=Moria Questy

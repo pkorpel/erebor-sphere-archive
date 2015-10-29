@@ -7,6 +7,7 @@ DAM=10
 moverate=3
 CAN=MT_WALK|MT_run|mt_usehands
 TEVENTS=e_character
+TEVENTS=e_monster 
 CATEGORY=Moria Questy
 SUBSECTION=Prechod
 DESCRIPTION=Mnich
@@ -22,19 +23,17 @@ ON=@Create
 NPC=brain_human
 NAME=#NAMES_HUMANMALE
 
-//COLOR=color_clovek
+str={10 20}
+dex={200 400}
+int={88 100}
+maxhits={10 20}
+maxstam={200 400}
+maxmana=0
 
-    str={10 20}
-     dex={200 400}
-     int={88 100}
-     maxhits={10 20}
-     maxstam={200 400}
-     maxmana=0
-
-     peacemaking=100.0
-     tactics={94.0 96.3}
-     wrestling={94.2 97.5}
-	 provocation=100.0
+peacemaking=100.0
+tactics={94.0 96.3}
+wrestling={94.2 97.5}
+provocation=100.0
 	 
 fame=0
 karma=9999
@@ -49,8 +48,8 @@ ITEMnewbie=i_robe
 
 ON=@NPCSEENEWPLAYER
 if (src.ismurderer)
-say=Odejdi ze svateho mista !
-attack
+  say=Odejdi ze svateho mista !
+  attack
 endif
 
 ON=@DEATH
@@ -78,64 +77,64 @@ DESCRIPTION=Jednorozec
 CATEGORY=Moria Questy
 SUBSECTION=Prechod
 
-TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_prechod
 
 
 on=@create
-     NPC=brain_human
+NPC=brain_human
 
-     str={296 325}
-     dex={86 115}
-     int={187 225}
-     maxhits={296 325}
-     maxstam={86 115}
-     maxmana={187 225}
+str={296 325}
+dex={86 115}
+int={187 225}
+maxhits={296 325}
+maxstam={86 115}
+maxmana={187 225}
 
-     parrying={65.0 75.0}
-     resist={73.3 95.0}
-     tactics={18.8 22.5}
-     wrestling={79.3 91.0}
-     EI={79.2 89.6}
-     magery={65.6 89.5}
-     meditation={49.1 60.0}
-     
+parrying={65.0 75.0}
+resist={73.3 95.0}
+tactics={18.8 22.5}
+wrestling={79.3 91.0}
+EI={79.2 89.6}
+magery={65.6 89.5}
+meditation={49.1 60.0}
 
-     peacemaking=59.1
 
-     fame={1000 3000}
-     karma={1000 3000}
+peacemaking=59.1
 
-     itemnewbie=i_spellbook
-     addspell=s_clumsy
-     addspell=s_feeblemind
-     addspell=s_magic_arrow
-     addspell=s_weaken
-     addspell=s_harm
-     addspell=s_fireball
-     addspell=s_poison
-     addspell=s_curse
-     addspell=s_fire_field
-     addspell=s_lightning
-     addspell=s_mana_drain
-     addspell=s_blade_spirits
-     addspell=s_mind_blast
-     addspell=s_paralyze
-     addspell=s_poison_field
-     addspell=s_cure
-     addspell=s_heal
-     addspell=s_dispel_field
-     addspell=s_dispel
-     addspell=s_greater_heal
-     addspell=s_energy_bolt
+fame={1000 3000}
+karma={1000 3000}
+
+itemnewbie=i_spellbook
+addspell=s_clumsy
+addspell=s_feeblemind
+addspell=s_magic_arrow
+addspell=s_weaken
+addspell=s_harm
+addspell=s_fireball
+addspell=s_poison
+addspell=s_curse
+addspell=s_fire_field
+addspell=s_lightning
+addspell=s_mana_drain
+addspell=s_blade_spirits
+addspell=s_mind_blast
+addspell=s_paralyze
+addspell=s_poison_field
+addspell=s_cure
+addspell=s_heal
+addspell=s_dispel_field
+addspell=s_dispel
+addspell=s_greater_heal
+addspell=s_energy_bolt
 
 
 on=@userdclick
-	if (src.obody == c_man)
-		src.sysmessage you cannot ride this horse, only females can
-		return 1
-	endif
+if (src.obody == c_man)
+  src.sysmessage you cannot ride this horse, only females can
+  return 1
+endif
 	
 on=@death	
 act.tag(zabilmnicha,1)

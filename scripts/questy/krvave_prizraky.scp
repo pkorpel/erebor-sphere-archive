@@ -170,6 +170,7 @@ ARMOR=80
 CAN=MT_WALK|mt_run
 TSPEECH=crunch_strazce_brany  
 TEVENTS=e_character  
+TEVENTS=e_monster
  
 ON=@Create 
 hits=50000

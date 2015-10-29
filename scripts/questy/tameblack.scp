@@ -10,7 +10,6 @@ attack=120
 ARMOR=20 
 CAN=MT_WALK|mt_run 
 RESOURCES=8 t_magic 
-//=r_caves,r_mountains 
 TEVENTS=e_monster 
 TEVENTS=e_character 
 
@@ -50,6 +49,7 @@ CAN=MT_WALK|mt_run
 TSPEECH=crunch_alenor 
 
 TEVENTS=e_character 
+TEVENTS=e_monster 
 
 CATEGORY=Kvesty 
 SUBSECTION=respawn_blacka

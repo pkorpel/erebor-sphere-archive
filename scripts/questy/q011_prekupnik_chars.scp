@@ -6,6 +6,7 @@ id=c_man
 name=Hruon
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_gq011_prekupnik
 
 CATEGORY=Moria Questy
@@ -69,6 +70,7 @@ id=c_man
 name=Akranon
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_mq011_prekupnik
 
 CATEGORY=Moria Questy

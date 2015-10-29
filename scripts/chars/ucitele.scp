@@ -9,6 +9,7 @@ ID=C_MAN
 TSPEECH=spk_mistr
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -58,6 +59,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -107,6 +109,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -161,6 +164,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -209,6 +213,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -257,6 +262,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -305,6 +311,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -355,6 +362,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -405,6 +413,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -455,6 +464,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -505,6 +515,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -553,6 +564,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -604,6 +616,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -654,6 +667,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -704,6 +718,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -755,6 +770,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -805,6 +821,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -857,6 +874,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -909,6 +927,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -959,6 +978,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1009,6 +1029,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1059,6 +1080,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1109,6 +1131,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1159,6 +1182,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1209,6 +1233,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1259,6 +1284,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1308,6 +1334,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1358,6 +1385,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1408,6 +1436,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1458,6 +1487,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1509,6 +1539,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1560,6 +1591,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1613,6 +1645,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1663,6 +1696,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1715,6 +1749,7 @@ TSPEECH=spk_mistr
 
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1765,6 +1800,7 @@ ID=C_MAN
 TSPEECH=spk_mistr
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria
 SUBSECTION=Mistri (ucitele)
@@ -1805,7 +1841,8 @@ NAME=Mistr Remesel
 ID=C_MAN
 //TSPEECH=spk_mistr_craft
 //TEVENTS=e_character
-tevents=e_mistr_craft
+TEVENTS=e_mistr_craft
+TEVENTS=e_monster
 
 ON=@Create
 SPEECH=spk_mistr_craft
@@ -1844,7 +1881,8 @@ ITEMnewbie=i_monster_create
 [chardef c_mistr_craft_log_gondor]
 NAME=Stavitel Lodi
 ID=C_MAN
-tevents=e_mistr_craft
+TEVENTS=e_mistr_craft
+TEVENTS=e_monster
 
 ON=@Create
 SPEECH=spk_mistr_craft_log
@@ -1896,7 +1934,8 @@ endif
 [chardef c_mistr_craft_log_mordor]
 NAME=Stavitel Lodi
 ID=C_MAN
-tevents=e_mistr_craft
+TEVENTS=e_mistr_craft
+TEVENTS=e_monster
 
 ON=@Create
 SPEECH=spk_mistr_craft_log
@@ -1943,8 +1982,5 @@ if (<src.tag.realm>==2)||(src.isgm)
 else
   say("Tahni!")
 endif
-
-
-
 
 [eof]

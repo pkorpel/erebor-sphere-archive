@@ -7,6 +7,7 @@ TSPEECH=spk_drazitel
 
 
 TEVENTS=e_character
+TEVENTS=e_monster 
 
 CATEGORY=Kvesty
 SUBSECTION=Drazitel

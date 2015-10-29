@@ -123,6 +123,7 @@ TSPEECH=Lenastirovarec
 //
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=M2 - Mistrovsky quest

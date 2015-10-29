@@ -5,6 +5,9 @@ CAN=MT_WALK, MT_SPEAK
 
 TSPEECH=spk_gq012_selka
 
+TEVENTS=e_character
+TEVENTS=e_monster
+
 ON=@Create
 NPC=brain_vendor
 COLOR=colors_skin
@@ -42,6 +45,9 @@ ID=c_rat_giant
 
 DAM=6,15
 ARMOR=13
+
+TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 NPC=brain_undead

@@ -2,7 +2,8 @@
 id=c_man
 name=Pepe
 TSPEECH=spk_q14_pepe
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=Q14 - Jeskyne poznani
@@ -35,7 +36,8 @@ COLOR=colors_neutral
 id=c_man
 name=Malkor
 TSPEECH=spk_q14_malkor
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=Q14 - Jeskyne poznani
@@ -66,7 +68,8 @@ COLOR=colors_neutral
 id=c_woman
 name=Dalmara
 TSPEECH=spk_q14_dalmara
-TEVENTs=e_character
+TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Moria Questy
 SUBSECTION=Q14 - Jeskyne poznani

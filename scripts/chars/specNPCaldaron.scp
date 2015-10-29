@@ -1664,6 +1664,7 @@ name=Ignac
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 
 TSPEECH=spk_ztracene_mesto_ignac
 

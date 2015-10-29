@@ -10,6 +10,7 @@ moverate=3
 TSPEECH=spk_q019_pocestny
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_q019_pocestny
 
 CATEGORY=Kvesty

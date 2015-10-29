@@ -7,6 +7,7 @@ DESIRES=i_gold,t_wand,t_reagent,t_bone
 AVERSIONS=t_TRAP,t_eerie_stuff
 TSPEECH=spk_q016_StaryNegr
 TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 NAME=Umirajici Nekromant
@@ -50,6 +51,7 @@ DESIRES=i_gold,t_wand,t_reagent,t_bone
 AVERSIONS=t_TRAP,t_eerie_stuff
 TSPEECH=spk_q016_orillus
 TEVENTS=e_character
+TEVENTS=e_monster
 
 ON=@Create
 NPC=brain_vendor
@@ -92,6 +94,7 @@ ARMOR=20
 CAN=MT_WALK|mt_run
 TSPEECH=spk_q016_Andor
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_summoneater
  
 ON=@Create 

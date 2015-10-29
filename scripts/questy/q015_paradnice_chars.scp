@@ -3,6 +3,7 @@ id=c_woman
 name=Paradnice Minny
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q015_paradnice
 
 CATEGORY=Moria Questy

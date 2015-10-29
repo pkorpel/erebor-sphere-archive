@@ -54,6 +54,7 @@ CAN=MT_WALK|mt_run
 
 TSPEECH=spk_kvest003_ubar_pirati
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-001 Vampiri Pribeh
@@ -154,6 +155,7 @@ CAN=MT_WALK|mt_run
 
 TSPEECH=spk_kvest003_Grager
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-001 Vampiri Pribeh
@@ -289,6 +291,7 @@ TSPEECH=panzvirat
 //
 
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-006 Zlata otep
@@ -335,6 +338,7 @@ RESOURCES=15 i_ribs_raw,10 i_hide
 CAN=MT_WALK|MT_RUN
 FOODTYPE=55 t_crops, 55 t_fruit, 55 t_grain, 64 t_grass
 TEVENTS=e_horses
+TEVENTS=e_monster
 
 TSPEECH=zlatymustang
 
@@ -429,6 +433,8 @@ NAME=Straz Degrana
 ID=c_man
 
 TSPEECH=joptravel
+
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-008 drak

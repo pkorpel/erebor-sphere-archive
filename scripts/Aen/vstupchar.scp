@@ -6,6 +6,7 @@ ATTACK=60
 ARMOR=80 
 
 TSPEECH=Cardolanske_pohrebiste_mag
+TEVENTS=e_monster
 TEVENTS=e_character
 
 BLOODCOLOR=0
@@ -49,6 +50,7 @@ ATTACK=60
 ARMOR=80 
 
 TSPEECH=Cardolanske_pohrebiste_farmarka 
+TEVENTS=e_monster
 TEVENTS=e_character
 
 BLOODCOLOR=0

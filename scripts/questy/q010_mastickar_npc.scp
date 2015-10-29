@@ -3,6 +3,7 @@ id=c_man
 name=Mastickar Gregoriel
 
 TEVENTS=e_character
+TEVENTS=e_monster
 TEVENTS=e_healer
 TEVENTS=e_item_refuser
 TSPEECH=spk_q010_mastickar

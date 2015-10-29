@@ -2190,8 +2190,6 @@ on=@getHit
 tag(combatSource,<src>)
 
 on=@death
-f_monsterRefreshSpwn         //potrebna funkce pro refreshnuti timeru spawneru (zkopceno z npc_systems)
-findlayer(25).remove
 tag(lastmurderbyf,<act>)
 arg(monstdeathact,<act>)
 if (flag_conjured)

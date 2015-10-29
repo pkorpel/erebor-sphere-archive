@@ -9,6 +9,7 @@ CAN=MT_WALK|mt_run
 
 TSPEECH=crunch_kecal 
 TEVENTS=e_character 
+TEVENTS=e_monster
  
 CATEGORY=Kvesty
 SUBSECTION=Obyvatele mest
@@ -97,6 +98,7 @@ CAN=MT_WALK|mt_run
 TSPEECH=crunch_zlodejicek 
  
 TEVENTS=e_character 
+TEVENTS=e_monster
  
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-009 Beauova hlava
@@ -147,6 +149,7 @@ AVERSIONS=t_TRAP,t_eerie_stuff
 
 TSPEECH=Crunch_Beau
 TEVENTS=e_character
+TEVENTS=e_monster
 
 CATEGORY=Kvesty
 SUBSECTION=Kvest Neutralni-009 Beauova hlava

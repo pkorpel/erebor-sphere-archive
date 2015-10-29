@@ -4,6 +4,7 @@ name=Jonas
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q036_jonas_uhrovity
 
 CATEGORY=Moria Questy
@@ -64,6 +65,7 @@ name=Evzen
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q036_jonas_evzen
 
 CATEGORY=Moria Questy
@@ -125,6 +127,7 @@ name=Hubert
 
 TEVENTS=e_item_refuser
 TEVENTS=e_character
+TEVENTS=e_monster
 TSPEECH=spk_q036_jonas_hubert
 
 CATEGORY=Moria Questy
