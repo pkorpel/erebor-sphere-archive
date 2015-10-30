@@ -363,68 +363,30 @@ name=npccorpsebox
 layer=81
 
 [EVENTS e_tele_to_target]
-//on=@skillstart
 on=@skillstroke
-if(!strcmpi(<name>,Roth))
- //kermel.sysmessage(Teleskill, act: <act>, jeho name: <act.name>, fighting: <isfighting>)
-endif
 if (act)
- if (act < 040000000) //itemy jsou od te ctyrky vyse
-  if (act.npc) 
-  else //na hrace
-  //if (isfighting)||(iscasting)
-   if !(<flags>&(statf_freeze|statf_invul|statf_invisible|statf_hidden))
-    if !(findid(i_attack_guard))
-     newitemsafe(i_attack_guard)
-     equip(<lastnew>)
+  if (act < 040000000) //itemy jsou od te ctyrky vyse
+    if !(<act.npc>) //na hrace
+      if !(<flags>&(statf_freeze|statf_invul|statf_invisible|statf_hidden))
+        if !(findid(i_attack_guard))
+          newitemsafe(i_attack_guard)
+          equip(<lastnew>)
+        endif
+        return 0
+      endif
     endif
-    return 0
-   endif
   endif
- endif
 else
- if (memoryfindtype(MEMORY_fight))
- else
-  findid(i_attack_guard).remove
-  removememories
-  events(-e_tele_to_target)
- endif
+  if (memoryfindtype(MEMORY_fight))
+  else
+    findid(i_attack_guard).remove
+    removememories
+    events(-e_tele_to_target)
+  endif
 endif
 //return 0
 
-[EVENTS e_iron_eye]
-ON=@NPCSeeNewPlayer
-if (src.flag_invul)
- return 1
-endif
-attack(<src>)
-events(+e_NPC_teleToTarget)	//alternative event - less expensive & without handling guards
-//events(+e_tele_to_target)
-
-on=@skillstroke
-if (act)
-  if (isfighting)
-    if (act.ischar)
-      if (act.issumon) //act is a summon, so the eye is going to attack at its owner
-        if (!act.memoryfindtype(MEMORY_IPET).link.isinvis)
-          if (!act.memoryfindtype(MEMORY_IPET).link.isdead) && (distancefrom(<act.memoryfindtype(MEMORY_IPET).link>)<4)
-            p = <act.memoryfindtype(MEMORY_IPET).link.p>
-            update
-            attack(act.memoryfindtype(MEMORY_IPET).link)     
-          endif
-        endif
-      endif
-      if (act.npc) && (!act.issumon) //ostatni NPCcka = smazat targety 
-        removememories
-      endif  
-    endif
-  endif
-endif
-
-on=@hittry
-events(+e_NPC_teleToTarget)
-//events(+e_tele_to_target)
-
+[EVENTS e_eye]
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -448,11 +410,6 @@ if (var(dodged) == 0)
     endif
   endif
 endif
-
-//if ( (<eval {1 100}> > 80) && !(var(dodged)==1) )
-// var(ubrano,#*2)
-// act.sysmessage("<name> ti zasadilo kriticky uder.")
-//endif
 
 on=@beforedoeffect 
 on=@beforegeteffect
@@ -1608,6 +1565,26 @@ events(+e_NPC_teleToTarget)
 
 on=@hittry
 events(+e_NPC_teleToTarget)
+
+on=@skillstroke
+if (act)
+  if (isfighting)
+    if (act.ischar)
+      if (act.issumon) //act is a summon, so the npc is going to attack its owner
+        if (!act.memoryfindtype(MEMORY_IPET).link.isinvis)
+          if (!act.memoryfindtype(MEMORY_IPET).link.isdead) && (distancefrom(<act.memoryfindtype(MEMORY_IPET).link>)<4)
+            p = <act.memoryfindtype(MEMORY_IPET).link.p>
+            update
+            attack(act.memoryfindtype(MEMORY_IPET).link)     
+          endif
+        endif
+      endif
+      if (act.npc) && (!act.issumon) //ostatni NPCcka = smazat targety 
+        removememories
+      endif  
+    endif
+  endif
+endif
 
 [EVENTS e_NPC_teleToTarget]
 on=@skillstroke

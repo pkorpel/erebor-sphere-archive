@@ -301,7 +301,8 @@ BLOODCOLOR=color_snow
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_iron_eye
+TEVENTS=e_eye
+TEVENTS=e_npc_leaper
 TEVENTS=e_snowmonster
 
 CATEGORY=Questy
@@ -393,7 +394,8 @@ BLOODCOLOR=color_ice
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_iron_eye
+TEVENTS=e_eye
+TEVENTS=e_npc_leaper
 TEVENTS=e_snowmonster
 
 CATEGORY=Questy

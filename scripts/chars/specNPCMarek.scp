@@ -1545,7 +1545,6 @@ BLOODCOLOR=colors_green
 
 TEVENTS=e_monster
 TEVENTS=e_character
-// TEVENTS=e_iron_eye
 TEVENTS=e_npc_leaper
 TEVENTS=e_npc_bleed
 

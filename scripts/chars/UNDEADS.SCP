@@ -2835,7 +2835,7 @@ BLOODCOLOR=1
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_iron_eye
+TEVENTS=e_npc_leaper
 TEVENTS=e_undead
 
 CATEGORY=Monsters
@@ -4292,7 +4292,7 @@ BLOODCOLOR=color_o_iron
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_iron_eye
+TEVENTS=e_npc_leaper
 TEVENTS=e_undead
 
 CATEGORY=Monsters

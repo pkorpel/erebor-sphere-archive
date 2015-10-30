@@ -540,7 +540,7 @@ DESCRIPTION=NEKRO Prizrak
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_iron_eye
+TEVENTS=e_npc_leaper
 TEVENTS=e_undeads_ability_life
  
 ON=@Create
