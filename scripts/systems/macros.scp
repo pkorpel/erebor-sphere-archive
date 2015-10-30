@@ -641,11 +641,11 @@ if !(tag(polymorfmdelay))
 endif
 if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>)
   dorand 11
-    tag(doceho,c_valorite_eye_menavec) // menavcova verzia bez leapu
+    tag(doceho,c_eye_valorite_menavec) // menavcova verzia bez leapu
     tag(doceho,c_black_vdova) // netreba menit, nema ability
     tag(doceho,c_bug_giant) // taktiez netreba menit
     tag(doceho,c_tarantule) // netreba
-    tag(doceho,c_obsidian_eye_menavec) // taktiez bez leapu
+    tag(doceho,c_eye_obsidian_menavec) // taktiez bez leapu
     tag(doceho,c_alligator) // netreba menit
     tag(doceho,c_golem_golden) // netreba menit
     tag(doceho,c_vortex_mage) // netreba
@@ -681,7 +681,7 @@ if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>
     tag(doceho,c_daemon_gold_menavec) // odstraneny reborn
     tag(doceho,c_fireant_queen_menavec) // odstraneny ovinovac
     tag(doceho,c_ophidian_king) // netreba menit
-    tag(doceho,c_adamantinum_eye_menavec) // odstraneny leap
+    tag(doceho,c_eye_adamantium_menavec) // odstraneny leap
     tag(doceho,c_reaper_eben) // odstraneny ovinovac
     tag(doceho,c_lizard_king) // netreba menit
     tag(doceho,c_m_phoenix_poison) // netreba menit
@@ -718,7 +718,7 @@ if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>
     tag(doceho,c_ophidian_mage_evil_menavec) // odstranene perma zrcko
     tag(doceho,c_golem_mithril_menavec) // odstraneny reactiv
     tag(doceho,c_balrogh_menavec) // odstraneny round
-    tag(doceho,c_mitheril_eye_menavec) // odstraneny leap
+    tag(doceho,c_eye_mithril_menavec) // odstraneny leap
     tag(doceho,c_minotaur_strazce_menavec) // odstraneny round
   enddo
   newequip(i_morfovatko)
@@ -930,7 +930,7 @@ if rand(20)==1
   lastnewchar.flag_conjured=1
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=20
-  newnpc(c_fire_eye)
+  newnpc(c_eye_fire)
   lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
   lastnewchar.fame=0
   lastnewchar.tag(experience,0)

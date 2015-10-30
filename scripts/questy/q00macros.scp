@@ -254,7 +254,7 @@ if ({1 100}>8)
     fq_Titan_lord
     fq_Titan_mage
     fq_Titanka
-    fq_Iron_Eye
+    fq_Eye_Iron
     fq_Golem_copper
     fq_Golem_iron
     fq_Brouci_low
@@ -284,8 +284,8 @@ else
     fq_Golem_gold
     fq_Golem_silver
     fq_Golem_verite
-    fq_Shadow_Eye
-    fq_Snow_Eye
+    fq_Eye_Shadow
+    fq_Eye_Snow
     fq_Skullhead
     fq_Spirit_silver
     fq_Spirit_gold
@@ -503,32 +503,32 @@ else
   say("Jdete a zbavte nas co nejvice Titan Lordu! Jsou to zabijacke stvury!")
 endif
 
-[function fq_Iron_Eye]
-if !(tag(hunted)==c_iron_eye)
-  tag(hunted,c_iron_eye)
+[function fq_Eye_Iron]
+if !(tag(hunted)==c_eye_iron)
+  tag(hunted,c_eye_iron)
   tag(huntedexperience,15)
   tag(huntedgold,40)
-  tag(hlaska,fq_Iron_Eye)
+  tag(hlaska,fq_Eye_Iron)
 else
   say("Odmenime vas kdyz dnes zabijete co nejvice Iron Eye!")
 endif
 
-[function fq_Shadow_Eye]
-if !(tag(hunted)==c_shadow_eye)
-  tag(hunted,c_shadow_eye)
+[function fq_Eye_Shadow]
+if !(tag(hunted)==c_eye_shadow)
+  tag(hunted,c_eye_shadow)
   tag(huntedexperience,50)
   tag(huntedgold,75)
-  tag(hlaska,fq_Shadow_Eye)
+  tag(hlaska,fq_Eye_Shadow)
 else
   say("Dnes se pokuste ulovit strasliva Shadow Eye!")
 endif
 
-[function fq_Snow_Eye]
-if !(tag(hunted)==c_Snow_Eye)
-  tag(hunted,c_Snow_Eye)
+[function fq_Eye_Snow]
+if !(tag(hunted)==c_eye_snow)
+  tag(hunted,c_eye_snow)
   tag(huntedexperience,30)
   tag(huntedgold,50)
-  tag(hlaska,fq_Snow_Eye)
+  tag(hlaska,fq_Eye_Snow)
 else
   say("Odmenime vas kdyz dnes zabijete co nejvice Snow Eye!")
 endif

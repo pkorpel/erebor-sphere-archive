@@ -1,7 +1,5 @@
 //// valo ocko
-
-
-[CHARDEF c_valorite_eye_menavec]
+[CHARDEF c_eye_valorite_menavec]
 id=c_gazer
 NAME=Eye
 SOUND=snd_MONSTER_GAZER1
@@ -81,7 +79,7 @@ ITEM=i_gold
 //// obs ocko
 
 
-[CHARDEF c_obsidian_eye_menavec]
+[CHARDEF c_eye_obsidian_menavec]
 id=c_gazer
 NAME=Eye
 SOUND=snd_MONSTER_GAZER1
@@ -161,7 +159,7 @@ ITEM=i_gold
 
 ///////////////////
 
-[CHARDEF c_adamantinum_eye_menavec]
+[CHARDEF c_eye_adamantinum_menavec]
 id=c_gazer
 NAME=Eye
 SOUND=snd_MONSTER_GAZER1

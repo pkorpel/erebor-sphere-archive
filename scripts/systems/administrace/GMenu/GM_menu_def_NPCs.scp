@@ -51,37 +51,37 @@ def_GM_Menu_NPC_Eyes_totalAmount 7
 def_GM_Menu_NPC_Eyes_sectionName  "NPC - Oci"
 
 def_GM_Menu_NPC_Eyes_name[0]      "Copper oko (c_copper_eye)"
-def_GM_Menu_NPC_Eyes_object[0]    "c_copper_eye" //chardef
+def_GM_Menu_NPC_Eyes_object[0]    "c_eye_copper" //chardef
 def_GM_Menu_NPC_Eyes_type[0]      def_GM_Menu_npc
 def_GM_Menu_NPC_Eyes_help[0]      "" // no help
 
-def_GM_Menu_NPC_Eyes_name[1]      "Iron oko (c_iron_eye)"
-def_GM_Menu_NPC_Eyes_object[1]    "c_iron_eye" //chardef
+def_GM_Menu_NPC_Eyes_name[1]      "Iron oko (c_eye_iron)"
+def_GM_Menu_NPC_Eyes_object[1]    "c_eye_iron" //chardef
 def_GM_Menu_NPC_Eyes_type[1]      def_GM_Menu_npc
 def_GM_Menu_NPC_Eyes_help[1]      "" // no help
 
-def_GM_Menu_NPC_Eyes_name[2]      "Verite oko (c_verite_eye)"
-def_GM_Menu_NPC_Eyes_object[2]    "c_verite_eye" //chardef
+def_GM_Menu_NPC_Eyes_name[2]      "Verite oko (c_eye_verite)"
+def_GM_Menu_NPC_Eyes_object[2]    "c_eye_verite" //chardef
 def_GM_Menu_NPC_Eyes_type[2]      def_GM_Menu_npc
 def_GM_Menu_NPC_Eyes_help[2]      "" // no help
 
-def_GM_Menu_NPC_Eyes_name[3]      "Valorite oko (c_valorite_eye)"
-def_GM_Menu_NPC_Eyes_object[3]    "c_valorite_eye" //chardef
+def_GM_Menu_NPC_Eyes_name[3]      "Valorite oko (c_eye_valorite)"
+def_GM_Menu_NPC_Eyes_object[3]    "c_eye_valorite" //chardef
 def_GM_Menu_NPC_Eyes_type[3]      def_GM_Menu_npc
 def_GM_Menu_NPC_Eyes_help[3]      "" // no help
 
-def_GM_Menu_NPC_Eyes_name[4]      "Obsidian oko (c_obsidian_eye)"
-def_GM_Menu_NPC_Eyes_object[4]    "c_obsidian_eye" //chardef
+def_GM_Menu_NPC_Eyes_name[4]      "Obsidian oko (c_eye_obsidian)"
+def_GM_Menu_NPC_Eyes_object[4]    "c_eye_obsidian" //chardef
 def_GM_Menu_NPC_Eyes_type[4]      def_GM_Menu_npc
 def_GM_Menu_NPC_Eyes_help[4]      "" // no help
 
-def_GM_Menu_NPC_Eyes_name[5]      "Adamantinum oko (c_adamantinum_eye)"
-def_GM_Menu_NPC_Eyes_object[5]    "c_adamantinum_eye" //chardef
+def_GM_Menu_NPC_Eyes_name[5]      "Adamantinum oko (c_eye_adamantium)"
+def_GM_Menu_NPC_Eyes_object[5]    "c_eye_adamantium" //chardef
 def_GM_Menu_NPC_Eyes_type[5]      def_GM_Menu_npc
 def_GM_Menu_NPC_Eyes_help[5]      "" // no help
 
-def_GM_Menu_NPC_Eyes_name[6]      "Mithrill oko (c_mitheril_eye)"
-def_GM_Menu_NPC_Eyes_object[6]    "c_mitheril_eye" //chardef
+def_GM_Menu_NPC_Eyes_name[6]      "Mithril oko (c_eye_mithril)"
+def_GM_Menu_NPC_Eyes_object[6]    "c_eye_mithril" //chardef
 def_GM_Menu_NPC_Eyes_type[6]      def_GM_Menu_npc
 def_GM_Menu_NPC_Eyes_help[6]      "" // no help
 

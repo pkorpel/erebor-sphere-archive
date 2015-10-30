@@ -1610,7 +1610,7 @@ attr_invis(1)
 tag(resTime,600)
 tag(npcDisappearTime,900)
 tag(spActivateChance,300)
-tag(spawnID,c_iron_eye)
+tag(spawnID,c_eye_iron)
 //sem se da proste potvora co ma vylezt po dupnuti na dlazku
 
 ON=@Step
