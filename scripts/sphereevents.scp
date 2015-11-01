@@ -1989,8 +1989,16 @@ events=+t_item_in_corpse
 tag(iic_owner,<src>)
 updatex
 
+[function f_item_in_corpse_reset]
+events -t_item_in_corpse
+tag.remove(iic_owner)
+
 [typedef t_item_in_corpse]
 on=@pickup_pack
+if (src.isgm)
+  f_item_in_corpse_reset
+  return 0
+endif
 if (topobj.isItem)
   if (topobj.link)//hracske telo
     if (topobj.timer><nastaveni_body_looting_timer>) //timer hracskeho tela je 900(15 minut)
@@ -2024,8 +2032,7 @@ if (topobj.isItem)
           src.criminal
         endif
       endif
-      events -t_item_in_corpse
-      tag.remove(iic_owner)
+      f_item_in_corpse_reset
       src.tag(nextloot,<eval serv.time+8>)
       return 0
     else

@@ -150,97 +150,115 @@ return"<arg(days)> dni <arg(hod)> hod <arg(min)> min <arg(sec)> sec"
 [typedef t_nbexp_enhancer]
 on=@UserDClick
 if (src.isGM)
-  src.dialog(d_nbexp_enhancer,<tag.lvl_limit>,<tag.exp_const>,<tag.time_limit>,<tag.message>,<tag.message2>,<uid>)
+  dialog(d_nbexp_enhancer)//<tag.lvl_limit>,<tag.exp_const>,<tag.time_limit>,<tag.message>,<tag.message2>,<uid>)
 else
- arg(exp_to_give,(<tag(lvl_limit)>-<src.tag(level)>) * <tag.exp_const>)
- arg(enhancer_tag,nbexp_enhancer_<hval <uid>>)
- if (exp_to_give > 0)
-  if !(strlen(<src.qtag(<enhancer_tag>)>) && (<tag.time_limit> == 0))
-   if (src.qtag(<enhancer_tag>) < <serv.time>)
-    src.addexp(<exp_to_give>)
-    src.qtag(<enhancer_tag>,<serv.time>+10*60*60*<tag(time_limit)>)
-    src.SysMessage(<tag.message>)
-   else
-    src.SysMessage(<tag.message2>)
-   endif
-  else
-   src.SysMessage("Hmm... Tady uz nic zajimaveho nezjistis.")
+  if (f_guarditAdv_CheckSpawns)	// 1 == strazce je nazivu
+    src.sysMessage("Predmet si potrebujes prohlednout v klidu, musis se nejak zbavit tech strazcu.")
+    return 1
   endif
- else
-  src.SysMessage("Hmm... nic zajimaveho jsi <src.sex nezjistil nezjistila>.")
-  src.qtagremove(<enhancer_tag>)
- endif
+  arg(exp_to_give,(<tag(lvl_limit)>-<src.tag(level)>) * <tag.exp_const>)
+  arg(enhancer_tag,nbexp_enhancer_<hval <uid>>)
+  if (exp_to_give > 0)
+    if !(strlen(<src.qtag(<enhancer_tag>)>) && (<tag.time_limit> == 0))
+      if (src.qtag(<enhancer_tag>) < <serv.time>)
+        src.addexp(<exp_to_give>)
+        src.qtag(<enhancer_tag>,<serv.time>+10*60*60*<tag(time_limit)>)
+        src.SysMessage(<tag.message>)
+      else
+        src.SysMessage(<tag.message2>)
+      endif
+    else
+      src.SysMessage("Hmm... Tady uz nic zajimaveho nezjistis.")
+    endif
+  else
+    src.SysMessage("Hmm... nic zajimaveho jsi <src.sex nezjistil nezjistila>.")
+    src.qtagremove(<enhancer_tag>)
+  endif
 endif
 return 1
 
 [dialog d_nbexp_enhancer]
 argo.SetLocation=15,5
 
-argo.tag(sirka,396)
-argo.tag(vyska,404)
+argo.tag(sirka,746)
+argo.tag(vyska,431)
 argo.dialog_prvni
 argo.dialog_pozadi(<argo.tag(nexty)>,1)
-argo.dialog_pozadi(<argo.tag(nexty)>,3,248,120)
+argo.dialog_pozadi(<argo.tag(nexty)>,3,248,50)
 argo.dialog_pozadi(<argo.tag(nexty)>,1)
 argo.dialog_pozadi(<argo.tag(nexty)>,1)
 argo.dialog_pozadi(<argo.tag(nexty)>,1)
 argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,248,50)
 argo.dialog_pozadi(<argo.tag(nexty)>,10)
+argo.dialog_pozadi(<argo.tag(nexty)>,0,248,50)
 argo.dialog_zpruhledni
 
-argo.tag(enhancer_uid,<argv(5)>)
 arg(sloupec_prvni_x,<d_def_okraj>+<d_def_skvira>+<d_def_odsazeni>)
 arg(sloupec_prvni_y,<d_def_okraj>+<d_def_skvira>)
 argo.textA(sloupec_prvni_x,sloupec_prvni_y+0*(<d_def_radek_vyska>+<d_def_skvira>),42,"NB Experience Enhancer")
-argo.button(sloupec_prvni_x+340,sloupec_prvni_y-3,0fb1,0fb3,1,0,0)//cancel
+argo.button(sloupec_prvni_x+690,sloupec_prvni_y-3,0fb1,0fb3,1,0,0)//cancel
 
 arg(sloupec_prvni_y,#+<d_def_radek_vyska>+<d_def_skvira>)
 argo.textA(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_readcolor>,"Lvl limit:")
 argo.textA(sloupec_prvni_x,sloupec_prvni_y+1*<d_def_radek_vyska>,<d_def_readcolor>,"Exp. konstanta:")
 argo.textA(sloupec_prvni_x,sloupec_prvni_y+2*<d_def_radek_vyska>,<d_def_readcolor>,"Time limit / hodiny:")
 
-argo.settext(1000,<argv(0)>)
-argo.settext(1001,<argv(1)>)
-argo.settext(1002,<argv(2)>)
-argo.textEntry(sloupec_prvni_x+251,sloupec_prvni_y+0*<d_def_radek_vyska>,50,<d_def_radek_vyska>,<d_def_writecolor>,1,1000)
-argo.textEntry(sloupec_prvni_x+251,sloupec_prvni_y+1*<d_def_radek_vyska>,50,<d_def_radek_vyska>,<d_def_writecolor>,2,1001)
-argo.textEntry(sloupec_prvni_x+251,sloupec_prvni_y+2*<d_def_radek_vyska>,50,<d_def_radek_vyska>,<d_def_writecolor>,3,1002)
+argo.settext(3,"<?tag(lvl_limit)?>")
+argo.settext(4,"<?tag(exp_const)?>")
+argo.settext(5,"<?tag(time_limit)?>")
+argo.textEntry(sloupec_prvni_x+251,sloupec_prvni_y+0*<d_def_radek_vyska>,50,<d_def_radek_vyska>,<d_def_writecolor>,1,3)
+argo.textEntry(sloupec_prvni_x+251,sloupec_prvni_y+1*<d_def_radek_vyska>,50,<d_def_radek_vyska>,<d_def_writecolor>,2,4)
+argo.textEntry(sloupec_prvni_x+251,sloupec_prvni_y+2*<d_def_radek_vyska>,50,<d_def_radek_vyska>,<d_def_writecolor>,3,5)
 
 arg(sloupec_prvni_y,#+(3*<d_def_radek_vyska>)+<d_def_skvira>)
 argo.textA(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_readcolor>,Message - dostane expy:)
 
 arg(sloupec_prvni_y,#+<d_def_radek_vyska>+<d_def_skvira>)
-argo.settext(1004,<argv(3)>)
-argo.textEntry(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,360,<d_def_radek_vyska>,<d_def_writecolor>,4,1004)
+argo.settext(7,"<?tag(message)?>")
+argo.textEntry(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,710,<d_def_radek_vyska>,<d_def_writecolor>,4,7)
 
 arg(sloupec_prvni_y,#+<d_def_radek_vyska>+<d_def_skvira>)
 argo.textA(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_readcolor>,Message - prisel brzy - nedostane expy:)
 
 arg(sloupec_prvni_y,#+<d_def_radek_vyska>+<d_def_skvira>)
-argo.settext(1006,<argv(4)>)
-argo.textEntry(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,360,<d_def_radek_vyska>,<d_def_writecolor>,5,1006)
+argo.settext(9,"<?tag(message2)?>")
+argo.textEntry(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,710,<d_def_radek_vyska>,<d_def_writecolor>,5,9)
 
-arg(sloupec_prvni_y,#+<d_def_radek_vyska>+<d_def_skvira>)
-argo.settext(1007,"Vypocet experience:<br> Experience se pocitaji takto:<br>('lvl_limit' - 'lvl_hrace') * 'exp_const'<br>Nejvice tudiz dostane hrac na 0 lvlu (a to presne LvlLimit nasobek experience konstanty), nejmene pak hrac s lvlem o jeda mensim, nez je hodnota Lvl Limitu. Ziskane experience takto ubyvaji s levelem hrace vzdy o hodnotu konstanty na kazdem levelu.<br><br>Message:<br> Message je RP informace, ktera by se mela zobrazit pri poklikani na item.<br> Message jsou dve, prvni se zobrazi v pripade, ze jsou splneny vsechny podminky pro ziskani expu, ta druha v pripade, ze hrac prisel prilis brzy na to, aby experience znovu dostal.<br><br>Time Limit:<br> Time limit je doba v hodinach, po ktere muze hrac znovu ziskat experience. Pokud je hodnota nastavena na 0, pak hrac ziska expy jen jednou. Tag obsahujici informaci o moznosti ziskat experience se automaticky smaze pri doubleclicku na item v pripade, ze prekroci limit dany levelem pro ziskavani expu.")
-argo.HTMLGump(sloupec_prvni_x,sloupec_prvni_y,365,10*<d_def_radek_vyska>,1007,0,32)
+//arg(sloupec_prvni_y,#+<d_def_radek_vyska>+<d_def_skvira>)
+argo.dialog_textpos(6,0)
+argo.textA(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>-3,<d_def_readcolor>,"Pridat Strazce")
+argo.dialog_textpos(6,1)
+argo.textA(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval tag(pocetSpawnu)?>")
+argo.dialog_textpos(6,2)
+argo.button(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,0fbd,0fbf,1,0,2)	//Add Guards Menu
 
-arg(sloupec_prvni_y,#+(10*<d_def_radek_vyska>)+<d_def_skvira>)
-argo.button(sloupec_prvni_x+340,sloupec_prvni_y-3,0fb7,0fb9,1,0,1)//OK
+argo.dialog_textpos(7,0)
+argo.settext(12,"Vypocet experience:<br> Experience se pocitaji takto:<br>('lvl_limit' - 'lvl_hrace') * 'exp_const'<br>Nejvice tudiz dostane hrac na 0 lvlu (a to presne LvlLimit nasobek experience konstanty), nejmene pak hrac s lvlem o jeda mensim, nez je hodnota Lvl Limitu. Ziskane experience takto ubyvaji s levelem hrace vzdy o hodnotu konstanty na kazdem levelu.<br><br>Message:<br> Message je RP informace, ktera by se mela zobrazit pri poklikani na item.<br> Message jsou dve, prvni se zobrazi v pripade, ze jsou splneny vsechny podminky pro ziskani expu, ta druha v pripade, ze hrac prisel prilis brzy na to, aby experience znovu dostal.<br><br>Time Limit:<br> Time limit je doba v hodinach, po ktere muze hrac znovu ziskat experience. Pokud je hodnota nastavena na 0, pak hrac ziska expy jen jednou. Tag obsahujici informaci o moznosti ziskat experience se automaticky smaze pri doubleclicku na item v pripade, ze prekroci limit dany levelem pro ziskavani expu.")
+argo.HTMLGump(<lastxpos>,<lastypos>,715,10*<d_def_radek_vyska>,12,0,32)
+
+var(lastypos,<lastypos>+(10*<d_def_radek_vyska>)+<d_def_skvira>)
+argo.button(<lastxpos>+690,<lastypos>,0fb7,0fb9,1,0,1)//OK
 
 [dialog d_nbexp_enhancer button]
 on=0
 src.SysMessage("nastaveni stornovana")
 
 on=1
-arg(enhancer,<argo.tag(enhancer_uid)>)
+on=@AnyButton	// OK
 src.SysMessage("Lvl Limit: <argtxt(1)>")
-enhancer.tag(lvl_limit,<argtxt(1)>)
+tag(lvl_limit,<argtxt(1)>)
 src.SysMessage("Experience Konstanta: <argtxt(2)>")
-enhancer.tag(exp_const,<argtxt(2)>)
+tag(exp_const,<argtxt(2)>)
 src.SysMessage("Time Limit: <argtxt(3)>")
-enhancer.tag(time_limit,<argtxt(3)>)
-enhancer.tag(message,<argtxt(4)>)
-enhancer.tag(message2,<argtxt(5)>)
+tag(time_limit,<argtxt(3)>)
+tag(message,<argtxt(4)>)
+tag(message2,<argtxt(5)>)
+
+if (argn == 2) //pressed button 7 - add Guards menu
+  dialog(d_guarditAdv,d_nbexp_enhancer)
+  return 1
+endif
 
 [typedef t_link_dclick]
 on=@UserDClick
