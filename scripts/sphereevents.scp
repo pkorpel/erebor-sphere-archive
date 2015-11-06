@@ -1543,6 +1543,9 @@ endif
 
 paralyze_remove(100) //in case the player was killed while having stronger paralysis type
 flag_immobile=0 //proti ovinovacum
+if (<stamina> < 5) //fix ghost movement in case he died without stamina
+  stamina=5
+endif
 if (<tag(gethealedby)>) //nekdo ho lecil
   tag(gethealedby).tag.remove(awaitsexpforhealing) //odstranit klerikovi/samanovi
   tag.remove(gethealedby) //odstranit umirajicimu
