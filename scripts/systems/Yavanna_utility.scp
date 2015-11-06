@@ -146,6 +146,78 @@ return"<arg(days)> dni <arg(hod)> hod <arg(min)> min <arg(sec)> sec"
 //////////////////////////////////////////////
 ////////    NB Experience enhancer    ////////
 //////////////////////////////////////////////
+[function nbExpEnhTag]
+if !(ischar)
+  return""
+endif
+arg(MyEnhanceRune,<findid(i_nbexp_rune)>)
+if (<argvcount> == 2) //zapisujeme novy nbExpEnhTag
+  if !(<hval arg(MyEnhanceRune)>) // postava jeste nema runu
+    newequip(i_nbexp_rune)
+    arg(MyEnhanceRune,<lastnew>)
+  endif
+  MyEnhanceRune.tag(<argv(0)>,"<argv(1)>")
+  return""
+elseif (<argvcount> == 1) // cteme nbExpEnhTag
+  if !(<hval arg(MyEnhanceRune)>) // postava jeste nema runu
+    return""
+  endif
+  if (strlen(<MyEnhanceRune.tag(<argv(0)>)>))
+    return<MyEnhanceRune.tag(<argv(0)>)>
+  else
+    return""
+  endif
+endif
+RedMessage("spatny pocet argumentu")
+Return""
+
+[function nbExpEnhTagRemove]
+arg(MyEnhanceRune,<findid(i_nbexp_rune)>)
+if (<hval arg(MyEnhanceRune)>)
+  MyEnhanceRune.tag.remove.(<argv(0)>)
+endif
+return 1
+
+[function nbExpEnhTagshow]
+if (<argvcount> == 0)
+  findid(i_nbexp_rune).tag(dump)
+else
+  Src.SysMessage("Hodnota nbexp_enhancer tagu -<argv(0)>- :")
+  arg(tag_value,"<nbExpEnhTag(<argv(0)>)>")
+  if !(strcmpi(<tag_value>,00))
+    Src.RedMessage("Tag je nulovy.")
+  else
+    Src.RedMessage("<tag_value>")
+  endif
+endif
+
+[itemdef i_nbexp_rune]
+id=i_rune_marker
+name=Runa pro nbEnhancery
+type=t_eq_script
+
+on=@create
+attr=094 // invis, nb, nevermove
+color=0989
+
+
+
+[function f_nbexp_calcExp]
+arg(lvl_min,0)
+arg(lvl_max,0)
+if (<argvcount> > 1)
+  arg(lvl_min,<argv(0)>)
+  arg(lvl_max,<argv(1)>)
+else
+  arg(lvl_max,<argv(0)>)
+endif
+arg(playerLvl,<eval src.tag(level)>)
+if (<playerLvl> < <lvl_min>) // no experience for players below min lvl
+  return 0
+endif
+arg(expToGive,(<lvl_max>-<playerLvl>) * <tag.exp_const>)
+return <eval expToGive>
+
 
 [typedef t_nbexp_enhancer]
 on=@UserDClick
@@ -156,13 +228,13 @@ else
     src.sysMessage("Predmet si potrebujes prohlednout v klidu, musis se nejak zbavit tech strazcu.")
     return 1
   endif
-  arg(exp_to_give,(<tag(lvl_limit)>-<src.tag(level)>) * <tag.exp_const>)
+  arg(exp_to_give,<f_nbexp_calcExp(<tag(lvl_limit)>)>)
   arg(enhancer_tag,nbexp_enhancer_<hval <uid>>)
-  if (exp_to_give > 0)
-    if !(strlen(<src.qtag(<enhancer_tag>)>) && (<tag.time_limit> == 0))
-      if (src.qtag(<enhancer_tag>) < <serv.time>)
+  if (<exp_to_give> > 0)
+    if !(strlen(<src.nbExpEnhTag(<enhancer_tag>)>) && (<tag.time_limit> == 0))
+      if (src.nbExpEnhTag(<enhancer_tag>) < <serv.time>)
         src.addexp(<exp_to_give>)
-        src.qtag(<enhancer_tag>,<serv.time>+10*60*60*<tag(time_limit)>)
+        src.nbExpEnhTag(<enhancer_tag>,<serv.time>+10*60*60*<tag(time_limit)>)
         src.SysMessage(<tag.message>)
       else
         src.SysMessage(<tag.message2>)
@@ -172,7 +244,7 @@ else
     endif
   else
     src.SysMessage("Hmm... nic zajimaveho jsi <src.sex nezjistil nezjistila>.")
-    src.qtagremove(<enhancer_tag>)
+    src.nbExpEnhTagRemove(<enhancer_tag>)
   endif
 endif
 return 1
@@ -200,7 +272,7 @@ argo.textA(sloupec_prvni_x,sloupec_prvni_y+0*(<d_def_radek_vyska>+<d_def_skvira>
 argo.button(sloupec_prvni_x+690,sloupec_prvni_y-3,0fb1,0fb3,1,0,0)//cancel
 
 arg(sloupec_prvni_y,#+<d_def_radek_vyska>+<d_def_skvira>)
-argo.textA(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_readcolor>,"Lvl limit:")
+argo.textA(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_readcolor>,"Lvl limit (min, max):")
 argo.textA(sloupec_prvni_x,sloupec_prvni_y+1*<d_def_radek_vyska>,<d_def_readcolor>,"Exp. konstanta:")
 argo.textA(sloupec_prvni_x,sloupec_prvni_y+2*<d_def_radek_vyska>,<d_def_readcolor>,"Time limit / hodiny:")
 
@@ -234,7 +306,7 @@ argo.dialog_textpos(6,2)
 argo.button(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,0fbd,0fbf,1,0,2)	//Add Guards Menu
 
 argo.dialog_textpos(7,0)
-argo.settext(12,"Vypocet experience:<br> Experience se pocitaji takto:<br>('lvl_limit' - 'lvl_hrace') * 'exp_const'<br>Nejvice tudiz dostane hrac na 0 lvlu (a to presne LvlLimit nasobek experience konstanty), nejmene pak hrac s lvlem o jeda mensim, nez je hodnota Lvl Limitu. Ziskane experience takto ubyvaji s levelem hrace vzdy o hodnotu konstanty na kazdem levelu.<br><br>Message:<br> Message je RP informace, ktera by se mela zobrazit pri poklikani na item.<br> Message jsou dve, prvni se zobrazi v pripade, ze jsou splneny vsechny podminky pro ziskani expu, ta druha v pripade, ze hrac prisel prilis brzy na to, aby experience znovu dostal.<br><br>Time Limit:<br> Time limit je doba v hodinach, po ktere muze hrac znovu ziskat experience. Pokud je hodnota nastavena na 0, pak hrac ziska expy jen jednou. Tag obsahujici informaci o moznosti ziskat experience se automaticky smaze pri doubleclicku na item v pripade, ze prekroci limit dany levelem pro ziskavani expu.")
+argo.settext(12,"Vypocet experience:<br> Experience se pocitaji takto:<br>('lvl_limit(max)' - 'lvl_hrace') * 'exp_const'<br>Nejvice tudiz dostane hrac na nejnizsim povolenym lvlu (a to presne (LvlLimit(max)-LvlLimit(min)) nasobek experience konstanty), nejmene pak hrac s lvlem o jeda mensim, nez je hodnota Lvl Limitu (max). Ziskane experience takto ubyvaji s levelem hrace vzdy o hodnotu konstanty na kazdem levelu.<br><br>Message:<br> Message je RP informace, ktera by se mela zobrazit pri poklikani na item.<br> Message jsou dve, prvni se zobrazi v pripade, ze jsou splneny vsechny podminky pro ziskani expu, ta druha v pripade, ze hrac podminky nesplnuje (napr. prisel prilis brzy na to, aby experience znovu dostal).<br><br>Time Limit:<br> Time limit je doba v hodinach, po ktere muze hrac znovu ziskat experience. Pokud je hodnota nastavena na 0, pak hrac ziska expy jen jednou. Tag obsahujici informaci o moznosti ziskat experience se automaticky smaze pri doubleclicku na item v pripade, ze prekroci limit dany levelem pro ziskavani expu.")
 argo.HTMLGump(<lastxpos>,<lastypos>,715,10*<d_def_radek_vyska>,12,0,32)
 
 var(lastypos,<lastypos>+(10*<d_def_radek_vyska>)+<d_def_skvira>)
@@ -244,7 +316,6 @@ argo.button(<lastxpos>+690,<lastypos>,0fb7,0fb9,1,0,1)//OK
 on=0
 src.SysMessage("nastaveni stornovana")
 
-on=1
 on=@AnyButton	// OK
 src.SysMessage("Lvl Limit: <argtxt(1)>")
 tag(lvl_limit,<argtxt(1)>)

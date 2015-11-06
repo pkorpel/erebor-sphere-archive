@@ -1,10 +1,10 @@
 [function qtag]
-arg(MyQuestRune,<findid(i_quest_rune)>)
 if !(ischar)
   return""
 endif
+arg(MyQuestRune,<findid(i_quest_rune)>)
 if (<argvcount> >= 2) //zapisujeme novy qtag
-  if !(<findid(i_quest_rune)>) // postava jeste nema quest runu
+  if !(<hval arg(MyQuestRune)>) // postava jeste nema quest runu
     newequip(i_quest_rune)
     arg(MyQuestRune,<lastnew>)
   endif
@@ -28,7 +28,9 @@ Return""
 
 [function qtagremove]
 arg(MyQuestRune,<findid(i_quest_rune)>)
-MyQuestRune.tag.remove.(<argv(0)>)
+if (<hval arg(MyQuestRune)>)
+  MyQuestRune.tag.remove.(<argv(0)>)
+endif
 return 1
 
 [function qtagshow]
@@ -57,6 +59,5 @@ color=0989
 if !(strlen(<qtag(argv(0))>)
   tag(<argv(0)>,0)
 endif
-
 
 [eof]
