@@ -29,7 +29,7 @@ DESCRIPTION=Kostlivec
 
 ON=@Create
 Color=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-999 -4999}
 
@@ -100,7 +100,7 @@ DESCRIPTION=Kostlivec
 
 ON=@Create
 Color=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-999 -4999}
 
@@ -159,7 +159,7 @@ DESCRIPTION=Kostlivec Sekernik
 
 ON=@Create
 Color=0753
-NPC=brain_undead
+NPC=brain_monster
 FAME={30 40}
 KARMA={-999 -5999}
 
@@ -231,7 +231,7 @@ DESCRIPTION=Kostlivec Lucistni
 
 ON=@Create
 Color=0542
-NPC=brain_undead
+NPC=brain_monster
 FAME=90
 KARMA={-999 -5999}
 
@@ -303,7 +303,7 @@ DESCRIPTION=Kostlivec Lucistni
 
 ON=@Create
 Color=0542
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-999 -4999}
 
@@ -364,7 +364,7 @@ DESCRIPTION=Kostlivec Carodej
 
 ON=@Create
 COLOR=066E
-NPC=brain_undead
+NPC=brain_monster
 FAME=90
 KARMA={-999 -5999}
 
@@ -440,7 +440,7 @@ SUBSECTION=NB Monsters
 DESCRIPTION=Spectre
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -507,7 +507,7 @@ SUBSECTION=NB Monsters
 DESCRIPTION=Zombie
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -574,7 +574,7 @@ SUBSECTION=NB Monsters
 DESCRIPTION=Zombie
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 STR=180
@@ -642,7 +642,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0481
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -711,7 +711,7 @@ DESCRIPTION=Ghoul
 
 ON=@Create
 Color=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -780,7 +780,7 @@ DESCRIPTION=Ghoul
 
 ON=@Create
 Color=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -833,7 +833,7 @@ SUBSECTION=NB Monsters
 DESCRIPTION=Liche
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=200
 KARMA={-4000 -4999}
 
@@ -912,7 +912,7 @@ SUBSECTION=NB Monsters
 DESCRIPTION=Liche
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=200
 KARMA={-4000 -4999}
 
@@ -980,7 +980,7 @@ SUBSECTION=NB Monsters
 DESCRIPTION=Liche Lord
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=200
 KARMA={-4000 -4999}
 
@@ -2657,7 +2657,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0481
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 

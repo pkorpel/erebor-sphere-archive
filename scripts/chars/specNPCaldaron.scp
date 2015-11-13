@@ -2845,7 +2845,7 @@ DESCRIPTION=Sand Mummy
 
 ON=@Create
 color=0709
-NPC=brain_undead
+NPC=brain_monster
 FAME=80
 KARMA={-4000 -4999}
 
@@ -3032,7 +3032,7 @@ SUBSECTION=OCS
 DESCRIPTION=Zombie
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME={100 2000}
 KARMA={-5000 -5999}
 
@@ -3122,7 +3122,7 @@ SUBSECTION=OCS
 DESCRIPTION=ghost
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME={100 2000}
 KARMA={-5000 -5999}
 
@@ -3205,7 +3205,7 @@ DESCRIPTION=Liche
 
 ON=@CREATE 
 COLOR=00
-NPC=brain_undead 
+NPC=brain_monster 
 FAME=2000
 KARMA={-4000 -4999}
 
@@ -3302,7 +3302,7 @@ DESCRIPTION=Drapac
 
 ON=@Create
 COLOR=colors_gray
-NPC=brain_undead
+NPC=brain_monster
 FAME={200 750}
 KARMA=-3000
 

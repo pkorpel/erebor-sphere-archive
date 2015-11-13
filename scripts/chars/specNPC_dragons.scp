@@ -1058,7 +1058,7 @@ DESCRIPTION=Phantom
 
 ON=@Create
 color=07FFF     // pruhledna
-NPC=brain_undead
+NPC=brain_monster
 FAME=30
 KARMA={-2000 -3999}
 
@@ -1405,7 +1405,7 @@ DESCRIPTION=Draci Liche
 
 ON=@Create
 Color=0481
-NPC=brain_undead
+NPC=brain_monster
 FAME=500
 KARMA={-4000 -4999}
 

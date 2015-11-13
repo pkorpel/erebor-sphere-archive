@@ -14,7 +14,7 @@ TEVENTS=e_character
 TEVENTS=e_selfreser
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 color=0774
 STR=600
 DEX=180
@@ -171,7 +171,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0481
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 STR=280
@@ -255,7 +255,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0482
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -343,7 +343,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0483
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -432,7 +432,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0484
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -525,7 +525,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0481
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 STR=280
@@ -615,7 +615,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0482
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -706,7 +706,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0483
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -798,7 +798,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0484
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 

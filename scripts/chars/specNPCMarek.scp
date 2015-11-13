@@ -1160,7 +1160,7 @@ TEVENTS=e_explosiondispell
 
 ON=@Create
 COLOR=098d
-NPC=brain_undead
+NPC=brain_monster
 FAME=240
 KARMA={-999 -3999}
 
@@ -2243,7 +2243,7 @@ DESCRIPTION=Phantom vybuchujici
 
 ON=@Create
 COLOR=07FFF
-NPC=brain_undead
+NPC=brain_monster
 FAME=30
 KARMA={-2000 -3999}
 STR=200

@@ -1897,7 +1897,7 @@ DESCRIPTION=Phantom
 
 ON=@Create
 COLOR=07FFF
-NPC=brain_undead
+NPC=brain_monster
 FAME=30
 KARMA={-2000 -3999}
 
@@ -1972,7 +1972,7 @@ DESCRIPTION=Phantom snow
 
 ON=@Create
 COLOR=07FFF
-NPC=brain_undead
+NPC=brain_monster
 FAME=30
 KARMA={-2000 -3999}
 
@@ -2045,7 +2045,7 @@ DESCRIPTION=Phantom gray
 
 ON=@Create
 COLOR=07FFF
-NPC=brain_undead
+NPC=brain_monster
 FAME=30
 KARMA={-2000 -3999}
 

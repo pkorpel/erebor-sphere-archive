@@ -113,7 +113,7 @@ DESCRIPTION=Nemrtvy carodej
 
 ON=@CREATE 
 COLOR=0992
-NPC=brain_undead 
+NPC=brain_monster 
 FAME=1000
 KARMA={-4000 -4999}
 STR=2000

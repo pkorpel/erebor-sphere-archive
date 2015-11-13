@@ -413,7 +413,7 @@ TEVENTS=e_character
 tag.resist_poison=100.0 
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=10
 KARMA=-8000
 

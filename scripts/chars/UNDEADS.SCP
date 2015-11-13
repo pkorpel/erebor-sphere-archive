@@ -24,7 +24,7 @@ DESCRIPTION=Kostlivec
 
 ON=@Create
 Color=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-999 -4999}
 
@@ -106,7 +106,7 @@ DESCRIPTION=Kostlivec Sekernik 1
 
 ON=@Create
 Color=0751
-NPC=brain_undead
+NPC=brain_monster
 FAME={20 30}
 KARMA={-999 -5999}
 
@@ -188,7 +188,7 @@ DESCRIPTION=Kostlivec Sekernik 2
 
 ON=@Create
 Color=0753
-NPC=brain_undead
+NPC=brain_monster
 FAME={30 40}
 KARMA={-999 -5999}
 
@@ -273,7 +273,7 @@ DESCRIPTION=Kostlivec Sekernik 3
 
 ON=@Create
 Color=0757
-NPC=brain_undead
+NPC=brain_monster
 FAME={40 50}
 KARMA={-999 -5999}
 
@@ -359,7 +359,7 @@ DESCRIPTION=Kostlivec Sekernik 4
 
 ON=@Create
 Color=0759
-NPC=brain_undead
+NPC=brain_monster
 FAME={50 60}
 KARMA={-999 -5999}
 
@@ -452,7 +452,7 @@ DESCRIPTION=Kostlivec Sekernik 5
 
 ON=@Create
 Color=0759
-NPC=brain_undead
+NPC=brain_monster
 FAME={50 60}
 KARMA={-999 -5999}
 
@@ -544,7 +544,7 @@ DESCRIPTION=Kostlivec Valecnik 1
 
 ON=@Create
 Color=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=40
 KARMA={-999 -5999}
 
@@ -625,7 +625,7 @@ DESCRIPTION=Kostlivec Valecnik 2
 
 ON=@Create
 Color=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=50
 KARMA={-999 -5999}
 
@@ -710,7 +710,7 @@ DESCRIPTION=Kostlivec Rytir 1
 
 ON=@Create
 Color=0997
-NPC=brain_undead
+NPC=brain_monster
 FAME=90
 KARMA={-999 -5999}
 
@@ -799,7 +799,7 @@ DESCRIPTION=Kostlivec Rytir 2
 
 ON=@Create
 Color=0999
-NPC=brain_undead
+NPC=brain_monster
 FAME=120
 KARMA={-999 -5999}
 
@@ -888,7 +888,7 @@ DESCRIPTION=Kostlivec Rytir 3
 
 ON=@Create
 Color=099B
-NPC=brain_undead
+NPC=brain_monster
 FAME=150
 KARMA={-999 -5999}
 
@@ -980,7 +980,7 @@ DESCRIPTION=Kostlivec Rytir 4
 
 ON=@Create
 Color=0433
-NPC=brain_undead
+NPC=brain_monster
 FAME=200
 KARMA={-999 -5999}
 
@@ -1076,7 +1076,7 @@ DESCRIPTION=Kostlivec Rytir 5
 
 ON=@Create
 Color=098B
-NPC=brain_undead
+NPC=brain_monster
 FAME=200
 KARMA={-999 -5999}
 
@@ -1169,7 +1169,7 @@ DESCRIPTION=Kostlivec Lucistnik 1
 
 ON=@Create
 Color=0542
-NPC=brain_undead
+NPC=brain_monster
 FAME=90
 KARMA={-999 -5999}
 
@@ -1252,7 +1252,7 @@ DESCRIPTION=Kostlivec Lucistnik 2
 
 ON=@Create
 Color=0544
-NPC=brain_undead
+NPC=brain_monster
 FAME=140
 KARMA={-999 -5999}
 
@@ -1334,7 +1334,7 @@ DESCRIPTION=Kostlivec Lucistnik 3
 
 ON=@Create
 Color=0547
-NPC=brain_undead
+NPC=brain_monster
 FAME=190
 KARMA={-999 -5999}
 
@@ -1422,7 +1422,7 @@ DESCRIPTION=Kostlivec Lucistnik 4
 
 ON=@Create
 Color=054A
-NPC=brain_undead
+NPC=brain_monster
 FAME=240
 KARMA={-999 -5999}
 
@@ -1511,7 +1511,7 @@ DESCRIPTION=Kostlivec Lucistnik 5
 
 ON=@Create
 Color=0455
-NPC=brain_undead
+NPC=brain_monster
 FAME=240
 KARMA={-999 -5999}
 
@@ -1606,7 +1606,7 @@ DESCRIPTION=Kostlivec Lucistnik 6
 
 ON=@Create
 Color=04A6
-NPC=brain_undead
+NPC=brain_monster
 FAME=240
 KARMA={-999 -5999}
 
@@ -1700,7 +1700,7 @@ DESCRIPTION=Kostlivec Lucistnik 7
 
 ON=@Create
 Color=083A
-NPC=brain_undead
+NPC=brain_monster
 FAME=240
 KARMA={-999 -5999}
 
@@ -1791,7 +1791,7 @@ DESCRIPTION=Kostlivec Carodej 1
 
 ON=@Create
 COLOR=066E
-NPC=brain_undead
+NPC=brain_monster
 FAME=90
 KARMA={-999 -5999}
 
@@ -1886,7 +1886,7 @@ DESCRIPTION=Kostlivec Carodej 2
 
 ON=@Create
 COLOR=0671
-NPC=brain_undead
+NPC=brain_monster
 FAME=140
 KARMA={-999 -5999}
 
@@ -1981,7 +1981,7 @@ DESCRIPTION=Kostlivec Carodej 3
 
 ON=@Create
 COLOR=0674
-NPC=brain_undead
+NPC=brain_monster
 FAME=190
 KARMA={-999 -5999}
 
@@ -2080,7 +2080,7 @@ DESCRIPTION=Kostlivec Carodej 4
 
 ON=@Create
 COLOR=098d
-NPC=brain_undead
+NPC=brain_monster
 FAME=240
 KARMA={-999 -5999}
 
@@ -2177,7 +2177,7 @@ SUBSECTION=Undeads
 DESCRIPTION=Spectre
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -2257,7 +2257,7 @@ SUBSECTION=Undeads
 DESCRIPTION=Zombie
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -2338,7 +2338,7 @@ DESCRIPTION=Mummy
 
 ON=@Create
 Color=0481
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -2420,7 +2420,7 @@ DESCRIPTION=Stone Mummy
 
 ON=@Create
 Color=0123
-NPC=brain_undead
+NPC=brain_monster
 FAME=80
 KARMA={-4000 -4999}
 
@@ -2503,7 +2503,7 @@ DESCRIPTION=Blood Mummy
 
 ON=@Create
 Color=098c
-NPC=brain_undead
+NPC=brain_monster
 FAME=80
 KARMA={-4000 -4999}
 
@@ -2587,7 +2587,7 @@ DESCRIPTION=Adamantinum Mummy
 
 ON=@Create
 color=0999
-NPC=brain_undead
+NPC=brain_monster
 FAME=80
 KARMA={-4000 -4999}
 
@@ -2672,7 +2672,7 @@ DESCRIPTION=Ghoul
 
 ON=@Create
 Color=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -2760,7 +2760,7 @@ DESCRIPTION=Fext
 
 ON=@Create
 COLOR=1
-NPC=brain_undead
+NPC=brain_monster
 FAME=90
 KARMA={-2000 -4000}
 
@@ -2844,7 +2844,7 @@ DESCRIPTION=Wraith
 
 ON=@Create
 COLOR=colors_gray
-NPC=brain_undead
+NPC=brain_monster
 FAME=70
 KARMA={-2000 -3999}
 
@@ -2929,7 +2929,7 @@ DESCRIPTION=Ghost
 
 ON=@Create
 COLOR=07FFF
-NPC=brain_undead
+NPC=brain_monster
 FAME=30
 KARMA={-2000 -3999}
 
@@ -3010,7 +3010,7 @@ SUBSECTION=Undeads
 DESCRIPTION=Shadow
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -3101,7 +3101,7 @@ DESCRIPTION=Shadow Lord
 
 ON=@Create
 Color=098a
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-1000 -2999}
 
@@ -3189,7 +3189,7 @@ DESCRIPTION=Shadow King
 
 ON=@Create
 COLOR=0992
-NPC=brain_undead
+NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
 
@@ -3279,7 +3279,7 @@ DESCRIPTION=Shadow King Undead
 
 ON=@CREATE 
 COLOR=0690
-NPC=brain_undead 
+NPC=brain_monster 
 FAME=2000
 KARMA={-4000 -4999}
 
@@ -3368,7 +3368,7 @@ SUBSECTION=Undeads
 DESCRIPTION=Liche
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 FAME=200
 KARMA={-4000 -4999}
 
@@ -3442,7 +3442,7 @@ DESCRIPTION=Liche Lord
 
 ON=@Create
 Color=098a
-NPC=brain_undead
+NPC=brain_monster
 FAME=500
 KARMA={-4000 -4999}
 
@@ -3531,7 +3531,7 @@ DESCRIPTION=Liche King
 
 ON=@CREATE 
 COLOR=0992
-NPC=brain_undead 
+NPC=brain_monster 
 FAME=1000
 KARMA={-4000 -4999}
 
@@ -3627,7 +3627,7 @@ DESCRIPTION=Liche King Undead
 
 ON=@CREATE 
 COLOR=0690
-NPC=brain_undead 
+NPC=brain_monster 
 FAME=2000
 KARMA={-4000 -4999}
 
@@ -3727,7 +3727,7 @@ DESCRIPTION=Undead Horse
 
 ON=@Create
 COLOR=0989
-NPC=brain_undead
+NPC=brain_monster
 FAME=500
 KARMA={-4000 -4999}
 
@@ -3816,7 +3816,7 @@ DESCRIPTION=Undead Horse
 
 ON=@Create
 COLOR=098d
-NPC=brain_undead
+NPC=brain_monster
 FAME=500
 KARMA={-4000 -4999}
 
@@ -4143,7 +4143,7 @@ SUBSECTION=Undeads
 DESCRIPTION=Skull Head
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 
 STR=280
 DEX=150
@@ -4220,7 +4220,7 @@ DESCRIPTION=Skullhead Mage
 
 ON=@Create
 COLOR=0433
-NPC=brain_undead
+NPC=brain_monster
 
 STR=200
 DEX=200

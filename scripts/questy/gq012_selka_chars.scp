@@ -50,7 +50,7 @@ TEVENTS=e_character
 TEVENTS=e_monster
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 STR={150 170}
 DEX={54 79}
 INT={30 55}

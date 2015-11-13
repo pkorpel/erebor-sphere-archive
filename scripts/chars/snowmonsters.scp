@@ -1160,7 +1160,7 @@ DESCRIPTION=Snow Skeleton
 
 ON=@Create
 Color=0481
-NPC=brain_undead
+NPC=brain_monster
 FAME=150
 KARMA={-999 -5999}
 
@@ -1246,7 +1246,7 @@ DESCRIPTION=Ice Skeleton
 
 ON=@Create
 Color=0480
-NPC=brain_undead
+NPC=brain_monster
 FAME=150
 KARMA={-999 -5999}
 

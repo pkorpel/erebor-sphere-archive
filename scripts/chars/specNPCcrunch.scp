@@ -27,7 +27,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 Color=098c
 FAME=80
 KARMA=-{4000 4999}
@@ -97,7 +97,7 @@ TEVENTS=e_character
 TEVENTS=e_npc_critic 
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 Color=0984
 FAME=80
 KARMA={-4000 -4999}

@@ -922,7 +922,7 @@ TSPEECH=spk_kvest001_Liche_Sarfeos
 
 
 ON=@Create
-NPC=brain_undead
+NPC=brain_monster
 Color=098a
 STR=300
 DEX=130
