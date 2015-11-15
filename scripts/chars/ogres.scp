@@ -505,8 +505,8 @@ NPC=brain_monster
 FAME={100 500}
 KARMA={-2000 -2999}
 
-STR={600 750}
-DEX=75
+STR={500 600}
+DEX=50
 INT=50
 
 maxhits={700 850}
@@ -539,10 +539,10 @@ tag(resist_fire,200)
 tag(resist_elect,200)
 tag(resist_cold,100)
 
-ARCHERY={85.0 95.0}
+ARCHERY={75.0 90.0}
 PARRYING={80.0 90.0}
 WRESTLING={80.0 90.0}
-TACTICS={75.0 90.0}
+TACTICS={30.0 50.0}
 
 ITEMNEWBIE=i_bow_rock
 ITEMnewbie=i_monster_create
