@@ -324,7 +324,7 @@ NAME=Ettin
 SOUND=snd_MONSTER_ETTIN1
 ICON=i_pet_ETTIN
 ANIM=078c7f
-CAN=MT_WALK|MT_USEHANDS|MT_RUN|MT_FIRE_IMMUNE
+CAN=MT_WALK|MT_USEHANDS|MT_RUN|MT_FIRE_IMMUNE|MT_EQUIP
 
 attack=30
 ARMOR=25
@@ -474,6 +474,82 @@ ITEM=i_gold
 //ITEM=tm_rocks,{0 2} 
 //ITEM=loot_ETTIN
 
+
+////////////////////////////////////////////////////
+
+[CHARDEF 012]
+DEFNAME=c_ettin_archer
+NAME=Ettin
+SOUND=snd_MONSTER_ETTIN1
+ICON=i_pet_ETTIN
+ANIM=078c7f
+CAN=MT_WALK|MT_USEHANDS|MT_RUN|MT_FIRE_IMMUNE|MT_EQUIP
+
+attack=40
+ARMOR=30
+moverate=3
+
+RESOURCES=20 i_ribs_raw
+FOODTYPE=
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+CATEGORY=Monsters
+SUBSECTION=Ettins, Ogres, Titans
+DESCRIPTION=Ettin {Archer}
+
+ON=@Create
+NPC=brain_monster
+FAME={100 500}
+KARMA={-2000 -2999}
+
+STR={600 750}
+DEX=75
+INT=50
+
+maxhits={700 850}
+maxstam={75 98}
+maxmana=0
+
+tag.experience=<eval {24.0 30.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
+
+tag(monstertype,humanoid,25)
+tag.weapflag=dam_physical|dam_blunt|dam_piercing
+
+//other resists
+tag(resist_poison,700)
+tag.resist_para=<eval {300 450}>
+tag(resist_summon,450)
+tag(resist_bleed,100)
+
+tag(resist_sharp,-50)
+tag(resist_slash,-50)        //sekery
+tag(resist_pierce,150)
+tag(resist_blunt,-150)
+
+tag(resist_fire,200)
+tag(resist_elect,200)
+tag(resist_cold,100)
+
+ARCHERY={85.0 95.0}
+PARRYING={80.0 90.0}
+WRESTLING={80.0 90.0}
+TACTICS={75.0 90.0}
+
+ITEMNEWBIE=i_bow_rock
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+ITEM=tm_rocks,{2 5} 
 ////////////////////////////////////////////////////
 
 [CHARDEF c_ettin_lord]
