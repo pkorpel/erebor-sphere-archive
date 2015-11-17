@@ -2814,7 +2814,7 @@ DUPEITEM=0131e
 id=i_rock_plain
 type=t_arock
 name=Mramor
-weight=100.0
+weight=15.0
 Category=Boulders and Rocks
 Subsection=Boulders
 Description=marble boulder
@@ -2826,7 +2826,7 @@ color=0481
 [ITEMDEF 0134f]
 DEFNAME=i_boulder
 TYPE=T_AROCK
-WEIGHT=100.0
+WEIGHT=50.0
 CATEGORY=Boulders and Rocks
 SUBSECTION=Boulders
 DESCRIPTION=Boulder
@@ -2912,7 +2912,7 @@ DUPEITEM=0134f
 [ITEMDEF 01363]
 DEFNAME=i_rock_plain
 VALUE=1
-WEIGHT=50.0
+WEIGHT=15.0
 TYPE=t_arock
 CATEGORY=Boulders and Rocks
 SUBSECTION=Rocks
