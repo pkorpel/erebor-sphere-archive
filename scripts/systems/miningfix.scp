@@ -162,7 +162,7 @@ elseif ( <ACT.TYPE> == t_water ) && (fishing <eval(finduid(<act.more1>).SKILL))
   return 1
 endif
 
-if ({1 100}==43)&&(act.type == t_rock) //pri sanci na miningu
+if ({1 120}==43)&&(act.type == t_rock) //pri sanci na miningu
   if (strcmpi("<region.name>","tutorial"))
     dozaval
   elseif ({1 100} < 10) //v tutorialu zavaly ANO, ale jenom 1/10 -> kdyztak snizim
@@ -281,7 +281,7 @@ endif
 
 on=@Pickaxed
 arg(player,<tag(PickaxingSrc)>)
-if ({1000 1300} < <player.mining>)&&(player.distancefrom(<uid>)<3)
+if ({800 1300} < <player.mining>)&&(player.distancefrom(<uid>)<3)
   player.sysMessage("<player.sex(Odstranil,Odstranila)> jsi zaval!")
   remove
 else
