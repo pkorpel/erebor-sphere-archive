@@ -21,6 +21,13 @@ cm_newsection(1,"Leather Armour",i_LEATHER_TUNIC)
  cm_newitem(i_armor_female_bustier)
  cm_newitem(i_armor_female_skirt)
  cm_newitem(i_armor_female_LEATHER)
+ 
+cm_newsection(1,"Bone Armour",i_bone_chest)
+ cm_newitem(i_bone_helmet)
+ cm_newitem(i_bone_gloves)
+ cm_newitem(i_bone_arms)
+ cm_newitem(i_bone_leggings)
+ cm_newitem(i_bone_chest)
 
 cm_newsection(1,"Bags",i_BACKPACK)
  cm_newitem(i_pouch)
