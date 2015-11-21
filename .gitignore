@@ -1,1 +1,6 @@
 *.swp
+*.log
+accounts/
+save/
+logs/
+muls/
