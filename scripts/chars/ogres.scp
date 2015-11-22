@@ -477,7 +477,7 @@ ITEM=i_gold
 
 ////////////////////////////////////////////////////
 
-[CHARDEF 012]
+[CHARDEF c_ettin_thrower]
 DEFNAME=c_ettin_thrower
 NAME=Ettin
 SOUND=snd_MONSTER_ETTIN1
