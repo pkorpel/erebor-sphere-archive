@@ -2938,6 +2938,7 @@ elseif (obody==c_ostard_zostrich_jmeno1)
 elseif (obody==c_ostard_zostrich_jmeno2)
 elseif (obody==c_ostard_zostrich_jmeno3)
 elseif (obody==c_ostard_zostrich_green)
+elseif (obody==c_mount_polar_bear)
 else
   return 1
 else

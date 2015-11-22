@@ -1227,7 +1227,23 @@ ITEM=loot_MARE
 DEFNAME=i_mt_bear 
 TYPE=T_EQ_HORSE 
 LAYER=25 
-TDATA3=01bb 
+TDATA3=c_bear_polar
+
+on=@create
+magic_horse
+
+on=@timer
+
+on=@equip
+mount_equip
+
+
+on=@unequip
+mount_unequip
+
+on=@userdclick
+remove
+lastnewchar.remove 
 
 [ITEMDEF 03f0e] 
 DEFNAME=i_mt_drake 
