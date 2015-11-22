@@ -1369,7 +1369,6 @@ ON=@Create
 tag(nores,1)
 tag(magic_horse,polar_bear)
 tag(noanimate,1)
-tag.mountitem=03f0f//i_mt_bear
 
 NPC=brain_animal
 COLOR=colors_white
