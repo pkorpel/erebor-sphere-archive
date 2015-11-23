@@ -909,7 +909,7 @@ TYPE=T_SPELLICON
 //
 on=@equip
 var(noMessage,1)
-cont.tag(combatSource).f_poisoning_Trigger(<cont>,1) // poison target, suppress chance computing
+src.tag(combatSource).f_poisoning_Trigger(<src>,1) // poison target, suppress chance computing
 var(noMessage,)
 remove
 
