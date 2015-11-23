@@ -3171,6 +3171,7 @@ consume(i_hypno_timer)
 on=@beforegeteffect
 
 on=@DrinkingPotion
+on=@beforegetswing
 on=@afterswing
 
 [Function isspellscrl]
