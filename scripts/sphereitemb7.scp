@@ -8537,10 +8537,34 @@ DESCRIPTION=Strange Yellow Dot
 //
 
 [ITEMDEF 03f0e]
-//
+//  (really used as horse equipped)
+DEFNAME=i_mt_drake 
+TYPE=T_EQ_HORSE 
+LAYER=25 
+TDATA3=01ba 
 
 [ITEMDEF 03f0f]
-//
+//   (really used as horse equipped)
+DEFNAME=i_mt_bear 
+TYPE=T_EQ_HORSE 
+LAYER=25 
+TDATA3=c_bear_polar
+
+on=@create
+magic_horse
+
+on=@timer
+
+on=@equip
+mount_equip
+
+
+on=@unequip
+mount_unequip
+
+on=@userdclick
+remove
+lastnewchar.remove 
 
 [ITEMDEF 03f1a]
 //
@@ -9499,26 +9523,5 @@ if (src.flag_dead)
 endif
 return 1
 
-[ITEMDEF 03f0f] 
-DEFNAME=i_mt_bear 
-TYPE=T_EQ_HORSE 
-LAYER=25 
-TDATA3=c_bear_polar
-
-on=@create
-magic_horse
-
-on=@timer
-
-on=@equip
-mount_equip
-
-
-on=@unequip
-mount_unequip
-
-on=@userdclick
-remove
-lastnewchar.remove 
 
 [EOF]
