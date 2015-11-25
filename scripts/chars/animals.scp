@@ -2377,7 +2377,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 tag(monstertype,animal)
 
 str={100 150}
-dex={150 160}
+dex={70 80}
 int={17 46}
 
 maxhits={200 250}
