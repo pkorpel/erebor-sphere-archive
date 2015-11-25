@@ -38,6 +38,7 @@ scripts\chars\guards.scp
 scripts\chars\t2a.scp
 scripts\chars\undeads.scp
 scripts\chars\vendors.scp
+scripts\chars\Newanim.scp
 scripts\chars\npc_evil_race.scp
 scripts\chars\special.scp
 scripts\chars\snowmonsters.scp
