@@ -2641,6 +2641,31 @@ tag.kick=1
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Dul Nurn]
+GROUP=Doly
+P=3265, 3116
+RECT=3243,3072,3292,3093
+RECT=3262,3094,3275,3117
+FLAGS=00812
+tag.kick=1
+tag.nobank=1
+events=r_doly_nohorse
+RESOURCES=r_doly
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Dul Samota]
+GROUP=Doly
+P=4950, 2344
+RECT=4919,2307,4958,2341
+FLAGS=00812
+tag.kick=1
+tag.nobank=1
+events=r_doly_nohorse
+RESOURCES=r_doly
+RAINCHANCE=00
+COLDCHANCE=00
+
 
 ///////////////////////////////// DUNGEONY ////////////////////////////////
 
