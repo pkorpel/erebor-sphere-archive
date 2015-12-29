@@ -42,7 +42,7 @@ Resist=100.0
 TACTICS={10.0 30.0}
 WRESTLING={10.0 30.0}
 TAMING={40.0 45.0}
-ANIMALLORE=30.0
+ANIMALLORE=75.0   //puvodne 30.0
 itemnewbie=i_monster_create
 
 ////////////////////////////////////////////////
@@ -92,7 +92,7 @@ Resist=100.0
 TACTICS={30.0 40.0}
 WRESTLING={30.0 40.0}
 TAMING={45.0 50.0}
-ANIMALLORE=50.0
+ANIMALLORE=80.0   //puvodne 50.0
 itemnewbie=i_monster_create
 
 ////////////////////////////////////////////////
@@ -142,7 +142,7 @@ Resist=100.0
 TACTICS={30.0 40.0}
 WRESTLING={30.0 40.0}
 TAMING={45.0 50.0}
-ANIMALLORE=50.0
+ANIMALLORE=80.0    //puvodne 50.0
 itemnewbie=i_monster_create
 
 ////////////////////////////////////////////////
@@ -191,7 +191,7 @@ Resist=100.0
 TACTICS={30.0 40.0}
 WRESTLING={30.0 40.0}
 TAMING={45.0 50.0}
-ANIMALLORE=50.0
+ANIMALLORE=80.0    //puvodne 50.0
 itemnewbie=i_monster_create
 
 ////////////////////////////////////////////////
@@ -240,7 +240,7 @@ Resist=100.0
 TACTICS={30.0 40.0}
 WRESTLING={30.0 40.0}
 TAMING={45.0 50.0}
-ANIMALLORE=50.0
+ANIMALLORE=80.0     //puvodne 50.0
 itemnewbie=i_monster_create
 
 ////////////////////////////////////////////////
@@ -290,7 +290,7 @@ Resist=100.0
 TACTICS={40.0 50.0}
 WRESTLING={40.0 50.0}
 TAMING={50.0 55.0}
-ANIMALLORE=55.0
+ANIMALLORE=80.0     //puvodne 55.0
 itemnewbie=i_monster_create
 
 on=@userdclick
@@ -348,7 +348,7 @@ Resist=100.0
 TACTICS={40.0 50.0}
 WRESTLING={40.0 50.0}
 TAMING={55.0 60.0}
-ANIMALLORE=55.0
+ANIMALLORE=80.0     //puvodne 55.0
 itemnewbie=i_monster_create
 
 on=@userdclick
@@ -506,7 +506,7 @@ Resist=100.0
 TACTICS={50.0 60.0}
 WRESTLING={50.0 60.0}
 TAMING={60.0 65.0}
-ANIMALLORE=70.0
+ANIMALLORE=80.0   //puvodne 70.0 
 itemnewbie=i_monster_create
 
 on=@userdclick
@@ -558,7 +558,7 @@ Resist=100.0
 TACTICS={50.0 60.0}
 WRESTLING={50.0 60.0}
 TAMING={65.0 70.0}
-ANIMALLORE=75.0
+ANIMALLORE=80.0   //puvodne 75.0
 itemnewbie=i_monster_create
 
 on=@userdclick
@@ -771,7 +771,7 @@ Resist=100.0
 TACTICS={50.0 60.0}
 WRESTLING={50.0 60.0}
 TAMING={60.0 65.0}
-ANIMALLORE=70.0
+ANIMALLORE=80.0     //puvodne 70.0
 itemnewbie=i_monster_create
 
 ////////////////////////////////////////////////
@@ -822,7 +822,7 @@ Resist=100.0
 TACTICS={50.0 60.0}
 WRESTLING={50.0 60.0}
 TAMING={65.0 70.0}
-ANIMALLORE=75.0
+ANIMALLORE=80.0    //puvodne 75.0
 itemnewbie=i_monster_create
 
 ////////////////////////////////////////////////
