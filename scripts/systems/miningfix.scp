@@ -266,7 +266,7 @@ lastnew.p=<src.act.p>
 lastnew.attr_movenever=1
 lastnew.move(<dir_inttochar(<var(mydirection)>)>)
 var.remove(mydirection)
-lastnew.timer=60*60*24 
+lastnew.timer=60*60*12
 lastnew.name=dulni zaval 
 lastnew.events=t_zavalTriggers
 lastnew.type=t_efectedByPickAxe
