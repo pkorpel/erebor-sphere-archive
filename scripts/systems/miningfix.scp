@@ -294,10 +294,10 @@ on=@AfterPickaxing
 [function randompotvora]
 //say <act.more1>
 if (act.type == t_rock)
-  tag(randommrcha,<rand(64)>)
-  if (tag(randommrcha) > 64)
+  tag(randommrcha,<rand(128)>)
+  if (tag(randommrcha) > 32)
     f_spawninit(1,c_rat_craft,50,80,6)
-  elseif (tag(randommrcha) > 32)
+  elseif (tag(randommrcha) > 0)
     f_spawninit(1,c_troll_craft,50,80,6)
   elseif (tag(randommrcha) > 16)
 //    f_spawninit(1,c_elem_earth,50,80,6)
@@ -317,8 +317,8 @@ if (act.type == t_rock)
 endif 
 
 if (act.type == t_tree)
-  tag(randommrcha,<rand(64)>)
-  if (tag(randommrcha) > 64)
+  tag(randommrcha,<rand(128)>)
+  if (tag(randommrcha) > 0)
     f_spawninit(1,c_wolf_craft,50,80,6)
   elseif (tag(randommrcha) > 32)
 //    f_spawninit(1,c_bear_grizzly_craft,50,80,6)
@@ -339,10 +339,10 @@ if (act.type == t_tree)
   lastnew.timer=900
 endif
 if (act.type == t_water)
-  tag(randommrcha,<rand(64)>)
-  if (tag(randommrcha) > 64)
+  tag(randommrcha,<rand(128)>)
+  if (tag(randommrcha) > 32)
     f_spawninit(1,c_frog_ropucha,50,80,6)
-  elseif (tag(randommrcha) > 32)
+  elseif (tag(randommrcha) > 0)
     f_spawninit(1,c_sea_serpent,50,80,6)
   elseif (tag(randommrcha) > 16)
 //    f_spawninit(1,c_kraken_craft,50,80,6)
