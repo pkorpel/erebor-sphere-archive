@@ -1047,7 +1047,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_bleed
+//TEVENTS=e_npc_bleed
 
 ON=@Create
 NPC=brain_animal
@@ -1056,7 +1056,7 @@ KARMA={-100 -199}
 
 tag.experience=<eval {4.0 5.0}>
 
-tag.npc_bleed=100        //10.0%
+//tag.npc_bleed=100        10.0%
 tag.resist_poison=900
 
 tag(hypnotizable,0)
@@ -1780,7 +1780,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
+//TEVENTS=e_npc_stun
 
 ON=@Create
 NPC=brain_animal
@@ -2090,7 +2090,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
+//TEVENTS=e_npc_stun
 
 ON=@Create
 NPC=brain_animal
@@ -2151,7 +2151,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
+//TEVENTS=e_npc_stun
 
 ON=@Create
 NPC=brain_animal
@@ -2225,7 +2225,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
+//TEVENTS=e_npc_stun
 
 ON=@Create
 NPC=brain_animal
@@ -2300,7 +2300,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
+//TEVENTS=e_npc_stun
 
 ON=@Create
 NPC=brain_animal
@@ -2749,8 +2749,8 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
-TEVENTS=e_npc_bleed
+//TEVENTS=e_npc_stun
+//TEVENTS=e_npc_bleed
 
 ON=@Create
 NPC=brain_monster
@@ -2767,7 +2767,7 @@ maxmana=0
 
 tag.experience=<eval {21.0 23.0}>
 
-tag.npc_bleed=200 //20.0%
+//tag.npc_bleed=200 //20.0%
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -2826,7 +2826,7 @@ CATEGORY=Animals
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_stun
-TEVENTS=e_npc_bleed
+//TEVENTS=e_npc_bleed
 
 ON=@Create
 NPC=brain_monster

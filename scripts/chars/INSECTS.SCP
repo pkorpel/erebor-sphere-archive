@@ -100,7 +100,7 @@ RESOURCES=4 i_ribs_raw
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
+//TEVENTS=e_npc_stun
 
 CATEGORY=Monsters
 SUBSECTION=Bugs

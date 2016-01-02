@@ -2573,7 +2573,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
+//TEVENTS=e_npc_stun
 
 ON=@Create
 NPC=brain_monster
@@ -3180,7 +3180,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
+//TEVENTS=e_npc_stun
 
 ON=@Create
 NPC=brain_monster
