@@ -294,7 +294,7 @@ on=@AfterPickaxing
 [function randompotvora]
 //say <act.more1>
 if (act.type == t_rock)
-  tag(randommrcha,<rand(128)>)
+  tag(randommrcha,<rand(64)>)
   if (tag(randommrcha) > 64)
     f_spawninit(1,c_rat_craft,50,80,6)
   elseif (tag(randommrcha) > 32)
@@ -317,7 +317,7 @@ if (act.type == t_rock)
 endif 
 
 if (act.type == t_tree)
-  tag(randommrcha,<rand(128)>)
+  tag(randommrcha,<rand(64)>)
   if (tag(randommrcha) > 64)
     f_spawninit(1,c_wolf_craft,50,80,6)
   elseif (tag(randommrcha) > 32)
@@ -339,7 +339,7 @@ if (act.type == t_tree)
   lastnew.timer=900
 endif
 if (act.type == t_water)
-  tag(randommrcha,<rand(128)>)
+  tag(randommrcha,<rand(64)>)
   if (tag(randommrcha) > 64)
     f_spawninit(1,c_frog_ropucha,50,80,6)
   elseif (tag(randommrcha) > 32)
