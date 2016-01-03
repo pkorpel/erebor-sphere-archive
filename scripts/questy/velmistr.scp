@@ -478,7 +478,7 @@ if (<arg(q000_velmistr)> == 2) || (<arg(q000_velmistr)> == 4) // has seen Elvira
         argo.questDialog_addResponse(0,0,1,"q000_receiveInstructions",1)
 
   argo.dialog_page("q000_receiveInstructions")
-    argo.setText(argo.newTextLine,"Znam jeji chorobu. Mnoho lidi, ktere jsme na sve ceste sem potkali trpelo podobnymi stavy. Nekteri z nich vypraveli o byline, korenu Valar Este, jako jedinem moznem leku. V dobach, kdy Este spolu s manzelem Irmem sidlili na ostrove Lorellinskeho jezera, jim byl posety cely Lorien. Jeho kvety vsak uvadly spolu s odchodem Valar. Posledni vyhonky teto vzacne byliny zmizely ze stredozeme pred stovkami let. Podle povesti nekolik malo semen zasadila Este na ostrovech, kolem kterych proplouvali na sve ceste do Valinoru. Dnes jsou tyto ostrovy obyvany Titany. Jedina nadeje me sestry je v techto nekolika malo sazenicich! Prosim, pomoz ji! Mela bych te ale varovat. Titani jsou prilis silni i na tebe. Premluv k ceste jine, silnejsi bojovniky, ale vydej se tam s nimi a nikomu nesdeluj pravy smysl tve cesty. Ta bylina leci mnohe nemoci a clovek, kteremu bys sveril jeji doruceni by se s ni nejspis nevratil.")
+    argo.setText(argo.newTextLine,"Znam jeji chorobu. Mnoho lidi, ktere jsme na sve ceste sem potkali trpelo podobnymi stavy. Nekteri z nich vypraveli o byline, korenu Valar Este, jako jedinem moznem leku. V dobach, kdy Este spolu s manzelem Irmem sidlili na ostrove Lorellinskeho jezera, jim byl posety cely Lorien. Jeho kvety vsak uvadly spolu s odchodem Valar. Posledni vyhonky teto vzacne byliny zmizely ze stredozeme pred stovkami let. Podle povesti nekolik malo semen zasadila Este v temne jeskyni, ktera se nachazi na vyhodni casti pohori Ered Mithrin, aby ji nikdo snadno neziskal. Dnes je tato jeskyne obyvana nejruznejsimi nestvurami, ktere moc teto kvetiny prilakala. Jedina nadeje me sestry je v techto nekolika malo sazenicich! Prosim, pomoz ji! Mela bych te ale varovat. Nestvur v jeskyni je prilis i na tebe. Premluv k ceste jine, silnejsi bojovniky, ale vydej se tam s nimi a nikomu nesdeluj pravy smysl tve cesty. Ta bylina leci mnohe nemoci a clovek, kteremu bys sveril jeji doruceni by se s ni nejspis nevratil.")
     argo.questDialog_HTMLGUMP
       argo.setText(argo.newTextLine,"Dobra! Vydam se na Ostrovy narku.")
       argo.questDialog_addResponse(0,1,1,"q000_wrongChoice")
@@ -490,11 +490,11 @@ if (<arg(q000_velmistr)> == 2) || (<arg(q000_velmistr)> == 4) // has seen Elvira
       argo.questDialog_addResponse(0,1,0,"q000_wrongChoice")
       argo.setText(argo.newTextLine,"Dobra! Vydam se do Haradske pouste.")
       argo.questDialog_addResponse(0,1,0,"q000_wrongChoice")
-      argo.setText(argo.newTextLine,"Dobra! Vydam se do Obrich lesu.")
+      argo.setText(argo.newTextLine,"Dobra! Vydam se na Ostrov Titanu.")
       argo.questDialog_addResponse(0,1,0,"q000_wrongChoice")
       argo.setText(argo.newTextLine,"Dobra! Vydam se k rhunskemu jezeru.")
       argo.questDialog_addResponse(0,1,0,"q000_wrongChoice")
-      argo.setText(argo.newTextLine,"Dobra! Vydam se na ostrovy Titanu.")
+      argo.setText(argo.newTextLine,"Dobra! Vydam se k pohori Ered Mithrin.")
       argo.questDialog_addResponse(0,0,1,"q000_receiveInstructions_2")
       argo.setText(argo.newTextLine,"Dobra! Vydam se do Lorienu.")
       argo.questDialog_addResponse(0,1,0,"q000_wrongChoice")
@@ -506,7 +506,7 @@ if (<arg(q000_velmistr)> == 2) || (<arg(q000_velmistr)> == 4) // has seen Elvira
   argo.dialog_page("q000_receiveInstructions_2")
     argo.setText(argo.newTextLine,"Vyborne! <def_questDialog_colorTextEmote>*Elmira na tebe hledi s nadeji*")
     argo.questDialog_HTMLGUMP
-      argo.setText(argo.newTextLine,"*Ziskat popis rostliny a vydat se na ostrovy Titanu*")
+      argo.setText(argo.newTextLine,"*Ziskat popis rostliny a vydat se k pohori Ered Mithrin*")
       argo.questDialog_addResponse(0,1,1,"q000_goForHerb",1)
 endif
 
@@ -578,7 +578,7 @@ endif
 if (<arg(q000_velmistr)> == 2) || (<arg(q000_velmistr)> == 4)
   if (<argn> == argo.dialog_linkButton("q000_goForHerb"))
     say("Pospes si!")
-    src.qtag(q000_velmistr,5,38) // go find the herb onto the Islands of Titans
+    src.qtag(q000_velmistr,5,38) // go find the herb into darkness cave in Ered Mithrin mountains
     src.addExp(50)
     return
   elseif (<argn> == argo.dialog_linkButton("q000_refuseHelp"))
