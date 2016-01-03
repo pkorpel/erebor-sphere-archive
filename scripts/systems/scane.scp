@@ -680,10 +680,10 @@ monster_kill_3_id c_bug
 miniq_all 8
 
 //// ID - id predmetu
-//// CONST - Konstanta mnoûstvi (Ëim )
+//// CONST - Konstanta mno≈æstvi (ƒçim )
 
 
-/// MNOéSTEVNÕ PÿEDMÃTY
+/// MNO≈ΩSTEVN√ç P≈òEDMƒöTY
 miniq_1_id i_gold
 miniq_1_const {500 800}
 
@@ -721,7 +721,6 @@ RESOURCES=50 i_hides_cut, 5 i_wire_iron, 15 i_gem_citrine, 50 i_thread
 SKILLMAKE=TINKERING 50.0, BOWCRAFT 40.0, TAILORING 50.0
 
 ON=@Create
-scyllaglob.tag(toulec_create,<scyllaglob.tag(toulec_create)>+1)
 tag(max_arrows,5000)
 
 ON=@UserClick
@@ -830,39 +829,40 @@ on=@userdclick
 target("Zamer sipy ktere chces pridat do toulce.")
 
 ON=@TARGON_ITEM
-if(<src.targ.typedef.id>==01BFB)||(<src.targ.typedef.id>==0F3F)||(<src.targ.typedef.id>==038D8)
-  if(<src.targ.topobj>==<src.topobj>)
+arg(item,<src.targ>)
+if(<item.typedef.id>==01BFB)||(<item.typedef.id>==0F3F)||(<item.typedef.id>==038D8)
+  if(<item.topobj>==<src.topobj>)
     if(<link.tag(arrows)>)
-      if(<link.tag(type_arrows)>==<src.targ.baseid>)
+      if(<link.tag(type_arrows)>==<item.baseid>)
         arg(zbyva,<link.tag(max_arrows)>-<link.tag(arrows)>)
-        if(<src.targ.amount> <= <zbyva>)
-          link.tag(arrows,<link.tag(arrows)>+<src.targ.amount>)
-          src.targ.remove
+        if(<item.amount> <= <zbyva>)
+          link.tag(arrows,<link.tag(arrows)>+<item.amount>)
+          item.remove
           dclick
         else
-          src.targ.amount = <src.targ.amount>-<zbyva>
+          item.amount = <item.amount>-<zbyva>
           link.tag(arrows,<link.tag(max_arrows)>)
         endif
       else
         src.sysmessage("Uz tam mas jiny druch sipu.")
       endif
     else
-      if(<src.targ.tag(jed_sila)> > 0)
-        link.tag(arrow_jed_sila,<src.targ.tag(jed_sila)>)
-        link.tag(arrow_jed_name,<src.targ.tag(jed_name)>)
-        link.tag(arrow_jed_rychlost,<src.targ.tag(jed_rychlost)>)
-        link.tag(arrow_jed_typ,<src.targ.tag(jed_typ)>)
+      if(0<item.tag(jed_sila)> > 0)
+        link.tag(arrow_jed_sila,<item.tag(jed_sila)>)
+        link.tag(arrow_jed_name,<item.tag(jed_name)>)
+        link.tag(arrow_jed_rychlost,<item.tag(jed_rychlost)>)
+        link.tag(arrow_jed_typ,<item.tag(jed_typ)>)
       endif 
-      link.tag(type_arrows,<src.targ.baseid>)
-      link.tag(name_arrows,<src.targ.name>)
-      link.color = <src.targ.color>
-      if(<src.targ.amount> <= <link.tag(max_arrows)>)
-        link.tag(arrows,<src.targ.amount>)
-        src.targ.remove
+      link.tag(type_arrows,<item.baseid>)
+      link.tag(name_arrows,<item.name>)
+      link.color = <item.color>
+      if(<item.amount> <= <link.tag(max_arrows)>)
+        link.tag(arrows,<item.amount>)
+        item.remove
         dclick
       else
         link.tag(arrows,<link.tag(max_arrows)>)
-        src.targ.amount = <src.targ.amount>-<link.tag(max_arrows)>
+        item.amount = <item.amount>-<link.tag(max_arrows)>
       endif    
     endif
   else

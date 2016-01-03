@@ -167,7 +167,6 @@ if(<serv.time> > <tag(time)>)
   Say Bez a rychle rozsir tuto informaci!
   tag(time,<serv.time>+600)
 endif
-scyllaglob.tag(readingkester,<scyllaglob.tag(readingkester)>+1)
 
 /////////////////////////////////////////////
 ///////// SPAWN BUGS JESKYNE     ///////////

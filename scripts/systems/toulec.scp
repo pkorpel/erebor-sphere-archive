@@ -94,76 +94,78 @@ color=color_elven
 [typedef t_toulec]
 on=@userdclick
 if (topobj.uid!=src.UID)
-src.sysmessage Toulec musis mit u sebe.
-return 1
-elseif (<tag.ammotype>==<src.findlayer(2).typedef.tdata3>)//&&(morex)
- toulec_vysypat(<src.tag.toulec>)
-elseif (morex>toulec_cap[<typedef.tdata1>])
- toulec_vysypat(<morex>)
+  src.sysmessage Toulec musis mit u sebe.
+  return 1
+elseif ( (src.findlayer(2)) && (<tag.ammotype>==<src.findlayer(2).typedef.tdata3>) ) //&&(morex)
+  toulec_vysypat(<src.tag.toulec>)
+elseif (<morex> > <toulec_cap[<typedef.tdata1>]>)
+  toulec_vysypat(<morex>)
 else
- target Ktere sipy chces dat do toulce?
+  target Ktere sipy chces dat do toulce?
 endif
 return 1
 
 ON=@TARGON_ITEM
 if (src.targ.isweapon)
- toulec_vysypat(<morex>)
- return 1
-elseif (src.targ.type!=t_weapon_arrow)&&(src.targ.type!=t_weapon_bolt)&&(src.targ.type!=t_weapon_bolt_jagged)
-src.sysmessage Tohle se do toulce nevejde.
-dclick
-return 1
-elseif (src.targ.topobj.uid!=src.UID)
-src.sysmessage Munici musis mit u sebe.
-return 1
-elseif (morex)
- if (<src.targ.baseid>!=<tag.ammobaseid>)
-  src.sysmessage Nemuzes michat ruzne typy sipu!
+  toulec_vysypat(<morex>)
   return 1
- else
-  morex=<eval <morex>+<src.targ.amount>>
-  src.targ.remove
- endif
+elseif (src.targ.type!=t_weapon_arrow)&&(src.targ.type!=t_weapon_bolt)&&(src.targ.type!=t_weapon_bolt_jagged)
+  src.sysmessage Tohle se do toulce nevejde.
+  dclick
+  return 1
+elseif (src.targ.topobj.uid!=src.UID)
+  src.sysmessage Munici musis mit u sebe.
+  return 1
+elseif (morex)
+  if (<src.targ.baseid>!=<tag.ammobaseid>)
+    src.sysmessage Nemuzes michat ruzne typy sipu!
+    return 1
+  else
+    morex=<eval <morex>+<src.targ.amount>>
+    src.targ.remove
+  endif
 else
- tag.ammotype=<src.targ.type>
- tag.ammobaseID=<src.targ.baseid>
- tag.ammoname="<src.targ.name>"
- morex=<eval <src.targ.amount>>
- src.targ.remove
+  tag.ammotype=<src.targ.type>
+  tag.ammobaseID=<src.targ.baseid>
+  tag.ammoname="<src.targ.name>"
+  morex=<eval <src.targ.amount>>
+  src.targ.remove
 endif
 
-if (morex>toulec_cap[<typedef.tdata1>])
- src.sysmessage Toulec je jiz plny.
- src.newitem <tag.ammobaseid>
- src.act.amount=<eval <morex>-<toulec_cap[<typedef.tdata1>]>>
- morex=<toulec_cap[<typedef.tdata1>]>
- src.act.bounce
+if (<morex> > <toulec_cap[<typedef.tdata1>]>)
+  src.sysmessage Toulec je jiz plny.
+  src.newitem <tag.ammobaseid>
+  src.act.amount=<eval <morex>-<toulec_cap[<typedef.tdata1>]>>
+  morex=<toulec_cap[<typedef.tdata1>]>
+  src.act.bounce
 endif
 name="<tag.ammoname> toulec (<morex>)"
 return 1
 
 [function toulec_vysypat]
 if (morex==0)
-src.sysmessage Toulec je prazdny.
-name=
-return 1
+  src.sysmessage Toulec je prazdny.
+  name=
+  return
+elseif (0<args> == 0)
+  src.sysmessage("Je treba urcit, kolik sipu chces z toulce vyndat")
+  return
 elseif (<args>>=<morex>)
- src.sysmessage Toulec vyprazdnen.
- src.newitem <tag.ammobaseid>
- src.act.amount=<morex>
- src.act.bounce
- morex=0
- name=
+  src.sysmessage Toulec vyprazdnen.
+  src.newitem <tag.ammobaseid>
+  src.act.amount=<morex>
+  src.act.bounce
+  morex=0
+  name=
 else
- src.newitem <tag.ammobaseid>
- src.act.amount=<args>
- src.act.bounce
- src.sysmessage Vyndal jsi <args> <tag.ammoname>. 
- morex=<eval <morex>-<args>>
- name=<tag.ammoname> toulec (<morex>)
+  src.newitem <tag.ammobaseid>
+  src.act.amount=<args>
+  src.act.bounce
+  src.sysmessage Vyndal jsi <args> <tag.ammoname>. 
+  morex=<eval <morex>-<args>>
+  name=<tag.ammoname> toulec (<morex>)
 endif
 
 [function toulec]
 tag.toulec=<args>
 findtype(t_toulec).toulec_vysypat(<tag.toulec>)
-endif
