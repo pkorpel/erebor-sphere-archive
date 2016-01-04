@@ -723,19 +723,19 @@ DESCRIPTION=Animal Tamer
 //price=30000
 
 sell=i_pet_llama
-price={17317 18086}
+price={13017 14086}
 sell=i_pet_llama
-price={17317 18086}
+price={13017 14086}
 sell=i_pet_llama
-price={17317 18086}
+price={13017 14086}
 sell=i_pet_llama
-price={17317 18086}
+price={13017 14086}
 sell=i_pet_llama
-price={17317 18086}
+price={13017 14086}
 sell=i_pet_llama
-price={17317 18086}
+price={13017 14086}
 sell=i_pet_llama
-price={17317 18086}
+price={13017 14086}
 
 sell=i_saddle,{1 3}
 price={1200 1500}
