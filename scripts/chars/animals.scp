@@ -1857,7 +1857,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
 
 str={27 37}
-dex={132 143}
+dex={55 65}
 int={30 36}
 
 maxhits={75 100}
@@ -2171,7 +2171,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 tag(monstertype,animal)
 
 str={100 150}
-dex={100 125}
+dex={80 100}
 int={10 15}
 
 maxhits={200 250}
@@ -2245,7 +2245,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 tag(monstertype,animal)
 
 str={100 150}
-dex={100 125}
+dex={80 100}
 int={10 15}
 
 maxhits={200 250}
@@ -2317,7 +2317,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 tag(monstertype,animal)
 
 str={50 100}
-dex={70 100}
+dex={45 50}
 int={27 56}
 
 maxhits={150 170}
@@ -2377,7 +2377,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 tag(monstertype,animal)
 
 str={100 150}
-dex={70 80}
+dex={45 50}
 int={17 46}
 
 maxhits={200 250}
@@ -2622,7 +2622,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 tag(monstertype,animal)
 
 str={100 150}
-dex={126 145}
+dex={70 80}
 int={23 47}
 
 maxhits={200 250}
@@ -2758,7 +2758,7 @@ FAME=10
 KARMA={-1000 -1500}
 
 str=120
-dex=150
+dex=120
 int=50
 
 maxhits=450
@@ -2835,7 +2835,7 @@ KARMA={-1000 -1500}
 COLOR=colors_white
 
 str=150
-dex=150
+dex=120
 int=50
 
 maxhits={450 500}
