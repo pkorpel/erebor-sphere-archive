@@ -1553,6 +1553,12 @@ endif
 if (<tag(awaitsexpforhealing)>) //klerik
   tag.remove(awaitsexpforhealing)
 endif
+
+//zrusit krvaceni
+if (findid(i_krvaceni))
+  findid(i_krvaceni).remove
+endif
+
 //opatrne odstranit aby to nebuglo skill...
 if (<findid(i_stealthbonus)>)
   findid(i_stealthbonus).remove
