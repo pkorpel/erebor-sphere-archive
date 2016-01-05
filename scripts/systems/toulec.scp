@@ -1,3 +1,177 @@
+/////////////////////////////////////////////
+////////////////// TOULEC ///////////////////
+/////////////////////////////////////////////
+
+[itemdef i_toulec]
+ID=i_toolkit_empty
+NAME=Toulec
+TYPE=0
+WEIGHT=5
+RESOURCES=50 i_hides_cut, 5 i_wire_iron, 15 i_gem_citrine, 50 i_thread
+SKILLMAKE=TINKERING 50.0, BOWCRAFT 40.0, TAILORING 50.0
+
+ON=@Create
+tag(max_arrows,5000)
+
+ON=@UserClick
+if(<tag(arrows)>)
+  message("<tag(arrows)> <tag(name_arrows)>")
+else
+  message("Toulec je prazdny.")
+endif
+return 1
+
+ON=@UserDclick
+if(<src>==<topobj>)
+  dialog(d_toulec_arrows)
+endif
+return 1
+
+ON=@TargOn_Item
+arg(item,<src.targ>)
+if(<item.typedef.id>==01BFB)||(<item.typedef.id>==0F3F)||(<item.typedef.id>==038D8)
+  if(<item.topobj>==<src.topobj>)
+    if(<tag(arrows)>)
+      if(<tag(type_arrows)>==<item.baseid>)
+        arg(zbyva,<tag(max_arrows)>-<tag(arrows)>)
+        if(<item.amount> <= <zbyva>)
+          tag(arrows,<tag(arrows)>+<item.amount>)
+          item.remove
+        else
+          item.amount = <item.amount>-<zbyva>
+          tag(arrows,<tag(max_arrows)>)
+        endif
+      else
+        src.sysmessage("Uz tam mas jiny druch sipu.")
+      endif
+    else
+      if(0<item.tag(jed_sila)> > 0)
+        tag(arrow_jed_sila,<item.tag(jed_sila)>)
+        tag(arrow_jed_name,<item.tag(jed_name)>)
+        tag(arrow_jed_rychlost,<item.tag(jed_rychlost)>)
+        tag(arrow_jed_typ,<item.tag(jed_typ)>)
+      endif 
+      tag(type_arrows,<item.baseid>)
+      tag(name_arrows,<item.name>)
+      color = <item.color>
+      if(<item.amount> <= <tag(max_arrows)>)
+        tag(arrows,<item.amount>)
+        item.remove
+      else
+        tag(arrows,<tag(max_arrows)>)
+        item.amount = <item.amount>-<tag(max_arrows)>
+      endif    
+    endif
+  else
+    src.sysmessage("Sipy musis mit u sebe.")
+  endif
+else
+  src.sysmessage("Do toulce muzes dat jen sipy.")
+endif
+target
+return 1
+
+ON=@TargOn_Char
+target
+return 1
+
+ON=@TargOn_Ground
+src.sysmessage("no ground")
+target
+return 1
+
+[dialog d_toulec_arrows]
+argo.SetLocation=180,230
+argo.tag(sirka,258)
+argo.tag(vyska,110)
+
+argo.dialog_prvni
+argo.dialog_pozadi(<argo.tag(nexty)>,1,190) 
+argo.dialog_pozadi(<argo.tag(nexty)>,1,70) 
+argo.dialog_pozadi(<argo.tag(nexty)>,1,70,65,50) 
+//argo.dialog_pozadi(<argo.tag(nexty)>,1,80) 
+argo.dialog_pozadi(<argo.tag(nexty)>,1,70) 
+
+argo.dialog_zpruhledni
+
+
+argo.dialog_textpos(0,0)
+argo.textA(<lastxpos>+75,<lastypos>,d_def_headcolor,"Toulec")
+argo.gumppic(<lastxpos>+155,-103,0C5A6)	//toulec
+
+argo.textA(<argo.dialog_textpos(1,0)>,d_def_readcolor,"Druh sipu")
+if (strlen(<tag(name_arrows)>))
+  argo.textA(<argo.dialog_textpos(1,1)>,d_def_valuecolor,<tag(name_arrows)>)
+else
+  argo.textA(<argo.dialog_textpos(1,1)>,d_def_NAcolor," prazdny")>)
+endif
+
+argo.textA(<argo.dialog_textpos(2,0)>,d_def_readcolor,"Pocet")
+argo.textA(<argo.dialog_textpos(2,1)>,d_def_valuecolor,<eval(<tag(arrows)>)>)
+
+argo.textA(<argo.dialog_textpos(2,2)>,d_def_readcolor,"Pridat")
+argo.button(<argo.dialog_buttonpos(2,3)>,d_def_button_select1,d_def_button_select2,1,0,1)
+
+argo.textA(<argo.dialog_textpos(3,0)>,d_def_readcolor,"Vyndat")
+argo.setText(8,"200")
+argo.textEntryA(<argo.dialog_textpos(3,1)>,50,d_def_radek_vyska,d_def_writecolor,5,8)
+argo.button(<argo.dialog_buttonpos(3,3)>,0fa5,0fa7,1,0,2)
+
+
+[dialog d_toulec_arrows BUTTON]
+on=0
+//Exit (rclick)
+
+on=@anybutton
+if (<argn>==1)
+  target("Zamer sipy ktere chces pridat do toulce.")
+endif
+if (<argn>==2)
+  if(!<tag(arrows)>)
+    src.redmessage("V toulci nejsou zadne sipy.")
+    return 1
+  endif
+  arg(arrowsToPull,<fixNumberPositive(<argTxt(5)>)>)
+  if(<arg(arrowsToPull)> > 0)
+    arrows_out(<arg(arrowsToPull)>)
+  else
+    src.redmessage("Hodnota musi byt cislo vetsi nez 0.")
+    return 1
+  endif  
+endif
+
+[function arrows_out]
+arg(out,<args>)
+if(0<tag(arrows)>)
+  src.newitem(<tag(type_arrows)>)
+  if(0<tag(arrow_jed_sila)> > 0)
+    lastnew.color = <color>
+    lastnew.tag(jed_name,<tag(arrow_jed_name)>)
+    lastnew.tag(jed_sila,<tag(arrow_jed_sila)>)
+    lastnew.tag(jed_typ,<tag(arrow_jed_typ)>)
+    lastnew.tag(jed_rychlost,<tag(arrow_jed_rychlost)>)
+  endif
+  if(0<tag(arrows)> > <out>)
+    lastnew.amount(<out>)
+    lastnew.bounce
+    tag(arrows,<tag(arrows)>-<out>)
+    src.sysmessage("<src.sex(Vyndal,Vyndala)> jsi <out> sipu.") 
+  else
+    arg(out,<tag(arrows)>)
+    lastnew.amount(<out>)
+    lastnew.bounce
+    tag.remove(type_arrows)
+    tag.remove(arrows)
+    tag.remove(name_arrows)
+    src.sysmessage("<src.sex(Vyndal,Vyndala)> jsi <out> sipu. V toulci uz dalsi sipy nejsou.") 
+    color=0
+  endif 
+endif
+
+
+/////////////////////////////
+// OLD IMPLEMENTATION  //
+/////////////////////////////
 [defnames arrow_toulec]
 toulec_cap[1]	100
 toulec_cap[2]	225

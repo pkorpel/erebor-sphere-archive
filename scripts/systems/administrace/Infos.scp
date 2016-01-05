@@ -93,9 +93,11 @@ d_def_button_vyska    22
 d_def_baseMenu_sirka  26
 d_def_baseMenu_vyska  73
 
-d_def_writecolor	2300
-d_def_readcolor		2303
-d_def_NAcolor		2305
+d_def_writecolor  2300
+d_def_readcolor   2303
+d_def_valuecolor  1000
+d_def_NAcolor     2305
+d_def_headcolor   93
 
 d_def_refer_sirka	800
 d_def_refer_vyska	480
