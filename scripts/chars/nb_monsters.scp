@@ -34,7 +34,7 @@ FAME=20
 KARMA={-999 -4999}
 
 STR=800
-DEX=80
+DEX=50
 INT=35
 
 maxhits={130 140}
@@ -105,7 +105,7 @@ FAME=20
 KARMA={-999 -4999}
 
 STR=400
-DEX=80
+DEX=50
 INT=0
 
 maxhits={50 60}

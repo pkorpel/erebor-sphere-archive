@@ -6700,7 +6700,7 @@ tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 180]     //Hurka
-P=1569,1202
+P=1568,1194
 RECT=1557,1189,1568,1199
 tag.housenumber=180
 FLAGS=01192
@@ -7770,7 +7770,7 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 274]     //Dol Amroth
 P=2196,3244
-RECT=2193,3235,2198,3243
+RECT=2193,3235,2198,3244
 tag.housenumber=274
 FLAGS=01192
 RAINCHANCE=00  
