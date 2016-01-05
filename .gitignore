@@ -4,3 +4,5 @@ accounts/
 save/
 logs/
 muls/
+webout/
+scripts/web/*.st
