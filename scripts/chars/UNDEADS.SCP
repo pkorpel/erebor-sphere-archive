@@ -3905,7 +3905,7 @@ DESCRIPTION=Death Elemental
 
 ON=@Create
 COLOR=0989
-brain=BRAIN_undead
+brain=brain_monster
 FAME=400
 KARMA={-4000 -4999}
 
