@@ -140,9 +140,9 @@ ELSE (<src.tag.gq012_selka>==0)
 ENDIF
 
 on=2  
-if <src.restest i_gq012_selka_collector> && (<src.findid(i_gq012_selka_collector).tag.contentscount>==10) 
+if <src.restest i_gq012_selka_collector> && (<src.findid(i_gq012_selka_collector).tag.contentscount> >=10) 
  SAY Dekuji ti mnohokrat, buh ti to oplat !
- src.addexp(300)
+ src.addexp(50)
  SRC.CONSUME i_gq012_selka_collector
  src.tag.gq012_selka=2
  return 1

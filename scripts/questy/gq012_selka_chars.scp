@@ -59,11 +59,9 @@ PARRYING={40.0 80.0}
 MAGICRESISTANCE={30.0 66.0}
 TACTICS={55.0 84.0}
 WRESTLING={55.0 74.0}
-tag.experience=<eval {10.0 12.0}>
+tag.experience=<eval {1.0 2.0}>
 FAME=300
 KARMA={-3800 -4500}
-
-
 
 ON=@NPCRestock
 ITEM=loot_zombie
