@@ -625,7 +625,7 @@ on=@create
 	swordsmanship={8.0 19.0}
 	wrestling={8.0 19.0}
 	macefighting={8.0 19.0}
-	magicresistance={8.0 19.0}
+	RESIST={8.0 19.0}
 	tactics={8.0 19.0}
 
 

@@ -521,7 +521,7 @@ on=@create
 
      SpiritSpeak=35.0
      parrying={70.0 80.0}
-     magicresistance={60.0 80.0}
+     RESIST={60.0 80.0}
      tactics={65.0 75.0}
      wrestling={75.0 80.0}
 
