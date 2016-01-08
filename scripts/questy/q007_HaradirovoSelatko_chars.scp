@@ -387,6 +387,22 @@ WRESTLING=120.0
 fencing=100.0
 tactics=100.0
 
+ITEMnewbie=i_monster_create
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+itemnewbie=i_boots_thigh
+Color=00
+itemnewbie=i_pants_short
+Color=00
+itemnewbie=i_bracelet_gold
+Color=00
+itemnewbie=i_necklace_gold
+Color=00
+itemnewbie=i_skull_cap
+Color=098c
+itemnewbie=i_shirt_plain
+Color=098a
+
 
 /////////////////////////////////////////////////
 
