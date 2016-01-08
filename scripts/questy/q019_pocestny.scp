@@ -5,7 +5,7 @@
 //                              namet: -LuTze-                                      //
 //                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////
-// UID spawnu na serveru: #0400021C4
+// UID spawnu na serveru: #040008794
 
 [speech spk_q019_pocestny]
 ON = *hi*
