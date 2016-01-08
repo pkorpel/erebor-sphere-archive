@@ -96,7 +96,7 @@ elseif ((<arg(q041_paserak)> >= 2)&&(<arg(q041_paserak)> <= 9))
             argo.questDialog_addResponse(0,1,1,"q041_killed_elf")
           endif
       elseif (<arg(q041_paserak)> == 8)
-        argo.setText(argo.newTextLine,"Budu ti muset zajistit nove doklady a celou novou identitu a to vsehcno neco stoji. Jak tak na tebe koukam, tak vymena xichtu by taky nebyla spatnej napad! Prines mi 100k zlatych, 10 ingotu zeleza, zeleny pytlik s magickym predmetem a jedno pecene prase.")
+        argo.setText(argo.newTextLine,"Budu ti muset zajistit nove doklady a celou novou identitu a to vsehcno neco stoji. Jak tak na tebe koukam, tak vymena xichtu by taky nebyla spatnej napad! Prines mi 50k zlatych, 10 ingotu zeleza, pytlik s magickym predmetem a jedno pecene prase.")
         argo.questDialog_HTMLGUMP
           if (<src.f_q041_prestup_has_items>)
             argo.setText(argo.newTextLine,"Zde to mas, je to hodne, ale za prechod mi to stoji!")
@@ -233,7 +233,7 @@ elseif (<argn> == argo.dialog_linkButton("Goodbye"))
 endif
 
 [function f_q041_prestup_has_items]
-if ((<src.rescount i_gold> >= 100000) && (<src.rescount i_ingot_iron> >= 10) && (<src.rescount i_mi_bag> >= 1) && (<src.rescount i_pig_roast> >= 1))
+if ((<src.rescount i_gold> >= 50000) && (<src.rescount i_ingot_iron> >= 10) && (<src.rescount i_mi_bag> >= 1) && (<src.rescount i_pig_roast> >= 1))
 	return 1
 else
 	return 0
@@ -251,7 +251,7 @@ src.consume(40,i_fish_cut_cooked)
 src.consume(5,i_potion_refresh)
 
 [function f_q041_prestup_consume_items]
-src.consume(100000,i_gold)
+src.consume(50000,i_gold)
 src.consume(10,i_ingot_iron)
 src.consume(1,i_mi_bag)
 src.consume(1,i_pig_roast)

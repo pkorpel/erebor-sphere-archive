@@ -11,7 +11,7 @@ on=@create
 src.sysMessage(Dej si .x info a v promenne more1l nastav kolik levelu to srazi -kladne cislo)
 src.sysMessage(Default - 10 levelu dolu)
 src.redmessage(Branu odstranuj prikazem .x odstranit_gatu)
-src.newitemsafe(i_tvurce_vortexu)
+//src.newitemsafe(i_tvurce_vortexu)
 lastnew.tag(tagate,<uid>)
 lastnew.equip
 more=10 //kolik levlu
@@ -32,7 +32,11 @@ if (src.isplayer)
     src.redMessage("Dalsi sanci nedostanes!")
     src.wait_then_port(<more2>,<morex>,<morey>,<morez>,<morem>)
     src.level_gate_efekt
-    //odstranit_gatu	// nejakej pozustatek po generovani vortexu nebo co ? snad to uz neni potreba ...
+    //odstranit_gatu  // nejakej pozustatek po generovani vortexu nebo co ? snad to uz neni potreba ...
+    return 1
+  endif
+  if !(<src.qtag(q041_paserak)> == 9)
+    src.redmessage("Nejprve musis promluvit s Paserakem.")
     return 1
   endif
   if !(<src.tag(presel)>) //pokud dotycnej jeste neprechazel, tag(presel) je 0 a tudiz ho nechame prejit
@@ -245,36 +249,36 @@ DESCRIPTION=port do svatyne
 
 ON=@STEP
 if ((src.tag(level)<10)||(<src.tag(presel)>))
-	src.sysMessage("Svatyne te neprijala.")
-//	src.tag.remove(zabilmnicha)
-	src.go 1142,3897
-	return 1
+  src.sysMessage("Svatyne te neprijala.")
+//  src.tag.remove(zabilmnicha)
+  src.go 1142,3897
+  return 1
 endif
 
 if (<src.qtag(q041_paserak)> == 9)
-	src.go <MOREP>
-	return 1
+  src.go <MOREP>
+  return 1
 else
-	src.sysMessage Svatyne te neprijala.
-	src.go 1142,3897
-	return 1
+  src.sysMessage Svatyne te neprijala.
+  src.go 1142,3897
+  return 1
 endif
 //if (src.tag(zabilmnicha))
 //  if (src.tag(realm)==2) || (src.tag(realm)==-1)
-//	  src.sysMessage Svatyne te neprijala.
-//	  src.tag.remove(zabilmnicha)
-//	  src.go 1142,3897
-//	  return 1
-//  else	
+//    src.sysMessage Svatyne te neprijala.
+//    src.tag.remove(zabilmnicha)
+//    src.go 1142,3897
+//    return 1
+//  else  
 //    src.tag.remove(zabilmnicha)
 //  endif
 //else
 //  if (src.tag(realm)==1) || (src.tag(realm)==-2)
-//	  src.sysMessage Svatyne te neprijala.
+//    src.sysMessage Svatyne te neprijala.
 //   src.tag.remove(zabilmnicha)
-//	  src.go 1142,3897
-// 	  return 1
-//  endif	
+//    src.go 1142,3897
+//    return 1
+//  endif 
 //endif
 //src.go <MOREP>
 
