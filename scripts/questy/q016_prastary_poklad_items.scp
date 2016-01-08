@@ -118,7 +118,7 @@ ON=@Create
 color=0980
 
 on=@userdclick                                                             
-message("vypada to jako voda. skoro bys <sex(rekl,rekla)>, ze je to voda.")  
+message("Vypada to jako voda. Skoro bys <src.sex(rekl,rekla)>, ze je to voda.")  
 return 1
 
 //////////////////////////////////
