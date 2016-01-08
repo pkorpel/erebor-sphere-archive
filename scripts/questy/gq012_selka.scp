@@ -23,7 +23,7 @@ tag.contentscount=0
 
 ON=@CollectorCheck
 
-
+                                            
 /////// speech selka ///////
 
 [SPEECH spk_gq012_selka]
@@ -38,9 +38,9 @@ else
 endif
 
 [FUNCTION f_gq012_selka]
-IF (<src.tag.gq012_selka> <=1)
+IF (<src.tag.gq012_selka> <= 1)
  DIALOG(d_gq012_selka)
-ELSEIF (<src.tag.gq012_selka> ==2)
+ELSEIF (<src.tag.gq012_selka> == 2)
  DIALOG(d_gq012_selka1)
 ENDIF
 
@@ -129,9 +129,9 @@ return 1
 
 //  prijeti ukolu
 on=1  
-IF (<src.tag.gq012_selka>==1)
+IF (<src.tag.gq012_selka> == 1)
  src.sysmessage Tento ukol uz jsi splnil nebo ho prave plnis !
-ELSE (<src.tag.gq012_selka>==0)
+ELSE (<src.tag.gq012_selka> == 0)
  src.sysmessage Prijmas ukol od Selky Enricy
  SRC.NEWITEM=i_gq012_selka_collector
  SRC.ACT.BOUNCE
@@ -140,7 +140,7 @@ ELSE (<src.tag.gq012_selka>==0)
 ENDIF
 
 on=2  
-if <src.restest i_gq012_selka_collector> && (<src.findid(i_gq012_selka_collector).tag.contentscount> >=10) 
+if <src.restest i_gq012_selka_collector> && (<src.findid(i_gq012_selka_collector).tag.contentscount> >= 10) 
  SAY Dekuji ti mnohokrat, buh ti to oplat !
  src.addexp(50)
  SRC.CONSUME i_gq012_selka_collector

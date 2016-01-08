@@ -63,5 +63,5 @@ tag.experience=<eval {1.0 2.0}>
 FAME=300
 KARMA={-3800 -4500}
 
-ON=@NPCRestock
-ITEM=loot_zombie
+ITEMnewbie=i_monster_create
+
