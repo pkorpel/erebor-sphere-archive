@@ -89,7 +89,16 @@ while (index<=imax)
    argo.button(<argo.tag(sloupec_x[3])>,ypos,4005,4007,1,0,(4*index)+11)
    argo.texta(<argo.tag(sloupec_x[4])>+<d_def_odsazeni>,<ypos>,<arg(charuid).getNameHue>,<arg(charuid).name>)
  endif
+
+ // barva textu
  arg(acccolor,<color_plevel[arg(accountref).plevel]>)
+ if (<arg(accountref).plevel> <= 1)	// pouze hraci
+   if !(<arg(accountref).privflags> & priv_Connected)
+	 arg(acccolor, <d_def_NAcolor>)
+   endif
+ endif
+
+
  argo.texta(<argo.tag(sloupec_x[0])>+<d_def_odsazeni>,<ypos>,acccolor,<argo.tag(accindex[index])>)
  argo.texta(<argo.tag(sloupec_x[2])>+<d_def_odsazeni>,<ypos>,acccolor,<arg(accountref).name>)
  argo.texta(<argo.tag(sloupec_x[5])>+<d_def_odsazeni>,<ypos>,acccolor,<arg(accountref).chars>)
