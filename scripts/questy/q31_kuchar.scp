@@ -42,6 +42,8 @@ endif
 [FUNCTION f_q31_kuchar]
 if (<eval src.tag.realm> ==2) 
   say("AAAAAA, Mordorani !!! Zachran se kdo muzes !!!")
+elseif (<eval src.tag.level> < 1)
+  say("Promin, ale s tebou se nemam aktualne o cem bavit. Prijd, az budes silnejsi!")
 elseif (<eval src.tag.q31_neuspel> ==1)
   say("S tebou se uz nemam o cem bavit. Nerus me prosim mam praci!")
 elseif  (<eval src.tag.q31_kuchar> ==0) 
@@ -55,6 +57,8 @@ endif
 [FUNCTION f_q31_kuchar_mordor]
 if (<eval src.tag.realm> ==1) 
   say("AAAAAA, Gondori !!! Zachran se kdo muzes !!!")
+elseif (<eval src.tag.level> < 1)
+  say("Promin, ale s tebou se nemam aktualne o cem bavit. Prijd, az budes silnejsi!")
 elseif (<eval src.tag.q31_neuspel> ==1)
   say("S tebou se uz nemam o cem bavit. Nerus me prosim mam praci!")
 elseif  (<eval src.tag.q31_kuchar> ==0) 
