@@ -205,7 +205,6 @@ accmsg(<args>)
 
 [function f_inforow_button]
 //<argv(0)>	index
-
 //<argv(1)>	flag
 //<argv(2)>	property
 //<argv(3)>	command 
@@ -213,6 +212,16 @@ accmsg(<args>)
 arg(command,<argv(3)>)
 arg(property,<argv(2)>)
 finduid(<tag(from)>).try <arg(command)>(<?safe finduid(<tag(from)>).<arg(property)>?>)
+
+[function f_inforow_button_src]
+//<argv(0)>	index
+//<argv(1)>	flag
+//<argv(2)>	property
+//<argv(3)>	command 
+//<argv(4)>	flag bit
+arg(command,<argv(3)>)
+arg(property,<argv(2)>)
+src.try <arg(command)>(<?safe finduid(<tag(from)>).<arg(property)>?>)
 
 [function f_inforow]
 //<argv(0)>	y

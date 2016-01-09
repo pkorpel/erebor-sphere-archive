@@ -65,7 +65,6 @@ argo.dialog_pozadi(<argo.tag(nexty)>,5,29,180,180,180,60)
 argo.dialog_zpruhledni
 
 argo.tag(from,<finduid(<argv(0)>)>)
-
 texta(<argo.dialog_textpos(0,0)>,2301,ACCOUNT INFO - <argo.tag(from).name>)
 
 arg(ypos,<argo.tag(obj_y[1])>)
@@ -141,7 +140,7 @@ if (argn>=1000)
 endif
 
 if (argn>=100)
- argo.f_inforow_button(<argn>,<argo.tag(row_ret[argn])>)
+ argo.f_inforow_button_src(<argn>,<argo.tag(row_ret[argn])>)
 endif
 
 [eof]
