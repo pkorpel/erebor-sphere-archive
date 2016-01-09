@@ -355,7 +355,7 @@ color=05e0
 
 [CHARDEF c_rodrigo]
 NAME=Pirat Rodrigo
-ID=c_pirat
+ID=c_man
 
 dam=60
 ARMOR=80
