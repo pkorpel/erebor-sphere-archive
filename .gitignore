@@ -1,5 +1,12 @@
 *.swp
 *.log
+*.ocx
+aaa.scp
+format
+hoglocs.scp
+hovno.scp
+roofing.txt
+rooftiles.cfg
 accounts/
 save/
 logs/
