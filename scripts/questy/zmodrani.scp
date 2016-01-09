@@ -10,8 +10,6 @@ SUBSECTION=prechod
 on=@create
 src.sysMessage(Dej si .x info a v promenne more1l nastav kolik levelu to srazi -kladne cislo)
 src.sysMessage(Default - 10 levelu dolu)
-src.redmessage(Branu odstranuj prikazem .x odstranit_gatu)
-//src.newitemsafe(i_tvurce_vortexu)
 lastnew.tag(tagate,<uid>)
 lastnew.equip
 more=10 //kolik levlu
@@ -30,9 +28,7 @@ if (src.isplayer)
   if (<src.tag(realm)> < 0) //zaporna cisla maji vyvrhelove, vyvrhel nesmi prechazet ! Zakazujeme to, proste konecna - nejtezsi RP trest. (tag presel nehraje roli)
     src.redMessage("Tve prohresky se staly prilis velkou hrozbou pro vsechny v tvem okoli.")
     src.redMessage("Dalsi sanci nedostanes!")
-    //src.wait_then_port(<more2>,<morex>,<morey>,<morez>,<morem>)
     src.level_gate_efekt
-    //odstranit_gatu  // nejakej pozustatek po generovani vortexu nebo co ? snad to uz neni potreba ...
     return 1
   endif
   if !(<src.qtag(q041_paserak)> == 9)
@@ -57,11 +53,9 @@ if (src.isplayer)
     sound=snd_spell_polymorph
     src.newitemsafe(i_prave_prosel_levelgatou)
     lastnew.equip
-    //src.wait_then_port(<more2>,<morex>,<morey>,<morez>,<morem>)
     src.level_gate_efekt
     src.tag(presel,1) //uz nebude moct prejit znova
     src.qtag(q041_paserak,10,51)
-    //odstranit_gatu //neni treba
     return 1
   else //dotycnej uz presel
     src.sysMessage("Kdo jednou svuj realm zradi, zpet se jiz nevrat.")
