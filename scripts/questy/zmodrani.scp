@@ -30,7 +30,7 @@ if (src.isplayer)
   if (<src.tag(realm)> < 0) //zaporna cisla maji vyvrhelove, vyvrhel nesmi prechazet ! Zakazujeme to, proste konecna - nejtezsi RP trest. (tag presel nehraje roli)
     src.redMessage("Tve prohresky se staly prilis velkou hrozbou pro vsechny v tvem okoli.")
     src.redMessage("Dalsi sanci nedostanes!")
-    src.wait_then_port(<more2>,<morex>,<morey>,<morez>,<morem>)
+    //src.wait_then_port(<more2>,<morex>,<morey>,<morez>,<morem>)
     src.level_gate_efekt
     //odstranit_gatu  // nejakej pozustatek po generovani vortexu nebo co ? snad to uz neni potreba ...
     return 1
@@ -57,7 +57,7 @@ if (src.isplayer)
     sound=snd_spell_polymorph
     src.newitemsafe(i_prave_prosel_levelgatou)
     lastnew.equip
-    src.wait_then_port(<more2>,<morex>,<morey>,<morez>,<morem>)
+    //src.wait_then_port(<more2>,<morex>,<morey>,<morez>,<morem>)
     src.level_gate_efekt
     src.tag(presel,1) //uz nebude moct prejit znova
     src.qtag(q041_paserak,10,51)
