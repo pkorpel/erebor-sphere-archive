@@ -60,7 +60,7 @@ id=c_man
 name=definice pokladu
 can=0
 
-TEVENTS=e_monster
+TEVENTS=e_character
 
 category=Moria
 subsection=(systemova NPC)
