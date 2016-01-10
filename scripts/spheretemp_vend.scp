@@ -204,8 +204,6 @@ sell=i_crossbow_heavy_copper,{5 10}
 price=360
 sell=i_bow_copper,{5 10}
 price=140
-sell=i_toulec_copper,{5 10}
-price=200
 
 sell=i_crossbow_iron,{5 10}
 price=3380
@@ -213,8 +211,6 @@ sell=i_crossbow_heavy_iron,{5 10}
 price=4680
 sell=i_bow_iron,{5 10}
 price=1820
-sell=i_toulec_iron,{5 10}
-price=1000
 
 sell=i_arrow_piercing_copper,{300 400}
 price=4
