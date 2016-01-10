@@ -6,7 +6,7 @@ ID=c_man
 
 TSPEECH=spk_strazcelagru
 
-TEVENTS=e_monster
+TEVENTS=e_character
 
 CATEGORY=Moria
 SUBSECTION=(systemova NPC)
