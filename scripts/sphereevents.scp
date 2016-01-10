@@ -1371,7 +1371,7 @@ endif
 
 on=@Login
 src.redmessage_me
-if(src==094dfd)||(src==0F0BEF) //Dinivan a Eufegenie dostanou logy :)
+if(src==027f)||(src==0C) //Finn a Houba dostanou logy :)
  src.afklog
 else
  src.message_me

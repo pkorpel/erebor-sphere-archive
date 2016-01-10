@@ -5737,10 +5737,10 @@ else
 endif
 
 [function kermel]
-return<finduid(#094dfd)>
+return<finduid(#027f)>
 
 [function eufegenie]
-return<finduid(#0F0BEF)>
+return<finduid(#0C)>
 
 [itemdef i_checkownerforpet]
 id=i_memory
