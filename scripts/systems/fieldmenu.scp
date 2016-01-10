@@ -66,7 +66,7 @@ if (<src.ischar>)
   //src.sysmessage(neni drazba, nuluju)
   tag(najem,10000) //nova drazba zacne automaticky na 10k  
  endif 
- more1=067288 //majitelem se stane Dinivan :o)  - pro drazbu a aby si nikdo nemohl jen tak vzit stanek
+ more1=01 //majitelem se stane Desttro :o)  - pro drazbu a aby si nikdo nemohl jen tak vzit stanek
 endif
 
 [function trashfielditem]
@@ -202,12 +202,12 @@ endif
 //nasledujici konstrukce zamerne nepouziva elseifu protoze nejak nefungujou (neprovadeji se), proto je to tak 
 //komplikovany
 if(<link.tag(drazba)>) //probiha-li drazba
- if(<link.more1>==067288) //majitelem jsem ja - drazba jen 1 tyden
+ if(<link.more1>==01) //majitelem jsem ja - drazba jen 1 tyden
   arg(doba,6048000) 
   arg(max_doba,6048000)
  else //klasicke 3+1 tyden
-  arg(doba,18144000)
-  arg(max_doba,24192000)	
+  arg(doba,6048000) // bylo 18144000
+  arg(max_doba,6048000) // bylo 24192000
  endif
  arg(doba_od_zacatku_drazby,<eval <serv.time>-<link.tag(zacatekdrazby)>>)
  if ( <arg(doba_od_zacatku_drazby)> > <arg(doba)> ) && (finduid(<link.more1>).isgm) //prvni drazba noveho stanku, majitelem jsem ja
@@ -218,7 +218,7 @@ if(<link.tag(drazba)>) //probiha-li drazba
   return 1	
  endif
  if((<arg(doba_od_zacatku_drazby)> >= <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> <= <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.more1>)) //dele nez (18144000)3 tydny&&kratsi dobu nez (24192000) 4 tydny&&nejvyssi nabidka neni od majitele&&klikatel na ceduli je majitel
-  if(src==067288)
+  if(src==01)
    src.sysmessage(Majitel ma cas na dorovnani)
   endif
   src.redmessage(Na dorovnani nabidky ti zbyva <f_vend_zbyva_casu>)
@@ -226,14 +226,14 @@ if(<link.tag(drazba)>) //probiha-li drazba
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.tag(zajemce)>)) //doba drazby delsi nez (24192000) 4 tydny&&nejvyssi nabidka neni od majitele&&kliknul si ten co nabidl nejvic
-  if(src==067288)
+  if(src==01)
    src.sysmessage(konec drazby a klikl ten co vyhral)
   endif
   pole_konec_drazby
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.more1>)) //konec drazby&&majitel nestihl dorovnat&&klikl majitel
-  if(src==067288)
+  if(src==01)
    src.sysmessage(konec drazby majitel prohral a klikl majitel)
   endif
   src.sysmessage(Nestihl jsi dorovnat nabidku, pole ti uz nepatri)
@@ -241,7 +241,7 @@ if(<link.tag(drazba)>) //probiha-li drazba
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>==<link.more1>)&&(<src>==<link.tag(zajemce)>)) //doba drazby > (2419200) 4 tydny&&majitel stihl dorovnat&&klikatel je sam majitel
-  if(src==067288)
+  if(src==01)
    src.sysmessage(konec drazby vyhral puvodni majitel)
   endif
   src.sysmessage(Drazba skoncila, majitelem zustavas ty)
@@ -262,14 +262,14 @@ if(<link.tag(drazba)>) //probiha-li drazba
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)> >= <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> <= <arg(max_doba)>)&&(<src>!=<link.more1>)&&(!(src.isgm))) //doba drazby >(1814400)3 tydny&&kratsi nez (2419200)4 tydny&&kliknul nekdo jinej nez majitel&&a nekliknul GM   
-   if(src==067288)
+   if(src==01)
     src.sysmessage(cas na dorovnani pro majitele)
    endif
    src.sysmessage(Prihazovat jiz nemuzes, majitel ma na dorovnani nabidky <f_vend_zbyva_casu>)
    return 1
  endif  
  if((<arg(doba_od_zacatku_drazby)> > <arg(max_doba)>)&&(<src>!=<link.more1>)&&(<src>!=<link.tag(zajemce)>)&&(!(src.isgm))) //doba drazby >(24192000) 4tydny&&neklikl majitel&&neklikl nejvyssi nabidka&&neklikl GM
-  if(src==067288)
+  if(src==01)
    src.sysmessage(konec drazby neklikl ani ten co vyhral ani majitel a majitel prohral)
   endif
   src.sysmessage(Konec drazby, nejsi majitelem stanku ani jsi neucinil nejvyssi nabidku, nezbyva ti, nez to zkusit priste)   
@@ -277,7 +277,7 @@ if(<link.tag(drazba)>) //probiha-li drazba
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)> > <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> < <arg(max_doba)>)&&(<link.tag(zajemce)>==<link.more1>)&&(<src>==<link.more1>)) //dele nez (18144000)3 tydny&&kratsi dobu nez (24192000) 4 tydny&&nejvyssi nabidka je uz od majitele&&klikatel na ceduli je majitel
-  if(src==067288)
+  if(src==01)
    src.sysmessage(konec drazby majitel ma cas na dorovnani a dorovnal - drazba konci drive)
   endif
   src.sysmessage(Nabidka je dorovnana, do konce ctvrteho tydne zbyva <f_vend_zbyva_casu>)

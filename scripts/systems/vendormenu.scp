@@ -224,7 +224,7 @@ if (<src.ischar>)
   //src.sysmessage(neni drazba, nuluju)
   tag(najem,50000) //nova drazba zacne automaticky na 50k  
  endif 
- more1=094dfd //majitelem se stane Dinivan :o)  - pro drazbu a aby si nikdo nemohl jen tak vzit stanek
+ more1=01 //majitelem se stane Desttro :o)  - pro drazbu a aby si nikdo nemohl jen tak vzit stanek
 endif
 
 [function trashvenditem]
@@ -377,12 +377,12 @@ endif
 //nasledujici konstrukce zamerne nepouziva elseifu protoze nejak nefungujou (neprovadeji se), proto je to tak 
 //komplikovany
 if(<link.tag(drazba)>) //probiha-li drazba
- if(<link.more1>==094dfd) //majitelem jsem ja - drazba jen 1 tyden
+ if(<link.more1>==01) //majitelem jsem ja - drazba jen 1 tyden
   arg(doba,6048000) 
   arg(max_doba,6048000)
  else //klasicke 3+1 tyden
-  arg(doba,18144000)
-  arg(max_doba,24192000)	
+  arg(doba,6048000) // bylo 18144000
+  arg(max_doba,6048000) // bylo 24192000
  endif
  arg(doba_od_zacatku_drazby,<eval <serv.time>-<link.tag(zacatekdrazby)>>)
  if(<arg(doba_od_zacatku_drazby)> > <arg(doba)>)&&(finduid(<link.more1>).isgm) //prvni drazba noveho stanku, majitelem jsem ja
@@ -951,7 +951,7 @@ if(!<tag(drazba)>) //zavolano z prvni casti buttonu 19
        tag(zajemce,<src>) //uid zajemce
        tag(zacatekdrazby,<serv.time>)
        tag(drazba,1) //zahajit drazbu
-       if(!<strcmp(<more1>,"094dfd")>==0) // Jen pokud neni majitelem stanku Dini
+       if(!<strcmp(<more1>,"01")>==0) // Jen pokud neni majitelem stanku Desttro
          finduid(<more1>).delayedmessage("Hrac <src.name> zahajil drazbu na tvem stanku castkou <tag(nabidka)>")
        endif
        src.sysmessage(Ucinil jsi zakladni nabidku <tag(nabidka)> gp.)
@@ -967,7 +967,7 @@ else //drazba neni, zavolano z druhe casti buttonu 19
      if(src.pay(<arg(castka)>))
        tag(nabidka,<arg(castka)>) //autorem je porad ten worldgem t_vendorplac
        tag(zajemce,<src>)
-       if(!<strcmp(<more1>,"094dfd")>==0) // Jen pokud neni majitelem stanku Dini
+       if(!<strcmp(<more1>,"01")>==0) // Jen pokud neni majitelem stanku Desttro
          finduid(<more1>).delayedmessage("Hrac <src.name> prihodil na tvuj stanek castkou <tag(nabidka)>")
        endif
        src.sysmessage(Zvysil jsi nabidku na <tag(nabidka)> gp.)
