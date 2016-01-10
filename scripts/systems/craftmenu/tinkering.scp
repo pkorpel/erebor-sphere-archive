@@ -110,6 +110,7 @@ cm_newsection(0,"Tavern Types",i_KEG_WOOD)
  cm_newitem(i_basin)
 
 cm_newsection(0,"Accesories",i_crystal_ball)
+ cm_newitem(i_POST_HITCHING)
  cm_newitem(i_crystal_ball)
  cm_newitem(i_vial_empty)
  cm_newitem(i_pen_and_ink)
