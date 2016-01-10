@@ -1771,7 +1771,7 @@ else
   return 0
 endif
 
-[ITEMDEF I_stone_reseting]
+[ITEMDEF i_stone_reseting]
 NAME=Kamen na prenastaveni abilit
 ID=i_grave_stone_4
 type=t_script
@@ -1786,17 +1786,14 @@ endif
 if (src.ismagic)
   src.redmessage("Nesmis byt pod zadnym magickym vlivem.")
   return 1
-elseif (tag(hrac[<src>]))
-else
- tag(hrac[<src>],1)
 endif
-dialog(d_YesNo_reset_abilit,<eval tag(hrac[<src>])*tag.price>)
+dialog(d_YesNo_reset_abilit,<eval <eval tag(hrac[<src>])>*tag.price>)
 return 1
 
 [dialog d_YesNo_reset_abilit]
 argo.f_dialog_YesNo(Resetovat Ability?)
 argo.texta(77,<argo.tag(obj_y[1])>-2,d_def_WriteColor,Cena:)
-argo.texta(120,<argo.tag(obj_y[1])>-2,42,<argv(0)>gp)
+argo.texta(120,<argo.tag(obj_y[1])>-2,42,"<eval argv(0)> gp")
 
 [dialog d_YesNo_reset_abilit Button]
 on=1
@@ -1804,8 +1801,9 @@ if (src.ismagic)
   src.redmessage("Nesmis byt pod zadnym magickym vlivem.")
   return 1
 endif
-if (<src.pay(<eval tag(hrac[<src>])*tag.price>)>)
- src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval <tag(hrac[<src>])>*tag.price> zlatych.")
+arg(toPay,<eval <eval tag(hrac[<src>])>*tag.price>)>)
+if (<src.pay(<arg(toPay)>)>)
+ src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval arg(toPay)> zlatych.")
  src.redmessage("Tvoje ability byly resetovany. Rozdel si body znovu.")
  tag(hrac[<src>],#+1)
  src.resethim
@@ -1922,7 +1920,7 @@ if (strlen(<?nationinfo_<TAG(nation)>[0]?>)>5)
 #  dialog(D_RACEclass_stats)
 endif
 
-[ITEMDEF I_stone_reseting_stats]
+[ITEMDEF i_stone_reseting_stats]
 NAME=Kamen na prenastaveni statu
 ID=i_grave_stone_4
 type=t_script
@@ -1937,17 +1935,14 @@ endif
 if (src.ismagic)
   src.redmessage("Nesmis byt pod zadnym magickym vlivem.")
   return 1
-elseif (tag(hrac[<src>]))
-else
- tag(hrac[<src>],1)
 endif
-dialog(d_YesNo_reset_stats,<eval tag(hrac[<src>])*tag.price>)
+dialog(d_YesNo_reset_stats,<eval <eval tag(hrac[<src>])>*tag.price>)
 return 1
 
 [dialog d_YesNo_reset_stats]
 argo.f_dialog_YesNo("Resetovat Staty?")
 argo.texta(77,<argo.tag(obj_y[1])>-2,d_def_WriteColor,Cena:)
-argo.texta(120,<argo.tag(obj_y[1])>-2,42,<argv(0)>gp)
+argo.texta(120,<argo.tag(obj_y[1])>-2,42,"<eval argv(0)> gp")
 
 [dialog d_YesNo_reset_stats Button]
 on=1
@@ -1955,10 +1950,11 @@ if (src.ismagic)
   src.redmessage("Nesmis byt pod zadnym magickym vlivem.")
   return 1
 endif
-if (<src.pay(<eval tag(hrac[<src>])*tag.price>)>)
- src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval <tag(hrac[<src>])>*tag.price> zlatych.")
- src.dialog D_RACEclass_stats_fix
- tag(hrac[<src>],#+1)
+arg(toPay,<eval <eval tag(hrac[<src>])>*tag.price>)>)
+if (<src.pay(<arg(toPay)>)>)
+  src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval arg(toPay)> zlatych.")
+  src.dialog D_RACEclass_stats_fix
+  tag(hrac[<src>],#+1)
 endif
 return 1
 
