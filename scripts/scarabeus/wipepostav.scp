@@ -11,7 +11,7 @@ ATTR=010
 COLOR=0987
 
 ON=@userDCLICK
-if (src.isgm)&&(src==094dfd)
+if (src.isgm)&&(src==01)
 wipepostav
 else
 src.redmessage(Nesahej na to, jak se to pouziva se zeptej Dinivana nebo Scaraba)

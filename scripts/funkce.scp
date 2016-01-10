@@ -213,7 +213,7 @@ if (tag(redMessagescount))
 endif 
 
 [function delayedmessage] //args - text
-if (isonline)&&(uid!=094dfd)&&(uid!=0F0BEF)&&(uid!=09fa43)&&(uid!=02b7c73)&&(uid!=0646af) //pro Dinivana, Eufegenii a Verbatima vzdy do tabulky, aj Heckovi/y ten je tiez fajnovy, a Herma!
+if (isonline)&&(uid!=01)&&(uid!=0C)&&(uid!=027f)&&(uid!=02b7c73)&&(uid!=0646af) //pro Desttra, Houbu a Finna vzdy do tabulky, aj Heckovi/y ten je tiez fajnovy, a Herma!
  classmessage("<args>")
 else
  //Do tabulky vzdy - jsou asi slepi takze jim to projistotu budem take ukladat 
@@ -229,7 +229,7 @@ else
 endif
 
 [function pagereplymessage] //args - text
-//if (isonline)&&(uid!=094dfd)&&(uid!=017857e)&&(uid!=09fa43) //pro Dinivana, Eufegenii a Verbatima vzdy do tabulky
+//if (isonline)&&(uid!=01)&&(uid!=0C)&&(uid!=027f) //pro Desttra, Houbu a Finna vzdy do tabulky
  classmessage("<args>")
 //else
  //Do tabulky vzdy - jsou asi slepi takze jim to projistotu budem take ukladat 
@@ -245,7 +245,7 @@ endif
 //endif
 
 [function delayedredMessage] //args - text
-if (isonline)&&(uid!=094dfd)&&(uid!=017857e)&&(uid!=09fa43) //pro Dinivana a Eufegenii vzdy do tabulky
+if (isonline)&&(uid!=01)&&(uid!=0C)&&(uid!=027f) //pro Desttra a Houbu, Finna vzdy do tabulky
  redMessage("<args>")
 else
  //Do tabulky vzdy - jsou asi slepi takze jim to projistotu budem take ukladat 
