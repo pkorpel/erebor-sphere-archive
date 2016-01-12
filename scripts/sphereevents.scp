@@ -2140,39 +2140,39 @@ say "spellcast <src>,<act>"
 [EVENTS e_character]
 on=@UserClick
 if (src.isgm)
- arg(statstring," ")
- if (flag_hidden)
-  arg(statstring,<statstring>[hidden])
-  arg(dispit,1)
- endif
- if (flag_invisible)
-  arg(statstring,<statstring>[invis])
-  arg(dispit,1)
- endif
- if (flag_insubstantial)
-  arg(statstring,<statstring>[insubst])
-  arg(dispit,1)
- endif
- if (flag_freeze)
-  arg(statstring,<statstring>[frozen])
-  arg(dispit,1)
- endif
- if (flag_immobile)
-  arg(statstring,<statstring>[immobile])
-  arg(dispit,1)
- endif
- if (flag_invul)
-  arg(statstring,<statstring>[invul])
-  arg(dispit,1)
- endif
- if (flag_squelch)
-  arg(statstring,<statstring>[squelched])
-  arg(dispit,1)
- endif
- if (arg(dispit))
-  message("<arg(statstring)>")
- endif
- Message("(<myaction>)")
+  arg(statstring," ")
+  if (flag_hidden)
+    arg(statstring,<statstring>[hidden])
+    arg(dispit,1)
+  endif
+  if (flag_invisible)
+    arg(statstring,<statstring>[invis])
+    arg(dispit,1)
+  endif
+  if (flag_insubstantial)
+    arg(statstring,<statstring>[insubst])
+    arg(dispit,1)
+  endif
+  if (flag_freeze)
+    arg(statstring,<statstring>[frozen])
+    arg(dispit,1)
+  endif
+  if (flag_immobile)
+    arg(statstring,<statstring>[immobile])
+    arg(dispit,1)
+  endif
+  if (flag_invul)
+    arg(statstring,<statstring>[invul])
+    arg(dispit,1)
+  endif
+  if (flag_squelch)
+    arg(statstring,<statstring>[squelched])
+    arg(dispit,1)
+  endif
+  if (arg(dispit))
+    message("<arg(statstring)>")
+  endif
+  Message("(<myaction>)")
 endif
 return <?showname_<src.tag(clienttype)>?>
 

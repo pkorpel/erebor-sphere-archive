@@ -32,9 +32,9 @@ d_afk_bgrnd_y	150
 d_afk_dialog_x		600
 d_afk_dialog_y		240
 
-//maximalni souradnice leveho horniho rohu (standard obrazovka 800*600)
-d_afk_max_x	200
-d_afk_max_y 	360
+//maximalni souradnice leveho horniho rohu (standard obrazovka 640*480)
+d_afk_max_x	40
+d_afk_max_y 	220
 
 [defnames afk_letters_offsets]
 //tak aby ctverecky lezely presne uprostred policka
