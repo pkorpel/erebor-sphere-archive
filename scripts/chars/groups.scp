@@ -686,18 +686,18 @@ ID=C_BEAR_GRIZZLY
 weight= 5
 
 ID=c_llama 
-weight=5  
+weight=20  
 ID=c_horse_tan 
-weight=5 
+weight=8 
 ID=c_horse_brown_lt 
-weight=5 
+weight=8 
 ID=c_horse_brown_dk 
-weight=5 
+weight=8 
 
 ID=C_A_MUSTANG_ROAN
-weight=30
-ID=C_A_MUSTANG_WIMMIMATE
 weight=15
+ID=C_A_MUSTANG_WIMMIMATE
+weight=5
 ID=C_A_MUSTANG_REDROAN
 weight=5
 
