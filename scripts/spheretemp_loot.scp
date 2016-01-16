@@ -169,7 +169,7 @@ DEFNAME=loot_ORC
 CATEGORY=Item Templates
 SUBSECTION=Monster Loot Templates
 DESCRIPTION=Orc
-//ITEM=i_boots_thigh
+ITEM=i_boots_thigh
 ITEM=RANDOM_REAGENT,{1 10}
 
 [TEMPLATE 150029]
