@@ -1803,14 +1803,14 @@ if (src.ismagic)
 endif
 arg(toPay,<eval <eval tag(hrac[<src>])>*tag.price>)>)
 if (<src.pay(<arg(toPay)>)>)
- src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval arg(toPay)> zlatych.")
- src.redmessage("Tvoje ability byly resetovany. Rozdel si body znovu.")
- tag(hrac[<src>],#+1)
- src.resethim
+  src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval arg(toPay)> zlatych.")
+  src.redmessage("Tvoje ability byly resetovany. Rozdel si body znovu.")
+  tag(hrac[<src>],<eval tag(hrac[<src>])>+1)
+  src.resethim
 endif
 
 on=2
- src.sysmessage("Reset abilit stornovan.")
+src.sysmessage("Reset abilit stornovan.")
 return 0
 
 
@@ -1825,32 +1825,32 @@ endif
 
 [function fixnation]
 if (tag(fixnation))
- return 1
+  return 1
 endif
 if (tag(realm))
 else
- return 1
+  return 1
 endif
 if (strmatch(<tag.race>,Trpaslik))
- tag(nation,"Ereboran")
- tag(fixnation,1)
+  tag(nation,"Ereboran")
+  tag(fixnation,1)
 elseif (strmatch(<tag.race>,Hobit))
- tag(nation,"Pulcik")
- tag(fixnation,1)
+  tag(nation,"Pulcik")
+  tag(fixnation,1)
 elseif (strmatch(<tag.race>,Elf))
-	dialog d_raceclass_nations_fix
+ 	dialog d_raceclass_nations_fix
 elseif (strmatch(<tag.race>,Clovek))
-	dialog d_raceclass_nations_fix
+ 	dialog d_raceclass_nations_fix
 elseif (strmatch(<tag.race>,Skret))
 	dialog d_raceclass_nations_fix
 elseif (strmatch(<tag.race>,Skurut_hai))
- tag(nation,"Mordoran")
- tag(fixnation,1)
+  tag(nation,"Mordoran")
+  tag(fixnation,1)
 elseif (strmatch(<tag.race>,Nurn_man))
-	dialog d_raceclass_nations_fix
+ 	dialog d_raceclass_nations_fix
 else 
- sysmessage("Chyba, napis page.")
- return 1
+  sysmessage("Chyba, napis page.")
+  return 1
 endif
 whoami 
 nastavhome
@@ -1916,8 +1916,8 @@ endif
 if (strlen(<?nationinfo_<TAG(nation)>[0]?>)>5)
   tag(startdialog,"nationinfo_<TAG(nation)>")
   dialog(D_RACEclass_info,"dialog(D_raceclass_nations)")
-#else
-#  dialog(D_RACEclass_stats)
+//else
+//  dialog(D_RACEclass_stats)
 endif
 
 [ITEMDEF i_stone_reseting_stats]
@@ -1953,8 +1953,8 @@ endif
 arg(toPay,<eval <eval tag(hrac[<src>])>*tag.price>)>)
 if (<src.pay(<arg(toPay)>)>)
   src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval arg(toPay)> zlatych.")
-  src.dialog D_RACEclass_stats_fix
-  tag(hrac[<src>],#+1)
+  src.dialog(D_RACEclass_stats_fix)
+  tag(hrac[<src>],<eval tag(hrac[<src>])>+1)
 endif
 return 1
 
