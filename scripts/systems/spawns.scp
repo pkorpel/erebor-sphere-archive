@@ -209,7 +209,7 @@ else
   if (findid(i_gold))
     if !(isResurrectedNPC)
       findid(i_gold).amount=<eval (<eval <tag.experience>>*900)/1000>
-      if (rescount(i_gold)>{30 100000})
+      if (rescount(i_gold)>{30 130000})
         giveitem(i_mi_bag)
       endif
       if (rescount(i_gold)>{3500 100000})&&({1 3} == 1)
