@@ -208,7 +208,7 @@ if (findid(i_nofame))
 else
   if (findid(i_gold))
     if !(isResurrectedNPC)
-      findid(i_gold).amount=<eval (<eval <tag.experience>>*900)/1000>
+      findid(i_gold).amount=<eval (<eval <tag.experience>>*750)/1000>
       if (rescount(i_gold)>{30 130000})
         giveitem(i_mi_bag)
       endif
