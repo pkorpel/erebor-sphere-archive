@@ -3422,7 +3422,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dug snagum vstup]
+[AREA Dung snagum vstup]
 GROUP=Dungeon Dug snagum
 P=4394,3288
 RECT=4337,3280,4452,3349
@@ -3431,37 +3431,41 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dug snagum 1 Level]
+[AREA Dung snagum 1 Level]
 GROUP=Dungeon Dug snagum
 P=4850, 434
 RECT=4707,402,4916,583
+mapplane=10
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dug snagum 2 Level]
+[AREA Dung snagum 2 Level]
 GROUP=Dungeon Dug snagum
 P=4946, 407
 RECT=4922,393,5087,596
+mapplane=10
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dug snagum 3 Level]
+[AREA Dung snagum 3 Level]
 GROUP=Dungeon Dug snagum
 P=5072, 343
 RECT=4923,250,5078,389
+mapplane=10
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dug snagum 4 Level]
+[AREA Dung snagum 4 Level]
 GROUP=Dungeon Dug snagum
 P=4859, 185
 RECT=4727,162,4878,367
+mapplane=10
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
@@ -3892,10 +3896,21 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Etheria Level 1]
+[AREA Etheria Level 3]
 GROUP=Dung Etheria
 P=5286, 1556
 RECT=5200,1512,5297,1600
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Etheria Level 1]
+GROUP=Dung Etheria
+P=5285, 1648
+RECT=5194,1603,5292,1713
+mapplane=10
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
@@ -3903,17 +3918,9 @@ COLDCHANCE=00
 
 [AREA Etheria Level 2]
 GROUP=Dung Etheria
-P=5285, 1648
-RECT=5194,1603,5292,1713
-FLAGS=00812
-tag.realm=3
-RAINCHANCE=00
-COLDCHANCE=00
-
-[AREA Etheria Level 3]
-GROUP=Dung Etheria
 P=5309, 745
 RECT=5204,706,5317,767
+mapplane=10
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
@@ -3923,6 +3930,7 @@ COLDCHANCE=00
 GROUP=Dung Etheria
 P=5281, 1755
 RECT=5203,1721,5293,1824
+mapplane=10
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
