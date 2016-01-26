@@ -22,6 +22,18 @@ endif
 var(lastybuttpos,<tag(obj_y[argv(0)])>-3)
 return <var(lastxbuttpos)>,<var(lastybuttpos)>
 
+[function dialog_buttonpos_near]//obj, (sloupec), bez odsazeni
+If (argvcount==1)
+  var(lastxbuttpos,<eval(<d_def_skvira>)>)
+else
+  var(lastxbuttpos,<eval (<tag(sloupec_x[argv(1)])>)-<d_def_odsazeni>>)
+endif
+if !(argv(2))
+  var(lastxbuttpos,#+<d_def_odsazeni>)
+endif
+var(lastybuttpos,<tag(obj_y[argv(0)])>-3)
+return <var(lastxbuttpos)>,<var(lastybuttpos)>
+
 [function dialog_prvni]
 tag(icount,0)
 tag(rowcount,100)
@@ -35,24 +47,24 @@ tag(nexty,<argv(0)>+<eval((<d_def_radek_vyska>*<argv(1)>)+<d_def_skvira>)>)
 tag(sloupec_x[0],<eval(<d_def_okraj>+<d_def_skvira>)>)//nulty sloupec
 arg(index,1)
 if (argvcount==2)//je to radek
- gumppictiled(<d_def_okraj>+<d_def_skvira>,<argv(0)>,<tag(sirka)>-(2*(<d_def_okraj>+<d_def_skvira>)),<argv(1)>*<d_def_radek_vyska>,2624)
- return 0
+  gumppictiled(<d_def_okraj>+<d_def_skvira>,<argv(0)>,<tag(sirka)>-(2*(<d_def_okraj>+<d_def_skvira>)),<argv(1)>*<d_def_radek_vyska>,2624)
+  return 0
 endif//vice sloupcu
 while (index<(argvcount-1)) 
- tag(sirkasloupce[index-1],<eval argv(index+1)>) //treti argument a dale (sirka 1 atd...)
- tag(sloupec_x[index],<eval(<d_def_skvira>+<tag(sloupec_x[index-1])>+<tag(sirkasloupce[index-1])>)>)
- arg(index,#+1)		//(((<tag(sirka)>-(2*(<d_def_okraj>+<d_def_skvira>)))*<argv(index+1)>)/1000)
+  tag(sirkasloupce[index-1],<eval argv(index+1)>) //treti argument a dale (sirka 1 atd...)
+  tag(sloupec_x[index],<eval(<d_def_skvira>+<tag(sloupec_x[index-1])>+<tag(sirkasloupce[index-1])>)>)
+  arg(index,#+1)		//(((<tag(sirka)>-(2*(<d_def_okraj>+<d_def_skvira>)))*<argv(index+1)>)/1000)
 endif
 arg(index,0)
 while (index<(argvcount-2))
- //src.smsg zacatek sloupce <index>:<tag(sloupec_x[index])>
- if !(safe sloupec_noback[index])
-  gumppictiled(<tag(sloupec_x[index])>,<argv(0)>,<tag(sirkasloupce[index])>,<eval argv(1)>*<d_def_radek_vyska>,2624)
- endif
- arg(index,#+1)
+  //src.smsg zacatek sloupce <index>:<tag(sloupec_x[index])>
+  if !(safe sloupec_noback[index])
+    gumppictiled(<tag(sloupec_x[index])>,<argv(0)>,<tag(sirkasloupce[index])>,<eval argv(1)>*<d_def_radek_vyska>,2624)
+  endif
+  arg(index,#+1)
 endif
 if !(safe sloupec_noback[index])
- gumppictiled(<tag(sloupec_x[index])>,<argv(0)>,((<tag(sirka)>-<tag(sloupec_x[index])>)-(<d_def_okraj>+<d_def_skvira>)),<eval argv(1)>*<d_def_radek_vyska>,2624)
+  gumppictiled(<tag(sloupec_x[index])>,<argv(0)>,((<tag(sirka)>-<tag(sloupec_x[index])>)-(<d_def_okraj>+<d_def_skvira>)),<eval argv(1)>*<d_def_radek_vyska>,2624)
 endif
 
 [function dialog_zvyrazni]
@@ -260,7 +272,7 @@ If (<iflags>&iflag_adminrea)&&(!src.isadmin)
 else
   arg(hodnota,<argv(5)>)
   if (strlen(<tag(from)>))
-    arg(hodnota,<?safe finduid(tag(from)).<arg(hodnota)>?>)
+    arg(hodnota,<?safe finduid(<tag(from)>).<arg(hodnota)>?>)
   else
     arg(hodnota,0)
   endif

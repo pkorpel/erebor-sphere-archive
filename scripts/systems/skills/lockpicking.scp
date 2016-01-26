@@ -60,8 +60,8 @@ remove
 return 1
 
 [function lockpick_ok]
-tag(wasSpawned,1)
 link.type=t_container
+link.tag(lockpicked,1)
 cont.sysMessage("<cont.sex(Odemkl,Odemkla)> jsi zamek!")
 cont.skillgain(skill_lockpick)
 

@@ -5494,7 +5494,7 @@ endif
 return 1
 
 on=@timer // move the treasure
-arg(treasure,<tag(pokladnik[0]).tag(myLastNew)>)
+arg(treasure,<tag(treasureKeeper[0]).tag(myLastNew)>)
 if (arg(treasure).isItem)
   if (<eval moreY> == 0) // this step moves the treasure to the front and down one position
     if (<arg(treasure)> != <tag(lastTransported)>)
@@ -5555,13 +5555,13 @@ argo.dialog_zpruhledni
 argo.texta(<argo.dialog_textpos(0,0)>,42,"Strazce koncove mistnosti")
 
 argo.dialog_textpos(1,0)
-argo.texta(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,<d_def_writecolor>,"Pokladnik:")
+argo.texta(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,<d_def_writecolor>,"treasureKeeper:")
 
 argo.button(<argo.dialog_buttonpos(1,1)>,<d_def_button_checkr1>,<d_def_button_checkr2>,1,0,3) // add link to the treasureMan :P
 
-if (strlen(<tag(pokladnik[0])>))
+if (strlen(<tag(treasureKeeper[0])>))
   argo.dialog_textpos(1,1)
-  argo.texta(<lastxpos>+35,<lastypos>,<d_def_readColor>,"<?tag(pokladnik[0])?>")
+  argo.texta(<lastxpos>+35,<lastypos>,<d_def_readColor>,"<?tag(treasureKeeper[0])?>")
 endif
 
 argo.f_customLink_D_print(balconySpawn,<uid>,2)
@@ -5577,10 +5577,10 @@ src.sysMessage("exit")
 on=1 // ok
 
 on=3
-if (strlen(<tag(pokladnik)>))
-  f_customLink_target("pokladnik",1,0,"d_hcn_endRoom_pillar")
+if (strlen(<tag(treasureKeeper)>))
+  f_customLink_target("treasureKeeper",1,0,"d_hcn_endRoom_pillar")
 else
-  f_customLink_target("pokladnik",0,0,"d_hcn_endRoom_pillar")
+  f_customLink_target("treasureKeeper",0,0,"d_hcn_endRoom_pillar")
 endif
 
 

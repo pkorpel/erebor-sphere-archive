@@ -841,8 +841,12 @@ if !(strlen(<src.region.tag(noshrink)>))
     src.act.name=<name>
     src.act.newmemory(<src>)
     src.act.act.color=<src.act.act.color>|MEMORY_IPET
-    src.act.food=<tag(myfood)>
-    src.act.hits=<tag(myhits)>
+    if (strlen(<tag(myfood)>))
+      src.act.food=<tag(myfood)>
+    endif
+    if (0<tag(myhits)>)
+      src.act.hits=<tag(myhits)>
+    endif
     src.act.findlayer(21).remove
     if(<src.act.id> == c_m_phoenix_poison) || (<src.act.id> == c_m_phoenix)// OPRAVA FENY
       src.act.events=-e_npc_leaper
@@ -855,7 +859,7 @@ if !(strlen(<src.region.tag(noshrink)>))
     arg.d = <findres(chardef, <more1>)>
     if (<arg.d>)
       if (<?findres(itemdef, <?<arg(d)>.icon?>)?> == <?dispid?>)
-        src.sysMessage("Byl sem pokazy, ale uz vporadku. Pristi poklikani uz vrati zvire.")
+        src.sysMessage("Byl sem pokazeny, ale uz jsem vporadku. Pristi poklikani uz vrati zvire.")
         tag(my_id, <arg.d>)
         more1 = 0
         return 1

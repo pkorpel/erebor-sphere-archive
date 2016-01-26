@@ -1,42 +1,582 @@
-[itemdef i_mem_poklad]
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// I N I T I A L I Z A T I O N 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+[function newTreasure]
+newnpc c_treasureKeeper
+lastnewchar.dialog(d_treasure_admin)
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Def Names
+[defnames d_def_treasures]
+d_def_treasureRespawnDelay            60 // min time period after which a treasure is respawned after opening
+d_def_treasureSpawnDelay              55 // time period in minutes for which an opened treasure is spawned (treasure chest decay time)
+d_def_treasureSpawnAnomaly             0 // per mil of a spawn delay that is randomly added (0%% up to the defined value)
+d_def_treasureSpawnDefault          1440 // one day (24*60)
+d_def_treasureGoldInit        "500 1000"  // gold placed in the treasure right after a new chest is spawned
+d_def_treasureGoldDefault             60 // 1gp per second
+d_def_treasureLockpickDefault       80.0 // necessary lockpicking skill to open the chest
+d_def_treasureFlagShrink              01 // is shrink item flag
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// D I A L O G S 
+
+[Dialog d_treasure_admin]
+argo.SetLocation=15,5
+
+arg(info_width,145)
+arg(input_width,100)
+argo.tag(sirka,648)
+argo.tag(vyska,<eval <d_def_baseMenu_vyska>+(5*<d_def_skvira>)+((6+<eval tag(addItemsCount)>)*<d_def_radek_vyska>)>)
+argo.dialog_prvni
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,<info_width>,<input_width>,<info_width>)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,<info_width>,<input_width>,<info_width>)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,<info_width>)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,30)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,30)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,30,100,250,65,65,65,30)
+argo.dialog_pozadi(<argo.tag(nexty)>,<eval tag(addItemsCount)>,30,100,250,65,65,65,30)
+argo.dialog_zpruhledni
+
+argo.newTextLine(<argo.dialog_textpos(0,0)>,<d_def_headcolor>,"Administrace Pokladu")
+
+argo.newTextLine(<argo.dialog_textpos(1,0)>,<d_def_readcolor>,"Respawn (min):")
+var(lastxpos,#+<info_width>+<d_def_skvira>)
+if (0<tag(respawn_delay)> > 0)
+  argo.newTextEntry(<lastxpos>,<lastypos>,100,1,"<eval tag(respawn_delay)>")
+else
+  argo.newTextEntry(<lastxpos>,<lastypos>,100,1,"<d_def_treasureSpawnDefault>")
+endif
+var(lastxpos,#+<input_width>+<d_def_skvira>)
+argo.newTextLine(<lastxpos>,<lastypos>,<d_def_readcolor>,"Anomalie (promile):")
+var(lastxpos,#+<info_width>+<d_def_skvira>)
+if (0<tag(respawn_anomaly)> > 0)
+  argo.newTextEntry(<lastxpos>,<lastypos>,100,2,"<eval tag(respawn_anomaly)>")
+else
+  argo.newTextEntry(<lastxpos>,<lastypos>,100,2,"<eval d_def_treasureSpawnAnomaly>")
+endif
+
+argo.newTextLine(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Zlata (gp/min):")
+var(lastxpos,#+<info_width>+<d_def_skvira>)
+if (0<tag(gold_per_minute)> > 0)
+  argo.newTextEntry(<lastxpos>,<lastypos>,100,3,"<eval tag(gold_per_minute)>")
+else
+  argo.newTextEntry(<lastxpos>,<lastypos>,100,3,"<d_def_treasureGoldDefault>")
+endif
+var(lastxpos,#+<input_width>+<d_def_skvira>)
+argo.newTextLine(<lastxpos>,<lastypos>,<d_def_readcolor>,"Pocatecni vklad:")
+var(lastxpos,#+<info_width>+<d_def_skvira>)
+if (<strlen(<tag(gold_init)>)> > 0)
+  argo.newTextEntry(<lastxpos>,<lastypos>,100,4,"<tag(gold_init)>")
+else
+  argo.newTextEntry(<lastxpos>,<lastypos>,100,4,"<d_def_treasureGoldInit>")
+endif
+
+argo.newTextLine(<argo.dialog_textpos(3,0)>,<d_def_readcolor>,"Lockpick (promile):")
+if (0<tag(lockpick)> > 0)
+  argo.newTextEntry(<lastxpos>+<info_width>+<d_def_skvira>,<lastypos>,100,5,"<eval tag(lockpick)>")
+else
+  argo.newTextEntry(<lastxpos>+<info_width>+<d_def_skvira>,<lastypos>,100,5,"<d_def_treasureLockpickDefault>")
+endif
+
+argo.button(<argo.dialog_buttonpos_near(4,0)>,0fbd,0fbf,1,0,2)  //set Item to add - dialog
+argo.newTextLine(<argo.dialog_textpos(4,1)>,<d_def_readcolor>,"Vybrat spawny strazici poklad")
+argo.newTextLine(<argo.dialog_textpos(4,3)>,<d_def_readcolor>,"Strazcu: ")
+argo.newTextLine(<argo.dialog_textpos(4,4)>,<d_def_readcolor>,"<eval tag(pocetSpawnu)>")
+
+argo.button(<argo.dialog_buttonpos_near(5,0)>,0fbd,0fbf,1,0,3)  //set Item to add - dialog
+argo.newTextLine(<argo.dialog_textpos(5,1)>,<d_def_readcolor>,"Pridat novy predmet")
+
+argo.newTextLine(<argo.dialog_textpos(6,0)>,<d_def_readcolor>,"E")
+argo.newTextLine(<argo.dialog_textpos(6,1)>,<d_def_readcolor>,"Cislo Itemu")
+argo.newTextLine(<argo.dialog_textpos(6,2)>,<d_def_readcolor>,"Item ID")
+argo.newTextLine(<argo.dialog_textpos(6,3)>,<d_def_readcolor>,"Pocet")
+argo.newTextLine(<argo.dialog_textpos(6,4)>,<d_def_readcolor>,"Sance")
+argo.newTextLine(<argo.dialog_textpos(6,5)>,<d_def_readcolor>,"Perioda")
+argo.newTextLine(<argo.dialog_textpos(6,6)>,<d_def_readcolor>,"Del")
+
+arg(i,0)
+while (<arg(i)> < <eval tag(addItemsCount)>)
+  argo.dialog_buttonpos_near(7,0)
+  argo.f_treasure_compileItemTags(<tag(itemToAdd[<eval arg(i)>])>)
+  argo.button(<lastxbuttpos>,<lastybuttpos>+<arg(i)>*<d_def_radek_vyska>,d_def_button_select1,d_def_button_select2,1,0,100+<arg(i)>) //edit Item - dialog
+  argo.dialog_textpos(7,1)
+  argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"Item <eval arg(i)>")
+  argo.dialog_textpos(7,2)
+  argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?argo.tag(itID)?>")
+  argo.dialog_textpos(7,3)
+  argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(itAmount)?>x")
+  argo.dialog_textpos(7,4)
+  argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(chance)?>%")
+  argo.dialog_textpos(7,5)
+  if (0<argo.tag(itPeriod)>)
+    argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(itPeriod))?>h")
+  else
+    argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"OFF")
+  endif
+  argo.dialog_buttonpos_near(7,6)
+  argo.button(<lastxbuttpos>,<lastybuttpos>+<arg(i)>*<d_def_radek_vyska>,0fb1,0fb3,1,0,1000+<arg(i)>)	//delete Item
+  arg(i,#+1)
+endwhile
+
+argo.button(<d_def_okraj>+<d_def_skvira>,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb7,0fb9,1,0,1)		//ok
+argo.button(<d_def_okraj>+<d_def_skvira>+33,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb1,0fb3,1,0,0)	//cancel
+
+argo.newTextLine(<argo.tag(sirka)>-250,(<argo.tag(vyska)>-<d_def_okraj>)-21,<d_def_readcolor>,"Vygenerovat testovaci balicek")
+argo.button(<argo.tag(sirka)>-<d_def_okraj>-<d_def_skvira>-33,(<argo.tag(vyska)>-<d_def_okraj>)-23,d_def_button_select1,d_def_button_select2,1,0,4)	//Generate Test Pack
+
+[Dialog d_treasure_admin button]
+on=0
+
+on=@anyButton
+arg(delay,<fixNumber(<argtxt(1)>)>)
+if (<arg(delay)> < d_def_treasureRespawnDelay)
+  src.redMessage("Doba spawnu pokladu musi byt nenulova kladna hodnota, minimalne <d_def_treasureRespawnDelay>min.")
+  tag(respawn_delay,<d_def_treasureRespawnDelay>)
+else
+  tag(respawn_delay,<arg(delay)>)
+endif
+arg(anomaly,<fixNumber(<argtxt(2)>)>)
+if (<arg(anomaly)> < 0)
+  src.redMessage("Nelze nastavovat anomalii respawnu pokladu jako zapornou hodnotu.")
+  tag(respawn_anomaly,<d_def_treasureSpawnAnomaly>)
+else
+  tag(respawn_anomaly,<arg(anomaly)>)
+endif
+arg(gold,<fixNumberPositive(<argtxt(3)>)>)
+if (<arg(gold)> < 0)
+  src.redMessage("Nelze generovat zaporny pocet penez! Nastavena defaultni hodnota 3600gp/min.")
+  tag(gold_per_minute,<d_def_treasureGoldDefault>)
+else
+  tag(gold_per_minute,<arg(gold)>)
+endif
+tag(gold_init,"<argtxt(4)>")
+arg(lockpick,<eval argtxt(5)>)
+if (<arg(lockpick)> < 0)
+  src.redMessage("Lockpicking musi byt nezaporny. Nastavena defaultni hodnota.")
+  tag(lockpick,<d_def_treasureLockpickDefault>)
+else
+  tag(lockpick,<arg(lockpick)>)
+endif
+
+if (<strlen(<tag(lastTreasureChestUID)>)>)
+  if (!<eval finduid(<tag(lastTreasureChestUID)>).tag(wasOpened)>) //non-opened treasure chest is already spawned - fix it with current values
+    arg(chest,<finduid(<tag(lastTreasureChestUID)>)>)
+    arg(chest).tag(lockpick,<tag(lockpick)>) // the lockpick needsto be applied to the chest (duplicated value because of the lockpicking skill)
+    f_treasure_setType(<arg(chest)>,<uid>)
+  endif
+endif
+//argn == 1 -> OK
+if (<argn> == 2)	// set Item to Add dialog
+  dialog(d_guarditAdv,d_treasure_admin)
+elseif (<argn> == 3)	// set Item to Add dialog
+  dialog(d_treasure_addItem)
+elseif (<argn> == 4)	// set Item to Add dialog
+  newitem(i_bag)
+  lastnew.name="TEST POKLADU"
+  lastnew.color=<color_o_mithril>
+  lastnew.bounce
+  f_treasure_generate(<lastnew>,1)
+  dialog(d_treasure_admin)
+elseif (<argn> >= 1000) // remove an existing Item
+  arg(itemNumber,<eval argn-1000>)
+  dialog(d_treasure_itemDelete_yesNo,<eval arg(itemNumber)>)
+elseif (<argn> >= 100) // open an existing item record for editing
+  arg(itemNumber,<eval argn-100>)
+  dialog(d_treasure_addItem,<tag(itemToAdd[<eval arg(itemNumber)>])>,<eval arg(itemNumber)>)
+endif
+src.sysMessage("Zmeny aplikovany")
+
+// argv(0) - ID
+// argv(1) - flags
+// argv(2) - chance
+// argv(3) - amount
+// argv(4) - period
+[function f_treasure_compileItemTags]
+tag(itID,<argv(0)>)
+tag(flgs,<argv(1)>)
+tag(chance,<argv(2)>)
+tag(itAmount,<argv(3)>)
+tag(itPeriod,<argv(4)>)
+
+[dialog d_treasure_itemDelete_yesNo]
+argo.f_dialog_YesNo("Smazat predmet c. <eval argv(0)>?")
+argo.tag(itemNum,<argv(0)>)
+
+[dialog d_treasure_itemDelete_yesNo Button]
+on=0
+src.sysmessage("Smazani predmetu stornovano.")
+dialog(d_treasure_admin)
+
+on=1
+arg(itemNumber,<eval argo.tag(itemNum)>)
+while (<arg(itemNumber)> < <eval <eval tag(addItemsCount)>-1>)
+  tag(itemToAdd[<eval itemNumber>],<tag(itemToAdd[<eval itemNumber+1>])>)
+  arg(itemNumber,#+1)
+endwhile
+tag(addItemsCount,<eval <eval tag(addItemsCount)>-1>)
+tag.remove(itemToAdd[<eval itemNumber>])
+dialog(d_treasure_admin)
+
+on=2
+src.sysmessage("Smazani predmetu stornovano.")
+dialog(d_treasure_admin)
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// argv(0) - ID
+// argv(1) - flags
+// argv(2) - chance
+// argv(3) - amount
+// argv(4) - period
+// argv(5) - this item number
+[Dialog d_treasure_addItem]
+argo.SetLocation=15,40
+
+argo.tag(sirka,920)
+argo.tag(vyska,157)
+argo.dialog_prvni
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,110,250,30)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,110,80)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,110,80)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,110,80)
+argo.dialog_zpruhledni
+if (<argvcount> > 1)
+  src.sysmessage("pocet: <argvcount>, <eval argv(5)>, <argv(4)>")
+  arg(itemID,<argv(0)>)
+  arg(chance,<argv(2)>)
+  arg(itemAmount,<argv(3)>)
+  arg(period,<argv(4)>)
+  if (argvcount == 6) //editing existing value
+    src.sysmessage("editing existing value")
+    argo.tag(thisItem,<eval <argv(5)>>)
+  endif
+else
+  arg(itemID,"i_")
+  arg(chance,"100")
+  arg(itemAmount,"1")
+  arg(period,"0")
+endif
+
+argo.newTextLine(<argo.dialog_textpos(0,0)>,<d_def_headcolor>,"Administrace Pokladu - Pridani predmetu")
+
+argo.newTextLine(<argo.dialog_textpos(1,0)>,<d_def_readcolor>,"ID/Chardef")
+argo.newTextEntry(<lastxpos>+110+<d_def_skvira>,<lastypos>,250,1,<arg(itemID)>)
+argo.checkBox(<lastxpos>+110+250+(2*<d_def_skvira>),<lastypos>,210,211,<hval argv(1)>&<d_def_treasureFlagShrink>,10)
+argo.newTextLine(<argo.dialog_textpos(1,3)>,<d_def_readcolor>,"Zaskrtni, pokud jde o shrink (a vepis chardef jezditka).")
+
+argo.newTextLine(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Sance (%)")
+argo.newTextEntry(<argo.dialog_textpos(2,1)>,70,2,"<arg(chance)>")
+argo.newTextLine(<argo.dialog_textpos(2,2)>,<d_def_readcolor>,"Sance na vytvoreni se pocita zvlast pro jeden kazdy z celkoveho poctu vytvarenych predmetu.")
+
+argo.newTextLine(<argo.dialog_textpos(3,0)>,<d_def_readcolor>,"Pocet")
+argo.newTextEntry(<argo.dialog_textpos(3,1)>,70,3,"<arg(itemAmount)>")
+argo.newTextLine(<argo.dialog_textpos(3,2)>,<d_def_readcolor>,"Pocet identickych predmetu. Muze byt vynasoben poctem uplynulych period.")
+
+argo.newTextLine(<argo.dialog_textpos(4,0)>,<d_def_readcolor>,"Perioda (hod.)")
+argo.newTextEntry(<argo.dialog_textpos(4,1)>,70,4,"<eval arg(period)>")
+argo.newTextLine(<argo.dialog_textpos(4,2)>,<d_def_readcolor>,"Nenulova hodnota, pokud se ma po dane periode pridat n (nastaveni Poctu) dalsich predmetu.")
+
+if (argvcount == 6) //editing existing value
+  argo.button(<d_def_okraj>+<d_def_skvira>,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb7,0fb9,1,0,2)	//ok -> edit existing value
+else
+  argo.button(<d_def_okraj>+<d_def_skvira>,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb7,0fb9,1,0,1)	//ok -> add new value
+endif
+argo.button(<d_def_okraj>+<d_def_skvira>+33,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb1,0fb3,1,0,0)	//cancel
+
+[Dialog d_treasure_addItem button]
+on=0
+dialog(d_treasure_admin)
+
+on=1	// apply changes -> new value
+if !(f_treasure_addItem_checkArgs(<argTxt(1)>,<argTxt(2)>,<argTxt(3)>,<argTxt(4)>))
+  dialog(d_treasure_addItem,<argTxt(1)>,<f_treasure_addItem_getChkBut(<argChk(10)>)>,<eval argTxt(2)>,<eval argTxt(3)>,<eval argTxt(4)>,<argo.tag(thisItem)>)
+else
+  tag(itemToAdd[<eval <eval tag(addItemsCount)>>],"<argTxt(1)>,<f_treasure_addItem_getChkBut(<argChk(10)>)>,<eval argTxt(2)>,<eval argTxt(3)>,<eval argTxt(4)>")	//ID, flags, chance, amount, period
+  tag(addItemsCount,<eval tag(addItemsCount)+1>)
+  dialog(d_treasure_admin)
+endif
+
+on=2	// apply changes -> edit existing value
+if !(f_treasure_addItem_checkArgs(<argTxt(1)>,<argTxt(2)>,<argTxt(3)>,<argTxt(4)>))
+  dialog(d_treasure_addItem,<argTxt(1)>,<f_treasure_addItem_getChkBut(<argChk(10)>)>,<eval argTxt(2)>,<eval argTxt(3)>,<eval argTxt(4)>,<argo.tag(thisItem)>)
+else // everything OK
+  tag(itemToAdd[<eval <eval argo.tag(thisItem)>>],"<argTxt(1)>,<f_treasure_addItem_getChkBut(<argChk(10)>)>,<eval argTxt(2)>,<eval argTxt(3)>,<eval argTxt(4)>")	//ID, flags, chance, amount, period
+  dialog(d_treasure_admin)
+endif
+
+// argv(0) - ID
+// argv(1) - chance
+// argv(2) - amount
+// argv(3) - period
+[function f_treasure_addItem_checkArgs]
+if !(safe(<argv(0).def>))
+  src.redMessage("Zadane ID neodpovida zadnemu predmetu! Oprav jmeno itemu.")
+  return 0
+elseif ((<eval argv(1)> <= 0) || (<eval argv(1)> > 100))
+  src.redMessage("Sance musi byt hodnota mezi 0 a 100")
+  return 0
+elseif (<eval argv(2)> <= 0)
+  src.redMessage("Pocet generovanych predmetu musi byt pozitivni nenulove cislo")
+  return 0
+elseif (<strlen(<argv(3)>)> && (<eval argv(3)> < 0))
+  src.redMessage("Perioda musi byt prirozenym cislem.")
+  return 0
+endif
+return 1
+
+// argv(0) - shrink checkButton
+[function f_treasure_addItem_getChkBut]
+arg(checkButtons,0)
+if (<argv(0)>)
+  arg.checkButtons=<hval arg(checkButtons)>|<d_def_treasureFlagShrink> //adds shrink bit if checked
+endif
+return<arg(checkButtons)>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//  SUPPORT DEFINITIONS and FUNCTIONS
+////////////////////////////////////////////////////////////////////////////////////////////////////
+[function f_treasure_count_gold]
+return<eval ((<serv.time>-<tag(lastOpened)>)*<tag(gold_per_minute)>)/600>
+
+// must be executed upon the i_mem_treasureGenerator
+[function f_treasureGenerator_init]
+timer=<eval (cont.tag(respawn_delay)*60)+((<eval cont.tag(respawn_anomaly)>*<cont.tag(respawn_delay)>)/1000)>
+
+//must be executed upon the treasurer //argv(0) - reset memory
+[function f_treasure_initTreasureGenerator]
+arg(memory,<findId(i_mem_treasureGenerator)>)
+if (!0<arg(memory)>)
+  newequip(i_mem_treasureGenerator)
+endif
+
+//argv(0) - chest
+//argv(1) - treasureKeeper
+[function f_treasure_setType]
+if (0<argv(0).tag(lockpick)> && !0<argv(0).tag(lockpicked)>)
+  argv(0).type=t_container_locked
+else
+  argv(0).type=t_container
+endif
+if (0<argv(1).tag(pocetSpawnu)> && !0<argv(0).tag(wasOpened)>)
+  argv(0).type=t_treasure_guarded //this intentionally overwrites the t_container_locked as the guarded type has precedence
+else
+return<strcmpi(<argv(0)>,t_container)>
+
+
+[itemdef i_mem_treasureGenerator]
 ID = i_memory
 TYPE = t_eq_script
 LAYER = layer_special
 name=generator pokladu
 
 on=@create
-timer=<cont.tag(mytimer)>//nastavi timer memory itemu podle udaje na pokladnikovi
+timer=1
 attr=010
 
-on=@timer
-//timer=cont.tag(mytimer)//nastavi timer memory itemu podle udaju na pokladnikovi plus rozhodi nahodu
-if (cont.tag(mapa)) // tag mapa = max pocet minut spawnu
-	timer=<eval {0 <eval <cont.tag(mapa)>*60>}>
-elseif (cont.tag(anomalie)) // tag anomalie = pocet minut spawnu + 10 hodin - 5 hodin
-	timer=<eval {<eval (<eval(<eval <cont.tag(anomalie)>*60>-18000)>)>  <eval (<eval(<eval <cont.tag(anomalie)>*60>+36000)>)>}>
-else
-	timer=<eval {<eval (<eval(90000-18000)>)>  <eval (<eval(90000+36000)>)>}>// 25 hodin plus 10 hodin / minus 5 hodin
-endif
-if (finduid(cont.tag(mylastnew)))//truhla existuje
- if (finduid(cont.tag(mylastnew)).timer < 0)//neni otevrena
-  if (finduid(cont.tag(mylastnew)).id==i_poklad)
-   return 1
-  endif
- endif
-endif
-cont.newitem(i_poklad)
-cont.act.p=<cont.p>
-cont.tag(mylastnew,<cont.act>)//zapamatuje si uid truhly
-cont.act.tag(vytvoreno,<serv.time>)//pro kontrolu
-cont.act.attr(010)
-cont.act.tag(pokladnik,<cont>)//zapise na truhlu uid pokladnika
-if (cont.tag(lockpick))
- cont.act.type=t_container_locked
- cont.act.tag(lockpick,<cont.tag(lockpick)>)
-endif
-return 1
+on=@equip
+f_treasureGenerator_init
 
-[itemdef i_poklad_fake]
+on=@timer
+if (strlen(<cont.tag(lastTreasureChestUID)>)) // should not happen, but just to be sure
+  arg(treasureTimer,<finduid(cont.tag(lastTreasureChestUID)).timer>)
+  if (<arg(treasureTimer)> < 0) //neni otevrena
+    return 0 // remove
+  endif
+  timer=<arg(treasureTimer)>+1 //respawn right after the old treasure chest is gone
+  return 1
+endif
+cont.newitem(i_treasureChest)
+cont.act.p=<cont.p>
+cont.tag(lastTreasureChestUID,<cont.act>) //zapamatuje si uid truhly
+cont.act.tag(vytvoreno,<serv.time>) //pro kontrolu
+cont.act.attr(010)
+cont.act.tag(treasureKeeper,<cont>) //zapise na truhlu uid treasureKeepera
+if (0<cont.tag(lockpick)>)
+  cont.act.tag(lockpick,<cont.tag(lockpick)>)
+endif
+f_treasure_setType(<cont.act>,<cont>)
+return 0 //remove the item
+
+[itemdef i_treasureChest]
+id=i_chest_metal
+name=poklad
+category=poklady
+subsection=truhly_s_poklady
+description=vygenerovany poklad nepouzivat
+
+on=@userDClick
+tag(klikos,<src>)
+if (src.isGM)
+  src.sysmessage(Nesahej na to, rozbijes to!)
+  src.sysmessage(Kazdej dvojklik zpusobi, ze poklad do hodiny zmizi a novej bude mit mene penez, protoze se to pocita podle stari truhly!)
+  src.sysmessage(Ale kdyzs uzs na me klik, tak je tu zatim <finduid(tag(treasureKeeper)).f_treasure_count_gold>gp.)
+  return 1
+endif
+arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
+if (!0<tag(wasOpened)> && treasureKeeper.f_guarditAdv_CheckSpawns) // check for guards only if the chest was not opened at all
+  src.sysmessage("Nedostanes se dovnitr, dokud je strazce nazivu!")
+  type=t_treasure_guarded
+  return 1
+elseif (type!=t_container_locked)
+  if (<eval tag(wasSpawned)>==0)  //je odemcena ale jeste nevyskocili guardi (pokud jsou)
+    timer=<d_def_treasureSpawnDelay>*60
+    tag(wasSpawned,1)
+    if (tag(treasureKeeper).findlayer(29).rescount) //guards should be spawned
+      f_treasure_throwGuards
+      return 1
+    endif
+  endif
+  if (<eval tag(wasOpened)>==0)
+    tag(wasOpened,1)
+    treasureKeeper.f_treasure_generate(<uid>)
+    treasureKeeper.f_treasure_initTreasureGenerator
+  endif
+  src.accMsg("hrac <src.name> (acc <src.account.name>,Lvl <eval src.tag(level)>) otevrel poklad (UID: <uid>) na souradnicich -<p>-, <src.region.name>")
+  open
+  return 1
+endif
+
+on=@timer
+arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
+arg(treasureKeeper).tag.remove(lastTreasureChestUID)
+arg(treasureKeeper).f_treasure_initTreasureGenerator
+return 0 // remove
+
+on=@destroy
+finduid(<tag(treasureKeeper)>).tag.remove(lastTreasureChestUID)
+
+// argv(0) -> uid truhly
+// argv(1) -> suppress time reset - used to test generated treasure without reseting the age
+// src -> hrac otevirajici truhlu
+[function f_treasure_generate]
+f_treasure_generate_gold(<argv(0)>,<src>) //generate gold first, as the TAG(lastOpened) is needed for this - using VAR would be clumsy in this case
+var(treasureLastOpened,<tag(lastOpened)>)
+if (<eval argv(1)> == 0)
+  tag(lastOpened,<serv.time>) // nastavit dobu otevreni pokladu drive, nez dojde k jeho generovani pro pripad, ze by se generovani pokladu nezdarilo.
+endif
+arg(i,0)
+arg(items,<eval tag(addItemsCount)>)
+while (<arg(i)> < <arg(items)>)
+  f_treasure_processItemRecord(<argv(0)>,<tag(itemToAdd[<eval arg(i)>])>)
+  arg(i,#+1)
+endwhile
+return
+
+// argv(0) -> uid truhly
+// argv(1) -> ID
+// argv(2) -> flags
+// argv(3) -> chance
+// argv(4) -> amount
+// argv(5) -> period
+[function f_treasure_processItemRecord]
+arg(totalAmount,<argv(4)>)
+arg(periodsPassed,1)
+if (<eval argv(5)>) // this is a periodically generated content
+  arg(periodsPassed,<eval (<serv.time>-<var(treasureLastOpened)>)/(36000*<argv(5)>)>)
+endif
+arg(canPile,0)
+arg(isShrink,<argv(2)>&<d_def_treasureFlagShrink>)
+if (!arg(isShrink)) //this is an item
+  arg(canPile,<eval <argv(1)>.can_pile>)
+endif
+src.sysmessage("pajl: <arg(canPile)>")
+arg(totalAmount,<eval arg(periodsPassed)*arg(totalAmount)>)
+if (<arg(canPile)>) //cannot pile, generate each item separately
+  while (<arg(totalAmount)>)
+    if (<arg(totalAmount)> > 60000)
+      arg(partialAmount,60000)
+    else
+      arg(partialAmount,<arg(totalAmount)>)
+    endif
+    f_treasure_generate_item(<argv(0)>,<argv(1)>,<argv(2)>,<argv(3)>,<arg(partialAmount)>)
+    arg(totalAmount,#-<arg(partialAmount)>)
+  endwhile
+else
+  if (arg(totalAmount) > 1)
+    runxtimes(<arg(totalAmount)>,f_treasure_generate_item(<argv(0)>,<argv(1)>,<argv(2)>,<argv(3)>,1))
+    return
+  endif
+  f_treasure_generate_item(<argv(0)>,<argv(1)>,<argv(2)>,<argv(3)>,1)
+endif
+return
+
+// argv(0) -> UID truhly
+// argv(1) -> ID
+// argv(2) -> flags
+// argv(3) -> chance
+// argv(4) -> amount
+[function f_treasure_generate_item]
+if ({0 99} < <argv(3)>) // RNG if chance is defined for this item
+  if (<argv(2)> & <d_def_treasureFlagShrink>)  
+    newitem(<hval <argv(1)>.icon>)
+    lastnew.type=t_figurine_2
+    lastnew.tag(my_id,<argv(1)>)
+    lastnew.name="<?<argv(1)>.name?>"
+    lastnew.color=<hval <def_color_<argv(1)>>>
+    lastnew.more1=1
+  else
+    newitem(<argv(1)>)
+  endif
+  lastnew.amount=<argv(4)>
+  lastnew.cont=<argv(0)>
+  src.AccMsg("BYL VYTVOREN predmet v pokladu - uid: <lastnew> jmeno: <lastnew.name>, container: (<argv(0)>,<argv(0).name>), pocet: <argv(4)>.")
+endif
+
+// argv(0) -> uid truhly
+// argv(1) -> uid hrace
+[function f_treasure_generate_gold]
+src.f_vytvor_mesec(<f_treasure_count_gold>,<argv(0)>) //prvni arg == kolik penez, druhej arg == kam ma ladovat truhly, spusteno nad hracem kvuli logovani
+arg(gold_init,<eval {<tag(gold_init)>}>)
+if (<arg(gold_init)> > 0)
+  src.f_vytvor_mesec(<arg(gold_init)>,<argv(0)>)
+endif 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// G U A R D S   H A N D L I N G
+
+[function f_treasure_throwGuards]
+tag(treasureKeeper).f_guarditAdv_RemoveAllSpawns	//vycisti pamet drive vygenerovanych spawnu
+tag(treasureKeeper).findlayer(29).contents(f_initGuardSpawn(<uid>)) //all the spawns in the backpack of the Treasure keeper
+tag(guardSpawnTime,<serv.time>)	// pro osetreni otevreni truhly pred spawnutim guardu...
+type=t_treasure_guarded
+src.sysmessage("Truhla je hlidana!")
+
+[function f_initGuardSpawn] //argv(0) - uid pokladu
+src.f_spawninit(1,<more1>,60,60,12)
+argv(0).f_guarditAdv_addSpawn(<var(spawnuid)>) //spawn
+argv(0).type=t_treasure_guarded
+topobj.newitem(i_randompotvora)
+arg(createdMonster,<topobj.act>)
+createdMonster.p=<topobj.p>
+createdMonster.tag(mrchaspawn,<var(spawnuid)>)
+createdMonster.timer=3700 //hlidace nechame jeste trochu dyl nez poklad. Pro sychr
+
+[typedef t_treasure_guarded]
+on=@userdclick
+if (<tag(treasureKeeper).f_guarditAdv_CheckSpawns> || <f_guarditAdv_CheckSpawns>)
+  src.sysmessage("Nedostanes se dovnitr, dokud je strazce nazivu!")
+  return 1
+elseif (<eval (<serv.time> - <tag(guardSpawnTime)>)> < 90) // otevrit truhlu pujde az 5s po vygenerovani npc
+  src.sysMessage("Jeste ne ! ! ! ")
+  return 1
+else
+  src.sysMessage("Vsichni strazci se zdaji byt mrtvi.")
+  if (0<tag(lockpick)> && ! 0<tag(lockpicked)>) //wasn't lockpicked yet
+    type=t_container_locked
+  else
+    type=t_container
+  endif
+endif
+
+
+////////////////////////////////////////
+// Fake chest - may be most probably removed from the scripts
+
+[itemdef i_treasureChest_fake]
 id=i_chest_metal
 name=poklad
 attr=010
@@ -71,136 +611,5 @@ if (src.targ.type==t_spawn_char)
 	link=<src.targ>
 	return 1
 endif
-
-[itemdef i_poklad]
-id=i_chest_metal
-name=poklad
-category=poklady
-subsection=truhly_s_poklady
-description=vygenerovany poklad nepouzivat
-
-on=@userdclick
-if (<eval finduid(tag(pokladnik)).tag(provereno)>==1)
-  finduid(tag(pokladnik)).tag.remove(provereno)
-endif
-tag(klikos,<src>)
-if (src.isGM)
-  src.sysmessage(nesahej na to, rozbijes to!)
-  src.sysmessage(nesahat ! kazdej dvojklik zpusobi, ze poklad do hodiny zmizi a novej bude mit mene penez, protoze se to pocita podle stari truhly)
-  src.sysmessage(ale kdyzs uz na me kliknul tak je tu zatim <eval (<serv.time>-<finduid(tag(pokladnik)).tag(lastopen)>)/10*<finduid(tag(pokladnik)).tag(prachy)>> gp)
-  return 1
-elseif (type!=t_container_locked)
-  if (<eval tag(wasSpawned)>==0)	//je odemcena ale jeste nevyskocili guardi - probiha, pokud se o otevreni nestara lockpick
-    timer=3600		//aby truhla za hodinu po spawnu guardu zmizela
-    tag(wasSpawned,1)
-    if (tag(pokladnik).findlayer(29).rescount)
-      f_poklad_throwGuards
-      return 1
-    endif
-  endif
-  if (<eval tag(wasOpened)>==0)
-    tag(wasOpened,1)
-    arg(lastOpen,<eval finduid(<tag(pokladnik)>).tag(lastopen)>)
-    finduid(<tag(pokladnik)>).tag(lastopen,<serv.time>) // nastavit dobu otevreni pokladu drive, nez dojde k jeho generovani pro pripad, ze by se generovani pokladu nezdarilo.
-    tag(pokladnik).findlayer(21).contents(f_poklad(<uid>,<src>,<arg(lastOpen)>))//na vsechno v baglu pokladnika provede funkci, uid hrace posilano kvuli logovani
-    finduid(<tag(pokladnik)>).f_dejprachy(<uid>,<src>,<arg(lastOpen)>)
-  endif
-  if !(<eval tag(pokladnik).tag(noOpenLog)>)
-    src.accMsg("hrac <src.name> (acc <src.account.name>,Lvl <eval src.tag(level)>) otevrel poklad (UID: <uid>) na souradnicich -<p>-, <src.region.name>")
-  endif
-  open
-  return 1
-endif
-
-
-[function f_poklad_throwGuards]
-tag(pokladnik).f_guarditAdv_RemoveAllSpawns	//vycisti pamet drive vygenerovanych spawnu
-tag(pokladnik).findlayer(29).contents(f_hlidaci(<uid>))
-tag(guardSpawnTime,<serv.time>)	// pro osetreni otevreni truhly pred spawnutim guardu...
-type=t_poklad_guarded
-src.sysmessage("Truhla je hlidana!")
-
-
-[function f_poklad_addSpawns]
-if (<type> == t_spawn_char)
-  topobj.say("pridavam: <uid>")
-  topobj.f_guarditAdv_addSpawn(<uid>)
-endif
-
-//argv(0) -> uid truhly
-//argv(1) -> uid hrace
-//argv(2) -> tag lastOpen ~ serv.time posledniho predchoziho otevreni truhly (== stari pokladu)
-[function f_poklad]
-if (<tag(periodic)>)//jedna se o item jehoz mnozstvi se casem zvysuje
-  runxtimes(<eval <eval ( <serv.time>-<argv(2)> )*<tag(periodic)>>/846000>,f_dejpoklad(<argv(0)>,<argv(1)>))
-else
-  f_dejpoklad(<argv(0)>,<argv(1)>)
-endif
-
-//argv(0) -> uid truhly
-//argv(1) -> uid hrace
-[function f_dejpoklad]
-if ({0 100} < <tag(chance)>)||(!<tag(chance)>)//resi procenta a tam kde neni uvedeno pusti rovnou
-  topobj.newitem(<id>)
-  arg(createdItem,<topobj.act>)
-  createdItem.cont=<argv(0)>
-  createdItem.amount=<amount>
-  createdItem.more1=<more1>
-  createdItem.color=<color>
-  if(tag(my_id))
-    createdItem.name=<name>
-    createdItem.tag(my_id,<tag(my_id)>)
-    createdItem.type=t_figurine_2
-    createdItem.tag(myhits,<tag(myhits)>)
-    createdItem.tag(myfood,<tag(myfood)>)
-  elseif(type==t_figurine_2)
-    createdItem.type=t_figurine
-  endif
-  argv(1).AccMsg("BYL VYTVOREN predmet v pokladu - uid: <createdItem> jmeno: <createdItem.name>, container: (<argv(1)>,<argv(1).name>).")
-endif
-
-
-//argv(0) -> uid truhly
-//argv(1) -> uid hrace
-//argv(2) -> tag lastOpen - serv.time posledniho predchoziho otevreni truhly (== stari pokladu)
-[function f_dejprachy]
-argv(1).f_vytvor_mesec(<eval ( ( <serv.time> - <argv(2)> ) / (<tag(prachy)> * 10) )>,<argv(0)>) //prvni arg == kolik penez, druhej arg == kam ma ladovat truhly, spusteno nad hracem kvuli logovani
-if (tag(sek))
-  argv(1).f_vytvor_mesec(<eval {<tag(sek)>}>,<argv(0)>)
-endif 
-
-[function f_hlidaci]	//argv(0) - uid pokladu
-src.f_spawninit(1,<more1>,60,60,12)
-if (tag(guarded))//bude hlidat
-  topobj.f_guarditAdv_addSpawn(<var(spawnuid)>) //spawn
-endif
-argv(0).type=t_poklad_guarded
-topobj.newitem(i_randompotvora)
-arg(createdMonster,<topobj.act>)
-createdMonster.p=<topobj.p>
-createdMonster.tag(mrchaspawn,<var(spawnuid)>)
-createdMonster.timer=3700 //hlidace nechame jeste trochu dyl nez poklad. Pro sychr
-
-[typedef t_poklad_guarded]
-on=@userdclick
-if (<tag(pokladnik).f_guarditAdv_CheckSpawns>)
-  src.sysmessage("Nedostanes se dovnitr, dokud je strazce nazivu!")
-  return 1
-elseif (<eval (<serv.time> - <tag(guardSpawnTime)>)> < 90) // otevrit truhlu pujde az 5s po vygenerovani npc
-  src.sysMessage("Jeste ne ! ! ! ")
-  return 1
-else
-  type=t_container
-endif
-
-[function showTreasureTime]
-arg(tm,<serv.time>-<tag(lastopen)>)
-src.sysMessage("<dsToRTime(<arg(tm)>)>")
-
-
-[function f_showPeriode]
-src.sysMessage("periodic <eval <eval ( <serv.time>-<topobj.tag(lastopen)> )*<tag(periodic)>>/846000>")
-
-
 
 [eof]

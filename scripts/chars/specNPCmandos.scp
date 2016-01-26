@@ -55,48 +55,6 @@ say("U me muzes ziskat pilu, svetlo a vymenit drevo za propousteci zlataky.")
 
 ////////////////////////////////////////////
 
-[chardef c_pokladnik]
-id=c_man
-name=definice pokladu
-can=0
-
-TEVENTS=e_character
-
-category=Moria
-subsection=(systemova NPC)
-description=Pokladnik (dynamicky poklad)
-
-on=@create
-STR=5000
-MAXHITS=5000
-INT=30
-flag_immobile(1)
-flag_invisible(1)
-flag_invul(1)
-flag_stone(1)
-tag(mytimer,72000)//timer spawnuti dalsi truhly je nastaven na 10 hodin
-tag(prachy,2)//kolika se deli stari truhly. Vysledek se da v podobe seku
-tag(lastopen,<serv.time>)
-newitem(i_mem_poklad)
-equip(act)
-itemnewbie=i_backpack
-
-on=@userclick
-invis=1
-//removefromview
-
-on=@hit
-return 1
-
-on=@gethit
-return 1
-
-on=@death
-hits=<maxhits>
-return 1
-
-////////////////////////////////////////
-
 [chardef c_erebor_opilec]
 id=c_man
 name=Giroin

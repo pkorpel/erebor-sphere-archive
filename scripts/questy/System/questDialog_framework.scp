@@ -229,10 +229,32 @@ while (strcmpi(<tag(buttonToExit[<arg(i)>])>,<argv(0)>)) //search until the name
 endwhile
 return(<arg(i)>) // return found button number
 
-[function newTextLine] // counts the next free text position, returns its value and increments the textLines Counter
+// counts the next free text position, returns its value and increments the textLines Counter
+// if the arguments aren't empty, it also writes new text line places new text into the position
+// argv(0) - x-position
+// argv(1) - y-position
+// argv(2) - color
+// argv(3) - text
+[function newTextLine] 
 tag(textLines,<eval <tag(textLines)>+1>)
+if (strlen(<args>))
+  if (<argvcount> != 4)
+    src.accmsg("Warning: Dialog <name> passes invalid number of arguments to the newTextLine function")
+    return<eval tag(textLines)>
+  endif
+  settext(<tag(textLines)>,"<argv(3)>")
+  text(<argv(0)>,<argv(1)>,<argv(2)>,<tag(textLines)>)
+endif
 return<tag(textLines)>
-//settext(<tag(textLines)>,<args>)
+
+// argv(0) -  x-position
+// argv(1) - y-position
+// argv(2) - text length
+// argv(3) - argTxt number (the result acquirable from the buttons section
+// argv(4) - default text value
+[function newTextEntry]
+setText(newTextLine,"<argv(4)>")
+textEntry(<argv(0)>,<argv(1)>,<argv(2)>,<d_def_radek_vyska>,<d_def_writecolor>,<argv(3)>,<tag(textLines)>)
 
 [function lastTextLine] // the number of last added Text
 return<eval tag(textLines)>

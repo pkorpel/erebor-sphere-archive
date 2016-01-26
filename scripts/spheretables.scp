@@ -166,6 +166,7 @@ scripts\systems\lagr_afk.scp
 scripts\systems\necrobook.scp
 scripts\systems\pergameny.scp
 scripts\systems\poklady.scp
+scripts\systems\poklady_chars.scp
 scripts\systems\random_camps.scp
 scripts\systems\runebook.scp
 scripts\systems\spawns.scp

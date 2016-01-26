@@ -1,3 +1,43 @@
+[defnames def_muntColors]
+def_color_c_llama                              0
+def_color_c_horse_tan                          0
+def_color_c_horse_gray                         0
+def_color_c_horse_brown_lt                     0
+def_color_c_horse_brown_dk                     0
+def_color_c_ostard_desert                      0
+def_color_c_ostard_forest                      0
+def_color_c_llama_pack                         0
+def_color_c_horse_pack                         0
+def_color_c_ostard_zostrich                    0
+def_color_c_mount_unicorn_lbr                  0
+def_color_c_mount_undead_horse                 0
+def_color_c_m_unicorn                          0
+def_color_c_m_ridgeback                        0
+def_color_c_m_ridgeback_savage                 0
+def_color_c_a_MUSTANG_ROAN_pack              0f2
+def_color_c_a_MUSTANG_WIMMIMATE_pack         02e
+def_color_c_a_MUSTANG_REDROAN_pack          0279
+def_color_c_a_MUSTANG_PAMAMINO_pack          033
+def_color_c_a_MUSTANG_GREY_pack             03e7
+def_color_c_a_MUSTANG_ROAN                   0f2
+def_color_c_a_MUSTANG_WIMMIMATE              02e
+def_color_c_a_MUSTANG_REDROAN               0279
+def_color_c_a_MUSTANG_CHOCOLATE             01ba
+def_color_c_a_MUSTANG_PAMAMINO               033
+def_color_c_a_MUSTANG_SKY                   0263
+def_color_c_a_MUSTANG_GREY                  03e7
+def_color_c_a_MUSTANG_SKYGRAY               031c
+def_color_c_a_MUSTANG_CRIMSON               01b6
+def_color_c_a_MUSTANG_BLACK                 0455
+def_color_c_ostard_zostrich_green           0851
+def_color_c_mount_polar_bear        colors_white
+def_color_c_a_MUSTANG__invul                01b6
+def_color_c_ostard_zostrich_JMENO1          0650
+def_color_c_ostard_zostrich_JMENO2          0027
+def_color_c_ostard_zostrich_JMENO3          0095
+def_color_c_llama_vztekla                      0
+def_color_c_orn_vztekly                        0
+def_color_c_mustang_vztekly                 0279
 
 [CHARDEF 0dc]
 mountid=i_mt_llama
@@ -489,7 +529,7 @@ tag(magic_horse,roan)
 tag(nores,1)
 tag(noanimate,1)
 
-COLOR=0f2
+COLOR=def_color_c_a_mustang_roan_pack
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -541,7 +581,7 @@ tag(nores,1)
 tag(magic_horse,wimmimate)
 tag(noanimate,1)
 
-COLOR=02e
+COLOR=def_color_c_a_MUSTANG_WIMMIMATE_pack
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -594,7 +634,7 @@ tag(nores,1)
 tag(magic_horse,red_roan)
 tag(noanimate,1)
 
-COLOR=0279
+COLOR=def_color_C_A_MUSTANG_REDROAN_pack
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -646,7 +686,7 @@ tag(nores,1)
 tag(magic_horse,pamamino)
 tag(noanimate,1)
 
-COLOR=033
+COLOR=def_color_c_a_MUSTANG_PAMAMINO_pack
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -698,7 +738,7 @@ tag(nores,1)
 tag(magic_horse,grey)
 tag(noanimate,1)
 
-COLOR=03e7
+COLOR=def_color_c_a_MUSTANG_GREY_pack
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -754,7 +794,7 @@ tag(magic_horse,roan)
 tag(nores,1)
 tag(noanimate,1)
 
-COLOR=0f2
+COLOR=def_color_c_a_MUSTANG_ROAN
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -805,7 +845,7 @@ tag(nores,1)
 tag(magic_horse,wimmimate)
 tag(noanimate,1)
 
-COLOR=02e
+COLOR=def_color_c_a_MUSTANG_WIMMIMATE
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -856,7 +896,7 @@ tag(nores,1)
 tag(magic_horse,red_roan)
 tag(noanimate,1)
 
-COLOR=0279
+COLOR=def_color_c_a_MUSTANG_REDROAN
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -907,7 +947,7 @@ tag(nores,1)
 tag(magic_horse,chocolate)
 tag(noanimate,1)
 
-COLOR=01ba
+COLOR=def_color_c_a_MUSTANG_CHOCOLATE
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -958,7 +998,7 @@ tag(nores,1)
 tag(magic_horse,pamamino)
 tag(noanimate,1)
 
-COLOR=033
+COLOR=def_color_c_a_MUSTANG_PAMAMINO
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1060,7 +1100,7 @@ tag(nores,1)
 tag(magic_horse,sky)
 tag(noanimate,1)
 
-COLOR=0263
+COLOR=def_color_c_a_MUSTANG_SKY
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1112,7 +1152,7 @@ tag(nores,1)
 tag(magic_horse,grey)
 tag(noanimate,1)
 
-COLOR=03e7
+COLOR=def_color_c_a_MUSTANG_GREY
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1163,7 +1203,7 @@ tag(nores,1)
 tag(magic_horse,sky_grey)
 tag(noanimate,1)
 
-COLOR=031c
+COLOR=def_color_c_a_MUSTANG_SKYGRAY
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1214,7 +1254,7 @@ tag(nores,1)
 tag(magic_horse,crimson)
 tag(noanimate,1)
 
-COLOR=01b6
+COLOR=def_color_c_a_MUSTANG_CRIMSON
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1266,7 +1306,7 @@ tag(nores,1)
 tag(magic_horse,black)
 tag(noanimate,1)
 
-COLOR=0455
+COLOR=def_color_c_a_MUSTANG_BLACK
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1319,7 +1359,7 @@ tag(nores,1)
 tag(magic_horse,zostrich_green)
 tag(noanimate,1)
 
-Color=0851
+Color=def_color_c_ostard_zostrich_green
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1371,7 +1411,7 @@ tag(magic_horse,polar_bear)
 tag(noanimate,1)
 
 NPC=brain_animal
-COLOR=colors_white
+COLOR=def_color_c_mount_polar_bear
 KARMA={-1500 -2000}
 
 STR=1200
@@ -1539,7 +1579,7 @@ ON=@Create
 tag(nores,1)
 tag(noanimate,1)
 
-COLOR=01b6
+COLOR=def_color_c_a_MUSTANG__invul
 NPC=brain_animal
 FAME=0
 KARMA={-100 -1100}
@@ -1575,7 +1615,7 @@ mountid=i_mt_ostard_zostrich
 
 NAME=Zostrich
 //SOUND=snd_ANIMAL_OSTARD_FRENZIED1
-ID= c_ostard_zostrich
+ID=c_ostard_zostrich
 ICON=i_pet_OSTARD_ZOSTRICH
 CAN=MT_WALK|MT_RUN
 
@@ -1600,7 +1640,7 @@ tag(magic_horse,zostrich_brown)
 tag(nores,1)
 tag(noanimate,1)
 
-Color=0650
+Color=def_color_c_ostard_zostrich_JMENO1
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1654,7 +1694,7 @@ tag(nores,1)
 tag(magic_horse,zostrich_red)
 tag(noanimate,1)
 
-Color=0027
+Color=def_color_c_ostard_zostrich_JMENO2
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
@@ -1708,7 +1748,7 @@ tag(nores,1)
 tag(magic_horse,zostrich_send)
 tag(noanimate,1)
 
-Color=0095
+Color=def_color_c_ostard_zostrich_JMENO3
 NPC=brain_animal
 FAME=0
 KARMA={-1 -99}
