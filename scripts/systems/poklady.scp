@@ -349,7 +349,7 @@ timer=<eval (cont.tag(respawn_delay)*60)+((<eval cont.tag(respawn_anomaly)>*<con
 //must be executed upon the treasurer //argv(0) - reset memory
 [function f_treasure_initTreasureGenerator]
 arg(memory,<findId(i_mem_treasureGenerator)>)
-if (!0<arg(memory)>)
+if (!<hval arg(memory)>)
   newequip(i_mem_treasureGenerator)
 endif
 
