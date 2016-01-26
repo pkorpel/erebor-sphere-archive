@@ -51,6 +51,7 @@ cm_newsection(1,"Dekorace",i_RUG_BEARSKIN_1)
 
 cm_newsection(0,"Platene veci")
 cm_newitem(i_cloth_bolt)
+cm_newitem(i_string)
 
 cm_newsection(1,"Shirts",i_shirt_fancy)
  cm_newitem(i_shirt_plain)
@@ -107,5 +108,6 @@ cm_newsection(1,"Miscellaneous",i_apron_half)
  cm_newitem(i_whip)
  cm_newitem(i_cat_o_ninetails)
  cm_newitem(i_towel)
+ cm_newitem(i_rope)
 
 [eof]

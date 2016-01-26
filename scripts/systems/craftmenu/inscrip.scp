@@ -1,11 +1,16 @@
 [function cmprep_inscrip]
 newTOPOBJ(Inscription)
+ 
+ cm_newitem(i_customscroll_manashield)
+ cm_newitem(i_customscroll_frostbolt)
+ 
  cm_newsection(0,Necromancery,<i_pet_zombie>)
   cm_newitem(i_scroll_firebolt)
   cm_newitem(i_scroll_animate_dead)
   cm_newitem(i_scroll_bone_armor)
   cm_newitem(i_scroll_light)
   cm_newitem(i_scroll_hallucination)
+  cm_newitem(i_spellbook_necro)
  cm_newsection(0,"Kruh 8",<i_spell_circle_8>)
   scribesection(8)
  cm_newsection(0,"Kruh 7",<i_spell_circle_7>)
