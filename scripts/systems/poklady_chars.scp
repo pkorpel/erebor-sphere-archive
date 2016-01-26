@@ -1,0 +1,46 @@
+[chardef c_treasureKeeper]
+id=c_man
+name=definice pokladu
+can=0
+
+TEVENTS=e_character
+
+category=Moria
+subsection=(systemova NPC)
+description=Pokladnik (dynamicky poklad)
+
+on=@create
+STR=5000
+MAXHITS=5000
+INT=30
+flag_immobile(1)
+flag_invisible(1)
+flag_invul(1)
+flag_stone(1)
+tag(lastOpened,<serv.time>)
+newitem(i_mem_treasureGenerator)
+equip(act)
+
+on=@userClick
+//invis=1
+
+on=@userDClick
+if (src.isGM)
+  dialog(d_treasure_admin)
+else
+  src.redMessage("Co na to jako vubec sahaaas! ? Si normalni?")
+endif
+return 1
+
+on=@hit
+return 1
+
+on=@gethit
+return 1
+
+on=@death
+hits=<maxhits>
+return 1
+
+
+[eof]
