@@ -1560,6 +1560,7 @@ dispID=baseID
 more2=1
 sfx(565) //cvak
 update
+f_switch_notify_multiSwitch
 return 1
 
 [dialog d_switch_lever]
@@ -2003,7 +2004,7 @@ endwhile
 
 on=2
 moreX=0
-target("Pridej dalsi spawn.")
+target("Pridej dalsi switch.")
 
 on=3 // add door
 moreX=1
@@ -2044,6 +2045,9 @@ while (<arg(swchNumber)> < <eval <tag(pocetSwitchu)>>)
     arg(swchNumber,#+1)
   else
     more2 = 0
+    if (!strcmpi(<tag(door).type>,t_padaciDvere))
+      tag(door).f_padaciDvere_shut
+    endif
     return 0
   endif
 endwhile

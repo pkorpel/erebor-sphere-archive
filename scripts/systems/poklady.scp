@@ -53,9 +53,9 @@ var(lastxpos,#+<input_width>+<d_def_skvira>)
 argo.newTextLine(<lastxpos>,<lastypos>,<d_def_readcolor>,"Anomalie (promile):")
 var(lastxpos,#+<info_width>+<d_def_skvira>)
 if (0<tag(respawn_anomaly)> > 0)
-  argo.newTextEntry(<lastxpos>,<lastypos>,100,2,"<eval tag(respawn_anomaly)>")
+  argo.newTextEntry(<lastxpos>,<lastypos>,120,2,"<eval tag(respawn_anomaly)>")
 else
-  argo.newTextEntry(<lastxpos>,<lastypos>,100,2,"<eval d_def_treasureSpawnAnomaly>")
+  argo.newTextEntry(<lastxpos>,<lastypos>,120,2,"<eval d_def_treasureSpawnAnomaly>")
 endif
 
 argo.newTextLine(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Zlata (gp/min):")
@@ -69,9 +69,9 @@ var(lastxpos,#+<input_width>+<d_def_skvira>)
 argo.newTextLine(<lastxpos>,<lastypos>,<d_def_readcolor>,"Pocatecni vklad:")
 var(lastxpos,#+<info_width>+<d_def_skvira>)
 if (<strlen(<tag(gold_init)>)> > 0)
-  argo.newTextEntry(<lastxpos>,<lastypos>,100,4,"<tag(gold_init)>")
+  argo.newTextEntry(<lastxpos>,<lastypos>,200,4,"<tag(gold_init)>")
 else
-  argo.newTextEntry(<lastxpos>,<lastypos>,100,4,"<d_def_treasureGoldInit>")
+  argo.newTextEntry(<lastxpos>,<lastypos>,200,4,"<d_def_treasureGoldInit>")
 endif
 
 argo.newTextLine(<argo.dialog_textpos(3,0)>,<d_def_readcolor>,"Lockpick (promile):")
@@ -483,7 +483,6 @@ arg(isShrink,<argv(2)>&<d_def_treasureFlagShrink>)
 if (!arg(isShrink)) //this is an item
   arg(canPile,<eval <argv(1)>.can_pile>)
 endif
-src.sysmessage("pajl: <arg(canPile)>")
 arg(totalAmount,<eval arg(periodsPassed)*arg(totalAmount)>)
 if (<arg(canPile)>) //cannot pile, generate each item separately
   while (<arg(totalAmount)>)
