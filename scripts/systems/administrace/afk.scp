@@ -263,7 +263,6 @@ if(more1)
  //cont.redmessage(AFK KONTROLA!!!) //chteli to opakovat, maj to mit 
  if(<eval (<tag(start_time)> + <nastaveni_afk_tolerance>*10 +10)> < <serv.time>) //10decisekund jako tolerance chyby :) 
   if(var(wassave) == 0) //nebyl li save tak mi to napis
-   kermel.delayedmessage("Cas: <servertime> spozdenec <cont> <cont.name>(<cont.account.name>) skoncil AFK kontrolu az za <eval (<serv.time>-<tag(start_time)>)/10>s")
    eufegenie.delayedmessage("Cas: <servertime> spozdenec <cont> <cont.name>(<cont.account.name>) skoncil AFK kontrolu az za <eval (<serv.time>-<tag(start_time)>)/10>s")
   endif
   more1=1
@@ -315,7 +314,6 @@ else
     cont.account.tag(afklagr,<eval <cont.account.tag(afklagr)>+1>) 
     cont.tag(lagrlogu,<eval <eval cont.tag(lagrlogu)>*2>)
     cont.delayedredmessage(Cas: <servertime> trest zvysen na <cont.tag(lagrlogu)>)
-    kermel.delayedmessage("Cas: <servertime> trestanec <cont> <cont.name>(<cont.account.name>) zdvojnasoben pocet logu - nyni: <cont.tag(lagrlogu)>. Celkem byl <cont.account.tag(afklagr)>x AFK. Mel napsat:<tag(generated_text)> - napsal:<cont.tag(written_combination)>")
     eufegenie.delayedmessage("Cas: <servertime> trestanec <cont> <cont.name>(<cont.account.name>) zdvojnasoben pocet logu - nyni: <cont.tag(lagrlogu)>. Celkem byl <cont.account.tag(afklagr)>x AFK. Mel napsat:<tag(generated_text)> - napsal:<cont.tag(written_combination)>")
    endif
   else         
@@ -326,11 +324,9 @@ else
      else 
       cont.tag(nachytanafk,1)
      endif
-     kermel.delayedmessage("Cas: <servertime> makrar <cont> <cont.name>(<cont.account.name>) do lagru za <tag(macro_action)> . Celkem byl <cont.account.tag(afklagr)>x AFK. Mel napsat:<tag(generated_text)> - napsal:<cont.tag(written_combination)>")    
      eufegenie.delayedmessage("Cas: <servertime> makrar <cont> <cont.name>(<cont.account.name>) do lagru za <tag(macro_action)> . Celkem byl <cont.account.tag(afklagr)>x AFK. Mel napsat:<tag(generated_text)> - napsal:<cont.tag(written_combination)>")    
      cont.afklagr
     //else //umrel
-    // kermel.delayedmessage("Cas: <servertime> makrar <cont> <cont.name>(<cont.account.name>) kontrola odlozena z duvodu umrti. Mel napsat:<tag(generated_text)> - napsal:<cont.tag(written_combination)>")          
     // eufegenie.delayedmessage("Cas: <servertime> makrar <cont> <cont.name>(<cont.account.name>) kontrola odlozena z duvodu umrti. Mel napsat:<tag(generated_text)> - napsal:<cont.tag(written_combination)>")          
     // cont.delayedmessage("AFK potrestani odlozeno z duvodu umrti pri kontrole")
     //endif
@@ -338,7 +334,6 @@ else
   endif 
  else
   cont.delayedmessage(Afk kontrola odpustena z duvodu worldsave)
-  kermel.delayedmessage("Cas: <servertime> stastlivec <cont> <cont.name>(<cont.account.name>) afk kontrola odpustena - worldsave")
   eufegenie.delayedmessage("Cas: <servertime> stastlivec <cont> <cont.name>(<cont.account.name>) afk kontrola odpustena - worldsave")
  endif
  cont.tag.remove(written_combination)
@@ -457,7 +452,6 @@ if (more1)
  if (<eval (<tag(my_timer)> + <nastaveni_afk_countdown>*10 +10)> < <serv.time>) //10decisekund jako tolerance chyby :)  
   arg(howmuchtime,<eval (<serv.time>-<eval (<tag(my_timer)>+<nastaveni_afk_countdown>*10)>)/10>)
   if(var(wassave) == 0)
-   kermel.delayedmessage("Cas: <servertime> spozdenec <cont> <cont.name>(<cont.account.name>) pretahl odpocet pred AFK pres limit o <howmuchtime>s")  
    eufegenie.delayedmessage("Cas: <servertime> spozdenec <cont> <cont.name>(<cont.account.name>) pretahl odpocet pred AFK pres limit o <howmuchtime>s")  
   endif
   if (howmuchtime > <nastaveni_afk_tolerance>) //pretahnul i naslednou kontrolu AFK
@@ -496,7 +490,6 @@ return 1
 
 [events e_afk_controlled]
 on=@logout
-kermel.delayedmessage("Cas: <servertime> podvodnik <uid> <name>(<account.name>) se odlogoval pri AFK kontrole")
 eufegenie.delayedmessage("Cas: <servertime> podvodnik <uid> <name>(<account.name>) se odlogoval pri AFK kontrole")
 
 on=@login
@@ -505,18 +498,15 @@ arg(afk_item,<findid(i_afk_dialog)>)
 afk_item.more1=<eval (<eval (<afk_item.tag(start_time)>+<nastaveni_afk_tolerance>*10)> - <serv.time>)/10>
 if(<eval afk_item.more1> < 0)
  if(var(wassave) == 0)
-  kermel.delayedmessage("Cas: <servertime> logouter <uid> <name>(<account.name>) se lognul <eval 0-afk_item.more1>s po konci AFK kontroly")
   eufegenie.delayedmessage("Cas: <servertime> logouter <uid> <name>(<account.name>) se lognul <eval 0-afk_item.more1>s po konci AFK kontroly")
  endif
  afk_item.more1=1
 else
- kermel.delayedmessage("Cas: <servertime> logouterovi <uid> <name>(<account.name>) po lognuti zbyva <eval afk_item.more1>s do konce AFK kontroly")
  eufegenie.delayedmessage("Cas: <servertime> logouterovi <uid> <name>(<account.name>) po lognuti zbyva <eval afk_item.more1>s do konce AFK kontroly")
 endif
 
 [events e_afk_countdowned]
 on=@logout
-kermel.delayedmessage("Cas: <servertime> podvodnik <uid> <name>(<account.name>) se odlogoval pri AFK odpocitavani")
 eufegenie.delayedmessage("Cas: <servertime> podvodnik <uid> <name>(<account.name>) se odlogoval pri AFK odpocitavani")
 
 on=@login
@@ -526,14 +516,12 @@ if (itemExists(<afk_item>))
   afk_item.more1=<eval (<eval (<afk_item.tag(my_timer)>+<nastaveni_afk_countdown>*10)> - <serv.time>)/10>
   if (<eval afk_item.more1> < 0)
     if (var(wassave) == 0)
-      kermel.delayedmessage("Cas: <servertime> logouter <uid> <name>(<account.name>) pretahl o <eval 0-afk_item.more1>s korektni zacatek AFK kontroly")
       eufegenie.delayedmessage("Cas: <servertime> logouter <uid> <name>(<account.name>) pretahl o <eval 0-afk_item.more1>s korektni zacatek AFK kontroly")
     endif
     afk_item.more1=1
     return 0
   endif
 endif
-kermel.delayedmessage("Cas: <servertime> logouterovi <uid> <name>(<account.name>) po lognuti zbyva <eval afk_item.more1>s do zacatku AFK kontroly")
 eufegenie.delayedmessage("Cas: <servertime> logouterovi <uid> <name>(<account.name>) po lognuti zbyva <eval afk_item.more1>s do zacatku AFK kontroly")
 
 
@@ -548,7 +536,6 @@ arg(afk_time,<eval <tag(afk_time)>-<minus>>)
 if(afk_time <= 0)
  arg(afk_time,1)
 endif
-kermel.delayedmessage("Cas: <servertime> logouter <uid> <name>(<account.name>) po nalogovani AFK kontrolovan v limitu <afk_time>s")
 eufegenie.delayedmessage("Cas: <servertime> logouter <uid> <name>(<account.name>) po nalogovani AFK kontrolovan v limitu <afk_time>s")
 userafk(<afk_time>)
 tag.remove(afk_time)
@@ -564,11 +551,9 @@ finduid(<var(afk_trigger_uid)>).timer=0
 [function userafk]//je li argv(0) dostane hrac tolik casu kolik udava... 
 if(src.isgm)
  if(argv(0))
-  kermel.delayedmessage("Cas: <servertime> kontrolor <src> <src.name>(<src.account.name>) pustil AFK na hrace <uid> <name>(<account.name>) s limitem <argv(0)>s")
   eufegenie.delayedmessage("Cas: <servertime> kontrolor <src> <src.name>(<src.account.name>) pustil AFK na hrace <uid> <name>(<account.name>) s limitem <argv(0)>s")
   src.accmsg("Pustil AFK kontrolu na hrace <uid> <name>(<account.name>) s limitem <argv(0)>s")
  else
-  kermel.delayedmessage("Cas: <servertime> kontrolor <src> <src.name>(<src.account.name>) pustil AFK na hrace <uid> <name>(<account.name>) s default limitem")
   eufegenie.delayedmessage("Cas: <servertime> kontrolor <src> <src.name>(<src.account.name>) pustil AFK na hrace <uid> <name>(<account.name>) s default limitem")
   src.accmsg("Pustil AFK kontrolu na hrace <uid> <name>(<account.name>) s default limitem")
  endif
@@ -692,12 +677,10 @@ if(strlen(<tag(firstsuccesslesscontrol)>)) //uz nekdy v limitu neuspel
       if(<getAFKsCount(<tag(numberAFKsInMonth)>)> < <nastaveni_povoleno_AFKfails>) //jeste ma nekolik pokusu
         increaseAFKTag(<tag(numberAFKsInMonth)>)
         delayedmessage(Tve <getAFKsCount(<tag(numberAFKsInMonth)>)>. AFK selhani v pocitanem obdobi. Davej si lepsi pozor!)
-        kermel.delayedmessage("Cas: <servertime> afkar <uid> <name>(<account.name>) po <getAFKsCount(<tag(numberAFKsInMonth)>)>. selhal pri AFK v obdobi. Jeho obdobi konci <cas_konec>. Jeho skill: <afk_item.tag(macro_action)>. Mel napsat:<afk_item.tag(generated_text)> - napsal:<tag(written_combination)>") 
         eufegenie.delayedmessage("Cas: <servertime> afkar <uid> <name>(<account.name>) po <getAFKsCount(<tag(numberAFKsInMonth)>)>. selhal pri AFK v obdobi. Jeho obdobi konci <cas_konec>. Jeho skill: <afk_item.tag(macro_action)>. Mel napsat:<afk_item.tag(generated_text)> - napsal:<tag(written_combination)>") 
         return 0 
       else //pokusy dosly
         delayedmessage("Cas: <servertime> tvoje tolerance k AFK selhani vyprsela. Vitej v Lagru")
-        kermel.delayedmessage("Cas: <servertime> nestastnik <uid> <name>(<account.name>) presahl limit AFK selhani. Jeho pocitane obdobi melo koncit <cas_konec>. Sanci na uspech mel <getAFKsCount(<tag(numberAFKsInMonth)>)>")
         eufegenie.delayedmessage("Cas: <servertime> nestastnik <uid> <name>(<account.name>) presahl limit AFK selhani. Jeho obdobi melo koncit <cas_konec>. Sanci na uspech mel <getAFKsCount(<tag(numberAFKsInMonth)>)>")
         tag.remove(firstsuccesslesscontrol)
         tag.remove(numberAFKsInMonth)
@@ -706,7 +689,6 @@ if(strlen(<tag(firstsuccesslesscontrol)>)) //uz nekdy v limitu neuspel
     else
       tag(numberAFKsInMonth,"1,0")
       delayedmessage(Tve 1. AFK selhani v pocitanem obdobi. Davej si lepsi pozor)
-      kermel.delayedmessage("Cas: <servertime> afkar <uid> <name>(<account.name>) po 1. selhal pri AFK v obdobi. Jeho obdobi konci <cas_konec>. Jeho skill: <afk_item.tag(macro_action)>. Mel napsat:<afk_item.tag(generated_text)> - napsal:<tag(written_combination)>")
       eufegenie.delayedmessage("Cas: <servertime> afkar <uid> <name>(<account.name>) po 1. selhal pri AFK v obdobi. Jeho obdobi konci <cas_konec>. Jeho skill: <afk_item.tag(macro_action)>. Mel napsat:<afk_item.tag(generated_text)> - napsal:<tag(written_combination)>")
       return 0
     endif
@@ -714,7 +696,6 @@ if(strlen(<tag(firstsuccesslesscontrol)>)) //uz nekdy v limitu neuspel
     tag(firstsuccesslesscontrol,<XDaysLater(<nastaveni_AFK_dniKOdmazani>)>)
     tag(numberAFKsInMonth,"1,0")
     delayedmessage(Tve 1. AFK selhani v novem obdobi. Davej si lepsi pozor)
-    kermel.delayedmessage("Cas: <servertime> afkar <uid> <name>(<account.name>) po 1. selhal pri AFK v novem obdobi. Jeho skill: <afk_item.tag(macro_action)>. Mel napsat:<afk_item.tag(generated_text)> - napsal:<tag(written_combination)>")
     eufegenie.delayedmessage("Cas: <servertime> afkar <uid> <name>(<account.name>) po 1. selhal pri AFK v novem obdobi. Jeho skill: <afk_item.tag(macro_action)>. Mel napsat:<afk_item.tag(generated_text)> - napsal:<tag(written_combination)>")
     return 0
   endif
@@ -722,7 +703,6 @@ else
   tag(firstsuccesslesscontrol,<XDaysLater(<nastaveni_AFK_dniKOdmazani>)>)
   tag(numberAFKsInMonth,"1,0")
   delayedmessage(Tve 1. AFK selhani. Davej si lepsi pozor. Limit je <nastaveni_povoleno_AFKfails> selhani v danem obdobi.)
-  kermel.delayedmessage("Cas: <servertime> afkar <uid> <name>(<account.name>) po 1. selhal vubec. Jeho skill: <afk_item.tag(macro_action)>. Mel napsat:<afk_item.tag(generated_text)> - napsal:<tag(written_combination)>")
   eufegenie.delayedmessage("Cas: <servertime> afkar <uid> <name>(<account.name>) po 1. selhal vubec. Jeho skill: <afk_item.tag(macro_action)>. Mel napsat:<afk_item.tag(generated_text)> - napsal:<tag(written_combination)>")
   return 0
 endif
@@ -734,7 +714,6 @@ var(macroersUID,"")
 [function odmazSelhani]
 if(strlen(<tag(numberAFKsInMonth)>))
  decreaseAFKTag(<tag(numberAFKsInMonth)>)
- kermel.delayedmessage("Cas: <servertime> gm <src> <src.name>(<src.account.name>):<src.account.lastip> odmazal hraci <uid> <name>(<account.name>) selhani pri afk kontrole - zbylo mu: <getAFKsCount(<tag(numberAFKsInMonth)>)> selhani") 
  eufegenie.delayedmessage("Cas: <servertime> gm <src> <src.name>(<src.account.name>):<src.account.lastip> odmazal hraci <uid> <name>(<account.name>) selhani pri afk kontrole - zbylo mu: <getAFKsCount(<tag(numberAFKsInMonth)>)> selhani") 
 endif
 

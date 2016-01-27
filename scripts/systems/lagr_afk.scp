@@ -58,7 +58,6 @@ if(isdefined(account.tag(vlagru)))
  afklagrpustit
 endif
 src.accmsg("Odvolal jeden stupen afklagru na <uid> <name>")
-kermel.delayedmessage("Cas: <servertime> gm <src> <src.name>(<src.account.name>):<src.account.lastip> propustil hrace <uid> <name>(<account.name>) z lagru") 
 eufegenie.delayedmessage("Cas: <servertime> gm <src> <src.name>(<src.account.name>):<src.account.lastip> propustil hrace <uid> <name>(<account.name>) z lagru") 
 account.tag(afklagr,<eval <account.tag(afklagr)>-1>)
 if(<account.tag(afklagr)> <=0)
@@ -84,7 +83,6 @@ if (src==uid)&&(isgm)
   return 0
 endif
 tag(firstsuccesslesscontrol,<XDaysLater(<argv(0)>)>)
-kermel.delayedmesasge("Cas: <servertime> gm <src> <src.name>(<src.account.name>):<src.account.lastip> nastavil hraci <uid> <name>(<account.name>) <argv(0)> dni do konce mesice") 
 eufegenie.delayedmesasge("Cas: <servertime> gm <src> <src.name>(<src.account.name>):<src.account.lastip> nastavil hraci <uid> <name>(<account.name>) <argv(0)> dni do konce mesice") 
 
 [function afklagrpustit]

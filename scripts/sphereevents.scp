@@ -1463,10 +1463,6 @@ if !(src.account.tag(vlagru))&&(src.tag(lagrjail))
   src.gohome
 endif
 
-if (uid==017857e)
-  kermel.delayedmessage("Cas: <servertime> vykonavatelka nalogovana z <account.lastip>")
-endif
-
 //navrat na lod
 
 arg(ship,<finduid(tag(logoffship))>)
