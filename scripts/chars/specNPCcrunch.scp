@@ -256,10 +256,10 @@ SAY("Zadny boost ti nepomuze k preziti!")
 /////////////////////////////////////////////
 
 [CHARDEF c_wasserman] //Boss Etheria
-ID=c_minotaur
-NAME=Vodni prisera
-SOUND=snd_ELEMENTL_ERTHEL1
-ICON=i_pet_elem_earth
+ID=c_test18
+NAME=Waterman
+SOUND=snd_MONSTER_TITAN1
+ICON=i_pet_man
 ANIM=079c7f
 
 attack=100
@@ -275,7 +275,7 @@ TEVENTS=e_npc_detect
 
 CATEGORY=Dungy
 SUBSECTION=Etheria
-DESCRIPTION=Vodni prisera
+DESCRIPTION=Waterman
 
 ON=@Create
 NPC=brain_monster
