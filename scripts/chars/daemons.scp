@@ -90,8 +90,8 @@ item=i_gold
 
 /////////////////////////////////////////////////////////////
 
-[chardef c_daemon]         //slaby + stun
-ID=c_daemon_mage1
+[chardef 066]         //slaby + stun
+DEFNAME=c_daemon
 Name=Demon
 SOUND=snd_MONSTER_DAEMON1
 ICON=i_pet_DAEMON
@@ -751,8 +751,8 @@ item=i_gold
 
 /////////////////////////////////////////////////////////////
 
-[CHARDEF c_daemon_ice]         //kouzli
-ID=c_daemon_mage1
+[CHARDEF 02b]         //kouzli
+DEFNAME=c_daemon_ice
 NAME=Ledovy demon
 SOUND=snd_MONSTER_DAEMON1
 ICON=i_pet_DAEMON

@@ -664,6 +664,7 @@ DEFNAME=c_test12
 NAME=Mega drak
 ICON=i_pet_MAN  
 CAN=MT_WALK|MT_run|MT_EQUIP|MT_MALE  
+ANIM=028c3f
 
 attack=85 
 ARMOR=45  
@@ -730,6 +731,7 @@ DEFNAME=c_test13
 NAME=Mega drak the Second
 ICON=i_pet_MAN  
 CAN=MT_WALK|MT_run|MT_EQUIP|MT_MALE  
+ANIM=028c3f
 
 attack=85 
 ARMOR=45  

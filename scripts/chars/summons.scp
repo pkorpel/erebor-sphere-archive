@@ -2023,7 +2023,7 @@ ITEMnewbie=i_monster_create
 
 [CHARDEF 0A]
 Name=Summon
-DEFNAME=c_daemon_mage1
+DEFNAME=c_daemon_sword1
 CAN=MT_WALK|MT_USEHANDS|mt_run
 ANIM=03fbc7f
 SOUND=snd_MONSTER_DAEMON1
@@ -2081,7 +2081,7 @@ ITEMnewbie=i_monster_create
 
 [CHARDEF 09]
 Name=Summon
-DEFNAME=c_daemon_sword1
+DEFNAME=c_daemon_mage1
 CAN=MT_WALK|MT_USEHANDS|mt_run
 ANIM=03fbc7f
 SOUND=snd_MONSTER_DAEMON1
@@ -2097,7 +2097,7 @@ TEVENTS=e_character
 
 CATEGORY=Monsters
 SUBSECTION=Summons
-DESCRIPTION=MAGE Daemon Sword
+DESCRIPTION=MAGE Daemon 
 
 ON=@Create
 Name=#NAMES_DAEMON
