@@ -77,7 +77,7 @@ item=i_gold
 
 [CHARDEF c_crunch_kryska_leap]
 id=0D7
-NAME=Infikovana krysa
+NAME=Otravna krysa
 CAN=MT_WALK
 
 attack=45
