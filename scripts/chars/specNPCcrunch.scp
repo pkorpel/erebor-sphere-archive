@@ -257,7 +257,7 @@ SAY("Zadny boost ti nepomuze k preziti!")
 
 [CHARDEF c_wasserman] //Boss Etheria
 ID=c_test18
-NAME=Waterman
+NAME=Lord Etherin
 SOUND=snd_MONSTER_TITAN1
 ICON=i_pet_man
 ANIM=079c7f
@@ -281,7 +281,6 @@ ON=@Create
 NPC=brain_monster
 FAME=300
 KARMA={-1000 -2500}
-Color=0984
 
 STR=5500
 DEX=280
