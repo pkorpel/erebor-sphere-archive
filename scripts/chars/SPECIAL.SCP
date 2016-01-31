@@ -1552,7 +1552,7 @@ DEFNAME=c_cajun_child1
 NAME=Cajun
 SOUND=snd_ELEMENTL_ERTHEL1
 ICON=i_pet_elem_earth
-anim=0ffc78c7f 
+anim=078c7f
 CAN=MT_WALK|mt_run
 
 attack=40
@@ -1637,7 +1637,7 @@ ID=c_cajun_child1
 NAME=Cajun
 SOUND=snd_ELEMENTL_ERTHEL1
 ICON=i_pet_elem_earth
-anim=0ffc78c7f 
+anim=078c7f 
 CAN=MT_WALK|mt_run
 
 attack=40
@@ -1717,7 +1717,7 @@ ID=c_cajun_child1
 NAME=Cajun
 SOUND=snd_ELEMENTL_ERTHEL1
 ICON=i_pet_elem_earth
-anim=0ffc78c7f 
+anim=078c7f
 CAN=MT_WALK|mt_run
 
 attack=40
