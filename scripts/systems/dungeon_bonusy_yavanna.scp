@@ -351,18 +351,12 @@ tag.remove(moveTrap_West)
 tag.remove(moveTrapBits)
 tag.remove(moveTrap_basePosition)
 
-[function f_trap_move] //depricated version of moveTrap function. Use f_trap_moveTrap function to run the move and dialog d_trap_moveTrap for settings
-if (strlen(<tag(orig_position)>))
-  p=<tag(orig_position)>
-  move(<eval {0 <morex>}>,<eval {0 <morey>}>,0,0)
-endif
-
 [function f_trap_moveTrap]
 if (strlen(<tag(moveTrap_basePosition)>))
   arg(baseX,<return_nth(1,<tag(moveTrap_basePosition)>)>)
   arg(baseY,<return_nth(2,<tag(moveTrap_basePosition)>)>)
   arg(baseZ,<return_nth(3,<tag(moveTrap_basePosition)>)>)
-  arg(baseM,<return_nth(4,<eval tag(moveTrap_basePosition)>)>)
+  arg(baseM,<eval return_nth(4,<tag(moveTrap_basePosition)>)>)
 else
   return 1
 endif

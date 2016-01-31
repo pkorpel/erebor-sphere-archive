@@ -352,7 +352,7 @@ endif
 //argv(0) - chest
 //argv(1) - treasureKeeper
 [function f_treasure_setType]
-if (0<argv(0).tag(lockpick)> && !0<argv(0).tag(lockpicked)>)
+if (<eval argv(0).tag(lockpick)> && !0<argv(0).tag(lockpicked)>)
   argv(0).type=t_container_locked
 else
   argv(0).type=t_container
