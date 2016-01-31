@@ -2041,6 +2041,84 @@ item=i_gold
 /////////////////////   SPIDERS  //////////////////////////
 ///////////////////////////////////////////////////////////
 
+[CHARDEF 017]
+DEFNAME=c_spider_giant_old
+NAME=Spider
+SOUND=snd_MONSTER_GISPIDR1
+ICON=i_pet_SPIDER_GIANT
+ANIM=078c7f
+CAN=MT_WALK|mt_run
+
+attack=25
+ARMOR=5
+moverate=5
+
+RESOURCES=5 i_reag_spider_silk
+FOODTYPE=
+
+BLOODCOLOR=colors_green
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_spider
+
+CATEGORY=Monsters
+SUBSECTION=Spiders
+DESCRIPTION=Giant Spider
+
+ON=@Create
+NPC=brain_monster
+FAME=1
+KARMA={-999 -2999}
+
+STR=250
+DEX=100
+INT=50
+
+maxhits={225 450}
+maxstam={80 120}
+maxmana=0
+
+tag.experience=<eval {10.0 20.0}>
+
+//mystik
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
+
+//other resists
+tag(resist_poison,1000)
+tag.resist_para=<eval {300 450}>
+tag(resist_summon,250)
+tag(resist_bleed,200)
+
+tag(resist_sharp,50)
+tag(resist_slash,-150)        //sekery
+tag(resist_pierce,-150)
+tag(resist_blunt,-150)
+
+tag(resist_fire,-200)
+tag(resist_elect,200)
+tag(resist_cold,200)
+
+//typ monstra
+tag(monstertype,spider)
+
+//weap flags
+tag.weapflag=dam_piercing|dam_physical
+
+TACTICS=100.0
+WRESTLING={70.0 90.0}
+POISONING={30.0 40.0}
+SpiritSpeak=15.0
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=loot_SPIDER
+item=i_gold
+
+///////////////////////////////////////////////////////////
 [CHARDEF 01c]
 DEFNAME=c_spider_giant
 NAME=Spider
