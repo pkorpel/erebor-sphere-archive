@@ -1196,7 +1196,6 @@ if (src.isplayer)
     return 0
   endif
   if (<eval tag(spDeactivatedTill)> < <serv.time>) // pad is innactive for some time after catching the player
-    f_trap_removeTrap_clearDepricatedTags
     if f_removeTrap_tryActivateTrap // checkne removetrap
       if (rand(2)==1)
         sfx(020c)
@@ -1432,7 +1431,6 @@ src.updatex
 dialog(d_verbuvadvancedspawnpad)
 
 on=12
-f_trap_removeTrap_clearDepricatedTags
 dialog(d_trap_removeTrap,d_verbuvadvancedspawnpad)
 
 [FUNCTION f_sp_repair_pos]

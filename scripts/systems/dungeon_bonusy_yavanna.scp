@@ -37,17 +37,6 @@ if (src.isplayer)
 endif
 return 0
 
-[function f_trap_removeTrap_clearDepricatedTags]
-if (<strlen(<tag(thief)>)>)
-  tag(removeTrapSkill_Deactivate,<tag(thief)>)
-  tag(removeTrapTimer_Deactivate,300) //5 minutes
-  tag(removeTrapDific_Deactivate,100)
-  tag(removeTrapSkill_Detect,<eval <tag(thief)>-200>)
-  tag(removeTrapTimer_Detect,5) //5 sec
-  tag(removeTrapDific_Detect,400)
-  tag.remove(thief)
-endif
-
 [dialog d_trap_removeTrap] //previous dialog can be passed as the first argument of this dialog - it will be opened after setting of removeTrap is done
 arg(textcolor,52)
 argo.SetLocation=285,250
@@ -366,19 +355,6 @@ tag.remove(moveTrap_basePosition)
 if (strlen(<tag(orig_position)>))
   p=<tag(orig_position)>
   move(<eval {0 <morex>}>,<eval {0 <morey>}>,0,0)
-endif
-
-[function f_trap_moveTrap_clearDepricatedTags]
-if (<strlen(<tag(orig_position)>)>)
-  tag(moveTrap_basePosition,<tag(orig_position)>)
-  tag.remove(orig_position)
-  tag(moveTrap_North,<eval moreY>)
-  tag(moveTrap_South,<eval moreY>)
-  tag(moveTrap_West,<eval moreX>)
-  tag(moveTrap_East,<eval moreX>)
-  tag(moveTrapBits,0F)  //means that all directions are ON
-  moreX=0
-  moreY=0
 endif
 
 [function f_trap_moveTrap]
@@ -897,13 +873,6 @@ argo.f_dialog_HelpCreator("HELP - Type t_onStepDMG")
 //      S W I T C H E S        //
 /////////////////////////////////
 
-//universal function used to activate the item that it's called upon
-[function f_switches_triggerLink]
-if (id==i_padaci_dvere)
-  timer=0
-elseif ()
-endif
-
 [itemDef i_switch_R]
 id=01092
 name=Packa
@@ -927,7 +896,11 @@ if (strlen(<tag(padaciDvere)>))
     src.sysMessage("Packa je zasekla")
     return 1
   endif
-  tag(padaciDvere).tag(riseDelay,<eval more1>)
+  arg(riseDelay,<eval more1-3>)
+  if (<arg(riseDelay)> < 1)
+    arg(riseDelay,1)
+  endif
+  tag(padaciDvere).tag(riseDelay,<eval arg(riseDelay)>)
   tag(padaciDvere).timer=0
 endif
 if (<more2> == 0)
@@ -993,7 +966,11 @@ if (strlen(<tag(padaciDvere)>))
     f_switch_torch_resistMessage
     return 1
   endif
-  tag(padaciDvere).tag(riseDelay,<eval more1>)
+  arg(riseDelay,<eval more1-3>)
+  if (<arg(riseDelay)> < 1)
+    arg(riseDelay,1)
+  endif
+  tag(padaciDvere).tag(riseDelay,<eval arg(riseDelay)>)
   tag(padaciDvere).timer=0
 endif
 if (<more2> == 0)

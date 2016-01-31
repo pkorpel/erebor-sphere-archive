@@ -20,15 +20,15 @@ if (region.tag(kick))
 elseif (region.flags==01192)
 elseif (region.flags==00812)
 else
- newitemsafe(i_testfollow)
- lastnew.tag(t_follow,<tag(t_follow)>)
- lastnew.tag(realm,<tag(realm)>)
- lastnew.tag(username,<name>)
- lastnew.p=<p>
- tag(t_follow,#+1)
- if (tag(t_follow) > 100)
-  tag(t_follow,1)
- endif
+  newitemsafe(i_testfollow)
+  lastnew.tag(t_follow,<tag(t_follow)>)
+  lastnew.tag(realm,<tag(realm)>)
+  lastnew.tag(username,<name>)
+  lastnew.p=<p>
+  tag(t_follow,#+1)
+  if (tag(t_follow) > 100)
+    tag(t_follow,1)
+  endif
 endif
 
 [ITEMDEF i_testfollow]
@@ -46,23 +46,23 @@ timerd=5
 
 ON=@Step
 if (tag(realm)==<src.tag(realm)>)
- return 1
+  return 1
 endif
 if (src.tag(followscript))
- if (src.tag(warn_follow))
- else
-  src.tag(warn_follow,1)
- endif
- if (src.tag(followscript) == <tag(t_follow)>-1)
-  src.tag(warn_follow,#+1)
-  if (src.tag(warn_follow) == 10)
-   src.accmsg("follow script 10 policek za sebou po stopach <tag(username)>")
-   src.tag(warn_follow,0)
+  if (src.tag(warn_follow))
+  else
+    src.tag(warn_follow,1)
   endif
- endif
- src.tag(followscript,<tag(t_follow)>)
+  if (src.tag(followscript) == <tag(t_follow)>-1)
+    src.tag(warn_follow,#+1)
+    if (src.tag(warn_follow) == 10)
+      src.accmsg("follow script 10 policek za sebou po stopach <tag(username)>")
+      src.tag(warn_follow,0)
+    endif
+  endif
+  src.tag(followscript,<tag(t_follow)>)
 else
- src.tag(followscript,1)
+  src.tag(followscript,1)
 endif
 
 [ITEMDEF I_stone_start]
@@ -1514,7 +1514,6 @@ if (<src.flags>&statf_dead) || (src.isGM) // nor ghosts nor GM can activate the 
   return 0
 endif
 if (src.isPlayer)
-  f_trap_removeTrap_clearDepricatedTags
   if (<eval tag(fpDeactivatedTill)> < <serv.time>) // pad is innactive for some time after catching the player
     if (f_removeTrap_tryActivateTrap) //checks wheather the player successfully removed the trap, the condition succeed if player doesnt
       f_trap_moveTrap
@@ -1566,8 +1565,6 @@ on=0
 src.sysMessage("<src.sex(Stornoval,Stornovala)> jsi volbu. Nastaveni zustava nezmeneno.")
 
 on=1
-f_trap_moveTrap_clearDepricatedTags
-f_trap_removeTrap_clearDepricatedTags
 src.sysMessage("Nastavujes nove hodnoty dlazdice.")
   
 on=2 // pad goes home
@@ -1580,11 +1577,9 @@ endif
 dialog(d_frozenpad)
 
 on=3 // removeTrap dialog
-f_trap_removeTrap_clearDepricatedTags
 dialog(d_trap_removeTrap,d_frozenpad)
 
 on=4 // moveTrap dialog
-f_trap_moveTrap_clearDepricatedTags
 dialog(d_trap_moveTrap,d_frozenpad)
 
 on=5 // help
@@ -1619,7 +1614,6 @@ if (<src.flags>&statf_dead) //ghosts can't activate the pad
 endif
 if (src.isPlayer) && !(src.isGM)
   if (<eval tag(spDeactivatedTill)> < <serv.time>) // pad is innactive for some time after catching the player
-    f_trap_removeTrap_clearDepricatedTags
     if (f_removeTrap_tryActivateTrap) //checks wheather the player successfully removed the trap, the condition succeed if player doesnt
       if !(strlen(<tag(spActivateChance)>)) //
         tag(spActivateChance,300)
@@ -1717,12 +1711,10 @@ dialog(d_spawnpad)
 
 on=3 // removeTrap dialog
 f_pad_spawnPad_setDialogValues(<argTxt(1)>,<argTxt(2)>,<argTxt(3)>,<argTxt(4)>)
-f_trap_removeTrap_clearDepricatedTags
 dialog(d_trap_removeTrap,d_spawnpad)
 
 on=4 // moveTrap dialog
 f_pad_spawnPad_setDialogValues(<argTxt(1)>,<argTxt(2)>,<argTxt(3)>,<argTxt(4)>)
-f_trap_moveTrap_clearDepricatedTags
 dialog(d_trap_moveTrap,d_spawnpad)
 
 on=5 //Help

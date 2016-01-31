@@ -176,7 +176,6 @@ if (flag_spawned)
       newequip(i_friendslayer)
     endif
     tag(summoner,<mySpawn.tag(summoner)>)
-
     arg(i,1)
     while (i < 4)
       if (<strlen(<mySpawn.tag(spawnevent<eval arg(i)>)>)>)
@@ -184,6 +183,9 @@ if (flag_spawned)
       endif
       arg(i,#+1)
     endwhile
+    if (<strlen(<mySpawn.tag(forceExperience)>)>)
+      tag(experience,<eval {<mySpawn.tag(forceExperience)>}>)
+    endif
     if (<strlen(<mySpawn.tag(removeAfterTimer)>)>)
       newequip(i_zmizni)
       lastnew.timer=<mySpawn.tag(removeAfterTimer)>
