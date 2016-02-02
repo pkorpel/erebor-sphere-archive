@@ -335,7 +335,7 @@ ID=c_test18
 NAME=Lord Etherin
 SOUND=snd_MONSTER_TITAN1
 ICON=i_pet_man
-ANIM=079c7f
+ANIM=07a07f
 
 attack=100
 ARMOR=80
