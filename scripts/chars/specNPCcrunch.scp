@@ -74,7 +74,6 @@ ITEM=random_reagent,{5 10}
 item=i_gold
 
 //infikovana krysa z etherky - leap
-
 [CHARDEF c_crunch_kryska_leap]
 id=0D7
 NAME=Otravna krysa
@@ -112,7 +111,7 @@ maxhits={500 600}
 maxstam={120 130}
 maxmana=0
 
-tag.experience=<eval {28.0 35.0}>
+tag.experience=<eval {15.0 22.0}> //opruz krysa - nizke expy (nevyplaci se naslapovat)
 
 tag.npc_lifeLeech_cap=1400
 
