@@ -806,7 +806,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
 //other resists
-tag(resist_poison,550)
+tag(resist_poison,900)
 tag.resist_para=<eval {650 750}>
 tag(resist_summon,700)
 tag(resist_bleed,-450)

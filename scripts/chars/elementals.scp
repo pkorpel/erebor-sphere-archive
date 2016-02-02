@@ -38,7 +38,7 @@ maxhits={475 525}
 maxstam={85 95}
 maxmana=0
 
-tag.experience=<eval {25.0 29.0}>
+tag.experience=<eval {20.0 23.0}>
 
 //mystik
 tag(hypnotizable,0)

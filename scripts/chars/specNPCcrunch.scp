@@ -347,6 +347,8 @@ TEVENTS=e_character
 TEVENTS=e_summoneater_vamp
 TEVENTS=e_npc_stun
 TEVENTS=e_npc_detect
+TEVENTS=e_dragon_regeneration
+TEVENTS=e_npc_roundattack
 
 CATEGORY=Dungy
 SUBSECTION=Etheria
@@ -358,14 +360,21 @@ FAME=300
 KARMA={-1000 -2500}
 
 STR=5500
-DEX=280
+DEX=290
 INT=190
 
-maxhits=13500
+maxhits=16500
 maxstam={200 250}
 maxmana=0
 
-tag.experience=<eval {450.0 500.0}>
+tag.experience=<eval {560.0 650.0}>
+
+tag.roundattack_damage=25,35  //dmg od - do
+tag.roundattack_time=10,15    //prodleva od - do v sek
+tag.roundattack_chance=200    //20.0%
+
+tag.regeneration_hp=300          // pocet hp ktore zregeneruje
+tag.regeneration_speed=5         // rychlost regeneracie v sekundach
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
@@ -385,12 +394,8 @@ tag(resist_pierce,-400)
 tag(resist_blunt,350)
 
 tag(resist_fire,750)
-tag(resist_elect,200)
-tag(resist_cold,-400)
-
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
+tag(resist_elect,100)
+tag(resist_cold,1000)
 
 SpiritSpeak=95.0
 WRESTLING=120.0
@@ -401,7 +406,7 @@ tactics=120.0
 ITEMnewbie=i_monster_create
 ON=@NPCRestock
 item=i_gold
-ITEM=random_reagent,{35 55}
+item=random_reagent,{35 55}
 
 ////////////////////////////////////////////////
 

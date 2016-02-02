@@ -644,7 +644,6 @@ BLOODCOLOR=020
 
 TEVENTS=e_monster
 TEVENTS=e_character
-//TEVENTS=e_npc_infiniteMana
 TEVENTS=e_npc_manashield
 TEVENTS=e_water
 TEVENTS=e_npc_curse_mana            //mass sani many
@@ -679,8 +678,8 @@ tag.npc_curse_mana_dmg=50,60        // mana reduce in between 50 and 60
 tag.stam_dmg_chance=250             // 25% chance to trigger this event
 tag.stam_dmg_power=40               // takes 40 of stam
 
-tag.regeneration_hp=500          // pocet hp ktore zregeneruje
-tag.regeneration_speed=5         // rychlost regeneracie v sekundach
+tag.regeneration_hp=400          // pocet hp ktore zregeneruje
+tag.regeneration_speed=6         // rychlost regeneracie v sekundach
 
 tag(npc_summoning_chance,500)      //50%
 tag(npc_summoning_time,60)        //nezakouzli znovu 60 sek
@@ -726,16 +725,12 @@ Parrying=100.0
 provocation=100
 SpiritSpeak=55.0
 
-ITEMNEWBIE=i_light_source
-//ITEMNEWBIE=i_spellbook
-//addspell=s_harm
-//addspell=s_summon_elem_water
-
+ITEMnewbie=i_light_source
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 item=i_gold
-ITEM=random_reagent,{25 35}
+item=random_reagent,{25 35}
 
 ///////////////////////////////////////////////////////////
 
