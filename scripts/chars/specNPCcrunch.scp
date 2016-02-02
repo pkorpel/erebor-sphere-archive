@@ -111,7 +111,7 @@ maxhits={500 600}
 maxstam={120 130}
 maxmana=0
 
-tag.experience=<eval {15.0 22.0}> //opruz krysa - nizke expy (nevyplaci se naslapovat)
+tag.experience=<eval {12.0 16.0}> //opruz krysa - nizke expy (nevyplaci se naslapovat)
 
 tag.npc_lifeLeech_cap=1400
 
