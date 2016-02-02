@@ -363,7 +363,7 @@ STR=5500
 DEX=290
 INT=190
 
-maxhits=16500
+maxhits=13500
 maxstam={200 250}
 maxmana=0
 
