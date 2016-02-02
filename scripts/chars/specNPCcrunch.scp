@@ -370,10 +370,10 @@ maxmana=0
 tag.experience=<eval {560.0 650.0}>
 
 tag.roundattack_damage=25,35  //dmg od - do
-tag.roundattack_time=10,15    //prodleva od - do v sek
+tag.roundattack_time=22,30    //prodleva od - do v sek
 tag.roundattack_chance=200    //20.0%
 
-tag.regeneration_hp=300          // pocet hp ktore zregeneruje
+tag.regeneration_hp=220          // pocet hp ktore zregeneruje
 tag.regeneration_speed=5         // rychlost regeneracie v sekundach
 
 tag(hypnotizable,0)

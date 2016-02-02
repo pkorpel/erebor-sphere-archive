@@ -678,7 +678,7 @@ tag.npc_curse_mana_dmg=50,60        // mana reduce in between 50 and 60
 tag.stam_dmg_chance=250             // 25% chance to trigger this event
 tag.stam_dmg_power=40               // takes 40 of stam
 
-tag.regeneration_hp=400          // pocet hp ktore zregeneruje
+tag.regeneration_hp=300          // pocet hp ktore zregeneruje
 tag.regeneration_speed=6         // rychlost regeneracie v sekundach
 
 tag(npc_summoning_chance,500)      //50%
