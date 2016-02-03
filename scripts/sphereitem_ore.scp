@@ -449,6 +449,7 @@ return"<blacksmithing_dclick>"
 ID=i_log
 NAME=lagr log%s
 value=10
+WEIGHT=1.0
 
 on=@create
 attr=attr_move_never
@@ -470,6 +471,7 @@ color_elven	07d6
 ID=i_log
 NAME=spruce log%s
 value=10
+WEIGHT=1.5
 
 on=@create
 color=color_spruce
@@ -478,6 +480,7 @@ color=color_spruce
 ID=i_log
 NAME=chestnut log%s
 value=12
+WEIGHT=1.5
 
 on=@create
 color=color_chestnut
@@ -486,6 +489,7 @@ color=color_chestnut
 ID=i_log
 NAME=oak log%s
 value=140
+WEIGHT=1.5
 
 on=@create
 color=color_oak
@@ -494,6 +498,7 @@ color=color_oak
 ID=i_log
 NAME=teak log%s
 value=400
+WEIGHT=1.5
 
 on=@create
 color=color_teak
@@ -502,6 +507,7 @@ color=color_teak
 ID=i_log
 NAME=mahagon log%s
 value=700
+WEIGHT=1.5
 
 on=@create
 color=color_mahagon
@@ -510,6 +516,7 @@ color=color_mahagon
 ID=i_log
 NAME=eben log%s
 value=1100
+WEIGHT=1.5
 
 on=@create
 color=color_eben
@@ -518,6 +525,7 @@ color=color_eben
 ID=i_log
 NAME=elven log%s
 value=1400
+WEIGHT=1.5
 
 on=@create
 color=color_elven
