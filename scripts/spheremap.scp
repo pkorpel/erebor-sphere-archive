@@ -7936,7 +7936,7 @@ GROUP=Rooms
 
 
 [AREA stanek 3]     //Umbar
-P=2473,4054,10
+P=2473,4045,10
 RECT=2470,4040,2477,4049
 tag.housenumber=3
 tag.houserealm=2
@@ -7956,7 +7956,7 @@ COLDCHANCE=00
 GROUP=Rooms
 
 [AREA stanek 5]     //Umbar
-P=2473,4045,10
+P=2473,4054,10
 RECT=2470,4050,2477,4059
 tag.housenumber=5
 tag.houserealm=2
