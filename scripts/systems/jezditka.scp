@@ -507,12 +507,13 @@ if (findlayer(25))
   arg(layerName,<findlayer(25).name>)
   dismount
   arg(mylastnewchar,<lastnewchar>)
+  accmsg("INFO: Dismount jezditka pri odlogu: (item:<layerUID>,<layerName>), (char:<arg(mylastnewchar)>,<arg(mylastnewchar).name>), (lastJezdik:<tag(lastjezdik)>,<tag(lastjezdik).name>)")
   if (charExists(<arg(mylastnewchar)>))
     if !(arg(mylastnewchar).isjezditko)	//Mozna zbytecna podminka, ale nevim proc jinak by hazel chyby flag_stone nez ze by tohle neexistovalo...
       accmsg("ERROR: pri odlogu bylo zachyceno chybne uid v promenne lastnewchar (<lastnewchar>) hrace (<uid>, <uid.name>)")
       return 1
     endif
-    tag(last_logout_horse,<lastnewchar>)
+    tag(last_logout_horse,<arg(mylastnewchar)>)
     mylastnewchar.flag_stone=1
     arg(myx,<eval {4740 4770}>)
     arg(myy,<eval {101 126}>)
@@ -550,6 +551,7 @@ endif
 
 [function f_loginmount]
 arg(logout_horse,<finduid(<tag(last_logout_horse)>)>)
+accmsg("INFO: Mount jezditka pri login (logout_horse:<arg(logout_horse)>,<arg(logout_horse).name>), (lastJezdik:<tag(lastJezdik)>,<tag(lastJezdik).name>)")
 if (strlen(<arg(logout_horse)>))
   if (arg(logout_horse).isjezditko)
     finduid(<tag(last_logout_horse)>).flag_stone=0
