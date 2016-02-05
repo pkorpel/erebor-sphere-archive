@@ -14,7 +14,7 @@
 
 
 
-///////////////////////// Definice cel‚ mapy - z kladn¡ lokace NEMAZAT !!!!! /////////
+///////////////////////// Definice celâ€š mapy - zÂ kladnÂ¡ lokace NEMAZAT !!!!! /////////
 
 [AREA Stredozeme] // %SERVNAME% = doplni nazev podle win.ini (pokud bude nazev serveru Moria, budou vsechna mista, ktera nejsou definovana jinym skriptem, mit jmeno "Moria" pri marku runy a prikazu .where.
 CLASS=11
@@ -7833,7 +7833,7 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 279]     //Nurnen
 P=3338,3525,40
-RECT=3334,3513,3344,3525
+RECT=3336,3515,3344,3526
 tag.housenumber=279
 FLAGS=01192
 RAINCHANCE=00  
