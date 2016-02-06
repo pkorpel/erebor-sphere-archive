@@ -891,7 +891,7 @@ maxmana=0
 
 tag.experience=<eval {30.0 34.0}>
 
-tag(npc_port_distance,4)
+tag(npc_port_distance,6)
 
 //mystik
 tag(hypnotizable,0)
