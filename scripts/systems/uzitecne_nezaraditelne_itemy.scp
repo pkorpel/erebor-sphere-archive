@@ -450,28 +450,23 @@ tag(napis_step," ")
 
 on=@userdclick
 if(src.isgm)
-  src.sysMessage(V tagu 'napis_step' je nejakej chytrej napis co se zobrazi pri slapnuti. BEZ CAREK!!!)
+  src.sysMessage(V tagu 'napis_step' je nejakej chytrej napis co se zobrazi pri slapnuti.)
   return 1
 endif
 
 on=@step
-if(!src.isgm)
+if (!src.isgm)
   if (src.issumon)
     src.remove
     return 1
   endif
-  arg(opustila,0)
-  while(src.findid(i_rune_hassummon))
-    arg(opustila,1)
-    arg(runa1,<src.findid(i_rune_hassummon)>)
-    runa1.link.remove //odstraní to zvíøátko 
-    runa1.remove
+  arg(dispelled,0)
+  while (src.findid(i_rune_hassummon))
+    arg(dispelled,1)
+    src.findid(i_rune_hassummon).link.remove //odstraní to zviratko 
   endwhile
-  //while(src.memoryfindtype(MEMORY_friend)) // might cause a bug. Anyway, it seems that it does not work 
-  //src.memoryfindtype(MEMORY_friend).remove
-  //endwhile
-  if(opustila)
-    src.sysMessage(<tag(napis_step)>)
+  if (dispelled)
+    src.sysMessage("<tag(napis_step)>")
   endif
 endif
 
@@ -493,7 +488,6 @@ tag(restime,100)
 on=@userdclick
 if (src.isGM)
   dialog(d_poisonpad)
-  // src.sysMessage(V tagu 'jed' je hodnota jaky to da poison - default je 500)
   return 1
 endif
 

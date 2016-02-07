@@ -16,51 +16,18 @@ name=nores
 on=@create
 attr_invis=1
 
-[itemdef i_summonremove]
-id=i_rune_summon_creature
-type=t_eq_script
-name=summoncreaturetimer
-
-on=@timer
-cont.remove
-remove
-return 1
-
 [events e_removesilk]
 on=@itemstep
 if (act.baseid==i_reag_spider_silk)
- act.more=0
- act.attr=0
- act.bounce
+  act.more=0
+  act.attr=0
+  act.bounce
 endif
 
 [itemdef i_rune_hassummon]
-NAME=summon timer
+NAME=summon counter
 ID=i_rune_summon_creature
 TYPE=T_EQ_SCRIPT 
-
-on=@create
-timer=5
-
-on=@unequip
-if (link)
- if (link.issumon)
-  link.remove
- else
-  link.cont.dismount
- endif
-endif
-
-on=@timer
-if (link)
- if (cont.rescount(i_rune_hassummon)>eval((cont.tag(level)/5)+1))||(cont.rescount(i_rune_hassummon)>5)
-   remove
- endif
-else
- remove
-endif
-timer=5
-return 1
 
 [events e_monster]
 on=@Death

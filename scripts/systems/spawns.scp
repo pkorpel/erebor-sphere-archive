@@ -232,31 +232,10 @@ else
       if (rescount(i_gold)>{30 100000})&&({1 20} == 5)
         giveitem(i_u_treasure_map)
       endif
-      //if (rescount(i_gold)>{2500 100000})&&({1 20} == 4)
-      //  giveitem(i_u_treasure_map_bonus)
-      //endif
-      
     endif
   endif
   if (<eval tag(experience)> < 10) && (<eval tag(experience)> > 0)
     tag(experience,10)
-  endif
-endif
-
-if (flag_conjured)
-  if (memoryfindtype(MEMORY_IPET))
-    arg(owner,<memoryfindtype(MEMORY_IPET).link>)
-    if (finduid(<arg(owner)>).isplayer)
-      newitemsafe(i_rune_hassummon)
-      tag(runecaster,<lastnew>)
-      lastnew.link=<uid>
-      lastnew.cont=<owner>
-      if (findid(i_rune_summon_creature))
-        newitemsafe(i_summonremove)
-        equip(lastnew)
-        lastnew.timer=<findid(i_rune_summon_creature).timer>-1
-      endif
-    endif
   endif
 endif
 safe(trigger(@Created))

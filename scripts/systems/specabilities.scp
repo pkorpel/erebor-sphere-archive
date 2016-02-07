@@ -2416,10 +2416,10 @@ src.events(-e_mystik)
 src.tag(dam,<findUID(argv(0)).typedef.dam>) //!!!!!!!!!!!!!!!!!!!!!!!!!!
 src.update
 if (<src.magery>)
- src.magery=0 //zakaz kouzleni a uvidime co to udela
+  src.magery=0 //zakaz kouzleni a uvidime co to udela
 endif
 if (src.body==c_man)||(src.body==c_woman) 
- src.prenes_veci_od_npc(<argv(0)>)
+  src.prenes_veci_od_npc(<argv(0)>)
 endif
 src.strelec
 
@@ -2502,24 +2502,25 @@ accmsg("HYPNOZA")
 accmsg("Hypnoza <uid>-<name>: Prenos veci od npc <argv(0)> - <argv(0).name>")
 findUID(argv(0)).eqlayers(dej_me)
 if (<findlayer(25)>)//mame od npc nejaky jezditko - udelam si misto toho summona aby ty pravy jezditka nekradli smradi...
- accmsg("HYPNOZA")
- accmsg("Hypnoza <name>: Prenos kone od npc")
- newnpc(mage_horse_brown)
- arg(summonHorse,<lastnewchar>)
- summonHorse.body=<findUID(<findlayer(25)>).typedef.tdata3.body>
- summonHorse.flag_conjured=1 //proti shrinkovani !
- newitemsafe(i_summonremove)
- lastnew.timer=540 //neni treba vic
- lastnew.cont=<lastnewchar> //dat novemu koni
- lastnew.update
- newitemsafe(i_memory)
- lastnew.attr=attr_newbie
- lastnew.color=02 //kun je pet
- lastnew.link=<uid> //komu ten kun patri
- lastnew.cont=<lastnewchar>
- lastnew.update
- findlayer(25).remove //zmizet pripadneho kone, jinak se z nej da sesednout a ukraast :)
- summonHorse.dclick //nasednout na noveho "summona"
+  accmsg("HYPNOZA")
+  accmsg("Hypnoza <name>: Prenos kone od npc")
+  newnpc(mage_horse_brown)
+  arg(summonHorse,<lastnewchar>)
+  summonHorse.body=<findUID(<findlayer(25)>).typedef.tdata3.body>
+  summonHorse.flag_conjured=1 //proti shrinkovani !
+  newitemsafe(i_rune_summon_creature)
+  lastnew.timer=540 //neni treba vic
+  lastnew.cont=<lastnewchar> //dat novemu koni
+  lastnew.link=<uid>
+  lastnew.update
+  newitemsafe(i_memory)
+  lastnew.attr=attr_newbie
+  lastnew.color=02 //kun je pet
+  lastnew.link=<uid> //komu ten kun patri
+  lastnew.cont=<lastnewchar>
+  lastnew.update
+  findlayer(25).remove //zmizet pripadneho kone, jinak se z nej da sesednout a ukraast :)
+  summonHorse.dclick //nasednout na noveho "summona"
 endif
 
 [Function dej_me]
@@ -5903,11 +5904,11 @@ endif
 if(<eval player.tag(ra_vylepseni_vydrz)> > 0)
   player.sysmessage("Summon vydrzi diky tve schopnosti dele.")
   if (<player.tag(ra_vylepseni_vydrz)> < 11)
-    arg(timer_smm,<eval((<findid(i_summonremove).timer>*100)*((<player.tag(ra_vylepseni_vydrz)>*2)+100))>/10000)
+    arg(timer_smm,<eval((<findid(i_rune_summon_creature).timer>*100)*((<player.tag(ra_vylepseni_vydrz)>*2)+100))>/10000)
   else
-    arg(timer_smm,<eval((<findid(i_summonremove).timer>*100)*((<player.tag(ra_vylepseni_vydrz)>/2)+115))>/10000)
+    arg(timer_smm,<eval((<findid(i_rune_summon_creature).timer>*100)*((<player.tag(ra_vylepseni_vydrz)>/2)+115))>/10000)
   endif
-  findid(i_summonremove).timer = <timer_smm> 
+  findid(i_rune_summon_creature).timer = <timer_smm> 
 endif
 
 on=@beforedoeffect

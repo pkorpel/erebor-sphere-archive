@@ -439,7 +439,7 @@ if (issumon)
   if (obody==mage_horse_brown) || (obody==necro_horse_undead)
   else
     if (<strlen(<tag(isAnimated)>)>)// chyba(animate) -> savovanie
-      findid(i_summonremove).timer=0
+      findid(i_rune_summon_creature).timer=0
     else
       remove
     endif

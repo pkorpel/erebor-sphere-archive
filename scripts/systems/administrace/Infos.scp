@@ -202,7 +202,7 @@ elseif (<iflags>&iflag_check)//iflag_bitmask
     endif
   endif
 else
-  if (<safe nvalue>!=<safe ovalue>)
+  if (strcmpi(<safe nvalue>,<safe ovalue>))
     finduid(<tag(from)>).try <argv(4)>(<nvalue>)
   endif
 endif

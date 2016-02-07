@@ -1097,6 +1097,25 @@ CATEGORY=Spell Icons
 SUBSECTION=Fifth Circle
 NAME=Summon Creature
 
+on=@unequip
+if (strlen(<tag(linkedMemory)>))
+  src.say("link: <tag(linkedMemory)>")
+  tag(linkedMemory).remove
+endif
+
+on=@equip
+if (link.isPlayer)
+  if (link.rescount(i_rune_hassummon)>eval(link.tag(level)/5))||(link.rescount(i_rune_hassummon)>4) // only allow 5 summons top
+    timer=0
+  else
+    cont.newitemsafe(i_rune_hassummon)
+    //cont.tag(runecaster,<lastnew>)
+    lastnew.link=<cont>
+    lastnew.cont=<link>
+    tag(linkedMemory,<lastnew>)
+  endif
+endif
+
 [ITEMDEF 020a8]
 //Dispel
 DEFNAME=i_rune_dispel
@@ -7714,8 +7733,6 @@ cont.consume(i_hladovitko)
 cont.accmsg(mazu sumona kone)
 remove
 return 1
-
-
 
 
 [ITEMDEF 03e9f]

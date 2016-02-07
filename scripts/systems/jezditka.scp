@@ -83,58 +83,52 @@ endif
 [function mount_equip]
 if (cont.tag(hypno_mystik)) //prehazovani zviratek mezi batuzky - nic nedelat (hlavne nemazat protoze tam je ten hrac)
 else
- if (playerExists(<cont>))
-  cont.f_mounts_removeMemoryes
-  tag(mycolor,<color>)
-  cont.newitemsafe(i_hladovitko)
-  arg(mylastnew,<lastnew>)
-  mylastnew.tag(myfood,<finduid(<more2>).food>)     
-  mylastnew.tag(mymaxfood,<finduid(<more2>).typedef.maxfood>)     
-  mylastnew.tag(myname,<finduid(<more2>).name>)     
-  mylastnew.tag(myuid,<uid>)
-  if (findUID(<more2>).findid(i_hladovitko))
-    arg(hladovitko,<findUID(<more2>).findid(i_hladovitko)>)
-    arg(foodTimer,<arg(hladovitko).timer>)
-    if (<finduid(<more2>).food> < 3)
-      mylastnew.more2=<arg(hladovitko).more2>
-      if (arg(foodTimer) < mt_lowFoodTimer)
-        mylastnew.timer=<arg(foodTimer)>
+  if (playerExists(<cont>))
+    cont.f_mounts_removeMemoryes
+    tag(mycolor,<color>)
+    cont.newitemsafe(i_hladovitko)
+    arg(mylastnew,<lastnew>)
+    mylastnew.tag(myfood,<finduid(<more2>).food>)     
+    mylastnew.tag(mymaxfood,<finduid(<more2>).typedef.maxfood>)     
+    mylastnew.tag(myname,<finduid(<more2>).name>)     
+    mylastnew.tag(myuid,<uid>)
+    if (findUID(<more2>).findid(i_hladovitko))
+      arg(hladovitko,<findUID(<more2>).findid(i_hladovitko)>)
+      arg(foodTimer,<arg(hladovitko).timer>)
+      if (<finduid(<more2>).food> < 3)
+        mylastnew.more2=<arg(hladovitko).more2>
+        if (arg(foodTimer) < mt_lowFoodTimer)
+          mylastnew.timer=<arg(foodTimer)>
+        else
+          mylastnew.timer=<mt_lowFoodTimer>
+        endif
       else
-        mylastnew.timer=<mt_lowFoodTimer>
+        if (<arg(foodTimer)> < <mt_sitOnFoodTimer>)
+          mylastnew.timer=<arg(foodTimer)>
+        else
+          mylastnew.timer=<mt_sitOnFoodTimer>
+        endif
       endif
-    else
-      if (<arg(foodTimer)> < <mt_sitOnFoodTimer>)
-        mylastnew.timer=<arg(foodTimer)>
-      else
-        mylastnew.timer=<mt_sitOnFoodTimer>
-      endif
+    elseif (<mylastnew.tag(myfood)> < 3)
+       mylastnew.timer=<mt_lowFoodTimer>
     endif
-  elseif (<mylastnew.tag(myfood)> < 3)
-    mylastnew.timer=<mt_lowFoodTimer>
+    cont.equip(<mylastnew>)
+    tag(myfood,<finduid(<more2>).food>)
+    tag(fooduid,<mylastnew>)
+    tag(myhits,<finduid(<more2>).hits>)
+    tag(myid,<finduid(<more2>).id>)
+    if (strlen(<finduid(<more2>).tag(myid)>))
+     tag(myid,<finduid(<more2>).tag(myid)>)
+    endif
+    if (finduid(<more2>).issumon)
+      cont.newitemsafe(i_summonmountremover)
+      lastnew.timer=600
+      cont.equip(<lastnew>)
+    endif
+    finduid(<more2>).actarg1=""
+    finduid(<more2>).remove 
   endif
-  cont.equip(<mylastnew>)
-  tag(myfood,<finduid(<more2>).food>)
-  tag(fooduid,<mylastnew>)
-  tag(myhits,<finduid(<more2>).hits>)
-  tag(myid,<finduid(<more2>).id>)
-  if (strlen(<finduid(<more2>).tag(myid)>))
-   tag(myid,<finduid(<more2>).tag(myid)>)
-  endif
-  if (finduid(<more2>).issumon)
-   cont.newitemsafe(i_summonmountremover)
-   lastnew.timer=600
-   cont.equip(<lastnew>)
-   arg(mymnt,<finduid(<more2>).tag(runecaster)>)
-   if (arg(mymnt))
-    finduid(<arg(mymnt)>).link=<uid>
-   else
-    remove
-   endif
-  endif
-  finduid(<more2>).actarg1=""
-  finduid(<more2>).remove 
- endif
- more2=<cont>
+  more2=<cont>
 endif
 
 [function mount_unequip]
