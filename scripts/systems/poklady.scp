@@ -27,22 +27,44 @@ argo.SetLocation=15,5
 
 arg(info_width,145)
 arg(input_width,100)
-argo.tag(sirka,648)
-argo.tag(vyska,<eval <d_def_baseMenu_vyska>+(5*<d_def_skvira>)+((6+<eval tag(addItemsCount)>)*<d_def_radek_vyska>)>)
+argo.tag(sirka,668)
+argo.tag(vyska,<eval <d_def_baseMenu_vyska>+(8*<d_def_skvira>)+((11+<eval tag(addItemsCount)>)*<d_def_radek_vyska>)>)
 argo.dialog_prvni
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,3,<info_width>)
 argo.dialog_pozadi(<argo.tag(nexty)>,1)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,<info_width>,<input_width>,<info_width>)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,<info_width>,<input_width>,<info_width>)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,<info_width>)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,30)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,30)
-argo.dialog_pozadi(<argo.tag(nexty)>,1,30,100,250,65,65,65,30)
-argo.dialog_pozadi(<argo.tag(nexty)>,<eval tag(addItemsCount)>,30,100,250,65,65,65,30)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,30,100,270,65,65,65,30)
+argo.dialog_pozadi(<argo.tag(nexty)>,<eval tag(addItemsCount)>,30,100,270,65,65,65,30)
 argo.dialog_zpruhledni
 
-argo.newTextLine(<argo.dialog_textpos(0,0)>,<d_def_headcolor>,"Administrace Pokladu")
+argo.dialog_textpos(0,0)
+argo.newTextLine(<lastxpos>+220,<lastypos>,<d_def_headcolor>,"Administrace Pokladu")
 
-argo.newTextLine(<argo.dialog_textpos(1,0)>,<d_def_readcolor>,"Respawn (min):")
+///////// Info
+argo.newTextLine(<argo.dialog_textpos(1,0)>,<d_def_subheadcolor>,"Informace o pokladu")
+
+argo.newTextLine(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Stari:")
+var(lastxpos,#+<info_width>+<d_def_skvira>)
+argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"<f_treasure_count_age>")
+
+argo.newTextLine(<argo.dialog_textpos(2,0,0,2)>,<d_def_readcolor>,"Zlata:")
+var(lastxpos,#+<info_width>+<d_def_skvira>)
+argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"<eval f_treasure_count_gold> gp")
+
+argo.newTextLine(<argo.dialog_textpos(2,0,0,3)>,<d_def_readcolor>,"Spawnu v bance:")
+var(lastxpos,#+<info_width>+<d_def_skvira>)
+argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"<eval findlayer(29).rescount> ks")
+
+///////// Settings
+argo.newTextLine(<argo.dialog_textpos(3,0)>,<d_def_subheadcolor>,"Nastaveni")
+
+argo.newTextLine(<argo.dialog_textpos(4,0)>,<d_def_readcolor>,"Respawn (min):")
 var(lastxpos,#+<info_width>+<d_def_skvira>)
 if (0<tag(respawn_delay)> > 0)
   argo.newTextEntry(<lastxpos>,<lastypos>,100,1,"<eval tag(respawn_delay)>")
@@ -58,7 +80,7 @@ else
   argo.newTextEntry(<lastxpos>,<lastypos>,120,2,"<eval d_def_treasureSpawnAnomaly>")
 endif
 
-argo.newTextLine(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Zlata (gp/min):")
+argo.newTextLine(<argo.dialog_textpos(5,0)>,<d_def_readcolor>,"Zlata (gp/min):")
 var(lastxpos,#+<info_width>+<d_def_skvira>)
 if (0<tag(gold_per_minute)> > 0)
   argo.newTextEntry(<lastxpos>,<lastypos>,100,3,"<eval tag(gold_per_minute)>")
@@ -74,45 +96,45 @@ else
   argo.newTextEntry(<lastxpos>,<lastypos>,200,4,"<d_def_treasureGoldInit>")
 endif
 
-argo.newTextLine(<argo.dialog_textpos(3,0)>,<d_def_readcolor>,"Lockpick (promile):")
+argo.newTextLine(<argo.dialog_textpos(6,0)>,<d_def_readcolor>,"Lockpick (promile):")
 argo.newTextEntry(<lastxpos>+<info_width>+<d_def_skvira>,<lastypos>,100,5,"<eval tag(lockpick)>")
 
-argo.button(<argo.dialog_buttonpos_near(4,0)>,0fbd,0fbf,1,0,2)  //set Item to add - dialog
-argo.newTextLine(<argo.dialog_textpos(4,1)>,<d_def_readcolor>,"Vybrat spawny strazici poklad")
-argo.newTextLine(<argo.dialog_textpos(4,3)>,<d_def_readcolor>,"Strazcu: ")
-argo.newTextLine(<argo.dialog_textpos(4,4)>,<d_def_readcolor>,"<eval tag(pocetSpawnu)>")
+argo.button(<argo.dialog_buttonpos_near(7,0)>,0fbd,0fbf,1,0,2)  //set Item to add - dialog
+argo.newTextLine(<argo.dialog_textpos(7,1)>,<d_def_readcolor>,"Vybrat spawny strazici poklad")
+argo.newTextLine(<argo.dialog_textpos(7,3)>,<d_def_readcolor>,"Strazcu: ")
+argo.newTextLine(<argo.dialog_textpos(7,4)>,<d_def_readcolor>,"<eval tag(pocetSpawnu)>")
 
-argo.button(<argo.dialog_buttonpos_near(5,0)>,0fbd,0fbf,1,0,3)  //set Item to add - dialog
-argo.newTextLine(<argo.dialog_textpos(5,1)>,<d_def_readcolor>,"Pridat novy predmet")
+argo.button(<argo.dialog_buttonpos_near(8,0)>,0fbd,0fbf,1,0,3)  //set Item to add - dialog
+argo.newTextLine(<argo.dialog_textpos(8,1)>,<d_def_readcolor>,"Pridat novy predmet")
 
-argo.newTextLine(<argo.dialog_textpos(6,0)>,<d_def_readcolor>,"E")
-argo.newTextLine(<argo.dialog_textpos(6,1)>,<d_def_readcolor>,"Cislo Itemu")
-argo.newTextLine(<argo.dialog_textpos(6,2)>,<d_def_readcolor>,"Item ID")
-argo.newTextLine(<argo.dialog_textpos(6,3)>,<d_def_readcolor>,"Pocet")
-argo.newTextLine(<argo.dialog_textpos(6,4)>,<d_def_readcolor>,"Sance")
-argo.newTextLine(<argo.dialog_textpos(6,5)>,<d_def_readcolor>,"Perioda")
-argo.newTextLine(<argo.dialog_textpos(6,6)>,<d_def_readcolor>,"Del")
+argo.newTextLine(<argo.dialog_textpos(9,0)>,<d_def_readcolor>,"E")
+argo.newTextLine(<argo.dialog_textpos(9,1)>,<d_def_readcolor>,"Cislo Itemu")
+argo.newTextLine(<argo.dialog_textpos(9,2)>,<d_def_readcolor>,"Item ID")
+argo.newTextLine(<argo.dialog_textpos(9,3)>,<d_def_readcolor>,"Pocet")
+argo.newTextLine(<argo.dialog_textpos(9,4)>,<d_def_readcolor>,"Sance")
+argo.newTextLine(<argo.dialog_textpos(9,5)>,<d_def_readcolor>,"Perioda")
+argo.newTextLine(<argo.dialog_textpos(9,6)>,<d_def_readcolor>,"Del")
 
 arg(i,0)
 while (<arg(i)> < <eval tag(addItemsCount)>)
-  argo.dialog_buttonpos_near(7,0)
+  argo.dialog_buttonpos_near(10,0)
   argo.f_treasure_compileItemTags(<tag(itemToAdd[<eval arg(i)>])>)
   argo.button(<lastxbuttpos>,<lastybuttpos>+<arg(i)>*<d_def_radek_vyska>,d_def_button_select1,d_def_button_select2,1,0,100+<arg(i)>) //edit Item - dialog
-  argo.dialog_textpos(7,1)
+  argo.dialog_textpos(10,1)
   argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"Item <eval arg(i)>")
-  argo.dialog_textpos(7,2)
+  argo.dialog_textpos(10,2)
   argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?argo.tag(itID)?>")
-  argo.dialog_textpos(7,3)
+  argo.dialog_textpos(10,3)
   argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(itAmount)?>x")
-  argo.dialog_textpos(7,4)
+  argo.dialog_textpos(10,4)
   argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(chance)?>%")
-  argo.dialog_textpos(7,5)
+  argo.dialog_textpos(10,5)
   if (0<argo.tag(itPeriod)>)
     argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(itPeriod))?>h")
   else
     argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"OFF")
   endif
-  argo.dialog_buttonpos_near(7,6)
+  argo.dialog_buttonpos_near(10,6)
   argo.button(<lastxbuttpos>,<lastybuttpos>+<arg(i)>*<d_def_radek_vyska>,0fb1,0fb3,1,0,1000+<arg(i)>)	//delete Item
   arg(i,#+1)
 endwhile
@@ -335,6 +357,9 @@ return<arg(checkButtons)>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //  SUPPORT DEFINITIONS and FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+[function f_treasure_count_age]
+return<dsToRTime(<serv.time>-<tag(lastOpened)>)>
+
 [function f_treasure_count_gold]
 return<eval ((<serv.time>-<tag(lastOpened)>)*<tag(gold_per_minute)>)/600>
 
@@ -407,9 +432,10 @@ description=vygenerovany poklad nepouzivat
 on=@userDClick
 tag(klikos,<src>)
 if (src.isGM)
-  src.sysmessage(Nesahej na to, rozbijes to!)
-  src.sysmessage(Kazdej dvojklik zpusobi, ze poklad do hodiny zmizi a novej bude mit mene penez, protoze se to pocita podle stari truhly!)
-  src.sysmessage(Ale kdyzs uzs na me klik, tak je tu zatim <finduid(tag(treasureKeeper)).f_treasure_count_gold>gp.)
+  src.sysmessage("Nesahej na to, rozbijes to!")
+  src.sysmessage("Kazdej dvojklik zpusobi, ze poklad do hodiny zmizi a novej bude mit mene penez, protoze se to pocita podle stari truhly!")
+  src.sysmessage("Ale kdyzs uzs na me klik, tak je tu zatim <finduid(tag(treasureKeeper)).f_treasure_count_gold>gp.")
+  src.sysmessage("Stari pokladu: <?finduid(tag(treasureKeeper)).f_treasure_count_age?>")
   return 1
 endif
 arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
