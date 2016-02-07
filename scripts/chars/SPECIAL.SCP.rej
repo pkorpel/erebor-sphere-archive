@@ -1,0 +1,9 @@
+diff a/scripts/chars/SPECIAL.SCP b/scripts/chars/SPECIAL.SCP	(rejected hunks)
+@@ -644,7 +644,6 @@
+ 
+ TEVENTS=e_monster
+ TEVENTS=e_character
+-//TEVENTS=e_npc_infiniteMana
+ TEVENTS=e_npc_manashield
+ TEVENTS=e_water
+ TEVENTS=e_npc_curse_mana            //mass sani many

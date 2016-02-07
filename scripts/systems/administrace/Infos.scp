@@ -1,13 +1,18 @@
-[function dialog_textpos]//obj, (sloupec), bez odsazeni
+[function dialog_textpos]//obj, (sloupec), bez odsazeni (X), radek (Y)
 If (argvcount==1)
   var(lastxpos,<eval(<d_def_skvira>+<d_def_okraj>)>)
 else
   var(lastxpos,<eval(<tag(sloupec_x[argv(1)])>)>)
 endif
+arg(radek,1)
 if !(argv(2))
   var(lastxpos,#+<d_def_odsazeni>)
 endif
 var(lastypos,<tag(obj_y[argv(0)])>)
+if (0<argv(3)>)
+  var(lastypos,#+((<argv(3)>-1)*<d_def_radek_vyska>))
+endif
+
 return <var(lastxpos)>,<var(lastypos)>
 
 [function dialog_buttonpos]//obj, (sloupec), bez odsazeni
@@ -105,11 +110,12 @@ d_def_button_vyska    22
 d_def_baseMenu_sirka  26
 d_def_baseMenu_vyska  73
 
-d_def_writecolor  2300
-d_def_readcolor   2303
-d_def_valuecolor  1000
-d_def_NAcolor     2305
-d_def_headcolor   93
+d_def_writecolor      2300
+d_def_readcolor       2303
+d_def_valuecolor      1000
+d_def_NAcolor         2305
+d_def_headcolor       98
+d_def_subheadcolor    95
 
 d_def_refer_sirka	800
 d_def_refer_vyska	480
