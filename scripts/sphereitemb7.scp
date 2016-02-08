@@ -1099,7 +1099,6 @@ NAME=Summon Creature
 
 on=@unequip
 if (strlen(<tag(linkedMemory)>))
-  src.say("link: <tag(linkedMemory)>")
   tag(linkedMemory).remove
 endif
 
@@ -1109,7 +1108,6 @@ if (link.isPlayer)
     timer=0
   else
     cont.newitemsafe(i_rune_hassummon)
-    //cont.tag(runecaster,<lastnew>)
     lastnew.link=<cont>
     lastnew.cont=<link>
     tag(linkedMemory,<lastnew>)
