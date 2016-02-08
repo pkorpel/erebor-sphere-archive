@@ -1099,7 +1099,9 @@ NAME=Summon Creature
 
 on=@unequip
 if (strlen(<tag(linkedMemory)>))
-  tag(linkedMemory).remove
+  if (finduid(tag(linkedMemory)).id == i_rune_hassummon)
+    finduid(tag(linkedMemory)).remove
+  endif
 endif
 
 on=@equip
@@ -1108,9 +1110,10 @@ if (link.isPlayer)
     timer=0
   else
     cont.newitemsafe(i_rune_hassummon)
-    lastnew.link=<cont>
-    lastnew.cont=<link>
-    tag(linkedMemory,<lastnew>)
+    arg(lastNewItem,<lastnew>)
+    tag(linkedMemory,<arg(lastNewItem)>)
+    lastNewItem.link=<cont>
+    lastNewItem.cont=<link>
   endif
 endif
 
