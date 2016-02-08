@@ -53,6 +53,15 @@ argo.newTextLine(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Stari:")
 var(lastxpos,#+<info_width>+<d_def_skvira>)
 argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"<f_treasure_count_age>")
 
+arg(memory,<findId(i_mem_treasureGenerator)>)
+if (<hval arg(memory)>)
+  arg(countDown,<eval (<arg(memory).timer> * 10)>)
+  if (arg(countDown) > 5)
+    var(lastxpos,#+200)
+    argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"respawn za <dsToRTime(<arg(countDown)>)>")
+  endif
+endif
+
 argo.newTextLine(<argo.dialog_textpos(2,0,0,2)>,<d_def_readcolor>,"Zlata:")
 var(lastxpos,#+<info_width>+<d_def_skvira>)
 argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"<eval f_treasure_count_gold> gp")
@@ -373,6 +382,14 @@ arg(memory,<findId(i_mem_treasureGenerator)>)
 if (!<hval arg(memory)>)
   newequip(i_mem_treasureGenerator)
 endif
+f_treasure_cleanChestLink(<uid>)
+
+//must be executed upon the treasurer
+// argv(0) - chest
+[function f_treasure_cleanChestLink]
+if (strcmpi(<tag(lastTreasureChestUID)>,<argv(0)>))
+  tag.remove(lastTreasureChestUID)
+endif
 
 //argv(0) - chest
 //argv(1) - treasureKeeper
@@ -393,10 +410,6 @@ ID = i_memory
 TYPE = t_eq_script
 LAYER = layer_special
 name=generator pokladu
-
-on=@create
-timer=1
-attr=010
 
 on=@equip
 f_treasureGenerator_init
@@ -420,7 +433,7 @@ if (0<cont.tag(lockpick)>)
   cont.act.tag(lockpick,<cont.tag(lockpick)>)
 endif
 f_treasure_setType(<cont.act>,<cont>)
-return 0 //remove the item
+return 0
 
 [itemdef i_treasureChest]
 id=i_chest_metal
@@ -447,9 +460,11 @@ elseif (type!=t_container_locked)
   if (<eval tag(wasSpawned)>==0)  //je odemcena ale jeste nevyskocili guardi (pokud jsou)
     timer=<d_def_treasureSpawnDelay>*60
     tag(wasSpawned,1)
-    if (tag(treasureKeeper).findlayer(29).rescount) //guards should be spawned
-      f_treasure_throwGuards
-      return 1
+    if (tag(treasureKeeper).findlayer(29))
+      if (tag(treasureKeeper).findlayer(29).rescount) //guards should be spawned
+        f_treasure_throwGuards
+        return 1
+      endif
     endif
   endif
   if (<eval tag(wasOpened)>==0)
@@ -464,12 +479,8 @@ endif
 
 on=@timer
 arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
-arg(treasureKeeper).tag.remove(lastTreasureChestUID)
-arg(treasureKeeper).f_treasure_initTreasureGenerator
+treasureKeeper.f_treasure_initTreasureGenerator
 return 0 // remove
-
-on=@destroy
-finduid(<tag(treasureKeeper)>).tag.remove(lastTreasureChestUID)
 
 // argv(0) -> uid truhly
 // argv(1) -> suppress time reset - used to test generated treasure without reseting the age
