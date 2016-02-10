@@ -875,6 +875,12 @@ flip=1
 dupelist=0108F
 
 on=@UserDClick
+if (<src.flags>&statf_dead)
+  return 0
+elseif (<distance> > 2)
+  src.sysMessage("Jsi prilis daleko.")
+  return 1
+endif
 if (f_guarditAdv_CheckSpawns)	// 1 == strazce je nazivu
   src.sysMessage("Packu nema smysl prehazovat, dokud je strazce nazivu.")
   return 1
@@ -945,6 +951,12 @@ flip=1
 dupelist=0A0A
 
 on=@UserDClick
+if (<src.flags>&statf_dead)
+  return 0
+elseif (<distance> > 2)
+  src.sysMessage("Jsi prilis daleko.")
+  return 1
+endif
 if (f_guarditAdv_CheckSpawns)	// 1 == strazce je nazivu
   src.sysMessage("S pochodni nema smysl manipulovat, dokud je strazce nazivu.")
   return 1
@@ -1200,6 +1212,12 @@ if (src.isGM)
   dialog(d_switcParalelhMenu)
   return 1
 endif
+if (<src.flags>&statf_dead)
+  return 0
+elseif (<distance> > 2)
+  src.sysMessage("Jsi prilis daleko.")
+  return 1
+endif
 if (f_guarditAdv_CheckSpawns)	// 1 == strazce je nazivu
   src.sysMessage("S louci nema smysl manipulovat, pokud je strazce nazivu.")
 elseif (<more2> == 0) // torch is not turned On
@@ -1252,6 +1270,12 @@ more1=120
 on=@UserDClick
 if (src.isGM)
   dialog(d_switcParalelhMenu)
+  return 1
+endif
+if (<src.flags>&statf_dead)
+  return 0
+elseif (<distance> > 2)
+  src.sysMessage("Jsi prilis daleko.")
   return 1
 endif
 if (f_guarditAdv_CheckSpawns)	// 1 == strazce je nazivu
@@ -1730,6 +1754,12 @@ if (src.isgm)
   dialog(d_switch_more2)
   return 1
 endif
+if (<src.flags>&statf_dead)
+  return 0
+elseif (<distance> > 2)
+  src.sysMessage("Jsi prilis daleko.")
+  return 1
+endif
 if (more2 == 1)
   src.sysMessage("Zhasinas louc.")
   timer=0
@@ -1784,6 +1814,12 @@ if (src.isgm)
   dialog(d_switch_more2)
   return 1
 endif
+if (<src.flags>&statf_dead)
+  return 0
+elseif (<distance> > 2)
+  src.sysMessage("Jsi prilis daleko.")
+  return 1
+endif
 if (more2 == 1)
   src.sysMessage("Zhasinas louc.")
   timer=0
@@ -1826,6 +1862,12 @@ attr=010
 on=@userDClick
 if (src.isgm)
   dialog(d_switch_more2)
+  return 1
+endif
+if (<src.flags>&statf_dead)
+  return 0
+elseif (<distance> > 2)
+  src.sysMessage("Jsi prilis daleko.")
   return 1
 endif
 if (more2 == 1)

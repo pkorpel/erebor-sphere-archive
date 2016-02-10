@@ -451,6 +451,14 @@ if (src.isGM)
   src.sysmessage("Stari pokladu: <?finduid(tag(treasureKeeper)).f_treasure_count_age?>")
   return 1
 endif
+if (<src.flags>&statf_dead)
+  src.accMsg("BUGGER hrac <src.name> (acc <src.account.name>,Lvl <eval src.tag(level)>) se pokousi otevrit poklad (UID: <uid>) na souradnicich -<p>- jako duch")
+  src.sysMessage("Tak tohle fakt nejde.")
+  return 1
+elseif (<distance> > 1)
+  src.sysMessage("Jsi prilis daleko.")
+  return 1
+endif
 arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
 if (!0<tag(wasOpened)> && treasureKeeper.f_guarditAdv_CheckSpawns) // check for guards only if the chest was not opened at all
   src.sysmessage("Nedostanes se dovnitr, dokud je strazce nazivu!")
