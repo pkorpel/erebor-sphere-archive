@@ -383,7 +383,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
 //typ monstra
 tag(monstertype,humanoid,60)
 
-tag(resist_poison,400)
+tag(resist_poison,600)
 tag.resist_para=<eval {700 800}>
 tag(resist_summon,950)
 tag(resist_bleed,-200)
