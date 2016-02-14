@@ -2596,6 +2596,8 @@ return 1
 //////////////////////////////////
 //   P A D A C I   D V E R E    //
 //////////////////////////////////
+[defnames d_def_padaciDvere]
+def_padaciDvere_height    9
 
 [itemdef i_padaciDvere]
 name=padaci dvere
@@ -2610,28 +2612,33 @@ attr=010
 tag(riseDelay,120)
 
 on=@Timer
-if (<eval more1> < 9) && (<eval moreX> == 0)
-  f_moveUp
-  if (<more1> == 0)
-    sfx(557)
+if (<eval moreX> == 0) // moreX==0 -> UP
+  if (<eval moreZ> < def_padaciDvere_height)
+    f_moveUp
+    moreZ=<moreZ>+1
+    if (<moreZ> == 0)
+      sfx(557)
+    endif
   endif
-  timerD=2
-  more1=<more1> +1
-elseif (<eval more1> == 9) && (<eval moreX> == 0)
-  timer=<eval tag(riseDelay)>
-  more2=9
-  moreX=1
-elseif (<eval more2> > 0)
-  f_moveDown
-  if (<more2> == 9)
-    sfx(557)
+  if (<eval moreZ> == def_padaciDvere_height)
+    timer=<eval tag(riseDelay)>
+    moreX=1
+  else
+    timerD=2
   endif
-  timerD=2
-  more2=<more2> -1
-else	//dvere dopadly na zem
-  more1=0
-  more2=0
-  moreX=0
+elseif (<eval moreX> == 1) // down
+  if (<eval moreZ> > 0)
+    f_moveDown
+    moreZ=<moreZ>-1
+    if (<moreZ> == def_padaciDvere_height)
+      sfx(557)
+    endif
+  endif
+  if (<eval moreZ> == 0) // hit the ground
+    moreX=0
+  else
+    timerD=2
+  endif
 endif
 return 1
 
@@ -2657,7 +2664,7 @@ argo.texta(<argo.dialog_textpos(0,0)>,42,"Padaci dvere")
 argo.button(260,<lastYPos>,0fab,0fad,1,0,2)//help
 argo.texta(<argo.dialog_textpos(1,0)>,<d_def_writecolor>,"Doba Otevreni/s:")
 
-argo.settext(10,"<?eval tag(riseDelay)?>")	//doba otevreni dveri v s (moreZ)
+argo.settext(10,"<?eval tag(riseDelay)?>")	//doba otevreni dveri v s
 argo.textentry(<argo.dialog_textpos(1,1)>,128,<d_def_radek_vyska>,textcolor,1,10)
 
 argo.button(<d_def_okraj>+<d_def_skvira>,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb7,0fb9,1,0,1)//ok
@@ -2679,29 +2686,23 @@ argo.setText(1," Dvere reaguji na vynulovani timeru. Pokud jsou spadle a timer n
 argo.f_dialog_HelpCreator("HELP - t_padaciDvere")
 
 [function f_padaciDvere_isMoving]
-if ((moreX==0) && (more1 > 0)) || ((moreX==1) && (more2 < 9))
+if ((moreZ > 0) && (moreZ < def_padaciDvere_height))
   return 1
 else
   return 0
 endif
 
 [function f_padaciDvere_shut]
-if <eval more2>
-  moreX=1
-  timer=0
-elseif <eval more1>
-  more2=<eval more1>
-  moreX=1
+if (<f_padaciDvere_isMoving> && (<moreX> == 0)) // moving up -> change direction, leave the timer as is
+  moreX=1  // change direction
+elseif (<moreZ> == def_padaciDvere_height) // fully lift, just reduce the timer
   timer=0
 endif
 
 [function f_padaciDvere_open]
-if (<eval more1> < 9)
-  moreX=0
-  timer=0
-elseif (<eval more2> < 9)
-  more1=<eval more2>
-  moreX=0
+if (<f_padaciDvere_isMoving> && (<moreX> == 1)) //moving down -> change direction, leave the timer as is
+  moreX=0  // change direction
+elseif (<moreZ> == 0) // fully lowered, just start the timer
   timer=0
 endif
 
