@@ -5,7 +5,7 @@ say(muj typ boje: <tag(combattype)>, <tag(weapflag)<tag(mi_weapflags)>>)
 //* Stores the current src (should be player) position and moves it to its target
 //*
 //* @param I        [char] the player character
-//* @param act      [char] act, current target (TODO MZU: context sensitive argument? Potential weak point
+//* @param argv(0)  [char] current target
 //* @return         no return value
 //*/
 [function combat_storepos]
@@ -13,7 +13,7 @@ if (strlen(<tag(combat_storepos)>))
     return // sphere script performance improvement
 endif
 tag(combat_storepos, <p>)
-p=<act.p>
+p=<argv(0).p>
 
 
 //**
@@ -629,7 +629,7 @@ if !(isnonmobile)
       if(strlen(<tag(hypno_mystik)>))
       else
         if (act.srccombatLOS)&&(act.distance>1)//vidim na cil, skok k nemu, nasleduje @hittry      
-          combat_storepos
+          combat_storepos(<act>)
         endif
       endif
     endif
@@ -650,7 +650,7 @@ if !(isnonmobile)
           if (act.distance>=nastaveni_global_mystikrangepvm+<eval tag(rangearrowdst)>)
             return 0
           endif
-          combat_storepos
+          combat_storepos(<act>)
         endif
       endif
     endif
