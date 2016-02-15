@@ -828,7 +828,6 @@ if (action==skill_macefighting)
         return 0
       endif
       if (<eval tag(firststroke)>)
-          smsg(e_runarcher1 storepos)
         combat_storepos
       else
         if (findtype(<findlayer(2).typedef.tdata3>))
@@ -840,7 +839,6 @@ if (action==skill_macefighting)
           return 1
         endif
         act.effect(0,<findlayer(2).typedef.tdata4>,10,1)
-          smsg(e_runarcher2 storepos)
         combat_storepos
       endif
     endif
