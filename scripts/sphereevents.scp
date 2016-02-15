@@ -828,11 +828,8 @@ if (action==skill_macefighting)
         return 0
       endif
       if (<eval tag(firststroke)>)
-        if (tag(combat_storepos))
-        else 
-         tag(combat_storepos,<p>)
-         p=<act.p>
-        endif
+          smsg(e_runarcher1 storepos)
+        combat_storepos
       else
         if (findtype(<findlayer(2).typedef.tdata3>))
           findtype(<findlayer(2).typedef.tdata3>).consume(1)
@@ -843,8 +840,8 @@ if (action==skill_macefighting)
           return 1
         endif
         act.effect(0,<findlayer(2).typedef.tdata4>,10,1)
-        tag(rb_storepos,<p>)
-        p=<act.p>
+          smsg(e_runarcher2 storepos)
+        combat_storepos
       endif
     endif
   endif
@@ -852,23 +849,17 @@ endif
 return 0
 
 on=@hittry
-if (tag(combat_storepos))
-  p=<tag(combat_storepos)>
-  tag.remove(combat_storepos)
-endif 
+combat_restorepos
 return 0
 
 on=@skillfail
-tag.remove(combat_storepos)
+combat_restorepos
 
 on=@DrinkingPotion
 on=@afterswing
 if (action==skill_macefighting)
   if (findlayer(2).type==t_weapon_bow_run)
-    if (tag(rb_storepos))
-     p=<tag(rb_storepos)>
-     tag.remove(rb_storepos)//mam dojem, ze tohle prave dela picoviny
-    endif
+    combat_restorepos
     if ({0 4})//padani sipu
       newitemsafe(<findtype(<findlayer(2).typedef.tdata3>).baseid>)
       lastnew.p = <var(swingedchar).p>
@@ -882,10 +873,7 @@ return 0
 on=@HitMiss
 if (action==skill_macefighting)
  if (findlayer(2).type==t_weapon_bow_run)
-  if (tag(rb_storepos))
-   p=<tag(rb_storepos)>
-   tag.remove(rb_storepos)//mam dojem, ze tohle prave dela picoviny
-  endif
+  combat_restorepos
   if ({0 4})//padani sipu
    newitemsafe(<findtype(<findlayer(2).typedef.tdata3>).baseid>)
    lastnew.p=<act.p>
@@ -1118,13 +1106,10 @@ return 0
 
 on=@hittry
 hungryhurts
-if(nolightfizz(1))//ty se poserou/imo lol - Dinivan :)) 
-//say(co vracim: <nolightfizz>)
- if (tag(combat_storepos))
-  p=<tag(combat_storepos)>
-  tag.remove(combat_storepos)
- endif 
- action=-1
+if(nolightfizz(1)) //ty se poserou/imo lol - Dinivan :))
+//    say(co vracim: <nolightfizz>)
+    combat_restorepos
+    action=-1
 endif
 
 
@@ -1339,7 +1324,7 @@ if (strlen(<arg(guildStone)>))
   guildMsg("--*<name> se <sex(odpojil,odpojila)>*--")
 endif
 
-if (<tag(pact_by)>) //pact je aktivní
+if (<tag(pact_by)>) //pact je aktivnï¿½
   f_cancelpact_by
 elseif (<tag(pact_to)>)
   f_cancelpact_to
@@ -1446,7 +1431,7 @@ endif
 //prvni nalogovany nastavi regiony
 if(<serv.statclients>==1)
  if(var(wassave))
-  if(<wassave>==1) //to by po reloadu nemìlo bejt! 
+  if(<wassave>==1) //to by po reloadu nemï¿½lo bejt! 
    var(wassave,0)
   endif  
  endif
@@ -1721,7 +1706,7 @@ if(act)//field ne na sebe
   endif
   if (argn==24)||(argn==28)||(argn==39)||(argn==47)||(argn==50)
     if (act.topobj==<uid>)
-      accmsg(Buguje s kouzlením kouzla cislo <argn> na predmet <act>, ktery je v <act.topobj>)
+      accmsg(Buguje s kouzlenï¿½m kouzla cislo <argn> na predmet <act>, ktery je v <act.topobj>)
       sysmessage("Jsem hnusny buger...") 
       // damage 50 // Damage jsem zrusil, oni to lidi casto delaji omylem. Irmo
       return 1
@@ -1729,7 +1714,7 @@ if(act)//field ne na sebe
   endif
 endif
 
-//sumoni vyžadujou hùl
+//sumoni vyï¿½adujou hï¿½l
 if (src.profession==class_mag)||(src.profession==class_necro)
   if (<argn>==<spell_Blade_Spirits>)
     if (!src.hasStaff(oak))
@@ -2183,10 +2168,6 @@ on=@hittry
 tag(combatTarget,<act>)
 speedtimer
 tag.remove(firststroke)
-//if (tag(combat_storepos))
-// p=<tag(combat_storepos)>
-// tag(combat_storepos,"")
-//endif 
 return 0
 
 on=@hit
@@ -2254,7 +2235,7 @@ if (act.rescount)
         act.link.addexp(<arg(addfame)>) //pridat expy
       endif
     endif
-    if (<act.link.tag(pact_by)>) //pact je aktivní
+    if (<act.link.tag(pact_by)>) //pact je aktivnï¿½
       if (<act.link.rescount(i_pact)> == 1) // JEN PRO SICHR
         if(<act.link.tag(pact_by).isInCity> != 1)
           if (<strcmpi(<act.link.tag(pact_type)>,"blood")>==0) //len pri pakte krvy dostava expy
@@ -3055,10 +3036,7 @@ if !(f_player_canEquip_mystik(<act>))
 endif
 
 on=@HitMiss 
-if (tag(mystik_storepos))
-  p=<tag(mystik_storepos)>
-  tag.remove(mystik_storepos)
-endif
+combat_restorepos
 mana=<eval (mana*nastaveni_mystik_manaloss)/1000)>
 tag.remove(speedset)
 tag(hitspeed,0)
@@ -3066,14 +3044,10 @@ sound 0fc
 return 1
 
 on=@hittry
-if (tag(mystik_storepos))
-  p=<tag(mystik_storepos)>
-  tag.remove(mystik_storepos)
-endif
+combat_restorepos
 
 on=@skillfail
-tag.remove(mystik_storepos)
-//tag.remove(castAct)
+combat_restorepos
 
 on=@spellcast
 if !(class_cancast(mystik))

@@ -1,6 +1,35 @@
 [function typ_boje]
 say(muj typ boje: <tag(combattype)>, <tag(weapflag)<tag(mi_weapflags)>>)
 
+//**
+//* Stores the current src (should be player) position and moves it to its target
+//*
+//* @param I        [char] the player character
+//* @param act      [char] act, current target (TODO MZU: context sensitive argument? Potential weak point
+//* @return         no return value
+//*/
+[function combat_storepos]
+if (strlen(<tag(combat_storepos)>))
+    return // sphere script performance improvement
+endif
+tag(combat_storepos, <p>)
+p=<act.p>
+
+
+//**
+//* Restores the current src (should be player) position from memory
+//*
+//* @param I        [char] the player character
+//* @return         no return value
+//*/
+[function combat_restorepos]
+if (strlen(<tag(combat_storepos)>) == 0)
+    return // sphere script performance improvement
+endif
+p=<tag(combat_storepos)>
+tag.remove(combat_storepos)
+
+
 [function temporary_null]
 tag(UC,0)
 tag(ammoid,0)
@@ -115,8 +144,7 @@ endif
 mana=<eval (mana*nastaveni_mystik_manaloss)/1000)>
 tag.remove(speedset)
 tag(hitspeed,0)
-p=<tag(mystik_storepos)>
-tag.remove(mystik_storepos)
+combat_restorepos
 
 // counts the basic nonmystik damage according to the players combat attributes
 // and the type of his enemy (player vs monster)
@@ -601,16 +629,11 @@ if !(isnonmobile)
       if(strlen(<tag(hypno_mystik)>))
       else
         if (act.srccombatLOS)&&(act.distance>1)//vidim na cil, skok k nemu, nasleduje @hittry      
-          tag(mystik_storepos,<p>)
-          p=<act.p>
+          combat_storepos
         endif
       endif
     endif
   else //druhej stroke (po hittry)
-  //if (tag(combat_storepos))
-  //  p=<tag(combat_storepos)>
-  //  tag(combat_storepos,"")
-  //endif 
     if (action==skill_archery)
       sebratsip(<tag(weaponuid).typedef.tdata3>)
     endif
@@ -627,8 +650,7 @@ if !(isnonmobile)
           if (act.distance>=nastaveni_global_mystikrangepvm+<eval tag(rangearrowdst)>)
             return 0
           endif
-          tag(mystik_storepos,<p>)
-          p=<act.p>
+          combat_storepos
         endif
       endif
     endif
