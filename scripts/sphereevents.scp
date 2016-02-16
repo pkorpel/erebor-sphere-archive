@@ -1017,9 +1017,6 @@ on=@stopguarding
 [events e_spelleffect]
 on=@spelleffect
 temporary_null
-if (<argn>==6)&&(flag_nightsight==1)
- return 1
-endif
 dospellcustom(<argn>,<src.calcspelleffect(<argn>)>,<src>)
 return 1
 
@@ -1339,7 +1336,7 @@ if (strlen(<arg(guildStone)>))
   guildMsg("--*<name> se <sex(odpojil,odpojila)>*--")
 endif
 
-if (<tag(pact_by)>) //pact je aktivní
+if (<tag(pact_by)>) //pact je aktivnï¿½
   f_cancelpact_by
 elseif (<tag(pact_to)>)
   f_cancelpact_to
@@ -1446,7 +1443,7 @@ endif
 //prvni nalogovany nastavi regiony
 if(<serv.statclients>==1)
  if(var(wassave))
-  if(<wassave>==1) //to by po reloadu nemìlo bejt! 
+  if(<wassave>==1) //to by po reloadu nemï¿½lo bejt! 
    var(wassave,0)
   endif  
  endif
@@ -1721,7 +1718,7 @@ if(act)//field ne na sebe
   endif
   if (argn==24)||(argn==28)||(argn==39)||(argn==47)||(argn==50)
     if (act.topobj==<uid>)
-      accmsg(Buguje s kouzlením kouzla cislo <argn> na predmet <act>, ktery je v <act.topobj>)
+      accmsg(Buguje s kouzlenï¿½m kouzla cislo <argn> na predmet <act>, ktery je v <act.topobj>)
       sysmessage("Jsem hnusny buger...") 
       // damage 50 // Damage jsem zrusil, oni to lidi casto delaji omylem. Irmo
       return 1
@@ -1729,7 +1726,7 @@ if(act)//field ne na sebe
   endif
 endif
 
-//sumoni vyžadujou hùl
+//sumoni vyï¿½adujou hï¿½l
 if (src.profession==class_mag)||(src.profession==class_necro)
   if (<argn>==<spell_Blade_Spirits>)
     if (!src.hasStaff(oak))
@@ -2254,7 +2251,7 @@ if (act.rescount)
         act.link.addexp(<arg(addfame)>) //pridat expy
       endif
     endif
-    if (<act.link.tag(pact_by)>) //pact je aktivní
+    if (<act.link.tag(pact_by)>) //pact je aktivnï¿½
       if (<act.link.rescount(i_pact)> == 1) // JEN PRO SICHR
         if(<act.link.tag(pact_by).isInCity> != 1)
           if (<strcmpi(<act.link.tag(pact_type)>,"blood")>==0) //len pri pakte krvy dostava expy
