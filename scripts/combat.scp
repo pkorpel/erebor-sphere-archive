@@ -1,13 +1,13 @@
 [function typ_boje]
 say(muj typ boje: <tag(combattype)>, <tag(weapflag)<tag(mi_weapflags)>>)
 
-//**
-//* Stores the current src (should be player) position and moves it to its target
-//*
-//* @param I        [char] the player character
-//* @param argv(0)  [char] current target
-//* @return         no return value
-//*/
+////
+// Stores the current src (should be player) position and moves it to its target
+//
+// @param I        [char] the player character
+// @param argv(0)  [char] current target
+// @return         no return value
+////
 [function combat_storepos]
 if (strlen(<tag(combat_storepos)>))
     return // sphere script performance improvement
@@ -16,12 +16,12 @@ tag(combat_storepos, <p>)
 p=<argv(0).p>
 
 
-//**
-//* Restores the current src (should be player) position from memory
-//*
-//* @param I        [char] the player character
-//* @return         no return value
-//*/
+////
+// Restores the current src (should be player) position from memory
+//
+// @param I        [char] the player character
+// @return         no return value
+////
 [function combat_restorepos]
 if (strlen(<tag(combat_storepos)>) == 0)
     return // sphere script performance improvement
