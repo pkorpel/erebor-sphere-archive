@@ -1034,6 +1034,9 @@ CATEGORY=Spell Icons
 SUBSECTION=Fifth Circle
 NAME=Blade Spirits
 
+on=@Create
+events=+t_summon_rune
+
 [ITEMDEF 020a1]
 //Dispel Field
 DEFNAME=i_rune_dispel_field
@@ -1097,6 +1100,10 @@ CATEGORY=Spell Icons
 SUBSECTION=Fifth Circle
 NAME=Summon Creature
 
+on=@Create
+events=+t_summon_rune
+
+[typedef t_summon_rune]
 on=@unequip
 if (strlen(<tag(linkedMemory)>))
   if (finduid(tag(linkedMemory)).id == i_rune_hassummon)
@@ -1278,6 +1285,9 @@ CATEGORY=Spell Icons
 SUBSECTION=Eighth Circle
 NAME=Energy Vortex
 
+on=@Create
+events=+t_summon_rune
+
 [ITEMDEF 020ba]
 //Resurrection
 DEFNAME=i_rune_resurrection
@@ -1296,6 +1306,9 @@ CATEGORY=Spell Icons
 SUBSECTION=Eighth Circle
 NAME=Summon Air Elemental
 
+on=@Create
+events=+t_summon_rune
+
 [ITEMDEF 020bc]
 //Summon Demon
 DEFNAME=i_rune_summon_daemon
@@ -1304,6 +1317,9 @@ TYPE=T_SPELLICON
 CATEGORY=Spell Icons
 SUBSECTION=Eighth Circle
 NAME=Summon Deamon
+
+on=@Create
+events=+t_summon_rune
 
 [ITEMDEF 020bd]
 //Summon Earth
@@ -1314,6 +1330,9 @@ CATEGORY=Spell Icons
 SUBSECTION=Eighth Circle
 NAME=Summon Earth Elemental
 
+on=@Create
+events=+t_summon_rune
+
 [ITEMDEF 020be]
 //Summon Fire
 DEFNAME=i_rune_summon_elem_fire
@@ -1323,6 +1342,9 @@ CATEGORY=Spell Icons
 SUBSECTION=Eighth Circle
 NAME=Summon Fire Elemental
 
+on=@Create
+events=+t_summon_rune
+
 [ITEMDEF 020bf]
 //Summon Water
 DEFNAME=i_rune_summon_elem_water
@@ -1331,6 +1353,9 @@ TYPE=T_SPELLICON
 CATEGORY=Spell Icons
 SUBSECTION=Eighth Circle
 NAME=Summon Water Elemental
+
+on=@Create
+events=+t_summon_rune
 
 [ITEMDEF 020c0]
 //Circle 1

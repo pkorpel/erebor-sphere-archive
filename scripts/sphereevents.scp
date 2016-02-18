@@ -1003,9 +1003,6 @@ on=@stopguarding
 [events e_spelleffect]
 on=@spelleffect
 temporary_null
-if (<argn>==6)&&(flag_nightsight==1)
- return 1
-endif
 dospellcustom(<argn>,<src.calcspelleffect(<argn>)>,<src>)
 return 1
 
