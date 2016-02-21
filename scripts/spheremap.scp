@@ -3853,6 +3853,7 @@ COLDCHANCE=00
 GROUP=Dungeon - bosses
 P=5554,616,2,11
 RECT=5520,648,5581,588
+RECT=5393,720,5478,612
 mapplane=11
 //FLAGS=0001E             // asi nejde recall ven:)
 FLAGS=00812
