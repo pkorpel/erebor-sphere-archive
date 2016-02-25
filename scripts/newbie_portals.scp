@@ -1395,7 +1395,22 @@ findlayer(2).bounce
 findlayer(2).bounce
 eqlayers(color=color_<tag.class>)
 startskills
+initChat
 
+////
+// Initializes the chat interface on a new char.
+// The following chat channels are initialized: realm, all
+//
+// @param I         [char] the target player
+////
+[function initChat]
+tag(chaton, chflag_all) // enable GM server wide chat notifications to players
+if (tag(realm) == 1)
+    tag(chaton, <eval tag(chaton)|chflag_good>)
+endif
+if (tag(realm) == 2)
+    tag(chaton, <eval tag(chaton)|chflag_evil>)
+endif
 
 [function startskills]
 arg(u,0)
