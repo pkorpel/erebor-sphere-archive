@@ -3859,7 +3859,6 @@ mapplane=11
 FLAGS=00812
 tag.nobank=1
 tag.realm=3
-events=r_nofield
 RAINCHANCE=00
 COLDCHANCE=00
 
