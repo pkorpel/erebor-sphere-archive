@@ -27,7 +27,7 @@ f_qSpeech(f_q30_zmocnenecg_DClick)
 
 
 [function f_gq030_refuseQDialog]
-if ( (<src.tag.realm> != 1) && (src.profession!=class_thief) )//|| (0<src.qtag(gq030_zmocnenec)> >= 1) )
+if (<src.tag.realm> != 1)
   say("Vyhni se memu meci, prisluhovaci Mordoru !")
   return 1
 endif
@@ -331,7 +331,7 @@ f_qSpeech(f_q30_zmocnenecm_DClick)
 
 
 [function f_mq030_refuseQDialog]
-if ( (<src.tag.realm> != 2) && (src.profession!=class_thief) )//|| (0<src.qtag(gq030_zmocnenec)> >= 1) )
+if (<src.tag.realm> != 2)
   say("Vyhni se memu meci, prisluhovaci Gondoru !")
   return 1
 endif
