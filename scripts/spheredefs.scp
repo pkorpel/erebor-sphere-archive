@@ -1509,29 +1509,29 @@ stats_MAXIMUM  32767
 
 
 [DEFNAMES blockedIPs]
-d_blocked_ips        8
-d_blocked_low_ip[0]  94.74.192.1      //Segment inetnum FM - Muta GM_Y
-d_blocked_hi_ip[0]   94.74.194.255 
-
-d_blocked_low_ip[1]  94.74.196.0      //Segment inetnum FM - Muta GM_Y
-d_blocked_hi_ip[1]   94.74.207.255 
-
-d_blocked_low_ip[2]  94.74.224.0      //Segment inetnum FM - Muta GM_Y
-d_blocked_hi_ip[2]   94.74.229.255 
-
-d_blocked_low_ip[3]  188.175.113.0      //Segment inetnum FM - Muta GM_Y
-d_blocked_hi_ip[3]   188.175.113.255 
-
-d_blocked_low_ip[4]  188.175.119.0      //Segment inetnum FM - Muta GM_Y
-d_blocked_hi_ip[4]   188.175.119.255 
-
-d_blocked_low_ip[5]  188.175.126.0      //Segment inetnum FM - Muta GM_Y
-d_blocked_hi_ip[5]   188.175.126.255
-
-d_blocked_low_ip[6]  178.72.192.0      //Segment inetnum FM - Muta GM_Y
-d_blocked_hi_ip[6]   178.72.223.255
-
-d_blocked_low_ip[7]  88.103.147.115   //Lu-Tze -> block kvuli brachovi + povoleny jen jeho accounty
-d_blocked_hi_ip[7]   88.103.147.115
+d_blocked_ips        0
+//d_blocked_low_ip[0]  94.74.192.1      //Segment inetnum FM - Muta GM_Y
+//d_blocked_hi_ip[0]   94.74.194.255 
+//
+//d_blocked_low_ip[1]  94.74.196.0      //Segment inetnum FM - Muta GM_Y
+//d_blocked_hi_ip[1]   94.74.207.255 
+//
+//d_blocked_low_ip[2]  94.74.224.0      //Segment inetnum FM - Muta GM_Y
+//d_blocked_hi_ip[2]   94.74.229.255 
+//
+//d_blocked_low_ip[3]  188.175.113.0      //Segment inetnum FM - Muta GM_Y
+//d_blocked_hi_ip[3]   188.175.113.255 
+//
+//d_blocked_low_ip[4]  188.175.119.0      //Segment inetnum FM - Muta GM_Y
+//d_blocked_hi_ip[4]   188.175.119.255 
+//
+//d_blocked_low_ip[5]  188.175.126.0      //Segment inetnum FM - Muta GM_Y
+//d_blocked_hi_ip[5]   188.175.126.255
+//
+//d_blocked_low_ip[6]  178.72.192.0      //Segment inetnum FM - Muta GM_Y
+//d_blocked_hi_ip[6]   178.72.223.255
+//
+//d_blocked_low_ip[7]  88.103.147.115   //Lu-Tze -> block kvuli brachovi + povoleny jen jeho accounty
+//d_blocked_hi_ip[7]   88.103.147.115
 
 [EOF]
