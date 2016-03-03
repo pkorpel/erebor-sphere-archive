@@ -1,18 +1,15 @@
+[defnames vendor_constants]
+def_vendor_baseRent    30000
+
 [function findvendorplac]
-  //if(uid==040000047)
-  //src.classmessage(nalezl jsem ten worldgem na zemi vedle)
-  //endif
 if (isvendorplac)
- //src.classmessage(nalezl jsem nejakej vendorplac)
  if (srcissameregion(<args>))
   var(vendorplacfound,<uid>)
-  //return 1
  endif
 endif
 
 
 [function findvendor]
-//src.sysmessage(hledam vendora)
 if (isvendor) 
  if (issameregion(<args>))
   var(vendorfound,<uid>)
@@ -23,15 +20,12 @@ endif
 [function isvendor]
 if (npc)  
   if ((obody==c_h_vendor)||(obody==c_h_vendor_f))
-    //src.sysmessage(nasel jsem npc, jeho id je <uid>, jmeno <name>, telo je <obody>)
     return 1
   endif
 endif
 return 0
 
 [function isvendorplac]
-//if (findres(type,<src.type>)==NID(t_vendorplac))  
-//if (type==<NID(t_vendorplac)>)
 if (type==t_vendorplac)
  return 1
 endif
@@ -158,9 +152,7 @@ endwhile
 return 0
 
 [function trashvendor] //premisteni vendora bez smazani tagu (nelze pridat noveho)
-//src.sysmessage(trashing vendor)
 var(vendorfound,<tag(vendoruid)>)
-//sector.allchars(findvendor(<uid>)) //melo by nalezt vendora v sektoru v nemz lezi item s timto UID
  if(var(vendorfound)) //a vratit vendorovo UID
   arg(kamvendora_x,<eval {5917 5922}>)  //vybrani nahodne pozice v rohu mistnosti s truhlama
   arg(kamvendora_y,<eval {94 99}>)
@@ -175,10 +167,8 @@ var(vendorfound,<tag(vendoruid)>)
 return 0
 
 [function trashvendor_itagy]
-//src.sysmessage(trashing vendor)
 var(vendorfound,<tag(vendoruid)>)
-//sector.allchars(findvendor(<uid>)) //melo by nalezt vendora v sektoru v nemz lezi item s timto UID
- if(var(vendorfound)) //a vratit vendorovo UID
+if(var(vendorfound)) //a vratit vendorovo UID
   arg(kamvendora_x,<eval {5917 5922}>)  //vybrani nahodne pozice v rohu mistnosti s truhlama
   arg(kamvendora_y,<eval {94 99}>)
   finduid(var(vendorfound)).go(<arg(kamvendora_x)>,<arg(kamvendora_y)>,0,10) //presun vendora (mistnost s truhlama, 10 mapplan)
@@ -188,11 +178,11 @@ var(vendorfound,<tag(vendoruid)>)
   tag.remove(vendoruid) 
   tag.remove(vendor_trest)
   return 1  
- else
+else
   if(<src.isgm>)
-   src.sysmessage(Vendor nenalezen!) 
+    src.sysmessage(Vendor nenalezen!) 
   endif
- endif
+endif
 return 0
 
 [function trashvendorplac]
@@ -201,30 +191,26 @@ if !(src)
 endif
 src.accmsg(trashes vendorplac uid=<uid> (<name>))
 if (<src.ischar>) 
- src.newitemsafe(i_backpack)
- tag(backpack_s_vecma,<lastnew>)
- lastnew.name="veci ze stanku <?name?> - <?serv.rtimetext?>"
- //lastnew.attr=<eval lastnew.attr|attr_move_never|attr_invis>
- lastnew.attr_invis=1
- lastnew.attr_movenever=1
- foreachlocked(trashvenditem)
- array_clear(tag.lockedlist)
- if (finduid(tag(backpack_s_vecma)).rescount)
-  finduid(tag(backpack_s_vecma)).cont=<tag(najemcont)>  
- else
-  finduid(tag(backpack_s_vecma)).remove
- endif
- tag.remove(backpack_s_vecma)
- //link.tag.remove(mammajitele) //plac skonci bez majitele, ze...
- tag(ownerscont).contents(link.remove)
- tag(ownerscont).emptycont
- tag.remove(bankactivated)
- //finduid(<tag(vend_ownermemUID)>).remove
- if !(<tag(drazba)>) //bezi li drazba, bude nadale pokracovat a nic se nedeje
-  //src.sysmessage(neni drazba, nuluju)
-  tag(najem,50000) //nova drazba zacne automaticky na 50k  
- endif 
- more1=01 //majitelem se stane Desttro :o)  - pro drazbu a aby si nikdo nemohl jen tak vzit stanek
+  src.newitemsafe(i_backpack)
+  tag(backpack_s_vecma,<lastnew>)
+  lastnew.name="veci ze stanku <?name?> - <?serv.rtimetext?>"
+  lastnew.attr_invis=1
+  lastnew.attr_movenever=1
+  foreachlocked(trashvenditem)
+  array_clear(tag.lockedlist)
+  if (finduid(tag(backpack_s_vecma)).rescount)
+    finduid(tag(backpack_s_vecma)).cont=<tag(najemcont)>  
+  else
+    finduid(tag(backpack_s_vecma)).remove
+  endif
+  tag.remove(backpack_s_vecma)
+  tag(ownerscont).contents(link.remove)
+  tag(ownerscont).emptycont
+  tag.remove(bankactivated)
+  if !(<tag(drazba)>) //bezi li drazba, bude nadale pokracovat a nic se nedeje
+    tag(najem,<def_vendor_baseRent>) //nova drazba zacne automaticky na zakladu
+  endif 
+  more1=01 //majitelem se stane Desttro :o)  - pro drazbu a aby si nikdo nemohl jen tak vzit stanek
 endif
 
 [function trashvenditem]
@@ -256,19 +242,15 @@ src.f_eq_vmsignlayer
 //nasledujici blok se pouzije v pripade, ze uz existuje v dane oblasti vendorplac 
 //linknuti vice ceduli k jednomu placu...
 if (!(safe.link.isvendorplac))//&&(sector.allitems(findvendorplac(<uid>))))//neni linknut&&nalezl v sektoru vendorplac
- //src.classmessage(nemame link)//, za to mame vendorplac)
- tag(vm_lockit,0)//nastaveni zakladni dostupnosti menu 
- var(vendorplacfound,0)
- sector.allitems(findvendorplac(<uid>)) //uid te cedule 
- //src.classmessage(nalezen vendorplac: <var(vendorplacfound)>)
- if (var(vendorplacfound))
-  //src.classmessage(vendorplac nalezen)
-  link=var(vendorplacfound)
-  src.classmessage(V tomto sektoru nalezen prostor pro vendora <?finduid(link).name?>. Menu prirazeno.)
-  //return 1
+  tag(vm_lockit,0)//nastaveni zakladni dostupnosti menu 
+  var(vendorplacfound,0)
+  sector.allitems(findvendorplac(<uid>)) //uid te cedule 
+  if (var(vendorplacfound))
+    link=var(vendorplacfound)
+    src.classmessage(V tomto sektoru nalezen prostor pro vendora <?finduid(link).name?>. Menu prirazeno.)
   else
-  src.classmessage(Nebyl nalezen vendorplac, na ktery by cedule sla linknout.)
- endif
+    src.classmessage(Nebyl nalezen vendorplac, na ktery by cedule sla linknout.)
+  endif
 endif
 
 //nasledujici blok se provede jen tehdy, neexistuje-li v dane oblasti vendorplac vubec
@@ -282,7 +264,6 @@ if (!(safe finduid(link.tag(ownerscont)).isitem))//neni aktivovan (nema owneruv 
   lastnew.p=<p>
   lastnew.type=t_vendorplac
   lastnew.more1=<src>
-  //link.tag(mammajitele,1)
   if (myrepregion)
    lastnew.name=<var(lastrepregion).name>
   else
@@ -290,7 +271,6 @@ if (!(safe finduid(link.tag(ownerscont)).isitem))//neni aktivovan (nema owneruv 
   endif
  else
   link.events +t_vendorplac
-  //src.classmessage(Zadne klice od nej nebudes potrebovat)
  endif
  
  src.newitemsafe(i_pouch)//ownerovo
@@ -326,7 +306,6 @@ if (!(safe finduid(link.tag(ownerscont)).isitem))//neni aktivovan (nema owneruv 
  link.f_vend_ownershipto(<src>) //src - ten co klika na ceduli
  src.sysmessage(Najem cini <link.tag(najem)>gp)
  src.redmessage(Autorent zapnut, zaplat si najem jeste nez podruhe kliknes na ceduli!) 
- //return 1
 endif
 
 //kontrola pritomnosti najemni truhlicky (jednou se mi stalo ze zmizela...)
@@ -359,9 +338,7 @@ endif
 
 //nasledujici konstrukce overi pritomnost staryho hracskyho vendora (pouze pokud klika na ceduli GM!)
 if(<src.isgm>) 
- //src.sysmessage(Budu hledat vendora)
  if (!(link.tag(vendorplaced))) //neni li na barak linkovan zadny vendor
-  //src.sysmessage(Hledam vendor)
   var(vendorfound,0) 
   sector.allchars(findvendor(<uid>))) //melo by nalezt vendora v sektoru v nemz lezi link s timto UID (tj. cedule
   if(var(vendorfound)) //nalezl stareho vendora
@@ -386,41 +363,25 @@ if(<link.tag(drazba)>) //probiha-li drazba
  endif
  arg(doba_od_zacatku_drazby,<eval <serv.time>-<link.tag(zacatekdrazby)>>)
  if(<arg(doba_od_zacatku_drazby)> > <arg(doba)>)&&(finduid(<link.more1>).isgm) //prvni drazba noveho stanku, majitelem jsem ja
-  //if(src==094dfd)
-   //src.sysmessage(konec drazby noveho stanku)
-  //endif
   konec_drazby
   return 1	
  endif
  if((<arg(doba_od_zacatku_drazby)> >= <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> <= <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.more1>)) //dele nez (18144000)3 tydny&&kratsi dobu nez (24192000) 4 tydny&&nejvyssi nabidka neni od majitele&&klikatel na ceduli je majitel
-  //if(src==094dfd)
-   //src.sysmessage(Majitel ma cas na dorovnani)
-  //endif
   src.redmessage(Na dorovnani nabidky ti zbyva <f_vend_zbyva_casu>)
   link.dialog d_vendor_menu
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.tag(zajemce)>)) //doba drazby delsi nez (24192000) 4 tydny&&nejvyssi nabidka neni od majitele&&kliknul si ten co nabidl nejvic
-  //if(src==094dfd)
-   //src.sysmessage(konec drazby a klikl ten co vyhral)
-  //endif
   konec_drazby
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.more1>)) //konec drazby&&majitel nestihl dorovnat&&klikl majitel
-  //if(src==094dfd)
-   //src.sysmessage("Konec drazby majitel prohral a klikl majitel")
-  //endif
   src.sysmessage("<src.sex(Nestihl,Nestihla)> jsi dorovnat nabidku. Stanek ti uz nepatri")
   konec_drazby
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>==<link.more1>)&&(<src>==<link.tag(zajemce)>)) //doba drazby > (2419200) 4 tydny&&majitel stihl dorovnat&&klikatel je sam majitel
-  //if(src==094dfd)
-   //src.sysmessage(konec drazby vyhral puvodni majitel)
-  //endif
   src.sysmessage(Drazba skoncila, majitelem zustavas ty)
-  //src.redmessage(Zkontroluj si najem!)
   src.sysmessage(Najem prepocten a pridan jeden mesic)    
   link.tag(drazba,0) //konec drazby
   arg(zaplaceno_dni,<link.paiduntildays>)
@@ -437,24 +398,15 @@ if(<link.tag(drazba)>) //probiha-li drazba
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)> >= <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> <= <arg(max_doba)>)&&(<src>!=<link.more1>)&&(!(src.isgm))) //doba drazby >(1814400)3 tydny&&kratsi nez (2419200)4 tydny&&kliknul nekdo jinej nez majitel&&a nekliknul GM   
-   //if(src==094dfd)
-    //src.sysmessage(cas na dorovnani pro majitele)
-   //endif
    src.sysmessage(Prihazovat jiz nemuzes, majitel ma na dorovnani nabidky <f_vend_zbyva_casu>)
    return 1
  endif  
  if((<arg(doba_od_zacatku_drazby)> > <arg(max_doba)>)&&(<src>!=<link.more1>)&&(<src>!=<link.tag(zajemce)>)&&(!(src.isgm))) //doba drazby >(24192000) 4tydny&&neklikl majitel&&neklikl nejvyssi nabidka&&neklikl GM
-  //if(src==094dfd)
-   //src.sysmessage(konec drazby neklikl ani ten co vyhral ani majitel a majitel prohral)
-  //endif
   src.sysmessage(Konec drazby, nejsi majitelem stanku ani jsi neucinil nejvyssi nabidku, nezbyva ti, nez to zkusit priste)   
   konec_drazby
   return 1
  endif
  if((<arg(doba_od_zacatku_drazby)> > <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> < <arg(max_doba)>)&&(<link.tag(zajemce)>==<link.more1>)&&(<src>==<link.more1>)) //dele nez (18144000)3 tydny&&kratsi dobu nez (24192000) 4 tydny&&nejvyssi nabidka je uz od majitele&&klikatel na ceduli je majitel
-  //if(src==094dfd)
-   //src.sysmessage(konec drazby majitel ma cas na dorovnani a dorovnal - drazba konci drive)
-  //endif
   src.sysmessage(Nabidka je dorovnana, do konce ctvrteho tydne zbyva <f_vend_zbyva_casu>)
   link.dialog d_vendor_menu
   return 1
@@ -475,9 +427,7 @@ endif
 arg(zaplaceno_dni,<link.paiduntildays>) //kolik mel starej majitel zpalaceno
 arg(star_najem_den,<eval <link.tag(najem)>/30>) //kolk cinil starej najem/den 
 arg(vratit_majiteli,<eval (<arg(star_najem_den)>*<arg(zaplaceno_dni)>)>) //puv. majitel dostane tolik do banky
-//src.sysmessage(zaplaceno: <arg(zaplaceno_dni)>, starnajem: <arg(star_najem_den)>, vratit: <arg(vratit_majiteli)>)
 src.newitemsafe(i_cashiers_check)
-//src.sysmessage(sek vytvoren <lastnew>)
 lastnew.more=<arg(vratit_majiteli)>
 lastnew.name=Preplatek najmu z prodejniho stanku 
 lastnew.cont=<finduid(<arg(majitel)>).findlayer(29)> //banka stareho majitele, ale stejne mu to dava do batohu
@@ -502,7 +452,6 @@ if (ischar) //jestlize to provadi hrac tak nedelat nic
 elseif (isvendorplac) //jestlize to provadi item vendorplac (to je to volani link.potvrdit(...) - o kus vys
  f_vend_ownershipto(<src>) //udela to majitelem toho co klikal na ceduli
 endif
-// tag(paiduntil,<serv.time>) //a nastavi zaplacenost najmu
 DIALOG d_vendor_menu
 
 [function f_vend_zbyva_casu]
@@ -531,11 +480,6 @@ elseif (<more1>==<args>)
  finduid(<tag.vend_ownermemUID>).morep=<p>
  finduid(<tag.vend_ownermemUID>).name=owner:<name>
  var(vm_rank,1) //majitel
-//else
-// finduid(<tag.friendscont>).contents(vm_findrankloop(<args>))
-// if (var(vm_rank)==0)
-//  finduid(<tag.coownerscont>).contents(vm_findrankloop(<args>))
-// endif
 endif
 if (safe tag(block))//&&(vm_rank<4)
  if (var(vm_rank))
@@ -571,156 +515,90 @@ return <argv(0)>
 [DIALOG d_vendor_menu]
 30,0
 arg(itemlevel,<eval tag(lastusedsign).tag(vm_lockit)>)
-//src.sysmessage(<arg(itemlevel)>)
-vm_findrank(<src>)
-//var(vm_rank,0)
 vm_namerank(<var(vm_rank)>) //0,1,2 - verejnost, majitel, GM
-//src.sysmessage(Tvuj rank je: <var(vm_rank)>; Tvuj namerank je : <namestr>)  - V PORADKU
-//src.smsg hm_rank:<hm_rank> itemlevel:<arg(itemlevel)>
 argo.settext(100,"Stanek cislo <?eval tag(housenumber)?><br><?safe tag(housename)?>")
 
 if (var(vm_rank)<arg(itemlevel))//rank je 0-2, item level o par radku vyse podle lockitu.lockit je zakladne na 0
  argo.gumppic(100,100,100)
  argo.htmlgump(120,120,100,60,100,0,0)
 else
- doswitch var(vm_rank)  //0,1,2 
-  argo.tag(radku,3)  //cudliku verejnosti
-  argo.tag(radku,10)  //cudliku majitele
-  argo.tag(radku,19) //cudliku GM
- enddo
- argo.tag(sirka,260)
- //argo.tag(vyska,360)
- 
- //if (cm_displaymore)
- argo.tag(vyska,<eval 100+((2+argo.tag(radku))*<d_def_radek_vyska>)+(2*<d_def_okraj>)+(4*<d_def_skvira>)>)
- //else
- // argo.tag(vyska,<eval (6*<d_def_radek_vyska>)+(2*<d_def_okraj>)+(4*<d_def_skvira>)>)
- //endif
- 
- argo.dialog_prvni
- argo.dialog_pozadi(<argo.tag(nexty)>,1,140+d_def_skvira)//owner
- argo.dialog_pozadi(<argo.tag(nexty)>,1,140+d_def_skvira)//owner
- argo.dialog_pozadi(<argo.tag(nexty)>,1,140+d_def_skvira)//rankname
- argo.dialog_pozadi(<argo.tag(nexty)>,1,140+d_def_skvira)//rankname
- arg(vedleX,<argo.tag(sloupec_x[1])>+<d_def_odsazeni>)
- argo.dialog_pozadi(114+d_def_skvira,2)//najem
- argo.dialog_pozadi(<argo.tag(nexty)>,<argo.tag(radku)>,29)//tlacitka
- argo.dialog_zpruhledni
- //argo.resizepic(0,0,2620,290,360)
- argo.gumppic(<argo.dialog_textpos(0,0,1)>,100)
- //argo.htmlgump(120,120,100,60,0,0,0)
- argo.htmlgump(lastxpos+20,lastypos+20,100,60,100,0,0)//
- argo.texta(vedleX,argo.tag(obj_y[0]),955,Majitel:)
- argo.texta(vedleX,argo.tag(obj_y[1]),955,<finduid(more1).getrealnamebyrealm(<region.tag.houserealm>)>)
- argo.texta(vedleX,argo.tag(obj_y[2]),955,Tvuj status:)
- argo.texta(vedleX,argo.tag(obj_y[3]),955,<namestr>)
- 
- 
- argo.texta(<argo.dialog_textpos(4,0)>,955,Najem: <tag.najem> gp)
- argo.texta(lastxpos,lastypos+d_def_radek_vyska,955,Zaplaceno na <paiduntildays> dni)//<sectodays((tag(paiduntil)-serv.time)/10)> 
- 
- arg(ypos,<argo.tag(obj_y[5])>)
- arg(ypos,<argo.vm_section(<ypos>,1,0,Drazebni nabidka)>)
- arg(ypos,<argo.vm_section(<ypos>,2,1,Zamknout/odemknout vec)>)
- //arg(ypos,<argo.vm_section(<ypos>,3,0,<qval(f_vend_dorprih_mjtl_gm,Dorovnat <tag(nabidka)>,Prihodit <qval(<tag(nabidka)>,<eval <tag(nabidka)>+50000>,<eval <tag(najem)>+50000>)>)>)>) //majitel+gm pouze dorovnat, verejnost Prihodit 50k
- arg(ypos,<argo.vm_section(<ypos>,19,0,<qval(f_vend_dorprih_mjtl_gm,Dorovnat <tag(nabidka)>,Prihodit)>)>)//<qval(<tag(nabidka)>,<eval <tag(nabidka)>+50000>,<eval <tag(najem)>+50000>)>)>)>)
- arg(ypos,<argo.vm_section(<ypos>,4,2,Prihodit)>) //GM ma jeste navic tuto moznost
- arg(ypos,<argo.vm_section(<ypos>,5,1,<qval(<tag(vendorplaced)>,Pre,U)>misteni Vendora)>)
- arg(ypos,<argo.vm_section(<ypos>,6,1,Zmena pohlavi Vendora)>)
- arg(ypos,<argo.vm_section(<ypos>,7,1,Prejmenovat stanek)>)
- 
- arg(ypos,<argo.vm_section(<ypos>,9,0,"<qval(<tag(bankactivated)>,"Otevrit banku","Aktivovat banku (100k gp)")>")>)
- arg(ypos,<argo.vm_section(<ypos>,10,1,Predat vlastnictvi stanku)>)
- 
- arg(ypos,<argo.vm_section(<ypos>,11,2,<qval(<tag(block)>,Od,Za)>blokovat stanek)>)
- arg(ypos,<argo.vm_section(<ypos>,12,2,Trash stanek (necha vendora))>) //=trashvendorplac
- arg(ypos,<argo.vm_section(<ypos>,8,2,<qval(<tag(vendor_trest)>,Vratit vendora z trestu,Odstranit vendora (trest))>)>) //trashvendor
- arg(ypos,<argo.vm_section(<ypos>,18,2,Odstranit vendora (uplne))>) //trashvendor_itagy
- arg(ypos,<argo.vm_section(<ypos>,13,2,Vynulovat zaplaceni)>)
- arg(ypos,<argo.vm_section(<ypos>,14,2,Nastavit najem)>)
- arg(ypos,<argo.vm_section(<ypos>,15,2,<qval(<tag(autorent)>,Vy,Za)>pnout autorent)>) 
- arg(ypos,<argo.vm_section(<ypos>,16,2,Zastavit drazbu)>) 
- arg(ypos,<argo.vm_section(<ypos>,17,1,Nastavit pozici pro vendora)>)
- arg(ypos,<argo.vm_section(<ypos>,20,1,Help)>)
+  doswitch var(vm_rank)  //0,1,2 
+    argo.tag(radku,3)  //cudliku verejnosti
+    argo.tag(radku,10)  //cudliku majitele
+    argo.tag(radku,19) //cudliku GM
+  enddo
+  argo.tag(sirka,260)
+  
+  argo.tag(vyska,<eval 100+((2+argo.tag(radku))*<d_def_radek_vyska>)+(2*<d_def_okraj>)+(4*<d_def_skvira>)>)
+  
+  argo.dialog_prvni
+  argo.dialog_pozadi(<argo.tag(nexty)>,1,140+d_def_skvira)//owner
+  argo.dialog_pozadi(<argo.tag(nexty)>,1,140+d_def_skvira)//owner
+  argo.dialog_pozadi(<argo.tag(nexty)>,1,140+d_def_skvira)//rankname
+  argo.dialog_pozadi(<argo.tag(nexty)>,1,140+d_def_skvira)//rankname
+  arg(vedleX,<argo.tag(sloupec_x[1])>+<d_def_odsazeni>)
+  argo.dialog_pozadi(114+d_def_skvira,2)//najem
+  argo.dialog_pozadi(<argo.tag(nexty)>,<argo.tag(radku)>,29)//tlacitka
+  argo.dialog_zpruhledni
+  argo.gumppic(<argo.dialog_textpos(0,0,1)>,100)
+  argo.htmlgump(lastxpos+20,lastypos+20,100,60,100,0,0)//
+  argo.texta(vedleX,argo.tag(obj_y[0]),955,Majitel:)
+  argo.texta(vedleX,argo.tag(obj_y[1]),955,<finduid(more1).getrealnamebyrealm(<region.tag.houserealm>)>)
+  argo.texta(vedleX,argo.tag(obj_y[2]),955,Tvuj status:)
+  argo.texta(vedleX,argo.tag(obj_y[3]),955,<namestr>)
+  
+  
+  argo.texta(<argo.dialog_textpos(4,0)>,955,Najem: <tag.najem> gp)
+  argo.texta(lastxpos,lastypos+d_def_radek_vyska,955,Zaplaceno na <paiduntildays> dni)
+  
+  arg(ypos,<argo.tag(obj_y[5])>)
+  arg(ypos,<argo.vm_section(<ypos>,1,0,Drazebni nabidka)>)
+  arg(ypos,<argo.vm_section(<ypos>,2,1,Zamknout/odemknout vec)>)
+  arg(ypos,<argo.vm_section(<ypos>,19,0,<qval(f_vend_dorprih_mjtl_gm,Dorovnat <tag(nabidka)>,Prihodit)>)>)
+  arg(ypos,<argo.vm_section(<ypos>,4,2,Prihodit)>) //GM ma jeste navic tuto moznost
+  arg(ypos,<argo.vm_section(<ypos>,5,1,<qval(<tag(vendorplaced)>,Pre,U)>misteni Vendora)>)
+  arg(ypos,<argo.vm_section(<ypos>,6,1,Zmena pohlavi Vendora)>)
+  arg(ypos,<argo.vm_section(<ypos>,7,1,Prejmenovat stanek)>)
+  
+  arg(ypos,<argo.vm_section(<ypos>,9,0,"<qval(<tag(bankactivated)>,"Otevrit banku","Aktivovat banku (100k gp)")>")>)
+  arg(ypos,<argo.vm_section(<ypos>,10,1,Predat vlastnictvi stanku)>)
+  
+  arg(ypos,<argo.vm_section(<ypos>,11,2,<qval(<tag(block)>,Od,Za)>blokovat stanek)>)
+  arg(ypos,<argo.vm_section(<ypos>,12,2,Trash stanek (necha vendora))>) //=trashvendorplac
+  arg(ypos,<argo.vm_section(<ypos>,8,2,<qval(<tag(vendor_trest)>,Vratit vendora z trestu,Odstranit vendora (trest))>)>) //trashvendor
+  arg(ypos,<argo.vm_section(<ypos>,18,2,Odstranit vendora (uplne))>) //trashvendor_itagy
+  arg(ypos,<argo.vm_section(<ypos>,13,2,Vynulovat zaplaceni)>)
+  arg(ypos,<argo.vm_section(<ypos>,14,2,Nastavit najem)>)
+  arg(ypos,<argo.vm_section(<ypos>,15,2,<qval(<tag(autorent)>,Vy,Za)>pnout autorent)>) 
+  arg(ypos,<argo.vm_section(<ypos>,16,2,Zastavit drazbu)>) 
+  arg(ypos,<argo.vm_section(<ypos>,17,1,Nastavit pozici pro vendora)>)
+  arg(ypos,<argo.vm_section(<ypos>,20,1,Help)>)
 endif
 
 [DIALOG d_vendor_menu BUTTON]
 on=1//Drazebni nabidka
 if (f_vend_checkrightsmes(0))
-DIALOG d_vendmenu_nabidka
+  DIALOG d_vendmenu_nabidka
 endif
 
 on=2//zamknout/odemknout vec
 if (f_vend_checkrightsmes(1))
-//src.say chci zamknout vec
-src.newitemsafe(i_target_vendor)
-lastnew.name=zamknout vec
-lastnew.link=<uid>
-lastnew.more1=2
-lastnew.more2=<vm_rank>
-lastnew.equip
+  src.newitemsafe(i_target_vendor)
+  lastnew.name=zamknout vec
+  lastnew.link=<uid>
+  lastnew.more1=2
+  lastnew.more2=<vm_rank>
+  lastnew.equip
 endif
-
-//on=3//dorovnat / prihodit 50k
-//if (f_vend_checkrightsmes(0))
-// if(!(<var(vm_rank)>)) //zahajit drazbu nebo prihodit 50k (pro verejnost)    
-//   if(!<tag(drazba)>) //neprobiha-li zrovna drazba pozn. vsechny tagy jdou na ten worldgem
-//      if(src.pay((<tag(najem)>+50000))) 
-//       tag(nabidka,<tag(najem)>+50000) //link je porad ten worldgem t_vendorplac
-//       tag(zajemce,<src>) //uid zajemce
-//       tag(zacatekdrazby,<serv.time>)
-//       tag(drazba,1) //zahajit drazbu
-//       src.sysmessage(Ucinil jsi zakladni nabidku <tag(nabidka)>gp.)
-//      else
-//       src.sysmessage(Nemas dost penez na zahajeni drazby, potrebujes aspon <eval <tag(najem)>+50000> gp.)
-//      endif    
-//   else //probiha-li drazba
-//      arg(uplynula_doba_drazby,<serv.time>-<eval tag(zacatekdrazby)>)
-//      if(<arg(uplynula_doba_drazby)> < 18144000) //cas od zacatku drazby je mensi nez tri tydny (3*7*24*3600*10=18144000)
-//         if(src.pay((<tag(nabidka)>+50000)))
-//           tag(nabidka,<tag(nabidka)>+50000) //autorem je porad ten worldgem t_vendorplac
-//           tag(zajemce,<src>)
-//          src.sysmessage(Zvysil jsi nabidku o 50k gp. Nejvyssi nabidka je nyni <tag(nabidka)>gp)
-//          else
-//           src.sysmessage(Nemas dost penez na prihozeni, potrebujes <eval <tag(nabidka)>+50000> gp.)
-//          endif
-//       else
-//          src.sysmessage(Drazba uz skoncila)
-//      endif
-//   endif
-// else //((var(vm_rank))||(var(vm_rank)==2)) //dorovnavat    
-//    if(<tag(drazba)>) //probiha-li drazba
-//      if(!(<tag(zajemce)>==<more1>)) //0 pokud stejne
-//        if(src.isgm)
-//          src.sysmessage(Jako GM muzes dorovnat zdarma)
-//          src.accmsg(dorovnal nabidku v drazbe stanku <name> ve prospech majitele <more1.name>)
-//          tag(zajemce,#<more1>) //GM dorovnal ve prospech majitele (zajemce tudiz bude = majiteli)
-//        else //neni to gm, je to majitel
-//         if(src.pay(<tag(nabidka)>)) //jestlize si muze majitel dovolit dorovnat
-//            tag(zajemce,<src>) // majitel dorovnal, stal se nejvyssi nabidkou ale samotna max. nabidka se nezvysuje...
-//            src.sysmessage(Dorovnal jsi nejvyssi nabidku)
-//          else
-//            src.sysmessage(Nemas dost penez k dorovnani nabidky)
-//          endif
-//        endif
-//      else //retezce byly stejne
-//        src.sysmessage(Nejvyssi nabidka patri majiteli, neni treba dorovnavat)
-//      endif
-//    else //drazba neprobiha
-//     src.sysmessage(Neprobiha zadna drazba, neni potreba nic dorovnavat) 
-//    endif   
-// endif
-// dialog d_vendmenu_nabidka
-//endif
 
 on=4//prihodit (GM)
 if (f_vend_checkrightsmes(2))
   if(!<tag(drazba)>)  
-    input(Jaka ma byt nabidka? nejmene <eval <tag(najem)>+50000> ,f_vend_prihod_gm,<eval 50000+<tag(najem)>>)
+    input(Jaka ma byt nabidka? nejmene <eval <tag(najem)>+<def_vendor_baseRent>> ,f_vend_prihod_gm,<eval <def_vendor_baseRent>+<tag(najem)>>)
   else //probiha-li drazba
     arg(uplynula_doba_drazby,<serv.time>-<eval tag(zacatekdrazby)>)
     if(<arg(uplynula_doba_drazby)> < 18144000) //cas od zacatku drazby je mensi nez tri tydny (3*7*24*3600*10=18144000)
-      input(Nova nabidka? nejmene <eval <tag(nabidka)>+50000> ,f_vend_prihod_gm,<eval 50000+<tag(nabidka)>>) 
+      input(Nova nabidka? nejmene <eval <tag(nabidka)>+<def_vendor_baseRent>> ,f_vend_prihod_gm,<eval <def_vendor_baseRent>+<tag(nabidka)>>) 
     else
       src.sysmessage(Drazba uz skoncila)
     endif       
@@ -738,11 +616,7 @@ if (f_vend_checkrightsmes(1))
     endif
    else
     arg(vendorfound,<tag(vendoruid)>)
-    //src.sysmessage(sector...)
-    //sector.allchars(findvendor(<uid>)) //melo by nalezt vendora v sektoru v nemz lezi item s timto UID (tj. cedule)
-    //src.sysmessage(po sectoru)
     if(arg(vendorfound)) //mame-li vendora (vratil vendorovo UID)
-      //src.sysmessage(<tag(vendpos)>, <finduid(arg(vendorfound)).p>)  
       if(!(strcmpi((<tag(vendpos)>),(<finduid(arg(vendorfound)).p>)))) //je li pozice stale ta stara (rovnost => vraci 0)
         src.sysmessage(Neni potreba ho premistovat, na urcenem miste uz stoji)
         src.sysmessage(Pro premisteni vendora nastav napred jeho novou pozici)
@@ -796,10 +670,6 @@ endif
 
 on=7//prejmenovat prodejni misto
 if (f_vend_checkrightsmes(1))
-//src.say chci prejmenovat dum
- //src.smsg Jak se ma dum jmenovat?
- //src.targ=<uid>
- //src.everbtarg finduid(<uid>).renamehouse=tag(housename)
  input(Jak se ma stanek jmenovat?,tag.housename,<tag(housename)>)
 endif
 
@@ -863,8 +733,6 @@ endif
 
 on=14//nastavit najem
 if (f_vend_checkrightsmes(2))
- //src.smsg Kolik gp ma byt mesicni najem?
- //src.everbtarg finduid(<uid>).tag.najem=
  input("Kolik ma byt najem?",tag.najem,<tag(najem)>)
 endif
 
@@ -903,11 +771,11 @@ on=19//prihodit libovolne
 if (f_vend_checkrightsmes(0))
   if(!(<var(vm_rank)>)) //zahajit drazbu nebo prihodit (pro verejnost)    
     if(!<tag(drazba)>) //neprobiha-li zrovna drazba pozn. vsechny tagy jdou na ten worldgem
-      input(Jaka ma byt prvni nabidka? nejmene <eval <tag(najem)>+50000>,f_vend_prihod,<eval 50000+<tag(najem)>>)     
+      input(Jaka ma byt prvni nabidka? nejmene <eval <tag(najem)>+<def_vendor_baseRent>>,f_vend_prihod,<eval <def_vendor_baseRent>+<tag(najem)>>)     
     else //probiha-li drazba
       arg(uplynula_doba_drazby,<serv.time>-<eval tag(zacatekdrazby)>)
       if(<arg(uplynula_doba_drazby)> < 18144000) //cas od zacatku drazby je mensi nez tri tydny (3*7*24*3600*10=18144000)
-         input(Nova nabidka? nejmene <eval <tag(nabidka)>+50000> ,f_vend_prihod,<eval 50000+<tag(nabidka)>>)
+         input(Nova nabidka? nejmene <eval <tag(nabidka)>+<def_vendor_baseRent>> ,f_vend_prihod,<eval <def_vendor_baseRent>+<tag(nabidka)>>)
       else
         src.sysmessage(Drazba uz skoncila)
       endif    
@@ -943,8 +811,8 @@ src.dialog(d_vendor_help)
 [function f_vend_prihod] //argv(0) - to co zadal v inputu za castku
 arg(castka,<fixNumber(<args>)>)
 if(!<tag(drazba)>) //zavolano z prvni casti buttonu 19
-   if(<arg(castka)> < (<eval <tag(najem)>+50000>))
-     src.sysmessage(Drazbu muzes zahajit vstupni castkou nejmene <eval <tag(najem)>+50000>)
+   if(<arg(castka)> < (<eval <tag(najem)>+<def_vendor_baseRent>>))
+     src.sysmessage(Drazbu muzes zahajit vstupni castkou nejmene <eval <tag(najem)>+<def_vendor_baseRent>>)
    else 
      if(src.pay(<arg(castka)>)) 
        tag(nabidka,<arg(castka)>) //link je porad ten worldgem t_vendorplac
@@ -957,12 +825,12 @@ if(!<tag(drazba)>) //zavolano z prvni casti buttonu 19
        src.sysmessage(Ucinil jsi zakladni nabidku <tag(nabidka)> gp.)
        src.accmsg(Zahajil drazbu o stanek <name> nabidkou <castka>)
      else
-       src.sysmessage(Nemas dost penez na zahajeni drazby, potrebujes aspon <eval (<tag(najem)>+50000)> gp.)
+       src.sysmessage(Nemas dost penez na zahajeni drazby, potrebujes aspon <eval (<tag(najem)>+<def_vendor_baseRent>)> gp.)
      endif   
    endif  
 else //drazba neni, zavolano z druhe casti buttonu 19
-   if(<arg(castka)> < (<eval <tag(nabidka)>+50000>))
-     src.sysmessage(Nabidku muzes zvysit nejmene na <eval <tag(nabidka)>+50000>)
+   if(<arg(castka)> < (<eval <tag(nabidka)>+<def_vendor_baseRent>>))
+     src.sysmessage(Nabidku muzes zvysit nejmene na <eval <tag(nabidka)>+<def_vendor_baseRent>>)
    else 
      if(src.pay(<arg(castka)>))
        tag(nabidka,<arg(castka)>) //autorem je porad ten worldgem t_vendorplac
@@ -973,7 +841,7 @@ else //drazba neni, zavolano z druhe casti buttonu 19
        src.sysmessage(Zvysil jsi nabidku na <tag(nabidka)> gp.)
        src.accmsg(Zvysil nabidku v drazbe o stanek <name> castkou <castka>)
      else
-       src.sysmessage(Nemas dost penez na prihozeni, potrebujes aspon <eval <tag(nabidka)>+50000> gp.)
+       src.sysmessage(Nemas dost penez na prihozeni, potrebujes aspon <eval <tag(nabidka)>+<def_vendor_baseRent>> gp.)
      endif
    endif     
 endif
@@ -982,8 +850,8 @@ dialog d_vendmenu_nabidka
 [function f_vend_prihod_gm]
 arg(castka,<fixNumber(<args>)>)
 if(!<tag(drazba)>) //zavolano z prvni casti buttonu 4
-   if(<arg(castka)> < (<eval <tag(najem)>+50000>))
-     src.sysmessage(Drazbu muzes zahajit vstupni castkou nejmene <eval <tag(najem)>+50000>)
+   if(<arg(castka)> < (<eval <tag(najem)>+<def_vendor_baseRent>>))
+     src.sysmessage(Drazbu muzes zahajit vstupni castkou nejmene <eval <tag(najem)>+<def_vendor_baseRent>>)
    else 
      src.sysmessage(Jako GM muzes drazit zdarma)
      src.accmsg(zahajil drazbu o "<name>" castkou <castka>)
@@ -994,8 +862,8 @@ if(!<tag(drazba)>) //zavolano z prvni casti buttonu 4
      src.sysmessage(Ucinil jsi zakladni nabidku <tag(nabidka)> gp.)     
    endif  
 else //drazba neni, zavolano z druhe casti buttonu 4
-   if(<arg(castka)> < (<eval <tag(nabidka)>+50000>))
-     src.sysmessage(Nabidku muzes zvysit nejmene na <eval <tag(nabidka)>+50000>)
+   if(<arg(castka)> < (<eval <tag(nabidka)>+<def_vendor_baseRent>>))
+     src.sysmessage(Nabidku muzes zvysit nejmene na <eval <tag(nabidka)>+<def_vendor_baseRent>>)
    else 
      src.sysmessage(Jako GM zvysujes nabidku zdarma)
      src.accmsg(prihodil do drazby o "<name>" castku <castka>)
@@ -1053,9 +921,7 @@ if (finduid(tag.vm_lockedto)) //najde li uid cedule na kterou je to zamceno
    var(itemlevel,<vm_rank>+1)
   endif
   finduid(<tag.vm_lockedto>).vm_findrank(<src>)
-  //src.smsg itemlevel:<itemlevel>. charlevel:<vm_rank>
   if ((type==t_door_locked)||(<itemlevel><=<vm_rank>)||(<itemuid>==<src>))&&(<globallock><=<vm_rank>)
-  //dvere jsou zamcene - standart|| mensi itemlevel||jsem vlastnikem
    return 0
   else
    src.redmessage(Nemas na to pravo.)
@@ -1095,26 +961,17 @@ endif
 [DIALOG d_vend_statask BUTTON]
 on=0
 remove
+
 on=1 //cudlik 1 (verejnost)
 f_vend_lock(0)
-//on=2
-//f_lock(1)
-//on=3 //cudlik 3 (GM)
-//f_lock(2)
+
 on=4 //vlastnik
 f_vend_lock(1)
+
 on=5 //GM
 f_vend_lock(2)
-//on=6
-//if (src.uid==0)||(src.uid==1)||(src.uid==2)||(src.uid==3)||(src.uid==4)||(src.uid==5)
-//  src.classmessage(Mas nevhodnou postavu na osobni zamykani...kontaktuj GM...)
-//elseif (src.targ.type==<NID(t_housemenu)>)
-//  src.sysmessage("Nemuzes zamknout vyvesku domu na osobu.")
-//else
-//  f_lock(<src>)
-endif
 
-[function f_vend_dorprih_mjtl_gm] //slouží pouze k rozhodnutí co zobrazit v menu -  jestli Dorovnat nebo Prihodit 50k
+[function f_vend_dorprih_mjtl_gm] //slouží pouze k rozhodnutí co zobrazit v menu -  jestli Dorovnat nebo Prihodit
 if(var(vm_rank)==0)               //v zavislosti na ranku postavy 
  return 0
 endif
@@ -1135,7 +992,6 @@ if (src.targ.issameregion(<link>))&&(src.targ.cont==0) //predmet ve stanku a na 
   src.targ.tag(vm_lockit,<args>) //level zamceni
   link.array_findremove(tag.lockedlist,<src.targ>)//seznam itemu na domu
   link.array_add(tag.lockedlist,<src.targ>)//seznam itemu na domu
-  //link.array_dump(tag.lockedlist)
   if (src.targ.type!=t_vendormenu)
    src.targ.tag(vm_lockedto,<link>) //uid cedule domu
    src.targ.tag(vm_storeattr,<src.targ.attr>) //ulozit atributy
@@ -1193,14 +1049,10 @@ endif
 [DIALOG d_vendmenu_nabidka]
 0,0
 resizepic 100 100 2620 550 <eval (5*d_def_radek_vyska)+(3*d_def_okraj)>  //s gumpem width=480
-//tag(uvodni_text,"<link.name>")
-//tag(nabidka,"<tag(nabidka)>")
-//tag(zajemce,"<tag(zajemce)>")
 argo.settext(100,Stav drazby prodejniho mista "<?name?> - <?tag(housename)?>") //jméno linku (to je vendorplac)
 argo.settext(101,Nabidka: <?tag(nabidka)?>)
 argo.settext(102,Zajemce s posledni nabidkou: <?tag(zajemce).name?>)
 
-//argo.htmlgump(120,120,450,30,0,0,100) //uvodni text
 argo.text(120,120,955,100) //uvodni text
 argo.text(140,145,955,101) //text 1  s gumpem y=155
 argo.text(140,165,955,102) //text 2  s gumpem y=175
