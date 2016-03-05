@@ -515,6 +515,7 @@ return <argv(0)>
 [DIALOG d_vendor_menu]
 30,0
 arg(itemlevel,<eval tag(lastusedsign).tag(vm_lockit)>)
+vm_findrank(<src>)
 vm_namerank(<var(vm_rank)>) //0,1,2 - verejnost, majitel, GM
 argo.settext(100,"Stanek cislo <?eval tag(housenumber)?><br><?safe tag(housename)?>")
 
