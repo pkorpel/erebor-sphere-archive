@@ -47,13 +47,15 @@ type=t_src_changer
 name=roundattack srcChanger
 
 on=@timer
-if (strlen(<link.tag(weapflag)>))
-  arg(fl,<hval link.tag(weapflag)<link.tag(mi_weapflags)>>)
-else
-  arg(fl,<hval dam_physical>)
+if (<link.isChar>)
+  if (strlen(<link.tag(weapflag)>))
+    arg(fl,<hval link.tag(weapflag)<link.tag(mi_weapflags)>>)
+  else
+    arg(fl,<hval dam_physical>)
+  endif
+  sector.allchars(f_npc_rounddamage(<link>,<arg(fl)>,<tag.damage>))
+  link.effect(2,02ED0,0,32)
 endif
-sector.allchars(f_npc_rounddamage(<link>,<arg(fl)>,<tag.damage>))
-link.effect(2,02ED0,0,32)
 remove
 return 1
 

@@ -213,11 +213,26 @@ endif
 
 [events e_parakrik]
 on=@aftergetswing
-if rand(15)==1
+if (strlen(<tag(paraKrik_chance)>))
+  arg(chance,<tag(paraKrik_chance)>)
+else
+  arg(chance,70) // 7%
+endif
+if (chance(<arg(chance)>,3))
+  if (<eval tag(paraKrik_cd)> > <serv.time>)
+    return 0
+  endif
+  if (strlen(<tag(paraKrik_delay)>))
+    arg(coolDown,<tag(paraKrik_delay)>)
+  else
+    arg(coolDown,50) // next para in 5s
+  endif
+  tag(paraKrik_cd,<serv.time>+<arg(coolDown)>) // won't cry for at least the next 5s
   newitem(<i_src_changer_parakrik>)
   lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
   emote("crying awfully.")
 endif
+
 return 0
 
 on=@beforegetswing
