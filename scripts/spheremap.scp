@@ -4100,9 +4100,9 @@ COLDCHANCE=00
 
 [AREA Glammoreg Caves]
 GROUP=Dungeon Glammoreg
-P=5708,156,0,10
+P=5708,156,0,11
 RECT=5587,148,5800,353
-mapplane=10
+mapplane=11
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
