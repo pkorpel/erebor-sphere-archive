@@ -91,7 +91,7 @@ endif
 
 argo.newTextLine(<argo.dialog_textpos(5,0)>,<d_def_readcolor>,"Zlata (gp/min):")
 var(lastxpos,#+<info_width>+<d_def_skvira>)
-if (0<tag(gold_per_minute)> > 0)
+if (strlen(<tag(gold_per_minute)>))
   argo.newTextEntry(<lastxpos>,<lastypos>,100,3,"<eval tag(gold_per_minute)>")
 else
   argo.newTextEntry(<lastxpos>,<lastypos>,100,3,"<d_def_treasureGoldDefault>")
