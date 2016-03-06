@@ -3782,7 +3782,7 @@ COLDCHANCE=00
 
 [AREA Tutorial]
 GROUP=startovni dungeon
-P=5362, 3004, 0, 35
+P=5240,2964,10,35
 RECT=5199,2915,5543,3291
 MAPPLANE=35
 FLAGS=0881E
@@ -3796,8 +3796,22 @@ COLDCHANCE=00
 
 [AREA Tutorial Lod]
 GROUP=startovni dungeon
-P=5248, 2898, 0, 35
+P=5240,2964,10,35
 RECT=5245,3003,5235,2953
+MAPPLANE=35
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
+resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=50
+COLDCHANCE=00
+
+[AREA Tutorial Pristaviste]
+GROUP=startovni dungeon
+P=5277,2993,0,35
+RECT=5244,3007,5296,2957
 MAPPLANE=35
 FLAGS=0881E
 tag.realm=4
@@ -3825,8 +3839,8 @@ COLDCHANCE=00
 [AREA Tutorial Dul]
 GROUP=startovni dungeon
 P=5450, 2965, 0, 35
-RECT=5439,2962,5522,2933
-RECT=5452,2961,5522,2981
+RECT=5439,2962,5490,2933
+RECT=5452,2961,5490,2981
 MAPPLANE=35
 FLAGS=0881E
 tag.realm=4
@@ -3834,6 +3848,19 @@ tag.nobank=1
 tag.kick=1
 events=e_startdung
 resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Tutorial Nekropole]
+GROUP=startovni dungeon
+P=5495, 2944, 0, 35
+RECT=5491,2933,5521,2981
+MAPPLANE=35
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
 RAINCHANCE=00
 COLDCHANCE=00
 
@@ -3850,6 +3877,82 @@ events=e_startdung
 resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=25
 COLDCHANCE=00
+
+[AREA Tutorial Osada piratu]
+GROUP=startovni dungeon
+P=5494,3108,0,35
+RECT=5479,3126,5528,3085
+RECT=5506,3085,5479,3091
+MAPPLANE=35
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
+resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=50
+COLDCHANCE=00
+
+[AREA Tutorial Jeskyne piratu]
+GROUP=startovni dungeon
+P=5499,3079,0,35
+RECT=5504,3086,5492,3071
+MAPPLANE=35
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
+resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Tutorial Zatoka piratu]
+GROUP=startovni dungeon
+P=5513,3136,0,35
+RECT=5542,3161,5476,3126
+MAPPLANE=35
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
+resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=75
+COLDCHANCE=00
+
+[AREA Tutorial Bazina]
+GROUP=startovni dungeon
+P=5281,3046,5,35
+RECT=5379,3055,5333,3036
+RECT=5337,3054,5271,3017
+RECT=5271,3027,5287,3087
+RECT=5271,3029,5248,3068
+RECT=5270,3082,5257,3067
+MAPPLANE=35
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
+resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=75
+COLDCHANCE=00
+
+[AREA Tutorial Horska osada]
+GROUP=startovni dungeon
+P=5327,3074,5,35
+RECT=5294,3101,5359,3059
+RECT=5303,3100,5351,3109
+MAPPLANE=35
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
+resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=25
+COLDCHANCE=50
 
 [AREA Beridor vstup]
 GROUP=Dung Beridor
