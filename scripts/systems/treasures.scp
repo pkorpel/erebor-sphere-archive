@@ -89,36 +89,36 @@ else
 endif
 if (SRC.MINING >  TAG(MAP))&&(nolightfizz(1))
  if (tag(map) > 975)
- if (finduid(0f1b52).p == finduid(finduid(0f1b52).tag(mylastnew)).p)
-   finduid(0f1b52).tag(mylastnew).p=<p> //lvl 5
+ if (finduid(026F2A).p == finduid(finduid(026F2A).tag(lastTreasureChestUID)).p)
+   finduid(026F2A).tag(lastTreasureChestUID).p=<p> //lvl 5
   else
    src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
    return 1
   endif 
  elseif (tag(map) > 920)
- if (finduid(0f19e2).p == finduid(finduid(0f19e2).tag(mylastnew)).p)
-   finduid(0f19e2).tag(mylastnew).p=<p> //lvl 4
+ if (finduid(0252B3).p == finduid(finduid(0252B3).tag(lastTreasureChestUID)).p)
+   finduid(0252B3).tag(lastTreasureChestUID).p=<p> //lvl 4
   else
    src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
    return 1
   endif 
  elseif (tag(map) > 825)
- if (finduid(0f18ea).p == finduid(finduid(0f18ea).tag(mylastnew)).p)
-   finduid(0f18ea).tag(mylastnew).p=<p> //lvl 3
+ if (finduid(023074).p == finduid(finduid(023074).tag(lastTreasureChestUID)).p)
+   finduid(023074).tag(lastTreasureChestUID).p=<p> //lvl 3
   else
    src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
    return 1
   endif 
  elseif  (tag(map) > 650)
-  if (finduid(0f1784).p == finduid(finduid(0f1784).tag(mylastnew)).p)
-   finduid(0f1784).tag(mylastnew).p=<p> //lvl 2
+  if (finduid(020B13).p == finduid(finduid(020B13).tag(lastTreasureChestUID)).p)
+   finduid(020B13).tag(lastTreasureChestUID).p=<p> //lvl 2
   else
    src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
    return 1
   endif 
  else
-  if (finduid(0f162a).p == finduid(finduid(0f162a).tag(mylastnew)).p)
-   finduid(0f162a).tag(mylastnew).p=<p> //lvl 1
+  if (finduid(01EEC8).p == finduid(finduid(01EEC8).tag(lastTreasureChestUID)).p)
+   finduid(01EEC8).tag(lastTreasureChestUID).p=<p> //lvl 1
   else
    src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
    return 1
@@ -301,8 +301,8 @@ else
 endif
 if (SRC.MINING >=  1200)&&(nolightfizz(1))
  if (tag(map) == 1000)
-   if (finduid(0DB0F4).p == finduid(finduid(0DB0F4).tag(mylastnew)).p)
-     finduid(0DB0F4).tag(mylastnew).p=<p>
+   if (finduid(0DB0F4).p == finduid(finduid(0DB0F4).tag(lastTreasureChestUID)).p)
+     finduid(0DB0F4).tag(lastTreasureChestUID).p=<p>
    else
      src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
      return 1
