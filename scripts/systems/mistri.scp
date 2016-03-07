@@ -171,10 +171,10 @@ if ((type==t_container)&&(safe rescount))
   lastnew.dispid=<dispid>
   lastnew.cont=<src.findid(i_buyer_tag_box)>
   lastnew.tag.expforthis=<getitemexp>
-  lastnew.tag.price=<eval((lastnew.tag(expforthis)*nastaveni_craftexp_gold*(<arg(priceLvl)>+1))/1000)>
+  lastnew.tag.price=<eval((lastnew.tag(expforthis)*nastaveni_craftexp_gold*((<arg(priceLvl)>/2)+1) / 1000)>
   contents2(f_tryexpit(<lastnew>))
   arg(thisbag).tag(expforthis,<eval (arg(thisbag).f_tryexpit)+var(exps)>)
-  arg(thisbag).tag.price=<eval((arg(thisbag).tag(expforthis)*nastaveni_craftexp_gold*(<arg(priceLvl)>+1))/1000)>
+  arg(thisbag).tag.price=<eval((arg(thisbag).tag(expforthis)*nastaveni_craftexp_gold*((<arg(priceLvl)>/2)+1) / 1000)>
   if !(arg(thisbag).tag(expforthis))//nulova cena, nechtit.
     arg(thisbag).remove
   endif
