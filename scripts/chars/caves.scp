@@ -16,6 +16,7 @@ BLOODCOLOR=colors_green
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_bleed
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Caves
@@ -91,6 +92,7 @@ BLOODCOLOR=colors_green
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_bleed
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Caves
@@ -168,6 +170,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_bleed
 TEVENTS=e_npc_curse
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Caves
@@ -250,6 +253,7 @@ BLOODCOLOR=colors_green
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_lifeLeech
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Caves
@@ -335,6 +339,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_critic
 TEVENTS=e_lifeLeech
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Caves
@@ -422,6 +427,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_parakrik
 TEVENTS=e_lifeLeech
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Caves

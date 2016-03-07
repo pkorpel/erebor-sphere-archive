@@ -807,6 +807,7 @@ TEVENTS=e_character
 TEVENTS=e_illusionist
 TEVENTS=e_snowmonster
 TEVENTS=e_lifeLeech
+TEVENTS=e_summoneater
 
 CATEGORY=Dungy
 SUBSECTION=Ledova jeskyne

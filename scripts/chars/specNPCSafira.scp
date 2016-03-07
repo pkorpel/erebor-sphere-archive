@@ -415,6 +415,7 @@ BLOODCOLOR=00
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_lifeLeech
 //TEVENTS=e_npc_stun
 
@@ -487,6 +488,7 @@ ARMOR=100
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_lifeLeech
 //TEVENTS=e_npc_stun
 
@@ -578,6 +580,7 @@ BLOODCOLOR=00
 //TEVENTS=e_lifeLeech_vampire
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_berserk_potvora
 //TEVENTS=e_parakrik
 
@@ -658,6 +661,7 @@ BLOODCOLOR=00
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_berserk_potvora
 //TEVENTS=e_parakrik
 //TEVENTS=e_npc_stun
@@ -1165,6 +1169,7 @@ ARMOR=80
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 
 RESOURCES=8 t_magic
 FOODTYPE=
@@ -1264,6 +1269,7 @@ BLOODCOLOR=00
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 
 CATEGORY=Dungy
 SUBSECTION=Vampire Dungeon
@@ -1348,6 +1354,7 @@ ARMOR=90
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_parakrik
 
 RESOURCES=8 t_magic
@@ -1444,6 +1451,7 @@ moverate=4
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_parakrik
 
 RESOURCES=8 t_magic
@@ -2018,6 +2026,7 @@ BLOODCOLOR=00
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_npc_bleed
 //TEVETS=e_lifeLeech
 
@@ -2096,6 +2105,7 @@ BLOODCOLOR=00
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_npc_bleed
 //TEVENTS=e_npc_stun
 //TEVETS=e_lifeLeech
@@ -2177,6 +2187,7 @@ ARMOR=90
 //TEVETS=e_lifeLeech
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_npc_bleed
 //TEVENTS=e_npc_stun
 //TEVETS=e_lifeLeech
@@ -2254,6 +2265,7 @@ ARMOR=110
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_lifeLeech_vampire
 //TEVENTS=e_npc_bleed
 //TEVENTS=e_npc_stun
@@ -2337,6 +2349,7 @@ BLOODCOLOR=00
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_lifeLeech_vampire
 //TEVENTS=e_npc_bleed
 //TEVENTS=e_npc_stun
@@ -2689,6 +2702,7 @@ ARMOR=60
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_resprismrti
 
 RESOURCES=8 t_magic
@@ -2783,6 +2797,7 @@ ARMOR=60
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_resprismrti
 
 
@@ -2878,6 +2893,7 @@ ARMOR=60
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_summoneater
 //TEVENTS=e_resprismrti
 
 RESOURCES=8 t_magic
