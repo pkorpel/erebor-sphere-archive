@@ -2843,7 +2843,7 @@ events=r_Hrobky_Cernych_Numenorejcu
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Hrobky Cernych Numenorejcu 2 Level]
+[AREA Hrobky Cernych Numenorejcu Level 2]
 GROUP=Dungeony
 P=4978, 3976, 0, 10
 MAPPLANE=10
@@ -3289,7 +3289,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Ledove jeskyne 1 level]
+[AREA Ledove jeskyne level 1]
 GROUP=Dungeony
 P=6047,3506,20
 RECT=5816,3264,6136,3672
@@ -3394,7 +3394,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Mount Dorlas 1 Level]
+[AREA Mount Dorlas Level 1]
 GROUP=Dungeon Mont Dorlas
 P=5708,156,0,10
 mapplane=10
@@ -3404,7 +3404,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Mount Dorlas 2 Level]
+[AREA Mount Dorlas Level 2]
 GROUP=Dungeon Mont Dorlas
 P=5256,352,0,10
 mapplane=10
@@ -3414,7 +3414,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Mount Dorlas 3 Level]
+[AREA Mount Dorlas Level 3]
 GROUP=Dungeon Mont Dorlas
 P=5432,377,0,10
 mapplane=10
@@ -3507,7 +3507,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Tumma Osto 1 level]
+[AREA Tumma Osto level 1]
 GROUP=Dungeon Tajemna hora
 P=132,116,-28,2
 RECT=36,2,188,140
@@ -3517,7 +3517,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Tumma Osto 2 level]
+[AREA Tumma Osto level 2]
 GROUP=Dungeon Tajemna hora
 P=427,109,-28,2
 RECT=345,2,500,124
@@ -3527,7 +3527,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Tumma Osto 3 level]
+[AREA Tumma Osto level 3]
 GROUP=Dungeon Tajemna hora
 P=247,20,-28,2
 mapplane=2
@@ -3568,7 +3568,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Carn Dum 1 Level]
+[AREA Carn Dum Level 1]
 GROUP=Dungeon Carn Dum
 P=5398, 1914, 10
 RECT=5305,1863,5404,1995
@@ -3578,7 +3578,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Carn Dum 2 Level]
+[AREA Carn Dum Level 2]
 GROUP=Dungeon Carn Dum
 P=5301, 2307, -17
 RECT=5199,2281,5362,2459
@@ -3588,7 +3588,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Carn Dum 3 Level]
+[AREA Carn Dum Level 3]
 GROUP=Dungeon Carn Dum
 P=5260, 1909, 12
 RECT=5190,1857,5301,2005
@@ -3598,7 +3598,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Carn Dum 4 Level]
+[AREA Carn Dum Level 4]
 GROUP=Dungeon Carn Dum
 P=5345, 2553
 RECT=5195,2470,5366,2618
@@ -3608,7 +3608,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Carn Dum 5 Level]
+[AREA Carn Dum Level 5]
 GROUP=Dungeon Carn Dum
 P=5275, 2042
 RECT=5191,2023,5364,2270
@@ -3641,7 +3641,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Arachnon 1 Level]
+[AREA Arachnon Level 1]
 GROUP=Dungeon Arachnon
 P=395,1582,-22,2
 RECT=380,1500,550,1598
@@ -3651,7 +3651,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Arachnon 2 Level]
+[AREA Arachnon Level 2]
 GROUP=Dungeon Arachnon
 P=226,1336,-19,2
 RECT=202,1334,250,1386
@@ -3662,7 +3662,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Pevnost Strachu 1 level]
+[AREA Pevnost Strachu level 1]
 GROUP=Dungeon
 P=5555,2325,0,10
 RECT=5416,2112,5690,2341
@@ -3673,7 +3673,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Pevnost Strachu 2 level]
+[AREA Pevnost Strachu level 2]
 GROUP=Dungeon
 P=5345,4068,0,10
 RECT=5121,3894,5354,4086
@@ -3966,7 +3966,7 @@ events=e_beridor
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Beridor 1 Level]
+[AREA Beridor Level 1]
 GROUP=Dung Beridor
 P=5834, 2639,10
 RECT=5540,2618,5890,2996
@@ -3998,7 +3998,7 @@ tag.nobank=1
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Beridor 2 Level]
+[AREA Beridor Level 2]
 GROUP=Dung Beridor
 P=1903,160,-28,2
 RECT=1824,5,2084,218
@@ -4011,7 +4011,7 @@ events=e_beridor
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Beridor 3 Level]
+[AREA Beridor Level 3]
 GROUP=Dung Beridor
 P=5466, 2669,10
 RECT=5194,2628,5514,2910
@@ -4132,7 +4132,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-//[AREA Etheria 5 Level]//asi uz nebude a koliduje to s arenou
+//[AREA Etheria Level 5]//asi uz nebude a koliduje to s arenou
 //GROUP=Dung Etheria
 //P=5268, 3540
 //RECT=5198,3501,5274,3584
@@ -4212,7 +4212,7 @@ RAINCHANCE=00
 COLDCHANCE=00
 
 
-[AREA Glammoreg 1 level]
+[AREA Glammoreg level 1]
 GROUP=Dung Glammoreg
 P=5473,849,0,10
 RECT=5359,858,5485,784
@@ -4222,7 +4222,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Glammoreg 2 level]
+[AREA Glammoreg level 2]
 GROUP=Dung Glammoreg
 P=5473,849,0,11
 RECT=5359,858,5485,784
@@ -4311,7 +4311,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Mahat extra 1 Level]
+[AREA Mahat extra Level 1]
 GROUP=Dung Mahat
 P=5267, 1015,10,20
 RECT=5196,958,5702,1230
@@ -4322,7 +4322,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Mahat 2 Level]
+[AREA Mahat Level 2]
 GROUP=Dung Mahat
 P=5233, 1445 , 10
 RECT=5188,1234,5646,1490
@@ -4332,7 +4332,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Mahat extra 2 Level]
+[AREA Mahat extra Level 2]
 GROUP=Dung Mahat
 P=5233, 1445 , 10, 20
 RECT=5188,1234,5646,1490
