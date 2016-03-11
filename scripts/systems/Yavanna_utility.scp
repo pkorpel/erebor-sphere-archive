@@ -236,6 +236,7 @@ else
         src.addexp(<exp_to_give>)
         src.nbExpEnhTag(<enhancer_tag>,<serv.time>+10*60*60*<tag(time_limit)>)
         src.SysMessage(<tag.message>)
+        src.accMsg("Hrac <src.name>, UID: <src> dostal <arg(exp_to_give)> expu na levelu <src.tag(level)> z Enhanceru <arg(enhancer_tag)>.")
       else
         src.SysMessage(<tag.message2>)
       endif
