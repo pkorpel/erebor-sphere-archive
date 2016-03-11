@@ -295,18 +295,18 @@ on=@AfterPickaxing
 //say <act.more1>
 if (act.type == t_rock)
   tag(randommrcha,<rand(128)>)
-  if (tag(randommrcha) > 32)
+  if (tag(randommrcha) > 64)
     f_spawninit(1,c_rat_craft,50,80,6)
-  elseif (tag(randommrcha) > 0)
+  elseif (tag(randommrcha) > 32)
     f_spawninit(1,c_troll_craft,50,80,6)
   elseif (tag(randommrcha) > 16)
-//    f_spawninit(1,c_elem_earth,50,80,6)
+    f_spawninit(1,c_elem_earth,50,80,6)
   elseif (tag(randommrcha) > 8)
-//    f_spawninit(1,c_elem_rock_craft,50,80,6)
+    f_spawninit(1,c_elem_rock_craft,50,80,6)
   elseif (tag(randommrcha) > 2)
-//    f_spawninit(1,c_spirit_copper_craft,50,80,6)
+    f_spawninit(1,c_spirit_copper_craft,50,80,6)
   else
-//    RANDOMGOLEM
+    RANDOMGOLEM
   endif
   var(spawnuid).removefromview
   newitemsafe(i_randompotvora)
@@ -318,18 +318,18 @@ endif
 
 if (act.type == t_tree)
   tag(randommrcha,<rand(128)>)
-  if (tag(randommrcha) > 0)
+  if (tag(randommrcha) > 64)
     f_spawninit(1,c_wolf_craft,50,80,6)
   elseif (tag(randommrcha) > 32)
-//    f_spawninit(1,c_bear_grizzly_craft,50,80,6)
+    f_spawninit(1,c_bear_grizzly_craft,50,80,6)
   elseif (tag(randommrcha) > 16)
-//    f_spawninit(1,c_elem_earth,50,80,6)
+    f_spawninit(1,c_elem_earth,50,80,6)
   elseif (tag(randommrcha) > 8)
-//    f_spawninit(1,c_elem_forrest_craft,50,80,6)
+    f_spawninit(1,c_elem_forrest_craft,50,80,6)
   elseif (tag(randommrcha) > 2)
-//    f_spawninit(1,c_spirit_forrest_craft,50,80,6)
+    f_spawninit(1,c_spirit_forrest_craft,50,80,6)
   else
-//    RANDOMREAPER
+    RANDOMREAPER
   endif
   var(spawnuid).removefromview
   newitemsafe(i_randompotvora)
@@ -340,18 +340,18 @@ if (act.type == t_tree)
 endif
 if (act.type == t_water)
   tag(randommrcha,<rand(128)>)
-  if (tag(randommrcha) > 32)
+  if (tag(randommrcha) > 64)
     f_spawninit(1,c_frog_ropucha,50,80,6)
-  elseif (tag(randommrcha) > 0)
+  elseif (tag(randommrcha) > 32)
     f_spawninit(1,c_sea_serpent,50,80,6)
   elseif (tag(randommrcha) > 16)
-//    f_spawninit(1,c_kraken_craft,50,80,6)
+    f_spawninit(1,c_kraken_craft,50,80,6)
   elseif (tag(randommrcha) > 8)
-//    f_spawninit(1,c_elem_water,50,80,6)
+    f_spawninit(1,c_elem_water,50,80,6)
   elseif (tag(randommrcha) > 4)
-//    f_spawninit(1,c_spirit_water_craft,50,80,6)
+    f_spawninit(1,c_spirit_water_craft,50,80,6)
   elseif (tag(randommrcha) > 2)
-//    f_spawninit(1,c_kraken_craft,50,80,6)
+    f_spawninit(1,c_kraken_craft,50,80,6)
   endif
   var(spawnuid).removefromview
   newitemsafe(i_randompotvora)
