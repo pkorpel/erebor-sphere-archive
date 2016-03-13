@@ -157,35 +157,34 @@ else
   say Nemohu slouzit...
 endif
 
+//argv(0) - exforthis
+[function f_mistr_craft_computeExp]
+if (<eval src.tag(level)> > 56) //vezmeme maximalne 56. lvl hrace. Dal bude cena / 1 exp stejna
+  arg(priceLvl,56)
+else
+  arg(priceLvl,<eval src.tag(level)>)
+endif
+return<eval((<argv(0)>*nastaveni_craftexp_gold*(<arg(priceLvl)>+1) / 1000)>
+
 [function tryexpit]
 var(exps,0)
-//if !(baseid==i_dagger)&&!(type==t_scroll_blank)&&!(type==t_shaft)&&!(type==t_weapon_arrow)&&!(type==t_weapon_bolt)&&!(t_bottle_empty)
-//jezis co to je tohleto? proc? a tohle "(t_bottle_empty)" asi nebude moc platna podminka -tart
-//Marek si stezuje, ze se na stack vecech porad buguje a Mandos ze mu to zatezuje server na 100% a protoze sem musel urgentne
-//vypadnout tak jsem tam pred tema lahvema umazal type aby to nepoustelo a nelagoval server.
 if ((type==t_container)&&(safe rescount))
-  if (<eval src.tag(level)> > 56) //vezmeme maximalne 56. lvl hrace. Dal bude cena / 1 exp stejna
-  	arg(priceLvl,56)
-  else
-    arg(priceLvl,<eval src.tag(level)>)
-  endif
   src.newitem <baseid>
   arg(thisbag,<lastnew>)
-  lastnew.name="<name> (<rescount> ks)"
-  lastnew.dispid=<dispid>
-  lastnew.cont=<src.findid(i_buyer_tag_box)>
-  lastnew.tag.expforthis=<getitemexp>
-  lastnew.tag.price=<eval((lastnew.tag(expforthis)*nastaveni_craftexp_gold*((<arg(priceLvl)>/2)+1) / 1000)>
+  thisbag.name="<name> (<rescount> ks)"
+  thisbag.dispid=<dispid>
+  thisbag.cont=<src.findid(i_buyer_tag_box)>
+  thisbag.tag.expforthis=<getitemexp>
+  thisbag.tag.price=f_mistr_craft_computeExp(<arg(thisbag).tag(expforthis)>)
   contents2(f_tryexpit(<lastnew>))
   arg(thisbag).tag(expforthis,<eval (arg(thisbag).f_tryexpit)+var(exps)>)
-  arg(thisbag).tag.price=<eval((arg(thisbag).tag(expforthis)*nastaveni_craftexp_gold*((<arg(priceLvl)>/2)+1) / 1000)>
-  if !(arg(thisbag).tag(expforthis))//nulova cena, nechtit.
+  arg(thisbag).tag.price=f_mistr_craft_computeExp(<arg(thisbag).tag(expforthis)>)
+  if !(arg(thisbag).tag(expforthis)) //nulova cena, nechtit.
     arg(thisbag).remove
   endif
 else
   f_tryexpit(<src.findid(i_buyer_tag_box)>)
 endif
-//endif
 
 [function f_tryexpit]//kontejner kam to hodit
 if (<attr>&0b0d4)
@@ -193,11 +192,6 @@ if (<attr>&0b0d4)
 endif
 arg(thisexp,<getitemexp>)
 if (arg(thisexp))
-  if (<eval src.tag(level)> > 56) //vezmeme maximalne 56. lvl hrace. Dal bude cena / 1 exp stejna
-  	arg(priceLvl,56)
-  else
-    arg(priceLvl,<eval src.tag(level)>)
-  endif
   src.newitem i_vendor_item
   lastnew.name="<?qval(<amount>>1,"<amount> ","")?><?name?>"
   lastnew.link=<uid>
@@ -207,7 +201,7 @@ if (arg(thisexp))
     lastnew.cont=<args>
   endif
   lastnew.tag(expforthis,<arg(thisexp)>)
-  lastnew.tag.price=<eval((lastnew.tag(expforthis)*nastaveni_craftexp_gold*(<arg(priceLvl)>+1))/1000)>
+  lastnew.tag.price=f_mistr_craft_computeExp(<lastnew.tag(expforthis)>)
   var(exps,#+<arg(thisexp)>)
 endif
 return <arg(thisexp)>
