@@ -175,10 +175,10 @@ if ((type==t_container)&&(safe rescount))
   thisbag.dispid=<dispid>
   thisbag.cont=<src.findid(i_buyer_tag_box)>
   thisbag.tag.expforthis=<getitemexp>
-  thisbag.tag.price=f_mistr_craft_computeExp(<arg(thisbag).tag(expforthis)>)
+  thisbag.tag(price,<f_mistr_craft_computeExp(<arg(thisbag).tag(expforthis)>)>)
   contents2(f_tryexpit(<lastnew>))
   arg(thisbag).tag(expforthis,<eval (arg(thisbag).f_tryexpit)+var(exps)>)
-  arg(thisbag).tag.price=f_mistr_craft_computeExp(<arg(thisbag).tag(expforthis)>)
+  arg(thisbag).tag(price,<f_mistr_craft_computeExp(<arg(thisbag).tag(expforthis)>)>)
   if !(arg(thisbag).tag(expforthis)) //nulova cena, nechtit.
     arg(thisbag).remove
   endif
@@ -201,7 +201,7 @@ if (arg(thisexp))
     lastnew.cont=<args>
   endif
   lastnew.tag(expforthis,<arg(thisexp)>)
-  lastnew.tag.price=f_mistr_craft_computeExp(<lastnew.tag(expforthis)>)
+  lastnew.tag(price,<f_mistr_craft_computeExp(<lastnew.tag(expforthis)>)>)
   var(exps,#+<arg(thisexp)>)
 endif
 return <arg(thisexp)>
