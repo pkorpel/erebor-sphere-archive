@@ -57,6 +57,7 @@ explevel            //dialog tykajici se levelu
 bandage             //pouziti bandazi
 bandageblood        //pouziti krvavych bandazi
 regy                //seznam regu
+bbmanbomb           //pro bomberman hru
 
 
 //systemove
