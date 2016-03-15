@@ -1,4 +1,3 @@
-
 [chardef c_demon_noci]     //nejslabsi demon
 id=c_minotaur
 name=Demon Noci
@@ -19,6 +18,7 @@ TEVENTS=e_character
 TEVENTS=e_daemon
 TEVENTS=e_parakrik
 TEVENTS=e_npc_critic
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -109,6 +109,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_daemon
 TEVENTS=e_npc_stun
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -197,6 +198,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_bleed
 TEVENTS=e_daemon
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -286,6 +288,7 @@ BLOODCOLOR=
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_curse
+TEVENTS=e_summoneater
 
 TEVENTS=e_daemon
 
@@ -391,6 +394,7 @@ TEVENTS=e_daemon
 TEVENTS=e_phoenix_fire
 TEVENTS=e_npc_bleed
 TEVENTS=e_npc_critic
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -481,6 +485,7 @@ TEVENTS=e_daemon
 TEVENTS=e_blood
 TEVENTS=e_lifeLeech          //kazda rana saje HP
 TEVENTS=e_npc_critic
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -580,6 +585,7 @@ TEVENTS=e_daemon
 TEVENTS=e_npc_infiniteMana
 TEVENTS=e_phoenix_fire
 TEVENTS=e_npc_curse
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -678,6 +684,7 @@ TEVENTS=e_character
 TEVENTS=e_npc_bleed
 TEVENTS=e_npc_roundattack_pullall
 TEVENTS=e_daemon
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -1075,6 +1082,7 @@ TEVENTS=e_npc_roundattack
 TEVENTS=e_parakrik
 TEVENTS=e_phoenix_fire
 TEVENTS=e_npc_critic
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
