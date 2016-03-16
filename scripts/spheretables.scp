@@ -92,6 +92,8 @@ scripts\speech\krvaveprizraky.scp
 scripts\speech\lagrspeech.scp
 scripts\speech\speakhuman.scp
 scripts\speech\speakshopkeep.scp
+scripts\systems\testing\testFramework.scp
+scripts\systems\testing\tests.scp
 scripts\systems\skills\discordance.scp
 scripts\systems\skills\lockpicking.scp
 scripts\systems\skills\meditation.scp
