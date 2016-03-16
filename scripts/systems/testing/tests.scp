@@ -1,0 +1,59 @@
+////////////////////////////////////////////////////////////
+//                   T E S T I N G   
+// Conventions:
+//  * each function to be tested should be named test_<function_name>,
+//    the function name being without the f_ prefix if present
+//  * each test should be present in a commented block, that clearly
+//    states to which files the tests belong. (we may decide to split
+//    this file into many, if this one proves to be too long)
+//  * The FIRST function in each block MUST be a global function, that'll
+//    run ALL the tests pertaining to the particular file. This function
+//    MUST also be added to a global function [function tests], that'll
+//    run ALL the tests of ALL the files.
+//  * The FIRST function should be called tst_<file_name_without_suffix>.
+
+
+[function tests]
+// always turn on clinet printOut, as the output might be too long for all the tests
+// the results will be written in sphere traces
+var(tst_suppress_successfull,"")
+tst_mistri
+
+////////////////////////////////////////////////////////////
+// FILE:  mistri.scp
+////////////////////////////////////////////////////////////
+[function tst_mistri]
+var(tst_suppress_successfull,!0<argv(0)>)
+test_mistr_craft_computeExp
+
+[function test_mistr_craft_computeExp]
+arg(orig_Lvl,<src.tag(level)>)
+arg(orig_nastaveni_craftexp_gold,<nastaveni_craftexp_gold>)
+src.tag(level,0)
+arg(result,<f_mistr_craft_computeGp(1)>)
+if (<arg(result)> < 1)
+  tst_errorr("can buy experience for 0gp at 0 level!")
+else
+  tst_success("Buy price for 1xp at lvl 0 is <arg(result)>")
+endif
+
+src.tag(level,1)
+arg(result_1,<f_mistr_craft_computeGp(1)>)
+if (<arg(result)> >= <arg(result_1)>)
+  tst_error("the price at level 1 is lower or equal to the level 0")
+else
+  tst_success("Buy price for 1xp at lvl 1 is <arg(result_1)>")
+endif
+
+src.tag(level,<def_mistr_levelLimit>)
+arg(result_limitLvl,<f_mistr_craft_computeGp(1)>)
+src.tag(level,<eval <def_mistr_levelLimit>+1>)
+arg(result_afterLimit,<f_mistr_craft_computeGp(1)>)
+if (<arg(result_limitLvl)> != <arg(result_afterLimit)>)
+  tst_error("The price for a single XP at limit level is lower than the level above")
+else
+  tst_success("Buy price for limit level <def_mistr_levelLimit> is <arg(result_limitLvl)>gp, same as for lvl <eval <def_mistr_levelLimit>+1>")
+endif
+
+src.tag(level,<arg(origLvl)>)
+var(nastaveni_craftexp_gold,<arg(orig_nastaveni_craftexp_gold)>)

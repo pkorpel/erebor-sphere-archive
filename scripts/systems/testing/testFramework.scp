@@ -1,0 +1,14 @@
+////////////////////////////////////////////////////////////
+//        T E S T I N G   F R A M E W O R K 
+//              (c) Yavanna Kementari
+//                      2016
+////////////////////////////////////////////////////////////
+[function tst_success]
+if (!0<var(tst_suppress_successfull)>)
+  src.sysMessage("SUCCESS - <args>")
+endif
+src.accMsg("TEST: SUCCESS - <args>")
+
+[function tst_error]
+src.redMessage("ERROR - <args>")
+src.accMsg("TEST: ERROR - <args>")
