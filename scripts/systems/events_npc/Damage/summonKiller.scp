@@ -1,0 +1,22 @@
+// tags to edit behavior:
+// tag.npc_summonKillerBoost=130 // 130% dmg boost to summons
+[events e_npc_summonKiller]
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+if (act.isSumon)
+  if (<strlen(<tag(npc_summonKillerBoost)>)>)
+    arg(boost,<tag(npc_summonKillerBoost)>)
+  else
+    arg(boost,100) //100% dmg bonus default
+  endif
+  var(ubrano,<eval (<var(ubrano)>+((<var(ubrano)>*<arg(boost)>)/100))>)
+endif
+
+on=@beforegetswing
+on=@aftergetswing
+on=@beforegeteffect
+on=@beforedoeffect
+
+[eof]
+
