@@ -90,7 +90,7 @@ DAM=3
 CATEGORY=Provisions - Weapons - Special
 SUBSECTION=iron
 DESCRIPTION=Vrhaci nuz
-SKILLMAKE=BLACKSMITHING 40.0, TINKERING 35.0
+SKILLMAKE=BLACKSMITHING 65.0, TINKERING 45.0
 
 on=@targon_item
 if (f_weapon_sharp_targon_item)
