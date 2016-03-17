@@ -3758,7 +3758,184 @@ ITEM=i_gold
 
 /////////////////////////////////////////////////
 
+[CHARDEF c_pirat_nb]
+ID=c_man
+NAME=Pirat
+ICON=i_pet_MAN
+ANIM=0ffc78c7f
+CAN=MT_WALK|MT_USEHANDS|MT_run
 
+attack=20
+ARMOR=18
+moverate=3
+
+RESOURCES=10 i_ribs_raw
+FOODTYPE=
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+CATEGORY=Monsters
+SUBSECTION=Pirati
+DESCRIPTION=Pirat chlap
+
+ON=@Create
+NAME=#NAMES_HUMANMALE
+COLOR=colors_skin 
+Title=The Pirat
+NPC=brain_monster
+fame={2000 2999}              
+karma={-2999 -3999}
+
+STR=300
+DEX=80
+INT=10
+
+maxhits={400 450}
+maxstam={60 80}
+maxmana=0
+
+tag.experience=<eval {14.0 15.0}>
+tag(hypnotizable,0)
+
+tag(resist_poison,880)
+tag.resist_para=<eval {250 350}>
+tag(resist_summon,450)
+tag(resist_bleed,00)
+
+tag(resist_sharp,-400)
+tag(resist_slash,-200)        //sekery
+tag(resist_pierce,-400)
+tag(resist_blunt,300)
+
+tag(resist_fire,150)
+tag(resist_elect,-350)
+tag(resist_cold,100)
+
+tag(monstertype,humanoid,60)
+
+resist=70.0
+tactics={50.0 70.0}
+wrestling={85.0 95.0}
+FENCING={80.0 95.0}
+SWORDSMANSHIP={80.0 95.0}
+MACEFIGHTING={80.0 95.0}
+peacemaking=40.0
+
+ITEMnewbie=i_monster_create
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_beard_long
+COLOR=match_hair
+itemnewbie=i_scimitar
+Color=0844
+itemnewbie=i_pants_short
+Color=00
+itemnewbie=i_bracelet_gold
+Color=00
+itemnewbie=i_necklace_gold
+Color=00
+itemnewbie=i_bandana
+Color=026
+itemnewbie=i_shirt_plain
+Color=098a
+
+ON=@NPCRestock
+ITEM=i_gold
+
+/////////////////////////////////////////////////
+
+[CHARDEF c_pirat_boss_nb]
+ID=c_man
+NAME=Vudce Piratu
+ICON=i_pet_MAN
+ANIM=0ffc78c7f
+CAN=MT_WALK|MT_USEHANDS|MT_run
+
+attack=25
+ARMOR=30
+moverate=3
+
+RESOURCES=10 i_ribs_raw
+FOODTYPE=
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+CATEGORY=Monsters
+SUBSECTION=Pirati
+DESCRIPTION=Pirat chlap
+
+ON=@Create
+NAME=#NAMES_HUMANMALE
+COLOR=colors_skin 
+Title=The Pirat
+NPC=brain_monster
+fame={2000 2999}              
+karma={-2999 -3999}
+
+STR=300
+DEX=90
+INT=10
+
+maxhits={500 800}
+maxstam={60 150}
+maxmana=0
+
+tag.experience=<eval {25.0 30.0}>
+tag(hypnotizable,0)
+
+tag(resist_poison,880)
+tag.resist_para=<eval {250 350}>
+tag(resist_summon,450)
+tag(resist_bleed,100)
+
+tag(resist_sharp,-100)
+tag(resist_slash,00)        //sekery
+tag(resist_pierce,-100)
+tag(resist_blunt,500)
+
+tag(resist_fire,250)
+tag(resist_elect,-150)
+tag(resist_cold,200)
+
+tag(monstertype,humanoid,60)
+
+parrying={100.0 110.0}
+resist=100.0
+tactics={90.0 110.0}
+wrestling={85.0 95.0}
+FENCING={90.0 105.0}
+SWORDSMANSHIP={90.0 105.0}
+MACEFIGHTING={100.0 105.0}
+peacemaking=100.0
+
+ITEMnewbie=i_monster_create
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=i_beard_mustache
+COLOR=match_hair
+itemnewbie=i_scimitar
+Color=0995
+itemnewbie=i_golden_metal_shield
+Color=0995
+itemnewbie=i_pants_long
+Color=099D
+itemnewbie=i_bracelet_gold
+Color=00
+itemnewbie=i_necklace_gold
+Color=00
+itemnewbie=i_boots_calf
+Color=00
+itemnewbie=i_hat_tricorne
+Color=098a
+itemnewbie=i_shirt_fancy
+Color=098a
+
+ON=@NPCRestock
+ITEM=i_gold
 
 
 
