@@ -3851,11 +3851,37 @@ resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Tutorial Nekropole]
+[AREA Tutorial Nekropole Level 1]
 GROUP=startovni dungeon
-P=5495, 2944, 0, 35
+P=5495, 2944, 0, 36
 RECT=5491,2933,5521,2981
-MAPPLANE=35
+MAPPLANE=36
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Tutorial Nekropole Level 2]
+GROUP=startovni dungeon
+P=5495, 2944, 0, 37
+RECT=5491,2933,5521,2981
+MAPPLANE=37
+FLAGS=0881E
+tag.realm=4
+tag.nobank=1
+tag.kick=1
+events=e_startdung
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Tutorial Nekropole Level 3]
+GROUP=startovni dungeon
+P=5495, 2944, 0, 38
+RECT=5491,2933,5521,2981
+MAPPLANE=38
 FLAGS=0881E
 tag.realm=4
 tag.nobank=1
