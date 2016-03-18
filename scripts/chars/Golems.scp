@@ -23,6 +23,7 @@ BLOODCOLOR=0481
 TEVENTS=e_monster  
 TEVENTS=e_character  
 TEVENTS=e_npc_knockback
+TEVENTS=e_npc_stun
 TEVENTS=e_golem
 TEVENTS=e_npc_summonKiller
    
@@ -43,13 +44,16 @@ maxhits={3500 3700}
 maxstam={350 400}
 maxmana=0
 
-tag.experience=<eval {160.0 180.0}>
+tag.experience=<eval {210.0 230.0}>
+
+tag.npc_stun_time=35
+tag.npc_stun_chance=400
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
-tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
 tag(monstertype,humanoid,60)
 
@@ -71,8 +75,7 @@ tag(resist_elect,800)
 tag(resist_cold,900)
 
 PARRYING={40.0 50.0}
-WRESTLING={70.0 80.0}
-//WRESTLING={40.0 50.0}  drive
+WRESTLING={88.0 95.0}
 Resist=200.0
 SpiritSpeak=60.0
 
