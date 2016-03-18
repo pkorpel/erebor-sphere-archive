@@ -3934,6 +3934,19 @@ Color=098a
 itemnewbie=i_shirt_fancy
 Color=098a
 
+ON=@hit 
+IF (RAND(15)==1)
+  dorand 7
+    SAYU("Doufam, ze to neni vsecho, co umis. Hahaha!")
+    SAYU("Nikdy me neporazis!")
+    SAYU("Uz ted jsi mrtvola!")
+    SAYU("Mas nejake posledni prani?")
+    SAYU("Zemri ty prasivy cerve!")
+    SAYU("Ty si myslis, ze mi ukradnes muj poklad?!")
+    SAYU("Muj drahokam nikdy nedostanes!")
+  enddo
+ENDIF
+
 ON=@NPCRestock
 ITEM=i_gold
 
