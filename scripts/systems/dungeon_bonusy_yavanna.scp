@@ -1726,7 +1726,7 @@ src.sysMessage("Nova nastaveni stornovana")
 on=@AnyButton
 more1=<argTxt(1)>
 if (argn == 2)	//pressed button 2 == set guardSpawns
-  dialog(d_guarditAdv,d_switchMenu)r
+  dialog(d_guarditAdv,d_switch_lever_GMenu)
 endif
 
 
