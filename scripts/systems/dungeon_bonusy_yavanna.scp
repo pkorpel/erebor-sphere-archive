@@ -1669,7 +1669,15 @@ return 1
 
 [function f_switch_notify_multiSwitch]
 if (moreX) //this is a multiSwitch-controlled switch
-  link.f_switch_multi_Check
+  if (<link>)
+    link.f_switch_multi_Check
+  endif
+  arg(i,0)
+  arg(linkCount,<eval tag(linkNumber)>)
+  while (<arg(i)> < <arg(linkCount)>)
+    tag(link_<eval arg(i)>).f_switch_multi_Check
+    arg(i,#+1)
+  endwhile
 endif
 
 [function f_switch_lever_setBasePos]
@@ -1935,7 +1943,7 @@ endif
 on=@targOn_Item
 if (moreX==0)
   src.targ.moreX=1	//informuje targetnuty switch, ze jde o multiswich (ma se hlasit pri prepnuti zpatky)
-  src.targ.link=<uid>
+  src.targ.f_item_linkAdder(<uid>)
   tag(switch_<eval tag(pocetSwitchu)>,"<src.targ>,1")
   tag(pocetSwitchu,<eval tag(pocetSwitchu)>+1)
 elseif (moreX==1) // target door
