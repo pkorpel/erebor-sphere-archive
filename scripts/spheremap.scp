@@ -3280,9 +3280,9 @@ COLDCHANCE=00
 
 [AREA Ered Mithrinska Jeskyne]
 GROUP=Dungeony
-P=19,1196,-10,11
+P=19,1196,-10,2
 RECT=1,794,190,1197
-mapplane=11
+mapplane=2
 FLAGS=00812
 resources=r_default_rock, r_default_water, r_default_tree
 tag.realm=3
@@ -3291,9 +3291,10 @@ COLDCHANCE=00
 
 [AREA Ledove jeskyne level 1]
 GROUP=Dungeony
-P=6047,3506,20
+P=6047,3506,20,10
 RECT=5816,3264,6136,3672
 RECT=5968,3184,6128,3264
+mapplane=10
 FLAGS=00812
 resources=r_default_rock, r_default_water, r_default_tree
 tag.realm=3
@@ -3311,8 +3312,9 @@ RAINCHANCE=00
 COLDCHANCE=00
 
 [AREA Nexmirias]
-P=5869,2108,10
+P=5869,2108,10,11
 RECT=5758,2098,5960,2306
+mapplane=11
 FLAGS=00812
 resources=r_default_rock, r_default_water, r_default_tree
 tag.realm=3
