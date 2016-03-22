@@ -211,6 +211,10 @@ else
   if (findid(i_gold))
     if !(isResurrectedNPC)
       findid(i_gold).amount=<eval (<eval <tag.experience>>*750)/1000>
+      if (<obody>==c_golem_mithril)   // zatim jen test padavosti
+        giveitem(i_easter_egg)
+        //act.amount=<eval(rescount(i_gold)/100)>     Glorgu, je to takhle OK? Chci pocet vajcek urcit na zaklade GP, aby bylo adekvatni vuci obtiznosti
+      endif
       if (rescount(i_gold)>{30 130000})
         giveitem(i_mi_bag)
       endif
