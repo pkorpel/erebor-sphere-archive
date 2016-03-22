@@ -71,3 +71,41 @@ COLOR=021
 tag(imi_value[29],10)  //Skill_Musicianship, +10
 mif_finishitem
 name=Opilcova kosile
+
+[ITEMDEF i_easter_egg]
+ID=i_fruit_coconut
+NAME=Velikonocni vejce
+VALUE=50000
+
+CATEGORY=Eventy
+SUBSECTION=Easter
+DESCRIPTION=Vejce
+
+ON=@Create
+  dorand 7
+    color=0983
+    color=06
+    color=084D
+    color=098e
+    color=021
+    color=0429
+    color=0111
+  enddo
+  attr=00
+  more=0
+
+ON=@userCLICK
+src.sysmessage("Velice krehkce, hezky malovane velikonocni vejce")
+  
+ON=@Step
+if(src.isgm)
+  return 1
+endif
+if(<src.weight> > 4000)
+  remove
+  src.sysmessage("Nesiko! Rozslapl si vejce!")
+else
+  src.sysmessage("Pozor! Malem jsi rozslapl velikonocni vejce.")
+endif
+
+[eof]
