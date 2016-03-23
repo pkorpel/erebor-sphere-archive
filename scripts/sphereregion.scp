@@ -876,8 +876,7 @@ on=@exit
 [REGIONTYPE r_notele]
 
 ON=@ENTER
-  if (src.isgm)
-  elseif (src.isplayer)
+  if !(src.isgm)
     src.events=+e_notele
   endif
 

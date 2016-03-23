@@ -91,10 +91,11 @@ ON=@Create
     color=0429
     color=0111
   enddo
-  attr=00
-  more=0
   WEIGHT=0.0
 
+ON=@itemDROPON_GROUND 
+  remove
+  src.sysmessage("Oh ne! Ty jsi je rozbil!")
 
 ON=@userCLICK
 src.sysmessage("Velice krehke, hezky malovane velikonocni vejce")
@@ -103,7 +104,7 @@ ON=@Step
 if(src.isgm)
   return 1
 endif
-if(<src.weight> > 4000)
+if(<src.weight> > 3000)
   remove
   src.sysmessage("Nesiko! Rozslapl si vejce!")
 else
@@ -229,7 +230,7 @@ ON=*Dobry den*
 ON=*Ahoj*
 ON=*Cau*
 ON=*Zdravim*
-If (src.qtag(easter)==1) then
+if (src.findid(i_easterQuest_wentThrough))
   SAY("Dobre tedy, jsem pozadu s dodavkou vajec pro Velikonocniho zajicka, ktery je na me proto velice nastvany. Vymenim s Tebou Velikonocni vajcka za ruzne veci.")
 else
   SAY("Zdravim te poutniku! Ani nevis jak velky problem me trapi, ale vypadas celkem zelene na to, aby jsi mi pomohl. Ale to muze byt tim jarem, troufas si na to? Ano?")
@@ -241,7 +242,7 @@ ON=*ano*
 ON=*yes*
 ON=*dukaz*
 ON=*duvera*
-If (src.qtag(easter)==1) then
+if (src.findid(i_easterQuest_wentThrough))
   SAY("Nabizim ti 5000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 5000 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")  
 else
   SAY("Abych si otestoval Tve schopnosti, chci po tobe, aby jsi prosel skrz doupe Velikonocniho zajicka az na konec, a az potom se s tebou budu bavit vice.")
@@ -254,7 +255,7 @@ ON=*veci*
 ON=*nabidka*
 ON=*smena*
 ON=*kurz*
-If (src.qtag(easter)==1) then
+if (src.findid(i_easterQuest_wentThrough))
   SAY("Nabizim ti 5000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 5000 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")
 else
   SAY("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
@@ -265,13 +266,13 @@ return 1
 ON=*penize*
 ON=*zlato*
 ON=*goldy*
-If (src.qtag(easter)==1) then
-  If (<SRC.RESTEST 100 i_easter_egg>)
+if (src.findid(i_easterQuest_wentThrough))
+  if (<SRC.RESTEST 100 i_easter_egg>)
     src.accMsg("Hrac <src.name>, UID: <src> dostal 5000 gp za 100 velikonocnich vajicek.")
     src.consume=100 i_easter_egg
     src.givegold(5000)
     SAY("Dekuji ti, ale to nestaci. Prines mi jich vice, penez mam dost.")  
-    src.qtag(odevzdanych_vajec,#+100)
+    src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+100)
     if (finduid(#040034663)) && !(src.isgm)
       finduid(#040034663).tag(vyplaceno_zlata,#+5000)
     endif
@@ -287,13 +288,13 @@ return 1
 ON=*item*
 ON=*magicky*
 ON=*itemek*
-If (src.qtag(easter)==1) then
-  If (<SRC.RESTEST 1000 i_easter_egg>)
+if (src.findid(i_easterQuest_wentThrough))
+  if (<SRC.RESTEST 1000 i_easter_egg>)
     src.accMsg("Hrac <src.name>, UID: <src> dostal 1x Magicky vacek za 1000 velikonocnich vajicek.")
     src.consume=1000 i_easter_egg
     src.giveitem(i_mi_bag)
     SAY("Dekuji ti, ale to nestaci. Prines mi jich vice, itemku mam jeste dost.")
-    src.qtag(odevzdanych_vajec,#+1000)
+    src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+1000)
     if (finduid(#040034663)) && !(src.isgm)
       finduid(#040034663).tag(magickych_itemku,#+1)
     endif
@@ -309,13 +310,13 @@ return 1
 ON=*mapu*
 ON=*mapa*
 ON=*tajemnou*
-If (src.qtag(easter)==1) then
-  If (<SRC.RESTEST 5000 i_easter_egg>)
+if (src.findid(i_easterQuest_wentThrough))
+  if (<SRC.RESTEST 5000 i_easter_egg>)
     src.accMsg("Hrac <src.name>, UID: <src> dostal 1x Tajemnou mapu za 5000 velikonocnich vajicek.")
     src.consume=5000 i_easter_egg
     src.giveitem(i_u_treasure_map)
     SAY("Dekuji ti, ale stale jich mam malo. Prines mi jich vice, jeste nejake Tajemne mapy mam.")    
-    src.qtag(odevzdanych_vajec,#+5000)
+    src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+5000)
     if (finduid(#040034663)) && !(src.isgm)
       finduid(#040034663).tag(tajemnych_map,#+1)
     endif
@@ -325,6 +326,27 @@ If (src.qtag(easter)==1) then
 else
   SAY("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
 endif
+return 1
+
+[function f_easterEvent_generateEgg]
+//if ({1 4} == 1)
+if (<obody>==c_golem_mithril)
+  arg(itemNumber,<eval(rescount(i_gold)/75)>)
+  if (<arg(itemNumber)> > 0)
+    giveitem(i_easter_egg,<arg(itemNumber)>)
+  endif
+endif
+
+[ITEMDEF i_easterQuest_wentThrough]
+ID=i_memory
+NAME=easterQuest
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=1036800
+
+ON=@timer
+remove
 return 1
 
 [eof]
