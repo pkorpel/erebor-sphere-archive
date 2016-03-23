@@ -93,9 +93,11 @@ ON=@Create
   enddo
   attr=00
   more=0
+  WEIGHT=0.0
+
 
 ON=@userCLICK
-src.sysmessage("Velice krehkce, hezky malovane velikonocni vejce")
+src.sysmessage("Velice krehke, hezky malovane velikonocni vejce")
   
 ON=@Step
 if(src.isgm)
@@ -107,5 +109,222 @@ if(<src.weight> > 4000)
 else
   src.sysmessage("Pozor! Malem jsi rozslapl velikonocni vejce.")
 endif
+
+
+[CHARDEF c_easter_rabbit]
+DEFNAME=c_rabbit
+NAME=Velikonocni zajic
+SOUND=snd_ANIMALS_RABBIT3
+ICON=i_pet_RABBIT_2
+CAN=MT_WALK|MT_RUN
+ANIM=01fff
+
+attack=5
+ARMOR=10
+moverate=3
+
+RESOURCES=1 i_ribs_raw,1 i_fur_light
+FOODTYPE=25 t_crops,25 t_foliage, 35 t_grass
+
+CATEGORY=Eventy
+SUBSECTION=Easter
+DESCRIPTION=Velikonocni zajic
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_animal
+FAME=1000
+KARMA={-2200 -2500}
+COLOR=0627
+
+str=50
+dex={26 38}
+int={10 14}
+
+maxhits=250
+maxstam={26 38}
+maxmana=0
+
+parrying=55.0
+resist=75.0
+tactics=50.0
+wrestling={55.7 80.1}
+SpiritSpeak=25.0
+taming=200.0
+
+tag.experience=<eval {5.0 10.0}>
+
+tag.resist_poison=970
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
+
+//typ monstra
+tag(monstertype,animal)
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_easter_egg,{1 10}
+
+
+//////////////////////////////////////////////
+[CHARDEF c_sberac_vajec]
+NAME=Farmar Olda
+ID=C_MAN
+ARMOR=95
+DAM=100
+CAN=MT_WALK|MT_run
+
+TSPEECH=SBERAC_VAJEC
+
+TEVENTS=e_character
+TEVENTS=e_monster
+
+CATEGORY=Eventy
+SUBSECTION=Easter
+DESCRIPTION=Sberac vajec
+
+ON=@Create
+NPC=brain_human
+Title=Dodavatel vajec
+COLOR=0748
+STR=1500
+DEX=150
+INT=200
+INVUL=1
+
+ALCHEMY=100.0
+
+FAME=1
+KARMA=100
+
+ON=@NPCRestock
+ITEMnewbie=i_hat_straw
+color=0638
+ITEMnewbie=i_boots_calf
+color=044F
+ITEMnewbie=i_pants_short
+color=0716
+ITEMnewbie=i_shirt_plain
+color=0484
+ITEMnewbie=i_bracelet_silver
+color=00
+ITEMnewbie=i_necklace_silver_beads
+color=00
+ITEMnewbie=i_ring_silver
+color=00
+ITEMnewbie=i_pitchfork_obsidian
+color=00
+name=Vidle
+
+
+[SPEECH SBERAC_VAJEC]
+ON=*hi*
+ON=*Dobry den*
+ON=*Ahoj*
+ON=*Cau*
+ON=*Zdravim*
+If (src.qtag(easter)==1) then
+  SAY("Dobre tedy, jsem pozadu s dodavkou vajec pro Velikonocniho zajicka, ktery je na me proto velice nastvany. Vymenim s Tebou Velikonocni vajcka za ruzne veci.")
+else
+  SAY("Zdravim te poutniku! Ani nevis jak velky problem me trapi, ale vypadas celkem zelene na to, aby jsi mi pomohl. Ale to muze byt tim jarem, troufas si na to? Ano?")
+endif
+return 1
+
+
+ON=*ano*
+ON=*yes*
+ON=*dukaz*
+ON=*duvera*
+If (src.qtag(easter)==1) then
+  SAY("Nabizim ti 5000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 5000 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")  
+else
+  SAY("Abych si otestoval Tve schopnosti, chci po tobe, aby jsi prosel skrz doupe Velikonocniho zajicka az na konec, a az potom se s tebou budu bavit vice.")
+endif
+return 1
+
+
+ON=*vymena*
+ON=*veci*
+ON=*nabidka*
+ON=*smena*
+ON=*kurz*
+If (src.qtag(easter)==1) then
+  SAY("Nabizim ti 5000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 5000 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")
+else
+  SAY("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
+
+
+ON=*penize*
+ON=*zlato*
+ON=*goldy*
+If (src.qtag(easter)==1) then
+  If (<SRC.RESTEST 100 i_easter_egg>)
+    src.accMsg("Hrac <src.name>, UID: <src> dostal 5000 gp za 100 velikonocnich vajicek.")
+    src.consume=100 i_easter_egg
+    src.givegold(5000)
+    SAY("Dekuji ti, ale to nestaci. Prines mi jich vice, penez mam dost.")  
+    src.qtag(odevzdanych_vajec,#+100)
+    if (finduid(#040034663)) && !(src.isgm)
+      finduid(#040034663).tag(vyplaceno_zlata,#+5000)
+    endif
+  else
+    SAY("Nemas dost vajicek pro tuto vymenu. Chces vedet smenny kurz?")
+  endif
+else
+  SAY("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
+
+
+ON=*item*
+ON=*magicky*
+ON=*itemek*
+If (src.qtag(easter)==1) then
+  If (<SRC.RESTEST 1000 i_easter_egg>)
+    src.accMsg("Hrac <src.name>, UID: <src> dostal 1x Magicky vacek za 1000 velikonocnich vajicek.")
+    src.consume=1000 i_easter_egg
+    src.giveitem(i_mi_bag)
+    SAY("Dekuji ti, ale to nestaci. Prines mi jich vice, itemku mam jeste dost.")
+    src.qtag(odevzdanych_vajec,#+1000)
+    if (finduid(#040034663)) && !(src.isgm)
+      finduid(#040034663).tag(magickych_itemku,#+1)
+    endif
+  else
+    SAY("Nemas dost vajicek pro tuto vymenu. Chces vedet smenny kurz?")
+  endif
+else
+  SAY("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
+
+
+ON=*mapu*
+ON=*mapa*
+ON=*tajemnou*
+If (src.qtag(easter)==1) then
+  If (<SRC.RESTEST 5000 i_easter_egg>)
+    src.accMsg("Hrac <src.name>, UID: <src> dostal 1x Tajemnou mapu za 5000 velikonocnich vajicek.")
+    src.consume=5000 i_easter_egg
+    src.giveitem(i_u_treasure_map)
+    SAY("Dekuji ti, ale stale jich mam malo. Prines mi jich vice, jeste nejake Tajemne mapy mam.")    
+    src.qtag(odevzdanych_vajec,#+5000)
+    if (finduid(#040034663)) && !(src.isgm)
+      finduid(#040034663).tag(tajemnych_map,#+1)
+    endif
+  else
+    SAY("Nemas dost vajicek pro tuto vymenu. Chces vedet smenny kurz?")
+  endif
+else
+  SAY("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
 
 [eof]
