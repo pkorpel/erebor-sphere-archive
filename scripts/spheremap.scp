@@ -3321,6 +3321,16 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Velikonocni bludiste]
+P=477,612,-20,2
+RECT=493,640,417,595
+mapplane=2
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+events=r_nofield, r_nosumon, r_notele
+RAINCHANCE=20
+COLDCHANCE=00
 
 //[AREA draci sluj]
 //GROUP=Dungeony
