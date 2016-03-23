@@ -873,6 +873,18 @@ on=@exit
   src.events=-e_nofield
 
 //////////////////////////////////////////////////////////////////////////
+[REGIONTYPE r_notele]
+
+ON=@ENTER
+  if (src.isgm)
+  elseif (src.isplayer)
+    src.events=+e_notele
+  endif
+
+on=@exit
+  src.events=-e_notele
+
+//////////////////////////////////////////////////////////////////////////
 
 [REGIONTYPE r_nohorsehigh]
 
