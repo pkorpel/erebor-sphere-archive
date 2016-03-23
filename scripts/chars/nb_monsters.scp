@@ -3951,7 +3951,233 @@ ON=@NPCRestock
 ITEM=i_gold
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+[CHARDEF 011]
+DEFNAME=c_orc_nb
+NAME=Orc
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+ANIM=078c7f
+CAN=MT_WALK|MT_USEHANDS|MT_EQUIP
 
+attack=20
+ARMOR=15
+moverate=3
+RESOURCES=8 i_ribs_raw
+FOODTYPE=
+
+TEVENTS=e_character
+TEVENTS=e_monster
+TEVENTS=e_looter
+
+CATEGORY=Monsters
+SUBSECTION=Rats, Lizards, Orcs
+DESCRIPTION=Orc
+
+ON=@Create
+NAME=#NAMES_ORC
+NPC=brain_monster
+
+FAME=25
+KARMA=-3000
+
+STR=200
+DEX=90
+INT=50
+
+maxhits={250 350}
+maxstam={90 100}
+maxmana=0
+
+tag.experience=<eval {12.0 15.0}>
+tag(hypnotizable,0)
+
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+tag(monstertype,humanoid,60)
+
+tag(resist_poison,930)
+tag.resist_para=<eval {200 250}>
+tag(resist_summon,250)
+tag(resist_bleed,100)
+tag(resist_sharp,-200)
+tag(resist_slash,-100)
+tag(resist_pierce,-150)
+tag(resist_blunt,-250)
+tag(resist_fire,200)
+tag(resist_elect,00)
+tag(resist_cold,00)
+
+PARRYING={50.0 75.0}
+WRESTLING={50.0 70.0}
+SpiritSpeak=20.0
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=loot_ORC
+ITEM=i_gold
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////
+[CHARDEF c_divoska_nb]
+ID=c_woman
+NAME=Domorodec
+ICON=i_pet_WOMAN
+CAN=MT_WALK|MT_USEHANDS|MT_run
+
+attack=20
+ARMOR=18
+moverate=3
+
+RESOURCES=10 i_ribs_raw
+FOODTYPE=
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+CATEGORY=Monsters
+SUBSECTION=Domorodci
+DESCRIPTION=Domorodec zena
+
+ON=@Create
+NAME=#NAMES_HUMANFEMALE
+COLOR=colors_skin 
+Title=The Domorodec
+NPC=brain_monster
+KARMA=-1000
+
+STR=300
+DEX=80
+INT=10
+
+maxhits={400 450}
+maxstam={60 80}
+maxmana=0
+
+tag.experience=<eval {14.0 15.0}>
+tag(hypnotizable,0)
+
+tag(resist_poison,880)
+tag.resist_para=<eval {250 350}>
+tag(resist_summon,450)
+tag(resist_bleed,00)
+tag(resist_sharp,-400)
+tag(resist_slash,-200)        //sekery
+tag(resist_pierce,-400)
+tag(resist_blunt,300)
+tag(resist_fire,150)
+tag(resist_elect,-350)
+tag(resist_cold,100)
+
+tag(monstertype,humanoid,60)
+
+resist=70.0
+tactics={50.0 70.0}
+wrestling={85.0 95.0}
+FENCING={80.0 95.0}
+SWORDSMANSHIP={80.0 95.0}
+MACEFIGHTING={80.0 95.0}
+peacemaking=40.0
+
+ITEMnewbie=i_monster_create
+ITEMNEWBIE=i_armor_female_skirt
+COLOR=0999
+ITEMNEWBIE=i_sash
+COLOR=0999
+ITEMNEWBIE=random_female_hair
+COLOR=01b5
+ITEMNEWBIE=i_bracelet_gold 
+ITEMNEWBIE=i_necklace_gold
+ITEMNEWBIE=i_earrings_gold 
+ITEMNEWBIE=i_spear 
+COLOR=05e5
+
+ON=@NPCRestock
+ITEM=i_gold
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+[CHARDEF c_divoch_nb]
+ID=c_man
+NAME=Domorodec
+ICON=i_pet_MAN
+ANIM=0ffc78c7f
+CAN=MT_WALK|MT_USEHANDS|MT_run
+
+attack=20
+ARMOR=18
+moverate=3
+
+RESOURCES=10 i_ribs_raw
+FOODTYPE=
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+CATEGORY=Monsters
+SUBSECTION=Domorodci
+DESCRIPTION=Domorodec zena
+
+ON=@Create
+NAME=#NAMES_HUMANFEMALE
+COLOR=colors_skin 
+Title=The Domorodec
+NPC=brain_monster
+
+KARMA=-1000
+
+STR=350
+DEX=70
+INT=5
+
+maxhits={450 500}
+maxstam={60 80}
+maxmana=0
+
+tag.experience=<eval {14.0 15.0}>
+
+tag(hypnotizable,0)
+
+tag(resist_poison,880)
+tag.resist_para=<eval {250 350}>
+tag(resist_summon,450)
+tag(resist_bleed,00)
+tag(resist_sharp,-400)
+tag(resist_slash,-200)        //sekery
+tag(resist_pierce,-400)
+tag(resist_blunt,300)
+tag(resist_fire,150)
+tag(resist_elect,-350)
+tag(resist_cold,100)
+
+tag(monstertype,humanoid,60)
+
+resist=70.0
+tactics={50.0 70.0}
+wrestling={85.0 95.0}
+FENCING={80.0 95.0}
+SWORDSMANSHIP={80.0 95.0}
+MACEFIGHTING={80.0 95.0}
+peacemaking=40.0
+
+ITEMnewbie=i_monster_create
+ITEMNEWBIE=i_armor_female_skirt
+COLOR=0999
+ITEMNEWBIE=i_sash
+COLOR=0999
+ITEMNEWBIE=random_male_hair
+COLOR=01b5
+ITEMNEWBIE=i_bracelet_gold 
+ITEMNEWBIE=i_necklace_gold
+ITEMNEWBIE=i_earrings_gold 
+ITEMNEWBIE=i_club
+COLOR=05e5
+ON=@NPCRestock
+ITEM=i_gold
+/////////////////////////////////////////////////
 
 
 
