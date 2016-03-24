@@ -72,6 +72,9 @@ tag(imi_value[29],10)  //Skill_Musicianship, +10
 mif_finishitem
 name=Opilcova kosile
 
+////////////////////////////////////////////////////////////////////////////////
+// E A S T E R   Q U E S T   2 0 1 6
+
 [ITEMDEF i_easter_egg]
 ID=i_fruit_coconut
 NAME=Velikonocni vejce
@@ -93,23 +96,26 @@ ON=@Create
     color=0111
   enddo
   
-
-ON=@itemDROPON_GROUND 
+ON=@DROPON_GROUND 
   remove
-  src.sysmessage("Oh ne! Ty jsi je rozbil!")
+  src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
 
 ON=@userCLICK
-src.sysmessage("Velice krehke, hezky malovane velikonocni vejce")
+if (amount > 1)
+  src.sysmessage("Velice krehka, hezky malovana velikonocni vejce")
+else
+  src.sysmessage("Velice krehke, hezky malovane velikonocni vejce")
+endif
   
 ON=@Step
 if(src.isgm)
   return 1
 endif
 if(<src.weight> > 3000)
+  src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
   remove
-  src.sysmessage("Nesiko! Rozslapl si vejce!")
 else
-  src.sysmessage("Pozor! Malem jsi rozslapl velikonocni vejce.")
+  src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
 endif
 
 
@@ -182,7 +188,7 @@ ARMOR=95
 DAM=100
 CAN=MT_WALK|MT_run
 
-TSPEECH=SBERAC_VAJEC
+TSPEECH=spk_sberac_vajec
 
 TEVENTS=e_character
 TEVENTS=e_monster
@@ -225,16 +231,16 @@ color=00
 name=Vidle
 
 
-[SPEECH SBERAC_VAJEC]
+[SPEECH spk_sberac_vajec]
 ON=*hi*
 ON=*Dobry den*
 ON=*Ahoj*
 ON=*Cau*
 ON=*Zdravim*
 if (src.findid(i_easterQuest_wentThrough))
-  SAY("Dobre tedy, jsem pozadu s dodavkou vajec pro Velikonocniho zajicka, ktery je na me proto velice nastvany. Vymenim s Tebou Velikonocni vajcka za ruzne veci.")
+  SAY("Dobre tedy, jsem pozadu s dodavkou vajec pro Velikonocniho zajicka. Je na me kvuli tomu velice nastvany. Smenim s tebou Velikonocni vajcka za ruzne veci.")
 else
-  SAY("Zdravim te poutniku! Ani nevis jak velky problem me trapi, ale vypadas celkem zelene na to, aby jsi mi pomohl. Ale to muze byt tim jarem, troufas si na to? Ano?")
+  SAY("Zdravim te poutniku! Ani nevis, jak velky problem me trapi. Vypadas celkem zelene na to, aby jsi mi <src.sex(pomohl,pomohla)>. Ale to muze byt tim jarem, troufas si na to? Ano?")
 endif
 return 1
 
@@ -246,7 +252,7 @@ ON=*duvera*
 if (src.findid(i_easterQuest_wentThrough))
   SAY("Nabizim ti 5000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 5000 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")  
 else
-  SAY("Abych si otestoval Tve schopnosti, chci po tobe, aby jsi prosel skrz doupe Velikonocniho zajicka az na konec, a az potom se s tebou budu bavit vice.")
+  SAY("Abych si otestoval Tve schopnosti, chci po tobe, aby jsi <src.sex(prosel,prosla)> az na konec doupete Velikonocniho zajicka. Az potom se s tebou budu bavit vice.")
 endif
 return 1
 
