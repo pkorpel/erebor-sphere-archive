@@ -76,6 +76,7 @@ name=Opilcova kosile
 ID=i_fruit_coconut
 NAME=Velikonocni vejce
 VALUE=50000
+WEIGHT=0
 
 CATEGORY=Eventy
 SUBSECTION=Easter
@@ -91,7 +92,7 @@ ON=@Create
     color=0429
     color=0111
   enddo
-  WEIGHT=0.0
+  
 
 ON=@itemDROPON_GROUND 
   remove
@@ -329,8 +330,7 @@ endif
 return 1
 
 [function f_easterEvent_generateEgg]
-//if ({1 4} == 1)
-if (<obody>==c_golem_mithril)
+if ({1 4} == 1)
   arg(itemNumber,<eval(rescount(i_gold)/75)>)
   if (<arg(itemNumber)> > 0)
     giveitem(i_easter_egg,<arg(itemNumber)>)
@@ -345,6 +345,10 @@ TYPE=T_EQ_SCRIPT
 ON=@EQUIP
 TIMER=1036800
 ATTR=094
+tag(odevzdanych_vajec,0)
+if (finduid(#040034663)) && !(src.isgm)
+  finduid(#040034663).tag(sberacu,#+1)
+endif
 
 ON=@timer
 remove
