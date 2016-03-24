@@ -4045,9 +4045,9 @@ DESCRIPTION=Domorodec zena
 ON=@Create
 NAME=#NAMES_HUMANFEMALE
 COLOR=colors_skin 
-Title=The Domorodec
+Title=Domorodkyne
 NPC=brain_monster
-KARMA=-1000
+KARMA=-10
 
 STR=300
 DEX=80
@@ -4119,15 +4119,15 @@ TEVENTS=e_character
 
 CATEGORY=Monsters
 SUBSECTION=Domorodci
-DESCRIPTION=Domorodec zena
+DESCRIPTION=Domorodec muz
 
 ON=@Create
-NAME=#NAMES_HUMANFEMALE
+NAME=#NAMES_HUMANMALE
 COLOR=colors_skin 
-Title=The Domorodec
+Title=Domorodec
 NPC=brain_monster
 
-KARMA=-1000
+KARMA=-10
 
 STR=350
 DEX=70
