@@ -113,7 +113,7 @@ endif
 
 
 [CHARDEF c_easter_rabbit]
-DEFNAME=c_rabbit
+ID=c_rabbit
 NAME=Velikonocni zajic
 SOUND=snd_ANIMALS_RABBIT3
 ICON=i_pet_RABBIT_2
@@ -344,6 +344,7 @@ TYPE=T_EQ_SCRIPT
 
 ON=@EQUIP
 TIMER=1036800
+ATTR=094
 
 ON=@timer
 remove
