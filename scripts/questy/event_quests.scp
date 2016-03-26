@@ -96,7 +96,8 @@ ON=@Create
     color=0111
   enddo
   
-ON=@DROPON_GROUND 
+ON=@DROPON_GROUND
+  sfx(74)      // zvuk rozbiti vajec :-)
   remove
   src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
 
@@ -113,6 +114,7 @@ if(src.isgm)
 endif
 if(<src.weight> > 3000)
   src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
+  sfx(74)
   remove
 else
   src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
