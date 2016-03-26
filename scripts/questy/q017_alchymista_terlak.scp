@@ -80,6 +80,12 @@ if (<src.rescount i_scout_crystal_blue> >= <src.qtag(q017_terlak)>) && (<src.res
  link.timer=1  //Resetujeme timer Gargamela -> pokud jdou hraci rychle po sobe, dalsi by mel mit to npc spawnuty
  src.go(<morep>)
  tag(posledni_vstup,<serv.time>)  
+  dorand 4               // Premistovani gaty po pruchodu hracem mezi dungeony
+    p(5286,730,-18,10)   // Etheria Level 2
+    p(4988,451,0,10)     // Dung Snagum level 1
+    p(478,1524,-8,2)     // Arachnon level 1
+    p(5219,170,0,10)     // Mount Dorlas level 2
+  enddo 
 elseif !(src.qtag(q017_terlak)) && (<src.rescount i_scout_crystal_blue> >= 1) && (<src.rescount i_scout_crystal_red> >= 1)
  if (<eval src.qtag(q017_terlak_ochrana)> == 2)
    src.qtagremove(q017_terlak_ochrana)
@@ -96,6 +102,12 @@ elseif !(src.qtag(q017_terlak)) && (<src.rescount i_scout_crystal_blue> >= 1) &&
  lastnew.equip
  link.timer=1  //Resetujeme timer Gargamela -> pokud jdou hraci rychle po sobe, dalsi by mel mit to npc spawnuty
  src.go(<morep>)
+  dorand 4               // Premistovani gaty po pruchodu hracem mezi dungeony
+    p(5286,730,-18,10)   // Etheria Level 2
+    p(4988,451,0,10)     // Dung Snagum level 1
+    p(478,1524,-8,2)     // Arachnon level 1
+    p(5219,170,0,10)     // Mount Dorlas level 2
+  enddo   
 elseif !(src.qtag(q017_terlak))
  src.sysmessage("Ke vstupu potrebujes 1 cerveny a 1 modry krystal.")
 else
