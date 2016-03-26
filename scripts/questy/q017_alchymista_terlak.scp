@@ -45,7 +45,7 @@ type=t_script
 on=@create
 color=colors_green
 attr=attr_static
-morep=1000 1000 //nastavit kam to bude dotycne lidi portovat
+morep=5719,111,0,10 //nastavit kam to bude dotycne lidi portovat
 
 on=@step
 src.f_q017_checkOldTags

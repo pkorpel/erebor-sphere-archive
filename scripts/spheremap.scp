@@ -4171,6 +4171,15 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Gargamelova kobka]  
+P=5719, 111, 0, 10
+RECT=5723,123,5695,101
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
 [AREA Shagar vstup]
 GROUP=Dung Shagar
 P=839, 3614
