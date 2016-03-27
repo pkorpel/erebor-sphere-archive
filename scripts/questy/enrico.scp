@@ -955,7 +955,7 @@ ON = *syr*
 ON = *jidlo* 
 ON = *tady* 
 if (<tag(syr)>==1)&&(<src.rescount i_cheese_wheel> >= 1) 
-  SAY("Aaa, diky! Na, vem si tohle."
+  SAY("Aaa, diky! Na, vem si tohle.")
   emote("hic")
   SAY("Mozna to uzijes.") 
   emote("hic")
@@ -970,7 +970,7 @@ if (<tag(syr)>==1)&&(<src.rescount i_cheese_wheel> >= 1)
   src.ACT.BOUNCE 
   src.addexp(50) 
   tag(syr,0)//vynuluje tag na postave 
-  tag(syrtime,<eval <servtime>+10*60*60)
+  tag(syrtime,<eval <servtime>+10*60*60>)
 else 
   emote("hic")
 endif
