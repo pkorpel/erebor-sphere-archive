@@ -970,7 +970,7 @@ if (<tag(syr)>==1)&&(<src.rescount i_cheese_wheel> >= 1)
   src.ACT.BOUNCE 
   src.addexp(50) 
   tag(syr,0)//vynuluje tag na postave 
-  tag(syrtime,<eval <servtime>+10*60*60>)
+  tag(syrtime,<eval <serv.time>+10*60*60*2>)
 else 
   emote("hic")
 endif
