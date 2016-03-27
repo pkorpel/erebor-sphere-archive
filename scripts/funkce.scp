@@ -5627,13 +5627,6 @@ if (argn==24)||(argn==28)||(argn==39)||(argn==47)||(argn==50)
  return 1
 endif
 
-[events e_notele]
-on=@spellcast
-if (argn==22)
- sysMessage("Toto kouzlo zde nejde pouzit.")
- return 1
-endif
-
 [events e_noport]
 on=@spellcast
 if (argn==32)
