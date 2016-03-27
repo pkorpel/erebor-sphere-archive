@@ -213,6 +213,13 @@ ALCHEMY=100.0
 FAME=1
 KARMA=100
 
+ON=@npcseenewplayer 
+DORAND 3 
+  SAY= "Hej! Ty tam. Ano tebe myslim, <src.name>. Chces si neco vydelat? Ano?" 
+  SAY= "Prosim, prines mi velikonocni vejce a ja se ti stedre odmenim." 
+  SAY= "Nejvice vajec mi prinesl <finduid(#040034663).tag(BestCollector_Name)> a to <finduid(#040034663).tag(BestCollector_amount)> kusu. Prekonas ho?"
+enddo
+
 ON=@NPCRestock
 ITEMnewbie=i_hat_straw
 color=0638
@@ -284,6 +291,7 @@ if (src.findid(i_easterQuest_wentThrough))
     src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+100)
     if (finduid(#040034663)) && !(src.isgm)
       finduid(#040034663).tag(vyplaceno_zlata,#+5000)
+      f_BestCollector
     endif
   else
     SAY("Nemas dost vajicek pro tuto vymenu. Chces vedet smenny kurz?")
@@ -306,6 +314,7 @@ if (src.findid(i_easterQuest_wentThrough))
     src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+1000)
     if (finduid(#040034663)) && !(src.isgm)
       finduid(#040034663).tag(magickych_itemku,#+1)
+      f_BestCollector
     endif
   else
     SAY("Nemas dost vajicek pro tuto vymenu. Chces vedet smenny kurz?")
@@ -328,6 +337,7 @@ if (src.findid(i_easterQuest_wentThrough))
     src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+5000)
     if (finduid(#040034663)) && !(src.isgm)
       finduid(#040034663).tag(tajemnych_map,#+1)
+      f_BestCollector
     endif
   else
     SAY("Nemas dost vajicek pro tuto vymenu. Chces vedet smenny kurz?")
@@ -343,6 +353,13 @@ if ({1 4} == 1)
   if (<arg(itemNumber)> > 0)
     giveitem(i_easter_egg,<arg(itemNumber)>)
   endif
+endif
+
+[function f_BestCollector]
+if (<src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec)> > <finduid(#040034663).tag(BestCollector_amount)>)
+  finduid(#040034663).tag(BestCollector_UID,<src.uid>)
+  finduid(#040034663).tag(BestCollector_Name,<src.uid.name>)
+  finduid(#040034663).tag(BestCollector_amount,<src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec)>)
 endif
 
 [ITEMDEF i_easterQuest_wentThrough]
