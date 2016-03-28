@@ -35,57 +35,70 @@ return <delaybonus>
 
 
 [FUNCTION resource_targon_ground]
-//return 0
-
-var(mydirection,<dir>)
-
+// Remove equipped newbie item
 if (findlayer(1))
- if(<findlayer(1).attr>&attr_newbie)
-  findlayer(1).remove
-  sysMessage("newbie krumpac je bug ! byl smazan.")
-  return 1
- endif
+    if(<findlayer(1).attr>&attr_newbie)
+        findlayer(1).remove
+        sysMessage("newbie krumpac je bug ! byl smazan.")
+        return 1
+    endif
 endif
 
-
+// Cannot mine/fish/chop mounted
 if ( <findlayer.layer_horse> )
-  sysMessage("Ze sedla to pujde tezko.")
-  dismount
+    sysMessage("Ze sedla to pujde tezko.")
+    dismount
 endif
 
+// check light conditions
 if (nolightfizz(1)) //i s napisem - nutno proverit jestli jim to nepise dvakrat (jestli se nepousti i skillstart)
-  return 1
+    return 1
 endif
+
+// check hunger
 hungryhurts
 
-if (findid(i_resprobe)) // we are still to be relocated
-  return 1
+// Check resource probe - probably not yet placed on target location?
+if (findid(i_resprobe))
+    return 1
 endif
+
 reveal
 
+// Store act (newitem/newnpc changes this)
 arg(mineact,<act>)
-NEWITEM(i_resprobe) // Load the probe item
-lastnew.P = <SRC.TARGP> // place it at the mining point
-lastnew.link=<uid>
-lastnew.removefromview
 
-if (src.distanceFrom(<lastnew>) > 3)&&(isgm==0) // check for distance to mining point
-  sysMessage("You are too far away.")
-  lastnew.REMOVE
-  return 1
-elseif !(lastnew.srcCANSEELOS) // check for line of sight to mining point
-  sysMessage("Tam nedosahnes.")
-  lastnew.REMOVE
-  return 1
-endif
+// create resource probe item
+newitem(i_resprobe)
 arg(probeuid,<lastnew>)
+// place it at the mining point
+probeuid.p = <targp>
+// link with player
+probeuid.link=<uid>
+probeuid.removefromview
 
+if ((src.distanceFrom(<probeuid>) > 3) && (isgm==0)) // check for distance to mining point
+    sysMessage("You are too far away.")
+    probeuid.remove
+    return 1
+elseif !(probeuid.srccanseelos) // check for line of sight to mining point
+    sysMessage("Tam nedosahnes.")
+    probeuid.remove
+    return 1
+endif
+
+// Why is this here - resource probe holder?
 newnpc c_mining_dummy
-act.EQUIP(<arg(probeuid)>)
-act.P=<TARGP> 
-act.flags=statf_insubstantial
-act.removefromview
+arg(miningDummy,<lastnewchar>)
+miningDummy.equip(<probeuid>)
+miningDummy.P=<TARGP>
+miningDummy.flags=statf_insubstantial
+miningDummy.removeFromView
+
+// restore act
 act=arg(mineact)
+
+// return 0 - OK
 return 0
 
 [function mfix_haveact]
@@ -225,22 +238,34 @@ on=@userclick
 return 1
 
 ON=@itemStep
-if (findid(i_resprobe).link.ACTION==-1) //hrac nic nedela, nejakej omyl nebo uz je pozde
-  remove
-  return 0
-endif
-if (act.baseid == i_worldgem_bit)
-  if (ACT.TYPE == t_rock )
-  elseif (ACT.TYPE == t_tree )
-  elseif (ACT.TYPE == t_water )
-  else
+arg(probeuid,<findid(i_resprobe)>)
+
+// if probe not found - exit
+if (<arg(probeuid)>)
+else
     return 0
-  endif //mame spravny typy
-  
-  findid(i_resprobe).link.act=<act>
-  findid(i_resprobe).link.mfix_haveact
-  act.color=1//hotovo
-  remove
+endif
+
+//hrac nic nedela, nejakej omyl nebo uz je pozde
+if (probeuid.link.ACTION==-1)
+    remove
+    return 0
+endif
+
+
+if (act.baseid == i_worldgem_bit)
+    // Filter out correct types
+    if (ACT.TYPE == t_rock )
+    elseif (ACT.TYPE == t_tree )
+    elseif (ACT.TYPE == t_water )
+    else
+        return 0
+    endif
+
+    probeuid.link.act=<act>
+    probeuid.link.mfix_haveact
+    act.color=1//hotovo
+    remove
 endif
 
 [ITEMDEF i_randompotvora]//snad
