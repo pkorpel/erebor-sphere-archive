@@ -1136,7 +1136,7 @@ arg(chance,200)
 if (<eval tag(stam_dmg_chance)>)
   arg(chance,<eval tag(stam_dmg_chance)>)
 endif
-if (chance(<tag(stam_dmg_chance)>,3)
+if (chance(<tag(stam_dmg_chance)>,3))
 	reducestamina(<tag(stam_dmg_power)>)
 endif
 on=@beforedoeffect
