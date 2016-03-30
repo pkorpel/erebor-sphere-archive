@@ -248,6 +248,11 @@ ON=*Cau*
 ON=*Zdravim*
 if (src.findid(i_easterQuest_wentThrough))
   SAY("Dobre tedy, jsem pozadu s dodavkou vajec pro Velikonocniho zajicka. Je na me kvuli tomu velice nastvany. Smenim s tebou Velikonocni vajcka za ruzne veci.")
+  if !(src.findid(i_easterQuest_wentThrough).tag(prodlouzeni_po_loadu))
+    src.findid(i_easterQuest_wentThrough).tag(prodlouzeni_po_loadu,1)  // Prodlouzi jen jednou
+    src.findid(i_easterQuest_wentThrough).timer=1036800  // Nastavi timer na 12 dni (Default) 
+    src.accMsg("Hraci <src.name>, UID: <src> byl prodlouzen limit Velikonocniho eventu o 12 dni.")
+  endif 
 else
   SAY("Zdravim te poutniku! Ani nevis, jak velky problem me trapi. Vypadas celkem zelene na to, aby jsi mi <src.sex(pomohl,pomohla)>. Ale to muze byt tim jarem, troufas si na to? Ano?")
 endif
