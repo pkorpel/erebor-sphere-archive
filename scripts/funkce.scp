@@ -3038,6 +3038,9 @@ else
 endif
 
 [function addexp]
+if !(<eval tag(experience)>)
+  tag(experience,0)
+endif
 if (<tag(hypno_mystik)>) //mystik v monstru neco zabil
   tag(experience,#+(<eval(args)>)) //jen expy, zadny levely ani nic.
 else

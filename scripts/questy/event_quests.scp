@@ -288,11 +288,11 @@ ON=*penize*
 ON=*zlato*
 ON=*goldy*
 if (src.findid(i_easterQuest_wentThrough))
-  if (<SRC.RESTEST 100 i_easter_egg>)
+  if (<src.restest(100,i_easter_egg)>)
     src.accMsg("Hrac <src.name>, UID: <src> dostal 5000 gp za 100 velikonocnich vajicek.")
-    src.consume=100 i_easter_egg
+    src.consume(100,i_easter_egg)
     src.givegold(5000)
-    SAY("Dekuji ti, ale to nestaci. Prines mi jich vice, penez mam dost.")  
+    say("Dekuji ti, ale to nestaci. Prines mi jich vice, penez mam dost.")  
     src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+100)
     if (finduid(#040034663)) && !(src.isgm)
       finduid(#040034663).tag(vyplaceno_zlata,#+5000)

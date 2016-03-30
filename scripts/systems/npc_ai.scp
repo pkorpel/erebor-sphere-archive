@@ -1072,21 +1072,25 @@ var(ban_out,"")
 
 on=@skillstroke //provadeni akce - simulujeme navrat domu pri spatreni hrace, guardi maj tendenci se courat
 if(isfighting)||(iscasting)
- if(act.ischar)
-  if(act.npc) //bojuje s npcckem
-   //je to npc spawnute ve meste - zrejme se mydlej guardi navzajem
-   if(strlen(<act.memoryfindtype(MEMORY_ISPAWNED).link.region.tag(jmeno_mesta)>))
-    memoryfindtype(MEMORY_FIGHT).remove
-    removememories
-    go(<home>)
-    return
-   endif
+  if(act.ischar)
+    if(act.npc) //bojuje s npcckem
+      //je to npc spawnute ve meste - zrejme se mydlej guardi navzajem
+      if(strlen(<act.memoryfindtype(MEMORY_ISPAWNED).link.region.tag(jmeno_mesta)>))
+        memoryfindtype(MEMORY_FIGHT).remove
+        removememories
+        go(<home>)
+        return
+      endif
+    endif
   endif
- endif
 elseif (action==06d)&&(distancefrom(<memoryfindtype(MEMORY_ISPAWNED).link>) > 8) //going home 
- if !(act.isplayer) //neboujuje s hracem
-  go(<home>)
- endif
+  if !(act) // poslat domu, pokud nebojuje s hracem. Poradi a rozdeleni podminek je dulezite, jinak to hazi error
+    go(<home>)
+  elseif (act.isitem)
+    go(<home>)
+  elseif !(act.isplayer)
+    go(<home>)
+  endif
 endif
 
 on=@beforegeteffect
@@ -1094,7 +1098,6 @@ on=@beforedoeffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-
 
 [itemdef i_memory_cleaner]
 id=i_memory

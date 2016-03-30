@@ -376,14 +376,11 @@ dialog d_class_info
 if !(isplayer)
   return 0
 endif
-if !(<eval tag(experience)>)
-  tag(experience,0)
-endif
 if !(tag(level))
   tag(level,0)
 endif
 arg(gainedLevel,0)
-while (tag(experience)>eval((tag(level)+1)*nextlevel))
+while (<eval tag(experience)> > <eval((tag(level)+1)*nextlevel)>)
   arg(gainedLevel,1)
   classmessage("<sex("Presel","Presla")> jsi na dalsi level!")
   tag(level,#+1)

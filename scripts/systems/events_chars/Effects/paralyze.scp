@@ -95,3 +95,5 @@ if (more2 == 1) //ethernal para
   return 1
 endif
 remove
+
+[eof]
