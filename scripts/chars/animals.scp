@@ -978,8 +978,8 @@ tag(npc_port_distance,10)
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
-tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[5]>//dmg
-tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
 //other resists
 tag(resist_poison,1000)

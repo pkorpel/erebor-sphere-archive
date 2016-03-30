@@ -859,6 +859,14 @@ elseif (src.isgm)
   return 1
 endif
 
+if !(<tag(gohome)>)
+  if !(strcmpi("<moreP>","0,0")) //0 if equals
+    src.accMsg("ERROR - varGate (<uid>) na pozici <p> nema nastavenou portovaci pozici")
+    src.sysMessage("<src.sex(Zhoupl,Zhoupla)> jsi se v magickem viru, ale nic se nestalo")
+    return 1
+  endif
+endif
+
 var(lastVarGate,<uid>)
 
 if (<tag(gateFlags)>&<vg_isGuarded>)	//Gata je Guardena
