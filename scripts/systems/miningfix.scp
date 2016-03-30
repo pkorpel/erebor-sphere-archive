@@ -35,24 +35,15 @@ return <delaybonus>
 
 
 [FUNCTION resource_targon_ground]
-// Remove equipped newbie item
-if (findlayer(1))
-    if(<findlayer(1).attr>&attr_newbie)
-        findlayer(1).remove
-        sysMessage("newbie krumpac je bug ! byl smazan.")
-        return 1
-    endif
-endif
-
 // Cannot mine/fish/chop mounted
 if ( <findlayer.layer_horse> )
-    sysMessage("Ze sedla to pujde tezko.")
-    dismount
+  sysMessage("Ze sedla to pujde tezko.")
+  dismount
 endif
 
 // check light conditions
 if (nolightfizz(1)) //i s napisem - nutno proverit jestli jim to nepise dvakrat (jestli se nepousti i skillstart)
-    return 1
+  return 1
 endif
 
 // check hunger
@@ -60,7 +51,7 @@ hungryhurts
 
 // Check resource probe - probably not yet placed on target location?
 if (findid(i_resprobe))
-    return 1
+  return 1
 endif
 
 reveal
@@ -68,23 +59,21 @@ reveal
 // Store act (newitem/newnpc changes this)
 arg(mineact,<act>)
 
-// create resource probe item
 newitem(i_resprobe)
 arg(probeuid,<lastnew>)
-// place it at the mining point
+// place the mining probe at the mining point & link with the player & hide
 probeuid.p = <targp>
-// link with player
 probeuid.link=<uid>
 probeuid.removefromview
 
 if ((src.distanceFrom(<probeuid>) > 3) && (isgm==0)) // check for distance to mining point
-    sysMessage("You are too far away.")
-    probeuid.remove
-    return 1
+  sysMessage("You are too far away.")
+  probeuid.remove
+  return 1
 elseif !(probeuid.srccanseelos) // check for line of sight to mining point
-    sysMessage("Tam nedosahnes.")
-    probeuid.remove
-    return 1
+  sysMessage("Tam nedosahnes.")
+  probeuid.remove
+  return 1
 endif
 
 // Why is this here - resource probe holder?

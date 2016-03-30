@@ -1079,12 +1079,12 @@ if(isfighting)||(iscasting)
     memoryfindtype(MEMORY_FIGHT).remove
     removememories
     go(<home>)
+    return
    endif
   endif
  endif
-endif
-if(action==06d)&&(distancefrom(<memoryfindtype(MEMORY_ISPAWNED).link>) > 8) //going home 
- if!(act.isplayer) //neboujuje s hracem
+elseif (action==06d)&&(distancefrom(<memoryfindtype(MEMORY_ISPAWNED).link>) > 8) //going home 
+ if !(act.isplayer) //neboujuje s hracem
   go(<home>)
  endif
 endif
@@ -1585,6 +1585,8 @@ if (act)
     endif
   endif
 endif
+
+on=@Created
 
 [EVENTS e_NPC_teleToTarget]
 on=@skillstroke
