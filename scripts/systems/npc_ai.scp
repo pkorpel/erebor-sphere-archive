@@ -1528,6 +1528,8 @@ mana=<maxMana>
 on=@afterswing
 mana=<maxMana>
 
+on=@Created
+
 //[function godistance]
 //if (<more2h>)
 // more2h=<more2h>-1
@@ -1588,8 +1590,6 @@ if (act)
     endif
   endif
 endif
-
-on=@Created
 
 [EVENTS e_NPC_teleToTarget]
 on=@skillstroke
