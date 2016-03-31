@@ -423,10 +423,10 @@ ON=@userCLICK
 src.sysMessage("Vidis davno mrtvy strom s pokroucenymi vetvemi a zcernalou kurou.")
 
 on=@userDClick 
-if (tag(tmr)< serv.time) 
+if (<eval tag(tmr)> < serv.time) 
   more1=2
 endif
-if (<src.tag(gq001)>==1)
+if (<eval src.tag(gq001)>==1)
   if(<more1> > 0) 
   //snizit citac 
     more1 =<eval <more1>-1> 
