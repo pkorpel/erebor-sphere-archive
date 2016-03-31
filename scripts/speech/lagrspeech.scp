@@ -3,11 +3,11 @@
 ON=*hi*
 ON=*ahoj*
 ON=*buy*
-if (<src.account.tag(lagr)><8)
+if (<eval(<src.account.tag(lagr)>)><8)
   say (Musis ziskat <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
 //say (Musis ziskat <eval(<trest_<src.account.tag(lagr)>>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
 else
-  if (src.tag(lagrlogu))
+  if (<eval(<src.tag(lagrlogu)>)>)
     say (Musis ziskat <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
   else
     say Kontaktuj GM pres page, tva postava je recidivista, ktery dostane specialni trest.
@@ -44,7 +44,7 @@ ON=*jidlo*
 src.food=15
 
 ON=*propustit*
-if (<src.account.tag(lagr)><8)
+if (<eval(<src.account.tag(lagr)>)><8)
  //if (<src.restest <eval(<trest_<src.account.tag(lagr)>>/100)> i_gold_lagr>)
  if (<src.restest <eval(<src.tag(lagrlogu)>/100)> i_gold_lagr>)
   src.lagrpustit
@@ -66,7 +66,7 @@ if (<src.account.tag(lagr)><8)
   say("Potrebujes celkem <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ty ziskas vymenou za normalni drevo. Az budes mit dostatek dreva, oslov me "vymena".")
  endif
 else
-  if (src.tag(lagrlogu))
+  if (<eval src.tag(lagrlogu)>)
     if (<src.restest <eval(<src.tag(lagrlogu)>/100)> i_gold_lagr>)
       src.lagrpustit
     else
