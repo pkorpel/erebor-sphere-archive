@@ -2,7 +2,7 @@
 ///:::::Orfeus (Moria - www.moria.cz)::///
 ///:::::Last update: 20/02/13  Nara::::///
 ///: Obsahuje:                         ///
-///:     1. Zahradnice Ambra           ///           
+///:     1. Zahradnice Ambra           ///
 //////////////////////////////////////////
 
 
@@ -22,7 +22,7 @@ endif
 
 
 [function f_q100_hobitin_ambra]
-if (<src.tag.q100_hobitin_ambra_neuspel> !=0)
+if (0<src.tag.q100_hobitin_ambra_neuspel> !=0)
   say("Prosim ted ne,mam spoustu prace!")
 else
 dialog(d_q100_hobitin_ambra)
@@ -39,31 +39,33 @@ argo.questDialog_baseButt(4) // Hledam praci
 argo.questDialog_baseButt(5) // Nesu ti
 argo.questDialog_baseButt(6) // Prohlednout
 
+arg(q100_hobitin_ambra,<eval src.tag(q100_hobitin_ambra)>)
+
 argo.dialog_page("Pozdrav")
-  if (<src.tag.q100_hobitin_ambra> !=0)  
+  if (<arg(q100_hobitin_ambra)> !=0)
     argo.setText(<argo.newTextLine>,"Zdravim...")
   else
     argo.setText(<argo.newTextLine>,"Zdravim, jmenuju se Ambra a staram se tady o pole s turinem.")
   endif
   argo.questDialog_HTMLGUMP
-  
+
 argo.dialog_page("Kdo jsi?")
   argo.setText(<argo.newTextLine>,"Zdravim, jmenuju se Ambra a staram se tady o pole s turinem.")
   argo.questDialog_HTMLGUMP
-  
+
 argo.dialog_page("Drby")
   argo.setText(<argo.newTextLine>,"V tomhle nemuzu slouzit, vetsinou se snazim vypoustet vsechno co slysim, jsou z toho zbytecne problemy.")
-  argo.questDialog_HTMLGUMP  
-  
+  argo.questDialog_HTMLGUMP
+
 argo.dialog_page("Obchodovat")
   argo.setText(<argo.newTextLine>,"Prodala bych ti nejakou zeleninu, ale tahle sklizen je uz bohuzel koupena.")
-  argo.questDialog_HTMLGUMP  
-  
+  argo.questDialog_HTMLGUMP
+
 argo.dialog_page("Hledam praci")
-  if (<src.tag.q100_hobitin_ambra> ==2)
+  if (<arg(q100_hobitin_ambra)> ==2)
     argo.setText(<argo.newTextLine>,"Uz pro tebe zadnou praci nemam.")
     argo.questDialog_HTMLGUMP
-  elseif (<src.tag.q100_hobitin_ambra> ==1)
+  elseif (<arg(q100_hobitin_ambra)> ==1)
     argo.setText(<argo.newTextLine>,"Mas mi donest ten hnuj.")
     argo.questDialog_HTMLGUMP
   else
@@ -73,33 +75,33 @@ argo.dialog_page("Hledam praci")
     argo.questDialog_addResponse(0,1,1,"q100_prijmout")
   endif
 
-  
+
 argo.dialog_page("Nesu ti")
-  if (<src.tag.q100_hobitin_ambra>==2)
+  if (<arg(q100_hobitin_ambra)>==2)
     argo.setText(<argo.newTextLine>,"Diky, ale uz od tebe nic nepotrebuju.")
     argo.questDialog_HTMLGUMP
-  elseif (<src.tag.q100_hobitin_ambra>==1)
+  elseif (<arg(q100_hobitin_ambra)>==1)
     argo.setText(<argo.newTextLine>,"Tak co? Kde mas ten hnuj?")
     argo.questDialog_HTMLGUMP
-    
+
     argo.setText(argo.newTextLine,"Uz ho mam.")
     argo.questDialog_addResponse(0,1,1,"q100_odevzdat")
     argo.setText(argo.newTextLine,"Jeste ho nemam ale snazim se.")
     argo.questDialog_addResponse(0,1,1,"q100_nemam")
     argo.setText(argo.newTextLine,"Kaslu ti na to, sezen si nekoho jineho!!!")
     argo.questDialog_addResponse(0,1,1,"q100_kaslu")
-    
+
   else
     argo.setText(<argo.newTextLine>,"Copak mi neses?")
     argo.questDialog_HTMLGUMP
   endif
-  
-  
-             
+
+
+
 argo.dialog_page("Prohlednout")
   argo.setText(<argo.newTextLine>,"Vypada celkem poctive, dela na tebe dojem slusneho hobitiho devcete.")
-  argo.questDialog_HTMLGUMP  
-  
+  argo.questDialog_HTMLGUMP
+
 [dialog d_q100_hobitin_ambra button]
 ON=@AnyButton
 if (<argn> == argo.dialog_linkButton("q100_odevzdat"))
@@ -107,15 +109,15 @@ if (<argn> == argo.dialog_linkButton("q100_odevzdat"))
     say("Dekuji ti mnohokrat...")
     src.addexp(30)
     src.giveitem(i_fruit_onion)
-    src.tag.q100_hobitin_ambra=2
+    src.tag(q100_hobitin_ambra,2)
     src.consume(i_q100_hobitin_ambra_pytel_2)
     f_quest_complete(15)  // splnenie questu "Hobitin"
   else
     say("Vzdyt v tom pytli jeste neni hnuj!")
   endif
-endif  
-  
-if (<argn> == argo.dialog_linkButton("q100_nemam"))  
+endif
+
+if (<argn> == argo.dialog_linkButton("q100_nemam"))
   say("Pospes si!")
 endif
 
@@ -125,14 +127,14 @@ if (<argn> == argo.dialog_linkButton("q100_kaslu"))
   src.consume(i_q100_hobitin_ambra_pytel_2)
   src.tag.remove(q100_hobitin_ambra)
   src.tag(q100_hobitin_ambra_neuspel,1)
-endif  
+endif
 
 if (<argn> == argo.dialog_linkButton("q100_prijmout"))
   src.giveitem=i_q100_hobitin_ambra_pytel
-  src.tag.q100_hobitin_ambra=1  
-endif  
-  
-  
+  src.tag(q100_hobitin_ambra,1)
+endif
+
+
 
 ///////Itemy (q100_hobitin_ambra)
 
