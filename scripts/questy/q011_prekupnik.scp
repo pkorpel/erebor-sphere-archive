@@ -21,6 +21,7 @@ tag.contentscount=0
 tag.fail_msg="Nesiko! Znicil jsi tu lebku!"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 [ITEMDEF i_q011_prekupnik_kolektor2]
 ID=i_bag
@@ -44,6 +45,7 @@ tag.contentscount=0
 tag.fail_msg="Nesiko! Tenhle ocas uz je ti k nicemu"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 [ITEMDEF i_q011_prekupnik_kolektor3]
 ID=i_bag
@@ -67,6 +69,7 @@ tag.contentscount=0
 tag.fail_msg="Nesiko! Tys ty kusadla zlomil!"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 [ITEMDEF i_q011_prekupnik_kolektor4]
 ID=i_bag
@@ -90,6 +93,7 @@ tag.contentscount=0
 tag.fail_msg="Nesiko! Tys ty kusadla zlomil!"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 /////////////////////////////////////////
 //   G O N D O R   P R E K U P N I K   //
