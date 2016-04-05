@@ -301,7 +301,7 @@ argo.textA(<argo.dialog_textpos(5,0)>,42,"Start map:")
 if(<tag(mapactive)>)
   argo.button(<argo.dialog_textpos(5,1)>,0fa5,0fa7,1,0,3)
 else
-  argo.textA(<argo.dialog_textpos(5,1)>,152,"No maps")  
+  argo.textA(<argo.dialog_textpos(5,1)>,152,"No maps") 
 endif
 
 [dialog d_bbman_map BUTTON]
@@ -411,7 +411,8 @@ if (argn>20)
     src.newitem(i_worldgem_bit)
     arg(posx,<tag(start_x)>+<?map_<tag(mapload)>_player_<x>_x?>-1)
     arg(posy,<tag(start_y)>+<?map_<tag(mapload)>_player_<x>_y?>-1)
-    lastnew.p = <posx>,<posy>,<eval(<tag(altitude)>)>,<eval(<tag(mapplan)>)>   
+    lastnew.p = <posx>,<posy>,<eval(<tag(altitude)>)>,<eval(<tag(mapplan)>)> 
+	lastnew.attr = attr_move_never|attr_invis
     tag(player_<x>_position_gembit,<lastnew>)
     arg(x,#+1)
   endwhile
@@ -498,7 +499,7 @@ id=i_memory
 type=t_eq_script
 
 on=@create
-attr=010
+attr=attr_move_never
 
 on=@timer
 remove
@@ -511,13 +512,14 @@ finduid(<bbmanstone>).tag(playercount,#+1)
 finduid(<bbmanstone>).tag(player_<finduid(<bbmanstone>).tag(playercount)>,<src.targ.uid>)
 src.redmessage(Hrac <src.targ.name> byl pridan do hry bbman.)
 if(!<src.targ.rescount(i_bbman_crystal)>)
-  src.targ.newitem i_bbman_crystal
-  lastnew.bounce <src.targ>
+  src.targ.newitem(i_bbman_crystal)
+  src.targ.bounce(<lastnew>)
   lastnew.tag(team,<finduid(<bbmanstone>).tag(playercount)>)
+  lastnew.tag(pos,<src.targ.p>)
 else
   src.targ.findid(i_bbman_crystal).tag(team,<finduid(<bbmanstone>).tag(playercount)>)
 endif
-src.d_bbman_player
+dialog d_bbman_player
 return 1
 
 [function bbmanremplayers]
@@ -560,16 +562,40 @@ lastnew.p <p>
 finduid(<bbmanstone>).change_nth(<return_nth(1,<lastnew.bbmanp>)>,bbman_<return_nth(2,<lastnew.bbmanp>)>,1,<finduid(<bbmanstone>).tag(bbman_<return_nth(2,<lastnew.bbmanp>)>)>)
 
 [function bbmanbomb]
-if(<findid(i_bbman_crystal).tag(inGame)>)
-  newitem i_bbman_bomb
-  lastnew.p = <p>
-  lastnew.link = <uid>
-  lastnew.more1 = <findid(i_bbman_crystal).tag(timebomb)>
-  lastnew.tag(range,<findid(i_bbman_crystal).tag(range)>)
-  lastnew.color = <findid(i_bbman_crystal).tag(color)>
-else
-  src.redMessage("Nyni nejsi ve hre!")
+if <hits> > 0
+  if(<findid(i_bbman_crystal).tag(inGame)>)
+    if <findid(i_bbman_wait)>
+      src.message("Moment!")
+      return 1
+    endif
+    if (findid(i_m_bbman_zacpa))
+      src.redMessage("Bombova Zacpa!")
+      return 1
+    else
+      newitem(i_bbman_bomb)
+      lastnew.p = <p>
+      lastnew.link = <uid>
+      lastnew.more1 = <findid(i_bbman_crystal).tag(timebomb)>
+      lastnew.tag(range,<findid(i_bbman_crystal).tag(range)>)
+      lastnew.color = <findid(i_bbman_crystal).color>
+      newitem(i_bbman_wait)
+      equip(<lastnew>)
+      lastnew.timer 1
+    endif
+  else
+    src.redMessage("Nyni nejsi ve hre!")
+  endif
 endif
+
+[itemdef i_bbman_wait]
+id=i_memory
+type=t_eq_script
+name=Bbman Wait
+on=@create
+attr=attr_move_never|attr_invis
+on=@timer
+remove
+return 1
 
 [function bbmanp]
 return <eval(<return_nth(1,<p>)>-<finduid(<bbmanstone>).tag(start_x)>-1)>,<eval(<return_nth(2,<p>)>-<finduid(<bbmanstone>).tag(start_y)>-1)>
@@ -600,12 +626,12 @@ endif
 return 0
 
 [itemdef i_bbman_bomb]
-id=01771
+id=01363
 name=Bomb
-
+CAN=CAN_I_BLOCK
 ON=@Create
 timer = 1
-
+dispid=01771
 ON=@Timer
 if(<more1> > 0)
   say <eval(more1)>
@@ -614,7 +640,7 @@ if(<more1> > 0)
   return 1
 else
   sound 519
-  link.newitem i_bbman_fire
+  link.newitem(i_bbman_fire)
   lastnew.p <p>
   lastnew.name Test
   lastnew.timer 1
@@ -623,7 +649,7 @@ else
   arg(obj,<lastnew>)
   arg(i,1)
   while(<finduid(<obj>).bbmandir(2)> == 0) && (<i> <= <tag(range)>)
-    link.newitem i_bbman_fire
+    link.newitem(i_bbman_fire)
     lastnew.p <p>
     lastnew.move <i>,0
     lastnew.timer 1
@@ -637,7 +663,7 @@ else
   arg(obj,<STATICobj>)
   arg(i,1)
   while(<finduid(<obj>).bbmandir(6)> == 0) && (<i> <= <tag(range)>)
-    link.newitem i_bbman_fire
+    link.newitem(i_bbman_fire)
     lastnew.p <p>
     lastnew.move <eval(-<i>)>,0
     lastnew.timer 1
@@ -651,7 +677,7 @@ else
   arg(obj,<STATICobj>)
   arg(i,1)
   while(<finduid(<obj>).bbmandir(4)> == 0) && (<i> <= <tag(range)>)
-    link.newitem i_bbman_fire
+    link.newitem(i_bbman_fire)
     lastnew.p <p>
     lastnew.move 0,<i>
     lastnew.timer 1
@@ -665,7 +691,7 @@ else
   arg(obj,<STATICobj>)
   arg(i,1)
   while(<finduid(<obj>).bbmandir(0)> == 0) && (<i> <= <tag(range)>)
-    link.newitem i_bbman_fire
+    link.newitem(i_bbman_fire)
     lastnew.p <p>
     lastnew.move 0,<eval(-<i>)>
     lastnew.timer 1
@@ -685,8 +711,8 @@ arg(object,<finduid(<args(0)>)>)
 if(<object.id> == i_bbman_destroy)
   if(<finduid(<bbmanstone>).tag(speed)>)
     if({0 1000} < <finduid(<bbmanstone>).tag(speedchance)>)
-      return_nth(2,<args(1)>).newitem(i_bbman_speedbonus)
-      lastnew.p = <object.p>
+      return_nth(2,<args(1)>).newitem(tm_bbman_bonus)
+      lastnew.p =<object.p>
     endif
   endif
   finduid(<bbmanstone>).tag.remove(map_<return_nth(2,<object.bbmanp>)>_<return_nth(1,<object.bbmanp>)>)
@@ -697,6 +723,7 @@ endif
 finduid(<bbmanstone>).more1 = 3
 finduid(<bbmanstone>).timer = 1
 
+
 [itemdef i_bbman_fire]
 id=i_fire_column
 name=Fire
@@ -706,17 +733,40 @@ remove
 return 1
 
 ON=@Create
+attr=attr_move_never
 
 ON=@Step
-src.hits = 0
-if(<src.findid(i_bbman_crystal).tag(life)> > 0)
-  src.newitem(i_bbman_respawn)
-  src.equip(<lastnew>)
-  src.findid(i_bbman_crystal).tag(life,#-1)
-  src.redmessage(Zbyvaji ti <src.findid(i_bbman_crystal).tag(life)> zivoty.)
-else
-  src.redmessage("Game Over!")
-  src.bbmanchat(<src.name> skoncil.)
+if (<src.hits> > 0)
+ src.hits = 0
+ src.events +e_nomove
+ if (<src.findid(i_mt_bbman_speedllama)>) > 0 
+   src.findid(i_mt_bbman_speedllama).remove
+ endif
+ if (<src.findid(i_mt_llama)>) > 0
+   src.findid(i_mt_llama).remove
+ endif
+ if (<src.findid(i_m_bbman_rangeboost)>) > 0
+   src.findid(i_m_bbman_rangeboost).remove
+   src.findid(i_bbman_crystal).color=0
+ endif
+ if (<src.findid(i_m_bbman_atomovka)>) > 0
+   src.findid(i_m_bbman_atomovka).remove
+   src.findid(i_bbman_crystal).color=0
+ endif
+ if (<src.findid(i_m_bbman_zacpa)>) > 0
+   src.findid(i_m_bbman_zacpa).remove
+ endif
+ if(<src.findid(i_bbman_crystal).tag(life)> > 1)
+   src.newitem(i_bbman_respawn)
+   src.equip(<lastnew>)
+   src.findid(i_bbman_crystal).tag(life,#-1)
+   src.redmessage(Zbyvaji ti <src.findid(i_bbman_crystal).tag(life)> zivoty.)
+ else
+   src.redmessage("Game Over!")
+   src.bbmanchat(<src.name> skoncil.)
+   src.newitem(i_bbman_end)
+   src.equip(<lastnew>)
+ endif
 endif
 
 [itemdef i_bbman_respawn]
@@ -728,10 +778,34 @@ ON=@EQUIP
 timer=<bbmanstone.tag(timerespawn)>
 
 ON=@CREATE
-ATTR=010|04
+ATTR=attr_move_never|attr_newbie
 
 ON=@Timer
 src.resurrect
+src.hits=<src.maxhits>
+src.spelleffect 6 1000
+src.events -e_nomove
+remove
+return 1
+
+[itemdef i_bbman_end]
+ID=i_memory
+NAME=BBman end
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+timer=6
+
+ON=@CREATE
+ATTR=attr_move_never|attr_newbie
+
+ON=@Timer
+src.resurrect
+src.hits=<src.maxhits>
+src.spelleffect 6 1000 
+src.events -e_nomove
+src.go <src.findid(i_bbman_crystal).tag(pos)>
+src.findid(i_bbman_crystal).remove
 remove
 return 1
 
@@ -739,16 +813,20 @@ return 1
 id=076c
 name=Wall
 type=t_wall
+CAN=CAN_I_BLOCK
 
 ON=@Create
+attr=attr_move_never
 COLOR=00a84
 
 [itemdef i_bbman_destroy]
-id=i_crate_lg
+id=0750//i_crate_lg
 name=Wall
 type=t_wall
+CAN=CAN_I_BLOCK
 
 ON=@Create
+attr=attr_move_never
 COLOR=006d1
 
 [ITEMDEF i_bbman_crystal]
@@ -757,7 +835,7 @@ Name=BBman Crystal
 Type=0
 
 ON=@Create
-ATTR=010|04
+ATTR=attr_move_never|attr_newbie
 tag(range,<bbmanstone.tag(rangedeufalt)>)
 tag(life,<bbmanstone.tag(numberoflife)>)
 tag(timebomb,<bbmanstone.tag(timebombdeufalt)>)
@@ -820,23 +898,153 @@ argo.textA(<argo.dialog_textpos(9,1)>,<bbmanstone.tag(colorteam_<crystal.tag(tea
 argo.textA(<argo.dialog_textpos(10,0)>,42,"Pocet zivotu:")
 argo.textA(<argo.dialog_textpos(10,1)>,1000,<crystal.tag(life)>)
 
+//////BONUSY//////
+[Template tm_bbman_bonus]
+item={i_bbman_speedbonus 3 i_bbman_atomovka 1 i_bbman_rangeboost 3 i_bbman_zacpa 1 }
 
-[itemdef i_bbman_speedbonus]
-id=i_pet_llama
-NAME=Speed Bonus
 
+[itemdef i_bbman_rangeboost]
+id=i_paver_stone
+NAME=Bonus
 ON=@Create
+attr=attr_move_never
 color=0098c
-
+tag(bonus,Rangeboost)
 ON=@UserDclick
 return 1
+ON=@Step
+if(<src.findid(i_bbman_crystal)>)
+ if(<src.findid(i_m_bbman_zacpa)>)
+   src.findid(i_m_bbman_zacpa).remove
+ endif
+ src.sfx 01f7
+ src.say("Dalekonosna smrt!")
+ src.newitem(i_m_bbman_rangeboost)
+ lastnew.color=<bbmanstone.tag(colorteam<src.findid(i_bbman_crystal).tag(team)>)>
+ lastnew.attr = attr_move_never|attr_invis
+ src.equip(<lastnew>)
+ src.findid(i_bbman_crystal).tag(range,4)
+ src.findid(i_bbman_crystal).color=020
+ src.update
+endif
+remove
+return 1
 
+[itemdef i_m_bbman_rangeboost]
+ID=i_memory
+NAME=BBman rangeboost
+TYPE=T_EQ_SCRIPT
+ON=@CREATE
+ATTR=attr_move_never|attr_newbie
+ON=@EQUIP
+timer=30
+ON=@Unequip
+src.findid(i_bbman_crystal).tag(range,2)
+src.findid(i_bbman_crystal).color=0
+ON=@Timer
+remove
+return 1
+
+
+[itemdef i_bbman_zacpa]
+id=i_paver_stone
+NAME=Bonus
+ON=@Create
+attr=attr_move_never
+color=0098c
+tag(bonus,Zacpa)
+ON=@UserDclick
+return 1
+ON=@Step
+if(<src.findid(i_bbman_crystal)>)
+  src.sfx 01f7
+  src.say("Bombova Zacpa!")
+  src.newitem(i_m_bbman_zacpa)
+  lastnew.color=<bbmanstone.tag(colorteam<src.findid(i_bbman_crystal).tag(team)>)>
+  lastnew.attr = attr_move_never|attr_invis
+  src.equip(<lastnew>)
+  src.update
+endif
+remove
+return 1
+
+[itemdef i_m_bbman_zacpa]
+ID=i_memory
+NAME=BBman zacpa
+TYPE=T_EQ_SCRIPT
+ON=@CREATE
+ATTR=attr_move_never|attr_newbie
+ON=@EQUIP
+timer=20
+ON=@Timer
+remove
+return 1
+
+
+[itemdef i_bbman_atomovka]
+id=i_paver_stone
+NAME=Bonus
+ON=@Create
+attr=attr_move_never
+color=0098c
+tag(bonus,Atomovka)
+ON=@UserDclick
+return 1
+ON=@Step
+if(<src.findid(i_bbman_crystal)>)
+ if (<src.findid(i_m_bbman_zacpa)>)
+   src.findid(i_m_bbman_zacpa).remove
+ endif
+ src.sfx 01f7
+ src.say("Mala Atomovka!")
+ src.newitem(i_m_bbman_atomovka)
+ lastnew.color=<bbmanstone.tag(colorteam<src.findid(i_bbman_crystal).tag(team)>)>
+ lastnew.attr = attr_move_never|attr_invis
+ src.equip(<lastnew>)
+ src.findid(i_bbman_crystal).tag(range,10)
+ src.findid(i_bbman_crystal).color=02C
+ src.update
+endif
+remove
+return 1
+
+[itemdef i_m_bbman_atomovka]
+ID=i_memory
+NAME=BBman atomovka
+TYPE=T_EQ_SCRIPT
+ON=@CREATE
+ATTR=attr_move_never|attr_newbie
+ON=@EQUIP
+timer=15
+ON=@Unequip
+src.findid(i_bbman_crystal).tag(range,2)
+src.findid(i_bbman_crystal).color=0
+ON=@Timer
+remove
+return 1
+
+[itemdef i_bbman_speedbonus]
+id=i_paver_stone
+NAME=Bonus
+ON=@Create
+attr=attr_move_never
+color=0098c
+tag(bonus,Speed)
+ON=@UserDclick
+return 1
 ON=@Step
 if(<src.findid(i_bbman_crystal).tag(speed)> != 1)
+  src.sfx 01f7
+  src.say("Speed!")
   src.newitem(i_mt_bbman_speedllama)
   lastnew.color=<bbmanstone.tag(colorteam<src.findid(i_bbman_crystal).tag(team)>)>
+  lastnew.attr = attr_move_never|attr_invis
   src.equip(<lastnew>)
   src.findid(i_bbman_crystal).tag(speed,1)
+  src.update
+else
+  src.sfx 01f7
+  src.say("Speed!")
 endif
 remove
 return 1
@@ -844,11 +1052,10 @@ return 1
 [ITEMDEF i_mt_bbman_speedllama]
 id=i_mt_llama
 NAME=Speed Bonus
-
 ON=@Unequip
-cont.findid(i_bbman_crystal).tag(speed,0)
-
+src.findid(i_bbman_crystal).tag(speed,0)
 ON=@Create
+attr=attr_move_never|attr_invis
 return 1
 
 /////////////////////MAPS/////////////////////////
@@ -1426,3 +1633,15 @@ map_3_15_12 1
 map_3_15_13 1
 map_3_15_14 1
 map_3_15_15 1
+
+[itemdef i_bbman_starter]
+id=i_crystal_ball
+name=Bbman starter
+ON=@Create
+attr=attr_move_never
+ON=@UserDclick
+if <src.isgm>
+ src.bbmanstart
+endif
+return 1
+
