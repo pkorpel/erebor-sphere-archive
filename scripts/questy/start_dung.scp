@@ -1591,7 +1591,7 @@ argo.settext(1,"Jaka cesta?")
 argo.text(200,332,1152,1)
 
 argo.page(1)
-if (<src.tag(level)>>=3)
+if (<src.tag(level)>>=1)
 	argo.settext(2,"Vidim, ze jsi <?src.sex(pripraven,pripravena)?> na dalsi cestu. Prejes si ji podstoupit?")
 	argo.HTMLGUMP(170,230,440,100,2,0,36)
 	argo.button(25,395,0fa5,0fa7,1,0,1)
@@ -1606,7 +1606,7 @@ else
 endif
 
 argo.page(2)
-if (<src.tag(level)>>=3)
+if (<src.tag(level)>>=1)
 	argo.settext(5,"Pozorne poslouchej! Jelikoz jsi jiz dostatecne silny, tva cesta muze pokracovat dal. Nyni prisel cas volby. Ve svete zuri valka. Valka mezi Gondorem a Mordorem. Ty se musis rozhodnout, ke ktere strane se pridas. Zvolis li pokracovat dal, budes postaven pred tezkou volbu, ale ta volba je nutna. Po volbe strany budes portnut do mista, ktere ozkousi tve schopnosti a muze te povysit na rank Expert. Diky tomuto povyseni budes moci sve schopnosti nadale zvysovat. Postupem casu budes postupovat dalsi zkousky - mistrovskou a velmistrovskou, aby jsi dosahl dokonalosti ve tvych dovednostech. Prejes si podstoupit tuto cestu?")
 	argo.HTMLGUMP(170,230,440,100,5,0,36)
 	argo.button(25,395,0fa5,0fa7,1,0,1)
@@ -1627,8 +1627,8 @@ endif
 ON=0
 
 ON=1
-if (<src.tag(level)>>=3)
-	src.go(4764,1362,10,10)
+if (<src.tag(level)>>=1)
+	src.go(4763,1362,10,35)
   src.nbTags_remove
 endif
 		
