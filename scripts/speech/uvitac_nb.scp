@@ -1,11 +1,10 @@
 [SPEECH spk_uvitac_nb]
-
-ON=*Hi*
-ON=*Cau*
-ON=*Hoj*
-ON=*Cusik*
-ON=*Zdarec*
-SAY ("<src.sex Pozdraven Pozdravena> budiz <src.name>, s cim bys <src.sex chtel chtela> pomoct? Muzu ti povedet jak zde prezit a co delat, o zdejsich tvorech, o historii ostrovu, jak opustit toto misto...")
+ON=*hi*
+ON=*cau*
+ON=*hoj*
+ON=*cusik*
+ON=*zdarec*
+SAY("<src.sex(Pozdraven,Pozdravena)> budiz <src.name>, s cim bys <src.sex(chtel,chtela)> pomoct? Muzu ti povedet jak zde prezit a co delat, o zdejsich tvorech, o historii ostrovu, jak opustit toto misto...")
 
 ON=*prezit*
 ON=*preziti*
@@ -14,7 +13,7 @@ ON=*zivobyti*
 ON=*delat*
 ON=*co*delat*
 ON=*jak*prezit*
-SAY ("Doporucuji jit po ceste do mesta <src.name> a navstivit par lidi, kteri Ti daji ukoly, za ktere dostanes odmenu.")
+SAY("Doporucuji jit po ceste do mesta <src.name> a navstivit par lidi, kteri Ti daji ukoly, za ktere dostanes odmenu.")
 
 ON=*tvor*
 ON=*tvorove*
@@ -22,13 +21,13 @@ ON=*monstra*
 ON=*prisery*
 ON=*zdejsi*tvorove*
 ON=*o*tvorech*
-SAY ("Ve meste muzes potkat same dobre duse. Pres most od mesta se potuluji pekelne kocky, orkove, obri a pirati, bacha na ne! Muzes potkat take domorodce, kteri jsou mirumilovni.")
+SAY("Ve meste muzes potkat same dobre duse. Pres most od mesta se potuluji pekelne kocky, orkove, obri a pirati, bacha na ne! Muzes potkat take domorodce, kteri jsou mirumilovni.")
 
 ON=*historie*
 ON=*o*historii*
 ON=*o*ostrovu*
 ON=*kde*jsem*
-SAY ("Toto uzemi jsme objevili nedavno. Snazime se zde vycvicit novacky jako tebe <src.name>! Ziji zde puvodni domorocdi, kteri maji utociste nekde v dzungli. Snazime se s nema vychazet vstric...")
+SAY("Toto uzemi jsme objevili nedavno. Snazime se zde vycvicit novacky jako tebe <src.name>! Ziji zde puvodni domorocdi, kteri maji utociste nekde v dzungli. Snazime se s nema vychazet vstric...")
 
 ON=*opustit*
 ON=*opustit*misto*
@@ -36,4 +35,4 @@ ON=*opusteni*ostrovu*
 ON=*jak*odejit*
 ON=*pryc*
 ON=*odchod*
-SAY ("Toto uzemi jsme objevili nedavno. Snazime se zde vycvicit novacky jako tebe <src.name>! Ziji zde puvodni domorocdi, kteri maji utociste nekde v dzungli. Snazime se s nema vychazet vstric...")
+SAY("Toto uzemi jsme objevili nedavno. Snazime se zde vycvicit novacky jako tebe <src.name>! Ziji zde puvodni domorocdi, kteri maji utociste nekde v dzungli. Snazime se s nema vychazet vstric...")
