@@ -3952,6 +3952,102 @@ ITEM=i_gold
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+
+[CHARDEF c_uvitac_nb]
+ID=c_man
+NAME=Pomocnik novackum
+ICON=i_pet_MAN
+ANIM=0ffc78c7f
+CAN=MT_WALK|MT_USEHANDS|MT_run
+
+attack=20
+ARMOR=18
+moverate=3
+
+RESOURCES=10 i_ribs_raw
+FOODTYPE=
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TSPEECH=uvitac_nb
+
+CATEGORY=Monsters
+SUBSECTION=NB
+DESCRIPTION=Uvitac NB
+
+ON=@Create
+NAME=Pomocnik
+COLOR=colors_skin 
+Title=Trener novacku
+NPC=brain_human
+fame={1000 1001}              
+karma={1000 1001}
+
+STR=900
+DEX=100
+INT=10
+
+maxhits={1000 1450}
+maxstam={160 180}
+maxmana=0
+
+tag.experience=<eval {14.0 15.0}>
+tag(hypnotizable,0)
+
+tag(resist_poison,880)
+tag.resist_para=<eval {250 350}>
+tag(resist_summon,450)
+tag(resist_bleed,00)
+
+tag(resist_sharp,-400)
+tag(resist_slash,-200)        //sekery
+tag(resist_pierce,-400)
+tag(resist_blunt,300)
+
+tag(resist_fire,150)
+tag(resist_elect,-350)
+tag(resist_cold,100)
+
+tag(monstertype,humanoid,60)
+
+resist=70.0
+tactics={50.0 70.0}
+wrestling={85.0 95.0}
+FENCING={80.0 95.0}
+SWORDSMANSHIP={80.0 95.0}
+MACEFIGHTING={80.0 95.0}
+peacemaking=40.0
+
+ITEMnewbie=i_monster_create
+itemnewbie=i_boots_thigh
+Color=00
+itemnewbie=i_studded_tunic_Golden
+Color=0995
+itemnewbie=i_surcoat
+Color=00
+itemnewbie=i_studded_sleeves_Golden
+Color=0995
+itemnewbie=i_studded_gloves_Golden
+Color=0995
+itemnewbie=i_cape
+Color=0484
+itemnewbie=i_spellbook
+Color=00
+itemnewbie=i_hat_feather
+Color=0484
+
+ON=@NPCRestock
+
+ON=@npcseenewplayer 
+dorand 3 
+  SAY("Vitej v tutorialu! Pokud chces dostat par rad do zacatku, staci se me zeptat...") 
+  SAY("Aaa, Dalsi novacek, vitej! Kdybys potreboval par rad do zacatku, muzes se me zeptat...") 
+  SAY("Preji Ti pekny den! Mohu Ti dat par rad do zacatku, ptej se kdybys neco nevedel...") 
+enddo
+
+/////////////////////////////////////////////////
+
 [CHARDEF 011]
 DEFNAME=c_orc_nb
 NAME=Orc
