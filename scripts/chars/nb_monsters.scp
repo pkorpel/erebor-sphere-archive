@@ -3970,7 +3970,7 @@ BLOODCOLOR=020
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TSPEECH=uvitac_nb
+TSPEECH=spk_uvitac_nb
 
 CATEGORY=Monsters
 SUBSECTION=NB
