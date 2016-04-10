@@ -56,7 +56,7 @@ ENDIF
 // MOREP = the treasure location = MOREX,MOREY
 IF !(tag(vylusteno))
  tag(vylusteno,1)
- NAME="mapa k pokladu"
+ f_zobrazlevelmapy
  TYPE=T_MAP
  finduid(#0400075A4).tag(vylustene_mapy,#+1)
  SRC.NEWITEM(randfern)//Place trigger random tile on UO Map
@@ -163,6 +163,12 @@ IF !(tag(vylusteno))
  lastnew.P=<morep>
  lastnew.fix
 ENDIF
+if (tag(vylusteno))
+  if (color == 0)  // vylustena pred zavedenim zobrazovani levelu mapy
+    f_zobrazlevelmapy
+    src.say("Hmmm, zajimave!")
+  endif
+endif
 
 
 ON=@CREATE
@@ -174,13 +180,13 @@ f_Map_GetCoords
 
 [FUNCTION f_Map_GetCoords]
 DORAND 49
- MOREP=1388,1188,0
+ MOREP=1388,1187,0
  MOREP=617,518,0
  MOREP=3366,3819,0
  MOREP=3331,3507,40
  MOREP=3366,3727,40
  MOREP=2747,3485,-1
- MOREP=2968,3883,20
+ MOREP=2969,3882,20
  MOREP=1245,1907,2
  MOREP=2312,2696,0
  MOREP=1419,2633,0
@@ -322,5 +328,26 @@ on=@timer
 link.tag.remove(vylusteno)
 remove
 
+
+[function f_zobrazlevelmapy]
+
+if (tag(vylusteno))
+  if (tag(map) > 975) // LVL 5
+    name="Legendarni mapa pokladu"
+    color=0845
+  elseif (tag(map) > 920) // LVL 4
+    name="Velmi Vzacna mapa pokladu"
+    color=08AE
+  elseif (tag(map) > 825) // LVL 3
+    name="Vzacna mapa pokladu"
+    color=08A0
+  elseif (tag(map) > 650) // LVL 2
+    name="Neobvykla mapa pokladu"
+    color=06B7
+  else // LVL 1
+    name="Bezna mapa pokladu"
+    color=0736
+  endif
+endif
 
 [EOF]
