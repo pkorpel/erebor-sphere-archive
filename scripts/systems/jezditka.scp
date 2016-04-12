@@ -2,6 +2,7 @@
 mt_sitOnFoodTimer=1000
 mt_freeFoodTimer=3600
 mt_lowFoodTimer=60	//tenhle cas * 10 pro jedno snizeni nizkyho foodu + kazdej dobehlej timer shodi jezdce ze sedla
+mt_newbieMountTimer=1200
 
 [itemdef i_hladovitko]
 id=i_memory
@@ -79,12 +80,20 @@ else //hladovitko neni equipnuty hracem/jezditkem
   remove
 endif
 
+////
+// Checks whether the player/character is mounted
+//
+// @param I        [char] the player character
+// @return         1 if not mounted, 0 otherwise
+////
+[function isMounted]
+return strlen(<findlayer(layer_horse)>)
 
 [function mount_equip]
 if (cont.tag(hypno_mystik)) //prehazovani zviratek mezi batuzky - nic nedelat (hlavne nemazat protoze tam je ten hrac)
 else
   if (playerExists(<cont>))
-    cont.f_mounts_removeMemoryes
+    cont.f_mounts_removeMemories
     tag(mycolor,<color>)
     cont.newitemsafe(i_hladovitko)
     arg(mylastnew,<lastnew>)
@@ -256,7 +265,7 @@ else
     vrazditko.timer=1
     //vrazditko.remove
   endif 
-  cont.f_mounts_removeMemoryes
+  cont.f_mounts_removeMemories
 endif
 
 [function udelej_pack]
@@ -596,7 +605,7 @@ sector.allchars(sejmimne(<link>))
 remove 
 return 1
 
-[function f_mounts_removeMemoryes]
+[function f_mounts_removeMemories]
 consume(i_hladovitko)
 consume(i_summonmountremover)
 
@@ -738,3 +747,123 @@ tag(imi_value[102], 10)  //draci
 tag(imi_value[103], 10)  //humanoidi
 tag(imi_value[134], 3)  //blok z blizka
 tag(imi_value[135], 8)  //blok z dalky
+return
+
+////////////////////////
+// Newbie Helper
+////////////////////////
+[ITEMDEF i_mt_llama_nb]
+//ship (really used as horse equipped)
+NAME=NB Mount
+ID=i_mt_llama
+TYPE=T_EQ_HORSE
+LAYER=layer_horse
+TDATA3=c_llama
+
+on=@create
+color=015
+
+on=@timer
+
+on=@equip
+cont.f_mounts_removeMemories
+cont.newitemsafe(i_summonmountremover)
+lastnew.timer=mt_newbieMountTimer
+cont.equip(<lastnew>)
+sound(0b9)
+effect(3, i_fx_sparkle, 0, 16, 0)
+
+on=@unequip
+lastnewchar.remove
+
+on=@userdclick
+
+////
+// Creates the NB Mount on a player character.
+// Checks whether the object is a player, is mounted and is below level 12.
+//
+// Returns:
+// 0 - success
+// 1 - not a player
+// 2 - is mounted
+// 3 - does not meet requirements
+//
+//
+// @param I        [char] the player character
+// @return         0 on success, errcode otherwise (see above)
+////
+[function f_nbMount_equip]
+if (!isPlayer)
+    return 1
+endif
+if (isMounted)
+    return 2
+endif
+if (eval(<tag(level)>) > 12)
+    return 3
+endif
+newitemsafe(i_mt_llama_nb)
+equip(lastnew)
+return 0
+
+[SPEECH speechNbHelper]
+ON=*dobry*
+ON=*dobre*
+ON=*den*
+ON=*zdravim*
+ON=*hi*
+ON=*ahoj*
+ON=*jezdit*
+
+arg(ret,<src.f_nbMount_equip>)
+if (ret = 0)
+    say("Zde mas svou lamku poutniku.")
+elseif (ret = 1)
+    say("Nejsi hrac, jdi pryc!")
+elseif (ret = 2)
+    say("Uz na necem jezdis!")
+elseif (ret = 3)
+    say("Nevyhovujes mym pozadavkum smrade!")
+else
+    say("Nevyhovujes mym pozadavkum smrade!")
+endif
+
+[CHARDEF c_nb_helper]
+NAME=Tajemny Pomocnik
+ID=C_MAN
+DESIRES=i_gold,t_wand,t_reagent,t_bone
+ARMOR=95
+DAM=100
+CAN=MT_WALK|MT_run|MT_FLY|MT_FEMALE
+TSPEECH=speechNbHelper
+
+TEVENTS=e_character
+TEVENTS=e_monster
+
+CATEGORY=Moria Questy
+SUBSECTION=Newbie helper
+DESCRIPTION=Tajemny Pomocnik
+
+ON=@Create
+NPC=brain_human
+COLOR=1152
+STR=1500
+DEX=150
+INT=200
+INVUL=1
+
+ALCHEMY=100.0
+
+FAME=1
+KARMA=100
+
+ITEMNEWBIE=random_male_hair
+ITEMNEWBIE=random_facial_hair
+
+ON=@NPCRestock
+ITEMnewbie=i_hat_wizards
+color=1153
+ITEMnewbie=i_sandals
+color=1153
+ITEMnewbie=i_robe
+color=1153
