@@ -1307,4 +1307,117 @@ if (f_canseelos(<argv(0)>)) && !(isgm) && !(flag_invisible==1)  && !(flag_insubs
   endif
 endif
 
+[events e_rinald]
+ON=@getHit
+if(<flag_invul>==0)
+  if (src.isplayer)
+    if (src.profession==class_necro)  //Necro - kazde kouzlo snizi rezist na sumony o 20
+      src.classmessage("Citis jak tva temna magie oslabila Rinalda!")
+      tag(resist_summon,#-20)
+      
+    elseif (src.profession==class_mag)  //Mag - kazde kouzlo snizi rezist na sumony o 20
+      src.classmessage("Citis jak tva magie oslabuje Rinalda!")
+      tag(resist_summon,#-20)
+      
+    elseif (src.profession==class_craft)  //Craft - zbran vyrobena kraftem = sance 1/20 na smrt zcela. Jakakoli zbran = sance na kriticky zasah 2/3.  Fixni dmg 100hp/zasah
+      hits=<hits>-100
+      if (src.findlayer(1))
+        if (src.findlayer(1).isweapon)
+          if (src.findlayer(1).tag(craftedby))
+            if (src.findlayer(1).tag(craftedby) == <src>)
+              if {1 20} == 1
+                say("Tu zbran jsi si <?sex("vyrobila sama","vyrobil sam")?>?! No dopr...")
+                sfx(0227)
+                effect(3,<s_explosion.EFFECTID>,6,15,1)
+                hits(0)
+              elseif {1 3} >= 2
+                src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
+                hits=<hits>-100
+              endif
+            endif
+          endif
+        endif
+      endif               
+      if (src.findlayer(2))
+        if (src.findlayer(2).isweapon)
+          if (src.findlayer(2).tag(craftedby))
+            if (src.findlayer(2).tag(craftedby) == <src>)
+              if {1 20} == 1
+                say("Tu zbran jsi si <?sex("vyrobila sama","vyrobil sam")?>?! No dopr...")
+                sfx(0227)
+                effect(3,<s_explosion.EFFECTID>,6,15,1)
+                hits(0)
+              elseif {1 3} >= 2
+                src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
+                hits=<hits>-100
+              endif
+            endif
+          endif
+        endif
+      endif
+      
+    elseif (src.profession==class_war) //War - kazda rana snizi fyzicke rezisty(krome pierce) o 50
+      src.classmessage("Tvuj silny uder oslabil Rinaldovou zbroj")
+      tag(resist_sharp,#-50)
+      tag(resist_slash,#-50)
+      tag(resist_blunt,#-50)
+      
+    elseif (src.profession==class_thief)  //Thief - kazda rana snizi rezist na poison a bleed o 25
+      src.classmessage("Tvuj zasah pronikl Rinaldovou kuzi")
+      tag(resist_poison,#-25)
+      tag(resist_bleed,#-25)
+      hits=<hits>-50
+      
+    elseif (src.profession==class_ranger)  //Ranger - sipka omraci cil, sance 1/3, kazda sipka snizi rezist na pierce o 50
+      src.classmessage("Tvuj sip se zabodl do Rinaldova tela.")
+      tag(resist_pierce,#-50)
+      say("Pierce Rezist: <tag(resist_pierce)>")
+      if {1 3} == 2 
+        src.classmessage("<?sex("Omracila","Omracil")?> jsi Rinalda.")
+        paralyze(10)
+      endif
+      
+    elseif (src.profession==class_mystik)  //Mystik - Snizi rezist na Elect a Cold o 25 kazdou ranou + snizi DEX o 1-55(rychlost pohybu) a STR o 1-10    
+      src.classmessage("Tvuj uder oslabil a zpomalil Rinalda.")
+      if <dex> >= 5
+        dex = <dex> - {1 5}
+      endif
+      if <str> >= 10
+        str = <str> - {1 10}
+      endif
+      tag(resist_elect,#-25)
+      tag(resist_cold,#-25)
+      
+    elseif (src.profession==class_shaman)  //Shaman - kazda rana snizi magicke rezisty o 50 + Sance 2/3 na vysati 15 many. Fixni dmg 50hp/zasah
+      src.classmessage("Citis jak magicka ochrana Rinalda slabne!")
+      hits=<hits>-50
+      tag(resist_fire,#-50)
+      tag(resist_elect,#-50)
+      tag(resist_cold,#-50)
+      if {1 3} >= 2 
+        src.classmessage("<?sex("Vysala","Vysal")?> jsi z Rinalda manu.")
+        src.mana= <src.mana> + 15
+      endif
+      
+    elseif (src.profession==class_priest)  // Priest - Kazada rana snizi rezist na tupe zbrane o 50 + sance 1/3 na omraceni
+      if {1 3} == 2 
+        src.classmessage("<?sex("Omracila","Omracil")?> jsi Rinalda.")
+        paralyze(10)
+      endif
+      tag(resist_blunt,#-50)
+      src.classmessage("Tvuj silny uder oslabil Rinaldovou zbroj")
+    endif
+    
+  else
+    return 1
+  endif
+else
+  say("Pche! Pokud neznas me jmeno, tak me neporazis!")
+  if <maxhits> < 5000
+    maxhits = <maxhits> + 200   // proti radoby bugerum, kteri by chteli oslabit Rinalda pred jeho promenenim :-P
+    hits = <maxhits>
+  endif
+endif
+
+
 [EOF]
