@@ -32,7 +32,7 @@ STR=1500
 DEX={165 175}
 INT={46 70}
 
-maxhits={1500 1600}
+maxhits={3000 4000}
 maxstam={165 175}
 maxmana=0
 
@@ -55,9 +55,9 @@ tag(resist_summon,350)
 tag(resist_bleed,300)
 
 tag(resist_sharp,50)
-tag(resist_slash,-150)        //sekery
+tag(resist_slash,150)        //sekery
 tag(resist_pierce,-50)
-tag(resist_blunt,-250)
+tag(resist_blunt,-50)
 
 tag(resist_fire,200)
 tag(resist_elect,200)
@@ -111,7 +111,7 @@ DEX={96 120}
 INT=245
 
 
-maxhits={680 720}
+maxhits={1600 2000}
 maxstam={96 120}
 maxmana=500
 
@@ -139,9 +139,9 @@ tag(resist_summon,350)
 tag(resist_bleed,100)
 
 tag(resist_sharp,50)
-tag(resist_slash,-150)        //sekery
+tag(resist_slash,-50)        //sekery
 tag(resist_pierce,-50)
-tag(resist_blunt,-250)
+tag(resist_blunt,-50)
 
 tag(resist_fire,300)
 tag(resist_elect,300)
@@ -202,7 +202,7 @@ STR=1500
 DEX={155 160}
 INT={95 190}
 
-maxhits={2500 3000}
+maxhits={2000 3000}
 maxstam={155 180}
 maxmana={95 190}
 
@@ -227,9 +227,9 @@ tag(resist_summon,550)
 tag(resist_bleed,300)
 
 tag(resist_sharp,50)
-tag(resist_slash,-150)        //sekery
+tag(resist_slash,-100)        //sekery
 tag(resist_pierce,-50)
-tag(resist_blunt,-250)
+tag(resist_blunt,-150)
 
 tag(resist_fire,200)
 tag(resist_elect,200)
@@ -291,7 +291,7 @@ STR=1500
 DEX={128 150}
 INT=350
 
-maxhits={1500 1600}
+maxhits={3500 5000}
 maxstam={128 150}
 maxmana=1000
 
@@ -318,9 +318,9 @@ tag(resist_summon,550)
 tag(resist_bleed,300)
 
 tag(resist_sharp,50)
-tag(resist_slash,-150)        //sekery
+tag(resist_slash,150)        //sekery
 tag(resist_pierce,-50)
-tag(resist_blunt,-250)
+tag(resist_blunt,250)
 
 tag(resist_fire,300)
 tag(resist_elect,300)
@@ -383,7 +383,7 @@ STR=1500
 DEX={96 115}
 INT={365 455}
 
-maxhits={1500 1600}
+maxhits={4500 5600}
 maxstam={69 115}
 maxmana=1000
 
@@ -408,9 +408,9 @@ tag(resist_summon,750)
 tag(resist_bleed,300)
 
 tag(resist_sharp,50)
-tag(resist_slash,-150)        //sekery
+tag(resist_slash,-100)        //sekery
 tag(resist_pierce,-50)
-tag(resist_blunt,-250)
+tag(resist_blunt,-150)
 
 tag(resist_fire,300)
 tag(resist_elect,300)
@@ -474,7 +474,7 @@ STR=2500
 DEX=200
 INT=400
 
-maxhits={3500 3700}
+maxhits={5500 6700}
 maxstam={200 210}
 maxmana=0
 
@@ -508,9 +508,9 @@ tag(resist_summon,650)
 tag(resist_bleed,300)
 
 tag(resist_sharp,50)
-tag(resist_slash,-150)        //sekery
-tag(resist_pierce,-50)
-tag(resist_blunt,-250)
+tag(resist_slash,150)        //sekery
+tag(resist_pierce,50)
+tag(resist_blunt,250)
 
 tag(resist_fire,300)
 tag(resist_elect,300)
