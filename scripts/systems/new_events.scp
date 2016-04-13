@@ -1330,11 +1330,12 @@ if(<flag_invul>==0)
                 sfx(0227)
                 effect(3,<s_explosion.EFFECTID>,6,15,1)
                 hits(0)
-              elseif {1 3} >= 2
-                src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
-                hits=<hits>-100
               endif
             endif
+          endif
+          if {1 3} >= 2
+            src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
+            hits=<hits>-100
           endif
         endif
       endif               
@@ -1347,14 +1348,16 @@ if(<flag_invul>==0)
                 sfx(0227)
                 effect(3,<s_explosion.EFFECTID>,6,15,1)
                 hits(0)
-              elseif {1 3} >= 2
-                src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
-                hits=<hits>-100
               endif
             endif
           endif
+          if {1 3} >= 2
+            src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
+            hits=<hits>-100
+          endif
         endif
       endif
+
       
     elseif (src.profession==class_war) //War - kazda rana snizi fyzicke rezisty(krome pierce) o 50
       src.classmessage("Tvuj silny uder oslabil Rinaldovou zbroj")
@@ -1377,7 +1380,7 @@ if(<flag_invul>==0)
         paralyze(10)
       endif
       
-    elseif (src.profession==class_mystik)  //Mystik - Snizi rezist na Elect a Cold o 25 kazdou ranou + snizi DEX o 1-55(rychlost pohybu) a STR o 1-10    
+    elseif (src.profession==class_mystik)  //Mystik - Snizi rezist na Elect a Cold o 25 kazdou ranou + snizi DEX o 1-5(rychlost pohybu) a STR o 1-10    
       src.classmessage("Tvuj uder oslabil a zpomalil Rinalda.")
       if <dex> >= 5
         dex = <dex> - {1 5}
