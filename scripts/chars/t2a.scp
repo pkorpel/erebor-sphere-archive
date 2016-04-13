@@ -115,7 +115,7 @@ maxhits={1600 2000}
 maxstam={96 120}
 maxmana=500
 
-tag.experience=<eval {45.0 55.0}>
+tag.experience=<eval {65.0 75.0}>
 
 tag(poisoning_dmg,14) // affects spell_poison
 tag(poisoning_MvM_dmg,35) // affects spell_poison
@@ -478,7 +478,7 @@ maxhits={5500 6700}
 maxstam={200 210}
 maxmana=0
 
-tag.experience=<eval {215.0 235.0}>
+tag.experience=<eval {220.0 250.0}>
 
 Tag.explode_dmg=50
 
