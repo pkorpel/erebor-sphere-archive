@@ -165,7 +165,7 @@ elseif ( <ACT.TYPE> == t_water ) && (fishing <eval(finduid(<act.more1>).SKILL))
 endif
 
 if ({1 120}==43)&&(act.type == t_rock) //pri sanci na miningu
-  if (strcmpi("<region.name>","tutorial"))
+  if (strcmpi("<region.name>","Tutorial Dul"))
     dozaval
   elseif ({1 100} < 10) //v tutorialu zavaly ANO, ale jenom 1/10 -> kdyztak snizim
     dozaval
@@ -192,7 +192,7 @@ endif
 
 
 if (rand(750)==1)&&(mapplane!=1)
-  if (<strcmpi("<region.name>","tutorial")>)
+  if (mapplane!=35)
     randompotvora
   else
     tutrandompotvora
