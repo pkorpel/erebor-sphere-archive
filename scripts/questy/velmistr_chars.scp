@@ -208,6 +208,7 @@ TSPEECH=spk_q000_rinald
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_rinald
 
 CATEGORY=Moria Questy
 SUBSECTION=M3 - Velmistrovsky quest
@@ -243,7 +244,7 @@ tag(resist_bleed,800)
 tag(resist_sharp,-150)
 tag(resist_slash,-150)
 tag(resist_pierce,50)
-tag(resist_blunt,-450)
+tag(resist_blunt,-150)
 
 tag(resist_fire,200)
 tag(resist_elect,200)
