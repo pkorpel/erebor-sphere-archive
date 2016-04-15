@@ -1320,7 +1320,7 @@ if(<flag_invul>==0)
       tag(resist_summon,#-20)
       
     elseif (src.profession==class_craft)  //Craft - zbran vyrobena kraftem = sance 1/20 na smrt zcela. Jakakoli zbran = sance na kriticky zasah 2/3.  Fixni dmg 100hp/zasah
-      hits=<hits>-100
+      hits=<hits>-{75 100}
       if (src.findlayer(1))
         if (src.findlayer(1).isweapon)
           if (src.findlayer(1).tag(craftedby))
@@ -1335,7 +1335,7 @@ if(<flag_invul>==0)
           endif
           if ({1 3} >= 2)
             src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
-            hits=<hits>-100
+            hits=<hits>-{50 100}
           endif
         endif
       endif               
@@ -1353,7 +1353,7 @@ if(<flag_invul>==0)
           endif
           if ({1 3} >= 2)
             src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
-            hits=<hits>-100
+            hits=<hits>-{50 100}
           endif
         endif
       endif
@@ -1374,7 +1374,6 @@ if(<flag_invul>==0)
     elseif (src.profession==class_ranger)  //Ranger - sipka omraci cil, sance 1/3, kazda sipka snizi rezist na pierce o 50
       src.classmessage("Tvuj sip se zabodl do Rinaldova tela.")
       tag(resist_pierce,#-50)
-      say("Pierce Rezist: <tag(resist_pierce)>")
       if ({1 3} == 2) 
         src.classmessage("<?sex("Omracila","Omracil")?> jsi Rinalda.")
         paralyze(10)
@@ -1393,7 +1392,7 @@ if(<flag_invul>==0)
       
     elseif (src.profession==class_shaman)  //Shaman - kazda rana snizi magicke rezisty o 50 + Sance 2/3 na vysati 15 many. Fixni dmg 50hp/zasah
       src.classmessage("Citis jak magicka ochrana Rinalda slabne!")
-      hits=<hits>-50
+      hits=<hits>-{25 50}
       tag(resist_fire,#-50)
       tag(resist_elect,#-50)
       tag(resist_cold,#-50)
