@@ -102,10 +102,43 @@ ON=@DROPON_GROUND
   src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
 
 ON=@userCLICK
+sfx(74)      // zvuk rozbiti vajec :-)
 if (amount > 1)
-  src.sysmessage("Velice krehka, hezky malovana velikonocni vejce")
+  src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+  remove
 else
-  src.sysmessage("Velice krehke, hezky malovane velikonocni vejce")
+  src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+  remove
+endif
+
+ON=@Pickup_ground
+sfx(74)      // zvuk rozbiti vajec :-)
+if (amount > 1)
+  src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+  remove
+else
+  src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+  remove
+endif
+
+ON=@Pickup_pack
+sfx(74)      // zvuk rozbiti vajec :-)
+if (amount > 1)
+  src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+  remove
+else
+  src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+  remove
+endif
+
+ON=@UserDClick
+sfx(74)      // zvuk rozbiti vajec :-)
+if (amount > 1)
+  src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+  remove
+else
+  src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+  remove
 endif
   
 ON=@Step
