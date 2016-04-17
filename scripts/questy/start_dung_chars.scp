@@ -49,6 +49,17 @@ else
 	f_nb001
 endif
 
+ON=@npcseenewplayer
+if ((src.qtag(nb001)<0)||(src.qtag(nb001)==0)||(src.qtag(nb001)==2)) // nema zadane ukoly 
+  dorand 3 
+    SAY("Hej, ty tam! Ano, myslim tebe <src.name>. Pojd blize. Mel bych pro tebe ukol.") 
+    SAY("<src.name> vypadas jako silak. Co takhle mi pomoct? Nabizim ti za to odmenu") 
+    SAY("Prosim, prosim o pomoc. Najde se nekdo kdo mi pomuze? Co ty <src.name> ?") 
+  enddo
+elseif ((src.qtag(nb001)==1)||(src.qtag(nb001)==3))  // jiz plni ukoly, ale jeste vsechny nesplnil
+  say("Zdravim te, <src.name>. Jak jsi na tom s tim oc jsem te zadal?")
+endif
+
 ON=@NPCRestock
 ItemNewbie=i_leather_cap
 ItemNewbie=i_leather_gorget
@@ -107,6 +118,17 @@ else
 	f_nb002
 endif
 
+ON=@npcseenewplayer
+if (src.qtag(nb002)<1) // nema zadane ukoly 
+  dorand 3 
+    SAY("Hej, ty tam! Ano, myslim tebe <src.name>. Pojd blize. Mela bych na tebe prosbu.") 
+    SAY("<src.name> vypadas ze jsi <src.sex("ten pravy","ta prava")>. Co takhle mi pomoct? Nabizim ti za to odmenu") 
+    SAY("Prosim, prosim o pomoc. Najde se nekdo kdo mi pomuze? Co ty <src.name> ?") 
+  enddo
+elseif (src.qtag(nb002)<2)  // jiz plni ukoly, ale jeste vsechny nesplnil
+  say("Ahoj, <src.name>. Uz jsi to <src.sex("sehnal","sehnala")>?")
+endif
+
 ON=@NPCRestock
 ItemNEwbie=i_cape
 ItemNEwbie=i_robe
@@ -161,6 +183,17 @@ if(src.targ.distance>3)
 	src.sysMessage("Na takovou vzdalenost s tebou jednat nebude")
 else
 	f_nb003
+endif
+
+ON=@npcseenewplayer
+if ((src.qtag(nb003)<0)||(src.qtag(nb003)==0)||(src.qtag(nb003)==2)||(src.qtag(nb003)==4)) // nema zadane ukoly 
+  dorand 3 
+    SAY("Zdravim te, <src.name>. Pojd blize. Mel bych pro tebe ukol.") 
+    SAY("<src.name> vypadas ze jsi <src.sex("silny","silna")>. Co takhle mi pomoct s tezbou rudy? Nabizim ti za to odmenu!") 
+    SAY("Shanim nekoho kdo mi pomuze. Co ty <src.name>? Pomuzes?") 
+  enddo
+elseif ((src.qtag(nb003)==1)||(src.qtag(nb003)==3)||(src.qtag(nb003)==5))  // jiz plni ukoly, ale jeste vsechny nesplnil
+  say("Ahoj, <src.name>. Uz jsi <src.sex("natezil","natezia")> oc jsem te pozadal?")
 endif
 
 ON=@NPCRestock
@@ -218,6 +251,17 @@ else
 	f_nb004
 endif
 
+ON=@npcseenewplayer
+if ((src.qtag(nb004)<0)||(src.qtag(nb004)==0)||(src.qtag(nb004)==2)) // nema zadane ukoly 
+  dorand 3 
+    SAY("Zdravim te, <src.name>. Pojd blize. Mel bych pro tebe ukol.") 
+    SAY("<src.name> vypadas ze jsi <src.sex("silny","silna")>. Umis to s sekerou? Kdyz mi pomuzes, odmena te nemine.") 
+    SAY("Pomuzes mi nasekat drevo? <src.name> pomuzes?") 
+  enddo
+elseif ((src.qtag(nb004)==1)||(src.qtag(nb004)==3))  // jiz plni ukoly, ale jeste vsechny nesplnil
+  say("Ahoj, <src.name>. Uz jsi <src.sex("nasekal","nasekala")> oc jsem te pozadal?")
+endif
+
 ON=@NPCRestock
 ItemNewbie=i_apron_half
 Color=000
@@ -273,6 +317,17 @@ else
 	f_nb005
 endif
 
+ON=@npcseenewplayer
+if ((src.qtag(nb005)<0)||(src.qtag(nb005)==0)||(src.qtag(nb005)==2)) // nema zadane ukoly 
+  dorand 3 
+    SAY("Zdravim te, <src.name>. Pojd blize. Mel bych pro tebe ukol.") 
+    SAY("<src.name> vypadas hladove. Ukazu ti, jak si zajistit jidlo a jeste te odmenim.") 
+    SAY("Pomuzes mi sehnat zasoby na zimu? <src.name> pomuzes?") 
+  enddo
+elseif ((src.qtag(nb005)==1)||(src.qtag(nb005)==3))  // jiz plni ukoly, ale jeste vsechny nesplnil
+  say("Ahoj, <src.name>. Jak ti to jde? Jiz mas pro me to o co jsem te poprosil?")
+endif
+
 ON=@NPCRestock
 ItemNewbie=i_shirt_plain
 color=091
@@ -323,6 +378,17 @@ if(src.targ.distance>3)
 	src.sysMessage("Na takovou vzdalenost s tebou jednat nebude")
 else
 	f_nb006
+endif
+
+ON=@npcseenewplayer
+if (src.qtag(nb006)<1) // nema zadane ukoly 
+  dorand 3 
+    SAY("Diky bohu! Nekdo mi prisel pomoct. <src.name>, pomoz mi zabit Liche Lorda a ja se ti odmenim.") 
+    SAY("<src.name> vypadas ze jsi boje <src.sex("znaly","znala")>. Zvladnes zabit Liche Lorda? Nabizim ti za to odmenu") 
+    SAY("Prosim, prosim o pomoc. Najde se nekdo kdo mi pomuze? Co ty <src.name> ?") 
+  enddo
+elseif (src.qtag(nb006)<2)  // jiz plni ukoly, ale jeste vsechny nesplnil
+  say("Ahoj, <src.name>. Uz jsi ho <src.sex("zabil","zabila")>?")
 endif
 
 ON=@NPCRestock
@@ -379,6 +445,20 @@ else
 	f_nb007
 endif
 
+
+ON=@npcseenewplayer
+if (src.profession==class_craft)
+  if ((src.qtag(nb007)<0)||(src.qtag(nb007)==0)||(src.qtag(nb007)==2)||(src.qtag(nb007)==4)||(src.qtag(nb007)==6)||(src.qtag(nb007)==8)||(src.qtag(nb007)==10)) // nema zadane ukoly 
+    dorand 3 
+      SAY("Zdravim te, <src.name>. Pojd blize. Mel bych pro tebe ukol.") 
+      SAY("<src.name> vypadas ze jsi <src.sex("zrucny delnik","zrucna delnice")>. Co takhle mi pomoct? Nabizim ti za to odmenu!") 
+      SAY("Shanim nekoho kdo mi pomuze. Co ty <src.name>? Pomuzes?") 
+    enddo
+  elseif ((src.qtag(nb007)==1)||(src.qtag(nb007)==3)||(src.qtag(nb007)==5)||(src.qtag(nb007)==7)||(src.qtag(nb007)==9)||(src.qtag(nb007)==11))  // jiz plni ukoly, ale jeste vsechny nesplnil
+    say("Ahoj, <src.name>. Uz jsi to <src.sex("vyrobil","vyrobila")> ? Pospes prosim.")
+  endif
+endif
+
 ON=@NPCRestock
 ItemNewbie=i_leather_cap
 ItemNewbie=i_apron_half
@@ -433,9 +513,79 @@ else
 	f_nb_gatekeeper
 endif
 
+ON=@npcseenewplayer
+if (src.tag(level)<1) // nema level 1 
+  dorand 3 
+    SAY("Zdravim te, <src.name>. Az budes dostatecne <src.sex("zkuseny","zkusena")>, prijd za mnou.") 
+    SAY("<src.name> vypadas ze jsi se <src.sex("ztratil","ztratila")>. Jdi po ceste do mesta. Tam ti pomuzou.") 
+    SAY("Az budes dostatecne <src.sex("zkuseny","zkusena")> na to opustit Tutorial. Prijd za mnou.") 
+  enddo
+else  // jiz level 1 ma a muze opustit Tutorial 
+  say("Ahoj, <src.name>. Vidim, ze jsi jiz dostatecne <src.sex("zkuseny","zkusena")>. Chces jiz opustit tutorial?")
+endif
+
 ON=@NPCRestock
 ItemNewbie=i_robe
 color=444
 ItemNewbie=i_hat_wizards
 color=444
 ItemNewbie=i_boots_calf
+
+//////////////////////////////////////////////////
+/////////////nb_healer - Healer do tutorialu//////
+//////////////////////////////////////////////////
+
+[CHARDEF c_nb_healer]
+NAME=Lecitel
+ID=C_MAN
+
+
+Tspeech=spk_healer
+TEVENTS=e_healer
+TSPEECH=spk_shopkeep
+TEVENTS=e_item_refuser
+
+TEVENTS=e_character
+TEVENTS=e_monster
+
+CATEGORY=MoriaNewbieRoom
+SUBSECTION=nbhealer
+DESCRIPTION=Healer
+ 
+ON=@Create
+Title=Vyleci dokonce i smrt
+NPC=brain_vendor
+COLOR=color_priest
+STR=150
+DEX=150
+INT=100
+
+ANATOMY={55.0 78.0}
+FORENSICS={35.0 58.0}
+HEALING={55.0 78.0}
+SPIRITSPEAK={55.0 78.0}
+WRESTLING={15.0 38.0}
+TACTICS={15.0 35.0}
+
+tag(noanimate,1)
+
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+ITEMNEWBIE=random_facial_hair
+COLOR=match_hair
+ITEMnewbie=i_monster_create
+
+ON=@npcseenewplayer
+say("Ahoj, <src.name>. Kdyby jsi nekdy zemrel, tak prijd za mnou a ja te ozivim.")
+
+
+ON=@NPCRestock
+ITEMnewbie=RANDOM_LIGHT
+ITEMnewbie=i_robe
+COLOR=colors_yellow
+ITEMnewbie=i_sandals
+
+SELL=VENDOR_S_HEALER
+
+
+[EOF]
