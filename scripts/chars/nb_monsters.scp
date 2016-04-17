@@ -4276,10 +4276,6 @@ ITEM=i_gold
 /////////////////////////////////////////////////
 
 
-
-
-
-
 [CHARDEF c_nb_jezditka_man]
 NAME=Jezdec
 ID=C_MAN
@@ -4287,7 +4283,7 @@ ARMOR=95
 DAM=100
 CAN=MT_WALK|MT_run
 
-// TSPEECH=spk_dejsemlamu
+TSPEECH=spk_nbMountNPC
 
 TEVENTS=e_character
 TEVENTS=e_monster
@@ -4302,29 +4298,13 @@ NPC=brain_human
 Title=Mecenas
 
 STR=1500
-DEX=150
+DEX=50
 INT=200
 INVUL=1
 
 
 ON=@npcseenewplayer
-if (src.tag(level) <= 12)
-  say("Hej! Ty tam. Ano tebe myslim, <src.name>. Chces jezditko zadarmo? Ano?")
-else
-  say("Pro tebe <src.name> nemam nic zajimaveho, ale rad jsem te potkal! Hezky den preji.")
-endif
-if color == 0
-  if (<region.Tag(realm)> == 1)
-    COLOR=color_clovek
-    KARMA=100
-    FAME=1
-    say("Hmmm, vune Gondoru! Tu mam rad!")
-  elseif (<region.Tag(realm)> == 2)
-    COLOR=color_npc_maiar_dur
-    KARMA=-1000
-    say("Hmmm, vune Mordoru! Tu mam rad!")
-  endif
-endif
+f_onsee_nbMountNPC
 
 ON=@NPCRestock
 ITEMNEWBIE=i_hair_short
@@ -4358,7 +4338,7 @@ ARMOR=95
 DAM=100
 CAN=MT_WALK|MT_run
 
-// TSPEECH=spk_dejsemlamu
+TSPEECH=spk_nbMountNPC
 
 TEVENTS=e_character
 TEVENTS=e_monster
@@ -4373,29 +4353,13 @@ NPC=brain_human
 Title=Mecenas
 
 STR=1500
-DEX=150
+DEX=50
 INT=200
 INVUL=1
 
 
 ON=@npcseenewplayer
-if (src.tag(level) <= 12)
-  say("Hej! Ty tam. Ano tebe myslim, <src.name>. Chces jezditko zadarmo? Ano?")
-else
-  say("Pro tebe <src.name> nemam nic zajimaveho, ale rada jsem te potkala! Hezky den preji.")
-endif
-if color == 0
-  if (<region.Tag(realm)> == 1)
-    COLOR=color_clovek
-    KARMA=100
-    FAME=1
-    say("Hmmm, vune Gondoru! Tu mam rada!")
-  elseif (<region.Tag(realm)> == 2)
-    COLOR=color_npc_maiar_dur
-    KARMA=-1000
-    say("Hmmm, vune Mordoru! Tu mam rada!")
-  endif
-endif
+f_onsee_nbMountNPC
 
 ON=@NPCRestock
 ITEMNEWBIE=i_hair_long
@@ -4421,7 +4385,50 @@ color=00
 name=Pastevecka hul
 
 
+[function f_onsee_nbMountNPC]
+if (src.tag(level) <= 12)
+  say("Hej! Ty tam. Ano tebe myslim, <src.name>. Chces jezditko zadarmo? Ano?")
+else
+  say("Pro tebe <src.name> nemam nic zajimaveho, ale rad jsem te <sex(potkal,potkala)>! Hezky den preji.")
+endif
+if (color == 0)
+  if (<region.Tag(realm)> == 1)
+    COLOR=color_clovek
+    KARMA=100
+    FAME=1
+    say("Hmmm, vune Gondoru! Tu mam rad!")
+  elseif (<region.Tag(realm)> == 2)
+    COLOR=color_npc_maiar_dur
+    KARMA=-1000
+    say("Hmmm, vune Mordoru! Tu mam rad!")
+  endif
+endif
 
+[SPEECH spk_nbMountNPC]
+ON=*dobry*
+ON=*dobre*
+ON=*den*
+ON=*zdravim*
+ON=*hi*
+ON=*ahoj*
+ON=*jezdit*
+
+if (eval(<tag(level)>) > 12)
+    say("Ty jsi uz dost zkuseny si najit vlastni obzivu!")
+    return
+endif
+
+arg(ret,<src.f_nbMount_equip>)
+if (ret = 0)
+    say("Zde mas svou lamku poutniku.")
+elseif (ret = 1)
+    say("Co to je? Zsse slysim duchy? Ufff, ne, asi se mi to zdalo.")
+    emote("shake in fear")
+elseif (ret = 2)
+    say("Nedelej si ze me srandu. Uz na necem jezdis!")
+else
+    say("Ty jsi uz dost zkuseny si najit vlastni obzivu!")
+endif
 
 
 [EOF]

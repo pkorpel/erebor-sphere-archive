@@ -784,86 +784,20 @@ on=@userdclick
 //
 // Returns:
 // 0 - success
-// 1 - not a player
+// 1 - not a player or player is dead
 // 2 - is mounted
-// 3 - does not meet requirements
 //
 //
 // @param I        [char] the player character
 // @return         0 on success, errcode otherwise (see above)
 ////
 [function f_nbMount_equip]
-if (!isPlayer)
+if (!isPlayer || isDead)
     return 1
 endif
 if (isMounted)
     return 2
 endif
-if (eval(<tag(level)>) > 12)
-    return 3
-endif
 newitemsafe(i_mt_llama_nb)
 equip(lastnew)
 return 0
-
-[SPEECH speechNbHelper]
-ON=*dobry*
-ON=*dobre*
-ON=*den*
-ON=*zdravim*
-ON=*hi*
-ON=*ahoj*
-ON=*jezdit*
-
-arg(ret,<src.f_nbMount_equip>)
-if (ret = 0)
-    say("Zde mas svou lamku poutniku.")
-elseif (ret = 1)
-    say("Nejsi hrac, jdi pryc!")
-elseif (ret = 2)
-    say("Uz na necem jezdis!")
-elseif (ret = 3)
-    say("Nevyhovujes mym pozadavkum smrade!")
-else
-    say("Nevyhovujes mym pozadavkum smrade!")
-endif
-
-[CHARDEF c_nb_helper]
-NAME=Tajemny Pomocnik
-ID=C_MAN
-DESIRES=i_gold,t_wand,t_reagent,t_bone
-ARMOR=95
-DAM=100
-CAN=MT_WALK|MT_run|MT_FLY|MT_FEMALE
-TSPEECH=speechNbHelper
-
-TEVENTS=e_character
-TEVENTS=e_monster
-
-CATEGORY=Moria Questy
-SUBSECTION=Newbie helper
-DESCRIPTION=Tajemny Pomocnik
-
-ON=@Create
-NPC=brain_human
-COLOR=1152
-STR=1500
-DEX=150
-INT=200
-INVUL=1
-
-ALCHEMY=100.0
-
-FAME=1
-KARMA=100
-
-ITEMNEWBIE=random_male_hair
-ITEMNEWBIE=random_facial_hair
-
-ON=@NPCRestock
-ITEMnewbie=i_hat_wizards
-color=1153
-ITEMnewbie=i_sandals
-color=1153
-ITEMnewbie=i_robe
-color=1153
