@@ -1190,6 +1190,83 @@ ITEM=RANDOM_REAGENT,{10 20}
 ITEM=RANDOM_REAGENT_NECRO,{10 20}
 ///////////////////////////////////////////////////////////
 
+[CHARDEF c_boss_rinald_event] //Boss Event pro Totala
+ID=c_test12
+NAME=Rinald
+SOUND=snd_monster_dragon1
+Icon=i_pet_dragon
+ANIM=028c3f
+
+
+attack=80
+ARMOR=75
+
+CAN=MT_WALK|mt_run
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_parakrik
+TEVENTS=e_npc_detect
+TEVENTS=e_dragon_regeneration
+TEVENTS=e_rinald
+TEVENTS=e_phoenix
+
+CATEGORY=Event
+SUBSECTION=Total
+DESCRIPTION=Event Boss Total
+
+ON=@Create
+NPC=brain_monster
+FAME=300
+KARMA={-1000 -2500}
+
+STR=5500
+DEX=500
+INT=190
+
+maxhits=25000
+maxstam={1200 1800}
+maxmana=1000
+
+tag.experience=<eval {1000.0 1500.0}>
+
+tag.regeneration_hp=300          // pocet hp ktore zregeneruje
+tag.regeneration_speed=5         // rychlost regeneracie v sekundach
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
+
+//typ monstra
+tag(monstertype,dragon,80)
+tag(hitspeed,15)
+
+tag(resist_poison,1000)
+tag(resist_para,1000)
+tag(resist_summon,1000)
+tag(resist_bleed,1000)
+
+tag(resist_sharp,950)
+tag(resist_slash,950)
+tag(resist_pierce,950)
+tag(resist_blunt,950)
+
+tag(resist_fire,950)
+tag(resist_elect,950)
+tag(resist_cold,950)
+
+SpiritSpeak=95.0
+WRESTLING=120.0
+Resist=150.0
+Parrying=120.0
+tactics=120.0
+
+ITEMnewbie=i_monster_create
+ON=@NPCRestock
+item=i_gold
+item=random_reagent,{350 550}
+///////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////
 
 
