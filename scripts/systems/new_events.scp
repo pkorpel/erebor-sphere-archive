@@ -1326,7 +1326,7 @@ if(<flag_invul>==0)
           if (src.findlayer(1).tag(craftedby))
             if (src.findlayer(1).tag(craftedby) == <src>)
               if ({1 20} == 1)
-                say("Tu zbran jsi si <?sex("vyrobila sama","vyrobil sam")?>?!!")
+                say("Tu zbran jsi si <?sex("vyrobil sam","vyrobila sama")?>?!!")
                 sfx(0227)
                 effect(3,<s_explosion.EFFECTID>,6,15,1)
                 hits(0)
@@ -1334,7 +1334,7 @@ if(<flag_invul>==0)
             endif
           endif
           if ({1 3} >= 2)
-            src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
+            src.classmessage("<?sex("Zasadil","Zasadila")?> jsi Rinaldovi kriticky uder")
             hits=<hits>-{50 100}
           endif
         endif
@@ -1344,7 +1344,7 @@ if(<flag_invul>==0)
           if (src.findlayer(2).tag(craftedby))
             if (src.findlayer(2).tag(craftedby) == <src>)
               if ({1 20} == 1)
-                say("Tu zbran jsi si <?sex("vyrobila sama","vyrobil sam")?>?!!")
+                say("Tu zbran jsi si <?sex("vyrobil sam","vyrobila sama")?>?!!")
                 sfx(0227)
                 effect(3,<s_explosion.EFFECTID>,6,15,1)
                 hits(0)
@@ -1352,7 +1352,7 @@ if(<flag_invul>==0)
             endif
           endif
           if ({1 3} >= 2)
-            src.classmessage("<?sex("Zasadila","Zasadil")?> jsi Rinaldovi kriticky uder")
+            src.classmessage("<?sex("Zasadil","Zasadila")?> jsi Rinaldovi kriticky uder")
             hits=<hits>-{50 100}
           endif
         endif
@@ -1375,7 +1375,7 @@ if(<flag_invul>==0)
       src.classmessage("Tvuj sip se zabodl do Rinaldova tela.")
       tag(resist_pierce,#-50)
       if ({1 3} == 2) 
-        src.classmessage("<?sex("Omracila","Omracil")?> jsi Rinalda.")
+        src.classmessage("<?sex("Omracil","Omracila")?> jsi Rinalda.")
         paralyze(10)
       endif
       
@@ -1397,13 +1397,13 @@ if(<flag_invul>==0)
       tag(resist_elect,#-50)
       tag(resist_cold,#-50)
       if ({1 3} >= 2) 
-        src.classmessage("<?sex("Vysala","Vysal")?> jsi z Rinalda manu.")
+        src.classmessage("<?sex("Vysal","Vysala")?> jsi z Rinalda manu.")
         src.mana= <src.mana> + 15
       endif
       
     elseif (src.profession==class_priest)  // Priest - Kazada rana snizi rezist na tupe zbrane o 50 + sance 1/3 na omraceni
       if ({1 3} == 2) 
-        src.classmessage("<?sex("Omracila","Omracil")?> jsi Rinalda.")
+        src.classmessage("<?sex("Omracil","Omracila")?> jsi Rinalda.")
         paralyze(10)
       endif
       tag(resist_blunt,#-50)

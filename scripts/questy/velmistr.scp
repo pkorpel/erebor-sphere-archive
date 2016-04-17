@@ -909,6 +909,7 @@ body=c_daemon_mage1
 KARMA=-10000
 color=0445
 INVUL 0
+EVENTS=e_rinald
 //try memoryfind.<src.uid>.remove
 f_dragon_fire(35) // give them smaller damage
 
