@@ -23,6 +23,7 @@ scripts\chars\ucitele.scp
 scripts\chars\ents.scp
 scripts\chars\animals.scp
 scripts\chars\mounts.scp
+scripts\chars\mounts_chars.scp
 scripts\chars\daemons.scp
 scripts\chars\dragons.scp
 scripts\chars\dragons_tmp.scp
@@ -455,11 +456,11 @@ Mor 		//temny
 Curu 		//dovednost
 Dol 		//hlava
 Ruin 		//plamen
-Esgal 		//zástìna
+Esgal 		//zï¿½stï¿½na
 Sul 		//vitr
 Anna 		//dar
 Del 		//hruza
-Heru 		//pán
+Heru 		//pï¿½n
 Fuin 		//temnota
 Aina 		// svaty
 Sereg 		//krev
@@ -471,7 +472,7 @@ Tir 		//bdit strezit
 Barad 		//vez
 Ril 		//trpit
 Beleg 		//Mohutny
-Loth 		//magický kvìt
+Loth 		//magickï¿½ kvï¿½t
 Val 		//mocnost
 Kemen 		//zeme
 Fea 		//duch
@@ -1201,7 +1202,7 @@ BONUS_STR=0
 BONUS_DEX=0
 BONUS_INT=0
 BONUSSTATS=0
-ADVRATE=0fffffff //info viz comment pred prvnim skillem/// sníženo pokusnì na alfatest
+ADVRATE=0fffffff //info viz comment pred prvnim skillem/// snï¿½eno pokusnï¿½ na alfatest
 
 on=@stroke
 combat_stroke

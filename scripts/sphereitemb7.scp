@@ -1,5 +1,5 @@
 //****************************************************************************
-//SPHERE by : Menasoft ©1997-2000
+//SPHERE by : Menasoft Â©1997-2000
 //www.sphereserver.com
 // All SPHERE script files and formats are copyright Menasoft & Partners.
 // This file may be freely edited for personal use, but may not be distributed
@@ -7753,10 +7753,9 @@ type=t_eq_script
 name=summonmount
 
 on=@timer
-cont.findlayer(layer_horse).remove
-lastnewchar.remove
+cont.accmsg("Mazu sumona kone: <cont.findlayer(layer_horse).id>")
 cont.consume(i_hladovitko)
-cont.accmsg(mazu sumona kone)
+cont.findlayer(layer_horse).remove // Tohle spusti unequip na mt_* itemu
 remove
 return 1
 
