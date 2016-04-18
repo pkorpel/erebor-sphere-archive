@@ -32,6 +32,9 @@ INVUL=1
 ON=@npcseenewplayer
 f_onsee_nbMountNPC
 
+ON=@userDClick
+f_nbMountNpc_interact
+
 ON=@NPCRestock
 ITEMNEWBIE=i_hair_short
 COLOR=colors_hair
@@ -83,9 +86,11 @@ DEX=50
 INT=200
 INVUL=1
 
-
 ON=@npcseenewplayer
 f_onsee_nbMountNPC
+
+ON=@userDClick
+f_nbMountNpc_interact
 
 ON=@NPCRestock
 ITEMNEWBIE=i_hair_long
@@ -113,9 +118,9 @@ name=Pastevecka hul
 
 [function f_onsee_nbMountNPC]
 if (src.tag(level) <= 12)
-  say("Hej! Ty tam. Ano tebe myslim, <src.name>. Chces jezditko zadarmo? Ano?")
+  say("Hej! Ty tam. Ano tebe myslim, <src.name>. Chces lamu zadarmo? Ano?")
 else
-  say("Pro tebe <src.name> nemam nic zajimaveho, ale rad jsem te <sex(potkal,potkala)>! Hezky den preji.")
+  say("Pro tebe, <src.name>, nemam nic zajimaveho, ale rad jsem te <sex(potkal,potkala)>! Hezky den preji.")
 endif
 if (color == 0)
   if (<region.Tag(realm)> == 1)
@@ -131,29 +136,44 @@ if (color == 0)
 endif
 
 [SPEECH spk_nbMountNPC]
-ON=*dobry*
-ON=*dobre*
-ON=*den*
 ON=*zdravim*
 ON=*hi*
 ON=*ahoj*
 ON=*jezdit*
+ON=*lama*
+ON=*lamu*
 
-if (eval(<tag(level)>) > 12)
-    say("Ty jsi uz dost zkuseny si najit vlastni obzivu!")
+f_nbMountNpc_interact
+return
+
+////
+// Newbie Mount NPC interaction with players.
+//
+// @param I        [char] the NPC
+// @param src      [char] the player
+// @return         [void] no return value
+////
+[function f_nbMountNpc_interact]
+if (distance > 5)
+	src.smsg("Na takovou vzdalenost s tebou <name> jednat nebude")
+	return
+endif
+
+if (eval(<src.tag(level)>) > 12)
+    say("<src.name>, jsi uz dost <src.sex(zkuseny,zkusena)> si vydelat na vlastni lamu!")
     return
 endif
 
-arg(ret,<src.f_nbMount_equip>)
-if (ret = 0)
-    say("Zde mas svou lamku poutniku.")
-elseif (ret = 1)
-    say("Co to je? Zsse slysim duchy? Ufff, ne, asi se mi to zdalo.")
+arg(mountResult,<eval src.f_nbMount_equip>)
+if (mountResult = 0)
+    say("Zde mas svou lamku, <src.name>.")
+elseif (mountResult = 1)
+    say("Co to je? Zase slysim duchy? Ufff, ne, asi se mi to zdalo.")
     emote("shake in fear")
-elseif (ret = 2)
+elseif (mountResult = 2)
     say("Nedelej si ze me srandu. Uz na necem jezdis!")
 else
-    say("Ty jsi uz dost zkuseny si najit vlastni obzivu!")
+    say("<src.name>, jsi uz dost <src.sex(zkuseny,zkusena)> si vydelat na vlastni lamu!")
 endif
 
 /////////////////////////////////////////////
