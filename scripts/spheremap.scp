@@ -4073,6 +4073,26 @@ events=e_beridor
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Kralova Hrobka Level 1]
+GROUP=Kralova Hrobka
+P=5076,2169,0,10
+RECT=5017,2138,5084,2202
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Kralova Hrobka Level 2]
+GROUP=Kralova Hrobka
+P=5044,2159,40,11
+RECT=5017,2138,5084,2202
+mapplane=11
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
 [AREA Doupe]
 GROUP=Doupe
 P=5737,3186,-18
