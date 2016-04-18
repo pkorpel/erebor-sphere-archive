@@ -2,7 +2,7 @@
 // Newbie Mount Helper NPCs
 /////////////////////////////////////////////
 
-[CHARDEF c_nb_jezditka_man]
+[CHARDEF c_nb_mount_man]
 NAME=Jezdec
 ID=C_MAN
 ARMOR=95
@@ -24,7 +24,7 @@ NPC=brain_human
 Title=Mecenas
 
 STR=1500
-DEX=50
+DEX=100
 INT=200
 INVUL=1
 
@@ -60,7 +60,7 @@ name=Pastevecka hul
 
 
 
-[CHARDEF c_nb_jezditka_woman]
+[CHARDEF c_nb_mount_woman]
 NAME=Jezdec
 ID=C_WOMAN
 ARMOR=95
@@ -82,7 +82,7 @@ NPC=brain_human
 Title=Mecenas
 
 STR=1500
-DEX=50
+DEX=100
 INT=200
 INVUL=1
 
