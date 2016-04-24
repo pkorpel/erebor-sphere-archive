@@ -1313,11 +1313,15 @@ if(<flag_invul>==0)
   if (src.isplayer)
     if (src.profession==class_necro)  //Necro - kazde kouzlo snizi rezist na sumony o 20
       src.classmessage("Citis jak tva temna magie oslabila Rinalda!")
-      tag(resist_summon,#-20)
+      tag(resist_summon,#-25)
+      tag(resist_fire,#-25)
+      tag(resist_cold,#-25)
       
     elseif (src.profession==class_mag)  //Mag - kazde kouzlo snizi rezist na sumony o 20
       src.classmessage("Citis jak tva magie oslabuje Rinalda!")
-      tag(resist_summon,#-20)
+      tag(resist_summon,#-25)
+      tag(resist_fire,#-25)
+      tag(resist_elect,#-25)
       
     elseif (src.profession==class_craft)  //Craft - zbran vyrobena kraftem = sance 1/20 na smrt zcela. Jakakoli zbran = sance na kriticky zasah 2/3.  Fixni dmg 100hp/zasah
       hits=<hits>-{75 100}
