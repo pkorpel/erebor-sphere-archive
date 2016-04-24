@@ -15,13 +15,9 @@ ICON=i_pet_elem_earth
 CAN=MT_WALK|mt_run
 attack=110
 ARMOR=100
-
 moverate=4
 
-
 RESOURCES=100 i_ribs_raw
-
-
  
 BLOODCOLOR=0431
 
@@ -32,7 +28,6 @@ TEVENTS=e_npc_stun
 TEVENTS=e_humanoid
 TEVENTS=e_summoneater                          //smaze summona, co zasahne
 TEVENTS=e_getwpn
-
 
 CATEGORY=Dungy
 DESCRIPTION=Zeus
@@ -103,7 +98,6 @@ ITEM=random_reagent,{15 50}
 ITEM=random_reagent,{50 125}
 ITEM=random_reagent,{115 125}
 
-
 ///////////////////////////////////////////////////////////
 [CHARDEF c_em_jeskynni_vlk]
 // Autor: Jeffrey
@@ -114,15 +108,12 @@ ID=c_wolf
 SOUND=snd_ANIMALS_WOLF1
 ICON=i_pet_wolf_gray
 
-attack=50
-ARMOR=50
+attack=85
+ARMOR=70
 moverate=5
 RESOURCES=3 i_ribs_raw, 3 i_fur_light
 
 CAN=MT_WALK|MT_RUN
-FOODTYPE=
-
-
 
 DESCRIPTION=Jeskynni Vlk
 SUBSECTION=Dungeons
@@ -136,16 +127,16 @@ ON=@Create
 COLOR=0433
 
 STR=700
-DEX=500
+DEX=250
 INT=70
 
 maxhits={3500 5000}
 maxstam={600 750}
-maxmana=0
+maxmana=100
 
 
-tag.experience=<eval {100.0 150.0}>
-tag.npc_speed=<eval {400 500}>
+tag.experience=<eval {120.0 170.0}>
+tag.npc_speed=<eval {300 400}>
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -194,15 +185,12 @@ ID=c_wolf
 SOUND=snd_ANIMALS_WOLF1
 ICON=i_pet_wolf_gray
 
-attack=70
-ARMOR=80
+attack=85
+ARMOR=90
 moverate=5
 RESOURCES=20 i_ribs_raw, 10 i_fur_dark
 
 CAN=MT_WALK|MT_RUN
-FOODTYPE=
-
-
 
 DESCRIPTION=Vlci Vudce
 SUBSECTION=Dungeons
@@ -214,13 +202,11 @@ TEVENTS=e_parakrik
 TEVENTS=e_npc_summoning
 TEVENTS=e_summoneater_vamp
 
-
-
 ON=@Create
 COLOR=0995
 
 STR=900
-DEX=600
+DEX=300
 INT=170
 
 maxhits={10000 12000}
@@ -288,14 +274,12 @@ ID=c_wolf
 SOUND=snd_ANIMALS_WOLF1
 ICON=i_pet_wolf_gray
 
-attack=50
-ARMOR=70
+attack=60
+ARMOR=80
 moverate=4
 RESOURCES=20 i_ribs_raw, 10 i_fur_dark
 
 CAN=MT_WALK
-FOODTYPE=
-
 
 
 DESCRIPTION=Vlci Saman
@@ -309,6 +293,9 @@ TEVENTS=e_managain
 
 ON=@Create
 COLOR=0992
+
+FAME=7000
+KARMA={-4000 -5999}
 
 STR=600
 DEX=600
@@ -352,7 +339,6 @@ magery=100.0
 ei=85.0
 
 ITEMNEWBIE=i_spellbook
-addspell s_curse
 addspell s_magic_reflection
 addspell s_dispel
 addspell s_fireball
@@ -360,9 +346,6 @@ addspell s_archprotection
 addspell s_cure
 
 NPC=brain_animal
-
-FAME=7000
-KARMA={-4000 -5999}
 
 ITEMnewbie=i_monster_create
 
@@ -383,15 +366,12 @@ ID=c_Bear_Brown
 SOUND=snd_ANIMALS_BEAR1
 ICON=i_pet_bear_black
 
-attack=65
-ARMOR=80
+attack=85
+ARMOR=90
 moverate=5
 RESOURCES=3 i_ribs_raw, 3 i_fur_light
 
 CAN=MT_WALK|MT_RUN
-FOODTYPE=
-
-
 
 DESCRIPTION=Jeskynni Grizly
 SUBSECTION=Dungeons
@@ -461,17 +441,14 @@ ID=c_Bear_grizzly
 SOUND=snd_ANIMALS_BEAR1
 ICON=i_pet_bear_black
 
-attack=90
-ARMOR=90
+attack=100
+ARMOR=80
 moverate=5
 RESOURCES=50 i_ribs_raw, 10 i_fur_dark
 
 BLOODCOLOR=colors_lava
 
 CAN=MT_WALK|MT_RUN
-FOODTYPE=
-
-
 
 DESCRIPTION=Krvelacny Grizly
 SUBSECTION=Dungeons
@@ -484,13 +461,11 @@ TEVENTS=e_npc_massleap
 TEVENTS=e_parakrik
 TEVENTS=e_summoneater_vamp
 
-
-
 ON=@Create
 Color=098C
 
 STR=900
-DEX=600
+DEX=400
 INT=170
 
 maxhits={15500 16000}
@@ -553,18 +528,14 @@ ID=c_snake
 SOUND=snd_MONSTER_SEASERP1
 ICON=i_pet_SNAKE_GIANT
 
-
 attack=50
-ARMOR=40
+ARMOR=30
 moverate=6
 RESOURCES=5 i_ribs_raw,8 i_reag_serpent_scale
 
 BLOODCOLOR=colors_lava
 
 CAN=MT_WALK|MT_RUN
-FOODTYPE=
-
-
 
 DESCRIPTION=Hadice
 SUBSECTION=Dungeons
@@ -585,7 +556,6 @@ INT=170
 maxhits={900 1000}
 maxstam={2000 3750}
 maxmana=00
-
 
 tag.experience=<eval {30.0 30.0}>
 tag.npc_speed=<eval {300 300}>
@@ -640,8 +610,7 @@ ID=c_serpent_giant
 SOUND=snd_MONSTER_SEASERP1
 ICON=i_pet_SNAKE_GIANT
 
-
-attack=80
+attack=100
 ARMOR=90
 moverate=4
 RESOURCES=20 i_ribs_raw,30 i_reag_serpent_scale
@@ -649,9 +618,6 @@ RESOURCES=20 i_ribs_raw,30 i_reag_serpent_scale
 BLOODCOLOR=colors_lava
 
 CAN=MT_WALK|MT_RUN
-FOODTYPE=
-
-
 
 DESCRIPTION=Hadi Kral
 SUBSECTION=Dungeons
@@ -662,8 +628,6 @@ TEVENTS=e_character
 TEVENTS=e_parakrik
 TEVENTS=e_npc_summoning
 TEVENTS=e_summoneater_vamp
-
-
 
 ON=@Create
 Color=0994
@@ -709,7 +673,6 @@ tag(npc_summoning_char[1],c_em_hadice)
 tag(npc_summoning_char[2],c_em_hadice)
 tag(npc_summoning_char[3],c_em_hadice)
 
-
 parrying=100.0
 resist=100.0
 tactics=100.0
@@ -738,18 +701,14 @@ ID=c_serpent_giant
 SOUND=snd_MONSTER_SEASERP1
 ICON=i_pet_SNAKE_GIANT
 
-
-attack=70
-ARMOR=80
+attack=100
+ARMOR=100
 moverate=5
 RESOURCES=5 i_ribs_raw,18 i_reag_serpent_scale
 
 BLOODCOLOR=colors_lava
 
 CAN=MT_WALK|MT_RUN
-FOODTYPE=
-
-
 
 DESCRIPTION=Hadi Bojovnik
 SUBSECTION=Dungeons
@@ -757,7 +716,6 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-
 
 ON=@Create
 Color=00
@@ -770,9 +728,8 @@ maxhits={8000 10000}
 maxstam={2000 3750}
 maxmana=00
 
-
 tag.experience=<eval {180.0 250.0}>
-tag.npc_speed=<eval {300 300}>
+tag.npc_speed=<eval {300 350}>
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -794,7 +751,6 @@ tag(resist_elect,200)
 tag(resist_cold,200)
 //weap flags
 tag.weapflag=dam_piercing|dam_physical
-
 
 parrying=100.0
 resist=100.0
@@ -823,7 +779,6 @@ ID=c_serpent_giant
 SOUND=snd_MONSTER_SEASERP1
 ICON=i_pet_SNAKE_GIANT
 
-
 attack=50
 ARMOR=80
 moverate=4
@@ -832,9 +787,6 @@ RESOURCES=5 i_ribs_raw,18 i_reag_serpent_scale
 BLOODCOLOR=colors_lava
 
 CAN=MT_WALK
-FOODTYPE=
-
-
 
 DESCRIPTION=Hadi Druid
 SUBSECTION=Dungeons
@@ -842,9 +794,8 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_summoneater
+TEVENTS=e_summoneater_vamp
 TEVENTS=e_managain
-
 
 ON=@Create
 Color=00
@@ -927,19 +878,14 @@ ID=c_toad_giant
 SOUND=snd_MONSTER_GIANTTOAD1
 ICON=i_pet_toad_giant
 
-
-
-attack=65
-ARMOR=70
+attack=100
+ARMOR=90
 moverate=4
 RESOURCES=20 i_ribs_raw
 
 BLOODCOLOR=colors_lava
 
 CAN=MT_WALK|MT_SWIM
-FOODTYPE=
-
-
 
 DESCRIPTION=Jeskynni Ropucha
 SUBSECTION=Dungeons
@@ -948,9 +894,8 @@ CATEGORY=Animals
 TEVENTS=e_monster
 TEVENTS=e_character
 
-
 ON=@Create
-Color=0433
+Color=0989
 
 STR=1500
 DEX=600
@@ -1013,18 +958,14 @@ ID=c_toad_giant
 SOUND=snd_MONSTER_GIANTTOAD1
 ICON=i_pet_toad_giant
 
-
 attack=90
-ARMOR=80
+ARMOR=100
 moverate=4
 RESOURCES=50 i_ribs_raw
 
 BLOODCOLOR=colors_lava
 
 CAN=MT_WALK|MT_SWIM
-FOODTYPE=
-
-
 
 DESCRIPTION=Pan Ropuch
 SUBSECTION=Dungeons
@@ -1037,10 +978,8 @@ TEVENTS=e_npc_summoning
 TEVENTS=e_npc_detect
 TEVENTS=e_summoneater_vamp
 
-
-
 ON=@Create
-Color=00
+Color=04A3
 
 STR=700
 DEX=400
@@ -1075,7 +1014,7 @@ tag(resist_cold,400)
 //weap flags
 tag.weapflag=dam_piercing|dam_physical
 
-tag(npc_summoning_chance,13) //1.3% chance
+tag(npc_summoning_chance,20) //2% chance
 tag(npc_summoning_time,120)
 tag(npc_summoning_count,4)
 tag(npc_summoning_char[0],c_em_zabak)
@@ -1113,18 +1052,14 @@ ID=c_bullfrog
 SOUND=snd_MONSTER_BULLFROG1
 ICON=i_pet_bullfrog
 
-
 attack=50
-ARMOR=40
+ARMOR=30
 moverate=6
 RESOURCES=25 i_ribs_raw
 
 BLOODCOLOR=colors_lava
 
 CAN=MT_WALK|MT_RUN
-FOODTYPE=
-
-
 
 DESCRIPTION=Zabak
 SUBSECTION=Dungeons
@@ -1133,12 +1068,25 @@ CATEGORY=Animals
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_parakrik
+TEVENTS=e_duplicator
 
 ON=@Create
-Color=00
+dorand 11
+  Color=04A3
+  Color=0754
+  Color=071C
+  Color=096D
+  Color=07D5
+  Color=0845
+  Color=030
+  Color=0593
+  Color=084B
+  Color=04BE
+  Color=0FE
+enddo  
 
 STR=500
-DEX=300
+DEX={150 300}
 INT=370
 
 maxhits={2000 2100}
@@ -1147,7 +1095,7 @@ maxmana=00
 
 
 tag.experience=<eval {40.0 50.0}>
-tag.npc_speed=<eval {300 300}>
+tag.npc_speed=<eval {150 300}>
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -1196,7 +1144,6 @@ NAME=Rinald
 SOUND=snd_monster_dragon1
 Icon=i_pet_dragon
 ANIM=028c3f
-
 
 attack=80
 ARMOR=75
