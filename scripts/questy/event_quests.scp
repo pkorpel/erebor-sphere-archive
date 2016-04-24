@@ -418,4 +418,34 @@ ON=@timer
 remove
 return 1
 
+
+[ITEMDEF i_3D_labyrint]
+ID=i_memory
+NAME=3D_Labyrint
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=21600
+ATTR=094
+tag(labyrint_zelene,0)
+tag(labyrint_modre,0)
+tag(labyrint_cervene,0)
+tag(labyrint_bile,0)
+tag(labyrint_zlute,0)
+
+ON=@timer
+remove
+return 1
+
+[function f_through_green_gate]
+if (<src.findid(i_3D_labyrint).tag(labyrint_zelene)> < 10)
+  src.findid(i_3D_labyrint).tag(labyrint_zelene,#+1)
+  arg(goX,eval {<5612 5622>})
+  arg(goY,eval {796 802})
+  arg(goMap,eval {50 100})
+  src.say("<arg(goX)>,<arg(goY)>,0,<arg(goMap)>")
+  src.p(<arg(goX)>,<arg(goY)>,0,<arg(goMap)>)
+else
+  src.say("Mam jiz dost zelenych! <src.findid(i_3D_labyrint).tag(labyrint_zelene)> ks")
+endif
 [eof]
