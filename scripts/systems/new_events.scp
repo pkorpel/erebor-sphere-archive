@@ -1422,4 +1422,40 @@ else
 endif
 
 
+[events e_craft_monster]  // Event pro upravene monstra pro crafty z Fishingu/lumberu/miningu. Jen ty, kteri maji specialni upravu chardefu viz nb_monsters.scp
+ON=@getHit
+if (src.isplayer)    
+  if (src.profession==class_craft)  //Craft - zbran vyrobena kraftem = sance 1/4 na kritik. Jakakoli zbran = fixni dmg 10-20
+    hits=<hits>-{10 20}
+    if (src.findlayer(1))
+      if (src.findlayer(1).isweapon)
+        if (src.findlayer(1).tag(craftedby))
+          if (src.findlayer(1).tag(craftedby) == <src>)
+            if ({1 4} = 2)
+              src.classmessage("<?sex("Zasadil","Zasadila")?> jsi kriticky uder")
+              hits=<hits>-{15 25}
+            endif
+          endif
+        endif
+      endif
+    endif               
+    if (src.findlayer(2))
+      if (src.findlayer(2).isweapon)
+        if (src.findlayer(2).tag(craftedby))
+          if (src.findlayer(2).tag(craftedby) == <src>)
+            if ({1 4} = 2)
+              src.classmessage("<?sex("Zasadil","Zasadila")?> jsi kriticky uder")
+              hits=<hits>-{15 25}
+            endif
+          endif
+        endif
+      endif
+    endif
+  else
+    return 0
+  endif
+endif
+return 0
+
+
 [EOF]
