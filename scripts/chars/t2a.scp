@@ -1149,7 +1149,7 @@ SpiritSpeak=45.0
 
 ITEMnewbie=i_monster_create
 ITEMNEWBIE=i_spellbook
-addspell=s_firebal
+addspell=s_fireball
 addspell=s_lightning
 
 ON=@NPCRestock
