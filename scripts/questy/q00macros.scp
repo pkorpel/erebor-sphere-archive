@@ -81,7 +81,7 @@ elseif (<eval src.findid(i_qf_sign).tag(qfcount)> >= 3) // tady odmenime uspesne
   src.addexp(<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
   src.newitem=i_cashiers_mesec
   lastnew.more=((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)
-  lastnew.cont=src.findlayer(29)
+  lastnew.cont=src.findlayer(layer_bankbox)
   src.findid(i_qf_sign).tag(qfcount,0)
 elseif (src.findid(i_qf_sign).tag(hunted)!=tag(hunted)) //klikne na jinou vyvesku
   src.findid(i_qf_sign).remove
@@ -1046,13 +1046,13 @@ if safe.finduid(<tag(npchrac)>)
     hrac.say("<hrac.sex VYHRAL JSEM!,VYHRALA JSEM!>")
     hrac.newitem=i_cashiers_mesec
     lastnew.more=(<tag(vsazeno)>*2)
-    lastnew.cont=hrac.findlayer(21)
+    lastnew.cont=hrac.findlayer(layer_pack)
     hrac.accMsg("Hrac <hrac.name> (<arg(hrac)>, <arg(hrac).account.name>) vsadil v kostkach <tag(vsazeno)>gp a vyhral - navracen mesec <lastnew> s <eval lastnew.more1>gp.")
   elseif (<tag(npccelkem)>)==(<tag(hraccelkem)>)
     hrac.say("Je to plichta!")
     hrac.newitem=i_cashiers_mesec
     lastnew.more=(<tag(vsazeno)>)
-    lastnew.cont=hrac.findlayer(21)
+    lastnew.cont=hrac.findlayer(layer_pack)
     hrac.sysmessage("Dostavas zpet co sis <hrac.sex("vsadil","vsadila")>.")
     hrac.accMsg("Hrac <hrac.name> (<arg(hrac)>, <arg(hrac).account.name>) vsadil v kostkach <tag(vsazeno)>gp a remizoval - navracen mesec <lastnew> s <eval lastnew.more1>gp.")
   else

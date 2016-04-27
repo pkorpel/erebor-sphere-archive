@@ -403,11 +403,11 @@ arg(int_mp,<eval (int*nastaveni_global_intSM)/1000>)
 arg(spspeak_mp,<eval (spiritspeak*SKILL_SPIRITSPEAK.effect)/1000>)
 arg(sum,<eval ((arg(EI_mp)+arg(int_mp)+arg(spspeak_mp))*nastaveni_global_SM)/1000>)
 tag(SM,<eval arg(sum)*nastaveni_staffSMbonus_barehands>)
-if (findlayer(2))
- if (findlayer(2).type==t_weapon_mace_staff)
-  if (safe nastaveni_staffSMbonus_<findlayer(2).baseid>)
-   arg(diff,<eval (arg(sum)*nastaveni_staffSMbonus_<findlayer(2).baseid>)-tag(SM)>)//rozdil mezi barehands a holi
-   tag(SM,<eval ((tag(SM)+(arg(diff)/2)+((arg(diff)*500)/((findlayer(2).more1h*1000)/findlayer(2).more1l)))+500)/1000>)
+if (findlayer(layer_hand2))
+ if (findlayer(layer_hand2).type==t_weapon_mace_staff)
+  if (safe nastaveni_staffSMbonus_<findlayer(layer_hand2).baseid>)
+   arg(diff,<eval (arg(sum)*nastaveni_staffSMbonus_<findlayer(layer_hand2).baseid>)-tag(SM)>)//rozdil mezi barehands a holi
+   tag(SM,<eval ((tag(SM)+(arg(diff)/2)+((arg(diff)*500)/((findlayer(layer_hand2).more1h*1000)/findlayer(layer_hand2).more1l)))+500)/1000>)
    return 0
   endif
  endif

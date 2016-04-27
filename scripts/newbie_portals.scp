@@ -1348,9 +1348,9 @@ events e_allplayers
 
 [function promazat]
 eqlayers(remove)
-findlayer(21).remove
-findlayer(29).remove
-findlayer(31).remove
+findlayer(layer_pack).remove
+findlayer(layer_bankbox).remove
+findlayer(layer_dragging).remove
 
 [function startrace]
 if (<strlen(<tag(race)>)>)
@@ -1390,9 +1390,9 @@ giveitem(i_rune_base)
 giveitem(i_crystal_<tag.class>)
 newloot(tm_<tag.class>newbie)
 class=<args>
-findlayer(1).bounce
-findlayer(2).bounce
-findlayer(2).bounce
+findlayer(layer_hand1).bounce
+findlayer(layer_hand2).bounce
+findlayer(layer_hand2).bounce
 eqlayers(color=color_<tag.class>)
 startskills
 initChat

@@ -273,12 +273,12 @@ src.sysmessage Vidis velmi uzkou skviru.
 
 
 ON=@step
-if (src.findlayer(25))
-src.sysmessage Tato skvira je velmi uzka na to aby jsi ji protahl tak velké zvire. Sotva se tam vejdes sam.
+if (src.findlayer(layer_horse))
+  src.sysmessage Tato skvira je velmi uzka na to aby jsi ji protahl tak velké zvire. Sotva se tam vejdes sam.
 elseif (<SRC.findtype(t_figurine))
-src.sysmessage Nesmis mit s sebou zvire...
+  src.sysmessage Nesmis mit s sebou zvire...
 else
-src.go 4819,440,5
+  src.go 4819,440,5
 endif
 
 

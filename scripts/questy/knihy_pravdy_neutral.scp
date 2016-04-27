@@ -105,10 +105,10 @@ item=i_gold
 
 ON=@hit
 if (<src.findlayer.1.isweapon>)
-  finduid(src.findlayer(1)).bounce  
+  finduid(src.findlayer(layer_hand1)).bounce  
   src.sysmessage dostal jsi strasnou ranu pri ktere ti vypadla zbran z ruky
 elseif (<src.findlayer.2.isweapon>)
-  finduid(src.findlayer(2)).bounce
+  finduid(src.findlayer(layer_hand2)).bounce
   src.sysmessage dostal jsi strasnou ranu pri ktere ti vypadla zbran z ruky
 endif
 

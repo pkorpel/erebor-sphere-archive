@@ -51,7 +51,7 @@ endif
 
 ON=@StackOn
  Src.sysMessage("Do truhly pridas veci pomoci double-clicku")
- argo.cont=<src.findlayer(21)>
+ argo.cont=<src.findlayer(layer_pack)>
  return 1
 
 /////////// vrata do ohrady 1 ///////////

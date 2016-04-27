@@ -70,7 +70,7 @@ if f_pvp_denyIflMagic_searchCycle
   return 1
 endif
 return 0
-findlayer(21).contents2(f_pvp_removeAllMagic_rm)
+findlayer(layer_pack).contents2(f_pvp_removeAllMagic_rm)
 
 [function f_pvp_denyIflMagic_searchCycle]
 if (<safe rescount>)

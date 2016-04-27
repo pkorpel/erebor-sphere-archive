@@ -32,9 +32,9 @@ endif
 if (isgm)
  return 1
 endif
-if (findlayer(2))
- //if (findlayer(2).isstaff)
-  if (staff_<findlayer(2).baseid> >= material_<args>)
+if (findlayer(layer_hand2))
+ //if (findlayer(layer_hand2).isstaff)
+  if (staff_<findlayer(layer_hand2).baseid> >= material_<args>)
    return 1
   endif
  //endif
@@ -45,9 +45,9 @@ return 0
 if (isgm)
   return 1
 endif
-if (findlayer(2))
-  if (findlayer(2).iscrook)
-    if (crook_<findlayer(2).baseid> >= material_<args>)
+if (findlayer(layer_hand2))
+  if (findlayer(layer_hand2).iscrook)
+    if (crook_<findlayer(layer_hand2).baseid> >= material_<args>)
       return 1
     endif
   endif
@@ -96,8 +96,8 @@ endif
 
 [function convertbombtypesonplayers]//convertbombtypesonplayers
 if (isplayer)||(isgm)
- findlayer(21).convertbombtypes //batoh
- findlayer(29).convertbombtypes //banka
+ findlayer(layer_pack).convertbombtypes //batoh
+ findlayer(layer_bankbox).convertbombtypes //banka
 endif
 
 [function arrowend]
@@ -113,13 +113,12 @@ if (isplayer)
  spelleffect(11,1000) //cure 
  events(+e_spelleffect) 
  say("all stay") //zastavit kone
- eqlayers(cont=<findlayer(21)>) //svléct
+ eqlayers(cont=<findlayer(layer_pack)>) //svléct
  zakladstats //resetovat
 endif
 
 [function keyswipe]
-//findlayer(101).emptycont
-if (cont.layer==101)
+if (cont.layer==<layer_housemenu>)
  remove
 endif
 
@@ -847,7 +846,7 @@ if !(strlen(<src.region.tag(noshrink)>))
     if (0<tag(myhits)>)
       src.act.hits=<tag(myhits)>
     endif
-    src.act.findlayer(21).remove
+    src.act.findlayer(layer_pack).remove
     if(<src.act.id> == c_m_phoenix_poison) || (<src.act.id> == c_m_phoenix)// OPRAVA FENY
       src.act.events=-e_npc_leaper
     endif
@@ -1305,7 +1304,7 @@ src.smsg("Durabilita: <more1l>/<more1h>")
 
 [typedef t_allshields]
 on=@userdclick
-safe src.findlayer(2).bounce
+safe src.findlayer(layer_hand2).bounce
 
 on=@equip
 src.temporary_null
@@ -1347,20 +1346,20 @@ color=color_o_<argv(0)>
 
 [typedef t_uneq_24]
 on=@equip
-safe cont.findlayer(24).unequip
+safe cont.findlayer(layer_legs).unequip
 
 [typedef t_uneq_4]
 on=@equip
-safe cont.findlayer(4).unequip
+safe cont.findlayer(layer_pants).unequip
 
 [typedef t_uneq_5]
 on=@equip
-safe cont.findlayer(5).unequip
+safe cont.findlayer(layer_shirt).unequip
 
 [typedef t_uneq_13_19]
 on=@equip
-safe cont.findlayer(13).unequip
-safe cont.findlayer(19).unequip
+safe cont.findlayer(layer_chest).unequip
+safe cont.findlayer(layer_arms).unequip
 
 [function logdupe]
 arg(mnozstvi,1)
@@ -1378,7 +1377,7 @@ else
 endif
 
 [function fastwalk]
-if (findlayer(25))
+if (findlayer(layer_horse))
   return 0
 endif
 newitem i_mount_fake
@@ -2092,8 +2091,8 @@ return 1  //docasne zastavena funkce - buguje to opravi to snad nekdo kdo vi co 
 switchbow
 
 [function switchbow]
-if (findlayer(2))
-  return <findlayer(2).switchthisbow>
+if (findlayer(layer_hand2))
+  return <findlayer(layer_hand2).switchthisbow>
 endif
 
 [function switchthisbow]
@@ -2446,7 +2445,7 @@ arg(myShrink).tag(MYHITS,<argv(0).hits>)
 arg(myShrink).tag(MYFOOD,<argv(0).food>)
 arg(myShrink).more1=1
 arg(myShrink).type=t_figurine_2
-arg(myShrink).cont=<argv(1).findlayer(21)>
+arg(myShrink).cont=<argv(1).findlayer(layer_pack)>
 arg(myShrink).tag(origTaming,<argv(0).taming>)
 argv(0).remove
 
@@ -2862,12 +2861,12 @@ endif
 return 1
 
 [function hasBow]
-if (findlayer(1))
-  if (findlayer(1).isBow)
+if (findlayer(layer_hand1))
+  if (findlayer(layer_hand1).isBow)
     return 1
   endif
-elseif (findlayer(2))
-  if (findlayer(2).isBow)
+elseif (findlayer(layer_hand2))
+  if (findlayer(layer_hand2).isBow)
     return 1
   endif
 endif
@@ -3165,7 +3164,7 @@ if (src.isplayer)
       contents(nonewbie(drop))
     
       lastnewchar.eqlayers(nonewbie(remove))
-      lastnewchar.findlayer(21).contents(nonewbie(remove))
+      lastnewchar.findlayer(layer_pack).contents(nonewbie(remove))
       lastnewchar.p=<p>
       lastnewchar.updatex
       lastnewchar.tag(isAnimated,1)
@@ -3321,13 +3320,13 @@ sysMessage("Topobj: <act.topobj.name>, <act.topobj.uid>")
 sysMessage("Amount: <act.amount>")
 
 [function usering]
-safe(findlayer(8).dclick)
+safe(findlayer(layer_ring).dclick)
 
 [function usehand]
-if (findlayer(1))
- findlayer(1).dclick
+if (findlayer(layer_hand1))
+ findlayer(layer_hand1).dclick
 else
- findlayer(2).dclick
+ findlayer(layer_hand2).dclick
 endif
 
 [function guardit]
@@ -4505,7 +4504,7 @@ endif
 //[function changeshield]
 //if (memoryfindtype(0400))
 // if (memoryfindtype(0400).link.align)
-//  if (findlayer(2).isshield)
+//  if (findlayer(layer_hand2).isshield)
 //   act=<findlayer.2.uid>
 //  else
 //   newitem i_shield_null
@@ -4804,8 +4803,8 @@ if (action==skill_wrestling)
 elseif (action==skill_swordsmanship)
 elseif (action==skill_fencing)
 elseif (action==skill_macefighting)
-  if (itemExists(<findlayer(2)>))
-    if (findlayer(2).type==t_weapon_bow_run)
+  if (itemExists(<findlayer(layer_hand2)>))
+    if (findlayer(layer_hand2).type==t_weapon_bow_run)
       return 0
     endif
   endif
@@ -4818,8 +4817,8 @@ return 1
 if (action==skill_archery)
   return 1
 elseif (action==skill_macefighting)
-  if (itemExists(<findlayer(2)>))
-    if (findlayer(2).type==t_weapon_bow_run)
+  if (itemExists(<findlayer(layer_hand2)>))
+    if (findlayer(layer_hand2).type==t_weapon_bow_run)
       return 1
     endif
   endif
@@ -4919,12 +4918,12 @@ return 1
 
 [function isArmed]
 
-if (src.findlayer(1))
-  if (src.findlayer(1).isweapon)
+if (src.findlayer(layer_hand1))
+  if (src.findlayer(layer_hand1).isweapon)
     return 1
   endif
-elseif (src.findlayer(2))
-  if (src.findlayer(2).isweapon)
+elseif (src.findlayer(layer_hand2))
+  if (src.findlayer(layer_hand2).isweapon)
     return 1
   endif
 endif
@@ -4943,7 +4942,7 @@ arg(shouldpay,<eval args>)
 if (src.isgm)
   return 2
 endif
-arg(totalgold,<eval findlayer(21).rescount(t_gold)+bankbalance>)
+arg(totalgold,<eval findlayer(layer_pack).rescount(t_gold)+bankbalance>)
 if (arg(shouldpay)>arg(totalgold)) //the amount to pay is more then you own??
   return 0
 else
@@ -4957,11 +4956,11 @@ if (src.isgm)
   return 1
 endif
 if (canPay(<arg(shouldpay)>)) //you have enough to pay
-  if (arg(shouldpay) > src.findlayer(21).rescount(t_gold)) // don't have enought money in the backpack
-    findlayer(29).consumegoldamount(<eval arg(shouldpay)-findlayer(21).rescount(t_gold)>) //remove the rest of the money from bank
-    findlayer(21).consumeallgold //pay all the money from backpack
+  if (arg(shouldpay) > src.findlayer(layer_pack).rescount(t_gold)) // don't have enought money in the backpack
+    findlayer(layer_bankbox).consumegoldamount(<eval arg(shouldpay)-findlayer(layer_pack).rescount(t_gold)>) //remove the rest of the money from bank
+    findlayer(layer_pack).consumeallgold //pay all the money from backpack
   else
-    findlayer(21).consumegoldamount(<arg(shouldpay)>) // pay only the necessarry amount from the backpack
+    findlayer(layer_pack).consumegoldamount(<arg(shouldpay)>) // pay only the necessarry amount from the backpack
   endif
   accmsg("Has paied #<arg(shouldpay)># gp.")
   return 1
@@ -5121,7 +5120,7 @@ endif
 
 [function bounceitem]
 newitemsafe(<args>)
-lastnew.cont=<findlayer(21)>
+lastnew.cont=<findlayer(layer_pack)>
 
 [function giveitem]
 if (ischar)
@@ -5456,9 +5455,9 @@ arg(TEMPTYPE,<type>)
 type=t_packbankcheck
 if (TOPOBJ == UID)
   arg(RETURN,0)
-ELSEIF (TOPOBJ.FINDLAYER(21).FINDTYPE(t_packbankcheck))
+ELSEIF (TOPOBJ.findlayer(layer_pack).FINDTYPE(t_packbankcheck))
   arg(RETURN,1)
-ELSEIF (TOPOBJ.FINDLAYER(29).FINDTYPE(t_packbankcheck))
+ELSEIF (TOPOBJ.findlayer(layer_bankbox).FINDTYPE(t_packbankcheck))
   arg(RETURN,2)
 ENDIF
 type=<arg(TEMPTYPE)>
@@ -5468,13 +5467,13 @@ RETURN <arg(RETURN)>
 if (finduid(tag(reccont)))
   if (tag(reccont).iscontainer)
     if (tag(reccont).topobj==uid)
-      if (tag(reccont).packorbank==1)||(tag(reccont)==findlayer(21))
+      if (tag(reccont).packorbank==1)||(tag(reccont)==findlayer(layer_pack))
         return <tag(reccont)>
       endif
     endif
   endif
 endif
-return <findlayer(21)>
+return <findlayer(layer_pack)>
 
 [function setreceivingcontainer]
 if (findid(i_reccont))
@@ -5655,8 +5654,8 @@ endif
 if (flag_nightsight==1)||(<sector.light> < <eval {0 64}>)||(isneartype(t_light_lit,2))||(safe findid(i_hypno_delka))
   return 0
 else 
-  if (findlayer(2))
-    if (findlayer(2).type==t_light_lit)      
+  if (findlayer(layer_hand2))
+    if (findlayer(layer_hand2).type==t_light_lit)      
       return 0
     else
       if (<argv(0)>)
@@ -6319,34 +6318,34 @@ return <arg(armorCount)>
 
 [function armorCountLogIn]//pri logine to spocita armorCount -> je to novy tag tak aby s tym neboli problemy // ak to bude niekto menit tak mente rovnako aj tie cisla vo funkcii returnArmorByLayer (tie nasobitele)
 arg(countedArmor,0)
-if (<findlayer(2)>)
-  if (findlayer(2).type==t_shield)
-    arg(countedArmor,#+(<findlayer(4).typedef.tdata1>))
+if (<findlayer(layer_hand2)>)
+  if (findlayer(layer_hand2).type==t_shield)
+    arg(countedArmor,#+(<findlayer(layer_pants).typedef.tdata1>))
   endif
 endif
-if (<findlayer(4)>)
-  if (findlayer(4).type==t_armor) || (findlayer(4).type==t_armor_leather)
-    arg(countedArmor,#+(3*<findlayer(4).typedef.tdata1>))
+if (<findlayer(layer_pants)>)
+  if (findlayer(layer_pants).type==t_armor) || (findlayer(layer_pants).type==t_armor_leather)
+    arg(countedArmor,#+(3*<findlayer(layer_pants).typedef.tdata1>))
   endif
 endif
-if (<findlayer(6)>)
-  if (findlayer(6).type==t_armor) || (findlayer(6).type==t_armor_leather)
-    arg(countedArmor,#+(2*<findlayer(6).typedef.tdata1>))
+if (<findlayer(layer_helm)>)
+  if (findlayer(layer_helm).type==t_armor) || (findlayer(layer_helm).type==t_armor_leather)
+    arg(countedArmor,#+(2*<findlayer(layer_helm).typedef.tdata1>))
   endif
 endif
-if (<findlayer(7)>)
-  if (findlayer(7).type==t_armor) || (findlayer(7).type==t_armor_leather)
-    arg(countedArmor,#+(<findlayer(13).typedef.tdata1>))
+if (<findlayer(layer_gloves)>)
+  if (findlayer(layer_gloves).type==t_armor) || (findlayer(layer_gloves).type==t_armor_leather)
+    arg(countedArmor,#+(<findlayer(layer_chest).typedef.tdata1>))
   endif
 endif
-if (<findlayer(13)>)
-  if (findlayer(13).type==t_armor) || (findlayer(13).type==t_armor_leather)
-    arg(countedArmor,#+(4*<findlayer(13).typedef.tdata1>))
+if (<findlayer(layer_chest)>)
+  if (findlayer(layer_chest).type==t_armor) || (findlayer(layer_chest).type==t_armor_leather)
+    arg(countedArmor,#+(4*<findlayer(layer_chest).typedef.tdata1>))
   endif
 endif
-if (<findlayer(19)>)
-  if (findlayer(19).type==t_armor) || (findlayer(19).type==t_armor_leather)
-    arg(countedArmor,#+(2*<findlayer(19).typedef.tdata1>))
+if (<findlayer(layer_arms)>)
+  if (findlayer(layer_arms).type==t_armor) || (findlayer(layer_arms).type==t_armor_leather)
+    arg(countedArmor,#+(2*<findlayer(layer_arms).typedef.tdata1>))
   endif
 endif
 tag.armorCount=<arg(countedArmor)>

@@ -2382,7 +2382,7 @@ ON=@userDClick
 if ( <LINK.TOPOBJ.UID> != <src.UID> )  
  return 1
 ENDIF
-if (src.FINDLAYER(1).id==i_pickaxe)
+if (src.findlayer(layer_hand1).id==i_pickaxe)
  src.ANIM=0B
  SOUND=0126  //kopani?
 else
