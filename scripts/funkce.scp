@@ -4916,15 +4916,15 @@ return 0
 endif
 return 1
 
-[function isArmed]
+[function getArmed]
 arg(arm,<findlayer(layer_hand1)>)
-if (0<arg(arm)>)
+if (<arg(arm)>)
   if (arg(arm).isweapon)
     return<arg(arm)>
   endif
 else
   arg(arm,<findlayer(layer_hand2)>)
-  if (0<arg(arm)>)
+  if (<arg(arm)>)
     if (arg(arm).isweapon)
       return<arg(arm)>
     endif
