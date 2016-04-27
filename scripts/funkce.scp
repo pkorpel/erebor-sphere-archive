@@ -4917,13 +4917,13 @@ endif
 return 1
 
 [function isArmed]
-arg(arm,src.findlayer(layer_hand1))
+arg(arm,<findlayer(layer_hand1)>)
 if (0<arg(arm)>)
   if (arg(arm).isweapon)
     return<arg(arm)>
   endif
 else
-  arg(arm,src.findlayer(layer_hand2))
+  arg(arm,<findlayer(layer_hand2)>)
   if (0<arg(arm)>)
     if (arg(arm).isweapon)
       return<arg(arm)>
