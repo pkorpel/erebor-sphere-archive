@@ -4917,14 +4917,17 @@ endif
 return 1
 
 [function isArmed]
-
-if (src.findlayer(layer_hand1))
-  if (src.findlayer(layer_hand1).isweapon)
-    return 1
+arg(arm,src.findlayer(layer_hand1))
+if (0<arg(arm)>)
+  if (arg(arm).isweapon)
+    return<arg(arm)>
   endif
-elseif (src.findlayer(layer_hand2))
-  if (src.findlayer(layer_hand2).isweapon)
-    return 1
+else
+  arg(arm,src.findlayer(layer_hand2))
+  if (0<arg(arm)>)
+    if (arg(arm).isweapon)
+      return<arg(arm)>
+    endif
   endif
 endif
 return 0
