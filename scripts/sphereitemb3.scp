@@ -756,6 +756,42 @@ color=0481
 on=@userdclick
 return <f_necrobook>
 
+[ITEMDEF i_spellbook_pvp]
+ID=i_spellbook
+name=PVPEVENT
+value=300
+
+ON=@Create
+morem=1
+morex=0ff
+addspell=s_harm
+addspell=s_fireball
+addspell=s_dispel
+addspell=s_energy_bolt
+addspell=s_magic_reflection
+addspell=s_mind_blast
+addspell=s_night_sight
+addspell=s_poison
+addspell=s_cure
+addspell=s_heal
+addspell=s_greater_heal
+addspell=s_clumsy
+addspell=s_feeblemind
+addspell=s_magic_arrow
+addspell=s_weaken
+addspell=s_paralyze
+addspell=s_flamestrike
+addspell=s_curse
+addspell=s_teleport
+addspell=s_reactive_Armor
+addspell=s_reveal
+addspell=s_cunning
+addspell=s_protection
+color=038d
+
+on=@userdclick
+return <f_necrobook>
+
 [ITEMDEF 0eff]
 //Hair Dye
 DUPEITEM=0e27
