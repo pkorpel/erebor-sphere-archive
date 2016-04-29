@@ -4244,12 +4244,10 @@ safe(findlayer(layer_shirt).<args>)
 safe(findlayer(layer_helm).<args>)
 safe(findlayer(layer_gloves).<args>)
 safe(findlayer(layer_ring).<args>)
-safe(findlayer(layer_light).<args>)
 safe(findlayer(layer_collar).<args>)
 safe(findlayer(layer_half_apron).<args>)
 safe(findlayer(layer_chest).<args>)
 safe(findlayer(layer_wrist).<args>)
-safe(findlayer(layer_beard).<args>)
 safe(findlayer(layer_tunic).<args>)
 safe(findlayer(layer_ears).<args>)
 safe(findlayer(layer_arms).<args>)
@@ -4257,7 +4255,6 @@ safe(findlayer(layer_cape).<args>)
 safe(findlayer(layer_robe).<args>)
 safe(findlayer(layer_skirt).<args>)
 safe(findlayer(layer_legs).<args>)
-safe(findlayer(layer_horse).<args>)
 
 [function eqvendorlayers]
 safe(findlayer(layer_hand1).<args>)
@@ -4281,6 +4278,356 @@ safe(findlayer(layer_cape).<args>)
 safe(findlayer(layer_robe).<args>)
 safe(findlayer(layer_skirt).<args>)
 safe(findlayer(layer_legs).<args>)
+
+//** main equip add function
+//** args: iron,copper,verite,valorite,obsidian,adamantinum,mithril
+
+[function f_varGate_pvpIn]
+if !(safe(<<i_<args>_platemail>.def>))
+ src.redmessage(Nelze volat funkci s timto parametrem: <args>.)
+ return 1
+endif
+
+src.newitemsafe(i_backpack)
+lastnew.name=Vybava z turnaje
+lastnew.color=012B
+lastnew.cont=<src.findlayer(layer_bankbox)>
+
+src.eqlayers(bounce)
+arg(findcount_length,0)
+arg(backpack,<SRC.FINDLAYER(layer_pack)>)
+arg(matros,<args>)
+
+while(<eval backpack.findcont.<findcount_length>.UID>)
+ arg(findcount_length,#+1)
+endwhile
+
+arg(findcount_length,#-1)
+
+while(findcount_length>=0)
+  arg(inventory_item,<backpack.FINDCONT.<findcount_length>.UID>)
+  if !(<eval inventory_item.attr_movenever>)
+   inventory_item.cont=<lastnew.uid>
+  endif
+ arg(findcount_length,#-1)
+endwhile
+
+//spolecne
+src.newitemsafe(i_bottle_empty)
+lastnew.amount=20
+lastnew.bounce
+src.newitemsafe(i_spellbook_pvp)
+lastnew.bounce
+src.newitemsafe(i_bandage)
+lastnew.amount=40
+lastnew.bounce
+src.newitemsafe(i_fish_cut_cooked)
+lastnew.amount=15
+lastnew.bounce
+src.newitemsafe(i_pet_llama)
+lastnew.bounce
+
+// WAR
+if (src.profession==class_war)
+src.newitemsafe(i_<matros>_platemail)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_leggings)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_gauntlets)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_plate_helm)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_gorget)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_arms)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_heater_shield)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_katana_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_halberd_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce¨
+src.newitemsafe(i_axe_double_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_hammer_war_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+endif
+
+// TYF
+if (src.profession==class_thief)
+src.newitemsafe(i_<matros>_chainmail_tunic)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_chainmail_leggings)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_chainmail_gloves)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_chainmail_coif)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_chainmail_gorget)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_chainmail_sleeves)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_metal_shield)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_kryss_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_scimitar_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_cutlass_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_kudla)
+lastnew.amount=40
+lastnew.bounce
+endif
+
+// MAG
+if (src.profession==class_mag)
+src.newitemsafe(i_studded_sleeves_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_cap_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_gloves_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_gorget_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_leggings_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_tunic_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_staff_gnarled_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+endif
+
+// KLERIK
+if (src.profession==class_priest)
+src.newitemsafe(i_<matros>_platemail)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_leggings)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_gauntlets)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_plate_helm)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_gorget)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_arms)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_heater_shield)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_hammer_pick_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_mace_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+endif
+
+// NEKRO
+if (src.profession==class_necro)
+src.newitemsafe(i_bone_chest_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_bone_gloves_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_bone_helmet_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_bone_arms_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_bone_leggings_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_staff_gnarled_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+endif
+
+// MYSTIK
+if (src.profession==class_mystik)
+src.newitemsafe(i_studded_sleeves_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_cap_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_gloves_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_gorget_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_leggings_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_studded_tunic_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_staff_gnarled_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+endif
+
+// SHAMAN
+if (src.profession==class_shaman)
+src.newitemsafe(i_<matros>_ringmail_tunic)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_gloves)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_sleeves)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_leggings)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_helm)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_gorget)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_staff_gnarled_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+endif
+
+// KRAFT
+if (src.profession==class_craft)
+src.newitemsafe(i_<matros>_platemail)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_leggings)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_gauntlets)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_plate_helm)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_gorget)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_platemail_arms)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_heater_shield)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_crossbow_heavy_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_katana_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_xbolt_piercing_verite)
+lastnew.amount=50
+lastnew.bounce
+endif
+
+// RANG
+if (src.profession==class_ranger)
+src.newitemsafe(i_<matros>_ringmail_tunic)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_gloves)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_sleeves)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_leggings)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_helm)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_ringmail_gorget)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_<matros>_kite_wood_shield)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_bow_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_crossbow_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_crossbow_heavy_<matros>)
+lastnew.name=PVPEVENT
+lastnew.bounce
+src.newitemsafe(i_xbolt_piercing_verite)
+lastnew.amount=20
+lastnew.bounce
+src.newitemsafe(i_arrow_piercing_verite)
+lastnew.amount=100
+lastnew.bounce
+src.newitemsafe(i_bolt_jagged_verite)
+lastnew.amount=20
+lastnew.bounce
+endif
+return 0
+
+
+//** main equip removal function
+
+[function f_varGate_pvpOut]
+src.eqlayers(bounce)
+arg(findcount_length,0)
+arg(backpack,<SRC.FINDLAYER(layer_pack)>)
+
+while(<eval backpack.findcont.<findcount_length>.UID>)
+ arg(findcount_length,#+1)
+endwhile
+
+arg(findcount_length,#-1)
+
+while(findcount_length>=0)
+  arg(inventory_item,<backpack.FINDCONT.<findcount_length>.UID>)
+  if !(<eval inventory_item.attr_movenever>)
+   inventory_item.remove
+  endif
+ arg(findcount_length,#-1)
+endwhile
 
 
 [function layerremove]
