@@ -3374,9 +3374,9 @@ tag(resist_cold,500)
 
 wrestling=90.0
 PARRYING={45.0 50.0}
-TACTICS={85.0 100.0}
+TACTICS={75.0 100.0}
 RESIST={85.0 100.0}
-ARCHERY=100.0
+ARCHERY={85.0 100.0}
 SpiritSpeak=35.0
 
 ITEMnewbie=i_monster_create
@@ -3821,8 +3821,8 @@ tag(resist_bleed,1000)
 //weap resists
 tag(resist_sharp,400) //u elemu ruzne
 tag(resist_slash,200) //u elemu ruzne
-tag(resist_pierce,300) //u elemu ruzne
-tag(resist_blunt,-300) //u elemu ruzne
+tag(resist_pierce,100) //u elemu ruzne
+tag(resist_blunt,-400) //u elemu ruzne
 
 //magic resists
 tag(resist_fire,600) //u elemu ruzne
@@ -3834,10 +3834,10 @@ tag(monstertype,earth) //u elemu ruzne
 //weap flags
 tag.weapflag=dam_blunt|dam_physical //ruzne
 
-WRESTLING={70.0 90.0}
-PARRYING={85.0 90.0}
-TACTICS={75.0 90.0}
-RESIST={85.0 90.0}
+WRESTLING={65.0 90.0}
+PARRYING={60.0 70.0}
+TACTICS={60.0 80.0}
+RESIST={70.0 90.0}
 SpiritSpeak=35.0
 
 ITEMnewbie=i_monster_create
