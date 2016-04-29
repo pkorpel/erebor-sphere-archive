@@ -77,31 +77,15 @@ MENU MENU_PAGEGM
 
 
 ON=0 Nouzovy teleport (stuck help): pouzij pri zaseku ci pokud jsi se ztratil - po casovem limitu budes prenesen do sveho domovskeho mesta.
-IF (src.tag(arena))||(src.tag(trestanec))||(<src.region.flags>==06d9f)||(<strlen(<src.region.tag(knihovna)>)>)
+if (src.tag(arena))||(src.tag(trestanec))||(<src.region.flags>==06d9f)||(<strlen(<src.region.tag(knihovna)>)>)
   src.raceMessage("Zde nemuzes pouzit Helproom.")
-ELSE
-  if (strcmpi(<src.region.name>,"tutorial"))
-    if (strcmpi(<src.region.name>,"tutorial high"))
-      if (strcmpi(<src.region.name>,"Start room"))
-        if (strcmpi(<src.region.name>,"Start room NB"))
-          if (strcmpi(<src.region.name>,"Start realmu"))
-          MENU MENU_helproom
-          else
-            src.raceMessage("Zde nemuzes pouzit Helproom.")
-          endif
-        else
-          src.raceMessage("Zde nemuzes pouzit Helproom.")
-        endif
-      else
-        src.raceMessage("Zde nemuzes pouzit Helproom.")
-      endif
-    else
-      src.raceMessage("Zde nemuzes pouzit Helproom.")
-    endif  
+else
+  if !(src.region.tag(nostuck))  // Druha moznost (vygrepovana) (Funguji obe-testovano): !(<strlen(<src.region.tag(nostuck)>)>)   
+    MENU MENU_helproom
   else
     src.raceMessage("Zde nemuzes pouzit Helproom.")
-  endif  
-ENDIF
+  endif     
+endif
 
 ////////////////////////
 
@@ -425,7 +409,7 @@ VIEWTHREATS
 
 [MENU MENU_TOWN_MAYORFUNC]
 Town of <Name>, Mayoral functions
-ON=0 Zadej nazev mesta. // tato volba automaticky nastaví gildovní zamereni na Or/cha ... Gondor/mordor
+ON=0 Zadej nazev mesta. // tato volba automaticky nastav  gildovn  zamereni na Or/cha ... Gondor/mordor
  //if (<region.tag...
   //CHANGEALIGN 2 //chaoss - mordorani
  //elseif (<region.tag
