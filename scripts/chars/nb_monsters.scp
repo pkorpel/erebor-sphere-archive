@@ -2963,6 +2963,7 @@ BLOODCOLOR=020
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_ovinovac
+TEVENTS=e_craft_monster
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -3043,6 +3044,7 @@ DESCRIPTION=Krysa pro crafty
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_craft_monster
 
 ON=@Create
 NPC=brain_monster
@@ -3111,6 +3113,7 @@ DESCRIPTION=Vlk pro crafty
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_craft_monster
 
 ON=@Create
 NPC=brain_monster
@@ -3180,7 +3183,7 @@ CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
-//TEVENTS=e_npc_stun
+TEVENTS=e_craft_monster
 
 ON=@Create
 NPC=brain_monster
@@ -3188,14 +3191,14 @@ FAME=10
 KARMA={-1000 -1500}
 
 str=120
-dex=150
+dex=120
 int=50
 
 maxhits=450
 maxstam=100
 maxmana=0
 
-tag.experience=<eval {44.0 46.0}>
+tag.experience=<eval {30.0 35.0}>
 
 //tag.npc_bleed=10
 
@@ -3249,6 +3252,7 @@ BLOODCOLOR=020
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_craft_monster
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -3324,6 +3328,7 @@ BloodColor=098b
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_stun
+TEVENTS=e_craft_monster
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -3369,9 +3374,9 @@ tag(resist_cold,500)
 
 wrestling=90.0
 PARRYING={45.0 50.0}
-TACTICS={85.0 100.0}
+TACTICS={75.0 100.0}
 RESIST={85.0 100.0}
-ARCHERY=100.0
+ARCHERY={85.0 100.0}
 SpiritSpeak=35.0
 
 ITEMnewbie=i_monster_create
@@ -3400,6 +3405,7 @@ BLOODCOLOR=072c
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_ovinovac
+TEVENTS=e_craft_monster
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -3472,6 +3478,7 @@ RESOURCES=4 i_ribs_raw
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_craft_monster
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -3546,6 +3553,7 @@ BLOODCOLOR=colors_gray
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_craft_monster
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -3623,6 +3631,7 @@ BLOODCOLOR=colors_gray
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_craft_monster
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -3699,6 +3708,7 @@ BLOODCOLOR=colors_gray
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_craft_monster
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -3754,6 +3764,86 @@ itemnewbie=i_spellbook
 addspell=s_fireball
 
 ON=@NPCRestock
+ITEM=i_gold
+
+/////////////////////////////////////////////////
+[CHARDEF c_elem_earth_craft]
+ID=c_elem_earth_m
+NAME=Elemental Zeme
+SOUND=snd_ELEMENTL_ERTHEL1
+ICON=i_pet_elem_earth
+CAN=MT_WALK
+
+attack=25
+ARMOR=45
+moverate=3
+
+BLOODCOLOR=072c
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_earth
+TEVENTS=e_craft_monster
+
+CATEGORY=Monsters
+SUBSECTION=Special
+DESCRIPTION=x Earth Elemental (pro crafty)
+
+ON=@Create
+color= {0709 0751}
+NPC=brain_monster
+FAME={10 20}
+KARMA=-3500
+
+STR={475 525}
+DEX={65 90}
+INT={5 10}
+
+maxhits={475 525}
+maxstam={85 95}
+maxmana=0
+
+tag.experience=<eval {20.0 23.0}>
+
+//mystik
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
+
+//other resists
+tag(resist_poison,1000)
+tag.resist_para=<eval {250 350}>
+tag(resist_summon,100)
+tag(resist_bleed,1000)
+
+//weap resists
+tag(resist_sharp,400) //u elemu ruzne
+tag(resist_slash,200) //u elemu ruzne
+tag(resist_pierce,100) //u elemu ruzne
+tag(resist_blunt,-400) //u elemu ruzne
+
+//magic resists
+tag(resist_fire,600) //u elemu ruzne
+tag(resist_elect,-200) //u elemu ruzne
+tag(resist_cold,-200) //u elemu ruzne
+
+//typ monstra
+tag(monstertype,earth) //u elemu ruzne
+//weap flags
+tag.weapflag=dam_blunt|dam_physical //ruzne
+
+WRESTLING={65.0 90.0}
+PARRYING={60.0 70.0}
+TACTICS={60.0 80.0}
+RESIST={70.0 90.0}
+SpiritSpeak=35.0
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=loot_elem
 ITEM=i_gold
 
 /////////////////////////////////////////////////
