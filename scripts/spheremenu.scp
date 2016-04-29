@@ -409,7 +409,7 @@ VIEWTHREATS
 
 [MENU MENU_TOWN_MAYORFUNC]
 Town of <Name>, Mayoral functions
-ON=0 Zadej nazev mesta. // tato volba automaticky nastav  gildovn  zamereni na Or/cha ... Gondor/mordor
+ON=0 Zadej nazev mesta. // tato volba automaticky nastavi  gildovni  zamereni na Or/cha ... Gondor/mordor
  //if (<region.tag...
   //CHANGEALIGN 2 //chaoss - mordorani
  //elseif (<region.tag
