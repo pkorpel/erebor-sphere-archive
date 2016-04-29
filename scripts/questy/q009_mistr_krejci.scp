@@ -32,7 +32,7 @@ elseif ((<src.tag.q009_krejci> == 2) && (<src.tag.q009_krejci_ringtime> < <serv.
 elseif (<src.tag.q009_krejci> == 2)
   src.tag.q009_krejci_ringtime= (<src.tag(q009_krejci_ringtime)>+10800)
   DIALOG(d_q009_krejci_4)
-elseif ((<src.tag.q009_krejci> == 1) && (<src.findlayer(21).findid(i_cashiers_check).more1> == 5000000 ))
+elseif ((<src.tag.q009_krejci> == 1) && (<src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 ))
   DIALOG(d_q009_krejci_3)
 elseif (<src.tag.q009_krejci> == 1)
   DIALOG(d_q009_krejci_2)
@@ -256,9 +256,9 @@ Mas jen me slovo a jistotu, ze opustit toto staveni by pro mne bylo tezsi nez sm
 
 [dialog d_q009_krejci_3 button]
 on=1
- if (<src.findlayer(21).findid(i_cashiers_check).more1> == 5000000 )
+ if (<src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 )
    SAY=Tedy dohodnuto, stav se zde zitra, prsten by mel byt pripraven.
-   src.findlayer(21).findid(i_cashiers_check).remove
+   src.findlayer(layer_pack).findid(i_cashiers_check).remove
    src.tag.q009_krejci_ringtime= (<serv.time>+86400)
    src.tag.q009_krejci=2
  else

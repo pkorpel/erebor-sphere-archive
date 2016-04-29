@@ -45,14 +45,14 @@ if (finduid(tag(weaponuid)))
  endif
 endif
 tag(weaponuid,0)
-if (findlayer(1))
- if (findlayer(1).isweapon)
-  tag(weaponuid,<findlayer(1)>)
+if (findlayer(layer_hand1))
+ if (findlayer(layer_hand1).isweapon)
+  tag(weaponuid,<findlayer(layer_hand1)>)
  endif
 endif
-if (findlayer(2))
- if (findlayer(2).isweapon)
-  tag(weaponuid,<findlayer(2)>)
+if (findlayer(layer_hand2))
+ if (findlayer(layer_hand2).isweapon)
+  tag(weaponuid,<findlayer(layer_hand2)>)
  endif
 endif
 return <tag(weaponuid)>
@@ -300,12 +300,12 @@ damage_final(<src>)
 if !(<src.isplayer>)
   if (<var(is_physical)>)
   	if (<eval tag(ra_thief_rebound)> > 0)
-  		if (findlayer(1))
-  		if (findlayer(1).dispid == i_kryss)||(findlayer(1).dispid == 01401)
+  		if (findlayer(layer_hand1))
+  		if (findlayer(layer_hand1).dispid == i_kryss)||(findlayer(layer_hand1).dispid == 01401)
   			arg(chance,100)
-  		elseif (findlayer(1).dispid == i_scimitar)||(findlayer(1).dispid == 013B6)
+  		elseif (findlayer(layer_hand1).dispid == i_scimitar)||(findlayer(layer_hand1).dispid == 013B6)
   			arg(chance,50)
-  		elseif (findlayer(1).dispid == i_cutlass)||(findlayer(1).dispid == 01441)
+  		elseif (findlayer(layer_hand1).dispid == i_cutlass)||(findlayer(layer_hand1).dispid == 01441)
   			arg(chance,150)
   		else
   			return 0
@@ -402,7 +402,7 @@ endif
 //ensures minimal damage for wrestling dmg
 [function f_dmgFinal_PvX_minimalDMG]
 if (src.isplayer)
-  if(<eval src.tag(atskill)>==43)&&(!src.findlayer(1))&&(!src.findlayer(2))&&(!<eval src.tag(hypno_mystik)>)  //wrestling, beze zbrane
+  if(<eval src.tag(atskill)>==43)&&(!src.findlayer(layer_hand1))&&(!src.findlayer(layer_hand2))&&(!<eval src.tag(hypno_mystik)>)  //wrestling, beze zbrane
     if (!<var(absoluteResist)>) //low dmg was caused due to the enemy's absolute resist against the attack
       if (!<var(ubrano)>)
         var(ubrano,1) //kvuli odparovani a mozna taky klerici si nejakej ten exp privydelaj!
@@ -520,9 +520,9 @@ while (i<argvcount)
   arg(i,#+1)
 endwhile
 if (flag_hasshield)
-  if (itemExists(<findlayer(2)>))
-    arg(localARsum,#+<eval 2*(<findlayer(2).typedef.armor>)>)
-    findlayer(2).damage(<eval ((<var(ubrano)>*<nastaveni_global_armorIdam>)/((<arg(localARsum)>*1000)/(2*<findlayer(2).typedef.armor>)))>)
+  if (itemExists(<findlayer(layer_hand2)>))
+    arg(localARsum,#+<eval 2*(<findlayer(layer_hand2).typedef.armor>)>)
+    findlayer(layer_hand2).damage(<eval ((<var(ubrano)>*<nastaveni_global_armorIdam>)/((<arg(localARsum)>*1000)/(2*<findlayer(layer_hand2).typedef.armor>)))>)
   endif
 endif
 arg(i,0)

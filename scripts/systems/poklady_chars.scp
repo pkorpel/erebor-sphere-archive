@@ -23,6 +23,11 @@ equip(act)
 
 on=@userClick
 //invis=1
+ 
+on=@spelleffect
+if (argn==48)
+  return 1          
+endif                       
 
 on=@userDClick
 if (src.isGM)

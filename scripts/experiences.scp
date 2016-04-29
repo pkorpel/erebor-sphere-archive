@@ -85,7 +85,7 @@ endif
 return 1
 
 [function f_deadcheck]
-findlayer(32).remove
+findlayer(layer_spell_stats).remove
 findid(i_honorcounter).remove
 findid(i_fearcounter).remove
 f_kontrolastats
@@ -410,12 +410,12 @@ else
 endif
 
 [function bouncepoint]
-if (findlayer(21).findid(i_dovedbod))
-  findlayer(21).findid(i_dovedbod).amount=<findlayer(21).findid(i_dovedbod).amount>+<args>
+if (findlayer(layer_pack).findid(i_dovedbod))
+  findlayer(layer_pack).findid(i_dovedbod).amount=<findlayer(layer_pack).findid(i_dovedbod).amount>+<args>
 else
   newitemsafe(i_dovedbod)
   lastnew.amount=<args>
-  lastnew.cont=<findlayer(21)>
+  lastnew.cont=<findlayer(layer_pack)>
 endif
 
 [function f_setmainability]

@@ -1693,7 +1693,7 @@ if (<flag_invul>==1)//ak nahodou ostal
 endif
 
 //na dvourucky (lba a podobne)  aby mel cca 95% sanci ze tu  ranu vrati normal  a cca 33% ze vrati ale s dvojnasob dmg
-if (<act.findlayer(2).typedef.twohands>)  //ak udrej s dvojruckou
+if (<act.findlayer(layer_hand2).typedef.twohands>)  //ak udrej s dvojruckou
   if (90 > {0 100})
     if (33 > {0 100})
       src.damage(2*<var(ubrano)>,<tag(weapflags)>)

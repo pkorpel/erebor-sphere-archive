@@ -243,19 +243,19 @@ return 1
 [function startfinal]
 //if (canbeclass(<?races_<args>?>))
 eqlayers(remove)
-findlayer(21).remove
-findlayer(31).remove
+findlayer(layer_pack).remove
+findlayer(layer_dragging).remove
 givegold(15000)
 giveitem(i_rune_base)
 giveitem(i_crystal_<tag.class>)
 newloot(tm_<tag.class>newbie)
-findlayer(1).bounce
-findlayer(2).bounce
-findlayer(2).bounce
+findlayer(layer_hand1).bounce
+findlayer(layer_hand2).bounce
+findlayer(layer_hand2).bounce
 eqlayers(color=color_<tag.class>)
 arg(kolik_bodu,<eval <tag(level)>*5>)
-while(findlayer(21).findid(i_dovedbod))
-   findlayer(21).findid(i_dovedbod).remove
+while(findlayer(layer_pack).findid(i_dovedbod))
+   findlayer(layer_pack).findid(i_dovedbod).remove
 endwhile
 if(<arg(kolik_bodu)>) //pokud to neni nula, jinak nedostane nic!
   bouncepoint(<arg(kolik_bodu)>)
@@ -406,9 +406,9 @@ if ((profession==class_mystik) || (isGM))
  lastnew.attr=014 //newbie, movenever
  lastnew.cont=<tag(moje_alter_ego)>
  lastnew.update
- newitemsafe(safe <findlayer(11).dispid>) //vlasy
+ newitemsafe(safe <findlayer(layer_hair).dispid>) //vlasy
  lastnew.layer=11
- lastnew.color=<findlayer(11).color>
+ lastnew.color=<findlayer(layer_hair).color>
  lastnew.cont=<tag(moje_alter_ego)>
  lastnew.update
 

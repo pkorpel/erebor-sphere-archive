@@ -68,7 +68,7 @@ argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"<eval f_treasure_coun
 
 argo.newTextLine(<argo.dialog_textpos(2,0,0,3)>,<d_def_readcolor>,"Spawnu v bance:")
 var(lastxpos,#+<info_width>+<d_def_skvira>)
-argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"<eval findlayer(29).rescount> ks")
+argo.newTextLine(<lastxpos>,<lastypos>,<d_def_valuecolor>,"<eval findlayer(layer_bankbox).rescount> ks")
 
 ///////// Settings
 argo.newTextLine(<argo.dialog_textpos(3,0)>,<d_def_subheadcolor>,"Nastaveni")
@@ -468,8 +468,8 @@ elseif (type!=t_container_locked)
   if (<eval tag(wasSpawned)>==0)  //je odemcena ale jeste nevyskocili guardi (pokud jsou)
     timer=<d_def_treasureSpawnDelay>*60
     tag(wasSpawned,1)
-    if (tag(treasureKeeper).findlayer(29))
-      if (tag(treasureKeeper).findlayer(29).rescount) //guards should be spawned
+    if (tag(treasureKeeper).findlayer(layer_bankbox))
+      if (tag(treasureKeeper).findlayer(layer_bankbox).rescount) //guards should be spawned
         f_treasure_throwGuards
         return 1
       endif
@@ -580,7 +580,7 @@ endif
 
 [function f_treasure_throwGuards]
 tag(treasureKeeper).f_guarditAdv_RemoveAllSpawns	//vycisti pamet drive vygenerovanych spawnu
-tag(treasureKeeper).findlayer(29).contents(f_initGuardSpawn(<uid>)) //all the spawns in the backpack of the Treasure keeper
+tag(treasureKeeper).findlayer(layer_bankbox).contents(f_initGuardSpawn(<uid>)) //all the spawns in the backpack of the Treasure keeper
 tag(guardSpawnTime,<serv.time>)	// pro osetreni otevreni truhly pred spawnutim guardu...
 type=t_treasure_guarded
 src.sysmessage("Truhla je hlidana!")

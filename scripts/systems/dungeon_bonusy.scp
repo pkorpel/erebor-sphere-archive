@@ -517,10 +517,10 @@ arg(n,0)
 while (<strlen(<tag(spawnedWall[<arg(n)>])>)> == 0)	//this cycle will find the first existing ! wall
   arg(n,#+1)
 endwhile
-arg(maxY,<getYPos(<tag(spawnedWall[<arg(n)>]).p>)>)	//lets assign the first existing wall Y pos as a so far found maximum
+arg(maxY,<eval getYPos(<tag(spawnedWall[<arg(n)>]).p>)>)	//lets assign the first existing wall Y pos as a so far found maximum
 arg(n,#+1)	//we can the search for next wall from the next position so that we won't search between the deleted ones again - those were ignored in previous cycle already
 while (<tag(wallsCount)> > <arg(n)>)	//this cycle searches for the highest unprocessed Ypos which will be used to remove all walls at this Yposition in the next cycle
-  if (<arg(maxY)> < <tag(processedCoordinate)>)
+  if (<arg(maxY)> < <eval tag(processedCoordinate)>)
     if (<strLen(<tag(spawnedWall[<eval arg(n)>])>)>)	//is this wall still there somewhere ?
       arg(currentYPos,<getYPos(<tag(spawnedWall[<eval arg(n)>]).p>)>)
       if (<arg(currentYPos)> < <tag(processedCoordinate)>)	// this Ypos is higher than the one we've already saved and is lower than the already processed position

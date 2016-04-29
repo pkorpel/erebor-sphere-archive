@@ -69,7 +69,7 @@ if (src.profession == class_ranger)
           DIALOG(d_q008_black_oldman_6)
         endif
       else
-        if (<src.tag.q008_black> == 1) && (<src.tag.q008_black_monster_1> == 1) && (<src.tag.q008_black_monster_2> == 1) && (<src.tag.q008_black_monster_3> == 1) && (<src.tag.q008_black_monster_4> == 1) && (<src.findlayer(21).findid(i_q008_benda_regy).tag(nasbirano)> == 1)
+        if (<src.tag.q008_black> == 1) && (<src.tag.q008_black_monster_1> == 1) && (<src.tag.q008_black_monster_2> == 1) && (<src.tag.q008_black_monster_3> == 1) && (<src.tag.q008_black_monster_4> == 1) && (<src.findlayer(layer_pack).findid(i_q008_benda_regy).tag(nasbirano)> == 1)
           if (<eval uid.memoryfindtype(MEMORY_ISPAWNED).link.tag(mustspawnid).tag(lastspawned).ischar> == 0) || (<uid.memoryfindtype(MEMORY_ISPAWNED).link.tag(mustspawnid).tag(lastspawned).ispet> == 1) // id posledniho spawnuteho mustanga neni ve svete, nebo je tamnuty
             DIALOG(d_q008_black_oldman_4)
           else
@@ -396,7 +396,7 @@ Aha.. ahh.. ne ... ne kdepak, ale ano ! Je to tady uz to vdim a je toho dost! Vy
 [dialog d_q008_black_oldman_4 button]
 on=1
  src.tag.q008_black_a = 1
- src.findlayer(21).findid(i_q008_benda_regy).remove
+ src.findlayer(layer_pack).findid(i_q008_benda_regy).remove
  src.tag.remove(q008_black)
  src.tag.remove(q008_black_monster_1)
  src.tag.remove(q008_black_monster_2)
@@ -595,7 +595,7 @@ Tak tedy, jak jsem ti jiz slibil, mas ted moznost vstoupit do ohrady a podmanit 
 [dialog d_q008_black_oldman_7 button]
 on=1
  src.tag.q008_black = 2
- src.findlayer(21).findid(i_q008_benda_regy).remove
+ src.findlayer(layer_pack).findid(i_q008_benda_regy).remove
  src.tag.remove(q008_black_monster_1)
  src.tag.remove(q008_black_monster_2)
  src.tag.remove(q008_black_monster_3)

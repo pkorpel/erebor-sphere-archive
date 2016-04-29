@@ -16,7 +16,7 @@ elseif (<arg(sum)> > <max_value>)
 elseif (pay_from_bank(<arg(sum)>)) //mas v bance dost penez ? + ty penize sezere
   src.newItemSafe(i_cashiers_check)
   lastnew.more=<arg(sum)>
-  lastnew.cont=<src.findLayer(21)>
+  lastnew.cont=<src.findlayer(layer_pack)>
   lastnew.tag(check_value,<arg(sum)>)
   AccMsg("BYL VYTVOREN SEK: uid: <lastnew> hodnota: <arg(sum)> gp.")
   src.sysMessage("Sek na <arg(sum)> gp byl umisten do tveho batohu.")
@@ -42,7 +42,7 @@ if (src.isgm)
 endif
 arg(shouldpay,<eval args>)
 if (canPay_from_bank(<arg(shouldpay)>)) //you have enough to pay
-  findLayer(29).consumegoldamount(<arg(shouldpay)>) //consume money from bank.
+  findlayer(layer_bankbox).consumegoldamount(<arg(shouldpay)>) //consume money from bank.
 else //the amount to pay is more then you own??
   classmessage("V bance nemas dostatek penez. Potrebujes <arg(shouldpay)> gp.") //refuse transaction
   accmsg("Hasn't got #<arg(shouldpay)># gp.")
@@ -67,7 +67,7 @@ if (<arg(sum)><=0)
 elseif (<arg(sum)> < <min_value>)
   src.redMessage("Takto maly obnos nelze umistit do mesce")
 elseif (pay_from_char(<arg(sum)>)) //mas u sebe dost penez ? + ty penize sezere
-  f_vytvor_mesec(<arg(sum)>,<findLayer(21)>)
+  f_vytvor_mesec(<arg(sum)>,<findlayer(layer_pack)>)
   return 1
 endif
 
@@ -104,7 +104,7 @@ if (src.isgm)
   return 2
 endif
 arg(shouldpay,<eval args>)
-if (arg(shouldpay) > <eval findLayer(21).rescount(t_gold)>) //the amount to pay is more then you own??
+if (arg(shouldpay) > <eval findlayer(layer_pack).rescount(t_gold)>) //the amount to pay is more then you own??
   return 0
 else
   return 1
@@ -118,7 +118,7 @@ if (src.isgm)
 endif
 arg(shouldpay,<eval args>)
 if (canPay_from_char(<arg(shouldpay)>)) // have enough
-  findLayer(21).consumegoldamount(<arg(shouldpay)>) //pay from the player's backpack
+  findlayer(layer_pack).consumegoldamount(<arg(shouldpay)>) //pay from the player's backpack
 else // don't have enough gp
   classmessage("potrebujes <arg(shouldpay)> gp.") //refuse transaction
   accmsg(Hasn't got #<arg(shouldpay)># gp.)
@@ -165,7 +165,7 @@ if (<argo.type> == t_gold)
       remove
     endif
   else
-    argo.cont=<src.findLayer(21)>
+    argo.cont=<src.findlayer(layer_pack)>
     src.redMessage("Mesec i penize musis mit u sebe")
     return 1    
   endif
@@ -184,7 +184,7 @@ elseif ((<argo.id> == i_cashiers_mesec) || (<argo.id> = i_cashiers_pokladnicka))
       remove
     endif
   else
-    argo.cont=<src.findLayer(21)>
+    argo.cont=<src.findlayer(layer_pack)>
     src.redMessage("Oba mesce musis mit u sebe")
     return 1    
   endif
@@ -233,13 +233,13 @@ if (<argo.type> == t_gold)
       argo.remove
     else
       src.AccMsg("Prisypany gp do pokladnicky <uid>. Pokladnicka smazana a vytvari se nova.")
-      src.f_vytvor_mesec(<eval more1>+<argo.amount>,<src.findLayer(21)>)
+      src.f_vytvor_mesec(<eval more1>+<argo.amount>,<src.findlayer(layer_pack)>)
       argo.remove
       src.sysMessage("Pokladnice je plna.")
       remove
     endif
   else
-    argo.cont=<src.findLayer(21)>
+    argo.cont=<src.findlayer(layer_pack)>
     src.redMessage("Mesec i penize musis mit u sebe")
     return 1    
   endif
@@ -258,7 +258,7 @@ elseif ((<argo.id> == i_cashiers_mesec) || (<argo.id> = i_cashiers_pokladnicka))
       remove
     endif
   else
-    argo.cont=<src.findLayer(21)>
+    argo.cont=<src.findlayer(layer_pack)>
     src.redMessage("Oba mesce musis mit u sebe")
     return 1
 

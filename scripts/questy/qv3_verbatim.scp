@@ -242,21 +242,21 @@ DESCRIPTION=Brana na svliknuti
 
 on=@step
 src.sysmessage(Veci uskladneny v bance)
-src.findlayer(1).qv3_armortobank
-src.findlayer(2).qv3_armortobank
-src.findlayer(4).qv3_armortobank
-src.findlayer(5).qv3_armortobank
-src.findlayer(6).qv3_armortobank
-src.findlayer(7).qv3_armortobank
-src.findlayer(10).qv3_armortobank
-src.findlayer(12).qv3_armortobank
-src.findlayer(13).qv3_armortobank
-src.findlayer(17).qv3_armortobank
-src.findlayer(19).qv3_armortobank
-src.findlayer(22).qv3_armortobank
-src.findlayer(23).qv3_armortobank
-src.findlayer(24).qv3_armortobank
-src.findlayer(21).contents(qv3_armortobank)
+src.findlayer(layer_hand1).qv3_armortobank
+src.findlayer(layer_hand2).qv3_armortobank
+src.findlayer(layer_pants).qv3_armortobank
+src.findlayer(layer_shirt).qv3_armortobank
+src.findlayer(layer_helm).qv3_armortobank
+src.findlayer(layer_gloves).qv3_armortobank
+src.findlayer(layer_collar).qv3_armortobank
+src.findlayer(layer_half_apron).qv3_armortobank
+src.findlayer(layer_chest).qv3_armortobank
+src.findlayer(layer_tunic).qv3_armortobank
+src.findlayer(layer_arms).qv3_armortobank
+src.findlayer(layer_robe).qv3_armortobank
+src.findlayer(layer_skirt).qv3_armortobank
+src.findlayer(layer_legs).qv3_armortobank
+src.findlayer(layer_pack).contents(qv3_armortobank)
 src.newequip=i_robe
 src.go <morep>
 
@@ -280,21 +280,21 @@ NAME=Brana na vstup
 ID=i_moongate_blue
 TYPE=T_SCRIPT
 on=@step
-	src.findlayer(1).qv3_armorpryc
-	src.findlayer(2).qv3_armorpryc
-	src.findlayer(4).qv3_armorpryc
-	src.findlayer(5).qv3_armorpryc
-	src.findlayer(6).qv3_armorpryc
-	src.findlayer(7).qv3_armorpryc
-	src.findlayer(10).qv3_armorpryc
-	src.findlayer(12).qv3_armorpryc
-	src.findlayer(13).qv3_armorpryc
-	src.findlayer(17).qv3_armorpryc
-	src.findlayer(19).qv3_armorpryc
-	src.findlayer(22).qv3_armorpryc
-	src.findlayer(23).qv3_armorpryc
-	src.findlayer(24).qv3_armorpryc
-	src.findlayer(21).contents(qv3_armorpryc)
+	src.findlayer(layer_hand1).qv3_armorpryc
+	src.findlayer(layer_hand2).qv3_armorpryc
+	src.findlayer(layer_pants).qv3_armorpryc
+	src.findlayer(layer_shirt).qv3_armorpryc
+	src.findlayer(layer_helm).qv3_armorpryc
+	src.findlayer(layer_gloves).qv3_armorpryc
+	src.findlayer(layer_collar).qv3_armorpryc
+	src.findlayer(layer_half_apron).qv3_armorpryc
+	src.findlayer(layer_chest).qv3_armorpryc
+	src.findlayer(layer_tunic).qv3_armorpryc
+	src.findlayer(layer_arms).qv3_armorpryc
+	src.findlayer(layer_robe).qv3_armorpryc
+	src.findlayer(layer_skirt).qv3_armorpryc
+	src.findlayer(layer_legs).qv3_armorpryc
+	src.findlayer(layer_pack).contents(qv3_armorpryc)
 return 0
 
 

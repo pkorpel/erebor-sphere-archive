@@ -346,7 +346,7 @@ else
       argo.setText(argo.newTextLine,"<def_questDialog_colorTextResponse>Antonio se pry snazi vase bratrstvi poprit uz dlouhou dobu a navic jsi pry toto tvrdil jiz minule, a nemas se na to tedy vymlouvat.")
       argo.questDialog_addResponse(1,0,1,"mq027_noExcuses") // long text & page button & new button
     elseif (<eval src.qtag(mq027_umbarskaHadka)> == 15) // Antonio wants the shovel whatever it will cost
-      if (<src.isArmed>) //have weapon -> can threat Vincent
+      if (<src.getArmed>) //have weapon -> can threat Vincent
         argo.setText(argo.newTextLine,"<def_questDialog_colorTextRespEmote>*Pevne jsi <src.sex("uchopil","uchopila")> svou zbran a prisne jsi <src.sex("pohledl","pohledla")> na Vincenta.*<def_questDialog_colorTextResponse> Tvuj bratr s tebou ztratil trpelivost. Nejsem tu, abych <src.sex("vyjednaval","vyjednavala")>, ale abych si <src.sex("vzal","vzala")>, co Antoniovi patri.")
         argo.questDialog_addResponse(1,0,1,"mq027_agressiveApproach") // long text & page button & new button
       endif
@@ -465,7 +465,7 @@ elseif (<eval src.qtag(mq027_umbarskaHadka)> == 13) // Antonio accepts no excuse
     argo.setText(argo.newTextLine,"No jak myslis.")
     argo.questDialog_addResponse(0,1,1,"mq027_noCooperation") // short text & exit button & new button
 elseif (<eval src.qtag(mq027_umbarskaHadka)> == 15) // Antonio wants the shovel whatever it will cost
-  if (<src.isArmed>) //have weapon -> can threat Vincent
+  if (<src.getArmed>) //have weapon -> can threat Vincent
     argo.dialog_page("mq027_agressiveApproach")
       argo.setText(argo.newTextLine,"<?def_questDialog_colorTextEmote?>*Vincent se zrejme zdesil, protoze se zornice jeho oci prudce rozestoupily a prava nohavice jeho kalhot napadne ztmavla.*<?def_questDialog_colorTextNormal?>Prosim, ne! Neublizuj mi! Ja preci nic neprovedl!")
       argo.questDialog_HTMLGUMP
@@ -479,7 +479,7 @@ elseif (<eval src.qtag(mq027_umbarskaHadka)> == 15) // Antonio wants the shovel 
       argo.questDialog_addResponse(0,1,1,"mq027_lostShovel") // short text & exit button & new button
   endif
 elseif (<eval src.qtag(mq027_umbarskaHadka)> == 17) // Antonio wants a new shovel
-  if (<src.isArmed>) //have weapon -> can threat Vincent
+  if (<src.getArmed>) //have weapon -> can threat Vincent
     argo.dialog_page("mq027_wantNewShovel")
       argo.setText(argo.newTextLine,"No co zase ?")
       argo.questDialog_HTMLGUMP
