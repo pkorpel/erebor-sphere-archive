@@ -121,18 +121,48 @@ on=@aftergetswing
 on=@afterswing
 ////////
 [EVENTS e_summoneater_vamp]
-on=@HitTry
+on=@hittry  // Vsude pridana kontrola na 30.000, jelikoz promenna ma maximum okolo 32,5k, potom pretece a monstrum bud bugne a nebo zemre.
 if(act.issumon) //cil je summon
   //say je to summon!
-  str=<str>+<act.str>
-  dex=<dex>+<act.dex>
-  int=<int>+<act.int>
-  maxhits=<str>
-  hits=<hits>+<act.hits>
-  maxmana=<int>
-  mana=<mana>+<act.mana>
-  maxstam=<dex>
-  stam=<stam>+<act.stam>
+  if ((<str>+<act.str>) < 30000) 
+    str=<str>+<act.str>
+  else
+    str=30000
+  endif
+  if ((<dex>+<act.dex>) < 30000)
+    dex=<dex>+<act.dex>
+  else
+    dex=30000
+  endif
+  if ((<int>+<act.int>) < 30000)
+    int=<int>+<act.int>
+  else
+    int=30000
+  endif
+  if (<maxhits> < <str>)
+    maxhits=<str>
+  endif
+  if ((<hits>+<act.hits>) < 30000)
+    hits=<hits>+<act.hits>
+  else
+    hits=30000
+  endif
+  if (<maxmana> < <int>)
+    maxmana=<int>
+  endif
+  if ((<mana>+<act.mana>) < 30000)
+    mana=<mana>+<act.mana>
+  else
+    mana=30000
+  endif
+  if (<maxstam> < <dex>)
+    maxstam=<dex>
+  endif
+  if ((<stam>+<act.stam>) < 30000)
+    stam=<stam>+<act.stam>
+  else
+    stam=30000
+  endif
   act.remove
   return 1
 else
