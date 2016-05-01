@@ -778,7 +778,7 @@ tag.roundattack_chance=350    //35.0%
 tag.npc_critic_chance=350                    // 35% chance to trigger this event
 tag.npc_critic_dmg=40,55                     // dmg in between 20 and 30
 
-tag.hit_damage=65
+tag.reactivearmor_damagePerc=65
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>

@@ -1504,7 +1504,7 @@ tag(monstertype,humanoid)
 tag(monstertype2,golem)
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
-tag.hit_damage=90
+tag.reactivearmor_damagePerc=90
 Tag(noanimate,1)
 tag.npc_bleed=700 //70.0%
 
@@ -2140,7 +2140,7 @@ tag(monstertype,humanoid)
 tag(monstertype2,golem)
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
-tag.hit_damage=95
+tag.reactivearmor_damagePerc=95
 stone=1
 flag_invul=1
 tag(stoned,1)

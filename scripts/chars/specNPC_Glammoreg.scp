@@ -1510,7 +1510,7 @@ Tag.explode_dmg=50
 tag.roundattack_damage=30,40  //dmg od - do
 tag.roundattack_time=5,7      //prodleva od - do v sek
 tag.roundattack_chance=400    //40.0%
-tag.hit_damage=<eval {25 35}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {25 35}> // % dmg kolik bude vracet reactivearmor
 tag.npc_port_timer=10
 tag(npc_port_distance,9)
 

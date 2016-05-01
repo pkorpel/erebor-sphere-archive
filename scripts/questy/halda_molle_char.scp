@@ -1928,7 +1928,7 @@ tag.experience=<eval {600.0 650.0}>
 tag(e_pushall_time,10)
 tag(e_pushall_chance,500) // 50.0%
 
-tag.hit_damage=95
+tag.reactivearmor_damagePerc=95
 
 //mystik
 tag(hypnotizable,0)

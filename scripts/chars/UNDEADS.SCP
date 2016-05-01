@@ -4102,7 +4102,7 @@ tag.weapflag=dam_blunt|dam_physical //ruzne
 
 tag.dupecount=1
 
-tag(hit_damage,<eval {10 15}>)
+tag(reactivearmor_damagePerc,<eval {10 15}>)
 
 WRESTLING=100.0
 swordsmanship=150.0

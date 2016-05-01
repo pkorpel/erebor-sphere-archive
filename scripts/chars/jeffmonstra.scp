@@ -426,7 +426,7 @@ tag(resist_cold,400)
 tag.weapflag=dam_piercing|dam_physical
 
 tag(monstertype,animal,60)
-tag.hit_damage=<eval {15 20}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {15 20}> // % dmg kolik bude vracet reactivearmor
 
 parrying={65.0 75.0}
 resist={70.0 90.0}

@@ -151,7 +151,7 @@ tag(resist_cold,-200) //u elemu ruzne
 tag(monstertype,earth) //u elemu ruzne
 //weap flags
 tag.weapflag=dam_blunt|dam_physical //ruzne
-tag.hit_damage=<eval {15 25}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {15 25}> // % dmg kolik bude vracet reactivearmor
 
 
 WRESTLING={95.0 100.0}
@@ -399,7 +399,7 @@ tag(resist_cold,00)
 tag(monstertype,water) //u elemu ruzne
 //weap flags
 tag.weapflag=dam_blunt|dam_physical //ruzne
-tag.hit_damage=<eval {10 20}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {10 20}> // % dmg kolik bude vracet reactivearmor
 
 WRESTLING={90.0 100.0}
 PARRYING={85.0 100.0}
@@ -659,7 +659,7 @@ tag(resist_cold,-700)
 tag(monstertype,fire) //u elemu ruzne
 //weap flags
 tag.weapflag=dam_fire|dam_magic //ruzne
-tag.hit_damage=<eval {15 25}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {15 25}> // % dmg kolik bude vracet reactivearmor
 
 WRESTLING={90.0 100.0}
 RESIST=200.0
@@ -922,7 +922,7 @@ tag(resist_cold,-300)
 tag(monstertype,air) //u elemu ruzne
 //weap flags
 tag.weapflag=dam_lightning|dam_magic //ruzne
-tag.hit_damage=<eval {5 15}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {5 15}> // % dmg kolik bude vracet reactivearmor
 
 WRESTLING=90.0
 PARRYING={85.0 100.0}
@@ -1185,7 +1185,7 @@ tag(resist_cold,-200)
 tag(monstertype,blood) //u elemu ruzne
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
-tag.hit_damage=<eval {10 20}> // % dmg kolik bude vracet reactivearmor 
+tag.reactivearmor_damagePerc=<eval {10 20}> // % dmg kolik bude vracet reactivearmor 
 
 WRESTLING=100.0
 PARRYING={85.0 100.0}
@@ -1447,7 +1447,7 @@ tag(monstertype,snow)
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
 
-tag.hit_damage=<eval {5 20}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {5 20}> // % dmg kolik bude vracet reactivearmor
 
 WRESTLING={95.0 100.0}
 PARRYING={85.0 100.0}
@@ -1712,7 +1712,7 @@ tag(monstertype,snow)
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
 
-tag.hit_damage=<eval {10 25}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {10 25}> // % dmg kolik bude vracet reactivearmor
 
 WRESTLING={95.0 100.0}
 PARRYING={85.0 100.0}
@@ -2152,7 +2152,7 @@ tag(monstertype,air) //u elemu ruzne
 //weap flags
 tag.weapflag=dam_lightning|dam_magic //ruzne
 
-tag.hit_damage=<eval {5 15}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {5 15}> // % dmg kolik bude vracet reactivearmor
 
 WRESTLING={70.0 100.0}
 PARRYING={80.0 95.0}
@@ -2426,7 +2426,7 @@ tag(monstertype,water) //u elemu ruzne
 //weap flags
 tag.weapflag=dam_lightning|dam_magic //ruzne
 
-tag.hit_damage=<eval {5 15}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {5 15}> // % dmg kolik bude vracet reactivearmor
 
 WRESTLING={90.0 100.0}
 PARRYING={80.0 95.0}
