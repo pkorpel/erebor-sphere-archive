@@ -654,7 +654,7 @@ tag(resist_blunt,850)
 tag(resist_fire,900)
 tag(resist_elect,400)
 tag(resist_cold,600)
-
+tag.hit_damage=<eval {25 40}> // % dmg kolik bude vracet reactivearmor
 //tag(resist_phys,0)
 //tag(resist_magic,0)
 //tag(resist_acid,0)
@@ -3560,7 +3560,7 @@ tag.experience=<eval {800.0 850.0}>
 tag(e_pushall_time,10)
 tag(e_pushall_chance,500) // 50.0%
 
-tag.hit_damage=85
+tag.hit_damage=85 // % dmg kolik bude vracet reactivearmor
 
 tag.roundattack_damage=50,60          //dmg od - do
 tag.roundattack_time=10,12            //prodleva od - do v sek
