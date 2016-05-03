@@ -4288,14 +4288,14 @@ giveitem(i_pet_llama)
 
 [function f_pvp_giveitem]
 if !(safe<<args>.def>)
-  src.redmessage(Tento predmet neexistuje: <args>)
+  redmessage(Tento predmet neexistuje: <args>)
   return 0
 endif
 
-src.newitemsafe(<args>)
-arg(i_pvp_tagged,<lastnew>)
-arg(i_pvp_tagged).name=PVPEVENT
-arg(i_pvp_tagged).bounce
+newitemsafe(<args>)
+arg(pvpTaggedItem,<lastnew>)
+arg(pvpTaggedItem).name=PVPEVENT
+arg(pvpTaggedItem).bounce
 return 1
 
 [function f_profession_giveArmor]
@@ -4406,24 +4406,22 @@ endif
 // args: iron,copper,verite,valorite,obsidian,adamantinum,mithril
 [function f_varGate_pvp_equip]
 if !(safe(<<i_<args>_platemail>.def>))
-  src.redmessage(Nelze volat funkci s timto parametrem: <args>.)
+  redmessage(Nelze volat funkci s timto parametrem: <args>.)
   return 1
 endif
 
 arg(backpack,<src.findlayer(layer_pack)>)
 arg(material,<args>)
 
-src.eqlayers(bounce)
+eqlayers(bounce)
 
-if (<safe arg(backpack).rescount>)
-  arg(count,<arg(backpack).rescount>)
-endif
+arg(count,<arg(backpack).rescount>)
 
 if (arg(count) == 0)
   return 1
 endif
 
-src.newitemsafe(i_backpack)
+newitemsafe(i_backpack)
 arg(equip2bank_container,<lastnew>)
 arg(equip2bank_container).name=Vybava z turnaje
 arg(equip2bank_container).color=012B
@@ -4440,21 +4438,18 @@ while(count>=0)
   arg(count,#-1)
 endwhile
 
-src.f_pvp_give_basic_items
-src.f_profession_giveArmor(<arg(material)>)
-src.f_profession_giveWeapon(<arg(material)>)
+f_pvp_give_basic_items
+f_profession_giveArmor(<arg(material)>)
+f_profession_giveWeapon(<arg(material)>)
 
 return 0
 
 
 // main equip removal function
 [function f_varGate_pvp_clearequip]
-src.eqlayers(bounce)
+eqlayers(bounce)
 arg(backpack,<src.findlayer(layer_pack)>)
-
-if (<safe arg(backpack).rescount>)
-  arg(count,<arg(backpack).rescount>)
-endif
+arg(count,<arg(backpack).rescount>)
 
 if (arg(count) == 0)
   return 1
