@@ -4244,12 +4244,10 @@ safe(findlayer(layer_shirt).<args>)
 safe(findlayer(layer_helm).<args>)
 safe(findlayer(layer_gloves).<args>)
 safe(findlayer(layer_ring).<args>)
-safe(findlayer(layer_light).<args>)
 safe(findlayer(layer_collar).<args>)
 safe(findlayer(layer_half_apron).<args>)
 safe(findlayer(layer_chest).<args>)
 safe(findlayer(layer_wrist).<args>)
-safe(findlayer(layer_beard).<args>)
 safe(findlayer(layer_tunic).<args>)
 safe(findlayer(layer_ears).<args>)
 safe(findlayer(layer_arms).<args>)
@@ -4257,7 +4255,6 @@ safe(findlayer(layer_cape).<args>)
 safe(findlayer(layer_robe).<args>)
 safe(findlayer(layer_skirt).<args>)
 safe(findlayer(layer_legs).<args>)
-safe(findlayer(layer_horse).<args>)
 
 [function eqvendorlayers]
 safe(findlayer(layer_hand1).<args>)
@@ -4281,6 +4278,194 @@ safe(findlayer(layer_cape).<args>)
 safe(findlayer(layer_robe).<args>)
 safe(findlayer(layer_skirt).<args>)
 safe(findlayer(layer_legs).<args>)
+
+[function f_pvp_give_basic_items]
+giveitem(i_bottle_empty,20)
+giveitem(i_spellbook_pvp)
+giveitem(i_bandage,40)
+giveitem(i_fish_cut_cooked,15)
+giveitem(i_pet_llama)
+
+[function f_pvp_giveitem]
+if !(safe<<args>.def>)
+  redmessage(Tento predmet neexistuje: <args>)
+  return 0
+endif
+
+newitemsafe(<args>)
+arg(pvpTaggedItem,<lastnew>)
+arg(pvpTaggedItem).name=PVPEVENT
+arg(pvpTaggedItem).bounce
+return 1
+
+[function f_profession_giveArmor]
+if (profession==class_war)
+  f_pvp_giveitem(i_<args>_platemail)
+  f_pvp_giveitem(i_<args>_platemail_leggings)
+  f_pvp_giveitem(i_<args>_platemail_gauntlets)
+  f_pvp_giveitem(i_<args>_plate_helm)
+  f_pvp_giveitem(i_<args>_platemail_gorget)
+  f_pvp_giveitem(i_<args>_platemail_arms)
+  f_pvp_giveitem(i_<args>_heater_shield)
+elseif (profession==class_thief)
+  f_pvp_giveitem(i_<args>_chainmail_tunic)
+  f_pvp_giveitem(i_<args>_chainmail_leggings)
+  f_pvp_giveitem(i_<args>_chainmail_gloves)
+  f_pvp_giveitem(i_<args>_chainmail_coif)
+  f_pvp_giveitem(i_<args>_chainmail_gorget)
+  f_pvp_giveitem(i_<args>_chainmail_sleeves)
+  f_pvp_giveitem(i_<args>_metal_shield)
+elseif (profession==class_mag)
+  f_pvp_giveitem(i_studded_sleeves_<args>)
+  f_pvp_giveitem(i_studded_cap_<args>)
+  f_pvp_giveitem(i_studded_gloves_<args>)
+  f_pvp_giveitem(i_studded_gorget_<args>)
+  f_pvp_giveitem(i_studded_leggings_<args>)
+  f_pvp_giveitem(i_studded_tunic_<args>)
+elseif (profession==class_priest)
+  f_pvp_giveitem(i_<args>_platemail)
+  f_pvp_giveitem(i_<args>_platemail_leggings)
+  f_pvp_giveitem(i_<args>_platemail_gauntlets)
+  f_pvp_giveitem(i_<args>_plate_helm)
+  f_pvp_giveitem(i_<args>_platemail_gorget)
+  f_pvp_giveitem(i_<args>_platemail_arms)
+  f_pvp_giveitem(i_<args>_heater_shield)
+elseif (profession==class_necro)
+  f_pvp_giveitem(i_bone_chest_<args>)
+  f_pvp_giveitem(i_bone_gloves_<args>)
+  f_pvp_giveitem(i_bone_helmet_<args>)
+  f_pvp_giveitem(i_bone_arms_<args>)
+  f_pvp_giveitem(i_bone_leggings_<args>)
+elseif (profession==class_mystik)
+  f_pvp_giveitem(i_studded_sleeves_<args>)
+  f_pvp_giveitem(i_studded_cap_<args>)
+  f_pvp_giveitem(i_studded_gloves_<args>)
+  f_pvp_giveitem(i_studded_gorget_<args>)
+  f_pvp_giveitem(i_studded_leggings_<args>)
+  f_pvp_giveitem(i_studded_tunic_<args>)
+elseif (profession==class_shaman)
+  f_pvp_giveitem(i_<args>_ringmail_tunic)
+  f_pvp_giveitem(i_<args>_ringmail_gloves)
+  f_pvp_giveitem(i_<args>_ringmail_sleeves)
+  f_pvp_giveitem(i_<args>_ringmail_leggings)
+  f_pvp_giveitem(i_<args>_ringmail_helm)
+  f_pvp_giveitem(i_<args>_ringmail_gorget)
+elseif (profession==class_craft)
+  f_pvp_giveitem(i_<args>_platemail)
+  f_pvp_giveitem(i_<args>_platemail_leggings)
+  f_pvp_giveitem(i_<args>_platemail_gauntlets)
+  f_pvp_giveitem(i_<args>_plate_helm)
+  f_pvp_giveitem(i_<args>_platemail_gorget)
+  f_pvp_giveitem(i_<args>_platemail_arms)
+  f_pvp_giveitem(i_<args>_heater_shield)
+elseif (profession==class_ranger)
+  f_pvp_giveitem(i_<args>_ringmail_tunic)
+  f_pvp_giveitem(i_<args>_ringmail_gloves)
+  f_pvp_giveitem(i_<args>_ringmail_sleeves)
+  f_pvp_giveitem(i_<args>_ringmail_leggings)
+  f_pvp_giveitem(i_<args>_ringmail_helm)
+  f_pvp_giveitem(i_<args>_ringmail_gorget)
+endif
+
+[function f_profession_giveWeapon]
+if (profession==class_war)
+  f_pvp_giveitem(i_katana_<args>)
+  f_pvp_giveitem(i_halberd_<args>)
+  f_pvp_giveitem(i_axe_double_<args>)
+  f_pvp_giveitem(i_hammer_war_<args>)
+elseif (profession==class_thief)
+  f_pvp_giveitem(i_kryss_<args>)
+  f_pvp_giveitem(i_scimitar_<args>)
+  f_pvp_giveitem(i_cutlass_<args>)
+  giveitem(i_kudla,40)
+elseif (profession==class_mag)
+  f_pvp_giveitem(i_staff_gnarled_<args>)
+elseif (profession==class_priest)
+  f_pvp_giveitem(i_hammer_pick_<args>)
+  f_pvp_giveitem(i_mace_<args>)
+elseif (profession==class_necro)
+  f_pvp_giveitem(i_staff_gnarled_<args>)
+elseif (profession==class_mystik)
+  f_pvp_giveitem(i_staff_gnarled_<args>)
+elseif (profession==class_shaman)
+  f_pvp_giveitem(i_staff_gnarled_<args>)
+elseif (profession==class_craft)
+  f_pvp_giveitem(i_crossbow_heavy_<args>)
+  f_pvp_giveitem(i_katana_<args>)
+  giveitem(i_xbolt_piercing_verite,50)
+elseif (profession==class_ranger)
+  f_pvp_giveitem(i_bow_<args>)
+  f_pvp_giveitem(i_crossbow_<args>)
+  f_pvp_giveitem(i_crossbow_heavy_<args>)
+  giveitem(i_xbolt_piercing_verite,20)
+  giveitem(i_arrow_piercing_verite,100)
+  giveitem(i_bolt_jagged_verite,20)
+endif
+
+// main equip add function
+// args: iron,copper,verite,valorite,obsidian,adamantinum,mithril
+[function f_varGate_pvp_equip]
+if !(safe(<<i_<args>_platemail>.def>))
+  redmessage(Nelze volat funkci s timto parametrem: <args>.)
+  return 1
+endif
+
+arg(backpack,<findlayer(layer_pack)>)
+arg(material,<args>)
+
+eqlayers(bounce)
+
+arg(count,<arg(backpack).rescount>)
+
+if (arg(count) == 0)
+  return 1
+endif
+
+newitemsafe(i_backpack)
+arg(equip2bank_container,<lastnew>)
+arg(equip2bank_container).name=Vybava z turnaje
+arg(equip2bank_container).color=012B
+arg(equip2bank_container).bounce
+arg(equip2bank_container).cont=<findlayer(layer_bankbox)>
+
+arg(count,#-1)
+
+while(count>=0)
+  arg(inventory_item,<backpack.findcont.<arg(count)>.UID>)
+  if !(<arg(inventory_item).attr>&attr_move_never)
+    arg(inventory_item).cont=<arg(equip2bank_container).uid>
+  endif
+  arg(count,#-1)
+endwhile
+
+f_pvp_give_basic_items
+f_profession_giveArmor(<arg(material)>)
+f_profession_giveWeapon(<arg(material)>)
+
+return 0
+
+
+// main equip removal function
+[function f_varGate_pvp_clearequip]
+eqlayers(bounce)
+arg(backpack,<findlayer(layer_pack)>)
+arg(count,<arg(backpack).rescount>)
+
+if (arg(count) == 0)
+  return 1
+endif
+
+arg(count,#-1)
+
+while(count>=0)
+  arg(inventory_item,<backpack.findcont.<arg(count)>.UID>)
+  if !(<arg(inventory_item).attr>&attr_move_never)
+    arg(inventory_item).remove
+  endif
+  arg(count,#-1)
+endwhile
+
+return 0
 
 
 [function layerremove]
