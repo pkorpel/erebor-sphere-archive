@@ -7073,4 +7073,14 @@ lastnewchar.equip(<lastnew>)
 lastnew.timer = <eval argv(1)>
 return <lastnewchar>
 
+
+// f_actAssignMax(<statName>,<maxValue>)
+// argv(0) - statName, argv(1) - maximalni dovolena hodnota
+[function f_actAssignMax] 
+if ((<eval argv(0)>+<eval act.<argv(0)>>) < <eval argv(1)>) 
+  return (<eval argv(0)>+<eval act.<argv(0)>>)
+else
+  return <eval argv(1)>)
+endif
+
 [eof]
