@@ -654,7 +654,7 @@ tag(resist_blunt,850)
 tag(resist_fire,900)
 tag(resist_elect,400)
 tag(resist_cold,600)
-tag.reactivearmor_damagePerc=<eval {25 40}> // % dmg kolik bude vracet reactivearmor
+tag.reactivearmor_damagePerc=<eval {25 30}> // % dmg kolik bude vracet reactivearmor
 //tag(resist_phys,0)
 //tag(resist_magic,0)
 //tag(resist_acid,0)
