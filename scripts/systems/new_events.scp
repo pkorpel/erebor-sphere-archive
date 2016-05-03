@@ -379,16 +379,18 @@ remove
 
 [events e_npc_reactivearmor] 
 on=@aftergetswing 
-if (<distancefrom(<src>)> > 2) || (src.tag(class)==Mystik)
+if ((<distancefrom(<src>)> > 2) || (src.profession==class_mystik))
   return 1
 endif
 src.effect(3,<s_harm.EFFECTID>,6,15,1)
 src.sound=00a1
-//say Hrac zasadil ranu za: <var(ubrano)>
 if (rand(5) == 0) // throw warning message once upon a time
   src.message("Tva rana tvrde narazila na krunyr soupere.")
 endif
-src.damage_noresponse(<eval ((<var(ubrano)>*<tag(hit_damage)>)+50)/100>,<var(damage_flags)>)
+if !(tag(reactivearmor_damagePerc))  // Pokud z nejakeho duvodu nema monstrum tag kolik % ma odrazet, tak nastavi na 20%
+  tag(reactivearmor_damagePerc,20)
+endif 
+src.damage_noresponse(<eval ((<var(ubrano)>*<tag(reactivearmor_damagePerc)>)+50)/100>,<var(damage_flags)>)
 
 on=@beforegeteffect
 on=@Created
