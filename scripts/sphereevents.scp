@@ -2056,11 +2056,20 @@ else
 endif
 
 on=@userclick
-if (topobj.link)
-  if ((<src>!=<tag(iic_owner)>)&&(<playerExists(<topobj.link>)>))
-    src.sysMessage("Sebrani teto veci je kriminalni cin.")
+if (topobj)
+  if (topobj.isItem)
+    src.sysmessage("type: <topobj.type>")
+    if (topobj.type==t_corpse) // po resurrectu na tele zustava itemum event -> test
+      if (topobj.link)
+        if ((<src>!=<tag(iic_owner)>)&&(<playerExists(<topobj.link>)>))
+          src.sysMessage("Sebrani teto veci je kriminalni cin.")
+        endif
+      endif
+      return
+    endif
   endif
 endif
+f_item_in_corpse_reset
 
 [itemdef i_looter_immobilizer]
 id=i_memory
