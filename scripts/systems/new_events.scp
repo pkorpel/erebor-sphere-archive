@@ -121,18 +121,32 @@ on=@aftergetswing
 on=@afterswing
 ////////
 [EVENTS e_summoneater_vamp]
-on=@HitTry
+on=@hittry  // Vsude pridana kontrola na 30.000, jelikoz promenna ma maximum okolo 32,5k, potom pretece a monstrum bud bugne a nebo zemre.
 if(act.issumon) //cil je summon
-  //say je to summon!
-  str=<str>+<act.str>
-  dex=<dex>+<act.dex>
-  int=<int>+<act.int>
-  maxhits=<str>
-  hits=<hits>+<act.hits>
-  maxmana=<int>
-  mana=<mana>+<act.mana>
-  maxstam=<dex>
-  stam=<stam>+<act.stam>
+  arg(maxValue,30000)
+  
+  str=<f_actAssignMax("str",<maxValue>)>
+  
+  dex=<f_actAssignMax("dex",<maxValue>)>
+  
+  int=<f_actAssignMax("int",<maxValue>)>
+  
+  hits=<f_actAssignMax("hits",<maxValue>)>
+  
+  mana=<f_actAssignMax("mana",<maxValue>)>
+  
+  stam=<f_actAssignMax("stam",<maxValue>)>
+  
+  if (<maxhits> < <str>)
+    maxhits=<str>
+  endif
+  if (<maxmana> < <int>)
+    maxmana=<int>
+  endif
+  if (<maxstam> < <dex>)
+    maxstam=<dex>
+  endif
+ 
   act.remove
   return 1
 else
