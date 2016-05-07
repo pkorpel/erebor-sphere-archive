@@ -3081,12 +3081,24 @@ if (src.isplayer)
       endif
 
       src.newnpc <morex>
-
-      if (<lastnewchar.tag(noanimate)>==1) //animatnout nepujde cokoliv, co ma tag(noanimate)
-        lastnewchar.remove
-        src.f_fizzleefect
-        src.redmessage("S timto telem nelze dale pracovat.")
-        return 1
+      
+      if (lastnewchar.tag(noanimate))
+        if (<lastnewchar.tag(noanimate)>==1) //animatnout nepujde cokoliv, co ma tag(noanimate)
+          lastnewchar.remove
+          src.f_fizzleefect
+          src.redmessage("S timto telem nelze dale pracovat.")
+          return 1
+        endif
+      endif
+      
+      if !(src.tag(ra_ucinnost))  // kontrola tagu ucinnosti animate dead, bez tagu hazi error.
+        src.tag(ra_ucinnost,0)
+      endif
+      if !(src.tag(ra_mana_narocnost))  // kontrola tagu mana narocnosti, pokud ho necro nema, spatne se pocita narocnost many a hazi errory do logu.
+        src.tag(ra_mana_narocnost,0)
+      endif
+      if !(src.tag(ra_vydrz))  // kontrola tagu vydrze animate dead, bez nej hazi error.
+        src.tag(ra_vydrz,0)
       endif
       
       if (<src.tag(ra_ucinnost)> > 0)
@@ -3168,6 +3180,7 @@ if (src.isplayer)
       lastnewchar.p=<p>
       lastnewchar.updatex
       lastnewchar.tag(isAnimated,1)
+      lastnewchar.tag(dupecount,0)  // Aby se animatnute monstrum nerozdvojovalo
       lastnewchar.food=<lastnewchar.def.maxfood>
       lastnewchar.skill 062
       lastnewchar.events +e_animate_monster
@@ -3186,6 +3199,7 @@ if (src.isplayer)
       lastnewchar.newitem(i_npcanimate_remove)
       arg(timer_an,<eval(<src.tag(level)>/2)>+50)
       //src.redmessage("Zaklad timer <timer_an>")
+      
       if (<src.tag(ra_vydrz)> > 0)
         if (<src.tag(ra_vydrz)> < 11) 
           arg(timer_an,<eval((<timer_an>*100)*(((<src.tag(ra_vydrz)>*3)+100)))>/10000)
@@ -3195,6 +3209,8 @@ if (src.isplayer)
           //src.redmessage("pak timer RA<src.tag(ra_vydrz)> je <timer_an>")
         endif
       endif
+ 
+      
       lastnew.timer = <timer_an> 
       lastnew.link = <src>
       lastnewchar.equip(<lastnew>)
