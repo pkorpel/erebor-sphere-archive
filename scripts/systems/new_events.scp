@@ -24,7 +24,7 @@ on=@beforegeteffect
 
 [function randombetween]
 if (<argvcount> == 1)
-  return<eval argv(0)>
+  return <eval argv(0)>
 else
   return <eval {<argv(0)> <argv(1)>}>
 endif
