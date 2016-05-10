@@ -427,25 +427,110 @@ TYPE=T_EQ_SCRIPT
 ON=@EQUIP
 TIMER=21600
 ATTR=094
-tag(labyrint_zelene,0)
-tag(labyrint_modre,0)
-tag(labyrint_cervene,0)
-tag(labyrint_bile,0)
-tag(labyrint_zlute,0)
+tag(labyrint_zelena,0)
+tag(labyrint_modra,0)
+tag(labyrint_cervena,0)
+tag(labyrint_bila,0)
+tag(labyrint_zluta,0)
+tag(labyrint_hneda,0)
+tag(labyrint_celkem,0)
 
 ON=@timer
 remove
 return 1
 
-[function f_through_green_gate]
-if (<src.findid(i_3D_labyrint).tag(labyrint_zelene)> < 10)
-  src.findid(i_3D_labyrint).tag(labyrint_zelene,#+1)
-  arg(goX,eval {<5612 5622>})
-  arg(goY,eval {796 802})
-  arg(goMap,eval {50 100})
-  src.say("<arg(goX)>,<arg(goY)>,0,<arg(goMap)>")
-  src.p(<arg(goX)>,<arg(goY)>,0,<arg(goMap)>)
-else
-  src.say("Mam jiz dost zelenych! <src.findid(i_3D_labyrint).tag(labyrint_zelene)> ks")
+[ITEMDEF i_3D_bludiste_vstup]
+ID=i_gate_3
+NAME=Brana do neznama
+
+ON=@create
+attr=010
+color=09CE
+
+ON=@step
+f_entry_to_3D_labyrint
+
+ON=@timer
+f_change_location_3D_labyrint_entry
+
+[ITEMDEF i_3D_bludiste_ohen]
+ID=i_fire_column
+NAME=Ohen prozreni
+
+ON=@create
+attr=010
+f_3D_labyrint_change_color
+
+ON=@step
+f_through_3D_labyrint_gate
+
+[function f_through_3D_labyrint_gate]
+if color==0A7
+  f_3D_labyrint_color_counter("zelena")
+elseif color==04A9
+  f_3D_labyrint_color_counter("modra")
+elseif color==026
+  f_3D_labyrint_color_counter("cervena")
+elseif color==0481
+  f_3D_labyrint_color_counter("bila")
+elseif color==084D
+  f_3D_labyrint_color_counter("zluta")
+elseif color==0750
+  f_3D_labyrint_color_counter("hneda")
 endif
+
+if (<src.findid(i_3D_labyrint).tag(labyrint_celkem)> < 30) 
+  arg(goX,<eval {5612 5622}>)
+  arg(goY,<eval {796 802}>)
+  arg(goMapplane,<eval {50 100}>)
+  src.p(<goX>,<goY>,0,<goMapplane>)
+  src.update
+else
+  src.say("JSI VITEZ !!!")
+endif  
+f_3D_labyrint_change_color  // po pruchodu zmeni barvu ohne
+
+[function f_3D_labyrint_change_color]
+dorand 10
+  color=0A7
+  color=04A9
+  color=026
+  color=0481
+  color=084D
+  color=0750
+  color=0750
+  color=0750
+  color=0750
+  color=0750
+enddo
+
+// argv(0) - barva, kterou bylo projito
+[function f_3D_labyrint_color_counter]
+if (<src.findid(i_3D_labyrint).tag(labyrint_<argv(0)>)> < 10)  // zapocita max 10ks od kazde barvy
+  src.findid(i_3D_labyrint).tag(labyrint_<argv(0)>,#+1)
+  if (strcmpi(<argv(0)>,hneda))
+      src.findid(i_3D_labyrint).tag(labyrint_celkem,#+1)  // sum barev bez hnede pro portnuti do zaverecneho patra
+  endif
+endif
+
+[function f_entry_to_3D_labyrint]
+if (finduid(#04002A363)) && !(src.isgm)   // #040041AEC
+  src.giveitem(i_3D_labyrint)
+  finduid(#04002A363).tag(vstoupilo,#+1)
+  src.accMsg("Hrac <src.name>, UID: <src> vstoupil do 3D bludiste na pozici <src.p>.")
+  timer=30  // Timer na gate na 30sec - pote se presune jinam
+endif
+
+[function f_change_location_3D_labyrint_entry]
+timer={10800 21600}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
+dorand 5
+  p=5620, 820, 0, 100
+  p=5620, 815, 0, 100
+  p=5620, 810, 0, 100
+  p=5620, 825, 0, 100
+  p=5620, 830, 0, 100
+enddo
+// src.accMsg("Brana do 3D Bludiste, UID: <uid> zmenila pozici na <p>.")
+
+
 [eof]
