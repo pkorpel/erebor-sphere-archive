@@ -452,6 +452,7 @@ f_entry_to_3D_labyrint
 
 ON=@timer
 f_change_location_3D_labyrint_entry
+return 1
 
 [ITEMDEF i_3D_bludiste_ohen]
 ID=i_fire_column
@@ -514,15 +515,19 @@ if (<src.findid(i_3D_labyrint).tag(labyrint_<argv(0)>)> < 10)  // zapocita max 1
 endif
 
 [function f_entry_to_3D_labyrint]
-if (finduid(#04002A363)) && !(src.isgm)   // #040041AEC
-  src.giveitem(i_3D_labyrint)
-  finduid(#04002A363).tag(vstoupilo,#+1)
-  src.accMsg("Hrac <src.name>, UID: <src> vstoupil do 3D bludiste na pozici <src.p>.")
-  timer=30  // Timer na gate na 30sec - pote se presune jinam
+if (src.isPlayer)
+  if (finduid(#04000208c)) && !(src.isgm)   // #040041AEC
+    src.giveitem(i_3D_labyrint)
+    finduid(#04000208c).tag(vstoupilo,#+1)
+    src.accMsg("Hrac <src.name>, UID: <src> vstoupil do 3D bludiste na pozici <src.p>.")
+    timer=30  // Timer na gate na 30sec - pote se presune jinam
+  endif
+else
+  return 1
 endif
 
 [function f_change_location_3D_labyrint_entry]
-timer={10800 21600}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
+timer={1 3}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
 dorand 5
   p=5620, 820, 0, 100
   p=5620, 815, 0, 100
@@ -530,7 +535,12 @@ dorand 5
   p=5620, 825, 0, 100
   p=5620, 830, 0, 100
 enddo
-// src.accMsg("Brana do 3D Bludiste, UID: <uid> zmenila pozici na <p>.")
+if (finduid(#04000208c))  // #040041AEC
+  finduid(#04000208c).tag(gata_presunuta,#+1)
+  arg(gm_to_log,"#01513a")
+  src=<arg(gm_to_log)>
+  src.accMsg("Brana do 3D Bludiste, UID: <uid> zmenila pozici na <p>.")
+endif
 
 
 [eof]
