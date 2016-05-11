@@ -225,11 +225,11 @@ DIALOG(d_questy)
 [dialog d_questy_mikena]
 argo.f_qDialogInstructions(03139)
 
-if (<eval src.tag(gq001) == 1) // prvni ukol - mord i gond totozne
+if (<eval src.tag(gq001)> == 1) // prvni ukol - mord i gond totozne
   argo.HTMLGUMP(160,80,242,100,2,0,36)
-elseif (<eval src.tag(gq001) == 2) && (<eval src.tag(realm)> == 1)
+elseif (<eval src.tag(gq001)> == 2) && (<eval src.tag(realm)> == 1)
   argo.HTMLGUMP(160,80,242,100,3,0,36) // druhy ukol, gondor
-elseif (<eval src.tag(gq001) == 2) && (<eval src.tag(realm)> == 2)
+elseif (<eval src.tag(gq001)> == 2) && (<eval src.tag(realm)> == 2)
   argo.HTMLGUMP(160,80,242,100,4,0,36) // druhy ukol, mordor
 elseif (0<src.tag(gq001)> == 3)
   argo.HTMLGUMP(160,80,242,100,5,0,36)
