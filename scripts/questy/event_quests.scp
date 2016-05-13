@@ -425,7 +425,7 @@ NAME=3D_Labyrint
 TYPE=T_EQ_SCRIPT
 
 ON=@EQUIP
-TIMER=21600
+TIMER=86400  // 24h, drive nelze znova vejit do bludiste
 ATTR=094
 tag(labyrint_zelena,0)
 tag(labyrint_modra,0)
@@ -437,7 +437,6 @@ tag(labyrint_celkem,0)
 
 ON=@timer
 remove
-return 1
 
 [ITEMDEF i_3D_bludiste_vstup]
 ID=i_gate_3
@@ -446,6 +445,7 @@ NAME=Brana do neznama
 ON=@create
 attr=010
 color=09CE
+tag(pocet_hracu,0)
 
 ON=@step
 f_entry_to_3D_labyrint
@@ -464,6 +464,17 @@ f_3D_labyrint_change_color
 
 ON=@step
 f_through_3D_labyrint_gate
+
+[ITEMDEF i_3D_bludiste_odmena]
+ID=i_gate_3
+NAME=Zlata brana
+
+ON=@create
+attr=010
+color=0995
+
+ON=@step
+f_3D_labyrint_prize
 
 [function f_through_3D_labyrint_gate]
 if color==0A7
@@ -517,30 +528,93 @@ endif
 [function f_entry_to_3D_labyrint]
 if (src.isPlayer)
   if (finduid(#04000208c)) && !(src.isgm)   // #040041AEC
-    src.giveitem(i_3D_labyrint)
-    finduid(#04000208c).tag(vstoupilo,#+1)
-    src.accMsg("Hrac <src.name>, UID: <src> vstoupil do 3D bludiste na pozici <src.p>.")
-    timer=30  // Timer na gate na 30sec - pote se presune jinam
-  endif
+    if (<eval tag(pocet_hracu)> == 0) && timer > 30
+      timer=30  // Prvni pruchozi spusti Timer na gate na 30sec - pote se presune jinam
+    endif
+    if  src.findid(i_3D_labyrint)
+      src.redmessage("Brana te odmita, jeste nemuzes znova projit.")
+    else
+      if (<eval tag(pocet_hracu)> < 10)  // pusti max 10 hracu na jednu lokaci
+        src.giveitem(i_3D_labyrint)
+        finduid(#04000208c).tag(vstoupilo,#+1)
+        src.accMsg("Hrac <src.name>, UID: <src> vstoupil do 3D bludiste na pozici <src.p>.")
+        tag(pocet_hracu,#+1)
+        src.p=5622, 820, 0, 100  // doplnit start lokaci 3D bludiste
+        src.update
+        src.sfx(254)
+      else
+        src.redmessage("Brana je nestabilni, dalsiho jedince jiz neprijme a brzy se rozpusti.")
+      endif
+    endif
+  endif                           
 else
   return 1
 endif
 
 [function f_change_location_3D_labyrint_entry]
-timer={1 3}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
+timer={10 15}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
 dorand 5
   p=5620, 820, 0, 100
   p=5620, 815, 0, 100
   p=5620, 810, 0, 100
   p=5620, 825, 0, 100
-  p=5620, 830, 0, 100
+  p=5620, 820, 0, 100
 enddo
-if (finduid(#04000208c))  // #040041AEC
-  finduid(#04000208c).tag(gata_presunuta,#+1)
-  arg(gm_to_log,"#01513a")
-  src=<arg(gm_to_log)>
-  src.accMsg("Brana do 3D Bludiste, UID: <uid> zmenila pozici na <p>.")
+tag(pocet_hracu,0)  // vynulovani poctu pruchozich hracu po zmene pozice
+arg(memory_stone,#04000208c)
+if (finduid(memory_stone))  // #040041AEC
+  memory_stone.tag(gata_presunuta,#+1)
+  memory_stone.tag(gata_pozice,<p>)
+  memory_stone.tag(last_cas_presunuti,<servertime>)
+  logmsg("<servertime> Brana do 3D Bludiste, UID: <uid> zmenila pozici na <p>.")
 endif
 
+[function f_3D_labyrint_prize]
+if (src.isPlayer)
+  arg(item_prize,0)
+  if (<eval src.tag(tag_3D_Labyrint)> == 0)
+    src.tag(tag_3D_Labyrint,0)
+    say("Qtag: <eval src.tag(tag_3D_Labyrint)>")
+  endif
+  if (<eval src.tag(tag_3D_Labyrint)> < 10)  // do 10ti pruchodu exp a gp odmena roste  
+    arg(exp_prize,500+(<eval src.tag(tag_3D_Labyrint)>*50))
+    arg(gp_prize,10000+(<eval src.tag(tag_3D_Labyrint)>*1000))
+  else  // od 10ti pruchodu exp a gp odmena je fixni + sance na item
+    arg(exp_prize,1000)
+    arg(gp_prize,20000)
+    if (<eval src.tag(tag_3D_Labyrint)> < 50) 
+      arg(item_prize,<eval {(<eval src.tag(tag_3D_Labyrint)>*10) 1000}>) // do 50ti pruchodu Bludistem sance na item roste
+    else
+      arg(item_prize,<eval {500 1000}>) // od 50ti pruchodu sance na item je stejna
+    endif  
+    if (<eval item_prize> > 975)
+      src.giveitem(i_mi_bag)
+      src.accMsg("Hrac <src.name>, UID: <src> dokoncil 3D bludiste a ziskal Magicky vacek.") 
+    endif
+  endif
+  
+  src.givegold(<gp_prize>)
+  src.addexp(<exp_prize>)
+  src.tag(tag_3D_Labyrint,#+1)
+
+  arg(memory_stone,#04000208c)
+  if (finduid(memory_stone))  // #040041AEC
+    memory_stone.tag(pocet_vitezu,#+1)
+    memory_stone.tag(rozdanych_exp,#+<eval exp_prize>)
+    memory_stone.tag(rozdanych_gp,#+<eval gp_prize>)
+    if (<eval item_prize> > 975)
+      memory_stone.tag(rozdanych_itemu,#+1)
+    endif
+  endif 
+  src.accMsg("Hrac <src.name>, UID: <src> dokoncil 3D bludiste a ziskal <exp_prize>expu a <gp_prize>gp.")
+  src.gohome
+  dorand 5
+    p=5625, 825, 0, 100
+    p=5625, 820, 0, 100
+    p=5625, 815, 0, 100
+    p=5625, 810, 0, 100
+    p=5625, 820, 0, 100
+  enddo 
+endif
 
 [eof]
