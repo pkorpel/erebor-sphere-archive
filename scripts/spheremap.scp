@@ -3345,7 +3345,7 @@ events=r_nofield, r_nosumon, r_notele
 RAINCHANCE=20
 COLDCHANCE=00
 
-[AREA 3D Bludiste 1]
+[AREA Goblin Labyrint 1]
 P=5913, 345, 0, 30
 RECT=5958,377,5848,293
 mapplane=30
@@ -3356,7 +3356,7 @@ events=r_nofield, r_nosumon, r_notele
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA 3D Bludiste 2]
+[AREA Goblin Labyrint 2]
 P=5913, 345, 0, 31
 RECT=5958,377,5848,293
 mapplane=31
@@ -3367,7 +3367,7 @@ events=r_nofield, r_nosumon, r_notele
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA 3D Bludiste 3]
+[AREA Goblin Labyrint 3]
 P=5913, 345, 0, 32
 RECT=5958,377,5848,293
 mapplane=32
@@ -3378,7 +3378,7 @@ events=r_nofield, r_nosumon, r_notele
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA 3D Bludiste 4]
+[AREA Goblin Labyrint 4]
 P=5913, 345, 0, 33
 RECT=5958,377,5848,293
 mapplane=33
@@ -3389,7 +3389,7 @@ events=r_nofield, r_nosumon, r_notele
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA 3D Bludiste 5]
+[AREA Goblin Labyrint 5]
 P=5913, 345, 0, 34
 RECT=5958,377,5848,293
 mapplane=34
@@ -3400,7 +3400,7 @@ events=r_nofield, r_nosumon, r_notele
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA 3D Bludiste Final]
+[AREA Goblin Labyrint Final]
 P=5913, 345, 0, 35
 RECT=5958,377,5848,293
 mapplane=35
