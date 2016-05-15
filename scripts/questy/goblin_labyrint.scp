@@ -3,37 +3,37 @@
 //         by: Jeffrey (GM Iustus)              //
 //////////////////////////////////////////////////
 
-[ITEMDEF i_3D_labyrint]
+[ITEMDEF i_goblin_labyrint]
 ID=i_memory
-NAME=3D_Labyrint
+NAME=Goblin Labyrint
 TYPE=T_EQ_SCRIPT
 
 ON=@EQUIP
 TIMER=86400  // 24h, drive nelze znova vejit do Labyrintu
 ATTR=094
-tag(labyrint_zelena,0)
-tag(labyrint_modra,0)
-tag(labyrint_cervena,0)
-tag(labyrint_bila,0)
-tag(labyrint_zluta,0)
-tag(labyrint_hneda,0)
-tag(labyrint_celkem,0)
+tag(labyrint_green,0)
+tag(labyrint_blue,0)
+tag(labyrint_red,0)
+tag(labyrint_white,0)
+tag(labyrint_yellow,0)
+tag(labyrint_brown,0)
+tag(labyrint_summary,0)
 
 ON=@timer
 remove
 
-[ITEMDEF i_3D_Labyrint_vstup]
+[ITEMDEF i_goblin_labyrint_entry]
 ID=i_gate_3
 NAME=Brana do neznama
 
 ON=@create
 attr=010
 color=0995
-tag(pocet_hracu,0)
+tag(count_players,0)
 timer=120  // po vytvoreni mas 120 sec nez gata se zacne portovat
 
 ON=@step
-if (src.isdead)
+if (src.isDead)
   return 1
 endif
 if (<itemExists(<link>)>)
@@ -43,29 +43,29 @@ if (<itemExists(<link>)>)
   endif
 endif
 if (src.isPlayer)
-  if (<src.tag(level)> > 6)  // pusti jen hrace s levelem 6+ (aby si netahaly nb postavy)
-    f_entry_to_3D_labyrint
+  if (<eval src.tag(level)> > 6)  // pusti jen hrace s levelem 6+ (aby si netahaly nb postavy)
+    f_goblin_labyrint_entry
   else
-    src.redMessage("Jsi prilis slaby na to, aby jsi prezil pruchod touto branou.")
+    src.redMessage("Jsi prilis <src.sex(slaby,slaba)> na to, aby jsi <src.sex(prezil,prezila)> pruchod touto branou.")
   endif
 endif
 
 ON=@timer
-f_change_location_3D_labyrint_entry
+f_goblin_labyrint_change_entry_location
 return 1
 
-[ITEMDEF i_3D_Labyrint_ohen]
+[ITEMDEF i_goblin_labyrint_fire]
 ID=i_fire_column
 NAME=Ohen prozreni
 
 ON=@create
 attr=010
-f_3D_labyrint_change_color
+f_goblin_labyrint_change_color
 
 ON=@step
-f_through_3D_labyrint_fire
+f_goblin_labyrint_through_fire
 
-[ITEMDEF i_3D_Labyrint_odmena]
+[ITEMDEF i_goblin_labyrint_prizegate]
 ID=i_gate_3
 NAME=Zlata brana
 
@@ -74,24 +74,24 @@ attr=010
 color=0995
 
 ON=@step
-f_3D_labyrint_prize
+f_goblin_labyrint_prize
 
-[function f_through_3D_labyrint_fire]
-if color==0A7
-  f_3D_labyrint_color_counter("zelena")
-elseif color==04A9
-  f_3D_labyrint_color_counter("modra")
-elseif color==026
-  f_3D_labyrint_color_counter("cervena")
-elseif color==0481
-  f_3D_labyrint_color_counter("bila")
-elseif color==084D
-  f_3D_labyrint_color_counter("zluta")
-elseif color==0750
-  f_3D_labyrint_color_counter("hneda")
+[function f_goblin_labyrint_through_fire]
+if (color==0A7)
+  f_goblin_labyrint_color_counter("green")
+elseif (color==04A9)
+  f_goblin_labyrint_color_counter("blue")
+elseif (color==026)
+  f_goblin_labyrint_color_counter("red")
+elseif (color==0481)
+  f_goblin_labyrint_color_counter("white")
+elseif (color==084D)
+  f_goblin_labyrint_color_counter("yellow")
+elseif (color==0750)
+  f_goblin_labyrint_color_counter("brown")
 endif
 
-if (<src.findid(i_3D_labyrint).tag(labyrint_celkem)> < 30)  // Pokud ma mene jak 30 barevnych ohinku, tak ho to nepusti do zaverecneho patra 
+if (<src.findid(i_goblin_labyrint).tag(labyrint_summary)> < 30)  // Pokud ma mene jak 30 barevnych ohynku, tak ho to nepusti do zaverecneho patra 
   arg(goX,<eval {5881 5944}>)  // Rozsah X souradnice labyrintu
   arg(goY,<eval {321 364}>)  // Rozsah Y souradnice labyrintu
   arg(goMapplane,<eval {30 34}>)  // Rozsah mapplanu labyrintu
@@ -108,9 +108,9 @@ else
     src.p=5900, 355, 0, 35
   enddo
 endif  
-f_3D_labyrint_change_color  // po pruchodu zmeni barvu ohne
+f_goblin_labyrint_change_color  // po pruchodu zmeni barvu ohne
 
-[function f_3D_labyrint_change_color]
+[function f_goblin_labyrint_change_color]
 dorand 10
   color=0A7
   color=04A9
@@ -122,31 +122,44 @@ dorand 10
   color=0750
   color=0750
   color=0750
-enddo
+enddo  
+if (color==0A7)
+  name=Zeleny ohen prozreni
+elseif (color==04A9)
+  name=Modry ohen prozreni
+elseif (color==026)
+  name=Cerveny ohen prozreni
+elseif (color==0481)
+  name=Bily ohen prozreni
+elseif (color==084D)
+  name=Zluty ohen prozreni
+elseif (color==0750)
+  name=Hnedy ohen prozreni
+endif
 
 // argv(0) - barva, kterou bylo projito
-[function f_3D_labyrint_color_counter]
-if (<src.findid(i_3D_labyrint).tag(labyrint_<argv(0)>)> < 10)  // zapocita max 10ks od kazde barvy
-  src.findid(i_3D_labyrint).tag(labyrint_<argv(0)>,#+1)
-  if (strcmpi(<argv(0)>,hneda))
-      src.findid(i_3D_labyrint).tag(labyrint_celkem,#+1)  // sum barev bez hnede pro portnuti do zaverecneho patra
+[function f_goblin_labyrint_color_counter]
+if (<src.findid(i_goblin_labyrint).tag(labyrint_<argv(0)>)> < 10)  // zapocita max 10ks od kazde barvy
+  src.findid(i_goblin_labyrint).tag(labyrint_<argv(0)>,#+1)
+  if (strcmpi(<argv(0)>,brown))
+    src.findid(i_goblin_labyrint).tag(labyrint_summary,#+1)  // sum barev bez hnede pro portnuti do zaverecneho patra
   endif
 endif
 
-[function f_entry_to_3D_labyrint]
+[function f_goblin_labyrint_entry]
 if (src.isPlayer)
-  if (finduid(#040041AEC)) && !(src.isgm)   // memory stone v zivem regionu
-    if (<eval tag(pocet_hracu)> == 0) && timer > 30
+  if ((finduid(#040041AEC)) && !(src.isgm))   // memory stone v zivem regionu
+    if ((<eval tag(count_players)> == 0) && (timer > 30))
       timer=30  // Prvni pruchozi spusti Timer na gate na 30sec - pote se presune jinam
     endif
-    if  src.findid(i_3D_labyrint)
+    if  (src.findid(i_goblin_labyrint))
       src.redmessage("Brana te odmita, jeste nemuzes znova projit.")
     else
-      if (<eval tag(pocet_hracu)> < 10)  // pusti max 10 hracu na jednu lokaci
-        src.giveitem(i_3D_labyrint)
+      if (<eval tag(count_players)> < 10)  // pusti max 10 hracu na jednu lokaci
+        src.giveitem(i_goblin_labyrint)
         finduid(#040041AEC).tag(vstoupilo,#+1)
-        src.accMsg("Hrac <src.name>, UID: <src> vstoupil do 3D Labyrintu na pozici <src.p>.")
-        tag(pocet_hracu,#+1)
+        src.accMsg("Hrac <src.name>, UID: <src> vstoupil do Goblin Labyrintu na pozici <src.p>.")
+        tag(count_players,#+1)
         src.p=5900, 355, 0, 30  // start lokace prvniho patra
         src.update
         src.sfx(254)  // zvuk pro hrace, co projde branou
@@ -159,27 +172,28 @@ else
   return 1
 endif
 
-[function f_change_location_3D_labyrint_entry]
+[function f_goblin_labyrint_change_entry_location]
 arg(memory_stone,#040041AEC)  // memory stone v zivem regionu
 timer={10800 21600}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
 arg(start_x,<return_nth(1,<p>)>)
 arg(start_y,<return_nth(2,<p>)>)
-arg(new_x,<return_nth(1,<p>)>)
-arg(new_y,<return_nth(2,<p>)>)
+arg(new_x,<start_x>)
+arg(new_y,<start_y>)
 while ((<new_x> == <start_x>) && (<new_y> == <start_y>))  // aby se nevygenerovala stejna pozice, jako je aktualni
-  f_3D_labyrint_random_position
+  f_goblin_labyrint_random_position
   arg(new_x,<return_nth(1,<p>)>)
   arg(new_y,<return_nth(2,<p>)>)         
 endwhile
-tag(pocet_hracu,0)  // vynulovani poctu pruchozich hracu po zmene pozice
+tag(count_players,0)  // vynulovani poctu pruchozich hracu po zmene pozice
 sfx(253)  // zvuk po presunu brany
 if (<itemExists(<link>)>)
   link.p=<p>  // Presouvam spawn guarda na novou pozici
   if (link.more2)  // Zije goblin?
     arg(goblin_spawned,<link.tag(lastspawned)>)
-    if ((goblin_spawned.flag_spawned) && (<goblin_spawned.Obody> == c_3D_labyrint_goblin))  // pokud je to opravdu goblin, tak ho portnu na novou lokaci brany 
+    if ((goblin_spawned.flag_spawned) && (<goblin_spawned.Obody> == c_goblin_labyrint))  // pokud je to opravdu goblin, tak ho portnu na novou lokaci brany 
       goblin_spawned.p=<p>
       goblin_spawned.home=<p>
+      goblin_spawned.hits=<goblin_spawned.maxhits>
     endif
   else
     link.timer=1  // Goblin nezije, spawnuji ho
@@ -187,45 +201,45 @@ if (<itemExists(<link>)>)
 endif
 update
 if (finduid(memory_stone))  
-  memory_stone.tag(gata_presunuta,#+1)
-  memory_stone.tag(gata_pozice,<p>)
-  memory_stone.tag(last_cas_presunuti,<servertime>)
+  memory_stone.tag(count_of_move,#+1)
+  memory_stone.tag(gate_location,<p>)
+  memory_stone.tag(last_time_of_move,<servertime>)
 endif
 
-[function f_3D_labyrint_prize]
+[function f_goblin_labyrint_prize]
 if (src.isPlayer)
   arg(memory_stone,#040041AEC)  // memory stone v zivem regionu
-  if (<eval src.qtag(Goblin_3D_Labyrint)> == 0)
-    src.qtag(Goblin_3D_Labyrint,0)
+  if (<eval src.qtag(Goblin_Labyrint)> == 0)
+    src.qtag(Goblin_Labyrint,0)
   endif
-  if (<eval src.qtag(Goblin_3D_Labyrint)> < 10)  // do 10ti pruchodu exp a gp odmena roste  
-    arg(exp_prize,500+(<eval src.qtag(Goblin_3D_Labyrint)>*50))
-    arg(gp_prize,10000+(<eval src.qtag(Goblin_3D_Labyrint)>*1000))
+  if (<eval src.qtag(Goblin_Labyrint)> < 10)  // do 10ti pruchodu exp a gp odmena roste  
+    arg(exp_prize,500+(<eval src.qtag(Goblin_Labyrint)>*50))
+    arg(gp_prize,10000+(<eval src.qtag(Goblin_Labyrint)>*1000))
   else  // od 10ti pruchodu exp a gp odmena je fixni + sance na item
     arg(exp_prize,1000)
     arg(gp_prize,20000)
-    if (<eval src.qtag(Goblin_3D_Labyrint)> < 50) 
-      arg(item_prize,<eval {(<eval src.qtag(Goblin_3D_Labyrint)>*10) 1000}>) // do 50ti pruchodu Labyrintem sance na item roste
+    if (<eval src.qtag(Goblin_Labyrint)> < 180) 
+      arg(item_chance,<eval {(<eval src.qtag(Goblin_Labyrint)>*5) 1000}>) // do 180ti pruchodu Labyrintem sance na item roste
     else
-      arg(item_prize,<eval {500 1000}>) // od 50ti pruchodu sance na item je stejna 10%
+      arg(item_chance,<eval {900 1000}>) // od 180ti pruchodu sance na item je stejna 50%
     endif  
-    if (<eval item_prize> > 950)
+    if (<eval item_chance> > 950)
       src.giveitem(i_mi_bag)
-      memory_stone.tag(rozdanych_itemu,#+1)
-      src.accMsg("Hrac <src.name>, UID: <src> dokoncil 3D Labyrint a ziskal Magicky vacek.") 
+      memory_stone.tag(gived_items,#+1)
+      src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal Magicky vacek.") 
     endif
   endif
   
   src.givegold(<gp_prize>)
   src.addexp(<exp_prize>)
-  src.qtag(Goblin_3D_Labyrint,(<eval src.qtag(Goblin_3D_Labyrint)>+1))  // nevim proc, ale qtag neumi navysit hodnotu tagu pres #+1
+  src.qtag(Goblin_Labyrint,(<eval src.qtag(Goblin_Labyrint)>+1))  // nevim proc, ale qtag neumi navysit hodnotu tagu pres #+1
 
   if (finduid(memory_stone))  
-    memory_stone.tag(pocet_vitezu,#+1)
-    memory_stone.tag(rozdanych_exp,#+<eval exp_prize>)
-    memory_stone.tag(rozdanych_gp,#+<eval gp_prize>)
+    memory_stone.tag(count_success,#+1)
+    memory_stone.tag(gived_exp,#+<eval exp_prize>)
+    memory_stone.tag(gived_gp,#+<eval gp_prize>)
   endif 
-  src.accMsg("Hrac <src.name>, UID: <src> dokoncil 3D Labyrint a ziskal <exp_prize>expu a <gp_prize>gp.")
+  src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal <exp_prize>expu a <gp_prize>gp.")
   src.gohome
   dorand 3  // zmena pozice finalni gaty do 3 ruznych rohu labyrintu
     p=5955, 375, 0, 35
@@ -235,7 +249,7 @@ if (src.isPlayer)
   update 
 endif
 
-[function f_3D_labyrint_random_position]
+[function f_goblin_labyrint_random_position]
 dorand 409
   p=2352, 2123
   p=2662, 2103
@@ -647,7 +661,7 @@ dorand 409
   p=4589, 1461, 2
 enddo
 
-[CHARDEF c_3D_labyrint_goblin]  // Strazce vstupu do Labyrintu
+[CHARDEF c_goblin_labyrint]  // Strazce vstupu do Labyrintu
 ID=c_orc
 NAME=Zlaty Goblin
 SOUND=snd_MONSTER_ORC1
