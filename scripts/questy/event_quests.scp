@@ -449,9 +449,12 @@ tag(pocet_hracu,0)
 timer=120  // po vytvoreni mas 120 sec nez gata se zacne portovat
 
 ON=@step
+if (src.isdead)
+  return 1
+endif
 if (<itemExists(<link>)>)
   if (link.more2)
-    src.sysMessage("Neprojdes, dokud goblin zije!")
+    src.redMessage("Neprojdes, dokud goblin zije!")
     return 1
   endif
 endif
@@ -459,7 +462,7 @@ if (src.isPlayer)
   if (<src.tag(level)> > 6)  // pusti jen hrace s levelem 6+ (aby si netahaly nb postavy)
     f_entry_to_3D_labyrint
   else
-    src.sysMessage("Jsi prilis slaby na to, aby jsi prezil pruchod touto branou.")
+    src.redMessage("Jsi prilis slaby na to, aby jsi prezil pruchod touto branou.")
   endif
 endif
 
@@ -476,7 +479,7 @@ attr=010
 f_3D_labyrint_change_color
 
 ON=@step
-f_through_3D_labyrint_gate
+f_through_3D_labyrint_fire
 
 [ITEMDEF i_3D_Labyrint_odmena]
 ID=i_gate_3
@@ -489,7 +492,7 @@ color=0995
 ON=@step
 f_3D_labyrint_prize
 
-[function f_through_3D_labyrint_gate]
+[function f_through_3D_labyrint_fire]
 if color==0A7
   f_3D_labyrint_color_counter("zelena")
 elseif color==04A9
@@ -504,14 +507,22 @@ elseif color==0750
   f_3D_labyrint_color_counter("hneda")
 endif
 
-if (<src.findid(i_3D_labyrint).tag(labyrint_celkem)> < 30) 
-  arg(goX,<eval {5612 5622}>)
-  arg(goY,<eval {796 802}>)
-  arg(goMapplane,<eval {50 100}>)
+if (<src.findid(i_3D_labyrint).tag(labyrint_celkem)> < 30)  // Pokud ma mene jak 30 barevnych ohinku, tak ho to nepusti do zaverecneho patra 
+  arg(goX,<eval {5881 5944}>)  // Rozsah X souradnice labyrintu
+  arg(goY,<eval {321 364}>)  // Rozsah Y souradnice labyrintu
+  arg(goMapplane,<eval {30 34}>)  // Rozsah mapplanu labyrintu
   src.p(<goX>,<goY>,0,<goMapplane>)
   src.update
 else
-  src.say("JSI VITEZ !!!")
+  dorand 7  // 7 nahodnych pozic posledniho patra
+    src.p=5931, 331, 0, 35
+    src.p=5912, 359, 0, 35
+    src.p=5881, 352, 0, 35
+    src.p=5881, 350, 0, 35
+    src.p=5931, 341, 0, 35
+    src.p=5886, 348, 0, 35
+    src.p=5900, 355, 0, 35
+  enddo
 endif  
 f_3D_labyrint_change_color  // po pruchodu zmeni barvu ohne
 
@@ -540,7 +551,7 @@ endif
 
 [function f_entry_to_3D_labyrint]
 if (src.isPlayer)
-  if (finduid(#04000208c)) && !(src.isgm)   // #040041AEC
+  if (finduid(#040041AEC)) && !(src.isgm)   // memory stone v zivem regionu
     if (<eval tag(pocet_hracu)> == 0) && timer > 30
       timer=30  // Prvni pruchozi spusti Timer na gate na 30sec - pote se presune jinam
     endif
@@ -549,10 +560,10 @@ if (src.isPlayer)
     else
       if (<eval tag(pocet_hracu)> < 10)  // pusti max 10 hracu na jednu lokaci
         src.giveitem(i_3D_labyrint)
-        finduid(#04000208c).tag(vstoupilo,#+1)
+        finduid(#040041AEC).tag(vstoupilo,#+1)
         src.accMsg("Hrac <src.name>, UID: <src> vstoupil do 3D Labyrintu na pozici <src.p>.")
         tag(pocet_hracu,#+1)
-        src.p=5622, 820, 0, 100  // doplnit start lokaci 3D Labyrintu
+        src.p=5900, 355, 0, 30  // start lokace prvniho patra
         src.update
         src.sfx(254)  // zvuk pro hrace, co projde branou
       else
@@ -565,8 +576,8 @@ else
 endif
 
 [function f_change_location_3D_labyrint_entry]
-arg(memory_stone,#04000208c)  // #040041AEC
-timer={10 12}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
+arg(memory_stone,#040041AEC)  // memory stone v zivem regionu
+timer={10800 21600}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
 arg(start_x,<return_nth(1,<p>)>)
 arg(start_y,<return_nth(2,<p>)>)
 arg(new_x,<return_nth(1,<p>)>)
@@ -600,22 +611,22 @@ logmsg("<servertime> Pozice Brany je <p>")
 
 [function f_3D_labyrint_prize]
 if (src.isPlayer)
-  arg(memory_stone,#04000208c)  // #040041AEC
-  if (<eval src.tag(tag_3D_Labyrint)> == 0)
-    src.tag(tag_3D_Labyrint,0)
+  arg(memory_stone,#040041AEC)  // memory stone v zivem regionu
+  if (<eval src.qtag(Goblin_3D_Labyrint)> == 0)
+    src.qtag(Goblin_3D_Labyrint,0)
   endif
-  if (<eval src.tag(tag_3D_Labyrint)> < 10)  // do 10ti pruchodu exp a gp odmena roste  
-    arg(exp_prize,500+(<eval src.tag(tag_3D_Labyrint)>*50))
-    arg(gp_prize,10000+(<eval src.tag(tag_3D_Labyrint)>*1000))
+  if (<eval src.qtag(Goblin_3D_Labyrint)> < 10)  // do 10ti pruchodu exp a gp odmena roste  
+    arg(exp_prize,500+(<eval src.qtag(Goblin_3D_Labyrint)>*50))
+    arg(gp_prize,10000+(<eval src.qtag(Goblin_3D_Labyrint)>*1000))
   else  // od 10ti pruchodu exp a gp odmena je fixni + sance na item
     arg(exp_prize,1000)
     arg(gp_prize,20000)
-    if (<eval src.tag(tag_3D_Labyrint)> < 50) 
-      arg(item_prize,<eval {(<eval src.tag(tag_3D_Labyrint)>*10) 1000}>) // do 50ti pruchodu Labyrintem sance na item roste
+    if (<eval src.qtag(Goblin_3D_Labyrint)> < 50) 
+      arg(item_prize,<eval {(<eval src.qtag(Goblin_3D_Labyrint)>*10) 1000}>) // do 50ti pruchodu Labyrintem sance na item roste
     else
-      arg(item_prize,<eval {500 1000}>) // od 50ti pruchodu sance na item je stejna
+      arg(item_prize,<eval {500 1000}>) // od 50ti pruchodu sance na item je stejna 10%
     endif  
-    if (<eval item_prize> > 975)
+    if (<eval item_prize> > 950)
       src.giveitem(i_mi_bag)
       memory_stone.tag(rozdanych_itemu,#+1)
       src.accMsg("Hrac <src.name>, UID: <src> dokoncil 3D Labyrint a ziskal Magicky vacek.") 
@@ -624,7 +635,7 @@ if (src.isPlayer)
   
   src.givegold(<gp_prize>)
   src.addexp(<exp_prize>)
-  src.tag(tag_3D_Labyrint,#+1)
+  src.qtag(Goblin_3D_Labyrint,(<eval src.qtag(Goblin_3D_Labyrint)>+1))  // nevim proc, ale qtag neumi navysit hodnotu tagu pres #+1
 
   if (finduid(memory_stone))  
     memory_stone.tag(pocet_vitezu,#+1)
@@ -1070,10 +1081,11 @@ BLOODCOLOR=0995
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_bleed
+TEVENTS=e_npc_golddrop
 
 CATEGORY=Monsters
-SUBSECTION=Animal Monsters
-DESCRIPTION=Vlkodav
+SUBSECTION=Event Monsters
+DESCRIPTION=Zlaty Goblin - strazce brany
 
 ON=@Create
 COLOR=0995
@@ -1100,15 +1112,15 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
 
 tag.weapflag=dam_physical
 
-tag(resist_poison,750)
-tag.resist_para=<eval {300 450}>
-tag(resist_summon,150)
-tag(resist_bleed,200)
+tag(resist_poison,1000)
+tag.resist_para=<eval {800 950}>
+tag(resist_summon,350)
+tag(resist_bleed,400)
 
 tag(resist_sharp,00)
 tag(resist_slash,00)
-tag(resist_pierce,150)
-tag(resist_blunt,00)
+tag(resist_pierce,250)
+tag(resist_blunt,-200)
 
 tag(resist_fire,50)
 tag(resist_elect,50)
