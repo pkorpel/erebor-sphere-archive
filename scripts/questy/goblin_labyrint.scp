@@ -191,7 +191,6 @@ if (finduid(memory_stone))
   memory_stone.tag(gata_pozice,<p>)
   memory_stone.tag(last_cas_presunuti,<servertime>)
 endif
-logmsg("<servertime> Pozice Brany je <p>")
 
 [function f_3D_labyrint_prize]
 if (src.isPlayer)
