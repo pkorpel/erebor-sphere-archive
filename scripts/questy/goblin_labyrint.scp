@@ -246,12 +246,7 @@ if (src.isPlayer)
   else  // od 10ti pruchodu exp a gp odmena je fixni + sance na item
     arg(exp_prize,1000)
     arg(gp_prize,20000)
-    if (<eval src.qtag(Goblin_Labyrint)> < 180) 
-      arg(item_chance,<eval {(<eval src.qtag(Goblin_Labyrint)>*5) 1000}>) // do 180ti pruchodu Labyrintem sance na item roste
-    else
-      arg(item_chance,<eval {900 1000}>) // od 180ti pruchodu sance na item je stejna 50%
-    endif  
-    if (<eval item_chance> > 950)
+    if (<eval {1 1000}> < (200+(<eval src.qtag(Goblin_Labyrint)>*4))) // fix 20% sance + (pocet_projiti*0,4%) => 200 projiti =100%
       src.giveitem(i_mi_bag)
       def_goblin_labyrint_memory_stone.tag(gived_items,#+1)
       src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal Magicky vacek.") 
