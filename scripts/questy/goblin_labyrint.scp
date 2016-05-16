@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////
 
 [defnames def_goblin_labyrint]
-def_goblin_labyrint_memory_stone #040041AEC // memory stone v zivem regionu
+def_goblin_labyrint_memory_stone  #040041AEC // memory stone v zivem regionu
 
 def_goblin_labyrint_color_green   0A7
 def_goblin_labyrint_color_blue    04A9
@@ -21,6 +21,7 @@ if (isGM)
   sysmessage("Rozdano: <eval def_goblin_labyrint_memory_stone.tag(gived_gp)> gp")
   sysmessage("Rozdano: <eval def_goblin_labyrint_memory_stone.tag(gived_exp)> expu")
   sysmessage("Rozdano: <eval def_goblin_labyrint_memory_stone.tag(gived_items)> itemu")
+  sysmessage("Nejlepsi je: <def_goblin_labyrint_memory_stone.tag(best_name)> (UID: <def_goblin_labyrint_memory_stone.tag(best_uid)>) s poctem <eval def_goblin_labyrint_memory_stone.tag(best_amount)>x")
 else
   return 1
 endif
@@ -240,10 +241,10 @@ if (src.isPlayer)
   if (<eval src.qtag(Goblin_Labyrint)> == 0)
     src.qtag(Goblin_Labyrint,0)
   endif
-  if (<eval src.qtag(Goblin_Labyrint)> < 10)  // do 10ti pruchodu exp a gp odmena roste  
-    arg(exp_prize,500+(<eval src.qtag(Goblin_Labyrint)>*50))
-    arg(gp_prize,10000+(<eval src.qtag(Goblin_Labyrint)>*1000))
-  else  // od 10ti pruchodu exp a gp odmena je fixni + sance na item
+  if (<eval src.qtag(Goblin_Labyrint)> < 5)  // do 5ti pruchodu exp a gp odmena roste  
+    arg(exp_prize,500+(<eval src.qtag(Goblin_Labyrint)>*100))
+    arg(gp_prize,10000+(<eval src.qtag(Goblin_Labyrint)>*2000))
+  else  // od 5ti pruchodu exp a gp odmena je fixni + sance na item
     arg(exp_prize,1000)
     arg(gp_prize,20000)
     if (<eval {1 1000}> < (200+(<eval src.qtag(Goblin_Labyrint)>*4))) // fix 20% sance + (pocet_projiti*0,4%) => 200 projiti =100%
@@ -261,6 +262,7 @@ if (src.isPlayer)
     def_goblin_labyrint_memory_stone.tag(count_success,#+1)
     def_goblin_labyrint_memory_stone.tag(gived_exp,#+<eval exp_prize>)
     def_goblin_labyrint_memory_stone.tag(gived_gp,#+<eval gp_prize>)
+    f_goblin_labyrint_the_best
   endif 
   src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal <exp_prize>expu a <gp_prize>gp.")
   src.gohome
@@ -270,6 +272,13 @@ if (src.isPlayer)
     p=5855, 321, 0, 35
   enddo
   update 
+endif
+
+[function f_goblin_labyrint_the_best]
+if (<eval src.qtag(Goblin_Labyrint)> > <eval def_goblin_labyrint_memory_stone.tag(best_amount)>)
+  def_goblin_labyrint_memory_stone.tag(best_uid,<src>)
+  def_goblin_labyrint_memory_stone.tag(best_name,<src.name>)
+  def_goblin_labyrint_memory_stone.tag(best_amount,<src.qtag(Goblin_Labyrint)>)
 endif
 
 [function f_goblin_labyrint_random_position]
