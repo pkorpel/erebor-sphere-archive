@@ -115,7 +115,7 @@ on=*jj*
 if (<src.rescount i_zmrzlavoda> >= 3)
  SAY(No vyborne <src.name>! S tvoji pomoci se snad studnu podari zachranit!)
  src.consume 3 i_zmrzlavoda
- src.wait_then_port(5,5947,3429,20,0)
+ src.wait_then_port(5,5947,3429,20,10)
 else
  SAY(Nejsprv sezen tu vodu, az pak se dohodneme)
 endif
