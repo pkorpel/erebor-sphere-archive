@@ -1441,6 +1441,15 @@ else
   endif
 endif
 
+[events e_npc_golddrop] 
+on=@gethit
+if ({1 5} == 2)
+  newitem=i_gold
+  act.amount={1 10}
+  act.p=<p>
+  sfx(55)
+  say("Moje zlato! To ti nedaruju!")
+endif
 
 [events e_craft_monster]  // Event pro upravene monstra pro crafty z Fishingu/lumberu/miningu. Jen ty, kteri maji specialni upravu chardefu viz nb_monsters.scp
 ON=@getHit

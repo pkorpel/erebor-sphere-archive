@@ -1,0 +1,761 @@
+//////////////////////////////////////////////////
+//    Automatizovany event: Goblinuv Labyrint   //
+//         by: Jeffrey (GM Iustus)              //
+//////////////////////////////////////////////////
+
+[defnames def_goblin_labyrint]
+def_goblin_labyrint_memory_stone #040041AEC // memory stone v zivem regionu
+
+def_goblin_labyrint_color_green   0A7
+def_goblin_labyrint_color_blue    04A9
+def_goblin_labyrint_color_red     026
+def_goblin_labyrint_color_white   0481
+def_goblin_labyrint_color_yellow  084D
+def_goblin_labyrint_color_brown   0750
+
+[function f_goblin_statistika]
+if (isGM)
+  sysmessage("Statistika Eventu Goblin Labyrint:")
+  sysmessage("Vstoupilo hracu: <eval def_goblin_labyrint_memory_stone.tag(entered)>")
+  sysmessage("Dokoncilo hracu: <eval def_goblin_labyrint_memory_stone.tag(count_success)>")
+  sysmessage("Rozdano: <eval def_goblin_labyrint_memory_stone.tag(gived_gp)> gp")
+  sysmessage("Rozdano: <eval def_goblin_labyrint_memory_stone.tag(gived_exp)> expu")
+  sysmessage("Rozdano: <eval def_goblin_labyrint_memory_stone.tag(gived_items)> itemu")
+else
+  return 1
+endif
+
+[function f_goblin_portfind]
+if (isGM)
+  p=<def_goblin_labyrint_memory_stone.tag(gate_location)>
+  update
+else
+  return 1
+endif
+
+[ITEMDEF i_goblin_labyrint_memory]
+ID=i_memory
+NAME=Goblin Labyrint
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=86400  // 24h, drive nelze znova vejit do Labyrintu
+ATTR=094
+tag(labyrint_green,0)
+tag(labyrint_blue,0)
+tag(labyrint_red,0)
+tag(labyrint_white,0)
+tag(labyrint_yellow,0)
+tag(labyrint_brown,0)
+tag(labyrint_summary,0)
+
+ON=@timer
+remove
+
+[ITEMDEF i_goblin_labyrint_entry]
+ID=i_gate_3
+NAME=Brana do neznama
+
+ON=@create
+attr=010
+color=0995
+tag(count_players,0)
+timer=120  // po vytvoreni mas 120 sec nez gata se zacne portovat
+
+ON=@step
+if (src.isDead)
+  return 1
+endif
+if (<itemExists(<link>)>)
+  if (link.more2)
+    src.redMessage("Neprojdes, dokud goblin zije!")
+    return 1
+  endif
+endif
+if (src.isPlayer)
+  if (<eval src.tag(level)> > 6)  // pusti jen hrace s levelem 6+ (aby si netahaly nb postavy)
+    f_goblin_labyrint_entry
+  else
+    src.redMessage("Jsi prilis <src.sex(slaby,slaba)> na to, aby jsi <src.sex(prezil,prezila)> pruchod touto branou.")
+  endif
+endif
+
+ON=@timer
+f_goblin_labyrint_change_entry_location
+return 1
+
+[ITEMDEF i_goblin_labyrint_fire]
+ID=i_fire_column
+NAME=Ohen prozreni
+
+ON=@create
+attr=010
+f_goblin_labyrint_change_color               
+
+ON=@step
+f_goblin_labyrint_through_fire
+
+[ITEMDEF i_goblin_labyrint_prizegate]
+ID=i_gate_3
+NAME=Zlata brana
+
+ON=@create
+attr=010
+color=0995
+
+ON=@step
+f_goblin_labyrint_prize
+
+[function f_goblin_labyrint_through_fire]
+if (color==def_goblin_labyrint_color_green)
+  f_goblin_labyrint_color_counter("green")
+elseif (color==def_goblin_labyrint_color_blue)
+  f_goblin_labyrint_color_counter("blue")
+elseif (color==def_goblin_labyrint_color_red)
+  f_goblin_labyrint_color_counter("red")
+elseif (color==def_goblin_labyrint_color_white)
+  f_goblin_labyrint_color_counter("white")
+elseif (color==def_goblin_labyrint_color_yellow)
+  f_goblin_labyrint_color_counter("yellow")
+elseif (color==def_goblin_labyrint_color_brown)
+  f_goblin_labyrint_color_counter("brown")
+endif
+
+if (<src.findid(i_goblin_labyrint_memory).tag(labyrint_summary)> < 30)  // Pokud ma mene jak 30 barevnych ohynku, tak ho to nepusti do zaverecneho patra 
+  arg(goX,<eval {5881 5944}>)  // Rozsah X souradnice labyrintu
+  arg(goY,<eval {321 364}>)  // Rozsah Y souradnice labyrintu
+  arg(goMapplane,<eval {30 34}>)  // Rozsah mapplanu labyrintu
+  src.p(<goX>,<goY>,0,<goMapplane>)
+  src.update
+else
+  dorand 7  // 7 nahodnych pozic posledniho patra
+    src.p=5931, 331, 0, 35
+    src.p=5912, 359, 0, 35
+    src.p=5881, 352, 0, 35
+    src.p=5881, 350, 0, 35
+    src.p=5931, 341, 0, 35
+    src.p=5886, 348, 0, 35
+    src.p=5900, 355, 0, 35
+  enddo
+endif  
+f_goblin_labyrint_change_color  // po pruchodu zmeni barvu ohne
+
+[function f_goblin_labyrint_change_color]
+dorand 10
+  color=def_goblin_labyrint_color_green
+  color=def_goblin_labyrint_color_blue
+  color=def_goblin_labyrint_color_red 
+  color=def_goblin_labyrint_color_white
+  color=def_goblin_labyrint_color_yellow
+  color=def_goblin_labyrint_color_brown
+  color=def_goblin_labyrint_color_brown
+  color=def_goblin_labyrint_color_brown
+  color=def_goblin_labyrint_color_brown
+  color=def_goblin_labyrint_color_brown
+enddo  
+if (color==def_goblin_labyrint_color_green)
+  name=Zeleny ohen prozreni
+elseif (color==def_goblin_labyrint_color_blue)
+  name=Modry ohen prozreni
+elseif (color==def_goblin_labyrint_color_red)
+  name=Cerveny ohen prozreni
+elseif (color==def_goblin_labyrint_color_white)
+  name=Bily ohen prozreni
+elseif (color==def_goblin_labyrint_color_yellow)
+  name=Zluty ohen prozreni
+elseif (color==def_goblin_labyrint_color_brown)
+  name=Hnedy ohen prozreni
+endif
+
+// argv(0) - barva, kterou bylo projito
+[function f_goblin_labyrint_color_counter]
+if (<src.findid(i_goblin_labyrint_memory).tag(labyrint_<argv(0)>)> < 10)  // zapocita max 10ks od kazde barvy
+  src.findid(i_goblin_labyrint_memory).tag(labyrint_<argv(0)>,#+1)
+  if (strcmpi(<argv(0)>,brown))
+    src.findid(i_goblin_labyrint_memory).tag(labyrint_summary,#+1)  // sum barev bez hnede pro portnuti do zaverecneho patra
+  endif
+endif
+
+[function f_goblin_labyrint_entry]
+if (src.isPlayer)
+  if ((finduid(def_goblin_labyrint_memory_stone)) && !(src.isgm))
+    if ((<eval tag(count_players)> == 0) && (timer > 30))
+      timer=30  // Prvni pruchozi spusti Timer na gate na 30sec - pote se presune jinam
+    endif
+    if  (src.findid(i_goblin_labyrint_memory))
+      src.redmessage("Brana te odmita, jeste nemuzes znova projit.")
+    else
+      if (<eval tag(count_players)> < 10)  // pusti max 10 hracu na jednu lokaci
+        src.giveitem(i_goblin_labyrint_memory)
+        finduid(def_goblin_labyrint_memory_stone).tag(entered,#+1)
+        src.accMsg("Hrac <src.name>, UID: <src> vstoupil do Goblin Labyrintu na pozici <src.p>.")
+        tag(count_players,#+1)
+        src.p=5900, 355, 0, 30  // start lokace prvniho patra
+        src.update
+        src.sfx(254)  // zvuk pro hrace, co projde branou
+      else
+        src.redmessage("Brana je nestabilni, dalsiho jedince jiz neprijme a brzy se rozpusti.")
+      endif
+    endif
+  endif                           
+else
+  return 1
+endif
+
+[function f_goblin_labyrint_change_entry_location]
+timer={10800 21600}  // {10800 21600} Dalsi zmena pozice za 3-6 hodin
+arg(start_x,<return_nth(1,<p>)>)
+arg(start_y,<return_nth(2,<p>)>)
+arg(new_x,<start_x>)
+arg(new_y,<start_y>)
+while ((<new_x> == <start_x>) && (<new_y> == <start_y>))  // aby se nevygenerovala stejna pozice, jako je aktualni
+  f_goblin_labyrint_random_position
+  arg(new_x,<return_nth(1,<p>)>)
+  arg(new_y,<return_nth(2,<p>)>)         
+endwhile
+tag(count_players,0)  // vynulovani poctu pruchozich hracu po zmene pozice
+sfx(253)  // zvuk po presunu brany
+if (<itemExists(<link>)>)
+  link.p=<p>  // Presouvam spawn guarda na novou pozici
+  if (link.more2)  // Zije goblin?
+    arg(goblin_spawned,<link.tag(lastspawned)>)
+    if ((goblin_spawned.flag_spawned) && (<goblin_spawned.Obody> == c_goblin_labyrint))  // pokud je to opravdu goblin, tak ho portnu na novou lokaci brany 
+      goblin_spawned.p=<p>
+      goblin_spawned.home=<p>
+      goblin_spawned.hits=<goblin_spawned.maxhits>
+    endif
+  else
+    link.timer=1  // Goblin nezije, spawnuji ho
+  endif
+endif
+update
+if (finduid(def_goblin_labyrint_memory_stone))  
+  def_goblin_labyrint_memory_stone.tag(count_of_move,#+1)
+  def_goblin_labyrint_memory_stone.tag(gate_location,<p>)
+  def_goblin_labyrint_memory_stone.tag(last_time_of_move,<servertime>)
+endif
+
+[function f_goblin_labyrint_prize]
+if (src.isPlayer)
+  if (<eval src.qtag(Goblin_Labyrint)> == 0)
+    src.qtag(Goblin_Labyrint,0)
+  endif
+  if (<eval src.qtag(Goblin_Labyrint)> < 10)  // do 10ti pruchodu exp a gp odmena roste  
+    arg(exp_prize,500+(<eval src.qtag(Goblin_Labyrint)>*50))
+    arg(gp_prize,10000+(<eval src.qtag(Goblin_Labyrint)>*1000))
+  else  // od 10ti pruchodu exp a gp odmena je fixni + sance na item
+    arg(exp_prize,1000)
+    arg(gp_prize,20000)
+    if (<eval {1 1000}> < (200+(<eval src.qtag(Goblin_Labyrint)>*4))) // fix 20% sance + (pocet_projiti*0,4%) => 200 projiti =100%
+      src.giveitem(i_mi_bag)
+      def_goblin_labyrint_memory_stone.tag(gived_items,#+1)
+      src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal Magicky vacek.") 
+    endif
+  endif
+  
+  src.givegold(<gp_prize>)
+  src.addexp(<exp_prize>)
+  src.qtag(Goblin_Labyrint,(<eval src.qtag(Goblin_Labyrint)>+1))  // nevim proc, ale qtag neumi navysit hodnotu tagu pres #+1
+
+  if (finduid(def_goblin_labyrint_memory_stone))  
+    def_goblin_labyrint_memory_stone.tag(count_success,#+1)
+    def_goblin_labyrint_memory_stone.tag(gived_exp,#+<eval exp_prize>)
+    def_goblin_labyrint_memory_stone.tag(gived_gp,#+<eval gp_prize>)
+  endif 
+  src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal <exp_prize>expu a <gp_prize>gp.")
+  src.gohome
+  dorand 3  // zmena pozice finalni gaty do 3 ruznych rohu labyrintu
+    p=5955, 375, 0, 35
+    p=5931, 303, 0, 35
+    p=5855, 321, 0, 35
+  enddo
+  update 
+endif
+
+[function f_goblin_labyrint_random_position]
+dorand 409
+  p=2352, 2123
+  p=2662, 2103
+  p=2763, 2089, 40  
+  p=2829, 2245, -1
+  p=2856, 2464, 70
+  p=2943, 2501, 3
+  p=3060, 2697
+  p=2968, 2904
+  p=2679, 2927
+  p=2378, 3535
+  p=2057, 3066
+  p=1666, 3245
+  p=1427, 3153, 91
+  p=1432, 2910, 1
+  p=1415, 2753, 25
+  p=1258, 2658
+  p=1448, 2519
+  p=1714, 2468, 2
+  p=1883, 2619
+  p=1952, 2740
+  p=2309, 2696
+  p=2033, 2136, 10
+  p=1982, 2005, 2
+  p=2102, 1863
+  p=2080, 1679, 5
+  p=2245, 1433
+  p=2293, 1313, 60
+  p=2018, 1474
+  p=2158, 1217
+  p=2308, 1032
+  p=2223, 883
+  p=2047, 878, 40
+  p=2016, 922, 89
+  p=1860, 846, 5
+  p=1775, 931, 10
+  p=1563, 1009
+  p=1478, 757, 10
+  p=1422, 591
+  p=1518, 410, 2
+  p=1601, 246
+  p=1776, 130, 5
+  p=2016, 182
+  p=2043, 320
+  p=2207, 72, 5
+  p=2299, 236
+  p=2599, 97, 5
+  p=2682, 250
+  p=2862, 47, 2
+  p=2960, 269
+  p=3144, 182, 5
+  p=3245, 14
+  p=3331, 111, 5
+  p=3240, 337
+  p=3485, 241, 5
+  p=3497, 56
+  p=3719, 44
+  p=3695, 365
+  p=3975, 429
+  p=4237, 362
+  p=3936, 206
+  p=3924, 20
+  p=4064, 97, 5
+  p=4238, 105, 5
+  p=4366, 199, 2
+  p=4593, 108, 5
+  p=4455, 452, 1
+  p=4239, 462
+  p=4242, 673
+  p=4439, 600
+  p=4595, 411
+  p=4617, 739, 1
+  p=4415, 925, 2
+  p=4200, 868, 3
+  p=3960, 654, 20
+  p=3738, 806, 5
+  p=3565, 713, 10
+  p=3300, 639, 20
+  p=3111, 741, 60
+  p=2896, 743, 45
+  p=2763, 895
+  p=2619, 915
+  p=2564, 832
+  p=2719, 1052, 20
+  p=2687, 1198
+  p=2887, 1050
+  p=2796, 1368
+  p=2828, 1510
+  p=2888, 1534
+  p=3097, 1339
+  p=3073, 1625
+  p=2994, 1740
+  p=2959, 1933
+  p=2813, 1892
+  p=2698, 1906
+  p=2575, 1782, 1
+  p=2535, 1949
+  p=2971, 1963
+  p=3124, 1925
+  p=3314, 1880
+  p=3398, 1735, 10
+  p=3468, 1608, 5
+  p=3653, 1479
+  p=3909, 1522, 25
+  p=4179, 1628
+  p=4033, 1720, 10
+  p=3875, 1782, 10
+  p=3713, 1851, 5
+  p=3550, 1986
+  p=3527, 2100, 10
+  p=3636, 2153, 10
+  p=3663, 2301, 10
+  p=3814, 2363
+  p=3505, 2486
+  p=3417, 2305, 10
+  p=3306, 2203, 10
+  p=3220, 2418
+  p=3084, 2409
+  p=3958, 2381, 10
+  p=3982, 2186
+  p=4158, 2263
+  p=4258, 2362
+  p=4233, 2135, 10
+  p=4060, 2093
+  p=3998, 1991
+  p=4252, 1890
+  p=4361, 1688
+  p=4438, 1605
+  p=4537, 1670
+  p=4598, 1854, 1
+  p=4491, 2022, 20
+  p=4606, 2146
+  p=4428, 2264
+  p=4488, 2296, 10
+  p=4591, 2325
+  p=4727, 2322
+  p=4457, 2446
+  p=4672, 2509, 10
+  p=4885, 2384
+  p=5034, 2335
+  p=4904, 2570, 2
+  p=4673, 2673
+  p=4782, 2818
+  p=4597, 2660, 2
+  p=4362, 2624
+  p=4155, 2580, 2
+  p=3932, 2522
+  p=4113, 2659
+  p=4316, 2719
+  p=4442, 2880, 5
+  p=4638, 2891
+  p=4721, 2933
+  p=4909, 2946
+  p=4865, 2993
+  p=4600, 3080, 2
+  p=4406, 2977, 2
+  p=4309, 3264
+  p=4099, 3232
+  p=4162, 3431
+  p=3986, 3491
+  p=4172, 3612, 1
+  p=4306, 3491
+  p=4415, 3312
+  p=4382, 3299
+  p=4463, 3454
+  p=4668, 3449, 2
+  p=4700, 3402
+  p=4685, 3302
+  p=4593, 3530, 93
+  p=4429, 3735, 31
+  p=4599, 3617, 1
+  p=4780, 3438, 2
+  p=4906, 3337
+  p=4881, 3271
+  p=4883, 3102
+  p=4902, 3438
+  p=4897, 3627
+  p=4793, 3784
+  p=4696, 3642, -1
+  p=4596, 3755, 2
+  p=4470, 3795, -1
+  p=4628, 3902
+  p=4718, 3865, -49
+  p=4705, 4021, -50
+  p=4623, 3999, -51
+  p=4598, 4024, 1
+  p=4554, 4083, -51
+  p=4521, 4076, 1
+  p=4408, 4022, -1
+  p=4427, 3960, -52
+  p=4321, 4028, 1
+  p=3974, 4061, 4
+  p=3990, 3865
+  p=3920, 3820, 56
+  p=3736, 4090, -1
+  p=3669, 3993, -1
+  p=3330, 4049
+  p=3184, 3970, 4
+  p=2970, 4014
+  p=2751, 4082, 1
+  p=2825, 3889, 10
+  p=2981, 3811, 10
+  p=2928, 4008, 31
+  p=2707, 3852, 31
+  p=2596, 3843, 10
+  p=2610, 3576, -1
+  p=2618, 3517, -1
+  p=2671, 3443
+  p=2794, 3391
+  p=2820, 3549, 1
+  p=3057, 3474, -1
+  p=3105, 3326, 1
+  p=3072, 3264
+  p=2951, 3307, 2
+  p=2855, 3347
+  p=3089, 3120, 1
+  p=5999, 4065, 34
+  p=5997, 3984, -80
+  p=5784, 4031, -80
+  p=4135, 3718
+  p=4268, 3661, 1
+  p=3972, 3716, 5
+  p=3724, 3497
+  p=3613, 3489, 20
+  p=3582, 3477, 20
+  p=3744, 3530, 20
+  p=3507, 3573, 20
+  p=3553, 3656, 20
+  p=3781, 3677, 19
+  p=3759, 3789, 21
+  p=3572, 3758, 20
+  p=3284, 3889, 39
+  p=3237, 3835
+  p=3265, 3673
+  p=3387, 3645, 42
+  p=3225, 3476, 41
+  p=3276, 3410, -1
+  p=3184, 3102, -1
+  p=3356, 3094
+  p=3607, 3088, -5
+  p=3519, 2952, -1
+  p=3803, 2791
+  p=3913, 3105, 60
+  p=4010, 3324
+  p=4123, 2992
+  p=4189, 2814, 5
+  p=3974, 2832, 5
+  p=3899, 2672
+  p=3869, 2860
+  p=3429, 2724
+  p=3328, 2736
+  p=3273, 2623, -1
+  p=3148, 2609, -20
+  p=3252, 2483
+  p=3130, 2704
+  p=3436, 2576
+  p=2883, 3110
+  p=2332, 2313
+  p=2485, 2354, 1
+  p=2597, 2401
+  p=2746, 2302
+  p=2730, 2449, 71
+  p=2661, 2505, 1
+  p=2585, 2598
+  p=2735, 2608
+  p=2473, 2546
+  p=2350, 2681
+  p=2445, 2748, 19
+  p=2565, 2781
+  p=2701, 2816
+  p=2019, 2636, 1
+  p=1919, 2546, -1
+  p=1775, 2511
+  p=2375, 1640
+  p=2466, 1603
+  p=2595, 1552
+  p=2562, 1727
+  p=2536, 1441
+  p=2439, 1499
+  p=2522, 1226
+  p=2519, 1095
+  p=2477, 1299, 70
+  p=2414, 1282, 70
+  p=2387, 1366, 70
+  p=2161, 1258, -3
+  p=1945, 1328, 2
+  p=1936, 1570, 2
+  p=1770, 1525, 5
+  p=1550, 1562, 5
+  p=1396, 1538, -5
+  p=1394, 1682, 10
+  p=1159, 1722
+  p=1243, 1920, 2
+  p=1085, 1877, 2
+  p=1021, 1821
+  p=973, 1929, 10
+  p=924, 2176
+  p=1107, 2038
+  p=1121, 2335
+  p=1230, 2244
+  p=1244, 2019
+  p=1465, 2112
+  p=1334, 2333
+  p=1568, 1792, 5
+  p=1373, 1399
+  p=1367, 1193, -21
+  p=1280, 1202, 1
+  p=1310, 1111
+  p=1216, 1045
+  p=1197, 983, 1
+  p=1402, 924
+  p=1255, 828
+  p=1157, 454
+  p=1387, 497
+  p=1108, 774
+  p=1010, 503, 45
+  p=848, 431
+  p=767, 539
+  p=762, 625
+  p=969, 769, 2
+  p=1097, 849
+  p=1110, 926
+  p=948, 983
+  p=929, 953
+  p=840, 841
+  p=647, 862
+  p=616, 780
+  p=709, 582
+  p=823, 674
+  p=760, 473, 1
+  p=615, 514
+  p=481, 613
+  p=291, 718
+  p=280, 812
+  p=516, 700
+  p=418, 862
+  p=227, 957
+  p=257, 1094, 10
+  p=123, 1037
+  p=125, 1258
+  p=270, 1179
+  p=306, 1370, 1
+  p=293, 1242
+  p=433, 1213
+  p=563, 1074
+  p=449, 1026
+  p=576, 957, 20
+  p=758, 950, 10
+  p=875, 1049
+  p=629, 1065
+  p=1047, 1030, 1
+  p=941, 1174, 10
+  p=842, 1193
+  p=844, 1334
+  p=972, 1353
+  p=920, 1519, 11
+  p=751, 1588
+  p=936, 1611
+  p=1120, 1600, 10
+  p=1294, 1556, 5
+  p=1348, 1424
+  p=1127, 1810
+  p=860, 1789
+  p=781, 1767
+  p=825, 1864
+  p=811, 1975
+  p=658, 1901
+  p=525, 1854
+  p=582, 1662
+  p=448, 1649, -20
+  p=392, 1765
+  p=326, 1612
+  p=331, 1525
+  p=1708, 553
+  p=1902, 459, 10
+  p=1715, 415, 10
+  p=2007, 387, 5
+  p=2022, 521
+  p=2221, 462
+  p=2263, 643
+  p=2408, 482, 22
+  p=2583, 434, 15
+  p=2557, 661, 10
+  p=2678, 613, 2
+  p=2823, 685
+  p=2772, 354
+  p=2738, 388
+  p=2942, 461, 12
+  p=2993, 540, 20
+  p=3231, 509, 6
+  p=3342, 766, 5
+  p=3413, 971, 2
+  p=3353, 1036, 50
+  p=3458, 1147, 6
+  p=3601, 1147, 2
+  p=3586, 1312, 10
+  p=3723, 1454
+  p=3895, 1238, 10
+  p=3867, 1020
+  p=3632, 1048
+  p=4054, 1211, 10
+  p=4280, 1120, 10
+  p=4420, 1041, 10
+  p=4620, 997
+  p=4490, 1367, 10
+  p=4258, 1319, 10
+  p=4017, 1415
+  p=4304, 1518
+  p=4589, 1461, 2
+enddo
+
+[CHARDEF c_goblin_labyrint]  // Strazce vstupu do Labyrintu
+ID=c_orc
+NAME=Zlaty Goblin
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+CAN=MT_walk|MT_run
+
+attack=45
+ARMOR=60
+moverate=7
+
+RESOURCES=4 i_ribs_raw
+BLOODCOLOR=0995
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_bleed
+TEVENTS=e_npc_golddrop
+
+CATEGORY=Monsters
+SUBSECTION=Event Monsters
+DESCRIPTION=Zlaty Goblin - strazce brany
+
+ON=@Create
+COLOR=0995
+NPC=brain_monster
+FAME={100 500}
+KARMA=-10000
+
+STR=250
+DEX=250
+INT=10
+
+maxhits={400 500}
+maxstam={140 150}
+maxmana=0
+
+tag.experience=<eval {35.0 40.0}>
+
+tag.npc_bleed=400 //40.0%
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+tag.weapflag=dam_physical
+
+tag(resist_poison,1000)
+tag.resist_para=<eval {800 950}>
+tag(resist_summon,350)
+tag(resist_bleed,400)
+
+tag(resist_sharp,00)
+tag(resist_slash,00)
+tag(resist_pierce,250)
+tag(resist_blunt,-200)
+
+tag(resist_fire,50)
+tag(resist_elect,50)
+tag(resist_cold,50)
+
+PARRYING=80.0
+RESIST=80.0
+TACTICS=80.0
+WRESTLING=90.0
+TAMING=95.0
+SpiritSpeak=25.0
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+
+[eof]
