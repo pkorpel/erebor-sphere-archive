@@ -1424,7 +1424,7 @@ tag(monstertype,animal)
 PARRYING=90.0
 TACTICS=80.0
 WRESTLING=80.0
-TAMING={80.0 85.0}
+TAMING={105.0 110.0}
 ANIMALLORE=100.0
 ITEMnewbie=i_monster_create
 

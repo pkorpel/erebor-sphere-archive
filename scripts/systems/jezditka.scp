@@ -701,6 +701,8 @@ tag(imi_value[21], 5)   //hiding
 tag(imi_value[47], 10)   //stealth
 
 [function polar_bear_mif]
+tag(imi_value[104], 20) //spiders+animals
+tag(imi_value[105], 20) //eyes+golems
                     
 [function zostrich_green_mif]
 tag(imi_value[101], 20) //demoni
