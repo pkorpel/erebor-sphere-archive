@@ -1817,6 +1817,7 @@ maxmana=0
 
 tag.experience=<eval {60.0 70.0}>
 tag(npc_port_distance,10)
+tag.dupecount=1
 
 //mystik
 tag(hypnotizable,0)
@@ -1846,7 +1847,7 @@ tag.weapflag=dam_piercing|dam_physical
 
 tactics=100.0
 Resist=100.0
-WRESTLING=1000
+WRESTLING=100.0
 SpiritSpeak=30.0
 
 ITEMnewbie=i_monster_create
@@ -1854,3 +1855,4 @@ ITEMnewbie=i_monster_create
 ON=@NPCRestock
 ITEM=i_gold
 
+[EOF]
