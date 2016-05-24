@@ -49,6 +49,7 @@ tag(labyrint_white,0)
 tag(labyrint_yellow,0)
 tag(labyrint_brown,0)
 tag(labyrint_summary,0)
+tag(labyrint_finished,0)
 
 ON=@timer
 remove
@@ -122,34 +123,34 @@ elseif (color==def_goblin_labyrint_color_brown)
   f_goblin_labyrint_color_counter("brown")
 endif
 
-if (<src.findid(i_goblin_labyrint_memory).tag(labyrint_summary)> < 30)  // Pokud ma mene jak 30 barevnych ohynku, tak ho to nepusti do zaverecneho patra 
+src.go=10, 10  // pro promazani klienta od veci z jineho mapplanu
+if (<eval src.findid(i_goblin_labyrint_memory).tag(labyrint_finished)> == 0)  // Pokud ma mene jak 25 barevnych ohynku nebo 3+ od kazde barvy, tak ho to nepusti do zaverecneho patra 
   arg(goX,<eval {5881 5944}>)  // Rozsah X souradnice labyrintu
   arg(goY,<eval {321 364}>)  // Rozsah Y souradnice labyrintu
   arg(goMapplane,<eval {30 34}>)  // Rozsah mapplanu labyrintu
-  src.p(<goX>,<goY>,0,<goMapplane>)
-  src.update
+  src.go(<goX>,<goY>,0,<goMapplane>)
 else
   dorand 7  // 7 nahodnych pozic posledniho patra
-    src.p=5931, 331, 0, 35
-    src.p=5912, 359, 0, 35
-    src.p=5881, 352, 0, 35
-    src.p=5881, 350, 0, 35
-    src.p=5931, 341, 0, 35
-    src.p=5888, 357, 0, 35
-    src.p=5900, 355, 0, 35
+    src.go=5931, 331, 0, 35
+    src.go=5912, 359, 0, 35
+    src.go=5881, 352, 0, 35
+    src.go=5881, 350, 0, 35
+    src.go=5931, 341, 0, 35
+    src.go=5888, 357, 0, 35
+    src.go=5900, 355, 0, 35
   enddo
-endif  
+  src.classmessage("Posledni pruchod te premistil do zaverecneho patra. Ted uz jen najit vychod.")
+endif 
+src.update 
 f_goblin_labyrint_change_color  // po pruchodu zmeni barvu ohne
 
 [function f_goblin_labyrint_change_color]
-dorand 10
+dorand 8
   color=def_goblin_labyrint_color_green
   color=def_goblin_labyrint_color_blue
   color=def_goblin_labyrint_color_red 
   color=def_goblin_labyrint_color_white
   color=def_goblin_labyrint_color_yellow
-  color=def_goblin_labyrint_color_brown
-  color=def_goblin_labyrint_color_brown
   color=def_goblin_labyrint_color_brown
   color=def_goblin_labyrint_color_brown
   color=def_goblin_labyrint_color_brown
@@ -170,12 +171,24 @@ endif
 
 // argv(0) - barva, kterou bylo projito
 [function f_goblin_labyrint_color_counter]
-if (<src.findid(i_goblin_labyrint_memory).tag(labyrint_<argv(0)>)> < 10)  // zapocita max 10ks od kazde barvy
-  src.findid(i_goblin_labyrint_memory).tag(labyrint_<argv(0)>,#+1)
+arg(color_memory,<src.findid(i_goblin_labyrint_memory)>)
+if (<color_memory.tag(labyrint_<argv(0)>)> < 10)  // zapocita max 10ks od kazde barvy
+  color_memory.tag(labyrint_<argv(0)>,#+1)
   if (strcmpi(<argv(0)>,brown))
-    src.findid(i_goblin_labyrint_memory).tag(labyrint_summary,#+1)  // sum barev bez hnede pro portnuti do zaverecneho patra
+    color_memory.tag(labyrint_summary,#+1)  // sum barev bez hnede pro portnuti do zaverecneho patra
+    src.classmessage("Po pruchodu ohnem se citis jinak...")
+  else
+    src.classmessage("Po pruchodu ohnem jsi <src.sex(nezaznamenal,nezaznamenala)> zadnou zmenu.")
   endif
+else
+  src.classmessage("Tento ohen te jiz vice neobohatil...")
 endif
+if (<eval color_memory.tag(labyrint_summary)> > 24)  // 25 ruznych barev bez ohledu na pocty od jake barvy
+  color_memory.tag(labyrint_finished,1)
+endif
+if ((<eval color_memory.tag(labyrint_green)> > 2) && (<eval color_memory.tag(labyrint_blue)> > 2) &&  (<eval color_memory.tag(labyrint_red)> > 2) && (<eval color_memory.tag(labyrint_yellow)> > 2) && (<eval color_memory.tag(labyrint_white)> > 2))
+  color_memory.tag(labyrint_finished,1)  // 3 a vice od kazde barvy (krome hnede)
+endif   
 
 [function f_goblin_labyrint_entry]
 if (src.isPlayer)
@@ -192,7 +205,7 @@ if (src.isPlayer)
         src.accMsg("Hrac <src.name>, UID: <src> vstoupil do Goblin Labyrintu na pozici <src.p>.")
         tag(count_players,#+1)
         src.p=5900, 355, 0, 30  // start lokace prvniho patra
-        src.update
+        src.update            
         src.sfx(254)  // zvuk pro hrace, co projde branou
       else
         src.redmessage("Brana je nestabilni, dalsiho jedince jiz neprijme a brzy se rozpusti.")
