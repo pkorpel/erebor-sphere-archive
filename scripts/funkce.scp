@@ -3082,32 +3082,18 @@ if (src.isplayer)
 
       src.newnpc <morex>
       
-      if (lastnewchar.tag(noanimate))
-        if (<lastnewchar.tag(noanimate)>==1) //animatnout nepujde cokoliv, co ma tag(noanimate)
-          lastnewchar.remove
-          src.f_fizzleefect
-          src.redmessage("S timto telem nelze dale pracovat.")
-          return 1
-        endif
+      if (<eval lastnewchar.tag(noanimate)>==1) //animatnout nepujde cokoliv, co ma tag(noanimate)
+        lastnewchar.remove
+        src.f_fizzleefect
+        src.redmessage("S timto telem nelze dale pracovat.")
+        return 1
       endif
       
-      if !(src.tag(ra_ucinnost))  // kontrola tagu ucinnosti animate dead, bez tagu hazi error.
-        src.tag(ra_ucinnost,0)
-      endif
-      if !(src.tag(ra_mana_narocnost))  // kontrola tagu mana narocnosti, pokud ho necro nema, spatne se pocita narocnost many a hazi errory do logu.
-        src.tag(ra_mana_narocnost,0)
-      endif
-      if !(src.tag(ra_vydrz))  // kontrola tagu vydrze animate dead, bez nej hazi error.
-        src.tag(ra_vydrz,0)
-      endif
-      
-      if (<src.tag(ra_ucinnost)> > 0)
-        if (<src.tag(ra_ucinnost)> < 11)
-          arg(strop,(<src.tag(ra_ucinnost)>*2)+100)
-          //src.redmessage("Strop procento <strop> u 10")
+      if (<eval src.tag(ra_ucinnost)> > 0)
+        if (<eval src.tag(ra_ucinnost)> < 11)
+          arg(strop,(<eval src.tag(ra_ucinnost)>*2)+100)
         else
-          arg(strop,<src.tag(ra_ucinnost)>+110)
-          //src.redmessage("Strop procento <strop> u oo")
+          arg(strop,<eval src.tag(ra_ucinnost)>+110)
         endif
       else
         arg(strop,100)
@@ -3198,15 +3184,12 @@ if (src.isplayer)
       
       lastnewchar.newitem(i_npcanimate_remove)
       arg(timer_an,<eval(<src.tag(level)>/2)>+50)
-      //src.redmessage("Zaklad timer <timer_an>")
       
-      if (<src.tag(ra_vydrz)> > 0)
-        if (<src.tag(ra_vydrz)> < 11) 
-          arg(timer_an,<eval((<timer_an>*100)*(((<src.tag(ra_vydrz)>*3)+100)))>/10000)
-          //src.redmessage("pak timer 10 je <timer_an>")
+      if (<eval src.tag(ra_vydrz)> > 0)
+        if (<eval src.tag(ra_vydrz)> < 11) 
+          arg(timer_an,<eval((<timer_an>*100)*(((<eval src.tag(ra_vydrz)>*3)+100)))>/10000)
         else
-          arg(timer_an,<eval((<timer_an>*100)*((<src.tag(ra_vydrz)>+120)))>/10000)
-          //src.redmessage("pak timer RA<src.tag(ra_vydrz)> je <timer_an>")
+          arg(timer_an,<eval((<timer_an>*100)*((<eval src.tag(ra_vydrz)>+120)))>/10000)
         endif
       endif
  
@@ -3285,14 +3268,15 @@ if !(safe.link.npc)
  remove
  return 1
 endif
-  arg(ubermany,<eval(<link.tag(experience)>/<nastaveni_ability_animatemanadrain>)>+1)
-  //cont.redmessage(Zaklad mana je <ubermany>)
-if (<cont.tag(ra_mana_narocnost)> < 11)
-  arg(ubermany,<eval((<ubermany>*100)*(100-(<cont.tag(ra_mana_narocnost)>*2)))>/10000)
-  //cont.redmessage(A pak 10 u <ubermany>)
-else
-  arg(ubermany,<eval((<ubermany>*100)*(90-<cont.tag(ra_mana_narocnost)>))>/10000)
-  //cont.redmessage(A pak oo u <ubermany>)
+
+arg(ubermany,<eval(<link.tag(experience)>/<nastaveni_ability_animatemanadrain>)>+1)
+
+if (<eval cont.tag(ra_mana_narocnost)> > 0)  
+  if (<eval cont.tag(ra_mana_narocnost)> < 11)
+    arg(ubermany,<eval((<ubermany>*100)*(100-(<eval cont.tag(ra_mana_narocnost)>*2)))>/10000)
+  else
+    arg(ubermany,<eval((<ubermany>*100)*(90-<eval cont.tag(ra_mana_narocnost)>))>/10000)
+  endif
 endif
 if (<cont.mana> > <arg(ubermany)>)
  cont.mana=<eval(<cont.mana>-<arg(ubermany)>)>
