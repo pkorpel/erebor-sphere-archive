@@ -3696,7 +3696,7 @@ ITEMNEWBIE=i_platemail_gloves
 COLOR=0985
 ITEMNEWBIE=i_platemail_gorget
 COLOR=0985
-ITEMNEWBIE=i_skullcap
+ITEMNEWBIE=i_skull_cap
 COLOR=0675
 
 ON=@NPCRestock 
