@@ -3107,49 +3107,49 @@ if (src.isplayer)
       arg(strop_eben,<eval(6000*100*<strop>)>/10000)
       arg(strop_elven,<eval(9000*100*<strop>)>/10000)
       
-      if(<lastnewchar.tag(experience)> <= <strop_spruce>)
+      if(<eval lastnewchar.tag(experience)> <= <strop_spruce>)
         if (!src.hasStaff(spruce))
           src.sysMessage("Na toto monstrum nestaci tvoje hul.")
           lastnewchar.remove
           src.f_fizzleefect
           return 1
         endif
-      elseif (<lastnewchar.tag(experience)> <= <strop_chestnut>)
+      elseif (<eval lastnewchar.tag(experience)> <= <strop_chestnut>)
         if (!src.hasStaff(chestnut))
           src.sysMessage("Na toto monstrum nestaci tvoje hul.")
           lastnewchar.remove
           src.f_fizzleefect
           return 1
         endif
-      elseif (<lastnewchar.tag(experience)> <= <strop_oak>)
+      elseif (<eval lastnewchar.tag(experience)> <= <strop_oak>)
         if (!src.hasStaff(oak))
           src.sysMessage("Na toto monstrum nestaci tvoje hul.")
           lastnewchar.remove
           src.f_fizzleefect
           return 1
         endif
-      elseif (<lastnewchar.tag(experience)> <= <strop_teak>)
+      elseif (<eval lastnewchar.tag(experience)> <= <strop_teak>)
         if (!src.hasStaff(teak))
           src.sysMessage("Na toto monstrum nestaci tvoje hul.")
           lastnewchar.remove
           src.f_fizzleefect
           return 1
         endif
-      elseif (<lastnewchar.tag(experience)> <= <strop_mahagon>)
+      elseif (<eval lastnewchar.tag(experience)> <= <strop_mahagon>)
         if (!src.hasStaff(mahagon))
           src.sysMessage("Na toto monstrum nestaci tvoje hul.")
           lastnewchar.remove
           src.f_fizzleefect
           return 1
         endif
-      elseif (<lastnewchar.tag(experience)> <= <strop_eben>)
+      elseif (<eval lastnewchar.tag(experience)> <= <strop_eben>)
         if (!src.hasStaff(eben))
           src.sysMessage("Na toto monstrum nestaci tvoje hul.")
           lastnewchar.remove
           src.f_fizzleefect
           return 1
         endif
-      elseif (<lastnewchar.tag(experience)> <= <strop_elven>)
+      elseif (<eval lastnewchar.tag(experience)> <= <strop_elven>)
         if (!src.hasStaff(elven))
           src.sysMessage("Na toto monstrum nestaci tvoje hul.")
           lastnewchar.remove
@@ -3183,7 +3183,7 @@ if (src.isplayer)
       lastnew.MOREP=<link.P>
       
       lastnewchar.newitem(i_npcanimate_remove)
-      arg(timer_an,<eval(<src.tag(level)>/2)>+50)
+      arg(timer_an,<eval(<eval src.tag(level)>/2)>+50)
       
       if (<eval src.tag(ra_vydrz)> > 0)
         if (<eval src.tag(ra_vydrz)> < 11) 
@@ -3269,7 +3269,7 @@ if !(safe.link.npc)
  return 1
 endif
 
-arg(ubermany,<eval(<link.tag(experience)>/<nastaveni_ability_animatemanadrain>)>+1)
+arg(ubermany,<eval(<eval link.tag(experience)>/<nastaveni_ability_animatemanadrain>)>+1)
 
 if (<eval cont.tag(ra_mana_narocnost)> > 0)  
   if (<eval cont.tag(ra_mana_narocnost)> < 11)
