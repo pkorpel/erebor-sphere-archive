@@ -1829,7 +1829,7 @@ ICON=i_pet_elem_earth
 CAN=MT_WALK|mt_run|mt_equip|MT_USEHANDS
 
 attack=50
-ARMOR=150
+ARMOR=90
 moverate=3
 
 DESIRES=t_rock
