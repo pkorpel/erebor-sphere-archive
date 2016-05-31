@@ -848,7 +848,7 @@ if rand(30)==1 && (tag(waittill) < (<serv.time>)) && !(tag(isillusion))
   lastnew.timer=30
   //
   newnpc(<obody>)
-  lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2})>,<p_z>,<mapplane>
+  lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2)>,<p_z>,<mapplane>
   lastnewchar.hits=1
   lastnewchar.tag(nedelse,1)
   lastnewchar.maxhits=1
@@ -864,7 +864,7 @@ if rand(30)==1 && (tag(waittill) < (<serv.time>)) && !(tag(isillusion))
   lastnew.timer=30
   //
   newnpc(<obody>)
-  lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2})>,<p_z>,<mapplane>
+  lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2)>,<p_z>,<mapplane>
   lastnewchar.hits=1
   lastnewchar.tag(nedelse,1)
   lastnewchar.maxhits=1
