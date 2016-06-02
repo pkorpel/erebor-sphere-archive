@@ -5683,7 +5683,7 @@ elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==1)
   int=<int>-60
   maxmana=<maxmana>-60
   
-  if cont.mana > <cont.maxmana>
+  if (<cont.mana> > <cont.maxmana>)
     cont.mana=<cont.maxmana>
   endif
   
