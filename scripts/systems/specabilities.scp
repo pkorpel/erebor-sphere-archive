@@ -5731,7 +5731,7 @@ if tag(ritual)==1
  cont.int=<cont.int>-30
  cont.maxmana=<cont.maxmana>-30
 
- if cont.mana > <cont.maxmana>
+ if (<cont.mana> > <cont.maxmana>)
   cont.mana=<cont.maxmana>
  endif
 
@@ -5741,11 +5741,11 @@ elseif tag(ritual)==2
  cont.int=<cont.int>+30
  cont.maxmana=<cont.maxmana>+30
 
- if cont.hits > <cont.maxhits>
+ if (<cont.hits> > <cont.maxhits>)
   cont.hits=<cont.maxhits>
  endif
 
- if cont.stam > <cont.maxstam>
+ if (<cont.stam> > <cont.maxstam>)
   cont.stam=<cont.maxstam>
  endif
 else
