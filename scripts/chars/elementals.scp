@@ -1892,6 +1892,7 @@ wrestling=90.0
 PARRYING={85.0 100.0}
 TACTICS={85.0 100.0}
 RESIST={85.0 100.0}
+ARCHERY={85.0 100.0}
 SpiritSpeak=30.0
 
 ITEMnewbie=i_monster_create

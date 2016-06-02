@@ -2052,6 +2052,7 @@ tag.resist_poison=450
 
 wrestling=110.0
 SpiritSpeak=60.0
+ARCHERY={90.0 100.0}
 
 ITEMnewbie=i_monster_create
 ITEMnewbie=i_bow_rock
