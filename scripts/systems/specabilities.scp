@@ -4025,7 +4025,7 @@ if (profession!=class_mag) && (profession!=class_necro)
   sysMessage("Tohle nemuzes pouzivat.")
   return 1
 elseif !(tag(ra_energyshield))
-  sysMessage("Tohle nemuzes pouzivat.")
+  sysMessage("Tohle zatim neumis pouzivat.")
   return 1
 elseif (findid(i_energyshield)) && !(tag(energyofshield))
   sysMessage("Tva magicka moc je jeste prilis oslabena.")
@@ -4042,7 +4042,7 @@ elseif (mana>60)
   say("Heru Beleg Del Tir")
   topobj.EFFECT(3,#0A2002EEA,6,20,2)
   sound(snd_spell_energy_vortex)
-  classMessage("Vztycil jsi stit z ciste energie!")
+  classMessage("<sex(Vztycil,Vztycila)> jsi stit z ciste energie!")
   mana=<mana>-59
   if <isevent(e_standcast)>  
     classMessage("Jsi zpatky v normalnim stavu.")
@@ -4055,7 +4055,7 @@ endif
 [function cancelenergyshield]
 if (findid(i_energyshield)) && (tag(energyofshield))
   findid(i_energyshield).timer=0
-  classMessage("Zrusil jsi magicky stit.")
+  classMessage("<sex(Zrusil,Zrusila)> jsi magicky stit.")
 endif
 
 [events e_energy_shield]
@@ -4072,7 +4072,7 @@ on=@beforegetswing
 on=@aftergetswing
 if (var(dodged)!=1) && !(src.isplayer)
   tag(energyofshield,#-<var(ubrano)>)
-  if (tag(energyofshield) < 0)
+  if (<eval tag(energyofshield)> < 0)
     arg(rest_shield_power, <eval( var(ubrano) + tag(energyofshield) )>)
     arg(temp, <eval( (arg(rest_shield_power) * 100) / var(ubrano) ) >)
     var(ubrano,<eval (var(ubrano)*<tag(shield_power)>)/<temp>>)
@@ -4117,7 +4117,7 @@ return 1
 on=@Equip
   timer=<timer>+<eval(cont.tag(ra_energyshield)/2)>
   cont.events=+e_energy_shield
-  arg(energyshield,<cont.tag(ra_energyshield)>)
+  arg(energyshield,<eval cont.tag(ra_energyshield)>)
   if (<arg(energyshield)> < 11)
     arg(shield_power,<eval(<arg(energyshield)>*21)>)
   elseif ((<arg(energyshield)> > 10) && (<arg(energyshield)> < 21))
