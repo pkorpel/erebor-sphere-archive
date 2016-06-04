@@ -1814,6 +1814,8 @@ tag(resist_cold,100)
 
 PARRYING={90.0 100.0}
 WRESTLING={90.0 100.0}
+SWORDSMANSHIP={85.0 90.0}
+TACTICS={85.0 100.0}
 resist=100.0
 SpiritSpeak=45.0
 
@@ -1908,6 +1910,7 @@ tag(resist_cold,100)
 peacemaking=100.0
 tactics={90.0 100.0}
 wrestling={90.0 100.0}
+fencing={85.0 95.0}
 SpiritSpeak=45.0
 
 ITEMnewbie=i_monster_create

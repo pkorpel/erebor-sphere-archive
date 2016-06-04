@@ -520,5 +520,37 @@ src.sysmessage Brana te neprijala
 ENDIF
 return 1
 
+[ITEMDEF i_beridor_magic_port]
+ID=i_fx_sparkle
+NAME=Levitujici energie
+
+ON=@create
+attr=010
+color=0
+
+ON=@step
+if (src.isDead)
+  return 1
+endif
+if (<itemExists(<link>)>)
+  if (link.more2)
+    src.redMessage("Neprojdes, dokud strazce pruchodu zije!")
+    return 1
+  endif
+endif
+if (src.isPlayer)
+  dorand 5
+    src.go(1899,155,-28,2)
+    src.go(1898,67,-28,2)
+    src.go(1899,155,-28,2)
+    src.go(1891,67,-28,2)
+    src.go(1899,155,-28,2)
+  enddo
+  src.sfx(253)
+endif
+
+ON=@timer
+return 1
+
 
 [EOF]
