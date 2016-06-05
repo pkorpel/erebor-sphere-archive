@@ -553,4 +553,49 @@ ON=@timer
 return 1
 
 
+[ITEMDEF i_beridor_magic_port2]
+ID=i_fx_sparkle
+NAME=Levitujici energie
+
+ON=@create
+attr=010
+color=0
+
+ON=@step
+if (src.isDead)
+  return 1
+endif
+if (<itemExists(<link>)>)
+  if (link.more2)
+    src.redMessage("Neprojdes, dokud strazce pruchodu zije!")
+    return 1
+  endif
+endif
+if (src.isPlayer)
+  if ({1 3} == 1)
+    dorand 7
+      src.go(1947,139,-28,2)
+      src.go(1947,123,-28,2)
+      src.go(1947,107,-28,2)
+      src.go(1947,91,-28,2)
+      src.go(1923,91,-28,2) 
+      src.go(1923,115,-28,2)
+      src.go(1923,139,-28,2)
+    enddo
+  else
+    dorand 6
+      src.go(1963,83,-28,2)
+      src.go(1995,83,-28,2)
+      src.go(2011,99,-28,2)
+      src.go(2011,131,-28,2)
+      src.go(1995,147,-28,2) 
+      src.go(1963,146,-28,2)
+    enddo
+  endif
+  src.sfx(253)
+endif
+
+ON=@timer
+return 1
+
 [EOF]
