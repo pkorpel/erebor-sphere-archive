@@ -268,11 +268,11 @@ timer 1
  
 on=@timer
 if (<cont.action>!=-1)
- cont.f_fizzleeffect
+ cont.f_fizzleefect
  remove
  return 1
 elseif (<cont.magery><{300 700})
- cont.f_fizzleeffect
+ cont.f_fizzleefect
  remove
  return 1
 else
