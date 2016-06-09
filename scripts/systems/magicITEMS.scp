@@ -927,7 +927,7 @@ elseif (src.tag(realm) == 2)
   endif
 endif
 f_mif_create
-logmsg("postava <src.uid> (meno: <src.name>, acc: <src.account.name>) rozbaluje magicky vacek <arg(uid)> a vznika predmet <lastnewitem.name> s <lastnewitem.uid>")
+src.accmsg("rozbaluje magicky vacek (<arg(uid)>) a vznika magicky predmet <lastnewitem.baseid> s uid: <lastnewitem.uid>.")
 if (lastnewitem.color == 098b)
 	finduid(#0400075A4).tag(padnute_mithil,#+1)
 elseif (lastnewitem.color == 07d6)
