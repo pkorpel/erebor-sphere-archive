@@ -104,6 +104,6 @@ on=@beforedoeffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-
+on=@afterswing
 
 [eof]
