@@ -188,7 +188,7 @@ tag(uni_layer[2],"20,def.dispid==i_cape,0689,blank,i_cape")
 tag(uni_layer[3],"7,isitem,1,blank")
 tag(uni_layer[4],"3,isitem,1,blank,i_boots_calf")
 tag(uni_layer[5],"25,isitem,0690,blank,i_mt_horse_tan")
-tag(uni_needed,5)     
+tag(uni_needed,5)
 
 tag.state=0
 tag(leading,1)
@@ -224,7 +224,7 @@ tag.baseplayerkills=<eval src.tag.playerkillstotal>
 tag.onlineminutes=0
 tag.basetime=<serv.time>
 tag.deaths=0
-f_reset_nazghul_dragon
+f_nazghul_default_mount
 arg(i,0)
 while(<arg(i)> < 7)
  tag.remove(killed_<arg(i)>) 
@@ -249,7 +249,7 @@ else
  link.tag(lordnazgulgate).color=0692
  link.tag(lordnazgulgate).more1=3
 endif
-f_reset_nazghul_dragon
+f_nazghul_default_mount
 return 0
 
 on=@userclick
@@ -288,44 +288,44 @@ on=@userdeath
 if !(mayhavering)
  drop
 else
-  f_reset_nazghul_dragon
+  f_nazghul_default_mount
 endif
 
-[function nazghul_dragon]
+[function nazghul_fell]
 if (src.isplayer)
-  if(<findlayer(8)>)
-    if (!strcmpi(<src.findlayer(8).baseid>,i_leading_ring_power))
+  if (<findlayer(layer_ring)>)
+    if (!strcmpi(<src.findlayer(layer_ring).baseid>,i_leading_ring_power))
       arg(prsten_prvniho,<src.findid(i_leading_ring_power)>)
       if (<src.fame> == 10000)
-        if (<eval prsten_prvniho.tag(nextDragonSwitch)> < <serv.time>)
-          if (<prsten_prvniho.tag(nazghul_dragon)> == 0)
-            src.redmessage("Privolavam draka.")
-            prsten_prvniho.tag(nazghul_dragon,1)
+        if (<eval prsten_prvniho.tag(nextFellSwitch)> < <serv.time>)
+          if (<prsten_prvniho.tag(nazghul_fell)> == 0)
+            src.redmessage("Privolavam Fella.")
+            prsten_prvniho.tag(nazghul_fell,1)
             prsten_prvniho.tag(uni_layer[5],"25,isitem,0692,blank,i_mt_drake")
           else
-            src.redmessage("Odvolavam draka.")
-            prsten_prvniho.tag(nazghul_dragon,0)
+            src.redmessage("Odvolavam Fella.")
+            prsten_prvniho.tag(nazghul_fell,0)
             prsten_prvniho.tag(uni_layer[5],"25,isitem,0690,blank,i_mt_horse_tan")
           endif
-          prsten_prvniho.tag(nextDrakeSwitch,<serv.time>+10*60*5) 
+          prsten_prvniho.tag(nextFellSwitch,<serv.time>+10*60*5) 
           src.update
         else
           src.redmessage("Jeste nemuzes znova pouzit tento prikaz.")
         endif
       else 
-        src.redmessage("Pouze jako <src.sex(Lord,Lady)> muzes privolat draka.")
+        src.redmessage("Pouze jako <src.sex(Lord,Lady)> muzes privolat Fella.")
       endif
     else
-      src.redmessage("Nejsi Prvni Nazhgul! Nemas pravo privolat draka.")
+      src.redmessage("Nejsi Prvni Nazhgul! Nemas pravo privolat Fella.")
     endif
   else
-    src.redmessage("Nejsi Prvni Nazhgul! Nemas pravo privolat draka.")
+    src.redmessage("Nejsi Prvni Nazhgul! Nemas pravo privolat Fella.")
   endif
 endif
 
-[function f_reset_nazghul_dragon]
+[function f_nazghul_default_mount]
 tag(uni_layer[5],"25,isitem,0690,blank,i_mt_horse_tan")
-tag(nazghul_dragon,0)
+tag(nazghul_fell,0)
 
 [typedef t_shrine_power]
 on=@timer
