@@ -291,7 +291,7 @@ else
   f_nazghul_default_mount
 endif
 
-[function nazghul_fell]
+[function nazghulfell]
 if (src.isplayer)
   if (<findlayer(layer_ring)>)
     if (!strcmpi(<src.findlayer(layer_ring).baseid>,i_leading_ring_power))
@@ -310,7 +310,7 @@ if (src.isplayer)
           prsten_prvniho.tag(nextFellSwitch,<serv.time>+10*60*5) 
           src.update
         else
-          src.redmessage("Jeste nemuzes znova pouzit tento prikaz.")
+          src.redmessage("Tento prikaz jeste nemuzes pouzit.")
         endif
       else 
         src.redmessage("Pouze jako <src.sex(Lord,Lady)> muzes privolat Fella.")
