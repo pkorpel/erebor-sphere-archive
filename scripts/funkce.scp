@@ -4058,7 +4058,7 @@ if (<src.targ.baseid> == i_truhla_heslo ) || (<src.targ.type> == mit_main) || (<
  src.redMessage("Sem nelze predmety presunout.")
  remove
  return 1
-elseif (more1 == 0) && (<src.targ.cont> == <src>)
+elseif (more1 == 0) && (<hval src.targ.cont> == <src>)
   src.redMessage("Prikaz nelze pouzit na predmety, ktere mas na sobe.")
   return 1
 endif
