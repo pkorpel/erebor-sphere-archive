@@ -76,11 +76,11 @@ if (0<src.tag(q007_haradir_Nemethen)> == 1)
 endif
 
 [function f_q007_Rodrigo_checkOldTags]
-if (<src.tag.Rodrigo> == 1)
+if (<eval src.tag.Rodrigo> == 1)
   src.qtag(q007_Rodrigo,1)
   src.tag.remove(Rodrigo)
 endif
-if (<src.TAG.q007_delfin> == 1)
+if (<eval src.TAG.q007_delfin> == 1)
   src.qtag(q007_delfin,1)
   src.tag.remove(q007_delfin)
 endif
@@ -2794,7 +2794,7 @@ endif
 
 [FUNCTION f_q007_rodrigo_DClick]
 src.f_q007_Rodrigo_checkOldTags
-IF (<src.qtag(q007_Rodrigo)> == 1)
+if (<eval src.qtag(q007_Rodrigo)> == 1)
  DIALOG(d_q007_rodrigo2)
 else
  DIALOG(d_q007_rodrigo)
