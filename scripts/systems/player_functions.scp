@@ -253,7 +253,10 @@ f_nazghul_default_mount
 return 0
 
 on=@userclick
-src.sysmessage(Prsten prvniho Nazgula)
+src.sysmessage("Prsten prvniho Nazgula")
+if (<eval src.tag(lordnazgul)> == 1)
+  src.sysmessage("Pro vyvolani Fella pouzij prikaz .NazghulFell")
+endif
 return 0
 
 on=@pickup_ground
