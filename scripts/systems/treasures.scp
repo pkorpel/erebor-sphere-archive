@@ -87,7 +87,7 @@ else
  src.message="Chtelo by to poradny nacini"
  return 1
 endif
-if (SRC.MINING >  TAG(MAP))&&(nolightfizz(1))
+if (SRC.MINING >  TAG(MAP))&&!(src.nolightfizz(1))
  if (tag(map) > 975)
  if (finduid(026F2A).p == finduid(finduid(026F2A).tag(lastTreasureChestUID)).p)
    finduid(026F2A).tag(lastTreasureChestUID).p=<p> //lvl 5
@@ -305,7 +305,7 @@ else
  src.message="Chtelo by to poradny nacini"
  return 1
 endif
-if (SRC.MINING >=  1200)&&(nolightfizz(1))
+if (SRC.MINING >=  1200)&&!(src.nolightfizz(1))
  if (tag(map) == 1000)
    if (finduid(0DB0F4).p == finduid(finduid(0DB0F4).tag(lastTreasureChestUID)).p)
      finduid(0DB0F4).tag(lastTreasureChestUID).p=<p>
