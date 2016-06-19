@@ -706,78 +706,55 @@ dorand 409
   p=4589, 1461, 2
 enddo
 
-[CHARDEF c_goblin_labyrint]  // Strazce vstupu do Labyrintu
-ID=c_orc
-NAME=Zlaty Goblin
-SOUND=snd_MONSTER_ORC1
-ICON=i_pet_ORC
-CAN=MT_walk|MT_run
+[function f_vyvolej_gate]
+arg(vrah,<act>)
+//act=<arg(vrah)> // nutne kvuli accmsg - jinak hodi error kvuli pravoum clienta
+vrah.accMsg("zabil XYte monstrum a privolal Pokladoveho Goblina na (<act.p>).")
+//def_goblin_labyrint_memory_stone
+tempspawn(c_goblin_poklad,1,0)
+newitem=i_fx_yavanna  //sry za zneuziti tvoji animacky
+arg(gata,<lastnew>)
+gata.color=099D
+gata.p=<p>
+act.sfx(248)
 
-attack=45
-ARMOR=60
-moverate=7
+[events e_goblin_treasure]
+ON=@Step                                  
+if (<eval src.tag.FirstStep> == 0)
+  src.home=<p>
+  src.homedist=5
+  src.say("Sakra, kde jsem se to portnul?!")
+  src.EFFECT=3,i_fx_smoke,6,15,1
+  src.sfx(510)
+  src.tag(FirstStep,1) 
+endif
 
-RESOURCES=4 i_ribs_raw
-BLOODCOLOR=0995
+ON=@Death
+if ({1 10} == 5)  // 1 ku 10 ze to bude zlata truhla(vetsi odmena)
+  arg(gold_truhla,<finduid(finduid(03a081).tag(lastTreasureChestUID))>)
+  if (finduid(03a081).p == gold_truhla.p)
+    gold_truhla.dispid=i_box_brass
+    gold_truhla.color=0995
+    gold_truhla.name="Goblinova zlata truhlice" 
+    gold_truhla.p=<p>
+    gold_truhla.sfx(310)
+  else
+    say("Truhla NENI")  // prakticky nemozne
+  endif 
+else  // jinak to bude stribrna
+  arg(silver_truhla,<finduid(finduid(03915a).tag(lastTreasureChestUID))>)
+  if (finduid(03915a).p == silver_truhla.p)
+    silver_truhla.dispid=i_box_brass
+    silver_truhla.color=0990
+    silver_truhla.name="Goblinova stribrna truhlice" 
+    silver_truhla.p=<p>
+    silver_truhla.sfx(310)
+  else
+    say("Truhla NENI")  // prakticky nemozne
+  endif
+endif
 
-TEVENTS=e_monster
-TEVENTS=e_character
-TEVENTS=e_npc_bleed
-TEVENTS=e_npc_golddrop
-
-CATEGORY=Monsters
-SUBSECTION=Event Monsters
-DESCRIPTION=Zlaty Goblin - strazce brany
-
-ON=@Create
-COLOR=0995
-NPC=brain_monster
-FAME={100 500}
-KARMA=-10000
-
-STR=250
-DEX=250
-INT=10
-
-maxhits={400 500}
-maxstam={140 150}
-maxmana=0
-
-tag.experience=<eval {35.0 40.0}>
-
-tag.npc_bleed=400 //40.0%
-
-tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
-tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
-tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
-
-tag.weapflag=dam_physical
-
-tag(resist_poison,1000)
-tag.resist_para=<eval {800 950}>
-tag(resist_summon,350)
-tag(resist_bleed,400)
-
-tag(resist_sharp,00)
-tag(resist_slash,00)
-tag(resist_pierce,250)
-tag(resist_blunt,-200)
-
-tag(resist_fire,50)
-tag(resist_elect,50)
-tag(resist_cold,50)
-
-PARRYING=80.0
-RESIST=80.0
-TACTICS=80.0
-WRESTLING=90.0
-TAMING=95.0
-SpiritSpeak=25.0
-
-ITEMnewbie=i_monster_create
-
-ON=@NPCRestock
-ITEM=i_gold
-
+ON=@npcseenewplayer
+src.accMsg("Hrac <src.name>, UID: <src> zabil XYte monstrum a privolal Pokladoveho Goblina na (<p>).")
+ 
 [eof]

@@ -1,0 +1,538 @@
+//////////////////////////////////////////////////
+//    Goblini pro Eventy - NEPOUZIVAT NIKDY!!   //
+//         by: Jeffrey (GM Iustus)              //
+//////////////////////////////////////////////////
+
+[CHARDEF c_goblin_labyrint]  // Strazce vstupu do Labyrintu
+ID=c_orc
+NAME=Zlaty Goblin
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+CAN=MT_walk|MT_run
+
+attack=45
+ARMOR=60
+moverate=7
+
+RESOURCES=4 i_ribs_raw
+BLOODCOLOR=0995
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_bleed
+TEVENTS=e_npc_golddrop
+
+CATEGORY=Monsters
+SUBSECTION=Event Monsters
+DESCRIPTION=Zlaty Goblin - strazce brany
+
+ON=@Create
+COLOR=0995
+NPC=brain_monster
+FAME={100 500}
+KARMA=-10000
+
+STR=250
+DEX=250
+INT=10
+
+maxhits={400 500}
+maxstam={140 150}
+maxmana=0
+
+tag.experience=<eval {35.0 40.0}>
+
+tag.npc_bleed=400 //40.0%
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+tag.weapflag=dam_physical
+
+tag(resist_poison,1000)
+tag.resist_para=<eval {800 950}>
+tag(resist_summon,350)
+tag(resist_bleed,400)
+
+tag(resist_sharp,00)
+tag(resist_slash,00)
+tag(resist_pierce,250)
+tag(resist_blunt,-200)
+
+tag(resist_fire,50)
+tag(resist_elect,50)
+tag(resist_cold,50)
+
+PARRYING=80.0
+RESIST=80.0
+TACTICS=80.0
+WRESTLING=90.0
+TAMING=95.0
+SpiritSpeak=25.0
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+
+[CHARDEF c_goblin_poklad]  // Strazce pokladu
+ID=c_orc
+NAME=Pokladovy Goblin
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+CAN=MT_walk|MT_run
+
+attack=85
+ARMOR=80
+moverate=7
+
+RESOURCES=4 i_ribs_raw
+BLOODCOLOR=099d
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_bleed
+TEVENTS=e_npc_golddrop
+TEVENTS=e_goblin_treasure  // NIKDE JINDE NEPOUZIVAT!!!
+
+CATEGORY=Monsters
+SUBSECTION=Event Monsters
+DESCRIPTION=Pokladovy Goblin
+
+ON=@Create
+COLOR=099d
+NPC=brain_monster
+FAME={100 500}
+KARMA=-10000
+
+STR=500
+DEX=250
+INT=10
+
+maxhits={5000 6000}
+maxstam={400 600}
+maxmana=0
+
+tag.experience=<eval {500.0 750.0}>
+
+tag.npc_bleed=400 //40.0%
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+tag.weapflag=dam_blunt|dam_physical
+tag(monstertype,humanoid,60)
+
+tag(resist_poison,1000)
+tag.resist_para=1000)
+tag(resist_summon,800)
+tag(resist_bleed,800)
+
+tag(resist_sharp,500)
+tag(resist_slash,500)
+tag(resist_pierce,500)
+tag(resist_blunt,500)
+
+tag(resist_fire,500)
+tag(resist_elect,500)
+tag(resist_cold,500)
+
+PARRYING=200.0
+RESIST=200.0
+TACTICS=100.0
+WRESTLING=100.0
+TAMING=150.0
+SpiritSpeak=25.0              
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+
+[CHARDEF c_goblin_forest]  // Jedovaty, slabsi
+ID=c_orc
+NAME=Lesni Goblin
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+CAN=MT_walk|MT_run
+
+attack=45
+ARMOR=60
+moverate=7
+
+RESOURCES=4 i_ribs_raw
+BLOODCOLOR=022d
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_bleed
+TEVENTS=e_npc_reagdrop
+
+CATEGORY=Monsters
+SUBSECTION=Event Monsters
+DESCRIPTION=Lesni Goblin
+
+ON=@Create
+COLOR=022d
+NPC=brain_monster
+FAME={100 500}
+KARMA=-10000
+
+STR=300
+DEX=100
+INT=10
+
+maxhits={2000 2500}
+maxstam={400 600}
+maxmana=0
+
+tag.experience=<eval {70.0 90.0}>
+
+tag.npc_bleed=200 // 20.0%
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+tag.weapflag=dam_blunt|dam_physical
+tag(monstertype,humanoid,60)
+
+tag(resist_poison,1000)
+tag.resist_para=1000)
+tag(resist_summon,800)
+tag(resist_bleed,800)
+
+tag(resist_sharp,-200)
+tag(resist_slash,500)
+tag(resist_pierce,-500)
+tag(resist_blunt,500)
+
+tag(resist_fire,-300)
+tag(resist_elect,800)
+tag(resist_cold,700)
+
+PARRYING=100.0
+RESIST=100.0
+TACTICS=80.0
+WRESTLING=90.0
+SpiritSpeak=25.0 
+POISONING={130.0 150.0}             
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+ITEM=random_reagent,{30 50}
+ITEM=random_reagent,{30 50}
+
+[CHARDEF c_goblin_fire]  // ohnivy, carujici
+ID=c_orc
+NAME=Ohnivy Goblin
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+CAN=MT_walk|MT_run
+
+attack=35
+ARMOR=40
+moverate=3
+
+RESOURCES=4 i_ribs_raw
+BLOODCOLOR=044c
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_reagdrop
+TEVENTS=e_npc_infiniteMana
+TEVENTS=e_npc_manashield
+TEVENTS=e_npc_curse_mana //mass sani many
+
+CATEGORY=Monsters
+SUBSECTION=Event Monsters
+DESCRIPTION=Ohnivy Goblin
+
+ON=@Create
+COLOR=044c
+NPC=brain_monster
+FAME={100 500}
+KARMA=-10000
+
+STR=300
+DEX=100
+INT=300
+
+maxhits={1500 2000}
+maxstam={400 600}
+maxmana=3000
+
+tag.experience=<eval {110.0 150.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+tag.weapflag=dam_blunt|dam_physical
+tag(monstertype,humanoid,60)
+
+tag(resist_poison,700)
+tag.resist_para=1000)
+tag(resist_summon,800)
+tag(resist_bleed,-200)
+
+tag(resist_sharp,300)
+tag(resist_slash,00)
+tag(resist_pierce,-500)
+tag(resist_blunt,200)
+
+tag(resist_fire,1000)
+tag(resist_elect,750)
+tag(resist_cold,-200)
+
+PARRYING=100.0
+RESIST=200.0
+TACTICS=50.0
+WRESTLING=70.0
+SpiritSpeak=80.0
+MAGERY=120.0
+EI=80.0             
+
+ITEMnewbie=i_monster_create
+ITEMNEWBIE=i_spellbook
+addspell=s_harm
+addspell=s_fireball
+addspell=s_magic_reflection
+
+ON=@NPCRestock
+ITEM=i_gold
+ITEM=random_reagent,{30 50}
+ITEM=random_reagent,{30 50}
+
+[CHARDEF c_goblin_silver]  // stribrny, nejvice low goblin
+ID=c_orc
+NAME=Stribrny Goblin
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+CAN=MT_walk|MT_run
+
+attack=40
+ARMOR=50
+moverate=5
+
+RESOURCES=4 i_ribs_raw
+BLOODCOLOR=0990
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_golddrop
+
+CATEGORY=Monsters
+SUBSECTION=Event Monsters
+DESCRIPTION=Stribrny Goblin
+
+ON=@Create
+COLOR=0990
+NPC=brain_monster
+FAME={100 500}
+KARMA=-10000
+
+STR=300
+DEX=100
+INT=0
+
+maxhits={1500 2000}
+maxstam={400 600}
+maxmana=0
+
+tag.experience=<eval {60.0 80.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+tag.weapflag=dam_blunt|dam_physical
+tag(monstertype,humanoid,60)
+
+tag(resist_poison,1000)
+tag.resist_para=1000)
+tag(resist_summon,800)
+tag(resist_bleed,00)
+
+tag(resist_sharp,100)
+tag(resist_slash,100)
+tag(resist_pierce,200)
+tag(resist_blunt,100)
+
+tag(resist_fire,300)
+tag(resist_elect,300)
+tag(resist_cold,300)
+
+PARRYING=100.0
+RESIST=100.0
+TACTICS=80.0
+WRESTLING=80.0
+SpiritSpeak=80.0         
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+ 
+[CHARDEF c_goblin_diamond]  // Diamantovy, tezka konzerva, cim vice do ni mlati, tim je slabsi
+ID=c_orc
+NAME=Diamantovy Goblin
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+CAN=MT_walk|MT_run
+
+attack=60
+ARMOR=90
+moverate=5
+
+RESOURCES=5 i_gem_diamond
+BLOODCOLOR=0432
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_diamonddrop
+TEVENTS=e_resist_countdown
+
+CATEGORY=Monsters
+SUBSECTION=Event Monsters
+DESCRIPTION=Diamantovy Goblin
+
+ON=@Create
+COLOR=0432
+NPC=brain_monster
+FAME={100 500}
+KARMA=-10000
+
+STR=500
+DEX=100
+INT=0
+
+maxhits={8000 10000}
+maxstam={700 800}
+maxmana=0
+
+tag.experience=<eval {300.0 400.0}>
+
+tag(resist_countdown_chance,250)  // 25%, defualt 50%
+tag(resist_countdown_amount,25)  // 2,5%, default 2,5%
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+tag.weapflag=dam_blunt|dam_physical
+tag(monstertype,humanoid,60)
+
+tag(resist_poison,1000)
+tag(resist_para,1000)
+tag(resist_summon,1000)
+tag(resist_bleed,1000)
+
+tag(resist_sharp,900)
+tag(resist_slash,900)
+tag(resist_pierce,900)
+tag(resist_blunt,900)
+
+tag(resist_fire,900)
+tag(resist_elect,900)
+tag(resist_cold,900)
+
+PARRYING=100.0
+RESIST=200.0
+TACTICS=100.0
+WRESTLING=100.0
+SpiritSpeak=80.0         
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+ITEM=i_gem_diamond,{1 5}
+
+
+[CHARDEF c_goblin_dark]  // temny, otravny, rozdvojujici se
+ID=c_orc
+NAME=Temny Goblin
+SOUND=snd_MONSTER_ORC1
+ICON=i_pet_ORC
+CAN=MT_walk|MT_run
+
+attack=40
+ARMOR=30
+moverate=3
+
+RESOURCES=10 RANDOM_REAGENT_NECRO
+BLOODCOLOR=0690
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_duplicator
+
+CATEGORY=Monsters
+SUBSECTION=Event Monsters
+DESCRIPTION=Temny Goblin
+
+ON=@Create
+COLOR=0690
+NPC=brain_monster
+FAME={100 500}
+KARMA=-10000
+
+STR=500
+DEX=100
+INT=0
+
+maxhits={500 1500}
+maxstam={200 300}
+maxmana=0
+
+tag.experience=<eval {50.0 70.0}>
+
+tag(dupecount,2)  // 2x se rozdvoji
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+tag.weapflag=dam_blunt|dam_physical
+tag(monstertype,humanoid,60)
+
+tag(resist_poison,1000)
+tag(resist_para,1000)
+tag(resist_summon,200)
+tag(resist_bleed,200)
+
+tag(resist_sharp,300)
+tag(resist_slash,300)
+tag(resist_pierce,500)
+tag(resist_blunt,300)
+
+tag(resist_fire,00)
+tag(resist_elect,00)
+tag(resist_cold,00)
+
+PARRYING=100.0
+RESIST=100.0
+TACTICS=70.0
+WRESTLING=60.0
+SpiritSpeak=80.0         
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+ITEM=RANDOM_REAGENT_NECRO,{15 20}
+ITEM=RANDOM_REAGENT_NECRO,{15 20}
+
+[eof]

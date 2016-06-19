@@ -3018,6 +3018,19 @@ else
  return 0
 endif
 
+[function isDung]
+if (<mapplane> == 2)
+  return 1
+elseif (<mapplane> == 10)
+  return 1
+elseif (<mapplane> == 11)
+  return 1
+elseif (<mapplane> == 12)
+  return 1
+else
+  return 0
+endif
+
 [function isinvis]
 if (flags&0802008)
  return 1

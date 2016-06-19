@@ -33,6 +33,12 @@ TYPE=T_EQ_SCRIPT
 on=@Death
 f_monsterRefreshSpwn
 findlayer(25).remove //smazat kone
+if ((isDung) && (act.isplayer) && (<eval tag.experience> > 0)) // v dungach, zabite hracem, nesumon a neressnute monstrum
+  say("ANO")
+  f_vyvolej_gate
+else
+  say("NE")
+endif
 
 on=@npcseenewplayer
 if(<tag(karma)>)
