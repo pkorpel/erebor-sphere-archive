@@ -30,15 +30,10 @@ ID=i_rune_summon_creature
 TYPE=T_EQ_SCRIPT 
 
 [events e_monster]
-on=@Death
+on=@Death  
 f_monsterRefreshSpwn
 findlayer(25).remove //smazat kone
-if ((isDung) && (act.isplayer) && (<eval tag.experience> > 0)) // v dungach, zabite hracem, nesumon a neressnute monstrum
-  say("ANO")
-  f_vyvolej_gate
-else
-  say("NE")
-endif
+f_goblin_treasure_counter
 
 on=@npcseenewplayer
 if(<tag(karma)>)

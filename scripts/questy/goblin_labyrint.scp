@@ -706,11 +706,19 @@ dorand 409
   p=4589, 1461, 2
 enddo
 
-[function f_vyvolej_gate]
-arg(vrah,<act>)
-//act=<arg(vrah)> // nutne kvuli accmsg - jinak hodi error kvuli pravoum clienta
-vrah.accMsg("zabil XYte monstrum a privolal Pokladoveho Goblina na (<act.p>).")
-//def_goblin_labyrint_memory_stone
+[function f_goblin_treasure_counter]
+if ((isDung) && (act.isplayer) && (<eval tag.experience> > 0)) // v dungach, zabite hracem, nesumon a neressnute monstrum
+  def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,#+1)  // pocitadlo monster zabitych v dungach
+  if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> == 10000)  // Bylo v dungu hracem zabito 10k monster
+    def_goblin_labyrint_memory_stone.tag(summoned_goblins,#+1)  // kolikrat byl jiz goblin vyvolan
+    def_goblin_labyrint_memory_stone.tag(last_time_of_summon,<servertime>)  // kdy naposledy byl vyvolan
+    act.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")
+    f_goblin_treasure_summon_gate  // vyvolani gaty a pokladoveho goblina
+    def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,0)  // vynulovani pocitadla
+  endif
+endif
+
+[function f_goblin_treasure_summon_gate]
 tempspawn(c_goblin_poklad,1,0)
 newitem=i_fx_yavanna  //sry za zneuziti tvoji animacky
 arg(gata,<lastnew>)
@@ -738,6 +746,7 @@ if ({1 10} == 5)  // 1 ku 10 ze to bude zlata truhla(vetsi odmena)
     gold_truhla.name="Goblinova zlata truhlice" 
     gold_truhla.p=<p>
     gold_truhla.sfx(310)
+    def_goblin_labyrint_memory_stone.tag(gold_treasure,#+1)
   else
     say("Truhla NENI")  // prakticky nemozne
   endif 
@@ -749,12 +758,13 @@ else  // jinak to bude stribrna
     silver_truhla.name="Goblinova stribrna truhlice" 
     silver_truhla.p=<p>
     silver_truhla.sfx(310)
+    def_goblin_labyrint_memory_stone.tag(silver_treasure,#+1)
   else
     say("Truhla NENI")  // prakticky nemozne
   endif
 endif
 
 ON=@npcseenewplayer
-src.accMsg("Hrac <src.name>, UID: <src> zabil XYte monstrum a privolal Pokladoveho Goblina na (<p>).")
+src.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")  // druha alternativa na logy, pokud nevyresim ten problem s pravy
  
 [eof]
