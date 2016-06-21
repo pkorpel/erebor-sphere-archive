@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////
 
 [defnames def_goblin_labyrint]
-def_goblin_labyrint_memory_stone  #040041AEC // memory stone v zivem regionu
+def_goblin_labyrint_memory_stone  #040004a21  // #040041AEC // memory stone v zivem regionu
 
 def_goblin_labyrint_color_green   0A7
 def_goblin_labyrint_color_blue    04A9
@@ -709,9 +709,9 @@ enddo
 [function f_goblin_treasure_counter]
 if ((isDung) && (act.isplayer) && (<eval tag.experience> > 0)) // v dungach, zabite hracem, nesumon a neressnute monstrum
   def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,#+1)  // pocitadlo monster zabitych v dungach
-  if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> == 10000)  // Bylo v dungu hracem zabito 10k monster
+  if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> >= 5)  // Bylo v dungu hracem zabito 10k monster
     def_goblin_labyrint_memory_stone.tag(summoned_goblins,#+1)  // kolikrat byl jiz goblin vyvolan
-    def_goblin_labyrint_memory_stone.tag(last_time_of_summon,<servertime>)  // kdy naposledy byl vyvolan
+    def_goblin_labyrint_memory_stone.tag(last_time_of_summon,<servertime>)  // kdy naposledy byl vyvolan  
     act.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")
     f_goblin_treasure_summon_gate  // vyvolani gaty a pokladoveho goblina
     def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,0)  // vynulovani pocitadla
@@ -766,5 +766,53 @@ endif
 
 ON=@npcseenewplayer
 src.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")  // druha alternativa na logy, pokud nevyresim ten problem s pravy
+if !(findid(i_goblin_treasure_remover))
+  giveitem(i_goblin_treasure_remover)
+endif
+
+ON=@gethit
+if (findid(i_goblin_treasure_remover))
+  arg(goblin_remover,<findid(i_goblin_treasure_remover)>)
+  if (goblin_remover.more1 == 1)  // casti
+    topobj.flag_freeze=0
+    goblin_remover.more1=2  // uz necasti
+    goblin_remover.timer=5  // 5 sec pauza na dalsi casteni
+    f_fizzleefect
+  endif  
+endif
+
+[ITEMDEF i_goblin_treasure_remover]
+ID=i_memory
+NAME=Goblin Remover
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=6  // 60 sec nez zmizi
+ATTR=094
+MORE1=2
+
+ON=@timer
+if (more1==2)  // bojuje
+  more1=1  // casti gatu, kdyz dostane pecku, zrusi mu to a prodlouzi timer do dalsiho castu gaty
+  topobj.flag_freeze=1
+  topobj.say("Beleg Foroth Kel")
+  timer=3
+  topobj.anim(11)
+  return 1
+elseif (more1==1)  // casti
+  more1=0  // docastil, odporti, leda ze by ho zabili
+  topobj.say("Loucim se s vami!")
+  timer=2
+  topobj.newitem=i_fx_yavanna  //sry za zneuziti tvoji animacky
+  arg(gata,<lastnew>)
+  topobj.tag(gata_out,<gata>)
+  gata.color=099D
+  gata.p=<topobj.p>
+  gata.sfx(248)
+  return 1
+elseif more1==0  // docastil, zmizi(uz tomu nezabrani)
+  topobj.go(planSTO)  // pro efekt odporteni
+  topobj.remove
+endif
  
 [eof]
