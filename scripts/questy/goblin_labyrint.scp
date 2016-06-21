@@ -752,8 +752,8 @@ endif
 
 ON=@Death
 if ({1 10} == 5)  // 1 ku 10 ze to bude zlata truhla(vetsi odmena)
-  arg(gold_truhla,<finduid(finduid(03a081).tag(lastTreasureChestUID))>)
-  if (finduid(03a081).p == gold_truhla.p)
+  arg(gold_truhla,<finduid(finduid(02BDC0).tag(lastTreasureChestUID))>)
+  if (finduid(02BDC0).p == gold_truhla.p)
     gold_truhla.dispid=i_box_brass
     gold_truhla.color=0995
     gold_truhla.name="Goblinova zlata truhlice" 
@@ -765,8 +765,8 @@ if ({1 10} == 5)  // 1 ku 10 ze to bude zlata truhla(vetsi odmena)
     say("Truhla NENI")  // prakticky nemozne
   endif 
 else  // jinak to bude stribrna
-  arg(silver_truhla,<finduid(finduid(03915a).tag(lastTreasureChestUID))>)
-  if (finduid(03915a).p == silver_truhla.p)
+  arg(silver_truhla,<finduid(finduid(02A749).tag(lastTreasureChestUID))>)
+  if (finduid(02A749).p == silver_truhla.p)
     silver_truhla.dispid=i_box_brass
     silver_truhla.color=0990
     silver_truhla.name="Goblinova stribrna truhlice" 
