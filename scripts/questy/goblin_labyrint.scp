@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////
 
 [defnames def_goblin_labyrint]
-def_goblin_labyrint_memory_stone  #040004a21  // #040041AEC // memory stone v zivem regionu
+def_goblin_labyrint_memory_stone  #040041AEC // memory stone v zivem regionu
 
 def_goblin_labyrint_color_green   0A7
 def_goblin_labyrint_color_blue    04A9
@@ -26,6 +26,19 @@ else
   return 1
 endif
 
+[function f_goblin_statistika_2]
+if (isGM)
+  sysmessage("Statistika Eventu Goblin Poklad:")
+  sysmessage("Goblinu vyvolano: <eval def_goblin_labyrint_memory_stone.tag(summoned_goblins)>")
+  sysmessage("Goblinu uteklo: <eval def_goblin_labyrint_memory_stone.tag(goblin_escaped)>")
+  sysmessage("Aktualne zabito: <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> Dungovnich monster")
+  sysmessage("Silver Truhel: <eval def_goblin_labyrint_memory_stone.tag(silver_treasure)>")
+  sysmessage("Gold Truhel: <eval def_goblin_labyrint_memory_stone.tag(gold_treasure)>")
+  sysmessage("Naposledy vyvolan Goblin: <def_goblin_labyrint_memory_stone.tag(last_time_of_summon)>")
+else
+  return 1
+endif
+    
 [function f_goblin_portfind]
 if (isGM)
   p=<def_goblin_labyrint_memory_stone.tag(gate_location)>
@@ -709,7 +722,7 @@ enddo
 [function f_goblin_treasure_counter]
 if ((isDung) && (act.isplayer) && (<eval tag.experience> > 0)) // v dungach, zabite hracem, nesumon a neressnute monstrum
   def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,#+1)  // pocitadlo monster zabitych v dungach
-  if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> >= 5)  // Bylo v dungu hracem zabito 10k monster
+  if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> >= 10000)  // Bylo v dungu hracem zabito 10k monster
     def_goblin_labyrint_memory_stone.tag(summoned_goblins,#+1)  // kolikrat byl jiz goblin vyvolan
     def_goblin_labyrint_memory_stone.tag(last_time_of_summon,<servertime>)  // kdy naposledy byl vyvolan  
     act.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")
@@ -745,6 +758,7 @@ if ({1 10} == 5)  // 1 ku 10 ze to bude zlata truhla(vetsi odmena)
     gold_truhla.color=0995
     gold_truhla.name="Goblinova zlata truhlice" 
     gold_truhla.p=<p>
+    gold_truhla.timer=3600
     gold_truhla.sfx(310)
     def_goblin_labyrint_memory_stone.tag(gold_treasure,#+1)
   else
@@ -757,6 +771,7 @@ else  // jinak to bude stribrna
     silver_truhla.color=0990
     silver_truhla.name="Goblinova stribrna truhlice" 
     silver_truhla.p=<p>
+    silver_truhla.timer=3600
     silver_truhla.sfx(310)
     def_goblin_labyrint_memory_stone.tag(silver_treasure,#+1)
   else
@@ -764,17 +779,18 @@ else  // jinak to bude stribrna
   endif
 endif
 
-ON=@npcseenewplayer
+ON=@NpcSeeNewPlayer
 src.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")  // druha alternativa na logy, pokud nevyresim ten problem s pravy
 if !(findid(i_goblin_treasure_remover))
   giveitem(i_goblin_treasure_remover)
+  say("Vypada to tady nebezpecne, musim se odsud co nejrychleji dostat...")
 endif
 
-ON=@gethit
+ON=@GetHit
 if (findid(i_goblin_treasure_remover))
   arg(goblin_remover,<findid(i_goblin_treasure_remover)>)
-  if (goblin_remover.more1 == 1)  // casti
-    topobj.flag_freeze=0
+  if (goblin_remover.more1 == 1)  // casti gatu
+    flag_freeze=0
     goblin_remover.more1=2  // uz necasti
     goblin_remover.timer=5  // 5 sec pauza na dalsi casteni
     f_fizzleefect
@@ -786,12 +802,12 @@ ID=i_memory
 NAME=Goblin Remover
 TYPE=T_EQ_SCRIPT
 
-ON=@EQUIP
-TIMER=6  // 60 sec nez zmizi
+ON=@Equip
+TIMER=60  // 60 sec nez zmizi
 ATTR=094
 MORE1=2
 
-ON=@timer
+ON=@Timer
 if (more1==2)  // bojuje
   more1=1  // casti gatu, kdyz dostane pecku, zrusi mu to a prodlouzi timer do dalsiho castu gaty
   topobj.flag_freeze=1
@@ -810,8 +826,9 @@ elseif (more1==1)  // casti
   gata.p=<topobj.p>
   gata.sfx(248)
   return 1
-elseif more1==0  // docastil, zmizi(uz tomu nezabrani)
+elseif (more1==0)  // docastil, zmizi(uz tomu nezabrani)
   topobj.go(planSTO)  // pro efekt odporteni
+  def_goblin_labyrint_memory_stone.tag(goblin_escaped,#+1)
   topobj.remove
 endif
  
