@@ -1,5 +1,10 @@
 //////////////////////////////////////////////////
 //    Goblini pro Eventy - NEPOUZIVAT NIKDY!!   //
+// Zlaty Goblin je strazce brany do Labyrintu   //
+// Pokladovy goblin se sam objevuje v dungach,  //
+//   po jeho zabiti se vytvori u tela poklad    //
+// Ostatni Goblinove, jsou strazci pokladu od   //
+//          pokladoveho Goblina.                //
 //         by: Jeffrey (GM Iustus)              //
 //////////////////////////////////////////////////
 
@@ -77,7 +82,7 @@ ITEMnewbie=i_monster_create
 ON=@NPCRestock
 ITEM=i_gold
 
-[CHARDEF c_goblin_poklad]  // Strazce pokladu
+[CHARDEF c_goblin_treasure]  // Strazce pokladu
 ID=c_orc
 NAME=Pokladovy Goblin
 SOUND=snd_MONSTER_ORC1
@@ -273,7 +278,7 @@ tag.experience=<eval {110.0 150.0}>
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
-tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
 
 tag.weapflag=dam_blunt|dam_physical

@@ -30,10 +30,10 @@ ID=i_rune_summon_creature
 TYPE=T_EQ_SCRIPT 
 
 [events e_monster]
-on=@Death  
+on=@Death
 f_monsterRefreshSpwn
 findlayer(25).remove //smazat kone
-f_goblin_treasure_counter
+f_goblin_treasure_evaluate
 
 on=@npcseenewplayer
 if(<tag(karma)>)

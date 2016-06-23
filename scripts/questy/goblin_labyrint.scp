@@ -1,5 +1,8 @@
 //////////////////////////////////////////////////
-//    Automatizovany event: Goblinuv Labyrint   //
+//          Automatizovany event:               //
+//            Goblinuv Labyrint                 //
+//                   and                        //
+//             Goblinuv Poklad                  //
 //         by: Jeffrey (GM Iustus)              //
 //////////////////////////////////////////////////
 
@@ -12,6 +15,11 @@ def_goblin_labyrint_color_red     026
 def_goblin_labyrint_color_white   0481
 def_goblin_labyrint_color_yellow  084D
 def_goblin_labyrint_color_brown   0750
+
+def_goblin_treasure_monsters_to_kill 10000
+
+def_goblin_treasure_silver_treasurer 02A749 
+def_goblin_treasure_gold_treasurer   02BDC0
 
 [function f_goblin_statistika]
 if (isGM)
@@ -719,10 +727,10 @@ dorand 409
   p=4589, 1461, 2
 enddo
 
-[function f_goblin_treasure_counter]
-if ((isDung) && (act.isplayer) && (<eval tag.experience> > 0)) // v dungach, zabite hracem, nesumon a neressnute monstrum
+[function f_goblin_treasure_evaluate]
+if ((isDung) && (act.isplayer) && (<eval tag(experience)> > 0)) // v dungach, zabite hracem, nesumon a neressnute monstrum
   def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,#+1)  // pocitadlo monster zabitych v dungach
-  if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> >= 10000)  // Bylo v dungu hracem zabito 10k monster
+  if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> >= def_goblin_treasure_monsters_to_kill)  // Bylo v dungu hracem zabito 10k monster
     def_goblin_labyrint_memory_stone.tag(summoned_goblins,#+1)  // kolikrat byl jiz goblin vyvolan
     def_goblin_labyrint_memory_stone.tag(last_time_of_summon,<servertime>)  // kdy naposledy byl vyvolan  
     act.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")
@@ -732,72 +740,76 @@ if ((isDung) && (act.isplayer) && (<eval tag.experience> > 0)) // v dungach, zab
 endif
 
 [function f_goblin_treasure_summon_gate]
-tempspawn(c_goblin_poklad,1,0)
-newitem=i_fx_yavanna  //sry za zneuziti tvoji animacky
+tempspawn(c_goblin_treasure,1,0)
+newitem=i_fx_yavanna
 arg(gata,<lastnew>)
 gata.color=099D
+gata.name="Magicka brana"
 gata.p=<p>
 act.sfx(248)
 
+//  argv(0)-UID pokladnika, argv(1)-nazev barvy, argv(2)-ID barvy
+[function f_move_treasure_to_me]
+arg(treasure_to_move,<finduid(finduid(argv(0)).tag(lastTreasureChestUID))>)
+if (finduid(argv(0)).p == treasure_to_move.p)
+  treasure_to_move.dispid=i_box_brass
+  treasure_to_move.color=<argv(2)>
+  treasure_to_move.name="Goblinova <argv(1)> truhlice" 
+  treasure_to_move.p=<p>
+  treasure_to_move.timer=3600
+  treasure_to_move.sfx(310)
+else
+  say("Truhla NENI")  // prakticky nemozne
+endif 
+
 [events e_goblin_treasure]
 ON=@Step                                  
-if (<eval src.tag.FirstStep> == 0)
+if (<eval src.tag(GoblinTreasure_FirstStep)> == 0)
   src.home=<p>
   src.homedist=5
-  src.say("Sakra, kde jsem se to portnul?!")
+  dorand 5
+    src.say("Sakra, kde jsem se to portnul?!")
+    src.say("Kde to jsem?!")
+    src.say("Zajimave misto, tady jsem jeste nikdy nebyl.")
+    src.say("Kde jsem se to ocitl?!")
+    src.say("Skvele misto k ukryti meho pokladu.")
+  enddo
   src.EFFECT=3,i_fx_smoke,6,15,1
   src.sfx(510)
-  src.tag(FirstStep,1) 
+  src.tag(GoblinTreasure_FirstStep,1) 
 endif
 
 ON=@Death
-if ({1 10} == 5)  // 1 ku 10 ze to bude zlata truhla(vetsi odmena)
-  arg(gold_truhla,<finduid(finduid(02BDC0).tag(lastTreasureChestUID))>)
-  if (finduid(02BDC0).p == gold_truhla.p)
-    gold_truhla.dispid=i_box_brass
-    gold_truhla.color=0995
-    gold_truhla.name="Goblinova zlata truhlice" 
-    gold_truhla.p=<p>
-    gold_truhla.timer=3600
-    gold_truhla.sfx(310)
-    def_goblin_labyrint_memory_stone.tag(gold_treasure,#+1)
-  else
-    say("Truhla NENI")  // prakticky nemozne
-  endif 
-else  // jinak to bude stribrna
-  arg(silver_truhla,<finduid(finduid(02A749).tag(lastTreasureChestUID))>)
-  if (finduid(02A749).p == silver_truhla.p)
-    silver_truhla.dispid=i_box_brass
-    silver_truhla.color=0990
-    silver_truhla.name="Goblinova stribrna truhlice" 
-    silver_truhla.p=<p>
-    silver_truhla.timer=3600
-    silver_truhla.sfx(310)
-    def_goblin_labyrint_memory_stone.tag(silver_treasure,#+1)
-  else
-    say("Truhla NENI")  // prakticky nemozne
-  endif
+if ({1 10} == 5)  // 1 ku 9 ze to bude zlata truhla(vetsi odmena)
+  f_move_treasure_to_me(def_goblin_treasure_gold_treasurer,"zlata",0995)
+  def_goblin_labyrint_memory_stone.tag(gold_treasure,#+1)
+else
+  f_move_treasure_to_me(def_goblin_treasure_silver_treasurer,"stribrna",0990)
+  def_goblin_labyrint_memory_stone.tag(silver_treasure,#+1)
 endif
 
 ON=@NpcSeeNewPlayer
 src.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")  // druha alternativa na logy, pokud nevyresim ten problem s pravy
-if !(findid(i_goblin_treasure_remover))
-  giveitem(i_goblin_treasure_remover)
+if !(findid(i_remover_goblin_treasure))
+  giveitem(i_remover_goblin_treasure)
   say("Vypada to tady nebezpecne, musim se odsud co nejrychleji dostat...")
 endif
 
 ON=@GetHit
-if (findid(i_goblin_treasure_remover))
-  arg(goblin_remover,<findid(i_goblin_treasure_remover)>)
+if (findid(i_remover_goblin_treasure))
+  arg(goblin_remover,<findid(i_remover_goblin_treasure)>)
   if (goblin_remover.more1 == 1)  // casti gatu
     flag_freeze=0
     goblin_remover.more1=2  // uz necasti
     goblin_remover.timer=5  // 5 sec pauza na dalsi casteni
     f_fizzleefect
-  endif  
+  endif
+else
+  giveitem(i_remover_goblin_treasure)
+  say("Vypada to tady nebezpecne, musim se odsud co nejrychleji dostat...")  
 endif
 
-[ITEMDEF i_goblin_treasure_remover]
+[ITEMDEF i_remover_goblin_treasure]
 ID=i_memory
 NAME=Goblin Remover
 TYPE=T_EQ_SCRIPT
@@ -819,10 +831,11 @@ elseif (more1==1)  // casti
   more1=0  // docastil, odporti, leda ze by ho zabili
   topobj.say("Loucim se s vami!")
   timer=2
-  topobj.newitem=i_fx_yavanna  //sry za zneuziti tvoji animacky
+  topobj.newitem=i_fx_yavanna
   arg(gata,<lastnew>)
   topobj.tag(gata_out,<gata>)
   gata.color=099D
+  gata.name="Magicka brana"
   gata.p=<topobj.p>
   gata.sfx(248)
   return 1
