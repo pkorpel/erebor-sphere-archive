@@ -4083,8 +4083,9 @@ COLDCHANCE=00
 
 [AREA Beridor Level 1]
 GROUP=Dung Beridor
-P=5834, 2639,10
+P=5834, 2639, 10, 10
 RECT=5540,2618,5890,2996
+mapplane=10
 FLAGS=00812
 tag.realm=3
 tag.necro=1
@@ -4148,8 +4149,9 @@ COLDCHANCE=00
 
 [AREA Beridor Level 3]
 GROUP=Dung Beridor
-P=5466, 2669,10
+P=5466, 2669, 10, 10
 RECT=5194,2628,5514,2910
+mapplane=10
 FLAGS=00812
 tag.nobank=1
 tag.necro=1
