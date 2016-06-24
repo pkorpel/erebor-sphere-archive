@@ -768,7 +768,7 @@ if (<eval src.tag(GoblinTreasure_FirstStep)> == 0)
   src.home=<p>
   src.homedist=5
   dorand 5
-    src.say("Sakra, kde jsem se to portnul?!")
+    src.say("Sakra, kam jsem se to portnul?!")
     src.say("Kde to jsem?!")
     src.say("Zajimave misto, tady jsem jeste nikdy nebyl.")
     src.say("Kde jsem se to ocitl?!")
