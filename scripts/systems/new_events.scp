@@ -1447,8 +1447,31 @@ if ({1 5} == 2)
   newitem=i_gold
   act.amount={1 10}
   act.p=<p>
+  act.timer=300
   sfx(55)
   say("Moje zlato! To ti nedaruju!")
+endif
+
+[events e_npc_reagdrop] 
+on=@gethit
+if ({1 5} == 2)
+  newitem=random_reagent
+  act.amount={1 10}
+  act.p=<p>
+  act.timer=300
+  sfx(310)
+  say("Me bylinky! Za to zemres!")
+endif
+
+[events e_npc_diamonddrop] 
+on=@gethit
+if ({1 10} == 2)
+  newitem=i_gem_diamond
+  act.amount=1
+  act.p=<p>
+  act.timer=300
+  sfx(52)
+  say("Muj Diamand! Za to budes pykat!")
 endif
 
 [events e_craft_monster]  // Event pro upravene monstra pro crafty z Fishingu/lumberu/miningu. Jen ty, kteri maji specialni upravu chardefu viz nb_monsters.scp
@@ -1469,5 +1492,41 @@ if (src.isplayer)
 endif
 return 0
 
+[events e_resist_countdown]
+ON=@getHit
+arg(countdown_chance,<eval tag.resist_countdown_chance>)
+if (<countdown_chance> == 0)
+  arg(countdown_chance,500)  // default 50%
+endif 
+if ({1 1000} <= <countdown_chance>)
+  if (src.isplayer)
+    arg(countdown_amount,<eval tag.resist_countdown_amount>)
+    if (<countdown_amount> == 0)
+      arg(countdown_amount,25)  // default 2,5%
+    endif  
+    if ((src.profession==class_necro) || (src.profession==class_mag) || (src.profession==class_mystik) || (src.profession==class_shaman))  // magicke povolani
+      tag(resist_summon,#-<countdown_amount>)
+      tag(resist_fire,#-<countdown_amount>)
+      tag(resist_cold,#-<countdown_amount>)
+      tag(resist_elect,#-<countdown_amount>)
+      src.classmessage("Citis jak <name> slabne vuci magii.")
+    elseif (src.profession==class_thief) // thief
+      if (<eval tag(resist_poison)> < 950)  // immunni na poison a tak to i zustane    
+        tag(resist_poison,#-<countdown_amount>)
+      endif
+      if (<eval tag(resist_bleed)> < 950)  // immunni na bleed a tak to i zustane  
+        tag(resist_bleed,#-<countdown_amount>)
+      endif
+      tag(resist_slash,#-<countdown_amount>)
+      tag(resist_pierce,#-<countdown_amount>)
+      src.classmessage("Citis jak <name> je zranitelnejsi.") 
+    else  // zbytek    
+      tag(resist_sharp,#-<countdown_amount>)
+      tag(resist_slash,#-<countdown_amount>)
+      tag(resist_blunt,#-<countdown_amount>)
+      tag(resist_pierce,#-<countdown_amount>)
+      src.classmessage("Citis jak <name> je zranitelnejsi.")
+    endif
+endif  
 
 [EOF]

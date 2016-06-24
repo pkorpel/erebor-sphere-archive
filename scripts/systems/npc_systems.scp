@@ -33,6 +33,7 @@ TYPE=T_EQ_SCRIPT
 on=@Death
 f_monsterRefreshSpwn
 findlayer(25).remove //smazat kone
+f_goblin_treasure_evaluate
 
 on=@npcseenewplayer
 if(<tag(karma)>)
