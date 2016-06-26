@@ -100,6 +100,8 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_bleed
 TEVENTS=e_npc_golddrop
+TEVENTS=e_summoneater_vamp
+TEVENTS=e_parakrik
 TEVENTS=e_goblin_treasure  // NIKDE JINDE NEPOUZIVAT!!!
 
 CATEGORY=Monsters
@@ -254,6 +256,7 @@ TEVENTS=e_character
 TEVENTS=e_npc_reagdrop
 TEVENTS=e_npc_infiniteMana
 TEVENTS=e_npc_manashield
+TEVENTS=e_summoneater
 TEVENTS=e_npc_curse_mana //mass sani many
 
 CATEGORY=Monsters
