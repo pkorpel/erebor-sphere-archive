@@ -3944,7 +3944,7 @@ ANIM=0ffc78c7f
 CAN=MT_WALK|MT_USEHANDS|MT_run
 
 attack=25
-ARMOR=30
+ARMOR=22
 moverate=3
 
 RESOURCES=10 i_ribs_raw
@@ -3953,6 +3953,7 @@ BLOODCOLOR=020
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_resist_countdown
 
 CATEGORY=Monsters
 SUBSECTION=Pirati
@@ -3974,8 +3975,10 @@ maxhits={500 800}
 maxstam={60 150}
 maxmana=0
 
-tag.experience=<eval {25.0 30.0}>
+tag.experience=<eval {35.0 40.0}>
 tag(hypnotizable,0)
+tag(resist_countdown_chance,750)
+tag(resist_countdown_amount,50)
 
 tag(resist_poison,880)
 tag.resist_para=<eval {250 350}>
@@ -3993,13 +3996,13 @@ tag(resist_cold,200)
 
 tag(monstertype,humanoid,60)
 
-parrying={100.0 110.0}
+parrying={70.0 100.0}
 resist=100.0
-tactics={90.0 110.0}
+tactics={80.0 100.0}
 wrestling={85.0 95.0}
-FENCING={90.0 105.0}
-SWORDSMANSHIP={90.0 105.0}
-MACEFIGHTING={100.0 105.0}
+FENCING={80.0 105.0}
+SWORDSMANSHIP={80.0 105.0}
+MACEFIGHTING={80.0 105.0}
 peacemaking=100.0
 
 ITEMnewbie=i_monster_create
@@ -4025,7 +4028,7 @@ itemnewbie=i_shirt_fancy
 Color=098a
 
 ON=@hit 
-IF (RAND(15)==1)
+IF (RAND(10)==1)
   dorand 7
     SAY("Doufam, ze to neni vsecho, co umis. Hahaha!")
     SAY("Nikdy me neporazis!")
