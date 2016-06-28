@@ -1225,11 +1225,11 @@ STR=1200
 DEX=355
 INT=150
 
-maxhits={2500 3000}
+maxhits={4500 5000}
 maxstam={300 380}
 maxmana=0
 
-tag.experience=<eval {150.0 170.0}>
+tag.experience=<eval {180.0 200.0}>
 
 tag.npc_bleed=500 //50.0%
 
@@ -1243,25 +1243,25 @@ tag(monstertype,animal,60)
 tag.weapflag=dam_sharp|dam_physical
 
 tag(resist_poison,1000)
-tag.resist_para=<eval {750 900}> 
+tag.resist_para=<eval {850 950}> 
 tag(resist_summon,600)
 tag(resist_bleed,700)
 
-tag(resist_sharp,50)
-tag(resist_slash,50)
-tag(resist_pierce,200)
-tag(resist_blunt,50)
+tag(resist_sharp,250)
+tag(resist_slash,250)
+tag(resist_pierce,350)
+tag(resist_blunt,100)
 
-tag(resist_fire,150)
-tag(resist_elect,300)
-tag(resist_cold,350)
+tag(resist_fire,200)
+tag(resist_elect,350)
+tag(resist_cold,450)
 
-PARRYING=100.0
-RESIST=120.0
+PARRYING=120.0
+RESIST=180.0
 TACTICS=100.0
 WRESTLING=100.0
 SpiritSpeak=75.0
-peacemaking=120.0
+peacemaking=150.0
 POISONING=125.0
 
 ITEMnewbie=i_monster_create
@@ -1292,7 +1292,7 @@ TEVENTS=e_npc_leaper
 
 CATEGORY=Monsters
 SUBSECTION=Animal Monsters
-DESCRIPTION=Krvavy Drapac
+DESCRIPTION=Skokan
 
 ON=@Create
 Color=06D8
@@ -1317,7 +1317,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 
-tag(monstertype,animal,60)
+tag(monstertype,animal,80)
 
 tag.weapflag=dam_sharp|dam_physical
 
@@ -1356,7 +1356,7 @@ CAN=MT_WALK|MT_run
 
 attack=15
 ARMOR=25
-moverate=9
+moverate=7
 
 FOODTYPE=55 t_FISH,64 t_meat_raw
 BLOODCOLOR=0
