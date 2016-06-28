@@ -1821,7 +1821,10 @@ tag.dupecount=1
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanNotBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
 
 //other resists
 tag(resist_poison,1000)
@@ -1846,7 +1849,7 @@ tag(monstertype,eye)
 tag.weapflag=dam_piercing|dam_physical
 
 tactics=100.0
-Resist=100.0
+Resist=150.0
 WRESTLING=100.0
 SpiritSpeak=30.0
 
