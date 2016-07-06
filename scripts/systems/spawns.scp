@@ -211,11 +211,11 @@ else
   if (findid(i_gold))
     if !(isResurrectedNPC)
       if (mapplane>0)
-        findid(i_gold).amount=<eval (<eval <tag.experience>>*825)/1000> // +10% drop goldu a tim padem i itemu v dungach
+        findid(i_gold).amount=<eval (<eval <tag.experience>>*900)/1000> // +20% drop goldu a tim padem i itemu v dungach
       else
         findid(i_gold).amount=<eval (<eval <tag.experience>>*750)/1000> // standard drop na povrchu a ostrovech
       endif
-      if (rescount(i_gold)>{30 130000})
+      if (rescount(i_gold)>{30 110000})
         giveitem(i_mi_bag)
       endif
       if (rescount(i_gold)>{3500 100000})&&({1 3} == 1)
