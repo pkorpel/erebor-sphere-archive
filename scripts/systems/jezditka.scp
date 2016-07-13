@@ -422,7 +422,7 @@ if (npcExists(<src.tag(lastjezdik)>))
   lastnew.tag(myhits,<lastJezdik.hits>)
   lastnew.name=<lastJezdik.name>
   lastnew.tag(bagl,<lastJezdik.findlayer(21)>)
-  finduid(lastnew.tag(bagl)).cont=0400b065b
+  finduid(lastnew.tag(bagl)).cont=04002CA40
   src.equip(lastnew)
 else
   src.redMessage("Jezditko nenalezeno...")
@@ -487,7 +487,7 @@ else
  mymemjezdik.name=<src.targ.name>
  mymemjezdik.tag(bagl,<src.targ.findlayer(21)>)
  mymemjezdik.tag(myfood,<src.targ.food>)
- finduid(mymemjezdik.tag(bagl)).cont=0400b065b
+ finduid(mymemjezdik.tag(bagl)).cont=04002CA40
  src.equip(mymemjezdik)
 endif
 //cont.newitemsafe(i_hladovitko)
