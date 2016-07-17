@@ -1171,11 +1171,11 @@ if (<nastaveni_sg_playing>==1)
   if ((<strcmpi(<region.name>,"dum ")>==1) || (<strcmpi(<region.name>,"pole ")>==1) || (<isevent(e_sheep_game_spectator)>) || (<strlen(<tag(sg_player)>)>))
     if (<strlen(<tag(sg_from)>)>)
       f_sheep_game_spectator_out
-      finduid(#02b7c73).tag(divaci,#-1) //gm heck uid
+      finduid(#01513A).tag(divaci,#-1) //gm Iustus uid
     else
-      if (<finduid(#02b7c73).tag.divaci> < 11) //gm heck uid
+      if (<finduid(#01513A).tag.divaci> < 11) //gm Iustus uid
         f_sheep_game_spectator_in
-        finduid(#02b7c73).tag(divaci,#+1)//gm heck uid
+        finduid(#01513A).tag(divaci,#+1)//gm Iustus uid
        else
         redmessage("Maximalny pocet divakov")
       endif
@@ -1206,7 +1206,7 @@ invis=0
 invul=0
 tag.remove(sg_from)
 events -e_sheep_game_spectator
-finduid(#02b7c73).tag(divaci,#-1)
+finduid(#01513A).tag(divaci,#-1)
 return 1
 
 [itemdef i_sheep_game_players]
