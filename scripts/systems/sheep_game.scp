@@ -468,10 +468,10 @@ if (<strlen(<src.tag(sheepGame)>)> > 0)
     src.tag(sheepGameInArena,1)//player inArena
     
     src.tag(sheepGameExperience,<src.tag.experience>)
-    //src.tag(sheepGameProvocation,<src.provocation>)
-    //src.provocation=0.0
-    //src.tag(sheepGameDetectingHidden,<src.detectinghidden>)
-    //src.detectinghidden=<src.detectinghidden>+100.0
+    src.tag(sheepGameProvocation,<src.provocation>)
+    src.provocation=0
+    src.tag(sheepGameDetectingHidden,<src.detectinghidden>)
+    src.detectinghidden=0
   else
     src.sysmessage("Brana je uzatvorena")
   endif
@@ -727,7 +727,7 @@ on=@aftergetswing
 [events e_sheep_game_player]
 on=@spellcast
 //24=stone wall, 28=fire field, 32=recall, 33=blade spirits, 40=summon creature, 47=paralyze field, 50=energy field, 52=gate
-//58=vortex, 
+//58=vortex, 60-64=elementalove a demon 
 //say(<argn>)
 if ((<argn>==24)||(<argn>==28)||(<argn>==32)||(<argn>==33)||(<argn>==40)||(<argn>==47)||(<argn>==50)||(<argn>==52)||(<argn>==58)|| ((<argn>>=60)&&(<argn><=64)) )
   src.redmessage("To nepujde")
@@ -752,7 +752,7 @@ f_sheep_game_death
 on=@beforedoeffect 
 f_sheep_game_setMonsterEvent
 
-//on=@DrinkingPotion
+on=@DrinkingPotion
 //if (<targ.baseid>==i_potion_Invisibility)
 //  newequip(i_invisibility_remover)
 //endif
@@ -949,8 +949,8 @@ if (<strlen(<tag(sheepGameStone)>)> > 0)
   tag.remove(sheepGameExperience)
   provocation=<tag(sheepGameProvocation)>
   tag.remove(sheepGameProvocation)
-  //detectinghidden=<tag(sheepGameDetectingHidden)>
-  //tag.remove(sheepGameDetectingHidden)
+  detectinghidden=<tag(sheepGameDetectingHidden)>
+  tag.remove(sheepGameDetectingHidden)
   tag.remove(sheepGameInArena)
   tag.remove(sheepGameId)
   
@@ -1025,7 +1025,8 @@ if (<src.isplayer>)
     src.provocation=<src.tag(sheepGameProvocation)>
   endif
   src.tag.remove(sheepGameProvocation)
-//  tag.remove(sheepGameDetectingHidden)
+  detectinghidden=<tag(sheepGameDetectingHidden)>
+  tag.remove(sheepGameDetectingHidden)
   src.events -e_sheep_game_player  
 endif
   
@@ -1145,39 +1146,38 @@ if (isgm)
   return 1
 endif
 
-if (<nastaveni_sg_playing>==1)
-  if (<strlen(<tag(sg_player)>)>)
-    if ((<strcmpi(<region.name>,"dum ")>==1) || (<strcmpi(<region.name>,"pole ")>==1) || (<isevent(e_sheep_game_spectator)>) || (<strlen(<tag(sg_player)>)>))
-      if (<strlen(<tag(sg_from)>)>)
-        f_sheep_game_spectator_out
-        return 1
-      else
-        f_sheep_game_spectator_in
-        return 1
-      endif
-    endif
-  endif
-endif
+//if (<nastaveni_sg_playing>==1)
+//  if (<strlen(<tag(sg_player)>)>)
+//    if ((<strcmpi(<region.name>,"dum ")>==1) || (<strcmpi(<region.name>,"pole ")>==1) || (<isevent(e_sheep_game_spectator)>) || (<strlen(<tag(sg_player)>)>))
+//      if (<strlen(<tag(sg_from)>)>)
+//        f_sheep_game_spectator_out
+//        return 1
+//      else
+//        f_sheep_game_spectator_in
+//        return 1
+//      endif
+//    endif
+//  endif
+//endif
 
-    if (<strlen(<tag(sg_from)>)>)
-      f_sheep_game_spectator_out
-    endif
-return 1
+//    if (<strlen(<tag(sg_from)>)>)
+//      f_sheep_game_spectator_out
+//    endif
+//return 1
 //sysmessage(<strcmpi(<region.name>,"dum ")>)
 //sysmessage(<strcmpi(<region.name>,"pole ")>)
 //sysmessage(<isevent(e_sheep_game_spectator)>)
 
 if (<nastaveni_sg_playing>==1)
-  if ((<strcmpi(<region.name>,"dum ")>==1) || (<strcmpi(<region.name>,"pole ")>==1) || (<isevent(e_sheep_game_spectator)>) || (<strlen(<tag(sg_player)>)>))
+  if ((<strlen(<region.tag(housenumber)>)>) || (<isevent(e_sheep_game_spectator)>) || (<strlen(<tag(sg_player)>)>))
     if (<strlen(<tag(sg_from)>)>)
       f_sheep_game_spectator_out
-      finduid(#01513A).tag(divaci,#-1) //gm Iustus uid
     else
       if (<finduid(#01513A).tag.divaci> < 11) //gm Iustus uid
         f_sheep_game_spectator_in
         finduid(#01513A).tag(divaci,#+1)//gm Iustus uid
        else
-        redmessage("Maximalny pocet divakov")
+        redmessage("Maximalni pocet divaku")
       endif
     endif
   else
@@ -1383,6 +1383,9 @@ if ((<argn> > 10) && (<argn> < 210)) //max 20 teamov
           
           if (<arg(player)>==7) // home - posle ich domov (odkial ich zobral s 'come')
             arg(sendTo,<finduid(<tag(team_<arg(team)>_player_<arg(p)>)>).tag(sg_ported_from)>)
+            if (<eval arg(sendTo)>==0)
+              arg(sendTo,<finduid(<tag(team_<arg(team)>_player_<arg(p)>)>).home>)  //portnut dovnitr jinak jak pres "come", portim tedy na jeho home
+            endif
             finduid(<tag(team_<arg(team)>_player_<arg(p)>)>).tag.remove(sg_player)
             finduid(<tag(team_<arg(team)>_player_<arg(p)>)>).tag.remove(sheepGame)
             finduid(<tag(team_<arg(team)>_player_<arg(p)>)>).tag.remove(sg_ported_from)
