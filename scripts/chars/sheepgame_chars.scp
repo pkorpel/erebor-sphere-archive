@@ -639,7 +639,7 @@ ON=@Create
 NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
-Color=0a84
+Color=047b
 
 STR=500
 DEX=150
@@ -707,6 +707,7 @@ ON=@Create
 NPC=brain_monster
 FAME=20
 KARMA={-2000 -3999}
+Color=0a84
 
 STR=700
 DEX=150
