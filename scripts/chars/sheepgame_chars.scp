@@ -1,0 +1,751 @@
+////////////////////////////
+//  Oveèky na Sheep Game  //
+//   by Jeffrey (Iustus)  //
+////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_0]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=25
+ARMOR=15
+MOVERATE=3
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L0
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=075a
+
+STR=280
+DEX=60
+INT=35
+
+maxhits=200
+maxstam=50
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,0)
+tag(resist_para,0)
+tag(resist_summon,0)
+tag(resist_bleed,0)
+
+//weap resists
+tag(resist_sharp,0)
+tag(resist_slash,0)
+tag(resist_pierce,0)
+tag(resist_blunt,0)
+
+//magic resists
+tag(resist_fire,0)
+tag(resist_elect,0)
+tag(resist_cold,0)
+
+parrying=20.0
+resist=20.0
+tactics=30.0
+wrestling=50.0
+SpiritSpeak=10.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_1]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=27
+ARMOR=17
+MOVERATE=3
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L1
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=075b
+
+STR=300
+DEX=70
+INT=45
+
+maxhits=300
+maxstam=70
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,0)
+tag(resist_para,0)
+tag(resist_summon,0)
+tag(resist_bleed,0)
+
+//weap resists
+tag(resist_sharp,0)
+tag(resist_slash,0)
+tag(resist_pierce,0)
+tag(resist_blunt,0)
+
+//magic resists
+tag(resist_fire,0)
+tag(resist_elect,0)
+tag(resist_cold,0)
+
+parrying=40.0
+resist=40.0
+tactics=40.0
+wrestling=50.0
+SpiritSpeak=20.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_2]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=30
+ARMOR=20
+MOVERATE=3
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L2
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=075c
+
+STR=350
+DEX=80
+INT=35
+
+maxhits=500
+maxstam=50
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,0)
+tag(resist_para,0)
+tag(resist_summon,0)
+tag(resist_bleed,0)
+
+//weap resists
+tag(resist_sharp,0)
+tag(resist_slash,0)
+tag(resist_pierce,0)
+tag(resist_blunt,0)
+
+//magic resists
+tag(resist_fire,0)
+tag(resist_elect,0)
+tag(resist_cold,0)
+
+parrying=60.0
+resist=60.0
+tactics=60.0
+wrestling=60.0
+SpiritSpeak=60.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_3]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=33
+ARMOR=23
+MOVERATE=3
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L3
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=075d
+
+STR=400
+DEX=80
+INT=35
+
+maxhits=650
+maxstam=100
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,0)
+tag(resist_para,0)
+tag(resist_summon,0)
+tag(resist_bleed,0)
+
+//weap resists
+tag(resist_sharp,0)
+tag(resist_slash,0)
+tag(resist_pierce,0)
+tag(resist_blunt,0)
+
+//magic resists
+tag(resist_fire,0)
+tag(resist_elect,0)
+tag(resist_cold,0)
+
+parrying=80.0
+resist=80.0
+tactics=80.0
+wrestling=80.0
+SpiritSpeak=80.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_4]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=35
+ARMOR=25
+MOVERATE=4
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L4
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=075e
+
+STR=400
+DEX=100
+INT=35
+
+maxhits=750
+maxstam=50
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,0)
+tag(resist_para,0)
+tag(resist_summon,0)
+tag(resist_bleed,0)
+
+//weap resists
+tag(resist_sharp,0)
+tag(resist_slash,0)
+tag(resist_pierce,0)
+tag(resist_blunt,0)
+
+//magic resists
+tag(resist_fire,0)
+tag(resist_elect,0)
+tag(resist_cold,0)
+
+parrying=100.0
+resist=100.0
+tactics=100.0
+wrestling=100.0
+SpiritSpeak=100.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_5]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=40
+ARMOR=30
+MOVERATE=4
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L5
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=075f
+
+STR=400
+DEX=110
+INT=35
+
+maxhits=850
+maxstam=100
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,100)
+tag(resist_para,100)
+tag(resist_summon,100)
+tag(resist_bleed,100)
+
+//weap resists
+tag(resist_sharp,100)
+tag(resist_slash,100)
+tag(resist_pierce,100)
+tag(resist_blunt,100)
+
+//magic resists
+tag(resist_fire,100)
+tag(resist_elect,100)
+tag(resist_cold,100)
+
+parrying=100.0
+resist=100.0
+tactics=100.0
+wrestling=100.0
+SpiritSpeak=100.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_6]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=45
+ARMOR=35
+MOVERATE=5
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L6
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=0760
+
+STR=450
+DEX=120
+INT=35
+
+maxhits=1000
+maxstam=250
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,200)
+tag(resist_para,200)
+tag(resist_summon,200)
+tag(resist_bleed,200)
+
+//weap resists
+tag(resist_sharp,200)
+tag(resist_slash,200)
+tag(resist_pierce,200)
+tag(resist_blunt,200)
+
+//magic resists
+tag(resist_fire,200)
+tag(resist_elect,200)
+tag(resist_cold,200)
+
+parrying=100.0
+resist=100.0
+tactics=100.0
+wrestling=100.0
+SpiritSpeak=100.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_7]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=50
+ARMOR=40
+MOVERATE=5
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L7
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=0761
+
+STR=450
+DEX=130
+INT=35
+
+maxhits=1000
+maxstam=250
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,300)
+tag(resist_para,300)
+tag(resist_summon,300)
+tag(resist_bleed,300)
+
+//weap resists
+tag(resist_sharp,300)
+tag(resist_slash,300)
+tag(resist_pierce,300)
+tag(resist_blunt,300)
+
+//magic resists
+tag(resist_fire,300)
+tag(resist_elect,300)
+tag(resist_cold,300)
+
+parrying=100.0
+resist=100.0
+tactics=100.0
+wrestling=100.0
+SpiritSpeak=100.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_8]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=60
+ARMOR=50
+MOVERATE=3
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L8
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=0762
+
+STR=500
+DEX=140
+INT=35
+
+maxhits=1500
+maxstam=500
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,400)
+tag(resist_para,400)
+tag(resist_summon,400)
+tag(resist_bleed,400)
+
+//weap resists
+tag(resist_sharp,400)
+tag(resist_slash,400)
+tag(resist_pierce,400)
+tag(resist_blunt,400)
+
+//magic resists
+tag(resist_fire,400)
+tag(resist_elect,400)
+tag(resist_cold,400)
+
+parrying=100.0
+resist=100.0
+tactics=100.0
+wrestling=100.0
+SpiritSpeak=100.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_9]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=70
+ARMOR=60
+MOVERATE=6
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L9
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+Color=0a84
+
+STR=500
+DEX=150
+INT=35
+
+maxhits=1500
+maxstam=500
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,500)
+tag(resist_para,500)
+tag(resist_summon,500)
+tag(resist_bleed,500)
+
+//weap resists
+tag(resist_sharp,500)
+tag(resist_slash,500)
+tag(resist_pierce,500)
+tag(resist_blunt,500)
+
+//magic resists
+tag(resist_fire,500)
+tag(resist_elect,500)
+tag(resist_cold,500)
+
+parrying=100.0
+resist=100.0
+tactics=100.0
+wrestling=100.0
+SpiritSpeak=100.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
+
+[CHARDEF c_sg_sheep_lvl_10]
+ID=c_sheep_woolly
+NAME=Ovce
+SOUND=snd_ANIMALS_SHEEP1
+ICON=i_pet_SHEEP_WOOLY
+
+ATTACK=90
+ARMOR=70
+MOVERATE=7
+
+CAN=MT_WALK|MT_RUN
+
+ANIM=01fff
+DESCRIPTION=Sheep L10
+SUBSECTION=Sheep Game
+CATEGORY=Sheep Game
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_monster
+FAME=20
+KARMA={-2000 -3999}
+
+STR=700
+DEX=150
+INT=35
+
+maxhits=2000
+maxstam=500
+maxmana=0
+
+tag.experience=<eval {1.0 2.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[1]>
+
+//other resists
+tag(resist_poison,500)
+tag(resist_para,500)
+tag(resist_summon,500)
+tag(resist_bleed,500)
+
+//weap resists
+tag(resist_sharp,500)
+tag(resist_slash,500)
+tag(resist_pierce,500)
+tag(resist_blunt,500)
+
+//magic resists
+tag(resist_fire,500)
+tag(resist_elect,500)
+tag(resist_cold,500)
+
+parrying=100.0
+resist=100.0
+tactics=100.0
+wrestling=100.0
+SpiritSpeak=100.0
+
+
+ITEMnewbie=i_monster_create
+//////////////////////////////////
