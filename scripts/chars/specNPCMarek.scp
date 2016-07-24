@@ -4107,8 +4107,133 @@ ON=@NPCRestock
 ITEM=RANDOM_REAGENT,{10 20}
 ITEM=i_gold
 
-/////////////////////////////////
+///////////////////////////////////////////
+//     Snagum Boss pro Erebor by Dw      //
+//           dung by GM Total            //
+///////////////////////////////////////////
 
+[CHARDEF 061]
+DEFNAME=c_boss_snagum
+NAME=Pan Selem 
+SOUND=snd_ELEMENTL_ERTHEL1
+ICON=i_pet_man
+ANIM=07b87f
+CAN=MT_WALK|mt_run
+
+attack=90
+ARMOR=130
+MOVERATE=3
+
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_stun
+TEVENTS=e_illusionist
+TEVENTS=e_npc_bleed
+TEVENTS=e_npc_critic
+TEVENTS=e_summoneater
+TEVENTS=e_npc_summoning
+TEVENTS=e_npc_berserker
+TEVENTS=e_npc_roundattack_pullall
+
+CATEGORY=Dungy
+SUBSECTION=Snagum
+DESCRIPTION=Boss Snagumu
+
+ON=@Create
+NPC=brain_monster
+FAME=1000
+KARMA={-6000 -10000}
+
+STR=4500
+DEX=400
+INT=100
+
+maxhits={14000 18000}
+maxstam={900 1000}
+maxmana=0
+
+tag.experience=<eval {1100.0 1500.0}>
+
+tag.npc_stun_time=20             // 2 seconds of stun
+Tag.npc_stun_chance=250          //25%, defaultne 20% 
+
+tag.npc_bleed=250 //25.0%
+
+tag.npc_critic_chance=300                //30% chance
+tag.npc_critic_dmg=25,30                 //dmg in between
+
+tag(npc_summoning_chance,70)  //7.0% chance
+tag(npc_summoning_time,60)
+tag(npc_summoning_count,2)
+tag(npc_summoning_char[0],c_drapac_skokan)
+tag(npc_summoning_char[1],c_drapac_phantom)
+
+tag(pullAll_distance,5)     // pritahne cile blizsi nez 5 poli, default je 9
+tag.roundattack_damage=40,50   //dmg od - do
+tag.roundattack_time=15,20     //prodleva od - do v sek
+tag.roundattack_chance=100     //10.0%
+
+//mystik
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
+
+//other resists
+tag.resist_poison=<eval {500 950}> //nahoda - muze byt zranitelny spawn
+tag.resist_para=<eval {850 950}>
+tag(resist_summon,1000) //boss - nelze summonit
+tag.resist_bleed=<eval {-50 150}> //zranitelny krvacenim
+
+//weap resists
+tag(resist_sharp,100)  // cilene ostre utoky maji sanci
+tag(resist_slash,700)  // silny obrnenec
+tag(resist_pierce,350) // cilene prurazne utoky maji sanci
+tag(resist_blunt,800)  // silny obrnenec
+
+//magic resists
+tag(resist_fire,990)   // prakticky nezranitelny ohnem
+tag.resist_elect=<eval {100 200}>  // nachylnost na elektrinu
+tag(resist_cold,450)   // zranitelny mrazem
+
+//typ monstra
+tag(monstertype,humanoid,50)
+tag(monstertype,animal,50)  // je zaroven zcasti zviretem
+
+//weap flags
+tag.weapflag=dam_slashing|dam_physical
+
+TACTICS=100.0
+WRESTLING=120.0
+SWORDSMANSHIP=120.0
+RESIST=250.0
+SpiritSpeak=100.0
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+item=i_gold
+
+ON=@Hit
+IF (RAND(10)==1)
+  dorand 8
+    SAYU("Nemel jsi se odvazit!")
+    SAYU("Je ve me bestie!")
+    SAYU("Me selmy te znici!")
+    SAYU("Jsem pan vsech zvirat!")
+    SAYU("Jen nejsilnejsi preziji. JA JSEM NEJSILNEJSI!")
+    SAYU("Narkmim s tebou sve psy!")
+    SAYU("Bude z tebe dobra vecere!")
+    SAYU("A tohle me ma bolet??!")
+  enddo
+ENDIF
+
+ON=@Death
+SAYU("NEEEEEEEEEEEEEE !!!")
+
+/////////////////////////////////
 
 [eof]
 

@@ -1527,6 +1527,43 @@ if ({1 1000} <= <countdown_chance>)
       tag(resist_pierce,#-<countdown_amount>)
       src.classmessage("Citis jak <name> je zranitelnejsi.")
     endif
+  endif  
+endif
+
+[events e_npc_berserker]  // event zatim jen pro bosse Snagumu, muze byt vyuzit i jinde
+on=@gethit
+if(<flag_invul>==0)
+  if (src.isplayer)
+    if (<hits> < 4500)
+      if ({1 4} == 2) 
+        SAY("UAARGHH ZEMRETE UUUAAARHH !!!!!")
+        COLOR=020
+        MOVERATE=4
+      endif
+      arg(loss_amount,<eval tag.resist_loss_amount>)
+      if (<loss_amount> == 0)
+        arg(loss_amount,50)  // default 5,0%
+      endif 
+      tag(resist_fire,#-<loss_amount>)
+      tag(resist_elect,#-<loss_amount>)
+      tag(resist_cold,#-<loss_amount>)
+      tag(resist_sharp,#-<loss_amount>)
+      tag(resist_slash,#-<loss_amount>)
+      tag(resist_blunt,#-<loss_amount>)
+      tag(resist_pierce,#-<loss_amount>)
+      tag(resist_poison,#-25)  // ponechame na pevne hodnote aby se nedala nastavit silenost
+      tag(resist_bleed,#-25)   // ponechame na pevne hodnote aby se nedala nastavit silenost
+      if ({1 4} == 2) 
+        src.classmessage("Citis jak protivnik v zachvatu zurivosti ztraci koncentraci a tve utoky ho zranuji vice")
+      endif
+      if (<dex> <= 2000)
+        dex = <dex> + {60 90}
+      endif
+      if (<str> <= 10000)
+        str = <str> + {30 50}
+      endif
+    endif
+  endif
 endif  
 
 [EOF]
