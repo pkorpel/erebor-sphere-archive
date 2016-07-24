@@ -4268,7 +4268,6 @@ safe(findlayer(layer_cape).<args>)
 safe(findlayer(layer_robe).<args>)
 safe(findlayer(layer_skirt).<args>)
 safe(findlayer(layer_legs).<args>)
-safe(findlayer(layer_horse).<args>)
 
 [function eqvendorlayers]
 safe(findlayer(layer_hand1).<args>)
