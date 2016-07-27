@@ -578,58 +578,35 @@ on=@beforegeteffect
 on=@aftergetswing 
 tag(start,1) 
 if (hits<(maxhits))&&(tag(start)==1)&&(!(tag(jedem))) 
-  tag(jedem,1) 
-  tag(npc_speed,400) 
-  tag(resist_fire,<tag.resist_fire>+150) 
-  tag(resist_phys,<tag.resist_phys>+150) 
-  temporary_null 
-elseif (hits< ((maxhits*10)/13))&&(tag(jedem)==1) 
+  tag(jedem,1)
+  tag(dex_default,<dex>)
+  tag(npc_speed_default,<eval tag(npc_speed)>)
+elseif (hits< ((maxhits*4)/10))&&(tag(jedem)==1) 
+  dex=350
   tag(jedem,2) 
-  tag(npc_speed,600) 
-  tag(resist_fire,<tag.resist_fire>-20) 
-  tag(resist_phys,<tag.resist_phys>-20) 
+  tag(npc_speed,900) 
+  f_reduceDmgResists(200)
   temporary_null 
-elseif (hits<((maxhits*10)/15))&&(tag(jedem)==2) 
+  emote("zacina zurive utocit a prestava se branit") 
+elseif (hits<((maxhits*25)/100))&&(tag(jedem)==2) 
   tag(jedem,3) 
-  tag(npc_speed,700) 
-  tag(resist_fire,<tag.resist_fire>-25) 
-  tag(resist_phys,<tag.resist_phys>-25) 
-  temporary_null 
-elseif (hits<((maxhits*10)/18))&&(tag(jedem)==3) 
-  tag(jedem,4) 
-  tag(npc_speed,800) 
-  temporary_null 
-  emote("becomes enraged.") 
-  tag(resist_fire,<tag.resist_fire>-50) 
-  tag(resist_phys,<tag.resist_phys>-50) 
-elseif (hits<(maxhits/2))&&(tag(jedem)==4) 
-  tag(jedem,5) 
-  tag(npc_speed,1200) 
-  temporary_null 
-  tag(resist_fire,<tag.resist_fire>-60) 
-  tag(resist_phys,<tag.resist_phys>-60) 
-elseif (hits<((maxhits*2)/3))&&(tag(jedem)==5) 
-  tag(jedem,6) 
   tag(npc_speed,1800) 
+  f_reduceDmgResists(300)
   temporary_null 
-  tag(resist_fire,<tag.resist_fire>-100) 
-  tag(resist_phys,<tag.resist_phys>-100) 
-  emote("becomes berserk.") 
-elseif (hits<(maxhits/3))&&(tag(jedem)==6) 
-  tag(jedem,7) 
-  tag(npc_speed,2000) 
+  emote("se prestava ovladat") 
+elseif (hits<((maxhits*15)/100))&&(tag(jedem)==3) 
+  tag(jedem,4) 
+  tag(npc_speed,6000)
+  f_reduceDmgResists(500) 
   temporary_null 
-  tag(resist_fire,<tag.resist_fire>-180) 
-  tag(resist_phys,<tag.resist_phys>-180) 
-elseif (hits<(maxhits/(4)))&&(tag(jedem)==7) 
-  emote("becomes frenzied.") 
-  tag(jedem,8)
-  tag(npc_speed,6000) 
+  emote("propadl silenstvi")
+elseif (hits>((maxhits*41)/100))&&(tag(jedem)>1) 
+  dex=<eval tag(dex_default)>
+  tag(jedem,1) 
+  tag(npc_speed,<eval tag(npc_speed_default)>)
+  f_restoreDmgResists 
   temporary_null 
-  tag(resist_fire,<tag.resist_fire>-150) 
-  tag(resist_phys,<tag.resist_phys>-150) 
-  tag(resist_magic,<tag.resist_magic>-200) 
-  tag(resist_poison,<tag.resist_poison>-400) 
+  emote("pusobi vyrovnane a odhodlane")    
 endif 
 on=@Created
 on=@DrinkingPotion
@@ -637,6 +614,35 @@ on=@afterswing
 on=@beforegetswing
 on=@beforedoeffect
 on=@beforegeteffect
+
+[function f_reduceDmgResists]
+f_reduceResist(resist_sharp,<argv(0)>)
+f_reduceResist(resist_slash,<argv(0)>)
+f_reduceResist(resist_pierce,<argv(0)>)
+f_reduceResist(resist_blunt,<argv(0)>)
+f_reduceResist(resist_fire,<argv(0)>)
+f_reduceResist(resist_elect,<argv(0)>)
+f_reduceResist(resist_cold,<argv(0)>)
+
+[function f_reduceResist]
+if !(tag(<argv(0)>_default))
+  tag(<argv(0)>_default,<tag(<argv(0)>)>)
+endif 
+tag(<argv(0)>,<tag(<argv(0)>)>-<argv(1)>)
+
+[function f_restoreDmgResists]
+f_restoreResist(resist_sharp)
+f_restoreResist(resist_slash)
+f_restoreResist(resist_pierce)
+f_restoreResist(resist_blunt)
+f_restoreResist(resist_fire)
+f_restoreResist(resist_elect)
+f_restoreResist(resist_cold)
+
+[function f_restoreResist]
+if tag(<argv(0)>_default)
+  tag(<argv(0)>,<tag(<argv(0)>_default)>)
+endif
 
 [EVENTS e_balrog]
 on=@Created
@@ -1527,6 +1533,7 @@ if ({1 1000} <= <countdown_chance>)
       tag(resist_pierce,#-<countdown_amount>)
       src.classmessage("Citis jak <name> je zranitelnejsi.")
     endif
-endif  
-
+  endif  
+endif
+ 
 [EOF]
