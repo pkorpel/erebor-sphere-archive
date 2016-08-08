@@ -134,7 +134,7 @@ if !(cm_section)
         if (!src.class_cancast(scribe_<src.tag(class)>))
           return 0
         endif
-      elseif (type==t_potion)||(type==t_allpotions)||(type==t_speedpotions)||(type==t_potion_bomba)
+      elseif (type==t_potion)||(type==t_allpotions)||(type==t_speedpotions)||(type==t_potion_bomba)||(type==T_potion_shrink)
         if (!src.classIsInList(<?potions_<baseid>?>))
           return 0
         endif
