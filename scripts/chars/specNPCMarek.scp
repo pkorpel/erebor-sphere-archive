@@ -4120,7 +4120,7 @@ ICON=i_pet_man
 ANIM=07b87f
 CAN=MT_EQUIP|MT_WALK|MT_RUN|MT_USEHANDS       
 
-attack=85
+attack=105
 ARMOR=130
 MOVERATE=4
 
@@ -4150,7 +4150,7 @@ STR=4500
 DEX=90
 INT=100
 
-maxhits={14000 18000}
+maxhits={16000 20000}
 maxstam=350
 maxmana=0
 
@@ -4165,7 +4165,7 @@ tag.npc_bleed=250 //25.0%
 tag.npc_critic_chance=300                //30% chance
 tag.npc_critic_dmg=25,30                 //dmg in between
 
-tag(npc_summoning_chance,70)  //7.0% chance
+tag(npc_summoning_chance,120)  //12.0% chance
 tag(npc_summoning_time,60)
 tag(npc_summoning_count,2)
 tag(npc_summoning_char[0],c_drapac_skokan)
@@ -4174,7 +4174,7 @@ tag(npc_summoning_char[1],c_drapac_phantom)
 tag(pullAll_distance,5)     // pritahne cile blizsi nez 5 poli, default je 9
 tag.roundattack_damage=40,50   //dmg od - do
 tag.roundattack_time=15,20     //prodleva od - do v sek
-tag.roundattack_chance=100     //10.0%
+tag.roundattack_chance=150     //15.0%
 
 //mystik
 tag(hypnotizable,0)
@@ -4187,7 +4187,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
 tag.resist_poison=<eval {500 950}> //nahoda - muze byt zranitelny spawn
 tag.resist_para=<eval {850 950}>
 tag(resist_summon,1000) //boss - nelze summonit
-tag.resist_bleed=<eval {-200 50}> //zranitelny krvacenim
+tag.resist_bleed=<eval {-50 150}> //zranitelny krvacenim
 
 //weap resists
 tag(resist_sharp,100)  // cilene ostre utoky maji sanci
