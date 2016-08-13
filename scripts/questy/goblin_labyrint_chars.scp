@@ -89,8 +89,8 @@ SOUND=snd_MONSTER_ORC1
 ICON=i_pet_ORC
 CAN=MT_walk|MT_run
 
-attack=85
-ARMOR=80
+attack=75
+ARMOR=60
 moverate=7
 
 RESOURCES=4 i_ribs_raw

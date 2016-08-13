@@ -819,7 +819,7 @@ NAME=Goblin Remover
 TYPE=T_EQ_SCRIPT
 
 ON=@Equip
-TIMER=60  // 60 sec nez zmizi
+TIMER=120  // 120 sec nez zmizi
 ATTR=094
 MORE1=2
 
