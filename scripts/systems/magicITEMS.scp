@@ -274,6 +274,8 @@ return 0
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function thisdaemonbonus]
 if (act.ischar)
@@ -338,6 +340,8 @@ return 0
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
+on=@userkill
+on=@npckill
 
 [function thisdragonbonus]
 if (act.ischar)
@@ -379,6 +383,8 @@ return 0
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function thishumanbonus]
 if (act.ischar)
@@ -800,6 +806,8 @@ on=@beforedoeffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@userkill
+on=@npckill
 
 [typedef tmi_135]
 on=@equip
@@ -829,6 +837,8 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@userkill
+on=@npckill
 
 [typedef tmi_136]
 on=@equip

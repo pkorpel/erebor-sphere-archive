@@ -225,9 +225,9 @@ on=@itemTARGON_ITEM  // I am being combined with an item
 smsg "@itemTARGON_ITEM <act.name>\n"
 return 0
 
-//on=@itemTimer
-//smsg "@itemTimer\n"
-//return 0
+on=@itemTimer
+smsg "@itemTimer\n"
+return 0
 
 on=@itemUNEQUIP    // i have unequipped (or try to unequip) an item
 if (act.type!=t_src_changer)
@@ -387,6 +387,14 @@ return 0
 
 on=@aftergetswing
 smsg "@AfterGetSwing"
+return 0
+
+on=@userkill
+smsg "@UserKill <src.name>: <src>"
+return 0
+
+on=@npckill
+smsg "@NPCKill <src.name>: <src>"
 return 0
 
 //on=@afterswing
@@ -999,6 +1007,8 @@ on=@beforegetswing
 on=@DrinkingPotion
 on=@afterswing
 on=@stopguarding
+on=@userkill
+on=@npckill
 
 [events e_spelleffect]
 on=@spelleffect
@@ -1962,7 +1972,8 @@ on=@afterswing
 on=@miningact
 on=@beforedoeffect
 on=@beforegetswing
-
+on=@userkill
+on=@npckill
 
 [events e_splend]
 on=@spellcast
@@ -2189,6 +2200,7 @@ tag(combatSource,<src>)
 on=@death
 tag(lastmurderbyf,<act>)
 arg(monstdeathact,<act>)
+logmsg("LOG0: <monstdeathact> <monstdeathact.name>")
 if (flag_conjured)
   return 0
 endif
@@ -2226,6 +2238,7 @@ if (act.rescount)
     if (profession==class_craft)//za krafty zadny expy
       arg(addfame,0)
     endif
+    tag(added_experience_bydeath,<arg(addfame)>)
     if (<act.link.tag(awaitsexpforhealing)>) //ma dostat expy za leceni - klerik a shaman, nedostane je za vlastni zabiti
       act.link.sysMessage("Zkusenosti ziskas za leceni.")
       act.link.tag.remove(gotexpforhealingnow) //kdyby to mel z minula tak odstranit
@@ -2237,6 +2250,7 @@ if (act.rescount)
         act.link.sysMessage("Zkusenosti za leceni jsi jiz <act.link.sex(ziskal,ziskala)>.")
       else //vubec nic
         act.link.addexp(<arg(addfame)>) //pridat expy
+        trigger_kill(<uid>,<act.link>)
       endif
     endif
     if (<act.link.tag(pact_by)>) //pact je aktivni
@@ -2246,6 +2260,7 @@ if (act.rescount)
             if (!isplayer)
               act.link.tag(pact_by).sysMessage("Ziskavas zkusenosti za aplikovany pakt na <act.link.name>.")
               act.link.tag(pact_by).addexp(<arg(addfame)>)
+              trigger_kill(<uid>,<act.link.tag(pact_by)>)
             else
               logmsg("<serverTime>: <act.link.name>(<act.link.uid>) zabil shamana ktory mu dal Pakt krve (<act.link.tag(pact_by).name> (<act.link.tag(pact_by).uid>))")
               act.link.f_cancelpact_by //neviem preco ale trigger death nezareaguje dobre ak je zabity hracom od ktoreho dostal BP v evente e_bloodpact takze ho zrusim tu (aspon u mna na sphere)
@@ -2261,6 +2276,7 @@ if (act.rescount)
         else
           act.link.tag(gethealedby).sysMessage("Ziskavas zkusenosti za leceni <act.link.name>.")
           act.link.tag(gethealedby).addexp(<arg(addfame)>)
+          trigger_kill(<uid>,<act.link.tag(gethealedby)>)
         endif
         act.link.tag(gethealedby).tag.remove(awaitsexpforhealing) //klerikovi odstranime
         act.link.tag(gethealedby).tag(gotexpforhealingnow,1) //dat kleirkovi indikace ze jiz expy dostal
@@ -2269,7 +2285,7 @@ if (act.rescount)
         act.link.sysMessage("Ten, kdo te lecil, za to ted nedostane zkusenosti.")
         act.link.tag.remove(gethealedby) //klerik nic nedostane, jen odstranime tag
       endif
-    endif
+    endif 
     act.type=t_eq_memory_obj
     equip(<act>)
     act=<arg(baguid)>
@@ -2277,16 +2293,6 @@ if (act.rescount)
 endif
 act.remove
 addexp(-<arg(losefame)>)
-act=<arg(monstdeathac)>
-if (charExists(<act>))
-  if (safe finduid(<act>).isPlayer)
-    var(trigkillact,<uid>)
-    act.trigger(@userkill) 
-  elseif (npcExists(<act>))
-    var(trigkillact,<uid>) 
-    act.trigger(@npckill)
-  endif
-endif
 return 0
 
 
@@ -2339,6 +2345,20 @@ tag(combatSource,<src>)
 
 [function stdname]
 src.sysMessage("Defname: <typedef.name>")
+
+[function trigger_kill]  // argv(0) - killed npc uid, argv(1) - killer
+arg(killer,<argv(1)>)
+if (charExists(<killer)>))
+  if (safe finduid(<killer>).isPlayer)
+    var(trigkillact,<argv(0)>)
+    killer.trigger(@userkill)
+    logmsg("USER_KILL <killer> <killer.name>, CIL: <argv(0).name>")  // debug hlaska
+  elseif (npcExists(<killer>))
+    var(trigkillact,<argv(0)>) 
+    killer.trigger(@npckill)
+    logmsg("NPC_KILL <killer> <killer.name>, CIL: <argv(0).name>")  // debug hlaska
+  endif
+endif
 
 [function f_countfight]
 if (<uid>==<src>)
@@ -2575,6 +2595,8 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
+on=@userkill
+on=@npckill
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
@@ -2649,6 +2671,8 @@ on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@userkill
+on=@npckill
 
 [EVENTS e_craft]
 on=@itemequip
@@ -2709,6 +2733,8 @@ f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [EVENTS e_war]
 on=@itemequip
@@ -2780,6 +2806,8 @@ f_shieldDodge_afterGetSwing
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@userkill
+on=@npckill
 
 [EVENTS e_thief]
 on=@DrinkingPotion
@@ -2918,6 +2946,8 @@ f_shieldDodge_afterGetSwing
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@userkill
+on=@npckill
 //deprecated on=@aftergetspelldamage
 
 [function f_thief_getfreezebyshield]
@@ -3030,6 +3060,8 @@ f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [EVENTS e_mystik]
 on=@itemequip
@@ -3095,6 +3127,8 @@ on=@beforegeteffect
 on=@beforedoeffect
 on=@DrinkingPotion
 on=@afterswing
+on=@userkill
+on=@npckill
 
 [EVENTS e_Undeclared]
 

@@ -444,8 +444,9 @@ CONTAINER=i_backpack
 ITEM=RANDOM_REAGENT,{15 20}
 
 [DEFNAMES REAGENTS]
-RANDOM_REAGENT { i_reag_black_pearl 1 i_reag_blood_moss 1 i_reag_garlic 1 i_reag_ginseng 1 i_reag_mandrake_root 1 i_reag_nightshade 1 i_reag_sulfur_ash 1 i_reag_spider_silk 1 i_reag_Fertile_Dirt 1 i_reag_Obsidian 1 i_reag_eye_of_newt 1 i_reag_Volcanic_Ash 1 i_reag_worm_heart 1 i_reag_Pig_iron 1 i_reag_Batwing 1 i_reag_Pumice 1}
+RANDOM_REAGENT        { i_reag_black_pearl 1 i_reag_blood_moss 1 i_reag_garlic 1 i_reag_ginseng 1 i_reag_mandrake_root 1 i_reag_nightshade 1 i_reag_sulfur_ash 1 i_reag_spider_silk 1 i_reag_Fertile_Dirt 1 i_reag_Obsidian 1 i_reag_eye_of_newt 1 i_reag_Volcanic_Ash 1 i_reag_worm_heart 1 i_reag_Pig_iron 1 i_reag_Batwing 1 i_reag_Pumice 1}
 RANDOM_REAGENT_NECRO	{ i_reag_blood_vial 2 i_reag_daemon_bone 2 i_reag_dragon_blood 2 i_reag_executioners_cap 2 }
+RANDOM_REAGENT_ALL    { RANDOM_REAGENT 1 RANDOM_REAGENT_NECRO 1 }
 
 // Items (Scrolls)
 [DEFNAMES ITEMS_SCROLLS]

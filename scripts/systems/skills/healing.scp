@@ -199,16 +199,26 @@ if (link.body==c_man)||(link.body==c_woman)       //humanoid - skill healing
   else
    cont.classmessage("<link.name> byl uspesne osetren")
    if (tag(shamanheal))
-    link.hits=<eval link.hits+(promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)*2)>
+    arg(healed_amount,<(promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)*2)>)
+    //link.hits=<eval link.hits+(promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)*2)>
    else
-    link.hits=<eval link.hits+promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)>//mnozstvi vylecenych zivotu podle anatomy i healingu
+    arg(healed_amount,<promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)>)
+    //link.hits=<eval link.hits+promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)>//mnozstvi vylecenych zivotu podle anatomy i healingu
    endif
-   if (link.hits>link.maxhits)
+   if (<eval (link.hits+healed_amount)> > link.maxhits)
+    arg(healed_amount,<eval link.maxhits-link.hits>)  // kolik se ve skutecnosti vylecilo
     link.hits=<link.maxhits>
+   else
+    link.hits=<link.hits>+<eval healed_amount>
    endif
   endif
+  cont.say("Vyleceno: <healed_amount>hp")
   IF (LINK!=CONT)
    link.classmessage("<cont.name> te osetril.")
+  endif
+  if <cont.isevent.e_weekly_quest>  // lecitel plni weekly quest
+    cont.say("Plnim Weekly Questy")
+    f_weekly_quest_healing(<healed_amount>)
   endif
  else
   cont.redmessage("Leceni se ti nepovedlo.")

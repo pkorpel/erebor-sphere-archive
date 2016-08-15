@@ -104,6 +104,9 @@ if ((<nastaveni_silence_using>==1)&&(!<rescount(i_silencer)>))
   lastnew.more1=1
 endif
 
+on=@userkill
+on=@npckill
+
 [events e_healer]
 on=@userclick
 if !(src.f_check_tag_realm)

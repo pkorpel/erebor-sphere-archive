@@ -1472,6 +1472,8 @@ on=@beforedoeffect
 on=@beforegetswing
 on=@aftergetswing
 on=@stopguarding
+on=@userkill
+on=@npckill
 
 [events e_npc_warcry]
 on=@beforegeteffect

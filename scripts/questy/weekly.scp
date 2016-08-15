@@ -1,0 +1,443 @@
+[defnames def_weekly_quest]
+def_weekly_quest_count_low_miniquest  11 // pocet low miniquestu
+def_weekly_quest_count_medium_miniquest  6 // pocet medium miniquestu
+def_weekly_quest_count_high_miniquest  4 // pocet high miniquestu
+
+
+[itemdef i_memory_weekly_quest]
+name=Weekly Quest memory
+id=i_memory
+type=t_eq_script
+
+on=@create
+tag(cas_prijeti,<serv.time>)
+tag(cas_konec,<serv.time>+6048000)  //tyden
+
+on=@equip
+tag(level_hrace_prijeti,<eval src.tag(level)>)
+f_generuj_weekly_questy(<eval tag(level_hrace_prijeti)>)
+src.events(+e_weekly_quest)
+src.sysMessage("Prijal jsi seznam ukolu.")
+
+on=@unequip
+src.events(-e_weekly_quest)
+
+on=@timer
+return 1
+
+////////////////////////////////////////////////////////////////////////////////
+
+[function f_check_time_to_end]
+if (<eval src.findid(i_memory_weekly_quest).tag(cas_konec)> < <serv.time>)
+  src.sysMessage("Vyprsel cas na splneni tvych ukolu.")
+  src.findid(i_memory_weekly_quest).remove
+  return 1
+endif
+
+[function f_generuj_weekly_questy]  // argv(0) level hrace pri prijeti weekly questu
+src.say("GENERUJI QUESTY")
+src.say("LEVEL: <argv(0)>")
+src.say("test_tagu: <tag.cas_prijeti>")
+
+f_pocet_miniquestu(<argv(0)>)  // pocet == obtiznost (3-8) (3-4=low, 5-6=medium, 7-8=high)
+
+arg(i,0)
+while (<i> < <eval tag(count_miniquest)>)
+  if (<i> <= 3)
+    arg(new_quest,<eval {1 def_weekly_quest_count_low_miniquest}>)
+  elseif (<i> <= 5)
+    arg(new_quest,<eval {1 def_weekly_quest_count_medium_miniquest}>)
+    arg(new_quest,#+100)  // +100 k nazvu, aby se rozpoznaly Medium od Low questu
+  elseif (<i> <= 7)
+    arg(new_quest,<eval {1 def_weekly_quest_count_high_miniquest}>)
+    arg(new_quest,#+1000)  // +1000 k nazvu, aby se rozpoznaly High od Medium a Low questu
+  endif
+  src.say("Quest: <new_quest>")  
+  if (tag(weekly_quest[new_quest]) == 1)  // kontrola, aby nebyl tentyz quest vygenerovan vicekrat.
+    src.say("Tento quest jiz mas, generuji novy")
+  else
+    tag(weekly_quest[new_quest],1)
+    f_nastav_miniquest(<new_quest>)
+    arg(i,#+1)
+  endif
+endwhile
+
+
+[function f_pocet_miniquestu]
+if (<argv(0)> >= 100)
+  src.findid(i_memory_weekly_quest).tag(count_miniquest,8)
+else
+  src.findid(i_memory_weekly_quest).tag(count_miniquest,<eval ((<argv(0)>)/20)+3>)
+endif
+src.say("Pocet miniquestu: <tag(count_miniquest)>")
+
+[function f_nastav_miniquest]  // argv(0) - cislo questu
+arg(RandomResult,0)
+arg(miniquest_amount,0)
+if (<argv(0)> == 1)  // 1 - Snez jidlo konkretniho typu
+  while (<RandomResult.type> != t_food)
+    arg(RandomResult,<finduid <f_weekly_quest_random_item(random_food)>>)    
+  endwhile
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>*{5 <eval 2+<tag(count_miniquest)>>})/<RandomResult.weight>>)
+  if (<miniquest_amount> == 0)
+    arg(miniquest_amount,#+1)
+  endif
+  arg(miniquest_text,"Snez jidlo: <miniquest_amount>x <RandomResult.name>")
+  say("KS: <miniquest_amount>")
+  say("FOOD: <RandomResult.name> <RandomResult> <RandomResult.type> <RandomResult.weight>")
+elseif (<argv(0)> == 2)  // 2 - Snez ovoce konkretniho typu
+  while (<RandomResult.type> != t_fruit)
+    arg(RandomResult,<finduid <f_weekly_quest_random_item(random_food)>>)    
+  endwhile
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>*{5 <eval 2+<tag(count_miniquest)>>})/<RandomResult.weight>>)
+  if (<miniquest_amount> == 0)
+    arg(miniquest_amount,#+1)
+  endif
+  arg(miniquest_text,"Snez jidlo: <miniquest_amount>x <RandomResult.name>")
+  say("KS: <miniquest_amount>")
+  say("FOOD: <RandomResult.name> <RandomResult> <RandomResult.type> <RandomResult.weight>")
+elseif (<argv(0)> == 3)  // 3 - Vypij jakykoli potion
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>*{6 <eval 4+<tag(count_miniquest)>>})>)
+  arg(miniquest_text,"Vypij: <miniquest_amount>x jakykoli potion")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 4)  // 4 - Vypij potion svetla
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>*{4 <eval 2+<tag(count_miniquest)>>})>)
+  arg(miniquest_text,"Vypij: <miniquest_amount>x potion Svetla (Potion Nightsight)")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 5)  // 5 - Vypij jakykoli potion krome svetla
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>*{3 <eval 2+<tag(count_miniquest)>>})>)
+  arg(miniquest_text,"Vypij: <miniquest_amount>x jakykoli potion krome Svetla (Potion Nightsight)")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 6)  // 6 - Lootni GP
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>*{<eval <tag(level)>*100> <eval (<tag(level)>+1)*100>}*2)>)
+  arg(miniquest_text,"Lootni z monstra: <miniquest_amount>gp")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 7)  // 7 - Lootni regy
+  arg(RandomResult,<finduid <f_weekly_quest_random_item(RANDOM_REAGENT_ALL)>>) 
+  arg(miniquest_amount,<eval {<eval (35+(<tag(count_miniquest)>*5))> <eval (20+(<tag(count_miniquest)>*10))>}*<tag(count_miniquest)>>)
+  arg(miniquest_text,"Lootni z monstra: <miniquest_amount>x <RandomResult.name>")
+  say("KS: <miniquest_amount>") 
+  say("Reagent: <RandomResult.name> <RandomResult> <RandomResult.type> <RandomResult.value>")
+elseif (<argv(0)> == 8)  // 8 - Lootni drahokamy
+  arg(RandomResult,<finduid <f_weekly_quest_random_item(random_JEWEL)>>) 
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>+{0 2})>)
+  arg(miniquest_text,"Lootni z monstra: <miniquest_amount>x <RandomResult.name>")
+  say("KS: <miniquest_amount>")
+  say("Gem: <RandomResult.name> <RandomResult> <RandomResult.type> <RandomResult.value>")
+elseif (<argv(0)> == 9)  // 9 - Lootni jidlo
+  while (<RandomResult.type> != t_food)
+    arg(RandomResult,<finduid <f_weekly_quest_random_item(random_food)>>)    
+  endwhile
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>)>)
+  arg(miniquest_text,"Lootni z monstra: <miniquest_amount>x <RandomResult.name>")
+  say("KS: <miniquest_amount>")
+  say("FOOD: <RandomResult.name> <RandomResult> <RandomResult.type> <RandomResult.weight>")
+elseif (<argv(0)> == 10)  // 10 - Lootni ovoce
+  while (<RandomResult.type> != t_fruit)
+    arg(RandomResult,<finduid <f_weekly_quest_random_item(random_food)>>)    
+  endwhile
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>)>)
+  arg(miniquest_text,"Lootni z monstra: <miniquest_amount>x <RandomResult.name>")
+  say("KS: <miniquest_amount>")
+  say("FOOD: <RandomResult.name> <RandomResult> <RandomResult.type> <RandomResult.weight>")
+elseif (<argv(0)> == 11)  // 11 - Navstiv a pozdrav Mistra
+  arg(miniquest_amount,1)
+  arg(miniquest_hi_master,<f_weekly_quest_random_master>)
+  arg(miniquest_text,"Navstiv a pozdrav Mistra, ktery uci skill<miniquest_hi_master>")
+  say("KS: <miniquest_amount>")
+  tag(weekly_quest_where[<argv(0)>],<miniquest_hi_master>)  
+  
+elseif (<argv(0)> == 101)  // 101 - Lootni itemek
+  arg(miniquest_amount,1)
+  arg(miniquest_text,"Lootni z monstra: <miniquest_amount>x Vacek s Magickym predmetem")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 102)  // 102 - Proslapni pavucinu
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*{30 50})/10)>)
+  arg(miniquest_text,"Roztrhej roslapnutim: <miniquest_amount>x pavucinu.")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 103)  // 103 - zabij XY monster v dungu nad 50 expu
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*<tag(count_miniquest)>*{35 45})/10)>)
+  arg(miniquest_text,"Zabij v dungeonu <miniquest_amount> monster, z kterych ziskas vice jak 50 expu.")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 104)  // 104 - zabij XY monster v dungu pod 50 expu
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*<tag(count_miniquest)>*{40 50})/10)>)
+  arg(miniquest_text,"Zabij v dungeonu <miniquest_amount> monster, z kterych ziskas mene jak 50 expu.")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 105)  // 105 - Zabij hrace opacneho realmu
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*{5 10})/10)>)
+  arg(miniquest_text,"Zabij <miniquest_amount>x hrace opacneho realmu.")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 106)  // 106 - Zabij hrace opacneho realmu na jeho/tvem/neutralnim uzemi
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*{2 4})/10)>)
+  arg(miniquest_where,<eval {1 3}>)
+  if (<topobj.tag(realm)> == <miniquest_where>)
+    arg(miniquest_text,"Zabij <miniquest_amount>x hrace opacneho realmu na svem uzemi.")
+  elseif (<miniquest_where> == 3)
+    arg(miniquest_text,"Zabij <miniquest_amount>x hrace opacneho realmu na neutralnim uzemi.")
+  else
+    arg(miniquest_text,"Zabij <miniquest_amount>x hrace opacneho realmu na nepratelskem uzemi.")
+  endif
+  say("KS: <miniquest_amount>")
+  tag(weekly_quest_where[<argv(0)>],<miniquest_where>)
+elseif (<argv(0)> == 1001)  // 1001 - zabij XY monster v dungu nad 100 expu
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*<tag(count_miniquest)>*{25 35})/10)>)
+  arg(miniquest_text,"Zabij v dungeonu <miniquest_amount> monster, z kterych ziskas vice jak 100 expu.")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 1002)  // 1002 - zabij XY monster v dungu nad 150 expu
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*<tag(count_miniquest)>*{15 20})/10)>)
+  arg(miniquest_text,"Zabij v dungeonu <miniquest_amount> monster, z kterych ziskas vice jak 150 expu.")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 1003)  // 1003 - zabij XY monster v dungu nad 200 expu
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*<tag(count_miniquest)>*{10 15})/10)>)
+  arg(miniquest_text,"Zabij v dungeonu <miniquest_amount> monster, z kterych ziskas vice jak 200 expu.")
+  say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 1004)  // 1004 - zabij hrace opacneho realmu konkretniho povolani
+  arg(miniquest_amount,1)
+  dorand 9
+    arg(profession_to_kill,<class_craft.name>)
+    arg(profession_to_kill,<class_necro.name>)
+    arg(profession_to_kill,<class_mag.name>)
+    arg(profession_to_kill,<class_war.name>)
+    arg(profession_to_kill,<class_thief.name>)
+    arg(profession_to_kill,<class_ranger.name>)
+    arg(profession_to_kill,<class_mystik.name>)
+    arg(profession_to_kill,<class_shaman.name>)
+    arg(profession_to_kill,<class_priest.name>)
+  enddo
+  arg(miniquest_text,"Zabij hrace opacneho realmu, jehoz povolani je <profession_to_kill>.")
+  tag(weekly_quest_what[<argv(0)>],<profession_to_kill>)
+  say("KS: <miniquest_amount>")
+else                        
+
+  say("KONEC")
+endif
+tag(weekly_quest_amount[<argv(0)>],<miniquest_amount>)
+tag(weekly_quest_completed[<argv(0)>],0)
+tag(weekly_quest_text[<argv(0)>],<miniquest_text>)
+if (<RandomResult> > 0)
+  tag(weekly_quest_what[<argv(0)>],<RandomResult.baseID>)
+  tag(weekly_quest_name[<argv(0)>],<RandomResult.name>)
+endif
+redMessage("Miniquest c.<argv(0)>: <tag(weekly_quest_text[<argv(0)>])>")
+
+[function f_weekly_quest_random_item]  // argv(0) - defname
+topobj.newitemsafe(<argv(0)>) 
+arg(random_item,<lastnew>)
+random_item.p=3256,2916,5  // klec, fregventovane misto, kde to zmizne
+random_item.timer=2
+return <random_item>
+
+[function f_weekly_quest_random_master]
+dorand 36
+  arg(random_master,"Anatomy")
+  arg(random_master,"AnimalLore")
+  arg(random_master,"Archery")
+  arg(random_master,"ArmsLore")
+  arg(random_master,"Begging")
+  arg(random_master,"Camping")
+  arg(random_master,"Cartography")
+  arg(random_master,"DetectingHidden")
+  arg(random_master,"Enticement")
+  arg(random_master,"Forensics")
+  arg(random_master,"Healing")
+  arg(random_master,"Herding")
+  arg(random_master,"Hiding")
+  arg(random_master,"ItemID")
+  arg(random_master,"Magery")
+  arg(random_master,"Meditation")
+  arg(random_master,"Musicianship")
+  arg(random_master,"Parrying")
+  arg(random_master,"Peacemaking")
+  arg(random_master,"Poisoning")
+  arg(random_master,"Provocation")
+  arg(random_master,"Snooping")
+  arg(random_master,"SpiritSpeak")
+  arg(random_master,"Stealing")
+  arg(random_master,"Stealth")
+  arg(random_master,"Tactics")
+  arg(random_master,"TasteID")
+  arg(random_master,"Tracking")
+  arg(random_master,"Veterinary")
+  arg(random_master,"Wrestling")
+  arg(random_master,"RemoveTrap")
+  arg(random_master,"Swordsmanship")
+  arg(random_master,"Resist")
+  arg(random_master,"Macefighting")
+  arg(random_master,"Fencing")
+  arg(random_master,"EI")
+enddo
+return <random_master>
+
+////////////////////////////////////////////////////////////////////////////////
+[events e_weekly_quest]
+ON=@login
+f_check_time_to_end
+if (findid(i_memory_weekly_quest))
+  arg(memory_weekly,<findid(i_memory_weekly_quest)>)
+  arg(time_to_end,<SectoDays(<eval (<memory_weekly.tag(cas_konec)>-<serv.time>)>)>)
+  src.classmessage("Stale plnim Weekly Quest. Do konce zbyva <time_to_end>")
+endif
+
+ON=@itemUserDClick
+if ((act.type==t_food) || (act.type==t_fruit))  
+  if (<eval src.food> < <eval src.def.maxfood>) && (<act.distance> < 5)
+    if (act.type==t_food)
+      src.say(<act.name> <act.type>)  // 1 - snez jidlo   
+    elseif (act.type==t_fruit)
+      src.say(<act.name> <act.type>)  // 2 - snez ovoce
+    endif
+  else
+    say("Jsi prilis syty na snezeni tohoto jidla")
+  endif
+endif
+
+if ((act.type==t_speedpotions) || (act.type==t_allpotions))  // 3 - vypij potion (jakykoli)
+  if (serv.time><eval src.tag.nextpotion>)
+    if (act.typedef.Baseid==i_potion_nightsight)  // 4 - vypij potion svetla
+      say("SVETLO: <act.name>")
+    else  // 5 - vypij jakykoli jiny potion nez svetlo
+      say("Jiny potion nez svetlo:  <act.name>")
+    endif
+  endif
+endif
+
+on=@itemPICKUP_PACK  // lootuj z monster
+if (<eval act.tag(iic_owner)> > 0)  // jeste nikdo nelotl z tela monstra
+  if (act.topobj.isItem)
+    if !(act.topobj.link)  // neni to hrac
+      if (act.typedef.Baseid==i_gold)  // 6 - lootni goldy
+        say("Zlata: <act.amount>")
+      elseif (act.type==t_reagent)  // 7 - lootni regy
+        say("Reagent: <act.amount>x <act.name>")
+      elseif (act.type==t_gem)  // 8 - lootni drahokamy
+        say("Drahokam: <act.amount>x <act.name>")
+      elseif (act.type==t_food)  // 9 - lootni jidlo (trolove, ettini atd)
+        say("Jidlo: <act.amount>x <act.name>")
+      elseif (act.type==t_fruit)  // 10 - lootni Ovoce (trolove, ettini atd)
+        say("Ovoce: <act.amount>x <act.name>")
+      elseif (act.typedef.Baseid==i_mi_bag)  // 101 - lootni itemek
+        say("Itemek:  <act.name>")
+      endif
+    endif
+  endif
+endif
+
+on=@itemStep                                                           
+if (act.type==t_web) // 102 - roztrhej proslapnutim pavucinu
+  if (<eval act.tag(stepedby)> == 0)
+    act.tag(stepedby,<src>)
+  endif
+endif
+
+ON=@AfterSwing
+say("Zasah")
+act.say("Zasazen")
+
+ON=@userkill  // src - co bylo zabito, uid - kdo zabil
+say("Zabil jsem NPC !!")
+say("Dostal jsem z nej <eval src.tag(added_experience_bydeath)> expu")
+if !(src.isplayer)  // zabil npc
+  say("Zabil jsem monstrum")
+  if (<eval src.tag(added_experience_bydeath)> > 0)  // 15 - bylo to monstrum co dává expy
+    if !(isDung)  // nejsem v dungu
+      say("Nejsem v dungu")
+      
+    else  // jsem v dungu
+      say("Jsem v dungu")
+      if (<eval src.tag(added_experience_bydeath)> >= 200)  //1001- zabij Monstrum v Dungu nad 200 expu
+        say("Zabil jsem monstrum nad 200expu") 
+      endif
+      if (<eval src.tag(added_experience_bydeath)> >= 150)  //1002- zabij Monstrum v Dungu nad 150 expu
+        say("Zabil jsem monstrum nad 150expu")
+      endif
+      if (<eval src.tag(added_experience_bydeath)> >= 100)  //1003- zabij Monstrum v Dungu nad 100 expu
+        say("Zabil jsem monstrum nad 100expu")
+      endif
+      if (<eval src.tag(added_experience_bydeath)> >= 50)  //103- zabij Monstrum v Dungu nad 50 expu
+        say("Zabil jsem monstrum nad 50expu")
+      endif
+      if (<eval src.tag(added_experience_bydeath)> < 50)  //104- zabij Monstrum v Dungu do 50 expu
+        say("Zabil jsem monstrum do 50expu")  
+      endif
+    endif
+    if (<src.brain> == 1)  //14 - Brain 1 - Animal // pozn.: Projet NPC jestli maji vsechna zvirata opravdu Brain Animal  // prepsat pres tag.monstertype?
+      say("Zabil jsem zvire")
+    endif
+  endif
+else  // zabil hrace
+  if !(<eval src.tag(realm)> == <tag(realm)>)  //105- Zabity hrac nema stejny realm jako ja
+    say("Zabil jsem hrace Opacneho realmu")
+    if (src.profession==class_craft)  // Zabij Krafta
+    elseif (src.profession==class_necro)  // Zabij Necra
+    elseif (src.profession==class_mag)  // Zabij Maga
+    elseif (src.profession==class_war)  // Zabij Wara
+    elseif (src.profession==class_thief)  // Zabij Thiefa
+    elseif (src.profession==class_ranger)  // Zabij Rangera
+    elseif (src.profession==class_mystik)  // Zabij Mystika
+    elseif (src.profession==class_shaman)  // Zabij Shamana
+    elseif (src.profession==class_priest)  // Zabij Priesta
+    endif
+    say("Zabil jsem <src.profession.name>")  //1004 - Zabij hrace konkretniho povolani
+    if (<region.Tag(realm)> == <tag(realm)>)  //106- zabil jsem hrace opacneho realmu na mem uzemi
+    elseif (<region.Tag(realm)> == <eval src.tag(realm)>)  //106- zabil jsem hrace opacneho realmu na jeho uzemi
+    elseif (<region.Tag(realm)> == 3)  //106- zabil jsem hrace opacneho realmu na neutralnim uzemi
+    endif
+    
+  endif
+endif
+
+on=@aftergetswing
+on=@beforegeteffect
+on=@beforedoeffect
+on=@beforegetswing
+on=@npckill
+
+[function f_weekly_quest_healing]  // argv(0) - pocet vylecenych hp, cont-healer,link-cil leceni // provadi se na itemu i_mem_healing
+// navrh na vzorec pocet_na_vyleceni=(level*100*healing/10)   // pozn. je treba myslet na itemky na heal pri zadavani questu (if healing>100 =>100)
+cont.sysmessage("Level: <eval cont.tag.level> => <eval (<eval cont.tag.level>*100)>")
+cont.sysmessage("Healing: <cont.healing>% => <eval ((<cont.healing>*10)/5)>")
+cont.sysmessage("Anatomy: <cont.anatomy>% => <eval ((<cont.anatomy>*10)/50)>")
+if ((cont.profession==class_shaman) || (cont.profession==class_priest))  // 14 - healing, vylec HP 
+  //arg(TODO_heal,<eval ((<eval cont.tag.level>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
+  cont.tag(TODO_heal,<eval ((<eval cont.tag.level>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
+else
+  arg(TODO_heal,<eval ((<eval cont.tag.level>*50)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
+endif
+cont.sysmessage("Vyleceno <argv(0)>/<cont.tag(TODO_heal)>")
+                     
+[function f_weekly_quest_hi_master]  // 13 - navstiv a pozdrav Mistra dle zadani (EI,SS,Magery, ...atd)
+if (src.tag(weekly_quest_11) == 1)  // ma zadany tento miniquest
+  if (<src.tag(weekly_quest_completed_11)> < <src.tag(weekly_quest_amount_11)>)
+    if (<tag(ucimskill)> == <src.tag(weekly_quest_where_11)>)
+      say("Taky Te zdravim, <src.name>.")
+      src.tag(weekly_quest_completed_11,#+1)
+      if (<src.tag(weekly_quest_completed_11)> == <src.tag(weekly_quest_amount_11)>)
+        src.classmessage("Pozdrav Mistra<src.tag(weekly_quest_where_11)> splneno <src.tag(weekly_quest_completed_11)>/<src.tag(weekly_quest_amount_11)>")
+      endif
+    endif             
+  endif
+endif
+
+//(tag(weekly_quest[new_quest]) == 1)
+//tag(weekly_quest_amount[<argv(0)>],<miniquest_amount>)
+//tag(weekly_quest_completed[<argv(0)>],0)
+
+
+[function f_weekly_quest_check_finish]  // argv(0)-cislo miniquestu
+if (src.tag(weekly_quest_[<argv(0)>]) == 1)  // ma zadany tento miniquest
+  if (<src.tag(weekly_quest_completed_[<argv(0)>])> < <src.tag(weekly_quest_amount_[<argv(0)>])>)
+    return 0  // nema splneno                
+  endif
+endif
+return 1 // nema zadano a nebo jiz ma splneno
+
+[function f_weekly_quest_check_finish]  // argv(0)-cislo miniquestu, argv(1)-pridavek
+
+      src.tag(weekly_quest_completed_11,#+1)
+      if (<src.tag(weekly_quest_completed_11)> == <src.tag(weekly_quest_amount_11)>)
+        src.classmessage("Pozdrav Mistra<src.tag(weekly_quest_where_11)> splneno <src.tag(weekly_quest_completed_11)>/<src.tag(weekly_quest_amount_11)>")
+      endif
+    endif
+
+
+[eof]

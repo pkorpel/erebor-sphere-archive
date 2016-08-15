@@ -13,6 +13,12 @@ ON=*zdravim*
 ON=*hi*
 ON=*hello*
 ON=*buy*
+
+if <src.isevent.e_weekly_quest>  // lecitel plni weekly quest
+  src.say("Plnim Weekly Questy")
+  f_weekly_quest_hi_master
+endif
+  
 src.roundskill(<tag(ucimskill)>)
 if (src.profession==prof_undeclared)
   src.sysmessage "Mas poskozenou postavu... pouzij svuj krystal nebo zavolej GM..."
