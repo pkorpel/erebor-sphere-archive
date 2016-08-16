@@ -10,6 +10,8 @@ on=@beforedoeffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
+on=@userkill
+on=@npckill
 
 [events e_murdoc_general_pvp]
 on=@Death

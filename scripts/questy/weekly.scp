@@ -109,7 +109,7 @@ elseif (<argv(0)> == 5)  // 5 - Vypij jakykoli potion krome svetla
   arg(miniquest_text,"Vypij: <miniquest_amount>x jakykoli potion krome Svetla (Potion Nightsight)")
   say("KS: <miniquest_amount>")
 elseif (<argv(0)> == 6)  // 6 - Lootni GP
-  arg(miniquest_amount,<eval (<tag(count_miniquest)>*{<eval <tag(level)>*100> <eval (<tag(level)>+1)*100>}*2)>)
+  arg(miniquest_amount,<eval (<tag(count_miniquest)>*{<eval <tag(level_hrace_prijeti)>*100> <eval (<tag(level_hrace_prijeti)>+1)*100>}*2)>)
   arg(miniquest_text,"Lootni z monstra: <miniquest_amount>gp")
   say("KS: <miniquest_amount>")
 elseif (<argv(0)> == 7)  // 7 - Lootni regy
@@ -306,17 +306,35 @@ if (<eval act.tag(iic_owner)> > 0)  // jeste nikdo nelotl z tela monstra
   if (act.topobj.isItem)
     if !(act.topobj.link)  // neni to hrac
       if (act.typedef.Baseid==i_gold)  // 6 - lootni goldy
-        say("Zlata: <act.amount>")
+        if (f_weekly_quest_check_finish(6))
+          say("Zlata: <act.amount>")
+          f_weekly_quest_check_increase(6,<act.amount>)
+        endif
       elseif (act.type==t_reagent)  // 7 - lootni regy
-        say("Reagent: <act.amount>x <act.name>")
+        if (f_weekly_quest_check_finish(7,<act.baseID>))
+          say("Reagent: <act.amount>x <act.name> (<act.baseID>)")
+          f_weekly_quest_check_increase(7,<act.amount>)
+        endif
       elseif (act.type==t_gem)  // 8 - lootni drahokamy
-        say("Drahokam: <act.amount>x <act.name>")
+        if (f_weekly_quest_check_finish(8,<act.baseID>))
+          say("Drahokam: <act.amount>x <act.name> (<act.baseID>)")
+          f_weekly_quest_check_increase(8,<act.amount>)
+        endif
       elseif (act.type==t_food)  // 9 - lootni jidlo (trolove, ettini atd)
-        say("Jidlo: <act.amount>x <act.name>")
+        if (f_weekly_quest_check_finish(9,<act.baseID>))
+          say("Jidlo: <act.amount>x <act.name> (<act.baseID>)")
+          f_weekly_quest_check_increase(9,<act.amount>)
+        endif
       elseif (act.type==t_fruit)  // 10 - lootni Ovoce (trolove, ettini atd)
-        say("Ovoce: <act.amount>x <act.name>")
+        if (f_weekly_quest_check_finish(10,<act.baseID>))
+          say("Ovoce: <act.amount>x <act.name> (<act.baseID>)")
+          f_weekly_quest_check_increase(10,<act.amount>)
+        endif
       elseif (act.typedef.Baseid==i_mi_bag)  // 101 - lootni itemek
-        say("Itemek:  <act.name>")
+        if (f_weekly_quest_check_finish(101))
+          say("Itemek: <act.amount>x <act.name> (<act.baseID>)")
+          f_weekly_quest_check_increase(101,<act.amount>)
+        endif
       endif
     endif
   endif
@@ -326,6 +344,10 @@ on=@itemStep
 if (act.type==t_web) // 102 - roztrhej proslapnutim pavucinu
   if (<eval act.tag(stepedby)> == 0)
     act.tag(stepedby,<src>)
+    if (f_weekly_quest_check_finish(102))
+      say("Pavucina: <act.amount>x <act.name> (<act.baseID>)")
+      f_weekly_quest_check_increase(102,<act.amount>)
+    endif
   endif
 endif
 
@@ -423,21 +445,44 @@ endif
 //tag(weekly_quest_completed[<argv(0)>],0)
 
 
-[function f_weekly_quest_check_finish]  // argv(0)-cislo miniquestu
-if (src.tag(weekly_quest_[<argv(0)>]) == 1)  // ma zadany tento miniquest
-  if (<src.tag(weekly_quest_completed_[<argv(0)>])> < <src.tag(weekly_quest_amount_[<argv(0)>])>)
-    return 0  // nema splneno                
+[function f_weekly_quest_check_finish]  // argv(0)-cislo miniquestu, argv(1)-specialni podminka
+arg(memory_weekly,<findid(i_memory_weekly_quest)>)
+say("What: <memory_weekly.tag(weekly_quest_what_<argv(0)>)>")
+if (<eval memory_weekly.tag(weekly_quest_<argv(0)>)> == 1)  // ma zadany tento miniquest
+  if (memory_weekly.tag(weekly_quest_what_<argv(0)>))  // ma specialni podminku
+    if (<memory_weekly.tag(weekly_quest_what_<argv(0)>)> == <argv(1)>)
+      if (<memory_weekly.tag(weekly_quest_completed_<argv(0)>)> < <memory_weekly.tag(weekly_quest_amount_<argv(0)>)>)
+        src.say("Nema splneno, splnena specialni podminka a ma zadano")
+        return 1  // nema splneno                
+      endif
+    else
+      src.say("Nema Splneno, nesplnena specialni podminka a ma zadano")
+      return 0 //
+    endif
+  else  // nema specialni podminku
+    if (<memory_weekly.tag(weekly_quest_completed_<argv(0)>)> < <memory_weekly.tag(weekly_quest_amount_<argv(0)>)>)
+      src.say("Nema splneno, nema specialni podminku a ma zadano")
+      return 1  // nema splneno                
+    endif
+    src.say("Ma zadano, neexistuje specialni podminka, ma splneno")
   endif
 endif
-return 1 // nema zadano a nebo jiz ma splneno
+src.say("Nema zadano a nebo jiz ma splneno")
+return 0 // nema zadano a nebo jiz ma splneno
+//  tag(weekly_quest_what[<argv(0)>],<RandomResult.baseID>)
+//  tag(weekly_quest_name[<argv(0)>],<RandomResult.name>)
 
-[function f_weekly_quest_check_finish]  // argv(0)-cislo miniquestu, argv(1)-pridavek
-
-      src.tag(weekly_quest_completed_11,#+1)
-      if (<src.tag(weekly_quest_completed_11)> == <src.tag(weekly_quest_amount_11)>)
-        src.classmessage("Pozdrav Mistra<src.tag(weekly_quest_where_11)> splneno <src.tag(weekly_quest_completed_11)>/<src.tag(weekly_quest_amount_11)>")
-      endif
-    endif
-
+[function f_weekly_quest_check_increase]  // argv(0)-cislo miniquestu, argv(1)-pridavek
+arg(memory_weekly,<findid(i_memory_weekly_quest)>)
+src.say("Cislo miniquest: /<argv(0)>/, pridam +/<argv(1)>/")
+src.say("Splneno mam: <memory_weekly.tag(weekly_quest_completed_<argv(0)>)>, Potrebuju: <memory_weekly.tag(weekly_quest_amount_<argv(0)>)>")
+if ((<eval <memory_weekly.tag(weekly_quest_completed_<argv(0)>)>+<argv(1)>>) >= <memory_weekly.tag(weekly_quest_amount_<argv(0)>)>)  // kdyz narust serovna a nebo presahne maximalni pozadovany pocet
+  src.say("TEST1")
+  memory_weekly.tag(weekly_quest_completed_<argv(0)>,<memory_weekly.tag(weekly_quest_amount_<argv(0)>)>)  // tak aktualni stav se bude rovnat maximalnimu pozadovanemu poctu
+else  // a kdyz ne..
+  src.say("TEST2")
+  memory_weekly.tag(weekly_quest_completed_<argv(0)>,#+<argv(1)>)  // zvysime o pozadovanou hodnotu 
+endif
+src.classmessage("Splneno <memory_weekly.tag(weekly_quest_completed_<argv(0)>)>/<memory_weekly.tag(weekly_quest_amount_<argv(0)>)>")
 
 [eof]
