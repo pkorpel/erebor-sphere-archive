@@ -178,7 +178,7 @@ elseif (<argv(0)> == 106)  // 106 - Zabij hrace opacneho realmu na jeho/tvem/neu
     arg(miniquest_text,"Zabij <miniquest_amount>x hrace opacneho realmu na nepratelskem uzemi.")
   endif
   say("KS: <miniquest_amount>")
-  tag(weekly_quest_where[<argv(0)>],<miniquest_where>)
+  tag(weekly_quest_what[<argv(0)>],<miniquest_where>)
 elseif (<argv(0)> == 1001)  // 1001 - zabij XY monster v dungu nad 100 expu
   arg(miniquest_amount,<eval ((<tag(count_miniquest)>*<tag(count_miniquest)>*{25 35})/10)>)
   arg(miniquest_text,"Zabij v dungeonu <miniquest_amount> monster, z kterych ziskas vice jak 100 expu.")
@@ -282,21 +282,37 @@ ON=@itemUserDClick
 if ((act.type==t_food) || (act.type==t_fruit))  
   if (<eval src.food> < <eval src.def.maxfood>) && (<act.distance> < 5)
     if (act.type==t_food)
-      src.say(<act.name> <act.type>)  // 1 - snez jidlo   
+      if (f_weekly_quest_check_finish(1,<act.baseID>))
+        src.say("<act.name> <act.type>")  // 1 - snez jidlo 
+        f_weekly_quest_check_increase(1,1)
+      endif  
     elseif (act.type==t_fruit)
-      src.say(<act.name> <act.type>)  // 2 - snez ovoce
+      if (f_weekly_quest_check_finish(2,<act.baseID>))
+        src.say("<act.name> <act.type>")  // 2 - snez ovoce
+        f_weekly_quest_check_increase(2,1)
+      endif
     endif
   else
     say("Jsi prilis syty na snezeni tohoto jidla")
   endif
 endif
 
-if ((act.type==t_speedpotions) || (act.type==t_allpotions))  // 3 - vypij potion (jakykoli)
+if ((act.type==t_speedpotions) || (act.type==t_allpotions))  
   if (serv.time><eval src.tag.nextpotion>)
     if (act.typedef.Baseid==i_potion_nightsight)  // 4 - vypij potion svetla
-      say("SVETLO: <act.name>")
-    else  // 5 - vypij jakykoli jiny potion nez svetlo
-      say("Jiny potion nez svetlo:  <act.name>")
+      if (f_weekly_quest_check_finish(4))
+        say("SVETLO: <act.name>")
+        f_weekly_quest_check_increase(4,1)
+      endif
+    else  // 5 - vypij jakykoli jiny potion nez svetlo 
+      if (f_weekly_quest_check_finish(5))
+        say("Jiny potion nez svetlo:  <act.name>")
+        f_weekly_quest_check_increase(5,1)
+      endif
+    endif
+    if (f_weekly_quest_check_finish(3)) // 3 - vypij potion (jakykoli)
+      say("Vypij jakykoli potion:  <act.name>")
+      f_weekly_quest_check_increase(3,1)
     endif
   endif
 endif
@@ -359,36 +375,61 @@ ON=@userkill  // src - co bylo zabito, uid - kdo zabil
 say("Zabil jsem NPC !!")
 say("Dostal jsem z nej <eval src.tag(added_experience_bydeath)> expu")
 if !(src.isplayer)  // zabil npc
-  say("Zabil jsem monstrum")
+  
   if (<eval src.tag(added_experience_bydeath)> > 0)  // 15 - bylo to monstrum co dává expy
+    if (f_weekly_quest_check_finish(15))
+      say("Zabil jsem monstrum")
+      f_weekly_quest_check_increase(15,1)
+    endif
     if !(isDung)  // nejsem v dungu
       say("Nejsem v dungu")
       
     else  // jsem v dungu
       say("Jsem v dungu")
       if (<eval src.tag(added_experience_bydeath)> >= 200)  //1001- zabij Monstrum v Dungu nad 200 expu
-        say("Zabil jsem monstrum nad 200expu") 
+        if (f_weekly_quest_check_finish(1001))
+          say("Zabil jsem monstrum nad 200expu") 
+          f_weekly_quest_check_increase(1001,1)
+        endif
       endif
       if (<eval src.tag(added_experience_bydeath)> >= 150)  //1002- zabij Monstrum v Dungu nad 150 expu
-        say("Zabil jsem monstrum nad 150expu")
+        if (f_weekly_quest_check_finish(1002))
+          say("Zabil jsem monstrum nad 150expu")
+          f_weekly_quest_check_increase(1002,1)
+        endif
       endif
-      if (<eval src.tag(added_experience_bydeath)> >= 100)  //1003- zabij Monstrum v Dungu nad 100 expu
-        say("Zabil jsem monstrum nad 100expu")
+      if (<eval src.tag(added_experience_bydeath)> >= 100)  //1003- zabij Monstrum v Dungu nad 100 expu 
+        if (f_weekly_quest_check_finish(1003))
+          say("Zabil jsem monstrum nad 100expu")
+          f_weekly_quest_check_increase(1003,1)
+        endif
       endif
       if (<eval src.tag(added_experience_bydeath)> >= 50)  //103- zabij Monstrum v Dungu nad 50 expu
-        say("Zabil jsem monstrum nad 50expu")
+        if (f_weekly_quest_check_finish(103))
+          say("Zabil jsem monstrum nad 50expu")
+          f_weekly_quest_check_increase(103,1)
+        endif
       endif
       if (<eval src.tag(added_experience_bydeath)> < 50)  //104- zabij Monstrum v Dungu do 50 expu
-        say("Zabil jsem monstrum do 50expu")  
+        if (f_weekly_quest_check_finish(104))
+          say("Zabil jsem monstrum do 50expu")  
+          f_weekly_quest_check_increase(104,1)
+        endif
       endif
     endif
-    if (<src.brain> == 1)  //14 - Brain 1 - Animal // pozn.: Projet NPC jestli maji vsechna zvirata opravdu Brain Animal  // prepsat pres tag.monstertype?
-      say("Zabil jsem zvire")
+    if (<src.brain> == 1)  //14 - Brain 1 - Animal // pozn.: Projet NPC jestli maji vsechna zvirata opravdu Brain Animal  // prepsat pres tag.monstertype? 
+      if (f_weekly_quest_check_finish(14))
+        say("Zabil jsem zvire") 
+        f_weekly_quest_check_increase(14,1)
+      endif
     endif
   endif
 else  // zabil hrace
-  if !(<eval src.tag(realm)> == <tag(realm)>)  //105- Zabity hrac nema stejny realm jako ja
-    say("Zabil jsem hrace Opacneho realmu")
+  if !(<eval src.tag(realm)> == <tag(realm)>)  
+    if (f_weekly_quest_check_finish(105,<src.profession.name>))
+      say("Zabil jsem hrace Opacneho realmu")  //105- Zabity hrac nema stejny realm jako ja
+      f_weekly_quest_check_increase(105,1)
+    endif
     if (src.profession==class_craft)  // Zabij Krafta
     elseif (src.profession==class_necro)  // Zabij Necra
     elseif (src.profession==class_mag)  // Zabij Maga
@@ -398,11 +439,15 @@ else  // zabil hrace
     elseif (src.profession==class_mystik)  // Zabij Mystika
     elseif (src.profession==class_shaman)  // Zabij Shamana
     elseif (src.profession==class_priest)  // Zabij Priesta
+    endif 
+    if (f_weekly_quest_check_finish(1004,<src.profession.name>))
+      say("Zabil jsem <src.profession.name>")  //1004 - Zabij hrace konkretniho povolani
+      f_weekly_quest_check_increase(1004,1)
     endif
-    say("Zabil jsem <src.profession.name>")  //1004 - Zabij hrace konkretniho povolani
-    if (<region.Tag(realm)> == <tag(realm)>)  //106- zabil jsem hrace opacneho realmu na mem uzemi
-    elseif (<region.Tag(realm)> == <eval src.tag(realm)>)  //106- zabil jsem hrace opacneho realmu na jeho uzemi
-    elseif (<region.Tag(realm)> == 3)  //106- zabil jsem hrace opacneho realmu na neutralnim uzemi
+    
+    if (f_weekly_quest_check_finish(106,<region.Tag(realm)>))    //106- zabil jsem hrace opacneho realmu na mem/cizim/neutralnim uzemi
+      say("Zabil jsem hrace opacneho realmu na mem uzemi")
+      f_weekly_quest_check_increase(106,1)
     endif
     
   endif
@@ -413,6 +458,7 @@ on=@beforegeteffect
 on=@beforedoeffect
 on=@beforegetswing
 on=@npckill
+on=@DrinkingPotion
 
 [function f_weekly_quest_healing]  // argv(0) - pocet vylecenych hp, cont-healer,link-cil leceni // provadi se na itemu i_mem_healing
 // navrh na vzorec pocet_na_vyleceni=(level*100*healing/10)   // pozn. je treba myslet na itemky na heal pri zadavani questu (if healing>100 =>100)
@@ -447,42 +493,42 @@ endif
 
 [function f_weekly_quest_check_finish]  // argv(0)-cislo miniquestu, argv(1)-specialni podminka
 arg(memory_weekly,<findid(i_memory_weekly_quest)>)
-say("What: <memory_weekly.tag(weekly_quest_what_<argv(0)>)>")
-if (<eval memory_weekly.tag(weekly_quest_<argv(0)>)> == 1)  // ma zadany tento miniquest
-  if (memory_weekly.tag(weekly_quest_what_<argv(0)>))  // ma specialni podminku
-    if (<memory_weekly.tag(weekly_quest_what_<argv(0)>)> == <argv(1)>)
-      if (<memory_weekly.tag(weekly_quest_completed_<argv(0)>)> < <memory_weekly.tag(weekly_quest_amount_<argv(0)>)>)
-        src.say("Nema splneno, splnena specialni podminka a ma zadano")
+say("What: <memory_weekly.tag(weekly_quest_what[<argv(0)>])>")
+if (<eval memory_weekly.tag(weekly_quest[<argv(0)>])> == 1)  // ma zadany tento miniquest
+  if (memory_weekly.tag(weekly_quest_what[<argv(0)>]))  // ma specialni podminku
+    if (<memory_weekly.tag(weekly_quest_what[<argv(0)>])> == <argv(1)>)
+      if (<memory_weekly.tag(weekly_quest_completed[<argv(0)>])> < <memory_weekly.tag(weekly_quest_amount[<argv(0)>])>)
+        say("Nema splneno, splnena specialni podminka a ma zadano")
         return 1  // nema splneno                
       endif
     else
-      src.say("Nema Splneno, nesplnena specialni podminka a ma zadano")
+      say("Nema Splneno, nesplnena specialni podminka a ma zadano")
       return 0 //
     endif
   else  // nema specialni podminku
-    if (<memory_weekly.tag(weekly_quest_completed_<argv(0)>)> < <memory_weekly.tag(weekly_quest_amount_<argv(0)>)>)
-      src.say("Nema splneno, nema specialni podminku a ma zadano")
+    if (<memory_weekly.tag(weekly_quest_completed[<argv(0)>])> < <memory_weekly.tag(weekly_quest_amount[<argv(0)>])>)
+      say("Nema splneno, nema specialni podminku a ma zadano")
       return 1  // nema splneno                
     endif
-    src.say("Ma zadano, neexistuje specialni podminka, ma splneno")
+    say("Ma zadano, neexistuje specialni podminka, ma splneno")
   endif
 endif
-src.say("Nema zadano a nebo jiz ma splneno")
+say("Nema zadano a nebo jiz ma splneno")
 return 0 // nema zadano a nebo jiz ma splneno
 //  tag(weekly_quest_what[<argv(0)>],<RandomResult.baseID>)
 //  tag(weekly_quest_name[<argv(0)>],<RandomResult.name>)
 
 [function f_weekly_quest_check_increase]  // argv(0)-cislo miniquestu, argv(1)-pridavek
 arg(memory_weekly,<findid(i_memory_weekly_quest)>)
-src.say("Cislo miniquest: /<argv(0)>/, pridam +/<argv(1)>/")
-src.say("Splneno mam: <memory_weekly.tag(weekly_quest_completed_<argv(0)>)>, Potrebuju: <memory_weekly.tag(weekly_quest_amount_<argv(0)>)>")
-if ((<eval <memory_weekly.tag(weekly_quest_completed_<argv(0)>)>+<argv(1)>>) >= <memory_weekly.tag(weekly_quest_amount_<argv(0)>)>)  // kdyz narust serovna a nebo presahne maximalni pozadovany pocet
-  src.say("TEST1")
-  memory_weekly.tag(weekly_quest_completed_<argv(0)>,<memory_weekly.tag(weekly_quest_amount_<argv(0)>)>)  // tak aktualni stav se bude rovnat maximalnimu pozadovanemu poctu
+say("Cislo miniquest: /<argv(0)>/, pridam +/<argv(1)>/")
+say("Splneno mam: <memory_weekly.tag(weekly_quest_completed[<argv(0)>])>, Potrebuju: <memory_weekly.tag(weekly_quest_amount[<argv(0)>])>")
+if ((<eval <memory_weekly.tag(weekly_quest_completed[<argv(0)>])>+<argv(1)>>) >= <memory_weekly.tag(weekly_quest_amount[<argv(0)>])>)  // kdyz narust serovna a nebo presahne maximalni pozadovany pocet
+  say("TEST1")
+  memory_weekly.tag(weekly_quest_completed[<argv(0)>],<memory_weekly.tag(weekly_quest_amount[<argv(0)>])>)  // tak aktualni stav se bude rovnat maximalnimu pozadovanemu poctu
 else  // a kdyz ne..
-  src.say("TEST2")
-  memory_weekly.tag(weekly_quest_completed_<argv(0)>,#+<argv(1)>)  // zvysime o pozadovanou hodnotu 
+  say("TEST2")
+  memory_weekly.tag(weekly_quest_completed[<argv(0)>],#+<argv(1)>)  // zvysime o pozadovanou hodnotu 
 endif
-src.classmessage("Splneno <memory_weekly.tag(weekly_quest_completed_<argv(0)>)>/<memory_weekly.tag(weekly_quest_amount_<argv(0)>)>")
+classmessage("Splneno <memory_weekly.tag(weekly_quest_completed[<argv(0)>])>/<memory_weekly.tag(weekly_quest_amount[<argv(0)>])>")
 
 [eof]

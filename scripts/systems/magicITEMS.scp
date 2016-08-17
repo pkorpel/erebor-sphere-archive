@@ -448,6 +448,8 @@ return 0
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function thisspiderbonus]
 if (act.ischar)
@@ -501,6 +503,8 @@ return 0
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function thiseyebonus]
 if (act.ischar)
@@ -564,6 +568,8 @@ on=@beforedoeffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
+on=@userkill
+on=@npckill
 
 [typedef tmi_112]
 on=@equip
@@ -609,6 +615,8 @@ on=@beforedoeffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
+on=@userkill
+on=@npckill
 
 [typedef tmi_113]
 on=@equip
@@ -685,6 +693,8 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@userkill
+on=@npckill
 
 [typedef tmi_131]
 on=@equip
@@ -714,6 +724,8 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@userkill
+on=@npckill
 
 [typedef tmi_132]
 on=@equip
@@ -744,6 +756,8 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [typedef tmi_133]
 on=@equip
@@ -777,6 +791,8 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
+on=@userkill
+on=@npckill
 
 [typedef tmi_134]
 on=@equip
@@ -873,6 +889,8 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
+on=@userkill
+on=@npckill
 
 [itemdef i_mi_bag]
 id=i_bag
