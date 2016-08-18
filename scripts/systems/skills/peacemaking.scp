@@ -97,10 +97,12 @@ name=peacemade
 
 on=@equip
 cont.events +e_peacemade
+cont.emote(is falling asleep)
 timer=90
 
 on=@unequip
 cont.events -e_peacemade
+cont.emote(woke up)
 cont.action=""
 
 on=@timer
