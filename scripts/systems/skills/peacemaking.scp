@@ -102,7 +102,9 @@ timer=90
 
 on=@unequip
 cont.events -e_peacemade
-cont.emote(woke up)
+if (<eval cont.hits> > 0)
+  cont.emote(woke up)
+endif
 cont.action=""
 
 on=@timer
