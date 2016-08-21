@@ -3507,7 +3507,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dung snagum Level 2]
+[AREA Dung snagum deleted]
 GROUP=Dungeon Dug snagum
 P=4850, 434
 RECT=4707,402,4916,583
@@ -3527,7 +3527,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dung snagum Level 3]
+[AREA Dung snagum Level 2]
 GROUP=Dungeon Dug snagum
 P=5072, 343
 RECT=4923,250,5078,389
@@ -3537,7 +3537,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dung snagum Level 4]
+[AREA Dung snagum Level 3]
 GROUP=Dungeon Dug snagum
 P=4859, 185
 RECT=4727,162,4878,367
