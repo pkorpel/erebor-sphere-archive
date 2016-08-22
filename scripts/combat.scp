@@ -622,6 +622,13 @@ return 0
 if !(act)
   return
 endif
+if (NPC)
+  if (isfighting_ranged)
+    if !(act.srccombatLOS)
+      action=""
+    endif
+  endif
+endif
 if !(isnonmobile)
   if (tag(firststroke))//prvni stroke
     reveal
