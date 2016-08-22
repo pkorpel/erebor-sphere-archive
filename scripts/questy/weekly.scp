@@ -1,7 +1,7 @@
 [defnames def_weekly_quest]
 def_weekly_quest_count_low_miniquest  11 // pocet low miniquestu
-def_weekly_quest_count_medium_miniquest  6 // pocet medium miniquestu
-def_weekly_quest_count_high_miniquest  4 // pocet high miniquestu
+def_weekly_quest_count_medium_miniquest  10 // pocet medium miniquestu
+def_weekly_quest_count_high_miniquest  5 // pocet high miniquestu
 
 
 [itemdef i_memory_weekly_quest]
@@ -169,7 +169,7 @@ elseif (<argv(0)> == 105)  // 105 - Zabij hrace opacneho realmu
   say("KS: <miniquest_amount>")
 elseif (<argv(0)> == 106)  // 106 - Zabij hrace opacneho realmu na jeho/tvem/neutralnim uzemi
   arg(miniquest_amount,<eval ((<tag(count_miniquest)>*{2 4})/10)>)
-  arg(miniquest_where,<eval {1 3}>)
+  arg(miniquest_where,<eval {1 3}>)                             
   if (<topobj.tag(realm)> == <miniquest_where>)
     arg(miniquest_text,"Zabij <miniquest_amount>x hrace opacneho realmu na svem uzemi.")
   elseif (<miniquest_where> == 3)
@@ -179,6 +179,39 @@ elseif (<argv(0)> == 106)  // 106 - Zabij hrace opacneho realmu na jeho/tvem/neu
   endif
   say("KS: <miniquest_amount>")
   tag(weekly_quest_what[<argv(0)>],<miniquest_where>)
+elseif (<argv(0)> == 107)  // 107 - Dokonc dungeon
+  arg(miniquest_amount,1)
+  arg(miniquest_text,"Dokonc jakykoli dungeon.")
+  say("KS: <miniquest_amount>")  
+elseif (<argv(0)> == 108)  // 108 - utrz prime poskozeni ve vysi XY HP (Prime poskozeni=bez bleedu, poisnu atd)
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*50)*<eval topobj.tag(vitlev)>)>)   // tag.vitlev(pocet zivotu)*(pocet_miniquestu*50)
+  arg(miniquest_text,"Utrz prime poskozeni ve vysi <miniquest_amount> HP.")
+  say("KS: <miniquest_amount>")  
+elseif (<argv(0)> == 109)  // 109 - Rozklikni magicky itemek
+  arg(miniquest_amount,<eval ((<tag(count_miniquest)>*{2 4})/10)>)
+  arg(miniquest_text,"Otevri <miniquest_amount>x Vacek s magickym predmetem.")
+  say("KS: <miniquest_amount>") 
+elseif (<argv(0)> == 110)  // 110 - Navstiv magicke misto
+  arg(miniquest_amount,1)
+  arg(miniquest_where,<eval {1 5}>)
+  if (<miniquest_where> == 1)
+    tag(weekly_quest_what[<argv(0)>],790)
+    arg(miniquest_text,"Navstiv magicke misto nedaleko Severnich dolu.")
+  elseif (<miniquest_where> == 2)
+    tag(weekly_quest_what[<argv(0)>],393)
+    arg(miniquest_text,"Navstiv magicke misto na ostrove, JihoZapadne od Harlindonu.")
+  elseif (<miniquest_where> == 3)
+    tag(weekly_quest_what[<argv(0)>],4337)
+    arg(miniquest_text,"Navstiv magicke misto Severo-Vychodne od Vychodniho cipu Zeleznych Hor.")
+  elseif (<miniquest_where> == 4)
+    tag(weekly_quest_what[<argv(0)>],495)
+    arg(miniquest_text,"Navstiv magicke misto v SeveroZapadni casti Harlindonskeho lesa.")
+  elseif (<miniquest_where> == 5)
+    tag(weekly_quest_what[<argv(0)>],790)
+    arg(miniquest_text,"Navstiv magicke misto nedaleko Severnich dolu.")
+  endif
+
+  say("KS: <miniquest_amount>") 
 elseif (<argv(0)> == 1001)  // 1001 - zabij XY monster v dungu nad 100 expu
   arg(miniquest_amount,<eval ((<tag(count_miniquest)>*<tag(count_miniquest)>*{25 35})/10)>)
   arg(miniquest_text,"Zabij v dungeonu <miniquest_amount> monster, z kterych ziskas vice jak 100 expu.")
@@ -207,6 +240,10 @@ elseif (<argv(0)> == 1004)  // 1004 - zabij hrace opacneho realmu konkretniho po
   arg(miniquest_text,"Zabij hrace opacneho realmu, jehoz povolani je <profession_to_kill>.")
   tag(weekly_quest_what[<argv(0)>],<profession_to_kill>)
   say("KS: <miniquest_amount>")
+elseif (<argv(0)> == 1005)  // 1005 - Dokonc bonusove patro dungeonu
+  arg(miniquest_amount,1)
+  arg(miniquest_text,"Dokonc Bonusove patro libovolneho dungeonu.")
+  say("KS: <miniquest_amount>")  
 else                        
 
   say("KONEC")
@@ -294,6 +331,14 @@ if ((act.type==t_food) || (act.type==t_fruit))
     endif
   else
     say("Jsi prilis syty na snezeni tohoto jidla")
+  endif
+endif
+if (act.type==mit_main)  // magicky vacek(vsechny urovne)
+  if (<act.distance> < 5)
+    if (f_weekly_quest_check_finish(109)
+      src.say("<act.name> <act.type>")  // 109 - Otevri magicky vacek 
+      f_weekly_quest_check_increase(109,1)
+    endif 
   endif
 endif
 
@@ -430,30 +475,25 @@ else  // zabil hrace
       say("Zabil jsem hrace Opacneho realmu")  //105- Zabity hrac nema stejny realm jako ja
       f_weekly_quest_check_increase(105,1)
     endif
-    if (src.profession==class_craft)  // Zabij Krafta
-    elseif (src.profession==class_necro)  // Zabij Necra
-    elseif (src.profession==class_mag)  // Zabij Maga
-    elseif (src.profession==class_war)  // Zabij Wara
-    elseif (src.profession==class_thief)  // Zabij Thiefa
-    elseif (src.profession==class_ranger)  // Zabij Rangera
-    elseif (src.profession==class_mystik)  // Zabij Mystika
-    elseif (src.profession==class_shaman)  // Zabij Shamana
-    elseif (src.profession==class_priest)  // Zabij Priesta
-    endif 
     if (f_weekly_quest_check_finish(1004,<src.profession.name>))
       say("Zabil jsem <src.profession.name>")  //1004 - Zabij hrace konkretniho povolani
       f_weekly_quest_check_increase(1004,1)
-    endif
-    
+    endif   
     if (f_weekly_quest_check_finish(106,<region.Tag(realm)>))    //106- zabil jsem hrace opacneho realmu na mem/cizim/neutralnim uzemi
       say("Zabil jsem hrace opacneho realmu na mem uzemi")
       f_weekly_quest_check_increase(106,1)
-    endif
-    
+    endif    
   endif
 endif
 
 on=@aftergetswing
+if (<eval <var(ubrano)>> > 0)
+  if (f_weekly_quest_check_finish(108))
+    say("Ubrano: -<var(ubrano)>")
+    f_weekly_quest_check_increase(108,<var(ubrano)>)
+  endif 
+endif
+
 on=@beforegeteffect
 on=@beforedoeffect
 on=@beforegetswing
@@ -530,5 +570,81 @@ else  // a kdyz ne..
   memory_weekly.tag(weekly_quest_completed[<argv(0)>],#+<argv(1)>)  // zvysime o pozadovanou hodnotu 
 endif
 classmessage("Splneno <memory_weekly.tag(weekly_quest_completed[<argv(0)>])>/<memory_weekly.tag(weekly_quest_amount[<argv(0)>])>")
+
+[function f_finished_dungeon]
+src.accmsg("dokoncil dungeon <region.name> a prosel gatou na pozici <p>.")
+
+if (<src.isevent.e_weekly_quest>)  // plni weekly quest
+  if (f_weekly_quest_check_finish(107)) // 107 - Dokonc libovolny dungeon
+    src.say("Dokoncil jsem Dungeon (<region.name>)") 
+    f_weekly_quest_check_increase(107,1)
+  endif
+endif
+
+[function f_finished_dungeon_bonus]
+src.accmsg("dokoncil bonusove patro dungeonu <region.name> a prosel gatou na pozici <p>.")
+
+if (<src.isevent.e_weekly_quest>)  // plni weekly quest
+  if (f_weekly_quest_check_finish(1005)) // 1005 - Dokonc bonusove patro libovolneho dungeonu
+    src.say("Dokoncil jsem Bonusove patro (<region.name>)") 
+    f_weekly_quest_check_increase(1005,1)
+  endif
+endif
+
+[itemdef i_magic_place]
+ID=i_rune_glowing_3
+NAME=Zvlastni magicka runa
+
+ON=@create
+attr=010
+color=0
+
+ON=@step
+if (src.isDead)
+  return 1
+endif
+if (src.isPlayer)
+  if (<src.isevent.e_weekly_quest>)  // plni weekly quest
+    arg(x_pozice,<return_nth(1,<p>)>)
+    if (src.f_weekly_quest_check_finish(110,<x_pozice>)) // 110 - Nalezni magicke misto
+      src.say("Nalezl jsem magicke misto.") 
+      src.f_weekly_quest_check_increase(110,1)
+      dorand 5
+        DispID=i_rune_glowing_1
+        DispID=i_rune_glowing_2
+        DispID=i_rune_glowing_3
+        DispID=i_rune_glowing_4
+        DispID=i_rune_glowing_5
+      enddo
+      f_magic_place_column(-2,0)
+      f_magic_place_column(0,2)
+      f_magic_place_column(4,-1)
+      f_magic_place_column(4,2)
+      f_magic_place_column(-2,-3)
+      return 1
+    endif
+  endif
+  src.redmessage("Citis priliv energie, ale nevidis zadnou zmenu.")
+endif
+
+ON=@timer
+return 1
+
+[function f_magic_place_column]
+src.newitemsafe(i_column_magic_place)
+lastnew.morep=<P>
+lastnew.p=<P>
+lastnew.move=<argv(0)>,<argv(1)>
+lastnew.timer=5
+lastnew.attr=<attr>|attr_static
+
+[itemdef i_column_magic_place]
+id=i_fire_column
+type=t_script
+
+on=@timer
+remove
+return 1
+
 
 [eof]

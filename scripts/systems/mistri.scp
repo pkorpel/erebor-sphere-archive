@@ -14,7 +14,7 @@ ON=*hi*
 ON=*hello*
 ON=*buy*
 
-if <src.isevent.e_weekly_quest>  // lecitel plni weekly quest
+if (<src.isevent.e_weekly_quest>)  // lecitel plni weekly quest
   src.say("Plnim Weekly Questy")
   f_weekly_quest_hi_master
 endif
