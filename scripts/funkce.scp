@@ -6720,13 +6720,6 @@ endwhile
 tag(<arg(tagName)>sCount,<eval <tag(<arg(tagName)>sCount)>-1>)
 tag.remove(<arg(tagName)>[<eval linkNumber>])
 
-[function absolute]
-if (argv(0) < 0)
-  return<eval -(<argv(0)>)>
-else
-  return<argv(0)>
-endif
-
 // generates adding item target. Run on the object of linkAdder
 [function f_customLink_target] // argv(0): link name; argv(1): replacing existing tag ? (0/1); argv(2) - if replacing tag, then the number of replacing tag; argv(3): optional - dialog name
 src.newequip(i_customLink_target)
