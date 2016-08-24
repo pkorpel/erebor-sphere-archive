@@ -1459,7 +1459,7 @@ return 0
 
 [function srccombatLOS]
 if !(srccanseelos)
-elseif (absolute(<src.p_z-p_z>)>19)
+elseif (absolute(<eval(src.p_z-p_z)>)>19)
 else
  return 1
 endif

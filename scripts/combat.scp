@@ -623,7 +623,7 @@ if !(act)
   return
 endif
 if (isfighting_ranged)
-  if (absolute(<act.p_z-p_z>)>19)
+  if (absolute(<eval(act.p_z-p_z)>)>19)
     action=""
     return
   endif
