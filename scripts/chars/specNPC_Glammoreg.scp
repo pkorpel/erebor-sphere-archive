@@ -871,7 +871,8 @@ ARMOR=85
 moverate=3
 
 resources=9 i_ribs_raw, 8 i_reag_daemon_bone
-FOODTYPE=15 t_meat_rawBLOODCOLOR=colors_green
+FOODTYPE=15 t_meat_raw
+BLOODCOLOR=colors_green
 
 TEVENTS=e_monster
 TEVENTS=e_character
