@@ -2199,6 +2199,17 @@ return 1
 on=@getHit
 tag(combatSource,<src>)
 
+on=@aftergetswing
+if (<src.isevent.e_weekly_quest>)  // plni weekly quest
+  if (<eval <var(ubrano)>> > 0) 
+    if (<eval <var(ubrano)>> > <hits>)  // Kdyz je pecka vetsi nez zbyvajici zivoty cile, zajima me jen kolik ubere hp
+      src.f_weekly_dealed_damage(<hits>)
+    else
+      src.f_weekly_dealed_damage(<eval <var(ubrano)>>)
+    endif
+  endif
+endif
+
 on=@death
 tag(lastmurderbyf,<act>)
 arg(monstdeathact,<act>)
@@ -2344,6 +2355,14 @@ accMsg("hrac(<name>,<uid>,<p>,<region.name>) kouzli kouzlo (<spellDescription[<a
 on=@spellEffect
 tag(combatSource,<src>)
 
+on=@beforegetswing
+on=@afterswing
+on=@userkill
+on=@npckill
+on=@Created
+on=@beforegeteffect
+on=@beforedoeffect
+
 [function stdname]
 src.sysMessage("Defname: <typedef.name>")
 
@@ -2353,11 +2372,9 @@ if (charExists(<killer)>))
   if (safe finduid(<killer>).isPlayer)
     var(trigkillact,<argv(0)>)
     killer.trigger(@userkill)
-    logmsg("USER_KILL <killer> <killer.name>, CIL: <argv(0).name>")  // debug hlaska
   elseif (npcExists(<killer>))
     var(trigkillact,<argv(0)>) 
     killer.trigger(@npckill)
-    logmsg("NPC_KILL <killer> <killer.name>, CIL: <argv(0).name>")  // debug hlaska
   endif
 endif
 

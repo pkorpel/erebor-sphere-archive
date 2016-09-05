@@ -145,7 +145,15 @@ elseif (<argv(0)> == 11)  // 11 - Navstiv a pozdrav Mistra
   arg(miniquest_hi_master,<f_weekly_quest_random_master>)
   arg(miniquest_text,"Navstiv a pozdrav Mistra, ktery uci skill<miniquest_hi_master>")
   say("KS: <miniquest_amount>")
-  tag(weekly_quest_where[<argv(0)>],<miniquest_hi_master>)  
+  tag(weekly_quest_where[<argv(0)>],<miniquest_hi_master>)
+elseif (<argv(0)> == 12)  // 12 - Udelej XY HP poskozeni monstru
+  if ((topobj.profession==class_priest) || (topobj.profession==class_craft))
+    arg(miniquest_amount,<eval (<tag(count_miniquest)>*{<eval <tag(level_hrace_prijeti)>*100> <eval (<tag(level_hrace_prijeti)>+1)*100>}*10)>)
+  else
+    arg(miniquest_amount,<eval (<tag(count_miniquest)>*{<eval <tag(level_hrace_prijeti)>*100> <eval (<tag(level_hrace_prijeti)>+1)*100>}*25)>)
+  endif
+  arg(miniquest_text,"Ucin poskozeni monstru ve vysi: <miniquest_amount> zivotu")
+  say("KS: <miniquest_amount>")  
   
 elseif (<argv(0)> == 101)  // 101 - Lootni itemek
   arg(miniquest_amount,1)
@@ -207,8 +215,8 @@ elseif (<argv(0)> == 110)  // 110 - Navstiv magicke misto
     tag(weekly_quest_what[<argv(0)>],495)
     arg(miniquest_text,"Navstiv magicke misto v SeveroZapadni casti Harlindonskeho lesa.")
   elseif (<miniquest_where> == 5)
-    tag(weekly_quest_what[<argv(0)>],790)
-    arg(miniquest_text,"Navstiv magicke misto nedaleko Severnich dolu.")
+    tag(weekly_quest_what[<argv(0)>],2416)
+    arg(miniquest_text,"Navstiv magicke v jame Fireantu.")
   endif
 
   say("KS: <miniquest_amount>") 
@@ -646,5 +654,14 @@ on=@timer
 remove
 return 1
 
+[function f_weekly_dealed_damage]  // argv(0) - kolik dmg udelal
+if !(act.isPlayer)  // neni to hrac
+  if (f_weekly_quest_check_finish(12)) // 12 - Udelej XY HP poskozeni monstru
+    say("Udelal jsem damage: <argv(0)>") 
+    f_weekly_quest_check_increase(12,<argv(0)>)
+  endif
+else  // je to hrac
+
+endif
 
 [eof]
