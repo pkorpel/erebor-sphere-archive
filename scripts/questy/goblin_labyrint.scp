@@ -16,7 +16,7 @@ def_goblin_labyrint_color_white   0481
 def_goblin_labyrint_color_yellow  084D
 def_goblin_labyrint_color_brown   0750
 
-def_goblin_treasure_monsters_to_kill 10000
+def_goblin_treasure_monsters_to_kill 5000000 // 5M (500k expu) kvuli desetinek
 
 def_goblin_treasure_silver_treasurer 02A749 
 def_goblin_treasure_gold_treasurer   02BDC0
@@ -39,7 +39,7 @@ if (isGM)
   sysmessage("Statistika Eventu Goblin Poklad:")
   sysmessage("Goblinu vyvolano: <eval def_goblin_labyrint_memory_stone.tag(summoned_goblins)>")
   sysmessage("Goblinu uteklo: <eval def_goblin_labyrint_memory_stone.tag(goblin_escaped)>")
-  sysmessage("Aktualne zabito: <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> Dungovnich monster")
+  sysmessage("Aktualne zabito Dungovnich monster za: <eval <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)>/10> expu.")
   sysmessage("Silver Truhel: <eval def_goblin_labyrint_memory_stone.tag(silver_treasure)>")
   sysmessage("Gold Truhel: <eval def_goblin_labyrint_memory_stone.tag(gold_treasure)>")
   sysmessage("Naposledy vyvolan Goblin: <def_goblin_labyrint_memory_stone.tag(last_time_of_summon)>")
@@ -734,13 +734,13 @@ enddo
 
 [function f_goblin_treasure_evaluate]
 if (<eval act> > 0)  // bez toho hazi errory, kdyz zemre monstrum samovolne, act je pak 0
-  if ((act.isplayer) || (act.issumon) || (act.ispet))  // zabite hracem, petem a nebo sumonem
+  if ((act.isplayer) || (act.issumon) || (act.ispet))  // zabite hracem, petem a nebo sumonem  
     if ((isDung) && (<eval tag(experience)> > 0)) // v dungach, nesumon a neressnute monstrum
-      def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,#+1)  // pocitadlo monster zabitych v dungach
-      if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> >= def_goblin_treasure_monsters_to_kill)  // Bylo v dungu hracem zabito 10k monster
+      def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,#+<eval tag(experience)>)  // pocitadlo monster zabitych v dungach
+      if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> >= def_goblin_treasure_monsters_to_kill)  // Bylo v dungu hracem zabita monstra za 500k expu
         def_goblin_labyrint_memory_stone.tag(summoned_goblins,#+1)  // kolikrat byl jiz goblin vyvolan
         def_goblin_labyrint_memory_stone.tag(last_time_of_summon,<servertime>)  // kdy naposledy byl vyvolan  
-        act.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")
+        act.accMsg("Vyvolal Pokladoveho Goblina po zabiti monster za <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> expu na pozici <p>.")
         f_goblin_treasure_summon_gate  // vyvolani gaty a pokladoveho goblina
         def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,0)  // vynulovani pocitadla
       endif
@@ -798,7 +798,7 @@ else
 endif
 
 ON=@NpcSeeNewPlayer
-src.accMsg("Vyvolal Pokladoveho Goblina po zabiti <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> monster na pozici <p>.")  // druha alternativa na logy, pokud nevyresim ten problem s pravy
+src.accMsg("Vyvolal Pokladoveho Goblina po zabiti monster za <eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> expu na pozici <p>.")  // druha alternativa na logy, pokud nevyresim ten problem s pravy
 if !(findid(i_remover_goblin_treasure))
   giveitem(i_remover_goblin_treasure)
   say("Vypada to tady nebezpecne, musim se odsud co nejrychleji dostat...")
