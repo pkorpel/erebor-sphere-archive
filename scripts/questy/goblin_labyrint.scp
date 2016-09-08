@@ -293,17 +293,17 @@ if (src.isPlayer)
     arg(exp_prize,1000)
     arg(gp_prize,20000)
     arg(item_chance,(200+(<eval src.qtag(Goblin_Labyrint)>*4))) // fix 20% sance + (pocet_projiti*0,4%) => 200 projiti =100%
-    arg(item_chance,<eval <item_chance>+(<eval (<item_chance>*<eval prize_bonus>)/100>)>) // Bonus za precizní projití
+    arg(item_chance,<eval <item_chance>+(<eval (<item_chance>*<eval prize_bonus>)/100>)>) // Bonus za precizni projiti
     if (<eval {1 1000}> < <eval item_chance>)
       src.giveitem(i_mi_bag)
       def_goblin_labyrint_memory_stone.tag(gived_items,#+1)
       src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal Magicky vacek.") 
     endif
   endif
-  arg(exp_prize,<eval <exp_prize>+(<eval (<exp_prize>*<eval prize_bonus>)/100>)>) // Bonus za precizní projití
-  arg(gp_prize,<eval <gp_prize>+(<eval (<gp_prize>*<eval prize_bonus>)/100>)>)    // Bonus za precizní projití
+  arg(exp_prize,<eval <exp_prize>+(<eval (<exp_prize>*<eval prize_bonus>)/100>)>) // Bonus za precizni projiti
+  arg(gp_prize,<eval <gp_prize>+(<eval (<gp_prize>*<eval prize_bonus>)/100>)>)    // Bonus za precizni projiti
   
-  src.givegold(<gp_prize>)
+  src.f_vytvor_mesec(<gp_prize>,<src.findlayer(layer_bankbox)>)  // penize kvuli vaze do banky
   src.addexp(<exp_prize>)
   src.qtag(Goblin_Labyrint,(<eval src.qtag(Goblin_Labyrint)>+1))  // nevim proc, ale qtag neumi navysit hodnotu tagu pres #+1
 
@@ -315,6 +315,7 @@ if (src.isPlayer)
   endif 
   src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint (s bonusem <eval prize_bonus>%) a ziskal <exp_prize>expu a <gp_prize>gp.")
   src.gohome
+  src.classmessage("Blahopreji! Tva odmena byla presunuta do tve banky.")
   dorand 3  // zmena pozice finalni gaty do 3 ruznych rohu labyrintu
     p=5955, 375, 0, 35
     p=5931, 303, 0, 35
