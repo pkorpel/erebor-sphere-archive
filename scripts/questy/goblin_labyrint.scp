@@ -280,18 +280,28 @@ if (src.isPlayer)
   if (<eval src.qtag(Goblin_Labyrint)> == 0)
     src.qtag(Goblin_Labyrint,0)
   endif
+  arg(color_memory,<src.findid(i_goblin_labyrint_memory)>)
+  arg(prize_bonus,<eval ((35-<eval color_memory.tag(labyrint_summary)>)-<eval color_memory.tag(labyrint_brown)>)*5>)  // vypocet bonusu za precizni projiti
+  if (<eval prize_bonus> < 0)
+    arg(prize_bonus,0)  // jen pro sichr
+  endif
+  color_memory.tag(labyrint_prize_bonus,<eval prize_bonus>)
   if (<eval src.qtag(Goblin_Labyrint)> < 5)  // do 5ti pruchodu exp a gp odmena roste  
     arg(exp_prize,500+(<eval src.qtag(Goblin_Labyrint)>*100))
     arg(gp_prize,10000+(<eval src.qtag(Goblin_Labyrint)>*2000))
   else  // od 5ti pruchodu exp a gp odmena je fixni + sance na item
     arg(exp_prize,1000)
     arg(gp_prize,20000)
-    if (<eval {1 1000}> < (200+(<eval src.qtag(Goblin_Labyrint)>*4))) // fix 20% sance + (pocet_projiti*0,4%) => 200 projiti =100%
+    arg(item_chance,(200+(<eval src.qtag(Goblin_Labyrint)>*4))) // fix 20% sance + (pocet_projiti*0,4%) => 200 projiti =100%
+    arg(item_chance,<eval <item_chance>+(<eval (<item_chance>*<eval prize_bonus>)/100>)>) // Bonus za precizní projití
+    if (<eval {1 1000}> < <eval item_chance>)
       src.giveitem(i_mi_bag)
       def_goblin_labyrint_memory_stone.tag(gived_items,#+1)
       src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal Magicky vacek.") 
     endif
   endif
+  arg(exp_prize,<eval <exp_prize>+(<eval (<exp_prize>*<eval prize_bonus>)/100>)>) // Bonus za precizní projití
+  arg(gp_prize,<eval <gp_prize>+(<eval (<gp_prize>*<eval prize_bonus>)/100>)>)    // Bonus za precizní projití
   
   src.givegold(<gp_prize>)
   src.addexp(<exp_prize>)
@@ -303,7 +313,7 @@ if (src.isPlayer)
     def_goblin_labyrint_memory_stone.tag(gived_gp,#+<eval gp_prize>)
     f_goblin_labyrint_the_best
   endif 
-  src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint a ziskal <exp_prize>expu a <gp_prize>gp.")
+  src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint (s bonusem <eval prize_bonus>%) a ziskal <exp_prize>expu a <gp_prize>gp.")
   src.gohome
   dorand 3  // zmena pozice finalni gaty do 3 ruznych rohu labyrintu
     p=5955, 375, 0, 35
