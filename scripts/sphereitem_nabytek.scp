@@ -2633,6 +2633,22 @@ SKILLMAKE=CARPENTRY 35.0, TAILORING 30.0, t_carpentry
 DUPELIST=0dc0
 RESOURCES2=1 i_log,1 i_thread
 
+on=@equip
+if (typedef.layer==2)
+  arg(index,0)
+  while (arg(index)<cont.rescount)
+   arg(founditem,<cont.findcont(arg(index))>)
+   if (arg(founditem).layer==2)
+     if (arg(founditem)!=uid)
+       arg(founditem).unequip
+       break
+     endif
+   endif
+   arg(index,#+1)
+  endwhile
+endif
+src.temporary_null
+
 [ITEMDEF 0e34]
 DEFNAME=i_scroll_blank
 TYPE=T_SCROLL_BLANK
