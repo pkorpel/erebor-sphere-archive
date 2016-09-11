@@ -416,6 +416,10 @@ on=@beforegeteffect
 
 on=@beforegetswing
 on=@aftergetswing
+if (<eval src.int> > {100 1000})  // cim je utocnik chytrejsi, tim je lakavejsi pro oko na utok
+  attack(<src>)
+endif
+
 if ( (<eval {1 100}> > 85) && (is_physical) )
  var(ubrano,0)
  src.sysmessage("Tva rana se od <name> odrazila!")
