@@ -20,7 +20,7 @@ tag(contentscount,0)
 tag(fail_msg,"Telo je prilis poskozeno, nez aby se mohlo kuchari hodit...")
 
 ON=@CollectorCheck
-
+ON=@UserDeath
 
 //////////////// SPEECHE, DIALOGY ////////////////
 

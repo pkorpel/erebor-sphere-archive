@@ -24,6 +24,7 @@ tag.fail_msg="Tak tohle pirko by se asi Minny nelibilo..."
 ON=@CollectorCheck
 f_collectorFixTargetId("Body of Phoenix",097F)
 
+ON=@UserDeath
 
 [speech spk_q015_paradnice]
 

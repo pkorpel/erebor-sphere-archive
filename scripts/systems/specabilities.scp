@@ -3115,6 +3115,9 @@ return 1
 on=@deathcorpse
 argo.remove //odstranit
 
+on=@Created
+on=@beforegetswing
+
 [events e_hypnotising_mystic] //player
 on=@death
 tag(po_zasahu,5) //vrati se s malo HP
@@ -5086,6 +5089,7 @@ endif
 on=@aftergetswing
 on=@beforedoeffect
 on=@beforegeteffect
+on=@beforegetswing
 
 [function CountArmorByMaterial]  //spocte obranu dle materialu armoru (verite, valorite) bez ohledu na jeho typ (plate/studded) -> nepocita se krk (kvuli znevyhodneni bone)
 //layers and influence:

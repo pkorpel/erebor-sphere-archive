@@ -57,6 +57,7 @@ var(ubrano,<var(ubrano)>-<arg(uber)>)
 on=@aftergetswing
 on=@beforedoeffect
 on=@beforegeteffect
+on=@beforegetswing
 
 //////////////////////////////////////////////////////////////////////////
 

@@ -378,4 +378,5 @@ tag.contentscount=0
 tag.fail_msg="Pri otvirani lebky jsi poskodil mozek! Nezbyva, nez se vesele rypat ve zbytcich."
 
 ON=@CollectorCheck
+ON=@UserDeath
 [eof]

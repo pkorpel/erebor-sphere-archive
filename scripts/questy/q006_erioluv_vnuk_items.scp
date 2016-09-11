@@ -24,6 +24,7 @@ tag.contentscount=0
 tag.fail_msg="Jsi nesika, stehno se ti nepovedlo vzit!"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 [ITEMDEF i_q006_vacek_led]
 ID=i_bag
@@ -47,6 +48,7 @@ tag.contentscount=0
 tag.fail_msg="Esenci se ti vzit nepovedlo!"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 [ITEMDEF i_q006_vacek_kamen]
 ID=i_bag
@@ -70,6 +72,7 @@ tag.contentscount=0
 tag.fail_msg="Esenci se ti vzit nepovedlo!"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 [ITEMDEF i_q006_vacek_zem]
 ID=i_bag
@@ -93,6 +96,7 @@ tag.contentscount=0
 tag.fail_msg="Esenci se ti vzit nepovedlo!"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 [ITEMDEF i_q006_vacek_snih]
 ID=i_bag
@@ -116,6 +120,7 @@ tag.contentscount=0
 tag.fail_msg="Esenci se ti vzit nepovedlo!"
 
 ON=@CollectorCheck
+ON=@UserDeath
 
 [ITEMDEF i_q006_pergamen]
 id=0e34
