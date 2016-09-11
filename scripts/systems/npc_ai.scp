@@ -1693,6 +1693,38 @@ cont.attack(<victim>)
 cont.update
 return 1
 
+
+[events e_golem]
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@beforedoeffect 
+on=@beforegeteffect
+on=@beforegetswing
+on=@aftergetswing
+if (<hits> > <eval ((maxhits/4)*3)>)  // vice jak 75% HP
+  if ({1 25}==1)
+    attack(<src>)
+  endif
+elseif (<hits> > <eval maxhits/2>)  // vice jak 50% HP
+  if ({1 20})==1) 
+    attack(<src>)
+  endif
+elseif (<hits> > <eval maxhits/4>)  // vice jak 25% HP
+  if ({1 15}==1)  
+    attack(<src>)
+  endif
+elseif (<hits> > <eval maxhits/10>)  // vice jak 10% HP
+  if ({1 10}==1)  
+    attack(<src>)
+  endif  
+else                                // mene jak 10% HP
+  if ({1 5}==1)  
+    attack(<src>)
+  endif
+endif
+
+
 // promazany eventy 
 [events e_snowmonster]
 [events e_undead]
@@ -1703,7 +1735,6 @@ return 1
 [events e_blood]
 [events e_daemon]
 [events e_reaper]
-[events e_golem]
 [events e_spirit]
 [events e_humanoid]
 [events e_spider]
