@@ -416,7 +416,7 @@ on=@beforegeteffect
 
 on=@beforegetswing
 on=@aftergetswing
-if (<eval src.int> > {100 1000})  // cim je utocnik chytrejsi, tim je lakavejsi pro oko na utok
+if (<eval src.int> > {100 1250})  // cim je utocnik chytrejsi, tim je lakavejsi pro oko na utok
   attack(<src>)
 endif
 
@@ -1704,23 +1704,23 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 if (<hits> > <eval ((maxhits/4)*3)>)  // vice jak 75% HP
-  if ({1 25}==1)
+  if ({1 35}==1)
     attack(<src>)
   endif
 elseif (<hits> > <eval maxhits/2>)  // vice jak 50% HP
-  if ({1 20})==1) 
+  if ({1 30})==1) 
     attack(<src>)
   endif
 elseif (<hits> > <eval maxhits/4>)  // vice jak 25% HP
-  if ({1 15}==1)  
+  if ({1 25}==1)  
     attack(<src>)
   endif
 elseif (<hits> > <eval maxhits/10>)  // vice jak 10% HP
-  if ({1 10}==1)  
+  if ({1 20}==1)  
     attack(<src>)
   endif  
 else                                // mene jak 10% HP
-  if ({1 5}==1)  
+  if ({1 10}==1)  
     attack(<src>)
   endif
 endif
