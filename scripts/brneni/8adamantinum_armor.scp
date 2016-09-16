@@ -328,8 +328,6 @@ tdata1=8
 ON=@Create
 shieldcreate(Adamantinum,ring)
 
-on=@equip
-tdata1=8
 
 [itemdef i_Adamantinum_RINGMAIL_gorget]
 id=i_leather_gorget

@@ -306,8 +306,6 @@ tdata1=2
 ON=@Create
 shieldcreate(Iron,ring)
 
-on=@equip
-tdata1=2
 
 [itemdef i_Iron_RINGMAIL_gorget]
 id=i_leather_gorget

@@ -333,8 +333,6 @@ tdata1=9
 ON=@Create
 shieldcreate(Mithril,ring)
 
-on=@equip
-tdata1=9
 
 [itemdef i_Mithril_RINGMAIL_gorget]
 id=i_leather_gorget
