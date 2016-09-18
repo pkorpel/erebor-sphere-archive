@@ -370,7 +370,11 @@ return<arg(checkButtons)>
 return<dsToRTime(<serv.time>-<tag(lastOpened)>)>
 
 [function f_treasure_count_gold]
-return<eval ((<serv.time>-<tag(lastOpened)>)*<tag(gold_per_minute)>)/600>
+if (<eval ((<serv.time>-<tag(lastOpened)>)*<tag(gold_per_minute)>)/600> < 0)
+  return 3500000
+else 
+  return<eval ((<serv.time>-<tag(lastOpened)>)*<tag(gold_per_minute)>)/600>
+endif
 
 // must be executed upon the i_mem_treasureGenerator
 [function f_treasureGenerator_init]
