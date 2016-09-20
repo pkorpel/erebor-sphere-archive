@@ -341,7 +341,7 @@ else
 endif 
 if (<finduid(<tag(mrtvola)>).tag(rozrezano)>) //je li nalezene telo rozrezane
   if (<strlen(<tag(lastmurderbyf)>)>)
-    if (tag(lastmurderbyf).isPlayer) // the murderer is a player and exists
+    if (safe finduid(<tag(lastmurderbyf)>).isPlayer) // the murderer is a player and exists
       finduid(<tag(lastmurderbyf)>).sysMessage("Mas stesti, zes telo <finduid(<tag(lastmurderbyf)>).sex("rozrezal","rozrezala")>!")
     endif
   endif
@@ -369,7 +369,7 @@ else
   revivedNPC.sound=snd_spell_polymorph 
   vrah.p=<vrah.tag(oldp)> //ozivovace NPCcek zpatky domu
   if (<strlen(<tag(lastmurderbyf)>)>)
-    if (tag(lastmurderbyf).isPlayer) // the murderer is a player and exists
+    if (safe finduid(<tag(lastmurderbyf)>).isPlayer) // the murderer is a player and exists
       finduid(<tag(lastmurderbyf)>).sysMessage("Monstrum vstalo z mrtvych!")
     endif
   endif
