@@ -1591,6 +1591,7 @@ maxmana=0
 
 tag.experience=<eval {70.0 75.0}>
 
+tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
@@ -1673,6 +1674,7 @@ Tag.explode_dmg=50
 tag.npc_port_timer=10
 tag(npc_port_distance,9)
 
+tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
