@@ -97,7 +97,10 @@ if (cont.stamina>cont.maxstam)
  cont.stamina=<cont.maxstam>
 endif
 
-on=@unequip   
+on=@unequip
+if (<eval cont.hits> <= 0)   
+  return
+endif
 cont.emote("seems to be at full strength.")
 f_discordreturn(dex)
 f_discordreturn(str)

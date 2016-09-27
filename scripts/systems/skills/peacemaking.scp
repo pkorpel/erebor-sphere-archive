@@ -101,10 +101,11 @@ cont.emote(is falling asleep)
 timer=90
 
 on=@unequip
-cont.events -e_peacemade
-if (<eval cont.hits> > 0)
-  cont.emote(woke up)
+if (<eval cont.hits> <= 0)   
+  return
 endif
+cont.events -e_peacemade
+cont.emote(woke up)
 cont.action=""
 
 on=@timer
