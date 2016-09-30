@@ -47,7 +47,9 @@ on=@create
 timer=0
 
 on=@timer
-sector.allchars(f_npcCurse_effect(<UID>))
+if (<eval cont.hits> > 0)   
+  sector.allchars(f_npcCurse_effect(<UID>))
+endif
 
 [function f_npcCurse_effect]
 if (isPlayer)
