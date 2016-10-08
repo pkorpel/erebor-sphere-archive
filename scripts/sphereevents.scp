@@ -2317,7 +2317,7 @@ if !(<flags>&statf_conjured) //neni to summon
       if (<finduid(<argo.more2>).isplayer>) //vrahem je hrac, nedelej nic (nema mozek, ty ify dole pak hazej errory)
      //nic
       else
-        if(<finduid(<argo.more2>).npc>==1) //zabilo ho zvire
+        if(<eval finduid(<argo.more2>).npc>==1) //zabilo ho zvire
           if(finduid(<argo.more2>).ispet)||(<finduid(<argo.more2>).tag(guardhire)>)||(isjezditko) //je to neco ochoceneho - mohl ho zabit cviceny zostrich, zejo)
             //nebo je to guard (to jsou taky animalove...)
             //nedelej nic !! 
