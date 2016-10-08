@@ -1536,5 +1536,5 @@ if ({1 1000} <= <countdown_chance>)
     endif
   endif  
 endif
- 
+
 [EOF]
