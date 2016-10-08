@@ -129,6 +129,7 @@ if (<distancefrom(<var(blowupedmonster)>)> > 6)  // do 6ti poli dostane ranu vzd
 endif
 if (<uid> == <var(blowupedmonster)>)
   effect(3,i_fx_explode,6,15,1,098c,0)
+  sfx(285)
   hits=0
   return 0
 endif
