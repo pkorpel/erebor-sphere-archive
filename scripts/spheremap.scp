@@ -6331,6 +6331,7 @@ EVENTS=r_playerhouse, r_nosumon
 [AREA dum 117]// Minas Tirith
 P=5661,3982,-80
 RECT=5655,3964,5666,3981
+RECT=5662,3981,5662,3981
 tag.housenumber=117
 FLAGS=01192
 RAINCHANCE=00  
