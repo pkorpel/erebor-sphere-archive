@@ -34,7 +34,7 @@ if (<src.flags>&statf_dead)
 endif
 if ((<src.tag.level> < 10)||(<src.tag(realm)> < 0))
   say("Promin, ale s tebou se nemam aktualne o cem bavit. Prijd, az budes silnejsi!")
-elseif (<src.tag(presel)> == 1)
+elseif (<eval src.tag(presel)> == 1)
   say("S tebou se uz bavit nebudu!")
 else
   if ((<src.tag(realm)> == 1)||(<src.tag(realm)> == 2)) 
