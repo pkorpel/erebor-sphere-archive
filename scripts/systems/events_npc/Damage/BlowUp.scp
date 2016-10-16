@@ -49,7 +49,10 @@ on=@Death
 f_blow_up_blood_stain    // efekt krve v miste, kde byvala mrtvola
 
 on=@DeathCorpse
-argo.remove
+if (itemExists(<argo>))
+  argo.remove
+  return 1
+endif
 
 [function f_npc_blow_up_rage]
 if (<eval tag(npc_blow_up_target)> == 0)  // prvotni nastaveni cile
@@ -106,15 +109,21 @@ name=Blow up damage dealer
 
 on=@create
 timer=0
-tag(blow_up_body_part,<eval {0 5}>)
+tag(blow_up_body_part,6)  // nema definovane co je, proto radsi nebude hazet casti tela
+
 
 on=@timer
+if (<strlen(<link.tag(monstertype)>)>)
+  if (<strlen(<return_nth(1,<link.tag(monstertype)>)>)>==<strlen(humanoid)>)
+    tag(blow_up_body_part,<eval {0 5}>)  // Je to humanoid, budeme hazet casti tela
+  endif
+endif
 sector.allchars(f_npcBlowUp_effect(<uid>))
 
 
 [function f_npcBlowUp_effect]
 if (isPlayer)
-  if (isGM) || (isDead)
+  if ((isGM) || (isDead))
     return 0
   endif
 endif
@@ -133,9 +142,10 @@ if (<uid> == <var(blowupedmonster)>)
   hits=0
   return 0
 endif
-if (f_canseelos(<argv(0)>)) && !(isgm) && !(flag_invisible==1)  && !(flag_insubstantial==1) && !(flag_hidden==1)
+if ((f_canseelos(<argv(0)>)) && !(isgm) && !(flag_invisible==1)  && !(flag_insubstantial==1) && !(flag_hidden==1))
   arg(damage,<eval (16*<eval 9-<distancefrom(<var(blowupedmonster)>)>>)>)  // vypocet dmg v zavislosti na tom, jak deleko je cil od epicentra vybuchu
   if (npc)
+    //events=+e_npc_blow_up  // kdybychom nekdy chteli aby vybuch nakazil ostatni npc v dosahu
     arg(damage,#*10)  // silne proti ostatnim npc
   endif
 
@@ -203,5 +213,14 @@ lastnew.timer=120
 lastnew.attr=010
 lastnew.color=098c
 
+
+
+[function whoareyou]
+if (<strlen(<tag(monstertype)>)>)
+  say("Jsem <return_nth(1,<tag(monstertype)>)>")
+  return"<return_nth(1,<tag(monstertype)>)>" 
+else
+  retun 0
+endif
 [eof]
 
