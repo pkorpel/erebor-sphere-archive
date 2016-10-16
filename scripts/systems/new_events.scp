@@ -1210,7 +1210,9 @@ on=@create
 timer=0
 
 on=@timer
-sector.allchars(f_npcCurseMana_effect(<UID>))
+if (<eval link.hits> > 0) 
+  sector.allchars(f_npcCurseMana_effect(<UID>))
+endif
 
 [function f_npcCurseMana_effect]
 if (isPlayer)
@@ -1293,7 +1295,9 @@ on=@create
 timer=0
 
 on=@timer
-sector.allchars(f_npcCursestam_effect(<UID>))
+if (<eval link.hits> > 0) 
+  sector.allchars(f_npcCursestam_effect(<UID>))
+endif
 
 [function f_npcCursestam_effect]
 if (isPlayer)

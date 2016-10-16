@@ -2,7 +2,7 @@
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if(act.mana>10)
+if (act.mana>10)
   act.mana=mana-10
   act.sysMessage("Neco ti vysava manu!")
 elseif (act.mana<10)
@@ -18,7 +18,7 @@ on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if(act.mana>12)
+if (act.mana>12)
   hits=(<hits>+<var(ubrano)>)
   act.mana=mana-<eval{8 12}>
   act.sysMessage("Monstrum se syti tvou manou!")
@@ -39,7 +39,7 @@ if !tag(zjisteno)
   tag(puvodniexpy,<tag(experience)>) //zaznamena puvodni expy potvory
   tag(zjisteno,1)
 endif
-if (act.tag(experience)<20) || ((maxhits)>30000) || ((hits)>30000) || (!(act.isplayer))
+if ((act.tag(experience)<20) || ((maxhits)>30000) || ((hits)>30000) || (!(act.isplayer)))
   return 0  
 else
   tag(rana,(<eval {10 20}>)+(<tag(experience)>)/(<tag(puvodniexpy)>))
@@ -56,7 +56,7 @@ on=@beforegeteffect
 
 [events e_summonfrenzy]
 on=@aftergetswing
-if (src.issumon) && (!(src.flags&statf_pet))
+if ((src.issumon) && (!(src.flags&statf_pet)))
   src.findid(i_rune_summon_creature).link=""
   src.findid(i_rune_summon_elem_air).link=""
   src.findid(i_rune_summon_daemon).link=""
@@ -64,7 +64,7 @@ if (src.issumon) && (!(src.flags&statf_pet))
   src.findid(i_rune_summon_elem_fire).link=""
   src.findid(i_rune_summon_elem_water).link=""
   src.action=067
-  while memoryfindtype(0209c) || src.memoryfindtype(0209c)
+  while (memoryfindtype(0209c) || src.memoryfindtype(0209c))
     memoryfindtype(0209c).remove
     src.memoryfindtype(0209c).remove
   endwhile
@@ -89,10 +89,10 @@ timer=2
 attr=attr_move_never 
 
 on=@step
-if (src.isGM) || (src.isDead)
+if ((src.isGM) || (src.isDead))
   return 1
 endif
-if !((<link.uid>) == (<src.uid>)) && (src.isPlayer || src.isPet)	//dame dmg i summonum a jezditkum
+if (!((<link.uid>) == (<src.uid>)) && (src.isPlayer || src.isPet))	//dame dmg i summonum a jezditkum
   if (src.isEvent(e_fire_column_damage))
     if (<src.tag(fireColumnDamageStep)> > <serv.time>) // if the player stepped on the firecolumn at this position in the last 2 seconds
       return 1
@@ -255,7 +255,7 @@ sector.allchars(parakrik)
 remove
 
 [function parakrik]
-if !isgm && isplayer && tag(resist_para)<900 && !(<flags>&statf_dead)
+if ((!isgm) && (isplayer) && (tag(resist_para)<900) && !(<flags>&statf_dead))
  if (<eval tag(ra_speldodge)*nastaveni_ability_pvMdodge> > {0 999})
   //var(spellpower, 0)
   classmessage("Kouzlo absorbovano")
@@ -275,7 +275,7 @@ type=t_eq_script
 name=invism
 
 on=@equip
-if topobj.flag_insubstantial==0
+if (topobj.flag_insubstantial==0)
   topobj.EFFECT(3,#0A2002EEA,6,30,2)
   timer=1
 else
@@ -292,7 +292,7 @@ topobj.invis
 [events e_odinvis_krik]
 
 on=@aftergetswing
-if rand(12)==1
+if (rand(12)==1)
   newitem(<i_src_changer_odinvis>)
   lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
   emote("crying.")
@@ -320,8 +320,8 @@ remove
 return 1
 
 [function zviditelni]
-if (<flags>&statf_invisible) || (<flags>&statf_hidden)
-  if isplayer && !isgm && !(<flags>&statf_dead) 
+if ((<flags>&statf_invisible) || (<flags>&statf_hidden))
+  if ((isplayer) && !(isgm) && !(<flags>&statf_dead)) 
     flag_invisible=0
     flag_hidden=0
     sysMessage("<sex("Byl jsi objeven!","Byla jsi objevena!")>")
@@ -347,7 +347,7 @@ on=@create
 timer=5
 
 on=@timer
-if tag(dalsidetek) > 10
+if (tag(dalsidetek) > 10)
   topobj.memoryfindtype(0209c).remove
   topobj.action=""
   remove
@@ -369,7 +369,7 @@ on=@create
 color=0982
 
 on=@step
-if tag(nextstep) < (<serv.time>)
+if (tag(nextstep) < (<serv.time>))
 tag(nextstep,<serv.time>+50)
 src.zviditelni
 endif
@@ -380,22 +380,22 @@ return 1
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if(tag(neknockuj))!=1
+if ((tag(neknockuj))!=1)
   tag(neknockuj,1)
   return 0
 endif
-if tag(vypito)!=1
-  if (<hits> < <maxhits>) && ((hits)>(maxhits/2)) && rand(8)==1
+if (tag(vypito)!=1)
+  if ((<hits> < <maxhits>) && ((hits)>(maxhits/2)) && (rand(8)==1))
     newequip(i_npc_str_boost)
     tag(vypito,1)
     return 0
   endif
-  if (<hits> < <maxhits>) && ((hits)>(maxhits/2)) && rand(8)==1
+  if ((<hits> < <maxhits>) && ((hits)>(maxhits/2)) && (rand(8)==1))
     newequip(i_npc_dex_boost)
     tag(vypito,1)
     return 0
   endif
-  if (<hits> < <maxhits>) && ((hits)>(maxhits/2)) && rand(8)==1 && (<mana> > 0)
+  if ((<hits> < <maxhits>) && ((hits)>(maxhits/2)) && (rand(8)==1) && (<mana> > 0))
     newequip(i_npc_int_boost)
     tag(vypito,1)
     return 0
@@ -404,23 +404,23 @@ endif
 return 0
 
 on=@aftergetswing
-if(tag(neknockuj))!=1
+if ((tag(neknockuj))!=1)
   tag(neknockuj,1)
   return 0
 endif
-if tag(vypito)!=1
-  if (<hits> < <maxhits>/2) && rand(20)==1
+if (tag(vypito)!=1)
+  if ((<hits> < <maxhits>/2) && (rand(20)==1))
     hits=(hits)+(maxhits/3)
     emote("drinking potion")
     emote("regenerating!")
     return 0
   endif
-  if (<hits> < <maxhits>/2) && rand(12)==1
+  if ((<hits> < <maxhits>/2) && (rand(12)==1))
     newequip(i_npc_stoneskin_p)
     tag(vypito,1)
     return 0
   endif
-  if (<hits> < <maxhits>/2) && rand(12)==1
+  if ((<hits> < <maxhits>/2) && (rand(12)==1))
     newequip(i_npc_spellshield_p)
     tag(vypito,1)
     return 0
@@ -622,7 +622,7 @@ remove
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if rand(5)==1
+if (rand(5)==1)
   dorand(5)
     SAY("Priprav se na smrt!")
     SAY("Konec se blizi!")
@@ -644,7 +644,7 @@ SAY("Nyni zemrete!")
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if body!=c_gazer
+if (body!=c_gazer)
   events=-e_tele_to_target
   findid(i_attack_guard).remove
 endif
@@ -654,7 +654,7 @@ if !(tag(polymorfmdelay))
   tag(polymorfmdelay,<serv.time>+50)
   return 0
 endif
-if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>)
+if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
   dorand 11
     tag(doceho,c_eye_valorite_menavec) // menavcova verzia bez leapu
     tag(doceho,c_black_vdova) // netreba menit, nema ability
@@ -681,7 +681,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if body!=c_gazer
+if (body!=c_gazer)
   events=-e_tele_to_target
   findid(i_attack_guard).remove
 endif
@@ -691,7 +691,7 @@ if !(tag(polymorfmdelay))
   tag(polymorfmdelay,<serv.time>+50)
   return 0
 endif
-if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>)
+if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
   dorand 8
     tag(doceho,c_daemon_gold_menavec) // odstraneny reborn
     tag(doceho,c_fireant_queen_menavec) // odstraneny ovinovac
@@ -715,7 +715,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if body!=c_gazer
+if (body!=c_gazer)
   events=-e_tele_to_target
   findid(i_attack_guard).remove
 endif
@@ -725,7 +725,7 @@ if !(tag(polymorfmdelay))
 endif
 
 on=@aftergetswing
-if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>)
+if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
   dorand 9
     tag(doceho,c_cajun_lord_menavec) // odstranene summonenie malych cajunov
     tag(doceho,c_spider_elder_menavec) // odstraneny ovinovac
@@ -769,7 +769,7 @@ cont.flag_immobile=0
 
 on=@timer
 cont.action=""
-if !tag(secenznul)
+if !(tag(secenznul))
   topobj.body=(<tag(zmenimsena)>)
   topobj.name=Menivec
   if (<cont.body>==c_dragon_bone)
@@ -792,7 +792,7 @@ return 1
 
 [events e_pojistka_morf]
 on=@aftergetswing
-if (hits) < (maxhits/10)
+if ((hits) < (maxhits/10))
   tag(polymorfmdelay,<serv.time>+10000)
   findid(i_morfovatko).timer=0
 endif
@@ -810,7 +810,7 @@ on=@aftergetswing
 if !(tag(waitill))
   tag(waitill,1)
 endif
-if rand(30)==1 && (tag(waittill) < (<serv.time>)) && !(tag(isillusion))
+if ((rand(30)==1) && (tag(waittill) < (<serv.time>)) && !(tag(isillusion)))
   tag(waitill,<serv.time> + 600)
   src.sysMessage("Tvuj pohled se rozmazal.")
   invis
@@ -919,7 +919,7 @@ remove
 
 [events e_fire_lord]
 on=@aftergetswing
-if rand(12)==1
+if (rand(12) == 1)
   SAY("Heru Beleg Ruin Val")
   fireexplosion(10)
 endif
@@ -929,7 +929,7 @@ endif
 //    action=067
 //  endwhile
 //endif
-if rand(20)==1
+if (rand(20) == 1)
   SAY("Heru Ruin Val")
   newnpc(c_m_phoenix_fire)
   lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
@@ -972,7 +972,7 @@ endwhile
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if rand(15)==1
+if (rand(15) == 1)
   if (<eval tag(phoenix_fire_damage)>)
     fireexplosion(10,<eval tag(phoenix_fire_damage)>)
   else
@@ -988,8 +988,8 @@ on=@beforegeteffect
 
 [events e_phoenix]
 on=@aftergetswing
-if ((<hits>) < (<maxhits>/5)) && (maxhits) > (250)
-  if findid(i_a_curse) && rand(3)==1
+if (((<hits>) < (<maxhits>/5)) && (maxhits) > (250))
+  if ((findid(i_a_curse)) && (rand(3) == 1))
     return 0
   endif
   hits=maxhits/2
@@ -1011,7 +1011,7 @@ name=stone
 id=i_floor_stone_red
 
 ON=@STEP
-if !(src.isplayer) && src.memoryfindtype(0200).link.tag(stonehim)==1 && src.flag_invul!=1 && !src.findid(i_osklivejsmazse)
+if (!(src.isplayer) && (src.memoryfindtype(0200).link.tag(stonehim)==1) && (src.flag_invul!=1) && (!src.findid(i_osklivejsmazse)))
   tag(socha,<src.uid>)
   src.paralyze(-1)
   src.color=098b
@@ -1042,7 +1042,7 @@ on=@create
 color=0989
 
 on=@userdclick
-if src.isgm
+if (src.isgm)
   src.newequip(i_socha_zamerovatko)
   lastnew.link=<UID>
 else
@@ -1050,7 +1050,7 @@ else
 endif
 
 on=@step
-if link && !src.isgm
+if ((link) && (!src.isgm))
   link.tag(socha).action=""
   link.tag(socha).paralyze(-1)
   link.tag(socha).color=<link.tag(socha).oskin>
@@ -1072,7 +1072,7 @@ timer 20
 target "Zamer dlazku na kterou chces tuhle linknout."
 
 on=@targon_item
-if src.targ.id==i_socha_ps
+if (src.targ.id==i_socha_ps)
   link.link=<src.targ.uid>
   remove
   return 1
@@ -1119,7 +1119,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 
-if (rand(3)==1)
+if (rand(3) == 1)
   dorand 6
     SAY("Nemeli jste sem odvazovat!")
     SAY("Pripravte se na smrt!")
@@ -1132,7 +1132,7 @@ endif
 return 0
 
 on=@aftergetswing
-if (rand(30)==1)
+if (rand(30) == 1)
   SAY("Zhynes Strachem a Ohnem!!!")
   newnpc(c_daemon_fireps)
   lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
@@ -1142,7 +1142,7 @@ if (rand(30)==1)
   lastnewchar.flag_conjured=1
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=150
-elseif (rand(30)==1)
+elseif (rand(30) == 1)
   SAY("Zhynes Strachem!!!")
   newnpc(c_tarantule_fire)
   lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
@@ -1151,7 +1151,7 @@ elseif (rand(30)==1)
   lastnewchar.flag_conjured=1
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=60
-elseif (rand(100)==1)
+elseif (rand(100) == 1)
 //  SAY("Heru Beleg Ruth Val Ruin")
   SAY("Zhynes Ohnem!!!")
   newnpc(c_fire_lord_summon)
@@ -1161,7 +1161,7 @@ elseif (rand(100)==1)
   lastnewchar.flag_conjured=1
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=40
-elseif (rand(20)==1)
+elseif (rand(20) == 1)
   SAY("Heru Beleg Ruin Val")
   fireexplosion(10)
 endif
@@ -1220,16 +1220,16 @@ if (tag(firstspawn))
 endif 
  
 [function zaspawnujto] 
-if ((timer)==(-1)) || !(type==t_spawn_char) || (tag(spawned)==1)
+if (((timer)==(-1)) || !(type==t_spawn_char) || (tag(spawned)==1))
   return 1 
 endif 
-if (tag(firstspawn)) && !(tag(firstspawn_duration)) 
+if ((tag(firstspawn)) && !(tag(firstspawn_duration))) 
   tag(firstspawn_duration,<tag(firstspawn)>)
 endif 
 if (tag(firstspawn_duration))
   tag(firstspawn_duration,<tag(firstspawn_duration)>-1) 
 endif 
-if (tag(firstspawn_duration)==0) && !(tag(spawned)) 
+if ((tag(firstspawn_duration)==0) && !(tag(spawned)))
   finduid(#01a61f8).sysMessage("Tohle je <tag(firstspawn)> kolo.") 
   timer=1 
   tag(spawned,1) 
@@ -1263,7 +1263,7 @@ if (type==t_spawn_char)
 endif 
  
 [function removenpcs] 
-if !(isplayer) && ((flag_spawned)==(1)) 
+if (!(isplayer) && ((flag_spawned)==(1))) 
   flag_conjured=1 
   hits=0 
 endif
@@ -1295,7 +1295,7 @@ sector.allitems(resnpc)
 if tag(brain)==1
   return 0
 endif
-if !link && ((timer)!=(-1)) && id==i_corpse
+if ((!link) && ((timer)!=(-1)) && (id==i_corpse))
   var(resingnpcs).newnpc=<tag(living)>
   lastnewchar.go=<p>
   lastnewchar.tag(deathtag,1)
@@ -1324,14 +1324,14 @@ remove
 return 0
 
 [function spirit_drainmana]
-if (isplayer) && (distancefrom(<argv(0)>)<6) && !(isgm)
+if ((isplayer) && (distancefrom(<argv(0)>)<6) && !(isgm))
  mana=mana/2
 endif
 
 [events e_spectre]
 on=@aftergetswing
-if (src.isplayer) && rand(12)==1
-  while (memoryfindtype(0209c)) && (var(stopcreatingill)==4) && (isplayer)
+if ((src.isplayer) && (rand(12)==1))
+  while ((memoryfindtype(0209c)) && (var(stopcreatingill)==4) && (isplayer))
     if (memoryfindtype(0209c).link.isplayer)
       memoryfindtype(0209c).link.newnpc(<obody>)
       newnpc(<obody>)
@@ -1351,7 +1351,7 @@ if (src.isplayer) && rand(12)==1
       lastnew.p=<memoryfindtype(0209c).link.p>	
       lastnew.timer=5
       var(stopcreatingill,#+1)
-      if rand(5)==1 && !(tag(prohozen))
+      if ((rand(5)==1) && !(tag(prohozen)))
         p=<memoryfindtype(0209c).link.p>
         invis
         update
@@ -1386,15 +1386,15 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if !(act.findid(i_curse_drainhps)) && rand(10)==1
+if (!(act.findid(i_curse_drainhps)) && (rand(10)==1))
   act.newequip(i_curse_drainhp)
   lastnew.tag(lord,<UID>)
-elseif (act.findid(i_curse_drainhps)) && (hits<30000)
+elseif ((act.findid(i_curse_drainhps)) && (hits<30000))
   hits=<hits+(maxhits/20)>
 endif
 
 on=@aftergetswíng
-if !(src.findid(i_curse_givehps)) && rand(20)==1
+if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
   act.newequip(i_curse_givehps)
   lastnew.tag(lord,<UID>)
 endif
@@ -1402,7 +1402,7 @@ endif
 on=@beforedoeffect
 on=@beforegeteffect
 
-if !(src.findid(i_curse_givehps)) && rand(20)==1
+if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
   src.newequip(i_curse_givehps)
   lastnew.tag(lord,<UID>)
 endif
@@ -1431,7 +1431,7 @@ if !(findid(i_curse_givehps)
   events=-e_curse_givehps
   return 0
 endif
-if <act>==<findid(i_curse_givehps).tag(lord)> && ((findid(i_curse_givehps).tag(lord).hits)<30000)
+if ((<act>==<findid(i_curse_givehps).tag(lord)>) && ((findid(i_curse_givehps).tag(lord).hits)<30000))
   findid(i_curse_givehps).tag(lord).hits=<findid(i_curse_givehps).tag(lord).hits>+<var(ubrano)>
   var(ubrano,<eval (var(ubrano)/100)>)
 endif
@@ -1459,20 +1459,20 @@ topobj.sysMessage("Prokleti pozbylo na sile.")
 [events e_serpentdruid]
 
 on=@aftergetswing
-if ((hits)<(maxhits/2)) && !(findid(i_osklivejsmazse))
+if (((hits)<(maxhits/2)) && !(findid(i_osklivejsmazse)))
   emote("hissing.")
   body=<tag(had)>
   newequip(i_osklivejsmazse)
   lastnew.timer=2000
 endif
-if (src.obody==c_serpent_malej) && !(src.isplayer)
+if ((src.obody==c_serpent_malej) && !(src.isplayer))
   src.remove
 endif
 
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if rand(10)==1
+if (rand(10)==1)
   newnpc(c_serpent_malej)
   lastnewchar.p=<eval(<p_x>+{-2 2})>,<eval(<p_y>+{-2 2})>,<p_z>,<mapplane>
   lastnewchar.fame=0
@@ -1506,7 +1506,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@aftergetswing
 on=@beforedoeffect
-if (act.isplayer) && (rand(6)==1)
+if ((act.isplayer) && (rand(6)==1))
   newitem(<i_src_changer_parakrik>)
   lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
   say("Heru Ruth Dol Kel")
@@ -1517,7 +1517,7 @@ on=@beforegeteffect
 
 [events e_npc_manashield]
 on=@aftergetswing
-if (rand(15)==1) && !(findid(i_npc_manashield)) && ((mana)>=(<var(ubrano)>))
+if ((rand(15)==1) && !(findid(i_npc_manashield)) && ((mana)>=(<var(ubrano)>)))
   newequip(i_npc_manashield)
   lastnew.timer=16
 endif
@@ -1570,14 +1570,14 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-if !(safe.findid(i_npc_regeneration)) && ((<hits>)<(<maxhits>/2)) && !(tag(dontregenerate))
+if (!(safe.findid(i_npc_regeneration)) && ((<hits>)<(<maxhits>/2)) && !(tag(dontregenerate)))
  newequip(i_npc_regeneration)
  lastnew.timer=3
 endif
 
 on=@beforegeteffect
 
-if !(safe.findid(i_npc_regeneration)) && ((<hits>)<(<maxhits>/2)) && !(tag(dontregenerate))
+if (!(safe.findid(i_npc_regeneration)) && ((<hits>)<(<maxhits>/2)) && !(tag(dontregenerate)))
  newequip(i_npc_regeneration)
  lastnew.timer=3
 endif
@@ -1607,7 +1607,7 @@ if ((<cont.hits>)>(<cont.maxhits>))
  remove
 endif
 
-if (cont.findid(i_a_curse) && (rand(2)==1)
+if ((cont.findid(i_a_curse)) && (rand(2)==1))
  remove
 endif
 
@@ -1646,10 +1646,10 @@ endif
 if (src.isGM)
  src.sysMessage("Zdvojnasobi dmg na 140s")
  return 0
-elseif (src.isplayer) && !(src.findid(i_statue_Blessing)) && (timer<0)
+elseif ((src.isplayer) && !(src.findid(i_statue_Blessing)) && (timer<0))
  timer=600
  say("Socha se rozzarila.")
-elseif (src.isplayer) && !(src.findid(i_statue_Blessing)) && (timer>579)
+elseif ((src.isplayer) && !(src.findid(i_statue_Blessing)) && (timer>579))
 else
  src.sysMessage("Nic se nestalo.")
  src.sysMessage("Do dalsiho pozehnani zbyva <timer> vterin.")
@@ -1714,7 +1714,7 @@ on=@create
  color=633
  
 on=@step 
-if (src.isgm) || !(src.isplayer)
+if ((src.isgm) || !(src.isplayer))
  return 1
 endif
  src.sysMessage("<src.sex("Spadl si ze strechy a zabil se.","Spadla jsi ze strechy a zabila se")>") 
@@ -1722,8 +1722,8 @@ endif
 
 [events e_phoenix_10]
 on=@aftergetswing
-if ((<hits>) < (<maxhits>/5)) && (maxhits) > (250)
-  if findid(i_a_curse) && rand(3)==1
+if (((<hits>) < (<maxhits>/5)) && (maxhits) > (250))
+  if ((findid(i_a_curse)) && (rand(3)==1))
     return 0
   endif
   hits=<eval <eval maxhits/10>*9> // znizi to hp o 10%
@@ -1742,8 +1742,8 @@ on=@beforegeteffect
 
 [events e_phoenix_25]
 on=@aftergetswing
-if ((<hits>) < (<maxhits>/5)) && (maxhits) > (250)
-  if findid(i_a_curse) && rand(3)==1
+if (((<hits>) < (<maxhits>/5)) && ((maxhits) > (250)))
+  if ((findid(i_a_curse)) && (rand(3)==1))
     return 0
   endif
   hits=<eval <eval maxhits/4>*3> // znizi to hp o 25%
@@ -1759,3 +1759,5 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
 on=@beforegeteffect
+
+[eof]
