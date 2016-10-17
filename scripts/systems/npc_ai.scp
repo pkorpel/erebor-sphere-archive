@@ -1703,26 +1703,19 @@ on=@beforedoeffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-if (<hits> > <eval ((maxhits/4)*3)>)  // vice jak 75% HP
-  if ({1 35}==1)
-    attack(<src>)
-  endif
-elseif (<hits> > <eval maxhits/2>)  // vice jak 50% HP
-  if ({1 30})==1) 
-    attack(<src>)
-  endif
-elseif (<hits> > <eval maxhits/4>)  // vice jak 25% HP
-  if ({1 25}==1)  
-    attack(<src>)
-  endif
+if (<hits> > <eval ((maxhits/4)*3)>) // vice jak 75% HP
+  arg(chance,35)
+elseif (<hits> > <eval maxhits/2>)   // vice jak 50% HP
+  arg(chance,30)
+elseif (<hits> > <eval maxhits/4>)   // vice jak 25% HP
+  arg(chance,25)
 elseif (<hits> > <eval maxhits/10>)  // vice jak 10% HP
-  if ({1 20}==1)  
-    attack(<src>)
-  endif  
-else                                // mene jak 10% HP
-  if ({1 10}==1)  
-    attack(<src>)
-  endif
+  arg(chance,20)
+else // mene jak 10% HP
+  arg(chance,10)
+endif
+if ({1 <arg(chance)>}==1)
+  attack(<src>)
 endif
 
 

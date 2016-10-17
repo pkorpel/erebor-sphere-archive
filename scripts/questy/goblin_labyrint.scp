@@ -263,10 +263,8 @@ if (<itemExists(<link>)>)
     else
       link.more2=00   // zaseknuty spawn, resetuji
     endif
-    link.timer=1  // pro sichr
-  else
-    link.timer=1  // Goblin nezije, spawnuji ho
   endif
+  link.timer=1  // respawn Goblina za 1s
 endif
 update
 if (finduid(def_goblin_labyrint_memory_stone))  
@@ -315,7 +313,7 @@ if (src.isPlayer)
   endif 
   src.accMsg("Hrac <src.name>, UID: <src> dokoncil Goblin Labyrint (s bonusem <eval prize_bonus>%) a ziskal <exp_prize>expu a <gp_prize>gp.")
   src.gohome
-  src.classmessage("Blahopreji! Tva odmena byla presunuta do tve banky.")
+  src.classmessage("Blahopreji! Tva odmena byla presunuta do banky.")
   dorand 3  // zmena pozice finalni gaty do 3 ruznych rohu labyrintu
     p=5955, 375, 0, 35
     p=5931, 303, 0, 35
