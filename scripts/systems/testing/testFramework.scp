@@ -12,3 +12,14 @@ src.accMsg("TEST: SUCCESS - <args>")
 [function tst_error]
 src.redMessage("ERROR - <args>")
 src.accMsg("TEST: ERROR - <args>")
+
+/// restore level ///
+[function tst_alterLvl] // argv(0) - level to be applied
+if (<strlen(<tag(tstOrig_Lvl)>)> == 0)
+  tag(tstOrig_Lvl,<tag(level)>)
+endif
+tag(level,<argv(0)>)
+
+[function tst_restoreLvl]
+tag(level,<eval tag(tstOrig_Lvl)>)
+tag.remove(tstOrig_Lvl)

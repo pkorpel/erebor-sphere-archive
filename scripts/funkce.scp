@@ -3980,6 +3980,13 @@ else
   return 0
 endif
 
+[function f_canReach] //argv(0) - the item to reach, <uid> - the source that is being tested for reach
+if (<hval argv(0).topobj> != <uid>)
+  if (!f_canReachG(<argv(0)>) // the item is out of reach
+    return
+  endif
+endif
+
 [function f_canReachZ] // can reach item considering the Z position
 // argv(0) - max distance
 if (<distance> > <argv(0)>)
@@ -6658,15 +6665,16 @@ if(src.ischar)
   endif
   stamina=<eval (stamina-arg(reduce))>
 endif
+return
 
 /////////////////////////////////////////////////
 // L I N K S   A D D I N G   F R A M E W O R K //
 //              (c) GM Yavanna                 //
-//    reusable functions to adds links to      //
-//    a specific object                        //
+//    reusable functions to add links to       //
+//             specific objects                //
 /////////////////////////////////////////////////
 
-[function f_spawnLinks_add] //argv(0): the item, that should be added; argv(1): optional - name of the spawn tag
+[function f_spawnLinks_add] //argv(0): the item, that should be added; argv(1): optional - custom name of a spawn tag
 if (<argvcount> == 2)
   arg(tagName,<argv(1)>)
 else

@@ -151,8 +151,7 @@ page(0)
 resizepic(20,200,2620,<def_questDialog_width>,<def_questDialog_height>)
 gumppic(<def_questDialog_face_x>, <def_questDialog_face_y>, 03182) // podklad pod ksichtiky	
 gumppic(<eval <def_questDialog_face_x>+11>, <eval <def_questDialog_face_y>+7>, <argv(0)>) // ksichtik   3000-3164
-texta(220, 210, 52, <argv(1)>)     // Jmeno a titul pozdraveneho
-tag(textLines,1)
+newTextLine(220, 210, 52, <argv(1)>) // Jmeno a titul pozdraveneho
 tag(buttonsToExitCount,0)
 tag(pagesCount,0)
 tag(actualPage,0)
@@ -174,8 +173,7 @@ endif
 // creates big basic button from given arguments
 [function f_questDialog_baseButtCreate] //argv(0) - baseX; argv(1) - baseY; argv(2) - color; argv(3) - x odsazeni textu v buttonu; argv(4): popisek buttonu
 button(<argv(0)>, <argv(1)>, 0988, 0988, 0, <dialog_newPage(<argv(4)>)>, 0)
-setText(<newTextLine>,<argv(4)>)
-text(<eval <argv(0)>+<argv(3)>>, <eval <argv(1)>+2>, <argv(2)>, <lastTextLine>)
+newTextLine(<eval <argv(0)>+<argv(3)>>, <eval <argv(1)>+2>, <argv(2)>, <argv(4)>)
 
 // reserves new page position, creates the text link to this new page and updates the info tags of this gump
 [function dialog_newPage] //argv(0) - internal page name (the name is a simplified access point)
@@ -229,6 +227,11 @@ while (strcmpi(<tag(buttonToExit[<arg(i)>])>,<argv(0)>)) //search until the name
 endwhile
 return(<arg(i)>) // return found button number
 
+// needs to be called upon a dialog object if it's being re-opened again in the 'button' section. In that case,
+// the object is not discarded and is reused with all its tags!
+[function clearTextLine]
+tag(textLines,0)
+
 // counts the next free text position, returns its value and increments the textLines Counter
 // if the arguments aren't empty, it also writes new text line places new text into the position
 // argv(0) - x-position
@@ -236,35 +239,37 @@ return(<arg(i)>) // return found button number
 // argv(2) - color
 // argv(3) - text
 [function newTextLine] 
-tag(textLines,<eval <tag(textLines)>+1>)
+arg(currentPos,<eval <tag(textLines)>>)
+tag(textLines,<eval <arg(currentPos)>+1>)
 if (strlen(<args>))
   if (<argvcount> != 4)
     src.accmsg("Warning: Dialog <name> passes invalid number of arguments to the newTextLine function")
-    return<eval tag(textLines)>
+    return<arg(currentPos)>
   endif
-  settext(<tag(textLines)>,"<argv(3)>")
-  text(<argv(0)>,<argv(1)>,<argv(2)>,<tag(textLines)>)
+  settext(<arg(currentPos)>,"<argv(3)>")
+  text(<argv(0)>,<argv(1)>,<argv(2)>,<arg(currentPos)>)
 endif
-return<tag(textLines)>
+return<arg(currentPos)>
 
-// argv(0) -  x-position
+// argv(0) - x-position
 // argv(1) - y-position
 // argv(2) - text length
 // argv(3) - argTxt number (the result acquirable from the buttons section
 // argv(4) - default text value
 [function newTextEntry]
 setText(newTextLine,"<argv(4)>")
-textEntry(<argv(0)>,<argv(1)>,<argv(2)>,<d_def_radek_vyska>,<d_def_writecolor>,<argv(3)>,<tag(textLines)>)
+textEntry(<argv(0)>,<argv(1)>,<argv(2)>,<d_def_radek_vyska>,<d_def_writecolor>,<argv(3)>,<lastTextLine>)
 
-[function lastTextLine] // the number of last added Text
-return<eval tag(textLines)>
+[function lastTextLine] // the number of the last added Text
+return<eval (<tag(textLines)>-1)>
 
 //saves lastTextLine under a given name
 //returns the textLine number which was assigned to this text
 [function saveTextLine] //argv(0) the internal name of this TextLine
+arg(lastLine,<eval (<tag(textLines)>-1)>)
 tag(savedTextsCount,<eval tag(savedTextsCount)+1>)
-tag(savedText[<eval tag(savedTextsCount)>],"<argv(0)>,<eval tag(textLines)>") // saves the number of the last textline
-return<eval tag(textLines)>
+tag(savedText[<eval tag(savedTextsCount)>],"<argv(0)>,<arg(lastLine)>") // saves the number of the last textline
+return<eval arg(lastLine)>
 
 //saves a button number that corresponds to the given name
 [function getTextLine] //argv(0) the internal name of this TextLine
