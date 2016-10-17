@@ -28,6 +28,7 @@ TYPE=t_book_shrink
 CATEGORY=Noe
 SUBSECTION=Knihy receptu
 DESCRIPTION=Recept Shrink
+
 ON=@Create 
 COLOR=0039
 
@@ -40,18 +41,21 @@ src.SYSMESSAGE=K vyrobe je treba miti u sebe knihu receptu.
 [ITEMDEF i_book_bottle]
 NAME=Receptura Bottle
 ID=i_book_sm_pub
-
 TYPE=t_book_bottle
 
 CATEGORY=Noe
 SUBSECTION=Knihy receptu
 DESCRIPTION=Recept Bottle
+
 ON=@Create 
 COLOR=0036
 ON=@userDCLICK
 src.SYSMESSAGE=Recept na alchymistovu lahvicku:	Skillova potreba: Tinkering 75, Surovina: Sklovina, K vyrobe je treba miti u sebe: 1. Recepturu Bottle,	2. Formu na vyrobu lahvicek z kvalitniho dreva Oak., 3. Nastroj tinkera. 
 src.SYSMESSAGE=Vyroba formy: Skillova potreba: Carpentry 75, Surovina: Oak logy, - Vyroba skloviny: Skillova potreba: Mining 51, Surovina: Kremicity pisek
 
+[typedef t_book_bottle]
+
+[typedef t_book_shrink]
 
 ////////////////////////////////////////////////////////////////////////////////////
 
