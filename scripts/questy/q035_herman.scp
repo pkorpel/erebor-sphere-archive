@@ -247,7 +247,7 @@ argo.dialog_Page("Brouci?")
        argo.setText(<argo.newTextLine>,"Tak uz jsi tu zas?! Mno nevadi, mam pro tebe posledni praci.")
        argo.questDialog_HTMLGUMP
        argo.setText(argo.newTextLine,"O co jde?")
-       argo.questDialog_addResponse(0,0,1,"q035_herman_19)
+       argo.questDialog_addResponse(0,0,1,"q035_herman_19")
      else
        arg(lowlvl,1)
        argo.setText(<argo.newTextLine>,"Na to si prilis <src.sex(slaby,slaba)>. Ukol na ktery te potrebuji je velmi obtizny tak se prvni na nej dobre priprav.")
