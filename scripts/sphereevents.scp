@@ -1115,7 +1115,7 @@ if (act.type==t_spell)
 endif
 
 on=@itemequip  
-if(act.type==t_container)
+if (act.type==t_container)
  accmsg("equipped uid=<?act?> (<?act.amount?> <?act.name?> with <?act.rescount?> items) on self at <?p?> (<?act.region.name?>)")
 else
  accmsg("equipped uid=<?act?> (<?act.amount?> <?act.name?>) on self at <?p?> (<?act.region.name?>)")
@@ -1124,7 +1124,7 @@ endif
 on=@itemPICKUP_PACK
 if (act.cont.isevent(t_lockeditem))//proti vykradani zamcenych truhel
   if (act.cont.f_lockeditem)
-    if(act.type==t_container)
+    if (act.type==t_container)
       accmsg("ZLODEJ !!! picked up uid=<?act?> (<?act.amount?> <?act.name?> with <?act.rescount?> items) from container uid=<?act.cont.uid?> (<?act.cont.name?>) topobj=<?act.topobj.uid?> (<?act.topobj.name?>)")
     else
       accmsg("ZLODEJ !!! picked up uid=<?act?> (<?act.amount?> <?act.name?>) from container uid=<?act.cont.uid?> (<?act.cont.name?>) topobj=<?act.topobj.uid?> (<?act.topobj.name?>)")
@@ -1140,7 +1140,7 @@ Elseif (act.type==t_musical)
     sysMessage("Dovednost provokace se pouziva prikazem .provo")
   endif
 endif
-if(act.type==t_container)
+if (act.type==t_container)
   accmsg("picked up uid=<?act?> (<?act.amount?> <?act.name?> with <?act.rescount?> items) from container uid=<?act.cont.uid?> (<?act.cont.name?>) topobj=<?act.topobj.uid?> (<?act.topobj.name?>)")
 else
   accmsg("picked up uid=<?act?> (<?act.amount?> <?act.name?>) from container uid=<?act.cont.uid?> (<?act.cont.name?>) topobj=<?act.topobj.uid?> (<?act.topobj.name?>)")
@@ -1151,7 +1151,7 @@ on=@ItemPickup_Ground //proti injection a podobnym
 if ((act.attr_movenever)||(act.attr_static))&&(ISGM==0)
   RETURN 1 
 endif
-if(act.type==t_container)
+if (act.type==t_container)
   accmsg("picked up uid=<?act?> (<?act.amount?> <?act.name?> with <?act.rescount?> items) from ground at <?act.p?> (<?act.region.name?>)")
 else
   accmsg("picked up uid=<?act?> (<?act.amount?> <?act.name?>) from ground at <?act.p?> (<?act.region.name?>)")
