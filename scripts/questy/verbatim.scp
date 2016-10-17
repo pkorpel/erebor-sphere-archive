@@ -604,10 +604,10 @@ endif
 on=@aftergetswing
 if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>)
   dorand 8
-    tag(doceho,c_snow_spirit)
+    tag(doceho,c_spirit_snow)
     tag(doceho,c_spider_elder)
     tag(doceho,c_gladiator_lord_snow)
-    tag(doceho,c_snow_titan_lord)
+    tag(doceho,c_titan_lord_snow)
     tag(doceho,c_golem_frost)
     tag(doceho,c_excelent) //tag(doceho,c_ptak_ohnivak) -> neexistujici ID
     tag(doceho,c_minotaur)
