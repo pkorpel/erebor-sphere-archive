@@ -18,6 +18,8 @@
 // the results will be written in sphere traces
 var(tst_suppress_successfull,"")
 tst_mistri
+tst_weekly
+
 
 ////////////////////////////////////////////////////////////
 // FILE:  mistri.scp
@@ -29,6 +31,7 @@ test_mistr_craft_computeExp
 [function test_mistr_craft_computeExp]
 arg(orig_Lvl,<src.tag(level)>)
 arg(orig_nastaveni_craftexp_gold,<nastaveni_craftexp_gold>)
+src.tst_alterLvl(0)
 src.tag(level,0)
 arg(result,<f_mistr_craft_computeGp(1)>)
 if (<arg(result)> < 1)
@@ -57,3 +60,17 @@ endif
 
 src.tag(level,<arg(origLvl)>)
 var(nastaveni_craftexp_gold,<arg(orig_nastaveni_craftexp_gold)>)
+
+
+////////////////////////////////////////////////////////////
+// FILE:  weekly.scp
+////////////////////////////////////////////////////////////
+[function tst_weekly]
+var(tst_suppress_successfull,!0<argv(0)>)
+test_weekly_setQuest
+
+[function test_weekly_setQuest]
+f_weekly_setQuest(0,low)
+//f_weekly_setQuest(0,medium)
+//f_weekly_setQuest(0,high)
+tst_success("WEEKLY setQuest passed")
