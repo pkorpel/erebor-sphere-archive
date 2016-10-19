@@ -32,9 +32,9 @@ f_q000_checkOldTags
 f_q030_checkOldTags
 
 [defnames questy_seznam]
+questMenu_questStone  0400416B7
 questMenu_color_questActive        52
 questMenu_color_questInactive      1000
-questMenu_questStone  0400006F8
 questMenu_rows  53
 //          |     Nazev questu     |           dialogName           |  1=qtag, 0=tag  |  relevantni tagy
 questMenu[0]  Zemedelec Borek           ,d_questy_borek                     ,1         ,gq002, mq002

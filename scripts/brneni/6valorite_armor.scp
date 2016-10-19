@@ -323,8 +323,6 @@ tdata1=6
 ON=@Create
 shieldcreate(Valorite,ring)
 
-on=@equip
-tdata1=6
 
 [itemdef i_Valorite_RINGMAIL_gorget]
 id=i_leather_gorget

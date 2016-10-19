@@ -3024,7 +3024,8 @@ addspell=s_magic_reflection
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-ITEM=i_goldITEM=random_FOOD,{0 1}
+ITEM=i_gold
+ITEM=random_FOOD,{0 1}
 ITEM=RANDOM_REAGENT,{40 45}
 
 /////////////////////////////////

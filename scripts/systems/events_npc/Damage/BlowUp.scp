@@ -1,0 +1,226 @@
+// staci dat npc tento event a vse ostatni je jiz zabudovane ve funkci
+[events e_npc_blow_up]
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@beforegetswing
+if (!(src.isPlayer))  // nenecham se mlatit ani sumony, ani jinymi npc
+  src.removefight
+  src.tag(combatSource,<tag(npc_blow_up_target)>)
+  src.tag(combatTarget,<tag(npc_blow_up_target)>)
+  src.attack(<tag(npc_blow_up_target)>)  // At to co mlati do me, utoci na co chci ja
+  removefight
+  attack(<tag(npc_blow_up_target)>) // utocim na svuj posledni cil
+  return
+endif
+on=@aftergetswing
+if (!(src.isPlayer) || (src.isGM))
+  return 0
+else
+  if (<hits> < <eval maxhits/10>)  // ma pod 10% hp. Bouchne
+    f_npc_blow_up
+    return 0
+  endif
+endif
+
+if (<distancefrom(<src>)> < 2)  // kdyz utocnik mlati na blizko, bouchnu
+  giveitem(i_NPC_Blow_uper)
+else
+  f_npc_blow_up_rage  // kdyz mlati na dalku, zjistim jestli je bliz nez muj aktualni cil a jestli ano, zmenim attack na nej
+endif
+
+on=@beforedoeffect
+on=@beforegeteffect
+on=@HitTry
+if (act.isPlayer)         // pokousim se prastit hrace = jsem u nej = bouchnu
+  giveitem(i_NPC_Blow_uper)
+else                     // mlatim do monstra nebo sumona a to nechci
+  removefight
+  attack(<tag(npc_blow_up_target)>) // utocim na svuj posledni cil
+  return 0
+endif
+
+ON=@npcseenewplayer
+if (src.isPlayer)       // novej hrac na dosah, je bliz nez aktualni cil? jestli ano jdu po nem
+  f_npc_blow_up_rage
+endif
+
+on=@Death               
+f_blow_up_blood_stain    // efekt krve v miste, kde byvala mrtvola
+
+on=@DeathCorpse
+if (itemExists(<argo>))
+  argo.remove
+  return 1
+endif
+
+[function f_npc_blow_up_rage]
+if (<eval tag(npc_blow_up_target)> == 0)  // prvotni nastaveni cile
+  tag(npc_blow_up_target,<src>)
+  attack(<src>)
+  return
+endif
+
+if (<distancefrom(<src>)> < <distancefrom(<tag(npc_blow_up_target)>)>)
+  tag(npc_blow_up_target,<src>)  // Utocim na utocnika protoze je blize
+  attack(<src>)
+endif
+
+[function f_npc_blow_up]
+if (<eval tag(blow_up_yet)> == 0)  // jeste nevybouchl
+  tag(blow_up_yet,1) // aby se funkce nespustila vicekrat
+  newitem(i_blow_up_damage_dealer)
+  lastnew.p=<p>
+  lastnew.link=(<uid>)
+  var(blowupedmonster,<UID>)
+endif
+
+[ITEMDEF i_NPC_Blow_uper]
+ID=i_memory
+NAME=Blow Uper
+TYPE=T_EQ_SCRIPT
+
+ON=@Equip
+topobj.color=098c
+//topobj.flag_freeze=1
+TIMER=1
+ATTR=094
+MORE1=2
+
+ON=@Timer
+if (more1==2)  // Spustil se timer na Blow UP
+  more1=1
+  timer=1
+  topobj.anim(11)
+  return 1
+elseif (more1==1)  // BOOOOOOM !!!!
+  topobj.f_npc_blow_up
+  more1=0
+  timer=0
+  return 1
+elseif (more1==0)
+  topobj.hits=0   // zabije ogra, jestli jeste zije
+endif
+                        
+[itemdef i_blow_up_damage_dealer]
+id=i_memory
+type=t_eq_script
+name=Blow up damage dealer
+
+on=@create
+timer=0
+tag(blow_up_body_part,6)  // nema definovane co je, proto radsi nebude hazet casti tela
+
+
+on=@timer
+if (<strlen(<link.tag(monstertype)>)>)
+  if (<strlen(<return_nth(1,<link.tag(monstertype)>)>)>==<strlen(humanoid)>)
+    tag(blow_up_body_part,<eval {0 5}>)  // Je to humanoid, budeme hazet casti tela
+  endif
+endif
+sector.allchars(f_npcBlowUp_effect(<uid>))
+
+
+[function f_npcBlowUp_effect]
+if (isPlayer)
+  if ((isGM) || (isDead))
+    return 0
+  endif
+endif
+if (<distancefrom(<var(blowupedmonster)>)> > 6)  // do 6ti poli dostane ranu vzdy
+  if (<distancefrom(<var(blowupedmonster)>)> < 9) // 7-8 poli od centra vybuchu dostane ranu jen v 1/3 pripadu
+    if !({1 3} == 2)
+      return 0
+    endif
+  else
+    return 0  
+  endif             
+endif
+if (<uid> == <var(blowupedmonster)>)
+  effect(3,i_fx_explode,6,15,1,098c,0)
+  sfx(285)
+  hits=0
+  return 0
+endif
+if ((f_canseelos(<argv(0)>)) && !(isgm) && !(flag_invisible==1)  && !(flag_insubstantial==1) && !(flag_hidden==1))
+  arg(damage,<eval (16*<eval 9-<distancefrom(<var(blowupedmonster)>)>>)>)  // vypocet dmg v zavislosti na tom, jak deleko je cil od epicentra vybuchu
+  if (npc)
+    //events=+e_npc_blow_up  // kdybychom nekdy chteli aby vybuch nakazil ostatni npc v dosahu
+    arg(damage,#*10)  // silne proti ostatnim npc
+  endif
+
+  src=<argv(0).link>  // dulezite pro nasledujici efekty litajicich casti tela
+  if (<eval finduid(<argv(0)>).tag(blow_up_body_part)> < 6)  // cast tela
+    if (<eval finduid(<argv(0)>).tag(blow_up_body_part)> == 0)
+      newitemsafe(i_flesh_left_arm)
+      effect(0,i_flesh_left_arm)
+    elseif (<eval finduid(<argv(0)>).tag(blow_up_body_part)> == 1)
+      newitemsafe(i_flesh_head)
+      effect(0,i_flesh_head)
+    elseif (<eval finduid(<argv(0)>).tag(blow_up_body_part)> == 2)
+      newitemsafe(i_flesh_right_leg)
+      effect(0,i_flesh_right_leg)
+    elseif (<eval finduid(<argv(0)>).tag(blow_up_body_part)> == 3)
+      newitemsafe(i_flesh_torso)     
+      effect(0,i_flesh_torso) 
+    elseif (<eval finduid(<argv(0)>).tag(blow_up_body_part)> == 4)
+      newitemsafe(i_flesh_right_arm)
+      effect(0,i_flesh_right_arm)
+    elseif (<eval finduid(<argv(0)>).tag(blow_up_body_part)> == 5)
+      newitemsafe(i_flesh_left_leg)
+      effect(0,i_flesh_left_leg)
+    endif
+    finduid(<argv(0)>).tag(blow_up_body_part,#+1)
+  else // uz nemam dalsi cast tela, proto krev 
+    effect(0,02c81)
+    dorand 5
+      newitemsafe(i_blood)
+      newitemsafe(0122b)
+      newitemsafe(0122c)
+      newitemsafe(0122d)
+      newitemsafe(0122e)
+    enddo     
+  endif
+  lastnew.color=098c
+  lastnew.p=<p>
+  lastnew.attr=010
+  lastnew.timer={90 120}
+  
+  damage_noresponse(<arg(damage)>,dam_god)
+
+  if (isPlayer)
+    sysMessage("Zasahl te kus tela")
+  endif
+endif                         
+
+[function f_blow_up_blood_stain]
+f_blood_stain(i_blood,0,0)
+f_blood_stain(0122D,-1,-1)
+f_blood_stain(i_blood_smear,1,-1)
+f_blood_stain(0122C,-1,0)
+f_blood_stain(0122D,1,0)
+f_blood_stain(0122B,0,1)
+f_blood_stain(0122B,2,1)
+f_blood_stain(0122B,-2,2)
+f_blood_stain(0122C,0,-2)
+
+[function f_blood_stain]  // argv(0) - DispID, argv(1) + argv(2) - X_Y position from src 
+src.newitemsafe(<argv(0)>)
+lastnew.morep=<P>
+lastnew.p=<P>
+lastnew.move=<argv(1)>,<argv(2)>
+lastnew.timer=120
+lastnew.attr=010
+lastnew.color=098c
+
+
+
+[function whoareyou]
+if (<strlen(<tag(monstertype)>)>)
+  say("Jsem <return_nth(1,<tag(monstertype)>)>")
+  return"<return_nth(1,<tag(monstertype)>)>" 
+else
+  retun 0
+endif
+[eof]
+

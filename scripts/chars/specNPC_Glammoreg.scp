@@ -871,7 +871,8 @@ ARMOR=85
 moverate=3
 
 resources=9 i_ribs_raw, 8 i_reag_daemon_bone
-FOODTYPE=15 t_meat_rawBLOODCOLOR=colors_green
+FOODTYPE=15 t_meat_raw
+BLOODCOLOR=colors_green
 
 TEVENTS=e_monster
 TEVENTS=e_character
@@ -1590,6 +1591,7 @@ maxmana=0
 
 tag.experience=<eval {70.0 75.0}>
 
+tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
@@ -1672,6 +1674,7 @@ Tag.explode_dmg=50
 tag.npc_port_timer=10
 tag(npc_port_distance,9)
 
+tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>

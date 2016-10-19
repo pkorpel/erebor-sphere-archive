@@ -12,28 +12,28 @@
 //VERSION=0.54
 
 
-[typedef 1003]
+[typedef T_TRAPCHEST]
 // Trapped chest.
-defname=T_TRAPCHEST
+//defname=T_TRAPCHEST
 ON=@UserDClick
-  if <src.tinkering>>=300
-    src.message("You disarm the trap and open the chest.")
+if <src.tinkering>>=300
+  src.message("You disarm the trap and open the chest.")
+  type=t_container
+  return 0
+else
+  src.message You fail to disarm the trap.
+  if rand(2)
+    src.message("The trap does not go off. Lucky.")
     type=t_container
     return 0
   else
-    src.message You fail to disarm the trap.
-    if rand(2)
-      src.message("The trap does not go off. Lucky.")
-      type=t_container
-      return 0
-    else
-      effect=3,i_fx_explode
-      soun=snd_SPELL_EXPLOSION
-      src.damage_noresponse(<eval {20 35}>,dam_god)
-      type=t_container
-      return 0
-    endif
+    effect=3,i_fx_explode
+    soun=snd_SPELL_EXPLOSION
+    src.damage_noresponse(<eval {20 35}>,dam_god)
+    type=t_container
+    return 0
   endif
+endif
 
 
 [itemdef I_HAIR_TIE]

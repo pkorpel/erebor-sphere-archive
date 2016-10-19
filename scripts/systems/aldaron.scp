@@ -4173,7 +4173,7 @@ if (<tag(power)> < 1)||(<arg(dmg)> < 1)||(cont.isdead) //neni skit, likvidovat
   remove
   return 1
 endif
-reduceStamina(<arg(dmg)>)
+cont.reduceStamina(<arg(dmg)>)
 cont.sysMessage("Citis, jak te zasah ohnem vycerpava!")
 cont.effect(3,i_fx_glow_spike,3,16,0)
 

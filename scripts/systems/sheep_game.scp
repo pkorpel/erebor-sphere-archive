@@ -723,6 +723,7 @@ on=@beforedoeffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
+on=@Created
 
 [events e_sheep_game_player]
 on=@spellcast

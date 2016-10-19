@@ -3507,7 +3507,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dung snagum Level 2]
+[AREA Dung snagum deleted]
 GROUP=Dungeon Dug snagum
 P=4850, 434
 RECT=4707,402,4916,583
@@ -3527,7 +3527,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dung snagum Level 3]
+[AREA Dung snagum Level 2]
 GROUP=Dungeon Dug snagum
 P=5072, 343
 RECT=4923,250,5078,389
@@ -3537,7 +3537,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dung snagum Level 4]
+[AREA Dung snagum Level 3]
 GROUP=Dungeon Dug snagum
 P=4859, 185
 RECT=4727,162,4878,367
@@ -6331,6 +6331,7 @@ EVENTS=r_playerhouse, r_nosumon
 [AREA dum 117]// Minas Tirith
 P=5661,3982,-80
 RECT=5655,3964,5666,3981
+RECT=5662,3981,5663,3982
 tag.housenumber=117
 FLAGS=01192
 RAINCHANCE=00  

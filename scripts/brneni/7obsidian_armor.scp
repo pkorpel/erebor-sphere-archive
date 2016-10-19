@@ -330,8 +330,6 @@ tdata1=7
 ON=@Create
 shieldcreate(Obsidian,ring)
 
-on=@equip
-tdata1=7
 
 [itemdef i_Obsidian_RINGMAIL_gorget]
 id=i_leather_gorget

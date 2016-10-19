@@ -900,6 +900,90 @@ ITEM=i_gold
 ////////////////////////////////////////////////////
 
 //[CHARDEF 01040]
+[CHARDEF c_ogre_suicider]
+ID=c_OGRE
+NAME=Zlobr Sebevrah
+SOUND=snd_MONSTER_OGRE1
+ICON=i_pet_OGRE
+CAN=MT_WALK|MT_USEHANDS|MT_RUN|MT_FIRE_IMMUNE
+
+attack=50
+ARMOR=85
+moverate=7
+
+RESOURCES=10 i_ribs_raw
+FOODTYPE=
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_roundattack_pullall
+TEVENTS=e_npc_blow_up
+
+CATEGORY=Monsters
+SUBSECTION=Ettins, Ogres, Titans
+DESCRIPTION=Ogre Suicider
+
+ON=@Create
+Name=#NAMES_OGRE
+COLOR=0993
+NPC=BRAIN_MONSTER
+FAME={100 2000}
+KARMA={-4000 -4999}
+
+STR=1100
+DEX=500
+INT=40
+
+maxhits={2000 2500}
+maxstam={120 190}
+maxmana=0
+
+tag.experience=<eval {150.0 185.0}>
+
+tag.roundattack_damage=5,10   //dmg od - do   (umyslne tak maly)
+tag.roundattack_time=5,20     //prodleva od - do v sek
+tag.roundattack_chance=1000     //100%
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg 
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
+
+tag(monstertype,humanoid,70)
+
+tag.weapflag=dam_physical|dam_blunt
+
+//other resists
+tag(resist_poison,00)
+tag(resist_para,1000)  // imunni na paru
+tag(resist_summon,1000)  // sumoni mu nevezmou
+tag(resist_bleed,00)  //krvaci hodne
+
+tag(resist_sharp,-550)
+tag(resist_slash,-250)   // sekery
+tag(resist_pierce,-250)
+tag(resist_blunt,800)
+
+tag(resist_fire,200)
+tag(resist_elect,200)
+tag(resist_cold,00)
+
+PARRYING=100.0
+WRESTLING=120.0
+resist=80.0
+TACTICS=150.0
+SpiritSpeak=45.0
+PROVOCATION=200.0   // Nejde ani provnout
+peacemaking=200.0   // ani uspat
+
+ITEMnewbie=i_monster_create
+                                                                                 
+ON=@NPCRestock
+ITEM=i_gold
+
+////////////////////////////////////////////////////
 [CHARDEF c_ogre_lord]
 ID=c_OGRE
 NAME=Zlobr Valecnik

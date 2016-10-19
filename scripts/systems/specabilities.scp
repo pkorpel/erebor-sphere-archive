@@ -977,10 +977,6 @@ if (profession!=class_priest)&&(src.isgm==0)
   src.redmessage(Nemuzes pouzit tuto schopnost.)
   return 0
 endif
-if (memoryfindtype(01000).link.UID.AGE<10)
-  src.sysmessage("Tva duse je jeste prilis neklidna")
-  return 0
-endif
 if !(flag_dead)
   src.redmessage(Jsi nazivu, nepotrebujes se ozivovat.)
   return 0
@@ -988,7 +984,11 @@ elseif (<serv.time><<tag(priest_next_selfres)>)&&(src.isgm==0)
   src.sysMessage("Pokusit se o sebeoziveni se muzes za <?eval (<tag.priest_next_selfres>- <serv.time>)/600?> minut, <?eval ((<tag.priest_next_selfres>- <serv.time>)-(((<tag.priest_next_selfres>-<serv.time>)/600)*600))/10 ?> sekund.")
   return 0
 endif
-if !(findid(i_svice_zivota_lit)) & (src.isgm==0)
+if (memoryfindtype(01000).link.UID.AGE<10)
+  src.sysmessage("Tva duse je jeste prilis neklidna")
+  return 0
+endif
+if !(findid(i_svice_zivota_lit)) && (src.isgm==0)
   src.sysmessage("Tva svice jiz vyhasla.")
   return 0
 endif  
@@ -3115,6 +3115,9 @@ return 1
 on=@deathcorpse
 argo.remove //odstranit
 
+on=@Created
+on=@beforegetswing
+
 [events e_hypnotising_mystic] //player
 on=@death
 tag(po_zasahu,5) //vrati se s malo HP
@@ -5086,6 +5089,7 @@ endif
 on=@aftergetswing
 on=@beforedoeffect
 on=@beforegeteffect
+on=@beforegetswing
 
 [function CountArmorByMaterial]  //spocte obranu dle materialu armoru (verite, valorite) bez ohledu na jeho typ (plate/studded) -> nepocita se krk (kvuli znevyhodneni bone)
 //layers and influence:

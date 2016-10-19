@@ -57,6 +57,7 @@ var(ubrano,<var(ubrano)>-<arg(uber)>)
 on=@aftergetswing
 on=@beforedoeffect
 on=@beforegeteffect
+on=@beforegetswing
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -340,7 +341,7 @@ else
 endif 
 if (<finduid(<tag(mrtvola)>).tag(rozrezano)>) //je li nalezene telo rozrezane
   if (<strlen(<tag(lastmurderbyf)>)>)
-    if (tag(lastmurderbyf).isPlayer) // the murderer is a player and exists
+    if (safe finduid(<tag(lastmurderbyf)>).isPlayer) // the murderer is a player and exists
       finduid(<tag(lastmurderbyf)>).sysMessage("Mas stesti, zes telo <finduid(<tag(lastmurderbyf)>).sex("rozrezal","rozrezala")>!")
     endif
   endif
@@ -368,7 +369,7 @@ else
   revivedNPC.sound=snd_spell_polymorph 
   vrah.p=<vrah.tag(oldp)> //ozivovace NPCcek zpatky domu
   if (<strlen(<tag(lastmurderbyf)>)>)
-    if (tag(lastmurderbyf).isPlayer) // the murderer is a player and exists
+    if (safe finduid(<tag(lastmurderbyf)>).isPlayer) // the murderer is a player and exists
       finduid(<tag(lastmurderbyf)>).sysMessage("Monstrum vstalo z mrtvych!")
     endif
   endif
@@ -1209,7 +1210,9 @@ on=@create
 timer=0
 
 on=@timer
-sector.allchars(f_npcCurseMana_effect(<UID>))
+if (<eval link.hits> > 0) 
+  sector.allchars(f_npcCurseMana_effect(<UID>))
+endif
 
 [function f_npcCurseMana_effect]
 if (isPlayer)
@@ -1292,7 +1295,9 @@ on=@create
 timer=0
 
 on=@timer
-sector.allchars(f_npcCursestam_effect(<UID>))
+if (<eval link.hits> > 0) 
+  sector.allchars(f_npcCursestam_effect(<UID>))
+endif
 
 [function f_npcCursestam_effect]
 if (isPlayer)
@@ -1535,5 +1540,5 @@ if ({1 1000} <= <countdown_chance>)
     endif
   endif  
 endif
- 
+
 [EOF]

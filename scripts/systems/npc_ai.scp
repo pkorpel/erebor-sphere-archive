@@ -416,6 +416,10 @@ on=@beforegeteffect
 
 on=@beforegetswing
 on=@aftergetswing
+if (<eval src.int> > {100 1250})  // cim je utocnik chytrejsi, tim je lakavejsi pro oko na utok
+  attack(<src>)
+endif
+
 if ( (<eval {1 100}> > 85) && (is_physical) )
  var(ubrano,0)
  src.sysmessage("Tva rana se od <name> odrazila!")
@@ -1250,6 +1254,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
+on=@beforedoeffect
 
 //[EVENTS e_hodici_bombak]//kdokoli tohle stvoril, opravit nez to znova bude vypusteno.
 //
@@ -1691,6 +1696,31 @@ cont.attack(<victim>)
 cont.update
 return 1
 
+
+[events e_golem]
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@beforedoeffect 
+on=@beforegeteffect
+on=@beforegetswing
+on=@aftergetswing
+if (<hits> > <eval ((maxhits/4)*3)>) // vice jak 75% HP
+  arg(chance,35)
+elseif (<hits> > <eval maxhits/2>)   // vice jak 50% HP
+  arg(chance,30)
+elseif (<hits> > <eval maxhits/4>)   // vice jak 25% HP
+  arg(chance,25)
+elseif (<hits> > <eval maxhits/10>)  // vice jak 10% HP
+  arg(chance,20)
+else // mene jak 10% HP
+  arg(chance,10)
+endif
+if ({1 <arg(chance)>}==1)
+  attack(<src>)
+endif
+
+
 // promazany eventy 
 [events e_snowmonster]
 [events e_undead]
@@ -1701,7 +1731,6 @@ return 1
 [events e_blood]
 [events e_daemon]
 [events e_reaper]
-[events e_golem]
 [events e_spirit]
 [events e_humanoid]
 [events e_spider]

@@ -205,7 +205,7 @@ tag.contentscount=0
 tag.fail_msg="A u Valar! ... Ta srnka nema oci.. Co to tady v tech bulvach leze ? No fuj ..."
 
 ON=@CollectorCheck
-
+ON=@UserDeath
 
 
 ///////////////////////////////////////////////////////

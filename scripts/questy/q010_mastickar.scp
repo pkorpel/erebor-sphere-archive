@@ -20,6 +20,7 @@ tag.value_to_check=100
 tag.contentscount=0
 
 ON=@CollectorCheck
+ON=@UserDeath
 //SPEECH//
 
 [speech spk_q010_mastickar]

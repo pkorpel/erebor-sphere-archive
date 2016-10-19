@@ -767,7 +767,7 @@ if !(isGM)
   endif
   arg(narocnost,<a_difficulty[<argv(0)>]>)
   if (<argv(0)>==101) // je to frostbolt
-    if !(argv(1).isplayer) //miri na npc
+    if !(safe finduid(<argv(1)>).isPlayer) //miri na npc
       arg(narocnost,<eval(<a_difficulty[<argv(0)>]>-50)>) //ak mieri na npc tak menej fizuje (-50)
     endif
   endif

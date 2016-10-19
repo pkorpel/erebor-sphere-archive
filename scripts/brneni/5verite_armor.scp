@@ -324,8 +324,6 @@ tdata1=5
 ON=@Create
 shieldcreate(Verite,ring)
 
-on=@equip
-tdata1=5
 
 [itemdef i_Verite_RINGMAIL_gorget]
 id=i_leather_gorget

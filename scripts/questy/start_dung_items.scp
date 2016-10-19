@@ -23,5 +23,7 @@ tag.value_to_check=100
 tag.contentscount=0
 tag.fail_msg="Nepovedlo se!"
 
-
 ON=@CollectorCheck
+ON=@UserDeath
+
+[eof]

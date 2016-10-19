@@ -64,6 +64,7 @@ TYPE=t_eq_script
 name=discorded
 
 on=@equip
+cont.emote("looks weakened.")
 f_discordlower(dex)
 f_discordlower(str)
 f_discordlower(int)
@@ -97,6 +98,10 @@ if (cont.stamina>cont.maxstam)
 endif
 
 on=@unequip
+if (<eval cont.hits> <= 0)   
+  return
+endif
+cont.emote("seems to be at full strength.")
 f_discordreturn(dex)
 f_discordreturn(str)
 f_discordreturn(int)

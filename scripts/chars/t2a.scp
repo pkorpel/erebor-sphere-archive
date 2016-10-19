@@ -1315,7 +1315,7 @@ ITEMnewbie=i_monster_create
 ITEMNEWBIE=i_spellbook
 addspell=s_harm
 addspell=s_fireball
-addspell=s_necrobolt
+addspell=s_fire_bolt
 addspell=s_lightning
 addspell=s_flamestrike
 

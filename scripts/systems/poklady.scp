@@ -370,7 +370,11 @@ return<arg(checkButtons)>
 return<dsToRTime(<serv.time>-<tag(lastOpened)>)>
 
 [function f_treasure_count_gold]
-return<eval ((<serv.time>-<tag(lastOpened)>)*<tag(gold_per_minute)>)/600>
+arg(gold,<eval ((<serv.time>-<tag(lastOpened)>)/600)*<tag(gold_per_minute)>>)
+if ((<eval arg(gold)> < 0) || (<eval arg(gold)> > 50000000))
+  arg(gold,50000000)
+endif
+return<arg(gold)>
 
 // must be executed upon the i_mem_treasureGenerator
 [function f_treasureGenerator_init]
@@ -569,7 +573,9 @@ endif
 // argv(0) -> uid truhly
 // argv(1) -> uid hrace
 [function f_treasure_generate_gold]
-src.f_vytvor_mesec(<f_treasure_count_gold>,<argv(0)>) //prvni arg == kolik penez, druhej arg == kam ma ladovat truhly, spusteno nad hracem kvuli logovani
+if (<eval f_treasure_count_gold> > 0)
+  src.f_vytvor_mesec(<f_treasure_count_gold>,<argv(0)>) //prvni arg == kolik penez, druhej arg == kam ma ladovat truhly, spusteno nad hracem kvuli logovani
+endif
 arg(gold_init,<eval {<tag(gold_init)>}>)
 if (<arg(gold_init)> > 0)
   src.f_vytvor_mesec(<arg(gold_init)>,<argv(0)>)
