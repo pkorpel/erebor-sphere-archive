@@ -4490,8 +4490,8 @@ if !(src.isplayer)  //neudrel hrac
 	  if (<tag(pact_by)>)  //tento tag ma ten komu dal shaman BP
 	    arg(dmg, <eval(<var(ubrano)>)>)
 	    arg(bloodpact_damage, <eval( ( <arg(dmg)> * <nastaveni_bloodpact_dmg> ) / 100 )> ) //zdielanie nastaveni_bloodpact_dmg % damage
-	    if (<arg(bloodpact_damage)>>100)
-	      arg(bloodpact_damage,100)
+	    if (<arg(bloodpact_damage)>>20)
+	      arg(bloodpact_damage,20)
 	    endif
 	    //say("zdielane: <arg(bloodpact_damage)>")
       //say("dmg: <arg(dmg)>")	    
@@ -4500,8 +4500,8 @@ if !(src.isplayer)  //neudrel hrac
 	  elseif (<tag(pact_to)>)  //je to shaman ktory dal BP
 	    arg(dmg, <eval(<var(ubrano)>)>)
 	    arg(bloodpact_damage, <eval( ( <arg(dmg)> * <nastaveni_bloodpact_dmg> ) / 100 )> ) //zdielanie nastaveni_bloodpact_dmg % damage
-	    if (<arg(bloodpact_damage)>>100)
-	      arg(bloodpact_damage,100)
+	    if (<arg(bloodpact_damage)>>20)
+	      arg(bloodpact_damage,20)
 	    endif
 	    //say("zdielane: <arg(bloodpact_damage)>")
       //say("dmg: <arg(dmg)>")	    
