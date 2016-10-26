@@ -3981,11 +3981,12 @@ else
 endif
 
 [function f_canReach] //argv(0) - the item to reach, <uid> - the source that is being tested for reach
-if (<hval argv(0).topobj> != <uid>)
-  if (!f_canReachG(<argv(0)>) // the item is out of reach
-    return
-  endif
+if (<hval argv(0).topobj> == <uid>)
+  return 1
+elseif ( (findUID(<argv(0)>).srccanseelos) && (distancefrom(<argv(0)>)<5)) )
+  return 1
 endif
+return 0
 
 [function f_canReachZ] // can reach item considering the Z position
 // argv(0) - max distance
@@ -4004,9 +4005,8 @@ if (f_canseelosG(<args>))
     return 0
   endif
   return 1
-else
-  return 0
 endif
+return 0
 
 [function f_canseelosG]  //line of sight of position on the ground
 newitemsafe(i_bag)

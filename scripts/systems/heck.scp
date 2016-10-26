@@ -317,23 +317,8 @@ dialog(d_boosty_zoznam)
 on=3
 dialog(d_boosty_equip)
 
-//on=4
-////say(<f_boostyrefresh(<src.tag.boostyxy>)>)
-//if (src.findid(i_boosty_timer))
-//  src.findid(i_boosty_timer).remove
-//  src.sysmessage("Automaticke obnovovanie vypnute")
-//else
-//  src.newitem(i_boosty_timer).equip
-//  src.sysmessage("Automaticke obnovovanie zapnute")
-//endif
-
 ////////////DIALOG X Y////////////////////////////
 [dialog d_boostyxy]
-//textentry <x> <y> <gump width> <height> <color> <index> <text id>
-//<fixNumber(<argv(0)>)>
-//src.tag(test,111,222,333)
-//src.tag.test = <src.tag.test>,444
-
 arg(boosty_x,<f_boostyxyX(<src.tag.boostyxy>)>)
 arg(boosty_y,<f_boostyxyY(<src.tag.boostyxy>)>)
 
@@ -1512,7 +1497,6 @@ findid(i_ledova_dlazdice_zmrazovac).timer=1
 
 
 on=@spelleffect
-//say(<argn>)
 // 18 - fireball, 43 - explosion, 51 - kvf, 69 - necrobolt
 if (argn==18)
   arg(chance,20)
@@ -1645,7 +1629,6 @@ on=@userdclick
 if (src.isgm)
   if !(<tag(num_slaves)>)
     tag(num_slaves,0)
-//    tag(type,0)
   endif
   dialog(d_stone_boss)
 else
@@ -1688,12 +1671,7 @@ argo.dialog_pozadi(<argo.tag(nexty)>,<tag(num_slaves)>,160,160,160)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,160,160,160)
 
 argo.dialog_zpruhledni
-//if (<tag(type)>==0)
-  argo.textA(<argo.dialog_textpos(0,0)>,42,"Stone Boss - NPC")
-//else
-//  argo.textA(<argo.dialog_textpos(0,0)>,42,"Stone Boss - SPAWN - nefunguje este")
-//endif
-//argo.button(<lastxpos>+200,<lastypos>,03217,03218,1,0,1)
+argo.textA(<argo.dialog_textpos(0,0)>,42,"Stone Boss - NPC")
 
 arg(akt,0)
 
@@ -1748,24 +1726,17 @@ on=0
 
 on=@anybutton
 if (argn==1)
-//  if (<tag(type)>==0)
-//    tag(type,1)
-//  else
-//    tag(type,0)
-//  endif
   dialog(d_stone_boss)
 endif
 
 if (argn==2)
   src.newequip(i_target_stone_boss_pridat)
-//  lastnew.tag(type,<tag(type)>)
   lastnew.tag(boss,<uid>)
   lastnew.tag(num_slaves,<tag(num_slaves)>)
   return(1)
 endif
 
 if (argn > 499)
-//  say(<argn>)
   arg(npc_id,<fixnumber(<argn>-500)>)
   arg(slave,<finduid(<tag(slave_<npc_id>)>)>)
   // odstranenie/uvolnenie guarda
@@ -1801,44 +1772,35 @@ timer=10
 
 on=@targon_char
 if !(src.targ.isplayer)
-//if (<tag(type)>==0)
-    arg(boss,<finduid(<tag(boss)>)>)
-    arg(slave,<src.targ>)
+  arg(boss,<finduid(<tag(boss)>)>)
+  arg(slave,<src.targ>)
 
-    arg(akt,0)  //kontrola ci uz neni
-    while (<akt> < <boss.tag(num_slaves)>)
-      if (<slave> == <boss.tag(slave_<akt>)>)
-        src.sysmessage("Ten uz je")
-        return(1)
-      endif
-      arg(akt,#+1)
-    endwhile
-
-    if (<src.targ> != <boss>)
-      slave.stone=1
-      slave.flag_invul=1
-      slave.tag(boss,<boss>)
-      slave.events(+e_stone_slave)
-      boss.tag(slave_<tag(num_slaves)>,<slave.uid>)
-      boss.tag(slave_<tag(num_slaves)>_alive,1)
-      boss.tag(slave_<tag(num_slaves)>_hits,<boss.maxhits>/(<boss.tag(num_slaves)>+1))
-      boss.tag(num_slaves,#+1)
-      boss.dialog(d_stone_boss)
-    else
-      src.sysmessage("Bossa ne")
+  arg(akt,0)  //kontrola ci uz neni
+  while (<akt> < <boss.tag(num_slaves)>)
+    if (<slave> == <boss.tag(slave_<akt>)>)
+      src.sysmessage("Ten uz je")
+      return(1)
     endif
-//else
-//  src.sysmessage("Zameravaj NPC")
-//endif
+    arg(akt,#+1)
+  endwhile
+
+  if (<src.targ> != <boss>)
+    slave.stone=1
+    slave.flag_invul=1
+    slave.tag(boss,<boss>)
+    slave.events(+e_stone_slave)
+    boss.tag(slave_<tag(num_slaves)>,<slave.uid>)
+    boss.tag(slave_<tag(num_slaves)>_alive,1)
+    boss.tag(slave_<tag(num_slaves)>_hits,<boss.maxhits>/(<boss.tag(num_slaves)>+1))
+    boss.tag(num_slaves,#+1)
+    boss.dialog(d_stone_boss)
+  else
+    src.sysmessage("Bossa ne")
+  endif
 endif
 return(1)
 
 on=@targon_item
-//if (<tag(type)>==1)
-//  
-//else
-//  src.sysmessage("Zameravaj SPAWN")
-//endif
 src.sysmessage("Zameravaj NPC")
 finduid(<tag(boss)>).dialog(d_stone_boss)
 return(1)
@@ -1941,18 +1903,6 @@ endif
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //len skuska
 [events e_gmsteptest]
 on=@step
@@ -1961,7 +1911,6 @@ elseif (region.flags==01192)
 elseif (region.flags==00812)
 else
   newitemsafe(i_gmsteptest)
-//  lastnew.tag(realm,<tag(realm)>)
   lastnew.tag(uid,<uid>)
   lastnew.p=<p>
 endif
@@ -2061,139 +2010,6 @@ return 1
 
 on=@targon_ground
 return 1
-
-<<<<<<< .mine//tieto funkcie sa nikde nepouzivaju, ani ich nepouzivajte, nefunguje to dobre, mozno sa casom neco vymysli
-[function getdistance]
-//vzdialenost objektov/charov argv(0) a argv(1)
-if (<argv(0).mapplane>==<argv(1).mapplane>)
-//  src.say(<f_axisdistance(<argv(0).p_x>,<argv(1).p_x>)>)
-//  src.say(<f_axisdistance(<argv(0).p_y>,<argv(1).p_y>)>)
-  src.say(<sqrt(<f_axisdistance(<argv(0).p_x>,<argv(1).p_x>)>+<f_axisdistance(<argv(0).p_y>,<argv(1).p_y>)>)>)
-else
-  return 10000
-endif
-
-[function f_axisdistance]
-//argv(1) - x1, argv(2) - x2 
-if (<argv(0)> > <argv(1)>)
-  return <eval(<argv(0)>-<argv(1)>)>
-else
-  return <eval(<argv(1)>-<argv(0)>)>
-endif
-
-
-[function getdistancefrom]
-//vzdialenost this od argv(0)
-
-//[function sqrt] // vypocet druhej odmocniny no nieje to najspolahlivejsie
-//argv(0) - cislo na odmocnenie
-//arg(lastroot,<argv(0)>)
-//if (<argvcount> == 1)
-//  sqrt(<arg(lastroot)>*100,<arg(lastroot)>*100,0) //root_1, root_2, tries
-//else
-//  arg(tries,<argv(2)>)
-//  arg(tries,#+1)
-//  arg(root_1,<eval((<arg(lastroot)> / 2) + ((<argv(1)> / <arg(lastroot)>) / 2))>)
-// if (<arg(tries)> > 30)
-//    return -1
-//  endif
-//  if (<arg(lastroot)>==<arg(root_1)>)||(<arg(lastroot)>==(<arg(root_1)>/2))
-//		src.say("return 0: <?argv(0)?> 1: <?argv(1)?> 2: <?argv(2)?>")
-//    return <eval(arg(lastroot)/10)>
-//  else
-//		src.say("0: <?argv(0)?> 1: <?argv(1)?> 2: <?argv(2)?>")
-//    sqrt(<arg(root_1)>,<argv(1)>,<arg(tries)>)
-//  endif
-//endif
-
-=======//obnova mojich run
->>>>>>> .theirs[defnames larryobnovaruny]
-pocet_run 59
-runa[0] Skalny Dol,2058,725
-runa[1] Osamely dol,1231,933
-runa[2] Severny Dol,533,666
-runa[3] MT Lockpick,5637,3790,-60
-runa[4] Zelezny Pas Dol,2042,2297
-runa[5] Krajske Doly,768,1541,1
-runa[6] kralovske doly,2828,2980
-runa[7] Erebor,4758,2159
-runa[8] Vychodni Marka,2718,2187
-runa[9] Fornost,1413,1093
-runa[10] Hurka,1571,1211
-runa[11] Dom nad edom,1687,2276,5
-runa[12] Gondorske uzemi 2,934,399
-runa[13] barad most,3393,2804,1
-runa[14] Forondon,1225,612
-runa[15] Dol a Hora,3189,1014
-runa[16] Helmuv zleb,5295,3722
-runa[17] Esgaroth,3118,1067
-runa[18] Kralovstvi lesnich elfu,2944,1237
-runa[19] Tharbad,1588,1940
-runa[20] sede pristavy,717,1361
-runa[21] Gondorske uzemi,753,1951
-runa[22] Linhir,2735,3282
-runa[23] Calembel,2495,2965
-runa[24] barad most 2,3393,2803,1
-runa[25] Radovsko,1312,1373
-runa[26] Stredozeme,4545,848,2
-runa[27] Lorien,2469,1925
-runa[28] Pelargir,2900,3196
-runa[29] Dol Amroth,2181,3242
-runa[30] Minas Morgul,3184,2977,20
-runa[31] Vetesnik,5581,3925,-40
-runa[32] MT,5671,3872,-80
-runa[33] hafodrapku-pozor!,2934,2865,1
-runa[34] poklad da,2549,3196
-runa[35] Ostrov piratu,701,484
-runa[36] drapaci novy,1474,2405,30
-runa[37] Obroviste,2164,1078
-runa[38] terathani u sedych,569,1114
-runa[39] Stone Harpy Gargoyl ...,969,865
-runa[40] Pri orloch,1880,554
-runa[41] Gondorske uzemi,2271,1314,35
-runa[42] most mordor-gondor,2741,2497
-runa[43] OT Nejblizsi breh,1119,2356,3
-runa[44] Dungeon pod Edorasom,2358,2677
-runa[45] Forondon Spiriti,1362,535
-runa[46] Gondorske uzemi,302,754
-runa[47] Teranti Tharbad,1272,1863,6
-runa[48] Jizni vrchy,1592,1616
-runa[49] Gondorske uzemi,1573,2755
-runa[50] Etini Lorien,2276,1912
-runa[51] prusmyk ed,2314,1999
-runa[52] Etin Lordi Tharbad,1318,2309
-runa[53] Krvavy Drapaci,1415,2510
-runa[54] voda,1120,3306
-runa[55] Beridor,675,1076
-runa[56] osg drapci,6020,3943,-80
-runa[57] Spiriti,1986,2761
-runa[58] cislopy,843,1784
-
-[function vratmirunytykokso]
-arg(i,0)
-while(<arg(i)><<pocet_run>)
-  //say(<return_nth(1,<runa[i]>)>)
-  arg(j,2)
-  arg(more_p,"")
-  while(<arg(j)><6)
-  	if (<eval(<return_nth(<arg(j)>,<runa[i]>)>)>!=0)
-  		if (<arg(j)>==2)
-  		  arg(more_p,<return_nth(<arg(j)>,<runa[i]>)>)
-  		else
-        arg(more_p,<arg(more_p)>,<return_nth(<arg(j)>,<runa[i]>)>)
-      endif
-    else
-      arg(j,10)
-    endif
-    arg(j,#+1)
-  endwhile
-//  src.say(<arg(more_p)>)
-  newitemsafe(i_rune_marker)
-  lastnew.name=<return_nth(1,<runa[i]>)>
-  lastnew.morep=<arg(more_p)>
-  lastnew.bounce
-  arg(i,#+1)
-endwhile
 
 [eof]
 

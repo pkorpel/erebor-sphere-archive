@@ -177,8 +177,6 @@ tag(quest_subjectName[<currentQNumber>],<randFoodItemdef.def.name>)
 
 ////////////////////////////////////////////////////////////
 [function f_weekly_setQuest]  // argv(0) - cislo questu, // argv(1) - level questu (low, medium ...)
-arg(qAmount,0)
-
 src.sysMessage("setup Function: <def_weekly_<argv(1)>_setupFunction[<eval argv(0)>]>")
 src.sysMessage("Quest number: <eval argv(0)>")
 arg(arguments,"")
@@ -199,6 +197,7 @@ return 1
 //tag(weekly_quest[new_quest],1)
 
 ///////////////////////////////////// NOT EXECUTED
+//arg(qAmount,0)
 //arg(RandomResult,0)
 //if (<argv(0)> == 1)  // 1 - Snez jidlo konkretniho typu
 //  arg(RandomResult,<f_getRandomItemId(random_food)>)
@@ -431,32 +430,41 @@ enddo
 return <random_master>
 
 ////////////////////////////////////////////////////////////////////////////////
-[function f_weekly_addItemDClick] //argv(1) quest number in the week; //executed upon the weekly memory item
+[function f_weekly_addItemDClick] //argv(0) quest number in the week; //executed upon the weekly memory item
 cont.events=+e_weekly_itemDClick
-arg(dclickCount,<eval tag(qItemDClickN)>)
-tag(qItemDClick[<arg(dclickCount)>],<eval argv(0)>)
-tag(qItemDClickN,<eval arg(dclickCount)+1>)
+f_customLink_add(<eval argv(0)>,itemDClick)
 src.say("Setting weekly item dclick <argv(0)>")
 
+[function f_weekly_removeItemDClick] //argv(0) index of stored item in the qItemDClickN; //executed upon the weekly memory item
+f_customLink_remove(itemDClick,<argv(0)>)
+if (0<tag(itemDClicksCount)> == 0) // this was the last stored item to dclick -> clean the event and tags entirely
+  events=-e_weekly_itemDClick
+endif
 
 [events e_weekly_itemDclick]
 ON=@itemUserDClick
-if (!src.f_canReach(<act>))
-  return
-endif
+findid(i_memory_weekly_quest).f_weekly_itemDClick(<act>)
 
-arg(memory_weekly,<findid(i_memory_weekly_quest)>)
-arg(items,<weeklyTag(qItemDClickN)>)
+[function f_weekly_itemDClick] //argv(0) - act
 arg(i,0)
-while (<arg(i)> < <arg(items)>)
-  say("testing <weeklyTag(quest_subjectId[<eval weeklyTag(qItemDClick[<eval arg(i)>])>])>")
-  if (<act.baseID> == <weeklyTag(quest_subjectId[<weeklyTag(qItemDClick[<eval arg(i)>])>])>)
-    say("HEEEEEEEEEY YAH!")
+while (<arg(i)> < <tag(itemDClicksCount)>)
+  arg(questId,<eval tag(itemDClick[<eval arg(i)>])>)
+  cont.say("testing <tag(quest_subjectId[<arg(questId)>])>")
+  if (<argv(0).baseID> == <tag(quest_subjectId[<arg(questId)>])>)
+    if ((argv(0).type==t_food) || (argv(0).type==t_fruit))
+      if (<eval src.food> >= <eval src.def.maxfood>)
+        return
+      endif
+    endif
+    cont.say("HEEEEEEEEEY YAH!")
+    if (f_weekly_increase(<arg(questId)>,1))
+      f_weekly_removeItemDClick(<arg(i)>)
+    endif
     return
   endif
   arg(i,#+1)
 endwhile
-say("nope")
+cont.say("nope")
 
 
 [events e_weekly_quest]
@@ -683,6 +691,22 @@ endif
 //tag(weekly_quest_amount[<argv(0)>],<qAmount>)
 //tag(weekly_quest_completed[<argv(0)>],0)
 
+// returns 1 if the quest gets completed
+// returns 0 if the quest is not yet completed
+[function f_weekly_increase]  // argv(0)-cislo miniquestu, argv(1)-pridavek
+cont.say("Cislo miniquestu: /<argv(0)>/, pridam +/<argv(1)>/")
+cont.say("Splneno mam: <tag(quest_completed[<argv(0)>])>, Potrebuju: <tag(quest_totalAmount[<argv(0)>])>")
+if ((<eval <tag(quest_completed[<argv(0)>])>+<argv(1)>>) >= <tag(quest_totalAmount[<argv(0)>])>)  // kdyz narust serovna a nebo presahne maximalni pozadovany pocet
+  cont.say("TEST1")
+  arg(retVal,1)
+  tag(quest_completed[<argv(0)>],<tag(quest_totalAmount[<argv(0)>])>)  // tak aktualni stav se bude rovnat maximalnimu pozadovanemu poctu
+else  // a kdyz ne..
+  cont. say("TEST2")
+  arg(retVal,0)
+  tag(quest_completed[<argv(0)>],<eval <tag(quest_completed[<argv(0)>])>+<argv(1)>>)  // zvysime o pozadovanou hodnotu
+endif
+cont.classmessage("Splneno <tag(quest_completed[<argv(0)>])>/<tag(quest_totalAmount[<argv(0)>])>")
+return<arg(retVal)>
 
 [function f_weekly_quest_check_finish]  // argv(0)-cislo miniquestu, argv(1)-specialni podminka
 arg(memory_weekly,<findid(i_memory_weekly_quest)>)
