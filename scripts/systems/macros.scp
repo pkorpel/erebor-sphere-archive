@@ -1607,7 +1607,7 @@ if ((<cont.hits>)>(<cont.maxhits>))
  remove
 endif
 
-if ((cont.findid(i_a_curse)) && (rand(2)==1))
+if ((strlen(<cont.findid(i_a_curse)>)) && (rand(2)==1))
  remove
 endif
 
