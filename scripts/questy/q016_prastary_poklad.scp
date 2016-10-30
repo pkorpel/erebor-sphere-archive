@@ -192,7 +192,7 @@ argo.tag(necro).say("Heru Beleg Kel!")
 on=3
 src.qtag(q016_prastary_poklad,12,14)
 if (<src.tag.realm> == 2)
-  src.addex(1200)
+  src.addexp(1200)
 else
   src.addexp(500)
 endif
@@ -201,7 +201,7 @@ f_quest_complete(14)  // splnenie questu "Prastary poklad"
 on=4
 src.qtag(q016_prastary_poklad,11,14)
 if (<src.tag.realm> == 1)
-  src.addex(1200)
+  src.addexp(1200)
 else
   src.addexp(500)
 endif
