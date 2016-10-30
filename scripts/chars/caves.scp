@@ -1772,7 +1772,7 @@ DEFNAME=c_kentaur
 NAME=Kentaur
 SOUND=snd_ANIMALS_HORSE1
 ICON=i_pet_horse_brown_dk
-CAN=MT_WALK|CAN=MT_RUN
+CAN=MT_WALK|MT_RUN
 
 attack=120
 ARMOR=80
