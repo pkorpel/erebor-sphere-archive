@@ -3678,6 +3678,7 @@ RECT=5195,2470,5366,2618
 mapplane=10
 FLAGS=00812
 tag.realm=3
+tag.nobank=1
 RAINCHANCE=00
 COLDCHANCE=00
 
@@ -3686,17 +3687,6 @@ GROUP=Dungeon Carn Dum
 P=5275, 2042
 RECT=5191,2023,5364,2270
 mapplane=10
-FLAGS=00812
-tag.nobank=1
-tag.realm=3
-RAINCHANCE=00
-COLDCHANCE=00
-
-[AREA Carn Dum 4 Level new]
-GROUP=Dungeon Carn Dum
-P=5271, 2529, 28, 10
-RECT=5195,2470,5366,2618
-mapplane=10  
 FLAGS=00812
 tag.nobank=1
 tag.realm=3
