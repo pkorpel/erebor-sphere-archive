@@ -1871,6 +1871,9 @@ n_global3_default[9]	90
 n_global3[10]		body_looting_timer
 n_global3_name[10]	"timer - lootenie tiel hracov"
 n_global3_default[10]	897
+n_global3[11]		spellcast_silence_mind_blast
+n_global3_name[11]	"Silence po MindBlastu xx dsec."
+n_global3_default[11]	15
                         
 n_ability[0]		ability_leaprange
 n_ability_name[0]	Leap Range
@@ -2296,6 +2299,9 @@ n_ability3_default[38] 75
 n_ability3[39] 		mystik_doubleswing_stam
 n_ability3_name[39] "Ubytok staminy po mystik doubleswingu"
 n_ability3_default[39] 30
+n_ability3[40] 		MindBlast_silence_chance
+n_ability3_name[40] "Sance na silence MindBlastem"
+n_ability3_default[40] 95
 
 
 n_poison[0]		poison_absoluteDmg

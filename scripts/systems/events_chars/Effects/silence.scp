@@ -1,0 +1,76 @@
+[function f_silenced_npc]  // argv(0) - 0 from casting spell(src=uid=npc), 1 from Mind Blast Silence effect (src=mag co castil Mind Blast)
+if (strlen(<findid(i_silencer)>))//keby sa nahodou zaseklo na -1 z nejakeho dovodu
+  if (<findid(i_silencer).timer> < 0)
+    findid(i_silencer).timer=1
+  endif
+endif
+
+if (<argv(0)> == 0)
+  if ((<nastaveni_silence_using>==1)&&(!<rescount(i_silencer)>))
+    newequip(i_silencer)
+    lastnew.timer=nastaveni_spellcast_silence_after
+    //lastnew.more1=1
+  endif
+endif
+
+if (<argv(0)> == 1)
+  arg(chance_reduction,<eval 1000-<eval tag(resist_silence)>>)
+  arg(chance,<eval <eval src.tag(ra_mind_blast_silence)>*var(nastaveni_MindBlast_silence_chance)>)
+  if (chance_reduction!=1000)
+    arg(chance,<eval ((arg(chance)*arg(chance_reduction))/1000)>)
+  endif
+  
+  if (chance(<arg(chance)>,3))
+    src.classmessage("Umlcel jsi cil.")  
+    arg(silenced_time,<eval <eval src.tag(ra_mind_blast_silenced_time)>+nastaveni_spellcast_silence_mind_blast>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
+  
+    if (strlen(<findid(i_silencer)>))  // jiz je silencnuty, prodlouzime tedy timer
+      findid(i_silencer).timerd=<arg(silenced_time)>
+    else  // neni silencnuty, tak ho silencneme
+      newequip(i_silencer)
+      lastnew.timerd=<arg(silenced_time)>
+    endif
+  endif
+endif
+
+
+[itemdef i_silencer]
+id=i_memory
+layer=77
+type=t_src_changer
+name=silencer
+
+on=@equip
+cont.stopmagery
+cont.events +e_npc_silenced
+//tag(mana,<cont.mana>)
+
+//on=@timer
+//if (<more1>==1)
+//  cont.say("Vynulovala se mi mana")
+//  cont.mana=0
+//  timer=<nastaveni_silence_mana_return>
+//  more1=0
+//else
+//  cont.mana=<tag.mana>
+//  cont.say("Vratila se mi mana")
+//  remove 
+//endif
+//return(1)
+
+on=@unequip
+cont.events -e_npc_silenced
+
+[events e_npc_silenced]
+on=@death
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@beforegetswing
+on=@aftergetswing
+on=@beforedoeffect
+on=@beforegeteffect
+on=@spellcast
+return 1  // Jsem Silencnuty, nemohu kouzlit
+
+[eof]
