@@ -164,28 +164,52 @@ f_questMenu_sectionButton(1)
 arg(stepSize,54)
 arg(yImgOffset,6)
 arg(yTxtOffset,10)
-arg(qNum,0)
 arg(qCount,<src.weeklyTag(qCount)>)
 
-arg(font,"<?safe?><basefont size=4 color=#D7DF01>")
-arg(fontSm,"<?safe?><basefont size=1 color=#D7DF01>")
-
+arg(qNum,0)
+arg(hasCompleted,0)
 while (<arg(qNum)> < <arg(qCount)>)
-  f_qm_setOffsetAndPaging(4,<arg(stepSize)>)
-  arg(y,<tag(yPos)>)
-  resizepic(75,<arg(y)>+4,<g_bg[8]>,<questMenu_width>-65,<arg(stepSize)>-5) //g_bg[5,6,7,8] | 5,7,8
-  //checkertrans(75,<arg(y)>,<questMenu_width>-68,4)
-  //checkertrans(75,<arg(y)>+4,4,<arg(stepSize)>-14)
-  //checkertrans(<questMenu_width>+5,<arg(y)>+4,4,<arg(stepSize)>-14)
-  //checkertrans(75,<eval (<arg(y)>+<arg(stepSize)>-10)>,<questMenu_width>-68,4)
-  arg(y,#+10)
-  tilepichue(77,<eval arg(y)+arg(yImgOffset)>,<?<src.weeklyTag(quest_subjectId[<arg(qNum)>])>.ID?>)
-  setText(newTextLine,"<arg(fontSm)><eval src.weeklyTag(quest_completed[<arg(qNum)>])>/<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>")
-  htmlGump(115,<eval arg(y)+arg(yTxtOffset)>,40,20,<lastTextLine>,0,0)
-  setText(newTextLine,"<arg(font)><src.weeklyTag(quest_description[<arg(qNum)>])>")
-  htmlGump(160,<arg(y)>,<questMenu_width>-160,<arg(stepSize)>-20,<lastTextLine>,0,0)
+  arg(completed,<eval src.weeklyTag(quest_completed[<arg(qNum)>])>)
+  arg(totalAmount,<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>)
+  if (arg(completed) < arg(totalAmount))
+    f_qm_weeklyAddDialogItem(#D7DF01,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
+  else
+    arg(hasCompleted,1)
+  endif
   arg(qNum,#+1)
 endwhile
+
+if (arg(hasCompleted) == 0)
+  return
+endif
+
+arg(qNum,0)
+while (<arg(qNum)> < <arg(qCount)>)
+  arg(completed,<eval src.weeklyTag(quest_completed[<arg(qNum)>])>)
+  arg(totalAmount,<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>)
+  if (arg(completed) == arg(totalAmount))
+    f_qm_weeklyAddDialogItem(#AAAAAA,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
+  endif
+  arg(qNum,#+1)
+endwhile
+
+[function f_qm_weeklyAddDialogItem] // argv(0) color, argv(1) qnum, argv(2) step size, argv(3) - completed, argv(4) - totalAmount
+arg(font,"<?safe?><basefont size=4 color=<?argv(0)?>>")
+arg(fontSm,"<?safe?><basefont size=1 color=<?argv(0)?>>")
+f_qm_setOffsetAndPaging(4,<argv(2)>)
+arg(y,<tag(yPos)>)
+resizepic(75,<arg(y)>+4,<g_bg[8]>,<questMenu_width>-65,<argv(2)>-5) //g_bg[5,6,7,8] | 5,7,8
+arg(y,#+10)
+if (<src.weeklyTag(quest_iconId[<argv(1)>])>)
+  arg(picId,<src.weeklyTag(quest_iconId[<argv(1)>])>)
+else
+  arg(picId,<?<src.weeklyTag(quest_subjectId[<argv(1)>])>.ID?>)
+endif
+tilepichue(77,<eval arg(y)+arg(yImgOffset)>,<arg(picId)>)
+setText(newTextLine,"<arg(fontSm)><eval argv(3)>/<argv(4)>")
+htmlGump(115,<eval arg(y)+arg(yTxtOffset)>,40,20,<lastTextLine>,0,0)
+setText(newTextLine,"<arg(font)><src.weeklyTag(quest_description[<argv(1)>])>")
+htmlGump(160,<arg(y)>,<questMenu_width>-160,<argv(2)>-20,<lastTextLine>,0,0)
 
 [function f_qm_setOffsetAndPaging] // argv(0) max items, argv(1) - Y position step size
 if (0<tag(pageNumber)> == 0)

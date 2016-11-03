@@ -35,16 +35,4 @@ ITEMNEWBIE=i_doublet
 ITEMNEWBIE=i_necklace_silver_beads
 ITEMNEWBIE=i_hat_cape_2
 
-
-[speech spk_q035_herman]
-
-on = *ukol*
-on = *prace*
-on = *zdravim*
-on = *ahoj*
-
-say('Zdravim')
-//f_q035_herman
-
-
 [eof]

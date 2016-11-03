@@ -2,7 +2,7 @@
 //def_weekly_count_low  11 // pocet low miniquestu
 //def_weekly_count_medium  10 // pocet medium miniquestu
 //def_weekly_count_high  5 // pocet high miniquestu
-def_weekly_count_low  2 // pocet low miniquestu
+def_weekly_count_low  3 // pocet low miniquestu
 def_weekly_count_medium  1 // pocet medium miniquestu
 def_weekly_count_high  1 // pocet high miniquestu
 
@@ -18,6 +18,10 @@ def_weekly_low_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_1_[0]   random_fruit //prvni argument setup funkce
 def_weekly_low_setupFunArg_1_[1]   low //druhy argument setup funkce
 
+def_weekly_low_setupFunction[2]    f_weekly_setup_drinkPotion
+def_weekly_low_setupFunArgn[2]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArg_2_[0]   t_potion //prvni argument setup funkce
+def_weekly_low_setupFunArg_2_[1]   6 //druhy argument setup funkce
 
 
 // MEDIUM quests
@@ -94,7 +98,7 @@ endif
 return 1
 
 
-[function f_check_time_to_end]
+[function f_weekly_checkExpiracy]
 if (<eval src.findid(i_memory_weekly_quest).tag(cas_konec)> < <serv.time>)
   src.sysMessage("Vyprsel cas na splneni tvych ukolu.")
   src.findid(i_memory_weekly_quest).remove
@@ -140,9 +144,8 @@ else
 endif
 src.say("Pocet miniquestu: <src.weeklyTag(qCount)>")
 
-[function f_getRandomItemId] // argv(0) - nektera z random definici, ktera se ma expandovat na konkretni itemdef
+[function f_getFinalItemId] // argv(0) - nektera z random definici, ktera se ma expandovat na konkretni itemdef
 return<findres(itemdef,<argv(0)>)>
-//f_customLink_add
 
 
 ////////////////////////////////////////////////////////////
@@ -152,27 +155,53 @@ return<findres(itemdef,<argv(0)>)>
 //  * quest_totalAmount // the number of items to collect.
 //  * quest_description // the text to be displayed in a dialog
 //  * quest_subjectId   // the ID of an item that represents the quest
-// optional:
-//  * quest_subjectName // whom knows what this is for, probably useless
 
-[function f_weekly_setup_eatFood] // argv(0) - nazev jidla ke snezeni // argv(1) - level questu
-arg(currentQNumber,<eval tag(qAssigned)>)
-arg(randFoodItemdef,<f_getRandomItemId(<argv(0)>)>)
+[function f_weekly_setup_eatFood] // argv(0) - id jidla ke snezeni // argv(1) - level questu
 src.sysMessage("setting up food (<argv(0)>) for level: <tag(playerLevel)>")
+arg(currentQNumber,<eval tag(qAssigned)>)
+arg(finalFoodItemdef,<f_getFinalItemId(<argv(0)>)>)
 
-arg(qTotalAmount,<?eval (<eval (<tag(qCount)>*{5 <eval 2+<tag(qCount)>>})>/<?<arg(randFoodItemdef)>.weight?>)?>)
+arg(qTotalAmount,<?eval (<eval (<tag(qCount)>*{5 <eval 2+<tag(qCount)>>})>/<?<arg(finalFoodItemdef)>.weight?>)?>)
 if (<arg(qTotalAmount)> <= 0)
   arg(qTotalAmount,1)
 endif
 src.say("KS: <arg(qTotalAmount)>")
-src.say("FOOD: <?<arg(randFoodItemdef)>.name?> <?arg(randFoodItemdef)?> <?<arg(randFoodItemdef)>.type?> <?<arg(randFoodItemdef)>.weight?>")
+src.say("FOOD: <?<arg(finalFoodItemdef)>.name?> <?arg(finalFoodItemdef)?> <?<arg(finalFoodItemdef)>.type?> <?<arg(finalFoodItemdef)>.weight?>")
 
-f_weekly_addItemDClick(<currentQNumber>)
+f_weekly_addItem(<currentQNumber>,e_weekly_itemDClick,itemDClick)
 tag(quest_totalAmount[<currentQNumber>],<arg(qTotalAmount)>)
-//tag(quest_completed[<currentQNumber>],0)
-tag(quest_description[<currentQNumber>],"Snez jidlo: <?<arg(randFoodItemdef)>.name?>")
-tag(quest_subjectId[<currentQNumber>],<randFoodItemdef.def.baseID>)
-tag(quest_subjectName[<currentQNumber>],<randFoodItemdef.def.name>)
+tag(quest_description[<currentQNumber>],"Snez jidlo: <?<arg(finalFoodItemdef)>.name?>")
+tag(quest_subjectId[<currentQNumber>],<finalFoodItemdef.def.baseID>)
+
+[function f_weekly_setup_drinkPotion] // argv(0) id/type potionu k vypiti // argv(1) - amount multiplier
+src.sysMessage("setting up drink potion (<argv(0)>) for level: <tag(playerLevel)>")
+arg(currentQNumber,<eval tag(qAssigned)>)
+
+f_weekly_addItem(<currentQNumber>,e_weekly_itemDClick,itemDClick)
+tag(quest_totalAmount[<currentQNumber>],<eval (<tag(qCount)>*{<argv(1)> <eval ((<argv(1)>-2)+<tag(qCount)>)>})>)
+tag(quest_subjectId[<currentQNumber>],<argv(0)>)
+if (!strmatch(<argv(0)>,i_*))
+  tag(quest_iconId[<currentQNumber>],<i_bottle_empty>)
+  arg(descrName,"libovolny")
+else
+  arg(descrName,"<?<arg(finalFood)>.name?>")
+else
+else
+endif
+tag(quest_description[<currentQNumber>],"Vypij potion: <arg(descrName)>")
+
+//elseif (<argv(0)> == 3)  // 3 - Vypij jakykoli potion
+//  arg(qAmount,<eval (<tag(qCount)>*{6 <eval 4+<tag(qCount)>>})>)
+//  arg(quest_description,"Vypij: <qAmount>x jakykoli potion")
+//  say("KS: <qAmount>")
+//elseif (<argv(0)> == 4)  // 4 - Vypij potion svetla
+//  arg(qAmount,<eval (<tag(qCount)>*{4 <eval 2+<tag(qCount)>>})>)
+//  arg(quest_description,"Vypij: <qAmount>x potion Svetla (Potion Nightsight)")
+//  say("KS: <qAmount>")
+//elseif (<argv(0)> == 5)  // 5 - Vypij jakykoli potion krome svetla
+//  arg(qAmount,<eval (<tag(qCount)>*{3 <eval 2+<tag(qCount)>>})>)
+//  arg(quest_description,"Vypij: <qAmount>x jakykoli potion krome Svetla (Potion Nightsight)")
+//  say("KS: <qAmount>")
 
 
 ////////////////////////////////////////////////////////////
@@ -200,7 +229,7 @@ return 1
 //arg(qAmount,0)
 //arg(RandomResult,0)
 //if (<argv(0)> == 1)  // 1 - Snez jidlo konkretniho typu
-//  arg(RandomResult,<f_getRandomItemId(random_food)>)
+//  arg(RandomResult,<f_getFinalItemId(random_food)>)
 //  arg(qAmount,<eval (<tag(qCount)>*{5 <eval 2+<tag(qCount)>>})/<RandomResult.weight>>)
 //  if (<qAmount> == 0)
 //    arg(qAmount,#+1)
@@ -388,6 +417,7 @@ return 1
 //endif
 //redMessage("Miniquest c.<argv(0)>: <tag(weekly_quest_text[<argv(0)>])>")
 
+////////////////////////////////////////////////////////////
 [function f_weekly_quest_random_master]
 dorand 36
   arg(random_master,"Anatomy")
@@ -429,17 +459,20 @@ dorand 36
 enddo
 return <random_master>
 
-////////////////////////////////////////////////////////////////////////////////
-[function f_weekly_addItemDClick] //argv(0) quest number in the week; //executed upon the weekly memory item
-cont.events=+e_weekly_itemDClick
-f_customLink_add(<eval argv(0)>,itemDClick)
-src.say("Setting weekly item dclick <argv(0)>")
+/////////////////////////////
 
-[function f_weekly_removeItemDClick] //argv(0) index of stored item in the qItemDClickN; //executed upon the weekly memory item
+[function f_weekly_addItem] //argv(0) quest number in the week; argv(1) event name; argv(2) tags name //executed upon the weekly memory item
+cont.events=+<argv(1)>
+f_customLink_add(<eval argv(0)>,<argv(2)>)
+
+[function f_weekly_removeItem] //argv(0) index of stored item in the qItemDClickN; argv(1) event name; argv(2) tags name //executed upon the weekly memory item
 f_customLink_remove(itemDClick,<argv(0)>)
-if (0<tag(itemDClicksCount)> == 0) // this was the last stored item to dclick -> clean the event and tags entirely
-  events=-e_weekly_itemDClick
+if (0<tag(<argv(2)>sCount)> == 0) // this was the last stored item -> clean the event and tags entirely
+  events=-<argv(1)>
 endif
+
+////////////////////////////////////////////////////////////
+// E V E N T S 
 
 [events e_weekly_itemDclick]
 ON=@itemUserDClick
@@ -449,79 +482,58 @@ findid(i_memory_weekly_quest).f_weekly_itemDClick(<act>)
 arg(i,0)
 while (<arg(i)> < <tag(itemDClicksCount)>)
   arg(questId,<eval tag(itemDClick[<eval arg(i)>])>)
-  cont.say("testing <tag(quest_subjectId[<arg(questId)>])>")
-  if (<argv(0).baseID> == <tag(quest_subjectId[<arg(questId)>])>)
+  if ((<argv(0).baseID> == <tag(quest_subjectId[<arg(questId)>])>) || (<argv(0).type> == <tag(quest_subjectId[<arg(questId)>])>))
     if ((argv(0).type==t_food) || (argv(0).type==t_fruit))
       if (<eval src.food> >= <eval src.def.maxfood>)
         return
       endif
+    elseif ((argv(0).type==t_speedpotions) || (argv(0).type==t_allpotions))
+      if (serv.time <= <eval src.tag.nextpotion>)
+        return
+      endif
     endif
-    cont.say("HEEEEEEEEEY YAH!")
     if (f_weekly_increase(<arg(questId)>,1))
-      f_weekly_removeItemDClick(<arg(i)>)
+      f_weekly_removeItem(<arg(i)>,e_weekly_itemDClick,itemDClick)
     endif
     return
   endif
   arg(i,#+1)
 endwhile
-cont.say("nope")
 
+/////////////////////////////
 
+[events e_weekly_itemPickupPack]
+on=@itemPICKUP_PACK  // lootuj z monster
+if (<eval act.tag(iic_owner)> > 0)  // jeste nikdo nelotl z tela monstra
+  if (act.topobj.isItem)
+    if !(act.topobj.link)  // neni to telo hrace
+      findid(i_memory_weekly_quest).f_weekly_itemPickupPack(<act>)
+    endif
+  endif
+endif
+
+[function f_weekly_itemPickupPack] //argv(0) - act
+arg(i,0)
+while (<arg(i)> < <tag(itemPickupPacksCount)>)
+  arg(questId,<eval tag(itemDClick[<eval arg(i)>])>)
+  if ((<argv(0).baseID> == <tag(quest_subjectId[<arg(questId)>])>) || (<argv(0).type> == <tag(quest_subjectId[<arg(questId)>])>))
+    if (f_weekly_increase(<arg(questId)>,<argv(0).amount>))
+      f_weekly_removeItem(<arg(i)>,e_weekly_itemPickupPack,PickupPack)
+    endif
+    return
+  endif
+  arg(i,#+1)
+endwhile
+
+/////////////////////////////
 [events e_weekly_quest]
 ON=@login
-f_check_time_to_end
+f_weekly_checkExpiracy
 if (findid(i_memory_weekly_quest))
   arg(memory_weekly,<findid(i_memory_weekly_quest)>)
   arg(time_to_end,<SectoDays(<eval (<memory_weekly.tag(cas_konec)>-<serv.time>)>)>)
   src.classmessage("Stale plnim Weekly Quest. Do konce zbyva <time_to_end>")
 endif
-
-ON=@itemUserDClick
-//if ((act.type==t_food) || (act.type==t_fruit))
-//  if (<eval src.food> < <eval src.def.maxfood>) && (<act.distance> < 5)
-//    if (act.type==t_food)
-//      if (f_weekly_quest_check_finish(1,<act.baseID>))
-//        src.say("<act.name> <act.type>")  // 1 - snez jidlo
-//        f_weekly_quest_check_increase(1,1)
-//      endif
-//    elseif (act.type==t_fruit)
-//      if (f_weekly_quest_check_finish(2,<act.baseID>))
-//        src.say("<act.name> <act.type>")  // 2 - snez ovoce
-//        f_weekly_quest_check_increase(2,1)
-//      endif
-//    endif
-//  else
-//    say("Jsi prilis syty na snezeni tohoto jidla")
-//  endif
-//endif
-//if (act.type==mit_main)  // magicky vacek(vsechny urovne)
-//  if (<act.distance> < 5)
-//    if (f_weekly_quest_check_finish(109)
-//      src.say("<act.name> <act.type>")  // 109 - Otevri magicky vacek
-//      f_weekly_quest_check_increase(109,1)
-//    endif
-//  endif
-//endif
-//
-//if ((act.type==t_speedpotions) || (act.type==t_allpotions))
-//  if (serv.time><eval src.tag.nextpotion>)
-//    if (act.typedef.Baseid==i_potion_nightsight)  // 4 - vypij potion svetla
-//      if (f_weekly_quest_check_finish(4))
-//        say("SVETLO: <act.name>")
-//        f_weekly_quest_check_increase(4,1)
-//      endif
-//    else  // 5 - vypij jakykoli jiny potion nez svetlo
-//      if (f_weekly_quest_check_finish(5))
-//        say("Jiny potion nez svetlo:  <act.name>")
-//        f_weekly_quest_check_increase(5,1)
-//      endif
-//    endif
-//    if (f_weekly_quest_check_finish(3)) // 3 - vypij potion (jakykoli)
-//      say("Vypij jakykoli potion:  <act.name>")
-//      f_weekly_quest_check_increase(3,1)
-//    endif
-//  endif
-//endif
 
 on=@itemPICKUP_PACK  // lootuj z monster
 //if (<eval act.tag(iic_owner)> > 0)  // jeste nikdo nelotl z tela monstra
@@ -687,21 +699,15 @@ if (src.tag(weekly_quest_11) == 1)  // ma zadany tento miniquest
   endif
 endif
 
-//(tag(weekly_quest[new_quest]) == 1)
-//tag(weekly_quest_amount[<argv(0)>],<qAmount>)
-//tag(weekly_quest_completed[<argv(0)>],0)
-
 // returns 1 if the quest gets completed
 // returns 0 if the quest is not yet completed
 [function f_weekly_increase]  // argv(0)-cislo miniquestu, argv(1)-pridavek
-cont.say("Cislo miniquestu: /<argv(0)>/, pridam +/<argv(1)>/")
-cont.say("Splneno mam: <tag(quest_completed[<argv(0)>])>, Potrebuju: <tag(quest_totalAmount[<argv(0)>])>")
+cont.accMsg("Hrac <cont.name> (<cont>) navysuje hodnotu plneneho weekly questu c. <argv(0)> o <argv(1)> bodu. Object: <tag(quest_subjectId[<argv(0)>])>")
 if ((<eval <tag(quest_completed[<argv(0)>])>+<argv(1)>>) >= <tag(quest_totalAmount[<argv(0)>])>)  // kdyz narust serovna a nebo presahne maximalni pozadovany pocet
-  cont.say("TEST1")
   arg(retVal,1)
   tag(quest_completed[<argv(0)>],<tag(quest_totalAmount[<argv(0)>])>)  // tak aktualni stav se bude rovnat maximalnimu pozadovanemu poctu
+  cont.accMsg("Hrac <cont.name> (<cont>) splnil quest c. <argv(0)>.") // TODO: Odmena
 else  // a kdyz ne..
-  cont. say("TEST2")
   arg(retVal,0)
   tag(quest_completed[<argv(0)>],<eval <tag(quest_completed[<argv(0)>])>+<argv(1)>>)  // zvysime o pozadovanou hodnotu
 endif
@@ -732,8 +738,6 @@ if (<eval memory_weekly.tag(weekly_quest[<argv(0)>])> == 1)  // ma zadany tento 
 endif
 say("Nema zadano a nebo jiz ma splneno")
 return 0 // nema zadano a nebo jiz ma splneno
-//  tag(quest_subjectId[<argv(0)>],<RandomResult.baseID>)
-//  tag(quest_subjectName[<argv(0)>],<RandomResult.name>)
 
 [function f_weekly_quest_check_increase]  // argv(0)-cislo miniquestu, argv(1)-pridavek
 arg(memory_weekly,<findid(i_memory_weekly_quest)>)
