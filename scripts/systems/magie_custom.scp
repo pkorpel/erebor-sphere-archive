@@ -576,14 +576,14 @@ if(!<eval cont.tag(rfire)>)
    if (<cont.tag(resist_fire)> < 990) && (<cont.tag(resist_fire)> > 19)
      arg(ra_prokleti_ucinnost_temp,<finduid(cont.tag(UIDcastera)).tag(ra_prokleti_ucinnost)>)
      
-     if ( (<arg(ra_prokleti_ucinnost_temp)> > 0) && (<strcmp(<cont.tag(classcastera)>,"necro")>==0) )
-       if (<arg(ra_prokleti_ucinnost_temp)> < 11)
-         arg(resist_fire_temp,<eval((<cont.tag(resist_fire)>*100)*(5+<arg(ra_prokleti_ucinnost_temp)>/2))>/10000)
+     if ( (<eval arg(ra_prokleti_ucinnost_temp)> > 0) && (<strcmp(<cont.tag(classcastera)>,"necro")>==0) )
+       if (<eval arg(ra_prokleti_ucinnost_temp)> < 11)
+         arg(resist_fire_temp,<eval((<eval cont.tag(resist_fire)>*100)*(5+<eval arg(ra_prokleti_ucinnost_temp)>/2))>/10000)
        else
-         arg(resist_fire_temp,<eval((<cont.tag(resist_fire)>*100)*(5+<arg(ra_prokleti_ucinnost_temp)>/2))>/10000)
+         arg(resist_fire_temp,<eval((<eval cont.tag(resist_fire)>*100)*(5+<eval arg(ra_prokleti_ucinnost_temp)>/2))>/10000)
        endif                                            
      else
-       arg(resist_fire_temp,<eval((<cont.tag(resist_fire)>*100*5))>/10000) 
+       arg(resist_fire_temp,<eval((<eval cont.tag(resist_fire)>*100*5))>/10000) 
      endif
      tag(temp_ability_resist,<arg(resist_fire_temp)>)
      cont.tag(resist_fire,#-<arg(resist_fire_temp)>)
