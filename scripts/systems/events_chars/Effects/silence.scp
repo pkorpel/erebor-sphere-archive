@@ -21,7 +21,7 @@ if (<argv(0)> == 1)
   endif
   
   if (chance(<arg(chance)>,3))
-    src.classmessage("Umlcel jsi cil.")  
+    src.classmessage("<src.sex(Umlcel,Umlcela)> jsi cil.")  
     arg(silenced_time,<eval <eval src.tag(ra_mind_blast_silenced_time)>+nastaveni_spellcast_silence_mind_blast>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
   
     if (strlen(<findid(i_silencer)>))  // jiz je silencnuty, prodlouzime tedy timer
