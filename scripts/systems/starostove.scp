@@ -1279,7 +1279,7 @@ endif
 
 [function muj_kamen]
 if(<args>==<link>)
-  var(myTimeNextAdept,<tag(nextTimeAdept)>)
+  return<eval tag(nextTimeAdept)>
 endif
 
 [function pristi_vyhozeni]
@@ -2013,14 +2013,15 @@ endif
 
 on=8//navrhnout obcana mesta
 if (f_star_checkrightsmes(2))
- arg(myNextTimeAdept,<finduid(<tag(citizenscont)>).contents(muj_kamen(<src>))>)  
- if(<eval(<myNextTimeAdept>)> < <serv.time>)
+ arg(myNextTimeAdept,<eval finduid(<tag(citizenscont)>).contents(muj_kamen(<src>))>) 
+ if(<eval arg(myNextTimeAdept)> < <serv.time>)
    src.newitemsafe(i_target_town)
    lastnew.link=<uid>
    lastnew.more1=8
    lastnew.equip
  else
    src.sysmessage("Navrhnout na obcana muzes jen jednou tydne.")
+   src.sysmessage("Pristi navrh muzes za <SectoDays(<eval (<eval (<arg(myNextTimeAdept)>-<serv.time>)>)/10>)>")
  endif
 endif
 
