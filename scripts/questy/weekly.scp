@@ -1,10 +1,7 @@
 [defnames def_weekly_quest]
-//def_weekly_count_low  11 // pocet low miniquestu
-//def_weekly_count_medium  10 // pocet medium miniquestu
-//def_weekly_count_high  5 // pocet high miniquestu
-def_weekly_count_low  3 // pocet low miniquestu
-def_weekly_count_medium  1 // pocet medium miniquestu
-def_weekly_count_high  1 // pocet high miniquestu
+def_weekly_count_low  4 // pocet low miniquestu
+def_weekly_count_medium  3 // pocet medium miniquestu
+def_weekly_count_high  3 // pocet high miniquestu
 
 
 // LOW quests
@@ -20,9 +17,13 @@ def_weekly_low_setupFunArg_1_[1]   low //druhy argument setup funkce
 
 def_weekly_low_setupFunction[2]    f_weekly_setup_drinkPotion
 def_weekly_low_setupFunArgn[2]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_2_[0]   t_potion //prvni argument setup funkce
-def_weekly_low_setupFunArg_2_[1]   6 //druhy argument setup funkce
+def_weekly_low_setupFunArg_2_[0]   RANDOM_POTION_BOOST_LESS //prvni argument setup funkce
+def_weekly_low_setupFunArg_2_[1]   2 //druhy argument setup funkce
 
+def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion
+def_weekly_low_setupFunArgn[3]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArg_3_[0]   t_potion //prvni argument setup funkce
+def_weekly_low_setupFunArg_3_[1]   2 //druhy argument setup funkce
 
 // MEDIUM quests
 def_weekly_medium[0]
@@ -31,6 +32,15 @@ def_weekly_medium_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_0_[0]   random_food //prvni argument setup funkce
 def_weekly_medium_setupFunArg_0_[1]   medium //druhy argument setup funkce
 
+def_weekly_medium_setupFunction[1]    f_weekly_setup_drinkPotion
+def_weekly_medium_setupFunArgn[1]     2 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_1_[0]   t_potion //prvni argument setup funkce
+def_weekly_medium_setupFunArg_1_[1]   4 //druhy argument setup funkce
+
+def_weekly_medium_setupFunction[2]    f_weekly_setup_drinkPotion
+def_weekly_medium_setupFunArgn[2]     2 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_2_[0]   RANDOM_POTION_BOOST //prvni argument setup funkce
+def_weekly_medium_setupFunArg_2_[1]   4 //druhy argument setup funkce
 
 // HIGH quests
 def_weekly_high[0]
@@ -39,6 +49,15 @@ def_weekly_high_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_0_[0]   random_food //prvni argument setup funkce
 def_weekly_high_setupFunArg_0_[1]   high //druhy argument setup funkce
 
+def_weekly_high_setupFunction[1]    f_weekly_setup_drinkPotion
+def_weekly_high_setupFunArgn[1]     2 // pocet argumentu setup funkce
+def_weekly_high_setupFunArg_1_[0]   t_potion //prvni argument setup funkce - jakykoliv potion
+def_weekly_high_setupFunArg_1_[1]   6 //druhy argument setup funkce
+
+def_weekly_high_setupFunction[2]    f_weekly_setup_drinkPotion
+def_weekly_high_setupFunArgn[2]     2 // pocet argumentu setup funkce
+def_weekly_high_setupFunArg_2_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument setup funkce
+def_weekly_high_setupFunArg_2_[1]   6 //druhy argument setup funkce
 
 [itemdef i_memory_weekly_quest]
 name=Weekly Quest memory
@@ -120,20 +139,15 @@ while (<i> < <eval tag(qCount)>)
   elseif (<i> <= 5)
     arg(new_quest,<eval {1 def_weekly_count_medium}>)
     arg(quest_level,medium)
-    //arg(new_quest,#+100)  // +100 k nazvu, aby se rozpoznaly Medium od Low questu
   elseif (<i> <= 7)
     arg(new_quest,<eval {1 def_weekly_count_high}>)
     arg(quest_level,high)
-    //arg(new_quest,#+1000)  // +1000 k nazvu, aby se rozpoznaly High od Medium a Low questu
   endif
   arg(new_quest,#-1)
   src.say("Quest: <new_quest>, <quest_level>")
-  //if (tag(weekly_quest[new_quest]) == 1)  // kontrola, aby nebyl tentyz quest vygenerovan vicekrat.
-  //  src.say("Tento quest jiz mas, generuji novy")
-  //else
-    f_weekly_setQuest(<arg(new_quest)>,<arg(quest_level)>)
-    arg(i,#+1)
-  //endif
+  // TODO: kontrola jedinecnosti (nezadat 2x stejny quest)
+  f_weekly_setQuest(<arg(new_quest)>,<arg(quest_level)>)
+  arg(i,#+1)
 endwhile
 
 [function f_weekly_setQuestAmount]
@@ -157,7 +171,7 @@ return<findres(itemdef,<argv(0)>)>
 //  * quest_subjectId   // the ID of an item that represents the quest
 
 [function f_weekly_setup_eatFood] // argv(0) - id jidla ke snezeni // argv(1) - level questu
-src.sysMessage("setting up food (<argv(0)>) for level: <tag(playerLevel)>")
+src.sysMessage("setting up food (<argv(0)>) for quest level: <argv(1)>")
 arg(currentQNumber,<eval tag(qAssigned)>)
 arg(finalFoodItemdef,<f_getFinalItemId(<argv(0)>)>)
 
@@ -165,30 +179,28 @@ arg(qTotalAmount,<?eval (<eval (<tag(qCount)>*{5 <eval 2+<tag(qCount)>>})>/<?<ar
 if (<arg(qTotalAmount)> <= 0)
   arg(qTotalAmount,1)
 endif
-src.say("KS: <arg(qTotalAmount)>")
-src.say("FOOD: <?<arg(finalFoodItemdef)>.name?> <?arg(finalFoodItemdef)?> <?<arg(finalFoodItemdef)>.type?> <?<arg(finalFoodItemdef)>.weight?>")
 
 f_weekly_addItem(<currentQNumber>,e_weekly_itemDClick,itemDClick)
 tag(quest_totalAmount[<currentQNumber>],<arg(qTotalAmount)>)
-tag(quest_description[<currentQNumber>],"Snez jidlo: <?<arg(finalFoodItemdef)>.name?>")
+tag(quest_description[<currentQNumber>],"Snez jidlo:<br><?<arg(finalFoodItemdef)>.name?>")
 tag(quest_subjectId[<currentQNumber>],<finalFoodItemdef.def.baseID>)
 
 [function f_weekly_setup_drinkPotion] // argv(0) id/type potionu k vypiti // argv(1) - amount multiplier
-src.sysMessage("setting up drink potion (<argv(0)>) for level: <tag(playerLevel)>")
+src.sysMessage("setting up drink potion (<argv(0)>) for multiplier: <argv(1)>")
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,e_weekly_itemDClick,itemDClick)
 tag(quest_totalAmount[<currentQNumber>],<eval (<tag(qCount)>*{<argv(1)> <eval ((<argv(1)>-2)+<tag(qCount)>)>})>)
-tag(quest_subjectId[<currentQNumber>],<argv(0)>)
-if (!strmatch(<argv(0)>,i_*))
-  tag(quest_iconId[<currentQNumber>],<i_bottle_empty>)
-  arg(descrName,"libovolny")
-else
-  arg(descrName,"<?<arg(finalFood)>.name?>")
-else
-else
+if (strmatch(<argv(0)>,t_*)) // typedef -> general potion
+  arg(finalPotionDef,<argv(0)>)
+  tag(quest_iconId[<currentQNumber>],0F0E)
+  arg(descrName,"-- jakykoliv --")
+else // specific potion
+  arg(finalPotionDef,<f_getFinalItemId(<argv(0)>)>)
+  arg(descrName,"<?<arg(finalPotionDef)>.name?>")
 endif
-tag(quest_description[<currentQNumber>],"Vypij potion: <arg(descrName)>")
+tag(quest_subjectId[<currentQNumber>],<arg(finalPotionDef)>)
+tag(quest_description[<currentQNumber>],"Vypij lektvar:<br><?arg(descrName)?>")
 
 //elseif (<argv(0)> == 3)  // 3 - Vypij jakykoli potion
 //  arg(qAmount,<eval (<tag(qCount)>*{6 <eval 4+<tag(qCount)>>})>)
@@ -223,7 +235,6 @@ tag(quest_id[<eval tag(qAssigned)>],<argv(0)>)    // the ID of a quest for later
 <def_weekly_<argv(1)>_setupFunction[<eval argv(0)>]>(<arg(arguments)>)
 tag(qAssigned,<eval tag(qAssigned)+1>)
 return 1
-//tag(weekly_quest[new_quest],1)
 
 ///////////////////////////////////// NOT EXECUTED
 //arg(qAmount,0)
@@ -474,6 +485,12 @@ endif
 ////////////////////////////////////////////////////////////
 // E V E N T S 
 
+[function f_weekly_clearEvents]
+events=-e_weekly_itemPickupPack
+events=-e_weekly_itemDclick
+
+/////////////////////////////
+
 [events e_weekly_itemDclick]
 ON=@itemUserDClick
 findid(i_memory_weekly_quest).f_weekly_itemDClick(<act>)
@@ -711,7 +728,7 @@ else  // a kdyz ne..
   arg(retVal,0)
   tag(quest_completed[<argv(0)>],<eval <tag(quest_completed[<argv(0)>])>+<argv(1)>>)  // zvysime o pozadovanou hodnotu
 endif
-cont.classmessage("Splneno <tag(quest_completed[<argv(0)>])>/<tag(quest_totalAmount[<argv(0)>])>")
+cont.classmessage("<cont.sex(Splnil,Splnila)> jsi ukol tydenniho questu: <tag(quest_completed[<argv(0)>])>/<tag(quest_totalAmount[<argv(0)>])>")
 return<arg(retVal)>
 
 [function f_weekly_quest_check_finish]  // argv(0)-cislo miniquestu, argv(1)-specialni podminka

@@ -127,11 +127,14 @@ RANDOM_MISSILE         { i_bow 1 i_crossbow 1 i_crossbow_heavy 1 }
 RANDOM_WEAPON          { RANDOM_AXE 7 RANDOM_POLE_ARM 5 RANDOM_MACE 5 RANDOM_SWORD 8 RANDOM_STAFF 2 RANDOM_DAGGER 2 RANDOM_MISSILE 3 }
 
 [DEFNAMES ITEMS_OTHER]
-RANDOM_LIGHT			{ i_CANDLE 1 i_TORCH 1 i_LANTERN 1 }
-random_fishing_junk		{ i_FISHING_WEIGHT 1 i_FISHING_POLE 1 i_fish_cut_raw 1 i_FISH_RAW_HEAD 1 i_FISH_SMALL 1 i_FISH_BIG_1 1 i_FISH_BIG_2 1 i_FISH_BIG_3 1 i_FISH_BIG_4 1 }
+RANDOM_LIGHT           { i_CANDLE 1 i_TORCH 1 i_LANTERN 1 }
+random_fishing_junk    { i_FISHING_WEIGHT 1 i_FISHING_POLE 1 i_fish_cut_raw 1 i_FISH_RAW_HEAD 1 i_FISH_SMALL 1 i_FISH_BIG_1 1 i_FISH_BIG_2 1 i_FISH_BIG_3 1 i_FISH_BIG_4 1 }
 
 [DEFNAMES POTIONS]
-RANDOM_POTION			{ i_bottle_empty 1 i_potion_refresh 1 i_potion_agility 1 i_potion_nightsight 1 i_potion_heal 1 i_potion_strength 1 i_potion_poison 1 i_potion_cure 1 i_potion_explosion 1 }
+RANDOM_POTION             { i_bottle_empty 1 i_potion_refresh 1 i_potion_agility 1 i_potion_nightsight 1 i_potion_heal 1 i_potion_strength 1 i_potion_poison 1 i_potion_cure 1 i_potion_explosion 1 }
+RANDOM_POTION_BOOST       { i_potion_refresh 1 i_potion_agility 1 i_potion_heal 1 i_potion_strength 1 i_potion_cure 1 i_potion_cure 1 }
+RANDOM_POTION_BOOST_LESS  { i_potion_refreshLess 1 i_potion_agilityLess 1 i_potion_healLess 1 i_potion_strengthLess 1 i_potion_cureLess 1 i_potion_cureLess 1 }
+RANDOM_POTION_BOOST_GREAT { i_potion_refreshGreater 1 i_potion_agilityGreat 1 i_potion_healGreat 1 i_potion_strengthGreat 1 i_potion_cureGreat 1 i_potion_cureGreat 1 }
 
 [DEFNAMES ITEMS_MISC]
 random_instrument      { i_drum 1 i_tambourine 1 i_lyre 1 i_lute 1 }

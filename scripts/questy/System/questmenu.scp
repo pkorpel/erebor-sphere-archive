@@ -33,8 +33,8 @@ f_q030_checkOldTags
 
 [defnames questy_seznam]
 questMenu_questStone  0400416B7
-questMenu_color_questActive        52
-questMenu_color_questInactive      1000
+questMenu_color_questActive        #FFFFA7
+questMenu_color_questInactive      #383838
 questMenu_rows  53
 //          |     Nazev questu     |           dialogName           |  1=qtag, 0=tag  |  relevantni tagy
 questMenu[0]  Zemedelec Borek           ,d_questy_borek                     ,1         ,gq002, mq002
@@ -45,7 +45,7 @@ questMenu[4]  Kuchar Mrkvicka           ,d_questy_kuchar                    ,0  
 questMenu[5]  Lecitel Ceren             ,d_questy_lavovyjester              ,0         ,q1_lavovyjester, q1_neuspel
 questMenu[6]  Haradirovo selatko        ,d_questy_Haradirovo_selatko        ,1         ,q007_haradirovo_selatko
 questMenu[7]  Kniha inskripce           ,d_questy_kniha_inscripce           ,1         ,q007_stary_inscripter
-questMenu[8]  Adamant. kladivko         ,d_questy_adamantinove_kladivko     ,1         ,q007_prastary_kovar
+questMenu[8]  Adamantinove kladivko     ,d_questy_adamantinove_kladivko     ,1         ,q007_prastary_kovar
 questMenu[9]  Mastickar Gregoriel       ,d_questy_mastickar                 ,1         ,q010_mastickar
 questMenu[10] Prekupnik Hruon           ,d_questy_prekupnik                 ,0         ,gq011_prekupnik, gq011_neuspel
 questMenu[11] Prekupnik Akranon         ,d_questy_prekupnik                 ,0         ,mq011_prekupnik, mq011_neuspel
@@ -153,7 +153,9 @@ while (<questNumber> < <questMenu_rows>)
     f_qm_setOffsetAndPaging(10,30)
     arg(posY,<tag(yPos)>)
     button(<arg(middle)>-43,<arg(posY)>,<g_btn_background[1]>,<g_btn_background[5]>,1,0,<eval <questNumber>+1000>)
-    newTextLine(<arg(middle)>-32,<arg(posY)>+2,<questMenu_color_questActive>,<f_questMenu_getName(<questMenu[<questNumber>]>)>) //1152
+    setText(newTextLine,"<basefont color=<?questMenu_color_questActive?>><?f_questMenu_getName(<questMenu[<questNumber>]>)?>")
+    htmlGump(<arg(middle)>-32,<arg(posY)>+2,150,20,<lastTextLine>,0,0)
+    //newTextLine(<arg(middle)>-32,<arg(posY)>+2,<questMenu_color_questActive>,<f_questMenu_getName(<questMenu[<questNumber>]>)>) //1152
   endif
   arg(questNumber,#+1)
 endwhile
@@ -162,8 +164,6 @@ endwhile
 newTextLine(<eval (<questMenu_width>/2)-4>,45,<d_def_subheadcolor>,"Tydenni Questy")
 f_questMenu_sectionButton(1)
 arg(stepSize,54)
-arg(yImgOffset,6)
-arg(yTxtOffset,10)
 arg(qCount,<src.weeklyTag(qCount)>)
 
 arg(qNum,0)
@@ -172,7 +172,7 @@ while (<arg(qNum)> < <arg(qCount)>)
   arg(completed,<eval src.weeklyTag(quest_completed[<arg(qNum)>])>)
   arg(totalAmount,<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>)
   if (arg(completed) < arg(totalAmount))
-    f_qm_weeklyAddDialogItem(#D7DF01,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
+    f_qm_weeklyAddDialogItem(<questMenu_color_questActive>,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
   else
     arg(hasCompleted,1)
   endif
@@ -188,12 +188,14 @@ while (<arg(qNum)> < <arg(qCount)>)
   arg(completed,<eval src.weeklyTag(quest_completed[<arg(qNum)>])>)
   arg(totalAmount,<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>)
   if (arg(completed) == arg(totalAmount))
-    f_qm_weeklyAddDialogItem(#AAAAAA,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
+    f_qm_weeklyAddDialogItem(<questMenu_color_questInactive>,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
   endif
   arg(qNum,#+1)
 endwhile
 
 [function f_qm_weeklyAddDialogItem] // argv(0) color, argv(1) qnum, argv(2) step size, argv(3) - completed, argv(4) - totalAmount
+arg(yTxtOffset,8)
+arg(yImgOffset,6)
 arg(font,"<?safe?><basefont size=4 color=<?argv(0)?>>")
 arg(fontSm,"<?safe?><basefont size=1 color=<?argv(0)?>>")
 f_qm_setOffsetAndPaging(4,<argv(2)>)
@@ -2461,7 +2463,7 @@ endif
 
 
 [function f_questMenu_getName]
-return<argv(0)?>
+return<argv(0)>
 
 [function f_questMenu_getDialog]
 return<argv(1)>

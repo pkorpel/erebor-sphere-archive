@@ -2355,6 +2355,7 @@ accMsg("hrac(<name>,<uid>,<p>,<region.name>) kouzli kouzlo (<spellDescription[<a
 on=@spellEffect
 tag(combatSource,<src>)
 
+on=@DrinkingPotion
 on=@beforegetswing
 on=@afterswing
 on=@userkill
