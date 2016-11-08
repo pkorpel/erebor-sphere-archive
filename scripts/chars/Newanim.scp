@@ -200,7 +200,7 @@ ITEMNEWBIE=i_monster_create
 ON=@NPCRestock
 item=i_gold{700 999}
 
-[CHARDEF 031]
+[CHARDEF 070]
 DEFNAME=c_test7
 NAME=Phantom Assasin
 ICON=i_pet_MAN
@@ -334,7 +334,7 @@ ITEMNEWBIE=i_monster_create
 ON=@NPCRestock
 item=i_gold{700 999}
 
-[CHARDEF 070]
+[CHARDEF 040]
 DEFNAME=c_test9
 NAME=Mini drak
 ICON=i_pet_MAN
