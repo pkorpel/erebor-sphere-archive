@@ -2327,8 +2327,8 @@ ITEM=i_gold
 //// sand monstra ////
 ///////////////////////////////////////////////
 
-[chardef 0314]
-defname=c_Sphynx
+[chardef c_Sphynx]
+id=c_m_sphinx
 name=Sphynx
 SOUND=snd_ANIMALS_CAT1
 ICON=i_pet_wolf
