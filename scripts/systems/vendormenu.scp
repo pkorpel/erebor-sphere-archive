@@ -1,5 +1,7 @@
 [defnames vendor_constants]
 def_vendor_baseRent    30000
+def_vendor_drazba      6048000
+def_vendor_drazba_max  6048000
 
 [function findvendorplac]
 if (isvendorplac)
@@ -353,34 +355,34 @@ endif
 
 //nasledujici konstrukce zamerne nepouziva elseifu protoze nejak nefungujou (neprovadeji se), proto je to tak 
 //komplikovany
-if(<link.tag(drazba)>) //probiha-li drazba
- if(<link.more1>==01) //majitelem jsem ja - drazba jen 1 tyden
-  arg(doba,6048000) 
-  arg(max_doba,6048000)
+if (<link.tag(drazba)>) //probiha-li drazba
+ if (<link.more1>==01) //majitelem jsem ja - drazba jen 1 tyden
+  arg(doba,<def_vendor_drazba>) 
+  arg(max_doba,<def_vendor_drazba_max>)
  else //klasicke 3+1 tyden
-  arg(doba,6048000) // bylo 18144000
-  arg(max_doba,6048000) // bylo 24192000
+  arg(doba,<def_vendor_drazba>) // bylo 18144000
+  arg(max_doba,<def_vendor_drazba_max>) // bylo 24192000
  endif
  arg(doba_od_zacatku_drazby,<eval <serv.time>-<link.tag(zacatekdrazby)>>)
- if(<arg(doba_od_zacatku_drazby)> > <arg(doba)>)&&(finduid(<link.more1>).isgm) //prvni drazba noveho stanku, majitelem jsem ja
+ if (<arg(doba_od_zacatku_drazby)> > <arg(doba)>)&&(finduid(<link.more1>).isgm) //prvni drazba noveho stanku, majitelem jsem ja
   konec_drazby
   return 1	
  endif
- if((<arg(doba_od_zacatku_drazby)> >= <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> <= <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.more1>)) //dele nez (18144000)3 tydny&&kratsi dobu nez (24192000) 4 tydny&&nejvyssi nabidka neni od majitele&&klikatel na ceduli je majitel
+ if ((<arg(doba_od_zacatku_drazby)> >= <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> <= <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.more1>)) //dele nez (def_vendor_drazba)&&kratsi dobu nez def_vendor_drazba_max &&nejvyssi nabidka neni od majitele&&klikatel na ceduli je majitel
   src.redmessage(Na dorovnani nabidky ti zbyva <f_vend_zbyva_casu>)
   link.dialog d_vendor_menu
   return 1
  endif
- if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.tag(zajemce)>)) //doba drazby delsi nez (24192000) 4 tydny&&nejvyssi nabidka neni od majitele&&kliknul si ten co nabidl nejvic
+ if ((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.tag(zajemce)>)) //doba drazby delsi nez def_vendor_drazba_max&&nejvyssi nabidka neni od majitele&&kliknul si ten co nabidl nejvic
   konec_drazby
   return 1
  endif
- if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.more1>)) //konec drazby&&majitel nestihl dorovnat&&klikl majitel
+ if ((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>!=<link.more1>)&&(<src>==<link.more1>)) //konec drazby&&majitel nestihl dorovnat&&klikl majitel
   src.sysmessage("<src.sex(Nestihl,Nestihla)> jsi dorovnat nabidku. Stanek ti uz nepatri")
   konec_drazby
   return 1
  endif
- if((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>==<link.more1>)&&(<src>==<link.tag(zajemce)>)) //doba drazby > (2419200) 4 tydny&&majitel stihl dorovnat&&klikatel je sam majitel
+ if ((<arg(doba_od_zacatku_drazby)>> <arg(max_doba)>)&&(<link.tag(zajemce)>==<link.more1>)&&(<src>==<link.tag(zajemce)>)) //doba drazby > (2419200) 4 tydny&&majitel stihl dorovnat&&klikatel je sam majitel
   src.sysmessage(Drazba skoncila, majitelem zustavas ty)
   src.sysmessage(Najem prepocten a pridan jeden mesic)    
   link.tag(drazba,0) //konec drazby
@@ -397,16 +399,16 @@ if(<link.tag(drazba)>) //probiha-li drazba
   link.DIALOG d_vendor_menu
   return 1
  endif
- if((<arg(doba_od_zacatku_drazby)> >= <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> <= <arg(max_doba)>)&&(<src>!=<link.more1>)&&(!(src.isgm))) //doba drazby >(1814400)3 tydny&&kratsi nez (2419200)4 tydny&&kliknul nekdo jinej nez majitel&&a nekliknul GM   
+ if ((<arg(doba_od_zacatku_drazby)> >= <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> <= <arg(max_doba)>)&&(<src>!=<link.more1>)&&(!(src.isgm))) //doba drazby >(1814400)3 tydny&&kratsi nez (2419200)4 tydny&&kliknul nekdo jinej nez majitel&&a nekliknul GM   
    src.sysmessage(Prihazovat jiz nemuzes, majitel ma na dorovnani nabidky <f_vend_zbyva_casu>)
    return 1
  endif  
- if((<arg(doba_od_zacatku_drazby)> > <arg(max_doba)>)&&(<src>!=<link.more1>)&&(<src>!=<link.tag(zajemce)>)&&(!(src.isgm))) //doba drazby >(24192000) 4tydny&&neklikl majitel&&neklikl nejvyssi nabidka&&neklikl GM
+ if ((<arg(doba_od_zacatku_drazby)> > <arg(max_doba)>)&&(<src>!=<link.more1>)&&(<src>!=<link.tag(zajemce)>)&&(!(src.isgm))) //doba drazby def_vendor_drazba_max&&neklikl majitel&&neklikl nejvyssi nabidka&&neklikl GM
   src.sysmessage(Konec drazby, nejsi majitelem stanku ani jsi neucinil nejvyssi nabidku, nezbyva ti, nez to zkusit priste)   
   konec_drazby
   return 1
  endif
- if((<arg(doba_od_zacatku_drazby)> > <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> < <arg(max_doba)>)&&(<link.tag(zajemce)>==<link.more1>)&&(<src>==<link.more1>)) //dele nez (18144000)3 tydny&&kratsi dobu nez (24192000) 4 tydny&&nejvyssi nabidka je uz od majitele&&klikatel na ceduli je majitel
+ if ((<arg(doba_od_zacatku_drazby)> > <arg(doba)>)&&(<arg(doba_od_zacatku_drazby)> < <arg(max_doba)>)&&(<link.tag(zajemce)>==<link.more1>)&&(<src>==<link.more1>)) //dele nez (def_vendor_drazba) tydny&&kratsi dobu nez def_vendor_drazba_max&&nejvyssi nabidka je uz od majitele&&klikatel na ceduli je majitel
   src.sysmessage(Nabidka je dorovnana, do konce ctvrteho tydne zbyva <f_vend_zbyva_casu>)
   link.dialog d_vendor_menu
   return 1
@@ -455,8 +457,8 @@ endif
 DIALOG d_vendor_menu
 
 [function f_vend_zbyva_casu]
-arg(doba_od_konce_3tydnu,<eval ((<serv.time>-<link.tag(zacatekdrazby)>)-18144000)>) //celk.doba - 3 tydny   
-arg(zbyva_casu,<eval ((24192000-18144000)-arg(doba_od_konce_3tydnu))>) //1 tyden - uplynula doba z nej
+arg(doba_od_konce_3tydnu,<eval ((<serv.time>-<link.tag(zacatekdrazby)>)-<def_vendor_drazba>)>) //celk.doba - def_vendor_drazba_max
+arg(zbyva_casu,<eval ((<def_vendor_drazba_max>-<def_vendor_drazba>)-arg(doba_od_konce_3tydnu))>) //def_vendor_drazba_max - uplynula doba z nej
 arg(dnu,<eval (arg(zbyva_casu)/864000)>) //den ma 86400s (tohle je v decisekundach)
 arg(hodin,<eval ((arg(zbyva_casu)-(arg(dnu)*864000))/36000)>) //hodina ma 3600s
 arg(minut,<eval (((arg(zbyva_casu)-(arg(dnu)*864000))-(arg(hodin)*36000))/600)>)
@@ -598,7 +600,7 @@ if (f_vend_checkrightsmes(2))
     input(Jaka ma byt nabidka? nejmene <eval <tag(najem)>+<def_vendor_baseRent>> ,f_vend_prihod_gm,<eval <def_vendor_baseRent>+<tag(najem)>>)
   else //probiha-li drazba
     arg(uplynula_doba_drazby,<serv.time>-<eval tag(zacatekdrazby)>)
-    if(<arg(uplynula_doba_drazby)> < 18144000) //cas od zacatku drazby je mensi nez tri tydny (3*7*24*3600*10=18144000)
+    if(<arg(uplynula_doba_drazby)> < <def_vendor_drazba>) //cas od zacatku drazby je mensi nez def_vendor_drazba
       input(Nova nabidka? nejmene <eval <tag(nabidka)>+<def_vendor_baseRent>> ,f_vend_prihod_gm,<eval <def_vendor_baseRent>+<tag(nabidka)>>) 
     else
       src.sysmessage(Drazba uz skoncila)
@@ -775,7 +777,7 @@ if (f_vend_checkrightsmes(0))
       input(Jaka ma byt prvni nabidka? nejmene <eval <tag(najem)>+<def_vendor_baseRent>>,f_vend_prihod,<eval <def_vendor_baseRent>+<tag(najem)>>)     
     else //probiha-li drazba
       arg(uplynula_doba_drazby,<serv.time>-<eval tag(zacatekdrazby)>)
-      if(<arg(uplynula_doba_drazby)> < 18144000) //cas od zacatku drazby je mensi nez tri tydny (3*7*24*3600*10=18144000)
+      if(<arg(uplynula_doba_drazby)> < <def_vendor_drazba>)
          input(Nova nabidka? nejmene <eval <tag(nabidka)>+<def_vendor_baseRent>> ,f_vend_prihod,<eval <def_vendor_baseRent>+<tag(nabidka)>>)
       else
         src.sysmessage(Drazba uz skoncila)
@@ -1067,12 +1069,8 @@ else
 endif
 
 [function f_vend_cas_do_konce_drazby]
-if(finduid(<more1>).isgm)
- arg(celkem,6048000)
-else
- arg(celkem,18144000)
-endif
-arg(zbyva_casu,<eval ((<tag(zacatekdrazby)>+<celkem>)-<serv.time>)>) //celkova doba - 3 nebo 1(majitelem GM) tydny(en) co trvala drazba
+arg(celkem,<def_vendor_drazba>)
+arg(zbyva_casu,<eval ((<tag(zacatekdrazby)>+<celkem>)-<serv.time>)>) //celkova doba - 1 tyden co trvala drazba
 arg(dnu,<eval (arg(zbyva_casu)/864000)>) //den ma 86400s (*10 - decisekundy)
 arg(hodin,<eval ((arg(zbyva_casu)-(arg(dnu)*864000))/36000)>) //hodina ma 3600s
 arg(minut,<eval (((arg(zbyva_casu)-(arg(dnu)*864000))-(arg(hodin)*36000))/600)>)
