@@ -23,21 +23,19 @@ remove
 
 [function isDefined]//arg - hodnota promìnné
 if (safe(<eval (<args>)>))
- return 1
+  return 1
 else
- return 0
+  return 0
 endif
 
 [function hasStaff]//args - material z nehoz ma hul bejt (nebo z lepsiho)
 if (isgm)
- return 1
+  return 1
 endif
 if (findlayer(layer_hand2))
- //if (findlayer(layer_hand2).isstaff)
   if (staff_<findlayer(layer_hand2).baseid> >= material_<args>)
    return 1
   endif
- //endif
 endif
 return 0
 
@@ -78,26 +76,26 @@ sysMessage(Sektor: <sector>)
 
 [function convertbombtypes]
 if (type==t_container)||(type==t_eq_bank_box)
- if (rescount)
-  arg(u,0)
-  while(u < rescount)
-   findcont(u).convertbombtypes
-   arg(u,#+1)
-  endwhile
- endif
-else
- if (dispid==i_bottle_purple)&&(type==t_potion)
-  if (topobj.isplayer)&&(topobj.isonline)
-   src.sysMessage(Nalezena bomba u online hrace <topobj.name> na pozici <topobj.p>) 
+  if (rescount)
+    arg(u,0)
+    while(u < rescount)
+      findcont(u).convertbombtypes
+      arg(u,#+1)
+    endwhile
   endif
-  type=t_potion_bomba 
- endif
+else
+  if (dispid==i_bottle_purple)&&(type==t_potion)
+    if (topobj.isplayer)&&(topobj.isonline)
+      src.sysMessage(Nalezena bomba u online hrace <topobj.name> na pozici <topobj.p>) 
+    endif
+    type=t_potion_bomba 
+  endif
 endif
 
 [function convertbombtypesonplayers]//convertbombtypesonplayers
 if (isplayer)||(isgm)
- findlayer(layer_pack).convertbombtypes //batoh
- findlayer(layer_bankbox).convertbombtypes //banka
+  findlayer(layer_pack).convertbombtypes //batoh
+  findlayer(layer_bankbox).convertbombtypes //banka
 endif
 
 [function arrowend]
@@ -105,53 +103,53 @@ arrowquest 0
 
 [function repairplayers]
 if (isplayer)
- dismount //odkonit 
- consume(1000 t_custom_spell) //lahve
- consume(1000 t_custom_dispellable)
- events(-e_spelleffect)
- spelleffect(41,1000) //dispell
- spelleffect(11,1000) //cure 
- events(+e_spelleffect) 
- say("all stay") //zastavit kone
- eqlayers(cont=<findlayer(layer_pack)>) //svléct
- zakladstats //resetovat
+  dismount //odkonit 
+  consume(1000 t_custom_spell) //lahve
+  consume(1000 t_custom_dispellable)
+  events(-e_spelleffect)
+  spelleffect(41,1000) //dispell
+  spelleffect(11,1000) //cure 
+  events(+e_spelleffect) 
+  say("all stay") //zastavit kone
+  eqlayers(cont=<findlayer(layer_pack)>) //svléct
+  zakladstats //resetovat
 endif
 
 [function keyswipe]
 if (cont.layer==<layer_housemenu>)
- remove
+  remove
 endif
 
 [function removehitching]
 while(findid(i_hitching_memory))
- findid(i_hitching_memory).remove
+  findid(i_hitching_memory).remove
 endwhile
 
 [function equipcontents] //argv0 - komu
 while(rescount)
- arg(itemek,<findcont(0)>)
- itemek.cont=<argv(0)>
- itemek.layer=<itemek.typedef.layer>
- itemek.update
+  arg(itemek,<findcont(0)>)
+  itemek.cont=<argv(0)>
+  itemek.layer=<itemek.typedef.layer>
+  itemek.update
 endwhile
 
 [function movecontents]//argv0 - kam
 while(rescount)
- arg(itemek,<findcont(0)>)
- itemek.cont=<argv(0)>
- itemek.update
+  arg(itemek,<findcont(0)>)
+  itemek.cont=<argv(0)>
+  itemek.update
 endwhile
 
 [function makeplayernoninvul]
 if (isplayer)&&(flag_invul==1)
- src.sysMessage(Invul byl: <name>)
- invul=0
+  src.sysMessage(Invul byl: <name>)
+  invul=0
 endif
 
 [function makenpcnoninvul]
 if (npc)&&(flag_invul==1)&&(!isvendor)
- src.sysMessage(Invul byl: <name>)
- invul=0
+  src.sysMessage(Invul byl: <name>)
+  invul=0
 endif
 
 [function redeedship]
@@ -179,52 +177,52 @@ target("Zamer svou lod.")
 
 on=@targon_item
 if (src.targ.type==t_ship)
- if (src.targ.more1==src) || (src.isgm)
-  if (!(<src.region.flags>&region_flag_ship))
-   arg(jmeno,<src.targ.name>)
-   src.targ.DeedConvert  
-   arg(deed,<src.act>)
-   deed.name="Sbalena lod bez klice <jmeno>"
-   //deed.dispid=i_deed_ship
-   deed.update
+  if (src.targ.more1==src) || (src.isgm)
+    if (!(<src.region.flags>&region_flag_ship))
+      arg(jmeno,<src.targ.name>)
+      src.targ.DeedConvert  
+      arg(deed,<src.act>)
+      deed.name="Sbalena lod bez klice <jmeno>"
+      //deed.dispid=i_deed_ship
+      deed.update
+    else
+      src.sysMessage("Lod muzes sbalit jen na sousi.")
+    endif
   else
-   src.sysMessage("Lod muzes sbalit jen na sousi.")
-  endif
- else
-  src.redMessage("Musis byt <src.sex(majitelem,majitelkou)> lodi.")
- endif  
+    src.redMessage("Musis byt <src.sex(majitelem,majitelkou)> lodi.")
+  endif  
 else
- src.sysMessage("Zameruj pouze lode.")
+  src.sysMessage("Zameruj pouze lode.")
 endif
 remove
 return 1
 
 [function message_me]
 if (tag(messagescount))
- dialog d_login_messages
- return 1  
+  dialog d_login_messages
+  return 1  
 endif
 
 [function redMessage_me]
 if (tag(redMessagescount))
- dialog d_login_redMessages
- return 1
+  dialog d_login_redMessages
+  return 1
 endif 
 
 [function delayedmessage] //args - text
 if (isonline)&&(uid!=01)&&(uid!=0C)&&(uid!=027f)&&(uid!=02b7c73)&&(uid!=0646af) //pro Desttra, Houbu a Finna vzdy do tabulky, aj Heckovi/y ten je tiez fajnovy, a Herma!
- classmessage("<args>")
+  classmessage("<args>")
 else
  //Do tabulky vzdy - jsou asi slepi takze jim to projistotu budem take ukladat 
  //Takze hovno - nasrat jim, delaj pak moc chytry coz jim neprislusi. Vyskakovat si nebudou
- if (tag(messagescount)) //uz ma nejake zpravy ve fronte
-  arg(dalsi,<eval <tag(messagescount)>+1>)
-  tag(message_<arg(dalsi)>,<args>)
-  tag(messagescount,<arg(dalsi)>)
- else //prvni zprava do fronty
-  tag(messagescount,1)
-  tag(message_<tag(messagescount)>,<args>)  
- endif 
+  if (tag(messagescount)) //uz ma nejake zpravy ve fronte
+    arg(dalsi,<eval <tag(messagescount)>+1>)
+    tag(message_<arg(dalsi)>,<args>)
+    tag(messagescount,<arg(dalsi)>)
+  else //prvni zprava do fronty
+    tag(messagescount,1)
+    tag(message_<tag(messagescount)>,<args>)  
+  endif 
 endif
 
 [function pagereplymessage] //args - text
@@ -245,18 +243,18 @@ endif
 
 [function delayedredMessage] //args - text
 if (isonline)&&(uid!=01)&&(uid!=0C)&&(uid!=027f) //pro Desttra a Houbu, Finna vzdy do tabulky
- redMessage("<args>")
+  redMessage("<args>")
 else
  //Do tabulky vzdy - jsou asi slepi takze jim to projistotu budem take ukladat 
  //Takze hovno - nasrat jim, delaj pak moc chytry coz jim neprislusi. Vyskakovat si nebudou
- if (tag(redMessagescount)) //uz ma nejake zpravy ve fronte
-  arg(dalsi,<eval <tag(redMessagescount)>+1>)
-  tag(redMessage_<arg(dalsi)>,<args>)
-  tag(redMessagescount,<arg(dalsi)>)
- else //prvni zprava do fronty
-  tag(redMessagescount,1)
-  tag(redMessage_<tag(redMessagescount)>,<args>)  
- endif 
+  if (tag(redMessagescount)) //uz ma nejake zpravy ve fronte
+    arg(dalsi,<eval <tag(redMessagescount)>+1>)
+    tag(redMessage_<arg(dalsi)>,<args>)
+    tag(redMessagescount,<arg(dalsi)>)
+  else //prvni zprava do fronty
+    tag(redMessagescount,1)
+    tag(redMessage_<tag(redMessagescount)>,<args>)  
+  endif 
 endif
 
 
@@ -307,7 +305,7 @@ var(pocet_vadnych_spawnu,"")
 
 [function f_smazat_vadne_spawny]
 if (<dispid>==i_pet_wisp)&&(<baseid>==i_worldgem_bit)&&(<type>==t_spawn_char)&&(<more1>==00)
- remove
+  remove
 endif
 
 [function fixNumber]

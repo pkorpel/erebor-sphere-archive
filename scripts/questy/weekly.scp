@@ -1,7 +1,7 @@
 [defnames def_weekly_quest]
-def_weekly_count_low  4 // pocet low miniquestu
+def_weekly_count_low  2 // pocet low miniquestu
 def_weekly_count_medium  3 // pocet medium miniquestu
-def_weekly_count_high  3 // pocet high miniquestu
+def_weekly_count_high  2 // pocet high miniquestu
 
 
 // LOW quests
@@ -15,15 +15,15 @@ def_weekly_low_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_1_[0]   random_fruit //prvni argument setup funkce
 def_weekly_low_setupFunArg_1_[1]   low //druhy argument setup funkce
 
-def_weekly_low_setupFunction[2]    f_weekly_setup_drinkPotion
-def_weekly_low_setupFunArgn[2]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_2_[0]   RANDOM_POTION_BOOST_LESS //prvni argument setup funkce
-def_weekly_low_setupFunArg_2_[1]   2 //druhy argument setup funkce
+def_weekly_medium_setupFunction[2]    f_weekly_setup_drinkPotion
+def_weekly_medium_setupFunArgn[2]     2 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_2_[0]   i_potion_nightSight //prvni argument setup funkce
+def_weekly_medium_setupFunArg_2_[1]   2 // multiplier poctu potionu
 
-def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion
-def_weekly_low_setupFunArgn[3]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_3_[0]   t_potion //prvni argument setup funkce
-def_weekly_low_setupFunArg_3_[1]   2 //druhy argument setup funkce
+//def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion
+//def_weekly_low_setupFunArgn[3]     2 // pocet argumentu setup funkce
+//def_weekly_low_setupFunArg_3_[0]   RANDOM_POTION_BOOST_LESS //prvni argument setup funkce
+//def_weekly_low_setupFunArg_3_[1]   2 // multiplier poctu potionu
 
 // MEDIUM quests
 def_weekly_medium[0]
@@ -34,13 +34,13 @@ def_weekly_medium_setupFunArg_0_[1]   medium //druhy argument setup funkce
 
 def_weekly_medium_setupFunction[1]    f_weekly_setup_drinkPotion
 def_weekly_medium_setupFunArgn[1]     2 // pocet argumentu setup funkce
-def_weekly_medium_setupFunArg_1_[0]   t_potion //prvni argument setup funkce
-def_weekly_medium_setupFunArg_1_[1]   4 //druhy argument setup funkce
+def_weekly_medium_setupFunArg_1_[0]   RANDOM_POTION_BOOST //prvni argument setup funkce
+def_weekly_medium_setupFunArg_1_[1]   4  // multiplier poctu potionu
 
 def_weekly_medium_setupFunction[2]    f_weekly_setup_drinkPotion
 def_weekly_medium_setupFunArgn[2]     2 // pocet argumentu setup funkce
-def_weekly_medium_setupFunArg_2_[0]   RANDOM_POTION_BOOST //prvni argument setup funkce
-def_weekly_medium_setupFunArg_2_[1]   4 //druhy argument setup funkce
+def_weekly_medium_setupFunArg_2_[0]   i_potion_nightSight //prvni argument setup funkce
+def_weekly_medium_setupFunArg_2_[1]   4 // multiplier poctu potionu
 
 // HIGH quests
 def_weekly_high[0]
@@ -51,13 +51,8 @@ def_weekly_high_setupFunArg_0_[1]   high //druhy argument setup funkce
 
 def_weekly_high_setupFunction[1]    f_weekly_setup_drinkPotion
 def_weekly_high_setupFunArgn[1]     2 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_1_[0]   t_potion //prvni argument setup funkce - jakykoliv potion
-def_weekly_high_setupFunArg_1_[1]   6 //druhy argument setup funkce
-
-def_weekly_high_setupFunction[2]    f_weekly_setup_drinkPotion
-def_weekly_high_setupFunArgn[2]     2 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_2_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument setup funkce
-def_weekly_high_setupFunArg_2_[1]   6 //druhy argument setup funkce
+def_weekly_high_setupFunArg_1_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument setup funkce
+def_weekly_high_setupFunArg_1_[1]   6 // multiplier poctu potionu
 
 [itemdef i_memory_weekly_quest]
 name=Weekly Quest memory
@@ -169,6 +164,8 @@ return<findres(itemdef,<argv(0)>)>
 //  * quest_totalAmount // the number of items to collect.
 //  * quest_description // the text to be displayed in a dialog
 //  * quest_subjectId   // the ID of an item that represents the quest
+// optional:
+//  * quest_iconId      // ID of a gumppic image that should be displayed. Default is the quest_subjectId.def.ID
 
 [function f_weekly_setup_eatFood] // argv(0) - id jidla ke snezeni // argv(1) - level questu
 src.sysMessage("setting up food (<argv(0)>) for quest level: <argv(1)>")
