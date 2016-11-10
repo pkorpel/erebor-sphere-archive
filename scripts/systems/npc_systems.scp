@@ -92,7 +92,7 @@ if(<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
 endif
 
 on=@spellcast
-f_silenced_npc(0) //pokus o to aby monstra nekuzlili hned za sebou
+f_silence_npc(0) //pokus o to aby monstra nekuzlili hned za sebou
 
 
 [events e_healer]

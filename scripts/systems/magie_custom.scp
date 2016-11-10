@@ -311,7 +311,7 @@ arg(mb_damage,<eval (src.int-int)*promilerange(<argv(0)>,<s_mind_blast.effect>)>
 damage(<eval((<arg(mb_damage)>+500)/1000)>,dam_magic|dam_god,<src>)
 paralyze_remove
 if (npc)  // Silence effekt jen na NPC
-  f_silenced_npc(1)
+  f_silence_npc(1)
 endif
 
 [function f_effect_a_mana_vampire]
