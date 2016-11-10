@@ -48,12 +48,6 @@ on=@unequip
 cont.events -e_npc_silenced
 
 [events e_npc_silenced]
-on=@DrinkingPotion
-on=@afterswing
-on=@beforegetswing
-on=@aftergetswing
-on=@beforedoeffect
-on=@beforegeteffect
 on=@spellcast
 return 1  // Jsem Silencnuty, nemohu kouzlit
 
