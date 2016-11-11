@@ -481,6 +481,15 @@ tag.nobank=1
 RAINCHANCE=00  
 COLDCHANCE=00  
 
+[AREA Vendor sklad]// Sklad vendoru
+FLAGS=00180
+P=5926,102
+RECT=5916,93,5940,113
+MAPPLANE=10
+GROUP=a special
+RAINCHANCE=00  
+COLDCHANCE=00 
+
 /////////////////////////// hlavni oblasti //////////////////////////////////
 
 
@@ -1517,7 +1526,15 @@ RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=20  
 COLDCHANCE=00
 
-
+[AREA Bile hory]
+GROUP=vyznamna mista
+P=1952,2740
+RECT=1929,2697,1979,2750
+FLAGS=00012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=00  
+COLDCHANCE=25
 
 [AREA Nindalf vlhka plan]
 GROUP=vyznamna mista
