@@ -1102,6 +1102,7 @@ on=@beforedoeffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@beforegetswing
 
 [itemdef i_memory_cleaner]
 id=i_memory
