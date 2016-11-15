@@ -4618,9 +4618,11 @@ type=t_src_changer
 name=pullall srcChanger
 
 on=@timer
-sector.allchars(pullall_effect(<eval more1>,<link>))
-remove
-return 1
+if (<eval link.hits> > 0) 
+  sector.allchars(pullall_effect(<eval more1>,<link>))
+  remove
+  return 1
+endif
 
 [function pullall_effect] //argv(0) - max pull distance, argv(1) - pulling char
 if (isgm) || (<flags>&statf_dead) || (<flags>&statf_invisible) || (<flags>&statf_hidden)
@@ -4655,10 +4657,12 @@ type=t_src_changer
 name=pushall srcChanger
 
 on=@timer
-var(pushall_src,<link>)
-sector.allchars(pushall_effect)
-remove 
-return 1
+if (<eval link.hits> > 0) 
+  var(pushall_src,<link>)
+  sector.allchars(pushall_effect)
+  remove 
+  return 1
+endif
 
 [function pushall_effect]
 if (<uid>!=<var(pushall_src)>)&&(distancefrom(var(pushall_src))<6)&&(isplayer)
