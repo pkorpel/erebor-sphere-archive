@@ -1266,9 +1266,9 @@ elseif (strmatch("<args>","nesplasitelnost")) || (strmatch("<args>","ucinnost"))
     redMessage("Vic bodu do teto ability nyni pridat nelze.")
   endif
 elseif (strmatch("<args>","mind_blast_silenced_time"))
-	if (tag(level)>74)&&(<eval tag(ra_<args>)> <10)
+  if (tag(level)>74)&&(<eval tag(ra_<args>)> <10)
     tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-	else
+  else
     redMessage("Vic bodu do teto ability nyni pridat nelze.")
   endif  
 else

@@ -1,14 +1,7 @@
 [function f_silence_npc]  // argv(0) - 0 from casting spell(src=uid=npc), 1 from Mind Blast Silence effect (src=mag co castil Mind Blast)
-if (strlen(<findid(i_silencer)>))//keby sa nahodou zaseklo na -1 z nejakeho dovodu
-  if (<findid(i_silencer).timer> < 0)
-    findid(i_silencer).timer=1
-  endif
-endif
-
 if (<argv(0)> == 0)  // argv(0) - 0 from casting spell(src=uid=npc)
   if ((<nastaveni_silence_using>==1)&&(!<rescount(i_silencer)>))
-    newequip(i_silencer)
-    lastnew.timer=nastaveni_spellcast_silence_after
+    f_silence_add(<eval (<nastaveni_spellcast_silence_after>*10)>)
   endif
   return
 else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Mind Blast)
@@ -21,18 +14,20 @@ else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Min
   if (chance(<arg(chance)>,3))
     src.classmessage("<src.sex(Umlcel,Umlcela)> jsi cil.")  
     arg(silenced_time,<eval <eval src.tag(ra_mind_blast_silenced_time)>+nastaveni_spellcast_silence_mind_blast>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
-  
-    if (strlen(<findid(i_silencer)>))  // jiz je silencnuty, prodlouzime tedy timer
-      if (<eval findid(i_silencer).timerd> < <arg(silenced_time)>)
-        findid(i_silencer).timerd=<arg(silenced_time)>
-      endif
-    else  // neni silencnuty, tak ho silencneme
-      newequip(i_silencer)
-      lastnew.timerd=<arg(silenced_time)>
-    endif
+    f_silence_add(<arg(silenced_time)>)
   endif
 endif
 
+[function f_silence_add] // argv(0) - silence time in deciseconds to be applied
+arg(silencer,<findid(i_silencer)>)
+if (!strlen(<arg(silencer)>))
+  newequip(i_silencer)
+  lastnew.timerd=<argv(0)>
+  return
+endif
+if (<eval silencer.timerd> < <argv(0)>)
+  silencer.timerd=<argv(0)>
+endif
 
 [itemdef i_silencer]
 id=i_memory
