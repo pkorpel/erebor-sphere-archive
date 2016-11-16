@@ -12,23 +12,28 @@ else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Min
   endif
 
   if (chance(<arg(chance)>,3))
-    src.classmessage("<src.sex(Umlcel,Umlcela)> jsi cil.")  
     arg(silenced_time,<eval <eval src.tag(ra_mind_blast_silenced_time)>+nastaveni_spellcast_silence_mind_blast>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
-    f_silence_add(<arg(silenced_time)>)
+    arg(silenced_time,<f_silence_add(<arg(silenced_time)>)>)
+    src.classmessage("Cil je umlcen na <arg(silenced_time)>ds.")  
     return 1 // silence applied successfuly
   endif
 endif
 return 0 // silence effect did not apply
 
-[function f_silence_add] // argv(0) - silence time in deciseconds to be applied
+// argv(0) - silence time in deciseconds to be applied
+// returns the number of deci-seconds the NPC is silenced for.
+[function f_silence_add]
 arg(silencer,<findid(i_silencer)>)
 if (!strlen(<arg(silencer)>))
   newequip(i_silencer)
   lastnew.timerd=<argv(0)>
-  return
+  return<argv(0)>
 endif
 if (<eval silencer.timerd> < <argv(0)>)
   silencer.timerd=<argv(0)>
+  return<argv(0)>
+else
+  return<silencer.timerd>
 endif
 
 [itemdef i_silencer]
