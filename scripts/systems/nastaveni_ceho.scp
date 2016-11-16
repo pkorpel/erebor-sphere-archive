@@ -1854,8 +1854,8 @@ n_global3[4]		pevnosti_recall_palantir_dist
 n_global3_name[4]	"Recall vzdalenost od palantiru"
 n_global3_default[4]	30
 n_global3[5]		spellcast_silence_after
-n_global3_name[5]	"Silence po zakuzleni po x sec."
-n_global3_default[5]	5
+n_global3_name[5]	"Silence po zakuzleni po x dsec."
+n_global3_default[5]	40
 n_global3[6]		silence_mana_return
 n_global3_name[6]	"Vratenie many za x sec."
 n_global3_default[6]	3

@@ -33,14 +33,14 @@ var(reflected,0)
 remove
 
 [function dospellcustom]
-//<argv(0)>	cislo kouzla
-//<argv(1)>	sila kouzla
-//<argv(2)>	uid zdroje kouzla
+//<argv(0)>  cislo kouzla
+//<argv(1)>  sila kouzla
+//<argv(2)>  uid zdroje kouzla
 //<uid> cil, nad kterym se pocita ucinek kouzla
 if (<src>==<argv(2)>)||(<argv(2)>==0) // zdroj kouzla je i cilem nebo neni znam zdroj kouzla
   //kermel.sysMessage(kdo utoci: <src>,uid: <uid>, sila: <argv(1)>)
   dospellcustom_donesrc(<argv(0)>,<argv(1)>,<argv(2)>)
-else 
+else
   newitemsafe(i_spellsrc)
   lastnew.tag(arg0,<argv(0)>)
   lastnew.tag(arg1,<argv(1)>)
@@ -56,6 +56,7 @@ endif
 var(spellnumber,<argv(0)>)
 var(spellhitself,0)
 var(spellpower,<eval ((<argv(1)>*<nastaveni_global_spellpower>)/1000)>)
+arg(hasSideEffect,<spellHasSideEffect(<argv(0)>)>) //the spell causes side effect even if it does no damage
 if (ischar)
   if (f_spellchecklos)
     return 1
@@ -114,16 +115,16 @@ if (ischar)
     var(reflectHim,0)
     f_minddefrefresh
     //var(spellpowerrelative,100)
-    if (<argv(2)>)//kdyz je zdroj kouzla      
-      //nastaveni      
-      if (<src.npc>)||(<src.tag(hypno_mystik)>) //utoci NPC nebo hypnomystik 
+    if (<argv(2)>)//kdyz je zdroj kouzla
+      //nastaveni
+      if (<src.npc>)||(<src.tag(hypno_mystik)>) //utoci NPC nebo hypnomystik
         //kermel.sysMessage(puvodni spellpower: <var(spellpower)>, koef: <nastaveni_global_MvSM>)
         var(spellpower,<eval (<var(spellpower)>*<nastaveni_global_MvSM>)/1000)>)
         //kermel.sysMessage(Utoci mystik uid: <uid>, src: <src>, spellpower: <var(spellpower)>)
-      endif 
-      if (isplayer)&&!(<src.tag(hypno_mystik)>) //utok na playera a neutoci hypno mystik (vetsinou)        
-        if (src.isplayer) //utoci hrac          
-          if(<tag(hypno_mystik)>) //cilem je mystik v tele monstra           
+      endif
+      if (isplayer)&&!(<src.tag(hypno_mystik)>) //utok na playera a neutoci hypno mystik (vetsinou)
+        if (src.isplayer) //utoci hrac
+          if(<tag(hypno_mystik)>) //cilem je mystik v tele monstra
             var(spellpower,<eval (var(spellpower)*nastaveni_global_vMSM)/1000)>)
           else //normalni dmg
             var(spellpower,<eval (var(spellpower)*nastaveni_global_pvpSM)/1000)>)
@@ -153,7 +154,7 @@ if (ischar)
             endif
             if (src.tag(ra_mystikDoubleswing))
               if (src.mystikDoubleswingSuccess)
-              	var(spellpower,#+<eval ((var(spellpower)*<nastaveni_mystik_doubleswing_strength>)/100)>)
+                var(spellpower,#+<eval ((var(spellpower)*<nastaveni_mystik_doubleswing_strength>)/100)>)
               endif
             endif
           else
@@ -163,16 +164,16 @@ if (ischar)
             var(spellpower,<eval (var(spellpower)*<eval nastaveni_efekt_shadow*2>)/1000>)
           endif
           if (0<src.tag(ra_woodoo_curse)> > 0) // (chance(<eval <arg(chance)>*10>,2))
-          	if (chance(<eval 15+<src.tag(ra_woodoo_curse)>>,2))
-    					if (<src.stam> > 24)
-      					src.reduceStamina(25)
-      					src.sysmessage("Zkoncentrol jsi silu a zasadil silnejsi ranu!")
-            		var(spellpower,<eval <eval(var(spellpower)*13)>/10>)
-      				endif
-      			endif
-      		endif      					
+            if (chance(<eval 15+<src.tag(ra_woodoo_curse)>>,2))
+              if (<src.stam> > 24)
+                src.reduceStamina(25)
+                src.sysmessage("<src.sex(Zkoncentroval,Zkoncentrovala)> jsi silu a <src.sex(zasadil,zasadila)> silnejsi ranu!")
+                var(spellpower,<eval <eval(var(spellpower)*13)>/10>)
+              endif
+            endif
+          endif
         endif
-      endif      
+      endif
     endif
 
     if ((src.isplayer)&&(isplayer))
@@ -181,13 +182,12 @@ if (ischar)
       arg(spelldefense,<eval tag(OM)*10>)
     endif
 
-    if (ismpdepend(<var(spellnumber)>))//utocne kouzlo (harm)
+    if (ismpdepend(<var(spellnumber)>)) //utocne kouzlo (harm)
       var(spellpower,<eval (var(spellpower)-arg(spelldefense))>)
-      if (var(spellpower)<1)
-        src.redmessage("Cil kouzlu odolal.")
-        classmessage("<? src.sex(Odolal,Odolala) ?> jsi kouzlu!")
-      endif   
-      if (var(spellnumber)==5)||(spellnumber==12)
+      if (var(spellpower)<1 && !<arg(hasSideEffect)>)
+        f_spellResistedMsg
+      endif
+      if (var(spellnumber)==5)||(spellnumber==12) //magic arrow || harm
         flags=<flags>&~statf_freeze
       endif
     else
@@ -198,22 +198,18 @@ if (ischar)
         endif
       endif
       if ((<randfakt(<spellpower>,<findres(spell,<var(spellnumber)>).effect>)>) < (<arg(spelldefense)>))//negativni kouzlo (paralyza)
-        src.redmessage("Cil kouzlu odolal.")
-        classmessage("<? src.sex(Odolal,Odolala) ?> jsi kouzlu!")
+        f_spellResistedMsg
         return 0
       endif
     endif
   endif
 endif
 
-if (var(spellpower)>0)
-  //if (ischar)
-  //  var(ubrano,<hits>)
-  //endif
+if ( (var(spellpower)>0) || <arg(hasSideEffect)> )
   if (<argv(2)>)//kdyz je zdroj
-    arg(storeact,<src.act>)    
-    src.act=<uid>              
-    src.trigger(beforedoeffect)//ke zmene 
+    arg(storeact,<src.act>)
+    src.act=<uid>
+    src.trigger(beforedoeffect)//ke zmene
     src.act=<arg(storeact)>
   endif
   trigger(@beforegeteffect)
@@ -221,23 +217,30 @@ if (var(spellpower)>0)
     dospell_final(<var(spellnumber)>,<var(spellpower)>)
   endif
 endif
-return 1 
+return 1
+
+[function f_spellResistedMsg]
+src.redmessage("Cil kouzlu odolal.")
+classmessage("<? src.sex(Odolal,Odolala) ?> jsi kouzlu!")
 
 [function randfakt]//faktor, r0, r1
-//logmsg(<argv(0)>::<argv(1)>::<argv(2)>)
 arg(min,<eval (<argv(0)>*<argv(1)>)/1000>)
 arg(max,<eval (<argv(0)>*<argv(2)>)/1000>)
-//arg(ret,<eval {<min> <max>}>)
-//say <eval (<argv(0)>*<argv(1)>)/1000> az <eval (<argv(0)>*<argv(2)>)/1000>
-//logmsg(vysl:<ret>)
 return <eval {<min> <max>}>
 
+// spells with side effects should be triggered even if they are computed to do zero damage
+// argv(0) - cislo kouzla
+[function spellHasSideEffect]
+if (<argv(0)> == 37) // mind blast
+  return 1
+endif
+return 0
+
+//<argv(0)>  cislo kouzla
+//<argv(1)>  sila kouzla
 [function dospell_final] // pro prime zadani spelleffectu
-//<argv(0)>	cislo kouzla
-//<argv(1)>	sila kouzla
-//say spellpower:<argv(1)>
 if (<safe a_defname[<argv(0)>]>)
-  if (<argv(0)>==37)||(<argv(0)>==103) //mindblast - nepouziva damagecust ale rovnou damage
+  if (<argv(0)>==37)||(<argv(0)>==103) //mindblast&mystic strike - nepouzivaji damagecust ale rovnou damage
     if (manashield(<src>,0,0,<argv(1)>)) //byl pouzit manashield - udeli pripadny dmg
       return 1
     endif
@@ -506,7 +509,7 @@ lastnew.tag(manause,<eval a_MANAUSE[<argv(0)>]>)
 lastnew.tag(staminause,<eval a_staminause[<argv(0)>]>)
 lastnew.tag(casttime,<a_casttime[<argv(0)>]>)
 lastnew.tag(req,<a_req[<argv(0)>]>)
-//if(safe(<src.act>)) //mame nekoho zamerenyho 
+//if(safe(<src.act>)) //mame nekoho zamerenyho
  //src.sysMessage(<src.act>, <finduid(src.act).name>)
  //lastnew.tag(act,<src.act>) //nakoho se kouzli
  //lastnew.more1=1 //uz zamereno
@@ -532,7 +535,7 @@ if !(src.isgm)
   if (<src.stamina> < <tag(staminause)>)
     src.sysMessage("Na toto kouzlo ted nemas dost many.")
     timer=0
-    return 0 
+    return 0
   endif
   if (<StrGetTok("<tag.resources>",0," ")> > 0) //pokud vubec jsou
     if !(<src.restest(<tag.resources>)>)
@@ -616,7 +619,7 @@ if (more1)
   timer=0
 else
   if (<tag.flags>&csflag_notarg)
-    //src.sysMessage(nezamerovaci kouzlo, kouzlim na sebe, <src.uid.name>, <src.act.name>)  
+    //src.sysMessage(nezamerovaci kouzlo, kouzlim na sebe, <src.uid.name>, <src.act.name>)
     src.accMsg("hrac(<src.name>,<src>,<src.p>,<src.region.name>) kouzli kouzlo (<spellDescription[<tag(spellnumb)>]>) na sebeobjekt (<src.act.name>,<src.act>)")
     src.say("<tag.wop>")
     src.newitemsafe(i_customspell_timer)
@@ -644,7 +647,7 @@ if(<tag(spellnumb)>==104) //manashield
     remove
     return 1
   endif
-endif 
+endif
 if (<tag.flags>&csflag_TARG_char)
   if !(src.targ.srccombatLOS)
     src.sysMessage("Nevidis na cil.")
@@ -762,8 +765,8 @@ if !(isGM)
   if (ishungrymsg)
     f_fizzleefect
     consume(<a_scrollitem[<argv(0)>]>)
-    mana=<eval (<mana>-<eval (<a_manause[<argv(0)>]>)/2>)>	
-    return 1 
+    mana=<eval (<mana>-<eval (<a_manause[<argv(0)>]>)/2>)>
+    return 1
   endif
   arg(narocnost,<a_difficulty[<argv(0)>]>)
   if (<argv(0)>==101) // je to frostbolt
@@ -788,7 +791,7 @@ if (<eval a_flags[<argv(0)>]>&csflag_mass) //overit flagy (masove kouzlo), v tom
     lastnew.p=<tag.targp> //targp - pouze pri targon_ground
     var(distanceuid,<lastnew>) //vzdalenost od pomocneho itemu
     arg(removeitem,1)
-  endif 
+  endif
   sector.allchars f_a_massspell_dist(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>,<a_mass_distance[<argv(0)>]>,<eval <eval a_flags[<argv(0)>]>&csflag_noLOS>)
   if (<arg(removeitem)>)
     finduid(var(distanceuid)).remove
@@ -798,7 +801,7 @@ if (<eval a_flags[<argv(0)>]>&csflag_mass) //overit flagy (masove kouzlo), v tom
   return 0
 endif
 if (<act>) //mame cil (char)
- finduid(act).dospellcustom(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>) 
+ finduid(act).dospellcustom(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>)
  consume(<a_scrollitem[<argv(0)>]>)
 else
  dospellcustom(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>)
@@ -843,7 +846,7 @@ timer=3
 on=@timer
   topobj.damage_noresponse(<nastaveni_<var(bomba_src).id>,dam_god)
   topobj.effect(3,<s_explosion.EFFECTID>,6,15,1)
-  topobj.sound=<s_explosion.sound>			
+  topobj.sound=<s_explosion.sound>
 
 
 [function exploze]
@@ -857,24 +860,24 @@ if (distancefrom(<var(bomba_src)>) < 5)
   effect(3,<s_explosion.EFFECTID>,6,15,1)
   sound=<s_explosion.sound>
 else
-endif 
+endif
 
 [function znicsit]
 if (type==t_web)&&(timer!=-1)
   if (distancefrom(<var(bomba_src)>) < 5)
     effect(3,<s_explosion.EFFECTID>,6,15,1)
-    sound=<s_explosion.sound>			
+    sound=<s_explosion.sound>
     timer=1
   endif
 elseif (id==i_rock_plain)&&(timer!=-1)
   arg(bombdist,distancefrom(<var(bomba_src)>))
   if (arg(bombdist) < 5)
-    if (arg(bombdist)<1) 
+    if (arg(bombdist)<1)
       arg(bombdist,1)
     endif
     if (<eval nastaveni_potions_<var(bomba_src).id>/<arg(bombdist)>> > {0 150})
       effect(3,<s_explosion.EFFECTID>,6,15,1)
-      sound=<s_explosion.sound>			
+      sound=<s_explosion.sound>
       timer=1
     endif
   endif
@@ -885,7 +888,7 @@ endif
 if ((type==t_spell)||(type==t_telepad2))&&(timer!=-1)
  if (distancefrom(<var(bomba_src)>) < 5)
   effect(3,<s_explosion.EFFECTID>,6,15,1)
-  sound=<s_explosion.sound>			
+  sound=<s_explosion.sound>
   timer=1
  endif
 endif
@@ -893,11 +896,11 @@ endif
 [function dispellbomb]
 if (distancefrom(<var(bomba_src)>) < 5)
  effect(3,<s_explosion.EFFECTID>,6,15,1)
- sound=<s_explosion.sound>			
+ sound=<s_explosion.sound>
  events=-e_spelleffect
  spelleffect(41,1000)
  events=+e_spelleffect
-endif 
+endif
 
 
 
@@ -918,7 +921,7 @@ return 1
 
 on=@dropon_ground
 if (<tag(bum)> < 3)
-	tag(bum,3)
+  tag(bum,3)
 endif
 trigger @userdclick
 //attr_movenever=1
@@ -929,7 +932,7 @@ say <tag(bum)>
 tag(bum,#-1)
 if (tag(bum)==0)
   trigger @potioneffect
-else 
+else
  return 1
 endif
 
@@ -947,7 +950,7 @@ else
   sector.allitems(znicsit)
 endif
 effect(3,<s_explosion.EFFECTID>,6,15,1)
-sound=<s_explosion.sound>			
+sound=<s_explosion.sound>
 
 on=@userdeath
 on=@create
