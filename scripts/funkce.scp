@@ -5115,6 +5115,13 @@ return 0
 endif
 return 1
 
+[function issleeping]
+if (isevent(e_peacemade))
+  return 1
+endif
+return 0
+
+
 [function getArmed]
 arg(arm,<findlayer(layer_hand1)>)
 if (<arg(arm)>)
