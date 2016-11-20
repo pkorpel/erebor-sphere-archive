@@ -199,19 +199,6 @@ endif
 tag(quest_subjectId[<currentQNumber>],<arg(finalPotionDef)>)
 tag(quest_description[<currentQNumber>],"Vypij lektvar:<br><?arg(descrName)?>")
 
-//elseif (<argv(0)> == 3)  // 3 - Vypij jakykoli potion
-//  arg(qAmount,<eval (<tag(qCount)>*{6 <eval 4+<tag(qCount)>>})>)
-//  arg(quest_description,"Vypij: <qAmount>x jakykoli potion")
-//  say("KS: <qAmount>")
-//elseif (<argv(0)> == 4)  // 4 - Vypij potion svetla
-//  arg(qAmount,<eval (<tag(qCount)>*{4 <eval 2+<tag(qCount)>>})>)
-//  arg(quest_description,"Vypij: <qAmount>x potion Svetla (Potion Nightsight)")
-//  say("KS: <qAmount>")
-//elseif (<argv(0)> == 5)  // 5 - Vypij jakykoli potion krome svetla
-//  arg(qAmount,<eval (<tag(qCount)>*{3 <eval 2+<tag(qCount)>>})>)
-//  arg(quest_description,"Vypij: <qAmount>x jakykoli potion krome Svetla (Potion Nightsight)")
-//  say("KS: <qAmount>")
-
 
 ////////////////////////////////////////////////////////////
 [function f_weekly_setQuest]  // argv(0) - cislo questu, // argv(1) - level questu (low, medium ...)
