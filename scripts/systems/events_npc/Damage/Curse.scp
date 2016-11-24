@@ -13,7 +13,9 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-e_f_npc_curse
+if !(isSleeping)
+  e_f_npc_curse
+endif
 
 on=@beforedoeffect
 on=@beforegeteffect

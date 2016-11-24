@@ -6,7 +6,9 @@
 [events e_npc_roundattack]
 on=@beforegetswing
 on=@aftergetswing
-f_e_npc_roundattack
+if !(isSleeping)
+  f_e_npc_roundattack
+endif
 
 on=@beforegeteffect
 on=@Created
@@ -16,7 +18,9 @@ on=@afterswing
 
 on=@beforedoeffect
 on=@spelleffect
-f_e_npc_roundattack
+if !(isSleeping)
+  f_e_npc_roundattack
+endif
 
 [function f_e_npc_roundattack]
 f_npc_rndAtt_setVals
@@ -94,7 +98,9 @@ endif
 [events e_npc_roundattack_pullall]
 on=@beforegetswing
 on=@aftergetswing
-f_npc_roundattack_pullall
+if !(isSleeping)
+  f_npc_roundattack_pullall
+endif
 
 on=@beforegeteffect
 on=@Created
@@ -102,7 +108,9 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
 on=@spelleffect
-f_npc_roundattack_pullall
+if !(isSleeping)
+  f_npc_roundattack_pullall
+endif
 
 [function f_npc_roundattack_pullall]
 f_npc_rndAtt_setVals

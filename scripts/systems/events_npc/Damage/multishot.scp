@@ -12,7 +12,9 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-f_e_npc_multishot
+if !(isSleeping)
+  f_e_npc_multishot
+endif
 
 on=@beforedoeffect
 on=@beforegeteffect

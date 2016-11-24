@@ -274,10 +274,12 @@ return 1
 
 [EVENTS e_looter]
 on=@ItemStep
-if (act.type==t_corpse) //108 ... t_corpse (pripadne lze "if(act.type==NID(t_corpse))")
-  if (act.rescount)
-    SRC.SAY Helemese co jsem nasel
-    act.contents(cont=<uid>)
+if !(isSleeping)
+  if (act.type==t_corpse) //108 ... t_corpse (pripadne lze "if(act.type==NID(t_corpse))")
+    if (act.rescount)
+      SRC.SAY Helemese co jsem nasel
+      act.contents(cont=<uid>)
+    endif
   endif
 endif
 
@@ -898,19 +900,21 @@ on=@beforegeteffect
 [events e_npc_summoner]
 on=@beforeGetSwing
 on=@aftergetswing
-if rand(20)==1
-  SAY("Heru Ruin Val")
-  arg(i,0)
-  while (arg(i) < <eval tag(npc_summoner_count)>)
-    newnpc(<tag(npc_summoner_char[<arg(i)>])>)
-    lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-    lastnewchar.fame=0
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=20
-    arg(i,#+1)
-  endwhile
+if !(isSleeping)
+  if rand(20)==1
+    SAY("Heru Ruin Val")
+    arg(i,0)
+    while (arg(i) < <eval tag(npc_summoner_count)>)
+      newnpc(<tag(npc_summoner_char[<arg(i)>])>)
+      lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+      lastnewchar.fame=0
+      lastnewchar.tag(experience,0)
+      lastnewchar.flag_conjured=1
+      lastnewchar.newequip(i_osklivejsmazse)
+      lastnew.timer=20
+      arg(i,#+1)
+    endwhile
+  endif
 endif
 
 on=@Created
@@ -921,41 +925,43 @@ on=@beforegeteffect
 
 [events e_npc_summoning]
 on=@aftergetswing
-if !(tag(npc_summoning_chance))
-  tag(npc_summoning_chance,50)  //5.0%
-endif
-if (chance(<tag.npc_summoning_chance>,3))
-  if !(tag(npc_summoning_time))
-    tag(npc_summoning_time,30)  //defaultne sa nastavi 30sekund
+if !(isSleeping)
+  if !(tag(npc_summoning_chance))
+    tag(npc_summoning_chance,50)  //5.0%
   endif
-  if !(tag(npc_summoning_removeTime))
-    tag(npc_summoning_removeTime,7200)  //defaultne se nastavi 2 hodiny
-  endif
-  //  arg(server_time,<fixnumber((<serv.time>/10))>)  
-  //  arg(rozdiel,<fixnumber(<server_time>-<tag(last_summon_time)>)>)
-  //  if (<arg(rozdiel)> > <tag(npc_summoning_time)>)
-  
-	if !(tag(last_summon_time))
-		tag(last_summon_time,0)
-	  //tag(last_summon_time,<fixnumber((<serv.time>/10))>)
-	endif
-		if (<eval tag(last_summon_time)> < <serv.time>)
-    	tag(last_summon_time,<serv.time>+(<eval <tag(npc_summoning_time)>*10>))
-      //tag(last_summon_time,<fixnumber((<serv.time>/10))>)
-      SAY("Heru Ruin Val")
-      arg(i,0)
-      while (arg(i) < <eval tag(npc_summoning_count)>)
-        newnpc(<tag(npc_summoning_char[<arg(i)>])>)
-        lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-        lastnewchar.fame=0
-        lastnewchar.newequip(i_osklivejsmazse)
-        lastnew.timer=<tag(npc_summoning_removeTime)>
-        if (strlen(<tag(npc_summoner_experience)>))  //mame nejaky tag experience (i nulovy !)
-          lastnewchar.tag(experience,<tag(npc_summoner_experience)>)
-        endif
-        arg(i,#+1)
-      endwhile
+  if (chance(<tag.npc_summoning_chance>,3))
+    if !(tag(npc_summoning_time))
+      tag(npc_summoning_time,30)  //defaultne sa nastavi 30sekund
     endif
+    if !(tag(npc_summoning_removeTime))
+      tag(npc_summoning_removeTime,7200)  //defaultne se nastavi 2 hodiny
+    endif
+    //  arg(server_time,<fixnumber((<serv.time>/10))>)  
+    //  arg(rozdiel,<fixnumber(<server_time>-<tag(last_summon_time)>)>)
+    //  if (<arg(rozdiel)> > <tag(npc_summoning_time)>)
+  
+	  if !(tag(last_summon_time))
+		  tag(last_summon_time,0)
+	    //tag(last_summon_time,<fixnumber((<serv.time>/10))>)
+	  endif
+		  if (<eval tag(last_summon_time)> < <serv.time>)
+    	  tag(last_summon_time,<serv.time>+(<eval <tag(npc_summoning_time)>*10>))
+        //tag(last_summon_time,<fixnumber((<serv.time>/10))>)
+        SAY("Heru Ruin Val")
+        arg(i,0)
+        while (arg(i) < <eval tag(npc_summoning_count)>)
+          newnpc(<tag(npc_summoning_char[<arg(i)>])>)
+          lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+          lastnewchar.fame=0
+          lastnewchar.newequip(i_osklivejsmazse)
+          lastnew.timer=<tag(npc_summoning_removeTime)>
+          if (strlen(<tag(npc_summoner_experience)>))  //mame nejaky tag experience (i nulovy !)
+            lastnewchar.tag(experience,<tag(npc_summoner_experience)>)
+          endif
+          arg(i,#+1)
+        endwhile
+      endif
+  endif
 endif
 
 on=@beforeGetSwing
@@ -967,20 +973,22 @@ on=@beforegeteffect
 
 [events e_explosiondispell]
 on=@gethit
-f_explosiondispell_setVars
-if (chance(<tag(e_explosiondispell_chance)>,3))
-  arg(server_time,<fixnumber((<serv.time>/10))>)  //server time v sekundach
-  arg(rozdiel,<fixnumber(<server_time>-<tag(e_explosiondispell_last_time)>)>)
-  if (arg(rozdiel)>tag(e_explosiondispell_time))
-    tag(e_explosiondispell_last_time,<fixnumber((<serv.time>/10))>)
-    emote("throws dispell bomb")
-    arg(start_x,<eval(-tag(e_explosiondispell_range)+<rand(2*tag(e_explosiondispell_range)+1)>)>)
-    arg(start_y,<eval(-tag(e_explosiondispell_range)+<rand(2*tag(e_explosiondispell_range)+1)>)>)
-    newitem=i_potion_explosiondispell
-    lastnew.p=<p_x>+start_x,<p_y>+start_y,<p_z>,<mapplane>
-    lastnew.attr=attr_static|attr_decay|attr_move_never 
-    lastnew.trigger(userdclick)
-    lastnew.timer=6
+if !(isSleeping)
+  f_explosiondispell_setVars
+  if (chance(<tag(e_explosiondispell_chance)>,3))
+    arg(server_time,<fixnumber((<serv.time>/10))>)  //server time v sekundach
+    arg(rozdiel,<fixnumber(<server_time>-<tag(e_explosiondispell_last_time)>)>)
+    if (arg(rozdiel)>tag(e_explosiondispell_time))
+      tag(e_explosiondispell_last_time,<fixnumber((<serv.time>/10))>)
+      emote("throws dispell bomb")
+      arg(start_x,<eval(-tag(e_explosiondispell_range)+<rand(2*tag(e_explosiondispell_range)+1)>)>)
+      arg(start_y,<eval(-tag(e_explosiondispell_range)+<rand(2*tag(e_explosiondispell_range)+1)>)>)
+      newitem=i_potion_explosiondispell
+      lastnew.p=<p_x>+start_x,<p_y>+start_y,<p_z>,<mapplane>
+      lastnew.attr=attr_static|attr_decay|attr_move_never 
+      lastnew.trigger(userdclick)
+      lastnew.timer=6
+    endif
   endif
 endif
 
@@ -1011,15 +1019,17 @@ endif
 
 [events e_pushall]
 on=@gethit
-if (chance(<tag(e_pushall_chance)>,3))
-  arg(server_time,<fixnumber((<serv.time>/10))>)  //server time v sekundach
-  arg(rozdiel,<fixnumber(<server_time>-<tag(e_pushall_last_time)>)>)
-  if (arg(rozdiel)><tag(e_pushall_time)>)
-    tag(e_pushall_last_time,<fixnumber((<serv.time>/10))>)
-    pushall
+if !(isSleeping)
+  if (chance(<tag(e_pushall_chance)>,3))
+    arg(server_time,<fixnumber((<serv.time>/10))>)  //server time v sekundach
+    arg(rozdiel,<fixnumber(<server_time>-<tag(e_pushall_last_time)>)>)
+    if (arg(rozdiel)><tag(e_pushall_time)>)
+      tag(e_pushall_last_time,<fixnumber((<serv.time>/10))>)
+      pushall
+    endif
   endif
+  f_pushall_setVars
 endif
-f_pushall_setVars
 
 on=@beforeGetSwing
 on=@aftergetswing
@@ -1046,13 +1056,15 @@ endif
 
 [events e_pullall]
 on=@gethit
-f_pullall_setVars
-if (chance(<tag(e_pullall_chance)>,3))
-  arg(server_time,<eval (<serv.time>/10)>)  //server time v sekundach
-  arg(rozdiel,<eval (<server_time>-<tag(e_pullall_last_time)>)>)
-  if (arg(rozdiel)><tag(e_pullall_time)>)
-    tag(e_pullall_last_time,<eval(<serv.time>/10)>)
-    pullall(9) // distance
+if !(isSleeping)
+  f_pullall_setVars
+  if (chance(<tag(e_pullall_chance)>,3))
+    arg(server_time,<eval (<serv.time>/10)>)  //server time v sekundach
+    arg(rozdiel,<eval (<server_time>-<tag(e_pullall_last_time)>)>)
+    if (arg(rozdiel)><tag(e_pullall_time)>)
+      tag(e_pullall_last_time,<eval(<serv.time>/10)>)
+      pullall(9) // distance
+    endif
   endif
 endif
 
@@ -1081,29 +1093,31 @@ endif
 
 [events e_npc_summoning2]
 on=@aftergetswing
-if (strlen(<tag(npc_summoning2_chance)>) == 0)
-  tag(npc_summoning2_chance,50)  //default 5% chance
-endif
-if (strlen(<tag(npc_summoning2_time)>) == 0)
-  tag(npc_summoning2_time,30)  //defaultne sa nastavi 30sekund
-endif
+if !(isSleeping)
+  if (strlen(<tag(npc_summoning2_chance)>) == 0)
+    tag(npc_summoning2_chance,50)  //default 5% chance
+  endif
+  if (strlen(<tag(npc_summoning2_time)>) == 0)
+    tag(npc_summoning2_time,30)  //defaultne sa nastavi 30sekund
+  endif
 
-if (chance(<tag(npc_summoning2_chance)>,3))
-  if !(tag(last_summon2_time))
-    tag(last_summon2_time,<eval(<serv.time>/10)>)  // v sekundach
-  else
-    arg(server_time,<eval <serv.time>/10>)  //server time v sekundach
-    arg(rozdiel,<eval(<server_time>-<tag(last_summon2_time)>)>)
-    if (arg(rozdiel)>tag(npc_summoning2_time))
-      tag(last_summon2_time,<eval(<serv.time>/10)>)
-      SAY("Heru Ruin Val")
-      arg(i,0)
-      while (arg(i) < <eval tag(npc_summoning2_count)>)
-        newnpc(<tag(npc_summoning2_char[<arg(i)>])>)
-        lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-        lastnewchar.fame=0
-        arg(i,#+1)
-      endwhile
+  if (chance(<tag(npc_summoning2_chance)>,3))
+    if !(tag(last_summon2_time))
+      tag(last_summon2_time,<eval(<serv.time>/10)>)  // v sekundach
+    else
+      arg(server_time,<eval <serv.time>/10>)  //server time v sekundach
+      arg(rozdiel,<eval(<server_time>-<tag(last_summon2_time)>)>)
+      if (arg(rozdiel)>tag(npc_summoning2_time))
+        tag(last_summon2_time,<eval(<serv.time>/10)>)
+        SAY("Heru Ruin Val")
+        arg(i,0)
+        while (arg(i) < <eval tag(npc_summoning2_count)>)
+          newnpc(<tag(npc_summoning2_char[<arg(i)>])>)
+          lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+          lastnewchar.fame=0
+          arg(i,#+1)
+        endwhile
+      endif
     endif
   endif
 endif
@@ -1176,7 +1190,9 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-e_f_npc_curse_mana
+if !(isSleeping)
+  e_f_npc_curse_mana
+endif
 
 on=@beforedoeffect
 on=@beforegeteffect
@@ -1261,7 +1277,9 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-e_f_npc_curse_stam
+if !(isSleeping)
+  e_f_npc_curse_stam
+endif
 
 on=@beforedoeffect
 on=@beforegeteffect
