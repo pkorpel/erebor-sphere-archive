@@ -38,7 +38,11 @@ remove
 //<argv(2)>  uid zdroje kouzla
 //<uid> cil, nad kterym se pocita ucinek kouzla
 if (<src>==<argv(2)>)||(<argv(2)>==0) // zdroj kouzla je i cilem nebo neni znam zdroj kouzla
-  //kermel.sysMessage(kdo utoci: <src>,uid: <uid>, sila: <argv(1)>)
+  if (<argv(0)> == 37) // fix mindblast to be always casted on target
+    if (<src> == <uid>)
+      tag(combatTarget).dospellcustom_donesrc(<argv(0)>,<argv(1)>,<argv(2)>)
+    endif
+  endif
   dospellcustom_donesrc(<argv(0)>,<argv(1)>,<argv(2)>)
 else
   newitemsafe(i_spellsrc)
@@ -270,7 +274,6 @@ if (!islosdepend(<var(spellnumber)>))
   return 0
 endif
 if (<ischar>)
-  //say Checking LOS:<srccombatLOS>
   if (src.act)
     if (src.act==uid)
       if !(srccombatLOS)
@@ -801,11 +804,11 @@ if (<eval a_flags[<argv(0)>]>&csflag_mass) //overit flagy (masove kouzlo), v tom
   return 0
 endif
 if (<act>) //mame cil (char)
- finduid(act).dospellcustom(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>)
- consume(<a_scrollitem[<argv(0)>]>)
+  finduid(act).dospellcustom(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>)
+  consume(<a_scrollitem[<argv(0)>]>)
 else
- dospellcustom(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>)
- consume(<a_scrollitem[<argv(0)>]>)
+  dospellcustom(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>)
+  consume(<a_scrollitem[<argv(0)>]>)
 endif
 return 0
 
