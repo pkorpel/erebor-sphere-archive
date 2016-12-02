@@ -5,12 +5,23 @@ if (<argv(0)> == 0)  // argv(0) - 0 from casting spell(src=uid=npc)
   endif
   return 1
 else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Mind Blast)
-  arg(chance_reduction,<eval 1000-<eval tag(resist_silence)>>)
-  arg(chance,<eval <eval src.tag(ra_mind_blast_silence)>*var(nastaveni_MindBlast_silence_chance)>)
-  if (chance_reduction!=1000)
-    arg(chance,<eval ((arg(chance)*arg(chance_reduction))/1000)>)
+  if (!<src.findlayer(layer_hand2)> || !0<src.tag(ra_mind_blast_silence)>) //cannot apply silence without a staff, or if the source hasn't got the ability
+    return 0
   endif
-
+  arg(staffMaterial,<src.findlayer(layer_hand2).isStaff>) // returns staff material level, 0 for no staff
+  if (!<arg(staffMaterial)>)
+    return 0
+  endif
+  arg(mindPower,<eval ((<src.int>*<arg(staffMaterial)>)/2)>) // for mage with 250INT -> 125-875
+  arg(silenceResist,<eval tag(resist_silence)>)
+  if ( (arg(mindPower) <= arg(silenceResist)) || (arg(silenceResist) >= 1000) )
+    src.redMessage("Cil odolava umlceni")
+    return 0
+  endif
+  arg(mindBoost,<arg(mindPower)-arg(silenceResist)>)
+  arg(chance_resist_impact,<eval (1000+<arg(mindBoost)>-<arg(silenceResist)>)>) // reduction in promile -> the chance will be set to the given amount of promile, i.e. 1k == the success chance remains the same
+  arg(basic_chance,<eval <eval src.tag(ra_mind_blast_silence)>*var(nastaveni_MindBlast_silence_chance)>)
+  arg(chance,<eval ((arg(basic_chance)*arg(chance_resist_impact))/1000)>)
   if (chance(<arg(chance)>,3))
     arg(silenced_time,<eval (<eval src.tag(ra_mind_blast_silenced_time)>+<nastaveni_spellcast_silence_mind_blast>)>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
     arg(silenced_time,<f_silence_add(<arg(silenced_time)>)>)
