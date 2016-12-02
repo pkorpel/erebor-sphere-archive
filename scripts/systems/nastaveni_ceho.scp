@@ -2301,7 +2301,7 @@ n_ability3_name[39] "Ubytok staminy po mystik doubleswingu"
 n_ability3_default[39] 30
 n_ability3[40] 		MindBlast_silence_chance
 n_ability3_name[40] "Sance na silence MindBlastem"
-n_ability3_default[40] 95
+n_ability3_default[40] 60
 
 
 n_poison[0]		poison_absoluteDmg
