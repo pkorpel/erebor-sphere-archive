@@ -1237,7 +1237,7 @@ item=i_gold
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-[CHARDEF 0318]
+[CHARDEF 064]
 DEFNAME=c_fireant_daemon
 NAME=Fireant Daemon
 SOUND=snd_MONSTER_TERA_DRONE1

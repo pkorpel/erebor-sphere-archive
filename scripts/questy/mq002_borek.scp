@@ -438,7 +438,7 @@ f_qSpeech(f_mq002_Kovar_DClick)
 f_mq002_checkOldTags
 if (<src.flags>&statf_dead)
  return 1
-elseif (<src.tag.realm>==1)
+elseif (<eval src.tag.realm>==1)
  say "Zmiz gondorsky pse!"
  return 1
 endif

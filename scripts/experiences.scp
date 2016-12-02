@@ -390,7 +390,7 @@ endwhile
 if (<arg(gainedLevel)>)
   sfx snd_SPELL_GATE_TRAVEL
   effect(2,02ED0,0,32)
-  if (<tag.realm> == 1)
+  if (<eval tag.realm> == 1)  // eval proto, kdyby level dostalo GM nebo hrac v Tutu co jeste nema realm. Bez nej hazi errory
     do_a_cyrcle(i_fx_sparkle_2,1,color_snow)
   else
     do_a_cyrcle(i_fx_sparkle_2,1,01)

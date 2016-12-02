@@ -8,7 +8,7 @@ dialog d_inputChat
 
 [dialog d_inputChat]
 350,350
-argo.tag(sirka,400)
+argo.tag(sirka,680)
 argo.tag(vyska,<eval 23+(2*d_def_radek_vyska)+(3*d_def_skvira)+(2*d_def_okraj)>)
 argo.dialog_prvni
 argo.dialog_pozadi(<argo.tag(nexty)>,1)
@@ -25,7 +25,7 @@ argo.button(<d_def_okraj>+33,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb1,0fb3,1,0,
 
 if (src.findid(i_memory_guild))
   argo.settext(102,"GuildChat")
-  argo.text(<d_def_okraj>+280,(<argo.tag(vyska)>-<d_def_okraj>)-23,0481,102)
+  argo.text(<d_def_okraj>+560,(<argo.tag(vyska)>-<d_def_okraj>)-23,0481,102)
   if (strlen(<src.tag(guildChatON)>))	//guildchat je zapnuty
     argo.checkbox((<argo.tag(sirka)>-<d_def_okraj>)-25,(<argo.tag(vyska)>-<d_def_okraj>)-23,210,211,1,1)
   else
@@ -79,6 +79,9 @@ if (strcmpi("<cont.tag(message)>",""))
     remove
     return 1
   else
+    if (<eval strlen(<zpr>)> > 73)   //     - max lengt of message is 73chars
+      cont.redmessage("Zprava byla prilis dlouha, proto byla zkracena.")      
+    endif
     if (<cont.tag(guildMessage)>)
       cont.guildch("<zpr>")
       cont.tag.remove(guildMessage)

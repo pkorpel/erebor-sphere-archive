@@ -482,7 +482,7 @@ ON=@NPCRestock
 
 /////////////////////////////////////////////////////
 
-[chardef 0314]
+[chardef 071]
 defname=c_m_sphinx
 name="sphinx"
 sound=snd_animals_lion1

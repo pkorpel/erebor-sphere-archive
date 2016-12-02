@@ -5115,6 +5115,22 @@ return 0
 endif
 return 1
 
+[function issleeping]
+if (isevent(e_peacemade))
+  if (rand(30)==1)
+    dorand 5
+      say("Zzz")
+      say("ZzZzZ")
+      say("ZzzzZ")
+      say("ZZzzz")
+      say("Zzzzz")
+    enddo
+  endif
+  return 1
+endif
+return 0
+
+
 [function getArmed]
 arg(arm,<findlayer(layer_hand1)>)
 if (<arg(arm)>)

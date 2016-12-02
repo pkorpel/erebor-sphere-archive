@@ -3,11 +3,13 @@
 
 [events e_backstub]
 on=@NPCSeeNewPlayer
-if !(findid(i_backStub_hide)) && ((flag_insubstantial)!=1)
-  newequipsafe(i_backStub_hide)
-  lastnew.timer=2
+if !(isSleeping)
+  if !(findid(i_backStub_hide)) && ((flag_insubstantial)!=1)
+    newequipsafe(i_backStub_hide)
+    lastnew.timer=2
+  endif
+  return 0
 endif
-return 0
 
 on=@Created
 on=@DrinkingPotion

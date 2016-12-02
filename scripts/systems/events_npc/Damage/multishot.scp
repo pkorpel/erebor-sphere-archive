@@ -12,7 +12,9 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-f_e_npc_multishot
+if !(isSleeping)
+  f_e_npc_multishot
+endif
 
 on=@beforedoeffect
 on=@beforegeteffect
@@ -47,7 +49,9 @@ on=@create
 timer=0
 
 on=@timer
-sector.allchars(multishotthem(<UID>))
+if (<eval link.hits> > 0)
+  sector.allchars(multishotthem(<UID>))
+endif
 
 [function multishotthem]
 if (isPlayer)

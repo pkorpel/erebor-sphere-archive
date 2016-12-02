@@ -4618,9 +4618,11 @@ type=t_src_changer
 name=pullall srcChanger
 
 on=@timer
-sector.allchars(pullall_effect(<eval more1>,<link>))
-remove
-return 1
+if (<eval link.hits> > 0) 
+  sector.allchars(pullall_effect(<eval more1>,<link>))
+  remove
+  return 1
+endif
 
 [function pullall_effect] //argv(0) - max pull distance, argv(1) - pulling char
 if (isgm) || (<flags>&statf_dead) || (<flags>&statf_invisible) || (<flags>&statf_hidden)
@@ -4655,10 +4657,12 @@ type=t_src_changer
 name=pushall srcChanger
 
 on=@timer
-var(pushall_src,<link>)
-sector.allchars(pushall_effect)
-remove 
-return 1
+if (<eval link.hits> > 0) 
+  var(pushall_src,<link>)
+  sector.allchars(pushall_effect)
+  remove 
+  return 1
+endif
 
 [function pushall_effect]
 if (<uid>!=<var(pushall_src)>)&&(distancefrom(var(pushall_src))<6)&&(isplayer)
@@ -5579,8 +5583,8 @@ if (tag(weaker) == 0)
 		arg(chance,<tag(chance)>)
 	endif
   if (chance(<eval <arg(chance)>*10>,2))
-		tag(old_resist,<cont.tag(resist_cold)>)
-		if (<tag(old_resist)> > 0)
+		tag(old_resist,<eval cont.tag(resist_cold)>)
+		if (<eval tag(old_resist)> > 0)
 			arg(new_resist,<eval <tag(old_resist)>-<eval <eval <tag(old_resist)>*5*<tag(chance)>>/1000>>)
 		else
 			arg(new_resist,<tag(old_resist)>)

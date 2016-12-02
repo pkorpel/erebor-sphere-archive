@@ -459,7 +459,7 @@ src.f_q016_checkOldTags
 if (<src.flags>&statf_dead)
  return 1
 endif
-if (<src.qtag(q016_prastary_poklad)> > 10)
+if (<eval src.qtag(q016_prastary_poklad)> > 10)
  emote("Uz neni mezi nami.")
 else
  src.dialog(d_q016_StaryNegr,<uid>)

@@ -1102,6 +1102,7 @@ on=@beforedoeffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@beforegetswing
 
 [itemdef i_memory_cleaner]
 id=i_memory
@@ -1480,18 +1481,20 @@ on=@stopguarding
 
 [events e_npc_warcry]
 on=@beforegeteffect
-if(tag(nextcry) < <serv.time>)
-  tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
-  emote(crying)
-  sound(1098)
-  newitemsafe(i_warcry_srcChanger)
-  lastnew.p=<src.p>
-  lastnew.z=-100
-  lastnew.link=<uid>
-  lastnew.timerd=1
+if !(isSleeping)
+  if(tag(nextcry) < <serv.time>)
+    tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
+    emote(crying)
+    sound(1098)
+    newitemsafe(i_warcry_srcChanger)
+    lastnew.p=<src.p>
+    lastnew.z=-100
+    lastnew.link=<uid>
+    lastnew.timerd=1
+  endif
+  return 0
 endif
 
-return 0
 on=@beforedoeffect
 on=@Created
 on=@DrinkingPotion
@@ -1565,13 +1568,15 @@ on=@Created
 
 [EVENTS e_NPC_Leaper]
 ON=@NPCSeeNewPlayer
-if (src.flag_invul)
-  return 1
-elseif (isPet)
-  return 1
+if !(isSleeping)
+  if (src.flag_invul)
+    return 1
+  elseif (isPet)
+    return 1
+  endif
+  attack(<src>)
+  events(+e_NPC_teleToTarget)
 endif
-attack(<src>)
-events(+e_NPC_teleToTarget)
 
 on=@hittry
 events(+e_NPC_teleToTarget)
