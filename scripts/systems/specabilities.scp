@@ -637,42 +637,83 @@ ID=i_memory
 TYPE=t_eq_script
 name=krvaceni
 
+on=@equip
+tag(chance_to_fizz,668)
+tag(bleeding_steps,0)
+tag(koef_infoText,5)
+tag(blood_color,<cont.def.BLOODCOLOR>)
+if (cont.NPC)
+  tag(koef_infoText,20)
+  cont.events +e_bleeding
+endif
+
+on=@unequip
+cont.events -e_bleeding
+
 on=@timer
 if (cont.hits)&&(more1l)
   //more1h opakovani krvaceni maximalne
   //more1l zbyva opakovani
   //more2  damage
   arg(damag,<eval (more1l*more2)/more1h>)
-  if (<arg(damag)> > <var(nastaveni_maxbleed)>)
-    arg(damag,<var(nastaveni_maxbleed)>)
+  cont.say("Max.Stack: <more2>, Damag: <eval arg(damag)>")
+  if (<arg(damag)> > (<eval <var(nastaveni_maxbleed)>+<eval tag(BonusBleedCap)>>))
+    arg(damag,<eval <var(nastaveni_maxbleed)>+<eval tag(BonusBleedCap)>>)
   endif
   arg(damag,<eval (<arg(damag)>-((<arg(damag)>*<cont.tag(resist_bleed)>)/1000))>) // - muj navrh -Dinivan - 
   //arg(damag,<eval (arg(damag)-(arg(damag)/(1000/(cont.tag(resist_bleed)))))>) // - presunuto do funkce Handleresists -tart // presunuto spatne, protoze tam se to zpracuje jen pri swingu nebo co
   if (arg(damag)<1)
     remove
   endif
+  cont.say("Bleed DMG: <arg(damag)>")
   cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god)
-  if (chance(668,3)) //dvoutretinova sance na fizz
+  if (chance(<eval tag(chance_to_fizz)>,3)) //default dvoutretinova sance na fizz v PvP, v PvM chuze krvacejiciho sanci snizuje
     cont.stopmagery
   endif
   cont.emote("bleeding")// <arg(damag)>
-  arg(infoText,<arg(damag)/6>)
-  if (<arg(infoText)> > 4)
-    arg(infoText,4)
+  arg(infoText,<eval <arg(damag)>/<eval tag(koef_infoText)>>)
+  cont.say("InfoText: <eval arg(infotext)>")
+  if (<arg(infoText)> > 5)
+    arg(infoText,5)
   endif
   doswitch <arg(infoText)>
-    link.classMessage("<?cont.name?> lehce krvaci")
-    link.classMessage("<?cont.name?> krvaci")
-    link.classMessage("<?cont.name?> silne krvaci")
-    link.classMessage("<?cont.name?> velmi silne krvaci")
-    link.classMessage("<?cont.name?> extremne krvaci")
+    link.classMessage("<?cont.name?> temer nekrvaci")       // 1-4 dmg PvP
+    link.classMessage("<?cont.name?> lehce krvaci")         // 5-9 dmg PvP
+    link.classMessage("<?cont.name?> krvaci")               // 10-14 dmg PvP
+    link.classMessage("<?cont.name?> silne krvaci")         // 15-19 dmg PvP
+    link.classMessage("<?cont.name?> velmi silne krvaci")   // 20-24 dmg PvP 
+    link.classMessage("<?cont.name?> extremne krvaci")      // 25++ dmg PvP
+  enddo
+  doswitch <arg(infoText)>
+    cont.f_doBloodStain(01645,<hval (tag(blood_color))>)
+    cont.f_doBloodStain(0122c,<hval (tag(blood_color))>)
+    cont.f_doBloodStain(0122b,<hval (tag(blood_color))>)
+    cont.f_doBloodStain(0122e,<hval (tag(blood_color))>)
+    cont.f_doBloodStain(0122d,<hval (tag(blood_color))>)
+    cont.f_doBloodStain(0122a,<hval (tag(blood_color))>)
   enddo
   more1l=<eval more1l-1>
   timerd=<nastaveni_ability_ripperdelay>
+  tag(bleeding_steps,0)
+  tag(chance_to_fizz,668)
+  
+  cont.say("BonusBleedCap je: <eval tag(BonusBleedCap)>")
+  tag(BonusBleedCap,<eval (<eval tag(BonusBleedCap)>*more1l)/more1h>)
+  cont.say("BonusBleedCap je: <eval tag(BonusBleedCap)>")
 else
   remove
 endif
 return 1
+
+[events e_bleeding]
+on=@step
+arg(bleeditem,<f_bleed_getMemory(<uid>)>)
+bleeditem.tag(bleeding_steps,#+1)
+bleeditem.tag(chance_to_fizz,#-30)
+if (<eval bleeditem.timerd> > 1)
+  bleeditem.timerd=<eval bleeditem.timerd>-1
+endif 
+say("Kroku: <eval bleeditem.tag(bleeding_steps)> TimerD: <eval bleeditem.timerd>")
 
 [Function f_spelldone]
 if (npc)

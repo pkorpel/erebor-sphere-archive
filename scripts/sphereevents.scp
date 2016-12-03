@@ -2980,8 +2980,20 @@ if (<eval argv(2)>) //custom damage
 else // computed damage (cumulate bleed)
   arg(bleeditem).more2=<eval ((arg(bleedpower)*nastaveni_ability_ripper)/1000)+arg(bleeditem).more2>
 endif
+if (isPlayer)
+  if (profession==class_thief)    // Jen pro Thiefa
+    if (<eval arg(bleeditem).tag(BonusBleedCap)> < <eval <eval tag(level)>*2>)    // Jen pokud by aktualni bonus stropu navysil. Napr kdyz mlati dva thiefove ruznych levelu
+      if (<eval tag(level)> >= 100)
+        arg(bleeditem).tag(BonusBleedCap,200)  // Bonus Stropu max +200
+      else
+        arg(bleeditem).tag(BonusBleedCap,<eval <eval tag(level)>*2>)  //  Bonus ke stropu level*2
+      endif
+    endif
+    say("Strop Bonus: +<eval arg(bleeditem).tag(BonusBleedCap)>")
+  endif
+endif
 arg(bleeditem).link=<uid>
-arg(bleeditem).more1h={10 20}//opakovani krvaceni maximalne
+arg(bleeditem).more1h={10 12}//opakovani krvaceni maximalne
 arg(bleeditem).more1l=<arg(bleeditem).more1h>//aktualnich opakovani
 
 [function f_bleed_getMemory]

@@ -7291,4 +7291,11 @@ else
   return <eval argv(1)>)
 endif
 
+[function f_doBloodStain]  // argv(0) - DispID, argv(1) - color
+newitemsafe(<findres(itemdef,<argv(0)>)>)
+lastnew.color=<argv(1)>
+lastnew.p=<p>
+lastnew.timer={10 15}
+
+
 [eof]
