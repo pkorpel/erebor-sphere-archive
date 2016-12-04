@@ -32,7 +32,7 @@ maxhits={4500 5000}
 maxstam=40
 maxmana=0
 
-tag.npc_curse_chance=500            // 5% chance to trigger this event
+tag.npc_curse_chance=500            // 50% chance to trigger this event
 tag.npc_curse_delay=3,4          // delay between another possible strike
 tag.npc_curse_dmg=70,90            // dmg 
 
@@ -69,6 +69,8 @@ PARRYING={85.0 90.0}
 TACTICS={85.0 90.0}
 WRESTLING={55.0 75.0}
 SpiritSpeak=30.0
+Peacemaking=90.0
+Resist=130.0
 
 ITEMnewbie=i_deathshroud_npc
 color=083A
@@ -151,6 +153,8 @@ PARRYING={85.0 90.0}
 TACTICS={85.0 90.0}
 WRESTLING={55.0 75.0}
 SpiritSpeak=30.0
+Peacemaking=90.0
+Resist=130.0
 
 ITEMnewbie=i_hat_jester
 color=042D
@@ -195,7 +199,7 @@ KARMA=-5000
 
 STR=3000
 DEX=200
-INT=280
+INT=310
 
 maxhits={7750 8000}
 maxstam={115 190}
@@ -305,7 +309,7 @@ KARMA=-5000
 
 STR=4000
 DEX=200
-INT=300
+INT=350
 
 maxhits={13500 13900}
 maxstam={155 190}
@@ -414,7 +418,7 @@ KARMA=-5000
 
 STR=5000
 DEX=200
-INT=340
+INT=350
 
 maxhits={15500 15900}
 maxstam={175 250}
@@ -456,7 +460,7 @@ tag(monstertype,humanoid,50)
 //weap flags
 tag.weapflag=dam_lightning|dam_magic
 
-ei=130.0
+ei=80.0
 magery=120.0
 Resist=150.0
 WRESTLING=120.0
@@ -466,8 +470,7 @@ ITEMNEWBIE=i_light_source
 ITEMnewbie=i_monster_create
 
 itemnewbie=i_spellbook
-addspell=s_lightning
-addspell=s_chain_lightning
+addspell=s_mind_blast
 addspell=s_magic_reflection
 
 ITEMNEWBIE=random_male_hair
@@ -687,7 +690,7 @@ tag(monstertype,humanoid,50)
 //weap flags
 tag.weapflag=dam_lightning|dam_magic
 
-ei=110.0
+ei=120.0
 magery=120.0
 Resist=200.0
 WRESTLING=150.0
@@ -799,6 +802,12 @@ tag(monstertype,humanoid,60)
 				
 //weap flags			
 tag.weapflag=dam_blunt|dam_physical			
+
+TACTICS=100.0			
+WRESTLING=120.0			
+RESIST=180.0			
+SpiritSpeak=35.0
+MACEFIGHTING={110.0 120.0}
 				
 ITEMNEWBIE=i_hair_long
 color=098D		
@@ -817,10 +826,7 @@ color=097F
 ITEMnewbie=i_shield_order			
 color=097F			
 				
-TACTICS=100.0			
-WRESTLING=120.0			
-RESIST=180.0			
-SpiritSpeak=35.0		 	
+		 	
 ITEMnewbie=i_monster_create			
 								
 ON=@NPCRestock			
@@ -900,6 +906,12 @@ tag(monstertype,humanoid,60)
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
 
+TACTICS=100.0
+WRESTLING=120.0
+RESIST=180.0
+SpiritSpeak=45.0
+MACEFIGHTING={110.0 120.0}
+
 ITEMNEWBIE=i_hair_long
 ITEMnewbie=i_mace_war
 color=0985
@@ -916,10 +928,7 @@ color=0985
 ITEMnewbie=i_shield_order
 color=0985
 
-TACTICS=100.0
-WRESTLING=120.0
-RESIST=180.0
-SpiritSpeak=45.0
+
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
@@ -997,6 +1006,12 @@ tag(monstertype,humanoid,50)
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
 
+TACTICS=100.0
+WRESTLING=120.0
+RESIST=200.0
+SpiritSpeak=60.0
+MACEFIGHTING={110.0 120.0}
+
 ITEMNEWBIE=i_hair_long
 ITEMnewbie=i_mace_war
 color=0989
@@ -1013,10 +1028,7 @@ color=0989
 ITEMnewbie=i_shield_order
 color=0989
 
-TACTICS=100.0
-WRESTLING=120.0
-RESIST=200.0
-SpiritSpeak=60.0
+
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
@@ -1094,6 +1106,11 @@ tag(resist_cold,400) //
 //typ monstra
 tag(monstertype,humanoid,40)
 
+TACTICS=100.0
+WRESTLING=120.0
+RESIST=250.0
+MACEFIGHTING={110.0 120.0}
+
 ITEMNEWBIE=i_hair_long
 ITEMnewbie=i_mace_war
 color=0999
@@ -1113,9 +1130,6 @@ color=0999
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
 
-TACTICS=100.0
-WRESTLING=120.0
-RESIST=250.0
 
 SpiritSpeak=125.0
 ITEMnewbie=i_monster_create
@@ -1156,7 +1170,7 @@ STR=7000
 DEX=600
 INT=0
 
-maxhits={33000 35000}    // z 30,5k - 30,9k
+maxhits={30000 31000}    // z 30,5k - 30,9k
 maxstam={630 660}
 maxmana=0
 
@@ -1200,6 +1214,12 @@ tag(resist_cold,500)
 //typ monstra
 tag(monstertype,humanoid,30)
 
+TACTICS=100.0
+WRESTLING=120.0
+RESIST=250.0
+SpiritSpeak=200.0
+MACEFIGHTING={110.0 120.0}
+
 ITEMnewbie=i_hammer_smith
 color=098B
 ITEMnewbie=i_platemail_arms
@@ -1216,11 +1236,6 @@ color=098D
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
-
-TACTICS=100.0
-WRESTLING=120.0
-RESIST=250.0
-SpiritSpeak=200.0
 
 ITEMnewbie=i_monster_create
 
@@ -1284,6 +1299,14 @@ tag(monstertype,humanoid,60)
 
 tag.weapflag=dam_physical|dam_blunt
 
+Resist=175.0
+WRESTLING=150.0
+Parrying=150.0
+FENCING={110.0 120.0}
+SWORDSMANSHIP={100.0 120.0}
+tactics=150.0
+SpiritSpeak=75.0
+
 //other resists
 tag(resist_poison,350)
 tag.resist_para=<eval {850 950}>
@@ -1311,12 +1334,6 @@ ITEMnewbie=i_platemail_arms
 ITEMnewbie=i_platemail_helm
 ITEMnewbie=i_shield_heater
 ITEMnewbie=i_robe
-
-Resist=175.0
-WRESTLING=150.0
-Parrying=150.0
-tactics=150.0
-SpiritSpeak=75.0
 
 ITEMnewbie=i_monster_create
 
@@ -1375,6 +1392,14 @@ tag(monstertype,humanoid,60)
 
 tag.weapflag=dam_blunt|dam_physical
 
+Resist=175.0
+WRESTLING=120.0
+Parrying=150.0
+tactics=150.0
+FENCING={110.0 120.0}
+SWORDSMANSHIP={100.0 120.0}
+SpiritSpeak=80.0
+
 //other resists
 tag(resist_poison,750)
 tag.resist_para=<eval {800 900}>
@@ -1401,12 +1426,6 @@ ITEMnewbie=i_platemail_gorget
 ITEMnewbie=i_platemail_arms
 ITEMnewbie=i_helm_nose
 ITEMnewbie=i_cape
-
-Resist=175.0
-WRESTLING=120.0
-Parrying=150.0
-tactics=150.0
-SpiritSpeak=80.0
 
 ITEMnewbie=i_monster_create
 
@@ -1494,6 +1513,8 @@ tag.weapflag=dam_blunt|dam_physical
 WRESTLING=130.0
 TACTICS=120.0
 Parrying=150.0
+FENCING={110.0 120.0}
+SWORDSMANSHIP={100.0 120.0}
 SpiritSpeak=100.0
 
 ITEMnewbie=i_monster_create
@@ -1598,7 +1619,8 @@ PARRYING={190.0 200.0}
 Resist=150.0
 TACTICS={100.0 120.0}
 WRESTLING={105.0 120.0}
-Fencing={105.0 110.0}
+FENCING={110.0 120.0}
+SWORDSMANSHIP={100.0 120.0}
 SpiritSpeak=190.0
 peacemaking=100.0
 provocation=100.0
@@ -1655,7 +1677,7 @@ FAME=100
 KARMA=-5000
 
 STR=1000
-DEX=250
+DEX=200
 INT=50
 
 maxhits={2300 2500}
@@ -1694,17 +1716,19 @@ tag(resist_cold,800)
 //typ monstra
 tag(monstertype2,humanoid,60)
 //weap flags
-tag.weapflag=dam_slashing|dam_physical|dam_cold
+tag.weapflag=dam_piercing|dam_physical|
 
-WRESTLING=120.0 
-RESIST=200.0
-TACTICS=250.0
-PARRYING={120.0 145.0}
-SWORDSMANSHIP=100.0
-FENCING=100.0 
+WRESTLING={100.0 110.0}
+RESIST={110.0 120.0}
+TACTICS={110.0 120.0}
+PARRYING={90.0 100.0}
+FENCING={110.0 120.0}
+SWORDSMANSHIP={100.0 120.0}
+ARCHERY={110.0 120.0}
+MACEFIGHTING={110.0 120.0}
 PROVOCATION=100.0
 PEACEMAKING=100.0
-SpiritSpeak=40.0
+SpiritSpeak=35.0
 
 ITEMnewbie=i_monster_create
 ITEMNEWBIE=i_ringmail_tunic
@@ -1726,3 +1750,131 @@ ON=@NPCRestock
 ITEM=i_gold
 
 /////////////////////////////////////////////////////////////
+
+[CHARDEF c_zm_bandita]
+id=c_man
+NAME=Ztraceny bandita
+ICON=i_pet_MAN
+anim=0ffc78c7f
+CAN=MT_WALK|MT_run|MT_USEHANDS
+
+attack=40
+ARMOR=80
+MOVERATE=5
+
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_looter
+TEVENTS=e_npc_bleed
+TEVENTS=e_npc_critic              //sance na kritik melee
+
+CATEGORY=Monsters
+SUBSECTION=Pirati
+DESCRIPTION=Pirat chlap
+
+ON=@Create
+COLOR=colors_skin 
+Title=The Pirat
+NPC=brain_monster
+fame={2000 2999}              
+karma={-2999 -3999}
+
+str={500 700}
+dex={180 200}
+int={88 100}
+
+maxhits={1900 2200}
+maxstam={250 300}
+maxmana=0
+
+tag.experience=<eval {100.0 120.0}>
+
+tag.npc_bleed=700 //70.0%
+
+tag.npc_critic_chance=250         //25% chance
+tag.npc_critic_dmg=20,30          //dmg in between
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>  
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
+
+tag(monstertype,humanoid,60)
+
+tag(resist_poison,200)
+tag.resist_para=<eval {850 950}>
+tag(resist_summon,900)
+tag(resist_bleed,200)
+
+tag(resist_sharp,150)
+tag(resist_slash,150)        //sekery
+tag(resist_pierce,150)
+tag(resist_blunt,150)
+
+tag(resist_fire,150)
+tag(resist_elect,150)
+tag(resist_cold,150)
+
+parrying={100.0 110.0}
+resist=100.0
+tactics={90.0 110.0}
+wrestling={85.0 95.0}
+FENCING={90.0 105.0}
+SWORDSMANSHIP={90.0 105.0}
+MACEFIGHTING={100.0 105.0}
+peacemaking=50.0
+
+ITEMnewbie=i_monster_create
+ITEMNEWBIE=random_male_hair
+COLOR=colors_hair
+//ITEMNEWBIE=i_beard_long
+//COLOR=match_hair
+itemnewbie=i_cutlass
+Color=098A
+//itemnewbie=i_boots_thigh
+//Color=00
+itemnewbie=i_pants_short
+Color=0989
+itemnewbie=i_bracelet_gold
+Color=00
+itemnewbie=i_necklace_gold
+Color=00
+//itemnewbie=i_bandana
+itemnewbie=i_skull_cap
+Color=0989
+itemnewbie=i_shirt_plain
+Color=098a
+
+ON=@NPCRestock
+item=i_gold
+item=i_zm_scroll
+
+///////////////////////////////////////////////////////
+//  scroll - cannot access Ztracene Mesto without it //
+///////////////////////////////////////////////////////
+
+[ITEMDEF i_zm_scroll]
+ID=i_scroll_blank
+NAME=Potrhany svitek
+TYPE=t_normal
+WEIGHT=1
+
+on=@create
+color=0123
+
+on=@DROPON_GROUND
+src.sysmessage("Pri polozeni na zem svitek nasal vlhkost a znehodnotil se")
+remove
+return 0
+
+on=@userDClick
+src.sysmessage("Ty nemehlo, horlivosti jsi svitek roztrhl. Uz je k nicemu!")
+remove
+return 0
+
+on=@userclick
+src.sysmessage("Na svitku je spousta necitelnych run a velky napis Ztracene me...")
+return 1
