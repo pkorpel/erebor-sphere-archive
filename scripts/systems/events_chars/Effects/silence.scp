@@ -14,14 +14,13 @@ else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Min
   endif
   arg(mindPower,<eval ((<src.int>*<arg(staffMaterial)>)/2)>) // for mage with 250INT -> 125-875
   arg(silenceResist,<eval tag(resist_silence)>)
-  if ( (arg(mindPower) <= arg(silenceResist)) || (arg(silenceResist) >= 1000) )
+  if (arg(silenceResist) >= 1000)
     src.redMessage("Cil odolava umlceni")
     return 0
   endif
-  arg(mindBoost,<arg(mindPower)-arg(silenceResist)>)
-  arg(chance_resist_impact,<eval (1000+<arg(mindBoost)>-<arg(silenceResist)>)>) // reduction in promile -> the chance will be set to the given amount of promile, i.e. 1k == the success chance remains the same
+  arg(mindBoost,<eval (arg(mindPower)-arg(silenceResist))>) // either positive or negative influence of the basic chance
   arg(basic_chance,<eval <eval src.tag(ra_mind_blast_silence)>*var(nastaveni_MindBlast_silence_chance)>)
-  arg(chance,<eval ((arg(basic_chance)*arg(chance_resist_impact))/1000)>)
+  arg(chance,<eval (arg(basic_chance)+arg(mindBoost))>)
   if (chance(<arg(chance)>,3))
     arg(silenced_time,<eval (<eval src.tag(ra_mind_blast_silenced_time)>+<nastaveni_spellcast_silence_mind_blast>)>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
     arg(silenced_time,<f_silence_add(<arg(silenced_time)>)>)
