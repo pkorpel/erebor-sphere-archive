@@ -322,6 +322,7 @@ tag(resist_blunt,100)
 tag(resist_fire,-500)
 tag(resist_elect,200)
 tag(resist_cold,800)
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,snow)
@@ -415,6 +416,7 @@ tag(resist_blunt,-200) //spirit
 tag(resist_fire,-500)
 tag(resist_elect,200)
 tag(resist_cold,800)
+tag(resist_silence,450)
 
 //typ monstra
 tag(monstertype,snow)
@@ -854,6 +856,7 @@ tag(resist_blunt,100)
 tag(resist_fire,-500)
 tag(resist_elect,200)
 tag(resist_cold,800)
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,snow)
@@ -1370,6 +1373,7 @@ tag(resist_blunt,-200)
 tag(resist_fire,-500)
 tag(resist_elect,200)
 tag(resist_cold,800)
+tag(resist_silence,200)
 
 //typ monstra
 tag(monstertype,snow)
@@ -1551,6 +1555,7 @@ tag(resist_blunt,-300)
 tag(resist_fire,-500)
 tag(resist_elect,200)
 tag(resist_cold,800)
+tag(resist_silence,250)
 
 //typ monstra
 tag(monstertype,snow)
@@ -2184,6 +2189,7 @@ tag(resist_blunt,250)
 tag(resist_fire,-300)
 tag(resist_elect,300)
 tag(resist_cold,900)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,snow)
@@ -2307,6 +2313,7 @@ tag(resist_blunt,150)
 tag(resist_fire,-300)
 tag(resist_elect,300)
 tag(resist_cold,900)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,snow)
@@ -2428,6 +2435,7 @@ tag(resist_blunt,150)
 tag(resist_fire,-300)
 tag(resist_elect,300)
 tag(resist_cold,900)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,snow)
@@ -2547,6 +2555,7 @@ tag(resist_blunt,150)
 tag(resist_fire,-300)
 tag(resist_elect,300)
 tag(resist_cold,900)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,snow)
@@ -3373,6 +3382,7 @@ tag(resist_blunt,200)
 tag(resist_fire,-200)
 tag(resist_elect,200)
 tag(resist_cold,500)
+tag(resist_silence,250)
 
 //typ monstra
 tag(monstertype,snow)

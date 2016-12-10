@@ -66,6 +66,7 @@ tag(resist_blunt,800)
 tag(resist_fire,700)
 tag(resist_elect,900)
 tag(resist_cold,800)
+tag(resist_silence,650)
 //typ monstra
 tag(monstertype,humanoid)
 //weap flags
@@ -333,6 +334,7 @@ tag(resist_blunt,800)
 tag(resist_fire,900)
 tag(resist_elect,800)
 tag(resist_cold,900)
+tag(resist_silence,400)
 //weap flags
 tag.weapflag=dam_piercing|dam_physical
 
@@ -854,6 +856,7 @@ tag(resist_blunt,400)
 tag(resist_fire,900)
 tag(resist_elect,900)
 tag(resist_cold,750)
+tag(resist_silence,400)
 //weap flags
 tag.weapflag=dam_piercing|dam_physical
 

@@ -1798,6 +1798,7 @@ tag(resist_blunt,400)
 tag(resist_fire,950)
 tag(resist_elect,350)
 tag(resist_cold,-500)
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,fire)

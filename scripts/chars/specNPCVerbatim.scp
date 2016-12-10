@@ -60,6 +60,7 @@ tag(resist_blunt,50)
 tag(resist_fire,200)
 tag(resist_elect,650)
 tag(resist_cold,250)
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,air)
@@ -142,6 +143,7 @@ tag(resist_blunt,50)
 tag(resist_fire,200)
 tag(resist_elect,650)
 tag(resist_cold,250)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,air)
@@ -346,6 +348,7 @@ tag(resist_blunt,100)
 tag(resist_fire,950)
 tag(resist_elect,700)
 tag(resist_cold,-400)
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,fire) //u elemu ruzne
@@ -773,6 +776,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,300)
 tag(resist_elect,350)
 tag(resist_cold,150)
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,humanoid,60)
@@ -880,6 +884,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,300)
 tag(resist_elect,350)
 tag(resist_cold,150)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,humanoid,60)

@@ -339,6 +339,7 @@ tag(resist_blunt,350)
 tag(resist_fire,900)
 tag(resist_elect,300)
 tag(resist_cold,-400)   //mraz ano
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -635,6 +636,7 @@ tag(resist_blunt,-500)
 tag(resist_fire,900)
 tag(resist_elect,300)
 tag(resist_cold,-400)   //mraz ano
+tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -830,6 +832,7 @@ tag(resist_blunt,-700)   //ice verze
 tag(resist_fire,-800)
 tag(resist_elect,300)
 tag(resist_cold,800)     //ice verze
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -932,6 +935,7 @@ tag(resist_blunt,650)
 tag(resist_fire,900)
 tag(resist_elect,300)
 tag(resist_cold,-600)   //mraz ano
+tag(resist_silence,550)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -1030,7 +1034,8 @@ tag(resist_blunt,-500)      //unbdead
 //magic resists
 tag(resist_fire,-700)       // undead
 tag(resist_elect,300)
-tag(resist_cold,400)      
+tag(resist_cold,400)
+tag(resist_silence,450)      
 
 //typ monstra
 tag(monstertype,daemon,60)
