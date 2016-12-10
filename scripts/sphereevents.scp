@@ -2970,6 +2970,9 @@ endif
 //argv(2) == <optional> fixed damage -> the damage won't increase using multiple hits.
 classmessage("Tvuj cil krvaci.")
 arg(bleeditem,<f_bleed_getMemory(<argv(0)>)>)
+arg(BleedCap,<var(nastaveni_maxbleed)>)
+arg(ActualBleedCap,<eval arg(bleeditem).f_bleed_getBleedParameters(2)>)
+arg(bleeditem).more2=<eval arg(bleeditem).f_bleed_getBleedParameters(1)>  // Znova aplikuji bleed, proto pro me vychozi hodnota je aktualni dmg bleedu.
 if (<eval argv(1)>)
   arg(bleedpower,<argv(1)>)
 else
@@ -2982,19 +2985,24 @@ else // computed damage (cumulate bleed)
 endif
 if (isPlayer)
   if (profession==class_thief)    // Jen pro Thiefa
-    if (<eval arg(bleeditem).tag(BonusBleedCap)> < <eval <eval tag(level)>*2>)    // Jen pokud by aktualni bonus stropu navysil. Napr kdyz mlati dva thiefove ruznych levelu
-      if (<eval tag(level)> >= 100)
-        arg(bleeditem).tag(BonusBleedCap,200)  // Bonus Stropu max +200
-      else
-        arg(bleeditem).tag(BonusBleedCap,<eval <eval tag(level)>*2>)  //  Bonus ke stropu level*2
-      endif
+    arg(lvlBonus,<eval tag(level)>)
+    if (<arg(lvlBonus)> > 200)
+      arg(lvlBonus,200)
     endif
-    say("Strop Bonus: +<eval arg(bleeditem).tag(BonusBleedCap)>")
+    arg(BleedCap,<var(nastaveni_thief_bleed_cap)>+<arg(lvlBonus)>)
   endif
 endif
+
+if (<arg(ActualBleedCap)> > <arg(BleedCap)>)    // Kdyz bude aktualni strop vyssi nez toho kdo reaplikuje bleed, ponecham si ten aktualni
+  arg(BleedCap,<arg(ActualBleedCap)>)
+endif
+if (<eval arg(bleeditem).more2> > <arg(BleedCap)>)  // Aby more2 nemohl byt vetsi nez strop
+  arg(bleeditem).more2=<arg(BleedCap)>
+endif
+
 arg(bleeditem).link=<uid>
-arg(bleeditem).more1h={10 12}//opakovani krvaceni maximalne
-arg(bleeditem).more1l=<arg(bleeditem).more1h>//aktualnich opakovani
+arg(bleeditem).more1h=10 //opakovani krvaceni maximalne
+arg(bleeditem).more1l=0  //aktualnich opakovani
 
 [function f_bleed_getMemory]
 argv(0).redmessage("Krvacis!")
@@ -3010,6 +3018,10 @@ else
   arg(bleeditem,<lastnew>)
 endif
 return<arg(bleeditem)>
+
+[function f_bleed_getBleedParameters]  // argv(0) - 1 actual dmg; 2 actual bleed cap
+arg(BleedParameter,<eval <eval more2*<eval (1000-(<eval more1l*more1l*1000>/<eval more1h*more1h*<argv(0)>>))>>/1000>)
+return<arg(BleedParameter)>
 
 [EVENTS e_shaman]
 on=@itemequip
