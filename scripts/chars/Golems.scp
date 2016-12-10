@@ -400,7 +400,7 @@ tag(resist_bleed,1000) //golem nekrvaci
 //weap resists
 tag(resist_sharp,350)
 tag(resist_slash,350)
-tag(resist_pierce,150)
+tag(resist_pierce,350)
 tag(resist_blunt,-400) // skalu rozbijes hlavne drtivou zbrani
 
 //magic resists
@@ -654,7 +654,7 @@ tag(resist_bleed,1000)      //golem nekrvaci
 //weap resists
 tag(resist_sharp,600)
 tag(resist_slash,600)
-tag(resist_pierce,450)
+tag(resist_pierce,550)
 tag(resist_blunt,100)  // skalu rozbijes hlavne drtivou zbrani
 
 //magic resists
@@ -1005,12 +1005,13 @@ tag(resist_bleed,-400)
 
 tag(resist_sharp,150)
 tag(resist_slash,150)
-tag(resist_pierce,-150)
-tag(resist_blunt,-150)
+tag(resist_pierce,150)
+tag(resist_blunt,150)
 
 tag(resist_fire,250)
 tag(resist_elect,-400)
 tag(resist_cold,-200)
+tag(resist_silence,350)
 
 //tag(resist_phys,0)
 //tag(resist_magic,0)
@@ -1086,14 +1087,15 @@ tag.resist_para=<eval {650 750}>
 tag(resist_summon,400)
 tag(resist_bleed,-300)
 
-tag(resist_sharp,4150)
+tag(resist_sharp,150)
 tag(resist_slash,150)
-tag(resist_pierce,-150)
-tag(resist_blunt,-150)
+tag(resist_pierce,150)
+tag(resist_blunt,150)
 
 tag(resist_fire,750)
 tag(resist_elect,-400)
 tag(resist_cold,-600)
+tag(resist_silence,350)
 
 //tag(resist_phys,0)
 //tag(resist_magic,0)
@@ -1267,6 +1269,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-600)         //ohen je boli
 tag(resist_elect,900)         //elektrina reaperovi neublizuje
 tag(resist_cold,200)          //mraz jaks taks
+tag(resist_silence,250)
 
 //typ monstra
 tag(monstertype,reaper,80)
@@ -1358,6 +1361,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-600)         //ohen je boli
 tag(resist_elect,900)         //elektrina reaperovi neublizuje
 tag(resist_cold,200)          //mraz jaks taks
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,reaper,80)
@@ -1451,6 +1455,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-600)         //ohen je boli
 tag(resist_elect,900)         //elektrina reaperovi neublizuje
 tag(resist_cold,200)          //mraz jaks taks
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,reaper,80)
@@ -1545,6 +1550,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-50)         //ohen je boli
 tag(resist_elect,950)         //elektrina reaperovi neublizuje
 tag(resist_cold,450)          //mraz jaks taks
+tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,reaper,60)
@@ -1639,6 +1645,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-50)         //ohen je boli
 tag(resist_elect,950)         //elektrina reaperovi neublizuje
 tag(resist_cold,450)          //mraz jaks taks
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,reaper,60)
@@ -1741,6 +1748,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-50)         //ohen je boli
 tag(resist_elect,950)         //elektrina reaperovi neublizuje
 tag(resist_cold,450)          //mraz jaks taks
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,reaper,40)
@@ -1843,6 +1851,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-50)         //ohen je boli
 tag(resist_elect,950)         //elektrina reaperovi neublizuje
 tag(resist_cold,450)          //mraz jaks taks
+tag(resist_silence,900)
 
 //typ monstra
 tag(monstertype,reaper,40)
@@ -1932,13 +1941,14 @@ tag(resist_bleed,500)              //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,600)        //odolnost na mece
 tag(resist_slash,100)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
-tag(resist_blunt,-400)       //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,200)        //sipky nic moc
+tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-700)       //zranitelnost energii
 tag(resist_cold,-300)
+tag(resist_silence,200)
 
 PARRYING=55.0
 MAGERY=70.0
@@ -2018,13 +2028,14 @@ tag(resist_bleed,800)       //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,600)        //odolnost na mece
 tag(resist_slash,100)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
-tag(resist_blunt,-400)       //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,200)        //sipky nic moc
+tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-700)       //zranitelnost energii
 tag(resist_cold,-300)
+tag(resist_silence,250)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2115,13 +2126,14 @@ tag(resist_bleed,800)       //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,300)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
-tag(resist_blunt,-400)       //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,250)        //sipky nic moc
+tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-450)       //zranitelnost energii
 tag(resist_cold,-100)
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2211,13 +2223,14 @@ tag(resist_bleed,800)        //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,300)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
+tag(resist_pierce,200)        //sipky nic moc
 tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-450)       //zranitelnost energii
 tag(resist_cold,-100)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2306,13 +2319,14 @@ tag(resist_bleed,800)      //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,300)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
+tag(resist_pierce,200)        //sipky nic moc
 tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-450)       //zranitelnost energii
 tag(resist_cold,-100)
+tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2403,13 +2417,14 @@ tag(resist_bleed,800)      //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,300)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
-tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,250)        //sipky nic moc
+tag(resist_blunt,-100)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-450)       //zranitelnost energii
 tag(resist_cold,-100)
+tag(resist_silence,450)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2500,13 +2515,14 @@ tag(resist_bleed,850)            //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)            //odolnost na mece
 tag(resist_slash,450)            //sekyry
-tag(resist_pierce,200)           //sipky nic moc
-tag(resist_blunt,-50)            //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,350)           //sipky nic moc
+tag(resist_blunt,50)            //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-200)       //zranitelnost energii
 tag(resist_cold,-50)
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,spirit,60)
@@ -2595,13 +2611,14 @@ tag(resist_bleed,900)            //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,450)        //sekyry
-tag(resist_pierce,200)       //sipky nic moc
-tag(resist_blunt,-50)        // na spirity hodne drtivymi zbranemi
+tag(resist_pierce,400)       //sipky nic moc
+tag(resist_blunt,50)        // na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,800)
 tag(resist_elect,-50)
 tag(resist_cold,150)
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,spirit,60)
@@ -2699,13 +2716,14 @@ tag(resist_bleed,1000)     //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,450)        //sekyry
-tag(resist_pierce,200)       //sipky nic moc
-tag(resist_blunt,-50)        // na spirity hodne drtivymi zbranemi
+tag(resist_pierce,450)       //sipky nic moc
+tag(resist_blunt,150)        // na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,900)
 tag(resist_elect,-50)
 tag(resist_cold,150)
+tag(resist_silence,700)
 
 //typ monstra
 tag(monstertype,spirit,40)
@@ -2801,13 +2819,14 @@ tag(resist_bleed,1000)      //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,450)        //sekyry
-tag(resist_pierce,200)       //sipky nic moc
-tag(resist_blunt,-50)        // na spirity hodne drtivymi zbranemi
+tag(resist_pierce,500)       //sipky nic moc
+tag(resist_blunt,250)        // na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,900)
 tag(resist_elect,-50)
 tag(resist_cold,150)
+tag(resist_silence,850)
 
 //typ monstra
 tag(monstertype,spirit,40)

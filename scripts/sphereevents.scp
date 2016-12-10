@@ -2832,7 +2832,7 @@ if (action==Skill_fencing)||(tag(isstabbing))
     					if (<arg(body)> <= 10)
   	  					arg(bonus,<eval <arg(body)>*10>)
   		  			elseif (<arg(body)> > 10)
-  			  			arg(bonus,<eval 100+<eval <eval <arg(body)>-10>*4>>)
+  			  			arg(bonus,<eval 100+<eval <eval <arg(body)>-10>*12>>)
   				  	endif
   					  var(ubrano,<eval <var(ubrano)>+<eval <eval <var(ubrano)>*<arg(bonus)>>/1000>>)
     					if (tag(podriznuti))

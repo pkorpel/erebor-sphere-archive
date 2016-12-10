@@ -146,6 +146,7 @@ tag(resist_blunt,-50)
 tag(resist_fire,300)
 tag(resist_elect,300)
 tag(resist_cold,200)
+tag(resist_silence,350)
 
 PARRYING={85.0 95.0}
 MAGERY={90.0 100.0}
@@ -234,6 +235,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,200)
 tag(resist_elect,200)
 tag(resist_cold,100)
+tag(resist_silence,400)
 
 peacemaking=100.0
 provocation=100.0
@@ -325,6 +327,7 @@ tag(resist_blunt,250)
 tag(resist_fire,300)
 tag(resist_elect,300)
 tag(resist_cold,200)
+tag(resist_silence,450)
 
 peacemaking=100.0
 provocation=100.0
@@ -415,6 +418,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,300)
 tag(resist_elect,300)
 tag(resist_cold,200)
+tag(resist_silence,500)
 
 peacemaking=100.0
 provocation=100.0
@@ -505,12 +509,12 @@ tag.weapflag=dam_physical|dam_slashing
 tag(resist_poison,700)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,650)
-tag(resist_bleed,300)
+tag(resist_bleed,100)
 
-tag(resist_sharp,50)
-tag(resist_slash,150)        //sekery
-tag(resist_pierce,50)
-tag(resist_blunt,250)
+tag(resist_sharp,150)
+tag(resist_slash,450)        //sekery
+tag(resist_pierce,450)
+tag(resist_blunt,450)
 
 tag(resist_fire,300)
 tag(resist_elect,300)
@@ -816,6 +820,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,200)
 tag(resist_elect,200)
 tag(resist_cold,100)
+tag(resist_silence,250)
 
 peacemaking=100.0
 provocation=100.0
@@ -1136,6 +1141,7 @@ tag(resist_blunt,-250)
 tag(resist_fire,800)
 tag(resist_elect,200)
 tag(resist_cold,-200)
+tag(resist_silence,350)
 
 peacemaking=100.0
 provocation=100.0
@@ -1300,6 +1306,7 @@ tag(resist_blunt,-250)
 tag(resist_fire,800)
 tag(resist_elect,200)
 tag(resist_cold,-200)
+tag(resist_silence,600)
 
 peacemaking=100.0
 provocation=100.0
