@@ -647,7 +647,7 @@ tag(bleeding_steps,0)
 tag(koef_infoText,5)
 tag(blood_color,<cont.def.BLOODCOLOR>)
 if (cont.NPC)
-  tag(koef_infoText,20)
+  tag(koef_infoText,40)
   cont.events +e_bleeding
 endif
 
