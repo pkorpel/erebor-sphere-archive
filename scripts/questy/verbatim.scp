@@ -603,7 +603,7 @@ if !(tag(polymorfmdelay))
 endif
 
 on=@aftergetswing
-if !(isSleeping)
+if (!(isSleeping) && !(isSilenced)) 
   if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>)
     dorand 8
       tag(doceho,c_spirit_snow)

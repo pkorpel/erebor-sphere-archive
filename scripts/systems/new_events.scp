@@ -900,7 +900,7 @@ on=@beforegeteffect
 [events e_npc_summoner]
 on=@beforeGetSwing
 on=@aftergetswing
-if !(isSleeping)
+if (!(isSleeping) && !(isSilenced))
   if rand(20)==1
     SAY("Heru Ruin Val")
     arg(i,0)
@@ -925,7 +925,7 @@ on=@beforegeteffect
 
 [events e_npc_summoning]
 on=@aftergetswing
-if !(isSleeping)
+if (!(isSleeping) && !(isSilenced))
   if !(tag(npc_summoning_chance))
     tag(npc_summoning_chance,50)  //5.0%
   endif
@@ -1093,7 +1093,7 @@ endif
 
 [events e_npc_summoning2]
 on=@aftergetswing
-if !(isSleeping)
+if (!(isSleeping) && !(isSilenced))
   if (strlen(<tag(npc_summoning2_chance)>) == 0)
     tag(npc_summoning2_chance,50)  //default 5% chance
   endif
@@ -1190,7 +1190,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-if !(isSleeping)
+if (!(isSleeping) && !(isSilenced))
   e_f_npc_curse_mana
 endif
 
@@ -1277,7 +1277,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-if !(isSleeping)
+if (!(isSleeping) && !(isSilenced))
   e_f_npc_curse_stam
 endif
 

@@ -7,7 +7,7 @@
 
 [events e_lightnings]
 on=@gethit
-if !(isSleeping)
+if (!(isSleeping) && !(isSilenced))
   if !(<eval tag(e_lightnings_chance)>)
     tag(e_lightnings_chance,50) // 5.0% chance
   endif
