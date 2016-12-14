@@ -1574,9 +1574,9 @@ if (isSleeping)
 endif
 
 if (src.flag_invul)
-  return 1
+  return 0
 elseif (isPet)
-  return 1
+  return 0
 endif
 attack(<src>)
 events(+e_NPC_teleToTarget)
