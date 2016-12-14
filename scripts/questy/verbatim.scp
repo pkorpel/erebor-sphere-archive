@@ -556,31 +556,33 @@ on=@beforegeteffect
 [events e_healdrinker]
 
 on=@aftergetswing
-if !(isSleeping)
-  if(tag(neknockuj))!=1
-    tag(neknockuj,1)
-    return 0
-  endif
-  if tag(vypito)!=1
-    if (<hits> < <maxhits>/2) && rand(30)==1
-      hits=(hits)+(maxhits/3)
-      emote("drinking potion")
-      emote("healing")
-      return 0
-    endif
-    if (<hits> < <maxhits>/2) && rand(20)==1
-      newequip(i_npc_stoneskin_p)
-      tag(vypito,1)
-      return 0
-    endif
-    if (<hits> < <maxhits>/2) && rand(12)==1
-      newequip(i_npc_spellshield_p)
-      tag(vypito,1)
-      return 0
-    endif
-  endif
+if (isSleeping)
   return 0
 endif
+
+if(tag(neknockuj))!=1
+  tag(neknockuj,1)
+  return 0
+endif
+if tag(vypito)!=1
+  if (<hits> < <maxhits>/2) && rand(30)==1
+    hits=(hits)+(maxhits/3)
+    emote("drinking potion")
+    emote("healing")
+    return 0
+  endif
+  if (<hits> < <maxhits>/2) && rand(20)==1
+    newequip(i_npc_stoneskin_p)
+    tag(vypito,1)
+    return 0
+  endif
+  if (<hits> < <maxhits>/2) && rand(12)==1
+    newequip(i_npc_spellshield_p)
+    tag(vypito,1)
+    return 0
+  endif
+endif
+return 0
 
 on=@beforegetswing
 on=@Created
@@ -603,22 +605,23 @@ if !(tag(polymorfmdelay))
 endif
 
 on=@aftergetswing
-if (!(isSleeping) && !(isSilenced)) 
-  if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>)
-    dorand 8
-      tag(doceho,c_spirit_snow)
-      tag(doceho,c_spider_elder)
-      tag(doceho,c_gladiator_lord_snow)
-      tag(doceho,c_titan_lord_snow)
-      tag(doceho,c_golem_frost)
-      tag(doceho,c_excelent) //tag(doceho,c_ptak_ohnivak) -> neexistujici ID
-      tag(doceho,c_minotaur)
-      tag(doceho,c_strazce_ledu)
-    enddo
-    newequip(i_morfovatko)
-    lastnew.tag(zmenimsena,<tag(doceho)>)
-  endif
+if ((isSleeping) || (isSilenced))
   return 0
+endif
+ 
+if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>)
+  dorand 8
+    tag(doceho,c_spirit_snow)
+    tag(doceho,c_spider_elder)
+    tag(doceho,c_gladiator_lord_snow)
+    tag(doceho,c_titan_lord_snow)
+    tag(doceho,c_golem_frost)
+    tag(doceho,c_excelent) //tag(doceho,c_ptak_ohnivak) -> neexistujici ID
+    tag(doceho,c_minotaur)
+    tag(doceho,c_strazce_ledu)
+  enddo
+  newequip(i_morfovatko)
+  lastnew.tag(zmenimsena,<tag(doceho)>)
 endif
 
 on=@beforegetswing

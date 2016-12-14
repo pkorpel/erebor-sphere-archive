@@ -213,27 +213,28 @@ endif
 
 [events e_parakrik]
 on=@aftergetswing
-if !(isSleeping)
-  if (strlen(<tag(paraKrik_chance)>))
-    arg(chance,<tag(paraKrik_chance)>)
-  else
-    arg(chance,70) // 7%
-  endif
-  if (chance(<arg(chance)>,3))
-    if (<eval tag(paraKrik_cd)> > <serv.time>)
-      return 0
-    endif
-    if (strlen(<tag(paraKrik_delay)>))
-      arg(coolDown,<tag(paraKrik_delay)>)
-    else
-      arg(coolDown,50) // next para in 5s
-    endif
-    tag(paraKrik_cd,<serv.time>+<arg(coolDown)>) // won't cry for at least the next 5s
-    newitem(<i_src_changer_parakrik>)
-    lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
-    emote("crying awfully.")
-  endif
+if (isSleeping)
   return 0
+endif
+
+if (strlen(<tag(paraKrik_chance)>))
+  arg(chance,<tag(paraKrik_chance)>)
+else
+  arg(chance,70) // 7%
+endif
+if (chance(<arg(chance)>,3))
+  if (<eval tag(paraKrik_cd)> > <serv.time>)
+    return 0
+  endif
+  if (strlen(<tag(paraKrik_delay)>))
+    arg(coolDown,<tag(paraKrik_delay)>)
+  else
+    arg(coolDown,50) // next para in 5s
+  endif
+  tag(paraKrik_cd,<serv.time>+<arg(coolDown)>) // won't cry for at least the next 5s
+  newitem(<i_src_changer_parakrik>)
+  lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
+  emote("crying awfully.")
 endif
 
 on=@beforegetswing
@@ -293,13 +294,14 @@ topobj.invis
 [events e_odinvis_krik]
 
 on=@aftergetswing
-if !(isSleeping)
-  if (rand(12)==1)
-    newitem(<i_src_changer_odinvis>)
-    lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
-    emote("crying.")
-  endif
+if (isSleeping)
   return 0
+endif
+
+if (rand(12)==1)
+  newitem(<i_src_changer_odinvis>)
+  lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
+  emote("crying.")
 endif
 
 on=@beforegetswing
@@ -336,11 +338,12 @@ endif
 
 [events e_npc_detect]
 on=@npcseenewplayer
-if !(isSleeping)
-  if !(findid(i_npc_detekce))
-    newequip(i_npc_detekce)
-  endif
+if (isSleeping)
   return 0
+endif
+
+if !(findid(i_npc_detekce))
+  newequip(i_npc_detekce)
 endif
 
 [itemdef i_npc_detekce]
@@ -409,30 +412,31 @@ endif
 return 0
 
 on=@aftergetswing
-if !(isSleeping)
-  if ((tag(neknockuj))!=1)
-    tag(neknockuj,1)
+if (isSleeping)
+  return 0
+endif
+
+if ((tag(neknockuj))!=1)
+  tag(neknockuj,1)
+  return 0
+endif
+if (tag(vypito)!=1)
+  if ((<hits> < <maxhits>/2) && (rand(20)==1))
+    hits=(hits)+(maxhits/3)
+    emote("drinking potion")
+    emote("regenerating!")
     return 0
   endif
-  if (tag(vypito)!=1)
-    if ((<hits> < <maxhits>/2) && (rand(20)==1))
-      hits=(hits)+(maxhits/3)
-      emote("drinking potion")
-      emote("regenerating!")
-      return 0
-    endif
-    if ((<hits> < <maxhits>/2) && (rand(12)==1))
-      newequip(i_npc_stoneskin_p)
-      tag(vypito,1)
-      return 0
-    endif
-    if ((<hits> < <maxhits>/2) && (rand(12)==1))
-      newequip(i_npc_spellshield_p)
-      tag(vypito,1)
-      return 0
-    endif
+  if ((<hits> < <maxhits>/2) && (rand(12)==1))
+    newequip(i_npc_stoneskin_p)
+    tag(vypito,1)
+    return 0
   endif
-  return 0
+  if ((<hits> < <maxhits>/2) && (rand(12)==1))
+    newequip(i_npc_spellshield_p)
+    tag(vypito,1)
+    return 0
+  endif
 endif
 
 on=@beforegetswing
@@ -644,9 +648,11 @@ on=@aftergetswing
 on=@beforegeteffect
 
 on=@npcseenewplayer
-if !(isSleeping)
-  SAY("Nyni zemrete!")
+if (isSleeping)
+  return 0
 endif
+
+say("Nyni zemrete!")
 
 [events e_menavec_malej]
 on=@Created
@@ -658,29 +664,30 @@ if (body!=c_gazer)
 endif
 
 on=@aftergetswing
-if (!(isSleeping) && !(isSilenced)) 
-  if !(tag(polymorfmdelay))
-    tag(polymorfmdelay,<serv.time>+50)
-    return 0
-  endif
-  if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
-    dorand 11
-      tag(doceho,c_eye_valorite_menavec) // menavcova verzia bez leapu
-      tag(doceho,c_black_vdova) // netreba menit, nema ability
-      tag(doceho,c_bug_giant) // taktiez netreba menit
-      tag(doceho,c_tarantule) // netreba
-      tag(doceho,c_eye_obsidian_menavec) // taktiez bez leapu
-      tag(doceho,c_alligator) // netreba menit
-      tag(doceho,c_golem_golden) // netreba menit
-      tag(doceho,c_vortex_mage) // netreba
-      tag(doceho,c_mummy_stone) // netreba 
-      tag(doceho,c_m_phoenix_poison) // netreba
-      tag(doceho,c_ogre_lord) // netreba
-    enddo
-    newequip(i_morfovatko)
-    lastnew.tag(zmenimsena,<tag(doceho)>)
-  endif
+if ((isSleeping) || (isSilenced))
   return 0
+endif
+
+if !(tag(polymorfmdelay))
+  tag(polymorfmdelay,<serv.time>+50)
+  return 0
+endif
+if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
+  dorand 11
+    tag(doceho,c_eye_valorite_menavec) // menavcova verzia bez leapu
+    tag(doceho,c_black_vdova) // netreba menit, nema ability
+    tag(doceho,c_bug_giant) // taktiez netreba menit
+    tag(doceho,c_tarantule) // netreba
+    tag(doceho,c_eye_obsidian_menavec) // taktiez bez leapu
+    tag(doceho,c_alligator) // netreba menit
+    tag(doceho,c_golem_golden) // netreba menit
+    tag(doceho,c_vortex_mage) // netreba
+    tag(doceho,c_mummy_stone) // netreba 
+    tag(doceho,c_m_phoenix_poison) // netreba
+    tag(doceho,c_ogre_lord) // netreba
+  enddo
+  newequip(i_morfovatko)
+  lastnew.tag(zmenimsena,<tag(doceho)>)
 endif
 
 on=@beforegetswing
@@ -697,26 +704,27 @@ if (body!=c_gazer)
 endif
 
 on=@aftergetswing
-if (!(isSleeping) && !(isSilenced))
-  if !(tag(polymorfmdelay))
-    tag(polymorfmdelay,<serv.time>+50)
-    return 0
-  endif
-  if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
-    dorand 8
-      tag(doceho,c_daemon_gold_menavec) // odstraneny reborn
-      tag(doceho,c_fireant_queen_menavec) // odstraneny ovinovac
-      tag(doceho,c_ophidian_king) // netreba menit
-      tag(doceho,c_eye_adamantium_menavec) // odstraneny leap
-      tag(doceho,c_reaper_eben) // odstraneny ovinovac
-      tag(doceho,c_lizard_king) // netreba menit
-      tag(doceho,c_m_phoenix_poison) // netreba menit
-      tag(doceho,c_minotaur_menavec) // odobrany round + unequip zbrane
-    enddo
-    newequip(i_morfovatko)
-    lastnew.tag(zmenimsena,<tag(doceho)>)
-  endif
+if ((isSleeping) || (isSilenced))
   return 0
+endif
+
+if !(tag(polymorfmdelay))
+  tag(polymorfmdelay,<serv.time>+50)
+  return 0
+endif
+if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
+  dorand 8
+    tag(doceho,c_daemon_gold_menavec) // odstraneny reborn
+    tag(doceho,c_fireant_queen_menavec) // odstraneny ovinovac
+    tag(doceho,c_ophidian_king) // netreba menit
+    tag(doceho,c_eye_adamantium_menavec) // odstraneny leap
+    tag(doceho,c_reaper_eben) // odstraneny ovinovac
+    tag(doceho,c_lizard_king) // netreba menit
+    tag(doceho,c_m_phoenix_poison) // netreba menit
+    tag(doceho,c_minotaur_menavec) // odobrany round + unequip zbrane
+  enddo
+  newequip(i_morfovatko)
+  lastnew.tag(zmenimsena,<tag(doceho)>)
 endif
 
 on=@beforegetswing
@@ -737,22 +745,23 @@ if !(tag(polymorfmdelay))
 endif
 
 on=@aftergetswing
-if (!(isSleeping) && !(isSilenced))
-  if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
-    dorand 9
-      tag(doceho,c_cajun_lord_menavec) // odstranene summonenie malych cajunov
-      tag(doceho,c_spider_elder_menavec) // odstraneny ovinovac
-      tag(doceho,c_gladiator_lord_menavec) // odstraneny round
-      tag(doceho,c_ophidian_mage_evil_menavec) // odstranene perma zrcko
-      tag(doceho,c_golem_mithril_menavec) // odstraneny reactiv
-      tag(doceho,c_balrogh_menavec) // odstraneny round
-      tag(doceho,c_eye_mithril_menavec) // odstraneny leap
-      tag(doceho,c_minotaur_strazce_menavec) // odstraneny round
-    enddo
-    newequip(i_morfovatko)
-    lastnew.tag(zmenimsena,<tag(doceho)>)
-  endif
+if ((isSleeping) || (isSilenced))
   return 0
+endif
+
+if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
+  dorand 9
+    tag(doceho,c_cajun_lord_menavec) // odstranene summonenie malych cajunov
+    tag(doceho,c_spider_elder_menavec) // odstraneny ovinovac
+    tag(doceho,c_gladiator_lord_menavec) // odstraneny round
+    tag(doceho,c_ophidian_mage_evil_menavec) // odstranene perma zrcko
+    tag(doceho,c_golem_mithril_menavec) // odstraneny reactiv
+    tag(doceho,c_balrogh_menavec) // odstraneny round
+    tag(doceho,c_eye_mithril_menavec) // odstraneny leap
+    tag(doceho,c_minotaur_strazce_menavec) // odstraneny round
+  enddo
+  newequip(i_morfovatko)
+  lastnew.tag(zmenimsena,<tag(doceho)>)
 endif
 
 on=@beforegetswing
@@ -821,97 +830,99 @@ on=@beforegeteffect
 
 [events e_illusionist]
 on=@aftergetswing
-if !(isSleeping)
-  if !(tag(waitill))
-    tag(waitill,1)
-  endif
-  if ((rand(30)==1) && (tag(waittill) < (<serv.time>)) && !(tag(isillusion)))
-    tag(waitill,<serv.time> + 600)
-    src.sysMessage("Tvuj pohled se rozmazal.")
-    invis
-    invis
-    newnpc(<obody>)
-    lastnewchar.p=<eval(<p_x>+1)>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-    lastnewchar.hits=1
-    lastnewchar.tag(nedelse,1)
-    lastnewchar.maxhits=1
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1,
-    lastnewchar.maxmana=500
-    lastnewchar.mana=500
-    lastnewchar.temporary_null 
-    lastnewchar.update
-    lastnewchar.tag(isillusion,1)
-    lastnewchar.events=-e_illusionist
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=30
+if (isSleeping)
+  return 0
+endif
+
+if !(tag(waitill))
+  tag(waitill,1)
+endif
+if ((rand(30)==1) && (tag(waittill) < (<serv.time>)) && !(tag(isillusion)))
+  tag(waitill,<serv.time> + 600)
+  src.sysMessage("Tvuj pohled se rozmazal.")
+  invis
+  invis
+  newnpc(<obody>)
+  lastnewchar.p=<eval(<p_x>+1)>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+  lastnewchar.hits=1
+  lastnewchar.tag(nedelse,1)
+  lastnewchar.maxhits=1
+  lastnewchar.tag(experience,0)
+  lastnewchar.flag_conjured=1,
+  lastnewchar.maxmana=500
+  lastnewchar.mana=500
+  lastnewchar.temporary_null 
+  lastnewchar.update
+  lastnewchar.tag(isillusion,1)
+  lastnewchar.events=-e_illusionist
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=30
     //
-    newnpc(<obody>)
-    lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>+{-1 2})>,<p_z>,<mapplane>
-    lastnewchar.hits=1
-    lastnewchar.tag(nedelse,1)
-    lastnewchar.maxhits=1
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1
-    lastnewchar.maxmana=500
-    lastnewchar.mana=500
-    lastnewchar.temporary_null 
-    lastnewchar.update
-    lastnewchar.tag(isillusion,1)
-    lastnewchar.events=-e_illusionist
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=30
+  newnpc(<obody>)
+  lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>+{-1 2})>,<p_z>,<mapplane>
+  lastnewchar.hits=1
+  lastnewchar.tag(nedelse,1)
+  lastnewchar.maxhits=1
+  lastnewchar.tag(experience,0)
+  lastnewchar.flag_conjured=1
+  lastnewchar.maxmana=500
+  lastnewchar.mana=500
+  lastnewchar.temporary_null 
+  lastnewchar.update
+  lastnewchar.tag(isillusion,1)
+  lastnewchar.events=-e_illusionist
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=30
     //
-    newnpc(<obody>)
-    lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2)>,<p_z>,<mapplane>
-    lastnewchar.hits=1
-    lastnewchar.tag(nedelse,1)
-    lastnewchar.maxhits=1
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1
-    lastnewchar.maxmana=500
-    lastnewchar.mana=500
-    lastnewchar.temporary_null 
-    lastnewchar.update
-    lastnewchar.tag(isillusion,1)
-    lastnewchar.events=-e_illusionist
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=30
+  newnpc(<obody>)
+  lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2)>,<p_z>,<mapplane>
+  lastnewchar.hits=1
+  lastnewchar.tag(nedelse,1)
+  lastnewchar.maxhits=1
+  lastnewchar.tag(experience,0)
+  lastnewchar.flag_conjured=1
+  lastnewchar.maxmana=500
+  lastnewchar.mana=500
+  lastnewchar.temporary_null 
+  lastnewchar.update
+  lastnewchar.tag(isillusion,1)
+  lastnewchar.events=-e_illusionist
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=30
     //
-    newnpc(<obody>)
-    lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2)>,<p_z>,<mapplane>
-    lastnewchar.hits=1
-    lastnewchar.tag(nedelse,1)
-    lastnewchar.maxhits=1
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1
-    lastnewchar.maxmana=500
-    lastnewchar.mana=500
-    lastnewchar.temporary_null 
-    lastnewchar.tag(isillusion,1)
-    lastnewchar.update
-    lastnewchar.events=-e_illusionist
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=30
+  newnpc(<obody>)
+  lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2)>,<p_z>,<mapplane>
+  lastnewchar.hits=1
+  lastnewchar.tag(nedelse,1)
+  lastnewchar.maxhits=1
+  lastnewchar.tag(experience,0)
+  lastnewchar.flag_conjured=1
+  lastnewchar.maxmana=500
+  lastnewchar.mana=500
+  lastnewchar.temporary_null 
+  lastnewchar.tag(isillusion,1)
+  lastnewchar.update
+  lastnewchar.events=-e_illusionist
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=30
     //
-    newnpc(<obody>)
-    lastnewchar.p=<eval(<p_x>)>,<eval(<p_y>+1)>,<p_z>,<mapplane>
-    lastnewchar.hits=1
-    lastnewchar.tag(nedelse,1)
-    lastnewchar.maxhits=1
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1
-    lastnewchar.maxmana=500
-    lastnewchar.mana=500
-    lastnewchar.temporary_null 
-    lastnewchar.tag(isillusion,1)
-    lastnewchar.update
-    lastnewchar.events=-e_illusionist
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=30
-    p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-    update
-  endif
+  newnpc(<obody>)
+  lastnewchar.p=<eval(<p_x>)>,<eval(<p_y>+1)>,<p_z>,<mapplane>
+  lastnewchar.hits=1
+  lastnewchar.tag(nedelse,1)
+  lastnewchar.maxhits=1
+  lastnewchar.tag(experience,0)
+  lastnewchar.flag_conjured=1
+  lastnewchar.maxmana=500
+  lastnewchar.mana=500
+  lastnewchar.temporary_null 
+  lastnewchar.tag(isillusion,1)
+  lastnewchar.update
+  lastnewchar.events=-e_illusionist
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=30
+  p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+  update
 endif
 
 on=@beforegetswing
@@ -935,41 +946,43 @@ remove
 
 [events e_fire_lord]
 on=@aftergetswing
-if (!(isSleeping) && !(isSilenced))
-  if (rand(12) == 1)
-    SAY("Heru Beleg Ruin Val")
-    fireexplosion(10)
-  endif
-  //if rand(50)==1
-  //  while (memoryfindtype(0209c)) 
-  //    memoryfindtype(0209c).remove
-  //    action=067
-  //  endwhile
-  //endif
-  if (rand(20) == 1)
-    SAY("Heru Ruin Val")
-    newnpc(c_m_phoenix_fire)
-    lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-    lastnewchar.fame=0
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=20
-    newnpc(c_m_phoenix_fire)
-    lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-    lastnewchar.fame=0
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=20
-    newnpc(c_eye_fire)
-    lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-    lastnewchar.fame=0
-    lastnewchar.tag(experience,0)
-    lastnewchar.flag_conjured=1
-    lastnewchar.newequip(i_osklivejsmazse)
-    lastnew.timer=20
-  endif
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
+if (rand(12) == 1)
+  SAY("Heru Beleg Ruin Val")
+  fireexplosion(10)
+endif
+//if rand(50)==1
+//  while (memoryfindtype(0209c)) 
+//    memoryfindtype(0209c).remove
+//    action=067
+//  endwhile
+//endif
+if (rand(20) == 1)
+  SAY("Heru Ruin Val")
+  newnpc(c_m_phoenix_fire)
+  lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+  lastnewchar.fame=0
+  lastnewchar.tag(experience,0)
+  lastnewchar.flag_conjured=1
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=20
+  newnpc(c_m_phoenix_fire)
+  lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+  lastnewchar.fame=0
+  lastnewchar.tag(experience,0)
+  lastnewchar.flag_conjured=1
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=20
+  newnpc(c_eye_fire)
+  lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+  lastnewchar.fame=0
+  lastnewchar.tag(experience,0)
+  lastnewchar.flag_conjured=1
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=20
 endif
 
 on=@beforegetswing
@@ -1348,40 +1361,42 @@ endif
 
 [events e_spectre]
 on=@aftergetswing
-if !(isSleeping)
-  if ((src.isplayer) && (rand(12)==1))
-    while ((memoryfindtype(0209c)) && (var(stopcreatingill)==4) && (isplayer))
-      if (memoryfindtype(0209c).link.isplayer)
-        memoryfindtype(0209c).link.newnpc(<obody>)
-        newnpc(<obody>)
-        lastnewchar.tag(spectre,<UID>)
-        lastnewchar.events=+e_lowerdmg    
-        lastnewchar.hits=<hits>
-        lastnewchar.color=<color>
-        lastnewchar.maxhits=<maxhits>
-        lastnewchar.flag_conjured=1
-        lastnewchar.p=<memoryfindtype(0209c).link.p>
-        lastnewchar.update
-        lastnewchar.attack(<memoryfindtype(0209c).link.uid>)
-        lastnewchar.newequip(i_osklivejsmazse)
-        lastnew.timer=10
-        newitem(i_fx_sparkle_2)
-        lastnew.color=049c
-        lastnew.p=<memoryfindtype(0209c).link.p>	
-        lastnew.timer=5
-        var(stopcreatingill,#+1)
-        if ((rand(5)==1) && !(tag(prohozen)))
-          p=<memoryfindtype(0209c).link.p>
-          invis
-          update
-          invis 
-          update
-        endif
+if (isSleeping)
+  return 0
+endif
+
+if ((src.isplayer) && (rand(12)==1))
+  while ((memoryfindtype(0209c)) && (var(stopcreatingill)==4) && (isplayer))
+    if (memoryfindtype(0209c).link.isplayer)
+      memoryfindtype(0209c).link.newnpc(<obody>)
+      newnpc(<obody>)
+      lastnewchar.tag(spectre,<UID>)
+      lastnewchar.events=+e_lowerdmg    
+      lastnewchar.hits=<hits>
+      lastnewchar.color=<color>
+      lastnewchar.maxhits=<maxhits>
+      lastnewchar.flag_conjured=1
+      lastnewchar.p=<memoryfindtype(0209c).link.p>
+      lastnewchar.update
+      lastnewchar.attack(<memoryfindtype(0209c).link.uid>)
+      lastnewchar.newequip(i_osklivejsmazse)
+      lastnew.timer=10
+      newitem(i_fx_sparkle_2)
+      lastnew.color=049c
+      lastnew.p=<memoryfindtype(0209c).link.p>	
+      lastnew.timer=5
+      var(stopcreatingill,#+1)
+      if ((rand(5)==1) && !(tag(prohozen)))
+        p=<memoryfindtype(0209c).link.p>
+        invis
+        update
+        invis 
+        update
       endif
-      memoryfindtype(0209c).remove
-    endwhile
-    var(stopcreatingill,"")
-  endif
+    endif
+    memoryfindtype(0209c).remove
+  endwhile
+  var(stopcreatingill,"")
 endif
 
 on=@beforegetswing
@@ -1416,20 +1431,24 @@ if !(isSilenced)
 endif
 
 on=@aftergetswíng
-if (!(isSleeping) && !(isSilenced))
-  if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
-    act.newequip(i_curse_givehps)
-    lastnew.tag(lord,<UID>)
-  endif
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
+if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
+  act.newequip(i_curse_givehps)
+  lastnew.tag(lord,<UID>)
 endif
 
 on=@beforedoeffect
 on=@beforegeteffect
-if (!(isSleeping) && !(isSilenced))
-  if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
-    src.newequip(i_curse_givehps)
-    lastnew.tag(lord,<UID>)
-  endif
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
+if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
+  src.newequip(i_curse_givehps)
+  lastnew.tag(lord,<UID>)
 endif
 
 [itemdef i_curse_givehps]
@@ -1484,14 +1503,17 @@ topobj.sysMessage("Prokleti pozbylo na sile.")
 [events e_serpentdruid]
 
 on=@aftergetswing
-if !(isSleeping)
-  if (((hits)<(maxhits/2)) && !(findid(i_osklivejsmazse)))
-    emote("hissing.")
-    body=<tag(had)>
-    newequip(i_osklivejsmazse)
-    lastnew.timer=2000
-  endif
+if (isSleeping)
+  return 0
 endif
+
+if (((hits)<(maxhits/2)) && !(findid(i_osklivejsmazse)))
+  emote("hissing.")
+  body=<tag(had)>
+  newequip(i_osklivejsmazse)
+  lastnew.timer=2000
+endif
+
 if ((src.obody==c_serpent_malej) && !(src.isplayer))
   src.remove
 endif
@@ -1544,11 +1566,13 @@ on=@beforegeteffect
 
 [events e_npc_manashield]
 on=@aftergetswing
-if (!(isSleeping) && !(isSilenced))
-  if ((rand(15)==1) && !(findid(i_npc_manashield)) && ((mana)>=(<var(ubrano)>)))
-    newequip(i_npc_manashield)
-    lastnew.timer=16
-  endif
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
+if ((rand(15)==1) && !(findid(i_npc_manashield)) && ((mana)>=(<var(ubrano)>)))
+  newequip(i_npc_manashield)
+  lastnew.timer=16
 endif
 
 on=@beforegetswing

@@ -13,9 +13,10 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-if (!(isSleeping) && !(isSilenced))
-  e_f_npc_curse
+if ((isSleeping) || (isSilenced))
+  return 0
 endif
+e_f_npc_curse
 
 on=@beforedoeffect
 on=@beforegeteffect
