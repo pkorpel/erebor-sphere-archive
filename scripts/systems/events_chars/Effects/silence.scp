@@ -34,12 +34,9 @@ return 0 // silence effect did not apply
 // returns the number of deci-seconds the NPC is silenced for.
 [function f_silence_add]
 arg(silencer,<findid(i_silencer)>)
-arg(silence_icon_time,<eval <argv(0)>+46>)
 if (!strlen(<arg(silencer)>))
   newequip(i_silencer)
   lastnew.timerd=<argv(0)>
-//  effect(3,0f53,6,<arg(silence_icon_time)>,0,0,1)
-  effect(3,i_flesh_brain,6,71,0,0,1)
   return<argv(0)>
 endif
 if (<eval silencer.timerd> < <argv(0)>)
@@ -60,7 +57,6 @@ cont.stopmagery
 cont.events +e_npc_silenced
 
 on=@unequip
-cont.say("Konec")
 cont.events -e_npc_silenced
 
 [events e_npc_silenced]
