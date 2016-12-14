@@ -878,6 +878,7 @@ tag(resist_blunt,200)
 tag(resist_fire,300)
 tag(resist_elect,300)
 tag(resist_cold,150)
+tag(resist_silence,350)
 
 PARRYING=80.0
 Resist=120.0
@@ -1337,6 +1338,7 @@ tag(resist_blunt,00)
 tag(resist_fire,300)
 tag(resist_elect,200)
 tag(resist_cold,200)
+tag(resist_silence,350)
 
 PARRYING={70.0 80.0}
 WRESTLING={80.0 90.0}
@@ -1673,7 +1675,7 @@ tag.weapflag=dam_lightning|dam_magic
 tag(resist_poison,550)
 tag.resist_para=<eval {800 880}>
 tag(resist_summon,850)
-tag(resist_bleed,500)
+tag(resist_bleed,200)
 
 tag(resist_sharp,-100)
 tag(resist_slash,-100)   // sekery
@@ -1683,6 +1685,7 @@ tag(resist_blunt,100)
 tag(resist_fire,500)   //odolnejsi na magii
 tag(resist_elect,500)
 tag(resist_cold,300)
+tag(resist_silence,350)
 
 PARRYING=100.0
 Resist=200.0

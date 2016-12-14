@@ -2205,7 +2205,7 @@ tag(resstimer,18)
 tag(resist_poison,650)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,550)
-tag(resist_bleed,200)
+tag(resist_bleed,0)
 
 tag(resist_sharp,-100)
 tag(resist_slash,-100)        //sekery
@@ -2215,6 +2215,7 @@ tag(resist_blunt,-50)
 tag(resist_fire,700)
 tag(resist_elect,-200)
 tag(resist_cold,400)
+tag(resist_silence,350)
 
 ei=90.0
 MAGERY=120.0
@@ -2309,7 +2310,7 @@ tag(resstimer,18)
 tag(resist_poison,650)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,550)
-tag(resist_bleed,200)
+tag(resist_bleed,0)
 
 tag(resist_sharp,-100)
 tag(resist_slash,-100)        //sekery
@@ -2319,6 +2320,7 @@ tag(resist_blunt,-50)
 tag(resist_fire,700)
 tag(resist_elect,-200)
 tag(resist_cold,400)
+tag(resist_silence,350)
 
 ei=90.0
 MAGERY=110.0
@@ -2439,6 +2441,7 @@ tag(resist_blunt,150)
 tag(resist_fire,-50)                 //undead
 tag(resist_elect,300)
 tag(resist_cold,750)
+tag(resist_silence,1000)
 
 
 ei=130.0
@@ -2754,6 +2757,7 @@ tag(resist_blunt,-50)
 tag(resist_fire,500)
 tag(resist_elect,-100)
 tag(resist_cold,400)
+tag(resist_silence,300)
 
 parrying={85.0 100.0}
 resist={125.0 160.0}
@@ -2858,16 +2862,17 @@ tag(monstertype,humanoid,60)
 tag(resist_poison,400)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,650)
-tag(resist_bleed,400)
+tag(resist_bleed,150)
 
-tag(resist_sharp,-100)
-tag(resist_slash,-100)        //sekery
-tag(resist_pierce,-350)
+tag(resist_sharp,-50)
+tag(resist_slash,100)        //sekery
+tag(resist_pierce,-50)
 tag(resist_blunt,-50)
 
 tag(resist_fire,600)
 tag(resist_elect,-50)
 tag(resist_cold,500)
+tag(resist_silence,550)
 
 parrying={155.0 165.0}
 resist=190.0

@@ -234,6 +234,7 @@ tag(resist_blunt,800)
 tag(resist_fire,-450)     
 tag(resist_elect,800)
 tag(resist_cold,800)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,humanoid,50)
@@ -344,6 +345,7 @@ tag(resist_blunt,850)
 tag(resist_fire,-300)
 tag(resist_elect,850)      
 tag(resist_cold,850)
+tag(resist_silence,450)
 
 //typ monstra
 tag(monstertype,humanoid,50)
@@ -418,7 +420,7 @@ KARMA=-5000
 
 STR=5000
 DEX=200
-INT=350
+INT=300
 
 maxhits={15500 15900}
 maxstam={175 250}
@@ -453,6 +455,7 @@ tag(resist_blunt,900)
 tag(resist_fire,-200)
 tag(resist_elect,875)
 tag(resist_cold,875)
+tag(resist_silence,550)
 
 //typ monstra
 tag(monstertype,humanoid,50)
@@ -569,6 +572,7 @@ tag(resist_blunt,950)        //
 tag(resist_fire,-100)
 tag(resist_elect,875)
 tag(resist_cold,875)
+tag(resist_silence,650)
 
 //typ monstra
 tag(monstertype,humanoid,50)
@@ -683,6 +687,7 @@ tag(resist_blunt,900)
 tag(resist_fire,-50)
 tag(resist_elect,950)
 tag(resist_cold,950)
+tag(resist_silence,750)
 
 //typ monstra
 tag(monstertype,humanoid,50)

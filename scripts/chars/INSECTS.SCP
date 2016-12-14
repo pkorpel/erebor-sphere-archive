@@ -752,6 +752,7 @@ tag(resist_blunt,-50)
 tag(resist_fire,400)
 tag(resist_elect,00)
 tag(resist_cold,200)
+tag(resist_silence,300)
 
 PARRYING=120.0
 resist=170.0 
@@ -4275,6 +4276,7 @@ tag(resist_sharp,950)
 tag(resist_slash,950)
 tag(resist_pierce,950)
 tag(resist_blunt,500)
+tag(resist_silence,200)
 
 tag(monstertype,ooze)
 //weap flags
