@@ -2017,12 +2017,15 @@ n_ability_default[46]	5
 n_ability[47]     	
 n_ability_name[47]      
 n_ability_default[47]   
-n_ability[48]		maxbleed
-n_ability_name[48]	"max damage bleedu"
-n_ability_default[48]	50
-n_ability[49]		ability_mystikUClightning
-n_ability_name[49]	"UC mystika pri lightning dmg"
-n_ability_default[49]	0,15
+n_ability[48]		normal_bleed_cap
+n_ability_name[48]	"Bleed Cap Ostatni"
+n_ability_default[48]	250
+n_ability[49]		thief_bleed_cap
+n_ability_name[49]	"Bleed Cap Thiefa"
+n_ability_default[49]	300
+n_ability[50]		ability_mystikUClightning
+n_ability_name[50]	"UC mystika pri lightning dmg"
+n_ability_default[50]	0,15
 
 n_ability2[0]		rangearrow_chance
 n_ability2_name[0]	sance na longrange

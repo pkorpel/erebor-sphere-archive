@@ -18,7 +18,7 @@ else
    reduceStamina(3) // safely decreases stamina
    newitemsafe(i_spec_ability_counter)
    lastnew.Equip  
-   return 1
+   return 1                                                       
  endif
 endif
 return 0 
@@ -637,42 +637,81 @@ ID=i_memory
 TYPE=t_eq_script
 name=krvaceni
 
+on=@create
+more1h=10 //opakovani krvaceni maximalne
+more1l=0 //aktualnich opakovani  
+  
+on=@equip
+tag(chance_to_fizz,668)
+tag(bleeding_steps,0)
+tag(koef_infoText,5)
+tag(blood_color,<cont.def.BLOODCOLOR>)
+if (cont.NPC)
+  tag(koef_infoText,40)
+  cont.events +e_bleeding
+endif
+
+on=@unequip
+cont.events -e_bleeding
+
 on=@timer
-if (cont.hits)&&(more1l)
-  //more1h opakovani krvaceni maximalne
-  //more1l zbyva opakovani
-  //more2  damage
-  arg(damag,<eval (more1l*more2)/more1h>)
-  if (<arg(damag)> > <var(nastaveni_maxbleed)>)
-    arg(damag,<var(nastaveni_maxbleed)>)
-  endif
-  arg(damag,<eval (<arg(damag)>-((<arg(damag)>*<cont.tag(resist_bleed)>)/1000))>) // - muj navrh -Dinivan - 
-  //arg(damag,<eval (arg(damag)-(arg(damag)/(1000/(cont.tag(resist_bleed)))))>) // - presunuto do funkce Handleresists -tart // presunuto spatne, protoze tam se to zpracuje jen pri swingu nebo co
-  if (arg(damag)<1)
-    remove
-  endif
-  cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god)
-  if (chance(668,3)) //dvoutretinova sance na fizz
-    cont.stopmagery
-  endif
-  cont.emote("bleeding")// <arg(damag)>
-  arg(infoText,<arg(damag)/6>)
-  if (<arg(infoText)> > 4)
-    arg(infoText,4)
-  endif
-  doswitch <arg(infoText)>
-    link.classMessage("<?cont.name?> lehce krvaci")
-    link.classMessage("<?cont.name?> krvaci")
-    link.classMessage("<?cont.name?> silne krvaci")
-    link.classMessage("<?cont.name?> velmi silne krvaci")
-    link.classMessage("<?cont.name?> extremne krvaci")
-  enddo
-  more1l=<eval more1l-1>
-  timerd=<nastaveni_ability_ripperdelay>
-else
+if (! cont.hits) || (more1l >= more1h)
+  remove
+  return
+endif
+ 
+//more1h opakovani krvaceni maximalne
+//more1l kolikrat doslo k opakovani
+//more2  damage   
+
+arg(damag,<eval f_bleed_calculateCurrentValue(def_bleed_dmgCoeficient)>) // y=DMG * ( 1 - (x ^ 2) / (MAX_TICKS ^2) )
+  
+arg(damag,<eval (<arg(damag)>-((<arg(damag)>*<cont.tag(resist_bleed)>)/1000))>) // - muj navrh -Dinivan - 
+if (arg(damag)<1)
   remove
 endif
+  
+cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god)
+  
+if (chance(<eval tag(chance_to_fizz)>,3)) //default dvoutretinova sance na fizz v PvP, v PvM chuze krvacejiciho sanci snizuje
+  cont.stopmagery
+endif
+cont.emote("bleeding")// <arg(damag)>
+arg(infoText,<eval <arg(damag)>/<eval tag(koef_infoText)>>)
+if (<arg(infoText)> > 5)
+  arg(infoText,5)
+endif
+  
+doswitch <arg(infoText)>
+  f_bleed_infoText(01645,"temer nekrvaci")                // 1-4 dmg PvP
+  f_bleed_infoText(0122c,"lehce krvaci")                  // 5-9 dmg PvP
+  f_bleed_infoText(0122b,"krvaci")                        // 10-14 dmg PvP
+  f_bleed_infoText(0122e,"silne krvaci")                  // 15-19 dmg PvP
+  f_bleed_infoText(0122d,"velmi silne krvaci")            // 20-24 dmg PvP 
+  f_bleed_infoText(0122a,"extremne krvaci")               // 25++ dmg PvP
+enddo
+  
+more1l=<eval more1l+1>
+timerd=<nastaveni_ability_ripperdelay>
+tag(bleeding_steps,0)
+tag(chance_to_fizz,668)
+
 return 1
+
+[events e_bleeding]
+on=@step
+f_bleed_getMemory(<uid>).f_bleed_onStep
+
+[function f_bleed_onStep]
+tag(bleeding_steps,#+1)
+tag(chance_to_fizz,#-30)
+if (0<timerd> > 1)
+  timerd=<eval (timerd-1)>
+endif
+
+[function f_bleed_infoText] // argv 0 - blood stain ID, argv 1 - info text message
+cont.f_doBloodStain(<argv(0)>,<hval (tag(blood_color))>)
+link.classMessage("<cont.name> <argv(1)>")
 
 [Function f_spelldone]
 if (npc)
