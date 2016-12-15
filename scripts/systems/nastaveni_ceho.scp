@@ -1854,8 +1854,8 @@ n_global3[4]		pevnosti_recall_palantir_dist
 n_global3_name[4]	"Recall vzdalenost od palantiru"
 n_global3_default[4]	30
 n_global3[5]		spellcast_silence_after
-n_global3_name[5]	"Silence po zakuzleni po x sec."
-n_global3_default[5]	5
+n_global3_name[5]	"Silence po zakuzleni po x dsec."
+n_global3_default[5]	40
 n_global3[6]		silence_mana_return
 n_global3_name[6]	"Vratenie many za x sec."
 n_global3_default[6]	3
@@ -1871,6 +1871,9 @@ n_global3_default[9]	90
 n_global3[10]		body_looting_timer
 n_global3_name[10]	"timer - lootenie tiel hracov"
 n_global3_default[10]	897
+n_global3[11]		spellcast_silence_mind_blast
+n_global3_name[11]	"Silence po MindBlastu xx dsec."
+n_global3_default[11]	15
                         
 n_ability[0]		ability_leaprange
 n_ability_name[0]	Leap Range
@@ -2299,6 +2302,9 @@ n_ability3_default[38] 75
 n_ability3[39] 		mystik_doubleswing_stam
 n_ability3_name[39] "Ubytok staminy po mystik doubleswingu"
 n_ability3_default[39] 30
+n_ability3[40] 		MindBlast_silence_chance
+n_ability3_name[40] "Sance na silence MindBlastem"
+n_ability3_default[40] 60
 
 
 n_poison[0]		poison_absoluteDmg

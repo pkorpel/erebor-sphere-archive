@@ -1037,7 +1037,7 @@ if(<argn>==41)//dispel zoznam dispelnutelnych kuziel v magie_custom.scp
 endif
 
 if (<nastaveni_poison_use_custom_poison>==1)
-  if(<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
+  if (<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
     spell_poison_custom(<src>)
     return 1
   endif
@@ -1101,8 +1101,7 @@ return 0
 
 on=@hittry
 hungryhurts
-if(nolightfizz(1)) //ty se poserou/imo lol - Dinivan :))
-//    say(co vracim: <nolightfizz>)
+if (nolightfizz(1)) //ty se poserou/imo lol - Dinivan :))
     combat_restorepos
     action=-1
 endif

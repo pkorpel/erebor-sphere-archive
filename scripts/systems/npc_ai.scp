@@ -1481,18 +1481,19 @@ on=@stopguarding
 
 [events e_npc_warcry]
 on=@beforegeteffect
-if !(isSleeping)
-  if(tag(nextcry) < <serv.time>)
-    tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
-    emote(crying)
-    sound(1098)
-    newitemsafe(i_warcry_srcChanger)
-    lastnew.p=<src.p>
-    lastnew.z=-100
-    lastnew.link=<uid>
-    lastnew.timerd=1
-  endif
+if (isSleeping)
   return 0
+endif
+
+if(tag(nextcry) < <serv.time>)
+  tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
+  emote(crying)
+  sound(1098)
+  newitemsafe(i_warcry_srcChanger)
+  lastnew.p=<src.p>
+  lastnew.z=-100
+  lastnew.link=<uid>
+  lastnew.timerd=1
 endif
 
 on=@beforedoeffect
@@ -1568,15 +1569,17 @@ on=@Created
 
 [EVENTS e_NPC_Leaper]
 ON=@NPCSeeNewPlayer
-if !(isSleeping)
-  if (src.flag_invul)
-    return 1
-  elseif (isPet)
-    return 1
-  endif
-  attack(<src>)
-  events(+e_NPC_teleToTarget)
+if (isSleeping)
+  return 0
 endif
+
+if (src.flag_invul)
+  return 0
+elseif (isPet)
+  return 0
+endif
+attack(<src>)
+events(+e_NPC_teleToTarget)
 
 on=@hittry
 events(+e_NPC_teleToTarget)

@@ -1,0 +1,66 @@
+[function f_silence_npc]  // argv(0) - 0 from casting spell(src=uid=npc), 1 from Mind Blast Silence effect (src=mag co castil Mind Blast)
+if (<argv(0)> == 0)  // argv(0) - 0 from casting spell(src=uid=npc)
+  if ((<nastaveni_silence_using>==1)&&(!<rescount(i_silencer)>))
+    f_silence_add(<eval (<nastaveni_spellcast_silence_after>)>)
+  endif
+  return 1
+else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Mind Blast)
+  if (!<src.findlayer(layer_hand2)> || !0<src.tag(ra_mind_blast_silence)>) //cannot apply silence without a staff, or if the source hasn't got the ability
+    return 0
+  endif
+  arg(staffMaterial,<src.findlayer(layer_hand2).isStaff>) // returns staff material level, 0 for no staff
+  if (!<arg(staffMaterial)>)
+    return 0
+  endif
+  arg(mindPower,<eval ((<src.int>*<arg(staffMaterial)>)/2)>) // for mage with 250INT -> 125-875
+  arg(silenceResist,<eval tag(resist_silence)>)
+  if (arg(silenceResist) >= 1000)
+    src.redMessage("Cil odolava umlceni")
+    return 0
+  endif
+  arg(mindBoost,<eval (arg(mindPower)-arg(silenceResist))>) // either positive or negative influence of the basic chance
+  arg(basic_chance,<eval <eval src.tag(ra_mind_blast_silence)>*var(nastaveni_MindBlast_silence_chance)>)
+  arg(chance,<eval (arg(basic_chance)+arg(mindBoost))>)
+  if (chance(<arg(chance)>,3))
+    arg(silenced_time,<eval (<eval src.tag(ra_mind_blast_silenced_time)>+<nastaveni_spellcast_silence_mind_blast>)>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
+    arg(silenced_time,<f_silence_add(<arg(silenced_time)>)>)
+    src.classmessage("Cil je umlcen na <arg(silenced_time)>ds.")  
+    return 1 // silence applied successfuly
+  endif
+endif
+return 0 // silence effect did not apply
+
+// argv(0) - silence time in deciseconds to be applied
+// returns the number of deci-seconds the NPC is silenced for.
+[function f_silence_add]
+arg(silencer,<findid(i_silencer)>)
+if (!strlen(<arg(silencer)>))
+  newequip(i_silencer)
+  lastnew.timerd=<argv(0)>
+  return<argv(0)>
+endif
+if (<eval silencer.timerd> < <argv(0)>)
+  silencer.timerd=<argv(0)>
+  return<argv(0)>
+else
+  return<silencer.timerd>
+endif
+
+[itemdef i_silencer]
+id=i_memory
+layer=77
+type=t_src_changer
+name=silencer
+
+on=@equip
+cont.stopmagery
+cont.events +e_npc_silenced
+
+on=@unequip
+cont.events -e_npc_silenced
+
+[events e_npc_silenced]
+on=@spellcast
+return 1  // Jsem Silencnuty, nemohu kouzlit
+
+[eof]

@@ -305,11 +305,23 @@ spelleffect 41,1000
 events +e_spelleffect
 
 [function f_effect_a_mind_blast]
-effect(03,i_fx_curse,1,15,0)
-SOUND=snd_SPELL_MIND_BLAST
-arg(mb_damage,<eval (src.int-int)*promilerange(<argv(0)>,<s_mind_blast.effect>)>)
-damage(<eval((<arg(mb_damage)>+500)/1000)>,dam_magic|dam_god,<src>)
-paralyze_remove
+arg(silenced,0)
+arg(dmged,0)
+if (npc)  // Silence effekt jen na NPC
+  arg(silenced,<f_silence_npc(1)>)
+endif
+if (argv(0) > 0)
+  arg(dmged,1)
+  arg(mb_damage,<eval (src.int-int)*promilerange(<argv(0)>,<s_mind_blast.effect>)>)
+  damage(<eval((<arg(mb_damage)>+500)/1000)>,dam_magic|dam_god,<src>)
+  paralyze_remove
+endif
+if (arg(dmged) || arg(silenced)) //at least one of the spell effect applied -> display spell effect
+  effect(03,i_fx_curse,1,15,0)
+  SOUND=snd_SPELL_MIND_BLAST
+else
+  f_spellResistedMsg // needs to be called explicitely as this spell has side effect and it could not be decided earlier
+endif
 
 [function f_effect_a_mana_vampire]
 EFFECT(3,<s_mana_vampire.EFFECTID>,6,15,1)

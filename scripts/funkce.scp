@@ -33,11 +33,9 @@ if (isgm)
  return 1
 endif
 if (findlayer(layer_hand2))
- //if (findlayer(layer_hand2).isstaff)
   if (staff_<findlayer(layer_hand2).baseid> >= material_<args>)
-   return 1
+    return 1
   endif
- //endif
 endif
 return 0
 
@@ -2766,7 +2764,7 @@ maxstam=<eval maxstam+(args)>
 
 [function isstaff]
 if (type==T_WEAPON_MACE_STAFF)
- return 1
+ return <def.tdata1>
 endif
 return 0
 
@@ -5115,7 +5113,7 @@ return 0
 endif
 return 1
 
-[function issleeping]
+[function isSleeping]
 if (isevent(e_peacemade))
   if (rand(30)==1)
     dorand 5
@@ -5130,6 +5128,11 @@ if (isevent(e_peacemade))
 endif
 return 0
 
+[function isSilenced]
+if (isevent(e_npc_silenced))
+  return 1
+endif
+return 0
 
 [function getArmed]
 arg(arm,<findlayer(layer_hand1)>)

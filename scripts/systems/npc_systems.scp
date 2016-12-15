@@ -92,17 +92,8 @@ if(<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
 endif
 
 on=@spellcast
-//pokus o to aby monstra nekuzlili hned za sebou
-if (<rescount(i_silencer)>)//keby sa nahodou zaseklo na -1 z nejakeho dovodu
-  if (<findid(i_silencer).timer> < 0)
-    findid(i_silencer).timer=1
-  endif
-endif
-if ((<nastaveni_silence_using>==1)&&(!<rescount(i_silencer)>))
-  newequip(i_silencer)
-  lastnew.timer=nastaveni_spellcast_silence_after
-  lastnew.more1=1
-endif
+f_silence_npc(0) //pokus o to aby monstra nekuzlili hned za sebou
+
 
 [events e_healer]
 on=@userclick
@@ -323,25 +314,7 @@ endif
 ////deprecated on=@aftergetspelldamage
 //on=@beforegeteffect
 
-[itemdef i_silencer]
-id=i_memory
-layer=77
-type=t_src_changer
-name=silencer
 
-on=@equip
-tag(mana,<cont.mana>)
-
-on=@timer
-if (<more1>==1)
-  cont.mana=0
-  timer=<nastaveni_silence_mana_return>
-  more1=0
-else
-  cont.mana=<tag.mana>
-  remove 
-endif
-return(1)
 
 
 [eof]

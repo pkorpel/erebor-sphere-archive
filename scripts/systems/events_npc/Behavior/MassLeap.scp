@@ -3,16 +3,18 @@
 
 [events e_npc_massleap]
 on=@aftergetswing
-if !(isSleeping)
-  if findid(i_targetmassleap)
-    return 0
-  endif
+if (isSleeping)
+  return 0
+endif
 
-  if (src.isplayer) && rand(14)==1
-    newitem(i_src_changer_massleap)
-    lastnew.p=<p>
-    lastnew.tag(creator,<uid>)
-  endif
+if findid(i_targetmassleap)
+  return 0
+endif
+
+if (src.isplayer) && rand(14)==1
+  newitem(i_src_changer_massleap)
+  lastnew.p=<p>
+  lastnew.tag(creator,<uid>)
 endif
 
 on=@beforegetswing
