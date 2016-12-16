@@ -665,13 +665,11 @@ endif
 //more2  damage   
 
 arg(damag,<eval f_bleed_calculateCurrentValue(def_bleed_dmgCoeficient)>) // y=DMG * ( 1 - (x ^ 2) / (MAX_TICKS ^2) )
-  
-arg(damag,<eval (<arg(damag)>-((<arg(damag)>*<cont.tag(resist_bleed)>)/1000))>) // - muj navrh -Dinivan - 
-if (arg(damag)<1)
+
+cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god)
+if (var(dmgedNoResp) < 0)
   remove
 endif
-  
-cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god)
   
 if (chance(<eval tag(chance_to_fizz)>,3)) //default dvoutretinova sance na fizz v PvP, v PvM chuze krvacejiciho sanci snizuje
   cont.stopmagery
