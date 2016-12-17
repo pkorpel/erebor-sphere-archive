@@ -1451,7 +1451,7 @@ safe cont.findlayer(13).unequip
 [Function woodoobleed]
 newitemsafe(i_krvaceni)
 lastnew.more1h=100
-lastnew.more1l=100
+lastnew.more1l=0
 lastnew.more2=10
 lastnew.timer=1
 lastnew.Equip
