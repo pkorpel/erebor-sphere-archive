@@ -1082,7 +1082,7 @@ tag.experience=<eval {800.0 850.0}>
 tag(e_pushall_time,10)
 tag(e_pushall_chance,500) // 50.0%
 
-tag.hit_damage=85
+tag.reactivearmor_damagePerc=85
 
 //mystik
 tag(hypnotizable,0)
@@ -1190,7 +1190,7 @@ tag(kudlyimmune,2000000000)
 tag(e_pushall_time,10)
 tag(e_pushall_chance,500) // 50.0%
 
-tag.hit_damage=100
+tag.reactivearmor_damagePerc=100
 
 //mystik
 tag(hypnotizable,0)

@@ -8825,6 +8825,21 @@ TYPE=T_EQ_HORSE
 LAYER=25 
 TDATA3=01ba 
 
+on=@create
+magic_horse
+
+on=@timer
+
+on=@equip
+mount_equip
+
+on=@unequip
+mount_unequip
+
+on=@userdclick
+remove
+lastnewchar.remove
+
 [ITEMDEF 03f0f]
 //   (really used as horse equipped)
 DEFNAME=i_mt_bear 
