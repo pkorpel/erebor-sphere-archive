@@ -1,0 +1,384 @@
+////////////////////////////////////////////////////////////////////////////////
+// C H R I S T M A S   Q U E S T   2 0 1 6
+
+[defnames def_ChristmasQuest]
+def_christmasQuest_MemoryStone  #0400514A1  // memory item v zivem regionu
+
+[ITEMDEF i_christmas_pig_head]
+ID=i_pigs_head
+NAME=Vanocni banka
+VALUE=50000
+WEIGHT=0
+COLOR=0995
+  
+CATEGORY=Eventy
+SUBSECTION=Christmas
+DESCRIPTION=Hlava zlateho prasete
+
+ON=@Create
+timer=3600
+
+ON=@userCLICK
+src.sysmessage("Tlejici hlava zlateho prasete, asi nevydrzi dlouho cerstva.")
+
+ON=@Timer
+cont.sysmessage("Hlava zlateho prasete se rozpadla na kousky tlejiciho masa.")
+
+
+[ITEMDEF i_christmas_bulb]
+ID=i_virtstone_7
+NAME=Vanocni banka
+VALUE=50000
+WEIGHT=0
+
+CATEGORY=Eventy
+SUBSECTION=Christmas
+DESCRIPTION=Vanocni Banka
+
+ON=@Create
+dorand 20
+  color=0995
+  color=0998
+  color=0992
+  color=0994
+  color=0997
+  color=0985
+  color=0988
+  color=0983
+  color=0980
+  color=098B
+  color=0021
+  color=042D
+  color=0045
+  color=099D
+  color=0981
+  color=0058
+  color=007C
+  color=00D4
+  color=0AC1
+  color=0AC2 
+enddo
+
+ON=@DROPON_GROUND
+  sfx(74)      // zvuk rozbiti :-)
+  remove
+  src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
+
+ON=@userCLICK
+src.sysmessage("Opatrne, at to nerozbijes.")
+  
+ON=@Step
+if(src.isgm)
+  return 0
+endif
+if(<src.weight> > 3000)
+  src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vanocni ozdoby!")
+  sfx(74)
+  remove
+else
+  src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> vanocni ozdoby.")
+endif
+
+
+[CHARDEF c_christmas_pig]
+ID=c_pig
+NAME=Zlate prasatko
+SOUND=snd_ANIMALS_PIG1
+ICON=i_pet_PIG
+CAN=MT_WALK|MT_RUN
+
+attack=5
+ARMOR=10
+moverate=7
+
+RESOURCES=20 i_ribs_raw,1 i_christmas_pig_head
+FOODTYPE=25 t_crops,25 t_foliage, 35 t_grass
+
+CATEGORY=Eventy
+SUBSECTION=Christmas
+DESCRIPTION=Zlate prasatko
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+ON=@Create
+NPC=brain_animal
+FAME=1000
+KARMA={-2200 -2500}
+COLOR=0995
+
+str=80
+dex={46 78}
+int={10 14}
+
+maxhits=500
+maxstam={56 88}
+maxmana=0
+
+parrying=55.0
+resist=75.0
+tactics=50.0
+wrestling={55.7 80.1}
+SpiritSpeak=25.0
+taming=200.0
+
+tag.experience=<eval {10.0 30.0}>
+
+tag.resist_poison=970
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
+
+//typ monstra
+tag(monstertype,animal)
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_christmas_bulb,{1 10}
+ITEM=i_christmas_bulb,{0 10}
+
+//////////////////////////////////////////////
+[CHARDEF c_vanocni_sberac]
+NAME=Vasnivy sberatel
+ID=C_MAN
+ARMOR=95
+DAM=100
+CAN=MT_WALK|MT_run
+
+TSPEECH=spk_vanocni_sberac
+
+TEVENTS=e_character
+TEVENTS=e_monster
+
+CATEGORY=Eventy
+SUBSECTION=Christmas
+DESCRIPTION=Sberac vanocnich banek
+
+ON=@Create
+NPC=brain_human
+Title=Sberatel vanocnich banek
+COLOR=0748
+STR=1500
+DEX=150
+INT=200
+INVUL=1
+
+ALCHEMY=100.0
+
+FAME=1
+KARMA=100
+
+ON=@npcseenewplayer 
+DORAND 3 
+  say("Hej! Ty tam. Ano tebe myslim, <src.name>. Chces si neco vydelat? Ano?")
+  say("Prosim, prines mi Vanocni banky a ja se ti stedre odmenim.")
+  say("Chces ziskat bonus ke zkusenostem? Prines mi urcite mnozstvi Vanocnich banek a ja ti pozehnam.")
+  //say("Nejvice Banek mi prinesl <finduid(def_christmasQuest_MemoryStone).tag(BestCollector_Name)> a to <finduid(def_christmasQuest_MemoryStone).tag(BestCollector_amount)> kusu. Prekonas ho?")
+enddo
+
+ON=@NPCRestock
+ITEMnewbie=i_mask_bear
+ITEMnewbie=i_boots_calf
+color=0021
+ITEMnewbie=i_leather_leggings
+ITEMnewbie=i_leather_gloves
+color=0021
+ITEMnewbie=i_sash
+color=0021
+ITEMnewbie=i_shirt_fancy
+color=0994
+ITEMnewbie=i_necklace_gold_beads
+color=0995
+name=Zlaty nahrdelnik
+ITEMnewbie=i_wand_1
+color=0021
+name=Magicka hulka
+ITEMnewbie=i_lantern_forever
+
+
+[SPEECH spk_vanocni_sberac]
+ON=*hi*
+ON=*Dobry den*
+ON=*Ahoj*
+ON=*Cau*
+ON=*Zdravim*
+if (src.findid(i_christmasQuest))
+  say("Netajim se svou sberatelskou vasni. Miluji veskere Vanocni banky, prines mi nejake a ja se ti odmenim. Nejlepsi jsou ty, ktere jsou jeste od krve! Muhehe!")
+else
+  if (<src.restest(1,i_christmas_pig_head)>)
+    say("Nadhera, prinesl jsi mi tu hlavu! Dobra tedy, nyni se muzeme pobavit zcela otevrene. Sbiram vanocni banky. Cim vice tim lepe, rozumis?")
+    src.giveitem(i_christmasQuest)
+    src.addexp(500)
+  else
+     say("Zdravim te poutniku! Myslis si, ze by jsi mi <src.sex(dokazal,dokazala)> pomoct? Troufas si na to? Ano?")
+  endif
+endif
+return 1
+
+
+ON=*ano*
+ON=*yes*
+ON=*dukaz*
+ON=*duvera*
+if (src.findid(i_christmasQuest))
+  say("Nabizim ti 5000 zlata za 100 banek, Magicky vacek za 1000 banek a nebo Tajemnou mapu za 5000 banek. Co si z toho prejes vymenit? Penize? Item? Mapu?")  
+else
+  if (<src.restest(1,i_christmas_pig_head)>)
+    say("Nadhera, prinesl jsi mi tu hlavu! Dobra tedy, nyni se muzeme pobavit zcela otevrene. Sbiram vanocni banky. Cim vice tim lepe, rozumis?")
+    src.giveitem(i_christmasQuest)
+    src.addexp(500)
+  else
+    say("Abych si otestoval Tve schopnosti, chci po tobe, aby jsi mi <src.sex(prinesl,prinesla)> cerstvou hlavu zlateho prasete. Az potom se s tebou budu bavit vice.")
+  endif
+endif
+return 1
+
+
+ON=*vymena*
+ON=*veci*
+ON=*nabidka*
+ON=*smena*
+ON=*kurz*
+if (src.findid(i_christmasQuest))
+  say("Nabizim ti 5000 zlata za 100 banek, Magicky vacek za 1000 banek a nebo Tajemnou mapu za 5000 banek. Co si z toho prejes vymenit? Penize? Item? Mapu?")  
+else
+  say("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
+
+
+ON=*penize*
+ON=*zlato*
+ON=*goldy*
+if (src.findid(i_christmasQuest))
+  if (<src.restest(100,i_christmas_bulb)>)
+    src.accMsg("Hrac <src.name>, UID: <src> dostal 5000 gp za 100 vanocnich banek.")
+    src.consume(100,i_christmas_bulb)
+    src.givegold(5000)
+    say("Dekuji ti, ale to nestaci. Prines mi jich vice, penez mam dost.")  
+    src.findid(i_christmasQuest).tag(odevzdanych_banek,#+100)
+    if (finduid(def_christmasQuest_MemoryStone)) && !(src.isgm)
+      finduid(def_christmasQuest_MemoryStone).tag(vyplaceno_zlata,#+5000)
+      f_logBestCollector
+    endif
+  else
+    say("Nemas dost Banek pro tuto vymenu. Chces vedet smenny kurz?")
+  endif
+else
+  say("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
+
+
+ON=*item*
+ON=*magicky*
+ON=*itemek*
+if (src.findid(i_christmasQuest))
+  if (<src.restest(1000,i_christmas_bulb)>)
+    src.accMsg("Hrac <src.name>, UID: <src> dostal 1x Magicky vacek za 1000 vanocnich banek.")
+    src.consume(1000,i_christmas_bulb)
+    src.giveitem(i_mi_bag)
+    say("Dekuji ti, ale to nestaci. Prines mi jich vice, itemku mam jeste dost.")
+    src.findid(i_christmasQuest).tag(odevzdanych_banek,#+1000)
+    if (finduid(def_christmasQuest_MemoryStone)) && !(src.isgm)
+      finduid(def_christmasQuest_MemoryStone).tag(magickych_itemku,#+1)
+      f_logBestCollector
+    endif
+  else
+    say("Nemas dost Banek pro tuto vymenu. Chces vedet smenny kurz?")
+  endif
+else
+  say("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
+
+
+ON=*mapu*
+ON=*mapa*
+ON=*tajemnou*
+if (src.findid(i_christmasQuest))
+  if (<src.restest(5000,i_christmas_bulb)>)
+    src.accMsg("Hrac <src.name>, UID: <src> dostal 1x Tajemnou mapu za 5000 vanocnich banek.")
+    src.consume(5000,i_christmas_bulb)
+    src.giveitem(i_u_treasure_map)
+    say("Dekuji ti, ale stale jich mam malo. Prines mi jich vice, jeste nejake Tajemne mapy mam.")    
+    src.findid(i_christmasQuest).tag(odevzdanych_banek,#+5000)
+    if (finduid(def_christmasQuest_MemoryStone)) && !(src.isgm)
+      finduid(def_christmasQuest_MemoryStone).tag(tajemnych_map,#+1)
+      f_logBestCollector
+    endif
+  else
+    say("Nemas dost Banek pro tuto vymenu. Chces vedet smenny kurz?")
+  endif
+else
+  say("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
+
+// call upon an NPC
+[function f_christmasEvent_generateBulb]
+if ({1 3} == 1)
+  arg(BulbsNumber,<eval(rescount(i_gold)/50)>)
+  if (<arg(BulbsNumber)> > 0)
+    giveitem(i_christmas_bulb,<arg(BulbsNumber)>)
+  endif
+endif
+
+[function f_logBestCollector]
+arg(PlayersAmount,<src.findid(i_christmasQuest).tag(odevzdanych_banek)>)
+if (<arg(PlayersAmount)> > <eval def_christmasQuest_MemoryStone.tag(BestCollector_amount)>)
+  def_christmasQuest_MemoryStone.tag(BestCollector_UID,<src.uid>)
+  def_christmasQuest_MemoryStone.tag(BestCollector_Name,<src.uid.name>)
+  def_christmasQuest_MemoryStone.tag(BestCollector_amount,<arg(PlayersAmount)>)
+endif
+if (<arg(PlayersAmount)> >= 5000)
+  f_Christmas_BonusExperience(3)
+elseif (<arg(PlayersAmount)> >= 2500)
+  f_Christmas_BonusExperience(2)
+  sayu("Prines mi jeste aspon <eval (5000-<arg(PlayersAmount)>)> banek a tvuj bonus vzroste!")
+elseif (<arg(PlayersAmount)> >= 500)
+  f_Christmas_BonusExperience(1)
+  sayu("Prines mi jeste aspon <eval (2500-<arg(PlayersAmount)>)> banek a tvuj bonus vzroste!")
+else
+  f_Christmas_BonusExperience(0)
+  sayu("Prines mi jeste aspon <eval (500-<arg(PlayersAmount)>)> banek a tvuj bonus vzroste!")
+endif
+
+[function f_Christmas_BonusExperience]  // argv(0) - BonusLevel
+if ((<argv(0) > 0) && (<argv(0)> > <eval src.findid(i_christmasQuest).tag(bonus_zkusenosti)>)
+  src.findid(i_christmasQuest).tag(bonus_zkusenosti,<argv(0)>)
+  if (<eval src.tag(RP_rank)> == 0)
+    src.tag(RP_rank,<argv(0)>)
+  else
+    src.tag(RP_rank,#+<argv(0)>)
+  endif
+  say("Blahopreji, tvuj Bonus ke zkusenostem je nyni <RP_rank[<argv(0)>]> %.")
+endif
+
+[ITEMDEF i_christmasQuest]
+ID=i_memory
+NAME=ChristmasQuest
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=1036800
+ATTR=094
+tag(odevzdanych_banek,0)
+tag(bonus_zkusenosti,0)
+if (finduid(def_christmasQuest_MemoryStone)) && !(src.isgm)
+  finduid(def_christmasQuest_MemoryStone).tag(sberacu,#+1)
+endif
+
+ON=@UNEQUIP
+if (<eval tag(bonus_zkusenosti)> > 0)
+  cont.tag(RP_rank,<eval (<eval cont.tag(RP_rank)> - <eval tag(bonus_zkusenosti)>)>)
+endif
+
+ON=@timer
+remove
+return 1
+
+[eof]
