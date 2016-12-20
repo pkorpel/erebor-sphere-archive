@@ -44,11 +44,15 @@ endif
 return<chargeItem.more2>
 
 [dialog d_magicCharge]
-24,24
+0,24
 noclose=0
 nomove=0
-argo.gumppic(0,0,<hval def_charge_icon[<eval more1>]>)
-argo.texta(27,22,95,<eval more2>)
+argo.gumppic(24,0,<hval def_charge_icon[<eval more1>]>)
+arg(i,0)
+while (i<more2)
+  argo.gumppic(17+<eval(arg(i)*20)>,42,0d2)
+  arg(i,#+1)
+endwhile
 
 [dialog d_magicCharge button]
 on=0
