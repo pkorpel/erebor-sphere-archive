@@ -1,0 +1,126 @@
+////////////////////////////////////////////////////////////
+//               M A G I C    C H A R G E                 //
+//                    (c) Yavanna                         //
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////
+// PUBLIC INTERFACE
+////////////////////////////////////////
+
+[defnames def_magicCharge]
+def_charge_fire       1
+def_charge_mind       2
+def_charge_energy     3
+
+def_charge_icon[1]   08d1
+def_charge_icon[2]   08de
+def_charge_icon[3]   08e9
+
+def_charge_limit      3 // the maximum number of charges that can be accumulated
+
+def_charge_duration       15 // in seconds
+def_charge_dropDuration    5 // in seconds, once the charge starts to drop, this timer will be used for another drop down
+
+// executed upon player that's being charged
+// argv(0) - charge type
+[function f_charge_add] 
+arg(chargeItem,<findid(i_magicCharge)>)
+if (!strlen(<arg(chargeItem)>))
+  newequip(i_magicCharge)
+  arg(chargeItem,<lastnew>)
+endif
+chargeItem.f_charge_increase(<argv(0)>)
+
+// executed upon player
+// argv(0) - charge type for which the value should be obtained
+[function f_charge_get]
+arg(chargeItem,<findid(i_magicCharge)>)
+if (!strlen(<arg(chargeItem)>))
+  return 0
+endif
+if (chargeItem.more1 != <argv(0)>)
+  return 0
+endif
+return<chargeItem.more2>
+
+[dialog d_magicCharge]
+24,24
+noclose=0
+nomove=0
+argo.gumppic(0,0,<hval def_charge_icon[<eval more1>]>)
+argo.texta(27,22,95,<eval more2>)
+
+[dialog d_magicCharge button]
+on=0
+return
+
+on=1 // reopen dialog -> used for reinitializing the charge number
+dialog(d_magicCharge)
+
+
+////////////////////////////////////////
+// PRIVATE
+// the calls below are file internals
+// and should not be called from outside
+////////////////////////////////////////
+
+// executed upon charge item
+// argv(0) - charge type
+[function f_charge_increase]
+timer=<def_charge_duration>
+if (more1 != <argv(0)>)
+  arg(origMore,<more1>)
+  more1=<argv(0)>
+  more2=1
+  if (arg(origMore) == 0) // first increase (the dialog was not shown yet)
+    dialog(d_magicCharge)
+  else
+    cont.dialogclose(d_magicCharge,1)
+  endif
+  return
+endif
+if (more2 >= def_charge_limit)
+  return
+endif
+more2=<eval <more2>+1>
+cont.dialogclose(d_magicCharge,1)
+
+// executed upon charge item
+[function f_charge_decrease]
+if (more2 == 1)
+  more1=0
+  more2=0 // decrease these two values manually back to initial state, which marks the charge for removal
+  timer=1
+  cont.dialogclose(d_magicCharge,0)
+  return
+endif
+more2=<eval <more2>-1>
+timer=<def_charge_dropDuration>
+cont.dialogclose(d_magicCharge,1)
+
+[itemdef i_magicCharge]
+id=i_memory
+type=t_eq_script
+name=Magic Charge
+
+// more1 - charge TYPE
+// more2 - charge VALUE (the number of charged points)
+
+on=@equip
+cont.events +e_magicCharge
+
+on=@unequip
+cont.events -e_magicCharge
+
+on=@timer
+if (more1 == 0) //marked for removal
+  remove
+  return
+endif
+f_charge_decrease
+return 1
+
+[events e_magicCharge]
+
+
+[eof]
