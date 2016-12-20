@@ -18,12 +18,16 @@ DESCRIPTION=Hlava zlateho prasete
 ON=@Create
 COLOR=0995
 timer=3600
+def_christmasQuest_MemoryStone.tag(Uriznutych_hlav,#+1)
 
 ON=@userCLICK
 src.sysmessage("Tlejici hlava zlateho prasete, asi nevydrzi dlouho cerstva.")
 
 ON=@Timer
-cont.sysmessage("Hlava zlateho prasete se rozpadla na kousky tlejiciho masa.")
+def_christmasQuest_MemoryStone.tag(rozpadnutych_hlav,#+1)
+if (topobj.isChar)
+  topobj.sysmessage("Hlava zlateho prasete se rozpadla na kousky tlejiciho masa.")
+endif
 remove
 
 
@@ -62,19 +66,21 @@ dorand 20
 enddo
 
 ON=@DROPON_GROUND
-  sfx(74)      // zvuk rozbiti :-)
-  remove
-  src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
+def_christmasQuest_MemoryStone.tag(rozbitych_banek,#+<amount>)
+sfx(74)      // zvuk rozbiti :-)
+remove
+src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
 
 ON=@userCLICK
 src.sysmessage("Opatrne, at to nerozbijes.")
   
 ON=@Step
-if(src.isgm)
+if (src.isgm)
   return 0
 endif
 
 if (chance(<src.weight>,4))
+  def_christmasQuest_MemoryStone.tag(rozslapnutych_banek,#+<amount>)
   src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vanocni ozdoby!")
   sfx(74)
   remove
@@ -175,12 +181,21 @@ FAME=1
 KARMA=100
 
 ON=@npcseenewplayer 
-DORAND 3 
+DORAND 4 
   say("Hej! Ty tam. Ano tebe myslim, <src.name>. Chces si neco vydelat? Ano?")
   say("Prosim, prines mi Vanocni banky a ja se ti stedre odmenim.")
   say("Chces ziskat bonus ke zkusenostem? Prines mi urcite mnozstvi Vanocnich banek a ja ti pozehnam.")
-  //say("Nejvice Banek mi prinesl <finduid(def_christmasQuest_MemoryStone).tag(BestCollector_Name)> a to <finduid(def_christmasQuest_MemoryStone).tag(BestCollector_amount)> kusu. Prekonas ho?")
+  say("Nejvice Banek mi prinesl <finduid(def_christmasQuest_MemoryStone).tag(BestCollector_Name)> a to <finduid(def_christmasQuest_MemoryStone).tag(BestCollector_amount)> kusu. Prekonas ho?")
 enddo
+
+on=@userdclick
+if (src.findid(i_christmasQuest))
+  src.sysmessage("Pokud chces se mnou komunikovat, pouzij me jmeno a nejake klicove slovo jako jsou: Ahoj, ano, ukol, bonus, vymena, penize, item, mapa")
+  src.sysmessage("Napriklad: <name> ukol")
+else
+  src.sysmessage("Pozdrav me a nebo me pozadej o UKOL a reknu ti vice.")
+  src.sysmessage("Napriklad: <name> ukol")
+endif
 
 ON=@NPCRestock
 ITEMnewbie=i_mask_bear
@@ -251,6 +266,19 @@ ON=*smena*
 ON=*kurz*
 if (src.findid(i_christmasQuest))
   say("Nabizim ti 5000 zlata za 100 banek, Magicky vacek za 1000 banek a nebo Tajemnou mapu za 5000 banek. Co si z toho prejes vymenit? Penize? Item? Mapu?")  
+else
+  say("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
+endif
+return 1
+
+
+ON=*bonus*
+ON=*exp*
+ON=*experience*
+ON=*zkusenosti*
+ON=*pozehnani*
+if (src.findid(i_christmasQuest))
+  say("Tem, kteri mi prinesou velke mnozstvi banek pozehnam, ze budou ziskavat vice zkusenosti. Prines mi banky a pozehnam i tobe.")  
 else
   say("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
 endif
@@ -328,9 +356,10 @@ return 1
 // call upon an NPC
 [function f_christmasEvent_generateBulb]
 if ({1 3} == 1)
-  arg(BulbsNumber,<eval(rescount(i_gold)/50)>)
-  if (<arg(BulbsNumber)> > 0)
-    giveitem(i_christmas_bulb,<arg(BulbsNumber)>)
+  arg(BulbsAmount,<eval(rescount(i_gold)/50)>)
+  if (<arg(BulbsAmount)> > 0)
+    giveitem(i_christmas_bulb,<arg(BulbsAmount)>)
+    def_christmasQuest_MemoryStone.tag(vytvorenych_banek,#+<arg(BulbsAmount)>)
   endif
 endif
 
@@ -357,11 +386,7 @@ endif
 if ((<argv(0)> > 0) && (<argv(0)> > <eval src.findid(i_christmasQuest).tag(bonus_zkusenosti)>))
   arg(Rozdil_bonusExp,<eval (<argv(0)>-src.findid(i_christmasQuest).tag(bonus_zkusenosti))>)
   src.findid(i_christmasQuest).tag(bonus_zkusenosti,<argv(0)>)
-  if (<eval src.tag(RP_rank)> == 0)
-    src.tag(RP_rank,<argv(0)>)
-  else
-    src.tag(RP_rank,#+<arg(Rozdil_bonusExp)>)
-  endif
+  src.tag(RP_rank,<eval src.tag(RP_rank)>+<arg(Rozdil_bonusExp)>)
   def_christmasQuest_MemoryStone.tag(BonusExpPlayers[<argv(0)>],#+1)
   say("Blahopreji, tvuj Bonus ke zkusenostem je nyni <RP_rank[<argv(0)>]> %.")
 endif
@@ -377,7 +402,7 @@ ATTR=094
 tag(odevzdanych_banek,0)
 tag(bonus_zkusenosti,0)
 if (finduid(def_christmasQuest_MemoryStone)) && !(src.isgm)
-  finduid(def_christmasQuest_MemoryStone).tag(sberacu,#+1)
+  def_christmasQuest_MemoryStone.tag(sberacu,#+1)
 endif
 
 ON=@UNEQUIP
