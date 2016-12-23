@@ -389,6 +389,21 @@ if ((<argv(0)> > 0) && (<argv(0)> > <eval src.findid(i_christmasQuest).tag(bonus
   src.tag(RP_rank,<eval src.tag(RP_rank)>+<arg(Rozdil_bonusExp)>)
   def_christmasQuest_MemoryStone.tag(BonusExpPlayers[<argv(0)>],#+1)
   say("Blahopreji, tvuj Bonus ke zkusenostem je nyni <RP_rank[<argv(0)>]> %.")
+  src.accMsg("Hrac <src.name>, UID: <src> dostal Exp bonus +<RP_rank[<argv(0)>]> % z Vanocniho Eventu.")
+  src.do_a_cyrcle(i_fx_sparkle,2,0995)
+  src.effect(2,i_fx_sparkle,0,32)
+  src.sfx(199)
+endif
+
+[function SpoctiBanky]
+if (src.findid(i_christmasQuest))
+  if (<src.restest(1,i_christmas_bulb)>)
+    classmessage("Mas u sebe <?rescount i_christmas_bulb?> vanocnich banek")
+  else
+    redmessage("Nemas u sebe zadne Vanocni Banky.")
+  endif
+else
+  redmessage("Neplnis Vanocni Event, nejdrive ziskej duveru Sberatele Vanocnich Banek.")
 endif
 
 [ITEMDEF i_christmasQuest]
