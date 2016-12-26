@@ -1,0 +1,262 @@
+[defnames def_CTF_Christmas]
+def_CTF_christmas_MemoryStone  #040024919  //#0400635DB  // memory item v Arene
+
+[ITEMDEF i_CTF_christmas_box]
+ID=i_gift_box
+NAME=Vanocni Darecek
+TYPE=00
+
+ON=@create
+ATTR=010
+
+ON=@userCLICK
+src.sysmessage("Vanocni darecek.")
+
+ON=@userDCLICK
+if (src.isevent(e_CTF_christmas))
+    if (color == (<src.findid(i_CTF_christmas).tag(CTF_Color)>))   // klikam na darecek meho tymu
+      if (<eval tag(stolen_gift)> == 0)                            // je na home pozici
+        if (src.isevent(e_CTF_christmas_carry))                    // klika na nej nekdo, kdo ma darek opacneho tymu
+          src.findid(i_CTF_christmas_box).tag(stolen_gift,0)
+          src.findid(i_CTF_christmas_box).p=<src.findid(i_CTF_christmas_box).morep>  // vracim ukradeny darek na jeho home pozici
+          src.consume(i_CTF_christmas_carry_memory)                // Jiz vice nejsem nosicem
+          f_CTF_reset_players_in_arena
+          f_CTF_earn_point(<color>)
+        else 
+          src.redmessage("Vlastni darek nemuzes vzit.")
+        endif
+      else                                                         // neni na home pozici, klika na nej vlastni tym, vracim ho.
+        p=<morep>
+        tag(stolen_gift,0)
+        if (color == 021)
+          f_CTF_announcer("Hrac <src.name> vratil Cerveny darek na zakladni pozici!")
+        else
+          f_CTF_announcer("Hrac <src.name> vratil Sedy darek na zakladni pozici!")
+        endif
+        src.redmessage("Vratil jsi svuj darek na domaci pozici.")
+      endif
+    else                                                           // klikam na darecek opacneho tymu
+      if (src.isevent(e_CTF_christmas_carry))                      // klika na nej jeho zlodej
+        src.consume(i_CTF_christmas_carry_memory)
+        drop
+      else                                                         // klika na nej nekdo kdo ho nenese, takze ho vezme
+        bounce
+        tag(stolen_gift,1)
+        src.giveitem(i_CTF_christmas_carry_memory)
+        if (color == 021)
+          f_CTF_announcer("Hrac <src.name> ukradl Cerveny darek!")
+        else
+          f_CTF_announcer("Hrac <src.name> ukradl Sedy darek!")
+        endif
+      endif
+    endif
+
+else
+  src.redmessage("Nemuzes s timto predmetem nic udelat.")
+endif
+
+
+ON=@DROPON_GROUND
+ATTR=010
+timer=15    // timer pred portem na home pozici
+
+ON=@timer
+if !(cont)
+  say("Vracim se domu!")
+  p=<morep>   // vraceni na home pozici
+  tag(stolen_gift,0)
+endif
+return 1
+
+[ITEMDEF i_CTF_christmas_carry_memory]
+ID=i_memory
+NAME=CTF Christmas Carry
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=0
+cont.events +e_CTF_christmas_carry
+
+ON=@UNEQUIP
+cont.events -e_CTF_christmas_carry
+
+ON=@timer
+topobj.say("Ukradl jsem Darek!")
+topobj.effect(3,i_gift_box,1,90)
+timer=2
+return 1
+
+[ITEMDEF i_CTF_christmas]
+ID=i_memory
+NAME=CTF Christmas
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+cont.events +e_CTF_christmas
+
+ON=@UNEQUIP
+cont.f_CTF_return_experience
+cont.events -e_CTF_christmas
+
+ON=@timer
+return 1
+
+[ITEMDEF i_CTF_christmas_ress]
+ID=i_memory
+Name=Self resurrector
+TYPE=T_EQ_SCRIPT
+
+on=@create
+ATTR=attr_invis|attr_decay
+  
+on=@equip
+timer=10
+more2=5
+cont.stone=1      // aby se duch nemohl hybat
+cont.f_CTF_return_experience
+cont.redmessage("Zkusenosti ztracene smrti byly navraceny.")
+cont.redmessage("Za 15 sekund budes oziven, priprav se k boji!")
+
+ON=@timer
+if (<more2> > 0)
+  cont.redmessage("<more2l> sec do oziveni...")
+  more2=<more2>-1
+else
+  cont.spelleffect(59,1000)
+  cont.f_CTF_renew_player
+  cont.f_CTF_go_start_position
+  cont.stone=0      
+  cont.giveitem(i_pet_llama)
+  remove
+endif
+timer=1
+return 1
+
+[events e_CTF_christmas]
+ON=@Death
+safe(findlayer(layer_horse).remove)
+newequip(i_CTF_christmas_ress)
+
+[events e_CTF_christmas_carry]
+ON=@Death
+consume(i_CTF_christmas_carry_memory)
+arg(DropBox,<findid(i_CTF_christmas_box)>)
+arg(DropBox).drop
+arg(DropBox).timer=15
+arg(DropBox).say("Pomoc, zahrante me!")
+
+ON=@Spellcast
+redmessage("Nosic darku nemuze carovat!")
+return 1
+
+ON=@HitTry
+redmessage("Nosic darku nemuze bojovat!")
+return 1
+
+[function f_CTF_christmas_set_player_color]  // argv(0) - color
+giveitem(i_CTF_christmas)
+arg(CTF_memory,<findid(i_CTF_christmas)>)
+arg(CTF_memory).tag(CTF_Color,<argv(0)>)
+arg(CTF_memory).tag(CTF_experience,<eval tag(experience)>)
+arg(CTF_memory).tag(CTF_level,<eval tag(level)>)
+if (<argv(0)> == 021)
+  arg(CTF_memory).moreP=5952,2754,5  // home position Red team
+else
+  arg(CTF_memory).moreP=6065,2736,5  // home position Grey team
+endif
+def_CTF_christmas_MemoryStone.tag(Count_Player,#+1)
+def_CTF_christmas_MemoryStone.tag(Player[<def_CTF_christmas_MemoryStone.tag(Count_Player)>],<uid>)
+
+[function f_CTF_earn_point]  // argv(0) - color team, who earn point
+if (<argv(0)> == 021)
+  def_CTF_christmas_MemoryStone.tag(Score_RED,#+1)
+  if (def_CTF_christmas_MemoryStone.tag(Score_RED) == def_CTF_christmas_MemoryStone.tag(Max_Score))
+    f_CTF_announcer("Vyhrava Cerveny tym !")
+    def_CTF_christmas_MemoryStone.f_CTF_remove_players_from_arena
+    return 0
+  else
+    f_CTF_announcer("Hrac <src.name> ziskal bod pro Cerveny tym!")
+  endif
+else
+  def_CTF_christmas_MemoryStone.tag(Score_GREY,#+1)
+  if (def_CTF_christmas_MemoryStone.tag(Score_GREY) == def_CTF_christmas_MemoryStone.tag(Max_Score))
+    f_CTF_announcer("Vyhrava Sedy tym!")
+    def_CTF_christmas_MemoryStone.f_CTF_remove_players_from_arena
+    return 0
+  else
+    f_CTF_announcer("Hrac <src.name> ziskal bod pro Sedy tym!")
+  endif
+endif
+f_CTF_announcer("Aktualni Skore je <def_CTF_christmas_MemoryStone.tag(Score_RED)>:<def_CTF_christmas_MemoryStone.tag(Score_GREY)> (Cerveni vs. Sedi)")
+
+
+[function f_CTF_remove_players_from_arena]
+while (<eval tag(Count_player)> > 0)
+  arg(Player_CTF,<tag(Player[<eval tag(Count_player)>])>)
+  if (arg(Player_CTF).findid(i_CTF_christmas))
+    if (arg(Player_CTF).findid(i_CTF_christmas_carry_memory))
+      arg(Player_CTF).consume(i_CTF_christmas_carry_memory)
+      arg(Player_CTF).findid(i_CTF_christmas_box).p=<arg(Player_CTF).findid(i_CTF_christmas_box).MoreP>
+    endif
+    arg(Player_CTF).consume(i_CTF_christmas)
+    arg(Player_CTF).go=6048,2768,0,5
+  endif
+  tag.remove(Player[<eval tag(Count_player)>])
+  tag(Count_player,#-1)
+endwhile
+
+[function f_CTF_reset_players_in_arena]
+arg(PlayersCount,<eval def_CTF_christmas_MemoryStone.tag(Count_player)>)
+while (<arg(PlayersCount)> > 0)
+  arg(Player_CTF,<def_CTF_christmas_MemoryStone.tag(Player[<arg(PlayersCount)>])>)
+  if (arg(Player_CTF).findid(i_CTF_christmas))
+    arg(Player_CTF).paralyze(30)                          // paralyze
+    arg(Player_CTF).f_CTF_renew_player                    // renew player
+    arg(Player_CTF).f_CTF_go_start_position               // go to start position
+  endif
+  arg(PlayersCount,#-1)
+endwhile
+
+[function f_CTF_announcer]
+arg(PlayersCount,<eval def_CTF_christmas_MemoryStone.tag(Count_player)>)
+while (<arg(PlayersCount)> > 0)
+  arg(Player_CTF,<def_CTF_christmas_MemoryStone.tag(Player[<arg(PlayersCount)>])>)
+  if (arg(Player_CTF).findid(i_CTF_christmas))
+    arg(Player_CTF).redmessage("<argv(0)>")
+  endif
+  arg(PlayersCount,#-1)
+endwhile
+
+[function f_CTF_renew_player]
+if (isDead)
+  spelleffect(59,1000)  // ress
+endif
+spelleffect(41,1000) //dispell
+spelleffect(11,1000) //cure 
+hits=<maxhits>
+stam=<maxstam>
+mana=<maxmana>  
+
+
+[function f_CTF_go_start_position]
+arg(CTF_memoryItem,<findid(i_CTF_christmas)>)
+go(<CTF_memoryItem.moreP>)      // go to start RED position
+
+
+[function f_CTF_return_experience]
+if (<eval tag(level)> == <findid(i_CTF_christmas).tag(CTF_level)>)   // neudelal behem CTF level
+  tag(experience,<findid(i_CTF_christmas).tag(CTF_experience)>)  // vracim stav zkusenosti jake mel na zacatku.
+else
+  tag(experience,0)  // Udelal behem CTF level, vracim na hodnotu 0. Toto CTF neni na predavani expu.
+endif
+      
+[typedef t_CTF_christmas_memoryStone]
+ON=@UserDclick
+if (src.isGM)
+  src.redmessage("RESETUJI ARENU !!!")
+  f_CTF_remove_players_from_arena
+  tag(Score_RED,0)
+  tag(Score_GREY,0)
+  tag(Count_player,0)
+endif
+                  
