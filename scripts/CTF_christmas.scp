@@ -50,10 +50,10 @@ if (src.isevent(e_CTF_christmas))
         endif
       endif
     endif
-
 else
   src.redmessage("Nemuzes s timto predmetem nic udelat.")
 endif
+return 1
 
 
 ON=@DROPON_GROUND
@@ -187,7 +187,7 @@ else
     f_CTF_announcer("Hrac <src.name> ziskal bod pro Sedy tym!")
   endif
 endif
-f_CTF_announcer("Aktualni Skore je <def_CTF_christmas_MemoryStone.tag(Score_RED)>:<def_CTF_christmas_MemoryStone.tag(Score_GREY)> (Cerveni vs. Sedi)")
+f_CTF_announcer("Aktualni Skore je <eval def_CTF_christmas_MemoryStone.tag(Score_RED)>:<eval def_CTF_christmas_MemoryStone.tag(Score_GREY)> (Cerveni vs. Sedi)")
 
 
 [function f_CTF_remove_players_from_arena]
