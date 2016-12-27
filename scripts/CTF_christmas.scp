@@ -1,5 +1,5 @@
 [defnames def_CTF_Christmas]
-def_CTF_christmas_MemoryStone  #04002B160  //#0400635DB  // memory item v Arene
+def_CTF_christmas_MemoryStone  #0400635DB  // memory item v Arene
 
 [ITEMDEF i_CTF_christmas_box]
 ID=i_gift_box
