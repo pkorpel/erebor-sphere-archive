@@ -1,5 +1,5 @@
 [defnames def_CTF_Christmas]
-def_CTF_christmas_MemoryStone  #040024919  //#0400635DB  // memory item v Arene
+def_CTF_christmas_MemoryStone  #04002B160  //#0400635DB  // memory item v Arene
 
 [ITEMDEF i_CTF_christmas_box]
 ID=i_gift_box
@@ -29,11 +29,11 @@ if (src.isevent(e_CTF_christmas))
         p=<morep>
         tag(stolen_gift,0)
         if (color == 021)
-          f_CTF_announcer("Hrac <src.name> vratil Cerveny darek na zakladni pozici!")
+          f_CTF_announcer("<src.sex(Hrac,Hracka)> <src.name> <src.sex(vratil,vratila)> Cerveny darek na zakladni pozici!")
         else
-          f_CTF_announcer("Hrac <src.name> vratil Sedy darek na zakladni pozici!")
+          f_CTF_announcer("<src.sex(Hrac,Hracka)> <src.name> <src.sex(vratil,vratila)> Sedy darek na zakladni pozici!")
         endif
-        src.redmessage("Vratil jsi svuj darek na domaci pozici.")
+        src.redmessage("<src.sex(Vratil,Vratila)> jsi svuj darek na domaci pozici.")
       endif
     else                                                           // klikam na darecek opacneho tymu
       if (src.isevent(e_CTF_christmas_carry))                      // klika na nej jeho zlodej
@@ -44,9 +44,9 @@ if (src.isevent(e_CTF_christmas))
         tag(stolen_gift,1)
         src.giveitem(i_CTF_christmas_carry_memory)
         if (color == 021)
-          f_CTF_announcer("Hrac <src.name> ukradl Cerveny darek!")
+          f_CTF_announcer("<src.sex(Hrac,Hracka)> <src.name> <src.sex(ukradl,ukradla)> Cerveny darek!")
         else
-          f_CTF_announcer("Hrac <src.name> ukradl Sedy darek!")
+          f_CTF_announcer("<src.sex(Hrac,Hracka)> <src.name> <src.sex(ukradl,ukradla)> Sedy darek!")
         endif
       endif
     endif
@@ -81,7 +81,7 @@ ON=@UNEQUIP
 cont.events -e_CTF_christmas_carry
 
 ON=@timer
-topobj.say("Ukradl jsem Darek!")
+topobj.say("<src.sex(Sebral,Sebrala)> jsem Darek!")
 topobj.effect(3,i_gift_box,1,90)
 timer=2
 return 1
@@ -110,12 +110,11 @@ on=@create
 ATTR=attr_invis|attr_decay
   
 on=@equip
-timer=10
+timer=<eval def_CTF_christmas_MemoryStone.tag(Selfress_timer)>
 more2=5
-cont.stone=1      // aby se duch nemohl hybat
 cont.f_CTF_return_experience
 cont.redmessage("Zkusenosti ztracene smrti byly navraceny.")
-cont.redmessage("Za 15 sekund budes oziven, priprav se k boji!")
+cont.redmessage("Za <eval <more2>+<timer>> sekund budes oziven, priprav se k boji!")
 
 ON=@timer
 if (<more2> > 0)
@@ -125,7 +124,6 @@ else
   cont.spelleffect(59,1000)
   cont.f_CTF_renew_player
   cont.f_CTF_go_start_position
-  cont.stone=0      
   cont.giveitem(i_pet_llama)
   remove
 endif
@@ -135,6 +133,9 @@ return 1
 [events e_CTF_christmas]
 ON=@Death
 safe(findlayer(layer_horse).remove)
+if !(isEvent(e_CTF_christmas_carry))
+  go=6000,2711,0,56
+endif
 newequip(i_CTF_christmas_ress)
 
 [events e_CTF_christmas_carry]
@@ -144,6 +145,7 @@ arg(DropBox,<findid(i_CTF_christmas_box)>)
 arg(DropBox).drop
 arg(DropBox).timer=15
 arg(DropBox).say("Pomoc, zahrante me!")
+go=6000,2711,0,56
 
 ON=@Spellcast
 redmessage("Nosic darku nemuze carovat!")
@@ -160,9 +162,9 @@ arg(CTF_memory).tag(CTF_Color,<argv(0)>)
 arg(CTF_memory).tag(CTF_experience,<eval tag(experience)>)
 arg(CTF_memory).tag(CTF_level,<eval tag(level)>)
 if (<argv(0)> == 021)
-  arg(CTF_memory).moreP=5952,2754,5  // home position Red team
+  arg(CTF_memory).moreP=5952,2754,5,55  // home position Red team
 else
-  arg(CTF_memory).moreP=6065,2736,5  // home position Grey team
+  arg(CTF_memory).moreP=6065,2736,5,55  // home position Grey team
 endif
 def_CTF_christmas_MemoryStone.tag(Count_Player,#+1)
 def_CTF_christmas_MemoryStone.tag(Player[<def_CTF_christmas_MemoryStone.tag(Count_Player)>],<uid>)
@@ -175,7 +177,7 @@ if (<argv(0)> == 021)
     def_CTF_christmas_MemoryStone.f_CTF_remove_players_from_arena
     return 0
   else
-    f_CTF_announcer("Hrac <src.name> ziskal bod pro Cerveny tym!")
+    f_CTF_announcer("<src.sex(Hrac,Hracka)> <src.name> <src.sex(ziskal,ziskala)> bod pro Cerveny tym!")
   endif
 else
   def_CTF_christmas_MemoryStone.tag(Score_GREY,#+1)
@@ -184,7 +186,7 @@ else
     def_CTF_christmas_MemoryStone.f_CTF_remove_players_from_arena
     return 0
   else
-    f_CTF_announcer("Hrac <src.name> ziskal bod pro Sedy tym!")
+    f_CTF_announcer("<src.sex(Hrac,Hracka)> <src.name> <src.sex(ziskal,ziskala)>  bod pro Sedy tym!")
   endif
 endif
 f_CTF_announcer("Aktualni Skore je <eval def_CTF_christmas_MemoryStone.tag(Score_RED)>:<eval def_CTF_christmas_MemoryStone.tag(Score_GREY)> (Cerveni vs. Sedi)")
@@ -199,7 +201,7 @@ while (<eval tag(Count_player)> > 0)
       arg(Player_CTF).findid(i_CTF_christmas_box).p=<arg(Player_CTF).findid(i_CTF_christmas_box).MoreP>
     endif
     arg(Player_CTF).consume(i_CTF_christmas)
-    arg(Player_CTF).go=6048,2768,0,5
+    arg(Player_CTF).go=6052,2771,0,56
   endif
   tag.remove(Player[<eval tag(Count_player)>])
   tag(Count_player,#-1)
