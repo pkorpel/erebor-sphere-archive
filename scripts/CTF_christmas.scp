@@ -148,8 +148,14 @@ arg(DropBox).say("Pomoc, zahrante me!")
 go=6000,2711,0,56
 
 ON=@Spellcast
-redmessage("Nosic darku nemuze carovat!")
-return 1
+if (<eval def_CTF_christmas_MemoryStone.tag(MagicArrow_Denied)>)
+  redmessage("Nosic darku nemuze carovat!")
+  return 1
+endif
+if !(argn==5)
+  redmessage("Nosic darku muze carovat jen Magic Arrow!")
+  return 1
+endif
 
 ON=@HitTry
 redmessage("Nosic darku nemuze bojovat!")
