@@ -151,6 +151,7 @@ SRC.EVENTS +e_arena
 SRC.TAG(ARENA,1)
 src.tag(famepits,<src.fame>)
 src.tag(realmpits,<src.tag(realm)>)
+src.tag(deathspits,<src.deaths>)
 src.tag(playerkillstotal_bk,<eval(<src.tag(playerkillstotal)>)>)
 src.tag(monsterkillstotal_bk,<eval(<src.tag(monsterkillstotal)>)>)
 //src.tag(pozice,<region.name>)
@@ -252,7 +253,6 @@ if (tag(realmpits))
 endif
 if(tag(deathspits))
   deaths = <tag(deathspits)>
-  tag.remove(deathspits)
 endif
 if (<eval tag(playerkillstotal_bk)>)
   tag(playerkillstotal,<eval tag(playerkillstotal_bk)>)
@@ -266,6 +266,7 @@ TAG.remove(MURDERPITS)
 TAG.remove(KARMAPITS)
 tag.remove(famepits)
 tag.remove(realmpits)
+tag.remove(deathspits)
 EVENTS(-e_arena)
 TAG.remove(ARENA)
 gohome
