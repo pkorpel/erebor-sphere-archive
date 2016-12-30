@@ -8,6 +8,12 @@
 ////////////////////////////////////////
 
 [defnames def_magicCharge]
+def_charge_limit      3 // the maximum number of charges that can be accumulated
+def_charge_abilityPoints  10 // the maximum number of points put in the ability
+
+def_charge_duration       15 // in seconds
+def_charge_dropDuration    5 // in seconds, once the charge starts to drop, this timer will be used for another drop down
+
 def_charge_fire       1
 def_charge_mind       2
 def_charge_energy     3
@@ -16,14 +22,54 @@ def_charge_icon[1]   08d1
 def_charge_icon[2]   08de
 def_charge_icon[3]   08e9
 
-def_charge_limit      3 // the maximum number of charges that can be accumulated
+// fire
+def_charge_spellPow_pvp[5]  100 //magic arrow
+def_charge_spellPow_pvm[5]  200
+def_charge_spellType[5]     def_charge_fire
+def_charge_spellPow_pvp[18]  100 //fireball
+def_charge_spellPow_pvm[18]  200
+def_charge_spellType[18]     def_charge_fire
+def_charge_spellPow_pvp[43]  100 //explosion
+def_charge_spellPow_pvm[43]  200
+def_charge_spellType[43]     def_charge_fire
+def_charge_spellPow_pvp[51]  100 //flamestrike
+def_charge_spellPow_pvm[51]  200
+def_charge_spellType[51]     def_charge_fire
+def_charge_spellPow_pvp[55]  100 //meteor
+def_charge_spellPow_pvm[55]  200
+def_charge_spellType[55]     def_charge_fire
 
-def_charge_duration       15 // in seconds
-def_charge_dropDuration    5 // in seconds, once the charge starts to drop, this timer will be used for another drop down
+
+// mind
+def_charge_spellPow_pvp[12]  100 //harm
+def_charge_spellPow_pvm[12]  200
+def_charge_spellType[12]     def_charge_mind
+def_charge_spellPow_pvp[37]  100 // mind blast
+def_charge_spellPow_pvm[37]  200
+def_charge_spellType[37]     def_charge_mind
+
+// energy
+def_charge_spellPow_pvp[30]  100 //lightning
+def_charge_spellPow_pvm[30]  200
+def_charge_spellType[30]     def_charge_energy
+def_charge_spellPow_pvp[42]  100 //energy bolt
+def_charge_spellPow_pvm[42]  200
+def_charge_spellType[42]     def_charge_energy
+def_charge_spellPow_pvp[49]  100 //chain lightning
+def_charge_spellPow_pvm[49]  200
+def_charge_spellType[49]     def_charge_energy
 
 // executed upon player that's being charged
 // argv(0) - charge type
+// argv(1) - spell target - used to control, whether the charge should be incremented
 [function f_charge_add] 
+if (argv(1).isPlayer)
+  if (0<argv(1).tag(realm)> == 0<tag(realm)>)
+    return // do not increment charge if the target is player from the same realm
+  endif
+elseif (argv(1).isPet)
+  return // do not increment charge if the target is a pet (mount, summon, or other)
+endif
 arg(chargeItem,<findid(i_magicCharge)>)
 if (!strlen(<arg(chargeItem)>))
   newequip(i_magicCharge)
@@ -31,17 +77,73 @@ if (!strlen(<arg(chargeItem)>))
 endif
 chargeItem.f_charge_increase(<argv(0)>)
 
-// executed upon player
+// executed upon player for which the charge value should be obtained
 // argv(0) - charge type for which the value should be obtained
 [function f_charge_get]
 arg(chargeItem,<findid(i_magicCharge)>)
-if (!strlen(<arg(chargeItem)>))
-  return 0
-endif
-if (chargeItem.more1 != <argv(0)>)
+if (!0<arg(chargeItem)>)
   return 0
 endif
 return<chargeItem.more2>
+
+// if a spell is casted with defined type and spell number,
+// this function should be called to handle changes in charge
+[function f_charge_spellCasted]
+if (var(spellnumber) == 18) // fireball
+  if (0<src.tag(ra_magicCharge_fire)>)
+    src.f_charge_add(<def_charge_fire>,<src.act>)
+  endif
+elseif (var(spellnumber) == 12) // harm
+  if (0<src.tag(ra_magicCharge_mind)>)
+    src.f_charge_add(<def_charge_mind>,<src.act>)
+  endif
+elseif (var(spellnumber) == 30) // lightning
+  if (0<src.tag(ra_magicCharge_energy)>)
+    src.f_charge_add(<def_charge_energy>,<src.act>)
+  endif
+elseif (<safe def_charge_spellType[<var(spellNumber)>]>)
+  arg(chargeItem,<findid(i_magicCharge)>)
+  if (chargeItem)
+    if (<chargeItem.more1> != <def_charge_spellType[<var(spellNumber)>]>)
+      chargeItem.f_charge_decrease(<def_charge_limit>)
+      return
+    elseif (act.isPlayer) // always reduce charge if a non-charging, evil spell is casted upon another player
+      chargeItem.f_charge_decrease(1)
+    endif
+  endif
+endif
+
+// executed upon the spell source
+[function f_charge_apply_pvp]
+if (<safe def_charge_spellType[<var(spellNumber)>]>)
+  f_charge_formula(<def_charge_spellPow_pvp[<var(spellNumber)>]>)
+endif
+
+// executed upon the spell source
+[function f_charge_apply_pvm]
+if (<safe def_charge_spellType[<var(spellNumber)>]>)
+  f_charge_formula(<def_charge_spellPow_pvm[<var(spellNumber)>]>)
+endif
+
+// argv(0) - the charge dmg effect 
+[function f_charge_formula]
+arg(coef,50) // percentage of the effect given for the first ability point
+arg(spellType,<eval def_charge_spellType[<var(spellNumber)>]>)
+arg(chargeEffect,<f_charge_get(<arg(spellType)>)>)
+arg(ability,<f_charge_getAbility(<arg(spellType)>)>)
+if (<arg(ability)> < def_charge_abilityPoints)
+  arg(chargeEffect,<eval (chargeEffect*((coef*def_charge_abilityPoints)+(ability*(100-coef))))/(100*def_charge_abilityPoints)>)
+endif
+var(spellpower,<eval ((<var(spellpower)>*(<eval 1000+(<arg(chargeEffect)>*<argv(0)>)>))/1000)>)
+
+// executed upon player for which the ability should be retrieved
+[function f_charge_getAbility]
+doswitch argv(0)
+  return 0 // no ability
+  return <tag(ra_magicCharge_fire)>
+  return <tag(ra_magicCharge_mind)>
+  return <tag(ra_magicCharge_energy)>
+enddo
 
 [dialog d_magicCharge]
 0,24
@@ -90,8 +192,9 @@ more2=<eval <more2>+1>
 cont.dialogclose(d_magicCharge,1)
 
 // executed upon charge item
+// argv(0) - charges to remove
 [function f_charge_decrease]
-if (more2 == 1)
+if (more2 <= <argv(0)>)
   more1=0
   more2=0 // decrease these two values manually back to initial state, which marks the charge for removal
   timer=1
@@ -121,10 +224,17 @@ if (more1 == 0) //marked for removal
   remove
   return
 endif
-f_charge_decrease
+f_charge_decrease(1)
 return 1
 
 [events e_magicCharge]
+on=@beforedoeffect
+if (act.npc)
+  f_charge_apply_pvm
+else
+  f_charge_apply_pvp
+endif
 
-
+on=@afterswing
+on=@beforegeteffect
 [eof]

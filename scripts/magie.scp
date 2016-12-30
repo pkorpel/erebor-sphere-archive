@@ -221,6 +221,10 @@ if ( (var(spellpower)>0) || <arg(hasSideEffect)> )
     dospell_final(<var(spellnumber)>,<var(spellpower)>)
   endif
 endif
+
+if (src.isPlayer)
+  src.f_charge_spellCasted
+endif
 return 1
 
 [function f_spellResistedMsg]
