@@ -101,13 +101,10 @@ arg(coef,50) // percentage of the effect given for the first ability point
 arg(spellType,<eval def_charge_spellType[<var(spellNumber)>]>)
 arg(chargeEffect,<f_charge_get(<arg(spellType)>)>*<argv(0)>)
 arg(ability,<f_charge_getAbility(<arg(spellType)>)>)
-sysMessage("chargeEffect: <chargeEffect>, ability <ability>, <argv(0)>")
 if (<arg(ability)> < nastaveni_charge_abilityPoints)
   arg(chargeEffect,<eval (chargeEffect*((nastaveni_charge_baseEff*nastaveni_charge_abilityPoints)+(ability*(100-nastaveni_charge_baseEff))))/(100*nastaveni_charge_abilityPoints)>)
 endif
-sysMessage("chargeEffect: <chargeEffect>, spellpower <var(spellpower)>")
 var(spellpower,<eval ((<var(spellpower)>*(1000+<arg(chargeEffect)>))/1000)>)
-sysMessage("spellpower <var(spellpower)>")
 
 // executed upon player for which the ability should be retrieved
 [function f_charge_getAbility]
