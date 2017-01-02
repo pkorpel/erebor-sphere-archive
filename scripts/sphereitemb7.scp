@@ -8578,12 +8578,267 @@ DESCRIPTION=Strange Yellow Dot
 [ITEMDEF 03f0d]
 //
 
+[ITEMDEF 01387]
+//Big dark cloud
+DEFNAME=i_fx_dark_cloud
+NAME=Dark Cloud
+CATEGORY=Miscellaneous
+SUBSECTION=Weirdness
+DESCRIPTION=Big dark cloud
+DUPELIST=01388,01389,0138A,0138B,0138C
+
+[ITEMDEF 01388]
+//Big dark cloud
+DUPEITEM=01387
+
+[ITEMDEF 01389]
+//Big dark cloud
+DUPEITEM=01387
+
+[ITEMDEF 0138A]
+//Big dark cloud
+DUPEITEM=01387
+
+[ITEMDEF 0138B]
+//Big dark cloud
+DUPEITEM=01387
+
+[ITEMDEF 0138C]
+//Big dark cloud
+DUPEITEM=01387
+
+[ITEMDEF 01A75]
+//Lava explosion
+DEFNAME=i_fx_lava_explosion
+NAME=Lava
+CATEGORY=Miscellaneous
+SUBSECTION=Weirdness
+DESCRIPTION=Lava Explosion
+DUPELIST=01A76,01A77,01A78,01A79,01A7A,01A7B
+
+[ITEMDEF 01A76]
+//Lava explosion
+DUPEITEM=01A75
+
+[ITEMDEF 01A77]
+//Lava explosion
+DUPEITEM=01A75
+
+[ITEMDEF 01A78]
+//Lava explosion
+DUPEITEM=01A75
+
+[ITEMDEF 01A79]
+//Lava explosion
+DUPEITEM=01A75
+
+[ITEMDEF 01A7A]
+//Lava explosion
+DUPEITEM=01A75
+
+[ITEMDEF 01A7B]
+//Lava explosion
+DUPEITEM=01A75
+
+[ITEMDEF 03934]
+//Energy twister
+DEFNAME=i_fx_energy_twister
+NAME=Energy Twister
+CATEGORY=Miscellaneous
+SUBSECTION=Weirdness
+DESCRIPTION=Energy Twister
+DUPELIST=03935,03936,03937,03938,03939,0393A,0393B,0393C,0393D,0393E,0393F,03940,03941
+
+[ITEMDEF 03935]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 03936]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 03937]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 03938]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 03939]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 0393A]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 0393B]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 0393C]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 0393D]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 0393E]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 0393F]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 03940]
+//Energy Twister
+DUPEITEM=03934
+
+[ITEMDEF 03941]
+//Energy Twister
+DUPEITEM=03934
+
+
+[ITEMDEF 039C4]
+//Tornado
+DEFNAME=i_fx_tornado
+NAME=Tornado
+CATEGORY=Miscellaneous
+SUBSECTION=Weirdness
+DESCRIPTION=Tornado
+DUPELIST=039C5,039C6,039C7,039C8,039C9,039CA,039CB,039CC,039CD,039CE,039CF
+
+[ITEMDEF 039C5]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039C6]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039C7]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039C8]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039C9]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039CA]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039CB]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039CC]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039CD]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039CE]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 039CF]
+//Tornado
+DUPEITEM=039C4
+
+[ITEMDEF 03105]
+//Sleeping Effect
+DEFNAME=i_fx_sleeping
+NAME=Sleeping Effect
+CATEGORY=Miscellaneous
+SUBSECTION=Weirdness
+DESCRIPTION=Sleeping Effect
+DUPELIST=03106,03107,03108,03109,0310A,0310B,0310C
+
+[ITEMDEF 03106]
+//Sleeping Effect
+DUPEITEM=03105
+
+[ITEMDEF 03107]
+//Sleeping Effect
+DUPEITEM=03105
+
+[ITEMDEF 03108]
+//Sleeping Effect
+DUPEITEM=03105
+
+[ITEMDEF 03109]
+//Sleeping Effect
+DUPEITEM=03105
+
+[ITEMDEF 0310A]
+//Sleeping Effect
+DUPEITEM=03105
+
+[ITEMDEF 0310B]
+//Sleeping Effect
+DUPEITEM=03105
+
+[ITEMDEF 0310C]
+//Sleeping Effect
+DUPEITEM=03105
+
+[ITEMDEF 0310D]
+//Roots Catch
+DEFNAME=i_fx_roots_catch
+NAME=Roots
+CATEGORY=Miscellaneous
+SUBSECTION=Weirdness
+DESCRIPTION=Roots Catch
+DUPELIST=0310E,0310F,03110,03111
+
+[ITEMDEF 0310E]
+//Roots Catch
+DUPEITEM=0310D
+
+[ITEMDEF 0310F]
+//Roots Catch
+DUPEITEM=0310D
+
+[ITEMDEF 03110]
+//Roots Catch
+DUPEITEM=0310D
+
+[ITEMDEF 03111]
+//Roots Catch
+DUPEITEM=0310D
+
+
 [ITEMDEF 03f0e]
 //  (really used as horse equipped)
 DEFNAME=i_mt_drake 
 TYPE=T_EQ_HORSE 
 LAYER=25 
 TDATA3=01ba 
+
+on=@create
+magic_horse
+
+on=@timer
+
+on=@equip
+mount_equip
+
+on=@unequip
+mount_unequip
+
+on=@userdclick
+remove
+lastnewchar.remove
 
 [ITEMDEF 03f0f]
 //   (really used as horse equipped)

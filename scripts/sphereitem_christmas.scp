@@ -1,0 +1,100 @@
+//****************************************************************************
+//SPHERE by : Menasoft ©1997-2000
+//www.sphereserver.com
+// All SPHERE script files and formats are copyright Menasoft & Partners.
+// This file may be freely edited for personal use, but may not be distributed
+// in whole or in part, in any format without express written permission from
+// Menasoft & Partners.  All donations and contributions
+// become the property of Menasoft & Partners.
+//****************************************************************************
+// FILE LAST UPDATED: Monday, Sept. 18, 2000
+//
+//VERSION=0.54
+
+
+
+[ITEMDEF 02328]
+DEFNAME=i_snowman
+
+CATEGORY=Christmas
+SUBSECTION=Christmas
+DESCRIPTION=Snowman
+FLIP=1
+DUPELIST=02329
+
+ON=@Create
+ATTR=010
+
+[ITEMDEF 02329]
+//Snowman
+DUPEITEM=02328
+
+
+[ITEMDEF 0232A]
+DEFNAME=i_gift_box
+NAME=Darek
+
+CATEGORY=Christmas
+SUBSECTION=Christmas
+DESCRIPTION=Gift Box
+FLIP=1
+DUPELIST=0232B
+
+[ITEMDEF 0232B]
+//Gift Box
+DUPEITEM=0232A
+
+
+[ITEMDEF 0232C]
+DEFNAME=i_wreath
+NAME=Vanocni venec
+
+CATEGORY=Christmas
+SUBSECTION=Christmas
+DESCRIPTION=Wreath
+FLIP=1
+DUPELIST=0232D
+
+[ITEMDEF 0232D]
+//Wreath
+DUPEITEM=0232C
+
+[ITEMDEF 0232E]
+DEFNAME=i_snowflake_1
+NAME=Snehova vlocka
+
+CATEGORY=Christmas
+SUBSECTION=Christmas
+DESCRIPTION=Snowflake 1
+
+[ITEMDEF 0232F]
+DEFNAME=i_snowflake_2
+NAME=Snehova vlocka
+
+CATEGORY=Christmas
+SUBSECTION=Christmas
+DESCRIPTION=Snowflake 2
+
+[ITEMDEF 02c87] 
+DEFNAME=i_teddybear
+NAME=Medvidek
+
+CATEGORY=Christmas
+SUBSECTION=Christmas
+DESCRIPTION=Medvidek
+
+[ITEMDEF 038C5]
+DEFNAME=i_houpaci_konik
+NAME=Houpaci konik
+
+CATEGORY=Christmas
+SUBSECTION=Christmas
+DESCRIPTION=Houpaci konik
+FLIP=1
+DUPELIST=038C6
+
+[ITEMDEF 038C6]
+//Houpaci konik
+DUPEITEM=038C5
+
+[EOF]

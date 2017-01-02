@@ -722,14 +722,14 @@ ITEM=i_ztracene_mesto_kluc_5
 //// PALADIN - BOSS DUNGU ////
 //////////////////////////////
 
-[CHARDEF c_ztracene_mesto_paladin]  //// paladin, hlavny boss, silny dmg, velke resisty + obranna aura
+[CHARDEF c_ztracene_mesto_paladin]  //// paladin, hlavny boss, silny dmg, obranna aura ( reaktiv a rege hp ), draci dech
 id=c_man
 NAME=Paladin
 ICON=i_pet_MAN
 CAN=MT_WALK|MT_run
 
 attack=130
-ARMOR=100
+ARMOR=150
 MOVERATE=5
 
 BLOODCOLOR=020
@@ -743,6 +743,8 @@ TEVENTS=e_npc_critic
 TEVENTS=e_npc_reactivearmor
 TEVENTS=e_ztracene_mesto_paladin_boss
 TEVENTS=e_npc_summoning
+TEVENTS=e_dragon_regeneration
+TEVENTS=e_fire_dragon               // draci dech
 
 CATEGORY=Dungy
 SUBSECTION=Ztracene mesto
@@ -760,11 +762,11 @@ STR=3300
 DEX=650
 INT=0
 
-maxhits={20500 21500}
+maxhits={25500 29500}
 maxstam={430 460}
 maxmana=0
 
-tag.experience=<eval {450.0 500.0}>
+tag.experience=<eval {1000.0 1250.0}>
 
 tag(npc_summoning_chance,100)  //10% chance
 tag(npc_summoning_time,60)
@@ -773,12 +775,20 @@ tag(npc_summoning_char[0],c_ztracene_mesto_guard_hala)
 tag(npc_summoning_char[1],c_ztracene_mesto_guard_hala)
 tag(npc_summoning_char[2],c_ztracene_mesto_guard_hala)
 
+tag(dragon_fire_chance,750)  	        // 75% - sance
+tag(dragon_fire_dmg,50)  		// dmg po pruchodu
+tag(dragon_fire_type,4)			// typ ohne - jedovaty
+tag(dragon_fire_delay,20)		// min prodleva na dalsi pouziti v sec
+
+tag.regeneration_hp=150                 // pocet hp ktere zregeneruje
+tag.regeneration_speed=5               // rychlost regenerace v sekundach
+
 tag.roundattack_damage=65,80 //dmg od - do
 tag.roundattack_time=10,15   //cas od - do
 tag.roundattack_chance=350    //35.0%
 
-tag.npc_critic_chance=350                    // 35% chance to trigger this event
-tag.npc_critic_dmg=40,55                     // dmg in between 20 and 30
+tag.npc_critic_chance=450                    // 45% chance to trigger this event
+tag.npc_critic_dmg=40,55
 
 tag.reactivearmor_damagePerc=65
 
@@ -796,14 +806,14 @@ tag(resist_para,1000)
 tag(resist_summon,850)
 tag(resist_bleed,450)
 
-tag(resist_sharp,150)
-tag(resist_slash,150)        //sekery
-tag(resist_pierce,250)
-tag(resist_blunt,50)
+tag(resist_sharp,550)
+tag(resist_slash,600)        //sekery
+tag(resist_pierce,500)
+tag(resist_blunt,300)
 
-tag(resist_fire,50)
-tag(resist_elect,-50)
-tag(resist_cold,50)
+tag(resist_fire,200)
+tag(resist_elect,450)
+tag(resist_cold,850)
 
 TACTICS=100.0
 WRESTLING=120.0
@@ -811,10 +821,13 @@ RESIST=250.0
 SpiritSpeak=200.0
 peacemaking=100.0
 provocation=100.0
-FENCING={90.0 100.0}
-SWORDSMANSHIP={90.0 100.0}
+FENCING={110.0 120.0}
+SWORDSMANSHIP={110.0 120.0}
 
 ITEMnewbie=i_monster_create
+ITEM=i_npc_mount
+tag.mount=i_mt_drake
+tag.mountcolor=0543 //0543(best) nebo 0470 nebo 0994 
 ITEMNEWBIE=i_hair_long
 ITEMNEWBIE=i_platemail_leggings
 Color=098B
