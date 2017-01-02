@@ -83,6 +83,31 @@ elseif (<safe def_charge_spellType[<var(spellNumber)>]>)
   endif
 endif
 
+[dialog d_magicCharge]
+0,24
+noclose=0
+nomove=0
+argo.gumppic(24,0,<hval def_charge_icon[<eval more1>]>)
+arg(i,0)
+while (i<more2)
+  argo.gumppic(17+<eval(arg(i)*20)>,42,0d2)
+  arg(i,#+1)
+endwhile
+
+[dialog d_magicCharge button]
+on=0
+return
+
+on=1 // reopen dialog -> used for reinitializing the charge number
+dialog(d_magicCharge)
+
+
+////////////////////////////////////////
+// PRIVATE
+// the calls below are file internals
+// and should not be called from outside
+////////////////////////////////////////
+
 // executed upon the spell source
 [function f_charge_apply_pvp]
 if (<safe def_charge_spellType[<var(spellNumber)>]>)
@@ -114,31 +139,6 @@ doswitch argv(0)
   return <tag(ra_magicCharge_mind)>
   return <tag(ra_magicCharge_energy)>
 enddo
-
-[dialog d_magicCharge]
-0,24
-noclose=0
-nomove=0
-argo.gumppic(24,0,<hval def_charge_icon[<eval more1>]>)
-arg(i,0)
-while (i<more2)
-  argo.gumppic(17+<eval(arg(i)*20)>,42,0d2)
-  arg(i,#+1)
-endwhile
-
-[dialog d_magicCharge button]
-on=0
-return
-
-on=1 // reopen dialog -> used for reinitializing the charge number
-dialog(d_magicCharge)
-
-
-////////////////////////////////////////
-// PRIVATE
-// the calls below are file internals
-// and should not be called from outside
-////////////////////////////////////////
 
 // executed upon charge item
 // argv(0) - charge type
