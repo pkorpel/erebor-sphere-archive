@@ -81,7 +81,7 @@ chargeItem.f_charge_increase(<argv(0)>)
 // argv(0) - charge type for which the value should be obtained
 [function f_charge_get]
 arg(chargeItem,<findid(i_magicCharge)>)
-if (!0<arg(chargeItem)>)
+if (!<arg(chargeItem)>)
   return 0
 endif
 return<chargeItem.more2>
@@ -103,7 +103,7 @@ elseif (var(spellnumber) == 30) // lightning
   endif
 elseif (<safe def_charge_spellType[<var(spellNumber)>]>)
   arg(chargeItem,<findid(i_magicCharge)>)
-  if (chargeItem)
+  if (<arg(chargeItem)>)
     if (<chargeItem.more1> != <def_charge_spellType[<var(spellNumber)>]>)
       chargeItem.f_charge_decrease(<def_charge_limit>)
       return
@@ -129,12 +129,15 @@ endif
 [function f_charge_formula]
 arg(coef,50) // percentage of the effect given for the first ability point
 arg(spellType,<eval def_charge_spellType[<var(spellNumber)>]>)
-arg(chargeEffect,<f_charge_get(<arg(spellType)>)>)
+arg(chargeEffect,<f_charge_get(<arg(spellType)>)>*<argv(0)>)
 arg(ability,<f_charge_getAbility(<arg(spellType)>)>)
+sysMessage("chargeEffect: <chargeEffect>, ability <ability>, <argv(0)>")
 if (<arg(ability)> < def_charge_abilityPoints)
   arg(chargeEffect,<eval (chargeEffect*((coef*def_charge_abilityPoints)+(ability*(100-coef))))/(100*def_charge_abilityPoints)>)
 endif
-var(spellpower,<eval ((<var(spellpower)>*(<eval 1000+(<arg(chargeEffect)>*<argv(0)>)>))/1000)>)
+sysMessage("chargeEffect: <chargeEffect>, spellpower <var(spellpower)>")
+var(spellpower,<eval ((<var(spellpower)>*(1000+<arg(chargeEffect)>))/1000)>)
+sysMessage("spellpower <var(spellpower)>")
 
 // executed upon player for which the ability should be retrieved
 [function f_charge_getAbility]
@@ -237,4 +240,6 @@ endif
 
 on=@afterswing
 on=@beforegeteffect
+on=@beforegetswing
+on=@aftergetswing
 [eof]
