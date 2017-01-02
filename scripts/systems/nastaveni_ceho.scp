@@ -2345,74 +2345,87 @@ n_magicCharge_default[2]	15
 n_magicCharge[3]    charge_dropDuration
 n_magicCharge_name[3]	"timer padani naboje (s)"
 n_magicCharge_default[3]	5
-n_magicCharge[4]
-n_magicCharge_name[4]
-n_magicCharge_default[4]
+n_magicCharge[4]    charge_baseEff
+n_magicCharge_name[4] "Zakladni ucinek efektu (%)"
+n_magicCharge_default[4] 50
 
-n_magicCharge[5]    charge_spellPow_pvp[5]
-n_magicCharge_name[5]  "Magic Arrow (PvP)"
-n_magicCharge_default[5]  100
-n_magicCharge[6]    charge_spellPow_pvm[5]
-n_magicCharge_name[6]  "Magic Arrow (PvM)"
-n_magicCharge_default[6]  200
+n_magicCharge[5]
+n_magicCharge_name[5]
+n_magicCharge_default[5]
 
-n_magicCharge[7]    charge_spellPow_pvp[18]
-n_magicCharge_name[7]  "Fireball (PvP)"
+n_magicCharge[6]
+n_magicCharge_name[6]
+n_magicCharge_default[6]
+
+n_magicCharge[7]    charge_spellPow_pvp[5]
+n_magicCharge_name[7]  "Magic Arrow (PvP)"
 n_magicCharge_default[7]  100
-n_magicCharge[8]    charge_spellPow_pvm[18]
-n_magicCharge_name[8]  "Fireball (PvM)"
+n_magicCharge[8]    charge_spellPow_pvm[5]
+n_magicCharge_name[8]  "Magic Arrow (PvM)"
 n_magicCharge_default[8]  200
 
-n_magicCharge[9]    charge_spellPow_pvp[43]
-n_magicCharge_name[9]  "Explosion (PvP)"
+n_magicCharge[9]    charge_spellPow_pvp[18]
+n_magicCharge_name[9]  "Fireball (PvP)"
 n_magicCharge_default[9]  100
-n_magicCharge[10]    charge_spellPow_pvm[43]
-n_magicCharge_name[10] "Explosion (PvM)"
-n_magicCharge_default[10] 200
+n_magicCharge[10]    charge_spellPow_pvm[18]
+n_magicCharge_name[10]  "Fireball (PvM)"
+n_magicCharge_default[10]  200
 
-n_magicCharge[11]    charge_spellPow_pvp[51]
-n_magicCharge_name[11] "Flamestrike (PvP)"
-n_magicCharge_default[11] 100
-n_magicCharge[12]    charge_spellPow_pvm[51]
-n_magicCharge_name[12] "Flamestrike (PvM)"
+n_magicCharge[11]    charge_spellPow_pvp[43]
+n_magicCharge_name[11]  "Explosion (PvP)"
+n_magicCharge_default[11]  100
+n_magicCharge[12]    charge_spellPow_pvm[43]
+n_magicCharge_name[12] "Explosion (PvM)"
 n_magicCharge_default[12] 200
 
-n_magicCharge[11]    charge_spellPow_pvp[55]
-n_magicCharge_name[11] "Meteor (PvP)"
-n_magicCharge_default[11] 100
-n_magicCharge[12]    charge_spellPow_pvm[55]
-n_magicCharge_name[12] "Meteor (PvM)"
-n_magicCharge_default[12] 200
+n_magicCharge[13]    charge_spellPow_pvp[51]
+n_magicCharge_name[13] "Flamestrike (PvP)"
+n_magicCharge_default[13] 100
+n_magicCharge[14]    charge_spellPow_pvm[51]
+n_magicCharge_name[14] "Flamestrike (PvM)"
+n_magicCharge_default[14] 200
 
-n_magicCharge[11]    charge_spellPow_pvp[]
-n_magicCharge_name[11] ""
-n_magicCharge_default[11] 100
-n_magicCharge[12]    charge_spellPow_pvm[]
-n_magicCharge_name[12] ""
-n_magicCharge_default[12] 200
+n_magicCharge[15]    charge_spellPow_pvp[55]
+n_magicCharge_name[15] "Meteor (PvP)"
+n_magicCharge_default[15] 100
+n_magicCharge[16]    charge_spellPow_pvm[55]
+n_magicCharge_name[16] "Meteor (PvM)"
+n_magicCharge_default[16] 200
 
-n_magicCharge[11]    charge_spellPow_pvp[]
-n_magicCharge_name[11] ""
-n_magicCharge_default[11] 100
-n_magicCharge[12]    charge_spellPow_pvm[]
-n_magicCharge_name[12] ""
-n_magicCharge_default[12] 200
+n_magicCharge[17]    charge_spellPow_pvp[12]
+n_magicCharge_name[17] "Harm (PvP)"
+n_magicCharge_default[17] 100
+n_magicCharge[18]    charge_spellPow_pvm[12]
+n_magicCharge_name[18] "Harm (PvM)"
+n_magicCharge_default[18] 200
 
-n_magicCharge[11]    charge_spellPow_pvp[]
-n_magicCharge_name[11] ""
-n_magicCharge_default[11] 100
-n_magicCharge[12]    charge_spellPow_pvm[]
-n_magicCharge_name[12] ""
-n_magicCharge_default[12] 200
+n_magicCharge[19]    charge_spellPow_pvp[37]
+n_magicCharge_name[19] "Mind Blast (PvP)"
+n_magicCharge_default[19] 100
+n_magicCharge[20]    charge_spellPow_pvm[37]
+n_magicCharge_name[20] "Mind Blast (PvM)"
+n_magicCharge_default[20] 200
 
-n_magicCharge[11]    charge_spellPow_pvp[]
-n_magicCharge_name[11] ""
-n_magicCharge_default[11] 100
-n_magicCharge[12]    charge_spellPow_pvm[]
-n_magicCharge_name[12] ""
-n_magicCharge_default[12] 200
+n_magicCharge[21]    charge_spellPow_pvp[30]
+n_magicCharge_name[21] "Lightning (PvP)"
+n_magicCharge_default[21] 100
+n_magicCharge[22]    charge_spellPow_pvm[30]
+n_magicCharge_name[22] "Lightning (PvM)"
+n_magicCharge_default[22] 200
 
+n_magicCharge[23]    charge_spellPow_pvp[42]
+n_magicCharge_name[23] "Energy Bolt (PvP)"
+n_magicCharge_default[23] 100
+n_magicCharge[24]    charge_spellPow_pvm[42]
+n_magicCharge_name[24] "Energy Bolt (PvM)"
+n_magicCharge_default[24] 200
 
+n_magicCharge[25]    charge_spellPow_pvp[49]
+n_magicCharge_name[25] "Chain Lightning (PvP)"
+n_magicCharge_default[25] 100
+n_magicCharge[26]    charge_spellPow_pvm[49]
+n_magicCharge_name[26] "Chain Lightning (PvM)"
+n_magicCharge_default[26] 200
 
 
 
