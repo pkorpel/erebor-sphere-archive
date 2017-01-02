@@ -215,7 +215,6 @@ else
       else
         findid(i_gold).amount=<eval (<eval <tag.experience>>*750)/1000> // standard drop na povrchu a ostrovech
       endif
-      f_christmasEvent_generateBulb  // christmas Event
       if (rescount(i_gold)>{30 120000})
         giveitem(i_mi_bag)
       endif

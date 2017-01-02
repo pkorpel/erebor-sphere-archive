@@ -21,7 +21,11 @@ timer=3600
 def_christmasQuest_MemoryStone.tag(Uriznutych_hlav,#+1)
 
 ON=@userCLICK
-src.sysmessage("Tlejici hlava zlateho prasete, asi nevydrzi dlouho cerstva.")
+if (topobj.isChar)
+  topobj.sysmessage("Hlava zlateho prasete se rozpadla na kousky tlejiciho masa.")
+endif
+remove
+//src.sysmessage("Tlejici hlava zlateho prasete, asi nevydrzi dlouho cerstva.")
 
 ON=@Timer
 def_christmasQuest_MemoryStone.tag(rozpadnutych_hlav,#+1)
@@ -72,7 +76,20 @@ remove
 src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
 
 ON=@userCLICK
-src.sysmessage("Opatrne, at to nerozbijes.")
+sfx(74)      // zvuk rozbiti :-)
+remove
+src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
+//src.sysmessage("Opatrne, at to nerozbijes.")
+
+ON=@Pickup_pack
+sfx(74)      // zvuk rozbiti :-)
+if (amount > 1)
+  src.sysmessage("Byly tak krehke, az se ti rozpadly pod rukama.")
+  remove
+else
+  src.sysmessage("Byla tak krehka, az se ti rozpadla pod rukama.")
+  remove
+endif
   
 ON=@Step
 if (src.isgm)
