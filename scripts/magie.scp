@@ -223,7 +223,7 @@ if ( (var(spellpower)>0) || <arg(hasSideEffect)> )
 endif
 
 if (src.isPlayer)
-  src.f_charge_spellCasted
+  src.charge_spellCasted
 endif
 return 1
 
