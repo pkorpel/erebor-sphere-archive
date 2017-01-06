@@ -15,6 +15,11 @@ def_charge_energy     3
 def_charge_icon[1]   08d1
 def_charge_icon[2]   08de
 def_charge_icon[3]   08e9
+
+def_charge_spellclass_icon[1] 0186E      // fire - red
+def_charge_spellclass_icon[2] 0186D      // mind - purple
+def_charge_spellclass_icon[3] 01870      // energy - yellow
+
 // fire
 def_charge_spellType[5]     def_charge_fire //magic arrow
 def_charge_spellType[18]     def_charge_fire //fireball
@@ -90,7 +95,7 @@ nomove=0
 argo.gumppic(24,0,<hval def_charge_icon[<eval more1>]>)
 arg(i,0)
 while (i<more2)
-  argo.gumppic(17+<eval(arg(i)*20)>,42,0d2)
+  argo.tilepichue(8+<eval(arg(i)*16)>,42,<hval def_charge_spellclass_icon[<eval more1>]>,0)
   arg(i,#+1)
 endwhile
 
