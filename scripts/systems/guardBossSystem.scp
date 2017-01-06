@@ -23,6 +23,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 
 [function f_guardBossSystem_onHitCheckGuards]
 if (memoryFindType(memory_ispawned))

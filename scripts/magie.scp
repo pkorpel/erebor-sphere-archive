@@ -213,18 +213,15 @@ if ( (var(spellpower)>0) || <arg(hasSideEffect)> )
   if (<argv(2)>)//kdyz je zdroj
     arg(storeact,<src.act>)
     src.act=<uid>
-    src.trigger(beforedoeffect)//ke zmene
+    src.trigger(@beforeDoEffect)//ke zmene
     src.act=<arg(storeact)>
   endif
-  trigger(@beforegeteffect)
+  trigger(@beforeGetEffect)
   if (var(spellpower)>0)
     dospell_final(<var(spellnumber)>,<var(spellpower)>)
   endif
 endif
-
-if (src.isPlayer)
-  src.charge_spellCasted
-endif
+src.trigger(@afterDoEffect)
 return 1
 
 [function f_spellResistedMsg]

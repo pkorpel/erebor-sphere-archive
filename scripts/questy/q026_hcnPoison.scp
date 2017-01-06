@@ -52,6 +52,7 @@ on=@DrinkingPotion
 on=@AfterGetSwing
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_q026_hcnCurePoison_check]
@@ -70,6 +71,7 @@ on=@AfterSwing
 on=@AfterGetSwing
 on=@BeforeGetSwing
 on=@BeforeDoEffect
+on=@AfterDoEffect
 on=@BeforeGetEffect
 
 

@@ -3953,6 +3953,7 @@ f_catchField_releaseNPC(<tag(catchedBy)>,<tag(catchedBy).findID(i_memory_catchFi
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [Function f_catchField_effect]
@@ -4057,6 +4058,7 @@ if (src.isfighting_melee) && !(src.isplayer) && (tag(ra_defstance))
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 //ENERGYSHIELD
@@ -4130,6 +4132,7 @@ endif
 //afterspelldamage -> combat.scp
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_energyshield]
@@ -4514,6 +4517,7 @@ elseif (<tag(pact_to)>)  //zomrel shaman ktory dal BP
   src.f_cancelpact_to
 endif
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect   
 on=@beforegetswing
 
@@ -4557,6 +4561,7 @@ elseif (<tag(pact_to)>)  //zomrel shaman ktory dal BP
   f_cancelpact_to
 endif
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect   
 on=@beforegetswing
 
@@ -4763,6 +4768,7 @@ on=@aftergetswing
 on=@beforegeteffect
 // je to v function damage_final, lebo tu to nefungovalo
 on=@beforedoeffect
+on=@afterDoEffect
 
 [itemdef i_voodooshield]
 id=i_memory
@@ -5129,6 +5135,7 @@ endif
 
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 
@@ -5519,6 +5526,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function stance]
@@ -5957,6 +5965,7 @@ if(<eval player.tag(ra_vylepseni_vydrz)> > 0)
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing

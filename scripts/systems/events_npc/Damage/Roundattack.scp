@@ -18,6 +18,7 @@ on=@afterswing
 //f_e_npc_roundattack
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 if (isSleeping)
   return 0
@@ -110,6 +111,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 if (isSleeping)
   return 0

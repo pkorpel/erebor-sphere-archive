@@ -23,6 +23,7 @@ AciDropItem.tag.acid_dmg=<tag.acid_dmg>
 AciDropItem.tag.acid_ppst=<tag.acid_ppst>
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
