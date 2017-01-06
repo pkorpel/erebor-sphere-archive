@@ -286,7 +286,7 @@ endif
 return <eval tag(strlev)+tag(dexlev)+tag(intellev)+tag(vitlev)>
 
 [function ratotal]
-return <eval tag(ra_manareg)+tag(ra_hitsreg)+tag(ra_stamreg)+tag(ra_weapdodge)+tag(ra_speldodge)+tag(ra_hitsleech)+tag(ra_manaleech)+tag(ra_stamleech)+tag(ra_backstab)+tag(ra_warcry)+tag(ra_rangearrow)+tag(ra_stuntattack)+tag(ra_stuntattack_prodleva)+tag(ra_stuntattack_ucinnost)+tag(ra_roundattack)+tag(ra_doubleswing)+tag(ra_woodoo)+tag(ra_woodoo_curse)+tag(ra_woodoo_obet)+tag(ra_archery)+tag(ra_crushing)+tag(ra_sharps)+tag(ra_twohand)+tag(ra_knockback)+tag(ra_throwing)+tag(ra_leap)+tag(ra_bleed_bolt)+tag(ra_controlnpc)+tag(ra_buffSteal)+tag(ra_catch)+tag(ra_vykryti)+tag(ra_defstance)+tag(ra_energyshield)+tag(ra_woodoo_pacts)+tag(ra_woodoo_pacts_boost)+tag(ra_woodoo_lifepact)+tag(ra_woodoo_lifepact_stats)+tag(ra_voodooshield)+tag(ra_selfres)+tag(ra_selfres_hp)+tag(ra_selfres_mana)+tag(ra_selfres_stamina)+tag(ra_vigourMining)+tag(ra_vigourLumber)+tag(ra_mystikDoubleswing)+tag(ra_thief_rebound)+tag(ra_thief_defstance)+tag(ra_utok_do_zad)+tag(ra_podriznuti)+tag(ra_uderstitem)+tag(ra_mana_narocnost)+tag(ra_ucinnost)+tag(ra_vydrz)+tag(ra_undeads_zivoty)+tag(ra_velky_vampyr_vylepseni)+tag(ra_lucistnik_vylepseni)+tag(ra_satan_vylepseni)+tag(ra_vylepseni_vydrz)+tag(ra_prokleti_ucinnost)+tag(ra_doba_prokleti)+tag(ra_mind_blast_silence)+tag(ra_mind_blast_silenced_time)> 
+return <eval tag(ra_manareg)+tag(ra_hitsreg)+tag(ra_stamreg)+tag(ra_weapdodge)+tag(ra_speldodge)+tag(ra_hitsleech)+tag(ra_manaleech)+tag(ra_stamleech)+tag(ra_backstab)+tag(ra_warcry)+tag(ra_rangearrow)+tag(ra_stuntattack)+tag(ra_stuntattack_prodleva)+tag(ra_stuntattack_ucinnost)+tag(ra_roundattack)+tag(ra_doubleswing)+tag(ra_woodoo)+tag(ra_woodoo_curse)+tag(ra_woodoo_obet)+tag(ra_archery)+tag(ra_crushing)+tag(ra_sharps)+tag(ra_twohand)+tag(ra_knockback)+tag(ra_throwing)+tag(ra_leap)+tag(ra_bleed_bolt)+tag(ra_controlnpc)+tag(ra_buffSteal)+tag(ra_catch)+tag(ra_vykryti)+tag(ra_defstance)+tag(ra_energyshield)+tag(ra_woodoo_pacts)+tag(ra_woodoo_pacts_boost)+tag(ra_woodoo_lifepact)+tag(ra_woodoo_lifepact_stats)+tag(ra_voodooshield)+tag(ra_selfres)+tag(ra_selfres_hp)+tag(ra_selfres_mana)+tag(ra_selfres_stamina)+tag(ra_vigourMining)+tag(ra_vigourLumber)+tag(ra_mystikDoubleswing)+tag(ra_thief_rebound)+tag(ra_thief_defstance)+tag(ra_utok_do_zad)+tag(ra_podriznuti)+tag(ra_uderstitem)+tag(ra_mana_narocnost)+tag(ra_ucinnost)+tag(ra_vydrz)+tag(ra_undeads_zivoty)+tag(ra_velky_vampyr_vylepseni)+tag(ra_lucistnik_vylepseni)+tag(ra_satan_vylepseni)+tag(ra_vylepseni_vydrz)+tag(ra_prokleti_ucinnost)+tag(ra_doba_prokleti)+tag(ra_mind_blast_silence)+tag(ra_mind_blast_silenced_time)>+tag(ra_magicCharge_fire)+tag(ra_magicCharge_mind)+tag(ra_magicCharge_energy)
 
 [Dialog d_explevel]
 argo.SetLocation=0,0
@@ -631,7 +631,7 @@ elseif (profession==class_ranger)
 elseif (profession==class_craft)
   arg(classOrigAbilCount,10)
 elseif (profession==class_mag)
-  arg(classOrigAbilCount,3)
+  arg(classOrigAbilCount,6)
 elseif (profession==class_necro)
   arg(classOrigAbilCount,11)
 endif
@@ -720,7 +720,10 @@ elseif (profession==class_craft)
 elseif (profession==class_mag)
   argo.f_rearAbility_addLine("Energy shield","<?eval tag(ra_energyshield)?>",29)
   argo.f_rearAbility_addLine("MindBlast Silence","<?eval tag(ra_mind_blast_silence)?>",66)
-  argo.f_rearAbility_addLine("Silence - ucinnost","<?eval tag(ra_mind_blast_silenced_time)?>",67)
+  argo.f_rearAbility_addLine("Silence - ucinnost","<?eval tag(ra_mind_blast_silenced_time)?>",68)
+  argo.f_rearAbility_addLine("Magicky Naboj - ohen","<?eval tag(ra_magicCharge_fire)?>",68)
+  argo.f_rearAbility_addLine("Magicky Naboj - mysl","<?eval tag(ra_magicCharge_mind)?>",69)
+  argo.f_rearAbility_addLine("Magicky Naboj - energie","<?eval tag(ra_magicCharge_energy)?>",70)
 elseif (profession==class_necro)
   argo.f_rearAbility_addLine("Energy shield","<?eval tag(ra_energyshield)?>",29)
   argo.f_rearAbility_addLine("Povolani mrtvych - mana ","<?eval tag(ra_mana_narocnost)?>",56)
@@ -994,6 +997,19 @@ on=67
 if (profession==class_mag)
   ra_add(mind_blast_silenced_time)
 endif
+on=68
+if (profession==class_mag)
+  ra_add(magicCharge_fire)
+endif
+on=69
+if (profession==class_mag)
+  ra_add(magicCharge_mind)
+endif
+on=70
+if (profession==class_mag)
+  ra_add(magicCharge_energy)
+endif
+
 on=100
 omraceni
 dialog d_rearability 
@@ -1029,9 +1045,9 @@ if ((strmatch("<args>","vigourLumber"))||(strmatch("<args>","vigourMining")))&&(
   else
     redMessage("Nejsi dost <sex(zkuseny,zkusena)>, aby jsi <sex(navysil,navysila)> tuto abilitu.")
   endif
-elseif (<eval tag(ra_<args>)><10) && !(strmatch("<args>","mystikDoubleswing")) && !(strmatch("<args>","doubleswing")) && !(strmatch("<args>","thief_rebound")) && !(strmatch("<args>","thief_defstance"))  && !(strmatch("<args>","woodoo_curse")) && !(strmatch("<args>","woodoo")) && !(strmatch("<args>","woodoo_obet")) && !(strmatch("<args>","woodoo_pacts")) && !(strmatch("<args>","woodoo_pacts_boost")) && !(strmatch("<args>","woodoo_lifepact")) && !(strmatch("<args>","utok_do_zad")) && !(strmatch("<args>","podriznuti")) && !(strmatch("<args>","uderstitem")) && !(strmatch("<args>","woodoo_lifepact_stats")) && !(strmatch("<args>","stuntattack_prodleva")) && !(strmatch("<args>","stuntattack_ucinnost")) && !(strmatch("<args>","mana_narocnost")) && !(strmatch("<args>","nesplasitelnost")) && !(strmatch("<args>","ucinnost")) && !(strmatch("<args>","vydrz")) && !(strmatch("<args>","undeads_zivoty")) && !(strmatch("<args>","velky_vampyr_vylepseni")) && !(strmatch("<args>","lucistnik_vylepseni")) && !(strmatch("<args>","satan_vylepseni")) && !(strmatch("<args>","vylepseni_vydrz")) && !(strmatch("<args>","prokleti_ucinnost")) && !(strmatch("<args>","doba_prokleti"))  && !(strmatch("<args>","mind_blast_silenced_time"))
+elseif (<eval tag(ra_<args>)><10) && !(strmatch("<args>","mystikDoubleswing")) && !(strmatch("<args>","doubleswing")) && !(strmatch("<args>","thief_rebound")) && !(strmatch("<args>","thief_defstance"))  && !(strmatch("<args>","woodoo_curse")) && !(strmatch("<args>","woodoo")) && !(strmatch("<args>","woodoo_obet")) && !(strmatch("<args>","woodoo_pacts")) && !(strmatch("<args>","woodoo_pacts_boost")) && !(strmatch("<args>","woodoo_lifepact")) && !(strmatch("<args>","utok_do_zad")) && !(strmatch("<args>","podriznuti")) && !(strmatch("<args>","uderstitem")) && !(strmatch("<args>","woodoo_lifepact_stats")) && !(strmatch("<args>","stuntattack_prodleva")) && !(strmatch("<args>","stuntattack_ucinnost")) && !(strmatch("<args>","mana_narocnost")) && !(strmatch("<args>","nesplasitelnost")) && !(strmatch("<args>","ucinnost")) && !(strmatch("<args>","vydrz")) && !(strmatch("<args>","undeads_zivoty")) && !(strmatch("<args>","velky_vampyr_vylepseni")) && !(strmatch("<args>","lucistnik_vylepseni")) && !(strmatch("<args>","satan_vylepseni")) && !(strmatch("<args>","vylepseni_vydrz")) && !(strmatch("<args>","prokleti_ucinnost")) && !(strmatch("<args>","doba_prokleti")) && !(strmatch("<args>","mind_blast_silenced_time")) && !(strmatch("<args>","magicCharge_fire")) && !(strmatch("<args>","magicCharge_mind")) && !(strmatch("<args>","magicCharge_energy"))
   tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-elseif (<eval tag(ra_<args>)> <20) && !(strmatch("<args>","energyshield")) && !(strmatch("<args>","bloodpact")) && !(strmatch("<args>","voodooshield")) && !(strmatch("<args>","mystikDoubleswing")) && !(strmatch("<args>","doubleswing")) && !(strmatch("<args>","thief_rebound")) && !(strmatch("<args>","thief_defstance")) && !(strmatch("<args>","woodoo_curse")) && !(strmatch("<args>","woodoo")) && !(strmatch("<args>","woodoo_obet"))  && !(strmatch("<args>","woodoo_pacts")) && !(strmatch("<args>","woodoo_pacts_boost")) && !(strmatch("<args>","woodoo_lifepact")) && !(strmatch("<args>","utok_do_zad")) && !(strmatch("<args>","podriznuti")) && !(strmatch("<args>","uderstitem")) && !(strmatch("<args>","woodoo_lifepact_stats")) && !(strmatch("<args>","stuntattack_prodleva")) && !(strmatch("<args>","stuntattack_ucinnost")) && !(strmatch("<args>","mana_narocnost")) && !(strmatch("<args>","nesplasitelnost")) && !(strmatch("<args>","ucinnost")) && !(strmatch("<args>","vydrz")) && !(strmatch("<args>","undeads_zivoty"))  && !(strmatch("<args>","velky_vampyr_vylepseni")) && !(strmatch("<args>","lucistnik_vylepseni")) && !(strmatch("<args>","satan_vylepseni")) && !(strmatch("<args>","vylepseni_vydrz")) && !(strmatch("<args>","prokleti_ucinnost")) && !(strmatch("<args>","doba_prokleti"))  && !(strmatch("<args>","mind_blast_silenced_time"))
+elseif (<eval tag(ra_<args>)> <20) && !(strmatch("<args>","energyshield")) && !(strmatch("<args>","bloodpact")) && !(strmatch("<args>","voodooshield")) && !(strmatch("<args>","mystikDoubleswing")) && !(strmatch("<args>","doubleswing")) && !(strmatch("<args>","thief_rebound")) && !(strmatch("<args>","thief_defstance")) && !(strmatch("<args>","woodoo_curse")) && !(strmatch("<args>","woodoo")) && !(strmatch("<args>","woodoo_obet"))  && !(strmatch("<args>","woodoo_pacts")) && !(strmatch("<args>","woodoo_pacts_boost")) && !(strmatch("<args>","woodoo_lifepact")) && !(strmatch("<args>","utok_do_zad")) && !(strmatch("<args>","podriznuti")) && !(strmatch("<args>","uderstitem")) && !(strmatch("<args>","woodoo_lifepact_stats")) && !(strmatch("<args>","stuntattack_prodleva")) && !(strmatch("<args>","stuntattack_ucinnost")) && !(strmatch("<args>","mana_narocnost")) && !(strmatch("<args>","nesplasitelnost")) && !(strmatch("<args>","ucinnost")) && !(strmatch("<args>","vydrz")) && !(strmatch("<args>","undeads_zivoty"))  && !(strmatch("<args>","velky_vampyr_vylepseni")) && !(strmatch("<args>","lucistnik_vylepseni")) && !(strmatch("<args>","satan_vylepseni")) && !(strmatch("<args>","vylepseni_vydrz")) && !(strmatch("<args>","prokleti_ucinnost")) && !(strmatch("<args>","doba_prokleti"))  && !(strmatch("<args>","mind_blast_silenced_time")) && !(strmatch("<args>","magicCharge_fire")) && !(strmatch("<args>","magicCharge_mind")) && !(strmatch("<args>","magicCharge_energy"))
   if (strmatch("<args>","manareg"))||(strmatch("<args>","hitsreg"))||(strmatch("<args>","stamreg"))||(strmatch("<args>","hitsleech"))||(strmatch("<args>","stamleech"))||(strmatch("<args>","manaleech"))||(strmatch("<args>","backstab"))||(strmatch("<args>","doubleswing"))||(strmatch("<args>","archery"))||(strmatch("<args>","crushing"))||(strmatch("<args>","sharps"))||(strmatch("<args>","twohand"))||(strmatch("<args>","speldodge"))||(strmatch("<args>","weapdodge"))||(strmatch("<args>","bleed_bolt"))||(strmatch("<args>","buffSteal"))||(strmatch("<args>","catch"))||(strmatch("<args>","vykryti"))||(strmatch("<args>","woodoo_lifepact"))||(strmatch("<args>","selfres"))
     tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
   else
@@ -1267,6 +1283,12 @@ elseif (strmatch("<args>","nesplasitelnost")) || (strmatch("<args>","ucinnost"))
   endif
 elseif (strmatch("<args>","mind_blast_silenced_time"))
   if (tag(level)>74)&&(<eval tag(ra_<args>)> <10)
+    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
+  else
+    redMessage("Vic bodu do teto ability nyni pridat nelze.")
+  endif  
+elseif (strmatch("<args>","magicCharge_fire")) || (strmatch("<args>","magicCharge_mind")) || (strmatch("<args>","magicCharge_energy"))
+  if (tag(level)>60)&&(<eval tag(ra_<args>)> < nastaveni_charge_abilityPoints)
     tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
   else
     redMessage("Vic bodu do teto ability nyni pridat nelze.")
@@ -1520,6 +1542,9 @@ tag.remove(ra_prokleti_ucinnost)
 tag.remove(ra_doba_prokleti)
 tag.remove(ra_mind_blast_silence)
 tag.remove(ra_mind_blast_silenced_time)
+tag.remove(ra_magicCharge_fire)
+tag.remove(ra_ra_magicCharge_mind)
+tag.remove(ra_ra_magicCharge_energy)
 
 
 [function vit]

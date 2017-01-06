@@ -1,0 +1,214 @@
+////////////////////////////////////////////////////////////
+//               M A G I C    C H A R G E                 //
+//                    (c) Yavanna                         //
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////
+// PUBLIC INTERFACE
+////////////////////////////////////////
+
+[defnames def_magicCharge]
+def_charge_fire       1
+def_charge_mind       2
+def_charge_energy     3
+
+def_charge_icon[1]   08d1
+def_charge_icon[2]   08de
+def_charge_icon[3]   08e9
+// fire
+def_charge_spellType[5]     def_charge_fire //magic arrow
+def_charge_spellType[18]     def_charge_fire //fireball
+def_charge_spellType[43]     def_charge_fire //explosion
+def_charge_spellType[51]     def_charge_fire //flamestrike
+def_charge_spellType[55]     def_charge_fire //meteor
+// mind
+def_charge_spellType[12]     def_charge_mind //harm
+def_charge_spellType[37]     def_charge_mind // mind blast
+// energy
+def_charge_spellType[30]     def_charge_energy //lightning
+def_charge_spellType[42]     def_charge_energy //energy bolt
+def_charge_spellType[49]     def_charge_energy //chain lightning
+
+// executed upon player that's being charged
+// argv(0) - charge type
+// argv(1) - spell target - used to control, whether the charge should be incremented
+[function f_charge_add] 
+if (argv(1).isPlayer)
+  if (0<argv(1).tag(realm)> == 0<tag(realm)>)
+    return // do not increment charge if the target is player from the same realm
+  endif
+elseif (argv(1).isPet)
+  return // do not increment charge if the target is a pet (mount, summon, or other)
+endif
+arg(chargeItem,<findid(i_magicCharge)>)
+if (!strlen(<arg(chargeItem)>))
+  newequip(i_magicCharge)
+  arg(chargeItem,<lastnew>)
+endif
+chargeItem.f_charge_increase(<argv(0)>)
+
+// executed upon player for which the charge value should be obtained
+// argv(0) - charge type for which the value should be obtained
+[function f_charge_get]
+arg(chargeItem,<findid(i_magicCharge)>)
+if (!<arg(chargeItem)>)
+  return 0
+endif
+return<chargeItem.more2>
+
+// if a spell is casted with defined type and spell number,
+// this function should be called to handle changes in charge
+[function f_charge_spellCasted]
+if (var(spellnumber) == 18) // fireball
+  if (0<src.tag(ra_magicCharge_fire)>)
+    src.f_charge_add(<def_charge_fire>,<src.act>)
+  endif
+elseif (var(spellnumber) == 12) // harm
+  if (0<src.tag(ra_magicCharge_mind)>)
+    src.f_charge_add(<def_charge_mind>,<src.act>)
+  endif
+elseif (var(spellnumber) == 30) // lightning
+  if (0<src.tag(ra_magicCharge_energy)>)
+    src.f_charge_add(<def_charge_energy>,<src.act>)
+  endif
+elseif (<safe def_charge_spellType[<var(spellNumber)>]>)
+  arg(chargeItem,<findid(i_magicCharge)>)
+  if (<arg(chargeItem)>)
+    if (<chargeItem.more1> != <def_charge_spellType[<var(spellNumber)>]>)
+      chargeItem.f_charge_decrease(<nastaveni_charge_limit>)
+      return
+    elseif (act.isPlayer) // always reduce charge if a non-charging, evil spell is casted upon another player
+      chargeItem.f_charge_decrease(1)
+    endif
+  endif
+endif
+
+[dialog d_magicCharge]
+0,24
+noclose=0
+nomove=0
+argo.gumppic(24,0,<hval def_charge_icon[<eval more1>]>)
+arg(i,0)
+while (i<more2)
+  argo.gumppic(17+<eval(arg(i)*20)>,42,0d2)
+  arg(i,#+1)
+endwhile
+
+[dialog d_magicCharge button]
+on=0
+return
+
+on=1 // reopen dialog -> used for reinitializing the charge number
+dialog(d_magicCharge)
+
+
+////////////////////////////////////////
+// PRIVATE
+// the calls below are file internals
+// and should not be called from outside
+////////////////////////////////////////
+
+// executed upon the spell source
+[function f_charge_apply_pvp]
+if (<safe def_charge_spellType[<var(spellNumber)>]>)
+  f_charge_formula(<nastaveni_charge_spellPow_pvp[<var(spellNumber)>]>)
+endif
+
+// executed upon the spell source
+[function f_charge_apply_pvm]
+if (<safe def_charge_spellType[<var(spellNumber)>]>)
+  f_charge_formula(<nastaveni_charge_spellPow_pvm[<var(spellNumber)>]>)
+endif
+
+// argv(0) - the charge dmg effect 
+[function f_charge_formula]
+arg(coef,50) // percentage of the effect given for the first ability point
+arg(spellType,<eval def_charge_spellType[<var(spellNumber)>]>)
+arg(chargeEffect,<f_charge_get(<arg(spellType)>)>*<argv(0)>)
+arg(ability,<f_charge_getAbility(<arg(spellType)>)>)
+if (<arg(ability)> < nastaveni_charge_abilityPoints)
+  arg(chargeEffect,<eval (chargeEffect*((nastaveni_charge_baseEff*nastaveni_charge_abilityPoints)+(ability*(100-nastaveni_charge_baseEff))))/(100*nastaveni_charge_abilityPoints)>)
+endif
+var(spellpower,<eval ((<var(spellpower)>*(1000+<arg(chargeEffect)>))/1000)>)
+
+// executed upon player for which the ability should be retrieved
+[function f_charge_getAbility]
+doswitch argv(0)
+  return 0 // no ability
+  return <tag(ra_magicCharge_fire)>
+  return <tag(ra_magicCharge_mind)>
+  return <tag(ra_magicCharge_energy)>
+enddo
+
+// executed upon charge item
+// argv(0) - charge type
+[function f_charge_increase]
+timer=<nastaveni_charge_duration>
+if (more1 != <argv(0)>)
+  arg(origMore,<more1>)
+  more1=<argv(0)>
+  more2=1
+  if (arg(origMore) == 0) // first increase (the dialog was not shown yet)
+    dialog(d_magicCharge)
+  else
+    cont.dialogclose(d_magicCharge,1)
+  endif
+  return
+endif
+if (more2 >= nastaveni_charge_limit)
+  return
+endif
+more2=<eval <more2>+1>
+cont.dialogclose(d_magicCharge,1)
+
+// executed upon charge item
+// argv(0) - charges to remove
+[function f_charge_decrease]
+if (more2 <= <argv(0)>)
+  more1=0
+  more2=0 // decrease these two values manually back to initial state, which marks the charge for removal
+  timer=1
+  cont.dialogclose(d_magicCharge,0)
+  return
+endif
+more2=<eval <more2>-1>
+timer=<nastaveni_charge_dropDuration>
+cont.dialogclose(d_magicCharge,1)
+
+[itemdef i_magicCharge]
+id=i_memory
+type=t_eq_script
+name=Magic Charge
+
+// more1 - charge TYPE
+// more2 - charge VALUE (the number of charged points)
+
+on=@equip
+cont.events +e_magicCharge
+
+on=@unequip
+cont.events -e_magicCharge
+
+on=@timer
+if (more1 == 0) //marked for removal
+  remove
+  return
+endif
+f_charge_decrease(1)
+return 1
+
+[events e_magicCharge]
+on=@beforeDoEffect
+if (act.npc)
+  f_charge_apply_pvm
+else
+  f_charge_apply_pvp
+endif
+
+on=@afterSwing
+on=@beforeGetEffect
+on=@beforeGetSwing
+on=@afterGetSwing
+on=@drinkingPotion
+on=@created
+[eof]
