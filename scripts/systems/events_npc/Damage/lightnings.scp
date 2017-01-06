@@ -24,6 +24,7 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -105,6 +106,7 @@ events=-e_lightning_damage
 on=@Created
 on=@DrinkingPotion
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing

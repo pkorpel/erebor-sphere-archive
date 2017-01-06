@@ -71,31 +71,22 @@ if (<arg(chargeItem)>)
   chargeItem.f_charge_decrease(<nastaveni_charge_limit>)
 endif
 
-// if a spell is casted with defined type and spell number,
-// this function should be called to handle changes in charge
-[function charge_spellCasted]
+[function charge_checkCastedCharger]
 if (var(spellnumber) == 18) // fireball
-  if (0<src.tag(ra_magicCharge_fire)>)
-    src.charge_add(<def_charge_fire>,<src.act>)
+  if (0<tag(ra_magicCharge_fire)>)
+    charge_add(<def_charge_fire>,<act>)
   endif
+  return
 elseif (var(spellnumber) == 12) // harm
-  if (0<src.tag(ra_magicCharge_mind)>)
-    src.charge_add(<def_charge_mind>,<src.act>)
+  if (0<tag(ra_magicCharge_mind)>)
+    charge_add(<def_charge_mind>,<act>)
   endif
+  return
 elseif (var(spellnumber) == 30) // lightning
-  if (0<src.tag(ra_magicCharge_energy)>)
-    src.charge_add(<def_charge_energy>,<src.act>)
+  if (0<tag(ra_magicCharge_energy)>)
+    charge_add(<def_charge_energy>,<act>)
   endif
-elseif (<safe def_charge_spellType[<var(spellNumber)>]>)
-  arg(chargeItem,<findid(i_magicCharge)>)
-  if (<arg(chargeItem)>)
-    if (<chargeItem.more1> != <def_charge_spellType[<var(spellNumber)>]>)
-      chargeItem.f_charge_decrease(<nastaveni_charge_limit>)
-      return
-    elseif (act.isPlayer) // always reduce charge if a non-charging, evil spell is casted upon another player
-      chargeItem.f_charge_decrease(1)
-    endif
-  endif
+  return
 endif
 
 [dialog d_magicCharge]
@@ -201,7 +192,11 @@ f_charge_decrease(1)
 return 1
 
 [events e_magicCharge]
+on=@spellCast
+var(chargeEffect,0)
+
 on=@beforeDoEffect
+var(chargeEffect,#+1)
 if (!<safe def_charge_spellType[<var(spellNumber)>]>)
   return
 endif
@@ -209,6 +204,24 @@ if (act.npc)
   f_charge_formula(<nastaveni_charge_spellPow_pvm[<var(spellNumber)>]>)
 else
   f_charge_formula(<nastaveni_charge_spellPow_pvp[<var(spellNumber)>]>)
+endif
+return
+
+on=@afterDoEffect
+// only execute ONCE (optimization for explosions, meteors, and other multitarget spell)
+// only execute for spells that have charge effect defined
+if (0<var(chargeEffect)> != 1) || (!<safe def_charge_spellType[<var(spellNumber)>]>)
+  return
+endif
+arg(chargeItem,<findid(i_magicCharge)>) // this event exists i.e. the chargeItem exists - add test if necessary, but it shouldn't happen
+if (<chargeItem.more1> != <def_charge_spellType[<var(spellNumber)>]>) // drop full charge if a harmufl spell of a different type is casted
+  chargeItem.f_charge_decrease(<nastaveni_charge_limit>)
+elseif (<def_charge_spellType[<var(spellNumber)>]> == <def_charge_fire>) // always drop charge for the fire line, except for the charging spell above
+  if (var(spellnumber) != 18) // fireball
+    chargeItem.f_charge_decrease(<nastaveni_charge_limit>) // always drop full charge for meteor
+  endif
+elseif (act.isPlayer) // always reduce charge if a non-charging, evil spell is casted upon another player
+  chargeItem.f_charge_decrease(1)
 endif
 
 on=@afterSwing

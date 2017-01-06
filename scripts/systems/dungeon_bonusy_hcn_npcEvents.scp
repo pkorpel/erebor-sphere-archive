@@ -33,6 +33,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 
 on=@aftergetswing
@@ -223,6 +224,7 @@ if (<var(ubrano)>)
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -273,6 +275,7 @@ if (act.isPlayer)
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -484,6 +487,7 @@ on=@DrinkingPotion
 on=@AfterSwing
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 var(ubrano,0)
 

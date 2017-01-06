@@ -234,6 +234,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 
 [function f_eqDragon_brain]
 if !(rescount(i_mem_dragon_brain))

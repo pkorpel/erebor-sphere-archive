@@ -19,6 +19,7 @@ endif
 e_f_npc_curse
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function e_f_npc_curse]

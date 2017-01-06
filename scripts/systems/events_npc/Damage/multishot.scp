@@ -18,6 +18,7 @@ endif
 f_e_npc_multishot
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function f_e_npc_multishot]
