@@ -287,6 +287,7 @@ damagecust(<promilerange(<argv(0)>,<s_fireball.effect>)>,dam_magic|dam_fire,<ret
 [function f_effect_a_meteor_swarm]
 EFFECT(3,i_fx_explode,6,15,1)
 damagecust(<promilerange(<argv(0)>,<s_meteor_swarm.effect>)>,dam_magic|dam_fire,<return_nth(3,<s_meteor_swarm.effect>)>)
+charge_decrease(<nastaveni_charge_limit>)
 
 [function f_effect_a_energy_bolt]
 damagecust(<promilerange(<argv(0)>,<s_energy_bolt.effect>)>,dam_magic|dam_lightning,<return_nth(3,<s_energy_bolt.effect>)>)
@@ -294,7 +295,6 @@ damagecust(<promilerange(<argv(0)>,<s_energy_bolt.effect>)>,dam_magic|dam_lightn
 [function f_effect_a_explosion]
 EFFECT(3,i_fx_explode,6,30,1)
 damagecust(<promilerange(<argv(0)>,<s_explosion.effect>)>,dam_magic|dam_fire,<return_nth(3,<s_explosion.effect>)>)
-charge_decrease(<nastaveni_charge_limit>)
 
 [function f_effect_a_fire_bolt]
 damagecust(<promilerange(<argv(0)>,<s_fire_bolt.effect>)>,dam_magic|dam_fire,<return_nth(3,<s_fire_bolt.effect>)>)
