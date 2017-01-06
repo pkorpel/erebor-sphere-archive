@@ -71,6 +71,24 @@ if (<arg(chargeItem)>)
   chargeItem.f_charge_decrease(<nastaveni_charge_limit>)
 endif
 
+[function charge_checkCastedCharger]
+if (var(spellnumber) == 18) // fireball
+  if (0<tag(ra_magicCharge_fire)>)
+    charge_add(<def_charge_fire>,<act>)
+  endif
+  return
+elseif (var(spellnumber) == 12) // harm
+  if (0<tag(ra_magicCharge_mind)>)
+    charge_add(<def_charge_mind>,<act>)
+  endif
+  return
+elseif (var(spellnumber) == 30) // lightning
+  if (0<tag(ra_magicCharge_energy)>)
+    charge_add(<def_charge_energy>,<act>)
+  endif
+  return
+endif
+
 [dialog d_magicCharge]
 10,24
 noclose=0
@@ -195,30 +213,15 @@ on=@afterDoEffect
 if (0<var(chargeEffect)> != 1) || (!<safe def_charge_spellType[<var(spellNumber)>]>)
   return
 endif
-if (var(spellnumber) == 18) // fireball
-  if (0<tag(ra_magicCharge_fire)>)
-    charge_add(<def_charge_fire>,<act>)
-  endif
-  return
-elseif (var(spellnumber) == 12) // harm
-  if (0<tag(ra_magicCharge_mind)>)
-    charge_add(<def_charge_mind>,<act>)
-  endif
-  return
-elseif (var(spellnumber) == 30) // lightning
-  if (0<tag(ra_magicCharge_energy)>)
-    charge_add(<def_charge_energy>,<act>)
-  endif
-  return
-else
-  arg(chargeItem,<findid(i_magicCharge)>) // this event exists i.e. the chargeItem exists - add test if necessary, but it shouldn't happen
-  if (<chargeItem.more1> != <def_charge_spellType[<var(spellNumber)>]>) // drop full charge if a harmufl spell of a different type is casted
-    chargeItem.f_charge_decrease(<nastaveni_charge_limit>)
-  elseif (<def_charge_spellType[<var(spellNumber)>]> == <def_charge_fire>) // always drop charge for the fire line, except for the charging spell above
+arg(chargeItem,<findid(i_magicCharge)>) // this event exists i.e. the chargeItem exists - add test if necessary, but it shouldn't happen
+if (<chargeItem.more1> != <def_charge_spellType[<var(spellNumber)>]>) // drop full charge if a harmufl spell of a different type is casted
+  chargeItem.f_charge_decrease(<nastaveni_charge_limit>)
+elseif (<def_charge_spellType[<var(spellNumber)>]> == <def_charge_fire>) // always drop charge for the fire line, except for the charging spell above
+  if (var(spellnumber) != 18) // fireball
     chargeItem.f_charge_decrease(<nastaveni_charge_limit>) // always drop full charge for meteor
-  elseif (act.isPlayer) // always reduce charge if a non-charging, evil spell is casted upon another player
-    chargeItem.f_charge_decrease(1)
   endif
+elseif (act.isPlayer) // always reduce charge if a non-charging, evil spell is casted upon another player
+  chargeItem.f_charge_decrease(1)
 endif
 
 on=@afterSwing
