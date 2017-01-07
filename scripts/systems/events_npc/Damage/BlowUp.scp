@@ -30,6 +30,7 @@ else
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@HitTry
 if (act.isPlayer)         // pokousim se prastit hrace = jsem u nej = bouchnu

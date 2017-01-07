@@ -10,6 +10,7 @@ elseif (act.mana<10)
 endif
 
 on=@beforedoeffect 
+on=@afterDoEffect
 on=@beforegeteffect 
 on=@beforegetswing
 on=@aftergetswing
@@ -26,6 +27,7 @@ elseif (act.mana<12)
   act.mana=0
 endif
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -50,6 +52,7 @@ else
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -78,6 +81,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_fire_column_damage]
@@ -242,6 +246,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_src_changer_parakrik]
@@ -309,6 +314,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_src_changer_odinvis]
@@ -442,6 +448,7 @@ endif
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [itemdef i_npc_str_boost]
 id=i_memory
@@ -483,6 +490,7 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 
 [itemdef i_npc_dex_boost]
@@ -643,6 +651,7 @@ if (rand(5)==1)
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -692,6 +701,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_menavec]
@@ -729,6 +739,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_menavec_powerful]
@@ -766,6 +777,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_morfovatko]
@@ -823,6 +835,7 @@ return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -927,6 +940,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
@@ -990,6 +1004,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 on=@death
@@ -1015,6 +1030,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_phoenix]
@@ -1035,6 +1051,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [ITEMDEF i_socha_ps]
@@ -1143,6 +1160,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_strach_lord2]
@@ -1200,6 +1218,7 @@ return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_spawnovac_povlnach_prime] 
@@ -1404,6 +1423,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_lowerdmg]
@@ -1415,6 +1435,7 @@ var(ubrano,<eval (var(ubrano)/3)>)
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_vampire_lord]
@@ -1441,6 +1462,7 @@ if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 if ((isSleeping) || (isSilenced))
   return 0
@@ -1483,6 +1505,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_curse_drainhps]
@@ -1547,6 +1570,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_spellparalyze]
@@ -1561,6 +1585,7 @@ if ((act.isplayer) && (rand(6)==1))
   say("Heru Ruth Dol Kel")
 endif
 
+on=@afterDoEffect
 on=@beforegetswing
 on=@beforegeteffect
 
@@ -1580,6 +1605,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_npc_manashield]
@@ -1614,6 +1640,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_npc_regeneration]
@@ -1636,6 +1663,7 @@ if (!(safe.findid(i_npc_regeneration)) && ((<hits>)<(<maxhits>/2)) && !(tag(dont
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 
 [itemdef i_npc_regeneration]
 id=i_memory
@@ -1751,11 +1779,11 @@ if !(findid(i_statue_Blessing))
 endif
 
 on=@beforedoeffect
-
 if !(act.isplayer)
  var(ubrano,#*2)
 endif
 
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_strecha_kill]  
@@ -1791,6 +1819,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_phoenix_25]
@@ -1811,6 +1840,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [eof]

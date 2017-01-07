@@ -7,6 +7,7 @@ if (act.npc) && (<eval act.tag(resist_magic)> < 999)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -65,6 +66,7 @@ on=@spelleffect
 on=@beforegeteffect
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -366,6 +368,10 @@ on=@beforedoeffect
 smsg "@Beforedoeffect act:<act.name> numb:<?spellnumber?> pow:<?spellpower?>"
 return 0
 
+on=@afterDoEffect
+smsg "@AfterDoEffect act:<act.name> numb:<?spellnumber?> pow:<?spellpower?>"
+return 0
+
 //deprecated on=@aftergetspelldamage
 //  smsg "@Aftergetspelldamage ubrano:<?ubrano?>"
 //  return 0
@@ -431,6 +437,7 @@ on=@aftergetswing
 on=@spelleffect
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@DrinkingPotion
 
 on=@afterswing
@@ -514,6 +521,7 @@ on=@aftergetswing
 on=@spelleffect
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@DrinkingPotion
 
 on=@afterswing
@@ -603,6 +611,7 @@ on=@aftergetswing
 on=@spelleffect
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@DrinkingPotion
 
 on=@afterswing
@@ -884,6 +893,7 @@ return 0
 
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 //deprecated on=@aftergetspelldamage
 on=@beforegeteffect
 on=@beforegetswing
@@ -927,6 +937,7 @@ on=@beforegeteffect
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 
 [function noclick_release]
@@ -995,6 +1006,7 @@ on=@beforegeteffect
 on=@created
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@DrinkingPotion
 on=@afterswing
@@ -1964,6 +1976,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@miningact
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 
 
@@ -2581,6 +2594,7 @@ on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@afterDoEffect
 
 [EVENTS e_ranger]
 on=@itemequip
@@ -2652,6 +2666,7 @@ on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@afterDoEffect
 
 [EVENTS e_craft]
 on=@itemequip
@@ -2711,6 +2726,7 @@ on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [EVENTS e_war]
@@ -2783,6 +2799,7 @@ f_shieldDodge_afterGetSwing
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [EVENTS e_thief]
 on=@DrinkingPotion
@@ -2921,6 +2938,7 @@ f_shieldDodge_afterGetSwing
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 //deprecated on=@aftergetspelldamage
 
 [function f_thief_getfreezebyshield]
@@ -3060,6 +3078,7 @@ on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [EVENTS e_mystik]
@@ -3124,6 +3143,7 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@DrinkingPotion
 on=@afterswing
 
@@ -3267,6 +3287,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [EOF]

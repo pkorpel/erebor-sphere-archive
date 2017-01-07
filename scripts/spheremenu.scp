@@ -298,6 +298,7 @@ on=@beforegetswing
 on=@spelleffect
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
