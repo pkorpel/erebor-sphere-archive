@@ -1,0 +1,44 @@
+/////  M A G I C   S H I E L D  /////
+
+// tags to edit behavior:
+// tag.npc_magicShield_physical=90 // monster gains 90% physical DMG resistence while shielded
+[events e_npc_magicShield_physical]
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@beforedoeffect 
+on=@beforegeteffect
+on=@beforegetswing
+on=@aftergetswing
+if (0<tag(npc_magicShield_physical)>)
+  arg(shieldForce,<eval randombetween(<tag(npc_magicShield_physical)>)>)
+else
+  arg(shieldForce,90)
+endif
+if (!findid(i_silencer))
+  var(ubrano,#-((#*arg(shieldForce))/100))
+  src.sysMessage("Magicky stit cile pohltil cast ucinku tveho utoku.")
+endif
+
+// tags to edit behavior:
+// tag.npc_magicShield_magical=90 // monster gains 90% magical DMG resistence while shielded
+[events e_npc_magicShield_magical]
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@beforedoeffect 
+on=@beforegeteffect
+if (0<tag(npc_magicShield_physical)>)
+  arg(shieldForce,<eval randombetween(<tag(npc_magicShield_physical)>)>)
+else
+  arg(shieldForce,90)
+endif
+if (!findid(i_silencer))
+  var(spellpower,#-((#*arg(shieldForce))/100))
+  src.sysMessage("Magicky stit cile pohltil cast ucinku tveho utoku.")
+endif
+
+on=@beforegetswing
+on=@aftergetswing
+
+[eof]
