@@ -203,6 +203,7 @@ TEVENTS=e_summoneater          //smaze summona, co zasahne
 //TEVENTS=e_excelent
 TEVENTS=e_npc_critic              //sance na kritik melee
 TEVENTS=e_npc_curse_mana            //mass sani many
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -223,6 +224,7 @@ maxstam={600 700}
 maxmana=0
 
 tag.experience=<eval {750.0 800.0}>
+tag.npc_magicshield=35
 
 tag.npc_critic_chance=250           //25% chance
 tag.npc_critic_dmg=20,25            //dmg in between
@@ -254,6 +256,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,400)
 tag(resist_elect,400)
 tag(resist_cold,200)
+tag(resist_silence,600)
 
 //tag(resist_phys,0)
 //tag(resist_magic,0)
@@ -1198,6 +1201,7 @@ TEVENTS=e_npc_curse_mana            //mass sani many
 TEVENTS=e_npc_stam_dmg              //mlacenim saje staminu
 TEVENTS=e_npc_multishot             //vsechny viditelne zrani o dmg
 TEVENTS=e_npc_stun
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Dungy
 SUBSECTION=Ledova jeskyne
@@ -1213,11 +1217,12 @@ STR=5000
 DEX=250
 INT=0
 
-maxhits={10000 1100}
+maxhits={1000 1100}
 maxstam={180 210}
 maxmana=0
 
 tag.experience=<eval {330.0 350.0}>
+tag.npc_magicshield=90
 
 tag.npc_stun_time=10              //1 seconds of stun
 Tag.npc_stun_chance=300           //30%, defaultne 20% 
@@ -1256,6 +1261,7 @@ tag(resist_blunt,-500)
 tag(resist_fire,-500)
 tag(resist_elect,200)
 tag(resist_cold,800)
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,snow)

@@ -26,6 +26,7 @@ TEVENTS=e_npc_knockback
 TEVENTS=e_npc_stun
 TEVENTS=e_golem
 TEVENTS=e_npc_summonKiller
+TEVENTS=e_npc_magicshield
    
 CATEGORY=Monsters
 SUBSECTION=Golems
@@ -48,6 +49,7 @@ tag.experience=<eval {210.0 230.0}>
 
 tag.npc_stun_time=35
 tag.npc_stun_chance=400
+tag.npc_magicshield=40
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
@@ -73,6 +75,7 @@ tag(resist_blunt,150)
 tag(resist_fire,940)
 tag(resist_elect,850)
 tag(resist_cold,900)
+tag(resist_silence,400)
 
 PARRYING={40.0 50.0}
 WRESTLING={88.0 95.0}
@@ -867,7 +870,7 @@ CAN=MT_WALK|mt_run
 
 attack=190
 ARMOR=200
-MOVERATE=3
+MOVERATE=4
 
 BLOODCOLOR=colors_gray
 
@@ -879,6 +882,7 @@ TEVENTS=e_summoneater                         //smaze summona, co zasahne
 TEVENTS=e_pushall
 TEVENTS=e_parakrik
 TEVENTS=e_npc_multishot                        //vsechny viditelne zrani o dmg
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Golems
@@ -910,6 +914,7 @@ tag(e_pushall_time,10)
 tag(e_pushall_chance,500) // 50.0%
 
 tag.reactivearmor_damagePerc=100
+tag.npc_magicshield=70
 
 //mystik
 tag(hypnotizable,0)
@@ -932,8 +937,9 @@ tag(resist_blunt,200)  // skalu rozbijes hlavne drtivou zbrani
 
 //magic resists
 tag(resist_fire,800)
-tag(resist_elect,-50)  //nachylnost na elektrinu
-tag(resist_cold,150)   //nachylnost na chlad
+tag(resist_elect,450)  //nachylnost na elektrinu
+tag(resist_cold,250)   //nachylnost na chlad
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,golem,30)
@@ -943,7 +949,7 @@ tag.weapflag=dam_blunt|dam_physical
 
 TACTICS=100.0
 WRESTLING=120.0
-RESIST=250.0
+RESIST=150.0
 SpiritSpeak=200.0
 
 ITEMnewbie=i_monster_create
@@ -1601,6 +1607,7 @@ TEVENTS=e_ovinovac
 TEVENTS=e_summoneater
 TEVENTS=e_npc_infiniteMana
 TEVENTS=e_reaper
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Reapers
@@ -1621,6 +1628,7 @@ maxstam={100 150}
 maxmana=1000
 
 tag.experience=<eval {350.0 400.0}>
+tag.npc_magicshield=40
 
 //mystik
 tag(hypnotizable,0)
@@ -1698,6 +1706,7 @@ TEVENTS=e_npc_infiniteMana
 TEVENTS=e_reaper
 TEVENTS=e_parakrik
 TEVENTS=e_explosiondispell
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Reapers
@@ -1718,6 +1727,7 @@ maxstam={150 200}
 maxmana=1000
 
 tag.experience=<eval {700.0 750.0}>
+tag.npc_magicshield=50
 
 tag(e_explosiondispell_chance,100) //10% chance
 tag(e_explosiondispell_range,6)
@@ -1803,6 +1813,7 @@ TEVENTS=e_npc_infiniteMana
 TEVENTS=e_reaper
 TEVENTS=e_parakrik
 TEVENTS=e_explosiondispell
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Reapers
@@ -1823,6 +1834,7 @@ maxstam={200 240}
 maxmana=2000
 
 tag.experience=<eval {850.0 900.0}>
+tag.npc_magicshield=70
 
 tag(e_explosiondispell_chance,150) //15% chance
 tag(e_explosiondispell_range,6)
@@ -2673,6 +2685,7 @@ TEVENTS=e_parakrik
 TEVENTS=e_explode
 TEVENTS=e_explosiondispell
 TEVENTS=e_phoenix_fire
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Spiriti
@@ -2693,6 +2706,7 @@ maxstam={225 275}
 maxmana=1000
 
 tag.experience=<eval {650.0 700.0}>
+tag.npc_magicshield=30
 
 tag(e_explosiondispell_chance,50) //5% chance
 tag(e_explosiondispell_range,6)
@@ -2776,6 +2790,7 @@ TEVENTS=e_parakrik
 TEVENTS=e_explode
 TEVENTS=e_phoenix_fire
 TEVENTS=e_explosiondispell
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Spiriti
@@ -2796,6 +2811,7 @@ maxstam={250 340}
 maxmana=2000
 
 tag.experience=<eval {990.0 1000.0}>
+tag.npc_magicshield=45
 
 Tag.explode_dmg=50
 

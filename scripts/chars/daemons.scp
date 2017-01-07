@@ -885,6 +885,7 @@ TEVENTS=e_parakrik
 TEVENTS=e_phoenix_fire
 TEVENTS=e_summoneater
 TEVENTS=e_npc_curse
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -905,6 +906,7 @@ maxstam={250 350}
 maxmana=2000
 
 tag.experience=<eval {400.0 420.0}>
+tag.npc_magicshield=60
 
 tag.npc_curse_chance=250          // 25% chance to trigger this event
 tag.npc_curse_delay=15,20         // delay between another possible strike
@@ -1188,6 +1190,7 @@ TEVENTS=e_parakrik
 TEVENTS=e_explosiondispell
 TEVENTS=e_npc_curse
 TEVENTS=e_npc_bleed
+TEVENTS=e_npc_magicshield
 //TEVENTS=e_phoenix_fire
 
 CATEGORY=Monsters
@@ -1209,6 +1212,7 @@ maxstam={376 450}
 maxmana=0
 
 tag.experience=<eval {750.0 770.0}>
+tag.npc_magicshield=45
 
 tag.npc_bleed=300             //30%
 
@@ -1246,6 +1250,7 @@ tag(resist_blunt,750)
 tag(resist_fire,900)
 tag(resist_elect,100)
 tag(resist_cold,-300)   //mraz ano
+tag(resist_silence,650)
 
 //typ monstra
 tag(monstertype,daemon)
