@@ -89,6 +89,12 @@ elseif (var(spellnumber) == 30) // lightning
   return
 endif
 
+[function isSpellCharger]
+if (var(spellnumber) == 12 || var(spellnumber) == 18 || var(spellnumber) == 30) // fireball
+  return 1
+endif
+return 0
+
 [dialog d_magicCharge]
 10,24
 noclose=0
@@ -211,6 +217,9 @@ on=@afterDoEffect
 // only execute ONCE (optimization for explosions, meteors, and other multitarget spell)
 // only execute for spells that have charge effect defined
 if (0<var(chargeEffect)> != 1) || (!<safe def_charge_spellType[<var(spellNumber)>]>)
+  return
+endif
+if (isSpellCharger) // chargers are already handled in the combat scripts
   return
 endif
 arg(chargeItem,<findid(i_magicCharge)>) // this event exists i.e. the chargeItem exists - add test if necessary, but it shouldn't happen
