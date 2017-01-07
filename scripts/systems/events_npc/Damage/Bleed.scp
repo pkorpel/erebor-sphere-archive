@@ -19,6 +19,7 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [function npc_bleed]
 arg(bleeditem,<f_bleed_getMemory(<argv(0)>)>)

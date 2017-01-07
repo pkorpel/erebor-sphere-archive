@@ -29,6 +29,7 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 
 [eof]

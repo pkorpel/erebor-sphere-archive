@@ -58,6 +58,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_backStub_hide]

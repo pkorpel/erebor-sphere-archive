@@ -284,6 +284,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_autoreflect]
@@ -297,6 +298,7 @@ on=@DrinkingPotion
 on=@afterswing  
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 
 [events e_strazce_sumonner]
@@ -312,6 +314,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [defnames mount_colors] // barvy ze souboru definic npc_evil_race
 color_mount_chief={076f 0771}
@@ -486,6 +489,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 on=@death
@@ -551,6 +555,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_healdrinker]
@@ -590,6 +595,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [events e_menavec_ledovka]
 on=@Created
@@ -626,6 +632,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 
@@ -827,6 +834,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [ITEMDEF i_qv1_branazdi]
@@ -1102,6 +1110,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 
@@ -1527,6 +1536,7 @@ hits=<eval (<maxhits>+1)>
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing

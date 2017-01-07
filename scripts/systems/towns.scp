@@ -227,6 +227,7 @@ attack(<src>)
 on=@beforegetswing
 on=@afterswing //kdyz to tu neni tak to blbne
 on=@beforedoeffect
+on=@afterDoEffect
 
 [function iscriminal]
 if(<flag_criminal>) 

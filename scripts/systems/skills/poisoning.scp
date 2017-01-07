@@ -257,6 +257,7 @@ if (action==skill_swordsmanship)||(action==skill_fencing)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@aftergetswing
 on=@beforegetswing

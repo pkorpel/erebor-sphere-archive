@@ -12,6 +12,7 @@ on=@hittry
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect 
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
