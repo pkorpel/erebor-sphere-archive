@@ -2427,6 +2427,14 @@ n_magicCharge[26]    charge_spellPow_pvm[49]
 n_magicCharge_name[26] "Chain Lightning (PvM)"
 n_magicCharge_default[26] 200
 
+n_magicCharge[27]
+n_magicCharge_name[27]
+n_magicCharge_default[27]
+
+n_magicCharge[28]    charge_silenceBonus
+n_magicCharge_name[28] "Silence Bonus (%%)"
+n_magicCharge_default[28] 100
+
 
 
 n_poison[0]		poison_absoluteDmg

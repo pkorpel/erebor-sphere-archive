@@ -21,6 +21,10 @@ else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Min
   arg(mindBoost,<eval (arg(mindPower)-arg(silenceResist))>) // either positive or negative influence of the basic chance
   arg(basic_chance,<eval <eval src.tag(ra_mind_blast_silence)>*var(nastaveni_MindBlast_silence_chance)>)
   arg(chance,<eval (arg(basic_chance)+arg(mindBoost))>)
+  arg(mindCharge,<src.charge_get(def_charge_mind)>)
+  if (<mindCharge>)
+    arg(chance,<eval ((<arg(chance)>*(1000+(arg(mindCharge)*nastaveni_charge_silenceBonus)))/1000)>)
+  endif
   if (chance(<arg(chance)>,3))
     arg(silenced_time,<eval (<eval src.tag(ra_mind_blast_silenced_time)>+<nastaveni_spellcast_silence_mind_blast>)>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
     arg(silenced_time,<f_silence_add(<arg(silenced_time)>)>)

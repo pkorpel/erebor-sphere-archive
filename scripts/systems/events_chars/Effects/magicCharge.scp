@@ -89,6 +89,12 @@ elseif (var(spellnumber) == 30) // lightning
   return
 endif
 
+[function isSpellCharger]
+if (var(spellnumber) == 12 || var(spellnumber) == 18 || var(spellnumber) == 30) // fireball
+  return 1
+endif
+return 0
+
 [dialog d_magicCharge]
 10,24
 noclose=0
@@ -168,12 +174,6 @@ endif
 more2=<eval <more2>-<argv(0)>>
 timer=<nastaveni_charge_dropDuration>
 cont.dialogclose(d_magicCharge,1)
-
-[function isSpellCharger]
-if (var(spellnumber) == 12 || var(spellnumber) == 18 || var(spellnumber) == 30) // fireball
-  return 1
-endif
-return 0
 
 [itemdef i_magicCharge]
 id=i_memory
