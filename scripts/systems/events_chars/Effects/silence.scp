@@ -37,6 +37,7 @@ arg(silencer,<findid(i_silencer)>)
 if (!strlen(<arg(silencer)>))
   newequip(i_silencer)
   lastnew.timerd=<argv(0)>
+  effect(3,03789,1,<eval (8+(argv(0)*2)+(argv(0)/4))>)
   return<argv(0)>
 endif
 if (<eval silencer.timerd> < <argv(0)>)
