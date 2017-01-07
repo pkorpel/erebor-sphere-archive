@@ -90,7 +90,7 @@ elseif (var(spellnumber) == 30) // lightning
 endif
 
 [function isSpellCharger]
-if (var(spellnumber) == 12 || var(spellnumber) == 18 || var(spellnumber) == 30) // fireball
+if (var(spellnumber) == 12) || (var(spellnumber) == 18) || (var(spellnumber) == 30) // fireball
   return 1
 endif
 return 0
