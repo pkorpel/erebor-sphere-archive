@@ -1,7 +1,7 @@
 /////////////QUEST S LOVENIM POTVOR///////////////
 
 [itemdef i_sign_gquest]
-id=i_sign_blank
+id=0340D
 name=Vyhlaska
 type=00
 

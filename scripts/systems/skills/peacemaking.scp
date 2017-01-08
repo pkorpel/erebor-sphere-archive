@@ -99,6 +99,7 @@ on=@equip
 cont.events +e_peacemade
 cont.action=""
 cont.emote(is falling asleep)
+cont.effect(3,i_fx_sleeping,0,40,1)
 timer=90
 
 on=@unequip
