@@ -5140,7 +5140,7 @@ return 1
 [function isSleeping]
 if (isevent(e_peacemade))
   if (rand(30)==1)
-    effect(3,i_fx_sleeping,0,40,1)
+    effect(3,i_fx_sleeping,1,70,1)
   endif
   return 1
 endif
