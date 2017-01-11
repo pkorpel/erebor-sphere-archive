@@ -1862,7 +1862,7 @@ endif
 
 [chardef 0bb]
 defname=c_m_ridgeback
-name="ridgeback"
+name="Ridgeback"
 //sound=snd_animal_ostard_frenzied1
 
 tag.mountid=i_mt_ridgeback
@@ -1871,21 +1871,22 @@ ANIM=01fff
 ICON=i_pet_OSTARD_ZOSTRICH
 CAN=MT_WALK|MT_RUN
 
-attack=22
-ARMOR=30
+attack=58
+ARMOR=80
 
 RESOURCES=15 i_ribs_raw
 FOODTYPE=55 t_FISH,55 t_fruit,64 t_meat_raw
 //=r_stables
 //=e_OSTARDS
 
-DESCRIPTION=ridgeback
+DESCRIPTION=Ridgeback
 SUBSECTION=Kone - Musti - Zosti
 CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_noport
+TEVENTS=e_no_player_attack
 
 ON=@Create
 tag(nores,1)
@@ -1894,21 +1895,23 @@ tag(noanimate,1)
 
 NPC=brain_animal
 FAME=0
-KARMA={-1 -99}
+KARMA={5 100}
 
-STR=320
-DEX=125
-INT=80
+maxhits={1000 1250}
+
+STR=650
+DEX=245
+INT=140
 
 //typ monstra
 tag(monstertype,animal)
 
-PARRYING={75.0 85.0}
+PARRYING={95.0 105.0}
 Resist=100.0
-TACTICS={60.0 70.0}
-WRESTLING={65.0 75.0}
-TAMING={76.0 81.0}
-ANIMALLORE=76.0
+TACTICS={70.0 80.0}
+WRESTLING={75.0 85.0}
+TAMING={80.0 85.0}
+ANIMALLORE=90.0
 
 itemnewbie=i_monster_create
 
@@ -1919,7 +1922,7 @@ itemnewbie=i_monster_create
 [chardef 0bc]
 //ridden by savages, mean
 defname=c_m_ridgeback_savage
-name="ridgeback savage"
+name="Ridgeback Savage"
 
 tag.mountid=i_mt_ridgeback_savage
 //mountid=i_mt_ostard_zostrich
@@ -1928,20 +1931,21 @@ ANIM=01fff
 ICON=i_pet_OSTARD_ZOSTRICH
 CAN=MT_WALK|MT_RUN
 
-attack=22
-ARMOR=30
+attack=70
+ARMOR=90
 RESOURCES=15 i_ribs_raw
 FOODTYPE=55 t_FISH,55 t_fruit,64 t_meat_raw
 //=r_stables
 //=e_OSTARDS
 
-DESCRIPTION=ridgeback savage
+DESCRIPTION=Ridgeback Savage
 SUBSECTION=Kone - Musti - Zosti
 CATEGORY=Animals
 
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_noport
+TEVENTS=e_no_player_attack
 
 
 ON=@Create
@@ -1951,20 +1955,22 @@ tag(noanimate,1)
 
 NPC=brain_animal
 FAME=0
-KARMA={-1 -99}
+KARMA={1 99}
 
-STR=420
-DEX=125
-INT=80
+maxhits={1500 1700}
+
+STR=820
+DEX=360
+INT=280
 
 //typ monstra
 tag(monstertype,animal)
 
-PARRYING={85.0 95.0}
+PARRYING={105.0 125.0}
 Resist=100.0
-TACTICS={70.0 80.0}
-WRESTLING={65.0 75.0}
-TAMING={86.0 91.0}
+TACTICS={85.0 95.0}
+WRESTLING={85.0 95.0}
+TAMING={89.0 94.0}
 ANIMALLORE=90.0
 
 itemnewbie=i_monster_create

@@ -1510,6 +1510,22 @@ else
   endif
 endif
 
+[events e_no_player_attack] 
+on=@HitTry
+if (act.isPlayer)
+  if !(<eval tag(napaden_hracem)>)
+    removefight
+    return 1
+  endif
+endif
+
+on=@GetHit
+if (src.isPlayer)
+  tag(napaden_hracem,1)
+  act.attack
+endif
+
+
 [events e_npc_golddrop] 
 on=@gethit
 if ({1 5} == 2)
