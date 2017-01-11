@@ -35,7 +35,11 @@ argo.dialog_pozadi(<argo.tag(nexty)>,6,30,332,200,130,30)
 argo.dialog_zpruhledni
 argo.textA(<argo.dialog_textpos(0,0)>,42,"Variable Gate")
 argo.textA(<argo.dialog_textpos(0,2)>,<d_def_writecolor>,"MoreP:")
-argo.textA(<argo.dialog_textpos(0,3)>,<d_def_readcolor>,"<?moreP?>")
+if (<tag.gateFlags>&<vg_isRecallPort>)
+  argo.textA(<argo.dialog_textpos(0,3)>,<d_def_readcolor>,"RECALL")
+else
+  argo.textA(<argo.dialog_textpos(0,3)>,<d_def_readcolor>,"<?moreP?>")
+endif
 argo.dialog_textpos(0,4)
 
 argo.button(<lastxpos>-4,<lastypos>-2,0fa5,0fa7,1,0,2)		//set moreP
@@ -45,6 +49,12 @@ argo.dialog_textpos(1,0)
 argo.checkBox(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,210,211,<tag.gateFlags>&<vg_npcGoThrough>,1)
 argo.dialog_textpos(1,1)
 argo.textA(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,<d_def_readcolor>,"NPC muze projit.")
+
+// Go to Recall:
+argo.dialog_textpos(1,3)
+argo.textA(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,<d_def_readcolor>,"Recall Home:")
+argo.dialog_textpos(1,4)
+argo.checkBox(<lastxpos>,<lastypos>+0*<d_def_radek_vyska>,210,211,<tag.gateFlags>&<vg_isRecallPort>,16)
 
 //	Hypno Go Through:
 argo.dialog_textpos(1,0)
@@ -314,6 +324,12 @@ if (<argChk(15)>) //port sideways
   tag.gateFlags=<tag.gateFlags>|<vg_portSideway>
 else
   tag.gateFlags=<tag.gateFlags>&~<vg_portSideway>
+endif
+
+if (<argChk(16)>) //port to a home recall rune or HOME position if not set
+  tag.gateFlags=<tag.gateFlags>|<vg_isRecallPort>
+else
+  tag.gateFlags=<tag.gateFlags>&~<vg_isRecallPort>
 endif
 
 if (argn == 2)	//pressed button 2 - set position
@@ -854,12 +870,16 @@ if (<tag(gohome)>) && (src.isgm)
   src.gohome
   return 1
 elseif (src.isgm)
-  src.go(100,100)
-  src.go(<moreP>)
+  if (<tag.gateFlags>&<vg_isRecallPort>)
+    src.sysMessage("GM: Gate nastavena na RECALL runu!")
+  else
+    src.go(100,100)
+    src.go(<moreP>)
+  endif
   return 1
 endif
 
-if !(<tag(gohome)>)
+if !(<tag(gohome)>) && !(<tag.gateFlags>&<vg_isRecallPort>)
   if !(strcmpi("<moreP>","0,0")) //0 if equals
     src.accMsg("ERROR - varGate (<uid>) na pozici <p> nema nastavenou portovaci pozici")
     src.sysMessage("<src.sex(Zhoupl,Zhoupla)> jsi se v magickem viru, ale nic se nestalo")
@@ -1111,13 +1131,19 @@ if (<tag(gateFlags)>&<vg_isExpGate>)
 endif
 if (<tag(gohome)>)
   src.gohome
+elseif (<tag.gateFlags>&<vg_isRecallPort>)
+  arg(rune,<src.findid(i_rune_base)>)
+  if (arg(rune).moreX == 0)
+    src.goHome
+  else
+    src.go(<arg(rune).moreP>)
+  endif
 else
   if (<tag(gateFlags)>&<vg_portSideway>)
     // sector.allchars (and therefore all visible pets function too) works only on item's timer. Repair dismissed
     //src.allVisiblePets(f_varGate_petMove(<src>,<moreP>)) // all pets in the range of 20 steps except for Vendors go to the target position
     src.go(<moreP>) // this FIRST move ports the pets to the relevant position
     src.go(10,10)  //vypada to nepotrebne, ale je to uzitecny. Pokud gata posunuje jenom v mapplanu, tak se z pameti clienta smazou itemy z puvodniho mapplanu
-    src.go(<moreP>)
   endif
   src.go(<moreP>)
 endif
@@ -1242,22 +1268,22 @@ vg_isGuarded          000001000	// this gate is guarded
 vg_hasPlugins         000002000	// this gate has some plugins
 vg_portSideway        000004000	// this gate ports the player to the sea first so as to clear its memory of items on his position - useful while traveling only through mapplane, but in the same locality
 vg_addItemTimeLimit   000008000	// this gate add item only after a certain time
-//vg_17				000010000	//
-//vg_18				000020000	//
-//vg_19				000040000	//
-//vg_20				000080000	//
-//vg_21				000100000	//
-//vg_22				000200000	//
-//vg_23				000400000	//
-//vg_24				000800000	//
-//vg_25				001000000	//
-//vg_26				002000000	//
-//vg_27				004000000	//
-//vg_28				008000000	//
-//vg_29				010000000	//
-//vg_30				020000000	//
-//vg_31				040000000	//
-//vg_32				080000000	//
+vg_isRecallPort       000010000	// this gate ports to a recall position rather than a defined moreP location
+//vg_18     000020000	//
+//vg_19     000040000	//
+//vg_20     000080000	//
+//vg_21     000100000	//
+//vg_22     000200000	//
+//vg_23     000400000	//
+//vg_24     000800000	//
+//vg_25     001000000	//
+//vg_26     002000000	//
+//vg_27     004000000	//
+//vg_28     008000000	//
+//vg_29     010000000	//
+//vg_30     020000000	//
+//vg_31     040000000	//
+//vg_32     080000000	//
 
 
 
