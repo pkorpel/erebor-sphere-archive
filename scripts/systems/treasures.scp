@@ -24,6 +24,7 @@
 TMOS                        0FFFFFED4 //Treasure Map Offset
 TMS                         08c //Treasure Map Size	200x200 pixels - pins are in pixels
 
+def_pokladnik_mapy_6  #04BDA4
 def_pokladnik_mapy_5  #026F2A        
 def_pokladnik_mapy_4  #0252B3
 def_pokladnik_mapy_3  #023074
@@ -95,7 +96,9 @@ else
 endif
 if (src.mining >  tag(MAP))&&!(src.nolightfizz(1))
   if (<serv.time> > <eval var(treasureMapTime_<link.morex>_<link.morey>)>)
-    if (tag(map) > 975)
+    if (tag(map) == 1000)
+      f_mine_map_treasure(6)
+    elseif (tag(map) > 975)
       f_mine_map_treasure(5)
     elseif (tag(map) > 920)
       f_mine_map_treasure(4)
@@ -335,7 +338,11 @@ remove
 [function f_zobrazlevelmapy]
 
 if (tag(vylusteno))
-  if (tag(map) > 975) // LVL 5
+  if (tag(map) == 1000) // LVL 6
+    name="Unikatni mapa pokladu"
+    color=056
+    dispid=03352
+  elseif (tag(map) > 975) // LVL 5
     name="Legendarni mapa pokladu"
     color=0845
   elseif (tag(map) > 920) // LVL 4
