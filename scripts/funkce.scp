@@ -7281,4 +7281,7 @@ else
   return <eval argv(1)>)
 endif
 
+[function null]
+return""
+
 [eof]

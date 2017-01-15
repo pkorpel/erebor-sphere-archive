@@ -14,10 +14,7 @@ ON=*hi*
 ON=*hello*
 ON=*buy*
 
-if (<src.isevent.e_weekly_quest>)  // lecitel plni weekly quest
-  src.say("Plnim Weekly Questy")
-  f_weekly_quest_hi_master
-endif
+f_weekly_meetMaster
   
 src.roundskill(<tag(ucimskill)>)
 if (src.profession==prof_undeclared)
