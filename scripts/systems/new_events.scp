@@ -480,10 +480,6 @@ arg(timerr).timer=<eval arg(resstimer)>
 arg(timerr).p=<p>
 arg(timerr).removefromview
 
-on=@gethit
-if (flag_spawned)
-  z=<memoryfindtype(MEMORY_ISPAWNED).link.z>
-endif
 
 [function undeadhandler]
 if (src.brain==13)
