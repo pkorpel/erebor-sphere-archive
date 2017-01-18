@@ -1,0 +1,119 @@
+[function taunt]
+if !(<eval tag(Taunt_TEST)>)
+  redmessage("Nemuzes tuto abilitu v ramci TESTu pouzivat.")
+  return 1
+endif
+if (<findid(i_taunt_timer)>)
+  sysmessage(Nespechej s pouzivanim skillu)
+  return 1
+endif
+if (<flag_dead>)
+  return 1 
+endif
+if (<eval stam> < 20)
+  redmessage(Nemas dostatek staminy.)
+  return 1
+endif
+reveal
+stopscriptedskills
+if (ishungrymsg)
+  return 1
+endif
+newitemsafe(i_taunt_timer)
+equip(<lastnew>)
+return 1
+
+
+[itemdef i_taunt_timer]
+ID=i_memory
+TYPE=t_eq_script
+name=taunt
+
+on=@equip
+timer=60
+target Koho chces na sebe nalakat?
+
+on=@targon_item
+return 1
+
+on=@targon_char
+link=<src.targ.uid>
+if (<link.npc>==0)||(link.issumon)
+  cont.sysmessage(Tohle nemuzes nalakat.)
+  remove
+  return 1
+endif
+if (<eval (cont.tag(level)*20)> < <link.tag(experience)>)
+  cont.sysmessage(Nalakani teto prisery presahuje tve moznosti.)
+  remove
+  return 1
+endif
+cont.reduceStamina(20)
+if (<cont.str> < {0 250})
+  morex=0
+  cont.sysmessage(Tvuj slaby rev monstrum ignoruje.)
+  cont.sound(sex(1097,823))   // pridat zvuk slabeho revu
+else
+  morex=1
+  cont.sound(sex(1098,824))  // pridat zvuk silneho revu
+endif
+
+timerd=5
+more1=1
+return 1
+
+on=@timer
+if (more1)
+  if (charExists(<link>)) //mount exists and ergo is not dead or whatever
+    if (morex)
+      cont.classmessage(Nalakani se povedlo)  
+      if (link.findid(i_taunter))
+        link.findid(i_taunter).link=<cont.uid>  
+        lastnew.timer=<eval (cont.str/20)>
+      else
+        link.newitem(i_taunter)
+        lastnew.timer=<eval (cont.str/20)>
+        lastnew.link=<cont.uid>
+        link.equip(<lastnew>)
+      endif
+      link.removefight
+      link.attack(<cont>)
+    else
+      cont.redmessage("Nalakani se nepovedlo.")
+      link.findid(i_taunter).remove
+    endif
+  else
+    cont.redMessage("Lakane monstrum jiz nezije!")
+  endif
+endif
+remove
+return 1
+
+
+[itemdef i_taunter]
+id=i_memory
+layer=77
+type=t_src_changer
+name=taunter
+
+on=@equip
+cont.say("TAUNTED by <link.name>")
+cont.events +e_npc_taunted
+//cont.effect(3,013B9,1,60,1)
+
+
+on=@timer
+remove
+
+on=@unequip
+if (<eval cont.hits> <= 0)   
+  return
+endif
+cont.say("Konec tauntu")
+cont.events -e_npc_taunted
+
+[events e_npc_taunted]
+on=@npcseenewplayer
+return 1    // nikdo novy me nezajima
+
+[eof]
