@@ -2199,17 +2199,6 @@ return 1
 on=@getHit
 tag(combatSource,<src>)
 
-on=@aftergetswing
-if (<src.isevent.e_weekly_quest>)  // plni weekly quest
-  if (<eval <var(ubrano)>> > 0) 
-    if (<eval <var(ubrano)>> > <hits>)  // Kdyz je pecka vetsi nez zbyvajici zivoty cile, zajima me jen kolik ubere hp
-      src.f_weekly_damage_dealt(<hits>)
-    else
-      src.f_weekly_damage_dealt(<eval <var(ubrano)>>)
-    endif
-  endif
-endif
-
 on=@death
 tag(lastmurderbyf,<act>)
 arg(monstdeathact,<act>)
