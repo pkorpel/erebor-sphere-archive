@@ -5480,7 +5480,7 @@ if (type==t_scroll)
   endif
 elseif (type==t_customspell_scroll)
   if !(src.act.link.hasspell(<morex>))
-    srrc.act.link.addspell(<morex>)
+    src.act.link.addspell(<morex>)
     consume 1
   endif
 endif
