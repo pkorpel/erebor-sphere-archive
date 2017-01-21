@@ -2330,6 +2330,18 @@ n_ability3_default[39] 30
 n_ability3[40] 		MindBlast_silence_chance
 n_ability3_name[40] "Sance na silence MindBlastem"
 n_ability3_default[40] 60
+n_ability3[41] 		
+n_ability3_name[41]
+n_ability3_default[41] 
+n_ability3[42] 		single_taunt_stamina
+n_ability3_name[42] "Stamina na Single Taunt"
+n_ability3_default[42] 20
+n_ability3[43] 		taunt_max_range
+n_ability3_name[43] "Maximalni dosah Tauntu"
+n_ability3_default[43] 8
+n_ability3[44] 		mass_taunt_stamina
+n_ability3_name[44] "Stamina na Mass Taunt"
+n_ability3_default[44] 50
 
 
 

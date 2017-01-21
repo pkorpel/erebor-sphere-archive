@@ -1,17 +1,17 @@
 [function taunt]
 if !(<eval tag(Taunt_TEST)>)
-  redmessage("Nemuzes tuto abilitu v ramci TESTu pouzivat.")
+  redmessage("Abilita je ve stadiu testovani a nelze ji pouzit.")
   return 1
 endif
-if (<findid(i_taunt_timer)>)
-  sysmessage(Nespechej s pouzivanim skillu)
+if (<findid(i_taunt_target)>)
+  sysmessage("Nespechej s pouzivanim ability")
   return 1
 endif
 if (<flag_dead>)
   return 1 
 endif
 if (<eval stam> < 20)
-  redmessage(Nemas dostatek staminy.)
+  redmessage("Nemas dostatek staminy."")
   return 1
 endif
 reveal
@@ -19,19 +19,18 @@ stopscriptedskills
 if (ishungrymsg)
   return 1
 endif
-newitemsafe(i_taunt_timer)
-equip(<lastnew>)
+newequip(i_taunt_target)
 return 1
 
 
-[itemdef i_taunt_timer]
+[itemdef i_taunt_target]
 ID=i_memory
 TYPE=t_eq_script
 name=taunt
 
 on=@equip
 timer=60
-target Koho chces na sebe nalakat?
+target("Koho chces na sebe nalakat?")
 
 on=@targon_item
 return 1
@@ -39,19 +38,19 @@ return 1
 on=@targon_char
 link=<src.targ.uid>
 if (<link.npc>==0)||(link.issumon)
-  cont.sysmessage(Tohle nemuzes nalakat.)
+  cont.sysmessage("Tohle nemuzes nalakat."")
   remove
   return 1
 endif
 if (<eval (cont.tag(level)*20)> < <link.tag(experience)>)
-  cont.sysmessage(Nalakani teto prisery presahuje tve moznosti.)
+  cont.sysmessage("Nalakani teto prisery presahuje tve moznosti.")
   remove
   return 1
 endif
 cont.reduceStamina(20)
 if (<cont.str> < {0 250})
   morex=0
-  cont.sysmessage(Tvuj slaby rev monstrum ignoruje.)
+  cont.sysmessage("Tvuj slaby rev monstrum ignoruje.")
   cont.sound(sex(1097,823))   // pridat zvuk slabeho revu
 else
   morex=1
@@ -66,7 +65,7 @@ on=@timer
 if (more1)
   if (charExists(<link>)) //mount exists and ergo is not dead or whatever
     if (morex)
-      cont.classmessage(Nalakani se povedlo)  
+      cont.classmessage("Nalakani se povedlo")  
       if (link.findid(i_taunter))
         link.findid(i_taunter).link=<cont.uid>  
         lastnew.timer=<eval (cont.str/20)>
