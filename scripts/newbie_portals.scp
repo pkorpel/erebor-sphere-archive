@@ -700,6 +700,7 @@ potions_i_potion_Poison_weaken 	"class_thief"
 potions_i_potion_Poison_clumsy 	"class_thief"
 potions_i_potion_Poison_feeblemind 	"class_thief"
 potions_i_potion_ExplosionDispell 	"class_necro"
+potions_i_potion_ocisteni	"class_necro, class_mag, class_priest, class_thief"
 
 [profession 1]
 DEFNAME=class_necro
