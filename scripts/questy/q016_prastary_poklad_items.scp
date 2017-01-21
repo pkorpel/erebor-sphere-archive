@@ -11,16 +11,16 @@ color=0986
 
 on=@userdclick    
 src.f_q016_checkOldTags                                                         
-if (<src.qtag(q016_prastary_poklad)> == 9)
- message("Moc toho tu neni.. Vypada to, ze te nekdo predbehl...")
- src.qtag(q016_prastary_poklad,10)
- src.addexp(500)
- src.givegold(50000)
-elseif (<src.qtag(q016_prastary_poklad)> == 10)
- message("Uz jsi to vsechno <src.sex(vybral,vybrala)>...")
+if (<eval src.qtag(q016_prastary_poklad)> == 9)
+  message("Moc toho tu neni.. Vypada to, ze te nekdo predbehl...")
+  src.qtag(q016_prastary_poklad,10)
+  src.addexp(500)
+  src.givegold(50000)
+elseif (<eval src.qtag(q016_prastary_poklad)> == 10)
+  message("Uz jsi to vsechno <src.sex(vybral,vybrala)>...")
 else
- src.kill
- message("<src.sex(DOSTAL,DOSTALA)> JSI SE SEM PODVODEM!!!")¨
+  src.kill
+  message("<src.sex(DOSTAL,DOSTALA)> JSI SE SEM PODVODEM!!!")¨
 endIF
 
 
@@ -54,14 +54,14 @@ ON=@Create
 color=098c
 
 on=@userdclick                                                             
-if (<src.qtag(q016_prastary_poklad)> == 6)
- src.say("Byl tam chlast!!! To jsem si <src.sex mohl mohla> myslet!")
- src.newitem=i_crunch_clerduv_chlast
- src.act.bounce
- src.qtag(q016_prastary_poklad,7)
+if (<eval src.qtag(q016_prastary_poklad)> == 6)
+  src.say("Byl tam chlast!!! To jsem si <src.sex mohl mohla> myslet!")
+  src.newitem=i_crunch_clerduv_chlast
+  src.act.bounce
+  src.qtag(q016_prastary_poklad,7)
 else
- src.SAY Tak tuhle truhlu by neotevrel ani ten nejzrucnejsi zlodej...
- return 1
+  src.say("Tak tuhle truhlu by neotevrel ani ten nejzrucnejsi zlodej...")
+  return 1
 endIF
 
 
@@ -78,28 +78,28 @@ color=098c
 
 on=@userdclick                                                             
 if (<moreX> == 1)
- if (<src.qtag(q016_prastary_poklad)> == 8)
-  src.say("Brana me pustila!! Pozehnani od klerika pomohlo!")
-  src.qtag(q016_prastary_poklad,9)
-  src.go(3190,3640)
-  moreX=0
- else
+  if (<eval src.qtag(q016_prastary_poklad)> == 8)
+    src.say("Brana me pustila!! Pozehnani od klerika pomohlo!")
+    src.qtag(q016_prastary_poklad,9)
+    src.go(3190,3640)
+    moreX=0
+  else
+    src.kill
+    src.sysMessage("Cosi ti rika, ze je velmi pravdepodobne, ze nejspis nejsi vyvoleny vstoupit do te brany.")
+  endif
+elseif (<moreX> == 2)
   src.kill
   src.sysMessage("Cosi ti rika, ze je velmi pravdepodobne, ze nejspis nejsi vyvoleny vstoupit do te brany.")
- endif
-elseif (<moreX> == 2)
- src.kill
- src.sysMessage("Cosi ti rika, ze je velmi pravdepodobne, ze nejspis nejsi vyvoleny vstoupit do te brany.")
 else
- if (<src.qtag(q016_prastary_poklad)> == 8)
-  moreX=1
- else
-  moreX=2
- endif
- timer=10
- src.sysMessage("Brana je magicka!!! Myslis-li si, ze jsi vyvoleny ji projit, zkus ji otevrit jeste jednou... ale pozor! Nezvani se se zlou potazou!!!")
- return 1
-endIF
+  if (<eval src.qtag(q016_prastary_poklad)> == 8)
+    moreX=1
+  else
+    moreX=2
+  endif
+  timer=10
+  src.sysMessage("Brana je magicka!!! Myslis-li si, ze jsi vyvoleny ji projit, zkus ji otevrit jeste jednou... ale pozor! Nezvani se se zlou potazou!!!")
+  return 1
+endif
 return 1
 
 on=@Timer
@@ -132,7 +132,7 @@ NAME=Voda s ozdravujicimi ucinky
 ON=@Create
 
 on=@userdclick                                                             
-if (<src.qtag(q016_prastary_poklad)> == 2) && (<src.rescount i_bottle_empty> >= 1)
+if (<eval src.qtag(q016_prastary_poklad)> == 2) && (<src.rescount i_bottle_empty> >= 1)
   src.newitem(i_Crunch_lecici_voda).bounce
   src.consume i_bottle_empty 
   src.qtag(q016_prastary_poklad,3)

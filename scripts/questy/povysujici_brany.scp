@@ -47,10 +47,10 @@ SUBSECTION=System povyseni
 DESCRIPTION=Vstupni brana k mistrovskemu questu
 
 on=@step
-if (<src.tag(skillrank)>==1)&&(<src.tag(level)>>5)
-SRC.GO 462,2577,10,1 // ZADAT LOKACI kam hodi pro splneni mistrovskeho questu
+if (<eval src.tag(skillrank)> == 1)&&(<src.tag(level)> > 5)
+  src.go 462,2577,10,1 // ZADAT LOKACI kam hodi pro splneni mistrovskeho questu
 else
-src.redmessage(Tato cesta neni urcena pro tebe!)
+  src.redmessage("Tato cesta neni urcena pro tebe!"")
 endif
 
 /////////////////////////////////////
@@ -83,10 +83,9 @@ ON=@Timer
 			TIMER=1
 			return 1
 		else
-
 			cont.gohome  // zde se nastavi misto kam ho to hodi pokud vcas nestihne splnit quest
 			cont.redmessage(Ve stanovenem limitu jsi nestihl dojit na konec tve cesty muzes se pokusit znovu.)
-                        cont.EVENTS -e_povyseni
+      cont.EVENTS -e_povyseni
 		endif
 	endif
 	remove
