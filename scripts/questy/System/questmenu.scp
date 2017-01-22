@@ -160,6 +160,18 @@ while (<questNumber> < <questMenu_rows>)
   arg(questNumber,#+1)
 endwhile
 
+// TODO:
+// Icons of interest:
+//  bag closed: 0FC5
+//  bag opened: 0FC4
+//  button 03422 + 03423
+// XP ICONs:
+//   * 091F (chess horse white)
+//   * 0926 (chess horse black)
+// Gold ICONs:
+//   * 034CC
+//   * 034CA
+//   * item: 0EEF
 [function f_questy_buildWeeklyDialog]
 newTextLine(<eval (<questMenu_width>/2)-4>,45,<d_def_subheadcolor>,"Tydenni Questy")
 f_questMenu_sectionButton(1)
