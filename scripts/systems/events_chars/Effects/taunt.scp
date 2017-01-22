@@ -1,4 +1,8 @@
 [function taunt]
+if (profession!=class_war)
+ sysMessage("Toto muze pouzit jen valecnik."")
+ return 1
+endif
 if !(<eval tag(Taunt_TEST)>)
   redmessage("Abilita je ve stadiu testovani a nelze ji pouzit.")
   return 1
@@ -10,7 +14,7 @@ endif
 if (<flag_dead>)
   return 1 
 endif
-if (<eval stam> < 20)
+if (<eval stam> < <nastaveni_single_taunt_stamina>)
   redmessage("Nemas dostatek staminy."")
   return 1
 endif
@@ -36,25 +40,41 @@ on=@targon_item
 return 1
 
 on=@targon_char
-link=<src.targ.uid>
-if (<link.npc>==0)||(link.issumon)
-  cont.sysmessage("Tohle nemuzes nalakat."")
+src.targ.newequip(i_taunt_timer)
+lastnew.link=<cont>
+
+
+
+
+
+
+
+
+
+[itemdef i_taunt_timer]
+if (link.distance > <nastaveni_taunt_max_range>)
+  link.redmessage("Cil je mimo tvuj dosah")
   remove
   return 1
 endif
-if (<eval (cont.tag(level)*20)> < <link.tag(experience)>)
-  cont.sysmessage("Nalakani teto prisery presahuje tve moznosti.")
+if (<npc>==0)||(issumon)
+  link.sysmessage("Tohle nemuzes nalakat."")
   remove
   return 1
 endif
-cont.reduceStamina(20)
-if (<cont.str> < {0 250})
+if (<eval (link.tag(level)*20)> < <tag(experience)>)
+  link.sysmessage("Nalakani teto prisery presahuje tve moznosti.")
+  remove
+  return 1
+endif
+link.reduceStamina(<nastaveni_single_taunt_stamina>)
+if (<link.str> < {0 250})
   morex=0
-  cont.sysmessage("Tvuj slaby rev monstrum ignoruje.")
-  cont.sound(sex(1097,823))   // pridat zvuk slabeho revu
+  link.sysmessage("Tvuj slaby rev monstrum ignoruje.")
+  link.sound(sex(1097,823))   // zvuk slabeho revu
 else
   morex=1
-  cont.sound(sex(1098,824))  // pridat zvuk silneho revu
+  link.sound(sex(1098,824))  // zvuk silneho revu
 endif
 
 timerd=5
@@ -63,26 +83,22 @@ return 1
 
 on=@timer
 if (more1)
-  if (charExists(<link>)) //mount exists and ergo is not dead or whatever
-    if (morex)
-      cont.classmessage("Nalakani se povedlo")  
-      if (link.findid(i_taunter))
-        link.findid(i_taunter).link=<cont.uid>  
-        lastnew.timer=<eval (cont.str/20)>
-      else
-        link.newitem(i_taunter)
-        lastnew.timer=<eval (cont.str/20)>
-        lastnew.link=<cont.uid>
-        link.equip(<lastnew>)
-      endif
-      link.removefight
-      link.attack(<cont>)
+  if (morex)
+    link.classmessage("Nalakani se povedlo")  
+    if (cont.findid(i_taunter))
+      cont.findid(i_taunter).link=<link>  
+      lastnew.timer=<eval (link.str/20)>
     else
-      cont.redmessage("Nalakani se nepovedlo.")
-      link.findid(i_taunter).remove
+      cont.newitem(i_taunter)
+      lastnew.timer=<eval (link.str/20)>
+      lastnew.link=<link>
+      cont.equip(<lastnew>)
     endif
+    cont.removefight
+    cont.attack(<link>)
   else
-    cont.redMessage("Lakane monstrum jiz nezije!")
+    link.redmessage("Nalakani se nepovedlo.")
+    cont.findid(i_taunter).remove
   endif
 endif
 remove
