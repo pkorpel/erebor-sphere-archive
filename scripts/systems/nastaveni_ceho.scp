@@ -2342,6 +2342,12 @@ n_ability3_default[43] 8
 n_ability3[44] 		mass_taunt_stamina
 n_ability3_name[44] "Stamina na Mass Taunt"
 n_ability3_default[44] 50
+n_ability3[45] 		tauntdelay
+n_ability3_name[45] "Doba znova pouziti Tauntu"
+n_ability3_default[45] 120
+n_ability3[46] 		tauntdelay_penalty
+n_ability3_name[46] "Penalizace za rychle pouziti"
+n_ability3_default[46] 10
 
 
 
