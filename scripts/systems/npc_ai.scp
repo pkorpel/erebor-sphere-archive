@@ -418,7 +418,6 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 if (<eval src.int> > {100 1250})  // cim je utocnik chytrejsi, tim je lakavejsi pro oko na utok
-  removefight
   attack(<src>)
 endif
 
@@ -1737,7 +1736,6 @@ else // mene jak 10% HP
   arg(chance,10)
 endif
 if ({1 <arg(chance)>}==1)
-  removefight
   attack(<src>)
 endif
 
