@@ -81,13 +81,14 @@ if (arg(TauntResist) >= 1000)
 endif
 cont.accmsg("se pokousi Abilitou TAUNT prilakat NPC. Cil ma <src.targ.tag(experience)> a War muze tauntnout maximalne <eval (<eval cont.tag(level)>*<eval cont.tag(ra_taunt)>*5)>.")
 
+cont.reduceStamina(<nastaveni_single_taunt_stamina>)
+cont.tag(nextTaunt,<eval (<serv.time>+<nastaveni_tauntdelay>)>)
+
 arg(STR_koef,<eval ((<cont.str>*1000)/250)>)
 arg(STAM_koef,<eval ((<cont.stam>+50)*1000)/<cont.maxstam>)>)
 arg(Resist_koef,<eval (1000-<arg(TauntResist)>)>)
 arg(TauntChance,<eval ((<arg(STR_koef)>*<arg(STAM_koef)>*<arg(Resist_koef)>)/100000)>)
 
-cont.reduceStamina(<nastaveni_single_taunt_stamina>)
-cont.tag(nextTaunt,<eval (<serv.time>+<nastaveni_tauntdelay>)>)
 if !(chance(<arg(TauntChance)>,4))
   cont.sound(sex(1097,823))   // zvuk slabeho revu
   cont.accmsg("se nepovedlo Abilitou TAUNT prilakat NPC. Jeho sila je <cont.str>, stamina <cont.stam>/<cont.maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
