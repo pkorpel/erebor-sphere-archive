@@ -9,17 +9,17 @@ def_weekly_low_setupFunction[0]    f_weekly_setup_eatFood
 def_weekly_low_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_0_[0]   random_food //prvni argument setup funkce
 def_weekly_low_setupFunArg_0_[1]   low //druhy argument setup funkce
-def_weekly_low_rewardSize[0]      50
+def_weekly_low_rewardSize[0]       50
 
 def_weekly_low_setupFunction[1]    f_weekly_setup_eatFood
 def_weekly_low_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_1_[0]   random_fruit //prvni argument setup funkce
 def_weekly_low_setupFunArg_1_[1]   low //druhy argument setup funkce
-def_weekly_low_rewardSize[1]      50
+def_weekly_low_rewardSize[1]       50
 
 def_weekly_low_setupFunction[2]    f_weekly_setup_receiveDmg
 def_weekly_low_setupFunArgn[2]     0 // pocet argumentu setup funkce
-def_weekly_low_rewardSize[2]      50
+def_weekly_low_rewardSize[2]       50
 
 // TO TEST:
 
@@ -96,19 +96,19 @@ def_weekly_medium_setupFunction[0]    f_weekly_setup_eatFood
 def_weekly_medium_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_0_[0]   random_food //prvni argument setup funkce
 def_weekly_medium_setupFunArg_0_[1]   medium //druhy argument setup funkce
-def_weekly_medium_rewardSize[0]      75
+def_weekly_medium_rewardSize[0]       75
 
 def_weekly_medium_setupFunction[1]    f_weekly_setup_drinkPotion
 def_weekly_medium_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_1_[0]   RANDOM_POTION_BOOST //prvni argument setup funkce
 def_weekly_medium_setupFunArg_1_[1]   4  // multiplier poctu potionu
-def_weekly_medium_rewardSize[1]      75
+def_weekly_medium_rewardSize[1]       75
 
 def_weekly_medium_setupFunction[2]    f_weekly_setup_drinkPotion
 def_weekly_medium_setupFunArgn[2]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_2_[0]   i_potion_nightSight //prvni argument setup funkce
 def_weekly_medium_setupFunArg_2_[1]   4 // multiplier poctu potionu
-def_weekly_medium_rewardSize[2]      75
+def_weekly_medium_rewardSize[2]       75
 
 // HIGH quests
 def_weekly_high[0]
@@ -116,13 +116,13 @@ def_weekly_high_setupFunction[0]    f_weekly_setup_eatFood
 def_weekly_high_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_0_[0]   random_food //prvni argument setup funkce
 def_weekly_high_setupFunArg_0_[1]   high //druhy argument setup funkce
-def_weekly_high_rewardSize[0]      100
+def_weekly_high_rewardSize[0]       100
 
 def_weekly_high_setupFunction[1]    f_weekly_setup_drinkPotion
 def_weekly_high_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_1_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument setup funkce
 def_weekly_high_setupFunArg_1_[1]   6 // multiplier poctu potionu
-def_weekly_high_rewardSize[1]      100
+def_weekly_high_rewardSize[1]       100
 
 [itemdef i_memory_weekly_quest]
 name=Weekly Quest memory
@@ -253,20 +253,20 @@ while (<arg(i)> < <arg(argNumb)>)
 endwhile
 //tag(quest_level[<eval tag(qAssigned)>],<argv(1)>) // the level of a quest for later reference from a dialog if needed
 //tag(quest_id[<eval tag(qAssigned)>],<argv(0)>)    // the defnames ID of a quest for later reference from a dialog if needed
-if (safe <def_weekly_<argv(1)>_iconId[<eval argv(0)>]>)
+if (0<safe.def_weekly_<argv(1)>_iconId[<eval argv(0)>]>)
   tag(quest_iconId[<eval tag(qAssigned)>],<def_weekly_<argv(1)>_iconId[<eval argv(0)>]>)
 endif
-if (safe <def_weekly_<argv(1)>_descr[<eval argv(0)>]>)
+if (0<safe.def_weekly_<argv(1)>_descr[<eval argv(0)>]>)
   tag(quest_description[<eval tag(qAssigned)>],<def_weekly_<argv(1)>_iconId[<eval argv(0)>]>)
 endif
 <def_weekly_<argv(1)>_setupFunction[<eval argv(0)>]>(<arg(arguments)>)
-f_weekly_setRewardSingle(<argv(0)>)
+f_weekly_setRewardSingle(<argv(0)>,<argv(1)>)
 tag(qAssigned,<eval tag(qAssigned)+1>)
 return 1
 
 [function f_weekly_setRewardSingle] // argv(0) - cislo questu
 arg(rewardSize,<eval def_weekly_<argv(1)>_rewardSize[<eval argv(0)>]>)
-tag(rewardSize,<<eval tag(rewardSize)>+arg(rewardSize)>)
+tag(rewardSize,<eval (<eval tag(rewardSize)>+arg(rewardSize))>)
 tag(quest_rewGold[<eval tag(qAssigned)>],<arg(rewardSize)*arg(rewardSize)*4>) // amount of GP in the reward
 tag(quest_rewXP[<eval tag(qAssigned)>],<arg(rewardSize)*10>) // amount of XP in the reward
 tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(rewardSize)/<eval {45 55}>)>) // amount of magic items in the reward
@@ -369,7 +369,7 @@ f_weekly_addItem(<currentQNumber>,meetMaster)
 tag(quest_totalAmount[<currentQNumber>],<eval <argv(1)>>)
 arg(masterToMeet,<f_weekly_random_master>)
 tag(quest_description[<currentQNumber>],"Pozdrav Mistra, ktery uci<br>skill <?f_weekly_random_master?>")
-tag(quest_iconId[<currentQNumber>],#0001) // TODO: id MISTRA : e.g. ITEM 020F8
+tag(quest_iconId[<currentQNumber>],02848)
 
 
 [function f_weekly_setup_dmgNPC]
@@ -384,7 +384,7 @@ else
 endif
 tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
 tag(quest_description[<currentQNumber>],"Udel poskozeni monstrum.")
-tag(quest_iconId[<currentQNumber>],#0001) // TODO: id ikonky poskozeni - treba nakej vybuch nebo co ja vim : ITEM - 019B2
+tag(quest_iconId[<currentQNumber>],019b2)
 
 
 [function f_weekly_setup_receiveDmg]
@@ -394,7 +394,7 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,receiveDmg)
 tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*50)*<eval topobj.tag(vitlev)>)>) // tag.vitlev(pocet zivotu)*(pocet_miniquestu*50)
 tag(quest_description[<currentQNumber>],"Utrz prime poskozeni.")
-tag(quest_iconId[<currentQNumber>],#0001) // TODO: id ikonky poskozeni - treba nakej vybuch nebo co ja vim
+tag(quest_iconId[<currentQNumber>],019b2)
 
 
 [function f_weekly_setup_stepOnWeb]
@@ -404,7 +404,7 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,stepOnWeb)
 tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{30 50})/10)>)
 tag(quest_description[<currentQNumber>],"Stoupni na pavucinu.")
-tag(quest_iconId[<currentQNumber>],#0001) // TODO: id pavuciny
+tag(quest_iconId[<currentQNumber>],0EE4)
 
 
 [function f_weekly_setup_killInDung] // argv(0) - amount coeficient, argv(1) - minimum XP of a monster
@@ -414,7 +414,7 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,killInDung)
 tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<tag(qCount)>*{<eval 35+argv(0)> <eval 45+argv(0)>})/10)>)
 tag(quest_description[<currentQNumber>],"Zabij monstrum v dungeonu<br>s alespon <?argv(1)?>XP")
-tag(quest_iconId[<currentQNumber>],#0001) // TODO: id ikonky, treba nejaky NPC : GUMP IDs: 03500+
+tag(quest_iconId[<currentQNumber>],020E9)
 tag(quest_subjectId[<currentQNumber>],<argv(1)>) // exceptionaly the subjectId doesn't store an actual ID, but a minimal required XP
 
 
@@ -423,7 +423,7 @@ src.sysMessage("setting up killPlayer quest")
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,killPlayer)
-tag(quest_iconId[<currentQNumber>],#0001) // TODO: id ikonky, treba nejaky NPC
+tag(quest_iconId[<currentQNumber>],032D3) // TODO: id ikonky, treba nejaky NPC
 if (<eval argv(0)> == 1)
   dorand 8
     arg(profession_to_kill,<class_necro.name>)
@@ -733,9 +733,9 @@ return<arg(retVal)>
 // one to eat fruits, the other to eat meat.
 //
 // executed upon the weekly memory item
-[function f_weekly_addItem] //argv(0) quest number in the week; argv(1k) tag name - will also be used as suffix of the event as e_weekly_<tagname>
+[function f_weekly_addItem] //argv(0) quest number in the week; argv(1) tag name - will also be used as suffix of the event as e_weekly_<tagname>
 cont.events=+e_weekly_<argv(1)>
-f_customLink_add(<eval argv(0)>,<argv(2)>)
+f_customLink_add(<eval argv(0)>,<argv(1)>)
 
 // returns the quest number in the week for the Item stored 
 [function f_weekly_getItem] //argv(0) - the item number; argv(1) tag name

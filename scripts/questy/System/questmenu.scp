@@ -94,6 +94,8 @@ questMenu[52] Halda Molle Hatlend       ,d_hm_hatlend                       ,1  
 questMenu_bg 9270
 questMenu_width            300
 questMenu_height           400
+questMenu_detail_width     400
+questMenu_detail_height    202
 questMenu_section_width    72
 questMenu_section_height   78
 questMenu_section_pic[0]   02b08
@@ -134,14 +136,79 @@ if (<argn> < 100)
   f_qm_closeMainDialog
   dialog(d_questy,<argn>)
   return
+elseif (<argn> < 1000)
+  arg(weeklyNum,<eval (<argn>-99)>)
+  if (<eval tag(qm_lastWeeklyDetail)> != <arg(weeklyNum)>)
+    tag(qm_lastWeeklyDetail,<arg(weeklyNum)>)
+    tag(qm_lastWeeklyDetailGmp,<eval (!0<tag(qm_lastWeeklyDetailGmp)>)>)
+  endif
+  arg(dialogName,d_questy_weeklyDetail<eval tag(qm_lastWeeklyDetailGmp)>)
+  dialog(d_questy,2)
+else
+  arg(dialogName,<f_questMenu_getDialog(<questMenu[<eval <argn>-1000>]>)>)
+  dialog(d_questy,1)
 endif
-arg(dialogName,<f_questMenu_getDialog(<questMenu[<eval <argn>-1000>]>)>)
 f_qm_closeMainDialog(<arg(dialogName)>)
-dialog(d_questy,1)
 if (strcmpi(<tag(qm_subDialog)>,<arg(dialogName)>))
-  dialog(<arg(dialogName)>)
+  dialog(<arg(dialogName)>,<arg(weeklyNum)-1>)
   tag(qm_subDialog,<arg(dialogName)>)
 endif
+
+[dialog d_questy_weeklyDetail0] // the two following dialogs are identical, but with a different ID for alternation -> solves race conditions in server-side dialog closure in client
+argo.f_qDialogWeeklyDetail(<argv(0)>)
+
+[dialog d_questy_weeklyDetail0 button]
+on=0
+argo.f_qm_closeSubDialog
+
+[dialog d_questy_weeklyDetail1]
+argo.f_qDialogWeeklyDetail(<argv(0)>)
+
+[dialog d_questy_weeklyDetail1 button]
+on=0
+argo.f_qm_closeSubDialog
+
+// TODO:
+// Icons of interest:
+//  bag closed: 0FC5
+//  bag opened: 0FC4
+//  button 03422 + 03423
+// XP ICONs:
+//   * 091F (chess horse white)
+//   * 0926 (chess horse black)
+// Gold ICONs:
+//   * 034CC
+//   * 034CA
+//   * item: 0EEF
+[function f_qDialogWeeklyDetail]  //argv(0) -> cislo questu
+SetLocation(<questMenu_width>+80,5)
+page 0
+resizepic(20,20,<questMenu_bg>,<questMenu_detail_width>,<questMenu_detail_height>)
+arg(font,"<?safe?><basefont size=6 color=<?questMenu_color_questActive?>>")
+arg(middle,<eval (<questMenu_detail_width>/2)>)
+arg(step,40)
+arg(baseIndent,40)
+arg(baseIndent,40)
+arg(txtIndent,50)
+setText(newTextLine,"<arg(font)><cont.weeklyTag(quest_description[<argv(0)>])>")
+htmlGump(<arg(middle)>-30,35,<questMenu_width>-160,50,<lastTextLine>,0,0)
+newTextLine(<arg(baseIndent)>,70,<d_def_subheadcolor>,"Odmena:")
+
+gumppic(<arg(baseIndent)>,100,034CC) // gold
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,100,100,"<cont.weeklyTag(quest_rewGold[<eval argv(0)>])> zlatych")
+
+gumppic(40,<arg(step)>+100,091F) // XP
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(step)>+100,100,"<cont.weeklyTag(quest_rewXP[<eval argv(0)>])> XP")
+
+arg(itemNum,<cont.weeklyTag(quest_rewMI[<eval argv(0)>])>)
+if (0<arg(itemNum)>)
+  tilepichue(<arg(middle)>,100,0E76) // magic item
+  newTextLine(<arg(middle)>+<arg(txtIndent)>,100,100,"<cont.weeklyTag(quest_rewMI[<eval argv(0)>])>x magicky predmet")
+endif
+//cont.weeklyTag(quest_rewGold[<eval argv(0)>])
+//cont.weeklyTag(quest_rewXP[<eval argv(0)>])
+//cont.weeklyTag(quest_rewMI[<eval argv(0)>])
+
 
 [function f_questy_buildMainDialog]
 newTextLine(<eval (<questMenu_width>/2)+15>,45,<d_def_subheadcolor>,"Questy")
@@ -220,8 +287,15 @@ else
   arg(picId,<?<src.weeklyTag(quest_subjectId[<argv(1)>])>.ID?>)
 endif
 tilepichue(77,<eval arg(y)+arg(yImgOffset)>,<arg(picId)>)
-setText(newTextLine,"<arg(fontSm)><eval argv(3)>/<argv(4)>")
-htmlGump(115,<eval arg(y)+arg(yTxtOffset)>,40,20,<lastTextLine>,0,0)
+if (<argv(4)> > 100) // line can be too long, split in two lines
+  setText(newTextLine,"<?arg(fontSm)?> <?eval argv(3)?><br>/<?argv(4)?>")
+  htmlGump(115,<eval arg(y)>,40,50,<lastTextLine>,0,0)
+else
+  setText(newTextLine,"<arg(fontSm)><eval argv(3)>/<argv(4)>")
+  htmlGump(115,<eval arg(y)+arg(yTxtOffset)>,40,20,<lastTextLine>,0,0)
+endif
+//button(<questMenu_width>-10,<arg(y)>+5,01F,01F,1,0,<eval (<argv(1)>+100)>)
+button(<questMenu_width>-10,<arg(y)>+5,0828,01F,1,0,<eval (<argv(1)>+100)>)
 setText(newTextLine,"<arg(font)><src.weeklyTag(quest_description[<argv(1)>])>")
 htmlGump(160,<arg(y)>,<questMenu_width>-160,<argv(2)>-20,<lastTextLine>,0,0)
 
@@ -2460,7 +2534,7 @@ argo.htmlGump(160,80,242,130,1,0,36)
 [function f_qDialogInstructions]  //argv(0) -> ksichtik; argv(1) -> nazev gumpu; argv(2)&argv(3) -> x&y ksichtik position
 SetLocation(<questMenu_width>+80,5)
 page 0
-resizepic(20,20,<questMenu_bg>,400,202)
+resizepic(20,20,<questMenu_bg>,<questMenu_detail_width>,<questMenu_detail_height>)
 if (argvcount > 1)
   text(195,40,<d_def_subheadcolor>,<eval argv(1)>)  // nazev gumpu
 else
