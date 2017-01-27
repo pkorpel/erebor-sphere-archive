@@ -19,24 +19,24 @@ on=*zdrav*
 on=*ukol*
 
 if (<distance> > 3)
- src.SYSMESSAGE("Na takovou vzdalenost s tebou jednat nebude")
+  src.SYSMESSAGE("Na takovou vzdalenost s tebou jednat nebude")
 else
- f_q009_krejci
+  f_q009_krejci
 endif
 
 [function f_q009_krejci]
-if (<src.tag.q009_krejci> == 3)
+if (<eval src.tag.q009_krejci> == 3)
   DIALOG(d_q009_krejci_6)
-elseif ((<src.tag.q009_krejci> == 2) && (<src.tag.q009_krejci_ringtime> < <serv.time>))
+elseif ((<eval src.tag.q009_krejci> == 2) && (<eval src.tag.q009_krejci_ringtime> < <serv.time>))
   DIALOG(d_q009_krejci_5)
-elseif (<src.tag.q009_krejci> == 2)
-  src.tag.q009_krejci_ringtime= (<src.tag(q009_krejci_ringtime)>+10800)
+elseif (<eval src.tag.q009_krejci> == 2)
+  src.tag.q009_krejci_ringtime= (<eval src.tag(q009_krejci_ringtime)>+10800)
   DIALOG(d_q009_krejci_4)
-elseif ((<src.tag.q009_krejci> == 1) && (<src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 ))
+elseif ((<eval src.tag.q009_krejci> == 1) && (<src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 ))
   DIALOG(d_q009_krejci_3)
-elseif (<src.tag.q009_krejci> == 1)
+elseif (<eval src.tag.q009_krejci> == 1)
   DIALOG(d_q009_krejci_2)
-elseif (<src.tag.q009_krejci> == 0)
+elseif (<eval src.tag.q009_krejci> == 0)
   DIALOG(d_q009_krejci_1)
 else
   src.redmessage("Neosetrena chyba v dialogu. Napis page nebo kontaktuj GM Yavannu na e-mail")
@@ -143,11 +143,11 @@ Ne, jsem si vedoma zavratnosti teto castky, avsak nepolevim. Je to rodinny kleno
 
 [dialog d_q009_krejci_1 button]
 on=1
- src.tag.q009_krejci = 1
- SAY=Dones mi tedy ten sek a dohodneme se.
+ src.tag(q009_krejci,1)
+ SAY("Dones mi tedy ten sek a dohodneme se.")
 
 on=2
- SAY=U mne najdes vse, co zkusena svadlena potrebuje.
+ SAY("U mne najdes vse, co zkusena svadlena potrebuje.")
  buy
 
 
@@ -194,7 +194,7 @@ Trochu vystredne oblecena, zrala zena. Na jeji dnes jiz lehce zvrasnene tvari je
 
 [dialog d_q009_krejci_2 button]
 on=2
- SAY=U mne najdes vse, co zkusena svadlena potrebuje.
+ SAY("U mne najdes vse, co zkusena svadlena potrebuje.")
  buy
 
 
@@ -257,17 +257,17 @@ Mas jen me slovo a jistotu, ze opustit toto staveni by pro mne bylo tezsi nez sm
 [dialog d_q009_krejci_3 button]
 on=1
  if (<src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 )
-   SAY=Tedy dohodnuto, stav se zde zitra, prsten by mel byt pripraven.
+   SAY("Tedy dohodnuto, stav se zde zitra, prsten by mel byt pripraven.")
    src.findlayer(layer_pack).findid(i_cashiers_check).remove
-   src.tag.q009_krejci_ringtime= (<serv.time>+86400)
-   src.tag.q009_krejci=2
+   src.tag(q009_krejci_ringtime,<eval (<serv.time>+86400)>)
+   src.tag(q009_krejci,2)
  else
-   SAY=Kam jsi dal ten sek ?
+   SAY("Kam jsi dal ten sek ?")
  endif
 
 
 on=2
- SAY=U mne najdes vse, co zkusena svadlena potrebuje.
+ SAY("U mne najdes vse, co zkusena svadlena potrebuje.")
  buy
 
 
@@ -317,11 +317,11 @@ Trochu vystredne oblecena, zrala zena. Na jeji dnes jiz lehce zvrasnene tvari je
 
 [dialog d_q009_krejci_4 button]
 on=1
- SAY=Pokusim se upravu prstenu uspisit. Bohuzel mne ted stale nekdo otravuje a to mi protahuje praci...
- src.tag.q009_krejci_ringtime= (<src.tag(q009_krejci_ringtime)>-3600)
+ SAY("Pokusim se upravu prstenu uspisit. Bohuzel mne ted stale nekdo otravuje a to mi protahuje praci...")
+ src.tag(q009_krejci_ringtime,<eval (<src.tag(q009_krejci_ringtime)>-3600)>)
  
 on=2
- SAY=U mne najdes vse, co zkusena svadlena potrebuje.
+ SAY("U mne najdes vse, co zkusena svadlena potrebuje.")
  buy
  
  
@@ -368,18 +368,18 @@ Trochu vystredne oblecena, zrala zena. Na jeji dnes jiz lehce zvrasnene tvari je
 
 [dialog d_q009_krejci_5 button]
 on=1
- SAY=... a to je cele. Opatruj ho velmi peclive. Verim, ze u tebe bude v dobrych rukou
+ SAY("... a to je cele. Opatruj ho velmi peclive. Verim, ze u tebe bude v dobrych rukou")
  if (<src.tailoring> < 1000)
    src.sysmessage("Vubec jsi nepochopil, o cem ta svadlena mluvila... snad to nebyly vyhozene penize.")
  endif
- src.tag.q009_krejci=3
+ src.tag(q009_krejci,3)
  src.tag(q009_krejci_ringtime).remove
  src.newitemsafe(i_q009_ring_tailor)
- lastnew.tag.ownerid = <src>
+ lastnew.tag(ownerid,<src>)
  lastnew.bounce
 
 on=2
- SAY=U mne najdes vse, co zkusena svadlena potrebuje.
+ SAY("U mne najdes vse, co zkusena svadlena potrebuje.")
  buy
  
  
@@ -428,10 +428,10 @@ Trochu vystredne oblecena, zrala zena. Na jeji dnes jiz lehce zvrasnene tvari je
 
 [dialog d_q009_krejci_6 button]
 on=1
- SAY=Rada te tu zase nekdy uvidim !
+ SAY("Rada te tu zase nekdy uvidim !")
 
 on=2
- SAY=U mne najdes vse, co zkusena svadlena potrebuje.
+ SAY("U mne najdes vse, co zkusena svadlena potrebuje.")
  buy
   
  
@@ -460,24 +460,26 @@ ON=@Create
 color=0999
 
 ON=@Equip
-if (<src.tailoring>>999) && (<tag(ownerid)> == <src>)
- src.tag(altered_ta,1)
- src.tailoring=(<src.tailoring>+100)
- src.sysmessage="Mistrovstvi spjate s timto prstenem ti zveda obratnost pri vyrobe odevu."
+if (<src.tailoring> > 999) && (<tag(ownerid)> == <src>)
+  src.tag(altered_ta,1)
+  src.tailoring=(<src.tailoring>+100)
+  src.sysmessage="Mistrovstvi spjate s timto prstenem ti zveda obratnost pri vyrobe odevu."
 elseif (<tag(ownerid)> == <src>)
- src.redmessage="K manipulaci s timto prstenem nemas dost zkusenosti."
- bounce
- return 1
+  src.redmessage("K manipulaci s timto prstenem nemas dost zkusenosti.")
+  bounce
+  return 1
 else
- src.redmessage="Tento prsten ti nepadne. Je na nem vyryto jmeno <tag(ownerid).name>"
- bounce
- return 1
+  src.redmessage("Tento prsten ti nepadne. Je na nem vyryto jmeno <tag(ownerid).name>")
+  bounce
+  return 1
 endif
 
 ON=@UnEquip
-if(src.tag(altered_ta))
- if(<src.tag(altered_ta)>==1)
-  src.tag.remove(altered_ta)
-  src.tailoring=(<src.tailoring>-100)
- endif
+if (src.tag(altered_ta))
+  if (<src.tag(altered_ta)>==1)
+    src.tag.remove(altered_ta)
+    src.tailoring=(<src.tailoring>-100)
+  endif
 endif
+
+[eof]
