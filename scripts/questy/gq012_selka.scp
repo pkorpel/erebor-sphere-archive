@@ -32,16 +32,16 @@ ON *Zdravim*
 ON *Dobry den*
 
 if (<distance> > 3)
- src.SYSMESSAGE("Na takovou vzdalenost s tebou jednat nebude")
+  src.SYSMESSAGE("Na takovou vzdalenost s tebou jednat nebude")
 else
- f_gq012_selka
+  f_gq012_selka
 endif
 
 [FUNCTION f_gq012_selka]
-IF (<src.tag.gq012_selka> <= 1)
- DIALOG(d_gq012_selka)
-ELSEIF (<src.tag.gq012_selka> == 2)
- DIALOG(d_gq012_selka1)
+IF (<eval src.tag(gq012_selka)> <= 1)
+  DIALOG(d_gq012_selka)
+ELSEIF (<eval src.tag(gq012_selka)> == 2)
+  DIALOG(d_gq012_selka1)
 ENDIF
 
 
@@ -129,26 +129,26 @@ return 1
 
 //  prijeti ukolu
 on=1  
-IF (<src.tag.gq012_selka> == 1)
- src.sysmessage Tento ukol uz jsi splnil nebo ho prave plnis !
-ELSE (<src.tag.gq012_selka> == 0)
- src.sysmessage Prijmas ukol od Selky Enricy
- SRC.NEWITEM=i_gq012_selka_collector
- SRC.ACT.BOUNCE
- src.tag.gq012_selka=1
- return 0
+IF (<eval src.tag(gq012_selka)> == 1)
+  src.sysmessage("Tento ukol uz jsi splnil nebo ho prave plnis !")
+ELSE (<eval src.tag(gq012_selka)> == 0)
+  src.sysmessage("Prijmas ukol od Selky Enricy")
+  SRC.NEWITEM=i_gq012_selka_collector
+  SRC.ACT.BOUNCE
+  src.tag(gq012_selka,1)
+  return 0
 ENDIF
 
 on=2  
 if <src.restest i_gq012_selka_collector> && (<src.findid(i_gq012_selka_collector).tag.contentscount> >= 10) 
- SAY Dekuji ti mnohokrat, buh ti to oplat !
- src.addexp(50)
- SRC.CONSUME i_gq012_selka_collector
- src.tag.gq012_selka=2
- return 1
+  SAY("Dekuji ti mnohokrat, buh ti to oplat !")
+  src.addexp(50)
+  SRC.CONSUME i_gq012_selka_collector
+  src.tag(gq012_selka,2)
+  return 1
 ELSE
- SAY Vzdyt jsi jeste neudelal oc jsem te prosila 
- Return 1
+  SAY("Vzdyt jsi jeste neudelal oc jsem te prosila") 
+  Return 1
 ENDIF
 
 ///// Selka - po splneni ukolu
