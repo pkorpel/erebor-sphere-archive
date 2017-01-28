@@ -133,11 +133,11 @@ endif
 
 if (cont.findid(i_taunter))
   cont.findid(i_taunter).link=<link>  
-  lastnew.timerd=<eval (link.str/2)>
+  lastnew.timerd=<eval (<link.str>/2)>
 else
   cont.newitemsafe(i_taunter)
-  lastnew.timerd=<eval (link.str/2)>
-  lastnew.link=<link>
+  lastnew.link=<link> 
+  lastnew.timerd=<eval (<link.str>/2)>
   cont.equip(<lastnew>)
 endif
 cont.removefight
@@ -152,6 +152,10 @@ type=t_src_changer
 name=taunter
 
 on=@equip
+if (<timerd> < 50)
+  cont.accmsg("ERROR TAUNT : Tauntnute NPC <cont.name>(<cont>) warem <link.name>(<link>) melo TimerD velice maly <timerd> War mel silu <link.str>, TimerD mel byt <eval (<link.str>/2)>")
+  timerd=50
+endif
 cont.say("TAUNTED by <link.name>")
 cont.events +e_npc_taunted
 cont.tag(taunt_count,<eval (<eval cont.tag(taunt_count)>+1)>)      // pocitadlo kolikrat bylo dane monstrum tauntnute
@@ -174,6 +178,12 @@ cont.tag(resist_taunt,#-200)   // po skonceni tauntu snizim jen o 20%... 5% nech
 on=@npcseenewplayer
 return 1    // nikdo novy me nezajima
 
+on=@aftergetswing
+if (<nastaveni_taunt_aftergetswing> == 1)
+  arg(taunt_target,<findid(i_taunter).link>)
+  attack(<arg(taunt_target)>)
+  act=<arg(taunt_target)>
+endif
 
 
 [eof]                                           

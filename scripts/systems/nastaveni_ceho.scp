@@ -2348,7 +2348,9 @@ n_ability3_default[45] 600
 n_ability3[46] 		tauntdelay_penalty
 n_ability3_name[46] "Penalizace za rychle pouziti"
 n_ability3_default[46] 50
-
+n_ability3[47] 		taunt_aftergetswing
+n_ability3_name[47] "TEST: Chovani po rane"
+n_ability3_default[47] 0
 
 
 n_magicCharge[0]    charge_limit
