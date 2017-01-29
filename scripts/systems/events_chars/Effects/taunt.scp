@@ -1,6 +1,6 @@
 [function taunt]
 if (profession!=class_war)
- sysMessage("Toto muze pouzit jen valecnik."")
+ sysMessage("Toto muze pouzit jen valecnik.")
  return 1
 endif
 if !(<eval tag(Taunt_TEST)>)
@@ -114,8 +114,7 @@ endif
 
 [itemdef i_taunt_delay]
 id=i_memory
-layer=77
-type=t_src_changer
+type=t_eq_script
 name=taunt timer
 
 on=@equip
@@ -140,16 +139,20 @@ else
   lastnew.timerd=<eval (<link.str>/2)>
   cont.equip(<lastnew>)
 endif
-cont.removefight
+if (<nastaveni_taunt_removefight> == 1)
+  cont.removefight
+else
+  cont.act=<link>
+endif
 cont.attack(<link>)
 remove
 
 
 [itemdef i_taunter]
 id=i_memory
-layer=77
-type=t_src_changer
+type=t_eq_script
 name=taunter
+attr=094
 
 on=@equip
 if (<timerd> < 50)
@@ -171,12 +174,21 @@ if (<eval cont.hits> <= 0)
   return
 endif
 cont.say("Konec tauntu")
+attack(<link>)
+act=<link>
 cont.events -e_npc_taunted
 cont.tag(resist_taunt,#-200)   // po skonceni tauntu snizim jen o 20%... 5% necham jako penalizaci pro pristi pokus tauntnuti tohoto monstra, ktere jiz tauntnute bylo.
 
 [events e_npc_taunted]
 on=@npcseenewplayer
 return 1    // nikdo novy me nezajima
+
+on=@hittry
+on=@Hit
+on=@beforegetswing
+on=@beforeGetEffect
+on=@afterDoEffect
+on=@afterswing
 
 on=@aftergetswing
 if (<nastaveni_taunt_aftergetswing> == 1)
