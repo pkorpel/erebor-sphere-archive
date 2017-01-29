@@ -16,7 +16,7 @@ weaponcreate(Verite)
 
 on=@targon_item
 if (src.act.id==i_flesh_head)||(src.act.id==i_flesh_HEAD_2)
- woodoo(3)
+  woodoo(3)
 endif
 if (f_weapon_sharp_targon_item)
   return 1
