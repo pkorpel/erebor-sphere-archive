@@ -229,6 +229,7 @@ while (<i> < <eval tag(qCount)>)
   f_weekly_setQuest(<arg(new_quest)>,<arg(quest_level)>)
   arg(i,#+1)
 endwhile
+f_weekly_setRewardComplete
 
 [function f_weekly_setQuestAmount]
 if (<tag(playerLevel)> >= 100)
@@ -267,7 +268,7 @@ return 1
 [function f_weekly_setRewardSingle] // argv(0) - cislo questu
 arg(rewardSize,<eval def_weekly_<argv(1)>_rewardSize[<eval argv(0)>]>)
 tag(rewardSize,<eval (<eval tag(rewardSize)>+arg(rewardSize))>)
-tag(quest_rewGold[<eval tag(qAssigned)>],<arg(rewardSize)*arg(rewardSize)*4>) // amount of GP in the reward
+tag(quest_rewGold[<eval tag(qAssigned)>],<eval (<arg(rewardSize)>*<arg(rewardSize)>*4)>) // amount of GP in the reward
 tag(quest_rewXP[<eval tag(qAssigned)>],<arg(rewardSize)*10>) // amount of XP in the reward
 tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(rewardSize)/<eval {45 55}>)>) // amount of magic items in the reward
 //tag(quest_rewChance[<eval tag(qAssigned)>],<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
@@ -293,7 +294,6 @@ tag(rewMI,<eval (arg(rewardSize)/<eval {45 55}>)>) // amount of magic items in t
 //    ....
 //  enddo
 //endif
-
 
 [function f_getFinalItemId] // argv(0) - nektera z random definici, ktera se ma expandovat na konkretni itemdef
 return<findres(itemdef,<argv(0)>)>
@@ -423,7 +423,7 @@ src.sysMessage("setting up killPlayer quest")
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,killPlayer)
-tag(quest_iconId[<currentQNumber>],032D3) // TODO: id ikonky, treba nejaky NPC
+tag(quest_iconId[<currentQNumber>],032D3)
 if (<eval argv(0)> == 1)
   dorand 8
     arg(profession_to_kill,<class_necro.name>)

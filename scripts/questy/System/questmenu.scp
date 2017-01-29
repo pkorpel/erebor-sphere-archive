@@ -150,7 +150,7 @@ else
 endif
 f_qm_closeMainDialog(<arg(dialogName)>)
 if (strcmpi(<tag(qm_subDialog)>,<arg(dialogName)>))
-  dialog(<arg(dialogName)>,<arg(weeklyNum)-1>)
+  dialog(<arg(dialogName)>,<eval (arg(weeklyNum)-1)>)
   tag(qm_subDialog,<arg(dialogName)>)
 endif
 
@@ -168,46 +168,31 @@ argo.f_qDialogWeeklyDetail(<argv(0)>)
 on=0
 argo.f_qm_closeSubDialog
 
-// TODO:
-// Icons of interest:
-//  bag closed: 0FC5
-//  bag opened: 0FC4
-//  button 03422 + 03423
-// XP ICONs:
-//   * 091F (chess horse white)
-//   * 0926 (chess horse black)
-// Gold ICONs:
-//   * 034CC
-//   * 034CA
-//   * item: 0EEF
 [function f_qDialogWeeklyDetail]  //argv(0) -> cislo questu
 SetLocation(<questMenu_width>+80,5)
 page 0
 resizepic(20,20,<questMenu_bg>,<questMenu_detail_width>,<questMenu_detail_height>)
 arg(font,"<?safe?><basefont size=6 color=<?questMenu_color_questActive?>>")
 arg(middle,<eval (<questMenu_detail_width>/2)>)
-arg(step,40)
-arg(baseIndent,40)
+arg(step,45)
 arg(baseIndent,40)
 arg(txtIndent,50)
+arg(baseY,110)
 setText(newTextLine,"<arg(font)><cont.weeklyTag(quest_description[<argv(0)>])>")
 htmlGump(<arg(middle)>-30,35,<questMenu_width>-160,50,<lastTextLine>,0,0)
-newTextLine(<arg(baseIndent)>,70,<d_def_subheadcolor>,"Odmena:")
+newTextLine(<arg(baseIndent)>,80,<d_def_subheadcolor>,"Odmena")
 
-gumppic(<arg(baseIndent)>,100,034CC) // gold
-newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,100,100,"<cont.weeklyTag(quest_rewGold[<eval argv(0)>])> zlatych")
+gumppic(<arg(baseIndent)>,<arg(baseY)>,034CC) // gold
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(quest_rewGold[<eval argv(0)>])> zlatych")
 
-gumppic(40,<arg(step)>+100,091F) // XP
-newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(step)>+100,100,"<cont.weeklyTag(quest_rewXP[<eval argv(0)>])> XP")
+gumppic(<arg(baseIndent)>,<arg(step)>+<arg(baseY)>-9,091F) // XP
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(step)>+<arg(baseY)>,100,"<cont.weeklyTag(quest_rewXP[<eval argv(0)>])> xp")
 
 arg(itemNum,<cont.weeklyTag(quest_rewMI[<eval argv(0)>])>)
 if (0<arg(itemNum)>)
-  tilepichue(<arg(middle)>,100,0E76) // magic item
-  newTextLine(<arg(middle)>+<arg(txtIndent)>,100,100,"<cont.weeklyTag(quest_rewMI[<eval argv(0)>])>x magicky predmet")
+  tilepichue(<arg(middle)>,<arg(baseY)>,0E76) // magic item
+  newTextLine(<arg(middle)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(quest_rewMI[<eval argv(0)>])>x magicky predmet")
 endif
-//cont.weeklyTag(quest_rewGold[<eval argv(0)>])
-//cont.weeklyTag(quest_rewXP[<eval argv(0)>])
-//cont.weeklyTag(quest_rewMI[<eval argv(0)>])
 
 
 [function f_questy_buildMainDialog]
@@ -227,24 +212,36 @@ while (<questNumber> < <questMenu_rows>)
   arg(questNumber,#+1)
 endwhile
 
-// TODO:
-// Icons of interest:
-//  bag closed: 0FC5
-//  bag opened: 0FC4
-//  button 03422 + 03423
-// XP ICONs:
-//   * 091F (chess horse white)
-//   * 0926 (chess horse black)
-// Gold ICONs:
-//   * 034CC
-//   * 034CA
-//   * item: 0EEF
 [function f_questy_buildWeeklyDialog]
-newTextLine(<eval (<questMenu_width>/2)-4>,45,<d_def_subheadcolor>,"Tydenni Questy")
+newTextLine(<eval (<questMenu_width>/2)-11>,45,<d_def_subheadcolor>,"Tydenni Questy")
 f_questMenu_sectionButton(1)
 arg(stepSize,54)
 arg(qCount,<src.weeklyTag(qCount)>)
 
+// ODMENA
+arg(middle,<eval (<questMenu_width>/2)+15>)
+arg(step,32)
+arg(baseIndent,65)
+arg(baseY,305)
+arg(txtIndent,40)
+resizepic(50,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-20,102)
+newTextLine(<arg(middle)>-65,<arg(baseY)>+8,<d_def_subheadcolor>,"Odmena za splneni vsech Q")
+
+arg(baseY,#+26)
+gumppic(<arg(baseIndent)>,<arg(baseY)>,034CC) // gold
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(rewGold)> gp")
+
+gumppic(<arg(baseIndent)>,<arg(step)>+<arg(baseY)>-9,091F) // XP
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(step)>+<arg(baseY)>,100,"<cont.weeklyTag(rewXP)> xp")
+
+arg(middle,#+15)
+arg(itemNum,<cont.weeklyTag(rewMI)>)
+if (0<arg(itemNum)>)
+  tilepichue(<arg(middle)>,<arg(baseY)>,0E76) // magic item
+  newTextLine(<arg(middle)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(rewMI)>x MP")
+endif
+
+// QUESTY
 arg(qNum,0)
 arg(hasCompleted,0)
 while (<arg(qNum)> < <arg(qCount)>)
@@ -305,11 +302,11 @@ if (0<tag(pageNumber)> == 0)
   tag(qOnPageNum,0)
   page(1)
 elseif (<tag(qOnPageNum)> == <argv(0)>)
-  button(<questMenu_width>-10,<questMenu_height>-15,<g_btn_right[2]>,<g_btn_right_press[2]>,0,<tag(pageNumber)>+1,0)  //  next page
+  button(<questMenu_width>-30,47,<g_btn_right[2]>,<g_btn_right_press[2]>,0,<tag(pageNumber)>+1,0)  //  next page
   tag(qOnPageNum,0)
   tag(pageNumber,<eval tag(pageNumber)+1>)
   page(<tag(pageNumber)>)
-  button(<questMenu_width>-30,<questMenu_height>-15,<g_btn_left[2]>,<g_btn_left_press[2]>,0,<tag(pageNumber)>-1,0)  //  prev.page
+  button(93,47,<g_btn_left[2]>,<g_btn_left_press[2]>,0,<tag(pageNumber)>-1,0)  //  prev.page
 endif
 tag(yPos,<eval (84+(<tag(qOnPageNum)>*<argv(1)>))>)
 tag(qOnPageNum,<eval tag(qOnPageNum)+1>)
