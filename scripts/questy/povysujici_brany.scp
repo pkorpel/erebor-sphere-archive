@@ -21,7 +21,7 @@ ON=@userClick
 SRC.sysMESSAGE Cesta k povyseni na Mistra
 
 ON=@userDClick
-src.classmessage(Otevrela se ti cesta k Mistrovskemu questu ...)
+src.classmessage("Otevrela se ti cesta k Mistrovskemu questu ...")
 sfx snd_SPELL_lightning
 SRC.NEWITEM=i_gate_mistr
 SRC.ACT.COLOR=0981
@@ -47,10 +47,10 @@ SUBSECTION=System povyseni
 DESCRIPTION=Vstupni brana k mistrovskemu questu
 
 on=@step
-if (<eval src.tag(skillrank)> == 1)&&(<src.tag(level)> > 5)
+if (<eval src.tag(skillrank)> == 1) && (<src.tag(level)> > 5)
   src.go 462,2577,10,1 // ZADAT LOKACI kam hodi pro splneni mistrovskeho questu
 else
-  src.redmessage("Tato cesta neni urcena pro tebe!"")
+  src.redmessage("Tato cesta neni urcena pro tebe!")
 endif
 
 /////////////////////////////////////
