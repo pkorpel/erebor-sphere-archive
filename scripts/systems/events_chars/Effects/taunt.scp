@@ -174,8 +174,8 @@ if (<eval cont.hits> <= 0)
   return
 endif
 cont.say("Konec tauntu")
-attack(<link>)
-act=<link>
+cont.attack(<link>)
+cont.act=<link>
 cont.events -e_npc_taunted
 cont.tag(resist_taunt,#-200)   // po skonceni tauntu snizim jen o 20%... 5% necham jako penalizaci pro pristi pokus tauntnuti tohoto monstra, ktere jiz tauntnute bylo.
 
@@ -187,6 +187,7 @@ on=@hittry
 on=@Hit
 on=@beforegetswing
 on=@beforeGetEffect
+on=@beforeDoEffect
 on=@afterDoEffect
 on=@afterswing
 
