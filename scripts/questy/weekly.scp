@@ -1,8 +1,13 @@
 [defnames def_weekly_quest]
+def_weekly_count         8 // maximalni pocet questu
+def_weekly_countBase     3 // zakladni pocet questu pred uplatnenim levelu
+def_weekly_levelStepUp  20 // potrebny pocet levelu pro ziskani noveho questu
+def_weekly_levelMin     10 // minimalni potrebny level pro obdrzeni weekly questu
+
+// single-quest related definitions
 def_weekly_count_low  3 // pocet low miniquestu
 def_weekly_count_medium  3 // pocet medium miniquestu
 def_weekly_count_high  2 // pocet high miniquestu
-
 
 // LOW quests
 def_weekly_low_setupFunction[0]    f_weekly_setup_eatFood
@@ -157,6 +162,7 @@ findid(i_memory_weekly_quest).tag.dump
 
 [function wtr]
 findid(i_memory_weekly_quest).remove
+f_weekly_clearEvents
 
 [function f_weekly_clearEvents]
 events=-e_weekly_itemLoot
@@ -219,7 +225,7 @@ while (<i> < <eval tag(qCount)>)
   elseif (<i> < 6)
     arg(new_quest,<eval {1 def_weekly_count_medium}>)
     arg(quest_level,medium)
-  elseif (<i> < 8)
+  else
     arg(new_quest,<eval {1 def_weekly_count_high}>)
     arg(quest_level,high)
   endif
@@ -232,10 +238,10 @@ endwhile
 f_weekly_setRewardComplete
 
 [function f_weekly_setQuestAmount]
-if (<tag(playerLevel)> >= 100)
-  tag(qCount,8)
+if (<tag(playerLevel)> >= <eval ((<def_weekly_count>-<def_weekly_countBase>)*<def_weekly_levelStepUp>)>)
+  tag(qCount,<def_weekly_count>)
 else
-  tag(qCount,<eval ((<tag(playerLevel)>)/20)+3>)
+  tag(qCount,<eval ((<tag(playerLevel)>)/<def_weekly_levelStepUp>)+<def_weekly_countBase>>)
 endif
 src.say("Pocet miniquestu: <src.weeklyTag(qCount)>")
 
@@ -268,16 +274,16 @@ return 1
 [function f_weekly_setRewardSingle] // argv(0) - cislo questu
 arg(rewardSize,<eval def_weekly_<argv(1)>_rewardSize[<eval argv(0)>]>)
 tag(rewardSize,<eval (<eval tag(rewardSize)>+arg(rewardSize))>)
-tag(quest_rewGold[<eval tag(qAssigned)>],<eval (<arg(rewardSize)>*<arg(rewardSize)>*4)>) // amount of GP in the reward
-tag(quest_rewXP[<eval tag(qAssigned)>],<arg(rewardSize)*10>) // amount of XP in the reward
+tag(quest_rewGold[<eval tag(qAssigned)>],<eval (arg(rewardSize)*arg(rewardSize)*2)>) // amount of GP in the reward
+tag(quest_rewXP[<eval tag(qAssigned)>],<eval (arg(rewardSize)*10)>) // amount of XP in the reward
 tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(rewardSize)/<eval {45 55}>)>) // amount of magic items in the reward
 //tag(quest_rewChance[<eval tag(qAssigned)>],<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
 
 [function f_weekly_setRewardComplete] // sets reward for completion of ALL the subquests
 arg(rewardSize,<tag(rewardSize)>)
-tag(rewGold,<arg(rewardSize)*arg(rewardSize)*4>) // amount of GP in the reward
-tag(rewXP,<arg(rewardSize)*10>) // amount of XP in the reward
-tag(rewMI,<eval (arg(rewardSize)/<eval {45 55}>)>) // amount of magic items in the reward
+tag(rewGold,<eval (arg(rewardSize)*arg(rewardSize))>) // amount of GP in the reward
+tag(rewXP,<eval (arg(rewardSize)*10)>) // amount of XP in the reward
+tag(rewMI,<eval (arg(rewardSize)/85)>) // amount of magic items in the reward
 //tag(rewChance,<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
 
 //[function f_weekly_getChanceReward]

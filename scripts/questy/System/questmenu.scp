@@ -215,24 +215,23 @@ endwhile
 [function f_questy_buildWeeklyDialog]
 newTextLine(<eval (<questMenu_width>/2)-11>,45,<d_def_subheadcolor>,"Tydenni Questy")
 f_questMenu_sectionButton(1)
-arg(stepSize,54)
 arg(qCount,<src.weeklyTag(qCount)>)
 
 // ODMENA
 arg(middle,<eval (<questMenu_width>/2)+15>)
-arg(step,32)
-arg(baseIndent,65)
-arg(baseY,305)
+arg(stepSize,35)
+arg(baseIndent,70)
+arg(baseY,302)
 arg(txtIndent,40)
-resizepic(50,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-20,102)
-newTextLine(<arg(middle)>-65,<arg(baseY)>+8,<d_def_subheadcolor>,"Odmena za splneni vsech Q")
+resizepic(50,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-20,108)
+newTextLine(<arg(middle)>-72,<arg(baseY)>+8,<d_def_subheadcolor>,"Odmena za splneni vsech Questu")
 
-arg(baseY,#+26)
+arg(baseY,#+28)
 gumppic(<arg(baseIndent)>,<arg(baseY)>,034CC) // gold
 newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(rewGold)> gp")
 
-gumppic(<arg(baseIndent)>,<arg(step)>+<arg(baseY)>-9,091F) // XP
-newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(step)>+<arg(baseY)>,100,"<cont.weeklyTag(rewXP)> xp")
+gumppic(<arg(baseIndent)>,<arg(stepSize)>+<arg(baseY)>-9,091F) // XP
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(stepSize)>+<arg(baseY)>,100,"<cont.weeklyTag(rewXP)> xp")
 
 arg(middle,#+15)
 arg(itemNum,<cont.weeklyTag(rewMI)>)
@@ -242,6 +241,7 @@ if (0<arg(itemNum)>)
 endif
 
 // QUESTY
+arg(stepSize,54)
 arg(qNum,0)
 arg(hasCompleted,0)
 while (<arg(qNum)> < <arg(qCount)>)
@@ -255,19 +255,25 @@ while (<arg(qNum)> < <arg(qCount)>)
   arg(qNum,#+1)
 endwhile
 
-if (arg(hasCompleted) == 0)
-  return
+if (arg(hasCompleted) != 0)
+  arg(qNum,0)
+  while (<arg(qNum)> < <arg(qCount)>)
+    arg(completed,<eval src.weeklyTag(quest_completed[<arg(qNum)>])>)
+    arg(totalAmount,<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>)
+    if (arg(completed) >= arg(totalAmount)) // only completed quests
+      f_qm_weeklyAddDialogItem(<questMenu_color_questInactive>,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
+    endif
+    arg(qNum,#+1)
+  endwhile
 endif
+arg(qNum,#+1)
+//src.sysMessage("eem <qNum> and <def_weekly_count>")
 
-arg(qNum,0)
-while (<arg(qNum)> < <arg(qCount)>)
-  arg(completed,<eval src.weeklyTag(quest_completed[<arg(qNum)>])>)
-  arg(totalAmount,<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>)
-  if (arg(completed) == arg(totalAmount))
-    f_qm_weeklyAddDialogItem(<questMenu_color_questInactive>,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
-  endif
+while (<arg(qNum)> <= <def_weekly_count>)
+  f_qm_weeklyAddUnavailableQuestInfo(<arg(qNum)>,<arg(stepSize)>)
   arg(qNum,#+1)
 endwhile
+
 
 [function f_qm_weeklyAddDialogItem] // argv(0) color, argv(1) qnum, argv(2) step size, argv(3) - completed, argv(4) - totalAmount
 arg(yTxtOffset,8)
@@ -276,8 +282,8 @@ arg(font,"<?safe?><basefont size=4 color=<?argv(0)?>>")
 arg(fontSm,"<?safe?><basefont size=1 color=<?argv(0)?>>")
 f_qm_setOffsetAndPaging(4,<argv(2)>)
 arg(y,<tag(yPos)>)
-resizepic(75,<arg(y)>+4,<g_bg[8]>,<questMenu_width>-65,<argv(2)>-5) //g_bg[5,6,7,8] | 5,7,8
-arg(y,#+10)
+f_qm_weeklyItemButton(<arg(y)>,<argv(2)>)
+arg(y,#+6)
 if (<src.weeklyTag(quest_iconId[<argv(1)>])>)
   arg(picId,<src.weeklyTag(quest_iconId[<argv(1)>])>)
 else
@@ -295,6 +301,17 @@ endif
 button(<questMenu_width>-10,<arg(y)>+5,0828,01F,1,0,<eval (<argv(1)>+100)>)
 setText(newTextLine,"<arg(font)><src.weeklyTag(quest_description[<argv(1)>])>")
 htmlGump(160,<arg(y)>,<questMenu_width>-160,<argv(2)>-20,<lastTextLine>,0,0)
+
+[function f_qm_weeklyAddUnavailableQuestInfo] // argv(0) qnum, argv(1) step size
+f_qm_setOffsetAndPaging(4,<argv(1)>)
+arg(y,<tag(yPos)>)
+f_qm_weeklyItemButton(<arg(y)>,<argv(1)>)
+arg(y,<arg(y)>+13)
+arg(nextQuestLevel,<eval ((<argv(0)>-3)*<def_weekly_levelStepUp>)>)
+newTextLine(103,<arg(y)>,2298,"Quest dostupny na urovni <arg(nextQuestLevel)>")
+
+[function f_qm_weeklyItemButton] // argv(0) - Y pos, argv(1) - step size
+resizepic(75,<argv(0)>,<g_bg[8]>,<questMenu_width>-65,<argv(1)>-5) //g_bg[5,6,7,8] | 5,7,8
 
 [function f_qm_setOffsetAndPaging] // argv(0) max items, argv(1) - Y position step size
 if (0<tag(pageNumber)> == 0)
