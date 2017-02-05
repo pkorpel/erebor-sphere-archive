@@ -5152,6 +5152,12 @@ if (isevent(e_npc_silenced))
 endif
 return 0
 
+[function isTaunted]
+if (isevent(e_npc_taunted))
+  return 1
+endif
+return 0
+
 [function getArmed]
 arg(arm,<findlayer(layer_hand1)>)
 if (<arg(arm)>)

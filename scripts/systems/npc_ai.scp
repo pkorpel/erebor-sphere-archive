@@ -1584,6 +1584,10 @@ ON=@NPCSeeNewPlayer
 if (isSleeping)
   return 0
 endif
+if (isTaunted)
+  src.accmsg("leapujici monstrum <name>(<uid>) se pokusilo leapnout na <src.name>(<src>) ikdyz bylo TAUNT -nute.")
+  return 0
+endif
 
 if (src.flag_invul)
   return 0
@@ -1672,6 +1676,10 @@ if (cont.isPet)
     remove
     return 1
   endif
+endif
+if (isTaunted)  // npc je tauntnute, utoci tedy jen na wara
+  src.accmsg("leapujici monstrum <cont.name>(<cont>) se pokusilo leapnout2 na <victim.name>(<victim>) ikdyz bylo TAUNT -nute.")
+  arg(victim,<cont.findid(i_taunter).link>)
 endif
 if (victim) //mam vubec nejaky bojovy cil
   if (victim.ischar) //je to char
