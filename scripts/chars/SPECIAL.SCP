@@ -2431,7 +2431,7 @@ tag(resist_cold,-200)
 //typ monstra
 tag(monstertype,golem,60)
 //weap flags
-tag.weapflag=dam_slash|dam_physical
+tag.weapflag=dam_slashing|dam_physical
 
 PEACEMAKING=100.0
 WRESTLING=160.0
@@ -2691,7 +2691,7 @@ tag(resist_cold,-200)
 tag(monstertype,golem,60)
 
 //weap flags
-tag.weapflag=dam_slash|dam_physical
+tag.weapflag=dam_slashing|dam_physical
 
 PEACEMAKING=100.0
 WRESTLING=160.0

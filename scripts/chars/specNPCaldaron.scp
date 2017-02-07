@@ -465,7 +465,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
 tag(monstertype,humanoid,40)
-tag.weapflag=dam_slash|dam_physical
+tag.weapflag=dam_slashing|dam_physical
 
 tag(resist_poison,100)
 tag(resist_para,1000)
@@ -1258,7 +1258,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
 tag(monstertype,humanoid,60)
-tag.weapflag=dam_slash|dam_physical
+tag.weapflag=dam_slashing|dam_physical
 
 tag(resist_poison,300)
 tag.resist_para=<eval {500 750}>
@@ -1937,7 +1937,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
 tag(monstertype,humanoid,60)
-tag.weapflag=dam_slash|dam_physical
+tag.weapflag=dam_slashing|dam_physical
 
 tag(resist_poison,300)
 tag.resist_para=<eval {500 750}>
@@ -2022,7 +2022,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
 tag(monstertype,humanoid,60)
-tag.weapflag=dam_slash|dam_physical
+tag.weapflag=dam_slashing|dam_physical
 
 tag(resist_poison,300)
 tag.resist_para=<eval {500 750}>
