@@ -856,7 +856,7 @@ if (findlayer.layer_horse)
     classmessage("V sedle nejsi <sex schopen schopna> s touto kusi dobre manipulovat")
   endif
 else (action==Skill_archery)
-  if (chance(<eval (<tag(ra_bleed_bolt)>*45)>,3))
+  if (chance(<eval (<eval tag(ra_bleed_bolt)>*45)>,3))
     arg(arrowTypeNumber,<eval (<eval findtype(<tag(weaponuid).typedef.tdata3>).typedef.tdata1>+25)>) //the bleed bonus settings is moved by 25 positions, see nastaveni.scp:n_arrows for more detailed view
     arg(boltMaterial_BleedCoefficient,<nastaveni_arrowdamage_<eval arg(arrowTypeNumber)>>)
     arg(UC2BleedPower_Coefficient,<eval (<nastaveni_bleed_bolt>*<arg(boltMaterial_BleedCoefficient)>)/1000>)
