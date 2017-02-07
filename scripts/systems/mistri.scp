@@ -13,62 +13,72 @@ ON=*zdravim*
 ON=*hi*
 ON=*hello*
 ON=*buy*
+
+if (src.isdead)
+  say("Musis byt nazivu. S duchy se nebavim...")
+  return 1
+endif
 src.roundskill(<tag(ucimskill)>)
 if (src.profession==prof_undeclared)
-  src.sysmessage "Mas poskozenou postavu... pouzij svuj krystal nebo zavolej GM..."
+  src.sysmessage("Mas poskozenou postavu... pouzij svuj krystal nebo zavolej GM...")
   return 0
 elseif (src.ismagic)
-  src.sysmessage "Nesmis byt pod zadnym magickym vlivem..."
+  src.sysmessage("Nesmis byt pod zadnym magickym vlivem...")
   return 0
 endif
 
-IF (src.canbe_velmistr(<tag(ucimskill)>))
-  SAY "Vidim ze jsi pripraven stati se VELMISTREM <tag.ucimskill>. Pokud mas zajem staci rici ANO a za poplatek <def_mistr_price_vm>gp te vytrenuji v tomto oboru."
+if (src.canbe_velmistr(<tag(ucimskill)>))
+  say("Vidim ze jsi pripraven stati se VELMISTREM <tag.ucimskill>. Pokud mas zajem staci rici ANO a za poplatek <def_mistr_price_vm>gp te vytrenuji v tomto oboru.")
   return 0    
 elseif (src.canbe_mistr(<tag(ucimskill)>))
-  SAY "Vidim ze jsi pripraven stati se MISTREM <tag.ucimskill>. Pokud mas zajem staci rici ANO a za poplatek <def_mistr_price_mistr>gp te vytrenuji v tomto oboru."
+  say("Vidim ze jsi pripraven stati se MISTREM <tag.ucimskill>. Pokud mas zajem staci rici ANO a za poplatek <def_mistr_price_mistr>gp te vytrenuji v tomto oboru.")
   return 0    
-elseIF (src.canbe_expert(<tag(ucimskill)>))
-  SAY "Vidim ze jsi pripraven stati se EXPERTEM <tag.ucimskill>. Pokud mas zajem staci rici ANO a za poplatek <def_mistr_price_expert>gp te vytrenuji v tomto oboru."
+elseif (src.canbe_expert(<tag(ucimskill)>))
+  say("Vidim ze jsi pripraven stati se EXPERTEM <tag.ucimskill>. Pokud mas zajem staci rici ANO a za poplatek <def_mistr_price_expert>gp te vytrenuji v tomto oboru.")
   return 0   
 else
-  say "Nemohu te naucit vice o <tag.ucimskill>."
+  say("Nemohu te naucit vice o <tag.ucimskill>.")
   return 0   
 endif
  
 ON=*YES* 
 ON=*ANO*
+
+if (src.isdead)
+  say("Musis byt nazivu. S duchy se nebavim...")
+  return 1
+endif
 if (src.profession==prof_undeclared)
-  src.sysmessage "Mas poskozenou postavu... pouzij svuj krystal nebo zavolej GM..."
+  src.sysmessage("Mas poskozenou postavu... pouzij svuj krystal nebo zavolej GM...")
   return 0
 elseif (src.ismagic)
-  src.sysmessage "Nesmis byt pod zadnym magickym vlivem..."
+  src.sysmessage("Nesmis byt pod zadnym magickym vlivem...")
   return 0
 endif
 
-IF (src.canbe_velmistr(<tag.ucimskill>))
+if (src.canbe_velmistr(<tag.ucimskill>))
   if (src.pay(<def_mistr_price_vm>))
     src.<tag.ucimskill>=800
-    SAY "Byl jsi vytrenovan VELMISTREM <tag.ucimskill> "
+    say("Byl jsi vytrenovan VELMISTREM <tag.ucimskill> ")
   else
-    SAY "Nemas patricnou sumu, za kterou bych te mohl vytrenovat."
+    say("Nemas patricnou sumu, za kterou bych te mohl vytrenovat.")
   endif
 elseif (src.canbe_MISTR(<tag.ucimskill>))
   if (src.pay(<def_mistr_price_mistr>))
     src.<tag.ucimskill>=550
-    SAY "Byl jsi vytrenovan MISTREM <tag.ucimskill> "
+    say("Byl jsi vytrenovan MISTREM <tag.ucimskill> ")
   else
-    SAY "Nemas patricnou sumu, za kterou bych te mohl vytrenovat."
+    say("Nemas patricnou sumu, za kterou bych te mohl vytrenovat.")
   endif
-elseIF (src.canbe_expert(<tag.ucimskill>))
+elseif (src.canbe_expert(<tag.ucimskill>))
   if (src.pay(<def_mistr_price_expert>))
     src.<tag.ucimskill>=300
-    SAY "Byl jsi vytrenovan EXPERTEM <tag.ucimskill> "
+    say("Byl jsi vytrenovan EXPERTEM <tag.ucimskill> ")
   else
-    SAY "Nemas patricnou sumu, za kterou bych te mohl vytrenovat."
+    say("Nemas patricnou sumu, za kterou bych te mohl vytrenovat.")
   endif
 else
-  say "Nemohu te naucit vice o <tag.ucimskill>."
+  say("Nemohu te naucit vice o <tag.ucimskill>.")
   return 0
 endif
 
@@ -80,16 +90,16 @@ if (<?<args>?><=250)
     if (<src.tag(level)>>2)
      return 1
     else
-     sysmessage "Jsi na moc nizke urovni"
+     sysmessage("Jsi na moc nizke urovni")
     endif
    else 
-    sysmessage "Pred dalsi lekci musis jeste trenovat."
+    sysmessage("Pred dalsi lekci musis jeste trenovat.")
    endif
   else
-   sysmessage "Dosahl jsi sveho maxima <args>."
+   sysmessage("Dosahl jsi sveho maxima <args>.")
   endif
  else
-  sysmessage "Jeste nejsi pripraven na dalsi lekci."
+  sysmessage("Jeste nejsi pripraven na dalsi lekci.")
  endif
 endif
 return 0
@@ -102,16 +112,16 @@ if (<?<args>?>>250)&&(<?<args>?><=500)
     if (<src.tag(level)>>5)
      return 1
      else
-     sysmessage "Jsi na moc nizke urovni"
+     sysmessage("Jsi na moc nizke urovni")
     endif
    else 
-    sysmessage "Pred dalsi lekci musis jeste trenovat."
+    sysmessage("Pred dalsi lekci musis jeste trenovat.")
    endif
   else
-   sysmessage "Dosahl jsi sveho maxima <args>."
+   sysmessage("Dosahl jsi sveho maxima <args>.")
   endif
  else
-  sysmessage "Jeste nejsi pripraven na dalsi lekci."
+  sysmessage("Jeste nejsi pripraven na dalsi lekci.")
  endif
 endif
 return 0
@@ -124,16 +134,16 @@ if (<?<args>?>>500)&&(<?<args>?><=750)
     if (<src.tag(level)>>11)
      return 1
     else
-     sysmessage "Jsi na moc nizke urovni"
+     sysmessage("Jsi na moc nizke urovni")
     endif
    else 
-    sysmessage "Pred dalsi lekci musis jeste trenovat."
+    sysmessage("Pred dalsi lekci musis jeste trenovat.")
    endif
   else
-   sysmessage "Dosahl jsi sveho maxima <args>."
+   sysmessage("Dosahl jsi sveho maxima <args>.")
   endif
  else
-  sysmessage "Jeste nejsi pripraven na dalsi lekci"
+  sysmessage("Jeste nejsi pripraven na dalsi lekci")
  endif
 endif
 return 0
@@ -147,7 +157,7 @@ on=*hello*
 on=*prod*
 on=*exp*
 if (src.profession==class_craft)||(src.isgm)
-  say "Poskytuji lekce na zaklade tvych zkusenosti s remeslnou vyrobou"
+  say("Poskytuji lekce na zaklade tvych zkusenosti s remeslnou vyrobou")
   src.findid(i_buyer_tag_box).remove
   src.newitemsafe(i_buyer_tag_box)
   lastnew.equip
@@ -155,7 +165,7 @@ if (src.profession==class_craft)||(src.isgm)
   src.findlayer(21).contents(tryexpit)
   src.findid(i_buyer_tag_box).dialog d_craftmistr
 else
-  say Nemohu slouzit...
+  say("Nemohu slouzit...")
 endif
 
 //argv(0) - exforthis
@@ -425,7 +435,7 @@ if (src.profession==class_craft)||(src.isgm)
   //src.dialogclose(d_craftmistrlog,0)
   src.findid(i_buyer_tag_box).dialog(d_craftmistrlog)
 else
-  say Nemohu slouzit...
+  say("Nemohu slouzit...")
 endif
 
 if (src.isgm)
