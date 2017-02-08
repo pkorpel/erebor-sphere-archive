@@ -2,7 +2,9 @@
 //pripadnou_corpse_oznac
 if (src.targ.type==t_corpse)
   src.targ.tag(rozrezano,1)
+  src.targ.tag(rozrezal,<src>)
   src.sysMessage("<src.sex(Rozrezal,Rozrezala)> jsi mrtvolu.")
+  src.accmsg("rozrezal mrtvolu <src.targ.name>(<src.targ>) na pozici <src.targ.p>")
   return 1
 else 
   return 0
