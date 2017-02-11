@@ -543,6 +543,11 @@ while (memoryfindtype(MEMORY_FIGHT))
  
 endwhile
 
+[function rewritetarget]
+while (memoryfindtype(MEMORY_WAR_targ))
+  memoryfindtype(MEMORY_WAR_targ).color=04c
+endwhile
+
 [function vyvrhel_prevest]
 if (f_check_tag_realm)
   return 1

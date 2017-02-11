@@ -82,10 +82,16 @@ endif
 cont.accmsg("se pokousi Abilitou TAUNT prilakat NPC. Cil ma <src.targ.tag(experience)> a War muze tauntnout maximalne <eval (<eval cont.tag(level)>*<eval cont.tag(ra_taunt)>*5)>.")
 
 cont.reduceStamina(<nastaveni_single_taunt_stamina>)
-cont.tag(nextTaunt,<eval (<serv.time>+<nastaveni_tauntdelay>)>)
+if (cont.isevent(e_defstance))
+  arg(next_tauntdelay,<eval (<nastaveni_tauntdelay>-((<nastaveni_tauntdelay>*25)/100))>)
+else
+  arg(next_tauntdelay,<nastaveni_tauntdelay>)
+endif
+cont.say("Dalsi taunt za <arg(next_tauntdelay)>")
+cont.tag(nextTaunt,<eval (<serv.time>+<arg(next_tauntdelay)>)>)
 
 arg(STR_koef,<eval ((<cont.str>*1000)/250)>)
-arg(STAM_koef,<eval ((<cont.stam>+50)*1000)/<cont.maxstam>)>)
+arg(STAM_koef,<eval (((<cont.stam>+50)*1000)/<cont.maxstam>)>)
 arg(Resist_koef,<eval (1000-<arg(TauntResist)>)>)
 arg(TauntChance,<eval ((<arg(STR_koef)>*<arg(STAM_koef)>*<arg(Resist_koef)>)/100000)>)
 
@@ -118,7 +124,7 @@ type=t_eq_script
 name=taunt timer
 
 on=@equip
-timerd=5
+timerd=2
 return 1
 
 on=@timer
@@ -137,10 +143,14 @@ else
   cont.newitemsafe(i_taunter)
   lastnew.link=<link> 
   lastnew.timerd=<eval ((<link.str>/3)*2)>
+  lastnew.tag(restore_karma,<cont.karma>)
+  cont.karma=00
   cont.equip(<lastnew>)
 endif
 if (<nastaveni_taunt_removefight> == 1)
   cont.removefight
+elseif (<nastaveni_taunt_removefight> == 2)
+  cont.rewritetarget
 else
   cont.act=<link>
 endif
@@ -170,14 +180,16 @@ on=@timer
 remove
 
 on=@unequip
-if (<eval cont.hits> <= 0)   
+if (<eval cont.hits> <= 0) 
   return
 endif
+cont.karma=<eval tag(restore_karma)>
 cont.say("Konec tauntu")
 cont.attack(<link>)
 cont.act=<link>
 cont.events -e_npc_taunted
 cont.tag(resist_taunt,#-200)   // po skonceni tauntu snizim jen o 20%... 5% necham jako penalizaci pro pristi pokus tauntnuti tohoto monstra, ktere jiz tauntnute bylo.
+cont.update
 
 [events e_npc_taunted]
 on=@npcseenewplayer
@@ -190,10 +202,15 @@ on=@beforeGetEffect
 on=@beforeDoEffect
 on=@afterDoEffect
 on=@afterswing
+on=@itemequip
 
 on=@aftergetswing
 if (<nastaveni_taunt_aftergetswing> == 1)
   arg(taunt_target,<findid(i_taunter).link>)
+//  while (memoryfindtype(MEMORY_WAR_targ))
+//    memoryfindtype(MEMORY_WAR_targ).color=04c
+//    say("Prepisuju memory po zasashu!")
+//  endwhile
   attack(<arg(taunt_target)>)
   act=<arg(taunt_target)>
 endif
