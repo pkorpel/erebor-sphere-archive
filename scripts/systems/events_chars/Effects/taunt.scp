@@ -1,5 +1,5 @@
 [function taunt]
-if !(f_CanDoTaunt("single"))
+if !(f_CanDo_Taunt("single"))
   return 0
 endif
 accmsg("pouzil Abilitu single TAUNT spravne, vytvoril target k zacileni.")
@@ -8,7 +8,7 @@ return 1
 
 
 [function masstaunt]
-if !(f_CanDoTaunt("mass"))
+if !(f_CanDo_Taunt("mass"))
   return 0
 endif
 sound(sex(1098,824))  // zvuk silneho revu
