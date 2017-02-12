@@ -1,40 +1,77 @@
 [function taunt]
+if !(f_CanDoTaunt("single"))
+  return 0
+endif
+accmsg("pouzil Abilitu single TAUNT spravne, vytvoril target k zacileni.")
+newequip(i_taunt_target)
+return 1
+
+
+[function masstaunt]
+if !(f_CanDoTaunt("mass"))
+  return 0
+endif
+sound(sex(1098,824))  // zvuk silneho revu
+reduceStamina(<nastaveni_mass_taunt_stamina>)
+accmsg("pouzil Abilitu mass TAUNT spravne, vytvoril mass_target.")
+var(STR_koef_masstaunt,<eval ((<str>*1000)/250)>)
+var(STAM_koef_masstaunt,<eval (((<stam>+50)*1000)/<maxstam>)>)
+
+newitem(i_mass_taunt_taunter)
+lastnew.p=<p>
+lastnew.link=(<uid>)
+var(taunting_war,<uid>)
+
+if (isevent(e_defstance))
+  arg(next_tauntdelay,<eval (<nastaveni_mass_tauntdelay>-((<nastaveni_mass_tauntdelay>*25)/100))>)
+else
+  arg(next_tauntdelay,<nastaveni_mass_tauntdelay>)
+endif
+say("Dalsi Mass Taunt za <arg(next_tauntdelay)> dsec")
+tag(nextTaunt_mass,<eval (<serv.time>+<arg(next_tauntdelay)>)>)
+
+
+[function f_CanDo_Taunt]   //<argv(0)> - single/mass Taunt
 if (profession!=class_war)
- sysMessage("Toto muze pouzit jen valecnik.")
- return 1
+  sysMessage("Toto muze pouzit jen valecnik.")
+  return 0
 endif
 if !(<eval tag(Taunt_TEST)>)
   redmessage("Abilita je ve stadiu testovani a nelze ji pouzit.")
-  accmsg("se pokusil pouzit Abilitu TAUNT aniz by byl soucasti testu.")
-  return 1
+  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT aniz by byl soucasti testu.")
+  return 0
 endif
 if (<flag_dead>)
-  return 1 
+  return 0 
 endif
 if !(<eval tag(ra_taunt)>)
   redmessage("Neumis pouzit tuto abilitu.")
-  accmsg("se pokusil pouzit Abilitu TAUNT bez bodu v abilite.")
-  return 1
+  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT bez bodu v abilite.")
+  return 0
 endif
-if (<stam> < <nastaveni_single_taunt_stamina>)
+if (<argv(0)> == "mass")
+  if (<eval tag(ra_taunt)> < 11)
+    redmessage("Neumis pouzit tuto abilitu.")
+    accmsg("se pokusil pouzit Abilitu mass TAUNT bez dostatecneho poctu bodu v abilite.")
+    return 0
+  endif
+endif
+if (<stam> < <nastaveni_<argv(0)>_taunt_stamina>)
   redmessage("Nemas dostatek staminy.")
-  accmsg("se pokusil pouzit Abilitu TAUNT s nedostatkem staminy. Potreboval <nastaveni_single_taunt_stamina> a mel <stam>.")
-  return 1
+  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT s nedostatkem staminy. Potreboval <nastaveni_<argv(0)>_taunt_stamina> a mel <stam>.")
+  return 0
 endif
-if (<eval tag(nextTaunt)> > <serv.time>)
- redmessage("Zbrkle pouziti schopnosti jen oddalilo cas, kdy ji pujde znova pouzit.")
- accmsg("se pokusil pouzit Abilitu TAUNT drive nez mohl. Dalsi pouziti muze az za <eval <eval tag(nextTaunt)>-<serv.time>> sekund.")
- tag(nextTaunt,<eval (<tag(nextTaunt)>+<nastaveni_tauntdelay_penalty>)>)
- return 1 
+if (<eval tag(nextTaunt_<argv(0)>)> > <serv.time>)
+  redmessage("Zbrkle pouziti schopnosti jen oddalilo cas, kdy ji pujde znova pouzit.")
+  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT drive nez mohl. Dalsi pouziti muze az za <eval <eval tag(nextTaunt_<argv(0)>)>-<serv.time>> sekund.")
+  tag(nextTaunt_<argv(0)>,<eval (<tag(nextTaunt_<argv(0)>)>+<nastaveni_tauntdelay_penalty>)>)
+  return 0 
 endif
 reveal
 stopscriptedskills
 if (ishungrymsg)
-  return 1
+  return 0
 endif
-accmsg("pouzil Abilitu TAUNT spravne, vytvoril target k zacileni.")
-newequip(i_taunt_target)
-return 1
 
 
 [itemdef i_taunt_target]
@@ -83,11 +120,11 @@ cont.accmsg("se pokousi Abilitou TAUNT prilakat NPC. Cil ma <src.targ.tag(experi
 
 cont.reduceStamina(<nastaveni_single_taunt_stamina>)
 if (cont.isevent(e_defstance))
-  arg(next_tauntdelay,<eval (<nastaveni_tauntdelay>-((<nastaveni_tauntdelay>*25)/100))>)
+  arg(next_tauntdelay,<eval (<nastaveni_single_tauntdelay>-((<nastaveni_single_tauntdelay>*25)/100))>)
 else
-  arg(next_tauntdelay,<nastaveni_tauntdelay>)
+  arg(next_tauntdelay,<nastaveni_single_tauntdelay>)
 endif
-cont.say("Dalsi taunt za <arg(next_tauntdelay)>")
+cont.say("Dalsi Single Taunt za <arg(next_tauntdelay)> dsec")
 cont.tag(nextTaunt,<eval (<serv.time>+<arg(next_tauntdelay)>)>)
 
 arg(STR_koef,<eval ((<cont.str>*1000)/250)>)
@@ -106,6 +143,55 @@ else
 endif
 src.targ.f_taunt(<cont>,<morex>)
 
+
+[itemdef i_mass_taunt_taunter]
+id=i_memory
+type=t_eq_script
+name=Mass Taunt taunter
+
+on=@create
+timer=0
+
+on=@timer
+sector.allchars(f_masstaunt_effect(<uid>))
+
+
+[function f_masstaunt_effect]
+if (isPlayer)
+  return 0
+endif
+if (<distancefrom(<var(taunting_war)>)> > <nastaveni_taunt_max_range>)  // max dosah tauntu
+  return 0            
+endif
+if (<eval tag(taunt_count)>)
+  if (<argv(0).link.stam> < <eval (<tag(taunt_count)>*5)>)  // +5 staminy spotreba za kazde retauntnute npc
+    return 0
+  endif
+endif
+if (<eval (<eval var(taunting_war).tag(level)>*<eval var(taunting_war).tag(ra_taunt)>*5)> < <eval tag(experience)>)
+  say("haha me nenalakas, jsem mimo tvuj exp rozsah")
+  return 0
+endif
+arg(TauntResist,<eval tag(resist_taunt)>)
+if (arg(TauntResist) >= 1000)
+  return 0
+endif
+
+arg(Resist_koef,<eval (1000-<arg(TauntResist)>)>)
+arg(TauntChance,<eval ((<var(STR_koef_masstaunt)>*<var(STAM_koef_masstaunt)>*<arg(Resist_koef)>)/100000)>)
+
+if !(chance(<arg(TauntChance)>,4))
+  var(taunting_war).accmsg("se nepovedlo Abilitou mass TAUNT prilakat NPC. Jeho sila je <var(taunting_war).str>, stamina <var(taunting_war).stam>/<var(taunting_war).maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
+  arg(taunt_success,2)
+else
+  arg(taunt_success,1)
+  if (<eval tag(taunt_count)>)
+    var(taunting_war).reduceStamina(<eval (<tag(taunt_count)>*5)>)
+  endif
+  var(taunting_war).accmsg("se povedlo Abilitou mass TAUNT prilakat NPC. Jeho sila je <var(taunting_war).str>, stamina <var(taunting_war).stam>/<var(taunting_war).maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
+endif
+f_taunt(<var(taunting_war)>,<arg(taunt_success)>)
+                    
 
 [function f_taunt]   // argv(0) - UID na co ma byt NPC tauntnuto
 if (npc)
@@ -190,6 +276,7 @@ cont.act=<link>
 cont.events -e_npc_taunted
 cont.tag(resist_taunt,#-200)   // po skonceni tauntu snizim jen o 20%... 5% necham jako penalizaci pro pristi pokus tauntnuti tohoto monstra, ktere jiz tauntnute bylo.
 cont.update
+
 
 [events e_npc_taunted]
 on=@npcseenewplayer
