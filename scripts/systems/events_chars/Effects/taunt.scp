@@ -1,5 +1,5 @@
 [function taunt]
-if !(f_CanDo_Taunt("single"))
+if !(f_Taunt_Apply("single"))
   return 0
 endif
 accmsg("pouzil Abilitu single TAUNT spravne, vytvoril target k zacileni.")
@@ -8,7 +8,7 @@ return 1
 
 
 [function masstaunt]
-if !(f_CanDo_Taunt("mass"))
+if !(f_Taunt_Apply("mass"))
   return 0
 endif
 sound(sex(1098,824))  // zvuk silneho revu
@@ -31,7 +31,7 @@ say("Dalsi Mass Taunt za <arg(next_tauntdelay)> dsec")
 tag(nextTaunt_mass,<eval (<serv.time>+<arg(next_tauntdelay)>)>)
 
 
-[function f_CanDo_Taunt]   //<argv(0)> - single/mass Taunt
+[function f_Taunt_Apply]   //<argv(0)> - single/mass Taunt
 if (profession!=class_war)
   sysMessage("Toto muze pouzit jen valecnik.")
   return 0
@@ -62,8 +62,8 @@ if (<stam> < <nastaveni_<argv(0)>_taunt_stamina>)
   return 0
 endif
 if (<eval tag(nextTaunt_<argv(0)>)> > <serv.time>)
-  redmessage("Zbrkle pouziti schopnosti jen oddalilo cas, kdy ji pujde znova pouzit.")
-  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT drive nez mohl. Dalsi pouziti muze az za <eval <eval tag(nextTaunt_<argv(0)>)>-<serv.time>> sekund.")
+  redmessage("Zbrkle pouziti schopnosti jen oddalilo cas, kdy ji pujde znovu pouzit.")
+  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT drive nez mohl. Dalsi pouziti muze az za <eval <eval tag(nextTaunt_<argv(0)>)>-<serv.time>> dsekund.")
   tag(nextTaunt_<argv(0)>,<eval (<tag(nextTaunt_<argv(0)>)>+<nastaveni_tauntdelay_penalty>)>)
   return 0 
 endif
@@ -208,6 +208,7 @@ endif
 id=i_memory
 type=t_eq_script
 name=taunt timer
+attr=094
 
 on=@equip
 timerd=2
@@ -224,11 +225,11 @@ endif
 
 if (cont.findid(i_taunter))
   cont.findid(i_taunter).link=<link>  
-  lastnew.timerd=<eval ((<link.str>/3)*2)>
+  lastnew.more2=<eval ((<link.str>/3)*2)>
 else
   cont.newitemsafe(i_taunter)
   lastnew.link=<link> 
-  lastnew.timerd=<eval ((<link.str>/3)*2)>
+  lastnew.more2=<eval ((<link.str>/3)*2)>
   lastnew.tag(restore_karma,<cont.karma>)
   cont.karma=00
   cont.equip(<lastnew>)
@@ -251,11 +252,11 @@ name=taunter
 attr=094
 
 on=@equip
-if (<timerd> < 50)
-  link.accmsg("ERROR TAUNT : Tauntnute NPC <cont.name>(<cont>) warem <link.name>(<link>) melo TimerD velice maly <timerd> War mel silu <link.str>, TimerD mel byt <eval ((<link.str>/3)*2)>")
-  timerd=50
+if (<more2> < 50)
+  link.accmsg("ERROR TAUNT : Tauntnute NPC <cont.name>(<cont>) warem <link.name>(<link>) melo TimerD velice maly <more2> War mel silu <link.str>, TimerD mel byt <eval ((<link.str>/3)*2)>")
+  more2=50
 endif
-cont.say("TAUNTED by <link.name> for <timer>,<eval (<timerd>-<eval (<timer>*10)>)> sec")
+cont.say("TAUNTED by <link.name> for <eval (<more2>/10)>,<eval (<more2>-<eval (<eval (<more2>/10)>*10)>)> sec")
 cont.events +e_npc_taunted
 cont.tag(taunt_count,<eval (<eval cont.tag(taunt_count)>+1)>)      // pocitadlo kolikrat bylo dane monstrum tauntnute
 cont.tag(resist_taunt,<eval (<eval cont.tag(resist_taunt)>+250)>)  // behem tauntu je o +25% rezistentni na pretauntnuti
@@ -263,6 +264,17 @@ cont.tag(resist_taunt,<eval (<eval cont.tag(resist_taunt)>+250)>)  // behem taun
 
 
 on=@timer
+if (<more2> > 0)
+  if (!(link.flag_invisible==1) && !(link.flag_insubstantial==1) && !(link.flag_hidden==1) && (<link.mapplane> == <cont.mapplane>) && (<distancefrom(<link>)> <= <nastaveni_taunt_max_range>))
+    if (<more2> >= 10)
+      more2=more2-10
+      timerd=10
+    else
+      timerd=<more2>
+    endif
+    return 1
+  endif
+endif
 remove
 
 on=@unequip
