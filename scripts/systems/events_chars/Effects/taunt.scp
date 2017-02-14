@@ -264,18 +264,25 @@ cont.tag(resist_taunt,<eval (<eval cont.tag(resist_taunt)>+250)>)  // behem taun
 
 
 on=@timer
-if (<more2> > 0)
-  if (!(link.flag_invisible==1) && !(link.flag_insubstantial==1) && !(link.flag_hidden==1) && (<link.mapplane> == <cont.mapplane>) && (<distancefrom(<link>)> <= <nastaveni_taunt_max_range>))
-    if (<more2> >= 10)
-      more2=more2-10
-      timerd=10
-    else
-      timerd=<more2>
-    endif
-    return 1
-  endif
+if (<more2> == 0)                    
+  remove
+elseif (<distancefrom(<link>)> > <nastaveni_taunt_max_range>) 
+  remove
+elseif (link.flag_invisible == 1) 
+  remove
+elseif (link.flag_hidden == 1) 
+  remove
+elseif !(<link.mapplane> == <cont.mapplane>)
+  remove
 endif
-remove
+
+if (<more2> >= 10)
+  more2=more2-10
+  timerd=10
+else
+  timerd=<more2>
+endif
+return 1
 
 on=@unequip
 if (<eval cont.hits> <= 0) 
