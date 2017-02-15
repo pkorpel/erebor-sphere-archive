@@ -399,8 +399,7 @@ timer=3600
 
 on=@timer
 topobj.events=-e_selfreser
-topobj.hits=0
-remove
+topobj.remove
 
 [events e_npc_reactivearmor] 
 on=@aftergetswing 
