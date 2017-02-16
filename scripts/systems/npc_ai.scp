@@ -1677,7 +1677,7 @@ if (cont.isPet)
     return 1
   endif
 endif
-if (isTaunted)  // npc je tauntnute, utoci tedy jen na wara
+if (cont.isTaunted)  // npc je tauntnute, utoci tedy jen na wara
   src.accmsg("leapujici monstrum <cont.name>(<cont>) se pokusilo leapnout2 na <victim.name>(<victim>) ikdyz bylo TAUNT -nute.")
   arg(victim,<cont.findid(i_taunter).link>)
 endif
