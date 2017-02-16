@@ -49,7 +49,7 @@ if !(<eval tag(ra_taunt)>)
   accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT bez bodu v abilite.")
   return 0
 endif
-if (<argv(0)> == "mass")
+if (<strlen(<argv(0)>)> == <strlen(mass)>)
   if (<eval tag(ra_taunt)> < 11)
     redmessage("Neumis pouzit tuto abilitu.")
     accmsg("se pokusil pouzit Abilitu mass TAUNT bez dostatecneho poctu bodu v abilite.")
@@ -72,6 +72,7 @@ stopscriptedskills
 if (ishungrymsg)
   return 0
 endif
+return 1
 
 
 [itemdef i_taunt_target]
@@ -125,7 +126,7 @@ else
   arg(next_tauntdelay,<nastaveni_single_tauntdelay>)
 endif
 cont.say("Dalsi Single Taunt za <arg(next_tauntdelay)> dsec")
-cont.tag(nextTaunt,<eval (<serv.time>+<arg(next_tauntdelay)>)>)
+cont.tag(nextTaunt_single,<eval (<serv.time>+<arg(next_tauntdelay)>)>)
 
 arg(STR_koef,<eval ((<cont.str>*1000)/250)>)
 arg(STAM_koef,<eval (((<cont.stam>+50)*1000)/<cont.maxstam>)>)
@@ -157,14 +158,14 @@ sector.allchars(f_masstaunt_effect(<uid>))
 
 
 [function f_masstaunt_effect]
-if (isPlayer)
+if (isPlayer) || (isGM)
   return 0
 endif
 if (<distancefrom(<var(taunting_war)>)> > <nastaveni_taunt_max_range>)  // max dosah tauntu
   return 0            
 endif
 if (<eval tag(taunt_count)>)
-  if (<argv(0).link.stam> < <eval (<tag(taunt_count)>*5)>)  // +5 staminy spotreba za kazde retauntnute npc
+  if (<argv(0).link.stam> < <eval (<tag(taunt_count)>*2)>)  // +2 staminy spotreba za kazde retauntnute npc
     return 0
   endif
 endif
@@ -185,8 +186,14 @@ if !(chance(<arg(TauntChance)>,4))
   arg(taunt_success,2)
 else
   arg(taunt_success,1)
-  if (<eval tag(taunt_count)>)
-    var(taunting_war).reduceStamina(<eval (<tag(taunt_count)>*5)>)
+  if (<eval tag(taunt_count)>) 
+    arg(redStam,(<eval (<tag(taunt_count)>*2)>))
+    if (<arg(redStam)> < <var(taunting_war).stam>)
+      var(taunting_war).stam=<var(taunting_war).stam>-<arg(redStam)>
+    else
+      var(taunting_war).stam=0
+    endif
+    //var(taunting_war).reduceStamina(<eval (<tag(taunt_count)>*5)>)
   endif
   var(taunting_war).accmsg("se povedlo Abilitou mass TAUNT prilakat NPC. Jeho sila je <var(taunting_war).str>, stamina <var(taunting_war).stam>/<var(taunting_war).maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
 endif
@@ -208,6 +215,8 @@ endif
 id=i_memory
 type=t_eq_script
 name=taunt timer
+
+on=@create
 attr=094
 
 on=@equip
@@ -225,11 +234,11 @@ endif
 
 if (cont.findid(i_taunter))
   cont.findid(i_taunter).link=<link>  
-  lastnew.more2=<eval ((<link.str>/3)*2)>
+  lastnew.more1=<eval ((<link.str>/3)*2)>
 else
   cont.newitemsafe(i_taunter)
   lastnew.link=<link> 
-  lastnew.more2=<eval ((<link.str>/3)*2)>
+  lastnew.more1=<eval ((<link.str>/3)*2)>
   lastnew.tag(restore_karma,<cont.karma>)
   cont.karma=00
   cont.equip(<lastnew>)
@@ -249,22 +258,25 @@ remove
 id=i_memory
 type=t_eq_script
 name=taunter
+
+on=@create
 attr=094
 
 on=@equip
-if (<more2> < 50)
-  link.accmsg("ERROR TAUNT : Tauntnute NPC <cont.name>(<cont>) warem <link.name>(<link>) melo TimerD velice maly <more2> War mel silu <link.str>, TimerD mel byt <eval ((<link.str>/3)*2)>")
-  more2=50
+if (<more1> < 50)
+  link.accmsg("ERROR TAUNT : Tauntnute NPC <cont.name>(<cont>) warem <link.name>(<link>) melo TimerD velice maly <more1> War mel silu <link.str>, TimerD mel byt <eval ((<link.str>/3)*2)>")
+  more1=50
 endif
-cont.say("TAUNTED by <link.name> for <eval (<more2>/10)>,<eval (<more2>-<eval (<eval (<more2>/10)>*10)>)> sec")
+cont.say("TAUNTED by <link.name> for <eval (<more1>/10)>,<eval (<more1>-<eval (<eval (<more1>/10)>*10)>)> sec")
 cont.events +e_npc_taunted
 cont.tag(taunt_count,<eval (<eval cont.tag(taunt_count)>+1)>)      // pocitadlo kolikrat bylo dane monstrum tauntnute
 cont.tag(resist_taunt,<eval (<eval cont.tag(resist_taunt)>+250)>)  // behem tauntu je o +25% rezistentni na pretauntnuti
+timer=0
 //cont.effect(3,013B9,1,60,1)
 
 
 on=@timer
-if (<more2> == 0)                    
+if (<more1> <= 0)                    
   remove
 elseif (<distancefrom(<link>)> > <nastaveni_taunt_max_range>) 
   remove
@@ -276,11 +288,12 @@ elseif !(<link.mapplane> == <cont.mapplane>)
   remove
 endif
 
-if (<more2> >= 10)
-  more2=more2-10
+if (<more1> >= 10)
+  more1=more1-10
   timerd=10
 else
-  timerd=<more2>
+  timerd=<more1>
+  more1=0
 endif
 return 1
 
@@ -301,14 +314,11 @@ cont.update
 on=@npcseenewplayer
 return 1    // nikdo novy me nezajima
 
-on=@hittry
-on=@Hit
 on=@beforegetswing
 on=@beforeGetEffect
 on=@beforeDoEffect
 on=@afterDoEffect
 on=@afterswing
-on=@itemequip
 
 on=@aftergetswing
 if (<nastaveni_taunt_aftergetswing> == 1)
