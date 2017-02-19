@@ -877,7 +877,7 @@ on=@DROPON_GROUND
 src.newitem(i_gold)
 lastnew.amount={10 100}
 lastnew.timer=300
-lastnew.p=<src.p>
+lastnew.p=<p>
 lastnew.fix
 src.sfx(55)
 src.sysmessage("Mapa se rozpadla na male kousicky.")
@@ -888,6 +888,8 @@ on=@userDClick
 if (tag(unreaded_yet))  // zobrazi souradnice jen jednou
   tag(unreaded_yet,0)
   morep=<def_goblin_labyrint_memory_stone.tag(gate_location)>
+  def_goblin_labyrint_memory_stone.tag(map_readed,#+1)
+  src.accmsg("precetl zlatou mapu s lokaci Goblin Labyrintu na <morep>")
   f_showmap
 else
   src.newitem(i_gold)
