@@ -969,7 +969,8 @@ if (arg(vytvorit))
   newguardspawn.AMOUNT=1
   newguardspawn.MOREp=<nastaveni_weapdam_guardspawntime>
   newguardspawn.MOREZ=5
-  newguardspawn.ATTR=0b0  
+  newguardspawn.ATTR=0b0
+  newguardspawn.events=t_allspawns  
   newguardspawn.timer=<eval {600 900}>
 //  lastnew.timer=<eval (<finduid(<tag(crystal)>).timer>+2)>
   finduid(<tag(crystal)>).tag(guardspawn,<newguardspawn>)

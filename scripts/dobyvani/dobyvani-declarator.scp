@@ -347,7 +347,7 @@ if(argchk(which_to_check+100)==1)//cislo "10x" je prvni zaskrtnute (dalsi nas ne
         arg(realm_to_conquer,"Gondor")
       endif
       tag(war_declared_on,<realm_to_conquer>_<abs(<fort_to_conquer>)>)
-      if(!checkDateCorrectness(<fixnumber(<argtxt(201)>)>,<fixnumber(<argtxt(202)>)>) //day, month - zkontrolovat jestli datum dava smysl (treba 29.2 32.11 atd)
+      if(!checkDateCorrectness(<fixnumber(<argtxt(201)>)>,<fixnumber(<argtxt(202)>)>)) //day, month - zkontrolovat jestli datum dava smysl (treba 29.2 32.11 atd)
         return 1
       endif
       tag(war_begins_day,<fixnumber(<argtxt(201)>)>)

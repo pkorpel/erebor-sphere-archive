@@ -24,7 +24,7 @@ if(<region.tag(realm)>==1)||(<region.tag(realm)>==2)
  endif
  if(<src.tag(captain)>)||(<src.isgm>)||(<src.tag(lordnazgul)>)
   if(!strcmpi(<src.tag(keep)>,<uid>))||(<src.isgm>)||(<src.tag(lordnazgul)>)
-   if(<src.tag(realm)> == 2)
+   if(<eval src.tag(realm)> == 2)||(<src.isgm>)
     f_mordorcaptainmenu 
     return 1
    endif
