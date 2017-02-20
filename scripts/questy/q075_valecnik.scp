@@ -36,7 +36,6 @@ endif
 
 
 [function f_q075_valecnik]
-f_q010_checkOldTags
 if (<src.flags>&statf_dead)
  return 1
 else

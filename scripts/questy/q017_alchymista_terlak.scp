@@ -8,13 +8,6 @@
 // q017_terlak_ochrana == 2 -> aktivni ochrana
 // 
 
-[function f_q017_checkOldTags]
-if (0<tag(quest_scout_terlak)>)
-  qtag(q017_terlak,<tag(quest_scout_terlak)>)
-  tag.remove(quest_scout_terlak)
-endif
-
-
 [ITEMDEF i_scout_crystal_red]
 NAME=Cerveny krystal bran
 ID=I_CRYSTAL_RED
@@ -48,7 +41,6 @@ attr=attr_static
 morep=5719,111,0,10 //nastavit kam to bude dotycne lidi portovat
 
 on=@step
-src.f_q017_checkOldTags
 if (src.qtag(q017_terlak)==1)
  src.qtag(q017_terlak,2,18)
 endif
@@ -161,7 +153,6 @@ attr=attr_static
 morep=1000 1000 //nastavit k vychodu z dungu!
 
 on=@step
-src.f_q017_checkOldTags
 if(<src.qtag(q017_terlak)>) //absolvoval quest
  arg(povolani_vstupujiciho,<src.profession.name>)
  src.qtag(q017_terlak,<src.qtag(q017_terlak)>+2,18)

@@ -15,26 +15,16 @@ if (src.isgm)
   endif
   return(1)
 endif
-f_questy_checkFunctions  // Kontroluje stare tagy u neopravenych questu. Proste v minulosti nekdo napsal quest a nastavil stupidni, blbe hledatelne tagy, tak se po predelani toho questu do gump podoby rovnou ty tagy prepocitavaj na nove a testuje se to pomoci tech funkci v f_questy_checkFunctions o par radku niz
+f_weekly_check
 dialog(d_questy,1)
 return 1
 
-[function f_questy_checkFunctions]
-f_q007_checkOldTags
-f_q010_checkOldTags
-f_q013_checkOldTags
-f_q016_checkOldTags
-f_q017_checkOldTags
-f_q018_checkOldTags
-f_q020_checkOldTags
-f_q021_checkOldTags
-f_q000_checkOldTags
-f_q030_checkOldTags
-
 [defnames questy_seznam]
 questMenu_questStone  0400416B7
-questMenu_color_questActive        #FFFFA7
-questMenu_color_questInactive      #383838
+questMenu_color_questActiveFont      #00F0FA
+questMenu_color_questInactiveFont    #383838
+questMenu_color_questDoneFont        #FA0000
+questMenu_color_questInactive        51
 questMenu_rows  53
 //          |     Nazev questu     |           dialogName           |  1=qtag, 0=tag  |  relevantni tagy
 questMenu[0]  Zemedelec Borek           ,d_questy_borek                     ,1         ,gq002, mq002
@@ -116,13 +106,14 @@ endif
 
 argo.resizepic(40,20,<questMenu_bg>,<questMenu_width>,<questMenu_height>)
 argo.resizepic(80,30,<questMenu_bg>,<questMenu_width>-80,50)
-argo.gumppic(<eval <questMenu_width>+7>,35,028C9)  //dracek
 
 if (<argv(0)> == 1) // main questy dialog
   argo.f_questy_buildMainDialog
 elseif (<argv(0)> == 2) // weekly quests
   argo.f_questy_buildWeeklyDialog
 endif
+page 0
+argo.gumppic(<eval <questMenu_width>+7>,35,028C9)  //dracek
 argo.clearTextLine // the dialog might be re-opened, cleans the counter to start over from zero the next time
 argo.f_qm_clearPaging
 
@@ -132,24 +123,32 @@ f_qm_closeMainDialog
 return 1
 
 on=@anyButton
+arg(weeklyCheck,<f_weekly_check>)
+arg(allowSubDialog,1)
 if (<argn> < 100)
   f_qm_closeMainDialog
   dialog(d_questy,<argn>)
   return
 elseif (<argn> < 1000)
   arg(weeklyNum,<eval (<argn>-99)>)
-  if (<eval tag(qm_lastWeeklyDetail)> != <arg(weeklyNum)>)
-    tag(qm_lastWeeklyDetail,<arg(weeklyNum)>)
-    tag(qm_lastWeeklyDetailGmp,<eval (!0<tag(qm_lastWeeklyDetailGmp)>)>)
+  if (arg(weeklyCheck)) // the weekly expired while watching the gump -> do not open the sub dialog, as the set of quests has been re-created
+    arg(allowSubDialog,0)
+    tag.remove(qm_lastWeeklyDetail)
+    tag.remove(qm_lastWeeklyDetailGmp)
+  else
+    if (<eval tag(qm_lastWeeklyDetail)> != <arg(weeklyNum)>)
+      tag(qm_lastWeeklyDetail,<arg(weeklyNum)>)
+      tag(qm_lastWeeklyDetailGmp,<eval (!0<tag(qm_lastWeeklyDetailGmp)>)>)
+    endif
+    arg(dialogName,d_questy_weeklyDetail<eval tag(qm_lastWeeklyDetailGmp)>)
   endif
-  arg(dialogName,d_questy_weeklyDetail<eval tag(qm_lastWeeklyDetailGmp)>)
   dialog(d_questy,2)
 else
   arg(dialogName,<f_questMenu_getDialog(<questMenu[<eval <argn>-1000>]>)>)
   dialog(d_questy,1)
 endif
 f_qm_closeMainDialog(<arg(dialogName)>)
-if (strcmpi(<tag(qm_subDialog)>,<arg(dialogName)>))
+if (strcmpi(<tag(qm_subDialog)>,<arg(dialogName)>) && arg(allowSubDialog))
   dialog(<arg(dialogName)>,<eval (arg(weeklyNum)-1)>)
   tag(qm_subDialog,<arg(dialogName)>)
 endif
@@ -172,26 +171,27 @@ argo.f_qm_closeSubDialog
 SetLocation(<questMenu_width>+80,5)
 page 0
 resizepic(20,20,<questMenu_bg>,<questMenu_detail_width>,<questMenu_detail_height>)
-arg(font,"<?safe?><basefont size=6 color=<?questMenu_color_questActive?>>")
+arg(font,"<?safe?><basefont size=6 color=<?questMenu_color_questActiveFont?>><center>")
 arg(middle,<eval (<questMenu_detail_width>/2)>)
 arg(step,45)
 arg(baseIndent,40)
 arg(txtIndent,50)
 arg(baseY,110)
 setText(newTextLine,"<arg(font)><cont.weeklyTag(quest_description[<argv(0)>])>")
-htmlGump(<arg(middle)>-30,35,<questMenu_width>-160,50,<lastTextLine>,0,0)
+htmlGump(<arg(middle)>-80,35,200,50,<lastTextLine>,0,0)
 newTextLine(<arg(baseIndent)>,80,<d_def_subheadcolor>,"Odmena")
+newTextLine(<arg(middle)>+40,80,<d_def_textcolor>,"<eval cont.weeklyTag(quest_completed[<argv(0)>])>/<cont.weeklyTag(quest_totalAmount[<argv(0)>])>")
 
 gumppic(<arg(baseIndent)>,<arg(baseY)>,034CC) // gold
-newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(quest_rewGold[<eval argv(0)>])> zlatych")
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(baseY)>,<d_def_textcolor>,"<cont.weeklyTag(quest_rewGold[<eval argv(0)>])> zlatych")
 
 gumppic(<arg(baseIndent)>,<arg(step)>+<arg(baseY)>-9,091F) // XP
-newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(step)>+<arg(baseY)>,100,"<cont.weeklyTag(quest_rewXP[<eval argv(0)>])> xp")
+newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(step)>+<arg(baseY)>,<d_def_textcolor>,"<cont.weeklyTag(quest_rewXP[<eval argv(0)>])> xp")
 
 arg(itemNum,<cont.weeklyTag(quest_rewMI[<eval argv(0)>])>)
 if (0<arg(itemNum)>)
   tilepichue(<arg(middle)>,<arg(baseY)>,0E76) // magic item
-  newTextLine(<arg(middle)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(quest_rewMI[<eval argv(0)>])>x magicky predmet")
+  newTextLine(<arg(middle)>+<arg(txtIndent)>,<arg(baseY)>,<d_def_textcolor>,"<cont.weeklyTag(quest_rewMI[<eval argv(0)>])>x magicky predmet")
 endif
 
 
@@ -202,12 +202,12 @@ arg(questNumber,0)
 arg(middle,<eval (<questMenu_width>/2)>)
 while (<questNumber> < <questMenu_rows>)
   if (<f_questMenu_hasRelevantTag(<questMenu[<questNumber>]>)>)
-    f_qm_setOffsetAndPaging(10,30)
+    f_qm_setOffsetAndPaging(8,40)
     arg(posY,<tag(yPos)>)
-    button(<arg(middle)>-43,<arg(posY)>,<g_btn_background[1]>,<g_btn_background[5]>,1,0,<eval <questNumber>+1000>)
-    setText(newTextLine,"<basefont color=<?questMenu_color_questActive?>><?f_questMenu_getName(<questMenu[<questNumber>]>)?>")
-    htmlGump(<arg(middle)>-32,<arg(posY)>+2,150,20,<lastTextLine>,0,0)
-    //newTextLine(<arg(middle)>-32,<arg(posY)>+2,<questMenu_color_questActive>,<f_questMenu_getName(<questMenu[<questNumber>]>)>) //1152
+    f_qm_itemButton(<arg(posY)>,40)
+    button(<questMenu_width>-10,<arg(posY)>,0828,01F,1,0,<eval <questNumber>+1000>)
+    setText(newTextLine,"<basefont color=<?questMenu_color_questActiveFont?>><?f_questMenu_getName(<questMenu[<questNumber>]>)?>")
+    htmlGump(<arg(middle)>-32,<arg(posY)>+8,150,20,<lastTextLine>,0,0)
   endif
   arg(questNumber,#+1)
 endwhile
@@ -218,26 +218,41 @@ f_questMenu_sectionButton(1)
 arg(qCount,<src.weeklyTag(qCount)>)
 
 // ODMENA
-arg(middle,<eval (<questMenu_width>/2)+15>)
+var(middle,<eval (<questMenu_width>/2)+15>)
 arg(stepSize,35)
 arg(baseIndent,70)
 arg(baseY,302)
 arg(txtIndent,40)
 resizepic(50,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-20,108)
-newTextLine(<arg(middle)>-72,<arg(baseY)>+8,<d_def_subheadcolor>,"Odmena za splneni vsech Questu")
+if (cont.tag(level) < def_weekly_levelMin)
+  newTextLine(<var(middle)>-82,<arg(baseY)>+38,<d_def_subheadcolor>,"Plneni se otevre na <def_weekly_levelMin> urovni.")
+else
+  arg(remainingTime,<src.weeklyTag(expiracyTime)>-<serv.time>)
+  if (cont.findid(i_memory_weekly_quest).f_weekly_isAllCompleted)
+    newTextLine(<var(middle)>-42,<arg(baseY)>+38,<d_def_subheadcolor>,"S P L N E N O")
+    arg(timeNotification,"Nova Sada: <dsToRTime(<arg(remainingTime)>,1)>")
+  else
+    newTextLine(<var(middle)>-82,<arg(baseY)>+8,<d_def_subheadcolor>,"Odmena za splneni vsech Questu")
 
-arg(baseY,#+28)
-gumppic(<arg(baseIndent)>,<arg(baseY)>,034CC) // gold
-newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(rewGold)> gp")
+    arg(baseY,#+28)
+    gumppic(<arg(baseIndent)>,<arg(baseY)>,034CC) // gold
+    newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(baseY)>,<d_def_textcolor>,"<cont.weeklyTag(rewGold)>")
 
-gumppic(<arg(baseIndent)>,<arg(stepSize)>+<arg(baseY)>-9,091F) // XP
-newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(stepSize)>+<arg(baseY)>,100,"<cont.weeklyTag(rewXP)> xp")
+    gumppic(<arg(baseIndent)>,<arg(stepSize)>+<arg(baseY)>-9,091F) // XP
+    newTextLine(<arg(baseIndent)>+<arg(txtIndent)>,<arg(stepSize)>+<arg(baseY)>,<d_def_textcolor>,"<cont.weeklyTag(rewXP)>")
 
-arg(middle,#+15)
-arg(itemNum,<cont.weeklyTag(rewMI)>)
-if (0<arg(itemNum)>)
-  tilepichue(<arg(middle)>,<arg(baseY)>,0E76) // magic item
-  newTextLine(<arg(middle)>+<arg(txtIndent)>,<arg(baseY)>,100,"<cont.weeklyTag(rewMI)>x MP")
+    var(middle,#+15)
+    arg(itemNum,<cont.weeklyTag(rewMI)>)
+    if (0<arg(itemNum)>)
+      tilepichue(<var(middle)>,<arg(baseY)>,0E76) // magic item
+      newTextLine(<var(middle)>+<arg(txtIndent)>,<arg(baseY)>,<d_def_textcolor>,"<cont.weeklyTag(rewMI)>x MP")
+    endif
+    arg(timeNotification,"Zbyva: <dsToRTime(<arg(remainingTime)>,1)>")
+  endif
+
+  arg(baseY,<questMenu_height>+25)
+  resizepic(70,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-60,40)
+  newTextLine(<var(middle)>-72,<arg(baseY)>+9,<d_def_subheadcolor>,<arg(timeNotification)>)
 endif
 
 // QUESTY
@@ -248,7 +263,7 @@ while (<arg(qNum)> < <arg(qCount)>)
   arg(completed,<eval src.weeklyTag(quest_completed[<arg(qNum)>])>)
   arg(totalAmount,<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>)
   if (arg(completed) < arg(totalAmount))
-    f_qm_weeklyAddDialogItem(<questMenu_color_questActive>,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
+    f_qm_weeklyAddDialogItem(<questMenu_color_questActiveFont>,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
   else
     arg(hasCompleted,1)
   endif
@@ -261,35 +276,37 @@ if (arg(hasCompleted) != 0)
     arg(completed,<eval src.weeklyTag(quest_completed[<arg(qNum)>])>)
     arg(totalAmount,<src.weeklyTag(quest_totalAmount[<arg(qNum)>])>)
     if (arg(completed) >= arg(totalAmount)) // only completed quests
-      f_qm_weeklyAddDialogItem(<questMenu_color_questInactive>,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
+      f_qm_weeklyAddDialogItem(<questMenu_color_questInactiveFont>,<arg(qNum)>,<arg(stepSize)>,<arg(completed)>,<arg(totalAmount)>)
     endif
     arg(qNum,#+1)
   endwhile
 endif
 arg(qNum,#+1)
-//src.sysMessage("eem <qNum> and <def_weekly_count>")
 
 while (<arg(qNum)> <= <def_weekly_count>)
   f_qm_weeklyAddUnavailableQuestInfo(<arg(qNum)>,<arg(stepSize)>)
   arg(qNum,#+1)
 endwhile
 
+[function f_qm_itemButton] // argv(0) - Y pos, argv(1) - step size
+resizepic(75,<argv(0)>,<g_bg[8]>,<questMenu_width>-65,<argv(1)>-5) //g_bg[5,6,7,8] | 5,7,8
 
 [function f_qm_weeklyAddDialogItem] // argv(0) color, argv(1) qnum, argv(2) step size, argv(3) - completed, argv(4) - totalAmount
 arg(yTxtOffset,8)
 arg(yImgOffset,6)
-arg(font,"<?safe?><basefont size=4 color=<?argv(0)?>>")
-arg(fontSm,"<?safe?><basefont size=1 color=<?argv(0)?>>")
+arg(font,"<?safe?><basefont size=4 color=<?argv(0)?>><center>")
+arg(fontSm,"<?safe?><basefont size=1 color=<?argv(0)?>><center>")
+arg(fontDone,"<?safe?><basefont size=8 color=<?questMenu_color_questDoneFont?>><center>")
 f_qm_setOffsetAndPaging(4,<argv(2)>)
 arg(y,<tag(yPos)>)
-f_qm_weeklyItemButton(<arg(y)>,<argv(2)>)
+f_qm_itemButton(<arg(y)>,<argv(2)>)
 arg(y,#+6)
 if (<src.weeklyTag(quest_iconId[<argv(1)>])>)
   arg(picId,<src.weeklyTag(quest_iconId[<argv(1)>])>)
 else
   arg(picId,<?<src.weeklyTag(quest_subjectId[<argv(1)>])>.ID?>)
 endif
-tilepichue(77,<eval arg(y)+arg(yImgOffset)>,<arg(picId)>)
+tilepichue(<eval (77-<eval src.weeklyTag(quest_iconId_moveX[<argv(1)>])>)>,<eval (arg(y)+arg(yImgOffset)-<eval src.weeklyTag(quest_iconId_moveY[<argv(1)>])>)>,<arg(picId)>)
 if (<argv(4)> > 100) // line can be too long, split in two lines
   setText(newTextLine,"<?arg(fontSm)?> <?eval argv(3)?><br>/<?argv(4)?>")
   htmlGump(115,<eval arg(y)>,40,50,<lastTextLine>,0,0)
@@ -297,21 +314,26 @@ else
   setText(newTextLine,"<arg(fontSm)><eval argv(3)>/<argv(4)>")
   htmlGump(115,<eval arg(y)+arg(yTxtOffset)>,40,20,<lastTextLine>,0,0)
 endif
-//button(<questMenu_width>-10,<arg(y)>+5,01F,01F,1,0,<eval (<argv(1)>+100)>)
-button(<questMenu_width>-10,<arg(y)>+5,0828,01F,1,0,<eval (<argv(1)>+100)>)
 setText(newTextLine,"<arg(font)><src.weeklyTag(quest_description[<argv(1)>])>")
 htmlGump(160,<arg(y)>,<questMenu_width>-160,<argv(2)>-20,<lastTextLine>,0,0)
+if (<argv(3)> == <argv(4)>)
+  setText(newTextLine,"<arg(fontDone)>S P L N E N O")
+  htmlGump(50,<arg(y)>+10,<questMenu_width>,20,<lastTextLine>,0,0)
+else
+  button(<questMenu_width>-10,<arg(y)>+5,0828,01F,1,0,<eval (<argv(1)>+100)>)
+endif
 
 [function f_qm_weeklyAddUnavailableQuestInfo] // argv(0) qnum, argv(1) step size
 f_qm_setOffsetAndPaging(4,<argv(1)>)
 arg(y,<tag(yPos)>)
-f_qm_weeklyItemButton(<arg(y)>,<argv(1)>)
+f_qm_itemButton(<arg(y)>,<argv(1)>)
 arg(y,<arg(y)>+13)
 arg(nextQuestLevel,<eval ((<argv(0)>-3)*<def_weekly_levelStepUp>)>)
-newTextLine(103,<arg(y)>,2298,"Quest dostupny na urovni <arg(nextQuestLevel)>")
-
-[function f_qm_weeklyItemButton] // argv(0) - Y pos, argv(1) - step size
-resizepic(75,<argv(0)>,<g_bg[8]>,<questMenu_width>-65,<argv(1)>-5) //g_bg[5,6,7,8] | 5,7,8
+if (arg(nextQuestLevel) < def_weekly_levelMin)
+  arg(nextQuestLevel,<def_weekly_levelMin>)
+endif
+newTextLine(123,<arg(y)>,<questMenu_color_questInactive>,"Potrebna uroven <arg(nextQuestLevel)>")
+//newTextLine(123,<arg(y)>,2298,"Potrebna uroven <arg(nextQuestLevel)>")
 
 [function f_qm_setOffsetAndPaging] // argv(0) max items, argv(1) - Y position step size
 if (0<tag(pageNumber)> == 0)

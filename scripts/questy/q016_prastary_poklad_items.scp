@@ -10,7 +10,6 @@ ON=@Create
 color=0986
 
 on=@userdclick    
-src.f_q016_checkOldTags                                                         
 if (<src.qtag(q016_prastary_poklad)> == 9)
  message("Moc toho tu neni.. Vypada to, ze te nekdo predbehl...")
  src.qtag(q016_prastary_poklad,10)

@@ -1,31 +1,3 @@
-[function f_mq002_checkOldTags]
-if ( (src.tag(mq002) == 1) && (<src.rescount i_mq002_radlice0> >= 1) )
-  src.qtag(mq002,3)
-elseif (src.tag(mq002) == 1)
-  src.qtag(mq002,1)
-elseif (src.tag(mq002) == 2)
-  src.qtag(mq002,3)  
-  src.qtag(mq002_kovar,1)
-elseif (src.tag(mq002) == 3)
-  src.qtag(mq002,3)  
-  src.qtag(mq002_kovar,2)
-elseif (src.tag(mq002) == 4)
-  src.qtag(mq002,3)
-  src.qtag(mq002_kovar,3)
-elseif (src.tag(mq002) == 5)
-  src.qtag(mq002,4)
-elseif (src.tag(mq002) == 6)
-  src.qtag(mq002,5)
-elseif (src.tag(mq002) == 7)
-  src.qtag(mq002,6)
-endif
-src.tag.remove(mq002)
-if (src.tag(mq002a))
-  src.tag.remove(mq002a)
-  src.qtag(mq002,2)
-endif
-
-
 ///////////////////////////////////////////////
 //                 B O R E K                 //
 ///////////////////////////////////////////////
@@ -405,7 +377,6 @@ f_qSpeech(f_mq002_Borek_DClick)
 //////////////////////////////////////////////////////
 
 [function f_mq002_Borek_DClick]
-f_mq002_checkOldTags
 if (<src.flags>&statf_dead)
   return 1
 elseif ( (<src.tag.realm>==1) || (0<src.qtag(gq002)> > 0) )
@@ -435,7 +406,6 @@ f_qSpeech(f_mq002_Kovar_DClick)
 //////////////////////////////////////////////////////
 
 [function f_mq002_Kovar_DClick]
-f_mq002_checkOldTags
 if (<src.flags>&statf_dead)
  return 1
 elseif (<src.tag.realm>==1)
@@ -468,7 +438,6 @@ ON=@userCLICK
 src.sysMessage Stary znacne posramoceny pluh
 
 on=@userdclick
-f_mq002_checkOldTags
 if (<src.flags>&statf_dead)
  return 1
 elseif (<src.targ.distance> >1)
@@ -554,7 +523,6 @@ ON=@userCLICK
 src.sysMessage Bedna se zmeti naloupenych veci
 
 on=@userdclick
-f_mq002_checkOldTags
 if (<src.flags>&statf_dead)
   return 1
 elseif (src.isgm)

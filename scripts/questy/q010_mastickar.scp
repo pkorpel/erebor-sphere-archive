@@ -32,21 +32,10 @@ on = *ahoj*
 f_qSpeech(f_q010_mastickar)
 
 [function f_q010_mastickar]
-f_q010_checkOldTags
 if (<src.flags>&statf_dead)
  return 0
 else
   dialog(d_q010_mastickar)
-endif
-
-[function f_q010_checkOldTags]
-if (<src.tag(q010_mastickar)>)
-  src.qtag(q010_mastickar,1)
-  src.tag.remove(q010_mastickar)
-endif
-if (0<src.tag(splnen_kvest_010)> ==1)
-  src.qtag(q010_mastickar,2)
-  src.tag.remove(splnen_kvest_010)
 endif
 
 [dialog d_q010_mastickar]

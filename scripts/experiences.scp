@@ -395,6 +395,7 @@ if (<arg(gainedLevel)>)
   else
     do_a_cyrcle(i_fx_sparkle_2,1,01)
   endif
+  f_weekly_check
 endif
 f_setmainability
 

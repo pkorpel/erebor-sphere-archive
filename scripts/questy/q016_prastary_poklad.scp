@@ -25,42 +25,6 @@
 // (src.tag(crunch_brana,2)		-> remove + hodnota hozena do moreX // pomocny tag pro vstup do brany
 
 
-
-[function f_q016_checkOldTags]
-if (src.tag(crunch_informace_011) == 1)
-  src.tag.remove(crunch_informace_011)
-  src.qtag(q016_prastary_poklad,1)
-elseif (src.tag(crunch_informace_011) == 2)
-  src.tag.remove(crunch_informace_011)
-  src.qtag(q016_prastary_poklad,2)
-elseif (src.tag(crunch_informace_011) == 3)
-  src.tag.remove(crunch_informace_011)
-  src.qtag(q016_prastary_poklad,3)
-elseif (src.tag(crunch_informace_011) == 4)
-  src.tag.remove(crunch_informace_011)
-  src.qtag(q016_prastary_poklad,5)
-elseif (src.tag(crunch_informace_011) == 5)
-  src.tag.remove(crunch_informace_011)
-  src.qtag(q016_prastary_poklad,6)
-elseif (src.tag(crunch_informace_011) == 6)
-  src.tag.remove(crunch_informace_011)
-  src.qtag(q016_prastary_poklad,7)
-elseif (src.tag(crunch_informace_011) == 7)
-  src.tag.remove(crunch_informace_011)
-  src.qtag(q016_prastary_poklad,8)
-elseif (src.tag(crunch_informace_011) == 8)
-  src.tag.remove(crunch_informace_011)
-  src.qtag(q016_prastary_poklad,9)
-elseif (src.tag(splnen_kvest_011) == 1)
-  src.tag.remove(splnen_kvest_011)
-  src.qtag(q016_prastary_poklad,11)
-endif
-if (<src.tag(crunch_brana)>)
-  src.tag.remove(crunch_brana)
-endif
-
-
-
 ////////////////////////////////////////////////
 // D I A L O G   S T A R Y   N E C R O M A N T
 ////////////////////////////////////////////////
@@ -455,7 +419,6 @@ else
 endif
 
 [Function f_q016_StaryNegr_DClick]
-src.f_q016_checkOldTags
 if (<src.flags>&statf_dead)
  return 1
 endif
@@ -486,7 +449,6 @@ else
 endif
 
 [Function f_q016_Orillus_DClick]
-src.f_q016_checkOldTags
 if (<src.flags>&statf_dead)
  return 1
 else
@@ -513,7 +475,6 @@ else
 endif
 
 [Function f_q016_Andor_DClick]
-src.f_q016_checkOldTags
 if (<src.flags>&statf_dead)
   return 1
 else

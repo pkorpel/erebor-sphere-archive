@@ -11,8 +11,7 @@
 /////////////////////////////////////////////
 
 [function f_q30_zmocnenecg_DClick]
- f_q030_checkOldTags
- f_gq030_zmocnenec
+f_gq030_zmocnenec
 
 //SPEECH//
 
@@ -315,7 +314,6 @@ endif
 
 
 [function f_q30_zmocnenecm_DClick]
-f_q030_checkOldTags
 f_mq030_zmocnenec
 
 //SPEECH//
@@ -625,19 +623,6 @@ endif
 ///////////////////////////////////////////////////////////
 //   S  U  P  P  O  R  T     F  U  N  C  T  I  O  N  S   //
 ///////////////////////////////////////////////////////////
-
-[function f_q030_checkOldTags]
-if (<eval src.tag(q30_zmocnenecm)> > 0)
-  src.qtag(mq030_zmocnenec,<eval src.tag(q30_zmocnenecm)>)
-  src.tag.remove(q30_zmocnenecm)
-  return 1
-endif
-if (<eval src.tag(q30_zmocnenecg)> > 0)
-  src.qtag(gq030_zmocnenec,<eval src.tag(q30_zmocnenecg)>)
-  src.tag.remove(q30_zmocnenecg)
-  return 1
-endif
-return 0
 
 //argv(0) ~ quest tag value
 [function f_q030_playerCanGetWork]

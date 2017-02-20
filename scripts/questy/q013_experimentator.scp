@@ -25,7 +25,6 @@ else
 endif
 
 [function f_gq013_experimentator]
-f_q013_checkOldTags
 if !(0<src.tag.realm>==1)
   say "Vyhni se mi obloukem, sluho Temneho Pana !"
   return 0
@@ -37,24 +36,6 @@ elseif (<eval src.qtag(gq013_experimentator)> ==3) // player has failed experime
   return 1
 else
   dialog(d_gq013_experimentator)
-endif
-
-[function  f_q013_checkOldTags]
-if (<src.tag(gq013_experimentator)>)
-  src.qtag(gq013_experimentator,<src.tag(gq013_experimentator)>)
-  src.tag.remove(gq013_experimentator)
-endif
-if (<src.tag(mq013_experimentator)>)
-  src.qtag(mq013_experimentator,<src.tag(mq013_experimentator)>)
-  src.tag.remove(mq013_experimentator)
-endif
-if (<src.tag(gq013_neuspel)>)
-  src.qtag(gq013_experimentator,3)
-  src.tag.remove(gq013_neuspel)
-endif
-if (<src.tag(mq013_neuspel)>)
-  src.qtag(mq013_experimentator,3) // neuspel
-  src.tag.remove(mq013_neuspel)
 endif
 
 ///////////////////
@@ -209,7 +190,6 @@ else
 endif
 
 [FUNCTION f_mq013_experimentator]
-f_q013_checkOldTags
 IF !(0<src.tag.realm>==2)
   say("Tahni odemne !")
   return 0

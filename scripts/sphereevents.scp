@@ -2346,6 +2346,7 @@ tag(combatSource,<src>)
 
 on=@DrinkingPotion
 on=@beforegetswing
+on=@aftergetswing
 on=@afterswing
 on=@userkill
 on=@npckill

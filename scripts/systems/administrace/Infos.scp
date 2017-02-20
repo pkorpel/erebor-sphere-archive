@@ -116,6 +116,7 @@ d_def_valuecolor      1000
 d_def_NAcolor         2305
 d_def_headcolor       98
 d_def_subheadcolor    95
+d_def_textcolor       90
 
 d_def_refer_sirka	800
 d_def_refer_vyska	480

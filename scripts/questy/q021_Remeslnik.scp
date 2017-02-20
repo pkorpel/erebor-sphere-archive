@@ -1,10 +1,3 @@
-[function f_q021_checkOldTags]
-if (src.tag(q20z)==1)
-  src.tag.remove(q20z)
-  src.qtag(q021,2,20)
-endif
-
-
 //////////////////////////////////////////////////
 /////Dialog Stary remeslnik
 [speech spk_q021_Remeslnik]
@@ -26,7 +19,6 @@ else
 endif
 
 [function f_q021_Remeslnik]
-f_q021_checkOldTags
 Dialog(d_q021_Remeslnik)
 
 [dialog d_q021_Remeslnik]
@@ -321,7 +313,6 @@ else
 endif
 
 [function f_q021_Lecitel]
-f_q021_checkOldTags
 Dialog(d_q021_Lecitel)
 
 [dialog d_q021_Lecitel]

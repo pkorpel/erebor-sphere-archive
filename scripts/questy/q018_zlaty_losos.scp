@@ -1,28 +1,5 @@
 /////	ZLATY LOSOS
 
-[function f_q018_checkOldTags]
-if (src.tag(crunch_informace_010)==1)
-  src.qtag(q018,1)
-  src.tag.remove(crunch_informace_010)
-elseif (src.tag(crunch_informace_010)==2)
-  src.qtag(q018,2)
-  src.tag.remove(crunch_informace_010)
-elseif (src.tag(crunch_informace_010)==3)
-  src.qtag(q018,3)
-  src.tag.remove(crunch_informace_010)
-elseif (src.tag(crunch_informace_010)==4)
-  src.qtag(q018,4)
-  src.tag.remove(crunch_informace_010)
-elseif (src.tag(crunch_informace_010)==5)
-  src.qtag(q018,5)
-  src.tag.remove(crunch_informace_010)
-endif
-if src.tag(splnen_kvest_010)==1)
-	src.qtag(q018,6)
-	src.tag.remove(splnen_kvest_010)
-endif
-return(1)
-
 //////////////////////////////////////////////////
 /////Rybar Podivin 	- 3916, 3609, 1
 [SPEECH spk_q018_rybar] 
@@ -40,7 +17,6 @@ else
 endif
 
 [function f_q018_rybar]
-f_q018_checkOldTags
 dialog(d_q018_rybar)
 return(1)
 
@@ -151,7 +127,6 @@ else
 endif
 
 [function f_q018_mirrana]
-f_q018_checkOldTags
 dialog(d_q018_mirrana)
 return(1)
 
@@ -255,7 +230,6 @@ else
 endif
 
 [function f_q018_elnassir]
-f_q018_checkOldTags
 dialog(d_q018_elnassir)
 return(1)
 

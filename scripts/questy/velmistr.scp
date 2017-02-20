@@ -31,12 +31,6 @@
 [defnames q000_constants]
 def_q000_minLevel           12
 
-[function f_q000_checkOldTags]
-if (<eval src.tag(skillrank)> > 2) && (<eval src.qtag(q000_velmistr)> == 0) //allready VM, but hasn't done the quest -> give the quest freely
-  src.qtag(q000_velmistr,13)
-endif
-//src.tag.remove(bylina)
-
 ////////////////////////////////////
 //        E  L  Q  I  R  A        //
 //             matka              //
@@ -51,7 +45,6 @@ ON=*hello*
 f_qSpeech(f_q000_ElqiraDClick)
 
 [function f_q000_ElqiraDClick]
-f_q000_checkOldTags
 if (<src.flags>&statf_dead)
   return 0
 endif
@@ -294,7 +287,6 @@ ON=*hello*
 f_qSpeech(f_q000_ElmiraDClick)
 
 [function f_q000_ElmiraDClick]
-f_q000_checkOldTags
 if (<src.flags>&statf_dead)
   return 0
 endif
@@ -630,7 +622,6 @@ endif
 f_q000_Elvira
 
 [function f_q000_Elvira]
-f_q000_checkOldTags
 if (<src.isDead>)
   return 0
 endif
@@ -826,7 +817,6 @@ ON=*zdravim*
 ON=*hi*
 ON=*hello*
 ON=*Rinald*
-f_q000_checkOldTags
 
 [function f_q000_RinaldDClick]
 arg(spawn,<memoryfindtype(MEMORY_ISPAWNED).link>)

@@ -1,40 +1,3 @@
-[function f_q020_checkOldTags]
-if (src.tag(q20)==1)
-  src.tag.remove(q20)
-  src.qtag(q020,1)
-elseif (src.tag(q20)==2)
-  src.tag.remove(q20)
-  src.qtag(q020,2)
-elseif (src.tag(q20)==3)
-  src.tag.remove(q20)
-  src.qtag(q020,3)
-elseif (src.tag(q20)==4)
-  src.tag.remove(q20)
-  src.qtag(q020,4)
-elseif (src.tag(q20)==5)
-  src.tag.remove(q20)
-  src.qtag(q020,5)
-elseif (src.tag(q20)==6)
-  src.tag.remove(q20)
-  src.qtag(q020,6)
-elseif (src.tag(q20)==7)
-  src.tag.remove(q20)
-  src.qtag(q020,7)
-elseif (src.tag(q20)==8)
-  src.tag.remove(q20)
-  src.qtag(q020,8)
-elseif (src.tag(q20)==9)
-  src.tag.remove(q20)
-  src.qtag(q020,9)
-elseif (src.tag(q20)==10)
-  src.tag.remove(q20)
-  src.qtag(q020,10)
-elseif (src.tag(q20)==11)
-  src.tag.remove(q20)
-  src.qtag(q020,11)
-endif
-
-
 //////////////////////////////////////////////////
 /////Dialog bard
 [speech spk_q020_bard]
@@ -47,7 +10,6 @@ else
 endif
 
 [function f_q020_Bard]
-f_q020_checkOldTags
 Dialog(d_q020_Bard)
 
 [dialog d_q020_Bard]
@@ -117,7 +79,6 @@ endif
 /////Dialog Roxana
 
 [function f_q020_roxana]
-f_q020_checkOldTags
 Dialog(d_q020_roxana)
 
 [speech spk_q020_roxana]

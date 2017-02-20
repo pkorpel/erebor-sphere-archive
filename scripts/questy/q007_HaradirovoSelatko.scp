@@ -29,63 +29,6 @@
 //Kniha == 3 -> vymenil sem knihu za pero
 
 
-
-[function f_q007_checkOldTags]
-if (0<src.tag(selatko)> == 1)
-  src.qtag(q007_haradirovo_selatko,1)
-  src.tag.remove(selatko)
-endif
-if (0<src.tag(Lakomec)> == 1)
-  src.qtag(q007_haradirovo_selatko,2)
-  src.tag.remove(Lakomec)
-endif
-if (0<src.tag(Carodejnice)> == 1)
-  src.qtag(q007_haradirovo_selatko,3)
-  src.tag.remove(Carodejnice)
-endif
-if (0<src.tag(Carodejnice_regy)> == 1)
-  src.qtag(q007_haradirovo_selatko,4)
-  src.tag.remove(Carodejnice_regy)
-endif
-if (0<src.tag(Rachel)> == 1)
-  src.qtag(q007_haradirovo_selatko,5)
-  src.tag.remove(Rachel)
-elseif (0<src.tag(Rachel)> == 2)
-  src.qtag(q007_haradirovo_selatko,6)
-  src.tag.remove(Rachel)
-endif
-if (0<src.tag(Informace)> == 1)
-  src.qtag(q007_haradirovo_selatko,7)
-  src.tag.remove(Informace)
-endif
-if (0<src.tag(Hotovo)> == 1)
-  src.qtag(q007_haradirovo_selatko,8)
-  src.tag.remove(Hotovo)
-endif
-if (0<src.tag(Kovar)> != 0)
-  src.qtag(q007_prastary_kovar,<src.tag(Kovar)>)
-  src.tag.remove(Kovar)
-endif
-if (0<src.tag(Kniha)> != 0)
-  src.qtag(q007_stary_inscripter,<src.tag(Kniha)>)
-  src.tag.remove(Kniha)
-endif
-if (0<src.tag(q007_haradir_Nemethen)> == 1)
-  src.qtag(q007_haradir_Nemethen,1)
-  src.tag.remove(q007_haradir_Nemethen)
-endif
-
-[function f_q007_Rodrigo_checkOldTags]
-if (<eval src.tag.Rodrigo> == 1)
-  src.qtag(q007_Rodrigo,1)
-  src.tag.remove(Rodrigo)
-endif
-if (<eval src.TAG.q007_delfin> == 1)
-  src.qtag(q007_delfin,1)
-  src.tag.remove(q007_delfin)
-endif
-
-
 //////////////////////////////////////////////////////
 //Speech Haradir
 //////////////////////////////////////////////////////
@@ -108,7 +51,6 @@ endif
 ///////////// ON DCLICK+SPEECH Haradir Function
 
 [FUNCTION f_q007_haradir_DClick]
-src.f_q007_checkOldTags
 if (0<src.qtag(q007_haradirovo_selatko)> == 8)
   DIALOG(d_q007_haradir8)
 elseif ((0<src.qtag(q007_haradirovo_selatko)> == 7) && (<SRC.RESTEST 1 i_selatko>))
@@ -780,8 +722,6 @@ else
 endif
 
 [FUNCTION f_q007_hospodsky_DClick]
-src.f_q007_checkOldTags
-src.f_q017_checkOldTags
 DIALOG(d_q007_hospodsky)
 
 
@@ -1279,7 +1219,6 @@ else
 endif
 
 [FUNCTION f_q007_carodejnice_DClick]
-src.f_q007_checkOldTags
 if (0<src.qtag(q007_haradirovo_selatko)> >= 5)
  DIALOG(d_q007_carodejnice5)
 elseif (0<src.qtag(q007_haradirovo_selatko)> == 4)
@@ -1690,7 +1629,6 @@ endif
 
 
 [FUNCTION f_q007_kovar_DClick]
-src.f_q007_checkOldTags
 IF (0<src.qtag(q007_prastary_kovar)>==2)
  DIALOG(d_q007_kovar6)
 elseIF (0<src.qtag(q007_prastary_kovar)>==1)
@@ -2124,7 +2062,6 @@ endif
 
 
 [FUNCTION f_q007_maginscript_DClick]
-src.f_q007_checkOldTags
 IF (0<src.qtag(q007_stary_inscripter)> > 1)
  DIALOG(d_q007_maginscript6)
 elseIF (0<src.qtag(q007_stary_inscripter)>==1)
@@ -2553,7 +2490,6 @@ endif
 
 
 [FUNCTION f_q007_divous_DClick]
-src.f_q007_checkOldTags
 IF (0<src.qtag(q007_stary_inscripter)> == 3)
  DIALOG(d_q007_divous3)
 elseif (<SRC.RESTEST 1 i_book_inscription>)
@@ -2793,7 +2729,6 @@ endif
 
 
 [FUNCTION f_q007_rodrigo_DClick]
-src.f_q007_Rodrigo_checkOldTags
 if (<eval src.qtag(q007_Rodrigo)> == 1)
  DIALOG(d_q007_rodrigo2)
 else
