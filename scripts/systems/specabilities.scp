@@ -5691,12 +5691,12 @@ elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==2)
   int=<int>+60
   maxmana=<maxmana>+60
   
-  if (<cont.hits> > <cont.maxhits>)
-    cont.hits=<cont.maxhits>
+  if (<hits> > <maxhits>)
+    hits=<maxhits>
   endif
 
-  if (<cont.stam> > <cont.maxstam>)
-    cont.stam=<cont.maxstam>
+  if (<stam> > <maxstam>)
+    stam=<maxstam>
   endif
   
   findid(i_voodoo_stats).tag(ritual,1)
@@ -5736,8 +5736,8 @@ elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==1)
   int=<int>-60
   maxmana=<maxmana>-60
   
-  if (<cont.mana> > <cont.maxmana>)
-    cont.mana=<cont.maxmana>
+  if (<mana> > <maxmana>)
+    mana=<maxmana>
   endif
   
   findid(i_voodoo_stats).tag(ritual,2)
