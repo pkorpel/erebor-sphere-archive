@@ -688,6 +688,8 @@ elseif (profession==class_shaman)
   argo.f_rearAbility_addLine("Pakty - vylepseni","<?eval tag(ra_woodoo_pacts_boost)?>",48)
   argo.f_rearAbility_addLine("Pakt zivota - prodlouzeni","<?eval tag(ra_woodoo_lifepact)?>",49)
   argo.f_rearAbility_addLine("Pakt zivota - vylepseni","<?eval tag(ra_woodoo_lifepact_stats)?>",53)
+  argo.f_rearAbility_addLine("MindBlast Silence","<?eval tag(ra_mind_blast_silence)?>",66)
+  argo.f_rearAbility_addLine("Silence - ucinnost","<?eval tag(ra_mind_blast_silenced_time)?>",67)
   //argo.f_rearAbility_addLine("LifePact","<?eval tag(ra_lifepact)?>",32)
   //argo.f_rearAbility_addLine("LifePact - stav zivota","<?eval tag(ra_lifepact_hp)?>",37)
   //argo.f_rearAbility_addLine("LifePact - stav many","<?eval tag(ra_lifepact_mana)?>",38)
@@ -990,11 +992,11 @@ if (profession==class_necro)
   ra_add(doba_prokleti)
 endif
 on=66
-if (profession==class_mag)
+if (profession==class_mag) || (profession==class_shaman)
   ra_add(mind_blast_silence)
 endif
 on=67
-if (profession==class_mag)
+if (profession==class_mag) || (profession==class_shaman)
   ra_add(mind_blast_silenced_time)
 endif
 on=68
