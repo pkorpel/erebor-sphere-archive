@@ -1047,7 +1047,7 @@ DUPELIST=01ce8
 [ITEMDEF 01ce1]
 DEFNAME=i_flesh_head
 RESOURCES=i_bone_skull, i_bone_jaw, i_flesh_brain
-WEIGHT=7.0
+WEIGHT=5.0
 CATEGORY=Decoration - Dungeons and The Dead
 SUBSECTION=Body Parts
 DESCRIPTION=Head
@@ -1186,7 +1186,7 @@ DUPELIST=01dad
 DEFNAME=i_flesh_head_2
 VALUE=1
 RESOURCES=i_bone_skull, i_bone_jaw, i_flesh_brain, i_blood_2
-WEIGHT=7.0
+WEIGHT=5.0
 CATEGORY=Decoration - Dungeons and The Dead
 SUBSECTION=Body Parts
 DESCRIPTION=Head
