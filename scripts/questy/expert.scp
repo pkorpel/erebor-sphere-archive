@@ -25,6 +25,9 @@ on=*zdravim*
 
 if (<distance> > 4)
   src.sysMessage("Rvat na sebe nebudete. Musis prijit bliz.")
+elseif (<eval src.tag(expert_failed)>)
+  say("Loucim se s tebou, zkus to priste znova...")
+  src.paralyze(20)
 else
   f_expertMistrDClick
 endif
@@ -108,6 +111,7 @@ if (<tag(port)>)
   else
     link.go 2757,2757
   endif
+  link.tag.remove(expert_failed)
 endif
 tag(stone).link=""
 tag(stone).tag(mistr).remove
@@ -301,6 +305,7 @@ return 0
 
 [function f_expert_quest_begin]
 src.go(<p>)
+src.tag(expert_failed,0)
 link=<src>
 timer=60
 more=60
@@ -329,6 +334,7 @@ lastnewchar.tag(otazka,0)
 
 
 [function f_expert_quest_end]
+link.tag(expert_failed,1)
 link.tag.remove(otazka)
 link.newitem(i_expertquest_end)
 arg(eqe,<lastnew>)
