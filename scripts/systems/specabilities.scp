@@ -5702,6 +5702,7 @@ elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==2)
   findid(i_voodoo_stats).tag(ritual,1)
   sysMessage("Cerpas magickou silu ze sve vlastni krve!")
 endif
+f_getmindpow
   
 [function voodoovit]
 if (<flags>&statf_dead)
@@ -5745,11 +5746,13 @@ elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==1)
 elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==2)
   sysMessage("Tenhle ritual jsi uz uspesne provedl!")
 endif
+f_getmindpow
 
 [function voodoorovnovaha]
 if (findid(i_voodoo_stats))
   findid(i_voodoo_stats).remove
   sysMessage("Sila krve je nyni v rovnovaze.")
+  f_getmindpow
 else
 	sysmessage("Nic se nestalo...")
 endif
