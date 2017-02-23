@@ -240,7 +240,11 @@ else
   lastnew.link=<link> 
   lastnew.more1=<eval ((<link.str>/3)*2)>
   lastnew.tag(restore_karma,<cont.karma>)
-  cont.karma=00
+  if (cont.brain==2)
+    cont.karma=-100
+  else
+    cont.karma=0
+  endif
   cont.equip(<lastnew>)
 endif
 if (<nastaveni_taunt_removefight> == 1)
