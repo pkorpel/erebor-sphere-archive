@@ -5013,6 +5013,27 @@ doswitch <args>
   return"-1,-1"
 enddo
 
+[function f_isBackslash] // argv(0) - dir cile               
+arg(minDIR,<eval (<dir>-1)>)
+arg(maxDIR,<eval (<dir>+1)>)
+
+if (<arg(minDir)> < 0)
+  arg(minDIR,7)
+endif
+if (<arg(maxDir)> > 7)
+  arg(maxDir,0)
+endif
+
+if (<argv(0)> == <arg(minDir)>)
+  return 1
+elseif (<argv(0)> == <dir>)
+  return 1
+elseif (<argv(0)> == <arg(maxDir)>)
+  return 1
+else
+  return 0
+endif
+
 [function isfighting]
 if (action==skill_wrestling)
 elseif (action==skill_swordsmanship)
