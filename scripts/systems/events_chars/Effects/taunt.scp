@@ -2,7 +2,6 @@
 if !(f_Taunt_Apply("single"))
   return 0
 endif
-accmsg("pouzil Abilitu single TAUNT spravne, vytvoril target k zacileni.")
 newequip(i_taunt_target)
 return 1
 
@@ -13,7 +12,6 @@ if !(f_Taunt_Apply("mass"))
 endif
 sound(sex(1098,824))  // zvuk silneho revu
 reduceStamina(<nastaveni_mass_taunt_stamina>)
-accmsg("pouzil Abilitu mass TAUNT spravne, vytvoril mass_target.")
 var(STR_koef_masstaunt,<eval ((<str>*1000)/250)>)
 var(STAM_koef_masstaunt,<eval (((<stam>+50)*1000)/<maxstam>)>)
 
@@ -27,7 +25,6 @@ if (isevent(e_defstance))
 else
   arg(next_tauntdelay,<nastaveni_mass_tauntdelay>)
 endif
-say("Dalsi Mass Taunt za <arg(next_tauntdelay)> dsec")
 tag(nextTaunt_mass,<eval (<serv.time>+<arg(next_tauntdelay)>)>)
 
 
@@ -36,34 +33,25 @@ if (profession!=class_war)
   sysMessage("Toto muze pouzit jen valecnik.")
   return 0
 endif
-if !(<eval tag(Taunt_TEST)>)
-  redmessage("Abilita je ve stadiu testovani a nelze ji pouzit.")
-  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT aniz by byl soucasti testu.")
-  return 0
-endif
 if (<flag_dead>)
   return 0 
 endif
 if !(<eval tag(ra_taunt)>)
   redmessage("Neumis pouzit tuto abilitu.")
-  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT bez bodu v abilite.")
   return 0
 endif
 if (<strlen(<argv(0)>)> == <strlen(mass)>)
   if (<eval tag(ra_taunt)> < 11)
     redmessage("Neumis pouzit tuto abilitu.")
-    accmsg("se pokusil pouzit Abilitu mass TAUNT bez dostatecneho poctu bodu v abilite.")
     return 0
   endif
 endif
 if (<stam> < <nastaveni_<argv(0)>_taunt_stamina>)
   redmessage("Nemas dostatek staminy.")
-  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT s nedostatkem staminy. Potreboval <nastaveni_<argv(0)>_taunt_stamina> a mel <stam>.")
   return 0
 endif
 if (<eval tag(nextTaunt_<argv(0)>)> > <serv.time>)
   redmessage("Zbrkle pouziti schopnosti jen oddalilo cas, kdy ji pujde znovu pouzit.")
-  accmsg("se pokusil pouzit Abilitu <argv(0)> TAUNT drive nez mohl. Dalsi pouziti muze az za <eval <eval tag(nextTaunt_<argv(0)>)>-<serv.time>> dsekund.")
   tag(nextTaunt_<argv(0)>,<eval (<tag(nextTaunt_<argv(0)>)>+<nastaveni_tauntdelay_penalty>)>)
   return 0 
 endif
@@ -85,29 +73,24 @@ timer=30
 target("Koho chces na sebe nalakat?")
 
 on=@targon_item
-cont.accmsg("zameril Abilitou TAUNT item. Konkretne <src.targ.name> (<src.targ>) na pozici <src.targ.p>.")
 cont.redmessage("Toto neni monstrum.")
 remove
 return 1
 
 on=@targon_char
-src.accmsg("zameril Abilitou TAUNT NPC. Konkretne <src.targ.name> (<src.targ>) na pozici <src.targ.p>.")
 
 if (src.targ.distance > <nastaveni_taunt_max_range>)
   cont.redmessage("Cil je mimo tvuj dosah")
-  cont.accmsg("zameril Abilitou TAUNT NPC mimo svuj dosah. NPC je daleko <src.targ.distance>")
   remove
   return 1
 endif
 if (<src.targ.npc>==0)
   cont.sysmessage("Tohle nemuzes nalakat.")
-  cont.accmsg("zameril Abilitou TAUNT neco co neni NPC. Konkretne zameril <src.targ.name>(<src.targ>)")
   remove
   return 1
 endif
 if (<eval (<eval cont.tag(level)>*<eval cont.tag(ra_taunt)>*5)> < <src.targ.tag(experience)>)
   cont.sysmessage("Nalakani teto prisery presahuje tve moznosti.")
-  cont.accmsg("zameril Abilitou TAUNT neco co presahuje jeho moznosti. Cil ma <src.targ.tag(experience)> a War muze tauntnout maximalne <eval (<eval cont.tag(level)>*<eval cont.tag(ra_taunt)>*5)>.")
   remove
   return 1
 endif
@@ -117,7 +100,7 @@ if (arg(TauntResist) >= 1000)
   remove
   return 1
 endif
-cont.accmsg("se pokousi Abilitou TAUNT prilakat NPC. Cil ma <src.targ.tag(experience)> a War muze tauntnout maximalne <eval (<eval cont.tag(level)>*<eval cont.tag(ra_taunt)>*5)>.")
+cont.accmsg("se pokousi Abilitou TAUNT prilakat NPC <src.targ.name> (<src.targ.Obody>, <src.targ>).")
 
 cont.reduceStamina(<nastaveni_single_taunt_stamina>)
 if (cont.isevent(e_defstance))
@@ -125,7 +108,6 @@ if (cont.isevent(e_defstance))
 else
   arg(next_tauntdelay,<nastaveni_single_tauntdelay>)
 endif
-cont.say("Dalsi Single Taunt za <arg(next_tauntdelay)> dsec")
 cont.tag(nextTaunt_single,<eval (<serv.time>+<arg(next_tauntdelay)>)>)
 
 arg(STR_koef,<eval ((<cont.str>*1000)/250)>)
@@ -135,11 +117,11 @@ arg(TauntChance,<eval ((<arg(STR_koef)>*<arg(STAM_koef)>*<arg(Resist_koef)>)/100
 
 if !(chance(<arg(TauntChance)>,4))
   cont.sound(sex(1097,823))   // zvuk slabeho revu
-  cont.accmsg("se nepovedlo Abilitou TAUNT prilakat NPC. Jeho sila je <cont.str>, stamina <cont.stam>/<cont.maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
+  cont.accmsg("se nepovedlo Abilitou TAUNT prilakat NPC <src.targ.name>. Jeho sila je <cont.str>, stamina <cont.stam>/<cont.maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
   morex=2
 else
   morex=1
-  cont.accmsg("se povedlo Abilitou TAUNT prilakat NPC. Jeho sila je <cont.str>, stamina <cont.stam>/<cont.maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
+  cont.accmsg("se povedlo Abilitou TAUNT prilakat NPC <src.targ.name>. Jeho sila je <cont.str>, stamina <cont.stam>/<cont.maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
   cont.sound(sex(1098,824))  // zvuk silneho revu
 endif
 src.targ.f_taunt(<cont>,<morex>)
@@ -170,32 +152,29 @@ if (<eval tag(taunt_count)>)
   endif
 endif
 if (<eval (<eval var(taunting_war).tag(level)>*<eval var(taunting_war).tag(ra_taunt)>*5)> < <eval tag(experience)>)
-  say("haha me nenalakas, jsem mimo tvuj exp rozsah")
+  var(taunting_war).redmessage("Nalakani teto prisery presahuje tve moznosti.")
   return 0
 endif
 arg(TauntResist,<eval tag(resist_taunt)>)
 if (arg(TauntResist) >= 1000)
+  var(taunting_war).redmessage("Cil odolava nalakani.")
   return 0
 endif
 
 arg(Resist_koef,<eval (1000-<arg(TauntResist)>)>)
 arg(TauntChance,<eval ((<var(STR_koef_masstaunt)>*<var(STAM_koef_masstaunt)>*<arg(Resist_koef)>)/100000)>)
 
+src=<var(taunting_war)> // aby accmsg a reduceStamina nize nehazely error
+var(taunting_war).accmsg("se pokousi Abilitou MASSTAUNT prilakat NPC <name> (<Obody>, <uid>).")
 if !(chance(<arg(TauntChance)>,4))
-  var(taunting_war).accmsg("se nepovedlo Abilitou mass TAUNT prilakat NPC. Jeho sila je <var(taunting_war).str>, stamina <var(taunting_war).stam>/<var(taunting_war).maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
+  var(taunting_war).accmsg("se nepovedlo Abilitou mass TAUNT prilakat NPC <name>. Jeho sila je <var(taunting_war).str>, stamina <var(taunting_war).stam>/<var(taunting_war).maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
   arg(taunt_success,2)
 else
   arg(taunt_success,1)
   if (<eval tag(taunt_count)>) 
-    arg(redStam,(<eval (<tag(taunt_count)>*2)>))
-    if (<arg(redStam)> < <var(taunting_war).stam>)
-      var(taunting_war).stam=<var(taunting_war).stam>-<arg(redStam)>
-    else
-      var(taunting_war).stam=0
-    endif
-    //var(taunting_war).reduceStamina(<eval (<tag(taunt_count)>*5)>)
+    var(taunting_war).reduceStamina(<eval (<tag(taunt_count)>*5)>)
   endif
-  var(taunting_war).accmsg("se povedlo Abilitou mass TAUNT prilakat NPC. Jeho sila je <var(taunting_war).str>, stamina <var(taunting_war).stam>/<var(taunting_war).maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
+  var(taunting_war).accmsg("se povedlo Abilitou mass TAUNT prilakat NPC <name>. Jeho sila je <var(taunting_war).str>, stamina <var(taunting_war).stam>/<var(taunting_war).maxstam> a rezist monstra je <arg(TauntResist)>, Chance: <arg(TauntChance)>/100")
 endif
 f_taunt(<var(taunting_war)>,<arg(taunt_success)>)
                     
@@ -250,11 +229,10 @@ endif
 if (<nastaveni_taunt_removefight> == 1)
   cont.removefight
 elseif (<nastaveni_taunt_removefight> == 2)
-  cont.rewritetarget
+  cont.rewritetarget(<link>)
 else
   cont.act=<link>
 endif
-cont.attack(<link>)
 remove
 
 
@@ -267,11 +245,12 @@ on=@create
 attr=094
 
 on=@equip
+cont.attack(<link>)
+cont.act=<link>
 if (<more1> < 50)
   link.accmsg("ERROR TAUNT : Tauntnute NPC <cont.name>(<cont>) warem <link.name>(<link>) melo TimerD velice maly <more1> War mel silu <link.str>, TimerD mel byt <eval ((<link.str>/3)*2)>")
   more1=50
 endif
-cont.say("TAUNTED by <link.name> for <eval (<more1>/10)>,<eval (<more1>-<eval (<eval (<more1>/10)>*10)>)> sec")
 cont.events +e_npc_taunted
 cont.tag(taunt_count,<eval (<eval cont.tag(taunt_count)>+1)>)      // pocitadlo kolikrat bylo dane monstrum tauntnute
 cont.tag(resist_taunt,<eval (<eval cont.tag(resist_taunt)>+250)>)  // behem tauntu je o +25% rezistentni na pretauntnuti
@@ -306,7 +285,6 @@ if (<eval cont.hits> <= 0)
   return
 endif
 cont.karma=<eval tag(restore_karma)>
-cont.say("Konec tauntu")
 cont.attack(<link>)
 cont.act=<link>
 cont.events -e_npc_taunted
@@ -327,10 +305,6 @@ on=@afterswing
 on=@aftergetswing
 if (<nastaveni_taunt_aftergetswing> == 1)
   arg(taunt_target,<findid(i_taunter).link>)
-//  while (memoryfindtype(MEMORY_WAR_targ))
-//    memoryfindtype(MEMORY_WAR_targ).color=04c
-//    say("Prepisuju memory po zasashu!")
-//  endwhile
   attack(<arg(taunt_target)>)
   act=<arg(taunt_target)>
 endif

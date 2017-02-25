@@ -543,10 +543,17 @@ while (memoryfindtype(MEMORY_FIGHT))
  
 endwhile
 
-[function rewritetarget]
+[function rewritetarget]  // args - UID cile, ktereho nechceme prepsat
 while (memoryfindtype(MEMORY_WAR_targ))
+  if (memoryfindtype(MEMORY_WAR_targ).link == <args>)   // nalezl jsem memory od cile ktereho nebudeme prepisovat
+    arg(restore_memory,<memoryfindtype(MEMORY_WAR_targ)>)    // ulozime si UID toho memory itemu
+    arg(restore_memory_color,<memoryfindtype(MEMORY_WAR_targ).color>)    // ulozime si Color toho memory itemu
+  endif
   memoryfindtype(MEMORY_WAR_targ).color=04c
 endwhile
+if (<eval arg(restore_memory)>)
+  arg(restore_memory).color=<arg(restore_memory_color)>  // prepiseme color na puvodni hodnotu
+endif
 
 [function vyvrhel_prevest]
 if (f_check_tag_realm)
