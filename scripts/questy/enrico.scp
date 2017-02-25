@@ -1239,6 +1239,10 @@ f_heal_value(14)
 f_heal_value(15)
 
 [function f_heal_value]
+if (<flags>&statf_dead)
+  redmessage("Jako duch nic nevylecis.")
+  return 0
+endif
 if (<strlen(<equiptag(equip<eval argv(0)>)>)>)
   if (findUID(<equiptag(equip<eval argv(0)>)>).isChar)
     findid(i_bandage).bandaonchar(<equiptag(equip<eval argv(0)>)>)
