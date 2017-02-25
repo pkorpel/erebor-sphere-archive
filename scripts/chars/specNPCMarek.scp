@@ -4132,7 +4132,7 @@ CAN=MT_EQUIP|MT_WALK|MT_RUN|MT_USEHANDS
 
 attack=105
 ARMOR=130
-MOVERATE=4
+MOVERATE=6
 
 BLOODCOLOR=020
 
@@ -4160,7 +4160,7 @@ STR=4500
 DEX=90
 INT=100
 
-maxhits={16000 20000}
+maxhits={18000 23000}
 maxstam=350
 maxmana=0
 
@@ -4168,20 +4168,20 @@ tag.experience=<eval {1100.0 1500.0}>
 tag.npc_speed=300
 
 tag.npc_stun_time=20             // 2 seconds of stun
-Tag.npc_stun_chance=250          //25%, defaultne 20% 
+Tag.npc_stun_chance=350          //35%, defaultne 20% 
 
 tag.npc_bleed=250 //25.0%
 
-tag.npc_critic_chance=300                //30% chance
+tag.npc_critic_chance=350                //35% chance
 tag.npc_critic_dmg=25,30                 //dmg in between
 
 tag(npc_summoning_chance,120)  //12.0% chance
-tag(npc_summoning_time,60)
+tag(npc_summoning_time,45)
 tag(npc_summoning_count,2)
 tag(npc_summoning_char[0],c_drapac_skokan)
 tag(npc_summoning_char[1],c_drapac_phantom)
 
-tag(pullAll_distance,5)     // pritahne cile blizsi nez 5 poli, default je 9
+tag(pullAll_distance,7)     // pritahne cile blizsi nez 5 poli, default je 9
 tag.roundattack_damage=40,50   //dmg od - do
 tag.roundattack_time=15,20     //prodleva od - do v sek
 tag.roundattack_chance=150     //15.0%
@@ -4200,15 +4200,15 @@ tag(resist_summon,1000) //boss - nelze summonit
 tag.resist_bleed=<eval {-50 150}> //zranitelny krvacenim
 
 //weap resists
-tag(resist_sharp,100)  // cilene ostre utoky maji sanci
-tag(resist_slash,700)  // silny obrnenec
-tag(resist_pierce,150) // cilene prurazne utoky maji sanci
-tag(resist_blunt,800)  // silny obrnenec
+tag(resist_sharp,200)  // cilene ostre utoky maji sanci
+tag(resist_slash,750)  // silny obrnenec
+tag(resist_pierce,350) // cilene prurazne utoky maji sanci
+tag(resist_blunt,850)  // silny obrnenec
 
 //magic resists
 tag(resist_fire,990)   // prakticky nezranitelny ohnem
-tag.resist_elect=<eval {100 200}>  // nachylnost na elektrinu
-tag(resist_cold,400)   // zranitelny mrazem
+tag.resist_elect=<eval {150 300}>  // nachylnost na elektrinu
+tag(resist_cold,500)   // zranitelny mrazem
 
 //typ monstra
 tag(monstertype,humanoid,50)
