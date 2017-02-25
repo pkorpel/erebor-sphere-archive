@@ -5473,7 +5473,7 @@ return 0
 
 [function mystikDoubleswingSuccess]
 if (<tag(ra_mystikDoubleswing)> > 0)
-  if (chance(<eval 50+(<tag(ra_mystikDoubleswing)>*5)>,3))
+  if (chance(<eval 100+(<tag(ra_mystikDoubleswing)>*5)>,3))
     if (<stamina> < <nastaveni_mystik_doubleswing_stam>)
       return 0
     else

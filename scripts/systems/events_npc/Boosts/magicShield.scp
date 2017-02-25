@@ -11,13 +11,24 @@ on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 if (0<tag(npc_magicShield)>)
-  arg(shieldForce,<eval randombetween(<tag(npc_magicShield)>)>)
+  arg(shieldForce,<eval (randombetween(<tag(npc_magicShield)>)*10)>)
 else
-  arg(shieldForce,90)
+  arg(shieldForce,900)
+endif
+if (src.profession==class_mystik)
+  arg(MystikLevel,<eval src.tag(level)>)
+  if (<arg(MystikLevel)> > 200)
+    arg(MystikLevel,200)
+  endif
+  arg(shieldForce,<eval (arg(shieldForce)-((arg(shieldForce)*<arg(MystikLevel)>)/200))>)
 endif
 if (!findid(i_silencer))
-  var(ubrano,<eval (var(ubrano)-((var(ubrano)*arg(shieldForce))/100))>)
-  src.sysMessage("Magicky stit cile pohltil cast ucinku tveho utoku.")
+  var(ubrano,<eval (var(ubrano)-((var(ubrano)*arg(shieldForce))/1000))>)
+  if (var(ubrano) > 1)
+    src.sysMessage("Magicky stit cile pohltil cast ucinku tveho utoku.")
+  else
+    src.sysMessage("Magicky stit cile zcela pohltil ucinek tveho utoku.")
+  endif
 endif
 
 on=@aftergetswing
