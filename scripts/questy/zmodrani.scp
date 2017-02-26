@@ -31,7 +31,7 @@ if (src.isplayer)
     src.level_gate_efekt
     return 1
   endif
-  if !(<src.qtag(q041_paserak)> == 9)
+  if !(<eval src.qtag(q041_paserak)> == 9)
     src.redmessage("Nejprve musis promluvit s Paserakem.")
     return 1
   endif
@@ -249,7 +249,7 @@ if ((src.tag(level)<10)||(<src.tag(presel)>))
   return 1
 endif
 
-if (<src.qtag(q041_paserak)> == 9)
+if (<eval src.qtag(q041_paserak)> == 9)
   src.go <MOREP>
   return 1
 else
