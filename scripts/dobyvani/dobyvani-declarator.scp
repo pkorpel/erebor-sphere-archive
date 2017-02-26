@@ -32,14 +32,78 @@ else
 endif
 return 1
 
+on=@Timer
+return 1
+
+[itemdef i_War_declarator_MemoryItem_1]   // vytvari se jako posledni ingame, az cele dobyvani je osazeno a ospawnovano
+id=i_memory
+type=t_eq_script
+name=War Declarator Gondor
+
+on=@create
+attr=094
+
+on=@userdclick
+if(src.isgm) 
+  finduid(013).equip(<uid>)
+endif
+return 1
+
+on=@equip
+if (<src.topobj> == 013)
+  var(War_declarator_MemoryItem_1,<uid>)
+  timer=10   // nastartovani dobyvani
+else
+  logmsg("War_declarator_MemoryItem_1 (<uid>) byl Equipnut na spatne NPC, konkretne na <src.topobj.name>(<src.topobj>)")
+endif
+
 on=@timer //pocitadlo bude kontrolovat stav dobyvani pevnosti
+logmsg("TIMEEER a jsem na <topobj.name>(<topobj>)")
+var(war_declarator_1).f_war_declarator_OnTimer(1)
+return 1
+
+[itemdef i_War_declarator_MemoryItem_2]
+id=i_memory
+type=t_eq_script
+name=War Declarator Mordor
+
+on=@create
+attr=094
+
+on=@userdclick
+if(src.isgm) 
+  finduid(013).equip(<uid>)
+endif
+return 1
+
+on=@equip
+if (<src.topobj> == 013)
+  var(War_declarator_MemoryItem_2,<uid>)
+  timer=10   // nastartovani dobyvani
+else
+  logmsg("War_declarator_MemoryItem_2 (<uid>) byl Equipnut na spatne NPC, konkretne na <src.topobj.name>(<src.topobj>)")
+endif
+
+on=@timer //pocitadlo bude kontrolovat stav dobyvani pevnosti
+logmsg("TIMEEER a jsem na <topobj.name>(<topobj>)")
+var(war_declarator_2).f_war_declarator_OnTimer(2)
+return 1
+
+
+[function f_war_declarator_OnTimer]
+logmsg("Provedl jsem funkci f_war_declarator_OnTimer na <uid.name>(<uid>) s parametrem <argv(0)>")
+logmsg("UID MemoryItemu podle Glob. prom. <var(War_declarator_MemoryItem_<argv(0)>).name>(<var(War_declarator_MemoryItem_<argv(0)>)>)")
+var(War_declarator_MemoryItem_<argv(0)>).timer=10
+if (<argv(0)> == 2)
+  logmsg("______________________________________________________________________________________")
+endif
 
 //VYNULOVANI
 if(!strcmpi(<tag(war_declared_on)>,0)) //valka neni, konec pocitani
-  say(rusim pocitani - valka neni)
+  //say(rusim pocitani - valka neni)
   scylla.delayedmessage("Dobyvani: <serverTime> Na deklaratoru <tag(my_realm)> dobehlo pocitani - valka je ukoncena.")
   more1=0
-  timer=-1
+  var(War_declarator_MemoryItem_<argv(0)>).timer=1800
   return 1
 endif
 
@@ -54,7 +118,7 @@ if (<more1> > 0) // Uz jsme zacali pocitat?
     var(palantir_<tag(war_declared_on)>).say("Na uspesne dobyti zbyva <more1l> s.")
   endif
   if ((<getMinute> % 10) ==0)
-    if(<region.tag(realm)>==1) // hlasi gondorsky kamen
+    if(<argv(0)>==1) // hlasi gondorsky kamen
       arg(gondr_msg,"Dobyvani pevnosti")
       arg(mordr_msg,"Brante pevnost")
     else
@@ -67,9 +131,9 @@ if (<more1> > 0) // Uz jsme zacali pocitat?
     serv.allclients(warmessage(2,<chatmessage>))
   endif
   if(<more1>==0)
-    endWar
+    endWar(<argv(0)>)  // predavam v parametru cislo realmu, abych ve funkci vedel na ktery memoryitem resetovat timer
   else 
-    timer=10
+    var(War_declarator_MemoryItem_<argv(0)>).timer=10
   endif
   return 1 
 endif
@@ -80,7 +144,7 @@ if (<getMonth> >= <eval tag(war_begins_month)>)&&(<getDay> >= <eval tag(war_begi
   finduid(<tag(war_lord)>).delayedredmessage("Valka muze zacit!")
   scylla.delayedmessage("Dobyvani: <serverTime> Dobyvani <tag(war_declared_on)> prave zacina.") 
   // jednorazova hlaska na chat
-  if(<region.tag(realm)>==1) //hlasi Gondorsky kamen
+  if(<argv(0)>==1) //hlasi Gondorsky kamen
     arg(gondr_msg,"Dobyvani pevnosti")
     arg(mordr_msg,"Braneni nasi pevnosti")
   else
@@ -94,12 +158,12 @@ if (<getMonth> >= <eval tag(war_begins_month)>)&&(<getDay> >= <eval tag(war_begi
  
   var(palantir_<tag(war_declared_on)>).respawnGuards
   more1=<nastaveni_pevnosti_cas_na_dobyti>
-  timer=10
+  var(War_declarator_MemoryItem_<argv(0)>).timer=10
   return 1
 else //jenom posunout timer a pocitame znova
   if((<getMinute> % 59) ==0) //kazdou 59. minutu
     if(<getSecond> > 45) //az uplne naposled :) (jednou-dvakrat)
-      if(<region.tag(realm)>==1) //hlasi Gondorsky kamen
+      if(<argv(0)>==1) //hlasi Gondorsky kamen
         arg(gondr_msg,"Dobyvani pevnosti")
         arg(mordr_msg,"Braneni nasi pevnosti")
       else
@@ -112,17 +176,17 @@ else //jenom posunout timer a pocitame znova
       serv.allclients(warmessage(2,<chatmessage>))
     endif
   endif 
-  timer=10
+  var(War_declarator_MemoryItem_<argv(0)>).timer=10
   return 1
 endif
 
-[function endWar] //ukoncit valku - vynulovat tagy, pocitadla a informovat warlorda.
+[function endWar] //ukoncit valku - vynulovat tagy, pocitadla a informovat warlorda.  <argv(0)> - cislo realmu
 finduid(<tag(war_lord)>).redmessage("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
 finduid(<tag(war_lord)>).redmessage("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
 var(palantir_<tag(war_declared_on)>).say("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
 var(palantir_<tag(war_declared_on)>).say("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
 scylla.delayedmessage("Dobyvani: <serverTime> EndWar. Cas na uspesne dobyti pevnosti vypsel, pevnost byla ubranena.") 
-if(<region.tag(realm)>==1) //hlasi gondorsky kamen
+if(<argv(0)>==1) //hlasi gondorsky kamen
     arg(gondr_msg,"Nepritel pevnost <d_area_<tag(war_declared_on)>_1> ubranil!")
     arg(mordr_msg,"Ubranili jsme pevnost <d_area_<tag(war_declared_on)>_1>!")
   else
@@ -138,9 +202,9 @@ tag(war_begins_day,0)
 tag(war_begins_month,0)
 tag(war_begins_hour,0)
 tag(war_lord,0)
-callOtherWarlord
+callOtherWarlord(<argv(0)>)
 
-[function callOtherWarlord] // jsou-li v poradi dalsi vyhlasovatele na tu samou pevnost, pak se warlord presune na dalsiho
+[function callOtherWarlord] // jsou-li v poradi dalsi vyhlasovatele na tu samou pevnost, pak se warlord presune na dalsiho  (<argv(0)> - Cislo realmu)
 if(array_size(tag.warlords) > 0) //nejaky warlord tam je
   //nastavit dalsiho
   tag(war_begins_day,<array_getremove(tag.begins_day,0)>)
@@ -148,7 +212,7 @@ if(array_size(tag.warlords) > 0) //nejaky warlord tam je
   tag(war_begins_hour,<array_getremove(tag.begins_hour,0)>)
   tag(war_lord,<array_getremove(tag.warlords,0)>)
   finduid(<tag(war_lord)>).delayedmessage(Tvuj utok na pevnost <d_area_<tag(war_declared_on)>_1> zacne <tag(war_begins_day)>.<tag(war_begins_month)> v <tag(war_begins_hour)>h)
-  timer=10 //zacneme pocitat a kontrolovat cas na dobyvani 
+  var(War_declarator_MemoryItem_<argv(0)>).timer=10 //zacneme pocitat a kontrolovat cas na dobyvani 
   scylla.delayedmessage("Dobyvani: <serverTime> Valka skoncila. Nastavuje se dalsi valka.")
 else //proste dokoncit to zruseni
   scylla.delayedmessage("Dobyvani: <serverTime> Valka skoncila, zadna dalsi nenasleduje.")
@@ -367,7 +431,7 @@ if(argchk(which_to_check+100)==1)//cislo "10x" je prvni zaskrtnute (dalsi nas ne
       src.sysmessage("Valka pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod.")
       scylla.delayedmessage("Dobyvani: <serverTime> Valka pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod. Player <src> (<src.name>)")
       //src.tag.remove(can_declare_war_on_<qval <eval tag(my_realm)-1>,"Gondor","Mordor">)
-      timer=10 //zacneme pocitat a kontrolovat cas na dobyvani
+      var(War_declarator_MemoryItem_<region.tag(realm)>).timer=10 //zacneme pocitat a kontrolovat cas na dobyvani
     else //uz je vyhlasena - vyhlasujeme novou na tu samou pevnost
       if((array_find(tag.warlords,<src>) != -1) || (strcmpi(<tag(war_lord)>,<src>)==0)) //je v poradi nebo je to dokonce sam aktualni warlord 
         src.redmessage("Ty jiz jsi valku teto pevnosti <src.sex(vyhlasil,vyhlasila)>!")
@@ -395,7 +459,7 @@ if(array_size(tag.warlords) == 0) //valku rusi ten jediny, kdo ji vyhlasil
   tag(war_lord,0) 
 else
   if(!strcmpi(<tag(war_lord)>,<src>)) //rusi aktualni warlord - presuneme obsah pole a udelame noveho warlorda
-    callOtherWarlord
+    callOtherWarlord(<region.tag(realm)>)
     src.sysmessage("<src.sex(Zrusil,Zrusila)> jsi svuj utok na pevnost <d_area_<tag(war_declared_on)>_1>. Nyni je na rade <finduid(<tag(war_lord)>).name>")
   else //rusi nekdo z nahradniku - jen ho odstranime z pole
     removeSelectedWarlord(<src>)
