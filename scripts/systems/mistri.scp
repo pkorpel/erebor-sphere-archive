@@ -84,7 +84,7 @@ endif
 
 [function canbe_expert]
 if (<?<args>?><=250)
- if (<safe.src.tag(skillrank)>>=1)
+ if (<eval src.tag(skillrank)> >= 1)
   if (<finduid(<profession>).<args>>>=300)
    if (<?<args>?>>=250)
     if (<src.tag(level)>>2)
@@ -106,7 +106,7 @@ return 0
 
 [function canbe_mistr]
 if (<?<args>?>>250)&&(<?<args>?><=500)
- if (<safe.src.tag(skillrank)>>=2)
+ if (<eval src.tag(skillrank)> >= 2)
   if (<finduid(<profession>).<args>>>=55.0)
    if (<?<args>?>==500)
     if (<src.tag(level)>>5)
@@ -128,7 +128,7 @@ return 0
 
 [function canbe_velmistr]
 if (<?<args>?>>500)&&(<?<args>?><=750)
- if (<safe.src.tag(skillrank)>==3)
+ if (<eval src.tag(skillrank)> == 3)
   if (<finduid(<profession>).<args>>>=80.0)
    if (<?<args>?>==750)
     if (<src.tag(level)>>11)
