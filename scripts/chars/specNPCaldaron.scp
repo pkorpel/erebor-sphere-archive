@@ -259,7 +259,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
 tag(monstertype,humanoid,60)
-tag.weapflag=dam_pierce|dam_physical
+tag.weapflag=dam_piercing|dam_physical
 
 tag(resist_poison,700)
 tag(resist_para,1000)
