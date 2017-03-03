@@ -69,9 +69,9 @@ mybag.p=<p_x> <p_y> <p_z>
 var(found_nearest_keep,0)
 arg(fn,1)
 arg(srcRealm,<getRealmName(<argv(0)>)>)
-while(<fn> <= <keeps_world_count>)
+while (<fn> <= <keeps_world_count>)
   arg(keepname,<keep_name_<srcRealm>_<fn>>)
-  if (<eval found_nearest_keep>==0)
+  if (<eval found_nearest_keep> == 0)
     kermel.smsg(prvni pevnost: <var(keep_<keepname>)>)
     var(found_nearest_keep,<finduid(<var(keep_<keepname>)>)>)
   else
@@ -121,14 +121,10 @@ endif
 return 0
 
 [function warMessage]
-logmsg("Funkce warMessage se spustila spravne s argumenty <argv(0)> a <argv(1)>")
-logmsg("Funkce se provadi na <name>(<uid>) a jeho realm je <eval tag(realm)>.")
 if (<eval tag(realm)> == <eval argv(0)>)
   if (<eval tag(realm)> == 1)
-    logmsg("Mam hlasit modrou barvou")  
     bluemessage(<argv(1)>)
   else
-    logmsg("Mam hlasit cervenou barvou")
     redmessage(<argv(1)>)
   endif
 endif

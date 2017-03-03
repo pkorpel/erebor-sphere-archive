@@ -67,12 +67,9 @@ on=@equip
 if (<src.topobj> == 013)
   var(War_declarator_MemoryItem_1,<uid>)
   timer=10   // nastartovani dobyvani
-else
-  logmsg("War_declarator_MemoryItem_1 (<uid>) byl Equipnut na spatne NPC, konkretne na <src.topobj.name>(<src.topobj>)")
 endif
 
 on=@timer //pocitadlo bude kontrolovat stav dobyvani pevnosti
-logmsg("TIMEEER a jsem na <topobj.name>(<topobj>)")
 var(war_declarator_1).f_war_declarator_OnTimer(1)
 return 1
 
@@ -94,27 +91,17 @@ on=@equip
 if (<src.topobj> == 013)
   var(War_declarator_MemoryItem_2,<uid>)
   timer=10   // nastartovani dobyvani
-else
-  logmsg("War_declarator_MemoryItem_2 (<uid>) byl Equipnut na spatne NPC, konkretne na <src.topobj.name>(<src.topobj>)")
 endif
 
 on=@timer //pocitadlo bude kontrolovat stav dobyvani pevnosti
-logmsg("TIMEEER a jsem na <topobj.name>(<topobj>)")
 var(war_declarator_2).f_war_declarator_OnTimer(2)
 return 1
 
 
 [function f_war_declarator_OnTimer]   // argv(0) - cislo realmu
-logmsg("Provedl jsem funkci f_war_declarator_OnTimer na <uid.name>(<uid>) s parametrem <argv(0)>")
-logmsg("UID MemoryItemu podle Glob. prom. <var(War_declarator_MemoryItem_<argv(0)>).name>(<var(War_declarator_MemoryItem_<argv(0)>)>)")
-
-if (<argv(0)> == 2)
-  logmsg("______________________________________________________________________________________")
-endif
 
 //VYNULOVANI
 if (!strcmpi(<tag(war_declared_on)>,0)) //valka neni, konec pocitani
-  //say(rusim pocitani - valka neni)
   scylla.delayedmessage("Dobyvani: <serverTime> Na deklaratoru <tag(my_realm)> dobehlo pocitani - valka je ukoncena.")
   more1=0
   var(War_declarator_MemoryItem_<argv(0)>).timer=1800
@@ -123,7 +110,6 @@ endif
 
 ////HLASENI
 if (<more1> > 0) // Uz jsme zacali pocitat?
-  logmsg("More1 je vetsi jak 0 a to <eval More1>")
   more1 = <eval (<more1>-10)> // Snizit cas
   if (<eval(more1 % 10)>==0) // Kazdych deset sekund informovat
     finduid(<tag(war_lord)>).redmessage("Na uspesne dobyti zbyva <more1l> s.")
@@ -133,7 +119,6 @@ if (<more1> > 0) // Uz jsme zacali pocitat?
     var(palantir_<tag(war_declared_on)>).say("Na uspesne dobyti zbyva <more1l> s.")
   endif
   if ((<getMinute> % 10) == 0)
-    logmsg("Je cas hlasit stav, hlasim?")
     if (<argv(0)>==1) // hlasi gondorsky kamen
       arg(gondr_msg,"Dobyvani pevnosti")
       arg(mordr_msg,"Brante pevnost")
@@ -142,9 +127,7 @@ if (<more1> > 0) // Uz jsme zacali pocitat?
       arg(mordr_msg,"Dobyvani pevnosti") 
     endif
     var(chatmessageG,"*Gondorsky herold* <gondr_msg> <d_area_<tag(war_declared_on)>_1> - jeste <eval more1> s!")
-    //serv.allclients(warmessage(1,<var(chatmessageG)>))  
     var(chatmessageM,"*Mordorsky herold* <mordr_msg> <d_area_<tag(war_declared_on)>_1> - jeste <eval more1> s!")
-    //serv.allclients(warmessage(2,<var(chatmessageM)>))
     src.newitem(i_war_declarator_announcer)       // item co zarve zpravu pro G i pro M
     lastnew.p=<src.p>
   endif
@@ -170,9 +153,7 @@ if (<getMonth> >= <eval tag(war_begins_month)>)&&(<getDay> >= <eval tag(war_begi
     arg(mordr_msg,"Dobyvani pevnosti") 
   endif
   var(chatmessageG,"*Gondorsky herold* <gondr_msg> <d_area_<tag(war_declared_on)>_1> prave zacalo")
-  //serv.allclients(warmessage(1,<chatmessageG>))    
   var(chatmessageM,"*Mordorsky herold* <mordr_msg> <d_area_<tag(war_declared_on)>_1> prave zacalo")
-  //serv.allclients(warmessage(2,<chatmessageM>))
   src.newitem(i_war_declarator_announcer)       // item co zarve zpravu pro G i pro M
   lastnew.p=<src.p>
   var(palantir_<tag(war_declared_on)>).respawnGuards
@@ -190,9 +171,7 @@ else //jenom posunout timer a pocitame znova
         arg(mordr_msg,"Dobyvani pevnosti") 
       endif 
       var(chatmessageG,"*Gondorsky herold* <gondr_msg> <d_area_<tag(war_declared_on)>_1> zacne <eval tag(war_begins_day)>.<eval tag(war_begins_month)> v <eval tag(war_begins_hour)>h")
-      //serv.allclients(warmessage(1,<chatmessageG>))    
       var(chatmessageM,"*Mordorsky herold* <mordr_msg> <d_area_<tag(war_declared_on)>_1> zacne <eval tag(war_begins_day)>.<eval tag(war_begins_month)> v <eval tag(war_begins_hour)>h")
-      //serv.allclients(warmessage(2,<chatmessageM>))
       src.newitem(i_war_declarator_announcer)       // item co zarve zpravu pro G i pro M
       lastnew.p=<src.p>
     endif
@@ -217,9 +196,7 @@ else
 endif
 
 var(chatmessageG,"*Gondorsky herold* <gondr_msg>")
-//serv.allclients(warmessage(1,<chatmessage>))    
 var(chatmessageM,"*Mordorsky herold* <mordr_msg>")
-//serv.allclients(warmessage(2,<chatmessage>))
 src.newitem(i_war_declarator_announcer)       // item co zarve zpravu pro G i pro M
 lastnew.p=<src.p>
 
@@ -264,7 +241,7 @@ array_remove(tag.begins_hour,<poradi>)
 [function forts_list]//y,index,text
 arg(text,<argv(2)>)
 arg(i,3)
-while(i < argvcount) //pospojovat nespojeny text :)
+while (i < argvcount) //pospojovat nespojeny text :)
   arg(text,"<arg(text)> <argv(i)>")
   arg(i,#+1)
 endwhile
@@ -394,10 +371,10 @@ if (array_size(tag.warlords) > 0) //jsou jeste dalsi vyhlasovatele
   arg(u,0)
   arg(x_names,<argo.tag(sloupec_x[0])>)
   arg(x_times,<argo.tag(sloupec_x[1])>)
-  while(u < array_size(tag.warlords))
+  while (u < array_size(tag.warlords))
     argo.texta(<x_names>+<d_def_odsazeni>,<y_nextwarlords>+u*<d_def_radek_vyska>,031,"<array_get(tag.warlords,<u>).name>")
     argo.texta(<x_times>+<d_def_odsazeni>,<y_nextwarlords>+u*<d_def_radek_vyska>,031,"<array_get(tag.begins_day,<u>)>.<array_get(tag.begins_month,<u>)> - <array_get(tag.begins_hour,<u>)>h") 
-    if (src==array_get(tag.warlords,<u>)) //cudlik na zruseni pro warlorda z pole (jen u toho kdo zrovna klika)
+    if (src == array_get(tag.warlords,<u>)) //cudlik na zruseni pro warlorda z pole (jen u toho kdo zrovna klika)
       argo.button((<argo.tag(sirka)>-(<d_def_okraj>+<d_def_skvira>))-<d_def_button_sirka>,<y_nextwarlords>+u*<d_def_radek_vyska>,0fb1,0fb3,1,0,2) //Zrusit
     endif
     arg(u,#+1)
