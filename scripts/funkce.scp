@@ -6026,6 +6026,9 @@ return<finduid(#033D6)>
 [function eufegenie]
 return<finduid(#033D6)>
 
+[function scylla]
+return<finduid(#01513a)>
+
 [itemdef i_checkownerforpet]
 id=i_memory
 name=test majitele

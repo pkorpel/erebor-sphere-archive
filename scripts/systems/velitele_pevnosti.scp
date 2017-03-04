@@ -50,7 +50,7 @@ if(<region.tag(realm)>==1)||(<region.tag(realm)>==2)
  //if(((<src.tag(captain)>)||(<src.tag(general)>)) && (<src.tag(realm)> == <region.tag(realm)>)) || (src.isgm) // jsem kapitan nebo general a souhlasi realm (pevnost je nase) + GM samozrejme
  if (<src.tag(captain)>)||(<src.isgm>)||(<src.tag(general)>)
   if(!strcmpi(<src.tag(keep)>,<uid>))||(<src.isgm>)||(<src.tag(general)>)
-   if(<src.tag(realm)> == 1)
+   if(<eval src.tag(realm)> == 1)||(<src.isgm>)
    	f_captainmenu 
     return 1
    endif
