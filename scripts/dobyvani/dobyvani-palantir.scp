@@ -59,7 +59,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
     return 1
   endif
   if (<eval tag(fortstones)> == 0)
-    src.redmessage("Pevnost neni nastavena, kontaktuj Dinivana.")
+    src.redmessage("Pevnost neni nastavena, kontaktuj Iustuse.")
     return 1
   endif
   if (<eval src.tag(realm)> != <eval tag(owners_realm)>) //klika budouci dobyvatel (mozna)

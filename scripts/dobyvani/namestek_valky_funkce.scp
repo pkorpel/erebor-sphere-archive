@@ -7,7 +7,7 @@ if(<src.targ.distance> > 3)
  src.sysMessage("Na takovou vzdalenost s tebou jednat nebude.")
  return 1
 endif
-if(<src.tag.realm>==2)
+if(<eval src.tag.realm>==2)
  say("Chces zautocit...?")
  dialog(d_namestek_valky_m) 
  return 1
@@ -18,7 +18,7 @@ endif
 [SPEECH spk_namestek_valky_m]
 ON=*ahoj*
 ON=*hi*
-if(<src.tag.realm>==2)
+if(<eval src.tag.realm>==2)
  say("Chces zautocit...?")
  dialog(d_namestek_valky_m)
  return 1
@@ -35,7 +35,7 @@ if (<src.targ.distance> > 3)
  src.sysMessage("Na takovou vzdalenost s tebou jednat nebude.")
  return 1
 endif
-if(<src.tag.realm>==1)
+if(<eval src.tag.realm>==1)
  say("Chces zautocit...?")
  dialog(d_namestek_valky_g)
  return 1
@@ -46,7 +46,7 @@ endif
 [SPEECH spk_namestek_valky_g]
 ON=*ahoj*
 ON=*hi*
-if (<src.tag.realm>==1)
+if (<eval src.tag.realm>==1)
  say("Hmmm?")
  dialog(d_namestek_valky_g)
  return 1
