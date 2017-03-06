@@ -76,6 +76,17 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
           scylla.delayedmessage("Dobyvani: <serverTime> obrana <d_area_<tag(fort_name)>_1> prolomena <src>-<src.name>(<src.account.name>)")
           tag(conquerors_realm,<src.tag(realm)>) //zapamatovat realm dobyvatele
           tag(prolomeni,1)
+          if (<tag(conquerors_realm)> == 1) //hlasi novy gondorsky palantir
+            arg(gondr_msg,"Prolomili jsme obranu pevnosti <d_area_<tag(fort_name)>_1>!")
+            arg(mordr_msg,"Obrana pevnosti <d_area_<tag(fort_name)>_1> byla prolomena!")
+          else
+            arg(gondr_msg,"Obrana pevnosti <d_area_<tag(fort_name)>_1> byla prolomena!")
+            arg(mordr_msg,"Prolomili jsme obranu pevnosti <d_area_<tag(fort_name)>_1>!") 
+          endif
+          var(chatmessage,"*Gondorsky herold* <gondr_msg>")
+          serv.allclients(delayedWarMessage(1,<chatmessage>))    
+          var(chatmessage,"*Mordorsky herold* <mordr_msg>")
+          serv.allclients(delayedWarMessage(2,<chatmessage>))
           return 1
         else
           src.sysmessage("Jeste zbyvaji nejake straze k zabiti.")
@@ -128,7 +139,18 @@ if (<tag(prolomeni)> == 1) //vyprsel timer a mame prolomeni
     if (<eval (<tag(timer_prolomeni)> % 10)> == 0) //Obcas hlaska 
       say("Uhlidej palantir jeste <tag(timer_prolomeni)> s.")
       if (<eval (<tag(timer_prolomeni)> % 60)> == 0) //Obcas zprava 
-        scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> jeste zbyva uhlidat <tag(timer_prolomeni)> s.")   
+        scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> jeste zbyva uhlidat <tag(timer_prolomeni)>s.")  
+        if (<tag(conquerors_realm)> == 1) //hlasi novy gondorsky palantir
+          arg(gondr_msg,"Pro uspesne dobyti pevnosti <d_area_<tag(fort_name)>_1> je treba udrzet palantir jeste <tag(timer_prolomeni)>s!")
+          arg(mordr_msg,"Jeste <tag(timer_prolomeni)>s a prijdeme o pevnost <d_area_<tag(fort_name)>_1>!")
+        else
+          arg(gondr_msg,"Jeste <tag(timer_prolomeni)>s a prijdeme o pevnost <d_area_<tag(fort_name)>_1>!")
+          arg(mordr_msg,"Pro uspesne dobyti pevnosti <d_area_<tag(fort_name)>_1> je treba udrzet palantir jeste <tag(timer_prolomeni)>s!") 
+        endif
+        var(chatmessage,"*Gondorsky herold* <gondr_msg>")
+        serv.allclients(delayedWarMessage(1,<chatmessage>))    
+        var(chatmessage,"*Mordorsky herold* <mordr_msg>")
+        serv.allclients(delayedWarMessage(2,<chatmessage>)) 
       endif
     endif
     timer=1

@@ -111,14 +111,14 @@ endif
 ////HLASENI
 if (<more1> > 0) // Uz jsme zacali pocitat?
   more1 = <eval (<more1>-10)> // Snizit cas
-  if (<eval(more1 % 10)>==0) // Kazdych deset sekund informovat
+  if (<eval(more1 % 10)> == 0) // Kazdych deset sekund informovat
     finduid(<tag(war_lord)>).redmessage("Na uspesne dobyti zbyva <more1l> s.")
-    if (<eval(more1 % 60)>==0) // Kazdou minutu informovat
+    if (<eval(more1 % 60)> == 0) // Kazdou minutu informovat
       scylla.delayedmessage("Dobyvani: <serverTime> Na uspesne dobyti <tag(war_declared_on)> zbyva <more1l> s.")
     endif
     var(palantir_<tag(war_declared_on)>).say("Na uspesne dobyti zbyva <more1l> s.")
   endif
-  if ((<getMinute> % 10) == 0)
+  if ((<getMinute> % 5) == 0)
     if (<argv(0)>==1) // hlasi gondorsky kamen
       arg(gondr_msg,"Dobyvani pevnosti")
       arg(mordr_msg,"Brante pevnost")
