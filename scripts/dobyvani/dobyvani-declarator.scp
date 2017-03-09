@@ -38,10 +38,10 @@ return 1
 [itemdef i_war_declarator_announcer]
 id=i_worldgem_bit
 type=00
-attr=094
 name=War Declarator Announcer
 
 on=@create
+attr=094
 timer=0
 
 on=@Timer
@@ -59,12 +59,12 @@ attr=094
 
 on=@userdclick
 if (src.isgm) 
-  finduid(013).equip(<uid>)
+  finduid(var(nastaveni_guardian_uid)).equip(<uid>)
 endif
 return 1
 
 on=@equip
-if (<src.topobj> == 013)
+if (<src.topobj> == <var(nastaveni_guardian_uid)>)
   var(War_declarator_MemoryItem_1,<uid>)
   timer=10   // nastartovani dobyvani
 endif
@@ -83,12 +83,12 @@ attr=094
 
 on=@userdclick
 if (src.isgm) 
-  finduid(013).equip(<uid>)
+  finduid(var(nastaveni_guardian_uid)).equip(<uid>)
 endif
 return 1
 
 on=@equip
-if (<src.topobj> == 013)
+if (<src.topobj> == <var(nastaveni_guardian_uid)>)
   var(War_declarator_MemoryItem_2,<uid>)
   timer=10   // nastartovani dobyvani
 endif
@@ -412,27 +412,25 @@ if (argchk(which_to_check+100) == 1)//cislo "10x" je prvni zaskrtnute (dalsi nas
         arg(realm_to_conquer,"Mordor")
       else
         arg(realm_to_conquer,"Gondor")
-      endif
-      tag(war_declared_on,<realm_to_conquer>_<abs(<fort_to_conquer>)>)
+      endif      
       if (!checkDateCorrectness(<fixnumber(<argtxt(201)>)>,<fixnumber(<argtxt(202)>)>)) //day, month - zkontrolovat jestli datum dava smysl (treba 29.2 32.11 atd)
         return 1
       endif
+      tag(war_declared_on,<realm_to_conquer>_<abs(<fort_to_conquer>)>)
       tag(war_begins_day,<fixnumber(<argtxt(201)>)>)
       tag(war_begins_month,<fixnumber(<argtxt(202)>)>)
       tag(war_begins_hour,<fixnumber(<argtxt(203)>)>)
-      if (<eval tag(war_begins_hour)> >= 0 && <eval tag(war_begins_hour)> <= <d_fort_warTo>) //po pulnoci asi
-        tag(war_begins_day,<eval <tag(war_begins_day)>+1>) //posunout den :)
-        if (<eval tag(war_begins_day)> > <d_month_days_<tag(war_begins_month)>>) //neprekrocili jsme mesic?
-          tag(war_begins_month,<eval <tag(war_begins_month)>+1>) //posuneme mesic 
-          tag(war_begins_day,1) //a vynulujem dny     
-          if (<eval tag(war_begins_month)> > 12)
-            tag(war_begins_month,1) //prekrocili jsme 12 mesicku
-          endif
+      if (<eval tag(war_begins_day)> > <d_month_days_<tag(war_begins_month)>>) //neprekrocili jsme mesic?
+        tag(war_begins_month,<eval <tag(war_begins_month)>+1>) //posuneme mesic 
+        tag(war_begins_day,1) //a vynulujem dny     
+        if (<eval tag(war_begins_month)> > 12)
+          tag(war_begins_month,1) //prekrocili jsme 12 mesicku
         endif
       endif
       tag(war_lord,<src>)
       src.sysmessage("Valka pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod.")
       scylla.delayedmessage("Dobyvani: <serverTime> Valka pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod. Player <src> (<src.name>)")
+      src.accmsg("vyhlasil dobyvani pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod.")
       //src.tag.remove(can_declare_war_on_<qval <eval tag(my_realm)-1>,"Gondor","Mordor">)
       var(War_declarator_MemoryItem_<region.tag(realm)>).timer=10 //zacneme pocitat a kontrolovat cas na dobyvani
     else //uz je vyhlasena - vyhlasujeme novou na tu samou pevnost
@@ -455,6 +453,7 @@ endif
 on=2 //zrusit valku
 if (array_size(tag.warlords) == 0) //valku rusi ten jediny, kdo ji vyhlasil
   src.sysmessage("S pevnosti <d_area_<tag(war_declared_on)>_1> byl podepsan docasny mir.")
+  src.accmsg("zrusil dobyvani pevnosti <d_area_<tag(war_declared_on)>_1>, ktera byla vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod.")
   tag(war_declared_on,0)
   tag(war_begins_month,0)
   tag(war_begins_day,0)
@@ -464,9 +463,11 @@ else
   if (!strcmpi(<tag(war_lord)>,<src>)) //rusi aktualni warlord - presuneme obsah pole a udelame noveho warlorda
     callOtherWarlord(<region.tag(realm)>)
     src.sysmessage("<src.sex(Zrusil,Zrusila)> jsi svuj utok na pevnost <d_area_<tag(war_declared_on)>_1>. Nyni je na rade <finduid(<tag(war_lord)>).name>")
+    src.accmsg("zrusil sve dobyvani pevnosti <d_area_<tag(war_declared_on)>_1>, nahradnikem se stava <finduid(<tag(war_lord)>).name>(<tag(war_lord)>) a probehne <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod.")
   else //rusi nekdo z nahradniku - jen ho odstranime z pole
     removeSelectedWarlord(<src>)
     src.sysmessage("<src.sex(Zrusil,Zrusila)> jsi svuj utok na pevnost <d_area_<tag(war_declared_on)>_1>.")
+    src.accmsg("nahradnik zrusil svuj narok na dobyvani pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasene na <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod.")
   endif
 endif
 src.tag.remove(can_declare_war_on_<qval <eval tag(my_realm)-1>,"Gondor","Mordor">)

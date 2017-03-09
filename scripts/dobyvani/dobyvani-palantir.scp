@@ -1,14 +1,15 @@
 [typedef t_fort_cashbox]
 on=@userdclick
-if(<src>==<more2>) //je to opravneny klikatel
- say("Bylo ve me nashromazdeno <eval more1> zlatych.")
- src.newitemsafe(i_cashiers_check)
- lastnew.more1=<more1>
- lastnew.cont=<src>
- lastnew.update
- more1=0
- more2=0
- events=-t_fort_cashbox
+if (<src> == <more2>) //je to opravneny klikatel
+  say("Bylo ve me nashromazdeno <eval more1> zlatych.")
+  src.accmsg("ziskal <eval more1> gp za uspesne dobyti pevnosti")
+  src.newitemsafe(i_cashiers_check)
+  lastnew.more1=<more1>
+  lastnew.cont=<src>
+  lastnew.update
+  more1=0
+  more2=0
+  events=-t_fort_cashbox
 endif
 return 1
 
@@ -74,6 +75,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
           timer=1
           say("Obrana pevnosti byla prolomena! Uhlidej palantir po dobu <tag(timer_prolomeni)> s.")
           scylla.delayedmessage("Dobyvani: <serverTime> obrana <d_area_<tag(fort_name)>_1> prolomena <src>-<src.name>(<src.account.name>)")
+          src.accmsg("prolomil obranu pevnosti <d_area_<tag(fort_name)>_1> do uspesneho dobyti zbyva udrzet pevnost <eval tag(timer_prolomeni)>s.")
           tag(conquerors_realm,<src.tag(realm)>) //zapamatovat realm dobyvatele
           tag(prolomeni,1)
           if (<tag(conquerors_realm)> == 1) //hlasi novy gondorsky palantir
@@ -109,6 +111,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
       say("Prolomeni bylo prozatim zvraceno.")
       switchColor(<src.tag(realm)>)
       scylla.delayedmessage("Dobyvani: <serverTime> prolomeni <d_area_<tag(fort_name)>_1> odvraceno <src>-<src.name>(<src.account.name>).")
+      src.accmsg("odvratil prolomeni obrany pevnosti <d_area_<tag(fort_name)>_1> do uspesneho dobyti zbyvalo <eval tag(timer_prolomeni)>s.")
       tag(prolomeni,0)
       tag(conquerors_realm,<src.tag(realm)>)
       timer=1
@@ -141,11 +144,11 @@ if (<tag(prolomeni)> == 1) //vyprsel timer a mame prolomeni
       if (<eval (<tag(timer_prolomeni)> % 60)> == 0) //Obcas zprava 
         scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> jeste zbyva uhlidat <tag(timer_prolomeni)>s.")  
         if (<tag(conquerors_realm)> == 1) //hlasi novy gondorsky palantir
-          arg(gondr_msg,"Pro uspesne dobyti pevnosti <d_area_<tag(fort_name)>_1> je treba udrzet palantir jeste <tag(timer_prolomeni)>s!")
+          arg(gondr_msg,"Jeste <tag(timer_prolomeni)>s a pevnost <d_area_<tag(fort_name)>_1> je nase!")
           arg(mordr_msg,"Jeste <tag(timer_prolomeni)>s a prijdeme o pevnost <d_area_<tag(fort_name)>_1>!")
         else
           arg(gondr_msg,"Jeste <tag(timer_prolomeni)>s a prijdeme o pevnost <d_area_<tag(fort_name)>_1>!")
-          arg(mordr_msg,"Pro uspesne dobyti pevnosti <d_area_<tag(fort_name)>_1> je treba udrzet palantir jeste <tag(timer_prolomeni)>s!") 
+          arg(mordr_msg,"Jeste <tag(timer_prolomeni)>s a pevnost <d_area_<tag(fort_name)>_1> je nase!") 
         endif
         var(chatmessage,"*Gondorsky herold* <gondr_msg>")
         serv.allclients(delayedWarMessage(1,<chatmessage>))    
