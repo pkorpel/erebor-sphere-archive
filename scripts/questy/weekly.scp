@@ -38,7 +38,7 @@ def_weekly_low_setupFunArg_4_[0]   RANDOM_POTION_BOOST_LESS //prvni argument set
 def_weekly_low_setupFunArg_4_[1]   2 // multiplier poctu potionu
 def_weekly_low_rewardSize[4]       50
 
-def_weekly_low_setupFunction[5]    f_weekly_setup_stepOnWeb
+def_weekly_low_setupFunction[5]    f_weekly_setup_stepOnWeb                     // OTESTOVANO
 def_weekly_low_setupFunArgn[5]     0 // pocet argumentu setup funkce
 def_weekly_low_rewardSize[5]       50
 
@@ -107,7 +107,7 @@ def_weekly_medium_setupFunArg_3_[0]   2 // koeficient poctu NPC
 def_weekly_medium_setupFunArg_3_[1]   100 // minimalni pocet XP
 def_weekly_medium_rewardSize[3]       75
 
-def_weekly_medium_setupFunction[4]    f_weekly_setup_killPlayer
+def_weekly_medium_setupFunction[4]    f_weekly_setup_killPlayer                 // OTESTOVANO
 def_weekly_medium_setupFunArgn[4]     1 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_4_[0]   0 // jakykoliv hrac bez omezeni
 def_weekly_medium_rewardSize[4]       75
@@ -120,12 +120,12 @@ def_weekly_high_setupFunArg_0_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument s
 def_weekly_high_setupFunArg_0_[1]   6 // multiplier poctu potionu
 def_weekly_high_rewardSize[0]       100
 
-def_weekly_high_setupFunction[1]    f_weekly_setup_killPlayer
+def_weekly_high_setupFunction[1]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[1]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_1_[0]   1 // hrac konkretni profese
 def_weekly_high_rewardSize[1]       100
 
-def_weekly_high_setupFunction[2]    f_weekly_setup_killPlayer
+def_weekly_high_setupFunction[2]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[2]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_2_[0]   2 // zabiti na konkretnim uzemi
 def_weekly_high_rewardSize[2]       100
@@ -574,15 +574,15 @@ if (<eval argv(0)> == 1)
     arg(profession_to_kill,<class_shaman.name>) // TODO: zvazit odebrani shamana kvuli cetnosti v PvP
     arg(profession_to_kill,<class_priest.name>) // TODO: zvazit odebrani priesta kvuli cetnosti v PvP
   enddo
-  tag(quest_description[<currentQNumber>],"<?null?>Zabij hrace, jehoz<br>povolani je <?profession_to_kill?>.")
+  tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele, jehoz<br>povolani je <?profession_to_kill?>.")
   tag(quest_subjectId[<currentQNumber>],<profession_to_kill>) // exceptionaly the subjectId doesn't store an actual ID, but a player profession to kill
   tag(quest_totalAmount[<currentQNumber>],1) // TODO: zvazit navyseni poctu pro bezna povolani? (war, mage, thief)
 elseif (<eval argv(0)> == 2)
   arg(where,<eval {1 3}>)
   doswitch <arg(where)>-1
-    tag(quest_description[<currentQNumber>],"<?null?>Zabij hrace<br>na gondorskem uzemi.")
-    tag(quest_description[<currentQNumber>],"<?null?>Zabij hrace<br>na mordorskem uzemi.")
-    tag(quest_description[<currentQNumber>],"<?null?>Zabij hrace<br>na neutralnim uzemi.")
+    tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na gondorskem uzemi.")
+    tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na mordorskem uzemi.")
+    tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na neutralnim uzemi.")
   enddo
   tag(quest_subjectId[<currentQNumber>],<where>)
   src.sysMessage("TESTED")
@@ -674,6 +674,7 @@ on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterGetSwing
 on=@npcKill
+on=@userKill
 on=@DrinkingPotion
 
 /////////////////////////////
@@ -747,6 +748,9 @@ if (src.isPlayer) // zabil hrace
   if (<src.tag(realm)> == <tag(realm)>)
     return
   endif
+  if !(<eval src.tag(added_experience_bydeath)>)   // resskilly nechceme pocitat
+    return
+  endif
   findid(i_memory_weekly_quest).f_weekly_killPlayer
 endif
 
@@ -761,15 +765,15 @@ on=@DrinkingPotion
 
 [function f_weekly_killPlayer]
 arg(i,0)
-while (<arg(i)> < <tag(killPlayer)>)
+while (<arg(i)> < <eval tag(killPlayersCount)>)
   arg(questId,<eval tag(killPlayer[<eval arg(i)>])>)
   arg(subjectId,<tag(quest_subjectId[<arg(questId)>])>)
   arg(meetsCondition,0)
-  if (!strlen<arg(subjectId)>) // pokud je zabiti hrace nepodminene dalsi podminkou
+  if (!strlen(<arg(subjectId)>)) // pokud je zabiti hrace nepodminene dalsi podminkou
     arg(meetsCondition,1)
-  elseif (!strcmpi(<src.profession.name>,<tag(subjectId)>)) // pokud je predmetem zabiti konkretni profese a je shodna
+  elseif (!strcmpi(<src.profession.name>,<arg(subjectId)>)) // pokud je predmetem zabiti konkretni profese a je shodna
     arg(meetsCondition,1)
-  elseif (!strcmpi(<region.Tag(realm)>,<tag(subjectId)>)) // pokud je zabiti podminene uzemim a uzemi odpovida (hodnoty tagu 1-3)
+  elseif (!strcmpi(<region.tag(realm)>,<arg(subjectId)>)) // pokud je zabiti podminene uzemim a uzemi odpovida (hodnoty tagu 1-3)
     arg(meetsCondition,1)
   endif
   if (arg(meetsCondition))

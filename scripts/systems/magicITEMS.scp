@@ -661,6 +661,8 @@ on=@beforedoeffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
+on=@userkill
+on=@npckill
 
 [typedef tmi_121]
 on=@equip
