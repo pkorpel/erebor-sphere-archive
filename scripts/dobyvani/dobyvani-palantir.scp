@@ -65,7 +65,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
   endif
   if (<eval src.tag(realm)> != <eval tag(owners_realm)>) //klika budouci dobyvatel (mozna)
     if (<eval tag(prolomeni)> == 0) //jeste neprolomili   
-      if (wasDeclaredWar(<tag(fort_name)>,<src.tag(realm)>)) //byla vubec valka vyhlasena?
+      if (wasDeclaredWar(<tag(fort_name)>,<eval src.tag(realm)>,1)) //byla vubec valka vyhlasena?
 		    if !(<eval(src.tag(can_declare_war_on_Gondor))> || <eval(src.tag(can_declare_war_on_Mordor))>)	//ak to nieje vyhlasovatel vojny
 			    src.redmessage("Nejsi <src.sex(vyzyvatelem,vyzyvatelkou)>, nejsi <src.sex(opravnen,opravnena)>.")
 			    return 1
@@ -283,17 +283,25 @@ if (<getDay> >= <eval tag(war_begins_day)>) && (<getMonth> >= <eval tag(war_begi
 endif
 return 0
 
-[function wasDeclaredWar]//argv0 - jmeno pevnosti kde zkoumam, argv1 - realm vyhlasovatele
+[function wasDeclaredWar]//argv0 - jmeno pevnosti kde zkoumam, argv1 - realm vyhlasovatele, argv2 - jestli hlasit zpravu
+if (<argv(1)> == 0) && (argvcount > 2)
+  src.redmessage("Jsi rozbity, napis PAGE pro GM!")
+  return 0
+endif 
 arg(declarator,<var(war_declarator_<argv(1)>)>) //jsou dva globalni itemy na vyhlasovani valky - G a M
 if (!strcmpi(<declarator.tag(war_declared_on)>,<argv(0)>))
   if (declarator.canbewar) //je na to dobry cas?
     return 1
   else
-    src.redmessage("Jeste neprisla hodina valky.")
+    if (argvcount > 2)
+      src.redmessage("Jeste neprisla hodina valky.")
+    endif
     return 0
   endif
 else
-  src.redmessage("Teto pevnosti nebyla vyhlasena valka.")
+  if (argvcount > 2)
+    src.redmessage("Teto pevnosti nebyla vyhlasena valka.")
+  endif
   return 0
 endif
 
@@ -493,7 +501,7 @@ plr.name=Kapitan <plr.name>
 plr.tag(captain,1)
 plr.tag(keep,<fort>)
 fort.link=<plr>
-plr.classmessage("<src.sex(Byl jsi jmenovan kapitanem,Byla jsi jmenovana kapitankou)> pevnosti <fort.tag(jmeno_mesta)>.")
+plr.classmessage("<plr.sex(Byl jsi jmenovan kapitanem,Byla jsi jmenovana kapitankou)> pevnosti <fort.tag(jmeno_mesta)>.")
 scylla.delayedmessage("Hrac <plr>-<plr.name>(<plr.account.name>) byl jmenovan kapitanem pevnosti <fort.tag(jmeno_mesta)>.")   
 return 1
 
@@ -527,7 +535,7 @@ while (<arg(w)> < <arg(pocet_guardu)>) // switch all guards on the stone
   arg(opposGuard,<findres(chardef,<tag(allowhire[<w>])>).tag(guardopposite)>) // opposite guard definition
   //finduid(01).smsg(stongrd: <tag(allowhire[<w>])> opgrd: <opposGuard>)
   if (<strlen(<arg(opposGuard)>)>)
-    tag(allowhire[<<arg(w)> - <arg(decreaser)>>],<arg(opposGuard)>) // switches current guard
+    tag(allowhire[<eval <arg(w)> - <arg(decreaser)>>],<arg(opposGuard)>) // switches current guard
   else
     arg(decreaser,#+1) // bad definitions will be ommited and the number of guards will decrease by this number
   endif
