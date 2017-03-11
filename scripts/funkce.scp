@@ -3897,13 +3897,13 @@ if (isitem)
 elseif (npc)
   return 0
 endif
-if (<ARGVCOUNT>!=2)
+if (<ARGVCOUNT> != 2)
   src.sysMessage("smsgcol: spatne zadano")
   return 0
 endif
 arg(length,<strlen(<argv(1)>)>+45)
-if (arg(length)>83+45)
- arg(length,<eval 83+45>)
+if (arg(length) > <eval (83+45)>)
+  arg(length,<eval (83+45)>)
 endif
 var(packet,01c <?hval (<length>&0ff00)/0100?> <?hval <length>&0ff?> 00 00 00 00 00 00 02 <?hval (<argv(0)>&0ff00)/0100?> <?hval <argv(0)>&0ff?> 00 03 053 079 073 074 065 06d 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <?strtoascii((<length>-45),"<argv(1)>")?> 00)
 sendpacket(<packet>)
@@ -3911,15 +3911,15 @@ sendpacket(<packet>)
 [function messagecol]
 // barva,text
 if (src.npc)
-return 0
+  return 0
 endif
-if (ARGVCOUNT!=2)
-sysMessage("msgcol: spatne zadano")
-return 0
+if (<ARGVCOUNT> != 2)
+  sysMessage("msgcol: spatne zadano")
+  return 0
 endif
 arg(length,<strlen(<argv(1)>)>+45)
-if (arg(length)>83+45)
- arg(length,<eval 83+45>)
+if (arg(length) > <eval (83+45)>)
+  arg(length,<eval 83+45>)
 endif
 src.sendpacket(01c <split2bytes(<arg(length)>)> <hval (<uid>&0ff000000)/01000000> <hval (<uid>&0ff0000)/010000> <hval (<uid>&0ff00)/0100> <hval <uid>&0ff> 00 00 03 <hval (<argv(0)>&0ff00)/0ff> <hval <argv(0)>&0ff> 00 03 <strtoascii(30,"<name>")> <strtoascii((<length>-45),"<argv(1)>")> 00)
 
