@@ -10,45 +10,45 @@ def_weekly_count_medium   5 // pocet medium miniquestu
 def_weekly_count_high     4 // pocet high miniquestu
 
 // LOW quests
-def_weekly_low_setupFunction[0]    f_weekly_setup_eatFood
+def_weekly_low_setupFunction[0]    f_weekly_setup_eatFood                       // OTESTOVANO
 def_weekly_low_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_0_[0]   random_food //prvni argument setup funkce
 def_weekly_low_setupFunArg_0_[1]   low //druhy argument setup funkce
 def_weekly_low_rewardSize[0]       50
 
-def_weekly_low_setupFunction[1]    f_weekly_setup_eatFood
+def_weekly_low_setupFunction[1]    f_weekly_setup_eatFood                       // OTESTOVANO
 def_weekly_low_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_1_[0]   random_fruit //prvni argument setup funkce
 def_weekly_low_setupFunArg_1_[1]   low //druhy argument setup funkce
 def_weekly_low_rewardSize[1]       50
 
-def_weekly_low_setupFunction[2]    f_weekly_setup_meetMaster
+def_weekly_low_setupFunction[2]    f_weekly_setup_meetMaster                    // OTESTOVANO
 def_weekly_low_setupFunArgn[2]     0 // pocet argumentu setup funkce
 def_weekly_low_rewardSize[2]       50
 
-def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion
+def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion                   // OTESTOVANO
 def_weekly_low_setupFunArgn[3]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_3_[0]   i_potion_nightSight //prvni argument setup funkce
 def_weekly_low_setupFunArg_3_[1]   2 // multiplier poctu potionu
 def_weekly_low_rewardSize[3]       50
 
-def_weekly_low_setupFunction[4]    f_weekly_setup_drinkPotion
+def_weekly_low_setupFunction[4]    f_weekly_setup_drinkPotion                   // OTESTOVANO
 def_weekly_low_setupFunArgn[4]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_4_[0]   RANDOM_POTION_BOOST_LESS //prvni argument setup funkce
 def_weekly_low_setupFunArg_4_[1]   2 // multiplier poctu potionu
 def_weekly_low_rewardSize[4]       50
 
-def_weekly_low_setupFunction[5]    f_weekly_setup_stepOnWeb
+def_weekly_low_setupFunction[5]    f_weekly_setup_stepOnWeb                     // OTESTOVANO
 def_weekly_low_setupFunArgn[5]     0 // pocet argumentu setup funkce
 def_weekly_low_rewardSize[5]       50
 
-def_weekly_low_setupFunction[6]    f_weekly_setup_loot
+def_weekly_low_setupFunction[6]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[6]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_6_[0]   i_gold //prvni argument setup funkce
 def_weekly_low_setupFunArg_6_[1]   50000 // pocet predmetu ke sbirani
 def_weekly_low_rewardSize[6]       50
 
-def_weekly_low_setupFunction[7]    f_weekly_setup_loot
+def_weekly_low_setupFunction[7]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[7]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_7_[0]   t_fruit //prvni argument setup funkce
 def_weekly_low_setupFunArg_7_[1]   2 // pocet predmetu ke sbirani
@@ -57,7 +57,7 @@ def_weekly_low_iconId_moveX[7]     8
 def_weekly_low_descr[7]            "<?null?>Lootni predmet:<br>Jakekoliv ovoce" // pocet predmetu ke sbirani
 def_weekly_low_rewardSize[7]       50
 
-def_weekly_low_setupFunction[8]    f_weekly_setup_killInDung
+def_weekly_low_setupFunction[8]    f_weekly_setup_killInDung                    // OTESTOVANO
 def_weekly_low_setupFunArgn[8]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_8_[0]   3 // koeficient poctu NPC
 def_weekly_low_setupFunArg_8_[1]   20 // minimalni pocet XP
@@ -107,7 +107,7 @@ def_weekly_medium_setupFunArg_3_[0]   2 // koeficient poctu NPC
 def_weekly_medium_setupFunArg_3_[1]   100 // minimalni pocet XP
 def_weekly_medium_rewardSize[3]       75
 
-def_weekly_medium_setupFunction[4]    f_weekly_setup_killPlayer
+def_weekly_medium_setupFunction[4]    f_weekly_setup_killPlayer                 // OTESTOVANO
 def_weekly_medium_setupFunArgn[4]     1 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_4_[0]   0 // jakykoliv hrac bez omezeni
 def_weekly_medium_rewardSize[4]       75
@@ -120,12 +120,12 @@ def_weekly_high_setupFunArg_0_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument s
 def_weekly_high_setupFunArg_0_[1]   6 // multiplier poctu potionu
 def_weekly_high_rewardSize[0]       100
 
-def_weekly_high_setupFunction[1]    f_weekly_setup_killPlayer
+def_weekly_high_setupFunction[1]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[1]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_1_[0]   1 // hrac konkretni profese
 def_weekly_high_rewardSize[1]       100
 
-def_weekly_high_setupFunction[2]    f_weekly_setup_killPlayer
+def_weekly_high_setupFunction[2]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[2]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_2_[0]   2 // zabiti na konkretnim uzemi
 def_weekly_high_rewardSize[2]       100
@@ -497,6 +497,7 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,meetMaster)
 tag(quest_totalAmount[<currentQNumber>],1)
 arg(masterToMeet,<f_weekly_random_master>)
+tag(quest_description[<currentQNumber>],"Pozdrav Mistra<br>skillu <?f_weekly_random_master?>")
 tag(quest_description[<currentQNumber>],"Pozdrav Mistra<br>skill<?arg(masterToMeet)?>")
 tag(quest_subjectId[<currentQNumber>],<arg(masterToMeet)>)
 tag(quest_iconId[<currentQNumber>],0E34)
@@ -574,15 +575,15 @@ if (<eval argv(0)> == 1)
     arg(profession_to_kill,<class_shaman.name>) // TODO: zvazit odebrani shamana kvuli cetnosti v PvP
     arg(profession_to_kill,<class_priest.name>) // TODO: zvazit odebrani priesta kvuli cetnosti v PvP
   enddo
-  tag(quest_description[<currentQNumber>],"<?null?>Zabij hrace, jehoz<br>povolani je <?profession_to_kill?>.")
+  tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele, jehoz<br>povolani je <?profession_to_kill?>.")
   tag(quest_subjectId[<currentQNumber>],<profession_to_kill>) // exceptionaly the subjectId doesn't store an actual ID, but a player profession to kill
   tag(quest_totalAmount[<currentQNumber>],1) // TODO: zvazit navyseni poctu pro bezna povolani? (war, mage, thief)
 elseif (<eval argv(0)> == 2)
   arg(where,<eval {1 3}>)
   doswitch <arg(where)>-1
-    tag(quest_description[<currentQNumber>],"<?null?>Zabij hrace<br>na gondorskem uzemi.")
-    tag(quest_description[<currentQNumber>],"<?null?>Zabij hrace<br>na mordorskem uzemi.")
-    tag(quest_description[<currentQNumber>],"<?null?>Zabij hrace<br>na neutralnim uzemi.")
+    tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na gondorskem uzemi.")
+    tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na mordorskem uzemi.")
+    tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na neutralnim uzemi.")
   enddo
   tag(quest_subjectId[<currentQNumber>],<where>)
   src.sysMessage("TESTED")
@@ -660,10 +661,10 @@ endif
 
 [function f_weekly_itemLoot] //argv(0) - act
 arg(i,0)
-while (<arg(i)> < <tag(itemLootCount)>)
-  arg(questId,<eval tag(itemDClick[<eval arg(i)>])>)
+while (<arg(i)> < <tag(itemLootsCount)>)
+  arg(questId,<eval tag(itemLoot[<eval arg(i)>])>)
   if ((<argv(0).baseID> == <tag(quest_subjectId[<arg(questId)>])>) || (<argv(0).type> == <tag(quest_subjectId[<arg(questId)>])>))
-    if (f_weekly_increase(<arg(questId)>,<argv(0).amount>),1)
+    if (f_weekly_increase(<arg(questId)>,<argv(0).amount>))
       f_weekly_removeItem(<arg(i)>,itemLoot)
     endif
     return
@@ -697,6 +698,7 @@ on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterGetSwing
 on=@npcKill
+on=@userKill
 on=@DrinkingPotion
 
 /////////////////////////////
@@ -717,6 +719,7 @@ on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterSwing
 on=@npcKill
+on=@userKill
 on=@DrinkingPotion
 
 /////////////////////////////
@@ -742,7 +745,7 @@ on=@DrinkingPotion
 arg(i,0)
 arg(selected,-1)
 arg(selectedLimit,0)
-while (<arg(i)> < <tag(killInDungCount)>) // select the HIGHEST required NPC. If e.g. we kill an NPC giving 300XP, and we have 2 quests, one to kill NPC above 50xp, the next above 100, we want to increment the later
+while (<arg(i)> < <eval tag(killInDungsCount)>) // select the HIGHEST required NPC. If e.g. we kill an NPC giving 300XP, and we have 2 quests, one to kill NPC above 50xp, the next above 100, we want to increment the later
   arg(receivedXP,<eval src.tag(added_experience_bydeath)>)
   arg(questId,<eval tag(killInDung[<eval arg(i)>])>)
   arg(reqXP,<tag(quest_subjectId[<arg(questId)>])>)
@@ -756,7 +759,7 @@ while (<arg(i)> < <tag(killInDungCount)>) // select the HIGHEST required NPC. If
 endwhile
 if (<selected> >= 0) // there is a quest to update
   arg(questId,<eval tag(killInDung[<arg(selected)>])>)
-  if (f_weekly_increase(<arg(questId)>,<src.tag(added_experience_bydeath)>),1)
+  if (f_weekly_increase(<arg(questId)>,1))
     f_weekly_removeItem(<arg(selected)>,killInDung)
   endif
 endif
@@ -767,6 +770,9 @@ endif
 on=@userKill // src - co bylo zabito, uid - kdo zabil
 if (src.isPlayer) // zabil hrace
   if (<src.tag(realm)> == <tag(realm)>)
+    return
+  endif
+  if !(<eval src.tag(added_experience_bydeath)>)   // resskilly nechceme pocitat
     return
   endif
   findid(i_memory_weekly_quest).f_weekly_killPlayer
@@ -783,15 +789,15 @@ on=@DrinkingPotion
 
 [function f_weekly_killPlayer]
 arg(i,0)
-while (<arg(i)> < <tag(killPlayer)>)
+while (<arg(i)> < <eval tag(killPlayersCount)>)
   arg(questId,<eval tag(killPlayer[<eval arg(i)>])>)
   arg(subjectId,<tag(quest_subjectId[<arg(questId)>])>)
   arg(meetsCondition,0)
-  if (!strlen<arg(subjectId)>) // pokud je zabiti hrace nepodminene dalsi podminkou
+  if (!strlen(<arg(subjectId)>)) // pokud je zabiti hrace nepodminene dalsi podminkou
     arg(meetsCondition,1)
-  elseif (!strcmpi(<src.profession.name>,<tag(subjectId)>)) // pokud je predmetem zabiti konkretni profese a je shodna
+  elseif (!strcmpi(<src.profession.name>,<arg(subjectId)>)) // pokud je predmetem zabiti konkretni profese a je shodna
     arg(meetsCondition,1)
-  elseif (!strcmpi(<region.Tag(realm)>,<tag(subjectId)>)) // pokud je zabiti podminene uzemim a uzemi odpovida (hodnoty tagu 1-3)
+  elseif (!strcmpi(<region.tag(realm)>,<arg(subjectId)>)) // pokud je zabiti podminene uzemim a uzemi odpovida (hodnoty tagu 1-3)
     arg(meetsCondition,1)
   endif
   if (arg(meetsCondition))
@@ -914,9 +920,9 @@ endif
 // returns quest number in the week that has the required subjectId, or -1 in case the subjectId isn't found
 [function f_weekly_getItemNumBySubjectId] // argv(0) - subjectId to be found; argv(1) - tag name
 arg(i,0)
-while (<arg(i)> < <eval <tag(<argv(1)>sCount)>-1>)
-  arg(qNum,<eval tag(<argv(1)>[<eval arg(i)>])>)
-  if (!strcpi(<argv(0)>,<tag(quest_subjectId[<arg(qNum)>])>))
+while (<arg(i)> < <eval (<tag(<argv(1)>sCount)>)>)
+  arg(qNum,<eval tag(<argv(1)>[<eval arg(i)>])>)                                
+  if (!strcmpi(<argv(0)>,<tag(quest_subjectId[<arg(qNum)>])>))
     return<arg(qNum)>
   endif
   arg(i,#+1)
@@ -927,43 +933,45 @@ return -1
 
 [function f_weekly_random_master]
 dorand 36
-  return Anatomy
-  return AnimalLore
-  return Archery
-  return ArmsLore
-  return Begging
-  return Camping
-  return Cartography
-  return DetectingHidden
-  return Enticement
-  return Forensics
-  return Healing
-  return Herding
-  return Hiding
-  return ItemID
-  return Magery
-  return Meditation
-  return Musicianship
-  return Parrying
-  return Peacemaking
-  return Poisoning
-  return Provocation
-  return Snooping
-  return SpiritSpeak
-  return Stealing
-  return Stealth
-  return Tactics
-  return TasteID
-  return Tracking
-  return Veterinary
-  return Wrestling
-  return RemoveTrap
-  return Swordsmanship
-  return Resist
-  return Macefighting
-  return Fencing
-  return EI
+  arg(skill_name,Anatomy)
+  arg(skill_name,AnimalLore)
+  arg(skill_name,Archery)
+  arg(skill_name,ArmsLore)
+  arg(skill_name,Begging)
+  arg(skill_name,Camping)
+  arg(skill_name,Cartography)
+  arg(skill_name,DetectingHidden)
+  arg(skill_name,Enticement)
+  arg(skill_name,Forensics)
+  arg(skill_name,Healing)
+  arg(skill_name,Herding)
+  arg(skill_name,Hiding)
+  arg(skill_name,ItemID)
+  arg(skill_name,Magery)
+  arg(skill_name,Meditation)
+  arg(skill_name,Musicianship)
+  arg(skill_name,Parrying)
+  arg(skill_name,Peacemaking)
+  arg(skill_name,Poisoning)
+  arg(skill_name,Provocation)
+  arg(skill_name,Snooping)
+  arg(skill_name,SpiritSpeak)
+  arg(skill_name,Stealing)
+  arg(skill_name,Stealth)
+  arg(skill_name,Tactics)
+  arg(skill_name,TasteID)
+  arg(skill_name,Tracking)
+  arg(skill_name,Veterinary)
+  arg(skill_name,Wrestling)
+  arg(skill_name,RemoveTrap)
+  arg(skill_name,Swordsmanship)
+  arg(skill_name,Resist)
+  arg(skill_name,Macefighting)
+  arg(skill_name,Fencing)
+  arg(skill_name,EI)
 enddo
+
+return<arg(skill_name)>
 
 /////////////////////////////
 
@@ -1027,8 +1035,8 @@ cont.sysmessage("Vyleceno <argv(0)>/<cont.tag(TODO_heal)>")
 
 [function f_weekly_meetMaster] // navstiv a pozdrav Mistra dle zadani (EI,SS,Magery, ...atd)
 if (src.isEvent(e_weekly_meetMaster))
-  arg(weekly,<findid(i_memory_weekly_quest)>)
-  arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<tag(ucimskill)>)>,meetMaster)
+  arg(weekly,<src.findid(i_memory_weekly_quest)>)
+  arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<tag(ucimskill)>,meetMaster)>)
   if (arg(questId) != -1)
     say("Taky Te zdravim, <src.name>.")
     weekly.f_weekly_increase(<arg(questId)>,1)
