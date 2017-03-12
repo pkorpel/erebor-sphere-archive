@@ -248,7 +248,7 @@ Return""
 [function weeklyTagRemove]
 arg(weekly,<findid(i_memory_weekly_quest)>)
 if (<hval arg(weekly)>)
-  weekly.tag.remove.(<argv(0)>)
+  weekly.tag.remove(<argv(0)>)
 endif
 
 // Verifies, whether the player should be given new set of quests, and
@@ -263,7 +263,7 @@ arg(generate,1)
 if (<arg(weekly)>)
   arg(generate,<weekly.f_weekly_checkExpiracy>)
 endif
-if (<tag.level> < def_weekly_levelMin)
+if (<tag(level)> < def_weekly_levelMin)
   return 0
 endif
 
@@ -497,7 +497,8 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,meetMaster)
 tag(quest_totalAmount[<currentQNumber>],1)
 arg(masterToMeet,<f_weekly_random_master>)
-tag(quest_description[<currentQNumber>],"Pozdrav Mistra<br>skill<?f_weekly_random_master?>")
+tag(quest_description[<currentQNumber>],"Pozdrav Mistra<br>skill<?arg(masterToMeet)?>")
+tag(quest_subjectId[<currentQNumber>],<arg(masterToMeet)>)
 tag(quest_iconId[<currentQNumber>],0E34)
 tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels down
 
@@ -524,7 +525,7 @@ tag(quest_iconId_moveY[<currentQNumber>],12) // move the custom icon 4 pixels up
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,receiveDmg)
-tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*50)*<eval topobj.tag(vitlev)>)>) // tag.vitlev(pocet zivotu)*(pocet_miniquestu*50)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*50)*<eval topobj.tag(vitlev)>)>) // tag(vitlev,(pocet zivotu)*(pocet_miniquestu*50))
 tag(quest_description[<currentQNumber>],"Utrz prime poskozeni.")
 tag(quest_iconId[<currentQNumber>],0122D)
 tag(quest_iconId_moveY[<currentQNumber>],5) // move the custom icon 4 pixels up
@@ -591,6 +592,29 @@ else
   tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{5 10})/10)>)
 endif
 
+[function f_weekly_setup_finishDungeon]
+//src.sysMessage("setting up finishDungeon quest")
+arg(currentQNumber,<eval tag(qAssigned)>)
+
+f_weekly_addItem(<currentQNumber>,finishDungeon)
+
+tag(quest_totalAmount[<currentQNumber>],1)
+
+arg(dungeonToFinish,{1 def_weekly_finishDungeon_count})
+
+arg(playerLvl,<src.tag(level)>)
+if (playerLvl > 150)
+  arg(playerLvl,150)
+endif
+arg(minDngLevel,<eval (arg(playerLvl)/2)>)
+arg(maxDngLevel,<eval (arg(playerLvl)+arg(minDngLevel))>)
+
+tag(quest_description[<currentQNumber>],"Dokonci Dungeon:<br>skill<?def_weekly_finishDungeon[<eval arg(dungeonToFinish)>]?>")
+tag(quest_subjectId[<currentQNumber>],<arg(dungeonToFinish)>)
+tag(quest_iconId[<currentQNumber>],0E34) // TODO add icon ID
+tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels down
+
+
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
@@ -610,7 +634,7 @@ while (<arg(i)> < <tag(itemDClicksCount)>)
         return
       endif
     elseif ((argv(0).type==t_speedpotions) || (argv(0).type==t_allpotions))
-      if (serv.time <= <eval src.tag.nextpotion>)
+      if (serv.time <= <eval src.tag(nextpotion)>)
         return
       endif
     endif
@@ -795,6 +819,22 @@ endif
 
 /////////////////////////////
 
+[events e_weekly_finishDungeon] // test provedeny na vargate dungu
+
+// MANUALLY ADDED
+// this function MUST be added manually to EACH of the defined vargates
+[function f_weekly_vg_finishDungeon] // argv(0) - the dungeon's ID defined in defnames
+if (src.isEvent(e_weekly_finishDungeon))
+  arg(weekly,<src.findid(i_memory_weekly_quest)>)
+  arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<argv(0)>,finishDungeon)
+  if (arg(questId) != -1)
+    weekly.f_weekly_increase(<arg(questId)>,1)
+    weekly.f_weekly_removeItem(<arg(questId)>,finishDungeon)
+  endif
+endif
+
+/////////////////////////////
+
 [events e_weekly_quest]
 on=@login
 f_weekly_check
@@ -927,16 +967,61 @@ enddo
 
 /////////////////////////////
 
+[defnames def_weekly_finishDungeon]
+def_weekly_finishDungeon_count  3
+
+// dungeon IDs (the values below are used as subjectID of the quest)
+def_weekly_finishDungeon[1]     "Etheria"
+def_weekly_finishDungeon[2]     "Mount Dorlas"
+def_weekly_finishDungeon[3]     "Dol Guldur"
+
+// level translation -> these defnames serve to define ID to dungeon LEVEL translation
+// based on the dungeon level, the dungeon is either available to player for selection or not
+// WARNING: The list of the following dungeon definitions is ORDERED, the LEVEL value MUST
+//          be rising from the lowest to the hardest
+//       def name                 dung ID    Level (ordered)
+def_weekly_finishDungeon_lvl[1]       1,         20
+def_weekly_finishDungeon_lvl[2]       2,         20
+def_weekly_finishDungeon_lvl[3]       3,         20
+
+// selects random dungeon ID in the player's level range
+// Player can only receive dungeons that have their level:
+//    * at least player_LVL/2
+//    * at most 1,5 * player_LVL
+[function f_weekly_finishDungeon_select]
+arg(playerLvl,<src.tag(level)>)
+if (playerLvl > 150)
+  arg(playerLvl,150)
+endif
+arg(minDngLevel,<eval (arg(playerLvl)/2)>)
+arg(maxDngLevel,<eval (arg(playerLvl)+arg(minDngLevel))>)
+arg(minID,1)
+arg(found,0)
+arg(i,1)
+while (!arg(found) || (arg(i) > def_weekly_finishDungeon_count) )
+  arg(curLvl,<f_return_nth(2,<def_weekly_finishDungeon_lvl[<eval arg(i)>]>)>)
+  if (f_return_nth(2,<def_weekly_finishDungeon_lvl[<eval arg(i)>]>) < arg(minDngLevel) )
+    arg(minID,#+1)
+  endif
+  if 
+  arg(minID,#+1)
+  arg(i,#+1)
+endwhile
+return {<arg(minID)> <arg(maxId)>}
+
+
+/////////////////////////////
+
 [function f_weekly_quest_healing]  // argv(0) - pocet vylecenych hp, cont-healer,link-cil leceni // provadi se na itemu i_mem_healing
 // navrh na vzorec pocet_na_vyleceni=(level*100*healing/10)   // pozn. je treba myslet na itemky na heal pri zadavani questu (if healing>100 =>100)
-cont.sysmessage("Level: <eval cont.tag.level> => <eval (<eval cont.tag.level>*100)>")
+cont.sysmessage("Level: <eval cont.tag(level)> => <eval (<eval cont.tag(level)>*100)>")
 cont.sysmessage("Healing: <cont.healing>% => <eval ((<cont.healing>*10)/5)>")
 cont.sysmessage("Anatomy: <cont.anatomy>% => <eval ((<cont.anatomy>*10)/50)>")
 if ((cont.profession==class_shaman) || (cont.profession==class_priest))  // 14 - healing, vylec HP
-  //arg(TODO_heal,<eval ((<eval cont.tag.level>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
-  cont.tag(TODO_heal,<eval ((<eval cont.tag.level>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
+  //arg(TODO_heal,<eval ((<eval cont.tag(level)>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
+  cont.tag(TODO_heal,<eval ((<eval cont.tag(level)>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
 else
-  arg(TODO_heal,<eval ((<eval cont.tag.level>*50)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
+  arg(TODO_heal,<eval ((<eval cont.tag(level)>*50)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
 endif
 cont.sysmessage("Vyleceno <argv(0)>/<cont.tag(TODO_heal)>")
 
