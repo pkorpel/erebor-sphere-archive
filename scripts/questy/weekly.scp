@@ -5,7 +5,7 @@ def_weekly_levelStepUp  20 // potrebny pocet levelu pro ziskani noveho questu
 def_weekly_levelMin     10 // minimalni potrebny level pro obdrzeni weekly questu
 
 // single-quest related definitions
-def_weekly_count_low      10 // pocet low miniquestu
+def_weekly_count_low      11 // pocet low miniquestu
 def_weekly_count_medium   6 // pocet medium miniquestu
 def_weekly_count_high     4 // pocet high miniquestu
 
@@ -71,7 +71,16 @@ def_weekly_low_setupFunction[9]    f_weekly_setup_killInDung                    
 def_weekly_low_setupFunArgn[9]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_9_[0]   15 // koeficient poctu NPC
 def_weekly_low_setupFunArg_9_[1]   20 // minimalni pocet XP
+def_weekly_low_iconId[9]           020E9
+def_weekly_low_iconId_moveY[9]     9  // move the custom icon 9 pixels up
+def_weekly_low_iconId_moveX[9]     -3 // move the custom icon 3 pixels to the right
 def_weekly_low_rewardSize[9]       50
+
+def_weekly_low_setupFunction[10]    f_weekly_setup_healPlayer
+def_weekly_low_setupFunArgn[10]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArg_10_[0]   20 // koeficient pro ostatni povolani
+def_weekly_low_setupFunArg_10_[1]   100 // koeficient pro Klerika/Shamana    
+def_weekly_low_rewardSize[10]       50
 
 // TO TEST:
 
@@ -104,25 +113,32 @@ def_weekly_medium_setupFunArg_0_[1]   4  // multiplier poctu potionu
 def_weekly_medium_rewardSize[0]       75
 
 def_weekly_medium_setupFunction[1]    f_weekly_setup_dmgNPC
-def_weekly_medium_setupFunArgn[1]     0 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArgn[1]     2 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_1_[0]   35 // multiplier udeleneho dmg pro ostatni povolani krome krafta/priesta
+def_weekly_medium_setupFunArg_1_[1]   15 // multiplier udeleneho dmg pro krafta/priesta
 def_weekly_medium_rewardSize[1]       75
 
 def_weekly_medium_setupFunction[2]    f_weekly_setup_receiveDmg
-def_weekly_medium_setupFunArgn[2]     2 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArgn[2]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_2_[0]   "prime" //prvni argument setup funkce
-def_weekly_medium_setupFunArg_2_[1]   50 // multiplier prijateho dmg 
+def_weekly_medium_setupFunArg_2_[1]   50 // multiplier prijateho dmg
+def_weekly_medium_setupFunArg_2_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
 def_weekly_medium_rewardSize[2]       75
 
 def_weekly_medium_setupFunction[3]    f_weekly_setup_receiveDmg
-def_weekly_medium_setupFunArgn[3]     2 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArgn[3]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_3_[0]   "neprime" //prvni argument setup funkce
-def_weekly_medium_setupFunArg_3_[1]   15 // multiplier prijateho dmg 
+def_weekly_medium_setupFunArg_3_[1]   15 // multiplier prijateho dmg
+def_weekly_medium_setupFunArg_3_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta 
 def_weekly_medium_rewardSize[3]       50
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_4_[0]   10 // koeficient poctu NPC
 def_weekly_medium_setupFunArg_4_[1]   100 // minimalni pocet XP
+def_weekly_medium_iconId[4]           0212E
+def_weekly_medium_iconId_moveY[4]     9  // move the custom icon 9 pixels up
+def_weekly_medium_iconId_moveX[4]     8 // move the custom icon 8 pixels to the left
 def_weekly_medium_rewardSize[4]       75
 
 def_weekly_medium_setupFunction[5]    f_weekly_setup_killPlayer                 // OTESTOVANO
@@ -152,6 +168,9 @@ def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_3_[0]   5 // koeficient poctu NPC
 def_weekly_high_setupFunArg_3_[1]   200 // minimalni pocet XP
+def_weekly_high_iconId[3]           02132
+def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
+def_weekly_high_iconId_moveX[3]     8 // move the custom icon 8 pixels to the left
 def_weekly_high_rewardSize[3]       100
 
 ////////////////////////////////////////////////////////////
@@ -244,6 +263,7 @@ events=-e_weekly_receiveDmg
 events=-e_weekly_killInDung
 events=-e_weekly_killPlayer
 events=-e_weekly_stepOnWeb
+events=-e_weekly_healPlayer
 
 /////////////////////////////
 
@@ -447,7 +467,6 @@ while (arg(i) < arg(miAmount))
 endif
 
 [function f_getFinalItemId] // argv(0) - nektera z random definici, ktera se ma expandovat na konkretni itemdef
-logmsg("Provadim f_getFinalItemID s parametrem: <argv(0)>")
 return<findres(itemdef,<argv(0)>)>
 
 
@@ -526,15 +545,38 @@ tag(quest_iconId[<currentQNumber>],0E34)
 tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels down
 
 
+[function f_weekly_setup_healPlayer]
+//src.sysMessage("setting up healPlayer quest")
+arg(currentQNumber,<eval tag(qAssigned)>)
+
+f_weekly_addItem(<currentQNumber>,healPlayer)
+if ((<eval cont.tag(mi_healing)> > 0) || (<eval cont.tag(mi_anaatomy)> > 0))    // osetreni jestli nositel nema healing itemky
+  arg(healing,<eval (<cont.healing>-<eval (cont.tag(mi_healing)*10)>)>)
+  arg(anatomy,<eval (<cont.anatomy>-<eval (cont.tag(mi_anatomy)*10)>)>)
+else
+  arg(healing,<cont.healing>)
+  arg(anatomy,<cont.anatomy>)
+endif
+if ((cont.profession==class_priest) || (cont.profession==class_shaman))
+  arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(1)>)>)*((<arg(healing)>*50)/100)*((<arg(anatomy)>)/10))/10000>)
+else
+  arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(0)>)>)*((<arg(healing)>*50)/100)*((<arg(anatomy)>)/10))/10000>)
+endif
+tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
+tag(quest_description[<currentQNumber>],"Osetri bandazemi poskozeni.")
+tag(quest_iconId[<currentQNumber>],0E21)
+tag(quest_iconId_moveX[<currentQNumber>],4) // move the custom icon 16 pixels to the left
+
+
 [function f_weekly_setup_dmgNPC]
 //src.sysMessage("setting up dmgNPC quest")
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,dmgNPC)
 if ((topobj.profession==class_priest) || (topobj.profession==class_craft))
-  arg(qAmount,<eval (<tag(qCount)>*{<eval <tag(playerLevel)>*100> <eval (<tag(playerLevel)>+1)*100>}*10)>)
+  arg(qAmount,<eval (((<tag(qCount)>*{<eval <tag(playerLevel)>*10000> <eval (<tag(playerLevel)>+1)*10000>})*<argv(1)>)/1000)>)
 else
-  arg(qAmount,<eval (<tag(qCount)>*{<eval <tag(playerLevel)>*100> <eval (<tag(playerLevel)>+1)*100>}*25)>)
+  arg(qAmount,<eval (((<tag(qCount)>*{<eval <tag(playerLevel)>*10000> <eval (<tag(playerLevel)>+1)*10000>})*<argv(0)>)/1000)>)
 endif
 tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
 tag(quest_description[<currentQNumber>],"Udel poskozeni monstrum.")
@@ -550,6 +592,9 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,receiveDmg)
 arg(typeDMG,<f_weekly_random_typeDMG(<argv(0)>)>)
 tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<argv(1)>)*<eval topobj.tag(vitlev)>)>) // tag.vitlev(pocet zivotu)*(pocet_miniquestu*50)
+if !((cont.profession == class_thief) || (cont.profession == class_war))
+  tag(quest_totalAmount[<currentQNumber>],<eval ((<eval tag(quest_totalAmount[<currentQNumber>])>*<argv(2)>)/100)>)
+endif
 if (!strcmpi(<arg(typeDMG)>,jedem)) || (!strcmpi(<arg(typeDMG)>,krvacenim))     // jiny popis + polovicni naroky, kdyz se jedna jen o jeden konkretni typ
   tag(quest_description[<currentQNumber>],"Utrz poskozeni<br><arg(typeDMG)> v boji.")
   tag(quest_totalAmount[<currentQNumber>],#/2)
@@ -578,9 +623,9 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,killInDung)
 tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<tag(qCount)>*{<eval (25*<argv(0)>)> <eval (35*<argv(0)>)>})/100)>)
 tag(quest_description[<currentQNumber>],"Zabij npc v dungeonu<br>s alespon <?argv(1)?>xp")
-tag(quest_iconId[<currentQNumber>],020E9)
-tag(quest_iconId_moveY[<currentQNumber>],9) // move the custom icon 4 pixels up
-tag(quest_iconId_moveX[<currentQNumber>],-3) // move the custom icon 2 pixels to the right
+// tag(quest_iconId[<currentQNumber>],020E9)
+// tag(quest_iconId_moveY[<currentQNumber>],9) // move the custom icon 4 pixels up
+// tag(quest_iconId_moveX[<currentQNumber>],-3) // move the custom icon 2 pixels to the right
 tag(quest_subjectId[<currentQNumber>],<argv(1)>) // exceptionaly the subjectId doesn't store an actual ID, but a minimal required XP
 
 
@@ -728,7 +773,7 @@ while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
 
   if (!strcmpi(prime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>))
     if (weekly.f_weekly_increase(<questId>,<var(ubrano)>))
-      weekly.f_weekly_removeItem(0,receiveDmg)
+      weekly.f_weekly_removeItem(<arg(i)>,receiveDmg)
       arg(i,#-1)
     endif
   endif
@@ -762,7 +807,7 @@ while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
   endif
   if (arg(received_dmg) > 0)
     if (weekly.f_weekly_increase(<questId>,<arg(received_dmg)>))
-      weekly.f_weekly_removeItem(0,receiveDmg)
+      weekly.f_weekly_removeItem(<arg(i)>,receiveDmg)
       arg(i,#-1)
     endif
   endif
@@ -880,6 +925,10 @@ if (act.type==t_web)
     endif
   endif
 endif
+
+/////////////////////////////
+
+[events e_weekly_healPlayer]
 
 /////////////////////////////
 
@@ -1035,17 +1084,27 @@ return<arg(typeDMG)>
 /////////////////////////////
 
 [function f_weekly_quest_healing]  // argv(0) - pocet vylecenych hp, cont-healer,link-cil leceni // provadi se na itemu i_mem_healing
-// navrh na vzorec pocet_na_vyleceni=(level*100*healing/10)   // pozn. je treba myslet na itemky na heal pri zadavani questu (if healing>100 =>100)
-cont.sysmessage("Level: <eval cont.tag.level> => <eval (<eval cont.tag.level>*100)>")
-cont.sysmessage("Healing: <cont.healing>% => <eval ((<cont.healing>*10)/5)>")
-cont.sysmessage("Anatomy: <cont.anatomy>% => <eval ((<cont.anatomy>*10)/50)>")
-if ((cont.profession==class_shaman) || (cont.profession==class_priest))  // 14 - healing, vylec HP
-  //arg(TODO_heal,<eval ((<eval cont.tag.level>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
-  cont.tag(TODO_heal,<eval ((<eval cont.tag.level>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
-else
-  arg(TODO_heal,<eval ((<eval cont.tag.level>*50)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
-endif
+// pozn. je treba myslet na itemky na heal pri zadavani questu (if healing>100 =>100)
 cont.sysmessage("Vyleceno <argv(0)>/<cont.tag(TODO_heal)>")
+
+if !(cont.isEvent(e_weekly_healPlayer))
+  return
+endif
+if (<argv(0)> <= 0)
+  return
+endif
+if !(<eval cont.tag(realm)> == <eval link.tag(realm)>)
+  return
+endif
+
+arg(weekly,<cont.findid(i_memory_weekly_quest)>)
+arg(questId,<eval weekly.tag(healPlayer[0])>)
+if (weekly.f_weekly_increase(<arg(questId)>,<argv(0)>,1))
+  weekly.f_weekly_removeItem(<arg(questId)>,healPlayer)
+endif
+
+cont.sysmessage("Prosel jsem vsemi podminkami! <arg(questId)>,<argv(0)>")
+
 
 [function f_weekly_meetMaster] // navstiv a pozdrav Mistra dle zadani (EI,SS,Magery, ...atd)
 if (src.isEvent(e_weekly_meetMaster))

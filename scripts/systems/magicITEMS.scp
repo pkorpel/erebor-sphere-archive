@@ -49,10 +49,30 @@ return 0
 [typedef tmi_skills]
 on=@equip
 mif_skilladd(<tag.imi_skill_present>)
+if (<eval tag(imi_value[1])> > 0)
+  if (<eval src.tag(mi_anatomy)> < 0)
+    src.tag(mi_anatomy,0)  
+  endif
+  src.tag(mi_anatomy,<eval <src.tag(mi_anatomy)>>+<tag(imi_value[1])>)
+endif
+if (<eval tag(imi_value[17])> > 0)
+  if (<eval src.tag(mi_healing)> < 0)
+    src.tag(mi_healing,0)  
+  endif
+  src.tag(mi_healing,<eval <src.tag(mi_healing)>>+<tag(imi_value[17])>)
+endif
 return 0
 
 on=@unequip
 mif_skillremove(<tag.imi_skill_present>)
+if (<eval tag(imi_value[1])> > 0)
+  src.tag(mi_anatomy,<eval <src.tag(mi_anatomy)>>-<tag(imi_value[1])>)
+  src.freetag(mi_anatomy)
+endif
+if (<eval tag(imi_value[17])> > 0)
+  src.tag(mi_healing,<eval <src.tag(mi_healing)>>-<tag(imi_value[17])>)
+  src.freetag(mi_healing)
+endif
 return 0
 
 [function mif_skilladd]
