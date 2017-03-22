@@ -74,7 +74,6 @@ PARRYING=80.0
 RESIST=80.0
 TACTICS=80.0
 WRESTLING=90.0
-TAMING=95.0
 SpiritSpeak=25.0
 
 ITEMnewbie=i_monster_create
@@ -152,7 +151,6 @@ PARRYING=200.0
 RESIST=200.0
 TACTICS=100.0
 WRESTLING=100.0
-TAMING=150.0
 SpiritSpeak=25.0              
 
 ITEMnewbie=i_monster_create

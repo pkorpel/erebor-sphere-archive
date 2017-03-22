@@ -48,7 +48,7 @@ if(argo.tag(zprav) == 0)
  src.sysmessage(Zadne zpravy k zobrazeni)
  return 1
 endif
-argo.tag(sirka,<src.zjisti_sirku(1,<argo.tag(zprav)>)>)
+argo.tag(sirka,<src.zjisti_sirku(1,<eval argo.tag(zprav)>)>)
 argo.tag(vyska,<eval ((1+<d_max_zprav>)*<d_def_radek_vyska>)+(2*d_def_okraj)+(2*d_def_skvira)>)
 
 argo.dialog_prvni
@@ -111,7 +111,7 @@ endif
 [dialog d_login_messages]
 20,20
 argo.tag(zprav,<src.tag(messagescount)>)
-arg(zjistena_sirka,<src.zjisti_sirku(0,<argo.tag(zprav)>)>)
+arg(zjistena_sirka,<src.zjisti_sirku(0,<eval argo.tag(zprav)>)>)
 if(argo.tag(zprav) == 0)
  src.sysmessage(Zadne zpravy k zobrazeni)
  return 1

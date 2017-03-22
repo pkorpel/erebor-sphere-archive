@@ -689,7 +689,7 @@ if (<f_q030_collector_isFull(<arg(tagValue)>)>)
 
   if ( <src.tag.presel> )
 
-    if ( <src.qtag(q030_presel)> > <argv(1)> ) //kym nedobehne hodnotu z minuleho realmu bude dostavat polovicne expy
+    if ( <eval src.qtag(q030_presel)> > <argv(1)> ) //kym nedobehne hodnotu z minuleho realmu bude dostavat polovicne expy
       src.sysMessage("Nez si ziskas moji duveru bude tva odmena polovicni")
       arg(expToAdd,<eval(<arg(expToAdd)>/2)>)
     endif
