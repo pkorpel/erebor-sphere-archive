@@ -10,9 +10,9 @@ def_weekly_count_medium   6 // pocet medium miniquestu
 def_weekly_count_high     5 // pocet high miniquestu
 
 // default prize koeficients
-def_weekly_prize_gold         5     // delitel pro vypocet gp
-def_weekly_prize_exp          50    // delitel pro vypocet zkusenosti
-def_weekly_prize_magicItem    20000 // delitel pro vypocet itemku
+def_weekly_prize_gold         250     // delitel pro vypocet gp
+def_weekly_prize_exp          2500    // delitel pro vypocet zkusenosti
+def_weekly_prize_magicItem    1000000 // delitel pro vypocet itemku
 
 // LOW quests
 def_weekly_low_setupFunction[0]    f_weekly_setup_eatFood                       // OTESTOVANO
@@ -135,7 +135,7 @@ def_weekly_medium_setupFunArgn[3]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_3_[0]   "neprime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_3_[1]   15 // multiplier prijateho dmg
 def_weekly_medium_setupFunArg_3_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta 
-def_weekly_medium_rewardSize[3]       50
+def_weekly_medium_rewardSize[3]       75
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
@@ -339,8 +339,8 @@ endif
 return 0
 
 [function f_weekly_start_prize]
-arg(basic_prize,<eval (100000/(((<eval tag(playerLevel)>*5)/10)+10))>)
-// cont.say("Basic Prize: <arg(basic_prize)>")
+arg(basic_prize,<eval (200000/(<eval tag(playerLevel)>+20))>)
+cont.say("Basic Prize: <arg(basic_prize)>")
 
 if (<eval tag(playerLevel)> <= 100)
   arg(level_prize,<eval (<eval tag(playerLevel)>*100)>)
@@ -385,7 +385,6 @@ while (<tag(qAssigned)> < <eval tag(qCount)>)
   f_weekly_setQuest(<arg(new_quest)>,<arg(quest_level)>)
   tag(qAssigned,#+1)
 endwhile
-f_weekly_setRewardComplete
 tag.remove(qAssigned)
 
 [function f_weekly_hasQuest] // argv(0) - quest level, argv(1) - quest id
@@ -440,28 +439,18 @@ return 1
 [function f_weekly_setRewardSingle] // argv(0) - cislo questu
 arg(rewardSize,<eval def_weekly_<argv(1)>_rewardSize[<eval argv(0)>]>)
 arg(start_prize,<eval (<eval tag(start_prize)>*<arg(rewardSize)>)>)
-// tag(rewardSize,<eval (<eval tag(rewardSize)>+arg(rewardSize))>)
 
-tag(quest_rewGold[<eval tag(qAssigned)>],<eval ((arg(start_prize)/def_weekly_prize_gold)/50)>) // amount of GP in the reward
-tag(quest_rewXP[<eval tag(qAssigned)>],<eval ((arg(start_prize)/def_weekly_prize_exp)/50)>) // amount of XP in the reward
-tag(quest_rewMI[<eval tag(qAssigned)>],<eval ((arg(start_prize)/def_weekly_prize_magicItem)/50)>) // amount of magic items in the reward
-
-
-// def_weekly_prize_gold
-// def_weekly_prize_exp
-// def_weekly_prize_magicItem 
+tag(quest_rewGold[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_gold)>) // amount of GP in the reward
+tag(quest_rewXP[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_exp)>) // amount of XP in the reward
+if (strcmpi(<argv(1)>,low))                                                            // only for Medium and Hard quests
+  tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_magicItem)>) // amount of magic items in the reward
+  tag(rewMI,#+<tag(quest_rewMI[<eval tag(qAssigned)>])>)
+endif
 
 tag(rewGold,#+<tag(quest_rewGold[<eval tag(qAssigned)>])>)
 tag(rewXP,#+<tag(quest_rewXP[<eval tag(qAssigned)>])>)
-tag(rewMI,#+<tag(quest_rewMI[<eval tag(qAssigned)>])>)
 //tag(quest_rewChance[<eval tag(qAssigned)>],<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
 
-[function f_weekly_setRewardComplete] // sets reward for completion of ALL the subquests
-// arg(rewardSize,<tag(rewardSize)>)
-// tag(rewGold,<eval (arg(rewardSize)*arg(rewardSize))>) // amount of GP in the reward
-// tag(rewXP,<eval (arg(rewardSize)*10)>) // amount of XP in the reward
-// tag(rewMI,<eval (arg(rewardSize)/85)>) // amount of magic items in the reward
-//tag(rewChance,<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
 
 //[function f_weekly_getChanceReward]
 //if (USPEJE SANCE)
@@ -603,9 +592,9 @@ arg(healing,<eval (<cont.healing>-<eval cont.tag(mi_boosted_17)>)>)         // o
 arg(anatomy,<eval (<cont.anatomy>-<eval cont.tag(mi_boosted_1)>)>)         // osetreni jestli nositel nema anatomy itemky
 
 if ((cont.profession==class_priest) || (cont.profession==class_shaman))
-  arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(1)>)>)*((<arg(healing)>*50)/100)*((<arg(anatomy)>)/10))/10000>)
+  arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(1)>)>)*(<arg(healing)>/2)*((<arg(anatomy)>)/10))/10000>)
 else
-  arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(0)>)>)*((<arg(healing)>*50)/100)*((<arg(anatomy)>)/10))/10000>)
+  arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(0)>)>)*(<arg(healing)>/2)*((<arg(anatomy)>)/10))/10000>)
 endif
 tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
 tag(quest_description[<currentQNumber>],"Osetri bandazemi poskozeni.")
@@ -963,21 +952,23 @@ endif
 
 arg(i,0)
 while (<arg(i)> < <eval tag(MultiKillsCount)>)
-arg(questId,<eval tag(MultiKill[<eval arg(i)>])>)
+  arg(questId,<eval tag(MultiKill[<eval arg(i)>])>)
 
-if (<eval tag(MultiKill_Time)> < <serv.time>)
-  tag(MultiKill_Time,<serv.time>+10)
-  tag(MultiKill_kills[<arg(questId)>],1)
-  return
-endif
-tag(MultiKill_kills[<arg(questId)>],#+1)
-
-if (<eval tag(MultiKill_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
-  if (f_weekly_increase(<arg(questId)>,1,1))
-    f_weekly_removeItem(<arg(questId)>,MultiKill)
+  if (<eval tag(MultiKill_Time)> < <serv.time>)
+    tag(MultiKill_Time,<serv.time>+10)
+    tag(MultiKill_kills[<arg(questId)>],1)
+    return
   endif
-  tag(MultiKill_kills[<arg(questId)>],0)
-endif
+  tag(MultiKill_kills[<arg(questId)>],#+1)
+
+  if (<eval tag(MultiKill_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
+    if (f_weekly_increase(<arg(questId)>,1,1))
+      f_weekly_removeItem(<arg(questId)>,MultiKill)
+    endif
+    tag(MultiKill_kills[<arg(questId)>],0)
+  endif
+
+endwhile
 
 
 /////////////////////////////
