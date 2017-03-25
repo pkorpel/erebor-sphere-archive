@@ -81,7 +81,7 @@ questMenu[50] Drakobijci - brneni       ,d_dragons_kovar                    ,1  
 questMenu[51] Prestupny quest           ,d_prestupak                        ,1         ,q041_paserak
 questMenu[52] Halda Molle Hatlend       ,d_hm_hatlend                       ,1         ,q042_hatlend_rulik
 
-questMenu_bg 9270
+questMenu_bg               9270
 questMenu_width            300
 questMenu_height           400
 questMenu_detail_width     400
@@ -91,7 +91,7 @@ questMenu_section_height   78
 questMenu_section_pic[0]   02b08
 questMenu_section_pic_x[0] 15
 questMenu_section_pic_y[0] 13
-questMenu_section_pic[1] 0fc5
+questMenu_section_pic[1]   0fc5
 questMenu_section_pic_x[1] 20
 questMenu_section_pic_y[1] 20
 

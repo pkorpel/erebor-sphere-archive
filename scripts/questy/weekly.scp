@@ -601,14 +601,7 @@ f_weekly_addItem(<currentQNumber>,finishDungeon)
 
 tag(quest_totalAmount[<currentQNumber>],1)
 
-arg(dungeonToFinish,{1 def_weekly_finishDungeon_count})
-
-arg(playerLvl,<src.tag(level)>)
-if (playerLvl > 150)
-  arg(playerLvl,150)
-endif
-arg(minDngLevel,<eval (arg(playerLvl)/2)>)
-arg(maxDngLevel,<eval (arg(playerLvl)+arg(minDngLevel))>)
+arg(dungeonToFinish,<f_weekly_finishDungeon_select>)
 
 tag(quest_description[<currentQNumber>],"Dokonci Dungeon:<br>skill<?def_weekly_finishDungeon[<eval arg(dungeonToFinish)>]?>")
 tag(quest_subjectId[<currentQNumber>],<arg(dungeonToFinish)>)
@@ -976,12 +969,16 @@ return<arg(skill_name)>
 /////////////////////////////
 
 [defnames def_weekly_finishDungeon]
-def_weekly_finishDungeon_count  3
+def_weekly_finishDungeon_count  6
+def_weekly_finishDungeon_lvl_limit  120 // limit the max level taken into account to pick dungeons
 
 // dungeon IDs (the values below are used as subjectID of the quest)
 def_weekly_finishDungeon[1]     "Etheria"
 def_weekly_finishDungeon[2]     "Mount Dorlas"
 def_weekly_finishDungeon[3]     "Dol Guldur"
+def_weekly_finishDungeon[4]     "Dug Snagum"
+def_weekly_finishDungeon[5]     "Mahat"
+def_weekly_finishDungeon[6]     "Pevnost Strachu"
 
 // level translation -> these defnames serve to define ID to dungeon LEVEL translation
 // based on the dungeon level, the dungeon is either available to player for selection or not
@@ -989,8 +986,11 @@ def_weekly_finishDungeon[3]     "Dol Guldur"
 //          be rising from the lowest to the hardest
 //       def name                 dung ID    Level (ordered)
 def_weekly_finishDungeon_lvl[1]       1,         20
-def_weekly_finishDungeon_lvl[2]       2,         20
-def_weekly_finishDungeon_lvl[3]       3,         20
+def_weekly_finishDungeon_lvl[2]       2,         30
+def_weekly_finishDungeon_lvl[3]       3,         45
+def_weekly_finishDungeon_lvl[4]       4,         60
+def_weekly_finishDungeon_lvl[5]       5,         80
+def_weekly_finishDungeon_lvl[6]       6,         100
 
 // selects random dungeon ID in the player's level range
 // Player can only receive dungeons that have their level:
@@ -998,24 +998,32 @@ def_weekly_finishDungeon_lvl[3]       3,         20
 //    * at most 1,5 * player_LVL
 [function f_weekly_finishDungeon_select]
 arg(playerLvl,<src.tag(level)>)
-if (playerLvl > 150)
-  arg(playerLvl,150)
+if (playerLvl > def_weekly_finishDungeon_lvl_limit)
+  arg(playerLvl,<def_weekly_finishDungeon_lvl_limit>)
 endif
-arg(minDngLevel,<eval (arg(playerLvl)/2)>)
-arg(maxDngLevel,<eval (arg(playerLvl)+arg(minDngLevel))>)
+arg(third,<eval (arg(playerLvl)/3)>)
+arg(minDngLevel,<eval (arg(playerLvl)-arg(third))>)
+arg(maxDngLevel,<eval (arg(playerLvl)+arg(third))>)
 arg(minID,1)
-arg(found,0)
+arg(maxID,0) // value lower than the first dungeon ID is intentional
+arg(foundRange,0)
 arg(i,1)
-while (!arg(found) || (arg(i) > def_weekly_finishDungeon_count) )
-  arg(curLvl,<f_return_nth(2,<def_weekly_finishDungeon_lvl[<eval arg(i)>]>)>)
-  if (f_return_nth(2,<def_weekly_finishDungeon_lvl[<eval arg(i)>]>) < arg(minDngLevel) )
+while (!arg(found) && (arg(i) <= def_weekly_finishDungeon_count) )
+  arg(curLvl,<return_nth(2,<def_weekly_finishDungeon_lvl[<eval arg(i)>]>)>)
+  if (<arg(curLvl)> < <arg(minDngLevel)>)
     arg(minID,#+1)
   endif
-  if 
-  arg(minID,#+1)
+  if (<arg(curLvl)> <= <arg(maxDngLevel)>)
+    arg(maxID,#+1)
+  else
+    arg(foundRange,1) // the maximum dungeon level has been found, no need to go through the rest
+  endif
   arg(i,#+1)
 endwhile
-return {<arg(minID)> <arg(maxId)>}
+if (!arg(maxId))
+  return 0
+endif
+return<eval {<arg(minID)> <arg(maxId)>}>
 
 
 /////////////////////////////
