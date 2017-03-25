@@ -5,8 +5,8 @@ def_weekly_levelStepUp  20 // potrebny pocet levelu pro ziskani noveho questu
 def_weekly_levelMin     10 // minimalni potrebny level pro obdrzeni weekly questu
 
 // single-quest related definitions
-def_weekly_count_low      11 // pocet low miniquestu
-def_weekly_count_medium   6 // pocet medium miniquestu
+def_weekly_count_low      12 // pocet low miniquestu
+def_weekly_count_medium   7 // pocet medium miniquestu
 def_weekly_count_high     5 // pocet high miniquestu
 
 // default prize koeficients
@@ -19,7 +19,7 @@ def_weekly_low_setupFunction[0]    f_weekly_setup_eatFood                       
 def_weekly_low_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_0_[0]   random_food //prvni argument setup funkce
 def_weekly_low_setupFunArg_0_[1]   low //druhy argument setup funkce
-def_weekly_low_rewardSize[0]       50
+def_weekly_low_rewardSize[0]       45
 
 def_weekly_low_setupFunction[1]    f_weekly_setup_eatFood                       // OTESTOVANO
 def_weekly_low_setupFunArgn[1]     2 // pocet argumentu setup funkce
@@ -29,7 +29,7 @@ def_weekly_low_rewardSize[1]       50
 
 def_weekly_low_setupFunction[2]    f_weekly_setup_meetMaster                    // OTESTOVANO
 def_weekly_low_setupFunArgn[2]     0 // pocet argumentu setup funkce
-def_weekly_low_rewardSize[2]       50
+def_weekly_low_rewardSize[2]       40
 
 def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion                   // OTESTOVANO
 def_weekly_low_setupFunArgn[3]     2 // pocet argumentu setup funkce
@@ -41,7 +41,7 @@ def_weekly_low_setupFunction[4]    f_weekly_setup_drinkPotion                   
 def_weekly_low_setupFunArgn[4]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_4_[0]   RANDOM_POTION_BOOST_LESS //prvni argument setup funkce
 def_weekly_low_setupFunArg_4_[1]   2 // multiplier poctu potionu
-def_weekly_low_rewardSize[4]       50
+def_weekly_low_rewardSize[4]       55
 
 def_weekly_low_setupFunction[5]    f_weekly_setup_stepOnWeb                     // OTESTOVANO
 def_weekly_low_setupFunArgn[5]     0 // pocet argumentu setup funkce
@@ -61,7 +61,7 @@ def_weekly_low_setupFunArg_7_[1]   100 // multiplier poctu ovoce
 def_weekly_low_iconId[7]           0993
 def_weekly_low_iconId_moveX[7]     8
 def_weekly_low_descr[7]            "<?null?>Lootni predmet:<br>Jakekoliv ovoce" // pocet predmetu ke sbirani
-def_weekly_low_rewardSize[7]       50
+def_weekly_low_rewardSize[7]       45
 
 def_weekly_low_setupFunction[8]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[8]     2 // pocet argumentu setup funkce
@@ -79,13 +79,23 @@ def_weekly_low_setupFunArg_9_[1]   20 // minimalni pocet XP
 def_weekly_low_iconId[9]           020E9
 def_weekly_low_iconId_moveY[9]     9  // move the custom icon 9 pixels up
 def_weekly_low_iconId_moveX[9]     -3 // move the custom icon 3 pixels to the right
-def_weekly_low_rewardSize[9]       50
+def_weekly_low_rewardSize[9]       60
 
 def_weekly_low_setupFunction[10]    f_weekly_setup_healPlayer
 def_weekly_low_setupFunArgn[10]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_10_[0]   20 // koeficient pro ostatni povolani
 def_weekly_low_setupFunArg_10_[1]   100 // koeficient pro Klerika/Shamana    
-def_weekly_low_rewardSize[10]       50
+def_weekly_low_rewardSize[10]       55
+
+def_weekly_low_setupFunction[11]    f_weekly_setup_loot                          // OTESTOVANO
+def_weekly_low_setupFunArgn[11]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArg_11_[0]   t_gem //prvni argument setup funkce
+def_weekly_low_setupFunArg_11_[1]   100 // multiplier poctu gemu
+def_weekly_low_iconId[11]           02C80
+def_weekly_low_iconId_moveX[11]     2
+def_weekly_low_iconId_moveY[11]     8  // move the custom icon 8 pixels up
+def_weekly_low_descr[11]            "<?null?>Lootni predmet:<br>Jakekoli drahokamy" // pocet predmetu ke sbirani
+def_weekly_low_rewardSize[11]       55
 
 // TO TEST:
 
@@ -128,14 +138,14 @@ def_weekly_medium_setupFunArgn[2]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_2_[0]   "prime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_2_[1]   50 // multiplier prijateho dmg
 def_weekly_medium_setupFunArg_2_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
-def_weekly_medium_rewardSize[2]       75
+def_weekly_medium_rewardSize[2]       80
 
 def_weekly_medium_setupFunction[3]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[3]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_3_[0]   "neprime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_3_[1]   15 // multiplier prijateho dmg
 def_weekly_medium_setupFunArg_3_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta 
-def_weekly_medium_rewardSize[3]       75
+def_weekly_medium_rewardSize[3]       85
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
@@ -144,30 +154,35 @@ def_weekly_medium_setupFunArg_4_[1]   100 // minimalni pocet XP
 def_weekly_medium_iconId[4]           0212E
 def_weekly_medium_iconId_moveY[4]     9  // move the custom icon 9 pixels up
 def_weekly_medium_iconId_moveX[4]     8 // move the custom icon 8 pixels to the left
-def_weekly_medium_rewardSize[4]       75
+def_weekly_medium_rewardSize[4]       85
 
 def_weekly_medium_setupFunction[5]    f_weekly_setup_killPlayer                 // OTESTOVANO
 def_weekly_medium_setupFunArgn[5]     1 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_5_[0]   0 // jakykoliv hrac bez omezeni
-def_weekly_medium_rewardSize[5]       75
+def_weekly_medium_rewardSize[5]       85
+
+def_weekly_medium_setupFunction[6]    f_weekly_setup_conqueror
+def_weekly_medium_setupFunArgn[6]     0 // pocet argumentu setup funkce
+def_weekly_medium_iconId[6]           3629
+def_weekly_medium_rewardSize[6]       75
 
 // HIGH quests
 
 def_weekly_high_setupFunction[0]    f_weekly_setup_drinkPotion
 def_weekly_high_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_0_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument setup funkce
-def_weekly_high_setupFunArg_0_[1]   6 // multiplier poctu potionu
+def_weekly_high_setupFunArg_0_[1]   5 // multiplier poctu potionu
 def_weekly_high_rewardSize[0]       100
 
 def_weekly_high_setupFunction[1]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[1]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_1_[0]   1 // hrac konkretni profese
-def_weekly_high_rewardSize[1]       100
+def_weekly_high_rewardSize[1]       110
 
 def_weekly_high_setupFunction[2]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[2]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_2_[0]   2 // zabiti na konkretnim uzemi
-def_weekly_high_rewardSize[2]       100
+def_weekly_high_rewardSize[2]       110
 
 def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
@@ -176,7 +191,7 @@ def_weekly_high_setupFunArg_3_[1]   200 // minimalni pocet XP
 def_weekly_high_iconId[3]           02132
 def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
 def_weekly_high_iconId_moveX[3]     8 // move the custom icon 8 pixels to the left
-def_weekly_high_rewardSize[3]       100
+def_weekly_high_rewardSize[3]       105
 
 def_weekly_high_setupFunction[4]    f_weekly_setup_MultiKill
 def_weekly_high_setupFunArgn[4]     1 // pocet argumentu setup funkce
@@ -185,6 +200,17 @@ def_weekly_high_iconId[4]           021FC
 def_weekly_high_iconId_moveY[4]     10  // move the custom icon 10 pixels up
 def_weekly_high_iconId_moveX[4]     15 // move the custom icon 8 pixels to the left
 def_weekly_high_rewardSize[4]       100
+
+
+
+[DEFNAMES WEEKLY_POTIONS]
+MAGIC_RANDOM_POTION_BOOST       { i_potion_refresh 1 i_potion_heal 1 i_potion_cure 1 i_potion_clever 2 }
+MAGIC_RANDOM_POTION_BOOST_LESS  { i_potion_refreshLess 1 i_potion_healLess 1 i_potion_cureLess 1 i_potion_cleverLess 2 }
+MAGIC_RANDOM_POTION_BOOST_GREAT { i_potion_refreshGreater 1 i_potion_healGreat 1 i_potion_cureGreat 1 i_potion_cleverGreat 2 }
+
+FIGHT_RANDOM_POTION_BOOST       { i_potion_refresh 1 i_potion_agility 2 i_potion_heal 1 i_potion_strength 2 i_potion_cure 1 }
+FIGHT_RANDOM_POTION_BOOST_LESS  { i_potion_refreshLess 1 i_potion_agilityLess 2 i_potion_healLess 1 i_potion_strengthLess 2 i_potion_cureLess 1 }
+FIGHT_RANDOM_POTION_BOOST_GREAT { i_potion_refreshGreater 1 i_potion_agilityGreat 2 i_potion_healGreat 1 i_potion_strengthGreat 2 i_potion_cureGreat 1 }
 
 ////////////////////////////////////////////////////////////
 
@@ -340,18 +366,16 @@ return 0
 
 [function f_weekly_start_prize]
 arg(basic_prize,<eval (200000/(<eval tag(playerLevel)>+20))>)
-cont.say("Basic Prize: <arg(basic_prize)>")
 
 if (<eval tag(playerLevel)> <= 100)
   arg(level_prize,<eval (<eval tag(playerLevel)>*100)>)
 else
   arg(level_prize,<eval (((<eval tag(playerLevel)>-100)*50)+10000)>)
 endif
-// cont.say("Level Prize: <arg(level_prize)>")
+
 tag(start_prize,<eval (<arg(level_prize)>+<arg(basic_prize)>)>)
-cont.say("Start Prize: <tag(start_prize)>")
 tag(rewGold,0)
-tag(rewXP,0)
+tag(rewXP,<eval tag(playerLevel)>*2)   // Celkova odmena navysena o level*2
 tag(rewMI,1)  // za splneni vsech questu vzdy 1 itemek
 
 
@@ -544,8 +568,16 @@ if (strmatch(<argv(0)>,t_*)) // typedef -> general potion
   arg(finalPotionDef,<argv(0)>)
   tag(quest_iconId[<currentQNumber>],0F0E)
   arg(descrName,"-- jakykoliv --")
-else // specific potion
+elseif (strmatch(<argv(0)>,i_*))  // itemdef -> specific potion
   arg(finalPotionDef,<f_getFinalItemId(<argv(0)>)>)
+  arg(descrName,"<?<arg(finalPotionDef)>.name?>")
+else // specific potion from defname
+  if (cont.profession==class_necro) || (cont.profession==class_mag) || (cont.profession==class_mystik) || (cont.profession==class_shaman)  
+    arg(ProfessionDefname,"MAGIC_<argv(0)>")
+  else 
+    arg(ProfessionDefname,"FIGHT_<argv(0)>")
+  endif
+  arg(finalPotionDef,<f_getFinalItemId(<arg(ProfessionDefname)>)>)
   arg(descrName,"<?<arg(finalPotionDef)>.name?>")
 endif
 tag(quest_subjectId[<currentQNumber>],<arg(finalPotionDef)>)
@@ -742,6 +774,14 @@ tag(quest_totalAmount[<currentQNumber>],<eval (((<tag(qCount)>*<tag(qCount)>)/<a
 tag(MultiKill_Time,<serv.time>+10)
 tag(MultiKill_kills[<currentQNumber>],0)
 
+[function f_weekly_setup_conqueror]
+arg(currentQNumber,<eval tag(qAssigned)>)
+
+
+f_weekly_addItem(<currentQNumber>,itemDClick)
+tag(quest_totalAmount[<currentQNumber>],1)
+tag(quest_description[<currentQNumber>],"<?null?>Zucastni se dobyvani<br>aktivuj Palantir")
+tag(quest_subjectId[<currentQNumber>],i_fortress_palantir)
 
 ////////////////////////////////////////////////////////////
 
@@ -764,6 +804,19 @@ while (<arg(i)> < <tag(itemDClicksCount)>)
     elseif ((argv(0).type==t_speedpotions) || (argv(0).type==t_allpotions))
       if (serv.time <= <eval src.tag(nextpotion)>)
         return
+      endif
+    elseif (<argv(0).baseID> == i_fortress_palantir)
+      if (<eval argv(0).tag(owners_realm)> == 1)    // Vlastni Gondor -> Ptam se mordorskeho kamene
+        arg(declarator,<var(war_declarator_2)>)
+      else                                         // Vlastni Mordor -> Ptam se gondorskeho kamene
+        arg(declarator,<var(war_declarator_1)>)
+      endif
+      if(!strcmpi(<declarator.tag(war_declared_on)>,<argv(0).tag(fort_name)>))  // je vyhlasena valka na tento palantir?
+       if !(declarator.canbewar) //je cas valky?
+        return
+       endif
+      else
+       return
       endif
     endif
     if (f_weekly_increase(<arg(questId)>,1,1))
@@ -1282,8 +1335,6 @@ return<eval {<arg(minID)> <arg(maxId)>}>
 /////////////////////////////
 
 [function f_weekly_quest_healing]  // argv(0) - pocet vylecenych hp, cont-healer,link-cil leceni // provadi se na itemu i_mem_healing
-// pozn. je treba myslet na itemky na heal pri zadavani questu (if healing>100 =>100)
-cont.sysmessage("Vyleceno <argv(0)>/<cont.tag(TODO_heal)>")
 
 if !(cont.isEvent(e_weekly_healPlayer))
   return
