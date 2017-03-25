@@ -212,12 +212,10 @@ if (link.body==c_man)||(link.body==c_woman)       //humanoid - skill healing
     link.hits=<link.hits>+<eval healed_amount>
    endif
   endif
-  cont.say("Vyleceno: <healed_amount>hp")
   IF (LINK!=CONT)
    link.classmessage("<cont.name> te osetril.")
   endif
   if <cont.isevent.e_weekly_quest>  // lecitel plni weekly quest
-    cont.say("Plnim Weekly Questy")
     f_weekly_quest_healing(<healed_amount>)
   endif
  else
@@ -230,7 +228,7 @@ else//nehumanoid - skill veterinary
   cont.classmessage("<link.name> byl uspesne osetren.")
   if (link.findid(i_krvaceni))//vyleceni krvaceni
    link.findid(i_krvaceni).remove
-   cont.sysmessage "Krvaceni zastaveno.  "
+   cont.sysmessage "Krvaceni zastaveno."
    remove
    return 1
   else//pridani zivotu

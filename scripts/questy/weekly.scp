@@ -5,9 +5,14 @@ def_weekly_levelStepUp  20 // potrebny pocet levelu pro ziskani noveho questu
 def_weekly_levelMin     10 // minimalni potrebny level pro obdrzeni weekly questu
 
 // single-quest related definitions
-def_weekly_count_low      9 // pocet low miniquestu
-def_weekly_count_medium   5 // pocet medium miniquestu
-def_weekly_count_high     4 // pocet high miniquestu
+def_weekly_count_low      11 // pocet low miniquestu
+def_weekly_count_medium   6 // pocet medium miniquestu
+def_weekly_count_high     5 // pocet high miniquestu
+
+// default prize koeficients
+def_weekly_prize_gold         250     // delitel pro vypocet gp
+def_weekly_prize_exp          2500    // delitel pro vypocet zkusenosti
+def_weekly_prize_magicItem    1000000 // delitel pro vypocet itemku
 
 // LOW quests
 def_weekly_low_setupFunction[0]    f_weekly_setup_eatFood                       // OTESTOVANO
@@ -29,7 +34,7 @@ def_weekly_low_rewardSize[2]       50
 def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion                   // OTESTOVANO
 def_weekly_low_setupFunArgn[3]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_3_[0]   i_potion_nightSight //prvni argument setup funkce
-def_weekly_low_setupFunArg_3_[1]   2 // multiplier poctu potionu
+def_weekly_low_setupFunArg_3_[1]   6 // multiplier poctu potionu
 def_weekly_low_rewardSize[3]       50
 
 def_weekly_low_setupFunction[4]    f_weekly_setup_drinkPotion                   // OTESTOVANO
@@ -45,23 +50,42 @@ def_weekly_low_rewardSize[5]       50
 def_weekly_low_setupFunction[6]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[6]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_6_[0]   i_gold //prvni argument setup funkce
-def_weekly_low_setupFunArg_6_[1]   50000 // pocet predmetu ke sbirani
+def_weekly_low_setupFunArg_6_[1]   200000 // multiplier poctu zlata
+def_weekly_low_iconId[6]           0EEF
 def_weekly_low_rewardSize[6]       50
 
 def_weekly_low_setupFunction[7]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[7]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_7_[0]   t_fruit //prvni argument setup funkce
-def_weekly_low_setupFunArg_7_[1]   2 // pocet predmetu ke sbirani
+def_weekly_low_setupFunArg_7_[1]   100 // multiplier poctu ovoce
 def_weekly_low_iconId[7]           0993
 def_weekly_low_iconId_moveX[7]     8
 def_weekly_low_descr[7]            "<?null?>Lootni predmet:<br>Jakekoliv ovoce" // pocet predmetu ke sbirani
 def_weekly_low_rewardSize[7]       50
 
-def_weekly_low_setupFunction[8]    f_weekly_setup_killInDung                    // OTESTOVANO
+def_weekly_low_setupFunction[8]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[8]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_8_[0]   3 // koeficient poctu NPC
-def_weekly_low_setupFunArg_8_[1]   20 // minimalni pocet XP
+def_weekly_low_setupFunArg_8_[0]   t_reagent //prvni argument setup funkce
+def_weekly_low_setupFunArg_8_[1]   2000 // multiplier poctu reagentu
+def_weekly_low_iconId[8]           018DD
+def_weekly_low_iconId_moveX[8]     2
+def_weekly_low_descr[8]            "<?null?>Lootni predmet:<br>Jakekoli reagenty" // pocet predmetu ke sbirani
 def_weekly_low_rewardSize[8]       50
+
+def_weekly_low_setupFunction[9]    f_weekly_setup_killInDung                    // OTESTOVANO
+def_weekly_low_setupFunArgn[9]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArg_9_[0]   15 // koeficient poctu NPC
+def_weekly_low_setupFunArg_9_[1]   20 // minimalni pocet XP
+def_weekly_low_iconId[9]           020E9
+def_weekly_low_iconId_moveY[9]     9  // move the custom icon 9 pixels up
+def_weekly_low_iconId_moveX[9]     -3 // move the custom icon 3 pixels to the right
+def_weekly_low_rewardSize[9]       50
+
+def_weekly_low_setupFunction[10]    f_weekly_setup_healPlayer
+def_weekly_low_setupFunArgn[10]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArg_10_[0]   20 // koeficient pro ostatni povolani
+def_weekly_low_setupFunArg_10_[1]   100 // koeficient pro Klerika/Shamana    
+def_weekly_low_rewardSize[10]       50
 
 // TO TEST:
 
@@ -94,23 +118,38 @@ def_weekly_medium_setupFunArg_0_[1]   4  // multiplier poctu potionu
 def_weekly_medium_rewardSize[0]       75
 
 def_weekly_medium_setupFunction[1]    f_weekly_setup_dmgNPC
-def_weekly_medium_setupFunArgn[1]     0 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArgn[1]     2 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_1_[0]   35 // multiplier udeleneho dmg pro ostatni povolani krome krafta/priesta
+def_weekly_medium_setupFunArg_1_[1]   15 // multiplier udeleneho dmg pro krafta/priesta
 def_weekly_medium_rewardSize[1]       75
 
 def_weekly_medium_setupFunction[2]    f_weekly_setup_receiveDmg
-def_weekly_medium_setupFunArgn[2]     0 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArgn[2]     3 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_2_[0]   "prime" //prvni argument setup funkce
+def_weekly_medium_setupFunArg_2_[1]   50 // multiplier prijateho dmg
+def_weekly_medium_setupFunArg_2_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
 def_weekly_medium_rewardSize[2]       75
 
-def_weekly_medium_setupFunction[3]    f_weekly_setup_killInDung
-def_weekly_medium_setupFunArgn[3]     2 // pocet argumentu setup funkce
-def_weekly_medium_setupFunArg_3_[0]   2 // koeficient poctu NPC
-def_weekly_medium_setupFunArg_3_[1]   100 // minimalni pocet XP
+def_weekly_medium_setupFunction[3]    f_weekly_setup_receiveDmg
+def_weekly_medium_setupFunArgn[3]     3 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_3_[0]   "neprime" //prvni argument setup funkce
+def_weekly_medium_setupFunArg_3_[1]   15 // multiplier prijateho dmg
+def_weekly_medium_setupFunArg_3_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta 
 def_weekly_medium_rewardSize[3]       75
 
-def_weekly_medium_setupFunction[4]    f_weekly_setup_killPlayer                 // OTESTOVANO
-def_weekly_medium_setupFunArgn[4]     1 // pocet argumentu setup funkce
-def_weekly_medium_setupFunArg_4_[0]   0 // jakykoliv hrac bez omezeni
+def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
+def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_4_[0]   10 // koeficient poctu NPC
+def_weekly_medium_setupFunArg_4_[1]   100 // minimalni pocet XP
+def_weekly_medium_iconId[4]           0212E
+def_weekly_medium_iconId_moveY[4]     9  // move the custom icon 9 pixels up
+def_weekly_medium_iconId_moveX[4]     8 // move the custom icon 8 pixels to the left
 def_weekly_medium_rewardSize[4]       75
+
+def_weekly_medium_setupFunction[5]    f_weekly_setup_killPlayer                 // OTESTOVANO
+def_weekly_medium_setupFunArgn[5]     1 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_5_[0]   0 // jakykoliv hrac bez omezeni
+def_weekly_medium_rewardSize[5]       75
 
 // HIGH quests
 
@@ -132,9 +171,20 @@ def_weekly_high_rewardSize[2]       100
 
 def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_3_[0]   1 // koeficient poctu NPC
+def_weekly_high_setupFunArg_3_[0]   5 // koeficient poctu NPC
 def_weekly_high_setupFunArg_3_[1]   200 // minimalni pocet XP
+def_weekly_high_iconId[3]           02132
+def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
+def_weekly_high_iconId_moveX[3]     8 // move the custom icon 8 pixels to the left
 def_weekly_high_rewardSize[3]       100
+
+def_weekly_high_setupFunction[4]    f_weekly_setup_MultiKill
+def_weekly_high_setupFunArgn[4]     1 // pocet argumentu setup funkce
+def_weekly_high_setupFunArg_4_[0]   4 // koeficient poctu Multikillu
+def_weekly_high_iconId[4]           021FC
+def_weekly_high_iconId_moveY[4]     10  // move the custom icon 10 pixels up
+def_weekly_high_iconId_moveX[4]     15 // move the custom icon 8 pixels to the left
+def_weekly_high_rewardSize[4]       100
 
 ////////////////////////////////////////////////////////////
 
@@ -173,6 +223,10 @@ tag(expiracyTime,<serv.time>+6048000)  //tyden TODO: upravit na absolutni cas? s
 
 on=@equip
 tag(playerLevel,<eval src.tag(level)>)
+if (tag(playerLevel) > 200)
+  tag(playerLevel,200)
+endif
+f_weekly_start_prize
 f_weekly_generate
 src.events(+e_weekly_quest)
 src.classMessage("<src.sex(Prijal,Prijala)> jsi novy seznam ukolu. Pro zobrazeni zadej prikaz .questy")
@@ -223,6 +277,7 @@ events=-e_weekly_receiveDmg
 events=-e_weekly_killInDung
 events=-e_weekly_killPlayer
 events=-e_weekly_stepOnWeb
+events=-e_weekly_healPlayer
 
 /////////////////////////////
 
@@ -283,6 +338,24 @@ if (<eval tag(expiracyTime)> < <serv.time>)
 endif
 return 0
 
+[function f_weekly_start_prize]
+arg(basic_prize,<eval (200000/(<eval tag(playerLevel)>+20))>)
+cont.say("Basic Prize: <arg(basic_prize)>")
+
+if (<eval tag(playerLevel)> <= 100)
+  arg(level_prize,<eval (<eval tag(playerLevel)>*100)>)
+else
+  arg(level_prize,<eval (((<eval tag(playerLevel)>-100)*50)+10000)>)
+endif
+// cont.say("Level Prize: <arg(level_prize)>")
+tag(start_prize,<eval (<arg(level_prize)>+<arg(basic_prize)>)>)
+cont.say("Start Prize: <tag(start_prize)>")
+tag(rewGold,0)
+tag(rewXP,0)
+tag(rewMI,1)  // za splneni vsech questu vzdy 1 itemek
+
+
+
 [function f_weekly_generate]
 //src.say("GENERUJI QUESTY")
 //src.say("LEVEL: <tag(playerLevel)>")
@@ -312,7 +385,6 @@ while (<tag(qAssigned)> < <eval tag(qCount)>)
   f_weekly_setQuest(<arg(new_quest)>,<arg(quest_level)>)
   tag(qAssigned,#+1)
 endwhile
-f_weekly_setRewardComplete
 tag.remove(qAssigned)
 
 [function f_weekly_hasQuest] // argv(0) - quest level, argv(1) - quest id
@@ -366,18 +438,19 @@ return 1
 
 [function f_weekly_setRewardSingle] // argv(0) - cislo questu
 arg(rewardSize,<eval def_weekly_<argv(1)>_rewardSize[<eval argv(0)>]>)
-tag(rewardSize,<eval (<eval tag(rewardSize)>+arg(rewardSize))>)
-tag(quest_rewGold[<eval tag(qAssigned)>],<eval (arg(rewardSize)*arg(rewardSize)*2)>) // amount of GP in the reward
-tag(quest_rewXP[<eval tag(qAssigned)>],<eval (arg(rewardSize)*10)>) // amount of XP in the reward
-tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(rewardSize)/<eval {45 55}>)>) // amount of magic items in the reward
+arg(start_prize,<eval (<eval tag(start_prize)>*<arg(rewardSize)>)>)
+
+tag(quest_rewGold[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_gold)>) // amount of GP in the reward
+tag(quest_rewXP[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_exp)>) // amount of XP in the reward
+if (strcmpi(<argv(1)>,low))                                                            // only for Medium and Hard quests
+  tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_magicItem)>) // amount of magic items in the reward
+  tag(rewMI,#+<tag(quest_rewMI[<eval tag(qAssigned)>])>)
+endif
+
+tag(rewGold,#+<tag(quest_rewGold[<eval tag(qAssigned)>])>)
+tag(rewXP,#+<tag(quest_rewXP[<eval tag(qAssigned)>])>)
 //tag(quest_rewChance[<eval tag(qAssigned)>],<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
 
-[function f_weekly_setRewardComplete] // sets reward for completion of ALL the subquests
-arg(rewardSize,<tag(rewardSize)>)
-tag(rewGold,<eval (arg(rewardSize)*arg(rewardSize))>) // amount of GP in the reward
-tag(rewXP,<eval (arg(rewardSize)*10)>) // amount of XP in the reward
-tag(rewMI,<eval (arg(rewardSize)/85)>) // amount of magic items in the reward
-//tag(rewChance,<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
 
 //[function f_weekly_getChanceReward]
 //if (USPEJE SANCE)
@@ -445,10 +518,15 @@ return<findres(itemdef,<argv(0)>)>
 arg(currentQNumber,<eval tag(qAssigned)>)
 arg(finalFoodItemdef,<f_getFinalItemId(<argv(0)>)>)
 
-arg(qTotalAmount,<?eval (<eval (<tag(qCount)>*{5 <eval 2+<tag(qCount)>>})>/<?<arg(finalFoodItemdef)>.weight?>)?>)
+arg(qTotalAmount,<?eval (<eval (<tag(qCount)>*{4 <eval 1+<tag(qCount)>>})>/<?<arg(finalFoodItemdef)>.weight?>)?>)
 if (<arg(qTotalAmount)> <= 0)
   arg(qTotalAmount,1)
 endif
+if (<finalFoodItemdef.def.baseID> == i_ribs_cooked)
+  arg(qTotalAmount,#*8)
+elseif (<finalFoodItemdef.def.baseID> == i_fish_cut_cooked)
+  arg(qTotalAmount,#*2)
+endif 
 
 f_weekly_addItem(<currentQNumber>,itemDClick)
 tag(quest_totalAmount[<currentQNumber>],<arg(qTotalAmount)>)
@@ -478,7 +556,8 @@ tag(quest_description[<currentQNumber>],"Vypij lektvar:<br><?arg(descrName)?>")
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,itemLoot)
-tag(quest_totalAmount[<currentQNumber>],<eval <argv(1)>>)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{<eval ((<tag(playerLevel)>-5)*<eval <argv(1)>>)> <eval ((<tag(playerLevel)>+10)*<eval <argv(1)>>)>})/1000)>)
+//tag(quest_totalAmount[<currentQNumber>],<eval <argv(1)>>)
 if (strmatch(<argv(0)>,t_*)) // typedef -> general item
   arg(finalItemDef,<argv(0)>)
   // the description for a typedef must be set explicitly through a defname : def_weekly_<level>_desc_<questNumber>
@@ -504,15 +583,35 @@ tag(quest_iconId[<currentQNumber>],0E34)
 tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels down
 
 
+[function f_weekly_setup_healPlayer]
+//src.sysMessage("setting up healPlayer quest")
+arg(currentQNumber,<eval tag(qAssigned)>)
+
+f_weekly_addItem(<currentQNumber>,healPlayer)  
+
+arg(healing,<eval (<cont.healing>-<eval cont.tag(mi_boosted_17)>)>)         // osetreni jestli nositel nema healing itemky
+arg(anatomy,<eval (<cont.anatomy>-<eval cont.tag(mi_boosted_1)>)>)         // osetreni jestli nositel nema anatomy itemky
+
+if ((cont.profession==class_priest) || (cont.profession==class_shaman))
+  arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(1)>)>)*(<arg(healing)>/2)*((<arg(anatomy)>)/10))/10000>)
+else
+  arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(0)>)>)*(<arg(healing)>/2)*((<arg(anatomy)>)/10))/10000>)
+endif
+tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
+tag(quest_description[<currentQNumber>],"Osetri bandazemi poskozeni.")
+tag(quest_iconId[<currentQNumber>],0E21)
+tag(quest_iconId_moveX[<currentQNumber>],4) // move the custom icon 16 pixels to the left
+
+
 [function f_weekly_setup_dmgNPC]
 //src.sysMessage("setting up dmgNPC quest")
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,dmgNPC)
 if ((topobj.profession==class_priest) || (topobj.profession==class_craft))
-  arg(qAmount,<eval (<tag(qCount)>*{<eval <tag(playerLevel)>*100> <eval (<tag(playerLevel)>+1)*100>}*10)>)
+  arg(qAmount,<eval (((<tag(qCount)>*{<eval <tag(playerLevel)>*10000> <eval (<tag(playerLevel)>+1)*10000>})*<argv(1)>)/1000)>)
 else
-  arg(qAmount,<eval (<tag(qCount)>*{<eval <tag(playerLevel)>*100> <eval (<tag(playerLevel)>+1)*100>}*25)>)
+  arg(qAmount,<eval (((<tag(qCount)>*{<eval <tag(playerLevel)>*10000> <eval (<tag(playerLevel)>+1)*10000>})*<argv(0)>)/1000)>)
 endif
 tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
 tag(quest_description[<currentQNumber>],"Udel poskozeni monstrum.")
@@ -526,11 +625,20 @@ tag(quest_iconId_moveY[<currentQNumber>],12) // move the custom icon 4 pixels up
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,receiveDmg)
-tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*50)*<eval topobj.tag(vitlev)>)>) // tag(vitlev,(pocet zivotu)*(pocet_miniquestu*50))
-tag(quest_description[<currentQNumber>],"Utrz prime poskozeni.")
+arg(typeDMG,<f_weekly_random_typeDMG(<argv(0)>)>)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<argv(1)>)*<eval topobj.tag(vitlev)>)>) // tag.vitlev(pocet zivotu)*(pocet_miniquestu*50)
+if !((cont.profession == class_thief) || (cont.profession == class_war))
+  tag(quest_totalAmount[<currentQNumber>],<eval ((<eval tag(quest_totalAmount[<currentQNumber>])>*<argv(2)>)/100)>)
+endif
+if (!strcmpi(<arg(typeDMG)>,jedem)) || (!strcmpi(<arg(typeDMG)>,krvacenim))     // jiny popis + polovicni naroky, kdyz se jedna jen o jeden konkretni typ
+  tag(quest_description[<currentQNumber>],"Utrz poskozeni<br><arg(typeDMG)> v boji.")
+  tag(quest_totalAmount[<currentQNumber>],#/2)
+else
+  tag(quest_description[<currentQNumber>],"Utrz <arg(typeDMG)> poskozeni<br>v boji.")
+endif
 tag(quest_iconId[<currentQNumber>],0122D)
 tag(quest_iconId_moveY[<currentQNumber>],5) // move the custom icon 4 pixels up
-
+tag(quest_subjectId[<currentQNumber>],<arg(typeDMG)>)
 
 [function f_weekly_setup_stepOnWeb]
 //src.sysMessage("setting up stepOnWeb quest")
@@ -548,11 +656,8 @@ tag(quest_iconId_moveY[<currentQNumber>],14) // move the custom icon 4 pixels up
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,killInDung)
-tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<tag(qCount)>*{<eval 35+argv(0)> <eval 45+argv(0)>})/10)>)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<tag(qCount)>*{<eval (25*<argv(0)>)> <eval (35*<argv(0)>)>})/100)>)
 tag(quest_description[<currentQNumber>],"Zabij npc v dungeonu<br>s alespon <?argv(1)?>xp")
-tag(quest_iconId[<currentQNumber>],020E9)
-tag(quest_iconId_moveY[<currentQNumber>],9) // move the custom icon 4 pixels up
-tag(quest_iconId_moveX[<currentQNumber>],-3) // move the custom icon 2 pixels to the right
 tag(quest_subjectId[<currentQNumber>],<argv(1)>) // exceptionaly the subjectId doesn't store an actual ID, but a minimal required XP
 
 
@@ -607,6 +712,35 @@ tag(quest_description[<currentQNumber>],"Dokonci Dungeon:<br>skill<?def_weekly_f
 tag(quest_subjectId[<currentQNumber>],<arg(dungeonToFinish)>)
 tag(quest_iconId[<currentQNumber>],0E34) // TODO add icon ID
 tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels down
+
+
+
+[function f_weekly_setup_MultiKill] 
+//src.sysMessage("setting up killPlayer quest")
+arg(currentQNumber,<eval tag(qAssigned)>)
+ 
+f_weekly_addItem(<currentQNumber>,MultiKill)
+
+
+arg(rand_type,<eval {1 11}>)
+if (<arg(rand_type)> <= 5)
+  arg(MultiKill,"Double")
+  tag(quest_subjectId[<currentQNumber>],2)
+elseif (<arg(rand_type)> <= 8)
+  arg(MultiKill,"Triple")
+  tag(quest_subjectId[<currentQNumber>],3)
+elseif (<arg(rand_type)> <= 10)
+  arg(MultiKill,"Quadra")
+  tag(quest_subjectId[<currentQNumber>],4)
+else
+  arg(MultiKill,"Penta")
+  tag(quest_subjectId[<currentQNumber>],5)
+endif
+
+tag(quest_description[<currentQNumber>],"Zabitim monster<br>ziskej <?arg(MultiKill)?>kill.")
+tag(quest_totalAmount[<currentQNumber>],<eval (((<tag(qCount)>*<tag(qCount)>)/<argv(0)>)/<tag(quest_subjectId[<currentQNumber>])>)>)
+tag(MultiKill_Time,<serv.time>+10)
+tag(MultiKill_kills[<currentQNumber>],0)
 
 
 ////////////////////////////////////////////////////////////
@@ -698,13 +832,65 @@ on=@DrinkingPotion
 
 [events e_weekly_receiveDmg]
 on=@afterGetSwing
-if (<eval <var(ubrano)>> > 0)
-  arg(weekly,<findid(i_memory_weekly_quest)>)
-  arg(questId,<eval weekly.tag(receiveDmg[0])>)
-  if (weekly.f_weekly_increase(<questId>,<var(ubrano)>))
-    weekly.f_weekly_removeItem(0,receiveDmg)
-  endif
+if (src.isgm)   // nepocitat dmg od GM, protoze .kill dava 32k dmg :D
+  return
 endif
+if (<eval src.tag(realm)> == <eval tag(realm)>)  // ze stejneho realmu nene
+  return
+endif
+if (<eval <var(ubrano)>> <= 0)
+  return
+endif
+
+arg(weekly,<findid(i_memory_weekly_quest)>)
+arg(i,0)
+while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
+  arg(questId,<eval weekly.tag(receiveDmg[<eval arg(i)>])>)
+  arg(subjectId,<weekly.tag(quest_subjectId[<arg(questId)>])>)
+
+  if (!strcmpi(prime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>))
+    if (weekly.f_weekly_increase(<questId>,<var(ubrano)>))
+      weekly.f_weekly_removeItem(<arg(i)>,receiveDmg)
+      arg(i,#-1)
+    endif
+  endif
+  arg(i,#+1)
+endwhile
+
+on=@itemTimer          // SRC a UID je hrac, ACT je item co tikl
+if !((<act.id> == i_memory_jed) || (<act.id> == i_krvaceni))
+  return
+endif
+
+arg(weekly,<findid(i_memory_weekly_quest)>)
+arg(i,0) 
+
+while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
+  arg(received_dmg,0)
+  arg(questId,<eval weekly.tag(receiveDmg[<eval arg(i)>])>)
+  arg(subjectId,<weekly.tag(quest_subjectId[<arg(questId)>])>)
+
+  if (<act.id> == i_memory_jed)   // nevim jak osetrit jed ze stejneho realmu jako u bleedu
+    if (!strcmpi(neprime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>)) || (!strcmpi(jedem,<arg(subjectId)>))
+      arg(received_dmg,<eval act.tag(jed_sila)>)
+    endif
+  elseif (<act.id> == i_krvaceni)
+    if (<eval tag(realm)> == <eval act.link.tag(realm)>)   // nechceme aby se bleedili navzajem hraci mezi sebou v ramci jednoho realmu
+      return
+    endif
+    if (!strcmpi(neprime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>)) || (!strcmpi(krvacenim,<arg(subjectId)>))
+      arg(received_dmg,<var(dmgedNoResp)>)
+    endif
+  endif
+  if (arg(received_dmg) > 0)
+    if (weekly.f_weekly_increase(<questId>,<arg(received_dmg)>))
+      weekly.f_weekly_removeItem(<arg(i)>,receiveDmg)
+      arg(i,#-1)
+    endif
+  endif
+  arg(i,#+1)
+endwhile
+
 
 on=@beforeGetEffect
 on=@beforeDoEffect
@@ -759,13 +945,58 @@ endif
 
 /////////////////////////////
 
+[events e_weekly_MultiKill]
+on=@userKill // src - co bylo zabito, uid - kdo zabil
+if (src.npc) // zabil npc
+  findid(i_memory_weekly_quest).f_weekly_Multikill
+endif
+
+on=@beforeGetEffect
+on=@beforeDoEffect
+on=@afterDoEffect
+on=@beforeGetSwing
+on=@afterGetSwing
+on=@afterSwing
+on=@npcKill
+on=@DrinkingPotion
+
+[function f_weekly_MultiKill]
+
+arg(receivedXP,<eval src.tag(added_experience_bydeath)>)
+if !(<arg(receivedXP)>)
+  return
+endif
+
+arg(i,0)
+while (<arg(i)> < <eval tag(MultiKillsCount)>)
+  arg(questId,<eval tag(MultiKill[<eval arg(i)>])>)
+
+  if (<eval tag(MultiKill_Time)> < <serv.time>)
+    tag(MultiKill_Time,<serv.time>+10)
+    tag(MultiKill_kills[<arg(questId)>],1)
+    return
+  endif
+  tag(MultiKill_kills[<arg(questId)>],#+1)
+
+  if (<eval tag(MultiKill_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
+    if (f_weekly_increase(<arg(questId)>,1,1))
+      f_weekly_removeItem(<arg(questId)>,MultiKill)
+    endif
+    tag(MultiKill_kills[<arg(questId)>],0)
+  endif
+
+endwhile
+
+
+/////////////////////////////
+
 [events e_weekly_killPlayer]
 on=@userKill // src - co bylo zabito, uid - kdo zabil
 if (src.isPlayer) // zabil hrace
   if (<src.tag(realm)> == <tag(realm)>)
     return
   endif
-  if !(<eval src.tag(added_experience_bydeath)>)   // resskilly nechceme pocitat
+  if (src.findid(i_checkstats_timer)) || (src.profession == class_craft)  // resskilly a CK nechceme pocitat
     return
   endif
   findid(i_memory_weekly_quest).f_weekly_killPlayer
@@ -796,6 +1027,7 @@ while (<arg(i)> < <eval tag(killPlayersCount)>)
   if (arg(meetsCondition))
     if (f_weekly_increase(<arg(questId)>,1,1))
       f_weekly_removeItem(<arg(i)>,killPlayer)
+      arg(i,#-1)
     endif
   endif
   arg(i,#+1)
@@ -831,6 +1063,10 @@ if (src.isEvent(e_weekly_finishDungeon))
     weekly.f_weekly_removeItem(<arg(questId)>,finishDungeon)
   endif
 endif
+
+/////////////////////////////
+
+[events e_weekly_healPlayer]
 
 /////////////////////////////
 
@@ -966,6 +1202,23 @@ enddo
 
 return<arg(skill_name)>
 
+
+[function f_weekly_random_typeDMG]  // <argv(0)> prime / neprime poskozeni
+
+if (!strcmpi(prime,<argv(0)>))
+  dorand 2
+    arg(typeDMG,prime)
+    arg(typeDMG,jakekoli)
+  enddo
+elseif (!strcmpi(neprime,<argv(0)>))
+  dorand 3
+    arg(typeDMG,neprime)
+    arg(typeDMG,jedem)
+    arg(typeDMG,krvacenim)
+  enddo
+endif
+
+return<arg(typeDMG)>
 /////////////////////////////
 
 [defnames def_weekly_finishDungeon]
@@ -1029,17 +1282,27 @@ return<eval {<arg(minID)> <arg(maxId)>}>
 /////////////////////////////
 
 [function f_weekly_quest_healing]  // argv(0) - pocet vylecenych hp, cont-healer,link-cil leceni // provadi se na itemu i_mem_healing
-// navrh na vzorec pocet_na_vyleceni=(level*100*healing/10)   // pozn. je treba myslet na itemky na heal pri zadavani questu (if healing>100 =>100)
-cont.sysmessage("Level: <eval cont.tag(level)> => <eval (<eval cont.tag(level)>*100)>")
-cont.sysmessage("Healing: <cont.healing>% => <eval ((<cont.healing>*10)/5)>")
-cont.sysmessage("Anatomy: <cont.anatomy>% => <eval ((<cont.anatomy>*10)/50)>")
-if ((cont.profession==class_shaman) || (cont.profession==class_priest))  // 14 - healing, vylec HP
-  //arg(TODO_heal,<eval ((<eval cont.tag(level)>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
-  cont.tag(TODO_heal,<eval ((<eval cont.tag(level)>*100)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
-else
-  arg(TODO_heal,<eval ((<eval cont.tag(level)>*50)*((<cont.healing>*10)/5)*((<cont.anatomy>*10)/50))/10000>)
-endif
+// pozn. je treba myslet na itemky na heal pri zadavani questu (if healing>100 =>100)
 cont.sysmessage("Vyleceno <argv(0)>/<cont.tag(TODO_heal)>")
+
+if !(cont.isEvent(e_weekly_healPlayer))
+  return
+endif
+if (<argv(0)> <= 0)
+  return
+endif
+if !(<eval cont.tag(realm)> == <eval link.tag(realm)>)
+  return
+endif
+
+arg(weekly,<cont.findid(i_memory_weekly_quest)>)
+arg(questId,<eval weekly.tag(healPlayer[0])>)
+if (weekly.f_weekly_increase(<arg(questId)>,<argv(0)>,1))
+  weekly.f_weekly_removeItem(<arg(questId)>,healPlayer)
+endif
+
+cont.sysmessage("Prosel jsem vsemi podminkami! <arg(questId)>,<argv(0)>")
+
 
 [function f_weekly_meetMaster] // navstiv a pozdrav Mistra dle zadani (EI,SS,Magery, ...atd)
 if (src.isEvent(e_weekly_meetMaster))

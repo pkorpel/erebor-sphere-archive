@@ -60,7 +60,9 @@ arg(v,0)
 while (arg(v)<ARGVCOUNT-1)
   arg(type,<?argv(<arg(v)>)?>)
   arg(skillname,<?findres(skill,<arg(type)>).name?>)
-  src.<?arg(skillname)?>=<?src.<arg(skillname)>?>+(<?tag(imi_value[<arg(type)>])?>*10)
+  arg(skillBoost,<eval (<tag(imi_value[<arg(type)>])>*10)>)
+  src.<arg(skillname)>=<src.<arg(skillname)>>+<arg(skillBoost)>
+  src.tag(mi_boosted[<eval arg(type)>],<eval (<eval src.tag(mi_boosted[<eval arg(type)>])>+<arg(skillBoost)>)>)
   arg(v,<arg(v)>+1)
 endwhile
 
@@ -69,7 +71,10 @@ arg(v,0)
 while (arg(v)<ARGVCOUNT-1)
   arg(type,<?argv(<arg(v)>)?>)
   arg(skillname,<?findres(skill,<arg(type)>).name?>)
-  src.<?arg(skillname)?>=<?src.<arg(skillname)>?>-(<?tag(imi_value[<arg(type)>])?>*10)
+  arg(skillBoost,<eval (<tag(imi_value[<arg(type)>])>*10)>)
+  src.<arg(skillname)>=<src.<arg(skillname)>>-<arg(skillBoost)>
+  src.tag(mi_boosted[<eval arg(type)>],<eval (<eval src.tag(mi_boosted[<eval arg(type)>])>-<arg(skillBoost)>)>)
+  src.freetag(mi_boosted[<eval arg(type)>])
   arg(v,<arg(v)>+1)
 endwhile 
 
