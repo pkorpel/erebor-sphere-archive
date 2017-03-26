@@ -67,20 +67,25 @@ elseif !(src.findid(i_qf_sign)) //tady dame quest po vygenerovani hraci
 elseif (<eval src.findid(i_qf_sign).tag(qfcount)> >= 3) // tady odmenime uspesne lovce
   src.sysmessage("Odmena ti byla poslana do banky.")
   say("<src.name> <src.sex("ulovil","ulovila")> jsi <eval src.findid(i_qf_sign).tag(qfcount)> monster. Dostanes odmenu.")
+  arg(exp_to_give,<eval (((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>))/2)>)
+  arg(gp_to_give,<eval (((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>))*2)>)
   if safe.finduid(#0400075A4)
-    finduid(#0400075A4).tag(givenexps,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
-    finduid(#0400075A4).tag(givengold,#+<eval ((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)>)
+    finduid(#0400075A4).tag(givenexps,#+<arg(exp_to_give)>)
+    finduid(#0400075A4).tag(givengold,#+<arg(gp_to_give)>)
   endif
-  tag(givengold,#+<eval ((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)>)
-  tag(givenexps,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
+  tag(givengold,#+<arg(gp_to_give)>)
+  tag(givenexps,#+<arg(exp_to_give)>)
   if !(src.tag(loveckasoutez))
-    src.tag(loveckasoutez,<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
+    src.tag(loveckasoutez,<arg(exp_to_give)>)
   else
-    src.tag(loveckasoutez,#+<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
+    src.tag(loveckasoutez,#+<arg(exp_to_give)>)
   endif
-  src.addexp(<eval ((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>)/2)>)
+  src.addexp(<arg(exp_to_give)>)
+  if <src.isevent.e_weekly_quest>  // Lovec plni weekly quest
+    src.f_weekly_quest_HuntingSign(<arg(exp_to_give)>)
+  endif
   src.newitem=i_cashiers_mesec
-  lastnew.more=((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>)*2)
+  lastnew.more=<arg(gp_to_give)>
   lastnew.cont=src.findlayer(layer_bankbox)
   src.findid(i_qf_sign).tag(qfcount,0)
 elseif (src.findid(i_qf_sign).tag(hunted)!=tag(hunted)) //klikne na jinou vyvesku

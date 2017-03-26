@@ -6,7 +6,7 @@ def_weekly_levelMin     10 // minimalni potrebny level pro obdrzeni weekly quest
 
 // single-quest related definitions
 def_weekly_count_low      12 // pocet low miniquestu
-def_weekly_count_medium   7 // pocet medium miniquestu
+def_weekly_count_medium   8 // pocet medium miniquestu
 def_weekly_count_high     5 // pocet high miniquestu
 
 // default prize koeficients
@@ -165,6 +165,14 @@ def_weekly_medium_setupFunction[6]    f_weekly_setup_conqueror
 def_weekly_medium_setupFunArgn[6]     0 // pocet argumentu setup funkce
 def_weekly_medium_iconId[6]           3629
 def_weekly_medium_rewardSize[6]       75
+
+def_weekly_medium_setupFunction[7]    f_weekly_setup_HuntingSign
+def_weekly_medium_setupFunArgn[7]     1 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_7_[0]   15 // koeficient pro vypocet bodu ktere je treba ziskat
+def_weekly_medium_iconId[7]           0340E
+def_weekly_medium_iconId_moveY[7]     8  // move the custom icon 9 pixels up
+def_weekly_medium_iconId_moveX[7]     4 // move the custom icon 8 pixels to the left
+def_weekly_medium_rewardSize[7]       70
 
 // HIGH quests
 
@@ -783,6 +791,13 @@ tag(quest_totalAmount[<currentQNumber>],1)
 tag(quest_description[<currentQNumber>],"<?null?>Zucastni se dobyvani<br>aktivuj Palantir")
 tag(quest_subjectId[<currentQNumber>],i_fortress_palantir)
 
+[function f_weekly_setup_HuntingSign]
+arg(currentQNumber,<eval tag(qAssigned)>)
+
+f_weekly_addItem(<currentQNumber>,HuntingSign)
+tag(quest_totalAmount[<currentQNumber>],<eval (<tag(playerLevel)>*<argv(0)>)>)
+tag(quest_description[<currentQNumber>],"<?null?>Ziskej body na<br>Lovecke vyvesce")
+
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
@@ -1123,6 +1138,10 @@ endif
 
 /////////////////////////////
 
+[events e_weekly_HuntingSign]
+
+/////////////////////////////
+
 [events e_weekly_quest]
 on=@login
 f_weekly_check
@@ -1352,7 +1371,20 @@ if (weekly.f_weekly_increase(<arg(questId)>,<argv(0)>,1))
   weekly.f_weekly_removeItem(<arg(questId)>,healPlayer)
 endif
 
-cont.sysmessage("Prosel jsem vsemi podminkami! <arg(questId)>,<argv(0)>")
+[function f_weekly_quest_HuntingSign]  // argv(0) - pocet nalovenych bodu
+
+if !(isEvent(e_weekly_HuntingSign))
+  return
+endif
+if (<argv(0)> <= 0)
+  return
+endif
+
+arg(weekly,<findid(i_memory_weekly_quest)>)
+arg(questId,<eval weekly.tag(HuntingSign[0])>)
+if (weekly.f_weekly_increase(<arg(questId)>,<argv(0)>,1))
+  weekly.f_weekly_removeItem(<arg(questId)>,HuntingSign)
+endif
 
 
 [function f_weekly_meetMaster] // navstiv a pozdrav Mistra dle zadani (EI,SS,Magery, ...atd)
