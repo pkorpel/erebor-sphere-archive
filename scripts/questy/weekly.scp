@@ -6,8 +6,8 @@ def_weekly_levelMin     10 // minimalni potrebny level pro obdrzeni weekly quest
 
 // single-quest related definitions
 def_weekly_count_low      12 // pocet low miniquestu
-def_weekly_count_medium   8 // pocet medium miniquestu
-def_weekly_count_high     5 // pocet high miniquestu
+def_weekly_count_medium   9 // pocet medium miniquestu
+def_weekly_count_high     6 // pocet high miniquestu
 
 // default prize koeficients
 def_weekly_prize_gold         250     // delitel pro vypocet gp
@@ -170,9 +170,15 @@ def_weekly_medium_setupFunction[7]    f_weekly_setup_HuntingSign
 def_weekly_medium_setupFunArgn[7]     1 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_7_[0]   15 // koeficient pro vypocet bodu ktere je treba ziskat
 def_weekly_medium_iconId[7]           0340E
-def_weekly_medium_iconId_moveY[7]     8  // move the custom icon 9 pixels up
-def_weekly_medium_iconId_moveX[7]     4 // move the custom icon 8 pixels to the left
+def_weekly_medium_iconId_moveY[7]     12 // move the custom icon 12 pixels up
+def_weekly_medium_iconId_moveX[7]     -6 // move the custom icon 5 pixels to the right
 def_weekly_medium_rewardSize[7]       70
+
+def_weekly_medium_setupFunction[8]    f_weekly_setup_finishDungeon
+def_weekly_medium_setupFunArgn[8]     1  // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_8_[0]   65 // player level limit (78 dng level max)
+def_weekly_medium_rewardSize[8]       90
+
 
 // HIGH quests
 
@@ -209,6 +215,10 @@ def_weekly_high_iconId_moveY[4]     10  // move the custom icon 10 pixels up
 def_weekly_high_iconId_moveX[4]     15 // move the custom icon 8 pixels to the left
 def_weekly_high_rewardSize[4]       100
 
+def_weekly_high_setupFunction[5]    f_weekly_setup_finishDungeon
+def_weekly_high_setupFunArgn[5]     1 // pocet argumentu setup funkce
+def_weekly_high_setupFunArg_5_[0]   100 // player level limit (120 dng level max)
+def_weekly_high_rewardSize[5]       130
 
 
 [DEFNAMES WEEKLY_POTIONS]
@@ -387,7 +397,6 @@ tag(rewXP,<eval tag(playerLevel)>*2)   // Celkova odmena navysena o level*2
 tag(rewMI,1)  // za splneni vsech questu vzdy 1 itemek
 
 
-
 [function f_weekly_generate]
 //src.say("GENERUJI QUESTY")
 //src.say("LEVEL: <tag(playerLevel)>")
@@ -452,6 +461,9 @@ while (<arg(i)> < <arg(argNumb)>)
 endwhile
 tag(quest_level[<eval tag(qAssigned)>],<argv(1)>) // the level of a quest for later reference from a dialog if needed
 tag(quest_id[<eval tag(qAssigned)>],<argv(0)>)    // the defnames ID of a quest for later reference from a dialog if needed
+<def_weekly_<argv(1)>_setupFunction[<eval argv(0)>]>(<arg(arguments)>)
+f_weekly_setRewardSingle(<argv(0)>,<argv(1)>)
+
 if (0<safe.def_weekly_<argv(1)>_iconId[<eval argv(0)>]>)
   tag(quest_iconId[<eval tag(qAssigned)>],<def_weekly_<argv(1)>_iconId[<eval argv(0)>]>)
 endif
@@ -464,11 +476,9 @@ endif
 if (strlen(<safe.def_weekly_<argv(1)>_descr[<eval argv(0)>]>))
   tag(quest_description[<eval tag(qAssigned)>],<def_weekly_<argv(1)>_descr[<eval argv(0)>]>)
 endif
-<def_weekly_<argv(1)>_setupFunction[<eval argv(0)>]>(<arg(arguments)>)
-f_weekly_setRewardSingle(<argv(0)>,<argv(1)>)
 return 1
 
-[function f_weekly_setRewardSingle] // argv(0) - cislo questu
+[function f_weekly_setRewardSingle] // argv(0) - cislo questu; argv(1) - level questu (low, medium ...)
 arg(rewardSize,<eval def_weekly_<argv(1)>_rewardSize[<eval argv(0)>]>)
 arg(start_prize,<eval (<eval tag(start_prize)>*<arg(rewardSize)>)>)
 
@@ -616,8 +626,7 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,meetMaster)
 tag(quest_totalAmount[<currentQNumber>],1)
 arg(masterToMeet,<f_weekly_random_master>)
-tag(quest_description[<currentQNumber>],"Pozdrav Mistra<br>skillu <?f_weekly_random_master?>")
-tag(quest_description[<currentQNumber>],"Pozdrav Mistra<br>skill<?arg(masterToMeet)?>")
+tag(quest_description[<currentQNumber>],"Pozdrav Mistra<br>skillu <?arg(masterToMeet)?>")
 tag(quest_subjectId[<currentQNumber>],<arg(masterToMeet)>)
 tag(quest_iconId[<currentQNumber>],0E34)
 tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels down
@@ -640,7 +649,7 @@ endif
 tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
 tag(quest_description[<currentQNumber>],"Osetri bandazemi poskozeni.")
 tag(quest_iconId[<currentQNumber>],0E21)
-tag(quest_iconId_moveX[<currentQNumber>],4) // move the custom icon 16 pixels to the left
+tag(quest_iconId_moveX[<currentQNumber>],4) // move the custom icon 4 pixels to the left
 
 
 [function f_weekly_setup_dmgNPC]
@@ -656,8 +665,8 @@ endif
 tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
 tag(quest_description[<currentQNumber>],"Udel poskozeni monstrum.")
 tag(quest_iconId[<currentQNumber>],036B3)
-tag(quest_iconId_moveX[<currentQNumber>],21) // move the custom icon 16 pixels to the left
-tag(quest_iconId_moveY[<currentQNumber>],12) // move the custom icon 4 pixels up
+tag(quest_iconId_moveX[<currentQNumber>],21) // move the custom icon 21 pixels to the left
+tag(quest_iconId_moveY[<currentQNumber>],12) // move the custom icon 12 pixels up
 
 
 [function f_weekly_setup_receiveDmg]
@@ -677,7 +686,7 @@ else
   tag(quest_description[<currentQNumber>],"Utrz <arg(typeDMG)> poskozeni<br>v boji.")
 endif
 tag(quest_iconId[<currentQNumber>],0122D)
-tag(quest_iconId_moveY[<currentQNumber>],5) // move the custom icon 4 pixels up
+tag(quest_iconId_moveY[<currentQNumber>],5) // move the custom icon 5 pixels up
 tag(quest_subjectId[<currentQNumber>],<arg(typeDMG)>)
 
 [function f_weekly_setup_stepOnWeb]
@@ -688,8 +697,8 @@ f_weekly_addItem(<currentQNumber>,stepOnWeb)
 tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{30 50})/10)>)
 tag(quest_description[<currentQNumber>],"Stoupni na pavucinu.")
 tag(quest_iconId[<currentQNumber>],010D5)
-tag(quest_iconId_moveX[<currentQNumber>],25) // move the custom icon 16 pixels to the left
-tag(quest_iconId_moveY[<currentQNumber>],14) // move the custom icon 4 pixels up
+tag(quest_iconId_moveX[<currentQNumber>],25) // move the custom icon 25 pixels to the left
+tag(quest_iconId_moveY[<currentQNumber>],14) // move the custom icon 14 pixels up
 
 [function f_weekly_setup_killInDung] // argv(0) - amount coeficient, argv(1) - minimum XP of a monster
 //src.sysMessage("setting up killInDung quest")
@@ -708,7 +717,7 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,killPlayer)
 tag(quest_iconId[<currentQNumber>],027FA)
 tag(quest_iconId_moveY[<currentQNumber>],4) // move the custom icon 4 pixels up
-tag(quest_iconId_moveX[<currentQNumber>],2) // move the custom icon 2 pixels to the right
+tag(quest_iconId_moveX[<currentQNumber>],2) // move the custom icon 2 pixels to the left
 if (<eval argv(0)> == 1)
   dorand 8
     arg(profession_to_kill,<class_necro.name>)
@@ -738,21 +747,19 @@ else
   tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{5 10})/10)>)
 endif
 
-[function f_weekly_setup_finishDungeon]
-//src.sysMessage("setting up finishDungeon quest")
+[function f_weekly_setup_finishDungeon] // argv(0) level limit
+src.sysMessage("setting up finishDungeon quest")
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,finishDungeon)
+arg(dungeonToFinish,<f_weekly_finishDungeon_select(<argv(0)>)>)
 
 tag(quest_totalAmount[<currentQNumber>],1)
-
-arg(dungeonToFinish,<f_weekly_finishDungeon_select>)
-
-tag(quest_description[<currentQNumber>],"Dokonci Dungeon:<br>skill<?def_weekly_finishDungeon[<eval arg(dungeonToFinish)>]?>")
+tag(quest_description[<currentQNumber>],"Dokonci Dungeon:<br><?def_weekly_finishDungeon[<eval arg(dungeonToFinish)>]?>")
 tag(quest_subjectId[<currentQNumber>],<arg(dungeonToFinish)>)
-tag(quest_iconId[<currentQNumber>],0E34) // TODO add icon ID
-tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels down
-
+tag(quest_iconId[<currentQNumber>],01A01)
+tag(quest_iconId_moveY[<currentQNumber>],20) // move the custom icon 20 pixels up
+tag(quest_iconId_moveX[<currentQNumber>],-4) // move the custom icon 4 pixels to the right
 
 
 [function f_weekly_setup_MultiKill] 
@@ -760,7 +767,6 @@ tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels do
 arg(currentQNumber,<eval tag(qAssigned)>)
  
 f_weekly_addItem(<currentQNumber>,MultiKill)
-
 
 arg(rand_type,<eval {1 11}>)
 if (<arg(rand_type)> <= 5)
@@ -784,7 +790,6 @@ tag(MultiKill_kills[<currentQNumber>],0)
 
 [function f_weekly_setup_conqueror]
 arg(currentQNumber,<eval tag(qAssigned)>)
-
 
 f_weekly_addItem(<currentQNumber>,itemDClick)
 tag(quest_totalAmount[<currentQNumber>],1)
@@ -1122,13 +1127,16 @@ endif
 
 // MANUALLY ADDED
 // this function MUST be added manually to EACH of the defined vargates
-[function f_weekly_vg_finishDungeon] // argv(0) - the dungeon's ID defined in defnames
+[function f_vg_finishDng] // argv(0) - the dungeon's ID defined in defnames
 if (src.isEvent(e_weekly_finishDungeon))
   arg(weekly,<src.findid(i_memory_weekly_quest)>)
-  arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<argv(0)>,finishDungeon)
+  arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<argv(0)>,finishDungeon)>)
   if (arg(questId) != -1)
+    src.sysMessage("GOT IT")
     weekly.f_weekly_increase(<arg(questId)>,1)
     weekly.f_weekly_removeItem(<arg(questId)>,finishDungeon)
+  else
+    src.sysMessage("this is a different dung")
   endif
 endif
 
@@ -1294,28 +1302,33 @@ return<arg(typeDMG)>
 /////////////////////////////
 
 [defnames def_weekly_finishDungeon]
-def_weekly_finishDungeon_count  6
-def_weekly_finishDungeon_lvl_limit  120 // limit the max level taken into account to pick dungeons
+def_weekly_finishDungeon_count  9
 
-// dungeon IDs (the values below are used as subjectID of the quest)
+// dungeon IDs (the values below are used as subjectID of the quest and MUSTN'T be changed, as players may already have them set)
 def_weekly_finishDungeon[1]     "Etheria"
-def_weekly_finishDungeon[2]     "Mount Dorlas"
-def_weekly_finishDungeon[3]     "Dol Guldur"
-def_weekly_finishDungeon[4]     "Dug Snagum"
-def_weekly_finishDungeon[5]     "Mahat"
-def_weekly_finishDungeon[6]     "Pevnost Strachu"
+def_weekly_finishDungeon[2]     "Dung Snagum"
+def_weekly_finishDungeon[3]     "Mount Dorlas"
+def_weekly_finishDungeon[4]     "Ledova Jeskyne"
+def_weekly_finishDungeon[5]     "Beridor"
+def_weekly_finishDungeon[6]     "Arachnon"
+def_weekly_finishDungeon[7]     "Nexmirias"
+def_weekly_finishDungeon[8]     "Tumma Osto"
+def_weekly_finishDungeon[9]     "Carn Dum"
 
 // level translation -> these defnames serve to define ID to dungeon LEVEL translation
 // based on the dungeon level, the dungeon is either available to player for selection or not
 // WARNING: The list of the following dungeon definitions is ORDERED, the LEVEL value MUST
 //          be rising from the lowest to the hardest
 //       def name                 dung ID    Level (ordered)
-def_weekly_finishDungeon_lvl[1]       1,         20
-def_weekly_finishDungeon_lvl[2]       2,         30
-def_weekly_finishDungeon_lvl[3]       3,         45
-def_weekly_finishDungeon_lvl[4]       4,         60
-def_weekly_finishDungeon_lvl[5]       5,         80
-def_weekly_finishDungeon_lvl[6]       6,         100
+def_weekly_finishDungeon_lvl[1]       1,         35
+def_weekly_finishDungeon_lvl[2]       2,         40
+def_weekly_finishDungeon_lvl[3]       3,         50
+def_weekly_finishDungeon_lvl[4]       4,         55
+def_weekly_finishDungeon_lvl[5]       5,         55
+def_weekly_finishDungeon_lvl[6]       6,         60
+def_weekly_finishDungeon_lvl[7]       7,         70
+def_weekly_finishDungeon_lvl[8]       8,         80
+def_weekly_finishDungeon_lvl[9]       9,         100
 
 // selects random dungeon ID in the player's level range
 // Player can only receive dungeons that have their level:
@@ -1323,12 +1336,12 @@ def_weekly_finishDungeon_lvl[6]       6,         100
 //    * at most 1,5 * player_LVL
 [function f_weekly_finishDungeon_select]
 arg(playerLvl,<src.tag(level)>)
-if (playerLvl > def_weekly_finishDungeon_lvl_limit)
-  arg(playerLvl,<def_weekly_finishDungeon_lvl_limit>)
+if (playerLvl > <argv(0)>)
+  arg(playerLvl,<argv(0)>)
 endif
-arg(third,<eval (arg(playerLvl)/3)>)
-arg(minDngLevel,<eval (arg(playerLvl)-arg(third))>)
-arg(maxDngLevel,<eval (arg(playerLvl)+arg(third))>)
+arg(fifth,<eval (arg(playerLvl)/5)>)
+arg(minDngLevel,<eval (arg(playerLvl)-arg(fifth))>)
+arg(maxDngLevel,<eval (arg(playerLvl)+arg(fifth))>)
 arg(minID,1)
 arg(maxID,0) // value lower than the first dungeon ID is intentional
 arg(foundRange,0)
