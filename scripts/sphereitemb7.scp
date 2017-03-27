@@ -9870,11 +9870,18 @@ COLOR=00
 
 [typedef t_ress_ankh]
 ON=@userClick
-src.sysmessage "Duchove poutniku jez se obnovi do stavu predeslemu obtiznemu boji."
 if (src.flag_dead)
+  if (src.memoryfindtype(01000).link.UID.AGE<10)
+    src.sysmessage("Tva duse je jeste prilis neklidna")
+    return 0
+  endif
 	if (distance<5)
+    src.sysmessage("Duchove poutniku jez se obnovi do stavu predeslemu obtiznemu boji.")
+    src.accmsg("se ozivil u Ress Krize (<uid>) na pozici <p>")
 		src.dospell_final(59,1000)
 	endif
+else
+  src.sysmessage("Artefakt, jenz mrtve k zivotu dokaze privezt.")
 endif
 return 1
 

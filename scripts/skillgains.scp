@@ -225,7 +225,7 @@ necroarmor
 
 //starostove, generalove, nazgulove
 fear
-nazghulfell            //privolani Nazghul Fella, muze vyvolat jen Prvni nazghul a s titulem Lord (10.000 fame)
+nazghulfell            //privolani Nazghul Fella, muze vyvolat jen Prvni nazghul a s titulem Lord (9901+ fame)
 honor
 navrhban               //vsichni opravneni
 remember               //pro ukladani uidcek hracu k navrhum na ban. atd

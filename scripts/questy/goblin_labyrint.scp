@@ -259,6 +259,9 @@ if (<itemExists(<link>)>)
         goblin_spawned.p=<p>
         goblin_spawned.home=<p>
         goblin_spawned.hits=<goblin_spawned.maxhits>
+      else
+        scylla.delayedmessage("Zlaty Goblin se nepresunul jak melr. Ma byt na pozici <p> a je <goblin_spawned.p>(<goblin_spawned.Obody>)")
+        link.more2=00
       endif
     else
       link.more2=00   // zaseknuty spawn, resetuji
