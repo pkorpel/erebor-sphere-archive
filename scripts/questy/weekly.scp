@@ -274,6 +274,7 @@ f_weekly_start_prize
 f_weekly_generate
 src.events(+e_weekly_quest)
 src.classMessage("<src.sex(Prijal,Prijala)> jsi novy seznam ukolu. Pro zobrazeni zadej prikaz .questy")
+src.accmsg("prijal serii <eval tag(qCount)> Weekly questu na levelu <eval tag(playerLevel)>")
 
 on=@unequip
 src.f_weekly_clearEvents
@@ -528,6 +529,7 @@ while (arg(i) < arg(miAmount))
   bankBox.giveItem(i_mi_bag)
   arg(i,#+1)
 endif
+cont.accmsg("splnil <tag(quest_totalAmount[<eval argv(0)>])>x <tag(quest_description[<eval argv(0)>])> ve Weekly questu a ziskal <tag(quest_rewGold[<eval argv(0)>])>gp; <tag(quest_rewXP[<eval argv(0)>])>expu a  <eval tag(quest_rewMI[<eval argv(0)>])> itemu")
 
 [function f_weekly_giveRewardComplete]
 cont.addExp(<tag(rewXP)>)
@@ -539,6 +541,8 @@ while (arg(i) < arg(miAmount))
   bankBox.giveItem(i_mi_bag)
   arg(i,#+1)
 endif
+cont.accmsg("splnil vsechny Weekly questy a ziskal za to odmenu <tag(rewGold[<eval argv(0)>])>gp; <tag(rewXP[<eval argv(0)>])>expu a  <eval tag(rewMI[<eval argv(0)>])> itemu")
+
 
 [function f_getFinalItemId] // argv(0) - nektera z random definici, ktera se ma expandovat na konkretni itemdef
 return<findres(itemdef,<argv(0)>)>
@@ -574,6 +578,7 @@ f_weekly_addItem(<currentQNumber>,itemDClick)
 tag(quest_totalAmount[<currentQNumber>],<arg(qTotalAmount)>)
 tag(quest_description[<currentQNumber>],"Snez jidlo:<br><?<arg(finalFoodItemdef)>.name?>")
 tag(quest_subjectId[<currentQNumber>],<finalFoodItemdef.def.baseID>)
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 
 [function f_weekly_setup_drinkPotion] // argv(0) id/type potionu k vypiti // argv(1) - amount multiplier
@@ -600,6 +605,7 @@ else // specific potion from defname
 endif
 tag(quest_subjectId[<currentQNumber>],<arg(finalPotionDef)>)
 tag(quest_description[<currentQNumber>],"Vypij lektvar:<br><?arg(descrName)?>")
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_loot] // argv(0) id/type predmetu, ktery se ma sbirat // argv(1) - amount
 //src.sysMessage("setting up loot quest (<argv(0)>) for multiplier: <argv(1)>")
@@ -617,6 +623,7 @@ else // specific item
   tag(quest_description[<currentQNumber>],"Lootni predmet:<br><?arg(descrName)?>")
 endif
 tag(quest_subjectId[<currentQNumber>],<arg(finalItemDef)>)
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 
 [function f_weekly_setup_meetMaster]
@@ -630,7 +637,7 @@ tag(quest_description[<currentQNumber>],"Pozdrav Mistra<br>skillu <?arg(masterTo
 tag(quest_subjectId[<currentQNumber>],<arg(masterToMeet)>)
 tag(quest_iconId[<currentQNumber>],0E34)
 tag(quest_iconId_moveY[<currentQNumber>],-4) // move the custom icon 4 pixels down
-
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_healPlayer]
 //src.sysMessage("setting up healPlayer quest")
@@ -650,7 +657,7 @@ tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
 tag(quest_description[<currentQNumber>],"Osetri bandazemi poskozeni.")
 tag(quest_iconId[<currentQNumber>],0E21)
 tag(quest_iconId_moveX[<currentQNumber>],4) // move the custom icon 4 pixels to the left
-
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_dmgNPC]
 //src.sysMessage("setting up dmgNPC quest")
@@ -667,7 +674,7 @@ tag(quest_description[<currentQNumber>],"Udel poskozeni monstrum.")
 tag(quest_iconId[<currentQNumber>],036B3)
 tag(quest_iconId_moveX[<currentQNumber>],21) // move the custom icon 21 pixels to the left
 tag(quest_iconId_moveY[<currentQNumber>],12) // move the custom icon 12 pixels up
-
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_receiveDmg]
 //src.sysMessage("setting up receiveDmg quest")
@@ -688,6 +695,7 @@ endif
 tag(quest_iconId[<currentQNumber>],0122D)
 tag(quest_iconId_moveY[<currentQNumber>],5) // move the custom icon 5 pixels up
 tag(quest_subjectId[<currentQNumber>],<arg(typeDMG)>)
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_stepOnWeb]
 //src.sysMessage("setting up stepOnWeb quest")
@@ -708,6 +716,7 @@ f_weekly_addItem(<currentQNumber>,killInDung)
 tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<tag(qCount)>*{<eval (25*<argv(0)>)> <eval (35*<argv(0)>)>})/100)>)
 tag(quest_description[<currentQNumber>],"Zabij npc v dungeonu<br>s alespon <?argv(1)?>xp")
 tag(quest_subjectId[<currentQNumber>],<argv(1)>) // exceptionaly the subjectId doesn't store an actual ID, but a minimal required XP
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 
 [function f_weekly_setup_killPlayer] // argv(0) - type of player kill: 0 = no condition, 1 = specific profession, 2 = specific realm
@@ -740,12 +749,12 @@ elseif (<eval argv(0)> == 2)
     tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na neutralnim uzemi.")
   enddo
   tag(quest_subjectId[<currentQNumber>],<where>)
-  src.sysMessage("TESTED")
   tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{2 4})/10)>)
 else
   tag(quest_description[<currentQNumber>],"Zabij hrace opacneho realmu.")
   tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{5 10})/10)>)
 endif
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_finishDungeon] // argv(0) level limit
 src.sysMessage("setting up finishDungeon quest")
@@ -760,7 +769,7 @@ tag(quest_subjectId[<currentQNumber>],<arg(dungeonToFinish)>)
 tag(quest_iconId[<currentQNumber>],01A01)
 tag(quest_iconId_moveY[<currentQNumber>],20) // move the custom icon 20 pixels up
 tag(quest_iconId_moveX[<currentQNumber>],-4) // move the custom icon 4 pixels to the right
-
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_MultiKill] 
 //src.sysMessage("setting up killPlayer quest")
@@ -787,6 +796,8 @@ tag(quest_description[<currentQNumber>],"Zabitim monster<br>ziskej <?arg(MultiKi
 tag(quest_totalAmount[<currentQNumber>],<eval (((<tag(qCount)>*<tag(qCount)>)/<argv(0)>)/<tag(quest_subjectId[<currentQNumber>])>)>)
 tag(MultiKill_Time,<serv.time>+10)
 tag(MultiKill_kills[<currentQNumber>],0)
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
+
 
 [function f_weekly_setup_conqueror]
 arg(currentQNumber,<eval tag(qAssigned)>)
@@ -795,6 +806,7 @@ f_weekly_addItem(<currentQNumber>,itemDClick)
 tag(quest_totalAmount[<currentQNumber>],1)
 tag(quest_description[<currentQNumber>],"<?null?>Zucastni se dobyvani<br>aktivuj Palantir")
 tag(quest_subjectId[<currentQNumber>],i_fortress_palantir)
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_HuntingSign]
 arg(currentQNumber,<eval tag(qAssigned)>)
@@ -802,6 +814,7 @@ arg(currentQNumber,<eval tag(qAssigned)>)
 f_weekly_addItem(<currentQNumber>,HuntingSign)
 tag(quest_totalAmount[<currentQNumber>],<eval (<tag(playerLevel)>*<argv(0)>)>)
 tag(quest_description[<currentQNumber>],"<?null?>Ziskej body na<br>Lovecke vyvesce")
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 ////////////////////////////////////////////////////////////
 
@@ -914,6 +927,11 @@ endif
 if (<eval <var(ubrano)>> <= 0)
   return
 endif
+if (<var(ubrano)> >= <hits>)
+  arg(ubranoHP,<hits>)
+else
+  arg(ubranoHP,<var(ubrano)>)
+endif
 
 arg(weekly,<findid(i_memory_weekly_quest)>)
 arg(i,0)
@@ -922,7 +940,7 @@ while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
   arg(subjectId,<weekly.tag(quest_subjectId[<arg(questId)>])>)
 
   if (!strcmpi(prime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>))
-    if (weekly.f_weekly_increase(<questId>,<var(ubrano)>))
+    if (weekly.f_weekly_increase(<questId>,<arg(ubranoHP)>))
       weekly.f_weekly_removeItem(<arg(i)>,receiveDmg)
       arg(i,#-1)
     endif

@@ -2359,7 +2359,7 @@ src.sysMessage("Defname: <typedef.name>")
 
 [function trigger_kill]  // argv(0) - killed npc uid, argv(1) - killer
 arg(killer,<argv(1)>)
-if (charExists(<killer)>))
+if (charExists(<killer>))
   if (safe finduid(<killer>).isPlayer)
     var(trigkillact,<argv(0)>)
     killer.trigger(@userkill)
