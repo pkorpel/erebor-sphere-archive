@@ -211,8 +211,8 @@ def_weekly_high_setupFunction[4]    f_weekly_setup_MultiKill
 def_weekly_high_setupFunArgn[4]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_4_[0]   4 // koeficient poctu Multikillu
 def_weekly_high_iconId[4]           021FC
-def_weekly_high_iconId_moveY[4]     10  // move the custom icon 10 pixels up
-def_weekly_high_iconId_moveX[4]     15 // move the custom icon 8 pixels to the left
+def_weekly_high_iconId_moveY[4]     9  // move the custom icon 9 pixels up
+def_weekly_high_iconId_moveX[4]     15 // move the custom icon 15 pixels to the left
 def_weekly_high_rewardSize[4]       100
 
 def_weekly_high_setupFunction[5]    f_weekly_setup_finishDungeon
@@ -512,6 +512,7 @@ tag(rewXP,#+<tag(quest_rewXP[<eval tag(qAssigned)>])>)
 
 [function f_weekly_giveReward] // argv(0) - cislo questu
 f_weekly_giveRewardSingle(<argv(0)>)
+cont.dialog(d_weekly_completed,<argv(0)>)
 if (f_weekly_isAllCompleted)
   f_weekly_giveRewardComplete
   cont.classmessage("<cont.sex(Splnil,Splnila)> jsi vsechny ukoly tydennich questu! Odmena byla vlozena do banky.")
@@ -766,9 +767,8 @@ arg(dungeonToFinish,<f_weekly_finishDungeon_select(<argv(0)>)>)
 tag(quest_totalAmount[<currentQNumber>],1)
 tag(quest_description[<currentQNumber>],"Dokonci Dungeon:<br><?def_weekly_finishDungeon[<eval arg(dungeonToFinish)>]?>")
 tag(quest_subjectId[<currentQNumber>],<arg(dungeonToFinish)>)
-tag(quest_iconId[<currentQNumber>],01A01)
-tag(quest_iconId_moveY[<currentQNumber>],20) // move the custom icon 20 pixels up
-tag(quest_iconId_moveX[<currentQNumber>],-4) // move the custom icon 4 pixels to the right
+tag(quest_iconId[<currentQNumber>],02203)
+tag(quest_iconId_moveX[<currentQNumber>],-8) // move the custom icon 4 pixels to the right
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_MultiKill] 

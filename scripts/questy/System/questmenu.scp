@@ -23,7 +23,7 @@ return 1
 questMenu_questStone  0400416B7
 questMenu_color_questActiveFont      #00F0FA
 questMenu_color_questInactiveFont    #383838
-questMenu_color_questDoneFont        #FA0000
+questMenu_color_questDoneFont        #00FA55
 questMenu_color_questInactive        51
 questMenu_rows  53
 //          |     Nazev questu     |           dialogName           |  1=qtag, 0=tag  |  relevantni tagy
@@ -301,12 +301,7 @@ f_qm_setOffsetAndPaging(4,<argv(2)>)
 arg(y,<tag(yPos)>)
 f_qm_itemButton(<arg(y)>,<argv(2)>)
 arg(y,#+6)
-if (<src.weeklyTag(quest_iconId[<argv(1)>])>)
-  arg(picId,<src.weeklyTag(quest_iconId[<argv(1)>])>)
-else
-  arg(picId,<?<src.weeklyTag(quest_subjectId[<argv(1)>])>.ID?>)
-endif
-tilepichue(<eval (77-<eval src.weeklyTag(quest_iconId_moveX[<argv(1)>])>)>,<eval (arg(y)+arg(yImgOffset)-<eval src.weeklyTag(quest_iconId_moveY[<argv(1)>])>)>,<arg(picId)>)
+f_qm_weeklyAddQuestIcon(<argv(1)>,77,<eval (arg(y)+arg(yImgOffset))>)
 if (<argv(4)> > 100) // line can be too long, split in two lines
   setText(newTextLine,"<?arg(fontSm)?> <?eval argv(3)?><br>/<?argv(4)?>")
   htmlGump(115,<eval arg(y)>,40,50,<lastTextLine>,0,0)
@@ -322,6 +317,14 @@ if (<argv(3)> == <argv(4)>)
 else
   button(<questMenu_width>-10,<arg(y)>+5,0828,01F,1,0,<eval (<argv(1)>+100)>)
 endif
+
+[function f_qm_weeklyAddQuestIcon] // argv 0: quest ID; argv 1: x-pos; argv 2: y-pos
+if (<src.weeklyTag(quest_iconId[<argv(0)>])>)
+  arg(picId,<src.weeklyTag(quest_iconId[<argv(0)>])>)
+else
+  arg(picId,<?<src.weeklyTag(quest_subjectId[<argv(0)>])>.ID?>)
+endif
+tilepichue(<eval (<argv(1)>-<eval src.weeklyTag(quest_iconId_moveX[<argv(0)>])>)>,<eval (<argv(2)>-<eval src.weeklyTag(quest_iconId_moveY[<argv(0)>])>)>,<arg(picId)>)
 
 [function f_qm_weeklyAddUnavailableQuestInfo] // argv(0) qnum, argv(1) step size
 f_qm_setOffsetAndPaging(4,<argv(1)>)
@@ -385,6 +388,25 @@ if (0<argv(3)>)
 else
   gumppic(<arg(x)>+<eval(questMenu_section_pic_x[<argv(0)>])>,<arg(y)>+<eval(questMenu_section_pic_y[<argv(0)>])>,questMenu_section_pic[<argv(0)>])
 endif
+
+[dialog d_weekly_completed]
+300,5
+arg(width,260)
+arg(height,90)
+
+argo.resizepic(0,0,<questMenu_bg>,<arg(width)>,90)
+argo.newTextLine(52,10,<d_def_subheadcolor>,"Splnen Weekly Quest")
+
+arg(font,"<?safe?><basefont size=6 color=<?questMenu_color_questActiveFont?>><center>")
+argo.setText(<argo.newTextLine>,"<arg(font)><weeklyTag(quest_description[<argv(0)>])>")
+argo.htmlGump(50,35,200,50,<argo.lastTextLine>,0,0)
+argo.f_qm_weeklyAddQuestIcon(<argv(0)>,20,38)
+
+argo.button(<arg(width)>-20,<eval arg(height)/2>-16,0828,01F,1,0,1)
+
+[dialog d_weekly_completed button]
+on=1
+dialog(d_questy,2)
 
 
 /////////////////////
