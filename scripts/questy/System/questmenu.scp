@@ -335,8 +335,8 @@ arg(nextQuestLevel,<eval ((<argv(0)>-3)*<def_weekly_levelStepUp>)>)
 if (arg(nextQuestLevel) < def_weekly_levelMin)
   arg(nextQuestLevel,<def_weekly_levelMin>)
 endif
-newTextLine(123,<arg(y)>,<questMenu_color_questInactive>,"Potrebna uroven <arg(nextQuestLevel)>")
-//newTextLine(123,<arg(y)>,2298,"Potrebna uroven <arg(nextQuestLevel)>")
+newTextLine(126,<arg(y)>,<questMenu_color_questInactive>,"Potrebna uroven : <arg(nextQuestLevel)>")
+gumppic(97,<arg(y)>+2,082C)
 
 [function f_qm_setOffsetAndPaging] // argv(0) max items, argv(1) - Y position step size
 if (0<tag(pageNumber)> == 0)
