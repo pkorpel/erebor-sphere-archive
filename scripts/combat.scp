@@ -616,7 +616,7 @@ tag(firststroke,1)
 if (act)
   if !(act.srccombatLOS)
     sysmessage(Nevidis na cil)
-    return 1
+    return 0
   endif
 endif
 return 0
