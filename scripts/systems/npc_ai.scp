@@ -425,6 +425,8 @@ if ( (<eval {1 100}> > 85) && (is_physical) )
  var(ubrano,0)
  src.sysmessage("Tva rana se od <name> odrazila!")
 endif
+on=@userkill
+on=@npckill
 
 [events e_item_refuser]
 on=@ReceiveItem

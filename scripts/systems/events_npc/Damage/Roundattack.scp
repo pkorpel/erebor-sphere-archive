@@ -112,6 +112,8 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
+on=@npcKill
+on=@userKill
 on=@spelleffect
 if (isSleeping)
   return 0

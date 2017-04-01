@@ -55,6 +55,9 @@ if (itemExists(<argo>))
   return 1
 endif
 
+on=@npcKill
+on=@userKill
+
 [function f_npc_blow_up_rage]
 if (<eval tag(npc_blow_up_target)> == 0)  // prvotni nastaveni cile
   tag(npc_blow_up_target,<src>)

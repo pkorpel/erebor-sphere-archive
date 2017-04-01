@@ -1006,6 +1006,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@npcKill
+on=@userKill
 
 on=@death
 while (memoryfindtype(0209c))
@@ -1032,6 +1034,8 @@ on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@npcKill
+on=@userKill
 
 [events e_phoenix]
 on=@aftergetswing
@@ -1053,6 +1057,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@npcKill
+on=@userKill
 
 [ITEMDEF i_socha_ps]
 name=stone

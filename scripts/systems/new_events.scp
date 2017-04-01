@@ -98,6 +98,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@userkill
+on=@npckill
 
 [function selfdupe]
 newnpc(<obody>)
@@ -1061,6 +1063,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@npcKill
+on=@userKill
 
 [function f_pushall_setVars]
 if (<eval tag(pushall_varsChecked)> == 0)
@@ -1101,6 +1105,8 @@ on=@afterswming
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@npcKill
+on=@userKill
 
 [function f_pullall_setVars]
 if (strlen(<tag(pullall_varsChecked)>) == 0)

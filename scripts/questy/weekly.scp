@@ -1,5 +1,5 @@
 [defnames def_weekly_quest]
-def_weekly_stone         #04002B637 // #04004F507 // Stone na tagy
+def_weekly_stone         #04004F507 // Stone na tagy
 def_weekly_count         8 // maximalni pocet questu
 def_weekly_countBase     3 // zakladni pocet questu pred uplatnenim levelu
 def_weekly_levelStepUp  20 // potrebny pocet levelu pro ziskani noveho questu
@@ -520,6 +520,7 @@ tag(rewXP,#+<tag(quest_rewXP[<eval tag(qAssigned)>])>)
 //endif
 
 [function f_weekly_giveReward] // argv(0) - cislo questu
+src=<cont>
 f_weekly_giveRewardSingle(<argv(0)>)
 cont.dialog(d_weekly_completed,<argv(0)>)
 def_weekly_stone.tag(<tag(quest_level[<argv(0)>])>_<eval tag(quest_id[<argv(0)>])>_1,<eval def_weekly_stone.tag(<tag(quest_level[<argv(0)>])>_<eval tag(quest_id[<argv(0)>])>_1)>+1)
@@ -776,7 +777,7 @@ endif
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_finishDungeon] // argv(0) level limit
-src.sysMessage("setting up finishDungeon quest")
+// src.sysMessage("setting up finishDungeon quest")
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,finishDungeon)
@@ -878,7 +879,7 @@ arg(i,0)
 while (<arg(i)> < <tag(itemLootsCount)>)
   arg(questId,<eval tag(itemLoot[<eval arg(i)>])>)
   if ((<argv(0).baseID> == <tag(quest_subjectId[<arg(questId)>])>) || (<argv(0).type> == <tag(quest_subjectId[<arg(questId)>])>))
-    if (f_weekly_increase(<arg(questId)>,<argv(0).amount>),1)
+    if (f_weekly_increase(<arg(questId)>,<argv(0).amount>,1))
       f_weekly_removeItem(<arg(i)>,itemLoot)
     endif
     return
@@ -1073,10 +1074,11 @@ while (<arg(i)> < <eval tag(KillStreaksCount)>)
   if (<eval tag(KillStreak_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
     if (f_weekly_increase(<arg(questId)>,1,1))
       f_weekly_removeItem(<arg(questId)>,KillStreak)
+      arg(i,#-1)
     endif
     tag(KillStreak_kills[<arg(questId)>],0)
   endif
-
+  arg(i,#+1)
 endwhile
 
 
@@ -1151,11 +1153,8 @@ if (src.isEvent(e_weekly_finishDungeon))
   arg(weekly,<src.findid(i_memory_weekly_quest)>)
   arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<argv(0)>,finishDungeon)>)
   if (arg(questId) != -1)
-    src.sysMessage("GOT IT")
     weekly.f_weekly_increase(<arg(questId)>,1)
     weekly.f_weekly_removeItem(<arg(questId)>,finishDungeon)
-  else
-    src.sysMessage("this is a different dung")
   endif
 endif
 

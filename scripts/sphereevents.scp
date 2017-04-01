@@ -2369,6 +2369,7 @@ on=@npckill
 on=@Created
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [function stdname]
 src.sysMessage("Defname: <typedef.name>")

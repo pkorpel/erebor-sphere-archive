@@ -20,6 +20,8 @@ on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
+on=@npcKill
+on=@userKill
 
 [function npc_bleed]
 arg(bleeditem,<f_bleed_getMemory(<argv(0)>)>)
