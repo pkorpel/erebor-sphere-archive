@@ -45,7 +45,7 @@ argo.text(525,332,142,3)
 argo.page(1)
 if (src.qtag(q018)==6)
 	argo.settext(11,"Ahojda, jak se dari? Toho parchanta lososovskyho jsem porad jeste nechytnul ale urcite mi na tu zlatou musku brzo skoci!")
-elseif (src.qtag(q018)==5)&&(<src.rescount(i_q018_zlata_snura)>>=1)||(<src.rescount(i_crunch_zlata_snura)>>=1)
+elseif (src.qtag(q018)==5)&&(<src.rescount(i_q018_zlata_snura)>>=1)
 	argo.settext(11,"Vyborne!!! Mockrat ti dekuji <src.name>. Podej mi ji!") 
 	argo.button(25,395,0fa5,0fa7,1,0,2)
 	argo.settext(111,"*podat zlatou nit*")
@@ -102,10 +102,9 @@ src.act.bounce
 src.qtag(q018,1,31)
 
 on=2
-if (src.qtag(q018)==5)&&(<src.rescount(i_q018_zlata_snura)>>=1)||(<src.rescount(i_crunch_zlata_snura)>>=1)
+if (src.qtag(q018)==5)&&(<src.rescount(i_q018_zlata_snura)>>=1)
 	src.addexp(1000)
 	src.givegold 20000
-	src.findid(i_crunch_zlata_snura).remove
 	src.findid(i_q018_zlata_snura).remove
 	src.qtag(q018,6,31)
 	f_quest_complete(31)  // splnenie questu "Zlaty Losos"

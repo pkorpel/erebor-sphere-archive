@@ -412,6 +412,7 @@ if (var(dodged) == 0)
 endif
 
 on=@beforedoeffect 
+on=@afterDoEffect
 on=@beforegeteffect
 
 on=@beforegetswing
@@ -576,6 +577,7 @@ endif
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [function isfrommytown]
 src.newitemsafe(i_pouch)
@@ -774,6 +776,7 @@ endif
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -845,6 +848,7 @@ endif
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -928,6 +932,7 @@ endif
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -1019,6 +1024,7 @@ endif
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -1099,9 +1105,11 @@ endif
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@beforegetswing
 
 [itemdef i_memory_cleaner]
 id=i_memory
@@ -1255,6 +1263,7 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 //[EVENTS e_hodici_bombak]//kdokoli tohle stvoril, opravit nez to znova bude vypusteno.
 //
@@ -1474,6 +1483,7 @@ endif
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@stopguarding
@@ -1482,6 +1492,10 @@ on=@npckill
 
 [events e_npc_warcry]
 on=@beforegeteffect
+if (isSleeping)
+  return 0
+endif
+
 if(tag(nextcry) < <serv.time>)
   tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
   emote(crying)
@@ -1493,8 +1507,8 @@ if(tag(nextcry) < <serv.time>)
   lastnew.timerd=1
 endif
 
-return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -1509,6 +1523,7 @@ endif
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -1532,6 +1547,7 @@ mana=<maxMana>
 on=@beforedoeffect
 mana=<maxMana>
 
+on=@afterDoEffect
 on=@afterswing
 mana=<maxMana>
 
@@ -1567,10 +1583,18 @@ on=@Created
 
 [EVENTS e_NPC_Leaper]
 ON=@NPCSeeNewPlayer
+if (isSleeping)
+  return 0
+endif
+if (isTaunted)
+  src.accmsg("leapujici monstrum <name>(<uid>) se pokusilo leapnout na <src.name>(<src>) ikdyz bylo TAUNT -nute.")
+  return 0
+endif
+
 if (src.flag_invul)
-  return 1
+  return 0
 elseif (isPet)
-  return 1
+  return 0
 endif
 attack(<src>)
 events(+e_NPC_teleToTarget)
@@ -1655,6 +1679,10 @@ if (cont.isPet)
     return 1
   endif
 endif
+if (cont.isTaunted)  // npc je tauntnute, utoci tedy jen na wara
+  src.accmsg("leapujici monstrum <cont.name>(<cont>) se pokusilo leapnout2 na <victim.name>(<victim>) ikdyz bylo TAUNT -nute.")
+  arg(victim,<cont.findid(i_taunter).link>)
+endif
 if (victim) //mam vubec nejaky bojovy cil
   if (victim.ischar) //je to char
     link=<victim>
@@ -1702,6 +1730,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect 
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing

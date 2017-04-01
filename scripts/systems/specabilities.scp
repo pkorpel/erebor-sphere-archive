@@ -18,7 +18,7 @@ else
    reduceStamina(3) // safely decreases stamina
    newitemsafe(i_spec_ability_counter)
    lastnew.Equip  
-   return 1
+   return 1                                                       
  endif
 endif
 return 0 
@@ -637,42 +637,79 @@ ID=i_memory
 TYPE=t_eq_script
 name=krvaceni
 
+on=@create
+more1h=10 //opakovani krvaceni maximalne
+more1l=0 //aktualnich opakovani  
+  
+on=@equip
+tag(chance_to_fizz,668)
+tag(bleeding_steps,0)
+tag(koef_infoText,5)
+tag(blood_color,<cont.def.BLOODCOLOR>)
+if (cont.NPC)
+  tag(koef_infoText,40)
+  cont.events +e_bleeding
+endif
+
+on=@unequip
+cont.events -e_bleeding
+
 on=@timer
-if (cont.hits)&&(more1l)
-  //more1h opakovani krvaceni maximalne
-  //more1l zbyva opakovani
-  //more2  damage
-  arg(damag,<eval (more1l*more2)/more1h>)
-  if (<arg(damag)> > <var(nastaveni_maxbleed)>)
-    arg(damag,<var(nastaveni_maxbleed)>)
-  endif
-  arg(damag,<eval (<arg(damag)>-((<arg(damag)>*<cont.tag(resist_bleed)>)/1000))>) // - muj navrh -Dinivan - 
-  //arg(damag,<eval (arg(damag)-(arg(damag)/(1000/(cont.tag(resist_bleed)))))>) // - presunuto do funkce Handleresists -tart // presunuto spatne, protoze tam se to zpracuje jen pri swingu nebo co
-  if (arg(damag)<1)
-    remove
-  endif
-  cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god)
-  if (chance(668,3)) //dvoutretinova sance na fizz
-    cont.stopmagery
-  endif
-  cont.emote("bleeding")// <arg(damag)>
-  arg(infoText,<arg(damag)/6>)
-  if (<arg(infoText)> > 4)
-    arg(infoText,4)
-  endif
-  doswitch <arg(infoText)>
-    link.classMessage("<?cont.name?> lehce krvaci")
-    link.classMessage("<?cont.name?> krvaci")
-    link.classMessage("<?cont.name?> silne krvaci")
-    link.classMessage("<?cont.name?> velmi silne krvaci")
-    link.classMessage("<?cont.name?> extremne krvaci")
-  enddo
-  more1l=<eval more1l-1>
-  timerd=<nastaveni_ability_ripperdelay>
-else
+if (! cont.hits) || (more1l >= more1h)
+  remove
+  return
+endif
+ 
+//more1h opakovani krvaceni maximalne
+//more1l kolikrat doslo k opakovani
+//more2  damage   
+
+arg(damag,<eval f_bleed_calculateCurrentValue(def_bleed_dmgCoeficient)>) // y=DMG * ( 1 - (x ^ 2) / (MAX_TICKS ^2) )
+
+cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god)
+if (var(dmgedNoResp) <= 0)
   remove
 endif
+  
+if (chance(<eval tag(chance_to_fizz)>,3)) //default dvoutretinova sance na fizz v PvP, v PvM chuze krvacejiciho sanci snizuje
+  cont.stopmagery
+endif
+cont.emote("bleeding")// <arg(damag)>
+arg(infoText,<eval <arg(damag)>/<eval tag(koef_infoText)>>)
+if (<arg(infoText)> > 5)
+  arg(infoText,5)
+endif
+  
+doswitch <arg(infoText)>
+  f_bleed_infoText(01645,"temer nekrvaci")                // 1-4 dmg PvP
+  f_bleed_infoText(0122c,"lehce krvaci")                  // 5-9 dmg PvP
+  f_bleed_infoText(0122b,"krvaci")                        // 10-14 dmg PvP
+  f_bleed_infoText(0122e,"silne krvaci")                  // 15-19 dmg PvP
+  f_bleed_infoText(0122d,"velmi silne krvaci")            // 20-24 dmg PvP 
+  f_bleed_infoText(0122a,"extremne krvaci")               // 25++ dmg PvP
+enddo
+  
+more1l=<eval more1l+1>
+timerd=<nastaveni_ability_ripperdelay>
+tag(bleeding_steps,0)
+tag(chance_to_fizz,668)
+
 return 1
+
+[events e_bleeding]
+on=@step
+f_bleed_getMemory(<uid>).f_bleed_onStep
+
+[function f_bleed_onStep]
+tag(bleeding_steps,#+1)
+tag(chance_to_fizz,#-30)
+if (0<timerd> > 1)
+  timerd=<eval (timerd-1)>
+endif
+
+[function f_bleed_infoText] // argv 0 - blood stain ID, argv 1 - info text message
+cont.f_doBloodStain(<argv(0)>,<hval (tag(blood_color))>)
+link.classMessage("<cont.name> <argv(1)>")
 
 [Function f_spelldone]
 if (npc)
@@ -1414,7 +1451,7 @@ safe cont.findlayer(13).unequip
 [Function woodoobleed]
 newitemsafe(i_krvaceni)
 lastnew.more1h=100
-lastnew.more1l=100
+lastnew.more1l=0
 lastnew.more2=10
 lastnew.timer=1
 lastnew.Equip
@@ -3916,6 +3953,7 @@ f_catchField_releaseNPC(<tag(catchedBy)>,<tag(catchedBy).findID(i_memory_catchFi
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [Function f_catchField_effect]
@@ -4020,6 +4058,7 @@ if (src.isfighting_melee) && !(src.isplayer) && (tag(ra_defstance))
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 //ENERGYSHIELD
@@ -4093,6 +4132,7 @@ endif
 //afterspelldamage -> combat.scp
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_energyshield]
@@ -4477,6 +4517,7 @@ elseif (<tag(pact_to)>)  //zomrel shaman ktory dal BP
   src.f_cancelpact_to
 endif
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect   
 on=@beforegetswing
 
@@ -4490,8 +4531,8 @@ if !(src.isplayer)  //neudrel hrac
 	  if (<tag(pact_by)>)  //tento tag ma ten komu dal shaman BP
 	    arg(dmg, <eval(<var(ubrano)>)>)
 	    arg(bloodpact_damage, <eval( ( <arg(dmg)> * <nastaveni_bloodpact_dmg> ) / 100 )> ) //zdielanie nastaveni_bloodpact_dmg % damage
-	    if (<arg(bloodpact_damage)>>100)
-	      arg(bloodpact_damage,100)
+	    if (<arg(bloodpact_damage)>>20)
+	      arg(bloodpact_damage,20)
 	    endif
 	    //say("zdielane: <arg(bloodpact_damage)>")
       //say("dmg: <arg(dmg)>")	    
@@ -4500,8 +4541,8 @@ if !(src.isplayer)  //neudrel hrac
 	  elseif (<tag(pact_to)>)  //je to shaman ktory dal BP
 	    arg(dmg, <eval(<var(ubrano)>)>)
 	    arg(bloodpact_damage, <eval( ( <arg(dmg)> * <nastaveni_bloodpact_dmg> ) / 100 )> ) //zdielanie nastaveni_bloodpact_dmg % damage
-	    if (<arg(bloodpact_damage)>>100)
-	      arg(bloodpact_damage,100)
+	    if (<arg(bloodpact_damage)>>20)
+	      arg(bloodpact_damage,20)
 	    endif
 	    //say("zdielane: <arg(bloodpact_damage)>")
       //say("dmg: <arg(dmg)>")	    
@@ -4520,6 +4561,7 @@ elseif (<tag(pact_to)>)  //zomrel shaman ktory dal BP
   f_cancelpact_to
 endif
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect   
 on=@beforegetswing
 
@@ -4618,9 +4660,11 @@ type=t_src_changer
 name=pullall srcChanger
 
 on=@timer
-sector.allchars(pullall_effect(<eval more1>,<link>))
-remove
-return 1
+if (<eval link.hits> > 0) 
+  sector.allchars(pullall_effect(<eval more1>,<link>))
+  remove
+  return 1
+endif
 
 [function pullall_effect] //argv(0) - max pull distance, argv(1) - pulling char
 if (isgm) || (<flags>&statf_dead) || (<flags>&statf_invisible) || (<flags>&statf_hidden)
@@ -4655,10 +4699,12 @@ type=t_src_changer
 name=pushall srcChanger
 
 on=@timer
-var(pushall_src,<link>)
-sector.allchars(pushall_effect)
-remove 
-return 1
+if (<eval link.hits> > 0) 
+  var(pushall_src,<link>)
+  sector.allchars(pushall_effect)
+  remove 
+  return 1
+endif
 
 [function pushall_effect]
 if (<uid>!=<var(pushall_src)>)&&(distancefrom(var(pushall_src))<6)&&(isplayer)
@@ -4722,6 +4768,7 @@ on=@aftergetswing
 on=@beforegeteffect
 // je to v function damage_final, lebo tu to nefungovalo
 on=@beforedoeffect
+on=@afterDoEffect
 
 [itemdef i_voodooshield]
 id=i_memory
@@ -5088,6 +5135,7 @@ endif
 
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 
@@ -5425,7 +5473,7 @@ return 0
 
 [function mystikDoubleswingSuccess]
 if (<tag(ra_mystikDoubleswing)> > 0)
-  if (chance(<eval 50+(<tag(ra_mystikDoubleswing)>*5)>,3))
+  if (chance(<eval 100+(<tag(ra_mystikDoubleswing)>*5)>,3))
     if (<stamina> < <nastaveni_mystik_doubleswing_stam>)
       return 0
     else
@@ -5478,6 +5526,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function stance]
@@ -5579,8 +5628,8 @@ if (tag(weaker) == 0)
 		arg(chance,<tag(chance)>)
 	endif
   if (chance(<eval <arg(chance)>*10>,2))
-		tag(old_resist,<cont.tag(resist_cold)>)
-		if (<tag(old_resist)> > 0)
+		tag(old_resist,<eval cont.tag(resist_cold)>)
+		if (<eval tag(old_resist)> > 0)
 			arg(new_resist,<eval <tag(old_resist)>-<eval <eval <tag(old_resist)>*5*<tag(chance)>>/1000>>)
 		else
 			arg(new_resist,<tag(old_resist)>)
@@ -5642,17 +5691,18 @@ elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==2)
   int=<int>+60
   maxmana=<maxmana>+60
   
-  if (<cont.hits> > <cont.maxhits>)
-    cont.hits=<cont.maxhits>
+  if (<hits> > <maxhits>)
+    hits=<maxhits>
   endif
 
-  if (<cont.stam> > <cont.maxstam>)
-    cont.stam=<cont.maxstam>
+  if (<stam> > <maxstam>)
+    stam=<maxstam>
   endif
   
   findid(i_voodoo_stats).tag(ritual,1)
   sysMessage("Cerpas magickou silu ze sve vlastni krve!")
 endif
+f_getmindpow
   
 [function voodoovit]
 if (<flags>&statf_dead)
@@ -5687,8 +5737,8 @@ elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==1)
   int=<int>-60
   maxmana=<maxmana>-60
   
-  if (<cont.mana> > <cont.maxmana>)
-    cont.mana=<cont.maxmana>
+  if (<mana> > <maxmana>)
+    mana=<maxmana>
   endif
   
   findid(i_voodoo_stats).tag(ritual,2)
@@ -5696,11 +5746,13 @@ elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==1)
 elseif (findid(i_voodoo_stats)) && (findid(i_voodoo_stats).tag(ritual)==2)
   sysMessage("Tenhle ritual jsi uz uspesne provedl!")
 endif
+f_getmindpow
 
 [function voodoorovnovaha]
 if (findid(i_voodoo_stats))
   findid(i_voodoo_stats).remove
   sysMessage("Sila krve je nyni v rovnovaze.")
+  f_getmindpow
 else
 	sysmessage("Nic se nestalo...")
 endif
@@ -5916,6 +5968,7 @@ if(<eval player.tag(ra_vylepseni_vydrz)> > 0)
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing

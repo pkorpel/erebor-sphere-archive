@@ -7,6 +7,7 @@ if (act.npc) && (<eval act.tag(resist_magic)> < 999)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -67,6 +68,7 @@ on=@spelleffect
 on=@beforegeteffect
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -368,6 +370,10 @@ on=@beforedoeffect
 smsg "@Beforedoeffect act:<act.name> numb:<?spellnumber?> pow:<?spellpower?>"
 return 0
 
+on=@afterDoEffect
+smsg "@AfterDoEffect act:<act.name> numb:<?spellnumber?> pow:<?spellpower?>"
+return 0
+
 //deprecated on=@aftergetspelldamage
 //  smsg "@Aftergetspelldamage ubrano:<?ubrano?>"
 //  return 0
@@ -441,6 +447,7 @@ on=@aftergetswing
 on=@spelleffect
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@DrinkingPotion
 
 on=@afterswing
@@ -524,6 +531,7 @@ on=@aftergetswing
 on=@spelleffect
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@DrinkingPotion
 
 on=@afterswing
@@ -613,6 +621,7 @@ on=@aftergetswing
 on=@spelleffect
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@DrinkingPotion
 
 on=@afterswing
@@ -894,6 +903,7 @@ return 0
 
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 //deprecated on=@aftergetspelldamage
 on=@beforegeteffect
 on=@beforegetswing
@@ -937,6 +947,7 @@ on=@beforegeteffect
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 
 [function noclick_release]
@@ -1005,6 +1016,7 @@ on=@beforegeteffect
 on=@created
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@DrinkingPotion
 on=@afterswing
@@ -1049,7 +1061,7 @@ if(<argn>==41)//dispel zoznam dispelnutelnych kuziel v magie_custom.scp
 endif
 
 if (<nastaveni_poison_use_custom_poison>==1)
-  if(<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
+  if (<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
     spell_poison_custom(<src>)
     return 1
   endif
@@ -1113,8 +1125,7 @@ return 0
 
 on=@hittry
 hungryhurts
-if(nolightfizz(1)) //ty se poserou/imo lol - Dinivan :))
-//    say(co vracim: <nolightfizz>)
+if (nolightfizz(1)) //ty se poserou/imo lol - Dinivan :))
     combat_restorepos
     action=-1
 endif
@@ -1362,6 +1373,10 @@ endif
 
 
 on=@Login
+if (src.findid(i_christmasQuest))
+  src.findid(i_christmasQuest).timer=5
+  src.accmsg("byl odmazan memory item Vanocniho Eventu. Hrac celkem nasbiral <src.findid(i_christmasQuest).tag(odevzdanych_banek)> Banek.")
+endif
 src.redmessage_me
 if(src==027f)||(src==0C) //Finn a Houba dostanou logy :)
  src.afklog
@@ -1973,6 +1988,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@miningact
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@userkill
 on=@npckill
@@ -2609,6 +2625,7 @@ on=@npckill
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@afterDoEffect
 
 [EVENTS e_ranger]
 on=@itemequip
@@ -2680,6 +2697,7 @@ on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@userkill
 on=@npckill
 
@@ -2741,6 +2759,7 @@ on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@userkill
 on=@npckill
@@ -2815,6 +2834,7 @@ f_shieldDodge_afterGetSwing
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@userkill
 on=@npckill
 
@@ -2859,7 +2879,7 @@ if (action==Skill_fencing)||(tag(isstabbing))
     if (act.npc)
     	if (tag(ra_utok_do_zad))
   	  	if (<tag(ra_utok_do_zad)> > 0)
-  		  	if (<dir> == <act.dir>)
+  		  	if (f_isBackslash(<act.dir>))
   		  		arg(distance,<distancefrom(<act>)>)
   			  	if ((<arg(distance)> == 1)||(<arg(distance)> == 2))
   				  	arg(body,<tag(ra_utok_do_zad)>)
@@ -2869,7 +2889,7 @@ if (action==Skill_fencing)||(tag(isstabbing))
     					if (<arg(body)> <= 10)
   	  					arg(bonus,<eval <arg(body)>*10>)
   		  			elseif (<arg(body)> > 10)
-  			  			arg(bonus,<eval 100+<eval <eval <arg(body)>-10>*4>>)
+  			  			arg(bonus,<eval 100+<eval <eval <arg(body)>-10>*12>>)
   				  	endif
   					  var(ubrano,<eval <var(ubrano)>+<eval <eval <var(ubrano)>*<arg(bonus)>>/1000>>)
     					if (tag(podriznuti))
@@ -2955,6 +2975,7 @@ f_shieldDodge_afterGetSwing
 
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@userkill
 on=@npckill
 //deprecated on=@aftergetspelldamage
@@ -3003,12 +3024,19 @@ else
   return 0
 endif
 
+[defnames def_bleed]
+def_bleed_capCoeficient  2
+def_bleed_dmgCoeficient  1
+
 [function f_thief_doBleed]
 //argv(0) == bleeding target
 //argv(1) == <optional> bleedPower
 //argv(2) == <optional> fixed damage -> the damage won't increase using multiple hits.
 classmessage("Tvuj cil krvaci.")
 arg(bleeditem,<f_bleed_getMemory(<argv(0)>)>)
+arg(BleedCap,<var(nastaveni_normal_bleed_cap)>)
+arg(ActualBleedCap,<eval arg(bleeditem).f_bleed_calculateCurrentValue(def_bleed_capCoeficient)>)
+arg(bleeditem).more2=<eval arg(bleeditem).f_bleed_calculateCurrentValue(def_bleed_dmgCoeficient)>  // Znova aplikuji bleed, proto pro me vychozi hodnota je aktualni dmg bleedu.
 if (<eval argv(1)>)
   arg(bleedpower,<argv(1)>)
 else
@@ -3019,9 +3047,26 @@ if (<eval argv(2)>) //custom damage
 else // computed damage (cumulate bleed)
   arg(bleeditem).more2=<eval ((arg(bleedpower)*nastaveni_ability_ripper)/1000)+arg(bleeditem).more2>
 endif
+if (isPlayer)
+  if (profession==class_thief)    // Jen pro Thiefa
+    arg(lvlBonus,<eval tag(level)>)
+    if (<arg(lvlBonus)> > 200)
+      arg(lvlBonus,200)
+    endif
+    arg(BleedCap,<var(nastaveni_thief_bleed_cap)>+<arg(lvlBonus)>)
+  endif
+endif
+
+if (<arg(ActualBleedCap)> > <arg(BleedCap)>)    // Kdyz bude aktualni strop vyssi nez toho kdo reaplikuje bleed, ponecham si ten aktualni
+  arg(BleedCap,<arg(ActualBleedCap)>)
+endif
+if (<eval arg(bleeditem).more2> > <arg(BleedCap)>)  // Aby more2 nemohl byt vetsi nez strop
+  arg(bleeditem).more2=<arg(BleedCap)>
+endif
+
 arg(bleeditem).link=<uid>
-arg(bleeditem).more1h={10 20}//opakovani krvaceni maximalne
-arg(bleeditem).more1l=<arg(bleeditem).more1h>//aktualnich opakovani
+arg(bleeditem).more1h=10 //opakovani krvaceni maximalne
+arg(bleeditem).more1l=0  //aktualnich opakovani
 
 [function f_bleed_getMemory]
 argv(0).redmessage("Krvacis!")
@@ -3037,6 +3082,10 @@ else
   arg(bleeditem,<lastnew>)
 endif
 return<arg(bleeditem)>
+
+[function f_bleed_calculateCurrentValue]
+arg(CurrentValue,<eval <eval more2*<eval (1000-(<eval more1l*more1l*1000>/<eval more1h*more1h*<argv(0)>>))>>/1000>)
+return<arg(CurrentValue)>
 
 [EVENTS e_shaman]
 on=@itemequip
@@ -3068,6 +3117,7 @@ on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@userkill
 on=@npckill
@@ -3134,6 +3184,7 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@DrinkingPotion
 on=@afterswing
 on=@userkill
@@ -3279,6 +3330,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [EOF]

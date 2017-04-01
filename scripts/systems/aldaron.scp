@@ -40,6 +40,7 @@ return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_druid_morf]
@@ -93,6 +94,7 @@ return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -138,10 +140,10 @@ on=@userDClick
    src.act.home=784,642,0,2
    src.act.homedist=5
    src.act.newequip(i_mazatko_paladina)
-   timer=1200
+   timer=7200
    tag(spawnute,1)
    tag(seal).tag(spawnute,1)
-   tag(seal).timer=1200
+   tag(seal).timer=7200
  endif
 
 [itemdef i_mazatko_paladina]
@@ -580,6 +582,7 @@ endif
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -971,6 +974,7 @@ endif
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -1098,6 +1102,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function f_ocs_create_monsters]
@@ -1259,6 +1264,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function f_explosionlava_setVars]
@@ -1302,6 +1308,7 @@ endif
   
   	
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [ITEMDEF i_bomba_boy]
@@ -1517,6 +1524,7 @@ on=@skillstroke
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -1532,6 +1540,7 @@ on=@skillstroke
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -2005,6 +2014,7 @@ if ((src.profession==class_war) || (src.profession==class_craft) || (src.profess
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -3720,6 +3730,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 fire_dragon
 
@@ -3766,6 +3777,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 fire_dragon_bomb
 
@@ -3802,6 +3814,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 fire_dragon_aura
 
@@ -5384,6 +5397,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 bahenny_drak_aura
 
@@ -5489,6 +5503,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 bahenny_drak_krev
 
@@ -5670,6 +5685,7 @@ if (act.isplayer)
  endif
 endif
 
+on=@afterDoEffect
 on=@beforeGetSwing
 on=@aftergetswing
 on=@beforegeteffect
@@ -5738,6 +5754,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 fire_dragon_round
 
@@ -5797,6 +5814,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 f_fire_dragon_area
 
@@ -5983,6 +6001,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 if !(findid(i_dragon_regenerator))
   newequip(i_dragon_regenerator)
@@ -6027,6 +6046,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 f_golden_dragon
 
@@ -6164,6 +6184,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 f_dragon_npc
 
@@ -6200,6 +6221,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 if (0<tag(walker)> == 1)
   action 06D
@@ -6256,6 +6278,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 fire_dragon_cage
 
@@ -6452,6 +6475,7 @@ on=@aftergetswing
 on=@beforegetswing
 //aldaron_vamp
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@spelleffect
 //aldaron_vamp
@@ -7764,6 +7788,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
 golden_dragon_morph
 

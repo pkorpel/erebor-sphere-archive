@@ -57,13 +57,13 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 tag(resist_poison,500) //na humanoidy silny
 tag.resist_para=<eval {650 750}>
 tag(resist_summon,600) //individualni
-tag(resist_bleed,400) //individualni
+tag(resist_bleed,100) //individualni
 
 //weap resists
 tag(resist_sharp,350)
-tag(resist_slash,150)
+tag(resist_slash,350)
 tag(resist_pierce,-150)
-tag(resist_blunt,50)
+tag(resist_blunt,350)
 
 //magic resists
 tag(resist_fire,50)
@@ -150,13 +150,13 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[9]>
 tag(resist_poison,100) //na humanoidy silny
 tag.resist_para=<eval {800 925}>
 tag(resist_summon,700) //individualni
-tag(resist_bleed,400) //individualni
+tag(resist_bleed,150) //individualni
 
 //weap resists
-tag(resist_sharp,250)
-tag(resist_slash,150)
-tag(resist_pierce,-150)
-tag(resist_blunt,100)
+tag(resist_sharp,150)
+tag(resist_slash,350)
+tag(resist_pierce,350)
+tag(resist_blunt,200)
 
 //magic resists
 tag(resist_fire,150)
@@ -203,6 +203,7 @@ TEVENTS=e_summoneater          //smaze summona, co zasahne
 //TEVENTS=e_excelent
 TEVENTS=e_npc_critic              //sance na kritik melee
 TEVENTS=e_npc_curse_mana            //mass sani many
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -216,13 +217,14 @@ KARMA=-5000
 
 STR=20000
 DEX=500
-INT=300
+INT=1
 
-maxhits={28000 29000}
+maxhits={21000 22500}
 maxstam={600 700}
 maxmana=0
 
-tag.experience=<eval {750.0 800.0}>
+tag.experience=<eval {950.0 1100.0}>
+tag.npc_magicshield=60
 
 tag.npc_critic_chance=250           //25% chance
 tag.npc_critic_dmg=20,25            //dmg in between
@@ -252,8 +254,9 @@ tag(resist_pierce,550)
 tag(resist_blunt,-150)
 
 tag(resist_fire,400)
-tag(resist_elect,400)
+tag(resist_elect,600)
 tag(resist_cold,200)
+tag(resist_silence,450)
 
 //tag(resist_phys,0)
 //tag(resist_magic,0)
@@ -262,7 +265,7 @@ tag(resist_cold,200)
 POISONING={400.0 500.0}
 WRESTLING=140.0
 TACTICS=100.0
-RESIST=150.0
+RESIST=100.0
 SpiritSpeak=110.0
 
 ITEMnewbie=i_monster_create
@@ -407,11 +410,11 @@ tag.weapflag=dam_blunt|dam_physical
 tag(resist_poison,500) 
 tag.resist_para=<eval {800 900}>
 tag(resist_summon,600) //individualni
-tag(resist_bleed,400) //individualni
+tag(resist_bleed,100) //individualni
 
 //weap resists
-tag(resist_sharp,-350)
-tag(resist_slash,-250)
+tag(resist_sharp,-150)
+tag(resist_slash,-150)
 tag(resist_pierce,-100)
 tag(resist_blunt,650)
 
@@ -494,11 +497,11 @@ tag.weapflag=dam_physical|dam_blunt
 tag(resist_poison,600)
 tag.resist_para=<eval {850 950}>
 tag(resist_summon,600)
-tag(resist_bleed,400)
+tag(resist_bleed,100)
 
 //weap resists
-tag(resist_sharp,-350)
-tag(resist_slash,-250)
+tag(resist_sharp,-250)
+tag(resist_slash,-150)
 tag(resist_pierce,-100)
 tag(resist_blunt,650)
 
@@ -599,6 +602,7 @@ tag(resist_blunt,350)
 tag(resist_fire,1000)
 tag(resist_elect,400)
 tag(resist_cold,-500)
+tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,fire)
@@ -815,6 +819,7 @@ tag(resist_blunt,-350)
 tag(resist_fire,200)
 tag(resist_elect,1000)
 tag(resist_cold,-500)
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,air)
@@ -1032,7 +1037,7 @@ tag(resist_bleed,-500)
 
 //weap resists
 tag(resist_sharp,-100)
-tag(resist_slash,-350)
+tag(resist_slash,350)
 tag(resist_pierce,-100)
 tag(resist_blunt,800)
 
@@ -1196,6 +1201,7 @@ TEVENTS=e_npc_curse_mana            //mass sani many
 TEVENTS=e_npc_stam_dmg              //mlacenim saje staminu
 TEVENTS=e_npc_multishot             //vsechny viditelne zrani o dmg
 TEVENTS=e_npc_stun
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Dungy
 SUBSECTION=Ledova jeskyne
@@ -1211,11 +1217,12 @@ STR=5000
 DEX=250
 INT=0
 
-maxhits={10000 1100}
+maxhits={1500 1900}
 maxstam={180 210}
 maxmana=0
 
 tag.experience=<eval {330.0 350.0}>
+tag.npc_magicshield=90
 
 tag.npc_stun_time=10              //1 seconds of stun
 Tag.npc_stun_chance=300           //30%, defaultne 20% 
@@ -1254,6 +1261,7 @@ tag(resist_blunt,-500)
 tag(resist_fire,-500)
 tag(resist_elect,200)
 tag(resist_cold,800)
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,snow)
@@ -1346,6 +1354,7 @@ tag(resist_blunt,150)
 tag(resist_fire,800)
 tag(resist_elect,350)
 tag(resist_cold,-500)
+tag(resist_silence,650)
 
 //typ monstra
 tag(monstertype,daemon,40)
@@ -1522,6 +1531,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,600)
 tag(resist_elect,-150)
 tag(resist_cold,100)
+tag(resist_silence,500)
 
 peacemaking=100.0
 provocation=100.0
@@ -2421,7 +2431,7 @@ tag(resist_cold,-200)
 //typ monstra
 tag(monstertype,golem,60)
 //weap flags
-tag.weapflag=dam_slash|dam_physical
+tag.weapflag=dam_slashing|dam_physical
 
 PEACEMAKING=100.0
 WRESTLING=160.0
@@ -2681,7 +2691,7 @@ tag(resist_cold,-200)
 tag(monstertype,golem,60)
 
 //weap flags
-tag.weapflag=dam_slash|dam_physical
+tag.weapflag=dam_slashing|dam_physical
 
 PEACEMAKING=100.0
 WRESTLING=160.0

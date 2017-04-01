@@ -3785,7 +3785,6 @@ SUBSECTION=NOVE
 [ITEMDEF 02c86] 
 CATEGORY=Provisions - Jewels and Jewelry
 SUBSECTION=NOVE
-[ITEMDEF 02c87] 
 
 [ITEMDEF 02c88] 
 
@@ -4696,14 +4695,6 @@ HITPOINTS={51 65}
 [ITEMDEF 02ea2]
 CATEGORY=aaa
 DESCRIPTION=duch
-
-[ITEMDEF 02eb2]
-CATEGORY=aaa
-DESCRIPTION=ohnivy dest
-
-
-
-
 
 [ITEMDEF 02c36]
 CATEGORY=aaa
@@ -8124,68 +8115,14 @@ DESCRIPTION=magickaBrana 3
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 
-/// PRETHNU TE JAK MALEHO HADA CO TO TADY ????
-/// ZAPRVE to sem nepatri, patri to do charu
-/// ZADRUHE predefinovavas EXISTUJICI chardefy!!!!!!
-
-//!!!!!![CHARDEF 0100]
-
-//!!!!!![CHARDEF 0101]
-
-//!!!!!![CHARDEF 0102]
-
-//!!!!!![CHARDEF 0103]
-
-//!!!!!![CHARDEF 0104]
-
-//!!!!!![CHARDEF 0105]
-
-//!!!!!![CHARDEF 0106]
-
-//!!!!!![CHARDEF 0107]
-
-//!!!!!![CHARDEF 0108]
-
-//!!!!!![CHARDEF 0109]
-
-//!!!!!![CHARDEF 010A]
-
-//!!!!!![CHARDEF 010B]
-
-//!!!!!![CHARDEF 010C]
-
-//!!!!!![CHARDEF 010D]
-
-//!!!!!![CHARDEF 010E]
-
-//!!!!!![CHARDEF 010F]
-
-//!!!!!![CHARDEF 0120]
-
-//!!!!!![CHARDEF 0121]
-
-//!!!!!![CHARDEF 0122]
-
-//!!!!!![CHARDEF 0123]
-
-//!!!!!![CHARDEF 0124]
-
-//!!!!!![CHARDEF 0125]
-
-//!!!!!![CHARDEF 0fC] 
-
-//!!!!!![CHARDEF 0FD] 
-
-//!!!!!![CHARDEF 0FE] 
-
-//!!!!!![CHARDEF 0FF] 
-
-//!!!!!![CHARDEF 01BA]
-
-//!!!!!![CHARDEF 01BC]
-
 [ITEMDEF 0387f]
 
 [ITEMDEF 03880]
 
 [ITEMDEF 03881]
+
+[ITEMDEF 03352]
+
+[ITEMDEF 03340]
+
+[ITEMDEF 0340D]

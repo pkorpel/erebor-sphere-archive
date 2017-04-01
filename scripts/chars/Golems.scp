@@ -26,6 +26,7 @@ TEVENTS=e_npc_knockback
 TEVENTS=e_npc_stun
 TEVENTS=e_golem
 TEVENTS=e_npc_summonKiller
+TEVENTS=e_npc_magicshield
    
 CATEGORY=Monsters
 SUBSECTION=Golems
@@ -40,11 +41,12 @@ STR=4000
 DEX=400
 INT=60
 
-maxhits={5500 6000}
+maxhits={3850 4200}
 maxstam={350 400}
 maxmana=0
 
-tag.experience=<eval {210.0 230.0}>
+tag.experience=<eval {250.0 290.0}>
+tag.npc_magicshield=60
 
 tag.npc_stun_time=35
 tag.npc_stun_chance=400
@@ -55,7 +57,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,golem,60)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -73,6 +75,7 @@ tag(resist_blunt,150)
 tag(resist_fire,940)
 tag(resist_elect,850)
 tag(resist_cold,900)
+tag(resist_silence,350)
 
 PARRYING={40.0 50.0}
 WRESTLING={88.0 95.0}
@@ -400,7 +403,7 @@ tag(resist_bleed,1000) //golem nekrvaci
 //weap resists
 tag(resist_sharp,350)
 tag(resist_slash,350)
-tag(resist_pierce,150)
+tag(resist_pierce,350)
 tag(resist_blunt,-400) // skalu rozbijes hlavne drtivou zbrani
 
 //magic resists
@@ -654,7 +657,7 @@ tag(resist_bleed,1000)      //golem nekrvaci
 //weap resists
 tag(resist_sharp,600)
 tag(resist_slash,600)
-tag(resist_pierce,450)
+tag(resist_pierce,550)
 tag(resist_blunt,100)  // skalu rozbijes hlavne drtivou zbrani
 
 //magic resists
@@ -867,7 +870,7 @@ CAN=MT_WALK|mt_run
 
 attack=190
 ARMOR=200
-MOVERATE=3
+MOVERATE=4
 
 BLOODCOLOR=colors_gray
 
@@ -879,6 +882,7 @@ TEVENTS=e_summoneater                         //smaze summona, co zasahne
 TEVENTS=e_pushall
 TEVENTS=e_parakrik
 TEVENTS=e_npc_multishot                        //vsechny viditelne zrani o dmg
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Golems
@@ -899,6 +903,7 @@ maxstam={630 660}
 maxmana=0
 
 tag.experience=<eval {1100.0 1200.0}>
+tag.npc_magicshield=70
 
 tag.multishot_chance=300                       // 30% chance pri zasahu monstra
 tag.multishot_delay=10,15                      // prodleva nez znovu
@@ -932,8 +937,9 @@ tag(resist_blunt,200)  // skalu rozbijes hlavne drtivou zbrani
 
 //magic resists
 tag(resist_fire,800)
-tag(resist_elect,-50)  //nachylnost na elektrinu
-tag(resist_cold,150)   //nachylnost na chlad
+tag(resist_elect,450)  //nachylnost na elektrinu
+tag(resist_cold,250)   //nachylnost na chlad
+tag(resist_silence,450)
 
 //typ monstra
 tag(monstertype,golem,30)
@@ -943,7 +949,7 @@ tag.weapflag=dam_blunt|dam_physical
 
 TACTICS=100.0
 WRESTLING=120.0
-RESIST=250.0
+RESIST=150.0
 SpiritSpeak=200.0
 
 ITEMnewbie=i_monster_create
@@ -1005,12 +1011,13 @@ tag(resist_bleed,-400)
 
 tag(resist_sharp,150)
 tag(resist_slash,150)
-tag(resist_pierce,-150)
-tag(resist_blunt,-150)
+tag(resist_pierce,150)
+tag(resist_blunt,150)
 
 tag(resist_fire,250)
 tag(resist_elect,-400)
 tag(resist_cold,-200)
+tag(resist_silence,350)
 
 //tag(resist_phys,0)
 //tag(resist_magic,0)
@@ -1086,14 +1093,15 @@ tag.resist_para=<eval {650 750}>
 tag(resist_summon,400)
 tag(resist_bleed,-300)
 
-tag(resist_sharp,4150)
+tag(resist_sharp,150)
 tag(resist_slash,150)
-tag(resist_pierce,-150)
-tag(resist_blunt,-150)
+tag(resist_pierce,150)
+tag(resist_blunt,150)
 
 tag(resist_fire,750)
 tag(resist_elect,-400)
 tag(resist_cold,-600)
+tag(resist_silence,350)
 
 //tag(resist_phys,0)
 //tag(resist_magic,0)
@@ -1267,6 +1275,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-600)         //ohen je boli
 tag(resist_elect,900)         //elektrina reaperovi neublizuje
 tag(resist_cold,200)          //mraz jaks taks
+tag(resist_silence,250)
 
 //typ monstra
 tag(monstertype,reaper,80)
@@ -1358,6 +1367,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-600)         //ohen je boli
 tag(resist_elect,900)         //elektrina reaperovi neublizuje
 tag(resist_cold,200)          //mraz jaks taks
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,reaper,80)
@@ -1451,6 +1461,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-600)         //ohen je boli
 tag(resist_elect,900)         //elektrina reaperovi neublizuje
 tag(resist_cold,200)          //mraz jaks taks
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,reaper,80)
@@ -1545,6 +1556,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-50)         //ohen je boli
 tag(resist_elect,950)         //elektrina reaperovi neublizuje
 tag(resist_cold,450)          //mraz jaks taks
+tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,reaper,60)
@@ -1595,6 +1607,7 @@ TEVENTS=e_ovinovac
 TEVENTS=e_summoneater
 TEVENTS=e_npc_infiniteMana
 TEVENTS=e_reaper
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Reapers
@@ -1610,11 +1623,12 @@ STR={4000 4500}
 DEX={125 150}
 INT=350
 
-maxhits={14000 15000}
+maxhits={9800 10500}
 maxstam={100 150}
 maxmana=1000
 
 tag.experience=<eval {350.0 400.0}>
+tag.npc_magicshield=60
 
 //mystik
 tag(hypnotizable,0)
@@ -1639,6 +1653,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-50)         //ohen je boli
 tag(resist_elect,950)         //elektrina reaperovi neublizuje
 tag(resist_cold,450)          //mraz jaks taks
+tag(resist_silence,450)
 
 //typ monstra
 tag(monstertype,reaper,60)
@@ -1691,6 +1706,7 @@ TEVENTS=e_npc_infiniteMana
 TEVENTS=e_reaper
 TEVENTS=e_parakrik
 TEVENTS=e_explosiondispell
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Reapers
@@ -1706,11 +1722,12 @@ STR={4500 5000}
 DEX={150 175}
 INT=400
 
-maxhits={18000 19000}
+maxhits={11700 12350}
 maxstam={150 200}
 maxmana=1000
 
-tag.experience=<eval {700.0 750.0}>
+tag.experience=<eval {800.0 950.0}>
+tag.npc_magicshield=70
 
 tag(e_explosiondispell_chance,100) //10% chance
 tag(e_explosiondispell_range,6)
@@ -1741,6 +1758,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-50)         //ohen je boli
 tag(resist_elect,950)         //elektrina reaperovi neublizuje
 tag(resist_cold,450)          //mraz jaks taks
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,reaper,40)
@@ -1795,6 +1813,7 @@ TEVENTS=e_npc_infiniteMana
 TEVENTS=e_reaper
 TEVENTS=e_parakrik
 TEVENTS=e_explosiondispell
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Reapers
@@ -1815,6 +1834,7 @@ maxstam={200 240}
 maxmana=2000
 
 tag.experience=<eval {850.0 900.0}>
+tag.npc_magicshield=70
 
 tag(e_explosiondispell_chance,150) //15% chance
 tag(e_explosiondispell_range,6)
@@ -1843,6 +1863,7 @@ tag(resist_blunt,900)         //kladivem ne
 tag(resist_fire,-50)         //ohen je boli
 tag(resist_elect,950)         //elektrina reaperovi neublizuje
 tag(resist_cold,450)          //mraz jaks taks
+tag(resist_silence,900)
 
 //typ monstra
 tag(monstertype,reaper,40)
@@ -1932,13 +1953,14 @@ tag(resist_bleed,500)              //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,600)        //odolnost na mece
 tag(resist_slash,100)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
-tag(resist_blunt,-400)       //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,200)        //sipky nic moc
+tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-700)       //zranitelnost energii
 tag(resist_cold,-300)
+tag(resist_silence,200)
 
 PARRYING=55.0
 MAGERY=70.0
@@ -2018,13 +2040,14 @@ tag(resist_bleed,800)       //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,600)        //odolnost na mece
 tag(resist_slash,100)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
-tag(resist_blunt,-400)       //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,200)        //sipky nic moc
+tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-700)       //zranitelnost energii
 tag(resist_cold,-300)
+tag(resist_silence,250)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2115,13 +2138,14 @@ tag(resist_bleed,800)       //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,300)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
-tag(resist_blunt,-400)       //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,250)        //sipky nic moc
+tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-450)       //zranitelnost energii
 tag(resist_cold,-100)
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2211,13 +2235,14 @@ tag(resist_bleed,800)        //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,300)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
+tag(resist_pierce,200)        //sipky nic moc
 tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-450)       //zranitelnost energii
 tag(resist_cold,-100)
+tag(resist_silence,350)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2306,13 +2331,14 @@ tag(resist_bleed,800)      //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,300)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
+tag(resist_pierce,200)        //sipky nic moc
 tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-450)       //zranitelnost energii
 tag(resist_cold,-100)
+tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2403,13 +2429,14 @@ tag(resist_bleed,800)      //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,300)        //sekyry
-tag(resist_pierce,00)        //sipky nic moc
-tag(resist_blunt,-200)       //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,250)        //sipky nic moc
+tag(resist_blunt,-100)       //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-450)       //zranitelnost energii
 tag(resist_cold,-100)
+tag(resist_silence,450)
 
 //typ monstra
 tag(monstertype,spirit,80)
@@ -2500,13 +2527,14 @@ tag(resist_bleed,850)            //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)            //odolnost na mece
 tag(resist_slash,450)            //sekyry
-tag(resist_pierce,200)           //sipky nic moc
-tag(resist_blunt,-50)            //na spirity hodne drtivymi zbranemi
+tag(resist_pierce,350)           //sipky nic moc
+tag(resist_blunt,50)            //na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,600)
 tag(resist_elect,-200)       //zranitelnost energii
 tag(resist_cold,-50)
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,spirit,60)
@@ -2595,13 +2623,14 @@ tag(resist_bleed,900)            //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,450)        //sekyry
-tag(resist_pierce,200)       //sipky nic moc
-tag(resist_blunt,-50)        // na spirity hodne drtivymi zbranemi
+tag(resist_pierce,400)       //sipky nic moc
+tag(resist_blunt,50)        // na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,800)
 tag(resist_elect,-50)
 tag(resist_cold,150)
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,spirit,60)
@@ -2656,6 +2685,7 @@ TEVENTS=e_parakrik
 TEVENTS=e_explode
 TEVENTS=e_explosiondispell
 TEVENTS=e_phoenix_fire
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Spiriti
@@ -2671,11 +2701,12 @@ STR=5000
 DEX=250
 INT=380
 
-maxhits={19000 20000}
+maxhits={13300 14000}
 maxstam={225 275}
 maxmana=1000
 
 tag.experience=<eval {650.0 700.0}>
+tag.npc_magicshield=60
 
 tag(e_explosiondispell_chance,50) //5% chance
 tag(e_explosiondispell_range,6)
@@ -2699,13 +2730,14 @@ tag(resist_bleed,1000)     //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,450)        //sekyry
-tag(resist_pierce,200)       //sipky nic moc
-tag(resist_blunt,-50)        // na spirity hodne drtivymi zbranemi
+tag(resist_pierce,450)       //sipky nic moc
+tag(resist_blunt,150)        // na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,900)
 tag(resist_elect,-50)
 tag(resist_cold,150)
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,spirit,40)
@@ -2758,6 +2790,7 @@ TEVENTS=e_parakrik
 TEVENTS=e_explode
 TEVENTS=e_phoenix_fire
 TEVENTS=e_explosiondispell
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Spiriti
@@ -2773,11 +2806,12 @@ STR=7000
 DEX=300
 INT=450
 
-maxhits={30500 30900}
+maxhits={19825 20085}
 maxstam={250 340}
 maxmana=2000
 
 tag.experience=<eval {990.0 1000.0}>
+tag.npc_magicshield=70
 
 Tag.explode_dmg=50
 
@@ -2801,13 +2835,14 @@ tag(resist_bleed,1000)      //spirit vetsinou nekrvaci
 //weap resists
 tag(resist_sharp,800)        //odolnost na mece
 tag(resist_slash,450)        //sekyry
-tag(resist_pierce,200)       //sipky nic moc
-tag(resist_blunt,-50)        // na spirity hodne drtivymi zbranemi
+tag(resist_pierce,500)       //sipky nic moc
+tag(resist_blunt,250)        // na spirity hodne drtivymi zbranemi
 
 //magic resists
 tag(resist_fire,900)
 tag(resist_elect,-50)
 tag(resist_cold,150)
+tag(resist_silence,700)
 
 //typ monstra
 tag(monstertype,spirit,40)

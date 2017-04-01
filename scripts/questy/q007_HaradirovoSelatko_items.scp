@@ -151,6 +151,7 @@ ELSE
 SRC.SYSMESSAGE Toto pero zda se magii ocarovano tak ze inkoust na predmet jim naneseny, svou stopu navzdy zachova byt i neviditelna po case bude.
 endif
 
+[typedef t_book_inscription]
 
 ///////////////////////
 ///////////////////////

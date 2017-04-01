@@ -17,31 +17,31 @@ weaponcreate(adamantinum)
 
 on=@targon_item
 if (src.act.id==i_flesh_head)||(src.act.id==i_flesh_HEAD_2)
- woodoo(6)
+  woodoo(6)
 endif
 if (f_weapon_sharp_targon_item)
   return 1
 endif
 if (src.act.id==i_gem_amber) && (src.profession==class_shaman)
- src.consume(i_gem_amber,1)
- tag(manatransfer,10)
- src.sysmessage("Dyka je nasycena magii.")¨
- src.EFFECT=3,i_fx_glow_spike,0,20,10
-return 1
+  src.consume(i_gem_amber,1)
+  tag(manatransfer,10)
+  src.sysmessage("Dyka je nasycena magii.")
+  src.EFFECT=3,i_fx_glow_spike,0,20,10
+  return 1
 endif
 
 on=@targon_char
-if (<src.targ.uid>==<src.targ>) && (tag(manatransfer)>=1) && (src.profession==class_shaman)
-src.say("blublu")
-src.mana=<src.mana>+80
-src.hits=<src.hits>-80
-tag(manatransfer,#-1)
-src.EFFECT=3,i_fx_glow_spike,0,20,10
-elseif (tag(manatransfer)==0) || !(tag(manatransfer)) && (src.profession==class_shaman)
-src.sysmessage("Dyka je za soucasneho stavu k obradum nepouzitelna.")
+if (<src.targ.uid>==<src.targ>) && (<eval tag(manatransfer)> >= 1) && (src.profession==class_shaman)
+  src.say("blublu")
+  src.mana=<src.mana>+80
+  src.hits=<src.hits>-80
+  tag(manatransfer,#-1)
+  src.EFFECT=3,i_fx_glow_spike,0,20,10
+elseif (<eval tag(manatransfer)> == 0) || !(<eval tag(manatransfer)>) && (src.profession==class_shaman)
+  src.sysmessage("Dyka je za soucasneho stavu k obradum nepouzitelna.")
 endif
-if (src.mana>src.maxmana) && (src.profession==class_shaman)
-src.mana=<src.maxmana>
+if (src.mana > src.maxmana) && (src.profession==class_shaman)
+  src.mana=<src.maxmana>
 endif
 return 1
 

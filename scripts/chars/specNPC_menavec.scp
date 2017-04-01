@@ -308,6 +308,7 @@ tag(resist_blunt,-500)
 tag(resist_fire,900)
 tag(resist_elect,300)
 tag(resist_cold,-400)   //mraz ano
+tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -487,6 +488,7 @@ tag(resist_blunt,500)         //na reapery hlavne ostrymi zbranemi
 tag(resist_fire,-600)         //ohen je boli
 tag(resist_elect,800)         //elektrina reaperovi neublizuje
 tag(resist_cold,200)          //mraz jaks taks
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,reaper)
@@ -908,6 +910,7 @@ tag(resist_blunt,150)
 tag(resist_fire,800)
 tag(resist_elect,350)
 tag(resist_cold,-500)
+tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,daemon)

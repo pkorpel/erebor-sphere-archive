@@ -6,6 +6,9 @@
 [events e_npc_roundattack]
 on=@beforegetswing
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
 f_e_npc_roundattack
 
 on=@beforegeteffect
@@ -15,7 +18,11 @@ on=@afterswing
 //f_e_npc_roundattack
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
+if (isSleeping)
+  return 0
+endif
 f_e_npc_roundattack
 
 [function f_e_npc_roundattack]
@@ -94,6 +101,9 @@ endif
 [events e_npc_roundattack_pullall]
 on=@beforegetswing
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
 f_npc_roundattack_pullall
 
 on=@beforegeteffect
@@ -101,7 +111,11 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@spelleffect
+if (isSleeping)
+  return 0
+endif
 f_npc_roundattack_pullall
 
 [function f_npc_roundattack_pullall]

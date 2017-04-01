@@ -286,6 +286,7 @@ damagecust(<promilerange(<argv(0)>,<s_fireball.effect>)>,dam_magic|dam_fire,<ret
 
 [function f_effect_a_meteor_swarm]
 EFFECT(3,i_fx_explode,6,15,1)
+EFFECT(2,i_fx_meteor_swarm,0,40,1)
 damagecust(<promilerange(<argv(0)>,<s_meteor_swarm.effect>)>,dam_magic|dam_fire,<return_nth(3,<s_meteor_swarm.effect>)>)
 
 [function f_effect_a_energy_bolt]
@@ -305,11 +306,23 @@ spelleffect 41,1000
 events +e_spelleffect
 
 [function f_effect_a_mind_blast]
-effect(03,i_fx_curse,1,15,0)
-SOUND=snd_SPELL_MIND_BLAST
-arg(mb_damage,<eval (src.int-int)*promilerange(<argv(0)>,<s_mind_blast.effect>)>)
-damage(<eval((<arg(mb_damage)>+500)/1000)>,dam_magic|dam_god,<src>)
-paralyze_remove
+arg(silenced,0)
+arg(dmged,0)
+if (npc)  // Silence effekt jen na NPC
+  arg(silenced,<f_silence_npc(1)>)
+endif
+if (argv(0) > 0)
+  arg(dmged,1)
+  arg(mb_damage,<eval (src.int-int)*promilerange(<argv(0)>,<s_mind_blast.effect>)>)
+  damage(<eval((<arg(mb_damage)>+500)/1000)>,dam_magic|dam_god,<src>)
+  paralyze_remove
+endif
+if (arg(dmged) || arg(silenced)) //at least one of the spell effect applied -> display spell effect
+  effect(03,i_fx_curse,1,15,0)
+  SOUND=snd_SPELL_MIND_BLAST
+else
+  f_spellResistedMsg // needs to be called explicitely as this spell has side effect and it could not be decided earlier
+endif
 
 [function f_effect_a_mana_vampire]
 EFFECT(3,<s_mana_vampire.EFFECTID>,6,15,1)
@@ -576,14 +589,14 @@ if(!<eval cont.tag(rfire)>)
    if (<cont.tag(resist_fire)> < 990) && (<cont.tag(resist_fire)> > 19)
      arg(ra_prokleti_ucinnost_temp,<finduid(cont.tag(UIDcastera)).tag(ra_prokleti_ucinnost)>)
      
-     if ( (<arg(ra_prokleti_ucinnost_temp)> > 0) && (<strcmp(<cont.tag(classcastera)>,"necro")>==0) )
-       if (<arg(ra_prokleti_ucinnost_temp)> < 11)
-         arg(resist_fire_temp,<eval((<cont.tag(resist_fire)>*100)*(5+<arg(ra_prokleti_ucinnost_temp)>/2))>/10000)
+     if ( (<eval arg(ra_prokleti_ucinnost_temp)> > 0) && (<strcmp(<cont.tag(classcastera)>,"necro")>==0) )
+       if (<eval arg(ra_prokleti_ucinnost_temp)> < 11)
+         arg(resist_fire_temp,<eval((<eval cont.tag(resist_fire)>*100)*(5+<eval arg(ra_prokleti_ucinnost_temp)>/2))>/10000)
        else
-         arg(resist_fire_temp,<eval((<cont.tag(resist_fire)>*100)*(5+<arg(ra_prokleti_ucinnost_temp)>/2))>/10000)
+         arg(resist_fire_temp,<eval((<eval cont.tag(resist_fire)>*100)*(5+<eval arg(ra_prokleti_ucinnost_temp)>/2))>/10000)
        endif                                            
      else
-       arg(resist_fire_temp,<eval((<cont.tag(resist_fire)>*100*5))>/10000) 
+       arg(resist_fire_temp,<eval((<eval cont.tag(resist_fire)>*100*5))>/10000) 
      endif
      tag(temp_ability_resist,<arg(resist_fire_temp)>)
      cont.tag(resist_fire,#-<arg(resist_fire_temp)>)

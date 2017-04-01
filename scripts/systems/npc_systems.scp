@@ -70,39 +70,21 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@stopguarding
-
-//ON=@DeathCorpse
-//if !(flag_pet)//nebyl tamnutej
-//  argo.tag(isnopet,1)//nepude resnout
-//endif
-
 on=@spelleffect
 if (issumon)&&(<argn>==44)
  hits=0
 endif
-//if (<argn>==20)||(<argn>==39)
-//  dospell_final(s_cure,1000)
-//  return 1
-//endif
 if(<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
   spell_poison_custom(<src>)
   return 1
 endif
 
 on=@spellcast
-//pokus o to aby monstra nekuzlili hned za sebou
-if (<rescount(i_silencer)>)//keby sa nahodou zaseklo na -1 z nejakeho dovodu
-  if (<findid(i_silencer).timer> < 0)
-    findid(i_silencer).timer=1
-  endif
-endif
-if ((<nastaveni_silence_using>==1)&&(!<rescount(i_silencer)>))
-  newequip(i_silencer)
-  lastnew.timer=nastaveni_spellcast_silence_after
-  lastnew.more1=1
-endif
+f_silence_npc(0) //pokus o to aby monstra nekuzlili hned za sebou
+
 
 on=@userkill
 on=@npckill
@@ -132,219 +114,5 @@ if (src.flag_dead)
     src.dospell_final(59,1000)
   endif
 endif
-//on=@DeathCorpse
-//if (<safe.argo>)
-//var.corpseuid=<argo>
-//sector.allchars(f_addcorpse)
-//endif
-//return 0
-//
-//[function f_addcorpse]
-//if (findlayer(81))
-// newitemsafe(i_relating_crystal)
-// lastnew.link=<corpseuid>
-// lastnew.cont=<findlayer(81)>
-// lastnew.color=<finduid(<corpseuid>).color>
-// lastnew.dispid=<findres(chardef,<finduid(<corpseuid>).morex>).icon>
-// lastnew.name=<finduid(<corpseuid>).name>
-//endif
-
-//[events e_resist_para]
-//on=@beforegeteffect
-//say huhle:<spellnumber>
-//if (<eval <spellnumber>&0ffff>==38)||(<eval <spellnumber>&0ffff>==47)
-// if (<eval tag.resist_para>>{0 99})
-//  if (<eval tag.resist_para><100)
-//   var(imunmsg,"<?name?> se zda byt castecne resistentni proti paralyze.")
-//  else
-//   var(imunmsg,"<?name?> se zda byt imunni proti paralyze.")
-//  endif
-//  var(spellpowerrelative,0)
-//  return 1
-// endif
-//endif
-//return 0
-//on=@DrinkingPotion
-//on=@afterswing
-//on=@aftergetswing
-//deprecated on=@beforegethit 
-//on=@beforedoeffect
-//deprecated on=@aftergetspelldamage
-
-//[events e_resist_magic]
-//on=@beforegeteffect
-//if (isevil(<spellnumber>))
-// if (<eval tag.resist_negmagery><100)
-//  if (ismpdepend(<spellnumber>))//je to utocne kouzlo, 
-//   var(imunmsg,"<?name?> se zda byt castecne resistentni vuci negativnim kouzlum.")
-//   var(spellpowerrelative,<spellpowerrelative>-<tag.resist_negmagery>)
-//   return 0
-//  elseif (<eval tag.resist_negmagery>>{0 99})//poison, 
-//   var(imunmsg,"<?name?> se zda byt castecne resistentni vuci negativnim kouzlum.")
-//   var(spellpowerrelative,0)
-//   return 1
-//  endif
-// else
-//  var(imunmsg,"<?name?> se zda byt imunni vuci utocnym kouzlum.")
-//  var(spellpowerrelative,0)
-//  return 1
-// endif
-//endif
-//return 0
-//on=@DrinkingPotion
-//on=@afterswing
-//on=@aftergetswing
-////deprecated on=@beforegethit 
-//on=@beforedoeffect
-////deprecated on=@aftergetspelldamage
-//
-//[events e_resist_fire]
-//on=@beforegeteffect
-//if (isfire(<spellnumber>))
-// if (<eval tag.resist_fire><100)
-//  var(imunmsg,"<?name?> se zda byt castecne resistentni vuci ohnivym kouzlum.")
-//  var(spellpowerrelative,<spellpowerrelative>-<tag.resist_fire>)
-//  return 0
-// else
-//  var(imunmsg,"<?name?> se zda byt imunni vuci ohnivym kouzlum.")
-//  var(spellpowerrelative,0)
-//  return 1
-// endif
-//endif
-//return 0
-//on=@DrinkingPotion
-//on=@afterswing
-//on=@aftergetswing
-////deprecated on=@beforegethit 
-//on=@beforedoeffect
-////deprecated on=@aftergetspelldamage
-//
-//[events e_resist_summon] 
-//on=@beforegeteffect
-//if (src.isconjured)
-// if (<eval tag.resist_summon><100)
-//  var(imunmsg,"<?name?> se zda byt castecne resistentni vuci vyvolanym monstrum.")
-//  var(spellpowerrelative,<spellpowerrelative>-<eval tag.resist_summon>)
-//  return 0
-// else
-//  var(imunmsg,"<?name?> se zda byt imunni vuci vyvolanym monstrum.")
-//  var(spellpowerrelative,0)
-//  return 1
-// endif
-//endif
-//return 0
-////deprecated on=@beforegethit 
-//if (src.isconjured)
-// if (<eval tag.resist_summon>==100)
-//  var(imunmsg,"<?name?> se zda byt imunni proti vyvolanym monstrum.")
-//  var(hitimunne,1)
-//  return 1
-// endif
-//endif 
-//on=@aftergetswing
-//if (hits)
-// if (src.isconjured)
-//  finduid(<src.master>).redmessage("<?name?> se zda byt castecne resistentni vuci vyvolanym monstrum.")
-//  hits=<eval <hits>+((<ubrano>*<eval tag.resist_summon>)/100)>
-//  return 0
-// endif
-//endif
-//return 0
-//on=@DrinkingPotion
-//on=@afterswing
-//on=@beforedoeffect
-////deprecated on=@aftergetspelldamage
-//
-//[events e_resist_phys]
-////deprecated on=@beforegethit 
-//if (<eval tag.resist_phys>==100)
-// var(imunmsg,"<?name?> se zda byt imunni proti fyzickemu utoku.")
-// var(hitimunne,1)
-// return 1
-//endif
-//return 0
-//on=@aftergetswing
-//if (hits)
-// src.redmessage("<?name?> se zda byt castecne resistentni vuci fyzickemu utoku.")
-// hits=<eval <hits>+((<ubrano>*<eval tag.resist_phys>)/100)>
-// return 0
-//endif
-//return 0
-//on=@DrinkingPotion
-//on=@afterswing
-//on=@beforedoeffect
-////deprecated on=@aftergetspelldamage
-//on=@beforegeteffect
-//
-//[events e_resist_melee]
-////deprecated on=@beforegethit 
-//if (<eval tag.resist_melee>==100)
-// if (src.isfighting_melee)
-//  var(imunmsg,"<?name?> se zda byt imunni proti melee utoku.")
-//  var(hitimunne,1)
-//  return 1
-// endif
-//endif
-//return 0
-//on=@aftergetswing
-//if (hits)
-// if (src.isfighting_melee)
-//  src.redmessage("<?name?> se zda byt castecne resistentni vuci melee utoku.")
-//  hits=<eval <hits>+((<ubrano>*<eval tag.resist_melee>)/100)>
-//  return 0
-// endif
-//endif
-//return 0
-//on=@DrinkingPotion
-//on=@afterswing
-//on=@beforedoeffect
-////deprecated on=@aftergetspelldamage
-//on=@beforegeteffect
-//
-//[events e_resist_ranged]
-////deprecated on=@beforegethit 
-//if (<eval tag.resist_ranged>==100)
-// if (src.isfighting_ranged)
-//  var(imunmsg,"<?name?> se zda byt imunni proti ranged utoku.")
-//  var(hitimunne,1)
-//  return 1
-// endif
-//endif
-//return 0
-//on=@aftergetswing
-//if (hits)
-// if (src.isfighting_ranged)
-//  src.redmessage("<?name?> se zda byt castecne resistentni vuci ranged utoku.")
-//  hits=<eval <hits>+((<ubrano>*<eval tag.resist_ranged>)/100)>
-//  return 0
-// endif
-//endif
-//return 0 
-//on=@DrinkingPotion
-//on=@afterswing
-//on=@beforedoeffect
-////deprecated on=@aftergetspelldamage
-//on=@beforegeteffect
-
-[itemdef i_silencer]
-id=i_memory
-layer=77
-type=t_src_changer
-name=silencer
-
-on=@equip
-tag(mana,<cont.mana>)
-
-on=@timer
-if (<more1>==1)
-  cont.mana=0
-  timer=<nastaveni_silence_mana_return>
-  more1=0
-else
-  cont.mana=<tag.mana>
-  remove 
-endif
-return(1)
-
 
 [eof]

@@ -720,6 +720,7 @@ return 0
 
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -753,6 +754,7 @@ f_sheep_game_death
 on=@beforedoeffect 
 f_sheep_game_setMonsterEvent
 
+on=@afterDoEffect
 on=@DrinkingPotion
 //if (<targ.baseid>==i_potion_Invisibility)
 //  newequip(i_invisibility_remover)

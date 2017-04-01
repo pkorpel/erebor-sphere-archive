@@ -6082,20 +6082,20 @@ ON=@Create
 	HITPOINTS={101 115}
 
 ON=@EQUIP
-	if <src.isgm>
+	if (<src.isgm>) || (<src.npc>)
 		return 0
-	elseif ! <src.memoryfindtype.memory_guild>
+	elseif !(<src.memoryfindtype.memory_guild>)
 		src.sound=snd_SPELL_LIGHTNING
 		src.message("Your are unable to wear this shield")
 		remove
 		return 1
-	elseif <src.memoryfindtype.memory_guild.link.align>==2
+	elseif (<src.memoryfindtype.memory_guild.link.align> == 2)
 		src.sound=snd_SPELL_LIGHTNING
 		src.message("Your are unable to wear this shield, and are damaged for attempting to do so!")
 		src.hits=<src.hits>/2
 		remove
 		return 1
-	elseif <src.memoryfindtype.memory_guild.link.align>!=1
+	elseif (<src.memoryfindtype.memory_guild.link.align> != 1)
 		src.sound=snd_SPELL_LIGHTNING
 		src.message("Your are unable to wear this shield")
 		remove

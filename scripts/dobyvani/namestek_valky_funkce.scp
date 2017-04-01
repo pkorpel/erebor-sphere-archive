@@ -3,14 +3,14 @@
 ////////////////////////////////////////////
 
 [FUNCTION f_namestek_valky_m]
-if(<src.targ.distance> > 3)
- src.sysMessage("Na takovou vzdalenost s tebou jednat nebude.")
- return 1
+if (<src.targ.distance> > 3)
+  src.sysMessage("Na takovou vzdalenost s tebou jednat nebude.")
+  return 1
 endif
-if(<src.tag.realm>==2)
- say("Chces zautocit...?")
- dialog(d_namestek_valky_m) 
- return 1
+if (<eval src.tag.realm> == 2)
+  say("Chces zautocit...?")
+  dialog(d_namestek_valky_m) 
+  return 1
 else
   say("Tahni...")
 endif
@@ -18,12 +18,12 @@ endif
 [SPEECH spk_namestek_valky_m]
 ON=*ahoj*
 ON=*hi*
-if(<src.tag.realm>==2)
- say("Chces zautocit...?")
- dialog(d_namestek_valky_m)
- return 1
+if (<eval src.tag.realm> == 2)
+  say("Chces zautocit...?")
+  dialog(d_namestek_valky_m)
+ r eturn 1
 else
- say("Tahni!")
+  say("Tahni!")
 endif
 
 ////////////////////////////////////////////
@@ -32,26 +32,26 @@ endif
 
 [FUNCTION f_namestek_valky_g]
 if (<src.targ.distance> > 3)
- src.sysMessage("Na takovou vzdalenost s tebou jednat nebude.")
- return 1
+  src.sysMessage("Na takovou vzdalenost s tebou jednat nebude.")
+  return 1
 endif
-if(<src.tag.realm>==1)
- say("Chces zautocit...?")
- dialog(d_namestek_valky_g)
- return 1
+if (<eval src.tag.realm> == 1)
+  say("Chces zautocit...?")
+  dialog(d_namestek_valky_g)
+  return 1
 else
- say("Tahni!")
+  say("Tahni!")
 endif
 
 [SPEECH spk_namestek_valky_g]
 ON=*ahoj*
 ON=*hi*
-if (<src.tag.realm>==1)
- say("Hmmm?")
- dialog(d_namestek_valky_g)
- return 1
+if (<eval src.tag.realm> == 1)
+  say("Hmmm?")
+  dialog(d_namestek_valky_g)
+  return 1
 else
- say("Tahni!")
+  say("Tahni!")
 endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,28 +103,29 @@ argo.questDialog_HTMLGUMP
 [dialog d_namestek_valky_g button]
 on=@AnyButton
 if (<argn> == argo.dialog_linkButton("war_will_pay"))
-  if(<eval(<src.tag(skillrank)>)> < 3) || (<eval(<src.tag(level)>)> < 30)
-   say("Je mi lito, ale na nejaky realny uspech ve valce nemas dostatek zkusenosti.")
-   return 1
+  if (<eval(<src.tag(skillrank)>)> < 3) || (<eval(<src.tag(level)>)> < 30)
+    say("Je mi lito, ale na nejaky realny uspech ve valce nemas dostatek zkusenosti.")
+    return 1
   endif
-  if(<strlen(<src.tag(captain)>)>) //uz je kapitanem
+  if (<strlen(<src.tag(captain)>)>) //uz je kapitanem
     say("Ty uz kapitanem jsi. Starej se o svou pevnost a vedeni dalsi valky prenech jinemu.")
     return 1
   endif
-  if(<src.tag(realm)> == 2)
+  if (<src.tag(realm)> == 2)
     say("Vypadni prasivej mordore!")
     return 1
   endif
-  if(<eval(<var(war_declarator_1).tag(conquered)>)> == -3) //Gondor uz dobyl vse az po pevnost -3
+  if (<eval(<var(war_declarator_1).tag(conquered)>)> == -3) //Gondor uz dobyl vse az po pevnost -3
     say("Vzdyt uz jsi tem Mordoranum vsechno <src.sex(dobyl,dobyla)>!")
     return 1
   endif
-  if(src.tag(can_declare_war_on_Mordor))
+  if (src.tag(can_declare_war_on_Mordor))
     say("Je zbytecne platit mi za dalsi vyhlasovani valky, kdyz uz jsi to jednou <src.sex(udelal,udelala)>.")
     return 1
   endif
-  if(<src.pay(100000)>)
+  if (<src.pay(100000)>)
     src.tag(can_declare_war_on_Mordor,1)
+    src.accmsg("zaplatil poplatek 100k gp na moznost vyhlasit valku u Gondorskeho Namestka Valky.")
   endif
 elseif (<argn> == argo.dialog_linkButton("nowar"))
   say("Tak s tim se neda nic delat, musis si nasetrit.")
@@ -180,28 +181,29 @@ argo.questDialog_HTMLGUMP
 [dialog d_namestek_valky_m button]
 on=@AnyButton
 if (<argn> == argo.dialog_linkButton("war_will_pay"))
-  if(<eval(<src.tag(skillrank)>)> < 3) || (<eval(<src.tag(level)>)> < 30)
-   say("Je mi lito, ale na nejaky realny uspech ve valce nemas dostatek zkusenosti.")
-   return 1
+  if (<eval(<src.tag(skillrank)>)> < 3) || (<eval(<src.tag(level)>)> < 30)
+    say("Je mi lito, ale na nejaky realny uspech ve valce nemas dostatek zkusenosti.")
+    return 1
   endif
-  if(<strlen(<src.tag(captain)>)>) //uz je kapitanem
+  if (<strlen(<src.tag(captain)>)>) //uz je kapitanem
     say("Ty uz kapitanem jsi. Starej se o svou pevnost a vedeni dalsi valky prenech jinemu.")
     return 1
   endif
-  if(<src.tag(realm)> == 1)
+  if (<src.tag(realm)> == 1)
     say("Vypadni prasivej gondore!")
     return 1
   endif
-  if(<eval(<var(war_declarator_2).tag(conquered)>)> == -3) //Mordor uz dobyl vse az po pevnost -3
+  if (<eval(<var(war_declarator_2).tag(conquered)>)> == -3) //Mordor uz dobyl vse az po pevnost -3
     say("Vzdyt uz jsi tem Gondoranum vsechno <src.sex(dobyl,dobyla)>!")
     return 1
   endif
-  if(src.tag(can_declare_war_on_Gondor))
+  if (src.tag(can_declare_war_on_Gondor))
     say("Je zbytecne platit mi za dalsi vyhlasovani valky, kdyz uz jsi to jednou <src.sex(udelal,udelala)>.")
     return 1
   endif
-  if(<src.pay(100000)>)
+  if (<src.pay(100000)>)
     src.tag(can_declare_war_on_Gondor,1)
+    src.accmsg("zaplatil poplatek 100k gp na moznost vyhlasit valku u Mordorskeho Namestka Valky.")
   endif
 elseif (<argn> == argo.dialog_linkButton("nowar"))
   say("Tak s tim se neda nic delat, musis si nasetrit.")

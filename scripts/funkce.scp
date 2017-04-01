@@ -34,7 +34,7 @@ if (isgm)
 endif
 if (findlayer(layer_hand2))
   if (staff_<findlayer(layer_hand2).baseid> >= material_<args>)
-   return 1
+    return 1
   endif
 endif
 return 0
@@ -542,6 +542,18 @@ while (memoryfindtype(MEMORY_FIGHT))
  memoryfindtype(MEMORY_FIGHT).remove
  
 endwhile
+
+[function rewritetarget]  // args - UID cile, ktereho nechceme prepsat
+while (memoryfindtype(MEMORY_WAR_targ))
+  if (memoryfindtype(MEMORY_WAR_targ).link == <args>)   // nalezl jsem memory od cile ktereho nebudeme prepisovat
+    arg(restore_memory,<memoryfindtype(MEMORY_WAR_targ)>)    // ulozime si UID toho memory itemu
+    arg(restore_memory_color,<memoryfindtype(MEMORY_WAR_targ).color>)    // ulozime si Color toho memory itemu
+  endif
+  memoryfindtype(MEMORY_WAR_targ).color=04c
+endwhile
+if (<eval arg(restore_memory)>)
+  arg(restore_memory).color=<arg(restore_memory_color)>  // prepiseme color na puvodni hodnotu
+endif
 
 [function vyvrhel_prevest]
 if (f_check_tag_realm)
@@ -2764,7 +2776,7 @@ maxstam=<eval maxstam+(args)>
 
 [function isstaff]
 if (type==T_WEAPON_MACE_STAFF)
- return 1
+ return <def.tdata1>
 endif
 return 0
 
@@ -3885,13 +3897,13 @@ if (isitem)
 elseif (npc)
   return 0
 endif
-if (<ARGVCOUNT>!=2)
+if (<ARGVCOUNT> != 2)
   src.sysMessage("smsgcol: spatne zadano")
   return 0
 endif
 arg(length,<strlen(<argv(1)>)>+45)
-if (arg(length)>83+45)
- arg(length,<eval 83+45>)
+if (arg(length) > <eval (83+45)>)
+  arg(length,<eval (83+45)>)
 endif
 var(packet,01c <?hval (<length>&0ff00)/0100?> <?hval <length>&0ff?> 00 00 00 00 00 00 02 <?hval (<argv(0)>&0ff00)/0100?> <?hval <argv(0)>&0ff?> 00 03 053 079 073 074 065 06d 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <?strtoascii((<length>-45),"<argv(1)>")?> 00)
 sendpacket(<packet>)
@@ -3899,15 +3911,15 @@ sendpacket(<packet>)
 [function messagecol]
 // barva,text
 if (src.npc)
-return 0
+  return 0
 endif
-if (ARGVCOUNT!=2)
-sysMessage("msgcol: spatne zadano")
-return 0
+if (<ARGVCOUNT> != 2)
+  sysMessage("msgcol: spatne zadano")
+  return 0
 endif
 arg(length,<strlen(<argv(1)>)>+45)
-if (arg(length)>83+45)
- arg(length,<eval 83+45>)
+if (arg(length) > <eval (83+45)>)
+  arg(length,<eval 83+45>)
 endif
 src.sendpacket(01c <split2bytes(<arg(length)>)> <hval (<uid>&0ff000000)/01000000> <hval (<uid>&0ff0000)/010000> <hval (<uid>&0ff00)/0100> <hval <uid>&0ff> 00 00 03 <hval (<argv(0)>&0ff00)/0ff> <hval <argv(0)>&0ff> 00 03 <strtoascii(30,"<name>")> <strtoascii((<length>-45),"<argv(1)>")> 00)
 
@@ -4275,6 +4287,27 @@ safe(findlayer(layer_skirt).<args>)
 safe(findlayer(layer_legs).<args>)
 safe(findlayer(layer_horse).<args>)
 
+[function eqlayerspvp]
+safe(findlayer(layer_hand1).<args>)
+safe(findlayer(layer_hand2).<args>)
+safe(findlayer(layer_shoes).<args>)
+safe(findlayer(layer_pants).<args>)
+safe(findlayer(layer_shirt).<args>)
+safe(findlayer(layer_helm).<args>)
+safe(findlayer(layer_gloves).<args>)
+safe(findlayer(layer_ring).<args>)
+safe(findlayer(layer_collar).<args>)
+safe(findlayer(layer_half_apron).<args>)
+safe(findlayer(layer_chest).<args>)
+safe(findlayer(layer_wrist).<args>)
+safe(findlayer(layer_tunic).<args>)
+safe(findlayer(layer_ears).<args>)
+safe(findlayer(layer_arms).<args>)
+safe(findlayer(layer_cape).<args>)
+safe(findlayer(layer_robe).<args>)
+safe(findlayer(layer_skirt).<args>)
+safe(findlayer(layer_legs).<args>)
+
 [function eqvendorlayers]
 safe(findlayer(layer_hand1).<args>)
 safe(findlayer(layer_hand2).<args>)
@@ -4421,19 +4454,10 @@ elseif (profession==class_ranger)
   giveitem(i_bolt_jagged_verite,20)
 endif
 
-// main equip add function
-// args: iron,copper,verite,valorite,obsidian,adamantinum,mithril
-[function f_varGate_pvp_equip]
-if !(safe(<<i_<args>_platemail>.def>))
-  redmessage(Nelze volat funkci s timto parametrem: <args>.)
-  return 1
-endif
+[function f_equip2bank]
+eqlayerspvp(bounce)
 
 arg(backpack,<findlayer(layer_pack)>)
-arg(material,<args>)
-
-eqlayers(bounce)
-
 arg(count,<arg(backpack).rescount>)
 
 if (arg(count) == 0)
@@ -4457,6 +4481,18 @@ while(count>=0)
   arg(count,#-1)
 endwhile
 
+// main equip add function
+// args: iron,copper,verite,valorite,obsidian,adamantinum,mithril
+[function f_varGate_pvp_equip]
+if !(safe(<<i_<args>_platemail>.def>))
+  redmessage(Nelze volat funkci s timto parametrem: <args>.)
+  return 1
+endif
+
+arg(backpack,<findlayer(layer_pack)>)
+arg(material,<args>)
+
+f_equip2bank
 f_pvp_give_basic_items
 f_profession_giveArmor(<arg(material)>)
 f_profession_giveWeapon(<arg(material)>)
@@ -4466,7 +4502,7 @@ return 0
 
 // main equip removal function
 [function f_varGate_pvp_clearequip]
-eqlayers(bounce)
+eqlayerspvp(bounce)
 arg(backpack,<findlayer(layer_pack)>)
 arg(count,<arg(backpack).rescount>)
 
@@ -4991,6 +5027,27 @@ doswitch <args>
   return"-1,-1"
 enddo
 
+[function f_isBackslash] // argv(0) - dir cile               
+arg(minDIR,<eval (<dir>-1)>)
+arg(maxDIR,<eval (<dir>+1)>)
+
+if (<arg(minDir)> < 0)
+  arg(minDIR,7)
+endif
+if (<arg(maxDir)> > 7)
+  arg(maxDir,0)
+endif
+
+if (<argv(0)> == <arg(minDir)>)
+  return 1
+elseif (<argv(0)> == <dir>)
+  return 1
+elseif (<argv(0)> == <arg(maxDir)>)
+  return 1
+else
+  return 0
+endif
+
 [function isfighting]
 if (action==skill_wrestling)
 elseif (action==skill_swordsmanship)
@@ -5119,6 +5176,27 @@ else
 return 0
 endif
 return 1
+
+[function isSleeping]
+if (isevent(e_peacemade))
+  if (rand(30)==1)
+    effect(3,i_fx_sleeping,1,70,1)
+  endif
+  return 1
+endif
+return 0
+
+[function isSilenced]
+if (isevent(e_npc_silenced))
+  return 1
+endif
+return 0
+
+[function isTaunted]
+if (isevent(e_npc_taunted))
+  return 1
+endif
+return 0
 
 [function getArmed]
 arg(arm,<findlayer(layer_hand1)>)
@@ -5448,7 +5526,7 @@ if (type==t_scroll)
   endif
 elseif (type==t_customspell_scroll)
   if !(src.act.link.hasspell(<morex>))
-    srrc.act.link.addspell(<morex>)
+    src.act.link.addspell(<morex>)
     consume 1
   endif
 endif
@@ -5955,6 +6033,9 @@ return<finduid(#033D6)>
 [function eufegenie]
 return<finduid(#033D6)>
 
+[function scylla]
+return<finduid(#01513a)>
+
 [itemdef i_checkownerforpet]
 id=i_memory
 name=test majitele
@@ -6112,7 +6193,7 @@ else
 endif
 
 /////////////////////////////////////////
-////////////// Zmena Jmena //////////////
+///////////// Zmena Jmena ///////////////
 /////////////////////////////////////////
 
 [function newname]
@@ -7280,6 +7361,13 @@ if ((<eval argv(0)>+<eval act.<argv(0)>>) < <eval argv(1)>)
 else
   return <eval argv(1)>)
 endif
+
+[function f_doBloodStain]  // argv(0) - DispID, argv(1) - color
+newitemsafe(<findres(itemdef,<argv(0)>)>)
+lastnew.color=<argv(1)>
+lastnew.p=<p>
+lastnew.timer={10 15}
+
 
 [function null]
 return""

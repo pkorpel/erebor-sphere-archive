@@ -12,10 +12,13 @@ SUBSECTION=M1 - Expert quest
 DESCRIPTION=Chlapek na Experta
 
 ON=@UserDClick
-if (<src.targ.distance> > 3)
- src.sysMessage("Rvat na sebe nebudete. Musis prijit bliz.")
+if (<distance> > 4)
+  src.sysMessage("Rvat na sebe nebudete. Musis prijit bliz.")
+elseif (<eval src.tag(expert_failed)>)
+  say("Loucim se s tebou, zkus to priste znova...")
+  src.paralyze(20)
 else
- f_expertMistrDClick
+  f_expertMistrDClick
 endif
 
 ON=@Create

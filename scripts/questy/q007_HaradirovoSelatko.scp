@@ -2857,7 +2857,7 @@ ON = 1 //nabidka 10k
 if (<src.RESTEST 10000 i_gold>)
  src.CONSUME = 10000 i_gold
  src.qtag(q007_Rodrigo,1)
- if (<src.qtag(q007_delfin)> == 1)
+ if (<eval src.qtag(q007_delfin)> == 1)
   DIALOG(d_q007_rodrigo_informace2)
  else
   DIALOG(d_q007_rodrigo_informace)

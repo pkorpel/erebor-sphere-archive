@@ -343,6 +343,10 @@ arg(rndnumb,<eval {<eval arg(firstnumb)*60> <eval arg(secondnumb)*60>}>)
 timer=<arg(rndnumb)>
 
 [function respawncertain] //args - id monster
+if (account.plevel < 6)
+  redmessage("Na pouziti tohoto prikazu nemas opravneni!")
+  return 1
+endif
 if (strlen(<args>))
  nukeall(respawnspawns(<args>))
 else

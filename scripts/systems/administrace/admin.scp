@@ -7,20 +7,26 @@ var(pocethracuvrealmu[-1],0)
 var(pocethracuvrealmu[1],0)
 var(pocethracuvrealmu[2],0)
 var(pocethracuvtutorialu,0)
+var(pocetgmonline,0)
 serv.ALLCLIENTS(f_spocitejmordoryagnodory)
 sysmessage("Mordorskych vyvrhelu: <var(pocethracuvrealmu[-2])>")
 sysmessage("Gondorskych vyvrhelu: <var(pocethracuvrealmu[-1])>")
 sysmessage("Gondoru: <var(pocethracuvrealmu[1])>")
 sysmessage("Mordoru: <var(pocethracuvrealmu[2])>")
 sysmessage("Nbiku v tutorialu: <var(pocethracuvtutorialu)>")
+if (<account.plevel> >= 6)
+  sysmessage("GMek online: <var(pocetgmonline)>")
+endif
 
 [function f_spocitejmordoryagnodory]
 if !(isGM)
-  if (strcmpi(<region.name>,"tutorial"))
-    var(pocethracuvrealmu[<tag.realm>],#+1)
+  if (<eval tag(realm)>)
+    var(pocethracuvrealmu[<eval tag.realm>],#+1)
   else
     var(pocethracuvtutorialu,#+1)
   endif
+else
+  var(pocetgmonline,#+1)
 endif
 
 [function admin]

@@ -339,6 +339,7 @@ tag(resist_blunt,350)
 tag(resist_fire,900)
 tag(resist_elect,300)
 tag(resist_cold,-400)   //mraz ano
+tag(resist_silence,300)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -635,6 +636,7 @@ tag(resist_blunt,-500)
 tag(resist_fire,900)
 tag(resist_elect,300)
 tag(resist_cold,-400)   //mraz ano
+tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -830,6 +832,7 @@ tag(resist_blunt,-700)   //ice verze
 tag(resist_fire,-800)
 tag(resist_elect,300)
 tag(resist_cold,800)     //ice verze
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -882,6 +885,7 @@ TEVENTS=e_parakrik
 TEVENTS=e_phoenix_fire
 TEVENTS=e_summoneater
 TEVENTS=e_npc_curse
+TEVENTS=e_npc_magicshield
 
 CATEGORY=Monsters
 SUBSECTION=Demoni
@@ -897,11 +901,12 @@ str=5000
 dex=300
 int={290 300}
 
-maxhits={15000 17000}
+maxhits={9000 10200}
 maxstam={250 350}
 maxmana=2000
 
 tag.experience=<eval {400.0 420.0}>
+tag.npc_magicshield=80
 
 tag.npc_curse_chance=250          // 25% chance to trigger this event
 tag.npc_curse_delay=15,20         // delay between another possible strike
@@ -932,6 +937,7 @@ tag(resist_blunt,650)
 tag(resist_fire,900)
 tag(resist_elect,300)
 tag(resist_cold,-600)   //mraz ano
+tag(resist_silence,450)
 
 //typ monstra
 tag(monstertype,daemon)
@@ -1030,7 +1036,8 @@ tag(resist_blunt,-500)      //unbdead
 //magic resists
 tag(resist_fire,-700)       // undead
 tag(resist_elect,300)
-tag(resist_cold,400)      
+tag(resist_cold,400)
+tag(resist_silence,450)      
 
 //typ monstra
 tag(monstertype,daemon,60)
@@ -1183,6 +1190,7 @@ TEVENTS=e_parakrik
 TEVENTS=e_explosiondispell
 TEVENTS=e_npc_curse
 TEVENTS=e_npc_bleed
+TEVENTS=e_npc_magicshield
 //TEVENTS=e_phoenix_fire
 
 CATEGORY=Monsters
@@ -1199,11 +1207,12 @@ str=5000
 dex={276 350}
 int=300
 
-maxhits={25000 26000}
+maxhits={16250 16900}
 maxstam={376 450}
 maxmana=0
 
 tag.experience=<eval {750.0 770.0}>
+tag.npc_magicshield=70
 
 tag.npc_bleed=300             //30%
 
@@ -1241,6 +1250,7 @@ tag(resist_blunt,750)
 tag(resist_fire,900)
 tag(resist_elect,100)
 tag(resist_cold,-300)   //mraz ano
+tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,daemon)

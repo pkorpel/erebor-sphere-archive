@@ -373,6 +373,7 @@ if (ISMYPET)
   say Dnes pro tebe nemam zadne penize...
  else
   src.findlayer(29).givegold(<tag.gold>)
+  src.accmsg("vybral <tag(gold)> zlata z vendora <name>(<uid>); (<src.p>)")
   say Dostal jsi <tag.gold> zlata.
   tag(gold,0)
  endif
@@ -394,6 +395,7 @@ if (ISMYPET)
   act.name="Collected from <?name?>"
   act.logcont=<src.findlayer(29)>
   findID(i_buyer_goods_box).contents(collectgoods(<act>))
+  src.accmsg("vybral nakoupene zbozi z vendora <name>(<uid>). Vacek s vecmi je <act.name>(<act>)")
   say Nakoupene zbozi najdes v bance.
  else
   say Dnes pro tebe nemam zadne zbozi.
@@ -443,6 +445,7 @@ if (checkvendordialog) //neni otevrene menu jineho vendora?
   return 1
 endif
 checkvendor
+src.accmsg("otevrel nabidku SELL od vendora <name>(<uid>) a majetkem <eval tag(gold)>gp na pozici <src.p>")
 vendorspk_sell
 on=*poptav*
 on=*desire*
@@ -495,7 +498,7 @@ endif
 if(!tag(pure))
  return 0
 else
- if (<src.tag(realm)>==<finduid(<tag(mainowner)>).tag(realm)>)||(src.isgm)
+ if (<eval src.tag(realm)>==<finduid(<tag(mainowner)>).tag(realm)>)||(src.isgm)
   //kermel.sysmessage(src:<src.tag(realm)>, maj:<finduid(<tag(mainowner)>).tag(realm)>)
   return 0
  else
@@ -1334,6 +1337,7 @@ if (link.isVendorInactive)
   return 0
 endif
 if (src.targ.topobj.uid==src.uid)&&(src.targ.cont.uid!=src.uid)
+src.accmsg("se snazil pridat do prodeje <src.targ.name>(<src.targ> ; <src.targ.BaseID>) v poctu <src.targ.amount>ks")
  if (<src.targ.attr>&0b0d4)
   src.sysMessage("Tohle nemuzes prodat.")
  elseif (<src.targ.attr>&attr_stolen)
@@ -1928,7 +1932,7 @@ if (link)
  if (link.isitem)
   if (tag(oamount)!=link.amount)
     src.sysmessage("bugere bugerska - desired amount <tag(oamount)>, supplied <link.amount>")
-    src.accmessage("bugere bugerska - desired amount <tag(oamount)>, supplied <link.amount>")
+    src.accmsg("bugere bugerska - desired amount <tag(oamount)>, supplied <link.amount>")
     //src.jail
     return 1
   elseif (link.topobj!=src)
@@ -1939,7 +1943,7 @@ if (link)
 else
  //src.jail
  src.sysmessage("bugere bugerska - desired amount <tag(oamount)>, supplied <link.amount>")
- src.accmessage("bugere bugerska - desired amount <tag(oamount)>, supplied <link.amount>")
+ src.accmsg("bugere bugerska - desired amount <tag(oamount)>, supplied <link.amount>")
  remove
  return 1
 endif
@@ -1949,6 +1953,7 @@ arg(gold_this,<eval (<tag.price>*(100+<var(tagboxuid).link.tag.provize>))/100>)
 
 if (arg(gold_this)<0)
   src.sysmessage("Vysledna cena je mimo funkcni rozsah, zkus prodavat po mensim mnozstvi")
+  src.accmsg("se pokusil prodat u vendora <var(tagboxuid).link.name>(<var(tagboxuid).link>) <link.amount>x <link.name>(<link>) za castku, ktera pretekla do zaporu (<arg(gold_this)>)")
   remove
   return 0
 endif
@@ -1961,12 +1966,14 @@ if (gold_max>=gold_this)
  endif
  if (arg(nextlimit)>=0)
   if (link.isitem)
+   src.accmsg("prodal item vendorovi <var(tagboxuid).link.name>(<var(tagboxuid).link>) <link.amount>x <link.name>(<link>) za castku <tag(price)> gp")
    if (link.type==t_container)
     contents(bounce)
    endif
    link.logcont=<var(tagboxuid).link.findID(i_buyer_goods_box)>
    link.updatex
   else
+   src.accmsg("prodal npc vendorovi <var(tagboxuid).link.name>(<var(tagboxuid).link>) <link.amount>x <link.name>(<link>) za castku <tag(price)> gp")
    logcont=<src.findID(i_buyer_tag_box).link.findID(i_buyer_goods_box)>
    link.disconnect
    link.flags=<link.flags>|statf_ridden

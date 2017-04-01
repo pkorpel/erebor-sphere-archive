@@ -647,12 +647,12 @@ tag(imi_value[103], 3)  //humanoidi
 
 [function wimmimate_mif]
 tag(imi_value[101], 7)  //demoni
-tag(imi_value[102], 7)  //draci
+tag(imi_value[104], 7)  //spiders+animals
 tag(imi_value[103], 7)  //humanoidi
 
 [function red_roan_mif]
 tag(imi_value[101], 9)  //demoni
-tag(imi_value[102], 9)  //draci
+tag(imi_value[105], 9)  //eyes+golems
 tag(imi_value[103], 9)  //humanoidi
 
 [function chocolate_mif]
@@ -694,7 +694,7 @@ tag(imi_value[103], 25)  //humanoidi
 
 [function black_mif]
 tag(imi_value[101], 20)  //demoni
-tag(imi_value[102], 20)  //draci
+tag(imi_value[104], 20)  //spiders+animals
 tag(imi_value[103], 20)  //humanoidi
 //tag(imi_value[135], 10) //blok z dalky
 tag(imi_value[21], 5)   //hiding
@@ -737,16 +737,16 @@ tag(imi_value[135], 10)  //blok z dalky
 //tag(imi_value[136], 5)  //blok kouzel
 
 [function ridgeback_mif]
-tag(imi_value[101], 10)  //demoni
-tag(imi_value[102], 10)  //draci
+tag(imi_value[104], 10)  //spiders+animals
+tag(imi_value[105], 10)  //eyes+golems
 tag(imi_value[103], 10)  //humanoidi
 tag(imi_value[134], 2)  //blok z blizka
 tag(imi_value[135], 4)  //blok z dalky
 
 [function ridgeback_savage_mif]
-tag(imi_value[101], 10)  //demoni
-tag(imi_value[102], 10)  //draci
-tag(imi_value[103], 10)  //humanoidi
+tag(imi_value[104], 15)  //spiders+animals
+tag(imi_value[105], 15)  //eyes+golems
+tag(imi_value[103], 15)  //humanoidi
 tag(imi_value[134], 3)  //blok z blizka
 tag(imi_value[135], 8)  //blok z dalky
 return

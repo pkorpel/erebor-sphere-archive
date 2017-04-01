@@ -895,6 +895,7 @@ on=@hittry
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect 
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 
@@ -1088,6 +1089,7 @@ tag(resist_blunt,50)
 tag(resist_fire,-50)
 tag(resist_elect,-50)
 tag(resist_cold,100)
+tag(resist_silence,450)
 
 //typ monstra
 tag(monstertype,humanoid)
@@ -1780,6 +1782,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,600)
 tag(resist_elect,-150)
 tag(resist_cold,100)
+tag(resist_silence,400)
 
 peacemaking=100.0
 provocation=100.0
@@ -1863,6 +1866,7 @@ tag(resist_blunt,-150)
 tag(resist_fire,600)
 tag(resist_elect,-150)
 tag(resist_cold,100)
+tag(resist_silence,400)
 
 peacemaking=100.0
 provocation=100.0

@@ -17,57 +17,57 @@ weaponcreate(valorite)
 
 on=@targon_item
 if (src.act.id==i_flesh_head)||(src.act.id==i_flesh_HEAD_2)
- woodoo(4)
+  woodoo(4)
 endif
 if (f_weapon_sharp_targon_item)
   return 1
 endif
 if (src.targ.id==i_reag_blood_vial) && (src.targ.amount >= 50) && (src.targ.type==t_reagent)
- src.sysmessage("Pokryl jsi dyku krvi demonu.")
- src.consume(i_reag_blood_vial,50)
- tag(deamonblood,50)
- return 1
+  src.sysmessage("Pokryl jsi dyku krvi demonu.")
+  src.consume(i_reag_blood_vial,50)
+  tag(deamonblood,50)
+  return 1
 endif
 if (src.targ.id==i_reag_dragon_blood) && (src.targ.amount >= 50) && (src.targ.type==t_reagent)
- src.sysmessage("Pokryl jsi dyku draci krvi.")
- src.consume(i_reag_dragon_blood,50)
- tag(dragonblood,50)
- return 1
+  src.sysmessage("Pokryl jsi dyku draci krvi.")
+  src.consume(i_reag_dragon_blood,50)
+  tag(dragonblood,50)
+  return 1
 endif
 if (src.targ.link)
- if (src.targ.link.isplayer)&&(src.targ.type==t_corpse)
-  addflesh
-  return 1
- endif
+  if (src.targ.link.isplayer)&&(src.targ.type==t_corpse)
+    addflesh
+    return 1
+  endif
 endif
 
 on=@targon_char
-if (<src.targ.uid>==<src.uid>) && (src.tag(class)==shaman) && (tag(dragonblood) > 1) && (tag(deamonblood) > 1)
- //src.bloodritual
- tag(dragonblood,#-1)
- tag(deamonblood,#-1)
- return 1
-elseif (<src.targ.uid>==<src.uid>) && (src.tag(class)==shaman) && (tag(dragonblood) < 1)
-src.sysmessage("Dyka ztratila svuj magicky ucinek.")
-return 1
-elseif (<src.targ.uid>==<src.uid>) && (src.tag(class)==shaman) && (tag(deamonblood) < 1)
-src.sysmessage("Dyka ztratila svuj magicky ucinek.")
-return 1
+if (<src.targ.uid>==<src.uid>) && (src.tag(class)==shaman) && (<eval tag(dragonblood)> > 1) && (<eval tag(deamonblood)> > 1)
+  //src.bloodritual
+  tag(dragonblood,#-1)
+  tag(deamonblood,#-1)
+  return 1
+elseif (<src.targ.uid>==<src.uid>) && (src.tag(class)==shaman) && (<eval tag(dragonblood)> < 1)
+  src.sysmessage("Dyka ztratila svuj magicky ucinek.")
+  return 1
+elseif (<src.targ.uid>==<src.uid>) && (src.tag(class)==shaman) && (<eval tag(deamonblood)> < 1)
+  src.sysmessage("Dyka ztratila svuj magicky ucinek.")
+  return 1
 else
- return 1
+  return 1
 endif
 
 on=@userclick
-if (tag(dragonblood) > 0) && (tag(deamonblood) > 0)
-src.sysmessage("Dyka je pokryta krvi draku a demonu. Je pripravena k obradum.")
-return 0
+if (<eval tag(dragonblood)> > 0) && (<eval tag(deamonblood)> > 0)
+  src.sysmessage("Dyka je pokryta krvi draku a demonu. Je pripravena k obradum.")
+  return 0
 endif
-if (tag(dragonblood) > 0)
-src.sysmessage("Dyka je pokryta krvi draku.")
-elseif (tag(deamonblood) > 0)
-src.sysmessage("Dyka je pokryta krvi demonu.")
+if (<eval tag(dragonblood)> > 0)
+  src.sysmessage("Dyka je pokryta krvi draku.")
+elseif (<eval tag(deamonblood)> > 0)
+  src.sysmessage("Dyka je pokryta krvi demonu.")
 else 
-return 0
+  return 0
 endif
 
 [ITEMDEF i_club_valorite]

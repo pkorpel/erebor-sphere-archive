@@ -19,6 +19,7 @@ endif
 
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 
@@ -56,6 +57,7 @@ var(ubrano,<var(ubrano)>-<arg(uber)>)
 
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 
@@ -73,6 +75,7 @@ on=@beforegeteffect
 stam=<eval (<stam>+1)>
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -90,6 +93,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
@@ -116,6 +120,7 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -234,6 +239,7 @@ on=@afterswing
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [itemdef i_ovinovaccheck]
 ID=i_memory
@@ -274,6 +280,10 @@ return 1
 
 [EVENTS e_looter]
 on=@ItemStep
+if (isSleeping)
+  return 0
+endif
+
 if (act.type==t_corpse) //108 ... t_corpse (pripadne lze "if(act.type==NID(t_corpse))")
   if (act.rescount)
     SRC.SAY Helemese co jsem nasel
@@ -389,8 +399,7 @@ timer=3600
 
 on=@timer
 topobj.events=-e_selfreser
-topobj.hits=0
-remove
+topobj.remove
 
 [events e_npc_reactivearmor] 
 on=@aftergetswing 
@@ -413,6 +422,7 @@ on=@DrinkingPotion
 on=@beforegetswing
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 
 [events e_elem_terror]
 on=@death
@@ -469,10 +479,6 @@ arg(timerr).timer=<eval arg(resstimer)>
 arg(timerr).p=<p>
 arg(timerr).removefromview
 
-on=@gethit
-if (flag_spawned)
-  z=<memoryfindtype(MEMORY_ISPAWNED).link.z>
-endif
 
 [function undeadhandler]
 if (src.brain==13)
@@ -573,6 +579,7 @@ endif
 on=@afterswing 
 on=@beforegetswing
 on=@beforedoeffect 
+on=@afterDoEffect
 on=@beforegeteffect
 
 [EVENTS e_berserk_potvora] 
@@ -582,26 +589,26 @@ if (hits<(maxhits))&&(tag(start)==1)&&(!(tag(jedem)))
   tag(jedem,1)
   tag(dex_default,<dex>)
   tag(npc_speed_default,<eval tag(npc_speed)>)
-elseif (hits< ((maxhits*7)/10))&&(tag(jedem)==1) 
+elseif (hits< ((maxhits*8)/10))&&(tag(jedem)==1) 
   dex=350
   tag(jedem,2) 
   tag(npc_speed,900) 
-  f_reduceDmgResists(200)
+  f_reduceDmgResists(100)
   temporary_null 
   emote("zacina zurive utocit a prestava se branit") 
-elseif (hits<((maxhits*4)/10))&&(tag(jedem)==2) 
+elseif (hits<((maxhits*5)/10))&&(tag(jedem)==2) 
   tag(jedem,3) 
   tag(npc_speed,1800) 
-  f_reduceDmgResists(300)
+  f_reduceDmgResists(200)
   temporary_null 
   emote("se prestava ovladat") 
 elseif (hits<((maxhits*25)/100))&&(tag(jedem)==3) 
   tag(jedem,4) 
   tag(npc_speed,6000)
-  f_reduceDmgResists(500) 
+  f_reduceDmgResists(400) 
   temporary_null 
   emote("propadl silenstvi")
-elseif (hits>((maxhits*71)/100))&&(tag(jedem)>1) 
+elseif (hits>((maxhits*81)/100))&&(tag(jedem)>1) 
   dex=<eval tag(dex_default)>
   tag(jedem,1) 
   tag(npc_speed,<eval tag(npc_speed_default)>)
@@ -614,6 +621,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function f_reduceDmgResists]
@@ -674,6 +682,7 @@ if (rand(6)==1)&&(src.hits<=25)
 endif
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 on=@spelleffect
@@ -785,6 +794,7 @@ endif
   endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -845,7 +855,7 @@ if (findlayer.layer_horse)
     classmessage("V sedle nejsi <sex schopen schopna> s touto kusi dobre manipulovat")
   endif
 else (action==Skill_archery)
-  if (chance(<eval (<tag(ra_bleed_bolt)>*45)>,3))
+  if (chance(<eval (<eval tag(ra_bleed_bolt)>*45)>,3))
     arg(arrowTypeNumber,<eval (<eval findtype(<tag(weaponuid).typedef.tdata3>).typedef.tdata1>+25)>) //the bleed bonus settings is moved by 25 positions, see nastaveni.scp:n_arrows for more detailed view
     arg(boltMaterial_BleedCoefficient,<nastaveni_arrowdamage_<eval arg(arrowTypeNumber)>>)
     arg(UC2BleedPower_Coefficient,<eval (<nastaveni_bleed_bolt>*<arg(boltMaterial_BleedCoefficient)>)/1000>)
@@ -854,6 +864,7 @@ else (action==Skill_archery)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -871,6 +882,7 @@ if (rand(2)==1)
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@aftergetswing
 on=@beforegeteffect
 
@@ -891,6 +903,7 @@ if (act.isplayer)
  endif
 endif
 
+on=@afterDoEffect
 on=@beforeGetSwing
 on=@aftergetswing
 on=@beforegeteffect
@@ -898,6 +911,10 @@ on=@beforegeteffect
 [events e_npc_summoner]
 on=@beforeGetSwing
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if rand(20)==1
   SAY("Heru Ruin Val")
   arg(i,0)
@@ -917,10 +934,15 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_npc_summoning]
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if !(tag(npc_summoning_chance))
   tag(npc_summoning_chance,50)  //5.0%
 endif
@@ -963,10 +985,15 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_explosiondispell]
 on=@gethit
+if (isSleeping)
+  return 0
+endif
+
 f_explosiondispell_setVars
 if (chance(<tag(e_explosiondispell_chance)>,3))
   arg(server_time,<fixnumber((<serv.time>/10))>)  //server time v sekundach
@@ -990,6 +1017,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function f_explosiondispell_setVars]
@@ -1011,6 +1039,10 @@ endif
 
 [events e_pushall]
 on=@gethit
+if (isSleeping)
+  return 0
+endif
+
 if (chance(<tag(e_pushall_chance)>,3))
   arg(server_time,<fixnumber((<serv.time>/10))>)  //server time v sekundach
   arg(rozdiel,<fixnumber(<server_time>-<tag(e_pushall_last_time)>)>)
@@ -1027,6 +1059,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function f_pushall_setVars]
@@ -1046,6 +1079,10 @@ endif
 
 [events e_pullall]
 on=@gethit
+if (isSleeping)
+  return 0
+endif
+
 f_pullall_setVars
 if (chance(<tag(e_pullall_chance)>,3))
   arg(server_time,<eval (<serv.time>/10)>)  //server time v sekundach
@@ -1062,6 +1099,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswming
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function f_pullall_setVars]
@@ -1081,6 +1119,10 @@ endif
 
 [events e_npc_summoning2]
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if (strlen(<tag(npc_summoning2_chance)>) == 0)
   tag(npc_summoning2_chance,50)  //default 5% chance
 endif
@@ -1113,6 +1155,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_managain]
@@ -1139,6 +1182,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_npc_nobody]
@@ -1163,6 +1207,7 @@ if (chance(<tag(stam_dmg_chance)>,3))
 	reducestamina(<tag(stam_dmg_power)>)
 endif
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 // mass mana reduce
@@ -1176,9 +1221,13 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
 e_f_npc_curse_mana
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function e_f_npc_curse_mana]
@@ -1261,9 +1310,13 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
 e_f_npc_curse_stam
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [function e_f_npc_curse_stam]
@@ -1451,6 +1504,22 @@ else
     hits = <maxhits>
   endif
 endif
+
+[events e_no_player_attack] 
+on=@HitTry
+if (act.isPlayer)
+  if !(<eval tag(napaden_hracem)>)
+    removefight
+    return 1
+  endif
+endif
+
+on=@GetHit
+if (src.isPlayer)
+  tag(napaden_hracem,1)
+  act.attack
+endif
+
 
 [events e_npc_golddrop] 
 on=@gethit

@@ -1,7 +1,7 @@
 /////////////QUEST S LOVENIM POTVOR///////////////
 
 [itemdef i_sign_gquest]
-id=i_sign_blank
+id=0340D
 name=Vyhlaska
 type=00
 
@@ -235,14 +235,13 @@ on=@timer
 remove
 
 [function signnewquest]
-if ({1 100}>8)
-  dorand(46)
+if ({1 100}>33)
+  dorand(39)
     fq_Vlci
     fq_Medvedi
     fq_Drapac
     fq_troll
     fq_Krvavy_drapac
-    fq_Hellcat
     fq_Phoenix
     fq_Vlkodaf
     fq_Gargoyle
@@ -259,46 +258,52 @@ if ({1 100}>8)
     fq_Titan_lord
     fq_Titan_mage
     fq_Titanka
-    fq_Eye_Iron
-    fq_Golem_copper
-    fq_Golem_iron
+    fq_Golem_Low
     fq_Brouci_low
     fq_Brouci_mid
     fq_Brouci_high
-    fq_Corpser
     fq_Lizard_king
     fq_Lizardman
     fq_Ratman_low
     fq_Ratman_high
     fq_Cerna_vdova
-    fq_Fire_spider
-    fq_Black_spider
+    fq_Spider
     fq_Liche
-    fq_Stone_mummy
-    fq_Spider_king
-    fq_spider_queen
+    fq_Mummy_High
+    fq_Spider_Royal
     fq_Spirit_copper
     fq_Spirit_iron
     fq_wisp
-    fq_deathelem
-    fq_Zombie
-    fq_Spectre
+    fq_Undead_Low
+    fq_Terathan
   enddo
 else
-  dorand(13)
-    fq_Golem_gold
-    fq_Golem_silver
-    fq_Golem_verite
-    fq_Eye_Shadow
-    fq_Eye_Snow
-    fq_Skullhead
-    fq_Spirit_silver
-    fq_Spirit_gold
-    fq_Spirit_verite
-    fq_Spirit_valorite
+  dorand(25)
+    fq_Golem_High
+    fq_Elem_Earth
+    fq_Elem_Rock
+    fq_Skeleton_Axe
+    fq_Skeleton_Archer
+    fq_Skeleton_Mage
+    fq_Spirit_High
     fq_Tarantule
     fq_Brouci_hard
-    fq_Phoenix_Poison
+    fq_Beridor_War
+    fq_Beridor_Mage
+    fq_Beridor_Archer
+    fq_Snow_Warrior
+    fq_Snow_Mage
+    fq_Snow_Archer
+    fq_Elem_Snow
+    fq_Elem_Ice
+    fq_Serpent_Black
+    fq_Serpent_Gold
+    fq_Ophidian_Low
+    fq_Ophidian_High
+    fq_Scorpion_Giant
+    fq_Scorpion_Prince
+    fq_Scorpion_Queen
+    fq_Scorpion_King
   enddo  
 endif
 
@@ -329,51 +334,37 @@ endif
 [function fq_Drapac]
 if !(tag(hunted)==c_drapac)
   tag(hunted,c_drapac)
+  tag(hunteda,c_drapac_skokan)
+  tag(huntedb,c_drapac_hnilobny)
   tag(huntedexperience,50)
   tag(huntedgold,80)
   tag(hlaska,fq_Drapac)
 else
-  say("Dnes se vyhlasuje lovenou stvurou premnozeny Drapac.")
+  say("Dnes se vyhlasuje lovenou stvurou premnozeny Drapac, Hnilobny Drapac a Skokan.")
 endif
 
 [function fq_Krvavy_drapac]
 if !(tag(hunted)==c_drapac_blood)
   tag(hunted,c_drapac_blood)
+  tag(hunteda,c_drapac_snow)
+  tag(huntedb,c_drapac_ice)
   tag(huntedexperience,60)
   tag(huntedgold,80)
   tag(hlaska,fq_Krvavy_drapac)
 else
-  say("Dnes se vyhlasuje lovenou stvurou premnozeny Krvavy Drapac.")
-endif
-
-[function fq_Hellcat]
-if !(tag(hunted)==c_hellcat)
-  tag(hunted,c_hellcat)
-  tag(huntedexperience,18)
-  tag(huntedgold,40)
-  tag(hlaska,fq_Hellcat)
-else
-  say("Dnes je treba lovit stvuru zvanou Hellcat.")
+  say("Dnes se vyhlasuje lovenou stvurou premnozeny Krvavy, Snezny a Ledovy Drapac.")
 endif
 
 [function fq_Phoenix]
 if !(tag(hunted)==c_m_phoenix)
   tag(hunted,c_m_phoenix)
-  tag(huntedexperience,80)
-  tag(huntedgold,120)
+  tag(hunteda,c_m_phoenix_poison)
+  tag(huntedb,c_m_phoenix_fire)
+  tag(huntedexperience,110)
+  tag(huntedgold,140)
   tag(hlaska,fq_Phoenix)
 else
-  say("Dnes je treba lovit Phoenixe.")
-endif
-
-[function fq_Phoenix_Poison]
-if !(tag(hunted)==c_m_phoenix_poison)
-  tag(hunted,c_m_phoenix_poison)
-  tag(huntedexperience,120)
-  tag(huntedgold,140)
-  tag(hlaska,fq_Phoenix_Poison)
-else
-  say("Dnes je treba lovit Poison Phoenixe.")
+  say("Dnes je treba lovit Phoenixe, vsechny jeho druhy.")
 endif
 
 [function fq_Vlkodaf]
@@ -439,18 +430,19 @@ endif
 [function fq_Cyclop]
 if !(tag(hunted)==c_cyclops)
   tag(hunted,c_cyclops)
+  tag(hunteda,c_cyclops_mage)
   tag(huntedexperience,60)
   tag(huntedgold,100)
   tag(hlaska,fq_Cyclop)
 else
-  say("Jdete a zbavte nas co nejvice Cyclopu! Cyclopum jsme rekli NE!")
+  say("Jdete a zbavte nas co nejvice Cyclopu a jejich magu! Cyclopum jsme rekli NE!")
 endif
 
 [function fq_Cyclop_king]
 if !(tag(hunted)==c_cyclops_king)
   tag(hunted,c_cyclops_king)
-  tag(huntedexperience,80)
-  tag(huntedgold,120)
+  tag(huntedexperience,110)
+  tag(huntedgold,140)
   tag(hlaska,fq_Cyclop_king)
 else
   say("Jdete a zbavte nas co nejvice Cyclop Kingu! Jsou to zabijacke stvury!")
@@ -508,84 +500,50 @@ else
   say("Jdete a zbavte nas co nejvice Titan Lordu! Jsou to zabijacke stvury!")
 endif
 
-[function fq_Eye_Iron]
-if !(tag(hunted)==c_eye_iron)
-  tag(hunted,c_eye_iron)
-  tag(huntedexperience,15)
-  tag(huntedgold,40)
-  tag(hlaska,fq_Eye_Iron)
-else
-  say("Odmenime vas kdyz dnes zabijete co nejvice Iron Eye!")
-endif
-
-[function fq_Eye_Shadow]
-if !(tag(hunted)==c_eye_shadow)
-  tag(hunted,c_eye_shadow)
-  tag(huntedexperience,50)
-  tag(huntedgold,75)
-  tag(hlaska,fq_Eye_Shadow)
-else
-  say("Dnes se pokuste ulovit strasliva Shadow Eye!")
-endif
-
-[function fq_Eye_Snow]
-if !(tag(hunted)==c_eye_snow)
-  tag(hunted,c_eye_snow)
-  tag(huntedexperience,30)
+[function fq_Elem_Earth]
+if !(tag(hunted)==c_elem_earth)
+  tag(hunted,c_elem_earth)
+  tag(hunteda,c_elem_earth_elder)
+  tag(huntedb,c_elem_earth_terror)
+  tag(huntedexperience,20)
   tag(huntedgold,50)
-  tag(hlaska,fq_Eye_Snow)
+  tag(hlaska,fq_Elem_Earth)
 else
-  say("Odmenime vas kdyz dnes zabijete co nejvice Snow Eye!")
+  say("Dnes se pokuste ulovit Elementaly Zeme!")
 endif
 
-[function fq_Golem_copper]
+[function fq_Elem_Rock]
+if !(tag(hunted)==c_elem_rock)
+  tag(hunted,c_elem_rock)
+  tag(huntedexperience,30)
+  tag(huntedgold,75)
+  tag(hlaska,fq_Elem_Rock)
+else
+  say("Odmenime vas kdyz dnes zabijete co Elementalu Kamene!")
+endif
+
+[function fq_Golem_Low]
 if !(tag(hunted)==c_Golem_copper)
   tag(hunted,c_Golem_copper)
+  tag(hunteda,c_Golem_iron)
+  tag(huntedb,c_Golem_silver)
   tag(huntedexperience,100)
   tag(huntedgold,100)
-  tag(hlaska,fq_Golem_copper)
+  tag(hlaska,fq_Golem_Low)
 else
-  say("Dnes je vyhlasen lov Copper Golema!")
+  say("Dnes je vyhlasen lov Copper, Iron a Silver Golema!")
 endif
 
-[function fq_Golem_iron]
-if !(tag(hunted)==c_Golem_iron)
-  tag(hunted,c_Golem_iron)
-  tag(huntedexperience,120)
-  tag(huntedgold,120)
-  tag(hlaska,fq_Golem_iron)
-else
-  say("Dnes je vyhlasen lov Iron Golema!")
-endif
-
-[function fq_Golem_silver]
-if !(tag(hunted)==c_Golem_silver)
-  tag(hunted,c_Golem_silver)
-  tag(huntedexperience,140)
-  tag(huntedgold,120)
-  tag(hlaska,fq_Golem_silver)
-else
-  say("Dnes je vyhlasen lov Silver Golema!")
-endif
-
-[function fq_Golem_gold]
+[function fq_Golem_High]
 if !(tag(hunted)==c_Golem_golden)
   tag(hunted,c_Golem_golden)
+  tag(hunteda,c_Golem_verite)
+  tag(huntedb,c_Golem_valorite)
   tag(huntedexperience,160)
   tag(huntedgold,125)
-  tag(hlaska,fq_Golem_gold)
+  tag(hlaska,fq_Golem_High)
 else
-  say("Dnes je vyhlasen lov Gold Golema!")
-endif
-
-[function fq_Golem_verite]
-if !(tag(hunted)==c_Golem_verite)
-  tag(hunted,c_Golem_verite)
-  tag(huntedexperience,180)
-  tag(huntedgold,150)
-  tag(hlaska,fq_Golem_verite)
-else
-  say("Dnes je vyhlasen lov Verite Golema!")
+  say("Dnes je vyhlasen lov Gold, Verite a Valorite Golema!")
 endif
 
 [function fq_Brouci_low]
@@ -631,16 +589,6 @@ if !(tag(hunted)==c_bug_elite)
   tag(hlaska,fq_Brouci_hard)
 else
   say("Dnes je vyhlasen lov na matky brouku a elitni brouky!")
-endif
-
-[function fq_Corpser]
-if !(tag(hunted)==c_corpser)
-  tag(hunted,c_corpser)
-  tag(huntedexperience,30)
-  tag(huntedgold,35)
-  tag(hlaska,fq_Corpser)
-else
-  say("Corpseri zamoruji nas svet, zbavte nas jich co nejrychleji! Dnesek je dnem boje proti Corsperum!")
 endif
 
 [function fq_Lizard_king]
@@ -692,11 +640,12 @@ endif
 if !(tag(hunted)==c_ratman_mage)
   tag(hunted,c_ratman_mage)
   tag(hunteda,c_ratman_ranger)
+  tag(hunteda,c_ratman_chief)
   tag(huntedexperience,20)
   tag(huntedgold,25)
   tag(hlaska,fq_RatMan_high)
 else
-  say("Otravni krysaci! Dnes je vyhlasen lov na krysaky magy a rangery!")
+  say("Otravni krysaci! Dnes je vyhlasen lov na krysaky magy, rangery a vudce!")
 endif
 
 [function fq_Cerna_vdova]
@@ -709,24 +658,16 @@ else
   say("Cerne vdovy zabijeji cestovatele cestujici lesy, vyhladte je!")
 endif
 
-[function fq_Fire_spider]
+[function fq_Spider]
 if !(tag(hunted)==c_spider_fire)
   tag(hunted,c_spider_fire)
+  tag(hunteda,c_spider_black)
+  tag(huntedb,c_spider_poison)
   tag(huntedexperience,30)
   tag(huntedgold,50)
-  tag(hlaska,fq_Fire_spider)
+  tag(hlaska,fq_Spider)
 else
-  say("Dnes je vyhlasen lov na Ohnive pavouky!")
-endif
-
-[function fq_Black_spider]
-if !(tag(hunted)==c_spider_black)
-  tag(hunted,c_spider_black)
-  tag(huntedexperience,20)
-  tag(huntedgold,50)
-  tag(hlaska,fq_Black_spider)
-else
-  say("Cerni pavouci zabijeji poutniky v lesech, nyni zabte vy je!")
+  say("Dnes je vyhlasen lov na Ohnive, Cerne a Zelene pavouky!")
 endif
 
 [function fq_Liche]
@@ -741,44 +682,39 @@ else
   say("Posledni dobou povstava cim dal vice Lichu, je treba zamezit teto hrozbe!")
 endif
 
-[function fq_Stone_mummy]
+[function fq_Mummy_High]
 if !(tag(hunted)==c_mummy_stone)
   tag(hunted,c_mummy_stone)
-  tag(huntedexperience,60)
-  tag(huntedgold,100)
-  tag(hlaska,fq_Stone_mummy)
+  tag(hunteda,c_mummy_blood)
+  tag(huntedb,c_mummy_adamantinum)
+  tag(huntedexperience,70)
+  tag(huntedgold,120)
+  tag(hlaska,fq_Mummy_High)
 else
-  say("Dnes je vyhlasen lov na Stone Mummy!")
+  say("Dnes je vyhlasen lov na vzacne mumie. Kamenne, Krvave a Adamantinove!")
 endif
 
-[function fq_Spider_king]
-if !(tag(hunted)==c_spider_king)
-  tag(hunted,c_spider_king)
-  tag(huntedexperience,50)
-  tag(huntedgold,75)
-  tag(hlaska,fq_Spider_king)
-else
-  say("Dnes je lovnou stvurou Spider king!")
-endif
-
-[function fq_spider_queen]
+[function fq_Spider_Royal]
 if !(tag(hunted)==c_spider_queen)
   tag(hunted,c_spider_queen)
-  tag(huntedexperience,55)
-  tag(huntedgold,75)
-  tag(hlaska,fq_Spider_queen)
+  tag(hunteda,c_spider_king)
+  tag(huntedexperience,70)
+  tag(huntedgold,110)
+  tag(hlaska,fq_Spider_Royal)
 else
-  say("Dnes je lovnou stvurou Spider queen!")
+  say("Dnes je lovnou stvurou Spider Queen a King!")
 endif
 
 [function fq_Tarantule]
 if !(tag(hunted)==c_Tarantule)
   tag(hunted,c_Tarantule)
-  tag(huntedexperience,90)
-  tag(huntedgold,120)
+  tag(hunteda,c_Tarantule_shadow)
+  tag(huntedb,c_Tarantule_snow)
+  tag(huntedexperience,130)
+  tag(huntedgold,160)
   tag(hlaska,fq_Tarantule)
 else
-  say("Premnozily se Tarantule, znicte jich co nejvice!")
+  say("Premnozily se Tarantule a to i Snezne a Stinove, znicte jich co nejvice!")
 endif
 
 [function fq_Spirit_copper]
@@ -801,44 +737,40 @@ else
   say("Dnes je vyhlasen lov na Iron Spirity!")
 endif
 
-[function fq_Spirit_silver]
-if !(tag(hunted)==c_Spirit_silver)
-  tag(hunted,c_Spirit_silver)
-  tag(huntedexperience,70)
-  tag(huntedgold,140)
-  tag(hlaska,fq_Spirit_silver)
+[function fq_Skeleton_Archer]
+if !(tag(hunted)==c_skeleton_archer)
+  tag(hunted,c_skeleton_archer)
+  tag(hunteda,c_skeleton_archer_lvl_2)
+  tag(huntedb,c_skeleton_archer_lvl_3)
+  tag(huntedexperience,19)
+  tag(huntedgold,20)
+  tag(hlaska,fq_Skeleton_Archer)
 else
-  say("Dnes je vyhlasen lov na Silver Spirity")
+  say("Dnes je vyhlasen lov na slabsi kostene Lucistniky")
 endif
 
-[function fq_Spirit_gold]
-if !(tag(hunted)==c_Spirit_gold)
-  tag(hunted,c_Spirit_gold)
-  tag(huntedexperience,80)
-  tag(huntedgold,150)
-  tag(hlaska,fq_Spirit_gold)
+[function fq_Skeleton_Mage]
+if !(tag(hunted)==c_skeleton_mage)
+  tag(hunted,c_skeleton_mage)
+  tag(hunteda,c_skeleton_mage_lvl_2)
+  tag(huntedb,c_skeleton_mage_lvl_3)
+  tag(huntedexperience,19)
+  tag(huntedgold,20)
+  tag(hlaska,fq_Skeleton_Mage)
 else
-  say("Dnes je vyhlasen lov na Golden Spirity")
+  say("Dnes je vyhlasen lov na slabsi kostene Carodeje")
 endif
 
-[function fq_Spirit_verite]
+[function fq_Spirit_High]
 if !(tag(hunted)==c_Spirit_verite)
   tag(hunted,c_Spirit_verite)
+  tag(hunteda,c_Spirit_silver)
+  tag(huntedb,c_Spirit_valorite)
   tag(huntedexperience,90)
   tag(huntedgold,155)
-  tag(hlaska,fq_Spirit_verite)
+  tag(hlaska,fq_Spirit_High)
 else
-  say("Dnes je vyhlasen lov na Verite Spirity!")
-endif
-
-[function fq_Spirit_valorite]
-if !(tag(hunted)==c_Spirit_valorite)
-  tag(hunted,c_Spirit_valorite)
-  tag(huntedexperience,95)
-  tag(huntedgold,160)
-  tag(hlaska,fq_Spirit_valorite)
-else
-  say("Dnes je vyhlasen lov na Valorite Spirity!")
+  say("Dnes je vyhlasen lov na Verite, Valorite a Silver Spirity!")
 endif
 
 [function fq_wisp]
@@ -851,45 +783,28 @@ else
   say("Lovnou Stvurou je dnes Wisp!")
 endif
 
-[function fq_deathelem]
-if !(tag(hunted)==c_elem_death)
-  tag(hunted,c_elem_death)
-  tag(huntedexperience,24)
-  tag(huntedgold,50)
-  tag(hlaska,fq_deathelem)
-else
-  say("Znicte dnes co nejvice zkazonosnych Elementalu Smrti")
-endif
-
-[function fq_Skullhead]
-if !(tag(hunted)==c_skull_head)
-  tag(hunted,c_skull_head)
-  tag(hunteda,c_skull_head_mage)
+[function fq_Skeleton_Axe]
+if !(tag(hunted)==c_skeleton_axe)
+  tag(hunted,c_skeleton_axe)
+  tag(hunteda,c_skeleton_axe_lvl_2)
+  tag(huntedb,c_skeleton_axe_lvl_3)
   tag(huntedexperience,19)
   tag(huntedgold,20)
-  tag(hlaska,fq_Skullhead)
+  tag(hlaska,fq_Skeleton_Axe)
 else
-  say("Pobijte co nejvice nenavidenych Skullheadu!")
+  say("Pobijte co nejvice slabsich Kostlivcu Sekerniku!")
 endif
 
-[function fq_Zombie]
+[function fq_Undead_Low]
 if !(tag(hunted)==c_Zombie)
   tag(hunted,c_Zombie)
-  tag(huntedexperience,8)
+  tag(hunteda,c_spectre)
+  tag(huntedb,c_elem_death)
+  tag(huntedexperience,10)
   tag(huntedgold,20)
-  tag(hlaska,fq_Zombie)
+  tag(hlaska,fq_Undead_Low)
 else
-  say("Povstava prilis mnoho zombii, znicte jich dnes co nejvice hrdinni lovci!")
-endif
-
-[function fq_Spectre]
-if !(tag(hunted)==c_spectre)
-  tag(hunted,c_spectre)
-  tag(huntedexperience,11)
-  tag(huntedgold,20)
-  tag(hlaska,fq_Spectre)
-else
-  say("Odmenime vas kdyz dnes zabijete co nejvice Specter!")
+  say("Znicte nemrtve at jsme v bezpeci. Ulovte kazdou zombii, spektru a elementala smrti!")
 endif
 
 [function fq_troll]
@@ -915,6 +830,194 @@ if !(tag(hunted)==c_ettin)
 else
   say("Pobijte dnes co nejvice Ettinu!")
 endif
+
+[function fq_Beridor_War]
+if !(tag(hunted)==c_beridor_war)
+  tag(hunted,c_beridor_war)
+  tag(hunteda,c_beridor_war_f)
+  tag(huntedexperience,40)
+  tag(huntedgold,100)
+  tag(hlaska,fq_Beridor_War)
+else
+  say("Pobijte dnes co nejvice Beridorskych Valecniku!")
+endif
+
+[function fq_Beridor_Mage]
+if !(tag(hunted)==c_beridor_mage)
+  tag(hunted,c_beridor_mage)
+  tag(hunteda,c_beridor_mage_f)
+  tag(huntedexperience,40)
+  tag(huntedgold,100)
+  tag(hlaska,fq_Beridor_Mage)
+else
+  say("Pobijte dnes co nejvice Beridorskych Kouzelniku!")
+endif
+
+[function fq_Beridor_Archer]
+if !(tag(hunted)==c_beridor_archer)
+  tag(hunted,c_beridor_archer)
+  tag(hunteda,c_beridor_archer_f)
+  tag(huntedexperience,40)
+  tag(huntedgold,100)
+  tag(hlaska,fq_Beridor_Archer)
+else
+  say("Pobijte dnes co nejvice Beridorskych Lucistniku!")
+endif
+
+[function fq_Snow_Warrior]
+if !(tag(hunted)==c_snow_warrior_male_w)
+  tag(hunted,c_snow_warrior_male_w)
+  tag(hunteda,c_snow_warrior_female_w)
+  tag(huntedexperience,40)
+  tag(huntedgold,100)
+  tag(hlaska,fq_Snow_Warrior)
+else
+  say("Pobijte dnes co nejvice Sneznych Valecniku z Ledove Jeskyne!")
+endif
+
+[function fq_Snow_Mage]
+if !(tag(hunted)==c_snow_mage_male_w)
+  tag(hunted,c_snow_mage_male_w)
+  tag(hunteda,c_snow_mage_female_w)
+  tag(huntedexperience,40)
+  tag(huntedgold,100)
+  tag(hlaska,fq_Snow_Mage)
+else
+  say("Pobijte dnes co nejvice Sneznych Kouzelniku z Ledove Jeskyne!")
+endif
+
+[function fq_Snow_Archer]
+if !(tag(hunted)==c_snow_archer_male_w)
+  tag(hunted,c_snow_archer_male_w)
+  tag(hunteda,c_snow_archer_female_w)
+  tag(huntedexperience,40)
+  tag(huntedgold,100)
+  tag(hlaska,fq_Snow_Archer)
+else
+  say("Pobijte dnes co nejvice Sneznych Lucistniku z Ledove Jeskyne!")
+endif
+
+[function fq_Elem_Snow]
+if !(tag(hunted)==c_elem_snow)
+  tag(hunted,c_elem_snow)
+  tag(hunteda,c_elem_snow_mage)
+  tag(huntedb,c_elem_snow_archer)
+  tag(huntedexperience,15)
+  tag(huntedgold,30)
+  tag(hlaska,fq_Elem_Snow)
+else
+  say("Pobijte dnes co nejvice Sneznych Elementalu!")
+endif
+
+[function fq_Elem_Ice]
+if !(tag(hunted)==c_elem_ice)
+  tag(hunted,c_elem_ice)
+  tag(hunteda,c_elem_ice_mage)
+  tag(huntedb,c_elem_ice_archer)
+  tag(huntedexperience,15)
+  tag(huntedgold,30)
+  tag(hlaska,fq_Elem_Ice)
+else
+  say("Pobijte dnes co nejvice Ledovych Elementalu!")
+endif
+
+[function fq_Serpent_Black]
+if !(tag(hunted)==c_serpent_black)
+  tag(hunted,c_serpent_black)
+  tag(huntedexperience,10)
+  tag(huntedgold,20)
+  tag(hlaska,fq_Serpent_Black)
+else
+  say("Pobijte dnes co nejvice Cernych Serpentu!")
+endif
+
+[function fq_Serpent_Gold]
+if !(tag(hunted)==c_serpent_gold)
+  tag(hunted,c_serpent_gold)
+  tag(huntedexperience,10)
+  tag(huntedgold,20)
+  tag(hlaska,fq_Serpent_Gold)
+else
+  say("Pobijte dnes co nejvice Zlatych Serpentu!")
+endif
+
+[function fq_Ophidian_Low]
+if !(tag(hunted)==c_ophidian_warrior)
+  tag(hunted,c_ophidian_warrior)
+  tag(hunteda,c_ophidian_mage)
+  tag(huntedb,c_ophidian_knight)
+  tag(huntedexperience,55)
+  tag(huntedgold,85)
+  tag(hlaska,fq_Ophidian_Low)
+else
+  say("Pobijte dnes co nejvice Ophidian Valecniku, Magu a Rytiru!")
+endif
+
+[function fq_Ophidian_High]
+if !(tag(hunted)==c_ophidian_queen)
+  tag(hunted,c_ophidian_queen)
+  tag(hunteda,c_ophidian_king)
+  tag(huntedb,c_ophidian_archmage)
+  tag(huntedexperience,150)
+  tag(huntedgold,200)
+  tag(hlaska,fq_Ophidian_High)
+else
+  say("Pobijte dnes co nejvice Ophidian Kralu, Kraloven a Arcimagu!")
+endif
+
+[function fq_Scorpion_Giant]
+if !(tag(hunted)==c_scorpion_giant)
+  tag(hunted,c_scorpion_giant)
+  tag(huntedexperience,10)
+  tag(huntedgold,15)
+  tag(hlaska,fq_Scorpion_Giant)
+else
+  say("Nesnasim Velke Skorpiony. Pobijte je vsechny!")
+endif
+
+[function fq_Scorpion_Prince]
+if !(tag(hunted)==c_scorpion_prince)
+  tag(hunted,c_scorpion_prince)
+  tag(huntedexperience,13)
+  tag(huntedgold,19)
+  tag(hlaska,fq_Scorpion_Prince)
+else
+  say("Nesnasim Skorpiony Prince. Pobijte je vsechny!")
+endif
+
+[function fq_Scorpion_Queen]
+if !(tag(hunted)==c_scorpion_queen)
+  tag(hunted,c_scorpion_queen)
+  tag(huntedexperience,17)
+  tag(huntedgold,23)
+  tag(hlaska,fq_Scorpion_Queen)
+else
+  say("Nesnasim Skorpiony. Pobijte jim vsechny Kralovny!")
+endif
+
+[function fq_Scorpion_King]
+if !(tag(hunted)==c_scorpion_king)
+  tag(hunted,c_scorpion_king)
+  tag(huntedexperience,22)
+  tag(huntedgold,30)
+  tag(hlaska,fq_Scorpion_King)
+else
+  say("Nesnasim Skorpiony. Pobijte jejich Krale do jednoho!")
+endif
+
+[function fq_Terathan]
+if !(tag(hunted)==c_terathan_avenger)
+  tag(hunted,c_terathan_avenger)
+  tag(hunteda,c_terathan_warrior)
+  tag(huntedb,c_terathan_drone)
+  tag(huntedexperience,15)
+  tag(huntedgold,30)
+  tag(hlaska,fq_Terathan)
+else
+  say("Nesnasim Terathany. Pobijte jejich Avengery, Warriory a Drony!")
+endif
+
+///////////////////////
 
 [itemdef i_gemblersky_kostky]
 id=i_dice_cup

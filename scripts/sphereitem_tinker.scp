@@ -64,12 +64,12 @@ src.sysmessage("Tato runa jako by postradala magicke obrazce potrebne pro sve po
 ON=@userdCLICK
 if (<src.Inscription> < 85.0)&&(<SRC.RESTEST 1 i_magicke_pero> )
 SRC.SYSMESSAGE("Tve znalosti inskripce nejsou dostatecne.")
-elseif (<SRC.RESTEST 1 i_rune_tinker> )&&(<src.Inscription> > 84.9)
-SRC.SYSMESSAGE("Nemas nic, cim by se runa dala popsat. Hledej magicke pero, jen ono umozni popsani runy.")
 elseif (<SRC.RESTEST 1 i_rune_tinker> )&&(<SRC.RESTEST 1 i_magicke_pero> )&&(<src.Inscription> > 84.9)
 src.consume=i_rune_tinker
 src.newitem=i_rune_marker
 src.act.bounce
+elseif (<SRC.RESTEST 1 i_rune_tinker> )&&(<src.Inscription> > 84.9)
+SRC.SYSMESSAGE("Nemas nic, cim by se runa dala popsat. Hledej magicke pero, jen ono umozni popsani runy.")
 ELSE
 SRC.SYSMESSAGE("Runu je zrejme nutne necim aktivovat. Je mozne, ze magicka formule napsana na jeji povrch magicke schopnosti ozivi.")
 endif
@@ -1801,7 +1801,7 @@ WEIGHT=15.0
 CATEGORY=Decoration - Lightsources
 SUBSECTION=Brazier
 DESCRIPTION=BRAZIER
-DUPELIST=0e32,0e33
+DUPELIST=0e32
 
 ON=@Create
 MOREZ=1
@@ -1809,8 +1809,8 @@ MOREZ=1
 [ITEMDEF 0e32]
 DUPEITEM=0e31
 
-[ITEMDEF 0e33]
-DUPEITEM=0e31
+//[ITEMDEF 0e33]  - Vadna grafika
+//DUPEITEM=0e31
 
 [ITEMDEF 0fbb]
 //Tongs

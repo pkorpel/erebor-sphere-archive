@@ -341,66 +341,8 @@ tag(nastaveni_sufdefaulttype,"]")
 tag(nastaveni_sufdefault,")")
 nastaveni_dialog
 
-on=0 Ability, vlastnosti povolani
-tag(nastaveni_finishfunkce,nastaveni_finish_globals)
-tag(nastaveni_nadpis,"Vlastnosti povolani a abilit (Maxstat: VIT,STR,DEX,INT )")
-
-tag(nastaveni_prefname,"onestring(")
-tag(nastaveni_prefnametype,"n_ability_name[")
-tag(nastaveni_sufnametype,"]")
-tag(nastaveni_sufname,")")
-
-tag(nastaveni_prefvalue,"nastaveni_")
-tag(nastaveni_prefvaluetype,"n_ability[")
-tag(nastaveni_sufvaluetype,"]")
-tag(nastaveni_sufvalue,"")
-
-tag(nastaveni_prefdefault,"onestring(")
-tag(nastaveni_prefdefaulttype,"n_ability_default[")
-tag(nastaveni_sufdefaulttype,"]")
-tag(nastaveni_sufdefault,")")
-nastaveni_dialog
-
-on=0 Ability, vlastnosti povolani 2
-tag(nastaveni_finishfunkce,nastaveni_finish_globals)
-tag(nastaveni_nadpis,"Vlastnosti povolani a abilit 2 (Maxstat: VIT,STR,DEX,INT )")
-
-tag(nastaveni_prefname,"onestring(")
-tag(nastaveni_prefnametype,"n_ability2_name[")
-tag(nastaveni_sufnametype,"]")
-tag(nastaveni_sufname,")")
-
-tag(nastaveni_prefvalue,"nastaveni_")
-tag(nastaveni_prefvaluetype,"n_ability2[")
-tag(nastaveni_sufvaluetype,"]")
-tag(nastaveni_sufvalue,"")
-
-tag(nastaveni_prefdefault,"onestring(")
-tag(nastaveni_prefdefaulttype,"n_ability2_default[")
-tag(nastaveni_sufdefaulttype,"]")
-tag(nastaveni_sufdefault,")")
-nastaveni_dialog
-
-on=0 Ability, vlastnosti povolani 3
-tag(nastaveni_finishfunkce,nastaveni_finish_globals)
-tag(nastaveni_nadpis,"Vlastnosti povolani a abilit 3 (Maxstat: VIT,STR,DEX,INT )")
-
-tag(nastaveni_prefname,"onestring(")
-tag(nastaveni_prefnametype,"n_ability3_name[")
-tag(nastaveni_sufnametype,"]")
-tag(nastaveni_sufname,")")
-
-tag(nastaveni_prefvalue,"nastaveni_")
-tag(nastaveni_prefvaluetype,"n_ability3[")
-tag(nastaveni_sufvaluetype,"]")
-tag(nastaveni_sufvalue,"")
-
-tag(nastaveni_prefdefault,"onestring(")
-tag(nastaveni_prefdefaulttype,"n_ability3_default[")
-tag(nastaveni_sufdefaulttype,"]")
-tag(nastaveni_sufdefault,")")
-nastaveni_dialog
-
+ON=0 Ability
+menu menu_nastaveni_ability
 
 ON=0 Zbrane
 tag(nastaveni_prefname,"")
@@ -772,6 +714,89 @@ on=0 skill requirement
 tag(nastaveni_nadpis,"potrebna magery a tudiz i narocnost kouzla. stejne jako u craftmenu v zasade (ale nejdou tu zkratky :)")
 tag(nastaveni_prefvalue,"nastaveni_SKILLREQ_")
 tag(nastaveni_sufdefault,".SKILLREQ")
+nastaveni_dialog
+
+[menu menu_nastaveni_ability]
+Nastaveni Abilit
+
+on=0 Vlastnosti povolani
+tag(nastaveni_finishfunkce,nastaveni_finish_globals)
+tag(nastaveni_nadpis,"Vlastnosti povolani a abilit (Maxstat: VIT,STR,DEX,INT )")
+
+tag(nastaveni_prefname,"onestring(")
+tag(nastaveni_prefnametype,"n_ability_name[")
+tag(nastaveni_sufnametype,"]")
+tag(nastaveni_sufname,")")
+
+tag(nastaveni_prefvalue,"nastaveni_")
+tag(nastaveni_prefvaluetype,"n_ability[")
+tag(nastaveni_sufvaluetype,"]")
+tag(nastaveni_sufvalue,"")
+
+tag(nastaveni_prefdefault,"onestring(")
+tag(nastaveni_prefdefaulttype,"n_ability_default[")
+tag(nastaveni_sufdefaulttype,"]")
+tag(nastaveni_sufdefault,")")
+nastaveni_dialog
+
+on=0 Vlastnosti povolani 2
+tag(nastaveni_finishfunkce,nastaveni_finish_globals)
+tag(nastaveni_nadpis,"Vlastnosti povolani a abilit 2 (Maxstat: VIT,STR,DEX,INT )")
+
+tag(nastaveni_prefname,"onestring(")
+tag(nastaveni_prefnametype,"n_ability2_name[")
+tag(nastaveni_sufnametype,"]")
+tag(nastaveni_sufname,")")
+
+tag(nastaveni_prefvalue,"nastaveni_")
+tag(nastaveni_prefvaluetype,"n_ability2[")
+tag(nastaveni_sufvaluetype,"]")
+tag(nastaveni_sufvalue,"")
+
+tag(nastaveni_prefdefault,"onestring(")
+tag(nastaveni_prefdefaulttype,"n_ability2_default[")
+tag(nastaveni_sufdefaulttype,"]")
+tag(nastaveni_sufdefault,")")
+nastaveni_dialog
+
+on=0 Vlastnosti povolani 3
+tag(nastaveni_finishfunkce,nastaveni_finish_globals)
+tag(nastaveni_nadpis,"Vlastnosti povolani a abilit 3 (Maxstat: VIT,STR,DEX,INT )")
+
+tag(nastaveni_prefname,"onestring(")
+tag(nastaveni_prefnametype,"n_ability3_name[")
+tag(nastaveni_sufnametype,"]")
+tag(nastaveni_sufname,")")
+
+tag(nastaveni_prefvalue,"nastaveni_")
+tag(nastaveni_prefvaluetype,"n_ability3[")
+tag(nastaveni_sufvaluetype,"]")
+tag(nastaveni_sufvalue,"")
+
+tag(nastaveni_prefdefault,"onestring(")
+tag(nastaveni_prefdefaulttype,"n_ability3_default[")
+tag(nastaveni_sufdefaulttype,"]")
+tag(nastaveni_sufdefault,")")
+nastaveni_dialog
+
+on=0 MagicCharge
+tag(nastaveni_finishfunkce,nastaveni_finish_globals)
+tag(nastaveni_nadpis,"Vlastnosti Magickeho Naboje")
+
+tag(nastaveni_prefname,"onestring(")
+tag(nastaveni_prefnametype,"n_magicCharge_name[")
+tag(nastaveni_sufnametype,"]")
+tag(nastaveni_sufname,")")
+
+tag(nastaveni_prefvalue,"nastaveni_")
+tag(nastaveni_prefvaluetype,"n_magicCharge[")
+tag(nastaveni_sufvaluetype,"]")
+tag(nastaveni_sufvalue,"")
+
+tag(nastaveni_prefdefault,"onestring(")
+tag(nastaveni_prefdefaulttype,"n_magicCharge_default[")
+tag(nastaveni_sufdefaulttype,"]")
+tag(nastaveni_sufdefault,")")
 nastaveni_dialog
 
 [menu menu_nastaveni_zbrane]
@@ -1854,8 +1879,8 @@ n_global3[4]		pevnosti_recall_palantir_dist
 n_global3_name[4]	"Recall vzdalenost od palantiru"
 n_global3_default[4]	30
 n_global3[5]		spellcast_silence_after
-n_global3_name[5]	"Silence po zakuzleni po x sec."
-n_global3_default[5]	5
+n_global3_name[5]	"Silence po zakuzleni po x dsec."
+n_global3_default[5]	40
 n_global3[6]		silence_mana_return
 n_global3_name[6]	"Vratenie many za x sec."
 n_global3_default[6]	3
@@ -1871,6 +1896,9 @@ n_global3_default[9]	90
 n_global3[10]		body_looting_timer
 n_global3_name[10]	"timer - lootenie tiel hracov"
 n_global3_default[10]	897
+n_global3[11]		spellcast_silence_mind_blast
+n_global3_name[11]	"Silence po MindBlastu xx dsec."
+n_global3_default[11]	15
                         
 n_ability[0]		ability_leaprange
 n_ability_name[0]	Leap Range
@@ -2017,12 +2045,15 @@ n_ability_default[46]	5
 n_ability[47]     	
 n_ability_name[47]      
 n_ability_default[47]   
-n_ability[48]		maxbleed
-n_ability_name[48]	"max damage bleedu"
-n_ability_default[48]	50
-n_ability[49]		ability_mystikUClightning
-n_ability_name[49]	"UC mystika pri lightning dmg"
-n_ability_default[49]	0,15
+n_ability[48]		normal_bleed_cap
+n_ability_name[48]	"Bleed Cap Ostatni"
+n_ability_default[48]	250
+n_ability[49]		thief_bleed_cap
+n_ability_name[49]	"Bleed Cap Thiefa"
+n_ability_default[49]	300
+n_ability[50]		ability_mystikUClightning
+n_ability_name[50]	"UC mystika pri lightning dmg"
+n_ability_default[50]	0,15
 
 n_ability2[0]		rangearrow_chance
 n_ability2_name[0]	sance na longrange
@@ -2296,6 +2327,140 @@ n_ability3_default[38] 75
 n_ability3[39] 		mystik_doubleswing_stam
 n_ability3_name[39] "Ubytok staminy po mystik doubleswingu"
 n_ability3_default[39] 30
+n_ability3[40] 		MindBlast_silence_chance
+n_ability3_name[40] "Sance na silence MindBlastem"
+n_ability3_default[40] 60
+n_ability3[41] 		
+n_ability3_name[41]
+n_ability3_default[41] 
+n_ability3[42] 		single_taunt_stamina
+n_ability3_name[42] "Stamina na Single Taunt"
+n_ability3_default[42] 20
+n_ability3[43] 		taunt_max_range
+n_ability3_name[43] "Maximalni dosah Tauntu"
+n_ability3_default[43] 10
+n_ability3[44] 		mass_taunt_stamina
+n_ability3_name[44] "Stamina na Mass Taunt"
+n_ability3_default[44] 50
+n_ability3[45] 		single_tauntdelay
+n_ability3_name[45] "Doba znova pouziti Single Tauntu"
+n_ability3_default[45] 600
+n_ability3[46] 		tauntdelay_penalty
+n_ability3_name[46] "Penalizace za rychle pouziti"
+n_ability3_default[46] 50
+n_ability3[47] 		taunt_aftergetswing
+n_ability3_name[47] "TEST: Chovani po rane"
+n_ability3_default[47] 0
+n_ability3[48] 		taunt_removefight
+n_ability3_name[48] "TEST: RemoveFight?"
+n_ability3_default[48] 1
+n_ability3[49] 		mass_tauntdelay
+n_ability3_name[49] "Doba znova pouziti Mass Tauntu"
+n_ability3_default[49] 1800
+
+
+n_magicCharge[0]    charge_limit
+n_magicCharge_name[0]	 "max. pocet naboju"
+n_magicCharge_default[0]	3
+n_magicCharge[1]    charge_abilityPoints
+n_magicCharge_name[1]	 "bodu v abilitach"
+n_magicCharge_default[1]	10
+n_magicCharge[2]    charge_duration
+n_magicCharge_name[2]	 "trvani naboje (s)"
+n_magicCharge_default[2]	15
+n_magicCharge[3]    charge_dropDuration
+n_magicCharge_name[3]	"timer padani naboje (s)"
+n_magicCharge_default[3]	5
+n_magicCharge[4]    charge_baseEff
+n_magicCharge_name[4] "Zakladni ucinek efektu (%)"
+n_magicCharge_default[4] 50
+
+n_magicCharge[5]
+n_magicCharge_name[5]
+n_magicCharge_default[5]
+
+n_magicCharge[6]
+n_magicCharge_name[6]
+n_magicCharge_default[6]
+
+n_magicCharge[7]    charge_spellPow_pvp[5]
+n_magicCharge_name[7]  "Magic Arrow (PvP)"
+n_magicCharge_default[7]  100
+n_magicCharge[8]    charge_spellPow_pvm[5]
+n_magicCharge_name[8]  "Magic Arrow (PvM)"
+n_magicCharge_default[8]  200
+
+n_magicCharge[9]    charge_spellPow_pvp[18]
+n_magicCharge_name[9]  "Fireball (PvP)"
+n_magicCharge_default[9]  100
+n_magicCharge[10]    charge_spellPow_pvm[18]
+n_magicCharge_name[10]  "Fireball (PvM)"
+n_magicCharge_default[10]  200
+
+n_magicCharge[11]    charge_spellPow_pvp[43]
+n_magicCharge_name[11]  "Explosion (PvP)"
+n_magicCharge_default[11]  100
+n_magicCharge[12]    charge_spellPow_pvm[43]
+n_magicCharge_name[12] "Explosion (PvM)"
+n_magicCharge_default[12] 200
+
+n_magicCharge[13]    charge_spellPow_pvp[51]
+n_magicCharge_name[13] "Flamestrike (PvP)"
+n_magicCharge_default[13] 100
+n_magicCharge[14]    charge_spellPow_pvm[51]
+n_magicCharge_name[14] "Flamestrike (PvM)"
+n_magicCharge_default[14] 200
+
+n_magicCharge[15]    charge_spellPow_pvp[55]
+n_magicCharge_name[15] "Meteor (PvP)"
+n_magicCharge_default[15] 100
+n_magicCharge[16]    charge_spellPow_pvm[55]
+n_magicCharge_name[16] "Meteor (PvM)"
+n_magicCharge_default[16] 200
+
+n_magicCharge[17]    charge_spellPow_pvp[12]
+n_magicCharge_name[17] "Harm (PvP)"
+n_magicCharge_default[17] 100
+n_magicCharge[18]    charge_spellPow_pvm[12]
+n_magicCharge_name[18] "Harm (PvM)"
+n_magicCharge_default[18] 200
+
+n_magicCharge[19]    charge_spellPow_pvp[37]
+n_magicCharge_name[19] "Mind Blast (PvP)"
+n_magicCharge_default[19] 100
+n_magicCharge[20]    charge_spellPow_pvm[37]
+n_magicCharge_name[20] "Mind Blast (PvM)"
+n_magicCharge_default[20] 200
+
+n_magicCharge[21]    charge_spellPow_pvp[30]
+n_magicCharge_name[21] "Lightning (PvP)"
+n_magicCharge_default[21] 100
+n_magicCharge[22]    charge_spellPow_pvm[30]
+n_magicCharge_name[22] "Lightning (PvM)"
+n_magicCharge_default[22] 200
+
+n_magicCharge[23]    charge_spellPow_pvp[42]
+n_magicCharge_name[23] "Energy Bolt (PvP)"
+n_magicCharge_default[23] 100
+n_magicCharge[24]    charge_spellPow_pvm[42]
+n_magicCharge_name[24] "Energy Bolt (PvM)"
+n_magicCharge_default[24] 200
+
+n_magicCharge[25]    charge_spellPow_pvp[49]
+n_magicCharge_name[25] "Chain Lightning (PvP)"
+n_magicCharge_default[25] 100
+n_magicCharge[26]    charge_spellPow_pvm[49]
+n_magicCharge_name[26] "Chain Lightning (PvM)"
+n_magicCharge_default[26] 200
+
+n_magicCharge[27]
+n_magicCharge_name[27]
+n_magicCharge_default[27]
+
+n_magicCharge[28]    charge_silenceBonus
+n_magicCharge_name[28] "Silence Bonus (%%)"
+n_magicCharge_default[28] 100
+
 
 
 n_poison[0]		poison_absoluteDmg

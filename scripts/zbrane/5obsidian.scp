@@ -26,7 +26,7 @@ endif
 if (src.act.id==i_gem_ruby)&&(src.profession==class_shaman)
   src.consume(i_gem_ruby,1)
   tag(voodoocontrol,20)
-  src.sysmessage("Dyka je nasycena magii.")¨
+  src.sysmessage("Dyka je nasycena magii.")
   src.effect=3,i_fx_glow_spike,0,20,10
   return(1)
 endif
@@ -43,35 +43,35 @@ elseif (src.targ.flag_invul)||(src.targ.flag_immobile)||(src.targ.flag_stone)||(
   return(1)
 endif
 
-if (tag(voodoocontrol)>=1)&&(src.profession==class_shaman)
-  if (src.tag(level)<40)||!(src.tag(ra_woodoo))
+if (<eval tag(voodoocontrol)> >= 1) && (src.profession==class_shaman)
+  if (<eval src.tag(level)> < 40) || !(<eval src.tag(ra_woodoo)>)
     src.classmessage("Na to jsi jeste prilis <?src.sex(nezkuseny,nezkusena)?>.")
     return(1)
-  elseif ((<src.tag(nextvoodoocontrol)>)>(<serv.time>))
+  elseif ((<eval src.tag(nextvoodoocontrol)>) > (<serv.time>))
     src.classmessage("Muzes pouzit az za <eval (<src.tag(nextvoodoocontrol)>-<serv.time>)/10> sekund.")
     return(1)
-  elseif (<eval(src.targ.tag(experience)/10)> > <eval(eval(src.tag(ra_woodoo)*12)+eval(src.tag(level)))>)  //*8 - pocet expov za 1 bod vo voodoo, + 1 za level
+  elseif (<eval (<eval src.targ.tag(experience)>/10)> > <eval (<eval (<eval src.tag(ra_woodoo)>*12)+<eval (<eval src.tag(level)>)>)>)  //*8 - pocet expov za 1 bod vo voodoo, + 1 za level
     src.classmessage("Toto je nad tvoje sily.")
     return(1)
   endif
-  if (src.distancefrom(<src.targ>)<10)  //dostah 9 poli
-    if (rand(12)>=src.tag(ra_woodoo))
+  if (src.distancefrom(<src.targ>) < 10)  //dostah 9 poli
+    if (rand(12) >= <eval src.tag(ra_woodoo)>)
       src.classmessage("Nepovedlo se")
-      src.tag(nextvoodoocontrol,<serv.time>+eval(<nastaveni_voodoocontrol_again>*10/3))
+      src.tag(nextvoodoocontrol,<serv.time>+<eval (<nastaveni_voodoocontrol_again>*10/3)>)
       return(1)
     endif
-    arg(uber_staminy,<eval(src.targ.tag(experience)/15)>)
-    if (<uber_staminy><20)
+    arg(uber_staminy,<eval (<eval src.targ.tag(experience)>/15)>)
+    if (<uber_staminy> < 20)
       arg(uber_staminy,20)
     endif
-    if (<uber_staminy>><src.stam>)
+    if (<uber_staminy> > <src.stam>)
       src.stam=0
       src.damage_noresponse(25,dam_magic)
     else
       src.stam=<src.stam>-<uber_staminy>
     endif
-    src.targ.pullhim(<eval(src.tag(ra_woodoo)/2)>)
-    src.tag(nextvoodoocontrol,<serv.time>+<nastaveni_voodoocontrol_again>*10)  //pocet sekund kedy moze znova
+    src.targ.pullhim(<eval (<eval src.tag(ra_woodoo)>/2)>)
+    src.tag(nextvoodoocontrol,<serv.time>+<eval (<nastaveni_voodoocontrol_again>*10)>)  //pocet sekund kedy moze znova
     src.classmessage("<?src.sex(Pritahlun,Pritahla)?> jsi <?src.targ.name?>")
     tag(voodoocontrol,#-1)
     if (rand(2))
@@ -80,14 +80,14 @@ if (tag(voodoocontrol)>=1)&&(src.profession==class_shaman)
   else
     src.sysmessage("<?src.targ.name?>  je moc daleko.")
   endif
-elseif (tag(voodoocontrol)==0)||!(tag(voodoocontrol))&&(src.profession==class_shaman)
+elseif (<eval tag(voodoocontrol)> == 0) || !(<eval tag(voodoocontrol)>) && (src.profession==class_shaman)
   src.sysmessage("Dyka je za soucasneho stavu nepouzitelna.")
 endif
 return(1)
 
 
 on=@userclick
-if (tag(voodoocontrol) > 0)
+if (<eval tag(voodoocontrol)> > 0)
   src.sysmessage("Citis podivnou magii.")
   return 0
 endif

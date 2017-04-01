@@ -34,18 +34,18 @@ on = *zdravim*
 on = *ahoj*
 
 if (<distance> > 3)
- src.SYSMESSAGE("Na takovou vzdalenost s tebou jednat nebude")
+  src.SYSMESSAGE("Na takovou vzdalenost s tebou jednat nebude")
 else
- f_q015_paradnice
+  f_q015_paradnice
 endif
 
 [FUNCTION f_q015_paradnice]
-IF (<src.tag.realm>==2)
-  say "Jdi pryc Ty stvuro !"
+if (<src.tag.realm>==2)
+  say("Jdi pryc Ty stvuro !")
   return 1
 endif
-IF (<src.tag(q015_neuspel)> !=0)
-  SAY("Jak se opovazujete za mnou jeste chodit! Takova urazka. *Pche*")
+if (<eval src.tag(q015_neuspel)> != 0)
+  say("Jak se opovazujete za mnou jeste chodit! Takova urazka. *Pche*")
   return 1
 else
   DIALOG(d_q015_paradnice)
@@ -72,11 +72,11 @@ button 490 360 0988 0988 0 6 0  // Prohlednout ...
 text 520 360 1152 6   //
 
 page 1
-IF (<src.tag.q015_paradnice> !=0)
-argo.HTMLGUMP(170,230,440,100,18,0,36)
+if (<eval src.tag(q015_paradnice)> != 0)
+  argo.HTMLGUMP(170,230,440,100,18,0,36)
 else
-argo.HTMLGUMP(170,230,440,100,7,0,36)
-ENDIF
+  argo.HTMLGUMP(170,230,440,100,7,0,36)
+endif
 
 page 2
 HTMLGUMP(170,230,440,100,8,0,36)
@@ -85,32 +85,32 @@ page 3
 HTMLGUMP(170,230,440,100,9,0,36)
 
 page 4
-IF (<src.tag.q015_paradnice>==1)
-argo.HTMLGUMP(170,230,440,100,19,0,36)
-argo.button 25 395 0fa5 0fa7 1 0 3  //      uz to bude...
-argo.text 60 395 152 20
-argo.button 25 415 0fa5 0fa7 1 0 1  //        nechci to delat, tahni nech me byt.
-argo.text 60 415 152 21
-elseif (<src.tag.q015_paradnice>==2)
-argo.HTMLGUMP(170,230,440,100,25,0,36)
+if (<eval src.tag(q015_paradnice)> == 1)
+  argo.HTMLGUMP(170,230,440,100,19,0,36)
+  argo.button 25 395 0fa5 0fa7 1 0 3  //      uz to bude...
+  argo.text 60 395 152 20
+  argo.button 25 415 0fa5 0fa7 1 0 1  //        nechci to delat, tahni nech me byt.
+  argo.text 60 415 152 21
+elseif (<eval src.tag(q015_paradnice)> == 2)
+  argo.HTMLGUMP(170,230,440,100,25,0,36)
 else
-argo.HTMLGUMP(170,230,440,100,10,0,36)
-argo.button 25 395 0fa5 0fa7 0 7 0  //     hmno Minny nejdriv mi rekni co chces
-argo.text 60 395 152 13
-argo.button 25 415 0fa5 0fa7 1 0 1  //        Ne dekuji nechci - tag.neuspel
-argo.text 60 415 152 14
+  argo.HTMLGUMP(170,230,440,100,10,0,36)
+  argo.button 25 395 0fa5 0fa7 0 7 0  //     hmno Minny nejdriv mi rekni co chces
+  argo.text 60 395 152 13
+  argo.button 25 415 0fa5 0fa7 1 0 1  //        Ne dekuji nechci - tag.neuspel
+  argo.text 60 415 152 14
 endif
 
 page 5
-IF (<src.tag.q015_paradnice>==1)
-argo.HTMLGUMP(170,230,440,100,22,0,36)
-argo.button 25 395 0fa5 0fa7 1 0 4  //     mam to!
-argo.text 60 395 152 23
-argo.button 25 415 0fa5 0fa7 1 0 3  //      zatim nic..
-argo.text 60 415 152 24
+if (<eval src.tag(q015_paradnice)> == 1)
+  argo.HTMLGUMP(170,230,440,100,22,0,36)
+  argo.button 25 395 0fa5 0fa7 1 0 4  //     mam to!
+  argo.text 60 395 152 23
+  argo.button 25 415 0fa5 0fa7 1 0 3  //      zatim nic..
+  argo.text 60 415 152 24
 else
-argo.HTMLGUMP(170,230,440,100,11,0,36)
-ENDIF
+  argo.HTMLGUMP(170,230,440,100,11,0,36)
+endif
 
 page 6
 HTMLGUMP(170,230,440,100,12,0,36)
@@ -153,14 +153,14 @@ Zrovna ted nic nepotrebuji, dekuju za optani... ale muzes mi nekdy prinest nejak
 
 [dialog d_q015_paradnice button]
 on=1
-SAY("Ty jeden burane! Ty krupane! Ty chasniku! Ksc!")
+saz("Ty jeden burane! Ty krupane! Ty chasniku! Ksc!")
 src.tag.remove(q015_paradnice)
-src.tag.q015_neuspel=1
-SRC.CONSUME i_q015_paradnice_kolektor
+src.tag(q015_neuspel,1)
+src.consume i_q015_paradnice_kolektor
 
 on=2
-SAY("Tak do toho a pospes si. Minny chce byt hezka, hihihi")
-src.tag.q015_paradnice=1
+saz("Tak do toho a pospes si. Minny chce byt hezka, hihihi")
+src.tag(q015_paradnice,1)
 src.newitemsafe(i_q015_paradnice_kolektor)
 lastnew.bounce
 
@@ -169,12 +169,14 @@ SAY("Asi se nesnazis dost! Copak jsem ti nerekla jak je to dulezite?")
 
 on=4
 if <src.restest i_q015_paradnice_kolektor> && (<src.findid(i_q015_paradnice_kolektor).tag.contentscount>==12) 
-src.tag.q015_paradnice=2
-SAY("Vyborne, dekuji ti mnohokrat, tady je tvoje odmena")
-src.addexp(1000)
-SRC.CONSUME i_q015_paradnice_kolektor
-src.givegold(2500)
-f_quest_complete(13)  // splnenie questu "Paradnice Minny"
+  src.tag(q015_paradnice,2)
+  say("Vyborne, dekuji ti mnohokrat, tady je tvoje odmena")
+  src.addexp(1000)
+  src.consume i_q015_paradnice_kolektor
+  src.givegold(2500)
+  f_quest_complete(13)  // splnenie questu "Paradnice Minny"
 else
-SAY("Jeste nemas to co jsem po tobe chtel!")
-ENDIF
+  say("Jeste nemas to co jsem po tobe chtel!")
+endif
+
+[eof]

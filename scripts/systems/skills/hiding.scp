@@ -19,7 +19,7 @@ tag(hidetime,<serv.time>+30) // probodavat az po 5 sekundach!
 
 on=@equip
 if safe src.findid(i_backstab)
- findid(i_backstab).remove
+  findid(i_backstab).remove
 endif
 tag(dark,(<cont.sector.light>*10))
 cont.stealth=<eval <cont.stealth>+tag(dark)>
@@ -33,7 +33,7 @@ cont.stealth=<cont.stealth> - <tag(dark)>
 return 0
 
 on=@timer
-if (cont.flag_hidden==1) && !(cont.isdead)
+if (cont.flag_hidden == 1) && !(cont.isdead)
   if (safe.tag(tma)) // podminku casem odebrat
     tag(dark,<tag(tma)>)
     tag(tma,"")
@@ -56,16 +56,15 @@ TYPE=t_eq_script
 name=hiding
 
 on=@timer
-src=<cont>
 if (more1)
-  if (src.hiding > rand(1025))
+  if (cont.hiding > rand(1025))
     link.hide
-    src.classmessage(Skryti se povedlo.)
+    cont.classmessage("Skryti se povedlo.")
     remove
     return 1
   endif
 endif
-src.redmessage(Nepovedlo se ti schovat.)
+cont.redmessage("Nepovedlo se ti schovat.")
 remove
 return 1
 
@@ -77,11 +76,11 @@ flag_invisible=0
 flag_hidden=1
 if (findid(i_stealthbonus))
 else
- newitemsafe(i_stealthbonus)
- arg(hiditem,<lastnew>)
- equip(hiditem)
- hiditem.link=<uid>
- hiditem.more1=1
+  newitemsafe(i_stealthbonus)
+  arg(hiditem,<lastnew>)
+  equip(hiditem)
+  hiditem.link=<uid>
+  hiditem.more1=1
 endif
 //resync
 
@@ -94,13 +93,13 @@ stopscriptedskills
 skill -1
 reveal
 if (isnonmobile)
-  sysmessage(You are frozen and cannot move.)
+  sysmessage("You are frozen and cannot move.")
   return 1 
 elseif (<src.flags>&statf_dead)
-  sysmesasge(You are dead!)
+  sysmesasge("You are dead!")
   return 1
-elseif (tag(nextdetect)>serv.time)&&(src.isgm==0)
-  sysmessage(Jeste nelze pouzit.)
+elseif (tag(nextdetect)>serv.time) && (src.isgm == 0)
+  sysmessage("Jeste nelze pouzit.")
   return 1
 endif
 sysMessage("Prozkoumavas sve okoli")
@@ -128,16 +127,16 @@ remove
 return 1
 
 [function tryreveal]
-if (isGM)||(flag_invul==1)||(isDead)
- return 1
+if (isGM) || (flag_invul == 1) || (isDead)
+  return 1
 endif
-if (flag_invisible==1) || (flag_hidden==1) || ((flag_insubstantial==1) && (tag(potvorathief)==1))
+if (flag_invisible == 1) || (flag_hidden == 1) || ((flag_insubstantial == 1) && (tag(potvorathief) == 1))
   arg(detectMemory,<f_detectHidden_findMemory>)
   if (detectMemory.f_detectHidden_canBeDetected(<var(detect_src)>))
     arg(distance,<eval distancefrom(var(detect_src))>)
     detectMemory.f_detectHidden_saveDetector(<var(detect_src)>)
     if (hiding > <eval(((var(detect_src).detectinghidden/{50 400})+(arg(distance)))*50)>)
-      sysMessage(<var(detect_src).name> se te pokousi objevit.)
+      sysMessage("<var(detect_src).name> se te pokousi objevit.")
     endif
     arg(itemBonus,<eval((hiding-1000)*2)>)
     if (arg(itemBonus) < 0)

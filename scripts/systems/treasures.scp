@@ -24,6 +24,13 @@
 TMOS                        0FFFFFED4 //Treasure Map Offset
 TMS                         08c //Treasure Map Size	200x200 pixels - pins are in pixels
 
+def_pokladnik_mapy_6  #04BDA4
+def_pokladnik_mapy_5  #026F2A        
+def_pokladnik_mapy_4  #0252B3
+def_pokladnik_mapy_3  #023074
+def_pokladnik_mapy_2  #020B13
+def_pokladnik_mapy_1  #01EEC8
+
 [function randfern]
 dorand 11
 return tm_rocks
@@ -76,68 +83,67 @@ ENDIF
 
 [TYPEDEF T_TREAS_CHEST]
 
-ON=@USERDCLICK
-IF ( <LINK.TOPOBJ.UID> != <SRC.UID> )
- RETURN 1
-ENDIF
-IF (SRC.FINDLAYER(1).id==i_pickaxe)
- SRC.ANIM=0B
- SOUND=0126
-else
- src.message="Chtelo by to poradny nacini"
- return 1
+ON=@UserDClick
+if (<link.topobj.uid> != <src.uid>)
+  return 1
 endif
-if (SRC.MINING >  TAG(MAP))&&!(src.nolightfizz(1))
- if (tag(map) > 975)
- if (finduid(026F2A).p == finduid(finduid(026F2A).tag(lastTreasureChestUID)).p)
-   finduid(026F2A).tag(lastTreasureChestUID).p=<p> //lvl 5
-  else
-   src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
-   return 1
-  endif 
- elseif (tag(map) > 920)
- if (finduid(0252B3).p == finduid(finduid(0252B3).tag(lastTreasureChestUID)).p)
-   finduid(0252B3).tag(lastTreasureChestUID).p=<p> //lvl 4
-  else
-   src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
-   return 1
-  endif 
- elseif (tag(map) > 825)
- if (finduid(023074).p == finduid(finduid(023074).tag(lastTreasureChestUID)).p)
-   finduid(023074).tag(lastTreasureChestUID).p=<p> //lvl 3
-  else
-   src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
-   return 1
-  endif 
- elseif  (tag(map) > 650)
-  if (finduid(020B13).p == finduid(finduid(020B13).tag(lastTreasureChestUID)).p)
-   finduid(020B13).tag(lastTreasureChestUID).p=<p> //lvl 2
-  else
-   src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
-   return 1
-  endif 
- else
-  if (finduid(01EEC8).p == finduid(finduid(01EEC8).tag(lastTreasureChestUID)).p)
-   finduid(01EEC8).tag(lastTreasureChestUID).p=<p> //lvl 1
-  else
-   src.message="Kopani je namahave. Odpocin si a zkus to za chvili."
-   return 1
-  endif 
- endif
- SRC.MESSAGE="Hura poklad !!"
- finduid(#0400075A4).tag(vykopane_mapy,#+1)
- LINK.REMOVE			//remove linked deciphered map
- REMOVE				//remove trigger plant
- RETURN 1
+if (src.findlayer(1).id==i_pickaxe)
+  src.anim=0B
+  sound=0126
 else
- src.message="Moc to nejde."
-ENDIF
-RETURN 1
+  src.message("Chtelo by to poradny nacini")
+  return 1
+endif
+if (src.mining >  tag(MAP))&&!(src.nolightfizz(1))
+  if (<serv.time> > <eval var(treasureMapTime_<link.morex>_<link.morey>)>)
+    if (tag(map) == 1000)
+      f_mine_map_treasure(6)
+    elseif (tag(map) > 975)
+      f_mine_map_treasure(5)
+    elseif (tag(map) > 920)
+      f_mine_map_treasure(4)
+    elseif (tag(map) > 825)
+      f_mine_map_treasure(3)
+    elseif  (tag(map) > 650)
+      f_mine_map_treasure(2)
+    else
+      f_mine_map_treasure(1)
+    endif
+  else
+    src.message("Podle stop v okoli soudis, ze tu nekdo byl. Ted neni bezpecne poklad vykopavat.")
+    return 1
+  endif
+else
+  src.message("Moc to nejde.")
+endif
+return 1
 
 on=@timer
 link.tag.remove(vylusteno)
 remove
 
+
+[function f_mine_map_treasure]  // argv(0) - level mapy ; uid - predmet na miste kopani, src - miner co kope poklad, link - mapa k pokladu
+if !(<strlen(<finduid(def_pokladnik_mapy[argv(0)]).tag(lastTreasureChestUID)>)>)  // Truhla neexistuje, jeste se nespawnula
+  src.message("Kopani je namahave. Odpocin si a zkus to za chvili.")
+  return 0
+endif
+arg(treasure_to_mine,<finduid(finduid(def_pokladnik_mapy[argv(0)]).tag(lastTreasureChestUID))>)
+if (finduid(def_pokladnik_mapy[argv(0)]).p == treasure_to_mine.p)  // Truhla existuje a je u pokladnika, je ready k vykopani
+  treasure_to_mine.p=<p>
+  treasure_to_mine.timer=3600
+  treasure_to_mine.sfx(310)
+  src.message("Hura poklad !!")
+  var(treasureMapTime_<link.morex>_<link.morey>,<serv.time>+36000)  // Hodina, nez bude moct kopat nekdo na stejnem miste
+  src.accmsg("vykopal truhlu (<treasure_to_mine>) s pokladem z mapy (<link>) levelu <argv(0)> na pozici (<link.morex>, <link.morey>)")
+  finduid(#0400075A4).tag(vykopane_mapy,#+1)
+  link.remove			//remove linked deciphered map
+  remove				  //remove trigger plant
+  return 1
+else   // Truhla sice existuje, ale neni u pokladnika, nekdo jiny prave tento level pokladu vykopal. Krast truhlu mu nebudeme, bude si muset pockat
+  src.message("Kopani je namahave. Odpocin si a zkus to za chvili.")
+  return 0
+endif 
 //*******************************************************************
 
 [ITEMDEF i_u_treasure_map]
@@ -332,7 +338,11 @@ remove
 [function f_zobrazlevelmapy]
 
 if (tag(vylusteno))
-  if (tag(map) > 975) // LVL 5
+  if (tag(map) == 1000) // LVL 6
+    name="Unikatni mapa pokladu"
+    color=056
+    dispid=03352
+  elseif (tag(map) > 975) // LVL 5
     name="Legendarni mapa pokladu"
     color=0845
   elseif (tag(map) > 920) // LVL 4

@@ -95,6 +95,7 @@ if (<var(dmgPoison)> <= 0) //the current hit dmg might be too low already -> rem
   tag(pManager).f_pm_removeType(<tag(jed_typ)>)
   return
 endif
+cont.effect(3,01AE4,1,32,1)
 arg(jed_minus,<eval tag(jed_sila)/10>)
 if (arg(jed_minus) < 1)
   arg(jed_minus,1)
@@ -257,6 +258,7 @@ if (action==skill_swordsmanship)||(action==skill_fencing)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@aftergetswing
 on=@beforegetswing

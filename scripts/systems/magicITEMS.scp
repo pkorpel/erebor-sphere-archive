@@ -276,6 +276,7 @@ return 0
 on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+thisdaemonbonus))/100>)
 return 0
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -342,6 +343,7 @@ return 0
 on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+(thisdragonbonus)))/100>)
 return 0
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -385,6 +387,7 @@ return 0
 on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+thishumanbonus))/100>)
 return 0
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -450,6 +453,7 @@ return 0
 on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+thisspiderbonus))/100>)
 return 0
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -505,6 +509,7 @@ on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+thiseyebonus))/100>)
 return 0
 
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -570,6 +575,7 @@ if (var(swingedchar).npc)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -617,6 +623,7 @@ if (var(swingedchar).npc)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -663,6 +670,7 @@ if (var(swingedchar).npc)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -700,6 +708,7 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@userkill
 on=@npckill
 
@@ -731,6 +740,7 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@userkill
 on=@npckill
 
@@ -762,6 +772,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@userkill
 on=@npckill
@@ -793,6 +804,7 @@ if (<tag(mi_spellreflex)>><arg(random)>)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -826,6 +838,7 @@ endif
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -860,6 +873,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@userkill
 on=@npckill
 
@@ -891,6 +905,7 @@ if (tag(mi_spellblock)><arg(random)>)
 endif
 return 0
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing

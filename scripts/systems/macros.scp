@@ -10,6 +10,7 @@ elseif (act.mana<10)
 endif
 
 on=@beforedoeffect 
+on=@afterDoEffect
 on=@beforegeteffect 
 on=@beforegetswing
 on=@aftergetswing
@@ -26,6 +27,7 @@ elseif (act.mana<12)
   act.mana=0
 endif
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -50,6 +52,7 @@ else
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -78,6 +81,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_fire_column_damage]
@@ -213,6 +217,10 @@ endif
 
 [events e_parakrik]
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
+
 if (strlen(<tag(paraKrik_chance)>))
   arg(chance,<tag(paraKrik_chance)>)
 else
@@ -233,13 +241,12 @@ if (chance(<arg(chance)>,3))
   emote("crying awfully.")
 endif
 
-return 0
-
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_src_changer_parakrik]
@@ -292,18 +299,22 @@ topobj.invis
 [events e_odinvis_krik]
 
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
+
 if (rand(12)==1)
   newitem(<i_src_changer_odinvis>)
   lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
   emote("crying.")
 endif
-return 0
 
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_src_changer_odinvis]
@@ -333,10 +344,13 @@ endif
 
 [events e_npc_detect]
 on=@npcseenewplayer
+if (isSleeping)
+  return 0
+endif
+
 if !(findid(i_npc_detekce))
   newequip(i_npc_detekce)
 endif
-return 0
 
 [itemdef i_npc_detekce]
 id=i_memory
@@ -404,6 +418,10 @@ endif
 return 0
 
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
+
 if ((tag(neknockuj))!=1)
   tag(neknockuj,1)
   return 0
@@ -427,11 +445,10 @@ if (tag(vypito)!=1)
   endif
 endif
 
-return 0
-
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 [itemdef i_npc_str_boost]
 id=i_memory
@@ -473,6 +490,7 @@ on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
+on=@afterDoEffect
 
 
 [itemdef i_npc_dex_boost]
@@ -633,12 +651,17 @@ if (rand(5)==1)
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 
 on=@npcseenewplayer
-SAY("Nyni zemrete!")
+if (isSleeping)
+  return 0
+endif
+
+say("Nyni zemrete!")
 
 [events e_menavec_malej]
 on=@Created
@@ -650,6 +673,10 @@ if (body!=c_gazer)
 endif
 
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if !(tag(polymorfmdelay))
   tag(polymorfmdelay,<serv.time>+50)
   return 0
@@ -671,10 +698,10 @@ if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time
   newequip(i_morfovatko)
   lastnew.tag(zmenimsena,<tag(doceho)>)
 endif
-return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_menavec]
@@ -687,6 +714,10 @@ if (body!=c_gazer)
 endif
 
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if !(tag(polymorfmdelay))
   tag(polymorfmdelay,<serv.time>+50)
   return 0
@@ -705,10 +736,10 @@ if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time
   newequip(i_morfovatko)
   lastnew.tag(zmenimsena,<tag(doceho)>)
 endif
-return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_menavec_powerful]
@@ -725,6 +756,10 @@ if !(tag(polymorfmdelay))
 endif
 
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>))
   dorand 9
     tag(doceho,c_cajun_lord_menavec) // odstranene summonenie malych cajunov
@@ -739,10 +774,10 @@ if ((rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time
   newequip(i_morfovatko)
   lastnew.tag(zmenimsena,<tag(doceho)>)
 endif
-return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_morfovatko]
@@ -800,6 +835,7 @@ return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -807,6 +843,10 @@ on=@beforegeteffect
 
 [events e_illusionist]
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
+
 if !(tag(waitill))
   tag(waitill,1)
 endif
@@ -830,7 +870,7 @@ if ((rand(30)==1) && (tag(waittill) < (<serv.time>)) && !(tag(isillusion)))
   lastnewchar.events=-e_illusionist
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=30
-  //
+    //
   newnpc(<obody>)
   lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>+{-1 2})>,<p_z>,<mapplane>
   lastnewchar.hits=1
@@ -846,7 +886,7 @@ if ((rand(30)==1) && (tag(waittill) < (<serv.time>)) && !(tag(isillusion)))
   lastnewchar.events=-e_illusionist
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=30
-  //
+    //
   newnpc(<obody>)
   lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2)>,<p_z>,<mapplane>
   lastnewchar.hits=1
@@ -862,7 +902,7 @@ if ((rand(30)==1) && (tag(waittill) < (<serv.time>)) && !(tag(isillusion)))
   lastnewchar.events=-e_illusionist
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=30
-  //
+    //
   newnpc(<obody>)
   lastnewchar.p=<eval(<p_x>-2)>,<eval(<p_y>-2)>,<p_z>,<mapplane>
   lastnewchar.hits=1
@@ -878,7 +918,7 @@ if ((rand(30)==1) && (tag(waittill) < (<serv.time>)) && !(tag(isillusion)))
   lastnewchar.events=-e_illusionist
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=30
-  //
+    //
   newnpc(<obody>)
   lastnewchar.p=<eval(<p_x>)>,<eval(<p_y>+1)>,<p_z>,<mapplane>
   lastnewchar.hits=1
@@ -900,6 +940,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
@@ -919,6 +960,10 @@ remove
 
 [events e_fire_lord]
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if (rand(12) == 1)
   SAY("Heru Beleg Ruin Val")
   fireexplosion(10)
@@ -959,6 +1004,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 on=@death
@@ -984,6 +1030,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_phoenix]
@@ -997,13 +1044,14 @@ if (((<hits>) < (<maxhits>/5)) && (maxhits) > (250))
   emote("reborning in fire")
   fireshield
 endif
-return 0
+return 0 
 
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [ITEMDEF i_socha_ps]
@@ -1112,6 +1160,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_strach_lord2]
@@ -1169,6 +1218,7 @@ return 0
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_spawnovac_povlnach_prime] 
@@ -1330,13 +1380,17 @@ endif
 
 [events e_spectre]
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
+
 if ((src.isplayer) && (rand(12)==1))
   while ((memoryfindtype(0209c)) && (var(stopcreatingill)==4) && (isplayer))
     if (memoryfindtype(0209c).link.isplayer)
       memoryfindtype(0209c).link.newnpc(<obody>)
       newnpc(<obody>)
       lastnewchar.tag(spectre,<UID>)
-      lastnewchar.events=+e_lowerdmg
+      lastnewchar.events=+e_lowerdmg    
       lastnewchar.hits=<hits>
       lastnewchar.color=<color>
       lastnewchar.maxhits=<maxhits>
@@ -1369,6 +1423,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_lowerdmg]
@@ -1380,27 +1435,38 @@ var(ubrano,<eval (var(ubrano)/3)>)
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_vampire_lord]
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if (!(act.findid(i_curse_drainhps)) && (rand(10)==1))
-  act.newequip(i_curse_drainhp)
-  lastnew.tag(lord,<UID>)
-elseif ((act.findid(i_curse_drainhps)) && (hits<30000))
-  hits=<hits+(maxhits/20)>
+if !(isSilenced) 
+  if (!(act.findid(i_curse_drainhps)) && (rand(10)==1))
+    act.newequip(i_curse_drainhp)
+    lastnew.tag(lord,<UID>)
+  elseif ((act.findid(i_curse_drainhps)) && (hits<30000))
+    hits=<hits+(maxhits/20)>
+  endif
 endif
 
 on=@aftergetswíng
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
   act.newequip(i_curse_givehps)
   lastnew.tag(lord,<UID>)
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
 
 if (!(src.findid(i_curse_givehps)) && (rand(20)==1))
   src.newequip(i_curse_givehps)
@@ -1439,6 +1505,7 @@ endif
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_curse_drainhps]
@@ -1459,12 +1526,17 @@ topobj.sysMessage("Prokleti pozbylo na sile.")
 [events e_serpentdruid]
 
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
+
 if (((hits)<(maxhits/2)) && !(findid(i_osklivejsmazse)))
   emote("hissing.")
   body=<tag(had)>
   newequip(i_osklivejsmazse)
   lastnew.timer=2000
 endif
+
 if ((src.obody==c_serpent_malej) && !(src.isplayer))
   src.remove
 endif
@@ -1498,6 +1570,7 @@ endif
 
 on=@beforegetswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_spellparalyze]
@@ -1512,11 +1585,16 @@ if ((act.isplayer) && (rand(6)==1))
   say("Heru Ruth Dol Kel")
 endif
 
+on=@afterDoEffect
 on=@beforegetswing
 on=@beforegeteffect
 
 [events e_npc_manashield]
 on=@aftergetswing
+if ((isSleeping) || (isSilenced))
+  return 0
+endif
+
 if ((rand(15)==1) && !(findid(i_npc_manashield)) && ((mana)>=(<var(ubrano)>)))
   newequip(i_npc_manashield)
   lastnew.timer=16
@@ -1527,6 +1605,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_npc_manashield]
@@ -1561,6 +1640,7 @@ on=@DrinkingPotion
 on=@afterswing
 
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_npc_regeneration]
@@ -1583,6 +1663,7 @@ if (!(safe.findid(i_npc_regeneration)) && ((<hits>)<(<maxhits>/2)) && !(tag(dont
 endif
 
 on=@beforedoeffect
+on=@afterDoEffect
 
 [itemdef i_npc_regeneration]
 id=i_memory
@@ -1607,7 +1688,7 @@ if ((<cont.hits>)>(<cont.maxhits>))
  remove
 endif
 
-if ((cont.findid(i_a_curse)) && (rand(2)==1))
+if ((strlen(<cont.findid(i_a_curse)>)) && (rand(2)==1))
  remove
 endif
 
@@ -1698,11 +1779,11 @@ if !(findid(i_statue_Blessing))
 endif
 
 on=@beforedoeffect
-
 if !(act.isplayer)
  var(ubrano,#*2)
 endif
 
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_strecha_kill]  
@@ -1738,6 +1819,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_phoenix_25]
@@ -1758,6 +1840,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [eof]

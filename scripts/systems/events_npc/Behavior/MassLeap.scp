@@ -3,6 +3,10 @@
 
 [events e_npc_massleap]
 on=@aftergetswing
+if (isSleeping)
+  return 0
+endif
+
 if findid(i_targetmassleap)
   return 0
 endif
@@ -18,6 +22,7 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
+on=@afterDoEffect
 on=@beforegeteffect
 
 [itemdef i_src_changer_massleap]

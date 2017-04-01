@@ -55,6 +55,8 @@ src.SYSMESSAGE=Vyroba formy: Skillova potreba: Carpentry 75, Surovina: Oak logy,
 
 [typedef t_book_bottle]
 
+[typedef t_bottle_form]
+
 [typedef t_book_shrink]
 
 ////////////////////////////////////////////////////////////////////////////////////

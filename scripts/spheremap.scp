@@ -481,6 +481,15 @@ tag.nobank=1
 RAINCHANCE=00  
 COLDCHANCE=00  
 
+[AREA Vendor sklad]// Sklad vendoru
+FLAGS=00180
+P=5926,102
+RECT=5916,93,5940,113
+MAPPLANE=10
+GROUP=a special
+RAINCHANCE=00  
+COLDCHANCE=00 
+
 /////////////////////////// hlavni oblasti //////////////////////////////////
 
 
@@ -839,7 +848,7 @@ Rect=3413,2920,3430,2924
 GROUP=battlefiel -2
 FLAGS=00000
 tag.realm=2
-//tag.bf=-2
+tag.bf=-2
 resources=r_default_water, r_default_tree, r_default_grass, r_default_rock
 RAINCHANCE=20
 COLDCHANCE=5
@@ -863,7 +872,7 @@ RECT=3176,2952,3224,3000
 CLASS=48
 FLAGS=0000 
 tag.realm=2
-//tag.bf=-2
+tag.bf=-2
 EVENTS=r_minas_morgul
 RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
@@ -896,7 +905,7 @@ RECT=2543,2130,2622,2685
 RECT=2462,2338,2600,2600
 FLAGS=00000
 tag.realm=1
-//tag.bf=2
+tag.bf=2
 resources=r_default_water, r_default_tree, r_default_grass, r_default_rock
 RAINCHANCE=20
 COLDCHANCE=5
@@ -935,7 +944,7 @@ RECT=2968,2830,2984,2844
 RECT=2986,2847,3004,2858
 FLAGS=00000
 tag.realm=1
-//tag.bf=2
+tag.bf=2
 EVENTS=r_gondor
 RESOURCES=r_default_water, r_default_tree, r_default_grass, r_default_rock
 RAINCHANCE=20  
@@ -986,7 +995,7 @@ Rect=3092,3301,3112,3310
 RAINCHANCE=15
 COLDCHANCE=00  
 FLAGS=00000
-//tag.bf=-1
+tag.bf=-1
 tag.realm=2
 RESOURCES=r_default_rock, r_default_water, r_tree_ithilien, r_default_grass
 
@@ -1020,7 +1029,7 @@ Rect=2986,2732,3018,2786
 RAINCHANCE=15
 COLDCHANCE=00  
 FLAGS=00000
-//tag.bf=-1
+tag.bf=-1
 tag.realm=2
 RESOURCES=r_default_rock, r_default_water, r_tree_ithilien, r_default_grass
 
@@ -1041,7 +1050,7 @@ P=6012,3892,-80
 RECT=5974,3812,6045,3939
 flags=000
 tag.realm=2
-//tag.bf=-1
+tag.bf=-1
 events=r_nofield
 RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
@@ -1083,7 +1092,7 @@ Rect=6100,3976,6116,3998
 GROUP=battlefiel -1
 flags=000
 tag.realm=2
-//tag.bf=-1
+tag.bf=-1
 RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
@@ -1148,7 +1157,7 @@ RECT=5848,3947,5896,4043
 FLAGS=0100 // 0100 available
 EVENTS=r_pelenorska_pole
 tag.realm=1
-//tag.bf=1
+tag.bf=1
 RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
@@ -1161,7 +1170,7 @@ RECT=5908,3818,5974,3960
 RECT=5880,3896,5911,3921
 flags=000
 tag.realm=1
-//tag.bf=1
+tag.bf=1
 events=r_nofield
 RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
@@ -1517,7 +1526,15 @@ RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=20  
 COLDCHANCE=00
 
-
+[AREA Bile hory]
+GROUP=vyznamna mista
+P=1952,2740
+RECT=1929,2697,1979,2750
+FLAGS=00012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=00  
+COLDCHANCE=25
 
 [AREA Nindalf vlhka plan]
 GROUP=vyznamna mista
@@ -2001,7 +2018,7 @@ GROUP=Mesta Gondor
 P=3192,1064,1
 RECT=3166,992,3235,1022
 RECT=3155,1016,3221,1064
-RECT=3162,1062,3191,1079
+RECT=3162,1062,3221,1079
 RECT=3233,992,3250,1010
 TAG.GUARDOWNER=the city
 CLASS=48
@@ -3193,6 +3210,31 @@ tag.nobank=1
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA CTF Christmas Arena]
+GROUP=Arena
+P=6012,2747,0,55
+RECT=5945,2700,6070,2790
+FLAGS=0001E
+mapplane=55
+resources=r_default_rock, r_default_water, r_default_tree
+tag.arena=1
+tag.nobank=1
+RAINCHANCE=00
+COLDCHANCE=50
+
+[AREA CTF Christmas Equip Room]
+GROUP=Arena
+P=6050,2771,0,56
+RECT=5945,2700,6070,2790
+FLAGS=0801E
+mapplane=56
+resources=r_default_rock, r_default_water, r_default_tree
+tag.arena=1
+tag.nobank=1
+events=e_startdung   // nejde zde zabijet, lootit jine
+RAINCHANCE=00
+COLDCHANCE=50
+
 [AREA Fela Nazgul]
 GROUP=Mordorske uzemi
 P=5847,2104,10,10
@@ -3678,6 +3720,7 @@ RECT=5195,2470,5366,2618
 mapplane=10
 FLAGS=00812
 tag.realm=3
+tag.nobank=1
 RAINCHANCE=00
 COLDCHANCE=00
 
@@ -3686,17 +3729,6 @@ GROUP=Dungeon Carn Dum
 P=5275, 2042
 RECT=5191,2023,5364,2270
 mapplane=10
-FLAGS=00812
-tag.nobank=1
-tag.realm=3
-RAINCHANCE=00
-COLDCHANCE=00
-
-[AREA Carn Dum 4 Level new]
-GROUP=Dungeon Carn Dum
-P=5271, 2529, 28, 10
-RECT=5195,2470,5366,2618
-mapplane=10  
 FLAGS=00812
 tag.nobank=1
 tag.realm=3
@@ -5905,8 +5937,8 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 81] // SAMOTA
 P=933,1109
-RECT=921,1096,934,1107
-RECT=921,1107,930,1111
+RECT=921,1096,935,1107
+RECT=921,1107,931,1111
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  

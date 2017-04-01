@@ -59,6 +59,7 @@ scripts\chars\specNPCCrunch.scp
 scripts\chars\specNPCMandos.scp
 scripts\chars\specNPCIrmo.scp
 scripts\chars\specNPCaldaron.scp
+scripts\chars\specNPCTotal.scp
 scripts\chars\summons.scp
 scripts\chars\swamp.scp
 scripts\chars\groups.scp

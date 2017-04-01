@@ -1,0 +1,36 @@
+/////  M A G I C   S H I E L D  /////
+
+// tags to edit behavior:
+// tag.npc_magicShield=80,90 // monster gains 80-90% DMG resistence while shielded
+[events e_npc_magicShield]
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@beforedoeffect 
+on=@afterDoEffect
+on=@beforegeteffect
+on=@beforegetswing
+if (0<tag(npc_magicShield)>)
+  arg(shieldForce,<eval (randombetween(<tag(npc_magicShield)>)*10)>)
+else
+  arg(shieldForce,900)
+endif
+if (src.profession==class_mystik)
+  arg(MystikLevel,<eval src.tag(level)>)
+  if (<arg(MystikLevel)> > 200)
+    arg(MystikLevel,200)
+  endif
+  arg(shieldForce,<eval (arg(shieldForce)-((arg(shieldForce)*<arg(MystikLevel)>)/200))>)
+endif
+if (!findid(i_silencer))
+  var(ubrano,<eval (var(ubrano)-((var(ubrano)*arg(shieldForce))/1000))>)
+  if (var(ubrano) > 1)
+    src.sysMessage("Magicky stit cile pohltil cast ucinku tveho utoku.")
+  else
+    src.sysMessage("Magicky stit cile zcela pohltil ucinek tveho utoku.")
+  endif
+endif
+
+on=@aftergetswing
+
+[eof]
