@@ -4,10 +4,6 @@
 //                                 //
 /////////////////////////////////////
 
-// SMAZAT PO NASAZENI WEEKLY ! ! ! !
-[function f_vg_finishDng]
-return
-
 [function questy]
 if (src.isgm)
   if (isqueststone)
