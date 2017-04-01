@@ -783,7 +783,7 @@ tag(quest_iconId[<currentQNumber>],02203)
 tag(quest_iconId_moveX[<currentQNumber>],-8) // move the custom icon 4 pixels to the right
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
-[function f_weekly_setup_KillStreak] 
+[function f_weekly_setup_KillStreak]    // argv(0) koef obtiznosti (velikost i pocet KillStreaku)
 arg(currentQNumber,<eval tag(qAssigned)>)
  
 f_weekly_addItem(<currentQNumber>,KillStreak)
@@ -791,7 +791,7 @@ f_weekly_addItem(<currentQNumber>,KillStreak)
 tag(quest_subjectId[<currentQNumber>],<eval (<tag(qCount)>*<argv(0)>)>)
 tag(quest_description[<currentQNumber>],"Zabij <eval tag(quest_subjectId[<currentQNumber>])> monster<br>v kratkem sledu.")
 tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*2)/3)>)
-tag(KillStrike_time,<serv.time>)
+tag(KillStreak_time,<serv.time>)
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
 [function f_weekly_setup_conqueror]
@@ -1031,10 +1031,10 @@ endif
 
 /////////////////////////////
 
-[events e_weekly_KillStrike]
+[events e_weekly_KillStreak]
 on=@userKill // src - co bylo zabito, uid - kdo zabil
 if (src.npc) // zabil npc
-  findid(i_memory_weekly_quest).f_weekly_KillStrike
+  findid(i_memory_weekly_quest).f_weekly_KillStreak
 endif
 
 on=@beforeGetEffect
@@ -1046,7 +1046,7 @@ on=@afterSwing
 on=@npcKill
 on=@DrinkingPotion
 
-[function f_weekly_KillStrike]
+[function f_weekly_KillStreak]
 
 arg(receivedXP,<eval src.tag(added_experience_bydeath)>)
 if (<arg(receivedXP)> < 10)
@@ -1054,21 +1054,21 @@ if (<arg(receivedXP)> < 10)
 endif
 
 arg(i,0)
-while (<arg(i)> < <eval tag(KillStrikesCount)>)
-  arg(questId,<eval tag(KillStrike[<eval arg(i)>])>)
+while (<arg(i)> < <eval tag(KillStreaksCount)>)
+  arg(questId,<eval tag(KillStreak[<eval arg(i)>])>)
 
-  if (<eval tag(KillStrike_time)> < <serv.time>)
-    tag(KillStrike_kills[<arg(questId)>],1)
+  if (<eval tag(KillStreak_time)> < <serv.time>)
+    tag(KillStreak_kills[<arg(questId)>],1)
   else
-    tag(KillStrike_kills[<arg(questId)>],#+1)  
+    tag(KillStreak_kills[<arg(questId)>],#+1)  
   endif
-  tag(KillStrike_time,<serv.time>+150)
+  tag(KillStreak_time,<serv.time>+150)
 
-  if (<eval tag(KillStrike_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
+  if (<eval tag(KillStreak_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
     if (f_weekly_increase(<arg(questId)>,1,1))
-      f_weekly_removeItem(<arg(questId)>,KillStrike)
+      f_weekly_removeItem(<arg(questId)>,KillStreak)
     endif
-    tag(KillStrike_kills[<arg(questId)>],0)
+    tag(KillStreak_kills[<arg(questId)>],0)
   endif
 
 endwhile
