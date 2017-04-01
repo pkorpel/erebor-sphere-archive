@@ -1,4 +1,5 @@
 [defnames def_weekly_quest]
+def_weekly_stone         #04002B637 // #04004F507 // Stone na tagy
 def_weekly_count         8 // maximalni pocet questu
 def_weekly_countBase     3 // zakladni pocet questu pred uplatnenim levelu
 def_weekly_levelStepUp  20 // potrebny pocet levelu pro ziskani noveho questu
@@ -6,8 +7,8 @@ def_weekly_levelMin     10 // minimalni potrebny level pro obdrzeni weekly quest
 
 // single-quest related definitions
 def_weekly_count_low      12 // pocet low miniquestu
-def_weekly_count_medium   9 // pocet medium miniquestu
-def_weekly_count_high     6 // pocet high miniquestu
+def_weekly_count_medium   10 // pocet medium miniquestu
+def_weekly_count_high     5 // pocet high miniquestu
 
 // default prize koeficients
 def_weekly_prize_gold         250     // delitel pro vypocet gp
@@ -179,6 +180,13 @@ def_weekly_medium_setupFunArgn[8]     1  // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_8_[0]   65 // player level limit (78 dng level max)
 def_weekly_medium_rewardSize[8]       90
 
+def_weekly_medium_setupFunction[9]    f_weekly_setup_KillStreak
+def_weekly_medium_setupFunArgn[9]     1 // pocet argumentu setup funkce
+def_weekly_medium_setupFunArg_9_[0]   2 // koeficient poctu monster potrebnych k zabiti v rade
+def_weekly_medium_iconId[9]           021FC
+def_weekly_medium_iconId_moveY[9]     9  // move the custom icon 9 pixels up
+def_weekly_medium_iconId_moveX[9]     15 // move the custom icon 15 pixels to the left
+def_weekly_medium_rewardSize[9]       75
 
 // HIGH quests
 
@@ -207,18 +215,10 @@ def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
 def_weekly_high_iconId_moveX[3]     8 // move the custom icon 8 pixels to the left
 def_weekly_high_rewardSize[3]       105
 
-def_weekly_high_setupFunction[4]    f_weekly_setup_MultiKill
+def_weekly_high_setupFunction[4]    f_weekly_setup_finishDungeon
 def_weekly_high_setupFunArgn[4]     1 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_4_[0]   4 // koeficient poctu Multikillu
-def_weekly_high_iconId[4]           021FC
-def_weekly_high_iconId_moveY[4]     9  // move the custom icon 9 pixels up
-def_weekly_high_iconId_moveX[4]     15 // move the custom icon 15 pixels to the left
-def_weekly_high_rewardSize[4]       100
-
-def_weekly_high_setupFunction[5]    f_weekly_setup_finishDungeon
-def_weekly_high_setupFunArgn[5]     1 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_5_[0]   100 // player level limit (120 dng level max)
-def_weekly_high_rewardSize[5]       130
+def_weekly_high_setupFunArg_4_[0]   100 // player level limit (120 dng level max)
+def_weekly_high_rewardSize[4]       130
 
 
 [DEFNAMES WEEKLY_POTIONS]
@@ -275,6 +275,8 @@ f_weekly_generate
 src.events(+e_weekly_quest)
 src.classMessage("<src.sex(Prijal,Prijala)> jsi novy seznam ukolu. Pro zobrazeni zadej prikaz .questy")
 src.accmsg("prijal serii <eval tag(qCount)> Weekly questu na levelu <eval tag(playerLevel)>")
+def_weekly_stone.tag(WeeklyQuestGenerated,#+1)
+def_weekly_stone.tag(SingleQuestGenerated,#+<eval tag(qCount)>)
 
 on=@unequip
 src.f_weekly_clearEvents
@@ -450,6 +452,7 @@ endif
 [function f_weekly_setQuest] // argv(0) - cislo questu, // argv(1) - level questu (low, medium ...)
 //src.sysMessage("setup Function: <def_weekly_<argv(1)>_setupFunction[<eval argv(0)>]>")
 //src.sysMessage("Quest number: <eval argv(0)>")
+def_weekly_stone.tag(<argv(1)>_<argv(0)>_00,<eval def_weekly_stone.tag(<argv(1)>_<argv(0)>_00)>+1)
 arg(arguments,"")
 arg(argNumb,<def_weekly_<argv(1)>_setupFunArgn[<eval argv(0)>]>)
 arg(i,0)
@@ -513,6 +516,7 @@ tag(rewXP,#+<tag(quest_rewXP[<eval tag(qAssigned)>])>)
 [function f_weekly_giveReward] // argv(0) - cislo questu
 f_weekly_giveRewardSingle(<argv(0)>)
 cont.dialog(d_weekly_completed,<argv(0)>)
+def_weekly_stone.tag(<tag(quest_level[<argv(0)>])>_<eval tag(quest_id[<argv(0)>])>_1,<eval def_weekly_stone.tag(<tag(quest_level[<argv(0)>])>_<eval tag(quest_id[<argv(0)>])>_1)>+1)
 if (f_weekly_isAllCompleted)
   f_weekly_giveRewardComplete
   cont.classmessage("<cont.sex(Splnil,Splnila)> jsi vsechny ukoly tydennich questu! Odmena byla vlozena do banky.")
@@ -530,19 +534,27 @@ while (arg(i) < arg(miAmount))
   bankBox.giveItem(i_mi_bag)
   arg(i,#+1)
 endif
+def_weekly_stone.tag(SingleQuestCompleted,#+1)
+def_weekly_stone.tag(Reward_EXP,#+<tag(quest_rewXP[<eval argv(0)>])>)
+def_weekly_stone.tag(Reward_GP,#+<tag(quest_rewGold[<eval argv(0)>])>)
+def_weekly_stone.tag(Reward_MI,#+<eval tag(quest_rewMI[<eval argv(0)>])>)
 cont.accmsg("splnil <tag(quest_totalAmount[<eval argv(0)>])>x <tag(quest_description[<eval argv(0)>])> ve Weekly questu a ziskal <tag(quest_rewGold[<eval argv(0)>])>gp; <tag(quest_rewXP[<eval argv(0)>])>expu a  <eval tag(quest_rewMI[<eval argv(0)>])> itemu")
 
 [function f_weekly_giveRewardComplete]
-cont.addExp(<tag(rewXP)>)
+cont.addExp(<eval tag(rewXP)>)
 arg(bankBox,<cont.findlayer(layer_bankbox)>)
-bankBox.giveGold(<tag(rewGold)>)
+bankBox.giveGold(<eval tag(rewGold)>)
 arg(miAmount,<eval tag(rewMI)>)
 arg(i,0)
 while (arg(i) < arg(miAmount))
   bankBox.giveItem(i_mi_bag)
   arg(i,#+1)
 endif
-cont.accmsg("splnil vsechny Weekly questy a ziskal za to odmenu <tag(rewGold[<eval argv(0)>])>gp; <tag(rewXP[<eval argv(0)>])>expu a  <eval tag(rewMI[<eval argv(0)>])> itemu")
+def_weekly_stone.tag(WeeklyQuestCompleted,#+1)
+def_weekly_stone.tag(Reward_EXP,#+<eval tag(rewXP)>)
+def_weekly_stone.tag(Reward_GP,#+<eval tag(rewGold)>)
+def_weekly_stone.tag(Reward_MI,#+<eval tag(rewMI)>)
+cont.accmsg("splnil vsechny Weekly questy a ziskal za to odmenu <eval tag(rewGold)>gp; <eval tag(rewXP)>expu a <eval tag(rewMI)> itemu")
 
 
 [function f_getFinalItemId] // argv(0) - nektera z random definici, ktera se ma expandovat na konkretni itemdef
@@ -771,33 +783,16 @@ tag(quest_iconId[<currentQNumber>],02203)
 tag(quest_iconId_moveX[<currentQNumber>],-8) // move the custom icon 4 pixels to the right
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
 
-[function f_weekly_setup_MultiKill] 
-//src.sysMessage("setting up killPlayer quest")
+[function f_weekly_setup_KillStreak] 
 arg(currentQNumber,<eval tag(qAssigned)>)
  
-f_weekly_addItem(<currentQNumber>,MultiKill)
+f_weekly_addItem(<currentQNumber>,KillStreak)
 
-arg(rand_type,<eval {1 11}>)
-if (<arg(rand_type)> <= 5)
-  arg(MultiKill,"Double")
-  tag(quest_subjectId[<currentQNumber>],2)
-elseif (<arg(rand_type)> <= 8)
-  arg(MultiKill,"Triple")
-  tag(quest_subjectId[<currentQNumber>],3)
-elseif (<arg(rand_type)> <= 10)
-  arg(MultiKill,"Quadra")
-  tag(quest_subjectId[<currentQNumber>],4)
-else
-  arg(MultiKill,"Penta")
-  tag(quest_subjectId[<currentQNumber>],5)
-endif
-
-tag(quest_description[<currentQNumber>],"Zabitim monster<br>ziskej <?arg(MultiKill)?>kill.")
-tag(quest_totalAmount[<currentQNumber>],<eval (((<tag(qCount)>*<tag(qCount)>)/<argv(0)>)/<tag(quest_subjectId[<currentQNumber>])>)>)
-tag(MultiKill_Time,<serv.time>+10)
-tag(MultiKill_kills[<currentQNumber>],0)
+tag(quest_subjectId[<currentQNumber>],<eval (<tag(qCount)>*<argv(0)>)>)
+tag(quest_description[<currentQNumber>],"Zabij <eval tag(quest_subjectId[<currentQNumber>])> monster<br>v kratkem sledu.")
+tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*2)/3)>)
+tag(KillStrike_time,<serv.time>)
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
-
 
 [function f_weekly_setup_conqueror]
 arg(currentQNumber,<eval tag(qAssigned)>)
@@ -877,7 +872,7 @@ arg(i,0)
 while (<arg(i)> < <tag(itemLootsCount)>)
   arg(questId,<eval tag(itemLoot[<eval arg(i)>])>)
   if ((<argv(0).baseID> == <tag(quest_subjectId[<arg(questId)>])>) || (<argv(0).type> == <tag(quest_subjectId[<arg(questId)>])>))
-    if (f_weekly_increase(<arg(questId)>,<argv(0).amount>))
+    if (f_weekly_increase(<arg(questId)>,<argv(0).amount>),1)
       f_weekly_removeItem(<arg(i)>,itemLoot)
     endif
     return
@@ -901,7 +896,7 @@ if (<arg(dmgDealt)> > 0)
     arg(dmgDealt,<act.hits>)
   endif
   if (weekly.f_weekly_increase(<questId>,<arg(dmgDealt)>))
-    weekly.f_weekly_removeItem(0,dmgNPC)
+    weekly.f_weekly_removeItem(<questId>,dmgNPC)
   endif
 endif
 
@@ -1036,10 +1031,10 @@ endif
 
 /////////////////////////////
 
-[events e_weekly_MultiKill]
+[events e_weekly_KillStrike]
 on=@userKill // src - co bylo zabito, uid - kdo zabil
 if (src.npc) // zabil npc
-  findid(i_memory_weekly_quest).f_weekly_Multikill
+  findid(i_memory_weekly_quest).f_weekly_KillStrike
 endif
 
 on=@beforeGetEffect
@@ -1051,29 +1046,29 @@ on=@afterSwing
 on=@npcKill
 on=@DrinkingPotion
 
-[function f_weekly_MultiKill]
+[function f_weekly_KillStrike]
 
 arg(receivedXP,<eval src.tag(added_experience_bydeath)>)
-if !(<arg(receivedXP)>)
+if (<arg(receivedXP)> < 10)
   return
 endif
 
 arg(i,0)
-while (<arg(i)> < <eval tag(MultiKillsCount)>)
-  arg(questId,<eval tag(MultiKill[<eval arg(i)>])>)
+while (<arg(i)> < <eval tag(KillStrikesCount)>)
+  arg(questId,<eval tag(KillStrike[<eval arg(i)>])>)
 
-  if (<eval tag(MultiKill_Time)> < <serv.time>)
-    tag(MultiKill_Time,<serv.time>+10)
-    tag(MultiKill_kills[<arg(questId)>],1)
-    return
+  if (<eval tag(KillStrike_time)> < <serv.time>)
+    tag(KillStrike_kills[<arg(questId)>],1)
+  else
+    tag(KillStrike_kills[<arg(questId)>],#+1)  
   endif
-  tag(MultiKill_kills[<arg(questId)>],#+1)
+  tag(KillStrike_time,<serv.time>+150)
 
-  if (<eval tag(MultiKill_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
+  if (<eval tag(KillStrike_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
     if (f_weekly_increase(<arg(questId)>,1,1))
-      f_weekly_removeItem(<arg(questId)>,MultiKill)
+      f_weekly_removeItem(<arg(questId)>,KillStrike)
     endif
-    tag(MultiKill_kills[<arg(questId)>],0)
+    tag(KillStrike_kills[<arg(questId)>],0)
   endif
 
 endwhile
@@ -1134,7 +1129,7 @@ if (act.type==t_web)
     arg(weekly,<findid(i_memory_weekly_quest)>)
     arg(questId,<eval weekly.tag(stepOnWeb[0])>)
     if (weekly.f_weekly_increase(<questId>,1,1))
-      weekly.f_weekly_removeItem(0,stepOnWeb)
+      weekly.f_weekly_removeItem(<questId>,stepOnWeb)
     endif
   endif
 endif
