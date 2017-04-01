@@ -316,15 +316,19 @@ weeklyTag(expiracyTime,555)
 [function f_weekly_clearEvents]
 events=-e_weekly_quest
 
-events=-e_weekly_itemLoot
 events=-e_weekly_itemDclick
+events=-e_weekly_itemLoot
 events=-e_weekly_meetMaster
 events=-e_weekly_dmgNPC
 events=-e_weekly_receiveDmg
 events=-e_weekly_killInDung
+events=-e_weekly_KillStreak
 events=-e_weekly_killPlayer
 events=-e_weekly_stepOnWeb
+events=-e_weekly_finishDungeon
 events=-e_weekly_healPlayer
+events=-e_weekly_HuntingSign
+
 
 /////////////////////////////
 
@@ -365,7 +369,9 @@ arg(generate,1)
 if (<arg(weekly)>)
   arg(generate,<weekly.f_weekly_checkExpiracy>)
 endif
-if (<tag(level)> < def_weekly_levelMin)
+if (profession==class_craft) // do NOT give weekly quests to crafts for now
+  return 0
+elseif (<tag(level)> < def_weekly_levelMin)
   return 0
 endif
 
