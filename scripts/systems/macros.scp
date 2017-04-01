@@ -248,6 +248,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [itemdef i_src_changer_parakrik]
 id=i_memory

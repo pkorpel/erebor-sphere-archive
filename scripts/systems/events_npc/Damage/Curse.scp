@@ -21,6 +21,8 @@ e_f_npc_curse
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function e_f_npc_curse]
 if (<eval tag(npc_curse_time)> < <serv.time>)
