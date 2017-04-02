@@ -1397,7 +1397,7 @@ return<eval {<arg(minID)> <arg(maxId)>}>
 if !(cont.isEvent(e_weekly_healPlayer))
   return
 endif
-if (<argv(0)> <= 0)
+if (<eval argv(0)> <= 0)
   return
 endif
 if !(<eval cont.tag(realm)> == <eval link.tag(realm)>)

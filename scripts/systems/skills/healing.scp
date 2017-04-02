@@ -199,7 +199,7 @@ if (link.body==c_man)||(link.body==c_woman)       //humanoid - skill healing
   else
    cont.classmessage("<link.name> byl uspesne osetren")
    if (tag(shamanheal))
-    arg(healed_amount,<(promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)*2)>)
+    arg(healed_amount,<eval (promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)*2)>)
     //link.hits=<eval link.hits+(promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)*2)>
    else
     arg(healed_amount,<promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)>)
@@ -215,7 +215,7 @@ if (link.body==c_man)||(link.body==c_woman)       //humanoid - skill healing
   IF (LINK!=CONT)
    link.classmessage("<cont.name> te osetril.")
   endif
-  if <cont.isevent.e_weekly_quest>  // lecitel plni weekly quest
+  if (<cont.isevent(e_weekly_quest)>)  // lecitel plni weekly quest
     f_weekly_quest_healing(<healed_amount>)
   endif
  else
