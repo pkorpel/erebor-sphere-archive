@@ -75,7 +75,7 @@ def_weekly_low_rewardSize[8]       50
 
 def_weekly_low_setupFunction[9]    f_weekly_setup_killInDung                    // OTESTOVANO
 def_weekly_low_setupFunArgn[9]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_9_[0]   15 // koeficient poctu NPC
+def_weekly_low_setupFunArg_9_[0]   450 // koeficient poctu NPC
 def_weekly_low_setupFunArg_9_[1]   20 // minimalni pocet XP
 def_weekly_low_iconId[9]           020E9
 def_weekly_low_iconId_moveY[9]     9  // move the custom icon 9 pixels up
@@ -97,24 +97,6 @@ def_weekly_low_iconId_moveX[11]     2
 def_weekly_low_iconId_moveY[11]     8  // move the custom icon 8 pixels up
 def_weekly_low_descr[11]            "<?null?>Lootni predmet:<br>Jakekoli drahokamy" // pocet predmetu ke sbirani
 def_weekly_low_rewardSize[11]       55
-
-// TO TEST:
-
-//def_weekly_low_setupFunction[2]    f_weekly_setup_killPlayer
-
-//def_weekly_low_setupFunction[3]    f_weekly_setup_killPlayer
-
-//def_weekly_low_setupFunction[4]    f_weekly_setup_killPlayer
-
-//def_weekly_low_setupFunction[2]    f_weekly_setup_killInDung
-
-//def_weekly_low_setupFunction[2]    f_weekly_setup_stepOnWeb
-
-//def_weekly_low_setupFunction[2]    f_weekly_setup_dmgNPC
-
-//def_weekly_low_setupFunction[2]    f_weekly_setup_meetMaster
-
-//def_weekly_low_setupFunction[2]    f_weekly_setup_loot
 
 ////////////////////
 ////////////////////
@@ -150,7 +132,7 @@ def_weekly_medium_rewardSize[3]       85
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
-def_weekly_medium_setupFunArg_4_[0]   10 // koeficient poctu NPC
+def_weekly_medium_setupFunArg_4_[0]   300 // koeficient poctu NPC
 def_weekly_medium_setupFunArg_4_[1]   100 // minimalni pocet XP
 def_weekly_medium_iconId[4]           0212E
 def_weekly_medium_iconId_moveY[4]     9  // move the custom icon 9 pixels up
@@ -208,7 +190,7 @@ def_weekly_high_rewardSize[2]       110
 
 def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_3_[0]   5 // koeficient poctu NPC
+def_weekly_high_setupFunArg_3_[0]   120 // koeficient poctu NPC
 def_weekly_high_setupFunArg_3_[1]   200 // minimalni pocet XP
 def_weekly_high_iconId[3]           02132
 def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
@@ -233,28 +215,6 @@ FIGHT_RANDOM_POTION_BOOST_GREAT { i_potion_refreshGreater 1 i_potion_agilityGrea
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
-
-// QUESTS LEFT FOR CONVERSION
-//arg(qAmount,0)
-//arg(RandomResult,0)
-//elseif (<argv(0)> == 104)  // 104 - zabij XY monster v dungu pod 50 expu
-//  arg(qAmount,<eval ((<tag(qCount)>*<tag(qCount)>*{40 50})/10)>)
-//  arg(quest_description,"Zabij v dungeonu <qAmount> monster, z kterych ziskas mene jak 50 expu.")
-//  say("KS: <qAmount>")
-//elseif (<argv(0)> == 107)  // 107 - Dokonc dungeon
-//  arg(qAmount,1)
-//  arg(quest_description,"Dokonc jakykoli dungeon.")
-//  say("KS: <qAmount>")
-//elseif (<argv(0)> == 109)  // 109 - Rozklikni magicky itemek
-//  arg(qAmount,<eval ((<tag(qCount)>*{2 4})/10)>)
-//  arg(quest_description,"Otevri <qAmount>x Vacek s magickym predmetem.")
-//  say("KS: <qAmount>")
-//elseif (<argv(0)> == 110)  // 110 - Navstiv magicke misto
-//  arg(qAmount,1)
-//  arg(miniquest_where,<eval {1 5}>)
-//  if (<miniquest_where> == 1)
-//    tag(quest_subjectId[<argv(0)>],790)
-//    arg(quest_description,"Navstiv magicke misto nedaleko Severnich dolu.")
 
 [itemdef i_memory_weekly_quest]
 name=Weekly Quest memory
@@ -733,7 +693,7 @@ tag(quest_iconId_moveY[<currentQNumber>],14) // move the custom icon 14 pixels u
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,killInDung)
-tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<tag(qCount)>*{<eval (25*<argv(0)>)> <eval (35*<argv(0)>)>})/100)>)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*<tag(qCount)>*{<argv(0)> <eval (<argv(0)>+10)>})/100)>)
 tag(quest_description[<currentQNumber>],"Zabij npc v dungeonu<br>s alespon <?argv(1)?>xp")
 tag(quest_subjectId[<currentQNumber>],<argv(1)>) // exceptionaly the subjectId doesn't store an actual ID, but a minimal required XP
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
