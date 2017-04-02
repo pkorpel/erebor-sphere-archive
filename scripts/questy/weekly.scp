@@ -132,7 +132,7 @@ def_weekly_medium_rewardSize[3]       85
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
-def_weekly_medium_setupFunArg_4_[0]   300 // koeficient poctu NPC
+def_weekly_medium_setupFunArg_4_[0]   275 // koeficient poctu NPC
 def_weekly_medium_setupFunArg_4_[1]   100 // minimalni pocet XP
 def_weekly_medium_iconId[4]           0212E
 def_weekly_medium_iconId_moveY[4]     9  // move the custom icon 9 pixels up
