@@ -2746,7 +2746,7 @@ drop
 equip
 
 [function freetag]
-if (<eval tag(<args>)> <= 0) //kdyz ma tag hodnotu 0 a nebo je zaporny
+if !(tag(<args>)) //kdyz ma tag hodnotu 0
   tag.remove(<args>)
 endif
 
