@@ -1710,15 +1710,15 @@ n_global_default[46]	150
 n_global[47]		global_MvP_randomfactor
 n_global_name[47]	"nahodnost damage MvP "
 n_global_default[47]	"800 1200"
-n_global[47]		global_durabilitykvocient
-n_global_name[47]	"%% damage zbrane pri 0 dur"
-n_global_default[47]	0
-n_global[48]		global_potiondelay2          
-n_global_name[48]	"prodleva delsich potionu (1/10 s)"
-n_global_default[48]	200                         
-n_global[49]		global_reflectSPlowering
-n_global_name[49]	"%% spellpower odrazenyho kouzla"
-n_global_default[49]	0          
+n_global[48]		global_durabilitykvocient
+n_global_name[48]	"%% damage zbrane pri 0 dur"
+n_global_default[48]	0
+n_global[49]		global_potiondelay2          
+n_global_name[49]	"prodleva delsich potionu (1/10 s)"
+n_global_default[49]	200                         
+n_global[50]		global_reflectSPlowering
+n_global_name[50]	"%% spellpower odrazenyho kouzla"
+n_global_default[50]	0          
 
 n_global2[0]		global_armorchange_vM_war
 n_global2_name[0]	"zmena AC vM war"

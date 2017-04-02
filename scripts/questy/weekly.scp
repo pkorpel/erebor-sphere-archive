@@ -825,6 +825,9 @@ cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber
 
 [events e_weekly_itemDclick]
 on=@itemUserDClick
+if (<src.flags>&statf_dead)
+  return
+endif
 findid(i_memory_weekly_quest).f_weekly_itemDClick(<act>)
 
 [function f_weekly_itemDClick] //argv(0) - act
@@ -1132,6 +1135,9 @@ endwhile
 [events e_weekly_stepOnWeb] // stoupni na pavucinu
 on=@itemStep
 if (act.type==t_web)
+  if (<src.flags>&statf_dead)
+    return
+  endif
   if !(strlen(<act.tag(steppedby)>))
     act.tag(steppedby,<src>)
     arg(weekly,<findid(i_memory_weekly_quest)>)

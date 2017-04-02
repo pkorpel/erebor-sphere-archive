@@ -105,7 +105,7 @@ class_info_class_shaman_description[12] "Tato schopnost vyrazne zvysi zraneni ko
 //////////////////////////////////////////////////////////////////
 
 // class thief
-class_info_class_thief_abilities 13 // number of abilities == kazda pridana abilita +1
+class_info_class_thief_abilities 14 // number of abilities == kazda pridana abilita +1
 // meni sa cislo v [x]
 
 class_info_class_thief_name[0] Hazeni
@@ -120,77 +120,77 @@ class_info_class_thief_max_points[1] 10
 class_info_class_thief_function[1] longrange
 class_info_class_thief_description[1] "Tato schopnost umoznuje zlodejovi prodlouzit dosah hodu nozem a vybusninami. Zaroven kazdy zasah nozem behem trvani teto schopnosti automaticky rusi kouzlo Recall a Gate travel zasazeneho."
 
-class_info_class_thief_name[1] Maska
-class_info_class_thief_tag[1] none // aky to ma tag, to mozes nechat a doplnim ja
-class_info_class_thief_max_points[1] none
-class_info_class_thief_function[1] mask
-class_info_class_thief_description[1] "Tato schopnost umoznuje zlodejovi vytvorit si druhou identitu. Nejde vsak o novou postavu, presto je mozne s druhou identitou zmenit realm."
+class_info_class_thief_name[2] Maska
+class_info_class_thief_tag[2] none // aky to ma tag, to mozes nechat a doplnim ja
+class_info_class_thief_max_points[2] none
+class_info_class_thief_function[2] mask
+class_info_class_thief_description[2] "Tato schopnost umoznuje zlodejovi vytvorit si druhou identitu. Nejde vsak o novou postavu, presto je mozne s druhou identitou zmenit realm."
 
-class_info_class_thief_name[2] Strelba zubatymi sipkami
-class_info_class_thief_tag[2] ra_bleed_bolt
-class_info_class_thief_max_points[2] 20
-class_info_class_thief_function[2] none
-class_info_class_thief_description[2] "Tato schopnost umoznuje zlodejovi strilet z male kuse i zubate sipky, ktere zasadi cily krvaceni. Tuto schopnost vsak neni mozne zasadit z hrbetu jezditka, ale pouze pesmo."
-
-class_info_class_thief_name[3] Dvojity zasah
-class_info_class_thief_tag[3] ra_Doubleswing
-class_info_class_thief_max_points[3] 40
+class_info_class_thief_name[3] Strelba zubatymi sipkami
+class_info_class_thief_tag[3] ra_bleed_bolt
+class_info_class_thief_max_points[3] 20
 class_info_class_thief_function[3] none
-class_info_class_thief_description[3] "Tato automaticka schopnost umoznuje zlodejovi zasahnout monstrum o 50% silneji. K teto schopnosti zlodej potrebuje pouzivat valecne vidle a mit dostatek staminy. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zvednout tak sanci na zasazeni dvojiteho zasahu."
+class_info_class_thief_description[3] "Tato schopnost umoznuje zlodejovi strilet z male kuse i zubate sipky, ktere zasadi cily krvaceni. Tuto schopnost vsak neni mozne zasadit z hrbetu jezditka, ale pouze pesmo."
 
-class_info_class_thief_name[4] Odrazeni uderu zpet
-class_info_class_thief_tag[4] ra_thief_rebound
-class_info_class_thief_max_points[4] 30
+class_info_class_thief_name[4] Dvojity zasah
+class_info_class_thief_tag[4] ra_Doubleswing
+class_info_class_thief_max_points[4] 40
 class_info_class_thief_function[4] none
-class_info_class_thief_description[4] "Tato automaticka schopnost umoznuje zlodejovi odrazit cely utok zpet na utocnika. Tuto abilitu lze pouzit jen s nekterymi zbranemi a druh zbrane ma primy vliv na sanci odrazeni uderu zpet.  Vliv bonusu zbrane lze zdvojnasobit ostrazitym postojem. Tuto schopnost je mozno 2x po deseti bodech vylepsit a zvysit tak sanci na odrazeni uderu."
+class_info_class_thief_description[4] "Tato automaticka schopnost umoznuje zlodejovi zasahnout monstrum o 50% silneji. K teto schopnosti zlodej potrebuje pouzivat valecne vidle a mit dostatek staminy. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zvednout tak sanci na zasazeni dvojiteho zasahu."
 
-class_info_class_thief_name[5] Ostrazity postoj
-class_info_class_thief_tag[5] ra_thief_defstance
-class_info_class_thief_max_points[5] 10
-class_info_class_thief_function[5] stance
-class_info_class_thief_description[5] "Zlodej se muze vice soustredit na svoji obranu a odrazet zpet vice utoky utocniku. Toto soustredeni vsak vyrazne snizuje zraneni, ktere zlodej zpusobuje. Ke zmene postaveni je treba mit minimalne 50 bodu staminy."
+class_info_class_thief_name[5] Odrazeni uderu zpet
+class_info_class_thief_tag[5] ra_thief_rebound
+class_info_class_thief_max_points[5] 30
+class_info_class_thief_function[5] none
+class_info_class_thief_description[5] "Tato automaticka schopnost umoznuje zlodejovi odrazit cely utok zpet na utocnika. Tuto abilitu lze pouzit jen s nekterymi zbranemi a druh zbrane ma primy vliv na sanci odrazeni uderu zpet.  Vliv bonusu zbrane lze zdvojnasobit ostrazitym postojem. Tuto schopnost je mozno 2x po deseti bodech vylepsit a zvysit tak sanci na odrazeni uderu."
 
-class_info_class_thief_name[6] Utok do zad
-class_info_class_thief_tag[6] ra_utok_do_zad
-class_info_class_thief_max_points[6] 40
-class_info_class_thief_function[6] none
-class_info_class_thief_description[6] "Automaticka specializace zlodeje na utok zezadu. Zlodej je schopen cil zasahnout vyrazne efektivneji v pripade, ze stoji za jeho zady. Schopnost je nezavisla na pouzite zbrani a ma i primy vliv na zasazeni silnejsiho krvaceni. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zvysit tak velikost zraneni, ktere tato schopnost udili."
+class_info_class_thief_name[6] Ostrazity postoj
+class_info_class_thief_tag[6] ra_thief_defstance
+class_info_class_thief_max_points[6] 10
+class_info_class_thief_function[6] stance
+class_info_class_thief_description[6] "Zlodej se muze vice soustredit na svoji obranu a odrazet zpet vice utoky utocniku. Toto soustredeni vsak vyrazne snizuje zraneni, ktere zlodej zpusobuje. Ke zmene postaveni je treba mit minimalne 50 bodu staminy."
 
-class_info_class_thief_name[7] Podriznuti
-class_info_class_thief_tag[7] ra_podriznuti
+class_info_class_thief_name[7] Utok do zad
+class_info_class_thief_tag[7] ra_utok_do_zad
 class_info_class_thief_max_points[7] 40
-class_info_class_thief_function[7] podriznuti
-class_info_class_thief_description[7] "Zlodej je schopen pri utoku zezadu svuj cil podriznout. Jedna se o specialni uder, ktery je mozno monstru zasadit pouze ostrou zbrani a s dostatkem staminy. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zvysit tak velikost zraneni, ktere tato schopnost udili."
+class_info_class_thief_function[7] none
+class_info_class_thief_description[7] "Automaticka specializace zlodeje na utok zezadu. Zlodej je schopen cil zasahnout vyrazne efektivneji v pripade, ze stoji za jeho zady. Schopnost je nezavisla na pouzite zbrani a ma i primy vliv na zasazeni silnejsiho krvaceni. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zvysit tak velikost zraneni, ktere tato schopnost udili."
 
-class_info_class_thief_name[8] Uder stitem
-class_info_class_thief_tag[8] ra_uderstitem
+class_info_class_thief_name[8] Podriznuti
+class_info_class_thief_tag[8] ra_podriznuti
 class_info_class_thief_max_points[8] 40
-class_info_class_thief_function[8] uderstitem
-class_info_class_thief_description[8] "Zlodej je schopen zasadit kombinovany utok, jak zbrani tak stitem. Jedna se o specialni uder, ktery monstrum omraci na dve vteriny. K zasazeni je trba mit v ruce stit (jeho material ma vliv na to, jake monstrum lze omracit) a dostatek staminy. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zkratit tak dobu, kdy je mozno pouzit uder znovu."
+class_info_class_thief_function[8] podriznuti
+class_info_class_thief_description[8] "Zlodej je schopen pri utoku zezadu svuj cil podriznout. Jedna se o specialni uder, ktery je mozno monstru zasadit pouze ostrou zbrani a s dostatkem staminy. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zvysit tak velikost zraneni, ktere tato schopnost udili."
 
-class_info_class_thief_name[9] Utok ze stinu
-class_info_class_thief_tag[9] ra_backstab
-class_info_class_thief_max_points[9] 20
-class_info_class_thief_function[9] usehand
-class_info_class_thief_description[9] "Zlodej je schopen pri utoku ze stinu vyrazne silneji zranit svuj cil - jak hrace, tak monstrum. Toto zraneni vsak nezpusobi krvaceni ani otravu."
+class_info_class_thief_name[9] Uder stitem
+class_info_class_thief_tag[9] ra_uderstitem
+class_info_class_thief_max_points[9] 40
+class_info_class_thief_function[9] uderstitem
+class_info_class_thief_description[9] "Zlodej je schopen zasadit kombinovany utok, jak zbrani tak stitem. Jedna se o specialni uder, ktery monstrum omraci na dve vteriny. K zasazeni je trba mit v ruce stit (jeho material ma vliv na to, jake monstrum lze omracit) a dostatek staminy. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zkratit tak dobu, kdy je mozno pouzit uder znovu."
 
-class_info_class_thief_name[10] Provokace
-class_info_class_thief_tag[10] none
-class_info_class_thief_max_points[10] none
-class_info_class_thief_function[10] provo
-class_info_class_thief_description[10] "Zlodej je schopen za pomoci hudebniho nastroje vyprovokovat dve monstra k tomu, aby na sebe zautocila. Tato schopnost neni klasicka abilita, vych�zi ze skillu Provocation a Musicianship"
+class_info_class_thief_name[10] Utok ze stinu
+class_info_class_thief_tag[10] ra_backstab
+class_info_class_thief_max_points[10] 20
+class_info_class_thief_function[10] usehand
+class_info_class_thief_description[10] "Zlodej je schopen pri utoku ze stinu vyrazne silneji zranit svuj cil - jak hrace, tak monstrum. Toto zraneni vsak nezpusobi krvaceni ani otravu."
 
-class_info_class_thief_name[11] Oslabeni
+class_info_class_thief_name[11] Provokace
 class_info_class_thief_tag[11] none
 class_info_class_thief_max_points[11] none
-class_info_class_thief_function[11] none
-class_info_class_thief_description[11] "Zlodej je schopen za pomoci hudebniho nastroje oslabit monstrum. Tato schopnost neni klasicka abilita, vych�zi ze skillu Enticement a Musicianship"
+class_info_class_thief_function[11] provo
+class_info_class_thief_description[11] "Zlodej je schopen za pomoci hudebniho nastroje vyprovokovat dve monstra k tomu, aby na sebe zautocila. Tato schopnost neni klasicka abilita, vych�zi ze skillu Provocation a Musicianship"
 
-class_info_class_thief_name[12] Vykryti stitem
-class_info_class_thief_tag[12] ra_vykryti
-class_info_class_thief_max_points[12] 20
+class_info_class_thief_name[12] Oslabeni
+class_info_class_thief_tag[12] none
+class_info_class_thief_max_points[12] none
 class_info_class_thief_function[12] none
-class_info_class_thief_description[12] "Tato automaticka schopnost umoznuje zlodejovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+class_info_class_thief_description[12] "Zlodej je schopen za pomoci hudebniho nastroje oslabit monstrum. Tato schopnost neni klasicka abilita, vych�zi ze skillu Enticement a Musicianship"
+
+class_info_class_thief_name[13] Vykryti stitem
+class_info_class_thief_tag[13] ra_vykryti
+class_info_class_thief_max_points[13] 20
+class_info_class_thief_function[13] none
+class_info_class_thief_description[13] "Tato automaticka schopnost umoznuje zlodejovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
 
 
 //////////////////////////////////////////////////////////////////
