@@ -106,10 +106,8 @@ CATEGORY=Item Templates
 SUBSECTION=Monster Loot Templates
 DESCRIPTION=Ettin
 CONTAINER=i_backpack
-ITEM=tm_boulders,R8
-ITEM=tm_rocks,R2
-ITEM=tm_rocks,R2
-ITEM=tm_rocks,R2
+ITEM=random_FOOD,{0 1}
+
 
 [TEMPLATE 150015]
 DEFNAME=loot_GARGOYLE
@@ -154,13 +152,9 @@ CATEGORY=Item Templates
 SUBSECTION=Monster Loot Templates
 DESCRIPTION=Ogre
 CONTAINER=i_backpack
-ITEM=random_FOOD,{0 1}
+ITEM=random_FOOD,{1 2}
 //ITEM=random_potion
 ITEM=RANDOM_JEWEL,{0 1}
-ITEM=tm_boulders,R8
-ITEM=tm_rocks,R2
-ITEM=tm_rocks,R2
-ITEM=tm_rocks,R2
 ITEM=RANDOM_REAGENT,{10 20}
 
 
@@ -274,6 +268,7 @@ SUBSECTION=Monster Loot Templates
 DESCRIPTION=Cyclops
 CONTAINER=i_backpack
 ITEM=random_FOOD,{0 1}
+ITEM=random_FOOD,{0 1}
 //ITEM=random_potion
 //ITEM=ttm_lvl2,R99 //tattered treasure map level 2
 ITEM=tm_boulders,R8
@@ -297,6 +292,7 @@ CATEGORY=Item Templates
 SUBSECTION=Monster Loot Templates
 DESCRIPTION=Troll
 CONTAINER=i_backpack
+ITEM=random_FOOD,{0 1}
 ITEM=random_FOOD,{0 1}
 
 [TEMPLATE 150051]
@@ -431,8 +427,9 @@ SUBSECTION=Monster Loot Templates
 DESCRIPTION=Titan
 CONTAINER=i_backpack
 ITEM=random_FOOD,{0 1}
+ITEM=random_FOOD,{0 1}
 //ITEM=Random_Potion
-//ITEM=RANDOM_REAGENT,{50 120}
+ITEM=RANDOM_REAGENT,{10 20}
 ITEM=RANDOM_REAGENT,{20 30}
 
 [TEMPLATE 150082]

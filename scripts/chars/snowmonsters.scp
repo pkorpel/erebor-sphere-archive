@@ -964,6 +964,7 @@ ITEMnewbie=i_monster_create
 ITEMNEWBIE=i_sword_broad_iron
 
 ON=@NPCRestock
+ITEM=loot_TROLL
 ITEM=i_gold
 
 ///////////////////////////////////////////////////////////

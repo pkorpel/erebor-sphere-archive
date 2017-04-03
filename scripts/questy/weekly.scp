@@ -53,7 +53,7 @@ def_weekly_low_setupFunArgn[6]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_6_[0]   i_gold //prvni argument setup funkce
 def_weekly_low_setupFunArg_6_[1]   200000 // multiplier poctu zlata
 def_weekly_low_iconId[6]           0EEF
-def_weekly_low_rewardSize[6]       50
+def_weekly_low_rewardSize[6]       40
 
 def_weekly_low_setupFunction[7]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[7]     2 // pocet argumentu setup funkce
@@ -84,7 +84,7 @@ def_weekly_low_rewardSize[9]       60
 
 def_weekly_low_setupFunction[10]    f_weekly_setup_healPlayer
 def_weekly_low_setupFunArgn[10]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_10_[0]   20 // koeficient pro ostatni povolani
+def_weekly_low_setupFunArg_10_[0]   15 // koeficient pro ostatni povolani
 def_weekly_low_setupFunArg_10_[1]   100 // koeficient pro Klerika/Shamana    
 def_weekly_low_rewardSize[10]       55
 
@@ -592,7 +592,7 @@ cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,itemLoot)
-tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{<eval ((<tag(playerLevel)>-5)*<eval <argv(1)>>)> <eval ((<tag(playerLevel)>+10)*<eval <argv(1)>>)>})/1000)>)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{<eval ((<tag(playerLevel)>)*<eval <argv(1)>>)> <eval ((<tag(playerLevel)>+10)*<eval <argv(1)>>)>})/1000)>)
 //tag(quest_totalAmount[<currentQNumber>],<eval <argv(1)>>)
 if (strmatch(<argv(0)>,t_*)) // typedef -> general item
   arg(finalItemDef,<argv(0)>)
@@ -633,6 +633,9 @@ if ((cont.profession==class_priest) || (cont.profession==class_shaman))
 else
   arg(qAmount,<eval ((<eval (<tag(playerLevel)>*<argv(0)>)>)*(<arg(healing)>/2)*((<arg(anatomy)>)/10))/10000>)
 endif
+if (<arg(qAmount)> < 100)
+  arg(qAmount,100)
+endif  
 tag(quest_totalAmount[<currentQNumber>],<arg(qAmount)>)
 tag(quest_description[<currentQNumber>],"Osetri bandazemi poskozeni.")
 tag(quest_iconId[<currentQNumber>],0E21)
@@ -829,14 +832,20 @@ endwhile
 
 [events e_weekly_itemLoot] // lootuj z monster
 on=@itemPICKUP_PACK
-if (<eval act.tag(iic_owner)> > 0)  // jeste nikdo nelotl z tela monstra
-  if (act.topobj.isItem)
-    if !(act.topobj.link) // neni to telo hrace
-      findid(i_memory_weekly_quest).f_weekly_itemLoot(<act>)
-    endif
-  endif
+if !(<eval act.tag(iic_owner)> > 0)  // jeste nikdo nelotl z tela monstra
+  return
 endif
-
+if (<eval act.tag(looted)>)  // tento predmet lootlo NPC pomoci eventu e_looter (proti vychytralkum)
+  return
+endif
+if !(act.topobj.isItem)
+  return   
+endif
+if (act.topobj.link) // neni to telo hrace
+  return      
+endif
+findid(i_memory_weekly_quest).f_weekly_itemLoot(<act>)      
+  
 [function f_weekly_itemLoot] //argv(0) - act
 arg(i,0)
 while (<arg(i)> < <tag(itemLootsCount)>)
