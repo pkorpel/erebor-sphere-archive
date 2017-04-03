@@ -1003,7 +1003,7 @@ while (<arg(i)> < <eval tag(killInDungsCount)>) // select the HIGHEST required N
 endwhile
 if (<selected> >= 0) // there is a quest to update
   arg(questId,<eval tag(killInDung[<arg(selected)>])>)
-  if (f_weekly_increase(<arg(questId)>,1))
+  if (f_weekly_increase(<arg(questId)>,1,1))
     f_weekly_removeItem(<arg(selected)>,killInDung)
   endif
 endif
@@ -1128,7 +1128,7 @@ if (src.isEvent(e_weekly_finishDungeon))
   arg(weekly,<src.findid(i_memory_weekly_quest)>)
   arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<argv(0)>,finishDungeon)>)
   if (arg(questId) != -1)
-    weekly.f_weekly_increase(<arg(questId)>,1)
+    weekly.f_weekly_increase(<arg(questId)>,1,1)
     weekly.f_weekly_removeItem(<arg(questId)>,finishDungeon)
   endif
 endif
@@ -1407,7 +1407,7 @@ if (src.isEvent(e_weekly_meetMaster))
   arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<tag(ucimskill)>,meetMaster)>)
   if (arg(questId) != -1)
     say("Taky Te zdravim, <src.name>.")
-    weekly.f_weekly_increase(<arg(questId)>,1)
+    weekly.f_weekly_increase(<arg(questId)>,1,1)
     weekly.f_weekly_removeItem(<arg(questId)>,meetMaster)
     return
   endif
