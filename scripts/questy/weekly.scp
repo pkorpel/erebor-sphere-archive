@@ -190,12 +190,12 @@ def_weekly_high_rewardSize[2]       110
 
 def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_3_[0]   50 // koeficient poctu NPC
+def_weekly_high_setupFunArg_3_[0]   45 // koeficient poctu NPC
 def_weekly_high_setupFunArg_3_[1]   200 // minimalni pocet XP
 def_weekly_high_iconId[3]           02132
 def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
 def_weekly_high_iconId_moveX[3]     8 // move the custom icon 8 pixels to the left
-def_weekly_high_rewardSize[3]       105
+def_weekly_high_rewardSize[3]       120
 
 def_weekly_high_setupFunction[4]    f_weekly_setup_finishDungeon
 def_weekly_high_setupFunArgn[4]     1 // pocet argumentu setup funkce
