@@ -102,7 +102,7 @@ return 1
 
 //VYNULOVANI
 if (!strcmpi(<tag(war_declared_on)>,0)) //valka neni, konec pocitani
-  scylla.delayedmessage("Dobyvani: <serverTime> Na deklaratoru <tag(my_realm)> dobehlo pocitani - valka je ukoncena.")
+  //scylla.delayedmessage("Dobyvani: <serverTime> Na deklaratoru <tag(my_realm)> dobehlo pocitani - valka je ukoncena.")
   more1=0
   var(War_declarator_MemoryItem_<argv(0)>).timer=1800
   return 1
