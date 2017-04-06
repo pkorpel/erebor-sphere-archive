@@ -75,7 +75,7 @@ def_weekly_low_rewardSize[8]       50
 
 def_weekly_low_setupFunction[9]    f_weekly_setup_killInDung                    // OTESTOVANO
 def_weekly_low_setupFunArgn[9]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_9_[0]   250 // koeficient poctu NPC
+def_weekly_low_setupFunArg_9_[0]   350 // koeficient poctu NPC
 def_weekly_low_setupFunArg_9_[1]   20 // minimalni pocet XP
 def_weekly_low_iconId[9]           020E9
 def_weekly_low_iconId_moveY[9]     9  // move the custom icon 9 pixels up
