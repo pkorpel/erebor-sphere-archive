@@ -60,6 +60,21 @@ elseif (strcmpi(<act.type>,t_telepad2)==0)||(strcmpi(<act.type>,t_telepad)==0)
  return 1
 endif
 
+on=@personalspace
+if !((isPet) || (isSumon)))
+  return
+endif
+if (<mapplane> == 2)
+  return
+endif
+if !(src.isplayer)
+  return  
+endif
+if (<eval (<src.stam>+10)> < <src.maxstam>)
+  src.accmsg("detekovan GM STEP: prosel <Obody> <name>(<uid>) se silou <str> na pozici <p> aniz by mel plnou staminu. <eval (<src.stam>+9)>/<src.maxstam>")
+endif
+  
+  
 on=@aftergetswing
 if (rand(30)==1)
  attack(<src>)
