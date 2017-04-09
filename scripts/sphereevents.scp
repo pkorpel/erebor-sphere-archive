@@ -1109,7 +1109,7 @@ return <flag_freeze>
 
 on=@SkillMakeItem
 argo.tag(craftedby,<uid>)
-accmsg(made item uid=<argo> (<argo.name>))
+accmsg("made item uid=<argo> (<argo.name>) by <myaction>")
 argo.trigger(dropon_obj)
 return 0
 
