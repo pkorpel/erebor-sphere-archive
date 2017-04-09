@@ -89,12 +89,14 @@ on=@afterDoEffect
 on=@beforegeteffect
 on=@stopguarding
 on=@spelleffect
-if (issumon)&&(<argn>==44)
- hits=0
+if (issumon) && (<argn> == 44)
+  hits=0
 endif
-if(<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
-  spell_poison_custom(<src>)
-  return 1
+if (<src>)
+  if (<argn> == 20) && (<src.isplayer>)//kuzlo poison, len od hraca
+    spell_poison_custom(<src>)
+    return 1
+  endif
 endif
 
 on=@spellcast

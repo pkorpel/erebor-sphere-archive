@@ -1627,6 +1627,8 @@ TACTICS=250.0
 WRESTLING=100.0
 POISONING={80.0 120.0}
 SpiritSpeak=55.0
+HIDING={90.0 105.0}
+STEALTH={110.1 120.0}
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
