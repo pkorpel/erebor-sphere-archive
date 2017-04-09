@@ -127,6 +127,8 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 on=@afterswing
+on=@userkill
+on=@npckill
 ////////
 [EVENTS e_summoneater_vamp]
 on=@hittry  // Vsude pridana kontrola na 30.000, jelikoz promenna ma maximum okolo 32,5k, potom pretece a monstrum bud bugne a nebo zemre.
@@ -242,6 +244,8 @@ on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
+on=@userkill
+on=@npckill
 
 [itemdef i_ovinovaccheck]
 ID=i_memory
@@ -426,6 +430,8 @@ on=@beforegetswing
 on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
+on=@userkill
+on=@npckill
 
 [events e_elem_terror]
 on=@death
@@ -626,6 +632,8 @@ on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function f_reduceDmgResists]
 f_reduceResist(resist_sharp,<argv(0)>)
@@ -803,6 +811,8 @@ on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function f_stun_getfreezebyweapon]
 arg(exp,<argv(0)>)
@@ -873,7 +883,8 @@ on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
-
+on=@userkill
+on=@npckill
 
 [typedef t_weapon_bolt_jagged]
 
@@ -890,6 +901,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@aftergetswing
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [events e_nbdung]
 on=@Created
@@ -912,6 +925,8 @@ on=@afterDoEffect
 on=@beforeGetSwing
 on=@aftergetswing
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [events e_npc_summoner]
 on=@beforeGetSwing
@@ -941,6 +956,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [events e_npc_summoning]
 on=@aftergetswing
@@ -992,6 +1009,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [events e_explosiondispell]
 on=@gethit
@@ -1024,6 +1043,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function f_explosiondispell_setVars]
 if (strlen(<tag(explosionDispell_varsChecked)>) == 0)
@@ -1193,6 +1214,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [events e_npc_nobody]
 on=@deathCorpse
@@ -1218,6 +1241,8 @@ endif
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 // mass mana reduce
 // tag.npc_curse_mana_chance=250       // 25% chance to trigger this event
@@ -1238,6 +1263,8 @@ e_f_npc_curse_mana
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function e_f_npc_curse_mana]
 if (<eval tag(npc_curse_mana_time)> < <serv.time>)
@@ -1327,6 +1354,8 @@ e_f_npc_curse_stam
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function e_f_npc_curse_stam]
 if (<eval tag(npc_curse_stam_time)> < <serv.time>)

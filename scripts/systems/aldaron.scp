@@ -3728,7 +3728,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-
+on=@userkill
+on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
 on=@spelleffect
@@ -5999,7 +6000,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-
+on=@userkill
+on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
 on=@spelleffect
@@ -6009,6 +6011,7 @@ if !(findid(i_dragon_regenerator))
   lastnew.tag(speed,<tag(regeneration_speed)>)  
 endif
 return 0
+
 [itemdef i_dragon_regenerator]
 id=i_memory
 type=t_eq_script

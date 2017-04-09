@@ -239,4 +239,6 @@ on=@beforeGetSwing
 on=@afterGetSwing
 on=@drinkingPotion
 on=@created
+on=@userkill
+on=@npckill
 [eof]

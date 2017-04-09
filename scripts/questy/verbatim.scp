@@ -299,7 +299,8 @@ on=@afterswing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-
+on=@userkill
+on=@npckill
 
 [events e_strazce_sumonner]
 

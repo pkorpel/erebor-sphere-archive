@@ -301,6 +301,8 @@ on=@beforeGetEffect
 on=@beforeDoEffect
 on=@afterDoEffect
 on=@afterswing
+on=@userkill
+on=@npckill
 
 on=@aftergetswing
 if (<nastaveni_taunt_aftergetswing> == 1)

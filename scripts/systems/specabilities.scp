@@ -3210,7 +3210,8 @@ redmessage(Utok prerusil tve soustredeni, hypnoza se nezdarila)
 consume(i_hypno_timer)
 
 on=@beforegeteffect
-
+on=@afterDoEffect
+on=@beforeDoEffect
 on=@DrinkingPotion
 on=@beforegetswing
 on=@afterswing
@@ -4060,6 +4061,8 @@ endif
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 //ENERGYSHIELD
 [function energyshield]
@@ -4134,6 +4137,8 @@ endif
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [itemdef i_energyshield]
 id=i_memory
@@ -4564,6 +4569,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect   
 on=@beforegetswing
+on=@userkill
+on=@npckill
 
 [function pact]
 if (profession!=class_shaman)
@@ -5528,6 +5535,8 @@ on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function stance]
 if (src.profession==class_thief)

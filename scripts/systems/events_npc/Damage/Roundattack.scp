@@ -16,7 +16,8 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 //f_e_npc_roundattack
-
+on=@userkill
+on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
 on=@spelleffect

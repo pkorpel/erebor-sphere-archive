@@ -947,6 +947,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@userkill
+on=@npckill
 
 [itemdef i_osklivejsmazse]
 id=i_memory
@@ -1580,6 +1582,8 @@ on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [events e_spellparalyze]
 on=@Created
@@ -1615,6 +1619,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [itemdef i_npc_manashield]
 id=i_memory
@@ -1646,7 +1652,8 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-
+on=@userkill
+on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect

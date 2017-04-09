@@ -20,6 +20,8 @@ f_e_npc_multishot
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [function f_e_npc_multishot]
 if (<eval tag(multishot_time)> < <serv.time>)

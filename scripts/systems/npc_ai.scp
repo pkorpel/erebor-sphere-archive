@@ -938,6 +938,8 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@userkill
+on=@npckill
 
 [EVENTS e_guard_ent]    
 //on=@userclick
@@ -1030,7 +1032,8 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-
+on=@userkill
+on=@npckill
 
 [events e_guard_ranged]
 on=@NPCSeeWantItem
@@ -1112,6 +1115,8 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
+on=@userkill
+on=@npckill
 
 [itemdef i_memory_cleaner]
 id=i_memory
@@ -1554,6 +1559,8 @@ on=@afterswing
 mana=<maxMana>
 
 on=@Created
+on=@userkill
+on=@npckill
 
 //[function godistance]
 //if (<more2h>)
@@ -1735,6 +1742,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
+on=@userkill
+on=@npckill
 on=@aftergetswing
 if (<hits> > <eval ((maxhits/4)*3)>) // vice jak 75% HP
   arg(chance,35)

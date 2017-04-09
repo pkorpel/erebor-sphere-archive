@@ -907,6 +907,8 @@ on=@afterDoEffect
 //deprecated on=@aftergetspelldamage
 on=@beforegeteffect
 on=@beforegetswing
+on=@userkill
+on=@npckill
 
 [itemdef i_combat_main]
 id=i_memory
@@ -949,6 +951,8 @@ on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
+on=@userkill
+on=@npckill
 
 [function noclick_release]
 events=-e_noclick

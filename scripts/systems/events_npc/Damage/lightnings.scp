@@ -29,7 +29,8 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 on=@afterswing
-
+on=@userkill
+on=@npckill
 
 [function lightnings]
 arg(j,<rand(2)>)
@@ -111,5 +112,7 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 on=@afterswing
+on=@userkill
+on=@npckill
 
 [eof]

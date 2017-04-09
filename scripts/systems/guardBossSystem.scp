@@ -24,6 +24,8 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforedoeffect
 on=@afterDoEffect
+on=@userkill
+on=@npckill
 
 [function f_guardBossSystem_onHitCheckGuards]
 if (memoryFindType(memory_ispawned))

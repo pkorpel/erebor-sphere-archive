@@ -37,5 +37,7 @@ on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [eof]
