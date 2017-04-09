@@ -224,8 +224,14 @@ arg(baseIndent,70)
 arg(baseY,302)
 arg(txtIndent,40)
 resizepic(50,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-20,108)
-if (cont.tag(level) < def_weekly_levelMin)
-  newTextLine(<var(middle)>-82,<arg(baseY)>+38,<d_def_subheadcolor>,"Plneni se otevre na <def_weekly_levelMin> urovni.")
+if (cont.tag(level) < def_weekly_levelMin) || (cont.profession==class_craft)
+  if (cont.profession==class_craft)
+    newTextLine(<var(middle)>-82,<arg(baseY)>+30,<d_def_subheadcolor>,"Plneni Tydennich Questu")
+    newTextLine(<var(middle)>-82,<arg(baseY)>+44,<d_def_subheadcolor>,"je prozatim pro povolani kraft")
+    newTextLine(<var(middle)>-82,<arg(baseY)>+58,<d_def_subheadcolor>,"nepristupne")
+  else
+    newTextLine(<var(middle)>-82,<arg(baseY)>+38,<d_def_subheadcolor>,"Plneni se otevre na <def_weekly_levelMin> urovni.")
+  endif
 else
   arg(remainingTime,<src.weeklyTag(expiracyTime)>-<serv.time>)
   if (cont.findid(i_memory_weekly_quest).f_weekly_isAllCompleted)
