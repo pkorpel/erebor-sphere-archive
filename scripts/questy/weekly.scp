@@ -597,6 +597,7 @@ tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{<eval ((<tag(play
 if (strmatch(<argv(0)>,t_*)) // typedef -> general item
   arg(finalItemDef,<argv(0)>)
   // the description for a typedef must be set explicitly through a defname : def_weekly_<level>_desc_<questNumber>
+  tag(quest_description[<eval tag(qAssigned)>],<def_weekly_<tag(quest_level[<currentQNumber>])>_descr[<eval tag(quest_id[<currentQNumber>])>]>)
 else // specific item
   arg(finalItemDef,<f_getFinalItemId(<argv(0)>)>)
   arg(descrName,"<?<arg(finalItemDef)>.name?>")
