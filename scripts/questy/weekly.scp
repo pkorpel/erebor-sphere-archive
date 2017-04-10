@@ -1235,14 +1235,13 @@ return -1
 /////////////////////////////
 
 [function f_weekly_random_master]
-dorand 36
+dorand 35
   arg(skill_name,Anatomy)
   arg(skill_name,AnimalLore)
   arg(skill_name,Archery)
   arg(skill_name,ArmsLore)
   arg(skill_name,Begging)
   arg(skill_name,Camping)
-  arg(skill_name,Cartography)
   arg(skill_name,DetectingHidden)
   arg(skill_name,Enticement)
   arg(skill_name,Forensics)
