@@ -8045,13 +8045,13 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 265]     //Barad dur
 P=3713,2731
-RECT=3710,2723,3716,2731
+RECT=3710,2723,3716,2732
 tag.housenumber=265
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
 GROUP=Rooms
-tag.houserealm=1
+tag.houserealm=2
 EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 266]     //Dol Amroth
