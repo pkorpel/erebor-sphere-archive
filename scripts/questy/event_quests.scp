@@ -75,83 +75,83 @@ name=Opilcova kosile
 ////////////////////////////////////////////////////////////////////////////////
 // E A S T E R   Q U E S T   2 0 1 6
 
-[ITEMDEF i_easter_egg]
-ID=i_fruit_coconut
-NAME=Velikonocni vejce
-VALUE=50000
-WEIGHT=0
-
-CATEGORY=Eventy
-SUBSECTION=Easter
-DESCRIPTION=Vejce
-
-ON=@Create
-  dorand 7
-    color=0983
-    color=06
-    color=084D
-    color=098e
-    color=021
-    color=0429
-    color=0111
-  enddo
-  
-ON=@DROPON_GROUND
-  sfx(74)      // zvuk rozbiti vajec :-)
-  remove
-  src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
-
-ON=@userCLICK
-sfx(74)      // zvuk rozbiti vajec :-)
-if (amount > 1)
-  src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-  remove
-else
-  src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-  remove
-endif
-
-ON=@Pickup_ground
-sfx(74)      // zvuk rozbiti vajec :-)
-if (amount > 1)
-  src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-  remove
-else
-  src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-  remove
-endif
-
-ON=@Pickup_pack
-sfx(74)      // zvuk rozbiti vajec :-)
-if (amount > 1)
-  src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-  remove
-else
-  src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-  remove
-endif
-
-ON=@UserDClick
-sfx(74)      // zvuk rozbiti vajec :-)
-if (amount > 1)
-  src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-  remove
-else
-  src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-  remove
-endif
-  
-ON=@Step
-if(src.isgm)
-  return 1
-endif
-if(<src.weight> > 3000)
-  src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
-  sfx(74)
-  remove
-else
-  src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
-endif
+// [ITEMDEF i_easter_egg]
+// ID=i_fruit_coconut
+// NAME=Velikonocni vejce
+// VALUE=50000
+// WEIGHT=0
+// 
+// CATEGORY=Eventy
+// SUBSECTION=Easter
+// DESCRIPTION=Vejce
+// 
+// ON=@Create
+//   dorand 7
+//     color=0983
+//     color=06
+//     color=084D
+//     color=098e
+//     color=021
+//     color=0429
+//     color=0111
+//   enddo
+//   
+// ON=@DROPON_GROUND
+//   sfx(74)      // zvuk rozbiti vajec :-)
+//   remove
+//   src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
+// 
+// ON=@userCLICK
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+// 
+// ON=@Pickup_ground
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+// 
+// ON=@Pickup_pack
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+// 
+// ON=@UserDClick
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+//   
+// ON=@Step
+// if(src.isgm)
+//   return 1
+// endif
+// if(<src.weight> > 3000)
+//   src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
+//   sfx(74)
+//   remove
+// else
+//   src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
+// endif
 
 
 [CHARDEF c_easter_rabbit]
