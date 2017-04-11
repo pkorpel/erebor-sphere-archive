@@ -1295,7 +1295,7 @@ return<arg(typeDMG)>
 /////////////////////////////
 
 [defnames def_weekly_finishDungeon]
-def_weekly_finishDungeon_count  13
+def_weekly_finishDungeon_count  14
 
 // dungeon IDs (the values below are used as subjectID of the quest and MUSTN'T be changed, as players may already have them set)
 def_weekly_finishDungeon[1]     "Etheria"
@@ -1311,6 +1311,7 @@ def_weekly_finishDungeon[10]    "Tumma Osto"
 def_weekly_finishDungeon[11]    "Tumma Osto Bonus"
 def_weekly_finishDungeon[12]    "Carn Dum"
 def_weekly_finishDungeon[13]    "Carn Dum Bonus"
+def_weekly_finishDungeon[14]    "Ztracene Mesto"
 
 // level translation -> these defnames serve to define ID to dungeon LEVEL translation
 // based on the dungeon level, the dungeon is either available to player for selection or not
@@ -1330,6 +1331,7 @@ def_weekly_finishDungeon_lvl[10]     10,         80
 def_weekly_finishDungeon_lvl[11]     11,         90
 def_weekly_finishDungeon_lvl[12]     12,         90
 def_weekly_finishDungeon_lvl[13]     13,        100
+def_weekly_finishDungeon_lvl[14]     14,         95
 
 // selects random dungeon ID in the player's level range
 // Player can only receive dungeons that have their level:
