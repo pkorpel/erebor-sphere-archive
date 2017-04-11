@@ -1065,9 +1065,11 @@ if(<argn>==41)//dispel zoznam dispelnutelnych kuziel v magie_custom.scp
 endif
 
 if (<nastaveni_poison_use_custom_poison>==1)
-  if (<argn>==20)&&(<src.isplayer>)//kuzlo poison, len od hraca
-    spell_poison_custom(<src>)
-    return 1
+  if (<src>)
+    if (<argn>==20) && (<src.isplayer>)//kuzlo poison, len od hraca
+      spell_poison_custom(<src>)
+      return 1
+    endif
   endif
 endif
 
