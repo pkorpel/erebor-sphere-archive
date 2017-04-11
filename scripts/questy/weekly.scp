@@ -67,7 +67,7 @@ def_weekly_low_rewardSize[7]       45
 def_weekly_low_setupFunction[8]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[8]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_8_[0]   t_reagent //prvni argument setup funkce
-def_weekly_low_setupFunArg_8_[1]   2000 // multiplier poctu reagentu
+def_weekly_low_setupFunArg_8_[1]   2800 // multiplier poctu reagentu
 def_weekly_low_iconId[8]           018DD
 def_weekly_low_iconId_moveX[8]     2
 def_weekly_low_descr[8]            "<?null?>Lootni predmet:<br>Jakekoli reagenty" // pocet predmetu ke sbirani
@@ -75,7 +75,7 @@ def_weekly_low_rewardSize[8]       50
 
 def_weekly_low_setupFunction[9]    f_weekly_setup_killInDung                    // OTESTOVANO
 def_weekly_low_setupFunArgn[9]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_9_[0]   350 // koeficient poctu NPC
+def_weekly_low_setupFunArg_9_[0]   220 // koeficient poctu NPC
 def_weekly_low_setupFunArg_9_[1]   20 // minimalni pocet XP
 def_weekly_low_iconId[9]           020E9
 def_weekly_low_iconId_moveY[9]     9  // move the custom icon 9 pixels up
@@ -91,7 +91,7 @@ def_weekly_low_rewardSize[10]       55
 def_weekly_low_setupFunction[11]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[11]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_11_[0]   t_gem //prvni argument setup funkce
-def_weekly_low_setupFunArg_11_[1]   100 // multiplier poctu gemu
+def_weekly_low_setupFunArg_11_[1]   130 // multiplier poctu gemu
 def_weekly_low_iconId[11]           02C80
 def_weekly_low_iconId_moveX[11]     2
 def_weekly_low_iconId_moveY[11]     8  // move the custom icon 8 pixels up
@@ -190,7 +190,7 @@ def_weekly_high_rewardSize[2]       110
 
 def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_3_[0]   45 // koeficient poctu NPC
+def_weekly_high_setupFunArg_3_[0]   36 // koeficient poctu NPC
 def_weekly_high_setupFunArg_3_[1]   200 // minimalni pocet XP
 def_weekly_high_iconId[3]           02132
 def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
@@ -697,7 +697,7 @@ tag(quest_iconId_moveY[<currentQNumber>],14) // move the custom icon 14 pixels u
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,killInDung)
-tag(quest_totalAmount[<currentQNumber>],<eval ((<eval (<tag(playerLevel)>+150)>*{<argv(0)> <eval (<argv(0)>+10)>})/300)>)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<eval (<tag(playerLevel)>*<argv(0)>)>+{-500 100})/100)>)
 tag(quest_description[<currentQNumber>],"Zabij npc v dungeonu<br>s alespon <?argv(1)?>xp")
 tag(quest_subjectId[<currentQNumber>],<argv(1)>) // exceptionaly the subjectId doesn't store an actual ID, but a minimal required XP
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
