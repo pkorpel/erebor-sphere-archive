@@ -180,6 +180,36 @@ else //jenom posunout timer a pocitame znova
   return 1
 endif
 
+[function Dobyvani]
+if (<eval tag(realm)> == 1) // gondor
+  arg(muj_realm,1)
+  arg(druhy_realm,2)
+else                    // mordor nebo GM
+  arg(druhy_realm,1)
+  arg(muj_realm,2)
+endif
+
+if (!strcmpi(<var(war_declarator_<arg(muj_realm)>).tag(war_declared_on)>,0))
+  bluemessage("Aktualne se <qval <arg(muj_realm)>,"Mordor","Gondor"> nepripravuje na zadny utok.")
+else
+  if (<var(war_declarator_<arg(muj_realm)>).more1> > 0)
+    bluemessage("Dobyvani pevnosti <d_area_<var(war_declarator_<arg(muj_realm)>).tag(war_declared_on)>_1> prave probiha!")
+  else  
+    bluemessage("Dobyvani pevnosti <d_area_<var(war_declarator_<arg(muj_realm)>).tag(war_declared_on)>_1> zacne <eval var(war_declarator_<arg(muj_realm)>).tag(war_begins_day)>.<eval var(war_declarator_<arg(muj_realm)>).tag(war_begins_month)> v <eval var(war_declarator_<arg(muj_realm)>).tag(war_begins_hour)>h")
+  endif
+endif
+
+if (!strcmpi(<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>,0))
+  redmessage("Zadny utok na nasi pevnost nebyl vyhlasen.")
+else
+  if (<var(war_declarator_<arg(druhy_realm)>).more1> > 0)
+    redmessage("Braneni pevnosti <d_area_<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>_1> prave probiha!")
+  else  
+    redmessage("Braneni nasi pevnosti <d_area_<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>_1> zacne <eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_day)>.<eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_month)> v <eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_hour)>h")
+  endif
+endif
+
+
 [function endWar] //ukoncit valku - vynulovat tagy, pocitadla a informovat warlorda.  <argv(0)> - cislo realmu
 finduid(<tag(war_lord)>).redmessage("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
 finduid(<tag(war_lord)>).redmessage("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
