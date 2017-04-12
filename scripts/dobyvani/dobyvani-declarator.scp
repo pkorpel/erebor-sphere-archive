@@ -203,7 +203,7 @@ if (!strcmpi(<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>,0))
   redmessage("Zadny utok na nasi pevnost nebyl vyhlasen.")
 else
   if (<var(war_declarator_<arg(druhy_realm)>).more1> > 0)
-    redmessage("Braneni pevnosti <d_area_<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>_1> prave probiha!")
+    redmessage("Braneni nasi pevnosti <d_area_<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>_1> prave probiha!")
   else  
     redmessage("Braneni nasi pevnosti <d_area_<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>_1> zacne <eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_day)>.<eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_month)> v <eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_hour)>h")
   endif
