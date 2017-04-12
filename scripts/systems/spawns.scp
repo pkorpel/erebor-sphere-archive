@@ -92,6 +92,18 @@ cont.creaturestart
 remove
 return 1
 
+[function f_creatureStart_giveMIBag] // argv(0) - gp amount //
+if (<argv(0)> <= 30)
+  return
+elseif (<argv(0)> < 500)
+  arg(chance,120000)
+else
+  arg(chance,105000)
+endif
+if (<argv(0)> > {30 <arg(chance)>})
+  giveitem(i_mi_bag)
+endif
+
 [function creaturestart]
 events e_gethit
 events e_spelleffect
@@ -210,30 +222,29 @@ if (findid(i_nofame))
 else
   if (findid(i_gold))
     if !(isResurrectedNPC)
-      if (mapplane>0)
-        findid(i_gold).amount=<eval (<eval <tag.experience>>*900)/1000> // +20% drop goldu a tim padem i itemu v dungach
+      if (isDung)
+        arg(gp,<eval (<eval <tag.experience>>*900)/1000>) // +20% drop goldu a tim padem i itemu v dungach
       else
-        findid(i_gold).amount=<eval (<eval <tag.experience>>*750)/1000> // standard drop na povrchu a ostrovech
+        arg(gp,<eval (<eval <tag.experience>>*750)/1000>) // standard drop na povrchu a ostrovech
       endif
-      if (rescount(i_gold)>{30 120000})
-        giveitem(i_mi_bag)
-      endif
-      if (rescount(i_gold)>{3500 100000})&&({1 3} == 1)
+      findid(i_gold).amount=<arg(gp)>
+      f_creatureStart_giveMIBag(<arg(gp)>) 
+      if (<arg(gp)> > {3500 300000})
         giveitem(i_coal_elemental)
       endif
       if (<body>==c_elem_fire_m) || (<color>==044c) || (<obody>==c_fire_fanatik) || (<obody>==c_fire_lord)
         //firenpc,elmove ohne,verbatimovi fireanti
-        if (rescount(i_gold)>{20 30000})
+        if (<arg(gp)> >{20 30000})
           giveitem(i_coal_elemental)
         endif
       endif
-      if (rescount(i_gold)>{3500 100000})&&({1 10} == 1)
+      if (<arg(gp)> > {3500 1000000})
         giveitem(i_krystal_eben)
       endif
-      if (rescount(i_gold)>{3500 100000})&&({1 8} == 1)
+      if (<arg(gp)> > {3500 800000})
         giveitem(i_tetiva_eben)
       endif
-      if (rescount(i_gold)>{30 100000})&&({1 20} == 5)
+      if (<arg(gp)> > {30 1700000})
         giveitem(i_u_treasure_map)
       endif
     endif
