@@ -75,32 +75,32 @@ name=Opilcova kosile
 ////////////////////////////////////////////////////////////////////////////////
 // E A S T E R   Q U E S T   2 0 1 6
 
-// [ITEMDEF i_easter_egg]
-// ID=i_fruit_coconut
-// NAME=Velikonocni vejce
-// VALUE=50000
-// WEIGHT=0
-// 
-// CATEGORY=Eventy
-// SUBSECTION=Easter
-// DESCRIPTION=Vejce
-// 
-// ON=@Create
-//   dorand 7
-//     color=0983
-//     color=06
-//     color=084D
-//     color=098e
-//     color=021
-//     color=0429
-//     color=0111
-//   enddo
-//   
-// ON=@DROPON_GROUND
-//   sfx(74)      // zvuk rozbiti vajec :-)
-//   remove
-//   src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
-// 
+[ITEMDEF i_easter_egg]
+ID=i_fruit_coconut
+NAME=Velikonocni vejce
+VALUE=50000
+WEIGHT=0
+
+CATEGORY=Eventy
+SUBSECTION=Easter
+DESCRIPTION=Vejce
+
+ON=@Create
+  dorand 7
+    color=0983
+    color=06
+    color=084D
+    color=098e
+    color=021
+    color=0429
+    color=0111
+  enddo
+  
+ON=@DROPON_GROUND
+  sfx(74)      // zvuk rozbiti vajec :-)
+  remove
+  src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
+
 // ON=@userCLICK
 // sfx(74)      // zvuk rozbiti vajec :-)
 // if (amount > 1)
@@ -110,7 +110,7 @@ name=Opilcova kosile
 //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
 //   remove
 // endif
-// 
+
 // ON=@Pickup_ground
 // sfx(74)      // zvuk rozbiti vajec :-)
 // if (amount > 1)
@@ -120,7 +120,7 @@ name=Opilcova kosile
 //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
 //   remove
 // endif
-// 
+
 // ON=@Pickup_pack
 // sfx(74)      // zvuk rozbiti vajec :-)
 // if (amount > 1)
@@ -130,7 +130,7 @@ name=Opilcova kosile
 //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
 //   remove
 // endif
-// 
+
 // ON=@UserDClick
 // sfx(74)      // zvuk rozbiti vajec :-)
 // if (amount > 1)
@@ -140,19 +140,57 @@ name=Opilcova kosile
 //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
 //   remove
 // endif
-//   
-// ON=@Step
-// if(src.isgm)
-//   return 1
-// endif
-// if(<src.weight> > 3000)
-//   src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
-//   sfx(74)
-//   remove
-// else
-//   src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
-// endif
+  
+ON=@Step
+if (src.isgm)
+  return 1
+endif
+if (<src.weight> > 3000)
+  src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
+  sfx(74)
+  remove
+else
+  src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
+endif
 
+[ITEMDEF i_easter_port]
+ID=i_gate_3
+NAME=Port k zajickovi
+
+ON=@create
+attr=090
+color=00
+timer=120  // po vytvoreni mas 120 sec nez gata se zacne portovat
+tag(Port_time,60)
+
+ON=@step
+if (src.isDead)
+  return 1
+endif
+
+if (src.isPlayer)
+  src.go(476,611,-20,2)
+  f_easter_port_change_location
+endif
+
+ON=@timer
+f_easter_port_change_location
+return 1
+
+[function f_easter_port_change_location]
+attr=090
+update
+sfx(251)
+arg(goX,<eval {2235 2284}>)  // Rozsah X souradnice labyrintu
+arg(goY,<eval {2641 2685}>)  // Rozsah Y souradnice labyrintu
+p(<goX>,<goY>,90,0)
+if ({1 3} == 1)
+  attr=010
+  update
+  timer=3
+else
+  timer=<eval tag(Port_time)>
+endif
 
 [CHARDEF c_easter_rabbit]
 ID=c_rabbit
@@ -281,11 +319,11 @@ ON=*Cau*
 ON=*Zdravim*
 if (src.findid(i_easterQuest_wentThrough))
   say("Dobre tedy, jsem pozadu s dodavkou vajec pro Velikonocniho zajicka. Je na me kvuli tomu velice nastvany. Smenim s tebou Velikonocni vajcka za ruzne veci.")
-  if !(src.findid(i_easterQuest_wentThrough).tag(prodlouzeni_po_loadu))
-    src.findid(i_easterQuest_wentThrough).tag(prodlouzeni_po_loadu,1)  // Prodlouzi jen jednou
-    src.findid(i_easterQuest_wentThrough).timer=1036800  // Nastavi timer na 12 dni (Default) 
-    src.accMsg("Hraci <src.name>, UID: <src> byl prodlouzen limit Velikonocniho eventu o 12 dni.")
-  endif 
+//   if !(src.findid(i_easterQuest_wentThrough).tag(prodlouzeni_po_loadu))
+//     src.findid(i_easterQuest_wentThrough).tag(prodlouzeni_po_loadu,1)  // Prodlouzi jen jednou
+//     src.findid(i_easterQuest_wentThrough).timer=1036800  // Nastavi timer na 12 dni (Default) 
+//     src.accMsg("Hraci <src.name>, UID: <src> byl prodlouzen limit Velikonocniho eventu o 12 dni.")
+//   endif 
 else
   say("Zdravim te poutniku! Ani nevis, jak velky problem me trapi. Vypadas celkem zelene na to, aby jsi mi <src.sex(pomohl,pomohla)>. Ale to muze byt tim jarem, troufas si na to? Ano?")
 endif
@@ -387,7 +425,7 @@ return 1
 
 // call upon an NPC
 [function f_easterEvent_generateEgg]
-if ({1 4} == 1)
+if ({1 3} == 1)
   arg(eggsNumber,<eval(rescount(i_gold)/75)>)
   if (<arg(eggsNumber)> > 0)
     giveitem(i_easter_egg,<arg(eggsNumber)>)
