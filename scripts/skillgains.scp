@@ -338,6 +338,7 @@ emptybook       //vysypani svitku
 //sheep game
 sheepgame          //zapina se a vypina v nastaveni.
 spoctibanky        //pocitadlo vanocnich banek vanocniho eventu.
+spoctivejce        //pocitadlo velikonocnich vajec Velikonocniho eventu.
 
 miniquest // miniquest
 

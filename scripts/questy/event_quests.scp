@@ -80,6 +80,7 @@ ID=i_fruit_coconut
 NAME=Velikonocni vejce
 VALUE=50000
 WEIGHT=0
+TYPE=t_food
 
 CATEGORY=Eventy
 SUBSECTION=Easter
@@ -101,7 +102,8 @@ ON=@DROPON_GROUND
   remove
   src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
 
-// ON=@userCLICK
+ON=@userCLICK
+src.sysmessage("Velikonocni vejce, jsou opravdu krehke, tak opatrne.")
 // sfx(74)      // zvuk rozbiti vajec :-)
 // if (amount > 1)
 //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
@@ -191,6 +193,7 @@ if ({1 3} == 1)
 else
   timer=<eval tag(Port_time)>
 endif
+update
 
 [CHARDEF c_easter_rabbit]
 ID=c_rabbit
@@ -437,6 +440,17 @@ if (<src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec)> > <finduid(#0
   finduid(#040034663).tag(BestCollector_UID,<src.uid>)
   finduid(#040034663).tag(BestCollector_Name,<src.uid.name>)
   finduid(#040034663).tag(BestCollector_amount,<src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec)>)
+endif
+
+[function SpoctiVejce]
+if (findid(i_easterQuest_wentThrough))
+  if (<restest(1,i_easter_egg)>)
+    classmessage("Mas u sebe <?rescount i_easter_egg?> Velikonocnich vajec")
+  else
+    redmessage("Nemas u sebe zadne Velikonocni vejce.")
+  endif
+else
+  redmessage("Neplnis Velikonocni Event, nejdrive ziskej duveru Farmare Oldy.")
 endif
 
 [ITEMDEF i_easterQuest_wentThrough]
