@@ -537,28 +537,28 @@ update
 [function mayhavering]
 //ak nelogol viac ako 10 dni pride o prsten
 if (<topobj.tag(lastlogoutedAt)>)
-  if (<eval(<serv.time>-<topobj.tag(lastlogoutedAt)>)>>6048000)
+  if (<eval(<serv.time>-<topobj.tag(lastlogoutedAt)>)> > 6048000)
     return 0
   endif
 endif
 //kontroluje jestli nositel prstenu ma pravo ho nosit
 arg(cas,<timefromequip>)
-if(<arg(cas)> < 1440) //jeden den v minutach
- return 1 //to o nej jeste prijit nemuze
+if (<arg(cas)> < 1440) //jeden den v minutach
+  return 1 //to o nej jeste prijit nemuze
 endif
-if(<cont>)
- if (<cont.isitem>)
-  return 0
- endif
-endif
-if(<topobj>)
- if(<topobj.ischar>)
-  if !(<topobj.isplayer>)
-   return 0
+if (<cont>)
+  if (<cont.isitem>)
+    return 0
   endif
- else
-  return 0
- endif
+endif
+if (<topobj>)
+  if (<topobj.ischar>)
+    if !(<topobj.isplayer>)
+      return 0
+    endif
+  else
+    return 0
+  endif
 endif
 //prsten ma na ruce hrac:
 //kontrola casu od posledniho logoutu
@@ -575,28 +575,31 @@ endif
 arg(offwas,<eval (<timefromequip>-<tag(onlineminutes)>)>)
 arg(kolik_on,<eval (11*<tag(onlineminutes)>)>)
 //kermel.sysmessage(ofbyl: <offwas>, limit: <kolik_on>)
-if(<offwas> >= <kolik_on>)
- topobj.delayedredmessage(Prsten te opustil, ma rad vzruseni z akce a tvoje pasivita nebyla pro nej)
- return 0
+if (<offwas> >= <kolik_on>)
+  topobj.delayedredmessage("Prsten te opustil, ma rad vzruseni z akce a tvoje pasivita nebyla pro nej")
+  topobj.accmsg("ztratil <name> protoze byl malo online. Offline: <offwas> >= Online: <kolik_on>")
+  return 0
 endif
-if(<tag(leading)>)
- // Prvni Nazgul pomer smrti killy/smrti > 7/4 - musi se vic ohanet
- arg(kolik_death,<eval (7*<tag(deaths)>)>)
- arg(kolik_kill,<eval (4*<doneplayerkills>)>)
- //kermel.sysmessage(zabil: <doneplayerkills>, umrel: <tag(deaths)>, potreboval zabit: <kolik_death>)
- if(<kolik_death> >= <kolik_kill>)
-  topobj.delayedredmessage(Prsten te opustil, tve bojove schopnosti neodpovidaji jeho narokum)
-  return 0
- endif
+if (<tag(leading)>)
+  // Prvni Nazgul pomer smrti killy/smrti > 7/4 - musi se vic ohanet
+  arg(kolik_death,<eval (7*<tag(deaths)>)>)
+  arg(kolik_kill,<eval (4*<doneplayerkills>)>)
+  //kermel.sysmessage(zabil: <doneplayerkills>, umrel: <tag(deaths)>, potreboval zabit: <kolik_death>)
+  if (<kolik_death> >= <kolik_kill>)
+    topobj.delayedredmessage("Prsten te opustil, tve bojove schopnosti neodpovidaji jeho narokum")
+    topobj.accmsg("ztratil <name> protoze mel nedostatecny pomer Killu vuci Smrti. Smrti: <kolik_death> >= Killu: <kolik_kill>")
+    return 0
+  endif
 else
- // normalni Nazgul pomer smrti killy/smrti > 7/5
- arg(kolik_death,<eval (7*<tag(deaths)>)>)
- arg(kolik_kill,<eval (5*<doneplayerkills>)>)
- //kermel.sysmessage(zabil: <kolik_kill>, umrel: <tag(deaths)>, potreboval zabit: <kolik_death>)
- if(<kolik_death> >= <kolik_kill>)
-  topobj.delayedredmessage(Prsten te opustil, tve bojove schopnosti neodpovidaji jeho narokum)
-  return 0
- endif
+  // normalni Nazgul pomer smrti killy/smrti > 7/5
+  arg(kolik_death,<eval (7*<tag(deaths)>)>)
+  arg(kolik_kill,<eval (5*<doneplayerkills>)>)
+  //kermel.sysmessage(zabil: <kolik_kill>, umrel: <tag(deaths)>, potreboval zabit: <kolik_death>)
+  if (<kolik_death> >= <kolik_kill>)
+    topobj.delayedredmessage("Prsten te opustil, tve bojove schopnosti neodpovidaji jeho narokum")
+    topobj.accmsg("ztratil <name> protoze mel nedostatecny pomer Killu vuci Smrti. Smrti: <kolik_death> >= Killu: <kolik_kill>")
+    return 0
+  endif
 endif
 return 1
 

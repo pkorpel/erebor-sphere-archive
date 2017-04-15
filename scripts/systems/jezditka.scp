@@ -635,9 +635,9 @@ return 0
 [function magic_horse]
 if (<tag(hop)>)
 elseif (<strlen(<src.tag(magic_horse)>)>)
- tag(hop,1)
- <src.tag(magic_horse)>_mif
- mif_finishitem
+  tag(hop,1)
+  <src.tag(magic_horse)>_mif
+  mif_finishitem
 endif
 
 [function roan_mif]
