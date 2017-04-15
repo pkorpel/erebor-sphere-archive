@@ -28,57 +28,59 @@ return 0
 on=@userdclick
 var(keep_<tag(jmeno_mesta)>,<uid>) //toto je nutno nacpat do skriptu mapy !!!!!
 
-if(<src.tag(hypno_mystik)>) 
- return 1
-endif
-if(strlen(<link>))
- src.classmessage(Pevnost ridi <link.name>)
- if(src.isgm)//||(<src.tag(general)>) //jen GMKO
-  potvrdit(kapitanmake(0),"Opravdu si prejes sesadit z funkce kapitana pevnosti?")
- endif
-else 
- src.classmessage(Kapitan pevnosti <tag(jmeno_mesta)> neni urcen)
- if(src.isgm) //||(<src.tag(general)>) //jen GMKO
-  potvrdit(kapitanmake(1),"Prejes si dosadit noveho kapitana pevnosti <tag(jmeno_mesta)>?")
- endif
- //endif
-endif
-if(<region.tag(realm)>==1)||(<region.tag(realm)>==2)
- if(src.isgm)  
-  src.sysmessage(Realm <qval(<region.tag(realm)>-1,Mordorsky,Gondorsky)>)
- endif
- //if(((<src.tag(captain)>)||(<src.tag(general)>)) && (<src.tag(realm)> == <region.tag(realm)>)) || (src.isgm) // jsem kapitan nebo general a souhlasi realm (pevnost je nase) + GM samozrejme
- if (<src.tag(captain)>)||(<src.isgm>)||(<src.tag(general)>)
-  if(!strcmpi(<src.tag(keep)>,<uid>))||(<src.isgm>)||(<src.tag(general)>)
-   if(<eval src.tag(realm)> == 1)||(<src.isgm>)
-   	f_captainmenu 
-    return 1
-   endif
-  endif
- else
+if (<src.tag(hypno_mystik)>) 
   return 1
- endif
+endif
+if (strlen(<link>))
+  src.classmessage(Pevnost ridi <link.name>)
+  if (src.isgm)//||(<src.tag(general)>) //jen GMKO
+    potvrdit(kapitanmake(0),"Opravdu si prejes sesadit z funkce kapitana pevnosti?")
+  endif
 else 
- src.redmessage(Realm nevhodny pro pevnost, kontaktuj GM, kamen by zde nemel byt!)
- return 1
+  src.classmessage("Kapitan pevnosti <tag(jmeno_mesta)> neni urcen")
+  if (src.isgm) //||(<src.tag(general)>) //jen GMKO
+    potvrdit(kapitanmake(1),"Prejes si dosadit noveho kapitana pevnosti <tag(jmeno_mesta)>?")
+  endif
+endif
+if (<region.tag(realm)> == 1) || (<region.tag(realm)> == 2)
+  if (src.isgm)  
+    src.sysmessage("Realm <qval(<region.tag(realm)>-1,Mordorsky,Gondorsky)>"")
+  endif
+  //if(((<src.tag(captain)>)||(<src.tag(general)>)) && (<src.tag(realm)> == <region.tag(realm)>)) || (src.isgm) // jsem kapitan nebo general a souhlasi realm (pevnost je nase) + GM samozrejme
+  if (<src.tag(captain)>) || (<src.isgm>) || (<src.tag(general)>)
+    if (!strcmpi(<src.tag(keep)>,<uid>)) || (<src.isgm>) || (<src.tag(general)>)
+      if (<eval src.tag(realm)> == 1) || (<src.isgm>)
+   	    f_captainmenu 
+        return 1
+      endif
+    endif
+  else
+    return 1
+  endif
+else 
+  src.redmessage("Realm nevhodny pro pevnost, kontaktuj GM, kamen by zde nemel byt!"")
+  return 1
 endif
 return 1
 
 
 [function kapitanmake]
-if(<argv(0)>) //1 - dosazeni
- src.newitemsafe(i_targ_cpt_mk)
- lastnew.timer=45
- lastnew.link=<uid>
- lastnew.equip
+if (<argv(0)>) //1 - dosazeni
+  src.newitemsafe(i_targ_cpt_mk)
+  lastnew.timer=45
+  lastnew.link=<uid>
+  lastnew.equip
 else //sesazeni
- link.tag.remove(captain)
- link.tag.remove(keep)
- link.name=<link.tag(real_name)>
- link.tag.remove(real_name)
- link.redmessage(Byl jsi odvolan z funkce kapitana pevnosti <tag(jmeno_mesta)>)
- //src.sysmessage(Kapitan uspesne odvolan)
- link=""
+  link.tag.remove(captain)
+  link.tag.remove(keep)
+  link.name=<link.tag(real_name)>
+  link.tag.remove(real_name)
+  if (<link.findid(i_uniformTag_rune)>)
+    link.f_uniformRealm_removeEvent
+  endif
+  link.redmessage("Byl jsi odvolan z funkce kapitana pevnosti <tag(jmeno_mesta)>"")
+  //src.sysmessage(Kapitan uspesne odvolan)
+  link=""
 endif
 
 [itemdef i_targ_cpt_mk]
@@ -92,53 +94,53 @@ return 0
 
 on=@equip
 target 
-src.sysmessage(Zamer budouciho kapitana pevnosti)
+src.sysmessage("Zamer budouciho kapitana pevnosti")
 
 on=@targon_char
-if(!src.isgm)
- if(<src.targ.tag(realm)>!=<src.tag(realm)>)
-  src.sysmessage(Tohoto cloveka kapitanem udelat nemuzes) 
+if (!src.isgm)
+  if(<src.targ.tag(realm)>!=<src.tag(realm)>)
+    src.sysmessage("Tohoto cloveka kapitanem udelat nemuzes") 
+    remove
+    return 1
+  endif
+endif
+if (src.targ.isgm)
+  src.sysmessage("GM nepotrebuji byt kapitani")
   remove
   return 1
- endif
 endif
-if(src.targ.isgm)
- src.sysmessage(GM nepotrebuji byt kapitani)
- remove
- return 1
+if (<src.targ.tag(starosta)>)
+  src.sysmessage("Starostu kapitanem nedelej, ma sve prace dost")
+  remove
+  return 1
 endif
-if(<src.targ.tag(starosta)>)
- src.sysmessage(Starostu kapitanem nedelej, ma sve prace dost)
- remove
- return 1
+if (<src.targ.tag(captain)>)
+  src.targ.sysmessage("Kapitan nemuze byt kapitanem v jine pevnosti")
+  remove
+  return 1
 endif
-if(<src.targ.tag(captain)>)
- src.targ.sysmessage(Kapitan nemuze byt kapitanem v jine pevnosti)
- remove
- return 1
+if (<src.targ.tag(general)>)
+  src.sysmessage("Generala Gondoru kapitanem delati netreba")
+  remove
+  return 1
 endif
-if(<src.targ.tag(general)>)
- src.sysmessage(Generala Gondoru kapitanem delati netreba)
- remove
- return 1
-endif
-if(src.targ.isnazgul)
- src.sysmessage(Nazguly kapitanem nedelej)
- remove
- return 1
+if (src.targ.isnazgul)
+  src.sysmessage("Nazguly kapitanem nedelej")
+  remove
+  return 1
 endif
 src.targ.tag(real_name,<src.targ.name>)
 src.targ.name=Kapitan <src.targ.name>
 src.targ.tag(captain,1)
 src.targ.tag(keep,<link>)
 link.link=<src.targ>
-src.targ.classmessage(Byl jsi jmenovan kapitanem pevnosti <link.tag(jmeno_mesta)>)
-src.sysmessage(Novy kapitan uspesne jmenovan)
+src.targ.classmessage("Byl jsi jmenovan kapitanem pevnosti <link.tag(jmeno_mesta)>")
+src.sysmessage("Novy kapitan uspesne jmenovan")
 remove
 return 1
 
 on=@targon_item
-src.sysmessage(Zameruj lidi)
+src.sysmessage("Zameruj lidi")
 remove
 return 1
 
@@ -150,257 +152,257 @@ return 1
 //funkce captain only
 /////////////////////
 [function keepcontrol]
-if(<tag(realm)>!=1)&&(!isgm)
- return 1
+if (<tag(realm)> != 1) && (!isgm)
+  return 1
 endif
 arg(knam,<getNearestKeepName(<region.tag(realm)>)>)
-if(!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
- return 1
-endif
-if(<tag(captain)>)||(isgm)||(<tag(general)>)
- if(<ischiefinkeep>)
-  finduid(<var(keep_<knam>)>).dialog d_general_major
-  finduid(<var(keep_<knam>)>).dialog d_general_captain
-  finduid(<var(keep_<knam>).tag(enemyscont)>).dialog(d_captain_executioner,0)
+if (!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
   return 1
- endif
+endif
+if (<tag(captain)>) || (isgm) || (<tag(general)>)
+  if (<ischiefinkeep>)
+    finduid(<var(keep_<knam>)>).dialog d_general_major
+    finduid(<var(keep_<knam>)>).dialog d_general_captain
+    finduid(<var(keep_<knam>).tag(enemyscont)>).dialog(d_captain_executioner,0)
+    return 1
+  endif
 endif
 
 [function ischiefinkeep]
 arg(knam,<getNearestKeepName(<region.tag(realm)>)>)
-if(<tag(general)>)||(isgm)
- if(strlen(<var(keep_<knam>)>))
-  if(strcmpi(<region>,<finduid(<var(keep_<knam>)>).region>)) //0 pokud stejne   
-   return 0
-  else //byly stejne ty stringy   
-   return 1
+if (<tag(general)>) || (isgm)
+  if (strlen(<var(keep_<knam>)>))
+    if (strcmpi(<region>,<finduid(<var(keep_<knam>)>).region>)) //0 pokud stejne   
+      return 0
+    else //byly stejne ty stringy   
+      return 1
+    endif
+  else
+    sysmessage("Musis byt v pevnosti")
+    return 0
   endif
- else
-  sysmessage(Musis byt v pevnosti)
-  return 0
- endif
 endif
-if(<tag(captain)>)
- if(strlen(<var(keep_<knam>)>))
-  if(strcmpi(<tag(keep)>,<var(keep_<knam>)>)) //0 pokud stejne   
-   return 0
-  else //byly stejne ty stringy   
-   return 1
+if (<tag(captain)>)
+  if (strlen(<var(keep_<knam>)>))
+    if (strcmpi(<tag(keep)>,<var(keep_<knam>)>)) //0 pokud stejne   
+      return 0
+    else //byly stejne ty stringy   
+      return 1
+    endif
+  else
+    sysmessage("Musis byt ve sve pevnosti")
+    return 0
   endif
- else
-  sysmessage(Musis byt ve sve pevnosti)
-  return 0
- endif
 endif
 return 0
 
 [function keepguardskill]
-if(<tag(realm)>!=1)&&(!isgm)
- return 1
+if (<tag(realm)> != 1) && (!isgm)
+  return 1
 endif
 arg(knam,<getNearestKeepName(<region.tag(realm)>)>)
-if(!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
- return 1
+if (!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
+  return 1
 endif
-if(<tag(captain)>)
- if(strlen(<var(keep_<knam>)>))
-  if(!strcmpi(<tag(keep)>,<var(keep_<knam>)>))
-   if(<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
-    newitemsafe(<i_kingguard_targ>) 
-    lastnew.equip
-    lastnew.tag(mesto,<src.tag(keep)>)
-   else
-    sysmessage(Nemas k dispozici zadne straze)
-   endif
+if (<tag(captain)>)
+  if (strlen(<var(keep_<knam>)>))
+    if (!strcmpi(<tag(keep)>,<var(keep_<knam>)>))
+      if (<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
+        newitemsafe(<i_kingguard_targ>) 
+        lastnew.equip
+        lastnew.tag(mesto,<src.tag(keep)>)
+      else
+        sysmessage("Nemas k dispozici zadne straze")
+      endif
+    else
+      sysmessage("Musis byt ve sve pevnosti")
+    endif
   else
-   sysmessage(Musis byt ve sve pevnosti)
+    sysmessage("Musis byt v pevnosti")
   endif
- else
-  sysmessage(Musis byt v pevnosti)
- endif
 endif
-if(<tag(general)>)||(isgm) 
-  if(strlen(<var(keep_<knam>)>) && (<region>==<var(keep_<knam>).region>)) //jsem vubec v pevnosti? 
-   if(<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
-    newitemsafe(<i_kingguard_targ>) 
-    lastnew.tag(mesto,<var(keep_<knam>)>) //mesto i pevnost - proste ten stone
-    lastnew.equip 
-   else
-    sysmessage(Nemas k dispozici zadne straze)
-   endif
+if (<tag(general)>) || (isgm) 
+  if (strlen(<var(keep_<knam>)>) && (<region> == <var(keep_<knam>).region>)) //jsem vubec v pevnosti? 
+    if (<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
+      newitemsafe(<i_kingguard_targ>) 
+      lastnew.tag(mesto,<var(keep_<knam>)>) //mesto i pevnost - proste ten stone
+      lastnew.equip 
+    else
+      sysmessage("Nemas k dispozici zadne straze")
+    endif
   else
-   sysmessage(Musis byt v pevnosti)
+    sysmessage("Musis byt v pevnosti")
   endif 
 endif
 
 [function keepguardsstop]
-if(<tag(realm)>!=1)&&(!isgm)
- return 1
+if (<tag(realm)> != 1) && (!isgm)
+  return 1
 endif
 arg(knam,<getNearestKeepName(<region.tag(realm)>)>)
-if(!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
- return 1
+if (!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
+  return 1
 endif
-if(<tag(captain)>)
- if(strlen(<var(keep_<knam>)>))
-  if(!strcmpi(<tag(keep)>,<var(keep_<knam>)>))
-   if(<finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).rescount>)
-    finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).contents(stop_guard(1)) //1 stop
-   else
-    sysmessage(Nemas k dispozici zadne straze)
-   endif
+if (<tag(captain)>)
+  if (strlen(<var(keep_<knam>)>))
+    if (!strcmpi(<tag(keep)>,<var(keep_<knam>)>))
+      if (<finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).rescount>)
+        finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).contents(stop_guard(1)) //1 stop
+      else
+        sysmessage("Nemas k dispozici zadne straze")
+      endif
+    else
+      sysmessage("Musis byt ve sve pevnosti")
+    endif
   else
-   sysmessage(Musis byt ve sve pevnosti)
+    sysmessage("Musis byt v pevnosti")
   endif
- else
-  sysmessage(Musis byt v pevnosti)
- endif
 endif
-if(isgm)||(<tag(general)>)
-  if(strlen(<var(keep_<knam>)>) && (<region>==<var(keep_<knam>).region>)) //jsem vubec v pevnosti?
-   if(<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
-    finduid(<var(keep_<knam>).tag(kingguardcont)>).contents(stop_guard(1)) //1 stop
-   else
-    sysmessage(Nemas k dispozici zadne straze)
-   endif
+if (isgm) || (<tag(general)>)
+  if (strlen(<var(keep_<knam>)>) && (<region> == <var(keep_<knam>).region>)) //jsem vubec v pevnosti?
+    if (<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
+      finduid(<var(keep_<knam>).tag(kingguardcont)>).contents(stop_guard(1)) //1 stop
+    else
+      sysmessage("Nemas k dispozici zadne straze")
+    endif
   else
-   sysmessage(Musis byt v pevnosti)
+    sysmessage("Musis byt v pevnosti")
   endif 
 endif
 
 [function keepguardscontinue]
-if(<tag(realm)>!=1)&&(!isgm)
- return 1
+if (<tag(realm)> != 1) && (!isgm)
+  return 1
 endif
 arg(knam,<getNearestKeepName(<region.tag(realm)>)>)
-if(!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
- return 1
+if (!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
+  return 1
 endif
-if(<tag(captain)>)
- if(strlen(<var(keep_<knam>)>))
-  if(!strcmpi(<tag(keep)>,<var(keep_<knam>)>))
-   if(<finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).rescount>)
-    finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).contents(stop_guard(0)) //1 stop
-   else
-    sysmessage(Nemas k dispozici zadne straze)
-   endif
+if (<tag(captain)>)
+  if (strlen(<var(keep_<knam>)>))
+    if (!strcmpi(<tag(keep)>,<var(keep_<knam>)>))
+      if (<finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).rescount>)
+        finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).contents(stop_guard(0)) //1 stop
+      else
+        sysmessage("Nemas k dispozici zadne straze")
+      endif
+    else
+      sysmessage("Musis byt ve sve pevnosti")
+    endif
   else
-   sysmessage(Musis byt ve sve pevnosti)
+    sysmessage("Musis byt v pevnosti")
   endif
- else
-  sysmessage(Musis byt v pevnosti)
- endif
 endif
-if(isgm)||(<tag(general)>)
-  if(strlen(<var(keep_<knam>)>) && (<region>==<var(keep_<knam>).region>)) //jsem vubec v pevnosti?
-   if(<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
-    finduid(<var(keep_<knam>).tag(kingguardcont)>).contents(stop_guard(0)) //1 stop
-   else
-    sysmessage(Nemas k dispozici zadne straze)
-   endif
+if (isgm) || (<tag(general)>)
+  if (strlen(<var(keep_<knam>)>) && (<region> == <var(keep_<knam>).region>)) //jsem vubec v pevnosti?
+    if (<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
+     finduid(<var(keep_<knam>).tag(kingguardcont)>).contents(stop_guard(0)) //1 stop
+    else
+      sysmessage("Nemas k dispozici zadne straze")
+    endif
   else
-   sysmessage(Musis byt v pevnosti)
+    sysmessage("Musis byt v pevnosti")
   endif
 endif
 
 [function keepguardsflee]
-if(<tag(realm)>!=1)&&(!isgm)
- return 1
+if (<tag(realm)> != 1) && (!isgm)
+  return 1
 endif
 arg(knam,<getNearestKeepName(<region.tag(realm)>)>)
-if(!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
- return 1
+if (!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
+  return 1
 endif
-if(<tag(captain)>)
- if(strlen(<var(keep_<knam>)>))
-  if(!strcmpi(<tag(keep)>,<var(keep_<knam>)>))
-   if(<finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).rescount>)
-    finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).contents(home_run) //1 stop
-   else
-    sysmessage(Nemas k dispozici zadne straze)
-   endif
+if (<tag(captain)>)
+  if (strlen(<var(keep_<knam>)>))
+    if (!strcmpi(<tag(keep)>,<var(keep_<knam>)>))
+      if (<finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).rescount>)
+        finduid(<finduid(<tag(keep)>).tag(kingguardcont)>).contents(home_run) //1 stop
+      else
+        sysmessage("Nemas k dispozici zadne straze")
+      endif
+    else
+      sysmessage("Musis byt ve sve pevnosti")
+    endif
   else
-   sysmessage(Musis byt ve sve pevnosti)
-  endif
- else
-  sysmessage(Musis byt v pevnosti)
+    sysmessage("Musis byt v pevnosti")
  endif
 endif
-if(isgm)||(<tag(general)>)
-  if(strlen(<var(keep_<knam>)>) && (<region>==<var(keep_<knam>).region>)) //jsem vubec v pevnosti?
-   if(<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
-    finduid(<var(keep_<knam>).tag(kingguardcont)>).contents(home_run) //1 stop
-   else
-    sysmessage(Nemas k dispozici zadne straze)
-   endif
+if (isgm) || (<tag(general)>)
+  if (strlen(<var(keep_<knam>)>) && (<region> == <var(keep_<knam>).region>)) //jsem vubec v pevnosti?
+    if (<finduid(<var(keep_<knam>).tag(kingguardcont)>).rescount>)
+      finduid(<var(keep_<knam>).tag(kingguardcont)>).contents(home_run) //1 stop
+    else
+      sysmessage("Nemas k dispozici zadne straze")
+    endif
   else
-   sysmessage(Musis byt v pevnosti)
+    sysmessage("Musis byt v pevnosti")
   endif
 endif
 
 [function keepguardscome]
-if(<tag(realm)>!=1)&&(!isgm)
- return 1
-endif
-if(<tag(captain)>) //kontroluje pouze kapitana, generala ne !
- if(strcmpi(<region>,<finduid(<tag(keep)>).region>)) //0 pokud stejne, pak nic nehlasi
-  sysmessage(Straze prijdou jen v ramci tve pevnosti)
+if (<tag(realm)> != 1) && (!isgm)
   return 1
- endif
+endif
+if (<tag(captain)>) //kontroluje pouze kapitana, generala ne !
+  if (strcmpi(<region>,<finduid(<tag(keep)>).region>)) //0 pokud stejne, pak nic nehlasi
+    sysmessage("Straze prijdou jen v ramci tve pevnosti")
+    return 1
+  endif
 endif
 arg(knam,<getNearestKeepName(<region.tag(realm)>)>)
-if(!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
- return 1
-endif
-if(<tag(general)>)||(isgm)
- if(<region>==<var(keep_<knam>).region>) //jsem vubec v pevnosti?)
-  
- else
-  sysmesage(Straze prijdou jen v ramci pevnosti) 
+if (!isgm && !ismyconquered(<knam>)) //pevnost mi nepatri
   return 1
- endif
 endif
-if(<tag(captain)>)||(isgm)||(<tag(general)>)
- arg(kingguardcont,<finduid(<var(keep_<knam>)>).tag(kingguardcont)>)
- if(<arg(kingguardcont).rescount>)
-  arg(pocet_strazi,<arg(kingguardcont).rescount>)   
-  arg(i,0)
-  while(i < pocet_strazi)
-   //arg(j,<eval {0 <eval (<arg(pocet_strazi)>-1)>}>) //nahodna straz ve meste
-   if(<arg(kingguardcont).findcont(i).link>) //umisteny spawngem
-     arg(guard,<arg(kingguardcont).findcont(i).link.tag(lastspawned)>)
-     if(<finduid(guard).npc>) //spawnuta straz
-      if(<src.distancefrom(<finduid(guard)>)> <= 15)		
-       finduid(guard).events=-e_guard_stopped 
-       finduid(guard).paralyze_remove
-       finduid(guard).go(<src.p>) 
-      endif
-     endif
-   endif 
-   arg(i,#+1)
-  endwhile
- else
-  sysmessage(Nemas k dispozici zadne straze)
- endif
+if (<tag(general)>) || (isgm)
+  if (<region> == <var(keep_<knam>).region>) //jsem vubec v pevnosti?)
+  
+  else
+    sysmesage("Straze prijdou jen v ramci pevnosti") 
+    return 1
+  endif
+endif
+if (<tag(captain)>) || (isgm) || (<tag(general)>)
+  arg(kingguardcont,<finduid(<var(keep_<knam>)>).tag(kingguardcont)>)
+  if (<arg(kingguardcont).rescount>)
+    arg(pocet_strazi,<arg(kingguardcont).rescount>)   
+    arg(i,0)
+    while (i < pocet_strazi)
+      //arg(j,<eval {0 <eval (<arg(pocet_strazi)>-1)>}>) //nahodna straz ve meste
+      if (<arg(kingguardcont).findcont(i).link>) //umisteny spawngem
+        arg(guard,<arg(kingguardcont).findcont(i).link.tag(lastspawned)>)
+        if (<finduid(guard).npc>) //spawnuta straz
+          if (<src.distancefrom(<finduid(guard)>)> <= 15)		
+            finduid(guard).events=-e_guard_stopped 
+            finduid(guard).paralyze_remove
+            finduid(guard).go(<src.p>) 
+          endif
+        endif
+      endif 
+      arg(i,#+1)
+    endwhile
+  else
+    sysmessage("Nemas k dispozici zadne straze")
+  endif
 endif
 
 [function ismyconquered]//args - jmeno pevnosti
 arg(palname,<d_palantir_<argv(0)>>)
 //kermel.smsg(pnst? <palname> ppal: <eval var(palantir_<palname>).tag(owners_realm)> ja: <eval tag(realm)>)
-if(<eval var(palantir_<palname>).tag(owners_realm)> != <eval tag(realm)>)
- //nemam tu co delat
- redmessage("Nemuzes ovladat pevnost, kterou jsi nedobyl")
- return 0
+if (<eval var(palantir_<palname>).tag(owners_realm)> != <eval tag(realm)>)
+  //nemam tu co delat
+  redmessage("Nemuzes ovladat pevnost, kterou jsi nedobyl")
+  return 0
 else
- return 1
+  return 1
 endif
 
 [function keep_blacklist]
-if(<tag(realm)>!=1)
- return 1
+if (<tag(realm)> != 1)
+  return 1
 endif
 if !(<tag(captain)>)
- return 1
+  return 1
 endif
 newitemsafe(i_keep_ban)
 lastnew.link=<finduid(<tag(keep)>)>

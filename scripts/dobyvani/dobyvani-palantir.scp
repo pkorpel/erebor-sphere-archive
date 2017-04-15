@@ -501,6 +501,11 @@ plr.name=Kapitan <plr.name>
 plr.tag(captain,1)
 plr.tag(keep,<fort>)
 fort.link=<plr>
+if (<plr.f_uniformRealm_checkValidity>)
+  plr.f_uniformRealm_updateDate(12,<plr>)
+else
+  plr.f_uniformRealm_set(12,<plr>)
+endif
 plr.classmessage("<plr.sex(Byl jsi jmenovan kapitanem,Byla jsi jmenovana kapitankou)> pevnosti <fort.tag(jmeno_mesta)>.")
 scylla.delayedmessage("Hrac <plr>-<plr.name>(<plr.account.name>) byl jmenovan kapitanem pevnosti <fort.tag(jmeno_mesta)>.")   
 return 1
