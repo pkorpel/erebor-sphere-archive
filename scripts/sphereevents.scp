@@ -2054,7 +2054,7 @@ if (topobj.isItem)
        src.sysMessage("V tutorialu nemuzes obirat cizi mrtvoly.")
        return 1
       endif 
-      if (src.tag(skillrank)<3)&&(src.findid(i_checkstats_timer))
+      if (<eval src.tag(skillrank)> < 3) && (src.findid(i_checkstats_timer))
         //po smrti nejakou dobu nesmim lootovat...
         src.sysMessage("Jeste nemuzes obirat cizi mrtvoly.")
         return 1
@@ -2062,8 +2062,10 @@ if (topobj.isItem)
     endif
     if (src.tag(nextloot)<serv.time)
       if (src!=tag(iic_owner))//kdyz nejsem majitel
-        if (tag(iic_owner).ismurderer==0)
-          src.criminal
+        if (<src.findid(i_memory_guild).link> != <tag(iic_owner).findid(i_memory_guild).link>)  // nejsou ze stejne guildy 
+          if (tag(iic_owner).ismurderer==0)
+            src.criminal
+          endif
         endif
       endif
       f_item_in_corpse_reset
@@ -2080,18 +2082,22 @@ tag(iic_owner,"")
 events -t_item_in_corpse
 
 on=@pickup_ground
-if (src!=tag(iic_owner))
+if (<src> != <tag(iic_owner)>)
   //nejsem vlastnik tela
-  if (src.tag(skillrank)<3)&&(src.findid(i_checkstats_timer))
+  if (<eval src.tag(skillrank)> < 3) && (src.findid(i_checkstats_timer))
     //po smrti nejakou dobu nesmim lootovat...
     src.sysMessage("Jeste nemuzes obirat cizi mrtvoly.")
     return 1
   endif
 endif
-if (src.tag(nextloot)<serv.time)
-  if (src!=tag(iic_owner))//kdyz nejsem majitel
-    if (tag(iic_owner).ismurderer==0)
-      src.criminal
+if (src.tag(nextloot) < serv.time)
+  if (<src> != <tag(iic_owner)>)//kdyz nejsem majitel
+    if (charExists(<tag(iic_owner)>))
+      if (<src.findid(i_memory_guild).link> != <tag(iic_owner).findid(i_memory_guild).link>)  // nejsou ze stejne guildy 
+        if (<tag(iic_owner).ismurderer> == 0)
+          src.criminal
+        endif
+      endif
     endif
   endif
   events -t_item_in_corpse
@@ -2107,10 +2113,10 @@ endif
 on=@userclick
 if (topobj)
   if (topobj.isItem)
-    src.sysmessage("type: <topobj.type>")
+//     src.sysmessage("type: <topobj.type>")
     if (topobj.type==t_corpse) // po resurrectu na tele zustava itemum event -> test
       if (topobj.link)
-        if ((<src>!=<tag(iic_owner)>)&&(<playerExists(<topobj.link>)>))
+        if ((<src> != <tag(iic_owner)>) && (<playerExists(<topobj.link>)>))
           src.sysMessage("Sebrani teto veci je kriminalni cin.")
         endif
       endif
