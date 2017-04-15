@@ -1181,9 +1181,9 @@ return 1
 [typedef t_allweapons]
 on=@userclick
 if (STRCMPI(<src.tag(clienttype)>,"old"))//0 pokud ano
- return 1
+  return 1
 endif
-if (topobj==src)||(src.isgm)
+if (<topobj> == <src>) || (src.isgm)
   src.smsg("Durabilita: <more1l>/<more1h>")
 endif
 
@@ -1308,9 +1308,11 @@ endif
 
 on=@userclick
 if (STRCMPI(<src.tag(clienttype)>,"old"))//0 pokud ano
- return 1
+  return 1
 endif
-src.smsg("Durabilita: <more1l>/<more1h>")
+if (<topobj> == <src>) || (src.isgm)
+  src.smsg("Durabilita: <more1l>/<more1h>")
+endif
 
 [typedef t_allshields]
 on=@userdclick
@@ -1329,9 +1331,11 @@ endif
 
 on=@userclick
 if (STRCMPI(<src.tag(clienttype)>,"old"))//0 pokud ano
- return 1
+  return 1
 endif
-src.smsg("Durabilita:<more1l>/<more1h>")
+if (<topobj> == <src>) || (src.isgm)
+  src.smsg("Durabilita:<more1l>/<more1h>")
+endif
 
 [function armorcreate]//ie (copper,plate)
 events +t_allarmors
