@@ -6357,7 +6357,7 @@ if (charExists(<act>))
     endif
     if (animallore >= <act.animallore>)
       src.message("<act.name> se zivi vecmi jako: <f_showfoodtype>.")
-      if (safe.strlen(act.tag(magic_horse)))
+      if (safe.strlen(<act.tag(magic_horse)>))
         src.sysMessage("Jizdou na tomto zvireti ziskas nasledujici schopnosti:")
         src.newitemsafe(i_show_animal_bonus)
         arg(show_bonus,<lastnew>)
