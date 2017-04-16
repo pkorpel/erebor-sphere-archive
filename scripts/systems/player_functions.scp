@@ -399,7 +399,7 @@ if(strlen(<tag(jmeno_mesta)>))||(<tag(leading)>) //jen v nastavenem meste nebo l
    endif 
   else //neni u chlapa
    if(!src.isnazgul)
-    if(<src.tag(realm)>==2)         
+    if(<eval src.tag(realm)>==2)         
      if(<tag(leading)>)&&(!src.isgm)
       src.racemessage(Nejsi hoden vedouciho prstenu, nejsi Nazgulem)
      else
@@ -445,7 +445,7 @@ endif
 //if(!src.isnazgul)&&(!src.isgm)&&(!<tag(leading)>)
 if(!src.isgm)
  input("Chces-li zadej castku kterou prispejes do pokladny",f_nazg_prihod,0) 
- if(<src.tag(realm)>==2)&&(!<tag(leading)>)
+ if(<eval src.tag(realm)>==2)&&(!<tag(leading)>)
   zobraz_novinky    
  endif
 endif

@@ -1,9 +1,9 @@
 [function rentalclear]//args - mesto
 if(!argvcount)
- src.sysmessage(Kdyz nevis jak na to, tak to nepouzivej)
+ sysmessage(Kdyz nevis jak na to, tak to nepouzivej)
 else
  array_clear("var.housing_<args>")
- src.sysmesage(Najemni informace ve meste <args> vymazany)
+ sysmessage(Najemni informace ve meste <args> vymazany)
 endif
 
 [function rentalinfo]//args - mesto
@@ -58,84 +58,87 @@ else
  if(!strcmpi(<city>,"Tharbad"))
   bag.p=1603,1925  
  endif
- //src.sysmessage(kdejsem: <city>, bag: <bag>, bagpos: <bag.p>)
+ if(!strcmpi(<city>,"Dol_Amroth"))
+  bag.p=2262,3205  
+ endif
+//  src.sysmessage(kdejsem: <city>, bag: <bag>, bagpos: <bag.p>)
  bag.region.sectors.allitems(housing_info(<city>))
  if(!strcmpi(<city>,"Minas_tirith"))
   bag.p="Cair Andros"  //pridame jeste do obou mest
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Cair_Andros>))
+//   bag.region.sectors.allitems(housing_info(<Cair_Andros>))
   bag.p="Pelenorska pole"  //pridame jeste do obou mest
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Pelenorska_pole>))
+//   bag.region.sectors.allitems(housing_info(<Pelenorska_pole>))
  endif
  if(!strcmpi(<city>,"Fornost"))
   bag.p="Forondon"  //Forondon
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Forondon>))
+//   bag.region.sectors.allitems(housing_info(<Forondon>))
   bag.p=1603,1925  //Tharbad
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Tharbad>))
+//   bag.region.sectors.allitems(housing_info(<Tharbad>))
   bag.p="Hurka"  //Hurka
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Hurka>))
+//   bag.region.sectors.allitems(housing_info(<Hurka>))
   bag.p="Hurecko"  //Hurecko
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Hurecko>))
+//   bag.region.sectors.allitems(housing_info(<Hurecko>))
  endif
- if(!strcmpi(<city>,"Dol Amroth"))
+ if(!strcmpi(<city>,"Dol_Amroth"))
   bag.p="Calembel"  //Calembel
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Calembel>))
+//   bag.region.sectors.allitems(housing_info(<Calembel>))
   bag.p="Pelargir"  //Pelargir
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Pelargir>))
+//   bag.region.sectors.allitems(housing_info(<Pelargir>))
  endif
  if(!strcmpi(<city>,"Kralovstvi lesnich elfu"))
   bag.p="Lorien"  //Lorien
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Lorien>))
+//   bag.region.sectors.allitems(housing_info(<Lorien>))
  endif
  if(!strcmpi(<city>,"Edoras"))
   bag.p="Helmuv zleb"  //pridame jeste do obou mest
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Helmuv_zleb>))
+//   bag.region.sectors.allitems(housing_info(<Helmuv_zleb>))
  endif
  if(!strcmpi(<city>,"Dol"))
   bag.p="Esgaroth"  //pridame jeste do obou mest
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Esgaroth>))
+//   bag.region.sectors.allitems(housing_info(<Esgaroth>))
  endif
  if(!strcmpi(<city>,"Hobitin"))
   bag.p="Radovsko"  //pridame jeste do obou mest
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Radovsko>))
+//   bag.region.sectors.allitems(housing_info(<Radovsko>))
   bag.p="Severni ctvrtka"  //pridame jeste do obou mest
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Severni_ctvrtka>))
+//   bag.region.sectors.allitems(housing_info(<Severni_ctvrtka>))
   bag.p="Zabovresky"  //pridame jeste do obou mest
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Zabovresky>))
+//   bag.region.sectors.allitems(housing_info(<Zabovresky>))
   bag.p="Parezov"  //pridame jeste do obou mest
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Parezov>))
+//   bag.region.sectors.allitems(housing_info(<Parezov>))
  endif
  if(!strcmpi(<city>,"Nurn"))
   bag.p="Nurnske hradiste"  //
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Nurnske_hradiste>))
+//   bag.region.sectors.allitems(housing_info(<Nurnske_hradiste>))
  endif
  if(!strcmpi(<city>,"Barad-dur"))
   bag.p="Bagronk"  //Bagronk
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Bagronk>))
+//   bag.region.sectors.allitems(housing_info(<Bagronk>))
  endif
  if(!strcmpi(<city>,"Umbar"))
   bag.p="Tahabar"  //Tahabar
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Tahabar>))
+//   bag.region.sectors.allitems(housing_info(<Tahabar>))
   bag.p="Oaza Hagir"  //Oaza Hagir
   bag.region.sectors.allitems(housing_info(<city>))
-  bag.region.sectors.allitems(housing_info(<Oaza_hagir>))
+//   bag.region.sectors.allitems(housing_info(<Oaza_hagir>))
  endif
 
  bag.remove
@@ -149,13 +152,13 @@ endif
 //zjistime si vsechny obydlene domy
 [function housing_info]
 if(iscustomhouse)
- //src.sysmessage(mame house: <name>) 
+//  src.sysmessage(mame house: <name>) 
  array_add("var.housing_<args>",<uid>) 
 endif
 
 //zobrazime info nad polem domku
 [dialog d_show_housing_info] //argv1 - jmeno zobrazovaneho pole, argv2-jmeno mesta
-//src.sysmessage(arg0:<argv(0)>, arg1:<argv(1)>, arg2:<argv(2)>)
+// src.sysmessage(arg0:<argv(0)>, arg1:<argv(1)>, arg2:<argv(2)>)
 argo.SetLocation(20,20)
 if(src.isgm)
  argo.tag(sirka,700)
@@ -254,9 +257,9 @@ if (<arg(index)>)
 endif
 arg(imax,<eval index+20>)
 while ((<array_get(<argv(1)>,<index>)> != -1) && (index < imax))
- //src.sysmessage(get: <index>, v poli: <array_get(<argv(1)>,<index>)>)
+//  src.sysmessage(get: <index>, v poli: <array_get(<argv(1)>,<index>)>)
  arg(house,<finduid(array_get(<argv(1)>,<index>))>)
- //src.sysmessage(Zobrazuji dum <house.name> cislo: <index>)
+//  src.sysmessage(Zobrazuji dum <house.name> cislo: <index>)
  arg(owner,<finduid(<house.more1>)>)
  arg(usrcolor,955)//default 
  arg(sloupec,0)
@@ -264,11 +267,11 @@ while ((<array_get(<argv(1)>,<index>)> != -1) && (index < imax))
   arg(sloupec,#+1)
  argo.texta(argo.tag(sloupec_x[<sloupec>]),ypos,955,"<house.p_x>,<house.p_y>,<house.p_z>,<house.mapplane>")
   arg(sloupec,#+1)
- if(<house.more1>!=0)
-  arg(usrcolor,<eval (<owner.getNameHue>)>) //mordor(026) / gondor(063)
+ if(<house.more1>!=0) && (strlen(<arg(owner)>) > 0) 
+  arg(usrcolor,<arg(owner).getNameHue>) //mordor(026) / gondor(063)
   if(owner.profession==class_thief)
-   if(<owner.tag(realm)>!=<src.tag(realm)>) //masknutej thief?
-    if(<src.tag(realm)>==1) //jsem gondor, vidim tedy gondora (zobrazi se mi i jine jmeno thiefa)
+   if(<owner.tag(realm)>!=<eval src.tag(realm)>) //masknutej thief?
+    if(<eval src.tag(realm)>==1) //jsem gondor, vidim tedy gondora (zobrazi se mi i jine jmeno thiefa)
      arg(usrcolor,063)
     else
      arg(usrcolor,026)
@@ -277,10 +280,10 @@ while ((<array_get(<argv(1)>,<index>)> != -1) && (index < imax))
   endif
   //src.sysmessage(returned hue: <usrcolor>, should be: <owner.getNameHue>)
  endif   
- argo.texta(argo.tag(sloupec_x[<sloupec>]),ypos,<usrcolor>,<qval((<house.more1>!=0),<arg(owner).getrealname>,Neobydleny)>)   
+ argo.texta(argo.tag(sloupec_x[<sloupec>]),ypos,<arg(usrcolor)>,<qval((<house.more1>!=0),<arg(owner).getrealname>,Neobydleny)>)   
   arg(sloupec,#+1)
  if(<src.tag(lordnazgul)>)||(<src.tag(general)>)||(src.isgm)
-  if(<house.more1>!=0)
+  if(<house.more1>!=0) && (strlen(<arg(owner)>) > 0) 
    if(owner.canberealmbanned)  					   //je z meho realmu?                     ano - aktivni/ne-nebanovat
     argo.button(argo.tag(sloupec_x[<sloupec>])+3*d_def_odsazeni,ypos,<qval((<owner.tag(realm)>==<src.tag(realm)>),"4005,4007,1","0fb6,0fb6,0")>,0,index+1000) // realmban  	
     //argo.button(argo.tag(sloupec_x[<sloupec>])+3*d_def_odsazeni,ypos,4005,4007,1,0,index+1000) // realmban  	
@@ -292,7 +295,7 @@ while ((<array_get(<argv(1)>,<index>)> != -1) && (index < imax))
   arg(sloupec,#+1)
  endif  
  if(src.isnazgul)||(<src.tag(starosta)>)||(<src.tag(general)>)||(src.isgm)
-  if(<house.more1>!=0)
+  if(<house.more1>!=0) && (strlen(<arg(owner)>) > 0) 
    if(strlen(<src.region.tag(jmeno_mesta)>)) //dela to nekde, kde lze banovat z mesta
     if(owner.istownbannedfrom(<src.region.tag(jmeno_mesta)>))//              je z meho realmu (maska zlodeje atd...)?/ano         / ne
      argo.button(argo.tag(sloupec_x[<sloupec>])+3*d_def_odsazeni,ypos,<qval((<owner.tag(realm)>==<src.tag(realm)>),"0fb1,0fb3,1","0fb6,0fb6,0")>,0,index+2000)  // zrusit townban
@@ -328,7 +331,7 @@ DIALOG(d_show_housing_info,<argo.tag(firsti)>+20,"var.housing_<argo.tag(city)>",
 on=@anybutton
 arg(clicked,0) //zamek
 if(argn >= 4000)&&(!clicked) //pratele domu
- //src.sysmessage(pratele)
+//  src.sysmessage(pratele)
  arg(clicked,1)
  arg(cislo,<eval (<argn>-4000)>)
  arg(dum,<finduid(<array_get("var.housing_<argo.tag(city)>",<cislo>)>)>) 
@@ -336,7 +339,7 @@ if(argn >= 4000)&&(!clicked) //pratele domu
  dum.tag(friendscont).dialog(d_bags_housing_info,0,<argo.tag(city)>)
 endif
 if(argn >= 3000)&&(!clicked) //spoluvlastnici
- //src.sysmessage(spoluvl)
+//  src.sysmessage(spoluvl)
  arg(clicked,1)
  arg(cislo,<eval (<argn>-3000)>)
  arg(dum,<finduid(<array_get("var.housing_<argo.tag(city)>",<cislo>)>)>)
@@ -348,7 +351,7 @@ if(argn >= 2000)&&(!clicked) //townBan (majitele)
  arg(cislo,<eval (<argn>-2000)>)
  arg(dum,<finduid(<array_get("var.housing_<argo.tag(city)>",<cislo>)>)>)
  arg(majitel,<finduid(<arg(dum).more1>)>)
- //src.sysmessage(townban, src:<src.name>, majreg:<majitel.tag(realm)>, jareg:<src.tag(realm)>) 
+//  src.sysmessage(townban, src:<src.name>, majreg:<majitel.tag(realm)>, jareg:<src.tag(realm)>) 
  if(src.isnazgul)||(src.tag(starosta))||(src.isgm)
   if(majitel.tag(realm)==src.tag(realm))||(src.isgm)
    if(src.isintown)
@@ -445,7 +448,7 @@ while (index<imax)&&(index < rescount)
  arg(usrcolor,<eval (<osoba.getNameHue>)>) //mordor(026) / gondor(063)
  if(osoba.profession==class_thief)
   if(<osoba.tag(realm)>!=<src.tag(realm)>) //masknutej thief?
-   if(<src.tag(realm)>==1) //jsem gondor, vidim tedy gondora (zobrazi se mi i jine jmeno thiefa)
+   if(<eval src.tag(realm)>==1) //jsem gondor, vidim tedy gondora (zobrazi se mi i jine jmeno thiefa)
     arg(usrcolor,063)
    else
     arg(usrcolor,026)
