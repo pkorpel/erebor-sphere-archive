@@ -509,7 +509,7 @@ CATEGORY=Provisions - Armor - Colored
 SUBSECTION=Obsidian Studded Armor
 DESCRIPTION=Studded Sleeves
 SKILLMAKE=tinkering 85.0, t_tinker_tools
-tdata1=1//Obsidian
+tdata1=7//Obsidian
 
 ON=@Create
 armorcreate(Obsidian,studded)
