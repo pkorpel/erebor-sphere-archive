@@ -414,7 +414,7 @@ endif
 //kermel.delayedmessage("Dobyvani: <d_area_<tag(fort_name)>_1> skoncilo, vitez ma dobyto: <winners_declarstone.tag(conquered)>, looser ma dobyto: <loosers_declarstone.tag(conquered)>.")   
 
 //zkontrolovat jestli na looserove declarstonu nebyla vyhlasena valka a kdyztak upravit oznacenou dobyvanou pevnost
-if (strlen(<loosers_declarstone.tag(war_declared_on)>) > 1) //neni tam jen 0 (tj valka by nebyla vyhlasena), je tam nejakej text
+if (strlen(<loosers_declarstone.tag(war_declared_on)>) > 2) //neni tam jen 00 (tj valka by nebyla vyhlasena), je tam nejakej text
   if (<eval loosers_declarstone.tag(conquered)> < 0)
     if (<loosers_realm> == 1) //Gondor prohral, priste bude dobyvat pevnost o 1 mensiho cisla nez ma ted nastaveno
       //odecitame od zaporneho cisla, na nulu se dostat nemuzeme
@@ -551,3 +551,5 @@ endwhile
 tag(war_begins_day,<getDay>)
 tag(war_begins_hour,<getHour>)
 timer=1
+
+[eof]
