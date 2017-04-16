@@ -182,6 +182,7 @@ return 1
 [function f_easter_port_change_location]
 attr=090
 update
+removefromview
 sfx(251)
 arg(goX,<eval {2235 2284}>)  // Rozsah X souradnice labyrintu
 arg(goY,<eval {2641 2685}>)  // Rozsah Y souradnice labyrintu
