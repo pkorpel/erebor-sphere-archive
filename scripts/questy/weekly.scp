@@ -75,7 +75,7 @@ def_weekly_low_rewardSize[8]       50
 
 def_weekly_low_setupFunction[9]    f_weekly_setup_killInDung                    // OTESTOVANO
 def_weekly_low_setupFunArgn[9]     2 // pocet argumentu setup funkce
-def_weekly_low_setupFunArg_9_[0]   220 // koeficient poctu NPC
+def_weekly_low_setupFunArg_9_[0]   550 // koeficient poctu NPC
 def_weekly_low_setupFunArg_9_[1]   20 // minimalni pocet XP
 def_weekly_low_iconId[9]           020E9
 def_weekly_low_iconId_moveY[9]     9  // move the custom icon 9 pixels up
@@ -132,7 +132,7 @@ def_weekly_medium_rewardSize[3]       85
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
-def_weekly_medium_setupFunArg_4_[0]   90 // koeficient poctu NPC
+def_weekly_medium_setupFunArg_4_[0]   160 // koeficient poctu NPC
 def_weekly_medium_setupFunArg_4_[1]   100 // minimalni pocet XP
 def_weekly_medium_iconId[4]           0212E
 def_weekly_medium_iconId_moveY[4]     9  // move the custom icon 9 pixels up
@@ -190,7 +190,7 @@ def_weekly_high_rewardSize[2]       110
 
 def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
-def_weekly_high_setupFunArg_3_[0]   36 // koeficient poctu NPC
+def_weekly_high_setupFunArg_3_[0]   85 // koeficient poctu NPC
 def_weekly_high_setupFunArg_3_[1]   200 // minimalni pocet XP
 def_weekly_high_iconId[3]           02132
 def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
@@ -697,7 +697,7 @@ tag(quest_iconId_moveY[<currentQNumber>],14) // move the custom icon 14 pixels u
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,killInDung)
-tag(quest_totalAmount[<currentQNumber>],<eval ((<eval (<tag(playerLevel)>*<argv(0)>)>+{-500 100})/100)>)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<eval (<tag(playerLevel)>*<argv(0)>)>+{-500 100})/(200+<tag(playerLevel)>))>)
 tag(quest_description[<currentQNumber>],"Zabij npc v dungeonu<br>s alespon <?argv(1)?>xp")
 tag(quest_subjectId[<currentQNumber>],<argv(1)>) // exceptionaly the subjectId doesn't store an actual ID, but a minimal required XP
 cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
