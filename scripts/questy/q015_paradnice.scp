@@ -40,7 +40,7 @@ else
 endif
 
 [FUNCTION f_q015_paradnice]
-if (<src.tag.realm>==2)
+if (<eval src.tag(realm)> == 2)
   say("Jdi pryc Ty stvuro !")
   return 1
 endif
@@ -153,13 +153,13 @@ Zrovna ted nic nepotrebuji, dekuju za optani... ale muzes mi nekdy prinest nejak
 
 [dialog d_q015_paradnice button]
 on=1
-saz("Ty jeden burane! Ty krupane! Ty chasniku! Ksc!")
+say("Ty jeden burane! Ty krupane! Ty chasniku! Ksc!")
 src.tag.remove(q015_paradnice)
 src.tag(q015_neuspel,1)
 src.consume i_q015_paradnice_kolektor
 
 on=2
-saz("Tak do toho a pospes si. Minny chce byt hezka, hihihi")
+say("Tak do toho a pospes si. Minny chce byt hezka, hihihi")
 src.tag(q015_paradnice,1)
 src.newitemsafe(i_q015_paradnice_kolektor)
 lastnew.bounce
@@ -168,7 +168,7 @@ on=3
 SAY("Asi se nesnazis dost! Copak jsem ti nerekla jak je to dulezite?")
 
 on=4
-if <src.restest i_q015_paradnice_kolektor> && (<src.findid(i_q015_paradnice_kolektor).tag.contentscount>==12) 
+if <src.restest i_q015_paradnice_kolektor> && (<src.findid(i_q015_paradnice_kolektor).tag(contentscount)>==12) 
   src.tag(q015_paradnice,2)
   say("Vyborne, dekuji ti mnohokrat, tady je tvoje odmena")
   src.addexp(1000)
