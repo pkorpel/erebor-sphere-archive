@@ -49,25 +49,28 @@ def_weekly_low_setupFunArgn[5]     0 // pocet argumentu setup funkce
 def_weekly_low_rewardSize[5]       50
 
 def_weekly_low_setupFunction[6]    f_weekly_setup_loot                          // OTESTOVANO
-def_weekly_low_setupFunArgn[6]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArgn[6]     3      // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_6_[0]   i_gold //prvni argument setup funkce
-def_weekly_low_setupFunArg_6_[1]   200000 // multiplier poctu zlata
+def_weekly_low_setupFunArg_6_[1]   350000 // multiplier poctu zlata
+def_weekly_low_setupFunArg_6_[2]   130    // delimiter poctu zlata
 def_weekly_low_iconId[6]           0EEF
 def_weekly_low_rewardSize[6]       40
 
 def_weekly_low_setupFunction[7]    f_weekly_setup_loot                          // OTESTOVANO
-def_weekly_low_setupFunArgn[7]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArgn[7]     3 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_7_[0]   t_fruit //prvni argument setup funkce
 def_weekly_low_setupFunArg_7_[1]   100 // multiplier poctu ovoce
+def_weekly_low_setupFunArg_7_[2]   50 // delimiter poctu ovoce
 def_weekly_low_iconId[7]           0993
 def_weekly_low_iconId_moveX[7]     8
 def_weekly_low_descr[7]            "<?null?>Lootni predmet:<br>Jakekoliv ovoce" // pocet predmetu ke sbirani
 def_weekly_low_rewardSize[7]       45
 
 def_weekly_low_setupFunction[8]    f_weekly_setup_loot                          // OTESTOVANO
-def_weekly_low_setupFunArgn[8]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArgn[8]     3 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_8_[0]   t_reagent //prvni argument setup funkce
-def_weekly_low_setupFunArg_8_[1]   2800 // multiplier poctu reagentu
+def_weekly_low_setupFunArg_8_[1]   3000 // multiplier poctu reagentu
+def_weekly_low_setupFunArg_8_[2]   50   // delimiter poctu reagentu
 def_weekly_low_iconId[8]           018DD
 def_weekly_low_iconId_moveX[8]     2
 def_weekly_low_descr[8]            "<?null?>Lootni predmet:<br>Jakekoli reagenty" // pocet predmetu ke sbirani
@@ -89,9 +92,10 @@ def_weekly_low_setupFunArg_10_[1]   100 // koeficient pro Klerika/Shamana
 def_weekly_low_rewardSize[10]       55
 
 def_weekly_low_setupFunction[11]    f_weekly_setup_loot                          // OTESTOVANO
-def_weekly_low_setupFunArgn[11]     2 // pocet argumentu setup funkce
+def_weekly_low_setupFunArgn[11]     3 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_11_[0]   t_gem //prvni argument setup funkce
-def_weekly_low_setupFunArg_11_[1]   130 // multiplier poctu gemu
+def_weekly_low_setupFunArg_11_[1]   150 // multiplier poctu gemu
+def_weekly_low_setupFunArg_11_[2]   100 // delimiter poctu gemu
 def_weekly_low_iconId[11]           02C80
 def_weekly_low_iconId_moveX[11]     2
 def_weekly_low_iconId_moveY[11]     8  // move the custom icon 8 pixels up
@@ -592,8 +596,7 @@ cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber
 arg(currentQNumber,<eval tag(qAssigned)>)
 
 f_weekly_addItem(<currentQNumber>,itemLoot)
-tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{<eval ((<tag(playerLevel)>)*<eval <argv(1)>>)> <eval ((<tag(playerLevel)>+10)*<eval <argv(1)>>)>})/1000)>)
-//tag(quest_totalAmount[<currentQNumber>],<eval <argv(1)>>)
+tag(quest_totalAmount[<currentQNumber>],<eval ((<eval (<tag(playerLevel)>*<argv(1)>)>+{-500 0})/(<argv(2)>+<tag(playerLevel)>))>)
 if (strmatch(<argv(0)>,t_*)) // typedef -> general item
   arg(finalItemDef,<argv(0)>)
   // the description for a typedef must be set explicitly through a defname : def_weekly_<level>_desc_<questNumber>
@@ -712,27 +715,34 @@ tag(quest_iconId[<currentQNumber>],027FA)
 tag(quest_iconId_moveY[<currentQNumber>],4) // move the custom icon 4 pixels up
 tag(quest_iconId_moveX[<currentQNumber>],2) // move the custom icon 2 pixels to the left
 if (<eval argv(0)> == 1)
-  dorand 8
+  dorand 6
     arg(profession_to_kill,<class_necro.name>)
     arg(profession_to_kill,<class_mag.name>)
     arg(profession_to_kill,<class_war.name>)
     arg(profession_to_kill,<class_thief.name>)
     arg(profession_to_kill,<class_ranger.name>)
     arg(profession_to_kill,<class_mystik.name>)
-    arg(profession_to_kill,<class_shaman.name>) // TODO: zvazit odebrani shamana kvuli cetnosti v PvP
-    arg(profession_to_kill,<class_priest.name>) // TODO: zvazit odebrani priesta kvuli cetnosti v PvP
   enddo
   tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele, jehoz<br>povolani je <?profession_to_kill?>.")
   tag(quest_subjectId[<currentQNumber>],<profession_to_kill>) // exceptionaly the subjectId doesn't store an actual ID, but a player profession to kill
   tag(quest_totalAmount[<currentQNumber>],1) // TODO: zvazit navyseni poctu pro bezna povolani? (war, mage, thief)
 elseif (<eval argv(0)> == 2)
-  arg(where,<eval {1 3}>)
+  arg(where,<eval {1 5}>)
   doswitch <arg(where)>-1
     tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na gondorskem uzemi.")
+    tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na gondorskem uzemi.")
+    tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na mordorskem uzemi.")
     tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na mordorskem uzemi.")
     tag(quest_description[<currentQNumber>],"<?null?>Zabij nepritele<br>na neutralnim uzemi.")
   enddo
-  tag(quest_subjectId[<currentQNumber>],<where>)
+  doswitch <arg(where)>-1
+    arg(where_kill,1)   // Gondor
+    arg(where_kill,1)   // Gondor
+    arg(where_kill,2)   // Mordor
+    arg(where_kill,2)   // Mordor
+    arg(where_kill,3)   // Neutralni
+  enddo
+  tag(quest_subjectId[<currentQNumber>],<where_kill>)
   tag(quest_totalAmount[<currentQNumber>],<eval ((<tag(qCount)>*{2 4})/10)>)
 else
   tag(quest_description[<currentQNumber>],"Zabij hrace opacneho realmu.")
