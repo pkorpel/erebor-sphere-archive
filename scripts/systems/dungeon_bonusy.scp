@@ -30,10 +30,40 @@ if !(src.isGM)
   if (region.tag(houserealm))
     if !(region.tag(houserealm)==<src.tag(realm)>) && !(src.ispet)
       src.move(<dir_inttochar(<dir_revert(<src.dir>)>)>)
+    else
+      if (src.findid(i_house_safe))
+        src.findid(i_house_safe).timerd=11
+      else
+        src.newitem(i_house_safe)
+        src.equip(<lastnew>)
+      endif  
     endif
+    src.stopmagery
+    src.action=""
   endif
 endif
 
+[itemdef i_house_safe]
+ID=i_memory
+TYPE=t_eq_script
+name=House Safe
+
+on=@equip
+cont.flag_invul=1
+cont.events +e_house_safe
+timerd=11
+
+on=@unequip
+cont.events -e_house_safe
+cont.flag_invul=0
+
+[events e_house_safe]
+on=@step
+if (findid(i_house_safe))
+  if !(<strlen(<region.tag(housenumber)>)>)
+    findid(i_house_safe).remove
+  endif
+endif
 
 [ITEMDEF i_duch_dlazba2]
 ID=0AEC
