@@ -822,9 +822,9 @@ if (tag(weaponuid).type==T_WEAPON_MACE_SMITH)
 	if (tag(ra_stuntattack_ucinnost))
 		if (<tag(ra_stuntattack_ucinnost)> > 0)
 			if (<tag(ra_stuntattack_ucinnost)> < 11)
-				<arg(koeficient,<tag(ra_stuntattack_ucinnost)>)
+				arg(koeficient,<tag(ra_stuntattack_ucinnost)>)
 			else
-				<arg(koeficient,<eval 10+<eval <eval <tag(ra_stuntattack_ucinnost)>-10>/2>>)
+				arg(koeficient,<eval 10+<eval <eval <tag(ra_stuntattack_ucinnost)>-10>/2>>)
 			endif 
 		endif
 	endif
