@@ -28,18 +28,22 @@ if (<src.flags>&statf_dead)
 endif
 if !(src.isGM)
   if (region.tag(houserealm))
-    if !(region.tag(houserealm)==<src.tag(realm)>) && !(src.ispet)
+    if (!(region.tag(houserealm)==<src.tag(realm)>) && !(src.ispet))
       src.move(<dir_inttochar(<dir_revert(<src.dir>)>)>)
     else
-      if (src.findid(i_house_safe))
-        src.findid(i_house_safe).timerd=11
-      else
-        src.newitem(i_house_safe)
-        src.equip(<lastnew>)
+      if !(src.ispet)
+        if (src.findid(i_house_safe))
+          src.findid(i_house_safe).timerd=11
+        else
+          src.newitem(i_house_safe)
+          src.equip(<lastnew>)
+        endif
       endif  
     endif
-    src.stopmagery
-    src.action=""
+    if !(src.ispet)
+      src.stopmagery
+      src.action=""
+    endif
   endif
 endif
 
