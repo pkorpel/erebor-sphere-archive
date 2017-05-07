@@ -48,7 +48,7 @@ elseif (act.food == 0)
  act.emote(umira hlady)
  act.hits=0
 else
- if (<tag(realm)> == 1) && (!(strcmpi(<tag(race)>,"Elf")) || (<taming> > 95.0))
+ if (<eval tag(realm)> == 1) && (!(strcmpi(<tag(race)>,"Elf")) || (<taming> > 95.0))
   taming_randomsayElf
  else
   taming_randomsay(<act.name>)
@@ -127,7 +127,7 @@ elseif (cont.distancefrom(<link>)>5)
  remove
 elseif (more1)
  if ({0 2}==0)
-  if (<cont.tag(realm)> == 1) && (!(strcmpi(<cont.tag(race)>,"Elf")) || (<cont.taming> > 95.0))
+  if (<eval cont.tag(realm)> == 1) && (!(strcmpi(<cont.tag(race)>,"Elf")) || (<cont.taming> > 95.0))
    cont.taming_randomsayElf
   else
    cont.taming_randomsay(<link.name>)
