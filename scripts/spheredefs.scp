@@ -152,7 +152,7 @@ random_VEGGIE          { i_fruit_cabbage 1 i_fruit_carrot 1 i_fruit_corn 1 i_fru
 random_PITCHER         { i_pitcher_ale 1 i_pitcher_cider 1 i_pitcher_glass 1 i_pitcher_liquor 1 i_pitcher_milk 1 i_pitcher_wine 1 i_pitcher_water 1 }
 random_BOTTLE          { i_bottle_ale 1 i_bottle_wine 1 i_bottle_liquor 1 i_jug_cider 1 }
 random_FRUIT           { i_fruit_dates 1 i_fruit_peach 1 i_fruit_pear 1 i_fruit_lemon 1 i_fruit_lime 1 i_fruit_grapes 1 i_fruit_apple 1 i_fruit_banana 1 i_fruit_coconut 1 i_fruit_cantelope 1 i_fruit_honeydewmelon 1 i_fruit_watermelon 1 }
-random_FOOD            { random_meat 1 random_bread 1 random_veggie 1 random_fruit 1 random_other_food 1 }
+random_FOOD            { random_meat 5 random_bread 2 random_veggie 10 random_fruit 12 random_other_food 6 }
 
 [DEFNAMES ITEMS_CONTAINERS]
 random_CHEST           { i_chest_metal_brass 1 i_chest_metal 1 i_chest_wooden_brass 1 }
