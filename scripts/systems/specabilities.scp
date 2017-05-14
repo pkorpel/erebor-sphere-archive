@@ -1396,7 +1396,7 @@ endif
 Equip(lastnew)
 
 [Function woodooeffect]
-sysmessage(":<argv(0)>")
+// sysmessage(":<argv(0)>")
 newitemsafe(i_woodooeffect)
 var(woodooboost,0)
 if (argv(0)==1)
@@ -4313,7 +4313,7 @@ if (<arg(hrac).isplayer>)
     arg(hrac).tag(pact_by,<src.uid>)
     src.tag(pact_to,<arg(hrac)>)
     src.classMessage("<?src.sex(Dal,Dala)?> jsi <?f_get_pact_name("<tag(pact_type)>")?> <?arg(hrac).name?>")
-    logmsg("<serverTime> <src.name>(<src.uid>) <src.sex(dal,dala)> <f_get_pact_name("<tag(pact_type)>")> hraci <arg(hrac).name>(<arg(hrac).uid>)")
+    src.accmsg("<src.sex(dal,dala)> <f_get_pact_name("<tag(pact_type)>")> hraci <arg(hrac).name>(<arg(hrac).uid>)")
     if (<arg(hrac).uid>!=<src.uid>) //aby neboli dvojite hlasky ked to dava na seba
       arg(hrac).classMessage("<?arg(hrac).sex(Dostal,Dostala)?> jsi <?f_get_pact_name("<tag(pact_type)>")?> od <?src.name?>")
     endif
@@ -4952,7 +4952,7 @@ consume(1,i_soul_case)
 hrac.tag(lifepact_by,<uid>)
 
 classMessage("Daroval jsi Pakt zivota <?arg(hrac).name?>")
-logmsg("<serverTime> <src.name>(<src.uid>) <src.sex(dal,dala)> Pakt zivota hraci <arg(hrac).name>(<arg(hrac).uid>)")
+accmsg("<sex(dal,dala)> Pakt zivota hraci <arg(hrac).name>(<arg(hrac).uid>)")
 arg(hrac).classMessage(<?name?> ti daroval Pakt zivota.)
 arg(min_stam,<eval(60-<tag(ra_woodoo_lifepact)>)>)
 arg(min_mana,<eval(70-<tag(ra_woodoo_lifepact)>)>)

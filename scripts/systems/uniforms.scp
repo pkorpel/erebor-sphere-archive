@@ -71,7 +71,7 @@ return 1
 
 [events e_uniform]
 on=@itemequip
-if ((act.typedef.dispid == i_rune_poison)||(act.typedef.dispid == i_rune_poison_field)||(act.typedef.dispid == 020A6)) // dispid i_rune_poison_field is for dragon events, nemazat prosim :P
+if ((act.typedef.dispid == i_rune_poison)||(act.typedef.dispid == i_rune_poison_field)||(act.typedef.dispid == 020A6)||(act.typedef.dispid == i_rune_protection)||(act.typedef.dispid == i_rune_reactive_armor)) // dispid i_rune_poison_field is for dragon events, nemazat prosim :P
 elseif (act.typedef.layer<30)
  newitemsafe(i_uni_unequiptimer)
  lastnew.timerd=1
