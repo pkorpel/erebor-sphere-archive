@@ -1899,6 +1899,22 @@ n_global3_default[10]	897
 n_global3[11]		spellcast_silence_mind_blast
 n_global3_name[11]	"Silence po MindBlastu xx dsec."
 n_global3_default[11]	15
+n_global3[12]		
+n_global3_name[12]
+n_global3_default[12]	
+n_global3[13]		GM_Step
+n_global3_name[13]	"Zapnuti osetreni GM Stepu"
+n_global3_default[13]	0
+n_global3[14]		GM_Step_krok_zpet
+n_global3_name[14]	"GM Step_Krok zpet pod 20stam"
+n_global3_default[14]	1
+n_global3[15]		GM_Step_paralyza
+n_global3_name[15]	"GM Step_Para(ds) pod 50stam"
+n_global3_default[15]	5
+n_global3[16]		GM_Step_resist
+n_global3_name[16]	"GM Step_ochrana(ds) po leapu/teleportu"
+n_global3_default[16]	20
+
                         
 n_ability[0]		ability_leaprange
 n_ability_name[0]	Leap Range

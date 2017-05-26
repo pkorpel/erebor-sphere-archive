@@ -806,6 +806,7 @@ else
  endif
 endif
 tag(nextleap,<eval serv.time+nastaveni_ability_leapdelay>)
+tag(GM_step_resist,<eval serv.time+nastaveni_GM_Step_resist>)
 
 [Function movetoact]
 dir=<getdir(<act>)>

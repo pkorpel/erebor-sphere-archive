@@ -70,7 +70,7 @@ endif
 if !(src.isplayer)
   return  
 endif
-if (<eval (<src.stam>+10)> < <src.maxstam>)
+if (<eval (<src.stam>+20)> < <src.maxstam>)
   src.accmsg("detekovan GM STEP: prosel <Obody> <name>(<uid>) se silou <str> na pozici <p> aniz by mel plnou staminu. <eval (<src.stam>+9)>/<src.maxstam>")
 endif
   

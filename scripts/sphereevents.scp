@@ -1086,6 +1086,9 @@ if (tag(stepcount)>20)
 endif
 
 on=@personalspace
+if !(<nastaveni_GM_Step>)
+  return
+endif
 if !(isPlayer)
   return
 endif
@@ -1095,8 +1098,20 @@ endif
 if !(src.isplayer)
   return  
 endif
-if (<eval (<src.stam>+10)> < <src.maxstam>)
-  src.accmsg("detekovan GM STEP: prosel hracem <name>(<uid>) se silou <str> na pozici <p> aniz by mel plnou staminu. <eval (<src.stam>+9)>/<src.maxstam>")
+if (<eval src.tag(GM_step_resist)> > <serv.time>)
+  return
+endif
+
+if (<eval (<src.stam>+20)> < <src.maxstam>)
+  src.accmsg("detekovan GM STEP: prosel hracem <name>(<uid>) se silou <str> na pozici <p> aniz by mel plnou staminu. <eval (<src.stam>+10)>/<src.maxstam>")
+  if (<nastaveni_GM_Step_krok_zpet>)
+    //src.move(<dir_inttochar(<dir_revert(<src.dir>)>)>)    
+    src.newequip(i_nostep)
+    lastnew.morep=<src.p>
+  endif
+endif
+if ((<eval (<src.stam>+10)> < 50) && (<nastaveni_GM_Step_paralyza>))
+  src.paralyze(<nastaveni_GM_Step_paralyza>) 
 endif
 
 on=@itemuserclick
@@ -1275,6 +1290,9 @@ on=@skillsuccess
 if (ishungrymsg)
   skill -1
   return 1
+endif
+if (<eval tag(LastCastSpell)> == 22)   // prave uspesne docaroval teleport
+  tag(GM_step_resist,<eval serv.time+nastaveni_GM_Step_resist>)
 endif
 return 0
 
@@ -2013,6 +2031,24 @@ on=@beforegetswing
 on=@userkill
 on=@npckill
 
+[itemdef i_nostep]
+id=i_memory
+type=t_eq_script
+name=No_Step
+
+on=@create
+timerd=0
+attr=094
+
+on=@equip
+cont.flag_freeze=1
+
+on=@timer
+cont.p=<morep>
+cont.flag_freeze=0
+cont.update
+//cont.resync
+
 [events e_splend]
 on=@spellcast
 src.sysMessage("konec")
@@ -2381,6 +2417,7 @@ endif
 
 on=@spellCast
 tag(combatTarget,<act>)
+tag(LastCastSpell,<argn>)   // pro pozdejsi vyhodnocneni hardcoded kouzel na trigeru skillsuccess
 accMsg("hrac(<name>,<uid>,<p>,<region.name>) kouzli kouzlo (<spellDescription[<argn>]>) na objekt (<act.name>,<act>)")
 
 on=@spellEffect
