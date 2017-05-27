@@ -316,7 +316,7 @@ tag(resist_elect,00)
 tag(resist_cold,250)
 
 //typ monstra
-tag(monstertype,eye,80)
+tag(monstertype,eye,90)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -399,7 +399,7 @@ tag(resist_elect,00)
 tag(resist_cold,250)
 
 //typ monstra
-tag(monstertype,eye,80)
+tag(monstertype,eye,85)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical

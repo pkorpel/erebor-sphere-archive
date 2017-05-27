@@ -57,7 +57,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
-tag(monstertype,golem,60)
+tag(monstertype,golem,95)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -156,7 +156,7 @@ tag(resist_elect,-200)
 tag(resist_cold,-300)
 
 //typ monstra
-tag(monstertype,golem,80)
+tag(monstertype,golem,95)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -242,7 +242,7 @@ tag(resist_elect,-800)
 tag(resist_cold,-400)
 
 //typ monstra
-tag(monstertype,golem,80)
+tag(monstertype,golem,95)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -327,7 +327,7 @@ tag(resist_elect,-600)  //nachylnost na elektrinu
 tag(resist_cold,-400)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,golem,80)
+tag(monstertype,golem,95)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -412,7 +412,7 @@ tag(resist_elect,-400)  //nachylnost na elektrinu
 tag(resist_cold,-200)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,golem,60)
+tag(monstertype,golem,95)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -497,7 +497,7 @@ tag(resist_elect,-50)  //nachylnost na elektrinu
 tag(resist_cold,150)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,golem,60)
+tag(monstertype,golem,95)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -582,7 +582,7 @@ tag(resist_elect,-50)  //nachylnost na elektrinu
 tag(resist_cold,150)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,golem,60)
+tag(monstertype,golem,90)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -666,7 +666,7 @@ tag(resist_elect,-50)  //nachylnost na elektrinu
 tag(resist_cold,150)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,golem,50)
+tag(monstertype,golem,85)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -754,7 +754,7 @@ tag(resist_elect,-50)  //nachylnost na elektrinu
 tag(resist_cold,150)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,golem,40)
+tag(monstertype,golem,80)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -842,7 +842,7 @@ tag(resist_elect,-50)  //nachylnost na elektrinu
 tag(resist_cold,150)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,golem,40)
+tag(monstertype,golem,80)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -942,7 +942,7 @@ tag(resist_cold,250)   //nachylnost na chlad
 tag(resist_silence,450)
 
 //typ monstra
-tag(monstertype,golem,30)
+tag(monstertype,golem,70)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
