@@ -3102,17 +3102,18 @@ tag.nobank=1
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Nova Arena Gondor 4]
-GROUP=Arena
-P=5721, 296, 10, 13
-RECT=5588,149,5802,354
-FLAGS=00812
-mapplane=13
-resources=r_default_rock, r_default_water, r_default_tree
-tag.arena=1
-tag.nobank=1
-RAINCHANCE=00
-COLDCHANCE=00
+// Dw 2017/05/27 - unused area, w/o statics - maybe used earlier for shard Moria. Mapplane 13 added to isDung function
+// [AREA Nova Arena Gondor 4]
+// GROUP=Arena
+// P=5721, 296, 10, 13
+// RECT=5588,149,5802,354
+// FLAGS=00812
+// mapplane=13
+// resources=r_default_rock, r_default_water, r_default_tree
+// tag.arena=1
+// tag.nobank=1
+// RAINCHANCE=00
+// COLDCHANCE=00
 
 [AREA Nova Arena Mordor 4]
 GROUP=Arena
@@ -3126,17 +3127,18 @@ tag.nobank=1
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Nova Arena Gondor 5]
-GROUP=Arena
-P=5721, 296, 10, 14
-RECT=5588,149,5802,354
-FLAGS=00812
-mapplane=14
-resources=r_default_rock, r_default_water, r_default_tree
-tag.arena=1
-tag.nobank=1
-RAINCHANCE=00
-COLDCHANCE=00
+// Dw 2017/05/27 - unused area, w/o statics - maybe used earlier for shard Moria. Mapplane 14 added to isDung function
+// [AREA Nova Arena Gondor 5]
+// GROUP=Arena
+// P=5721, 296, 10, 14
+// RECT=5588,149,5802,354
+// FLAGS=00812
+// mapplane=14
+// resources=r_default_rock, r_default_water, r_default_tree
+// tag.arena=1
+// tag.nobank=1
+// RAINCHANCE=00
+// COLDCHANCE=00
 
 [AREA Nova Arena Gondor 5]
 GROUP=Arena
@@ -3150,17 +3152,18 @@ tag.nobank=1
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Nova Arena Gondor 6]
-GROUP=Arena
-P=5721, 296, 10, 15
-RECT=5588,149,5802,354
-FLAGS=00812
-mapplane=15
-resources=r_default_rock, r_default_water, r_default_tree
-tag.arena=1
-tag.nobank=1
-RAINCHANCE=00
-COLDCHANCE=00
+// Dw 2017/05/27 - unused area, w/o statics - maybe used earlier for shard Moria. Mapplane 15 added to isDung function
+// [AREA Nova Arena Gondor 6]
+// GROUP=Arena
+// P=5721, 296, 10, 15
+// RECT=5588,149,5802,354
+// FLAGS=00812
+// mapplane=15
+// resources=r_default_rock, r_default_water, r_default_tree
+// tag.arena=1
+// tag.nobank=1
+// RAINCHANCE=00
+// COLDCHANCE=00
 
 [AREA Nova Arena Mordor 6]
 GROUP=Arena
@@ -4441,9 +4444,19 @@ tag.realm=3
 
 [AREA Mahat Level 1]
 GROUP=Dung Mahat
-P=5267, 1015,10,10
+P=5267,1015,10,10
 RECT=5196,958,5702,1230
 mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Mahatske peklo Level 1]
+GROUP=Dung Mahat classic
+P=5267,1015,10,13
+RECT=5196,958,5702,1230
+mapplane=13
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
@@ -4502,8 +4515,20 @@ COLDCHANCE=00
 
 [AREA Mahat Level 2]
 GROUP=Dung Mahat
-P=5233, 1445 , 10
+P=5233,1445,10,10
 RECT=5188,1234,5646,1490
+mapplane=10
+FLAGS=00812
+tag.nobank=1
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Mahatske peklo Level 2]
+GROUP=Dung Mahat classic
+P=5233,1445,10,13
+RECT=5188,1234,5646,1490
+mapplane=13
 FLAGS=00812
 tag.nobank=1
 tag.realm=3

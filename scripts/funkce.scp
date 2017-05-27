@@ -3041,6 +3041,12 @@ elseif (<mapplane> == 11)
   return 1
 elseif (<mapplane> == 12)
   return 1
+elseif (<mapplane> == 13)
+  return 1
+elseif (<mapplane> == 14)
+  return 1  
+elseif (<mapplane> == 15)
+  return 1    
 else
   return 0
 endif
