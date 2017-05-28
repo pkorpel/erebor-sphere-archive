@@ -42,6 +42,8 @@ on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 [itemdef i_druid_morf]
 id=i_memory
@@ -99,6 +101,8 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 on=@beforegeteffect
+on=@userkill
+on=@npckill
 
 /////////////
 /// seals ///
@@ -3776,7 +3780,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-
+on=@userkill
+on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
 on=@spelleffect

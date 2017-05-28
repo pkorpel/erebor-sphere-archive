@@ -4529,6 +4529,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect   
 on=@beforegetswing
+on=@userkill
+on=@npckill
 
 [events e_bloodpact]
 on=@DrinkingPotion

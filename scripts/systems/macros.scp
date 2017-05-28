@@ -1679,6 +1679,8 @@ endif
 
 on=@beforedoeffect
 on=@afterDoEffect
+on=@userkill
+on=@npckill
 
 [itemdef i_npc_regeneration]
 id=i_memory
