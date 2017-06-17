@@ -26,4 +26,72 @@ tag.fail_msg="Nepovedlo se!"
 ON=@CollectorCheck
 ON=@UserDeath
 
+
+[ITEMDEF i_regenpad]
+ID=0AEC
+Name=Regen Pad
+
+CATEGORY=Tutorial
+SUBSECTION=Jeffrey
+DESCRIPTION=NB regen pad
+
+ON=@Create
+color=062
+attr_movenever(1)
+attr_invis(1)
+
+
+ON=@Step
+if (<src.flags>&statf_dead) || (src.isGM) // nor ghosts nor GM can activate the pad
+  return 0
+endif
+if !(src.isPlayer)
+  return 0
+endif
+if (src.findid(i_regenpad_rune))  // uz je aktivni
+  return 0
+endif
+src.newequip(i_regenpad_rune)
+
+[ITEMDEF i_regenpad_rune]
+name=Regenpad rune
+ID=i_memory
+TYPE=t_eq_script
+
+ON=@Equip
+timer=10
+more1=1
+if (<eval cont.tag(mi_hitsreg)>)
+  cont.tag(mi_hitsreg,#+100)
+else
+  cont.tag(mi_hitsreg,100)
+endif
+
+if (<eval cont.tag(mi_manareg)>)
+  cont.tag(mi_manareg,#+100)
+else
+  cont.tag(mi_manareg,100)
+endif
+
+if (<eval cont.tag(mi_stamreg)>)
+  cont.tag(mi_stamreg,#+100)
+else
+  cont.tag(mi_stamreg,100)
+endif
+cont.regenrefresh
+
+on=@timer
+if (<more1>)    // regenerace jen na 10 sec a pak pauza proti zneuziti
+  cont.tag(mi_hitsreg,#-100)
+  cont.tag(mi_manareg,#-100)
+  cont.tag(mi_stamreg,#-100)
+  timer=60
+  more1=0
+  return 1  
+else
+  remove
+endif
+
+
+
 [eof]

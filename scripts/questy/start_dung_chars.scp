@@ -471,7 +471,7 @@ ItemNewbie=i_boots_calf
 ItemNewbie=i_hammer_smith
 
 //////////////////////////////////////////////////
-//////////////nb_gatekeeper - Port na 3+ lvl//////
+//////////////nb_gatekeeper - Port na 1+ lvl//////
 //////////////////////////////////////////////////
 [CHARDEF c_nb_gatekeeper]
 ID=c_man
@@ -576,7 +576,11 @@ COLOR=match_hair
 ITEMnewbie=i_monster_create
 
 ON=@npcseenewplayer
-say("Ahoj, <src.name>. Kdyby jsi nekdy zemrel, tak prijd za mnou a ja te ozivim.")
+if (<src.hits> < <src.maxhits>)
+  say("<src.name> jsi zraneny, pojd ke me blize, ja te osetrim...")
+else
+  say("Ahoj, <src.name>. Kdyby jsi nekdy zemrel, tak prijd za mnou a ja te ozivim.")
+endif
 
 
 ON=@NPCRestock

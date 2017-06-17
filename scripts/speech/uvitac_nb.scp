@@ -4,6 +4,9 @@ ON=*cau*
 ON=*hoj*
 ON=*cusik*
 ON=*zdarec*
+ON=*ahoj*
+ON=*Dobry*
+ON=*hello*
 SAY("<src.sex(Pozdraven,Pozdravena)> budiz <src.name>, s cim bys <src.sex(chtel,chtela)> pomoct? Muzu ti povedet jak zde prezit a co delat, o zdejsich tvorech, o historii ostrovu, jak opustit toto misto...")
 
 ON=*prezit*
@@ -35,4 +38,4 @@ ON=*opusteni*ostrovu*
 ON=*jak*odejit*
 ON=*pryc*
 ON=*odchod*
-SAY("Toto uzemi jsme objevili nedavno. Snazime se zde vycvicit novacky jako tebe <src.name>! Ziji zde puvodni domorocdi, kteri maji utociste nekde v dzungli. Snazime se s nema vychazet vstric...")
+SAY("Toto uzemi muzes opustit po ziskani prvniho levelu. Jak budes pripraven, navstvit Gatekeepra na lodi, on ti povi vice.")

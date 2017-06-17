@@ -4111,18 +4111,27 @@ Color=0484
 ON=@NPCRestock
 
 ON=@npcseenewplayer 
-dorand 3 
+dorand 4 
   SAY("Vitej v tutorialu! Pokud chces dostat par rad do zacatku, staci se me zeptat...") 
   SAY("Aaa, Dalsi novacek, vitej! Kdybys potreboval par rad do zacatku, muzes se me zeptat...") 
   SAY("Preji Ti pekny den! Mohu Ti dat par rad do zacatku, ptej se kdybys neco nevedel...") 
+  SAY("Vitej! Na zlatych cedulkach naleznes mnoho zajimavych informaci, staci na ne jednou kliknout.")
 enddo
 
 ON=@UserDClick
+if (src.isGM)
+  return 0
+endif
 dorand 3 
   SAY("Doporucuji jit po ceste do mesta <src.name> a navstivit par lidi, kteri Ti daji ukoly, za ktere dostanes odmenu.")
   SAY("Ve meste muzes potkat same dobre duse. Pres most od mesta se potuluji pekelne kocky, orkove, obri a pirati, bacha na ne! Muzes potkat take domorodce, kteri jsou mirumilovni.")
-  SAY("Toto uzemi jsme objevili nedavno. Snazime se zde vycvicit novacky jako tebe <src.name>! Ziji zde puvodni domorocdi, kteri maji utociste nekde v dzungli. Snazime se s nema vychazet vstric...")
+  SAY("Toto uzemi jsme objevili nedavno. Snazime se zde vycvicit novacky jako tebe <src.name>! Ziji zde puvodni domorodci, kteri maji utociste nekde v dzungli. Snazime se s nema vychazet vstric...")
 enddo
+
+ON=@UserClick
+if !(src.isGM)
+  SAY("Zdravim <src.name>, s NPC muzes komunikovat dvojklikem a nebo klicovymi slovy v jejich blizkosti. Prijd blize ke me a zkus si to...")
+endif
 
 /////////////////////////////////////////////////
 

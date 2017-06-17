@@ -201,6 +201,11 @@ if (strlen(<src.tag(class)>))
     src.go(tutorial)
     src.home=5412,2555,13,35 //tutorial
     src.events +e_noport // pridame mu noport
+    src.underwear=0      // aby nedostavali CC pri zabiti, defaultne je 1
+    src.hits=<src.maxhits>
+    src.stam=<src.maxstam>
+    src.mana=<src.maxmana>
+    src.spelleffect(6,1000)  // svetlo
     return 1
   endif
 endif
@@ -302,7 +307,7 @@ endif
 
 [function showargs]
 
-finduid(01e).sysMessage("<argn0>,<argn1>,<argn2>,<argn3>")
+finduid(013).sysMessage("<argn0>,<argn1>,<argn2>,<argn3>")
 
 [function massdclick]
 if(type==t_spawn_char)

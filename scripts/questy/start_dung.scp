@@ -12,7 +12,7 @@ qtagremove(nb006)
 qtagremove(nb007)
 
 [function nbOffTtQTags_remove] //odstranit questy co nejsou z tutorialu
-f_questy_checkFunctions
+// f_questy_checkFunctions         // neznama funkce, mozna byla smazana
 arg(questRune,<findid(i_quest_rune)>)
 if (strlen(<arg(questRune)>)) // strasne fikane smazeme celou qtagrunu a je po starostech
   arg(questRune).remove
