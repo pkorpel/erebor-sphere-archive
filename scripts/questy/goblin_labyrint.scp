@@ -255,12 +255,12 @@ if (<itemExists(<link>)>)
   if (link.more2)  // Zije goblin?
     arg(goblin_spawned,<link.tag(lastspawned)>)
     if npcExists(<goblin_spawned>)
-      if ((goblin_spawned.flag_spawned) && (<goblin_spawned.Obody> == c_goblin_labyrint))  // pokud je to opravdu goblin, tak ho portnu na novou lokaci brany 
+      if ((finduid(<goblin_spawned>).flag_spawned) && (<finduid(<goblin_spawned>).Obody> == <link.more1>))  // pokud je to opravdu goblin, tak ho portnu na novou lokaci brany 
         goblin_spawned.p=<p>
         goblin_spawned.home=<p>
         goblin_spawned.hits=<goblin_spawned.maxhits>
       else
-        scylla.delayedmessage("Zlaty Goblin se nepresunul jak melr. Ma byt na pozici <p> a je <goblin_spawned.p>(<goblin_spawned.Obody>)")
+        scylla.delayedmessage("Zlaty Goblin se nepresunul jak mel. Ma byt na pozici <p> a je <goblin_spawned.p>(<goblin_spawned.Obody>)")
         link.more2=00
       endif
     else
