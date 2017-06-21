@@ -115,7 +115,7 @@ if (<argn> == argo.dialog_linkButton("war_will_pay"))
     say("Vypadni prasivej mordore!")
     return 1
   endif
-  if (<eval(<var(war_declarator_1).tag(conquered)>)> == -3) //Gondor uz dobyl vse az po pevnost -3
+  if (<eval(<var(war_declarator_1).tag(conquered)>)> == -2) //Gondor uz dobyl vse az po pevnost -2 (Minas Morghul)
     say("Vzdyt uz jsi tem Mordoranum vsechno <src.sex(dobyl,dobyla)>!")
     return 1
   endif
@@ -193,7 +193,7 @@ if (<argn> == argo.dialog_linkButton("war_will_pay"))
     say("Vypadni prasivej gondore!")
     return 1
   endif
-  if (<eval(<var(war_declarator_2).tag(conquered)>)> == -3) //Mordor uz dobyl vse az po pevnost -3
+  if (<eval(<var(war_declarator_2).tag(conquered)>)> == 2) //Mordor uz dobyl vse az po pevnost +2 (Vychodni Marka)
     say("Vzdyt uz jsi tem Gondoranum vsechno <src.sex(dobyl,dobyla)>!")
     return 1
   endif
