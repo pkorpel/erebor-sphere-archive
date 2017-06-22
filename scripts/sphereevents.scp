@@ -1328,7 +1328,11 @@ endif
 
 //navrat na lod
 if (<region.flags> & region_flag_ship)
-  tag.LOGOFFSHIP=<region.UID>
+  arg(ship,<finduid(<region>)>)
+  arg(ship).more2=0
+  tag(LOGOFFSHIP_position,<arg(ship).p>)   // pozice lodi, konkretne memory itemu lode
+  tag(LOGOFFSHIP,<arg(ship)>)              // UID memory itemu lode
+  tag(LOGOFFSHIP_P,<p>)                    // pozice kde se odhlasil
 endif
 
 tag(lastlogoutedAt,<serv.time>)
@@ -1514,12 +1518,30 @@ arg(ship,<finduid(tag(logoffship))>)
 if (arg(ship))
   if (itemExists(<arg(ship)>))
     if (arg(ship).type == t_ship)
-      go <arg(ship).p>
-      fix
+      if (<arg(ship).f_distanceFromPos_check(1,<tag(LOGOFFSHIP_position)>)>)
+        accmsg("se prihlasil po odlognuti na lodi, ale jeho lod se posunula. Portim na pozici lode(<arg(ship)>) <arg(ship).p>) ")
+        p=<arg(ship).p>
+        move(0,1)
+        fix z
+      else
+        accmsg("se prihlasil po odlognuti na lodi, jeho lod(<arg(ship)>) je tam, kde byla. <arg(ship).p>")
+        p=<tag(LOGOFFSHIP_P)>
+      endif
+      resync
+    else
+      gohome
+      accmsg("se prihlasil po odlognuti na lodi, ale jeho lod(<arg(ship)>) jiz neexistuje.")
+      redmessage("Lod na ktere jsi plul jiz neexistuje")
     endif
+  else
+    gohome
+    accmsg("se prihlasil po odlognuti na lodi, ale jeho lod(<arg(ship)>) jiz neexistuje.")
+    redmessage("Lod na ktere jsi plul jiz neexistuje")
   endif
 endif
 tag.remove(logoffship)
+tag.remove(LOGOFFSHIP_position)
+tag.remove(LOGOFFSHIP_P)
 
 //vykopne ho z dungu atp
 
