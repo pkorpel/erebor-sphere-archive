@@ -3901,7 +3901,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=25
 COLDCHANCE=00
 
@@ -3916,7 +3916,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=50
 COLDCHANCE=00
 
@@ -3931,7 +3931,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=50
 COLDCHANCE=00
 
@@ -3946,7 +3946,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
 
@@ -3962,7 +3962,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
 
@@ -4019,7 +4019,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=25
 COLDCHANCE=00
 
@@ -4035,7 +4035,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=50
 COLDCHANCE=00
 
@@ -4050,7 +4050,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
 
@@ -4065,7 +4065,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=75
 COLDCHANCE=00
 
@@ -4084,7 +4084,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=75
 COLDCHANCE=00
 
@@ -4100,7 +4100,7 @@ tag.nobank=1
 tag.kick=1
 tag.nostuck=1
 events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+resources=r_default_rock, r_tutorial_water, r_tutorial_tree, r_default_grass
 RAINCHANCE=25
 COLDCHANCE=50
 
