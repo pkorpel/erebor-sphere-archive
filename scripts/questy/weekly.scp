@@ -11,42 +11,42 @@ def_weekly_count_medium   10 // pocet medium miniquestu
 def_weekly_count_high     5 // pocet high miniquestu
 
 // default prize koeficients
-def_weekly_prize_gold         250     // delitel pro vypocet gp
-def_weekly_prize_exp          2500    // delitel pro vypocet zkusenosti
-def_weekly_prize_magicItem    1000000 // delitel pro vypocet itemku
+def_weekly_prize_gold         250    // delitel pro vypocet gp
+def_weekly_prize_exp          2200   // delitel pro vypocet zkusenosti
+def_weekly_prize_magicItem    850000 // delitel pro vypocet itemku
 
 // LOW quests
 def_weekly_low_setupFunction[0]    f_weekly_setup_eatFood                       // OTESTOVANO
 def_weekly_low_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_0_[0]   random_food //prvni argument setup funkce
 def_weekly_low_setupFunArg_0_[1]   low //druhy argument setup funkce
-def_weekly_low_rewardSize[0]       45
+def_weekly_low_rewardSize[0]       60
 
 def_weekly_low_setupFunction[1]    f_weekly_setup_eatFood                       // OTESTOVANO
 def_weekly_low_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_1_[0]   random_fruit //prvni argument setup funkce
 def_weekly_low_setupFunArg_1_[1]   low //druhy argument setup funkce
-def_weekly_low_rewardSize[1]       50
+def_weekly_low_rewardSize[1]       65
 
 def_weekly_low_setupFunction[2]    f_weekly_setup_meetMaster                    // OTESTOVANO
 def_weekly_low_setupFunArgn[2]     0 // pocet argumentu setup funkce
-def_weekly_low_rewardSize[2]       40
+def_weekly_low_rewardSize[2]       53
 
 def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion                   // OTESTOVANO
 def_weekly_low_setupFunArgn[3]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_3_[0]   i_potion_nightSight //prvni argument setup funkce
 def_weekly_low_setupFunArg_3_[1]   6 // multiplier poctu potionu
-def_weekly_low_rewardSize[3]       50
+def_weekly_low_rewardSize[3]       65
 
 def_weekly_low_setupFunction[4]    f_weekly_setup_drinkPotion                   // OTESTOVANO
 def_weekly_low_setupFunArgn[4]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_4_[0]   RANDOM_POTION_BOOST_LESS //prvni argument setup funkce
 def_weekly_low_setupFunArg_4_[1]   2 // multiplier poctu potionu
-def_weekly_low_rewardSize[4]       55
+def_weekly_low_rewardSize[4]       75
 
 def_weekly_low_setupFunction[5]    f_weekly_setup_stepOnWeb                     // OTESTOVANO
 def_weekly_low_setupFunArgn[5]     0 // pocet argumentu setup funkce
-def_weekly_low_rewardSize[5]       50
+def_weekly_low_rewardSize[5]       65
 
 def_weekly_low_setupFunction[6]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[6]     3      // pocet argumentu setup funkce
@@ -54,7 +54,7 @@ def_weekly_low_setupFunArg_6_[0]   i_gold //prvni argument setup funkce
 def_weekly_low_setupFunArg_6_[1]   350000 // multiplier poctu zlata
 def_weekly_low_setupFunArg_6_[2]   130    // delimiter poctu zlata
 def_weekly_low_iconId[6]           0EEF
-def_weekly_low_rewardSize[6]       40
+def_weekly_low_rewardSize[6]       53
 
 def_weekly_low_setupFunction[7]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[7]     3 // pocet argumentu setup funkce
@@ -64,7 +64,7 @@ def_weekly_low_setupFunArg_7_[2]   50 // delimiter poctu ovoce
 def_weekly_low_iconId[7]           0993
 def_weekly_low_iconId_moveX[7]     8
 def_weekly_low_descr[7]            "<?null?>Lootni predmet:<br>Jakekoliv ovoce" // pocet predmetu ke sbirani
-def_weekly_low_rewardSize[7]       45
+def_weekly_low_rewardSize[7]       60
 
 def_weekly_low_setupFunction[8]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[8]     3 // pocet argumentu setup funkce
@@ -74,7 +74,7 @@ def_weekly_low_setupFunArg_8_[2]   50   // delimiter poctu reagentu
 def_weekly_low_iconId[8]           018DD
 def_weekly_low_iconId_moveX[8]     2
 def_weekly_low_descr[8]            "<?null?>Lootni predmet:<br>Jakekoli reagenty" // pocet predmetu ke sbirani
-def_weekly_low_rewardSize[8]       50
+def_weekly_low_rewardSize[8]       65
 
 def_weekly_low_setupFunction[9]    f_weekly_setup_killInDung                    // OTESTOVANO
 def_weekly_low_setupFunArgn[9]     2 // pocet argumentu setup funkce
@@ -83,13 +83,13 @@ def_weekly_low_setupFunArg_9_[1]   20 // minimalni pocet XP
 def_weekly_low_iconId[9]           020E9
 def_weekly_low_iconId_moveY[9]     9  // move the custom icon 9 pixels up
 def_weekly_low_iconId_moveX[9]     -3 // move the custom icon 3 pixels to the right
-def_weekly_low_rewardSize[9]       60
+def_weekly_low_rewardSize[9]       80
 
 def_weekly_low_setupFunction[10]    f_weekly_setup_healPlayer
 def_weekly_low_setupFunArgn[10]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_10_[0]   15 // koeficient pro ostatni povolani
 def_weekly_low_setupFunArg_10_[1]   100 // koeficient pro Klerika/Shamana    
-def_weekly_low_rewardSize[10]       55
+def_weekly_low_rewardSize[10]       75
 
 def_weekly_low_setupFunction[11]    f_weekly_setup_loot                          // OTESTOVANO
 def_weekly_low_setupFunArgn[11]     3 // pocet argumentu setup funkce
@@ -100,7 +100,7 @@ def_weekly_low_iconId[11]           02C80
 def_weekly_low_iconId_moveX[11]     2
 def_weekly_low_iconId_moveY[11]     8  // move the custom icon 8 pixels up
 def_weekly_low_descr[11]            "<?null?>Lootni predmet:<br>Jakekoli drahokamy" // pocet predmetu ke sbirani
-def_weekly_low_rewardSize[11]       55
+def_weekly_low_rewardSize[11]       75
 
 ////////////////////
 ////////////////////
@@ -112,27 +112,27 @@ def_weekly_medium_setupFunction[0]    f_weekly_setup_drinkPotion
 def_weekly_medium_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_0_[0]   RANDOM_POTION_BOOST //prvni argument setup funkce
 def_weekly_medium_setupFunArg_0_[1]   4  // multiplier poctu potionu
-def_weekly_medium_rewardSize[0]       75
+def_weekly_medium_rewardSize[0]       100
 
 def_weekly_medium_setupFunction[1]    f_weekly_setup_dmgNPC
 def_weekly_medium_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_1_[0]   35 // multiplier udeleneho dmg pro ostatni povolani krome krafta/priesta
 def_weekly_medium_setupFunArg_1_[1]   15 // multiplier udeleneho dmg pro krafta/priesta
-def_weekly_medium_rewardSize[1]       75
+def_weekly_medium_rewardSize[1]       100
 
 def_weekly_medium_setupFunction[2]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[2]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_2_[0]   "prime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_2_[1]   50 // multiplier prijateho dmg
 def_weekly_medium_setupFunArg_2_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
-def_weekly_medium_rewardSize[2]       80
+def_weekly_medium_rewardSize[2]       108
 
 def_weekly_medium_setupFunction[3]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[3]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_3_[0]   "neprime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_3_[1]   15 // multiplier prijateho dmg
 def_weekly_medium_setupFunArg_3_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta 
-def_weekly_medium_rewardSize[3]       85
+def_weekly_medium_rewardSize[3]       115
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
@@ -141,17 +141,17 @@ def_weekly_medium_setupFunArg_4_[1]   100 // minimalni pocet XP
 def_weekly_medium_iconId[4]           0212E
 def_weekly_medium_iconId_moveY[4]     9  // move the custom icon 9 pixels up
 def_weekly_medium_iconId_moveX[4]     8 // move the custom icon 8 pixels to the left
-def_weekly_medium_rewardSize[4]       85
+def_weekly_medium_rewardSize[4]       115
 
 def_weekly_medium_setupFunction[5]    f_weekly_setup_killPlayer                 // OTESTOVANO
 def_weekly_medium_setupFunArgn[5]     1 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_5_[0]   0 // jakykoliv hrac bez omezeni
-def_weekly_medium_rewardSize[5]       85
+def_weekly_medium_rewardSize[5]       115
 
 def_weekly_medium_setupFunction[6]    f_weekly_setup_conqueror
 def_weekly_medium_setupFunArgn[6]     0 // pocet argumentu setup funkce
 def_weekly_medium_iconId[6]           3629
-def_weekly_medium_rewardSize[6]       75
+def_weekly_medium_rewardSize[6]       100
 
 def_weekly_medium_setupFunction[7]    f_weekly_setup_HuntingSign
 def_weekly_medium_setupFunArgn[7]     1 // pocet argumentu setup funkce
@@ -159,12 +159,12 @@ def_weekly_medium_setupFunArg_7_[0]   15 // koeficient pro vypocet bodu ktere je
 def_weekly_medium_iconId[7]           0340E
 def_weekly_medium_iconId_moveY[7]     12 // move the custom icon 12 pixels up
 def_weekly_medium_iconId_moveX[7]     -6 // move the custom icon 5 pixels to the right
-def_weekly_medium_rewardSize[7]       70
+def_weekly_medium_rewardSize[7]       93
 
 def_weekly_medium_setupFunction[8]    f_weekly_setup_finishDungeon
 def_weekly_medium_setupFunArgn[8]     1  // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_8_[0]   65 // player level limit (78 dng level max)
-def_weekly_medium_rewardSize[8]       90
+def_weekly_medium_rewardSize[8]       120
 
 def_weekly_medium_setupFunction[9]    f_weekly_setup_KillStreak
 def_weekly_medium_setupFunArgn[9]     1 // pocet argumentu setup funkce
@@ -172,7 +172,7 @@ def_weekly_medium_setupFunArg_9_[0]   2 // koeficient poctu monster potrebnych k
 def_weekly_medium_iconId[9]           021FC
 def_weekly_medium_iconId_moveY[9]     9  // move the custom icon 9 pixels up
 def_weekly_medium_iconId_moveX[9]     15 // move the custom icon 15 pixels to the left
-def_weekly_medium_rewardSize[9]       75
+def_weekly_medium_rewardSize[9]       100
 
 // HIGH quests
 
@@ -180,17 +180,17 @@ def_weekly_high_setupFunction[0]    f_weekly_setup_drinkPotion
 def_weekly_high_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_0_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument setup funkce
 def_weekly_high_setupFunArg_0_[1]   5 // multiplier poctu potionu
-def_weekly_high_rewardSize[0]       100
+def_weekly_high_rewardSize[0]       130
 
 def_weekly_high_setupFunction[1]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[1]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_1_[0]   1 // hrac konkretni profese
-def_weekly_high_rewardSize[1]       110
+def_weekly_high_rewardSize[1]       147
 
 def_weekly_high_setupFunction[2]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[2]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_2_[0]   2 // zabiti na konkretnim uzemi
-def_weekly_high_rewardSize[2]       110
+def_weekly_high_rewardSize[2]       140
 
 def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
@@ -199,12 +199,12 @@ def_weekly_high_setupFunArg_3_[1]   200 // minimalni pocet XP
 def_weekly_high_iconId[3]           02132
 def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
 def_weekly_high_iconId_moveX[3]     8 // move the custom icon 8 pixels to the left
-def_weekly_high_rewardSize[3]       120
+def_weekly_high_rewardSize[3]       160
 
 def_weekly_high_setupFunction[4]    f_weekly_setup_finishDungeon
 def_weekly_high_setupFunArgn[4]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_4_[0]   100 // player level limit (120 dng level max)
-def_weekly_high_rewardSize[4]       130
+def_weekly_high_rewardSize[4]       175
 
 
 [DEFNAMES WEEKLY_POTIONS]
@@ -234,7 +234,6 @@ tag(playerLevel,<eval src.tag(level)>)
 if (tag(playerLevel) > 200)
   tag(playerLevel,200)
 endif
-f_weekly_start_prize
 f_weekly_generate
 src.events(+e_weekly_quest)
 src.classMessage("<src.sex(Prijal,Prijala)> jsi novy seznam ukolu. Pro zobrazeni zadej prikaz .questy")
@@ -355,20 +354,6 @@ if (<eval tag(expiracyTime)> < <serv.time>)
 endif
 return 0
 
-[function f_weekly_start_prize]
-arg(basic_prize,<eval (200000/(<eval tag(playerLevel)>+20))>)
-
-if (<eval tag(playerLevel)> <= 100)
-  arg(level_prize,<eval (<eval tag(playerLevel)>*100)>)
-else
-  arg(level_prize,<eval (((<eval tag(playerLevel)>-100)*50)+10000)>)
-endif
-
-tag(start_prize,<eval (<arg(level_prize)>+<arg(basic_prize)>)>)
-tag(rewGold,0)
-tag(rewXP,<eval tag(playerLevel)>*2)   // Celkova odmena navysena o level*2
-tag(rewMI,1)  // za splneni vsech questu vzdy 1 itemek
-
 
 [function f_weekly_generate]
 //src.say("GENERUJI QUESTY")
@@ -376,6 +361,7 @@ tag(rewMI,1)  // za splneni vsech questu vzdy 1 itemek
 //src.say("test_tagu: <tag.receptionTime>")
 
 f_weekly_setQuestAmount // pocet == obtiznost (3-8) (3-4=low, 5-6=medium, 7-8=high)
+f_weekly_initReward
 tag(qAssigned,0)
 
 arg(quest_level,low)
@@ -399,6 +385,7 @@ while (<tag(qAssigned)> < <eval tag(qCount)>)
   f_weekly_setQuest(<arg(new_quest)>,<arg(quest_level)>)
   tag(qAssigned,#+1)
 endwhile
+f_weekly_setRewardComplete
 tag.remove(qAssigned)
 
 [function f_weekly_hasQuest] // argv(0) - quest level, argv(1) - quest id
@@ -452,21 +439,35 @@ if (strlen(<safe.def_weekly_<argv(1)>_descr[<eval argv(0)>]>))
 endif
 return 1
 
-[function f_weekly_setRewardSingle] // argv(0) - cislo questu; argv(1) - level questu (low, medium ...)
-arg(rewardSize,<eval def_weekly_<argv(1)>_rewardSize[<eval argv(0)>]>)
-arg(start_prize,<eval (<eval tag(start_prize)>*<arg(rewardSize)>)>)
-
-tag(quest_rewGold[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_gold)>) // amount of GP in the reward
-tag(quest_rewXP[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_exp)>) // amount of XP in the reward
-if (strcmpi(<argv(1)>,low))                                                            // only for Medium and Hard quests
-  tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(start_prize)/def_weekly_prize_magicItem)>) // amount of magic items in the reward
-  tag(rewMI,#+<tag(quest_rewMI[<eval tag(qAssigned)>])>)
+[function f_weekly_initReward]
+arg(basic_prize,<eval (200000/(<eval tag(playerLevel)>+20))>)
+if (<eval tag(playerLevel)> <= 100)
+  arg(level_prize,<eval (<eval tag(playerLevel)>*100)>)
+else
+  arg(level_prize,<eval (((<eval tag(playerLevel)>-100)*50)+10000)>)
 endif
 
-tag(rewGold,#+<tag(quest_rewGold[<eval tag(qAssigned)>])>)
-tag(rewXP,#+<tag(quest_rewXP[<eval tag(qAssigned)>])>)
+tag(start_prize,<eval (<arg(level_prize)>+<arg(basic_prize)>)>)
+tag(sum_prize,0)
+
+
+[function f_weekly_setRewardSingle] // argv(0) - cislo questu; argv(1) - level questu (low, medium ...)
+arg(rewardSize,<eval def_weekly_<argv(1)>_rewardSize[<eval argv(0)>]>)
+arg(single_prize,<eval (<eval tag(start_prize)>*<arg(rewardSize)>)>)
+tag(sum_prize,#+<arg(single_prize)>)
+
+tag(quest_rewGold[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_gold)>) // amount of GP in the reward
+tag(quest_rewXP[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_exp)>) // amount of XP in the reward
+tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_magicItem)>) // amount of magic items in the reward
+
 //tag(quest_rewChance[<eval tag(qAssigned)>],<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
 
+[function f_weekly_setRewardComplete]
+tag(rewGold,0)
+arg(prize,<eval (tag(sum_prize)-(tag(sum_prize)/2))>)
+tag(rewGold,<eval (arg(prize)/def_weekly_prize_gold)>)
+tag(rewXP,<eval ((tag(playerLevel)*2)+(arg(prize)/def_weekly_prize_exp))>)
+tag(rewMI,<eval ((arg(prize)/def_weekly_prize_magicItem)+1)>)
 
 //[function f_weekly_getChanceReward]
 //if (USPEJE SANCE)
