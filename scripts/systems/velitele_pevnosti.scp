@@ -44,7 +44,7 @@ else
 endif
 if (<region.tag(realm)> == 1) || (<region.tag(realm)> == 2)
   if (src.isgm)  
-    src.sysmessage("Realm <qval(<region.tag(realm)>-1,Mordorsky,Gondorsky)>"")
+    src.sysmessage("Realm <qval(<region.tag(realm)>-1,Mordorsky,Gondorsky)>")
   endif
   //if(((<src.tag(captain)>)||(<src.tag(general)>)) && (<src.tag(realm)> == <region.tag(realm)>)) || (src.isgm) // jsem kapitan nebo general a souhlasi realm (pevnost je nase) + GM samozrejme
   if (<src.tag(captain)>) || (<src.isgm>) || (<src.tag(general)>)
@@ -58,7 +58,7 @@ if (<region.tag(realm)> == 1) || (<region.tag(realm)> == 2)
     return 1
   endif
 else 
-  src.redmessage("Realm nevhodny pro pevnost, kontaktuj GM, kamen by zde nemel byt!"")
+  src.redmessage("Realm nevhodny pro pevnost, kontaktuj GM, kamen by zde nemel byt!")
   return 1
 endif
 return 1
@@ -78,7 +78,7 @@ else //sesazeni
   if (<link.findid(i_uniformTag_rune)>)
     link.f_uniformRealm_removeEvent
   endif
-  link.redmessage("Byl jsi odvolan z funkce kapitana pevnosti <tag(jmeno_mesta)>"")
+  link.redmessage("Byl jsi odvolan z funkce kapitana pevnosti <tag(jmeno_mesta)>")
   //src.sysmessage(Kapitan uspesne odvolan)
   link=""
 endif

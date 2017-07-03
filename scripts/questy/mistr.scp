@@ -112,7 +112,7 @@ if (<SRC.RESTEST 1 i_klic_teleportu>) && (<eval src.tag.skillrank> == 1)
   return 1
 elseif (<src.restest 1 i_klic_teleportu>)
   src.consume=i_klic_teleportu
-  src.redmessage("Tudy nemuzes projit!"")
+  src.redmessage("Tudy nemuzes projit!")
   return 1
 endif
 

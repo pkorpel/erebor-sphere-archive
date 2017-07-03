@@ -2417,8 +2417,8 @@ on=0
 on=1
   DIALOG(d_pani_roouse_mt_sluzby)
 on=2//zrusi ubytovani a odejde
-  say="Mejte se"
-  src.say="Roous dekuji za vse. A mejte se."
+  say("Mejte se")
+  src.say("Roous dekuji za vse. A mejte se.")
   src.ensureTag(hotoveQuesty_2)
   src.tag.hotovequesty_2 = <src.tag.hotovequesty_2>&~0100000
   f_mt_zrusit_najem
@@ -2428,12 +2428,12 @@ on=3//zrusi ubytovani a dal tlacha
   f_mt_zrusit_najem
   DIALOG(d_pani_roouse_mt_sluzby)
 on=4//vtip
-  say=""ch tak <?Src.Sex "pan je vtpalek *usmev*  "," holka je vtipalek *usmev* "?> 
-  src.say="Presne tak vtipalek. *usmev*"
+  say("cha, tak <src.sex(pan,holka)> je vtipalek *usmev* ") 
+  src.say("Presne tak vtipalek. *usmev*")
   DIALOG(d_pani_roouse_mt_sluzby)
 on=5//urazil roous
-  say=""Uz te tu nechci videt ty <?Src.Sex "nerade. Bidaku pamatuj ze tady si skoncil."," mrcho. Pamatuj ze sem uz nepachnes."?> 
-  src.say="konecne.. "
+  say("Uz te tu nechci videt ty <src.sex(nerade. Bidaku pamatuj ze tady si skoncil.,mrcho. Pamatuj ze sem uz nepachnes.)>") 
+  src.say("konecne.. ")
   src.ensureTag(hotoveQuesty_2)
   if (<src.tag.hotovequesty_2>&0100000)//ubytovan
     src.tag.hotovequesty_2 = <src.tag.hotovequesty_2>&~0100000
@@ -2445,8 +2445,8 @@ on=5//urazil roous
   endif
   src.tag.hotovequesty_2 = <src.tag.hotovequesty_2>|020000 //odmita  nadale bavit  
 on=6//zrusil predplatne jidla
-  say="Mejte se.." 
-  src.say="zbohem "
+  say("Mejte se..") 
+  src.say("zbohem ")
   src.ensureTag(hotoveQuesty_2)
   if (<src.tag.hotovequesty_2>&080000)//jidlo
     src.tag.hotovequesty_2 = <src.tag.hotovequesty_2>&~080000
