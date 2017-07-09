@@ -135,8 +135,15 @@ if (ischar)
           endif
         endif
       else //utok na monstrum
-        if(<npc>==15) //mozek stojiciho mystikova obrazu
+        if (<npc>==15) //mozek stojiciho mystikova obrazu
           var(spellpower,<eval (var(spellpower)*nastaveni_global_pvpSM)/1000)>)
+        elseif (<findres(spell,<argv(0)>).flags>&SPELLFLAG_FIELD)   // nechceme aby field mel bonus ze standcastu
+          if (<src.tag(level)> > 200)                               // ale dame mu fix bonus +0,25% za level (max +50%)
+            arg(useable_level,50)
+          else
+            arg(useable_level,<eval <src.tag(level)>/4>)                                              
+          endif
+          var(spellpower,<eval (var(spellpower)*(nastaveni_global_vMSM+nastaveni_standcast_sm*arg(useable_level)))/1000>)
         else //normalni monstrumendif
           if (src.tag(standcast))
             if (<src.tag(level)> > 200)
@@ -144,7 +151,14 @@ if (ischar)
             else
               arg(useable_level,<src.tag(level)>)
             endif
-            src.tag.remove(standcast)
+            
+            if ((<var(spellnumber)>==43) || (<var(spellnumber)>==49) || (<var(spellnumber)>==55))     // upraven standcast pro explosion, chain lighting, meteor swarm
+              src.tag(standcast,2)       // aby prosel vicekrat a zaroven byl polovicni efekt
+              arg(useable_level,<eval <arg(useable_level)>/<eval src.tag(standcast)>>)
+            else
+              src.tag.remove(standcast)
+            endif
+               
             var(spellpower,<eval (var(spellpower)*(nastaveni_global_vMSM+nastaveni_standcast_sm*arg(useable_level)))/1000>)
           elseif (src.profession==class_mystik)
             if (<src.tag(level)> > 200)
