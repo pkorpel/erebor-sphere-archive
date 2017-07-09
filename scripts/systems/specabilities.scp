@@ -1887,7 +1887,7 @@ endif
 if isevent(e_standcast)
   f_setStandcast(<argv(0)>)
 else
-  tag(standcast,0)
+  tag.remove(standcast)
 endif
 
 [Function f_setStandcast]
@@ -1928,7 +1928,7 @@ endif
 if (<isevent(e_standcast)>)
   classMessage("Tve usili polevilo.")
   events=-e_standcast
-  tag(standcast,0)
+  tag.remove(standcast)
 else
   if ( (profession == class_mag) || (profession == class_necro) || (profession == class_shaman) )
     classMessage("Nyni budes kouzlit s vetsim usilim.")
