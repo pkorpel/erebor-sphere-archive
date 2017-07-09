@@ -2697,10 +2697,10 @@ on=@DrinkingPotion
 on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
-on=@npckill
 f_shieldDodge_afterGetSwing
 
+on=@userkill
+on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
 
