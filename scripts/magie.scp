@@ -57,6 +57,8 @@ endif
 //arg1 == sila kouzla
 //arg2 == zdroj kouzla
 //uid == target kouzla
+logmsg("Funkce DoSpellCustom_DoneSRC")
+logmsg("Cislo: <argv(0)>; Sila: <argv(1)>; Zdroj: <argv(2).name>; Target: <name>")
 var(spellnumber,<argv(0)>)
 var(spellhitself,0)
 var(spellpower,<eval ((<argv(1)>*<nastaveni_global_spellpower>)/1000)>)
@@ -85,7 +87,13 @@ if (ischar)
       endif
     endif
   elseif (isevil(<var(spellnumber)>))
-    if (uid==src)//jsem zdroj
+  logmsg("Is EVIL !")
+  logmsg("UID: <name>; SRC: <src.name>")  
+    if (<findres(spell,<argv(0)>).flags>&SPELLFLAG_FIELD)   // aby se vsichni ostatni do fieldu chytili
+      if (uid==src)
+        return 0
+      endif
+    elseif (uid==src)//jsem zdroj
       if (act==uid)//jsem svuj act
         var(spellhitself,1)//chci zly efekt, a tudiz nechci aplikovat ability (uhyb atd)
       elseif (canharmcaster(<var(spellnumber)>))//je to zle kouzlo ktere se mne nepta (exploze)
@@ -138,12 +146,15 @@ if (ischar)
         if (<npc>==15) //mozek stojiciho mystikova obrazu
           var(spellpower,<eval (var(spellpower)*nastaveni_global_pvpSM)/1000)>)
         elseif (<findres(spell,<argv(0)>).flags>&SPELLFLAG_FIELD)   // nechceme aby field mel bonus ze standcastu
+            logmsg("BONUS za LEVEL u FIELDU !!!")
+            logmsg("Pred BONUSem: <var(spellpower)>")
           if (<src.tag(level)> > 200)                               // ale dame mu fix bonus +0,25% za level (max +50%)
             arg(useable_level,50)
           else
             arg(useable_level,<eval <src.tag(level)>/4>)                                              
           endif
           var(spellpower,<eval (var(spellpower)*(nastaveni_global_vMSM+nastaveni_standcast_sm*arg(useable_level)))/1000>)
+          logmsg("Po BONUSu: <var(spellpower)>")
         else //normalni monstrumendif
           if (src.tag(standcast))
             if (<src.tag(level)> > 200)
@@ -199,10 +210,12 @@ if (ischar)
     else
       arg(spelldefense,<eval tag(OM)*10>)
     endif
-
+    logmsg("Dosel jsem az sem...")
     if (ismpdepend(<var(spellnumber)>)) //utocne kouzlo (harm)
+          logmsg("TEST 1")
       var(spellpower,<eval (var(spellpower)-arg(spelldefense))>)
       if (var(spellpower)<1 && !<arg(hasSideEffect)>)
+
         f_spellResistedMsg
       endif
       if (var(spellnumber)==5)||(spellnumber==12) //magic arrow || harm
@@ -210,19 +223,26 @@ if (ischar)
       endif
     else
       if (var(spellnumber)==38)||(var(spellnumber)==47)
+      logmsg("SpellPower (pred odectem rezistu): <var(spellpower)>")
         var(spellpower,#-((<eval var(spellpower)> * <eval(resist_para)>)/1000))
         if (0=={0 <var(spellpower)>})
           var(spellpower,0)
-        endif
+        endif                                             
+      logmsg("SpellPower (po odectu rezistu): <var(spellpower)>")
       endif
-      if ((<randfakt(<spellpower>,<findres(spell,<var(spellnumber)>).effect>)>) < (<arg(spelldefense)>))//negativni kouzlo (paralyza)
+      arg(randfaktSP,<randfakt(<spellpower>,<findres(spell,<var(spellnumber)>).effect>)>)
+      logmsg("(<arg(randfaktSP)>) < (<arg(spelldefense)>)")
+      if (<arg(randfaktSP)> < <arg(spelldefense)>)//negativni kouzlo (paralyza)
+      logmsg("TEST 2")
+      
+      logmsg("(<arg(randfaktSP)>) < (<arg(spelldefense)>)")
         f_spellResistedMsg
         return 0
       endif
     endif
   endif
 endif
-
+ logmsg("Dosel jsem tady 2")
 if ( (var(spellpower)>0) || <arg(hasSideEffect)> )
   if (<argv(2)>)//kdyz je zdroj
     arg(storeact,<src.act>)
@@ -246,6 +266,7 @@ src.redmessage("Cil kouzlu odolal.")
 classmessage("<? src.sex(Odolal,Odolala) ?> jsi kouzlu!")
 
 [function randfakt]//faktor, r0, r1
+logmsg("Faktor: <argv(0)>; r0: <argv(1)>; r2: <argv(2)>")
 arg(min,<eval (<argv(0)>*<argv(1)>)/1000>)
 arg(max,<eval (<argv(0)>*<argv(2)>)/1000>)
 return <eval {<min> <max>}>
@@ -261,7 +282,10 @@ return 0
 //<argv(0)>  cislo kouzla
 //<argv(1)>  sila kouzla
 [function dospell_final] // pro prime zadani spelleffectu
+logmsg("Funkce Dospell_Final")
+logmsg("Cislo Kouzla: <argv(0)>; Sila: <argv(1)>")
 if (<safe a_defname[<argv(0)>]>)
+logmsg("Prvni IF")
   if (<argv(0)>==37)||(<argv(0)>==103) //mindblast&mystic strike - nepouzivaji damagecust ale rovnou damage
     if (manashield(<src>,0,0,<argv(1)>)) //byl pouzit manashield - udeli pripadny dmg
       return 1
@@ -269,8 +293,11 @@ if (<safe a_defname[<argv(0)>]>)
   endif
   f_effect_<a_defname[<argv(0)>]>(<argv(1)>)
 else
+logmsg("Prvni Else")
   arg(spelldefname,<findres(spell,<argv(0)>).defname>)
   arg(storeeffect,"<?<arg(spelldefname)>.effect?>")
+  logmsg("Spell Defname <arg(spelldefname)>")
+  logmsg("Spell storeeffect <arg(storeeffect)>")
   <arg(spelldefname)>.effect=<?promilerange(<argv(1)>,<arg(storeeffect)>)?>
   if (<argv(0)>==38) // paralyze
     paralyze({200 300}) //rand. 20-30s
