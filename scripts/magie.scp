@@ -67,47 +67,53 @@ if (ischar)
   endif
   if (spellisgood(<var(spellnumber)>))
     arg(checkit,0)
-    if (<uid>==<src>)//jsem zdroj, v poradku
+    if (<uid>==<src>)  // jsem zdroj, v poradku
     elseif (<eval src.act>==<eval uid>)//jsem act, v poradku
     elseif !(src.act)
       arg(checkit,1)
-    elseif (src.act.isitem)//item nebo zadny act, muze byt v neporadku
+    elseif (src.act.isitem)  // item nebo zadny act, muze byt v neporadku
       arg(checkit,1)
     elseif !(src.act.ischar)
       arg(checkit,1)
-    elseif !(src.act.ismyfriend)//nepritel byl zameren, v poradku
-    else //zameren byl pritel, muze byt v neporadku
+    elseif !(src.act.isMyFriend)  // nepritel byl zameren, v poradku
+    else  // zameren byl pritel, muze byt v neporadku
       arg(checkit,1)
     endif
     if (arg(checkit))
-      if !(ismyfriend)
+      if !(isMyFriend)
         return 0
       endif
     endif
   elseif (isevil(<var(spellnumber)>))
-    if (uid==src)//jsem zdroj
-      if (act==uid)//jsem svuj act
-        var(spellhitself,1)//chci zly efekt, a tudiz nechci aplikovat ability (uhyb atd)
-      elseif (canharmcaster(<var(spellnumber)>))//je to zle kouzlo ktere se mne nepta (exploze)
-      else//nezameril jsem se, nechci efekt
+    if ((<var(spellnumber)>==28) || (<var(spellnumber)>==39) || (<var(spellnumber)>==47))
+      if (uid==src)     // sam sobe field nebude delat efekt
+        return 0
+      elseif (isInMyGuild)    //  ani clenum guildy
         return 0
       endif
-    elseif (src.act==uid)//byl jsem zameren, vetsinovy pripad
-    elseif (ismyfriend)//jsem pritel, muze byt v neporadku
-      if (<src.act.isitem>)//item, nechci efekt
-      elseif (<src.act.ismyfriend>)//pritel byl zameren, v poradku
-      else
-        return 0 //jsem pritel a pritel nebyl zameren, nechci efekt
+    elseif (uid==src)  // jsem zdroj
+      if (act==uid)    // jsem svuj act
+        var(spellhitself,1)  // chci zly efekt, a tudiz nechci aplikovat ability (uhyb atd)
+      elseif (canharmcaster(<var(spellnumber)>))   // je to zle kouzlo ktere se mne nepta (exploze)
+      else  // nezameril jsem se, nechci efekt
+        return 0
       endif
-    endif//jsem nepritel, v poradku
-    if (<var(spellnumber)>==103)//aby prosel mystik strike
+    elseif (src.act==uid)      // byl jsem zameren, vetsinovy pripad
+    elseif (isMyFriend)        // jsem pritel, muze byt v neporadku
+      if (<src.act.isitem>)    // item, nechci efekt
+      elseif (<src.act.isMyFriend>)   // pritel byl zameren, v poradku
+      else
+        return 0   // jsem pritel a pritel nebyl zameren, nechci efekt
+      endif
+    endif   // jsem nepritel, v poradku
+    if (<var(spellnumber)>==103)   // aby prosel mystik strike
     elseif (flag_reflection)
       flag_reflection=0
       findid(i_rune_magic_reflection).remove
       effect=3,i_fx_glow,6,9,0
-      if (<argv(2)>)//je kam odrazit...
+      if (<argv(2)>)   // je kam odrazit...
         var(reflectHim,1)
-        src.dospellcustom(<var(spellnumber)>,<eval (argv(1)*nastaveni_global_reflectSPlowering)/1000>,<uid>)//snizuje silu odrazeneho kouzla
+        src.dospellcustom(<var(spellnumber)>,<eval (argv(1)*nastaveni_global_reflectSPlowering)/1000>,<uid>)   // snizuje silu odrazeneho kouzla
       endif
       return 0
     endif
@@ -119,32 +125,32 @@ if (ischar)
     var(reflectHim,0)
     f_minddefrefresh
     //var(spellpowerrelative,100)
-    if (<argv(2)>)//kdyz je zdroj kouzla
+    if (<argv(2)>)   // kdyz je zdroj kouzla
       //nastaveni
-      if (<src.npc>)||(<src.tag(hypno_mystik)>) //utoci NPC nebo hypnomystik
+      if (<src.npc>)||(<src.tag(hypno_mystik)>)  // utoci NPC nebo hypnomystik
         //kermel.sysMessage(puvodni spellpower: <var(spellpower)>, koef: <nastaveni_global_MvSM>)
         var(spellpower,<eval (<var(spellpower)>*<nastaveni_global_MvSM>)/1000)>)
         //kermel.sysMessage(Utoci mystik uid: <uid>, src: <src>, spellpower: <var(spellpower)>)
       endif
       if (isplayer)&&!(<src.tag(hypno_mystik)>) //utok na playera a neutoci hypno mystik (vetsinou)
-        if (src.isplayer) //utoci hrac
-          if(<tag(hypno_mystik)>) //cilem je mystik v tele monstra
+        if (src.isplayer)           // utoci hrac
+          if(<tag(hypno_mystik)>)   // cilem je mystik v tele monstra
             var(spellpower,<eval (var(spellpower)*nastaveni_global_vMSM)/1000)>)
-          else //normalni dmg
+          else   // normalni dmg
             var(spellpower,<eval (var(spellpower)*nastaveni_global_pvpSM)/1000)>)
           endif
         endif
-      else //utok na monstrum
-        if (<npc>==15) //mozek stojiciho mystikova obrazu
+      else   // utok na monstrum
+        if (<npc>==15)   // mozek stojiciho mystikova obrazu
           var(spellpower,<eval (var(spellpower)*nastaveni_global_pvpSM)/1000)>)
-        elseif (<findres(spell,<argv(0)>).flags>&SPELLFLAG_FIELD)   // nechceme aby field mel bonus ze standcastu
+        elseif ((<var(spellnumber)>==28) || (<var(spellnumber)>==39) || (<var(spellnumber)>==47))   // nechceme aby field mel bonus ze standcastu
           if (<src.tag(level)> > 200)                               // ale dame mu fix bonus +0,25% za level (max +50%)
             arg(useable_level,50)
           else
             arg(useable_level,<eval <src.tag(level)>/4>)                                              
           endif
           var(spellpower,<eval (var(spellpower)*(nastaveni_global_vMSM+nastaveni_standcast_sm*arg(useable_level)))/1000>)
-        else //normalni monstrumendif
+        else    // normalni monstrumendif
           if (src.tag(standcast))
             if (<src.tag(level)> > 200)
               arg(useable_level,200)
@@ -181,7 +187,7 @@ if (ischar)
           if (src.tag(shadow_weapon_dmg))
             var(spellpower,<eval (var(spellpower)*<eval nastaveni_efekt_shadow*2>)/1000>)
           endif
-          if (0<src.tag(ra_woodoo_curse)> > 0) // (chance(<eval <arg(chance)>*10>,2))
+          if (0<src.tag(ra_woodoo_curse)> > 0)  // (chance(<eval <arg(chance)>*10>,2))
             if (chance(<eval 15+<src.tag(ra_woodoo_curse)>>,2))
               if (<src.stam> > 24)
                 src.reduceStamina(25)
@@ -199,13 +205,13 @@ if (ischar)
     else
       arg(spelldefense,<eval tag(OM)*10>)
     endif
-
-    if (ismpdepend(<var(spellnumber)>)) //utocne kouzlo (harm)
+    if (ismpdepend(<var(spellnumber)>))   // utocne kouzlo (harm)
       var(spellpower,<eval (var(spellpower)-arg(spelldefense))>)
       if (var(spellpower)<1 && !<arg(hasSideEffect)>)
+
         f_spellResistedMsg
       endif
-      if (var(spellnumber)==5)||(spellnumber==12) //magic arrow || harm
+      if (var(spellnumber)==5)||(spellnumber==12)   // magic arrow || harm
         flags=<flags>&~statf_freeze
       endif
     else
@@ -213,7 +219,7 @@ if (ischar)
         var(spellpower,#-((<eval var(spellpower)> * <eval(resist_para)>)/1000))
         if (0=={0 <var(spellpower)>})
           var(spellpower,0)
-        endif
+        endif                                             
       endif
       if ((<randfakt(<spellpower>,<findres(spell,<var(spellnumber)>).effect>)>) < (<arg(spelldefense)>))//negativni kouzlo (paralyza)
         f_spellResistedMsg
@@ -222,12 +228,11 @@ if (ischar)
     endif
   endif
 endif
-
 if ( (var(spellpower)>0) || <arg(hasSideEffect)> )
-  if (<argv(2)>)//kdyz je zdroj
+  if (<argv(2)>)   // kdyz je zdroj
     arg(storeact,<src.act>)
     src.act=<uid>
-    src.trigger(@beforeDoEffect)//ke zmene
+    src.trigger(@beforeDoEffect)   // ke zmene
     src.act=<arg(storeact)>
   endif
   trigger(@beforeGetEffect)
