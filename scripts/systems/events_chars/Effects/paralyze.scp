@@ -61,6 +61,9 @@ if (<restest(i_paralysis)>)
     endif
   endif
 endif
+if (<restest(i_rune_paralyze_field)>)
+  findID(i_rune_paralyze_field).remove // removes the paralyze
+endif
 
 [function isParalyzed]
 return <flag_freeze>

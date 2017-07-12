@@ -6822,9 +6822,6 @@ if(argn==41) //dispell(41),dispell field(34), massdispel(54)
  return 1
 endif
 
-ON=@Create
-MOREZ=1
-
 on=@step
 if (src.charIsUnsafe) //gm/ghost ...
 	return 0
