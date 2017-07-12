@@ -85,7 +85,7 @@ if (ischar)
       endif
     endif
   elseif (isevil(<var(spellnumber)>))
-    if ((<var(spellnumber)>==28) || (<var(spellnumber)>==39) || (<var(spellnumber)>==47))   // aby se vsichni ostatni do fieldu chytili
+    if ((<var(spellnumber)>==28) || (<var(spellnumber)>==39) || (<var(spellnumber)>==47))
       if (uid==src)     // sam sobe field nebude delat efekt
         return 0
       elseif (isinmyguild)    //  ani clenu guildy
