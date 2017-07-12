@@ -6829,12 +6829,6 @@ on=@step
 if (src.charIsUnsafe) //gm/ghost ...
 	return 0
 endif
-logmsg("Para: <src.resist_para>; Magic: <src.resist_magic>")
-// if ({1 1000} > src.resist_para)&&({1 1000} > src.resist_magic)
-//  src.paralyze(600) //60s
-// else
-//  src.sysMessage("<src.sex(Odolal,Odolala)> jsi kouzlu.")
-// endif
 remove
 
 //DEPRICATED ITEM - REMOVE ON SIGHT !
