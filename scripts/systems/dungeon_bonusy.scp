@@ -1552,7 +1552,7 @@ endif
 
 // DUNGEONY NA POKRACOVANI:
 // Co je treba nastavit pro spravne fungovani:
-// Gata ktera vede do SafeZony da hraci item i_dungeon_mark  - je vhodne nastavit omezeni aby nedala hned po sobe aspon 600sec
+// Gata ktera vede do SafeZony da hraci item i_dungeon_marker  - je vhodne nastavit omezeni aby nedala hned po sobe aspon 600sec
 // Gata ktera vede do dungeonu musi mit funkci "f_dungeon_mark_check(nazev_safe_zony,0)"
 // Nazev SafeZony dle scriptu napr "Mount Dorlas SafeZone" , druhy argument 0 odlisuje vstupni branu od brany ze SafeZony
 // Brana ze SafeZony do dalsich pater dungeonu musi mit stejnou funkci, akorat s druhym parametrem = 1
@@ -1561,59 +1561,96 @@ endif
 ID=i_memory
 TYPE=t_eq_script
 name=Dungeon Mark
+                                               
+on=@timer
+return 1
+
+
+[itemdef i_dungeon_marker]
+ID=i_memory
+TYPE=t_eq_script
+name=Dungeon Mark
 
 on=@equip
 timerd=5      // aby se nastaveni provedlo az po portu do SafeZony a ne pred tim.
                                                
 on=@timer
-if !(<moreX>)
-  morep=<region.p>            
-  name=<region.name>
-  
-  if (<strlen(<region.tag(Dung_Mark)>)>)    // ma region nastaven tag na Dungeon Mark?
-    timer=<nastaveni_dungeon_mark_<region.tag(Dung_Mark)>>       // Ano ma, nastavuji delku trvani dle nastaveni
-  else      // Region tag neni nastaven
-    timer=86400  // default 1 den
-  endif
-  cont.greenmessage("<cont.sex(Ziskal,Ziskala)> jsi Mark do <name> na <eval (<timer>/3600)> hodin.")
-  cont.accmsg("ziskal na <eval (<timer>/3600)> hodin, Mark(<uid>) do <name> na pozici <cont.p>")
-  return 1
-endif
-cont.redmessage("Tvuj Mark do <name> vyprsel.")
-remove
+cont.f_dungeon_mark_addLink
 
+
+[function f_dungeon_mark_addLink]
+if !(findid(i_dungeon_mark))
+  newequip(i_dungeon_mark) 
+endif
+arg(Dung_mark,<findid(i_dungeon_mark)>)
+
+if (<strlen(<region.tag(Dung_Mark)>)>)    // ma region nastaven tag na Dungeon Mark?
+  arg(MarkTimer,<nastaveni_dungeon_mark_<region.tag(Dung_Mark)>>)    // Ano ma, nastavuji delku trvani dle nastaveni
+else      // Region tag neni nastaven
+  arg(MarkTimer,864000)    // default 1 den  
+endif
+
+arg(Dung_mark).f_customLink_add(<region.name>,"mark_zone")
+arg(Dung_mark).f_customLink_add(<eval (<arg(MarkTimer)>+<serv.time>)>,"mark_timer")  // default 1 den
+greenmessage("<sex(Ziskal,Ziskala)> jsi Mark do <region.name> na <eval (<arg(MarkTimer)>/36000)> hodin.")
+accmsg("ziskal na <eval (<arg(MarkTimer)>/36000)> hodin, Mark do <region.name> na pozici <p>")
+
+[function f_dungeon_mark_ClearLink]
+if !(findid(i_dungeon_mark))     // nema zadny mark, neni co cistit
+  return 0
+endif
+
+arg(Dung_mark,<findid(i_dungeon_mark)>)
+arg(i,0)
+while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
+  arg(Time,<eval Dung_mark.tag(mark_timer[<eval arg(i)>])>)     // do kdy je platny mark
+  if (<serv.time> > <arg(Time)>)
+    arg(Zone,<Dung_mark.tag(mark_zone[<eval arg(i)>])>)           // do jake zony je mark urcen
+    Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
+    Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
+    arg(i,0)
+  endif
+  arg(i,#+1)
+endwhile
+if (<eval Dung_mark.tag(mark_zonesCount)> == 0)      // je prazdny, smazeme ho
+  Dung_mark.remove
+endif
 
 [function f_dungeon_mark_check]  // argv(0)  - Jmeno marku/zony ktery pouziju/smazu ; argv(1) - 0=portim; 1=mazu
-if (src.findid(#0A2000EB0))   // uz ma context menu otevrene
+if (findid(#0A2000EB0))   // uz ma context menu otevrene
   return 1
 endif
 
-if (<rescount(i_dungeon_mark)>)
-  arg(return_check,<src.contents(f_isMyDung(<argv(0)>,<argv(1)>))>)
-  if (<strlen(<arg(return_check)>)> > 1)
-    arg(return_check,0)
-  endif
+f_dungeon_mark_ClearLink      // procisteni linku po timeru
+
+if !(findid(i_dungeon_mark))     // nema zadny mark, sup s nim hned na start
+  return 0
 endif
 
-return <arg(return_check)>
-
-
-[function f_isMyDung]
-if (!strcmpi(<name>,<argv(0)>))
-  if (<argv(1)> == 0)
-    src.redmessage("Mark do <name> byl pouzit!")
-    src.tag(lastGoToSafeZone,<serv.time>)
-    src.potvrdit(src.f_GoToSafeZone(<morep>),"Mas aktivni Mark do <name>. Chces pokracovat kde jsi posledne <src.sex(skoncil,skoncila)>?")
-    remove
-    return 1
-  else
-    src.redmessage("Pokracovanim v dungeonu jsi <src.sex(prisel,prisla)> o moznost se vratit do <name>")
-    remove                                
-    return 0
+arg(Dung_mark,<findid(i_dungeon_mark)>)
+arg(i,0)
+while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
+  arg(Zone,<Dung_mark.tag(mark_zone[<eval arg(i)>])>)           // do jake zony je mark urcen
+  if !(strcmpi(<argv(0)>,<arg(Zone)>))
+    if (<argv(1)> == 0)       // budeme portit
+      redmessage("Mark do <arg(zone)> byl pouzit!")
+      tag(lastGoToSafeZone,<serv.time>)
+      potvrdit(f_GoToSafeZone(<arg(zone)>),"Aktivoval se ti Mark do <arg(zone)>. Chces pokracovat kde jsi posledne <src.sex(skoncil,skoncila)>?")
+      Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
+      Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
+      return 1
+    else                    // budeme mazat
+      redmessage("Pokracovanim v dungeonu jsi prisel o moznost se vratit do <arg(Zone)>"))
+      Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
+      Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
+      arg(i,#-1)          // kdyby nahodou mel stejny mark vicekrat
+    endif
   endif
-endif
+  arg(i,#+1)
+endwhile
+return 0
 
-[function f_GoToSafeZone]  // argv(0) - morep
+[function f_GoToSafeZone]  // argv(0) - zona kam portne
 if (<eval (<eval tag(lastGoToSafeZone)>+300)> > <serv.time>)  // 30 sec na rozhodnuti (aby nam nebehal s gumpem buh vi jak dlouho)
   go=<args(0)>
   accmsg("byl portnut diky Marku do safe zony <region.name> na pozici <p>")
@@ -1625,15 +1662,21 @@ tag.remove(lastGoToSafeZone)
 
 
 [function DungeonMarky]
-if (<rescount(i_dungeon_mark)>)
-  src.contents(f_dungeon_marky)
-else
-  src.redmessage("Nemas zadne Dungeon Marky")
+f_dungeon_mark_ClearLink      // procisteni linku po timeru
+
+if !(findid(i_dungeon_mark))     // nema zadny mark
+  redmessage("Nemas zadne aktivni Dungeon Marky")
+  return 0
 endif
 
-[function f_dungeon_marky]
-if (!strcmpi(<BaseId>,i_dungeon_mark))
-    src.classmessage("Vlastnis Mark do <name>, ktery vyprsi za <dsToRTime(<timerd>,0)>!")
-endif
+classmessage("Mas aktivni Dungeon Marky do:")
+arg(Dung_mark,<findid(i_dungeon_mark)>)
+arg(i,0)
+while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
+  arg(Zone,<Dung_mark.tag(mark_zone[<eval arg(i)>])>)           // do jake zony je mark urcen
+  arg(Time,<eval Dung_mark.tag(mark_timer[<eval arg(i)>])>)     // do kdy je platny mark
+  classmessage("<arg(Zone)>, ktery vyprsi za <dsToRTime(<eval (<arg(time)>-<serv.time>)>,0)>!")    
+  arg(i,#+1)
+endwhile
 
 [EOF]
