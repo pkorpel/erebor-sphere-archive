@@ -1550,4 +1550,91 @@ elseif (<arg(dmg)> < 45)
   color=<def_explosion_clr_average>
 endif
 
+// DUNGEONY NA POKRACOVANI:
+// Co je treba nastavit pro spravne fungovani:
+// Gata ktera vede do SafeZony da hraci item i_dungeon_mark  - je vhodne nastavit omezeni aby nedala hned po sobe aspon 600sec
+// Gata ktera vede do dungeonu musi mit funkci "f_dungeon_mark_check(nazev_safe_zony,0)"
+// Nazev SafeZony dle scriptu napr "Mount Dorlas SafeZone" , druhy argument 0 odlisuje vstupni branu od brany ze SafeZony
+// Brana ze SafeZony do dalsich pater dungeonu musi mit stejnou funkci, akorat s druhym parametrem = 1
+
+[itemdef i_dungeon_mark]
+ID=i_memory
+TYPE=t_eq_script
+name=Dungeon Mark
+
+on=@equip
+timerd=5      // aby se nastaveni provedlo az po portu do SafeZony a ne pred tim.
+                                               
+on=@timer
+if !(<moreX>)
+  morep=<region.p>            
+  name=<region.name>
+  
+  if (<strlen(<region.tag(Dung_Mark)>)>)    // ma region nastaven tag na Dungeon Mark?
+    timer=<nastaveni_dungeon_mark_<region.tag(Dung_Mark)>>       // Ano ma, nastavuji delku trvani dle nastaveni
+  else      // Region tag neni nastaven
+    timer=86400  // default 1 den
+  endif
+  cont.greenmessage("Ziskal jsi Mark do <name> na <eval (<timer>/3600)> hodin.")
+  cont.accmsg("ziskal na <eval (<timer>/3600)> hodin, Mark(<uid>) do <name> na pozici <cont.p>")
+  return 1
+endif
+cont.redmessage("Tvuj Mark do <name> vyprsel.")
+remove
+
+
+[function f_dungeon_mark_check]  // argv(0)  - Jmeno marku/zony ktery pouziju/smazu ; argv(1) - 0=portim; 1=mazu
+if (src.findid(#0A2000EB0))   // uz ma context menu otevrene
+  return 1
+endif
+
+if (<rescount(i_dungeon_mark)>)
+  arg(return_check,<src.contents(f_isMyDung(<argv(0)>,<argv(1)>))>)
+  if (<strlen(<arg(return_check)>)> > 1)
+    arg(return_check,0)
+  endif
+endif
+
+return <arg(return_check)>
+
+
+[function f_isMyDung]
+
+if (!strcmpi(<name>,<argv(0)>))
+  if (<argv(1)> == 0)
+    src.redmessage("Mark do <name> byl pouzit!")
+    src.tag(lastGoToSafeZone,<serv.time>)
+    src.potvrdit(src.f_GoToSafeZone(<morep>),"Mas aktivni Mark do <name>. Chces pokracovat kde jsi posledne skoncil?")
+    remove
+    return 1
+  else
+    src.redmessage("Pokracovanim v dungeonu jsi prisel o moznost se vratit do <name>")
+    remove                                
+    return 0
+  endif
+endif
+
+[function f_GoToSafeZone]  // argv(0) - morep
+if (<eval (<eval tag(lastGoToSafeZone)>+300)> > <serv.time>)  // 30 sec na rozhodnuti (aby nam nebehal s gumpem buh vi jak dlouho)
+  go=<args(0)>
+  accmsg("byl portnut diky Marku do safe zony <region.name> na pozici <p>")
+else
+  accmsg("dlouho otalel s rozhodujici tabulkou a proto jeho Mark vyprsel. Otalel: <eval (<serv.time>-<eval tag(lastGoToSafeZone)>)> dsec.")
+  redmessage("Dlouho jsi otalel! Energie Marku jiz vyprsela...")
+endif
+tag.remove(lastGoToSafeZone)
+
+
+[function DungeonMarky]
+if (<rescount(i_dungeon_mark)>)
+  src.contents(f_dungeon_marky)
+else
+  src.redmessage("Nemas zadne Dungeon Marky")
+endif
+
+[function f_dungeon_marky]
+if (!strcmpi(<BaseId>,i_dungeon_mark))
+    src.classmessage("Vlastnis Mark do <name>, ktery vyprsi za <dsToRTime(<timerd>,0)>!")
+endif
+
 [EOF]
