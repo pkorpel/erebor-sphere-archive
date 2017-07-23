@@ -1575,7 +1575,7 @@ if !(<moreX>)
   else      // Region tag neni nastaven
     timer=86400  // default 1 den
   endif
-  cont.greenmessage("Ziskal jsi Mark do <name> na <eval (<timer>/3600)> hodin.")
+  cont.greenmessage("<cont.sex(Ziskal,Ziskala)> jsi Mark do <name> na <eval (<timer>/3600)> hodin.")
   cont.accmsg("ziskal na <eval (<timer>/3600)> hodin, Mark(<uid>) do <name> na pozici <cont.p>")
   return 1
 endif
@@ -1599,16 +1599,15 @@ return <arg(return_check)>
 
 
 [function f_isMyDung]
-
 if (!strcmpi(<name>,<argv(0)>))
   if (<argv(1)> == 0)
     src.redmessage("Mark do <name> byl pouzit!")
     src.tag(lastGoToSafeZone,<serv.time>)
-    src.potvrdit(src.f_GoToSafeZone(<morep>),"Mas aktivni Mark do <name>. Chces pokracovat kde jsi posledne skoncil?")
+    src.potvrdit(src.f_GoToSafeZone(<morep>),"Mas aktivni Mark do <name>. Chces pokracovat kde jsi posledne <src.sex(skoncil,skoncila)>?")
     remove
     return 1
   else
-    src.redmessage("Pokracovanim v dungeonu jsi prisel o moznost se vratit do <name>")
+    src.redmessage("Pokracovanim v dungeonu jsi <src.sex(prisel,prisla)> o moznost se vratit do <name>")
     remove                                
     return 0
   endif
@@ -1620,7 +1619,7 @@ if (<eval (<eval tag(lastGoToSafeZone)>+300)> > <serv.time>)  // 30 sec na rozho
   accmsg("byl portnut diky Marku do safe zony <region.name> na pozici <p>")
 else
   accmsg("dlouho otalel s rozhodujici tabulkou a proto jeho Mark vyprsel. Otalel: <eval (<serv.time>-<eval tag(lastGoToSafeZone)>)> dsec.")
-  redmessage("Dlouho jsi otalel! Energie Marku jiz vyprsela...")
+  redmessage("Dlouho jsi <src.sex(otalel,otalela)>! Energie Marku jiz vyprsela...")
 endif
 tag.remove(lastGoToSafeZone)
 
