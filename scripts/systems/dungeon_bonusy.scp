@@ -1635,6 +1635,7 @@ while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
     if (<argv(1)> == 0)       // budeme portit
       redmessage("Mark do <arg(zone)> byl pouzit!")
       tag(lastPortToSafeZone,<serv.time>)
+      tag(positionOfPortToSafeZone,<p>)
       potvrdit(f_dungeonMark_Port(<arg(zone)>),"Aktivoval se ti Mark do <arg(zone)>. Chces pokracovat kde jsi posledne <src.sex(skoncil,skoncila)>?")
       Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
       Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
@@ -1652,14 +1653,19 @@ return 0
 
 [function f_dungeonMark_Port]  // argv(0) - zona kam portne
 if (<eval (<eval tag(lastPortToSafeZone)>+300)> > <serv.time>)  // 30 sec na rozhodnuti (aby nam nebehal s gumpem buh vi jak dlouho)
-  go=<args(0)>
-  accmsg("byl portnut diky Marku do safe zony <region.name> na pozici <p>")
+  if !(f_distanceFromPos_check(10,<tag(positionOfPortToSafeZone)>))
+    go=<args(0)>
+    accmsg("byl portnut diky Marku do safe zony <region.name> na pozici <p>")
+  else
+    accmsg("se prilis vzdalil s rozhodujici tabulkou a proto jeho Mark vyprsel. Odesel z <tag(positionOfPortToSafeZone)> na <p>.")
+    redmessage("Prilis jsi se <src.sex(vzdalil,vzdalila)>! Energie Marku pominula...")
+  endif
 else
   accmsg("dlouho otalel s rozhodujici tabulkou a proto jeho Mark vyprsel. Otalel: <eval (<serv.time>-<eval tag(lastPortToSafeZone)>)> dsec.")
   redmessage("Dlouho jsi <src.sex(otalel,otalela)>! Energie Marku jiz vyprsela...")
 endif
 tag.remove(lastPortToSafeZone)
-
+tag.remove(positionOfPortToSafeZone)
 
 [function DungeonMarky]
 f_dungeonMark_ClearLinks      // procisteni linku po timeru

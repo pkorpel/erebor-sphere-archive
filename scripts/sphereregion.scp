@@ -763,6 +763,24 @@ ON=@CLIPERIODIC
 on=@exit
   src.events=-e_nbdung
 
+  //////////////////////////////////////////////////////////////////////////
+
+[REGIONTYPE r_SafeZone]
+
+ON=@ENTER
+  if (src.isplayer)
+    src.flag_invul=1  
+    src.sysmessage("Nyni jsi v bezpecne zone.")
+  elseif (src.npc)
+    src.gohome
+  endif  
+  
+on=@exit
+  if (src.isplayer)
+    src.flag_invul=0
+    src.sysmessage("<src.sex(Opustil,Opustila)> jsi bezpecnou zonu.")
+  endif
+  
 //////////////////////////////////////////////////////////////////////////
 
 [REGIONTYPE e_qv3_dejloot]
