@@ -1667,22 +1667,6 @@ endif
 tag.remove(lastPortToSafeZone)
 tag.remove(positionOfPortToSafeZone)
 
-[function DungeonMarky]
-f_dungeonMark_ClearLinks      // procisteni linku po timeru
 
-if !(findid(i_dungeon_mark))     // nema zadny mark
-  redmessage("Nemas zadne aktivni Dungeon Marky")
-  return 0
-endif
-
-classmessage("Mas aktivni Dungeon Marky do:")
-arg(Dung_mark,<findid(i_dungeon_mark)>)
-arg(i,0)
-while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
-  arg(Zone,<Dung_mark.tag(mark_zone[<eval arg(i)>])>)           // do jake zony je mark urcen
-  arg(Time,<eval Dung_mark.tag(mark_timer[<eval arg(i)>])>)     // do kdy je platny mark
-  classmessage("<arg(Zone)>, ktery vyprsi za <dsToRTime(<eval (<arg(time)>-<serv.time>)>,0)>!")    
-  arg(i,#+1)
-endwhile
 
 [EOF]

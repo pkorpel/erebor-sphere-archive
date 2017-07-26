@@ -16,7 +16,7 @@ if (src.isgm)
   return(1)
 endif
 f_weekly_check
-dialog(d_questy,0)
+dialog(d_questy,1)
 return 1
 
 [defnames questy_seznam]
@@ -103,7 +103,7 @@ questMenu_subsection_pic[0]     03324
 questMenu_subsection_pic_x[0]   13
 questMenu_subsection_pic_y[0]   12
 questMenu_subsection_title[1]   "Otevrene Dungeony"
-questMenu_subsection_title_x[1] -10
+questMenu_subsection_title_x[1] -22
 questMenu_subsection_pic[1]     03334
 questMenu_subsection_pic_x[1]   13
 questMenu_subsection_pic_y[1]   12

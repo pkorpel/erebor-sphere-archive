@@ -59,7 +59,6 @@ bandageblood        //pouziti krvavych bandazi
 regy                //seznam regu
 bbmanbomb           //pro bomberman hru
 dobyvani            //Zobrazi nadchazejici Dobyvani/Braneni
-dungeonmarky        //zobrazi aktivni a dobu Marku do Dungeonich Safezon
 
 //systemove
 setpassword
