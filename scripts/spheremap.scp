@@ -3359,7 +3359,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
                      
-[AREA Ledove jeskyne SafeZone]
+[AREA Ledove jeskyne Utociste]
 GROUP=Dungeony
 P=6103,3586,20,10
 RECT=6095,3597,6109,3577
@@ -3392,7 +3392,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Nexmirias SafeZone]
+[AREA Nexmirias Utociste]
 P=5856,2153,10,11
 RECT=5860,2155,5853,2150
 mapplane=11
@@ -3568,7 +3568,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Mount Dorlas SafeZone]
+[AREA Mount Dorlas Utociste]
 GROUP=Dungeon Mont Dorlas
 P=5236,160,0,10
 mapplane=10
@@ -3703,7 +3703,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Tumma Osto SafeZone]
+[AREA Tumma Osto Utociste]
 GROUP=Dungeon Tajemna hora
 P=274,136,-28,2
 mapplane=2
@@ -3786,7 +3786,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Carn Dum SafeZone]
+[AREA Carn Dum Utociste]
 GROUP=Dungeon Carn Dum
 P=5260, 1892, -18, 10
 RECT=5259,1860,5301,1901

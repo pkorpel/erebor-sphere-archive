@@ -253,13 +253,12 @@ if !(<arg(Dung_mark)>)     // nema zadny mark
   newTextLine(<arg(middle)>-62,<arg(middleY)>-36,021,"Nemas zadne aktivni")
   newTextLine(<arg(middle)>-62,<arg(middleY)>-18,021,"Dungeon Marky")
   newTextLine(<arg(middle)>-62,<arg(middleY)>+18,<questMenu_color_questInactive>,"Navstiv dungeon, ktery")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+36,<questMenu_color_questInactive>,"ma SafeZonu a priste muzes")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+54,<questMenu_color_questInactive>,"pokracovat v dungeonu")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+72,<questMenu_color_questInactive>,"z tohoto mista.")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+108,<questMenu_color_questInactive>,"Vsak pozor!")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+126,<questMenu_color_questInactive>,"Energie Marku vydrzi")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+144,<questMenu_color_questInactive>,"omezenou dobu, dle obtiznosti")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+162,<questMenu_color_questInactive>,"dungeonu.")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+36,<questMenu_color_questInactive>,"ma utociste, a pri dalsim")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+54,<questMenu_color_questInactive>,"vstupu muzes pokracovat")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+72,<questMenu_color_questInactive>,"z daneho mista.")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+108,<questMenu_color_questInactive>,"Ale pozor!")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+126,<questMenu_color_questInactive>,"Energie Marku vydrzi jen")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+144,<questMenu_color_questInactive>,"omezenou dobu.")
   return 0
 endif
 
