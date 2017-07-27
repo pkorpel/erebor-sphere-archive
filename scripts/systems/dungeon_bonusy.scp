@@ -1550,4 +1550,123 @@ elseif (<arg(dmg)> < 45)
   color=<def_explosion_clr_average>
 endif
 
+// DUNGEONY NA POKRACOVANI:
+// Co je treba nastavit pro spravne fungovani:
+// Gata ktera vede do SafeZony da hraci item i_dungeon_marker  - je vhodne nastavit omezeni aby nedala hned po sobe aspon 600sec
+// Gata ktera vede do dungeonu musi mit funkci "f_dungeonMark_useMark(nazev_safe_zony,0)"
+// Nazev SafeZony dle scriptu napr "Mount Dorlas SafeZone" , druhy argument 0 odlisuje vstupni branu od brany ze SafeZony
+// Brana ze SafeZony do dalsich pater dungeonu musi mit stejnou funkci, akorat s druhym parametrem = 1
+
+[itemdef i_dungeon_mark]
+ID=i_memory
+TYPE=t_eq_script
+name=Dungeon Mark
+                                               
+on=@timer
+return 1
+
+
+[itemdef i_dungeon_marker]
+ID=i_memory
+TYPE=t_eq_script
+name=Dungeon Mark
+
+on=@equip
+timerd=5      // aby se nastaveni provedlo az po portu do SafeZony a ne pred tim.
+                                               
+on=@timer
+cont.f_dungeonMark_addLink
+
+
+[function f_dungeonMark_addLink]
+if !(findid(i_dungeon_mark))
+  newequip(i_dungeon_mark) 
+endif
+arg(Dung_mark,<findid(i_dungeon_mark)>)
+
+if (<strlen(<region.tag(Dung_Mark)>)>)    // ma region nastaven tag na Dungeon Mark?
+  arg(MarkTimer,<nastaveni_dungeon_mark_<region.tag(Dung_Mark)>>)    // Ano ma, nastavuji delku trvani dle nastaveni
+else      // Region tag neni nastaven
+  arg(MarkTimer,864000)    // default 1 den  
+endif
+
+arg(Dung_mark).f_customLink_add(<region.name>,"mark_zone")
+arg(Dung_mark).f_customLink_add(<eval (<arg(MarkTimer)>+<serv.time>)>,"mark_timer")
+greenmessage("<sex(Ziskal,Ziskala)> jsi Mark do <region.name> na <eval (<arg(MarkTimer)>/36000)> hodin.")
+accmsg("ziskal na <eval (<arg(MarkTimer)>/36000)> hodin, Mark do <region.name> na pozici <p>")
+
+[function f_dungeonMark_ClearLinks]
+if !(findid(i_dungeon_mark))     // nema zadny mark, neni co cistit
+  return 0
+endif
+
+arg(Dung_mark,<findid(i_dungeon_mark)>)
+arg(i,0)
+while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
+  arg(Time,<eval Dung_mark.tag(mark_timer[<eval arg(i)>])>)     // do kdy je platny mark
+  if (<serv.time> > <arg(Time)>)
+    arg(Zone,<Dung_mark.tag(mark_zone[<eval arg(i)>])>)           // do jake zony je mark urcen
+    Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
+    Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
+    arg(i,0)
+  endif
+  arg(i,#+1)
+endwhile
+if (<eval Dung_mark.tag(mark_zonesCount)> == 0)      // je prazdny, smazeme ho
+  Dung_mark.remove
+endif
+
+[function f_dungeonMark_useMark]  // argv(0)  - Jmeno marku/zony ktery pouziju/smazu ; argv(1) - 0=portim; 1=mazu
+if (findid(#0A2000EB0))   // uz ma context menu otevrene
+  return 1
+endif
+
+f_dungeonMark_ClearLinks      // procisteni linku po timeru
+
+if !(findid(i_dungeon_mark))     // nema zadny mark, sup s nim hned na start
+  return 0
+endif
+
+arg(Dung_mark,<findid(i_dungeon_mark)>)
+arg(i,0)
+while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
+  arg(Zone,<Dung_mark.tag(mark_zone[<eval arg(i)>])>)           // do jake zony je mark urcen
+  if !(strcmpi(<argv(0)>,<arg(Zone)>))
+    if (<argv(1)> == 0)       // budeme portit
+      redmessage("Mark do <arg(zone)> byl pouzit!")
+      tag(lastPortToSafeZone,<serv.time>)
+      tag(positionOfPortToSafeZone,<p>)
+      potvrdit(f_dungeonMark_Port(<arg(zone)>),"Aktivoval se ti Mark do <arg(zone)>. Chces pokracovat kde jsi posledne <src.sex(skoncil,skoncila)>?")
+      Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
+      Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
+      return 1
+    else                    // budeme mazat
+      redmessage("Pokracovanim v dungeonu jsi <src.sex(prisel,prisla)> o moznost vratit se do <arg(Zone)>"))
+      Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
+      Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
+      arg(i,#-1)          // kdyby nahodou mel stejny mark vicekrat
+    endif
+  endif
+  arg(i,#+1)
+endwhile
+return 0
+
+[function f_dungeonMark_Port]  // argv(0) - zona kam portne
+if (<eval (<eval tag(lastPortToSafeZone)>+300)> > <serv.time>)  // 30 sec na rozhodnuti (aby nam nebehal s gumpem buh vi jak dlouho)
+  if !(f_distanceFromPos_check(10,<tag(positionOfPortToSafeZone)>))
+    go=<args(0)>
+    accmsg("byl portnut diky Marku do safe zony <region.name> na pozici <p>")
+  else
+    accmsg("se prilis vzdalil s rozhodujici tabulkou a proto jeho Mark vyprsel. Odesel z <tag(positionOfPortToSafeZone)> na <p>.")
+    redmessage("Prilis jsi se <src.sex(vzdalil,vzdalila)>! Energie Marku pominula...")
+  endif
+else
+  accmsg("dlouho otalel s rozhodujici tabulkou a proto jeho Mark vyprsel. Otalel: <eval (<serv.time>-<eval tag(lastPortToSafeZone)>)> dsec.")
+  redmessage("Dlouho jsi <src.sex(otalel,otalela)>! Energie Marku jiz vyprsela...")
+endif
+tag.remove(lastPortToSafeZone)
+tag.remove(positionOfPortToSafeZone)
+
+
+
 [EOF]

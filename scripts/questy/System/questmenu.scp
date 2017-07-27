@@ -95,21 +95,36 @@ questMenu_section_pic[1]   0fc5
 questMenu_section_pic_x[1] 20
 questMenu_section_pic_y[1] 20
 
+questMenu_subsection_width      58
+questMenu_subsection_height     56
+questMenu_subsection_title[0]   "Questy"
+questMenu_subsection_title_x[0] 15
+questMenu_subsection_pic[0]     03324
+questMenu_subsection_pic_x[0]   13
+questMenu_subsection_pic_y[0]   12
+questMenu_subsection_title[1]   "Otevrene Dungeony"
+questMenu_subsection_title_x[1] -22
+questMenu_subsection_pic[1]     03334
+questMenu_subsection_pic_x[1]   13
+questMenu_subsection_pic_y[1]   12
+
 [dialog d_questy]
 5,5
 page 0
-if (<argv(0)> != 1) // main questy dialog
-  argo.f_questMenu_sectionButton(0,1,10,1)
-elseif (<argv(0)> != 2) // weekly quests
-  argo.f_questMenu_sectionButton(1,1,10,1)
-endif
+arg(sideSection,0)
+while (arg(sideSection) < 2)
+  if ( (<argv(0)> < (arg(sideSection)*10)) || (<argv(0)> >= ((arg(sideSection)+1)*10)) )
+    argo.f_questMenu_sectionButton(<arg(sideSection)>,1,10,1)
+  endif
+  arg(sideSection,#+1)
+endwhile
 
 argo.resizepic(40,20,<questMenu_bg>,<questMenu_width>,<questMenu_height>)
 argo.resizepic(80,30,<questMenu_bg>,<questMenu_width>-80,50)
 
-if (<argv(0)> == 1) // main questy dialog
-  argo.f_questy_buildMainDialog
-elseif (<argv(0)> == 2) // weekly quests
+if (<argv(0)> < 10) // main questy dialog
+  argo.f_questy_buildMainDialog(<argv(0)>)
+elseif (<argv(0)> < 20) // weekly quests
   argo.f_questy_buildWeeklyDialog
 endif
 page 0
@@ -125,11 +140,11 @@ return 1
 on=@anyButton
 arg(weeklyCheck,<f_weekly_check>)
 arg(allowSubDialog,1)
-if (<argn> < 100)
+if (<argn> < 100) // main section pages were selected.
   f_qm_closeMainDialog
   dialog(d_questy,<argn>)
   return
-elseif (<argn> < 1000)
+elseif (<argn> < 1000) // weekly detail was selected
   arg(weeklyNum,<eval (<argn>-99)>)
   if (arg(weeklyCheck)) // the weekly expired while watching the gump -> do not open the sub dialog, as the set of quests has been re-created
     arg(allowSubDialog,0)
@@ -142,8 +157,8 @@ elseif (<argn> < 1000)
     endif
     arg(dialogName,d_questy_weeklyDetail<eval tag(qm_lastWeeklyDetailGmp)>)
   endif
-  dialog(d_questy,2)
-else
+  dialog(d_questy,10)
+else // main quest detail was selected
   arg(dialogName,<f_questMenu_getDialog(<questMenu[<eval <argn>-1000>]>)>)
   dialog(d_questy,1)
 endif
@@ -196,13 +211,30 @@ endif
 
 
 [function f_questy_buildMainDialog]
-newTextLine(<eval (<questMenu_width>/2)+15>,45,<d_def_subheadcolor>,"Questy")
 f_questMenu_sectionButton(0)
+arg(mainSubsection,0)
+while (arg(mainSubsection) < 2)
+  arg(active,1)
+  if ((argv(0)-1) == arg(mainSubsection))
+    newTextLine(<eval ((<questMenu_width>/2)+<questMenu_subsection_title_x[<arg(mainSubsection)>]>)>,45,<d_def_subheadcolor>,<questMenu_subsection_title[<arg(mainSubsection)>]>)
+    arg(active,0)
+  endif
+  f_questMenu_mainSubsectionButton(<arg(mainSubsection)>,<arg(active)>)
+  arg(mainSubsection,#+1)
+endwhile
+
+if (argv(0) == 1)
+  f_questy_buildMainDialog_basic
+else
+  f_questy_buildMainDialog_dungeonMarks
+endif
+
+[function f_questy_buildMainDialog_basic]
 arg(questNumber,0)
 arg(middle,<eval (<questMenu_width>/2)>)
 while (<questNumber> < <questMenu_rows>)
   if (<f_questMenu_hasRelevantTag(<questMenu[<questNumber>]>)>)
-    f_qm_setOffsetAndPaging(8,40)
+    f_qm_setOffsetAndPaging(7,40,48)
     arg(posY,<tag(yPos)>)
     f_qm_itemButton(<arg(posY)>,40)
     button(<questMenu_width>-10,<arg(posY)>,0828,01F,1,0,<eval <questNumber>+1000>)
@@ -210,6 +242,37 @@ while (<questNumber> < <questMenu_rows>)
     htmlGump(<arg(middle)>-32,<arg(posY)>+8,150,20,<lastTextLine>,0,0)
   endif
   arg(questNumber,#+1)
+endwhile
+
+[function f_questy_buildMainDialog_dungeonMarks]
+src.f_dungeonMark_ClearLinks      // procisteni linku po timeru
+arg(middle,<eval (<questMenu_width>/2)>)
+arg(middleY,<eval (<questMenu_height>/2)>)
+arg(Dung_mark,<src.findid(i_dungeon_mark)>)
+if !(<arg(Dung_mark)>)     // nema zadny mark
+  newTextLine(<arg(middle)>-62,<arg(middleY)>-36,021,"Nemas zadne aktivni")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>-18,021,"Dungeon Marky")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+18,<questMenu_color_questInactive>,"Navstiv dungeon, ktery")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+36,<questMenu_color_questInactive>,"ma utociste, a pri dalsim")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+54,<questMenu_color_questInactive>,"vstupu muzes pokracovat")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+72,<questMenu_color_questInactive>,"z daneho mista.")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+108,<questMenu_color_questInactive>,"Ale pozor!")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+126,<questMenu_color_questInactive>,"Energie Marku vydrzi jen")
+  newTextLine(<arg(middle)>-62,<arg(middleY)>+144,<questMenu_color_questInactive>,"omezenou dobu.")
+  return 0
+endif
+
+arg(i,0)
+while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
+  f_qm_setOffsetAndPaging(4,60,48)
+  arg(posY,<tag(yPos)>)
+  f_qm_itemButton(<arg(posY)>,60)
+  arg(zone,<Dung_mark.tag(mark_zone[<eval arg(i)>])>)           // do jake zony je mark urcen
+  arg(time,<eval Dung_mark.tag(mark_timer[<eval arg(i)>])>)     // do kdy je platny mark
+  setText(newTextLine,"<basefont color=<?questMenu_color_questActiveFont?>><arg(zone)>")
+  htmlGump(<arg(middle)>-62,<arg(posY)>+8,200,20,<lastTextLine>,0,0)
+  newTextLine(<arg(middle)>-62,<arg(posY)>+28,questMenu_color_questInactive,"Vyprsi za: <dsToRTime(<eval (<arg(time)>-<serv.time>)>,1)>")
+  arg(i,#+1)
 endwhile
 
 [function f_questy_buildWeeklyDialog]
@@ -344,7 +407,7 @@ endif
 newTextLine(126,<arg(y)>,<questMenu_color_questInactive>,"Potrebna uroven : <arg(nextQuestLevel)>")
 gumppic(97,<arg(y)>+2,082C)
 
-[function f_qm_setOffsetAndPaging] // argv(0) max items, argv(1) - Y position step size
+[function f_qm_setOffsetAndPaging] // argv(0) max items, argv(1) - Y position step size, argv(2) - number of top pixels to ignore (useful for additional info at the beginning of the dialog)
 if (0<tag(pageNumber)> == 0)
   tag(pageNumber,1)
   tag(qOnPageNum,0)
@@ -356,7 +419,7 @@ elseif (<tag(qOnPageNum)> == <argv(0)>)
   page(<tag(pageNumber)>)
   button(93,47,<g_btn_left[2]>,<g_btn_left_press[2]>,0,<tag(pageNumber)>-1,0)  //  prev.page
 endif
-tag(yPos,<eval (84+(<tag(qOnPageNum)>*<argv(1)>))>)
+tag(yPos,<eval (84+(<tag(qOnPageNum)>*<argv(1)>)+<eval argv(2)>)>)
 tag(qOnPageNum,<eval tag(qOnPageNum)+1>)
 
 [function f_qm_clearPaging] // in case a dialog is re-opened, this function cleans tags to start over
@@ -377,11 +440,24 @@ if (safe.isItem) // the object may not exist any more if there is an inconsisten
   endif
 endif
 
+// argv(0) - the section button number
+// argv(1) - the button is active, i.e. NOT selected (pass 0 or empty to disable)
+[function f_questMenu_mainSubsectionButton] 
+arg(x,129+(argv(0)*(questMenu_subsection_width+6)))
+arg(y,73)
+resizepic(<arg(x)>,<arg(y)>,<questMenu_bg>,<questMenu_subsection_width>,<questMenu_subsection_height>)
+if (0<argv(1)>)
+  button(<arg(x)>+<eval(questMenu_subsection_pic_x[<argv(0)>])>,<arg(y)>+<eval(questMenu_subsection_pic_y[<argv(0)>])>,questMenu_subsection_pic[<argv(0)>],questMenu_subsection_pic[<argv(0)>],1,0,<argv(0)>+1)
+  checkertrans(<arg(x)>+10,<arg(y)>+10,<questMenu_subsection_width>-20,<questMenu_subsection_height>-20)
+else
+  gumppic(<arg(x)>+<eval(questMenu_subsection_pic_x[<argv(0)>])>,<arg(y)>+<eval(questMenu_subsection_pic_y[<argv(0)>])>,questMenu_subsection_pic[<argv(0)>])
+endif
+
 // argv(0) - section number
 // argv(1) - transparent
 // argv(2) - indent
-// argv(3) - button is active (pass 0 or empty to disable)
-[function f_questMenu_sectionButton] 
+// argv(3) - button is active, i.e. NOT selected (pass 0 or empty to disable)
+[function f_questMenu_sectionButton]
 arg(x,0)
 arg(y,<eval (30+<eval argv(0)*85>)>)
 resizepic(<arg(x)>,<arg(y)>,<questMenu_bg>,<questMenu_section_width>,<questMenu_section_height>)
@@ -390,7 +466,7 @@ if (0<argv(1)>)
 endif
 
 if (0<argv(3)>)
-  button(<arg(x)>+<eval(questMenu_section_pic_x[<argv(0)>])>,<arg(y)>+<eval(questMenu_section_pic_y[<argv(0)>])>,questMenu_section_pic[<argv(0)>],questMenu_section_pic[<argv(0)>],1,0,<argv(0)>+1)
+  button(<arg(x)>+<eval(questMenu_section_pic_x[<argv(0)>])>,<arg(y)>+<eval(questMenu_section_pic_y[<argv(0)>])>,questMenu_section_pic[<argv(0)>],questMenu_section_pic[<argv(0)>],1,0,(<argv(0)>*10)+1)
 else
   gumppic(<arg(x)>+<eval(questMenu_section_pic_x[<argv(0)>])>,<arg(y)>+<eval(questMenu_section_pic_y[<argv(0)>])>,questMenu_section_pic[<argv(0)>])
 endif
@@ -412,7 +488,7 @@ argo.button(<arg(width)>-20,<eval arg(height)/2>-16,0828,01F,1,0,1)
 
 [dialog d_weekly_completed button]
 on=1
-dialog(d_questy,2)
+dialog(d_questy,10)
 
 
 /////////////////////

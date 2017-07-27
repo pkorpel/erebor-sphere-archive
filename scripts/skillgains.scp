@@ -58,7 +58,7 @@ bandage             //pouziti bandazi
 bandageblood        //pouziti krvavych bandazi
 regy                //seznam regu
 bbmanbomb           //pro bomberman hru
-dobyvani
+dobyvani            //Zobrazi nadchazejici Dobyvani/Braneni
 
 //systemove
 setpassword

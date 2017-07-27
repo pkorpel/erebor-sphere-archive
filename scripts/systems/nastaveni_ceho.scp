@@ -491,6 +491,27 @@ nastaveni_dialog
 on=0 Craftmenu
 menu menu_nastaveni_Craftmenu
 
+on=0 Dungeony
+// menu menu_nastaveni_Dungeonu
+tag(nastaveni_finishfunkce,nastaveni_finish_globals)
+tag(nastaveni_nadpis,"Nastaveni vlastnosti dungeonu")
+
+tag(nastaveni_prefname,"onestring(")
+tag(nastaveni_prefnametype,"n_dungeon_name[")
+tag(nastaveni_sufnametype,"]")
+tag(nastaveni_sufname,")")
+
+tag(nastaveni_prefvalue,"nastaveni_")
+tag(nastaveni_prefvaluetype,"n_dungeon[")
+tag(nastaveni_sufvaluetype,"]")
+tag(nastaveni_sufvalue,"")
+
+tag(nastaveni_prefdefault,"onestring(")
+tag(nastaveni_prefdefaulttype,"n_dungeon_default[")
+tag(nastaveni_sufdefaulttype,"]")
+tag(nastaveni_sufdefault,")")
+nastaveni_dialog
+
 on=0 Jine
 menu menu_nastaveni_jine
 
@@ -2630,6 +2651,27 @@ n_jine_default[19]	0
 n_jine[20]		craftexp_i_ore_mithril
 n_jine_name[20]	"Craftexp - mithril ore"
 n_jine_default[20]	0
+
+n_dungeon[0]		dungeon_mark_Carn_dum_SafeZone
+n_dungeon_name[0]	"Delka marku do CD (sec)"
+n_dungeon_default[0]	259200
+
+n_dungeon[1]		dungeon_mark_Tumma_Osto_SafeZone
+n_dungeon_name[1]	"Delka marku do TO (sec)"
+n_dungeon_default[1]	172800
+
+n_dungeon[2]		dungeon_mark_Mount_Dorlas_SafeZone
+n_dungeon_name[2]	"Delka marku do MD (sec)"
+n_dungeon_default[2]	86400
+
+n_dungeon[3]		dungeon_mark_Ledove_Jeskyne_SafeZone
+n_dungeon_name[3]	"Delka marku do Ledovky (sec)"
+n_dungeon_default[3]	86400
+
+n_dungeon[4]		dungeon_mark_Nexmirias_SafeZone
+n_dungeon_name[4]	"Delka marku do Nexu (sec)"
+n_dungeon_default[4]	86400
+
 
 n_sg[0]		sg_playing
 n_sg_name[0]	"Hra sa? 0|1"
