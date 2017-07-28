@@ -1618,7 +1618,9 @@ endif
 
 [function f_dungeonMark_useMark]  // argv(0)  - Jmeno marku/zony ktery pouziju/smazu ; argv(1) - 0=portim; 1=mazu
 if (findid(#0A2000EB0))   // uz ma context menu otevrene
-  return 1
+  if !(strcmpi(<findid(#0A2000EB0).more1>,"d_potvrdit"))   // je to nas context menu na potvrzeni vstupu
+    return 1
+  endif
 endif
 
 f_dungeonMark_ClearLinks      // procisteni linku po timeru
@@ -1642,6 +1644,7 @@ while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
       return 1
     else                    // budeme mazat
       redmessage("Pokracovanim v dungeonu jsi <src.sex(prisel,prisla)> o moznost vratit se do <arg(Zone)>"))
+      accmsg("pokracoval v dungeonu s aktivnim Markem do <arg(Zone)>. Mark byl smazan. <p>")
       Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
       Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
       arg(i,#-1)          // kdyby nahodou mel stejny mark vicekrat
