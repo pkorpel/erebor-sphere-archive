@@ -4,56 +4,55 @@ TYPE=t_eq_script
 name=discordance
 
 on=@equip
-if(<link.isitem>)
- cont.sysmessage(Zameruj jen monstra)
- remove
- return 1
+if (<link.isitem>)
+  cont.sysmessage(Zameruj jen monstra)
+  remove
+  return 1
 endif
 if (<link.npc>==0)||(<link.enticement>)
- cont.sysmessage Tohle nemuzes oslabit.
- remove
- return 1
+  cont.sysmessage Tohle nemuzes oslabit.
+  remove
+  return 1
 endif
 if (<eval(promilerange(<eval(<cont.enticement>)>,<Skill_Enticement.effect>))> < <link.tag(experience)>)
- cont.sysmessage(Oslabeni teto prisery presahuje tve moznosti)
- remove
- return 1
+  cont.sysmessage(Oslabeni teto prisery presahuje tve moznosti)
+  remove
+  return 1
 endif
 cont.reveal
 if (<cont.musicianship> <{0 1025})
- morex=0
- cont.sysmessage(You play poorly.)
- cont.sound <cont.findtype(t_musical).typedef.tdata2>
+  morex=0
+  cont.sysmessage(You play poorly.)
+  cont.sound <cont.findtype(t_musical).typedef.tdata2>
 else
   arg(power,<eval(randfakt(<eval(<cont.enticement>)>,<Skill_Enticement.effect>))>)
   if (<arg(power)> < <link.tag(experience)>)
-   morex=0
-   cont.sound <cont.findtype(t_musical).typedef.tdata1>
+    morex=0
+    cont.sound <cont.findtype(t_musical).typedef.tdata1>
   else
-   morex=1
-   cont.sound <cont.findtype(t_musical).typedef.tdata1>
+    morex=1
+    cont.sound <cont.findtype(t_musical).typedef.tdata1>
   endif
 endif
-//timerdelay(<promilerange(<cont.enticement>,<skill_enticement.delay>)>)
-timerd=(<promilerange(<cont.enticement>,<skill_enticement.delay>)>)
+timerd=<promilerange(<cont.enticement>,<skill_enticement.delay>)>
 more1=1
 
 on=@timer
 if (more1)
- if (morex)
-  cont.classmessage(Oslabeni uspesne.)
-  if (link.findid(i_rune_discordance))
-   link.findid(i_rune_discordance).remove
+  if (morex)
+    cont.classmessage("Oslabeni bylo uspesne.")
+    if (link.findid(i_rune_discordance))
+      link.findid(i_rune_discordance).remove
+    endif
+    link.tag(discorded,<eval cont.enticement/4>)
+    link.newitemsafe(i_rune_discordance)
+    link.equip(<lastnew>)
+    lastnew.timer=<eval 10+(<cont.enticement>/20)>
+    link.addFight(<cont>)
+  else
+    cont.redmessage("Oslabeni se nepovedlo.")
+    link.findid(i_rune_discordance).remove
   endif
-  link.tag(discorded,<eval cont.enticement/4>)
-  link.newitemsafe(i_rune_discordance)
-  link.equip(<lastnew>)
-  lastnew.timer=<eval 10+(<cont.enticement>/20)>
- else
-  cont.redmessage(Oslabeni se nepovedlo.)
-//  link.attack(<cont>)
-  link.findid(i_rune_discordance).remove
- endif
 endif
 remove
 return 1
