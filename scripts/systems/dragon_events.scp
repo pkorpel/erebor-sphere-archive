@@ -165,6 +165,7 @@ endif
 if (<act.ischar>)
   topobj.newitemsafe(i_poisonbreath_target_changer)
   arg(targchanger,<lastnew>)
+  targchanger.link=<uid>
   if !(f_canseelos(<act>))
     targchanger.remove
     return 0
@@ -197,7 +198,7 @@ if (npc) || (isgm)
 endif
 
 if (<distancefrom(argv(0))> < 5)
-  f_poison_doPoison(<eval <argv(1)>>,2,poison_c)
+  f_poison_doPoison(<argv(0).link>,<eval <argv(1)>>,2,poison_c)
   sound(586)
 endif
 
@@ -233,6 +234,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 

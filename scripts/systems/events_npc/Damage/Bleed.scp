@@ -15,13 +15,14 @@ if (<eval tag.npc_bleed>)
 endif
 npc_bleed(<var(swingedchar)>)
 
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
 on=@npcKill
-on=@userKill
+on=@playerKill
 
 [function npc_bleed]
 arg(bleeditem,<f_bleed_getMemory(<argv(0)>)>)

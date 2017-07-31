@@ -84,6 +84,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -103,7 +104,7 @@ on=@spellcast
 f_silence_npc(0) //pokus o to aby monstra nekuzlili hned za sebou
 
 
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_healer]

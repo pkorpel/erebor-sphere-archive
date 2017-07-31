@@ -891,13 +891,14 @@ if (<arg(dmgDealt)> > 0)
   endif
 endif
 
+on=@finalBlow
 on=@beforeGetEffect
 on=@beforeDoEffect
 on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterGetSwing
 on=@npcKill
-on=@userKill
+on=@playerKill
 on=@DrinkingPotion
 
 /////////////////////////////
@@ -974,14 +975,15 @@ on=@beforeDoEffect
 on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterSwing
+on=@finalBlow
 on=@npcKill
-on=@userKill
+on=@playerKill
 on=@DrinkingPotion
 
 /////////////////////////////
 
 [events e_weekly_killInDung]
-on=@userKill // src - co bylo zabito, uid - kdo zabil
+on=@playerKill // src - co bylo zabito, uid - kdo zabil
 if (src.npc) // zabil npc
   if (isDung) // jsem v dungu
     findid(i_memory_weekly_quest).f_weekly_killInDung
@@ -994,6 +996,7 @@ on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterGetSwing
 on=@afterSwing
+on=@finalBlow
 on=@npcKill
 on=@DrinkingPotion
 
@@ -1023,7 +1026,7 @@ endif
 /////////////////////////////
 
 [events e_weekly_KillStreak]
-on=@userKill // src - co bylo zabito, uid - kdo zabil
+on=@playerKill // src - co bylo zabito, uid - kdo zabil
 if (src.npc) // zabil npc
   findid(i_memory_weekly_quest).f_weekly_KillStreak
 endif
@@ -1034,6 +1037,7 @@ on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterGetSwing
 on=@afterSwing
+on=@finalBlow
 on=@npcKill
 on=@DrinkingPotion
 
@@ -1069,7 +1073,7 @@ endwhile
 /////////////////////////////
 
 [events e_weekly_killPlayer]
-on=@userKill // src - co bylo zabito, uid - kdo zabil
+on=@playerKill // src - co bylo zabito, uid - kdo zabil
 if (src.isPlayer) // zabil hrace
   if (<src.tag(realm)> == <tag(realm)>)
     return
@@ -1081,6 +1085,7 @@ if (src.isPlayer) // zabil hrace
 endif
 
 on=@afterswing
+on=@finalBlow
 on=@beforeGetEffect
 on=@beforeDoEffect
 on=@afterDoEffect

@@ -302,7 +302,8 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 [ITEMDEF i_teleport_delay]

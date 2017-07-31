@@ -88,12 +88,15 @@ questMenu_detail_width     400
 questMenu_detail_height    202
 questMenu_section_width    72
 questMenu_section_height   78
-questMenu_section_pic[0]   02b08
+questMenu_section_pic[0]   02B08
 questMenu_section_pic_x[0] 15
 questMenu_section_pic_y[0] 13
-questMenu_section_pic[1]   0fc5
-questMenu_section_pic_x[1] 20
-questMenu_section_pic_y[1] 20
+questMenu_section_pic[1]   02B03
+questMenu_section_pic_x[1] 15
+questMenu_section_pic_y[1] 13
+questMenu_section_pic[2]   02B05
+questMenu_section_pic_x[2] 15
+questMenu_section_pic_y[2] 13
 
 questMenu_subsection_width      58
 questMenu_subsection_height     56
@@ -112,7 +115,7 @@ questMenu_subsection_pic_y[1]   12
 5,5
 page 0
 arg(sideSection,0)
-while (arg(sideSection) < 2)
+while (arg(sideSection) < 3)
   if ( (<argv(0)> < (arg(sideSection)*10)) || (<argv(0)> >= ((arg(sideSection)+1)*10)) )
     argo.f_questMenu_sectionButton(<arg(sideSection)>,1,10,1)
   endif
@@ -126,6 +129,8 @@ if (<argv(0)> < 10) // main questy dialog
   argo.f_questy_buildMainDialog(<argv(0)>)
 elseif (<argv(0)> < 20) // weekly quests
   argo.f_questy_buildWeeklyDialog
+elseif (<argv(0)> < 30) // pvp league
+  argo.f_questy_buildPvPLeagueDialog
 endif
 page 0
 argo.gumppic(<eval <questMenu_width>+7>,35,028C9)  //dracek
@@ -275,8 +280,10 @@ while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
   arg(i,#+1)
 endwhile
 
+////////////
+
 [function f_questy_buildWeeklyDialog]
-newTextLine(<eval (<questMenu_width>/2)-11>,45,<d_def_subheadcolor>,"Tydenni Questy")
+newTextLine(<eval (<questMenu_width>/2)-17>,45,<d_def_subheadcolor>,"Tydenni Questy")
 f_questMenu_sectionButton(1)
 arg(qCount,<src.weeklyTag(qCount)>)
 
@@ -356,6 +363,41 @@ while (<arg(qNum)> <= <def_weekly_count>)
   f_qm_weeklyAddUnavailableQuestInfo(<arg(qNum)>,<arg(stepSize)>)
   arg(qNum,#+1)
 endwhile
+
+////////////
+
+[function f_questy_buildPvPLeagueDialog]
+src.f_pvpLeague_checkExpiration
+f_questMenu_sectionButton(2)
+
+arg(baseY,<questMenu_height>+25)
+resizepic(70,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-60,40)
+newTextLine(<var(middle)>-85,<arg(baseY)>+9,<d_def_subheadcolor>,"Konec Sezony  <DatePrint(-2,<pvpLeague.tag(endYear)>,<pvpLeague.tag(endMonth)>,<pvpLeague.tag(endDay)>)>")
+
+arg(middle,<eval (<questMenu_width>/2)>)
+newTextLine(<eval (<questMenu_width>/2)-12>,45,<d_def_subheadcolor>,"PvP Sezona <pvpLeague_season>")
+newTextLine(<arg(middle)>-42,85,<d_def_headcolor>,"Hrac")
+newTextLine(<arg(middle)>+90,85,<d_def_headcolor>,"Rank")
+
+arg(players,<pvpLeague.tag(playersCount)>)
+arg(i,0)
+while (<i> < <players>)
+  f_qm_setOffsetAndPaging(10,30,28)
+  arg(posY,<tag(yPos)>)
+  if (<i> < 3)
+    arg(lineColor,94)
+  elseif (<i> < 6)
+    arg(lineColor,89)
+  else
+    arg(lineColor,<questMenu_color_questInactive>)
+  endif
+  newTextLine(<arg(middle)>-72,<arg(posY)>,<arg(lineColor)>,"<eval (arg(i)+1)>.")
+  newTextLine(<arg(middle)>-42,<arg(posY)>,<arg(lineColor)>,"<finduid(<pvpLeague.tag(player[<arg(i)>])>).name>")
+  newTextLine(<arg(middle)>+90,<arg(posY)>,<arg(lineColor)>,"<pvpLeague.tag(rank[<arg(i)>])>")
+  arg(i,#+1)
+endwhile
+
+///////////
 
 [function f_qm_itemButton] // argv(0) - Y pos, argv(1) - step size
 resizepic(75,<argv(0)>,<g_bg[8]>,<questMenu_width>-65,<argv(1)>-5) //g_bg[5,6,7,8] | 5,7,8

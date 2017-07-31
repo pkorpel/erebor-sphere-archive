@@ -21,7 +21,7 @@ if (tag(bomba))
  src.exploze
  remove
 elseif (f_poisoning_weapon_checkPoisoningValues)
-  src.f_poison_doPoison(<tag(jed_sila)>,<tag(jed_rychlost)>,<tag(jed_typ)>)
+  src.f_poison_doPoison(0,<tag(jed_sila)>,<tag(jed_rychlost)>,<tag(jed_typ)>)
   src.damage_noresponse(<eval {1 25}>,dam_physical)
   tag.remove.jed_typ
 elseif (tag(natazeno))

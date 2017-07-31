@@ -313,14 +313,6 @@ endif
 timer=2
 return 1
 
-[function getRandomBug]
-tag(random,<random2(1,<tag(spawn_count)>)>)
-if(<tag(spawn_<tag(random)>_id)>)
-  return <tag(spawn_<tag(random)>_id)>
-else
-  return 0
-endif
-
 on=@create
 color=0296
 tag(timestep,0)
@@ -331,18 +323,28 @@ if (src.isGM)
   return 1
 endif
 if (<src.isplayer>)
-  if(<serv.time> > <tag(timestep)>)
+  if (<serv.time> > <tag(timestep)>)
     src.damage_noResponse(5,dam_poison)
     src.dm_poison(2)
     tag(timestep,<serv.time>+4*10)
+  endif
+endif
+
+[function getRandomBug]
+tag(random,<random2(1,<tag(spawn_count)>)>)
+if (<tag(spawn_<tag(random)>_id)>)
+  return <tag(spawn_<tag(random)>_id)>
+else
+  return 0
+endif
 
 [function decrementTagBug] //cislo brouka
-if(<tag(spawn_count)> > 0)
-  if(<tag(spawn_<argv(0)>_amount)> > 1)
+if (<tag(spawn_count)> > 0)
+  if (<tag(spawn_<argv(0)>_amount)> > 1)
     tag(spawn_<argv(0)>_amount,<tag(spawn_<argv(0)>_amount)>-1)
   else
     arg(y,1)
-    while(<y> <= <eval(<tag(spawn_count)>-<argv(0)>)>)
+    while (<y> <= <eval(<tag(spawn_count)>-<argv(0)>)>)
       tag(spawn_<eval(<argv(0)>+<y>-1)>_id,<tag(spawn_<eval(<argv(0)>+<y>)>_id)>)
       tag(spawn_<eval(<argv(0)>+<y>-1)>_amount,<tag(spawn_<eval(<argv(0)>+<y>)>_amount)>)
       arg(y,#+1)

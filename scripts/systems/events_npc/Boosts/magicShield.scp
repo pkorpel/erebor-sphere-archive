@@ -6,6 +6,7 @@
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect 
 on=@afterDoEffect
 on=@beforegeteffect
@@ -32,7 +33,7 @@ if (!findid(i_silencer))
 endif
 
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [eof]

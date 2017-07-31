@@ -719,6 +719,7 @@ events -e_sheep_game_monster
 return 0
 
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -730,7 +731,6 @@ on=@Created
 on=@spellcast
 //24=stone wall, 28=fire field, 32=recall, 33=blade spirits, 40=summon creature, 47=paralyze field, 50=energy field, 52=gate
 //58=vortex, 60-64=elementalove a demon 
-//say(<argn>)
 if ((<argn>==24)||(<argn>==28)||(<argn>==32)||(<argn>==33)||(<argn>==40)||(<argn>==47)||(<argn>==50)||(<argn>==52)||(<argn>==58)|| ((<argn>>=60)&&(<argn><=64)) )
   src.redmessage("To nepujde")
   return 1
@@ -754,12 +754,12 @@ f_sheep_game_death
 on=@beforedoeffect 
 f_sheep_game_setMonsterEvent
 
+on=@finalBlow
 on=@afterDoEffect
 on=@DrinkingPotion
 //if (<targ.baseid>==i_potion_Invisibility)
 //  newequip(i_invisibility_remover)
 //endif
-//on=@afterswing
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
@@ -781,6 +781,7 @@ on=@beforegeteffect
 //tag.remove(sheepGameProvocation)
 //tag.remove(sheepGameDetectingHidden)
 //events -e_sheep_game_player  
+
 
 [function f_sheep_game_setMonsterEvent]
 if (<act>)

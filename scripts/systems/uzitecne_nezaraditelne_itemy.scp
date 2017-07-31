@@ -524,7 +524,7 @@ if (src.isplayer)
         if (strlen(<tag(poisonType)>)==0)
           tag(poisonType,poison_c)
         endif
-        src.f_poison_doPoison(<tag(poisonDmg)>,<tag(poisonSpeed)>,<tag(poisonType)>) // arg1 ~ dmg; arg2 ~ poison speed in seconds; arg3 ~ poison type function name
+        src.f_poison_doPoison(0,<tag(poisonDmg)>,<tag(poisonSpeed)>,<tag(poisonType)>) // arg1 ~ dmg; arg2 ~ poison speed in seconds; arg3 ~ poison type function name
         src.redmessage("<src.sex("Slapl","Slapla")> jsi na jedovaty osten")
         f_trap_moveTrap
       endif

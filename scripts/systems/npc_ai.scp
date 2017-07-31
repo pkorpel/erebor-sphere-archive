@@ -411,6 +411,7 @@ if (var(dodged) == 0)
   endif
 endif
 
+on=@finalBlow
 on=@beforedoeffect 
 on=@afterDoEffect
 on=@beforegeteffect
@@ -425,7 +426,7 @@ if ( (<eval {1 100}> > 85) && (is_physical) )
  var(ubrano,0)
  src.sysmessage("Tva rana se od <name> odrazila!")
 endif
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_item_refuser]
@@ -576,6 +577,7 @@ if (action==06d)&&(distancefrom(<memoryfindtype(MEMORY_ISPAWNED).link>) > 7) //g
   go(<home>)  
 endif
 
+on=@finalBlow
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
@@ -782,6 +784,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 //Kopie bez picovin okolo - jen utocit na opacny realm
 [events e_guard_2]
@@ -854,6 +857,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 [EVENTS e_guard]    
 //test enrico
@@ -938,7 +942,8 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 [EVENTS e_guard_ent]    
@@ -1032,7 +1037,8 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 [events e_guard_ranged]
@@ -1114,8 +1120,9 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [itemdef i_memory_cleaner]
@@ -1266,12 +1273,13 @@ if !(<eval act.tag(hypno_mystik)>)	//mystikum v hypno nebudeme shazovat zbran ->
   endif
 endif
 
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 //[EVENTS e_hodici_bombak]//kdokoli tohle stvoril, opravit nez to znova bude vypusteno.
@@ -1354,6 +1362,7 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegeteffect
 
 
@@ -1438,6 +1447,8 @@ on=@DrinkingPotion
 on=@afterswing                 //   monstrum  zasazeno
      act.spelleffect 29 1000 //great heal
 
+on=@finalBlow
+
 
 
 [EVENTS e_wormDrop]
@@ -1490,13 +1501,14 @@ else
  endif
 endif
 
+on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@stopguarding
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_npc_warcry]
@@ -1521,9 +1533,10 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_npc_flee]
@@ -1538,6 +1551,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 [events e_issumon]
 on=@step
@@ -1562,8 +1576,9 @@ on=@afterDoEffect
 on=@afterswing
 mana=<maxMana>
 
+on=@finalBlow
 on=@Created
-on=@userkill
+on=@playerKill
 on=@npckill
 
 //[function godistance]
@@ -1742,11 +1757,12 @@ return 1
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect 
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 on=@aftergetswing
 if (<hits> > <eval ((maxhits/4)*3)>) // vice jak 75% HP

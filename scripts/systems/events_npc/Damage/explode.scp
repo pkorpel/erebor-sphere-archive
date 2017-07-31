@@ -12,12 +12,13 @@ endwhile
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [eof]

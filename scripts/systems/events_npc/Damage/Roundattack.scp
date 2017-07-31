@@ -15,8 +15,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-//f_e_npc_roundattack
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
@@ -111,10 +111,11 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@npcKill
-on=@userKill
+on=@playerKill
 on=@spelleffect
 if (isSleeping)
   return 0

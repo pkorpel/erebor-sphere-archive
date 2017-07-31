@@ -17,12 +17,13 @@ else
   changestat(hits,<arg(lifeLeech)>)
 endif
 
+on=@finalBlow
 on=@beforedoeffect 
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 /////  V  A  M  P  I  R  E    L  E  E  C  H  /////
@@ -48,12 +49,13 @@ if (<eval hits+arg(hps)> > <arg(cap)>) //arg(cap) is not a safe value to assign 
 endif
 changestat(hits,<arg(hps)>) // adds hps to the hits stat
 
+on=@finalBlow
 on=@beforedoeffect 
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [eof]

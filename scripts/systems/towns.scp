@@ -225,7 +225,8 @@ paralyze_remove
 attack(<src>)
 
 on=@beforegetswing
-on=@afterswing //kdyz to tu neni tak to blbne
+on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 

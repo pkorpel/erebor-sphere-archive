@@ -32,6 +32,7 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
@@ -220,9 +221,10 @@ if (<var(ubrano)>)
   if (act.poisonManager.f_pm_isImmune)
     return 1
   endif
-  act.f_poison_doPoison(<tag(jed_sila)>,2,poison_c)
+  act.f_poison_doPoison(<uid>,<tag(jed_sila)>,2,poison_c)
 endif
 
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
@@ -274,6 +276,7 @@ if (act.isPlayer)
   endif
 endif
 
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
@@ -401,7 +404,7 @@ if (<arg(distance)> <= <var(roundattackFriendNTimes_range)>)
         elseif (<var(roundattackFriendNTimes_type)> == 2) // mage ("flame strike" - differently counted)
           arg(fireDamage,<eval (((<eval src.tag(sm)>/6)*var(roundattackFriendNTimes_strength))/1000)>) // calculates the fire damage derivated from the mage's SM and is reduced (or enhanced) by the given strength of the monster's attack.
           effect(3,i_fire_column,6,16,0)
-          damage_noresponse(<arg(fireDamage)>,dam_fire|dam_magic)
+          damage_noresponse(<arg(fireDamage)>,dam_fire|dam_magic,<var(roundattackFriendNTimes_src)>)
           sound(snd_spell_flamestrike)
         elseif (<var(roundattackFriendNTimes_type)> == 3) // ranger
           f_roundattackFriendNTimes_applyNonmystikDmg
@@ -409,7 +412,7 @@ if (<arg(distance)> <= <var(roundattackFriendNTimes_range)>)
         elseif (<var(roundattackFriendNTimes_type)> == 4) // necro
           arg(poisonDamage,<eval (((<eval src.tag(sm)>/10)*var(roundattackFriendNTimes_strength))/1000)>) // calculates the poison damage derivated from the necro's SM and is reduced (or enhanced) by the given strength of the monster's attack.
           if (<arg(poisonDamage)> > 0) // a reduced mind strength is greater than 0
-            f_poison_doPoison(<eval arg(poisonDamage)>,5)  // arg1: strength, arg2: speed, (arg3: type ~ plain dmg if ommited); gives the poison damage of a given strength
+            f_poison_doPoison(<var(roundattackFriendNTimes_src)>,<eval arg(poisonDamage)>,5)  // arg1: poison source, arg2: strength, arg3: speed, (arg4: type ~ plain dmg if ommited); gives the poison damage of a given strength
           endif
         elseif (<var(roundattackFriendNTimes_type)> == 5) // cleric
           arg(curseStrength,<eval (((<eval src.Healing>/30)*var(roundattackFriendNTimes_strength))/1000)>) // number of stats reduced will be equal to the third of a healing skill of the cleric
@@ -485,6 +488,7 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@AfterSwing
+on=@finalBlow
 on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect

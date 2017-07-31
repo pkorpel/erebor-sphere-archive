@@ -135,6 +135,7 @@ ITEM=random_reagent,{45 55}
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@aftergetswing
 if (tag(time) < <serv.time>)
   if (chance(200,3))          //20% sance  

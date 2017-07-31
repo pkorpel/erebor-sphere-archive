@@ -533,23 +533,35 @@ if (<arg(sekund)>)
 endif
 
 [function removetarget]
-while (memoryfindtype(MEMORY_WAR_targ))
- memoryfindtype(MEMORY_WAR_targ).remove
+while (memoryfindtype(MEMORY_WAR_TARG))
+  memoryfindtype(MEMORY_WAR_TARG).remove
 endwhile
 
 [function removefight]
 while (memoryfindtype(MEMORY_FIGHT))
- memoryfindtype(MEMORY_FIGHT).remove
- 
+  memoryfindtype(MEMORY_FIGHT).remove
 endwhile
 
+[function addFight] // args - UID charu, jehoz fight link se ma pridat
+if (<uid> == <args>)
+  return
+endif
+if (memoryfind(<args>))
+  arg(mem,<memoryfind(<args>)>)
+else
+  newequip(i_memory)
+  lastnew.link=<args>
+  arg(mem,<lastnew>)
+endif
+mem.color=<mem.color>|<MEMORY_WAR_TARG>|<MEMORY_FIGHT>
+
 [function rewritetarget]  // args - UID cile, ktereho nechceme prepsat
-while (memoryfindtype(MEMORY_WAR_targ))
-  if (memoryfindtype(MEMORY_WAR_targ).link == <args>)   // nalezl jsem memory od cile ktereho nebudeme prepisovat
-    arg(restore_memory,<memoryfindtype(MEMORY_WAR_targ)>)    // ulozime si UID toho memory itemu
-    arg(restore_memory_color,<memoryfindtype(MEMORY_WAR_targ).color>)    // ulozime si Color toho memory itemu
+while (memoryfindtype(MEMORY_WAR_TARG))
+  if (memoryfindtype(MEMORY_WAR_TARG).link == <args>)   // nalezl jsem memory od cile ktereho nebudeme prepisovat
+    arg(restore_memory,<memoryfindtype(MEMORY_WAR_TARG)>)    // ulozime si UID toho memory itemu
+    arg(restore_memory_color,<memoryfindtype(MEMORY_WAR_TARG).color>)    // ulozime si Color toho memory itemu
   endif
-  memoryfindtype(MEMORY_WAR_targ).color=04c
+  memoryfindtype(MEMORY_WAR_TARG).color=04c
 endwhile
 if (<eval arg(restore_memory)>)
   arg(restore_memory).color=<arg(restore_memory_color)>  // prepiseme color na puvodni hodnotu
@@ -661,13 +673,13 @@ if (!act)
   return
 else
   arg(storeact,<act>)
-  arg(targmemory,<memoryfindtype(MEMORY_WAR_targ)>)
+  arg(targmemory,<memoryfindtype(MEMORY_WAR_TARG)>)
   while (arg(targmemory))
-    arg(targmemory).color=<eval arg(targmemory).color&~MEMORY_WAR_targ>
-    arg(targmemory,<memoryfindtype(MEMORY_WAR_targ)>)
+    arg(targmemory).color=<eval arg(targmemory).color&~MEMORY_WAR_TARG>
+    arg(targmemory,<memoryfindtype(MEMORY_WAR_TARG)>)
   endwhile
   arg(targmemory,<memoryfind(<arg(storeact)>)>)
-  arg(targmemory).color=<eval arg(targmemory).color|MEMORY_WAR_targ>
+  arg(targmemory).color=<eval arg(targmemory).color|MEMORY_WAR_TARG>
 endif
 
 [typedef t_shaft_multi]
@@ -5968,7 +5980,7 @@ endif
 
 [function hungryhurts]
 if (food <1)
- damage_noresponse(10,dam_god)
+ damage_noresponse(10,dam_god,<uid>)
  sysMessage("Umiras hlady...")
 endif
 

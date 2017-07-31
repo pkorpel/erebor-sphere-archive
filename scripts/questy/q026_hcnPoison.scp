@@ -41,12 +41,13 @@ endif
 ///////////////////////////
 
 [events e_q026_hcnPoisoning_NPC]
-on=@afterswing
+on=@Afterswing
 if (action==skill_magery) || (var(dodged)==1) || (strlen(<act.tag(energyofshield)>))
   return 0
 endif
 act.f_q026_HCNPoison_give
 
+on=@FinalBlow
 on=@Created
 on=@DrinkingPotion
 on=@AfterGetSwing
@@ -68,6 +69,7 @@ events=-e_q026_hcnCurePoison_check
 
 on=@Created
 on=@AfterSwing
+on=@FinalBlow
 on=@AfterGetSwing
 on=@BeforeGetSwing
 on=@BeforeDoEffect

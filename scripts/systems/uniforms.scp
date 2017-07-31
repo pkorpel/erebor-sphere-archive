@@ -411,7 +411,7 @@ endif
 [function f_uniformRealm_checkValidity]
 if !(<findID(i_uniformTag_rune)>)
   return 0
-elseif !(strlen(<uniformTag(expireDate)>)) || (<isMonthLater(<uniformTag(expireDate)>)>)
+elseif !(strlen(<uniformTag(expireDate)>)) || (<isTimeExceeded(<uniformTag(expireDate)>)>)
   f_uniformRealm_removeEvent
   return 0
 else

@@ -65,7 +65,7 @@ return 1
 ON=@UserDclick
 if(<tag(ready)>)
   if (chance(600,3)))
-    src.f_poison_doPoison(100,2)
+    src.f_poison_doPoison(0,100,2)
     src.sysmessage("<src.sex(Rizl,Rizla)> si se o turin.")
   endif
   scylla.delayedmessage("HM: Podivny Turin: <src.name> utrhl turin.")
@@ -98,7 +98,7 @@ return 1
 
 ON=@Equip
 if({1 100}<81)
-  src.f_poison_doPoison(49,4)
+  src.f_poison_doPoison(0,49,4)
   src.message(<src.sex(Porezal,Porezala)> si se o rostlinu. Citis mravenceni v ruce.)
 endif
 

@@ -3,15 +3,16 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 if (act.npc) && (<eval act.tag(resist_magic)> < 999)
- act.damage_noresponse(<eval  <tag.uc>/{<nastaveni_efekt_mithril>}>,dam_magic)
+  act.damage_noresponse(<eval  <tag.uc>/{<nastaveni_efekt_mithril>}>,dam_magic,<uid>)
 endif
 return 0
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_murdoc_general_pvp]
@@ -56,7 +57,7 @@ return 1
 
 [function f_smazat_murdoc_pvp]
 if (type == t_container)||(baseid == i_robe)||(type == t_allpotions)||(type == t_bandage)||(baseid == i_cape)||(type == t_jewelry)||(type == t_bandage_blood)||(type == t_water_wash)||(type == t_bottle_empty)||(type == t_speedpotions)||(type == t_potion_bomba)
- remove
+  remove
 endif
 
 
@@ -72,6 +73,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@created
 
@@ -362,6 +364,10 @@ on=@afterswing
 smsg "@Afterswing"
 return 0
 
+on=@finalBlow
+smsg "@finalBlow"
+return 0
+
 on=@aftergetswing
 smsg "@Aftergetswing hp:<var(ubrano)>"
 return 0
@@ -397,8 +403,8 @@ on=@aftergetswing
 smsg "@AfterGetSwing"
 return 0
 
-on=@userkill
-smsg "@UserKill <src.name>: <src>"
+on=@playerKill
+smsg "@playerKill <src.name>: <src>"
 return 0
 
 on=@npckill
@@ -479,6 +485,7 @@ else
 endif
 return 0
 
+on=@finalBlow
 on=@beforegetswing
 
 [dialog d_monitorHitsLeech_dialog]
@@ -569,6 +576,7 @@ endif
 return 0
 
 on=@beforegetswing
+on=@finalBlow
 
 [dialog d_monitorStamLeech_dialog]
 f_dialog_leechMonitor("STAM LEECH",<argo>,i_memory_monitorStamLeech)
@@ -666,6 +674,7 @@ else
 endif
 return 0
 
+on=@finalBlow
 on=@beforegetswing
 
 [dialog d_monitorManaLeech_dialog]
@@ -907,7 +916,7 @@ on=@afterDoEffect
 //deprecated on=@aftergetspelldamage
 on=@beforegeteffect
 on=@beforegetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [itemdef i_combat_main]
@@ -948,10 +957,11 @@ on=@aftergetswing
 on=@beforegeteffect
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function noclick_release]
@@ -1024,8 +1034,9 @@ on=@afterDoEffect
 on=@beforegetswing
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@stopguarding
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_spelleffect]
@@ -1580,7 +1591,12 @@ events=+e_noclick
 temporary_null
 return 0
 
-
+on=@finalBlow
+if (var(killedChar).isPlayer)
+  if (var(killedChar).isPvPEvaluable(<uid>))
+    f_pvpLeague_increaseRank(1) // add one more rank point for the killing blow
+  endif
+endif
 
 on=@death
 //nazgul quest
@@ -2034,6 +2050,7 @@ if (argn==52) // gate
 endif
 return <act.f_spellchecklos>
 
+
  //tyhle prazdny triggery tu musej bejt jinak to hazi erory
 on=@DrinkingPotion
 on=@afterswing
@@ -2041,8 +2058,8 @@ on=@miningact
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
-on=@userkill
 on=@npckill
+on=@playerKill
 
 [itemdef i_nostep]
 id=i_memory
@@ -2298,17 +2315,19 @@ if (flag_conjured)
 endif
 newitem i_pouch
 arg(baguid,<act>)
-sector.allchars(f_countfight)
-while (memoryfindtype(0209c))
-  if !(charExists(<memoryfindtype(0209c).link>))  //whe have memory of the character, that does not exist anymore
-    memoryfindtype(0209c).remove
-  elseif !(memoryfindtype(0209c).link.f_countfight)
-    memoryfindtype(0209c).remove
+//sector.allchars(f_countfight) // this should be redundant end expensive!
+arg(mem,<memoryfindtype(MEMORY_WAR_TARG)>)
+while (<arg(mem)>)
+  if !(<charExists(<arg(mem).link>)>)  //whe have memory of the character, that does not exist anymore
+    mem.remove
+  elseif !(mem.link.f_countfight)
+    mem.remove
   endif
+  arg(mem,<memoryfindtype(MEMORY_WAR_TARG)>)
 endwhile
-if !(act.rescount)
+if !(act.rescount) // no usable memory items were found
   act.remove
-  act=<arg(monstdeathac)>
+  act=<arg(monstdeathact)>
   return 0
 endif
 arg(losefame,0)
@@ -2320,69 +2339,67 @@ else
     arg(losefame,<tag(experience)>)
   endif
 endif
-if (act.rescount)
-  arg(addfame,<eval arg(losefame)/act.rescount>)
-  while (act.findcont(0))
-    act=<act.findcont(0).uid>
-    if (region.tag(realm) < 3)&&(arg(addfame) >100)&&((isplayer==0)||(tag(hypno_mystik)))//expstrop vcetne hypnotizovanejch
-      arg(addfame,100)
+arg(addfame,<eval arg(losefame)/act.rescount>)
+while (act.findcont(0))
+  act=<act.findcont(0).uid>
+  if (region.tag(realm) < 3)&&(arg(addfame) >100)&&((isplayer==0)||(tag(hypno_mystik)))//expstrop vcetne hypnotizovanejch
+    arg(addfame,100)
+  endif
+  if (profession==class_craft)//za krafty zadny expy
+    arg(addfame,0)
+  endif
+  tag(added_experience_bydeath,<arg(addfame)>)
+  if (<act.link.tag(awaitsexpforhealing)>) //ma dostat expy za leceni - klerik a shaman, nedostane je za vlastni zabiti
+    act.link.sysMessage("Zkusenosti ziskas za leceni.")
+    act.link.tag.remove(gotexpforhealingnow) //kdyby to mel z minula tak odstranit
+  elseif ((<strlen(<act.link.tag(pact_to)>)>)&&(<act.link.isInCity>!=1)&&(<strcmpi(<act.link.tag(pact_type)>,"blood")>==0))//pri bloodpacte nedostava normalne expy ale od toho s kym ma bloodpact
+    act.link.sysMessage("Zkusenosti ziskas od nositele paktu.")
+  else 
+    if(<act.link.tag(gotexpforhealingnow)>)//dostal za leceni a ucastnil se boje
+      act.link.tag.remove(gotexpforhealingnow)//jen odstranit tuhle indikaci a vic nic
+      act.link.sysMessage("Zkusenosti za leceni jsi jiz <act.link.sex(ziskal,ziskala)>.")
+    else //vubec nic
+      act.link.addexp(<arg(addfame)>) //pridat expy
+      trigger_kill(<uid>,<act.link>)
     endif
-    if (profession==class_craft)//za krafty zadny expy
-      arg(addfame,0)
-    endif
-    tag(added_experience_bydeath,<arg(addfame)>)
-    if (<act.link.tag(awaitsexpforhealing)>) //ma dostat expy za leceni - klerik a shaman, nedostane je za vlastni zabiti
-      act.link.sysMessage("Zkusenosti ziskas za leceni.")
-      act.link.tag.remove(gotexpforhealingnow) //kdyby to mel z minula tak odstranit
-    elseif ((<strlen(<act.link.tag(pact_to)>)>)&&(<act.link.isInCity>!=1)&&(<strcmpi(<act.link.tag(pact_type)>,"blood")>==0))//pri bloodpacte nedostava normalne expy ale od toho s kym ma bloodpact
-      act.link.sysMessage("Zkusenosti ziskas od nositele paktu.")
-    else 
-      if(<act.link.tag(gotexpforhealingnow)>)//dostal za leceni a ucastnil se boje
-        act.link.tag.remove(gotexpforhealingnow)//jen odstranit tuhle indikaci a vic nic
-        act.link.sysMessage("Zkusenosti za leceni jsi jiz <act.link.sex(ziskal,ziskala)>.")
-      else //vubec nic
-        act.link.addexp(<arg(addfame)>) //pridat expy
-        trigger_kill(<uid>,<act.link>)
-      endif
-    endif
-    if (<act.link.tag(pact_by)>) //pact je aktivni
-      if (<act.link.rescount(i_pact)> == 1) // JEN PRO SICHR
-        if(<act.link.tag(pact_by).isInCity> != 1)
-          if (<strcmpi(<act.link.tag(pact_type)>,"blood")>==0) //len pri pakte krvy dostava expy
-            if (!isplayer)
-              act.link.tag(pact_by).sysMessage("Ziskavas zkusenosti za aplikovany pakt na <act.link.name>.")
-              act.link.tag(pact_by).addexp(<arg(addfame)>)
-              trigger_kill(<uid>,<act.link.tag(pact_by)>)
-            else
-              logmsg("<serverTime>: <act.link.name>(<act.link.uid>) zabil shamana ktory mu dal Pakt krve (<act.link.tag(pact_by).name> (<act.link.tag(pact_by).uid>))")
-              act.link.f_cancelpact_by //neviem preco ale trigger death nezareaguje dobre ak je zabity hracom od ktoreho dostal BP v evente e_bloodpact takze ho zrusim tu (aspon u mna na sphere)
-            endif
+  endif
+  if (<act.link.tag(pact_by)>) //pact je aktivni
+    if (<act.link.rescount(i_pact)> == 1) // JEN PRO SICHR
+      if(<act.link.tag(pact_by).isInCity> != 1)
+        if (<strcmpi(<act.link.tag(pact_type)>,"blood")>==0) //len pri pakte krvy dostava expy
+          if (!isplayer)
+            act.link.tag(pact_by).sysMessage("Ziskavas zkusenosti za aplikovany pakt na <act.link.name>.")
+            act.link.tag(pact_by).addexp(<arg(addfame)>)
+            trigger_kill(<uid>,<act.link.tag(pact_by)>)
+          else
+            logmsg("<serverTime>: <act.link.name>(<act.link.uid>) zabil shamana ktory mu dal Pakt krve (<act.link.tag(pact_by).name> (<act.link.tag(pact_by).uid>))")
+            act.link.f_cancelpact_by //neviem preco ale trigger death nezareaguje dobre ak je zabity hracom od ktoreho dostal BP v evente e_bloodpact takze ho zrusim tu (aspon u mna na sphere)
           endif
         endif
-      endif   
-    endif
-    if (<act.link.tag(gethealedby)>) //nekdo ho lecil
-      if (<act.link.tag(gethealedby).tag(awaitsexpforhealing)>) //ma ten link jeste tenhle tag? nebo uz expy dostal?
-        if (act.link.tag(gethealedby).isinvis) //neviditelnej dostane hovno !
-          act.link.tag(gethealedby).sysMessage("Kdo se schovava, nezaslouzi zkusenosti.")
-        else
-          act.link.tag(gethealedby).sysMessage("Ziskavas zkusenosti za leceni <act.link.name>.")
-          act.link.tag(gethealedby).addexp(<arg(addfame)>)
-          trigger_kill(<uid>,<act.link.tag(gethealedby)>)
-        endif
-        act.link.tag(gethealedby).tag.remove(awaitsexpforhealing) //klerikovi odstranime
-        act.link.tag(gethealedby).tag(gotexpforhealingnow,1) //dat kleirkovi indikace ze jiz expy dostal
-        act.link.tag.remove(gethealedby) //lecenemu odstranime
-      else
-        act.link.sysMessage("Ten, kdo te lecil, za to ted nedostane zkusenosti.")
-        act.link.tag.remove(gethealedby) //klerik nic nedostane, jen odstranime tag
       endif
-    endif 
-    act.type=t_eq_memory_obj
-    equip(<act>)
-    act=<arg(baguid)>
-  endwhile
-endif
+    endif   
+  endif
+  if (<act.link.tag(gethealedby)>) //nekdo ho lecil
+    if (<act.link.tag(gethealedby).tag(awaitsexpforhealing)>) //ma ten link jeste tenhle tag? nebo uz expy dostal?
+      if (act.link.tag(gethealedby).isinvis) //neviditelnej dostane hovno !
+        act.link.tag(gethealedby).sysMessage("Kdo se schovava, nezaslouzi zkusenosti.")
+      else
+        act.link.tag(gethealedby).sysMessage("Ziskavas zkusenosti za leceni <act.link.name>.")
+        act.link.tag(gethealedby).addexp(<arg(addfame)>)
+        trigger_kill(<uid>,<act.link.tag(gethealedby)>)
+      endif
+      act.link.tag(gethealedby).tag.remove(awaitsexpforhealing) //klerikovi odstranime
+      act.link.tag(gethealedby).tag(gotexpforhealingnow,1) //dat kleirkovi indikace ze jiz expy dostal
+      act.link.tag.remove(gethealedby) //lecenemu odstranime
+    else
+      act.link.sysMessage("Ten, kdo te lecil, za to ted nedostane zkusenosti.")
+      act.link.tag.remove(gethealedby) //klerik nic nedostane, jen odstranime tag
+    endif
+  endif 
+  act.type=t_eq_memory_obj // move the processed memory object back on the dying character
+  equip(<act>)
+  act=<arg(baguid)>
+endwhile
 act.remove
 addexp(-<arg(losefame)>)
 return 0
@@ -2440,7 +2457,8 @@ on=@DrinkingPotion
 on=@beforegetswing
 on=@aftergetswing
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 on=@Created
 on=@beforegeteffect
@@ -2450,12 +2468,12 @@ on=@afterDoEffect
 [function stdname]
 src.sysMessage("Defname: <typedef.name>")
 
-[function trigger_kill]  // argv(0) - killed npc uid, argv(1) - killer
+[function trigger_kill]  // argv(0) - killed npc uid, argv(1) - killer // actually; the killer may just have a kill assistance (not necessarily the one dealing the final blow)
 arg(killer,<argv(1)>)
 if (charExists(<killer>))
   if (safe finduid(<killer>).isPlayer)
     var(trigkillact,<argv(0)>)
-    killer.trigger(@userkill)
+    killer.trigger(@playerKill)
   elseif (npcExists(<killer>))
     var(trigkillact,<argv(0)>) 
     killer.trigger(@npckill)
@@ -2469,95 +2487,89 @@ endif
 if !(ischar)
   return 0
 endif
-if (flag_conjured)||(distance>30)
+if (flag_conjured)||(distance>20)||(<src.mapplane> != <mapplane>)
   return 0
 endif
-if (srccanseelos)
-  if (src.memoryfind(<uid>))//zna me, jsem u nej zapsanej...
-    arg(storeact,<act>)
-    act=<src.memoryfind(<uid>).uid>
-    if (<act.color>&0209c)
-      if (findID(i_qf_sign)) // hrac ma aktivovany quest - lovecka vyveska
-        arg(sign,<findID(i_qf_sign)>)
-        if !(src.isResurrectedNPC) // resurrected NPC won't count
-          if (<src.obody>==<sign.tag(hunted)>)//jen quest
-            sign.tag(qfcount,#+1)
-            sysMessage("<sex(Zabil,Zabila)> jsi obludu, na kterou je vyhlaseny lov.")
-          endif
-          if (<src.obody>==<sign.tag(hunteda)>)//jen quest
-            sign.tag(qfcount,#+1)
-            sysMessage("<sex(Zabil,Zabila)> jsi obludu, na kterou je vyhlaseny lov.")
-          endif
-          if (<src.obody>==<sign.tag(huntedb)>)//jen quest
-            sign.tag(qfcount,#+1)
-            sysMessage("<sex(Zabil,Zabila)> jsi obludu, na kterou je vyhlaseny lov.")
-          endif
-        endif
-      endif
-      if (isplayer)
-        if (src.isplayer)
-          if(isnazgul)
-            if(<src.tag(realm)>!=2)&&(<src.tag(skillrank)>==3)&&(strcmpi(<src.profession>,class_craft)) //aby ziskal kill nesmi zabijet mordory a navic jen VMka a ne krafty
-              arg(prsten,<findlayer(8)>)
-              arg(i,0)
-              var(zabil_ho,0)
-              while(<arg(i)> < 3) //pozice 0-2
-                if(!<var(zabil_ho)>)
-                  if(strlen(<arg(prsten).tag(killed_<arg(i)>)>))
-                    if(!strcmpi(<arg(prsten).tag(killed_<arg(i)>)>,<src>))          
-                      var(zabil_ho,1) //uz driv nez pred sedmi killy
-                    endif
-                  else //jeste nic neulozeno, ulozime si ho
-                    arg(prsten).tag(killed_<arg(i)>,<src>)
-                    var(zabil_ho,2) //ulozen do prazdneho mista
-                  endif
-                endif
-                arg(i,#+1)
-              endwhile
-              if(<var(zabil_ho)>==2)
-                //kermel.sysMessage(bylo jeste volno)
-                tag(playerkillstotal,<eval tag.playerkillstotal>+1)
-              else
-                if(<var(zabil_ho)>)==0) //zabil nejdrive pred sedmi killy a v poli je plno
-                  //kermel.sysMessage(posouvame pole a neco dostanem)
-                  arg(j,0)
-                  while(<arg(j)> < 1) //pozice 0-0 posunout o jedno nahoru (0. vyhodit - mozno ho uz zabit znova) |Pozn Yavanna: while cyklus tu je z historickych duvodu, kdy byl ukladan vetsi pocet hracu nez posledni 3. Pro pripad ze by se to znovu menilo tu ten cyklus ponechavam pripraven
-                    arg(k,<eval (<arg(j)>+1)>)
-                    arg(prsten).tag(killed_<arg(j)>,<arg(prsten).tag(killed_<arg(k)>)>)
-                    arg(j,#+1)
-                  endwhile
-                  arg(prsten).tag(killed_2,<src>) //nova 2. pozice
-                  tag(playerkillstotal,<eval tag.playerkillstotal>+1)
-                else
-                  //kermel.sysMessage(jeste nic)
-                  //var=1 - jeste za nej nic nedostane
-                endif 
-              endif
-              var(zabil_ho,"")
-            endif
+if (src.memoryfind(<uid>))//zna me, jsem u nej zapsanej...
+  arg(storeact,<act>)
+  act=<src.memoryfind(<uid>).uid>
+  if (<act.color>&<MEMORY_WAR_TARG>)
+    if (isplayer)
+      if (src.isplayer)
+        if (src.isPvPEvaluable(<uid>))
+          if (isnazgul)
+            f_fightNazgulKillTest
           else
             tag(playerkillstotal,<eval tag.playerkillstotal>+1)
           endif     
-        else
-          tag(monsterkillstotal,<eval tag.monsterkillstotal>+1)
+          f_pvpLeague_increaseRank(2) // add pvp league rank points for killing assistance
         endif
+      else
+        f_signQuest_fightTest
+        tag(monsterkillstotal,<eval tag.monsterkillstotal>+1)
       endif
     endif
-    if (<act.color>&0209c)
-      act.type=t_eq_script
-      act.cont=<src.act>
-      return 1
-    endif
-    act=<arg(storeact)>
-    //elseif (expmandatory)
-    // newitemsafe(i_memory)
-    // lastnew.type=t_eq_script
-    // lastnew.link=<uid>
-    // lastnew.cont=<src.act>  
-    // return 1
+    act.type=t_eq_script // place usable memory items into a temporary i_pouch (out of the memory layer of the died character)
+    act.cont=<src.act>
+    return 1
   endif
+  act=<arg(storeact)>
 endif
 return 0
+
+[function f_fightNazgulKillTest]
+arg(prsten,<findlayer(8)>)
+f_fightNazgullKillCompute(<arg(prsten)>)
+if (<var(zabil_ho)>==2)
+  tag(playerkillstotal,<eval tag.playerkillstotal>+1)
+else
+  if (<var(zabil_ho)>)==0) //zabil nejdrive pred sedmi killy a v poli je plno
+    arg(j,0)
+    while (<arg(j)> < 1) //pozice 0-0 posunout o jedno nahoru (0. vyhodit - mozno ho uz zabit znova) |Pozn Yavanna: while cyklus tu je z historickych duvodu, kdy byl ukladan vetsi pocet hracu nez posledni 3. Pro pripad ze by se to znovu menilo tu ten cyklus ponechavam pripraven
+      arg(k,<eval (<arg(j)>+1)>)
+      arg(prsten).tag(killed_<arg(j)>,<arg(prsten).tag(killed_<arg(k)>)>)
+      arg(j,#+1)
+    endwhile
+    arg(prsten).tag(killed_2,<src>) //nova 2. pozice
+    tag(playerkillstotal,<eval tag.playerkillstotal>+1)
+  endif 
+endif
+var(zabil_ho,"")
+return
+
+// tests whether a player (argv(0)) is elligeable for receiving pvp-related bonuses (frags) for this player (uid)
+// called upon the fragged target whom is already tested for being a Player character
+// <argv(0)> - the attacker
+[function isPvPEvaluable]
+if (<tag(realm)> == <argv(0).tag(realm)>)
+  return 0
+elseif (<eval region.tag(arena)>)
+  return 0
+elseif (findid(i_checkstats_timer))   // hrac po nedavne smrti (Resskily nepocitame)
+  return 0
+elseif ( (<tag(skillrank)>==3)&&(!strcmpi(<profession>,class_craft)) ) //aby ziskal zasluhu, musi zabijet VMka a ne krafty
+  return 0
+endif
+return 1
+
+[function f_fightNazgullKillCompute]
+arg(i,0)
+var(zabil_ho,0)
+while (<arg(i)> < 3) //pozice 0-2
+  if (!<var(zabil_ho)>)
+    if (strlen(<argv(0).tag(killed_<arg(i)>)>))
+      if (!strcmpi(<argv(0).tag(killed_<arg(i)>)>,<src>))          
+        var(zabil_ho,1) //uz driv nez pred sedmi killy
+        return
+      endif
+    else //jeste nic neulozeno, ulozime si ho
+      argv(0).tag(killed_<arg(i)>,<src>)
+      var(zabil_ho,2) //ulozen do prazdneho mista
+      return
+    endif
+  endif
+  arg(i,#+1)
+endwhile
 
 [function expmandatory]//pro postavu splnujici tyto podminky...
 if (src.npc)
@@ -2695,11 +2707,12 @@ endif
 on=@beforegeteffect
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
-on=@userkill
+on=@playerKill
 on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
@@ -2759,7 +2772,7 @@ if (finduid(<arg(arrowUID)>).typedef.tdata4)
             if (strcmp(<arg(poisonType)>,poison_c) == 0)
               arg(poisonType,poison_absoluteDmg) // there is no way at the moment to appli poison_c damage upon weapons -
             endif
-            act.f_poison_doPoison(<arg(dmg)>,<nastaveni_poison_<arg(poisonType)>>,<arg(poisonType)>,1) //strength, speed, type, suppressed poison effect
+            act.f_poison_doPoison(<uid>,<arg(dmg)>,<nastaveni_poison_<arg(poisonType)>>,<arg(poisonType)>,1) //strength, speed, type, suppressed poison effect
           endif
         endif
       endif
@@ -2768,6 +2781,7 @@ if (finduid(<arg(arrowUID)>).typedef.tdata4)
 endif
 return 0
 
+on=@finalBlow
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
@@ -2775,7 +2789,7 @@ f_shieldDodge_afterGetSwing
 
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [EVENTS e_craft]
@@ -2822,7 +2836,7 @@ if (finduid(<arg(arrowUID)>).typedef.tdata4)
           if (strcmp(<arg(poisonType)>,poison_c) == 0)
             arg(poisonType,poison_absoluteDmg) // there is no way at the moment to appli poison_c damage upon weapons -
           endif
-          act.f_poison_doPoison(<arg(dmg)>,<nastaveni_poison_<arg(poisonType)>>,<arg(poisonType)>,1) //strength, speed, type, suppressed poison effect
+          act.f_poison_doPoison(<uid>,<arg(dmg)>,<nastaveni_poison_<arg(poisonType)>>,<arg(poisonType)>,1) //strength, speed, type, suppressed poison effect
         endif
       endif
     endif
@@ -2835,10 +2849,11 @@ on=@beforegetswing
 on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [EVENTS e_war]
@@ -2904,6 +2919,7 @@ if (act.npc)&&(tag(level)>29)&&(var(is_physical))
 endif
 return 0
   
+on=@finalBlow
 on=@beforegetswing
 
 on=@aftergetswing
@@ -2912,7 +2928,7 @@ f_shieldDodge_afterGetSwing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [EVENTS e_thief]
@@ -3050,10 +3066,11 @@ on=@beforegetswing
 on=@aftergetswing
 f_shieldDodge_afterGetSwing
 
+on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 //deprecated on=@aftergetspelldamage
 
@@ -3189,6 +3206,7 @@ endif
 
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 f_shieldDodge_afterGetSwing
@@ -3196,7 +3214,7 @@ f_shieldDodge_afterGetSwing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [EVENTS e_mystik]
@@ -3264,7 +3282,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 [EVENTS e_Undeclared]
@@ -3404,6 +3423,7 @@ if !(act.isplayer) // povolime pvp
   endif
 endif
 
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect

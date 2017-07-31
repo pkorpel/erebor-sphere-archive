@@ -11,6 +11,7 @@
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 if ((isSleeping) || (isSilenced))
@@ -21,7 +22,7 @@ e_f_npc_curse
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function e_f_npc_curse]
@@ -82,7 +83,7 @@ if (f_canseelos(<argv(0)>)) && !(isgm) && !(flag_invisible==1)  && !(flag_insubs
       arg(damage,#*5)
     endif
     effect(3,<s_curse.EFFECTID>,6,15,1)
-    damage_noresponse(<arg(damage)>,dam_magic)
+    damage_noresponse(<arg(damage)>,dam_magic,<argv(0).link>)
     sysMessage("Citis, jak z tebe mocna a temna sila vysala zivot!")
   endif
 endif

@@ -32,12 +32,13 @@ if (<eval act.tag(resist_para)> <= 900) && (wasHarmed)
 endif
 return 0
 
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [eof]
