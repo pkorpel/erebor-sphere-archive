@@ -234,11 +234,12 @@ elseif (act.isPlayer) // always reduce charge if a non-charging, evil spell is c
 endif
 
 on=@afterSwing
+on=@finalBlow
 on=@beforeGetEffect
 on=@beforeGetSwing
 on=@afterGetSwing
 on=@drinkingPotion
 on=@created
-on=@userkill
+on=@playerKill
 on=@npckill
 [eof]

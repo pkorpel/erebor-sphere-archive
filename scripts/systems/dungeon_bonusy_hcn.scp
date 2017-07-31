@@ -3720,7 +3720,7 @@ endif
 if (src.isGM)
   arg(mainFountainID).dialog(d_hcn_fountainOfLife)
 elseif (<eval src.tag(hcn_mark)>)	// pokud ma hrac znamenko, musi stat na naslapkach ale voda z fontany mu da poison namisto boostu HP
-  src.f_poison_doPoison(<arg(mainFountainID).tag(jed_sila)>,2) // arg1: strength, arg2: speed, (arg3: type ~ plain dmg if ommited)
+  src.f_poison_doPoison(0,<arg(mainFountainID).tag(jed_sila)>,2) // arg1: poison source, arg2: strength, arg3: speed, (arg4: type ~ plain dmg if ommited)
 else
   if (<src.restest(i_hcn_fountainOfLife_effect)>)
     src.findID(i_hcn_fountainOfLife_effect).remove

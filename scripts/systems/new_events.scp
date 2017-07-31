@@ -17,6 +17,7 @@ else
   say("no way")
 endif
 
+on=@finalBlow
 on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
@@ -55,6 +56,7 @@ on=@afterswing
 arg(uber,<eval (<var(ubrano)>*<tag.changeDmgPercent>)/100>)
 var(ubrano,<var(ubrano)>-<arg(uber)>)
 
+on=@finalBlow
 on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
@@ -79,6 +81,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 
 [events e_duplicator]
@@ -98,7 +101,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 [function selfdupe]
@@ -127,7 +131,8 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 ////////
 [EVENTS e_summoneater_vamp]
@@ -240,11 +245,12 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [itemdef i_ovinovaccheck]
@@ -421,16 +427,17 @@ endif
 if !(tag(reactivearmor_damagePerc))  // Pokud z nejakeho duvodu nema monstrum tag kolik % ma odrazet, tak nastavi na 20%
   tag(reactivearmor_damagePerc,20)
 endif 
-src.damage_noresponse(<eval ((<var(ubrano)>*<tag(reactivearmor_damagePerc)>)+50)/100>,<var(damage_flags)>)
+src.damage_noresponse(<eval ((<var(ubrano)>*<tag(reactivearmor_damagePerc)>)+50)/100>,<var(damage_flags)>,<uid>)
 
 on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@beforegetswing
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_elem_terror]
@@ -586,6 +593,7 @@ if (hits<(maxhits/2))&&(!(tag(drak)))
 endif
 
 on=@afterswing 
+on=@finalBlow
 on=@beforegetswing
 on=@beforedoeffect 
 on=@afterDoEffect
@@ -628,11 +636,12 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function f_reduceDmgResists]
@@ -691,11 +700,13 @@ if (rand(6)==1)&&(src.hits<=25)
   src.sysMessage("Cast tveho uderu byla odrazena zpet!")
   src.hits=0
 endif
+
+on=@finalBlow
 on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 on=@spelleffect
@@ -806,12 +817,14 @@ endif
     endif
   endif
 return 0
+
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function f_stun_getfreezebyweapon]
@@ -878,12 +891,14 @@ else (action==Skill_archery)
   endif
 endif
 return 0
+
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef t_weapon_bolt_jagged]
@@ -901,7 +916,7 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_nbdung]
@@ -921,11 +936,12 @@ if (act.isplayer)
  endif
 endif
 
+on=@finalBlow
 on=@afterDoEffect
 on=@beforeGetSwing
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_npc_summoner]
@@ -953,10 +969,11 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_npc_summoning]
@@ -1006,10 +1023,11 @@ on=@beforeGetSwing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_explosiondispell]
@@ -1040,10 +1058,11 @@ on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function f_explosiondispell_setVars]
@@ -1084,11 +1103,12 @@ on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@npcKill
-on=@userKill
+on=@playerKill
 
 [function f_pushall_setVars]
 if (<eval tag(pushall_varsChecked)> == 0)
@@ -1130,7 +1150,7 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@npcKill
-on=@userKill
+on=@playerKill
 
 [function f_pullall_setVars]
 if (strlen(<tag(pullall_varsChecked)>) == 0)
@@ -1184,6 +1204,7 @@ on=@beforeGetSwing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -1211,10 +1232,11 @@ on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_npc_nobody]
@@ -1238,10 +1260,11 @@ endif
 if (chance(<tag(stam_dmg_chance)>,3))
 	reducestamina(<tag(stam_dmg_power)>)
 endif
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 // mass mana reduce
@@ -1253,6 +1276,7 @@ on=@npckill
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 if ((isSleeping) || (isSilenced))
@@ -1263,7 +1287,7 @@ e_f_npc_curse_mana
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function e_f_npc_curse_mana]
@@ -1344,6 +1368,7 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 if ((isSleeping) || (isSilenced))
@@ -1354,7 +1379,7 @@ e_f_npc_curse_stam
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function e_f_npc_curse_stam]

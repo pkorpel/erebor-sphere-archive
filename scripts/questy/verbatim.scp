@@ -283,6 +283,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -296,10 +297,11 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing  
+on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_strazce_sumonner]
@@ -313,6 +315,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
@@ -489,6 +492,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -555,6 +559,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -594,6 +599,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
@@ -631,6 +637,7 @@ if (rand(2)==1) && !(findid(i_morfovatko)) && (tag(polymorfmdelay) < <serv.time>
   lastnew.tag(zmenimsena,<tag(doceho)>)
 endif
 
+on=@finalBlow
 on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect
@@ -834,6 +841,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -1110,6 +1118,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -1541,6 +1550,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 
 [ITEMDEF i_qv1_navnada]

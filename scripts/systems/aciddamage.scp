@@ -22,6 +22,7 @@ AciDropItem.p=<p>
 AciDropItem.tag.acid_dmg=<tag.acid_dmg>
 AciDropItem.tag.acid_ppst=<tag.acid_ppst>
 
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing

@@ -90,11 +90,56 @@ endif
 arg(CountedXMonthsLater,"<ThisYear>,<ThisMonth>,<ThisDay>,<ThisHour>,<ThisMinute>")
 return<CountedXMonthsLater>
 
+// argv(0) - offset to be printed. 0 will print all of the values. 1 will ommit the year, 2 also the month etc (removing from the larges), whereas -1 ommits minutes, -2 hours etc.;
+// rest - the full date starting with a year
+[function DatePrint]
+if (<argv(0)> < 0)
+  arg(startingPoint,<eval -(argv(0))>)
+  arg(endPoint,5)
+else
+  arg(startingPoint,0)
+  arg(endPoint,<eval (5-argv(0))>)
+endif
+
+arg(result,"")
+while (<startingPoint> < <endPoint>)
+  if (startingPoint == 0)
+    arg(result,"<eval argv(5)>m")
+  elseif (startingPoint == 1)
+    if (strlen(<arg(result)>))
+      arg(result,"<arg(result)> <eval argv(4)>h")
+    else
+      arg(result,"<eval argv(4)>h")
+    endif
+  elseif (startingPoint == 2)
+    if (strlen(<arg(result)>))
+      arg(result,"<arg(result)> <eval argv(3)>.")
+    else
+      arg(result,"<eval argv(3)>.")
+    endif
+  elseif (startingPoint == 3)
+    if (strlen(<arg(result)>))
+      arg(result,"<arg(result)><eval argv(2)>.")
+    else
+      arg(result,"<eval argv(2)>.")
+    endif
+  elseif (startingPoint == 4)
+    if (strlen(<arg(result)>))
+      arg(result,"<arg(result)> <eval argv(1)>")
+    else
+      arg(result,"<eval argv(1)>")
+    endif
+  endif
+  arg(startingPoint,#+1)
+endwhile
+return<arg(result)>
+
 [function MonthLater]
 arg(CountedMonthLater,<XDaysLater(31)>)
 Return<CountedMonthLater>
 
-[function isMonthLater]
+//tests whether the current date and time exceeded the timestamp passed in arguments
+[function isTimeExceeded]
 if (<argvcount> == 0)
   return 0
 endif

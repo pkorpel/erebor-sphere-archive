@@ -13,12 +13,13 @@ if (act.isSumon)
   var(ubrano,<eval (<var(ubrano)>+((<var(ubrano)>*<arg(boost)>)/100))>)
 endif
 
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill 
 
 [eof]

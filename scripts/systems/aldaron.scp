@@ -22,6 +22,7 @@ on=@death
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@aftergetswing
 if !(tag(polymorfmdelay))
@@ -42,7 +43,7 @@ on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [itemdef i_druid_morf]
@@ -100,8 +101,9 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 /////////////
@@ -590,6 +592,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 [function ocs_myguard]
 if (npc)
@@ -982,6 +985,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 [function ocs_guard_npc]
   if (src.isplayer)
@@ -1105,6 +1109,7 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -1267,6 +1272,7 @@ on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -1311,6 +1317,7 @@ if(tag(vybuch) != 1)
 endif
   
   	
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -1532,6 +1539,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 
 [EVENTS e_ocs_town_guard]    
@@ -1548,6 +1556,7 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 /////////////////////////
 //// remover of tags on water controller
@@ -2017,6 +2026,7 @@ if ((src.profession==class_war) || (src.profession==class_craft) || (src.profess
   endif
 endif
 return 0
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -3732,7 +3742,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
@@ -3780,7 +3791,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
@@ -3818,6 +3830,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -5401,6 +5414,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -5507,6 +5521,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -5691,6 +5706,7 @@ if (act.isplayer)
  endif
 endif
 
+on=@finalBlow
 on=@afterDoEffect
 on=@beforeGetSwing
 on=@aftergetswing
@@ -5758,6 +5774,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -5818,6 +5835,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -6005,7 +6023,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 on=@beforedoeffect
 on=@afterDoEffect
@@ -6052,6 +6071,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -6190,6 +6210,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -6227,6 +6248,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -6284,6 +6306,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect
@@ -6479,6 +6502,8 @@ src.tag.remove(vampir_name)
 src.events -e_aldaron_vamp
 
 //aldaron_vamp_hit
+
+on=@finalBlow
 on=@aftergetswing
 on=@beforegetswing
 //aldaron_vamp
@@ -7794,6 +7819,7 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforedoeffect
 on=@afterDoEffect

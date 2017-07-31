@@ -666,7 +666,7 @@ endif
 
 arg(damag,<eval f_bleed_calculateCurrentValue(def_bleed_dmgCoeficient)>) // y=DMG * ( 1 - (x ^ 2) / (MAX_TICKS ^2) )
 
-cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god)
+cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god,<link>)
 if (var(dmgedNoResp) <= 0)
   remove
 endif
@@ -820,39 +820,39 @@ vzadsafe
 [Function bankopen]
 return 
 if (<profession>!=class_craft)&&(src.isgm==0)
-src.classMessage(Nemuzes pouzit tuto schopnost.)
-return 0
+  src.classMessage(Nemuzes pouzit tuto schopnost.)
+  return 0
 endif
 if (flag_dead)
-src.sysMessage Your ghostly hand passes through the object.
+  src.sysMessage Your ghostly hand passes through the object.
 elseif (region.tag(nobank))
-src.redmessage(Tady nemuzes pouzit tuto schopnost.)
+  src.redmessage(Tady nemuzes pouzit tuto schopnost.)
 elseif (serv.time<tag(nextbank))&&(src.isgm==0)
-src.classMessage(Pokusit se o otevreni banky muzes za <eval (tag(nextbank)-serv.time)/600> minut, <eval ((tag(nextbank)-serv.time)-(((tag(nextbank)-serv.time)/600)*600))/10> sekund.)
+  src.classMessage(Pokusit se o otevreni banky muzes za <eval (tag(nextbank)-serv.time)/600> minut, <eval ((tag(nextbank)-serv.time)-(((tag(nextbank)-serv.time)/600)*600))/10> sekund.)
 elseif ( {0 100000} > tag(ability))
-tag(nextbank,<eval serv.time+nastaveni_ability_openbankdelay_fail>)
-src.classMessage(Nepovedlo se ti otevrit banku.)
+  tag(nextbank,<eval serv.time+nastaveni_ability_openbankdelay_fail>)
+  src.classMessage(Nepovedlo se ti otevrit banku.)
 else
-tag(nextbank,<eval serv.time+nastaveni_ability_openbankdelay_succes>)
-src.classMessage(Povedlo se ti otevrit banku.)
-bankself
-stamina=0
+  tag(nextbank,<eval serv.time+nastaveni_ability_openbankdelay_succes>)
+  src.classMessage(Povedlo se ti otevrit banku.)
+  bankself
+  stamina=0
 endif
 
 [Function longrange]
 if (isnonmobile)
- src.sysMessage(You are frozen and cannot move.)
- return 1 
+  src.sysMessage(You are frozen and cannot move.)
+  return 1 
 elseif (stamina<10)
- sysMessage("Uz ti nezbyvaji sily.")
- return 1
+  sysMessage("Uz ti nezbyvaji sily.")
+  return 1
 elseif findid(i_delayer_longrange)
- sysMessage("Jeste nelze pouzit.")
- return 1 
+  sysMessage("Jeste nelze pouzit.")
+  return 1 
 elseif ({0 10000}>eval(tag(ra_rangearrow)*nastaveni_rangearrow_chance))
- src.redmessage("Nepovedlo se.")
- newEquip(i_delayer_longrange)
- return 1 
+  src.redmessage("Nepovedlo se.")
+  newEquip(i_delayer_longrange)
+  return 1 
 endif
 src.sysMessage(dosah tve zbrane je vyssi)
 newEquip(i_delayer_longrange)
@@ -1304,7 +1304,7 @@ if (charExists(<act>))
             endif
             if (strlen(<findUID(<arg(kudla)>).tag(jed_sila)>))  //target was hit and there is still some poison on the dagger
               if (findUID(<arg(kudla)>).f_poisoning_weapon_checkPoisoningValues)
-                myTarget.f_poison_doPoison(<findUID(<arg(kudla)>).tag(jed_sila)>,<nastaveni_poison_<findUID(<arg(kudla)>).tag(jed_typ)>>,<findUID(<arg(kudla)>).tag(jed_typ)>)
+                myTarget.f_poison_doPoison(<uid>,<findUID(<arg(kudla)>).tag(jed_sila)>,<nastaveni_poison_<findUID(<arg(kudla)>).tag(jed_typ)>>,<findUID(<arg(kudla)>).tag(jed_typ)>)
               endif
             endif
           else
@@ -3114,6 +3114,8 @@ action=-1
 flag_war=0
 return 1
 
+on=@finalBlow
+
 [events e_hypnotising_mystic_ego] //panak
 //nedelat nic, a hlavne nekouzlit!!
 on=@npcseenewplayer
@@ -3159,6 +3161,7 @@ return 1
 on=@deathcorpse
 argo.remove //odstranit
 
+on=@finalBlow
 on=@Created
 on=@beforegetswing
 
@@ -3222,6 +3225,7 @@ on=@beforeDoEffect
 on=@DrinkingPotion
 on=@beforegetswing
 on=@afterswing
+on=@finalBlow
 
 [Function isspellscrl]
 if (<type>==t_scroll)||(<type>==t_customspell_scroll)
@@ -3960,6 +3964,7 @@ f_catchField_releaseNPC(<tag(catchedBy)>,<tag(catchedBy).findID(i_memory_catchFi
 
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
@@ -4055,6 +4060,7 @@ if (is_physical) && !(act.isplayer) && (tag(ra_defstance))
   var(ubrano,<eval (var(ubrano)*(100-(<nastaveni_defstance_dmgplayer>*<tag(ra_defstance)>/10)))/100>) // o kolik zredukujem dmg
 endif
 
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 
@@ -4068,7 +4074,7 @@ endif
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 //ENERGYSHIELD
@@ -4119,6 +4125,7 @@ endif
 
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 
 on=@beforegetswing
 on=@aftergetswing
@@ -4144,7 +4151,7 @@ endif
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [itemdef i_energyshield]
@@ -4521,6 +4528,7 @@ tag.remove(pact_to)
 [events e_pact]
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@aftergetswing
 on=@death
 if (<tag(pact_by)>)  //zomrel hrac ktoremu dal shaman BP
@@ -4532,12 +4540,13 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect   
 on=@beforegetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [events e_bloodpact]
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@aftergetswing
 on=@gethit
 if !(src.isplayer)  //neudrel hrac  
@@ -4578,7 +4587,7 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect   
 on=@beforegetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function pact]
@@ -4780,6 +4789,7 @@ endif
 
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@aftergetswing
 on=@beforegeteffect
 // je to v function damage_final, lebo tu to nefungovalo
@@ -5149,6 +5159,7 @@ if !(act.isplayer) &&  (<armslore> > {1.0 120.0})
  endif
 endif
 
+on=@finalBlow
 on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
@@ -5539,12 +5550,13 @@ if (is_physical) && !(act.isplayer) && (tag(ra_thief_defstance))
   var(ubrano,<eval (var(ubrano)*(70))/100>) // o kolik zredukujem dmg
 endif
 
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function stance]
@@ -5991,4 +6003,5 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 on=@afterswing
+on=@finalBlow
 [eof]

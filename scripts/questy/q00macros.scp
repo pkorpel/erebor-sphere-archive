@@ -234,6 +234,26 @@ timer=86400
 on=@timer
 remove
 
+[function f_signQuest_fightTest]
+if !(findID(i_qf_sign)) // hrac nema aktivovany quest lovecka vyveska - early exit
+  return
+endif
+arg(sign,<findID(i_qf_sign)>)
+if !(src.isResurrectedNPC) // resurrected NPC won't count
+  if (<src.obody>==<sign.tag(hunted)>)//jen quest
+    sign.tag(qfcount,#+1)
+    sysMessage("<sex(Zabil,Zabila)> jsi obludu, na kterou je vyhlaseny lov.")
+  endif
+  if (<src.obody>==<sign.tag(hunteda)>)//jen quest
+    sign.tag(qfcount,#+1)
+    sysMessage("<sex(Zabil,Zabila)> jsi obludu, na kterou je vyhlaseny lov.")
+  endif
+  if (<src.obody>==<sign.tag(huntedb)>)//jen quest
+    sign.tag(qfcount,#+1)
+    sysMessage("<sex(Zabil,Zabila)> jsi obludu, na kterou je vyhlaseny lov.")
+  endif
+endif
+
 [function signnewquest]
 if ({1 100}>33)
   dorand(39)

@@ -153,7 +153,7 @@ if (strmatch(<arg(written_text)>,"*<arg(generated_text)>*"))
   src.sysmessage("Spravne, prijemnou hru")
   src.tag.remove(written_combination)
   afk_item.remove
-  while (isMonthLater(<tag(firstsuccesslesscontrol)>))
+  while (isTimeExceeded(<tag(firstsuccesslesscontrol)>))
     decreaseAFKTag(<tag(numberAFKsInMonth)>)
   endwhile
   if(strlen(<tag(numberAFKsInMonth)>))
@@ -174,7 +174,7 @@ else
       src.accMsg("Cas: <servertime>, hrac <src> jmenem <src.name> (<src.account.name>) pouzil AFK SCRIPT k vyplneni kontroly. Pocet zaznamu hrace: <eval src.tag(fkMsg)>")
       src.tag.remove(written_combination)
       afk_item.remove
-      while (isMonthLater(<tag(firstsuccesslesscontrol)>))
+      while (isTimeExceeded(<tag(firstsuccesslesscontrol)>))
         decreaseAFKTag(<tag(numberAFKsInMonth)>)
       endwhile
       if (strlen(<tag(numberAFKsInMonth)>))
@@ -671,7 +671,7 @@ var(macroersAction,"")
 arg(afk_item,<findid(i_afk_dialog)>)
 if(strlen(<tag(firstsuccesslesscontrol)>)) //uz nekdy v limitu neuspel
   //f_checkAFKTag
-  if !(isMonthLater(<tag(firstsuccesslesscontrol)>)) //ma x-dni limit
+  if !(isTimeExceeded(<tag(firstsuccesslesscontrol)>)) //ma x-dni limit
     arg(cas_konec,<timeMonthLaterSH(<tag(firstsuccesslesscontrol)>)>)
     if(strlen(<tag(numberAFKsInMonth)>))
       if(<getAFKsCount(<tag(numberAFKsInMonth)>)> < <nastaveni_povoleno_AFKfails>) //jeste ma nekolik pokusu
@@ -780,7 +780,7 @@ return"<arg(dni)>:<arg(hodin)>:<arg(minut)>:<arg(sekund)>.<arg(zbyde)>"
 if(!(strlen(<tag(numberAFKsInMonth)>)))
   sysmessage("<sex Zmeskal Zmeskala> jsem 0 krat.")
 else
-  while (isMonthLater(<tag(firstsuccesslesscontrol)>))
+  while (isTimeExceeded(<tag(firstsuccesslesscontrol)>))
     decreaseAFKTag(<tag(numberAFKsInMonth)>)
   endwhile
   sysmessage("<sex Zmeskal Zmeskala> jsem <eval getAFKsCount(<tag(numberAFKsInMonth)>)> krat.")

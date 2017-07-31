@@ -1,10 +1,11 @@
 // THIS IS A BASIC FUNCTION TO TRIGGER POISON upon players and NPCs.
 // NO OTHER WAY SHALL BE USED TO TRIGGER POISON UNLESS YOU ARE REALLY SURE WHAT YOU'RE DOING!
-// argv(0) ~ poison strength
-// argv(1) ~ poison speed == delay between two poison hits in seconds
-// argv(2) ~ poison type - absolute dmg if not set
-// argv(3) ~ suppress effect
-// argv(4) ~ different sound
+// argv(0) ~ poison source
+// argv(1) ~ poison strength
+// argv(2) ~ poison speed == delay between two poison hits in seconds
+// argv(3) ~ poison type - absolute dmg if not set
+// argv(4) ~ suppress effect
+// argv(5) ~ different sound
 //
 // returns ~ 0 if poison applied
 //           1 if the poison was resisted
@@ -12,28 +13,29 @@
 if (poisonManager.f_pm_isImmune || isDead)
   return 1
 endif
-if (<argvcount> == 2)
+if (<argvcount> == 3)
   arg(poisonType,poison_absoluteDmg)
 else
-  arg(poisonType,<argv(2)>)
+  arg(poisonType,<argv(3)>)
 endif
-if (f_poison_updatePoisonDmg(<argv(0)>,<arg(poisonType)>))
+if (f_poison_updatePoisonDmg(<argv(1)>,<arg(poisonType)>))
   newitemsafe(i_memory_jed)
   arg(poisonMemory,<lastnew>)
-  arg(poisonMemory).tag(jed_sila,<argv(0)>)
-  arg(poisonMemory).tag(jed_rychlost,<argv(1)>)
+  arg(poisonMemory).tag(jed_sila,<argv(1)>)
+  arg(poisonMemory).tag(jed_rychlost,<argv(2)>)
   arg(poisonMemory).tag(jed_typ,<arg(poisonType)>)
   arg(poisonMemory).tag(pManager,<var_poisonManager>)
+  arg(poisonMemory).tag(poisonDealer,<argv(0)>)
   equip(<lastnew>)
   var(var_poisonManager).f_pm_registerNewPoison(<arg(poisonType)>,<lastnew>)
 endif
-if (<eval argv(3)> == 0) // effect not suppressed
+if (<eval argv(4)> == 0) // effect not suppressed
   effect(3,i_fx_curse,6,15,1)
 endif
-if (<eval argv(4)> == 0) // default sound
+if (<eval argv(5)> == 0) // default sound
   sound(221)
 else // other sound specified
-  sound(<argv(4)>)
+  sound(<argv(5)>)
 endif
 return 0
 
@@ -88,7 +90,7 @@ elseif (poisonManager.f_pm_isImmune)
   return
 endif
 //poison hit (damage/para/stamLoss etc):
-cont.<tag(jed_typ)>(<tag(jed_sila)>)
+cont.<tag(jed_typ)>(<tag(jed_sila)>,<tag(poisonDealer)>)
 
 //after poison hit:
 if (<var(dmgPoison)> <= 0) //the current hit dmg might be too low already -> remove this memory
@@ -247,9 +249,9 @@ if (action==skill_swordsmanship)||(action==skill_fencing)
           endif
           arg(poisonType,<finduid(<tag(weaponuid)>).tag(jed_typ)>)
           if (strcmp(<arg(poisonType)>,poison_c) == 0)
-            arg(poisonType,poison_absoluteDmg) // there is no way at the moment to appli poison_c damage upon weapons -
+            arg(poisonType,poison_absoluteDmg) // there is no way at the moment to apply poison_c damage upon weapons
           endif
-          finduid(<arg(mypoisonact)>).f_poison_doPoison(<arg(dmg)>,<nastaveni_poison_<arg(poisonType)>>,<arg(poisonType)>,1) //strength, speed, type, suppressed poison effect
+          finduid(<arg(mypoisonact)>).f_poison_doPoison(<uid>,<arg(dmg)>,<nastaveni_poison_<arg(poisonType)>>,<arg(poisonType)>,1) //strength, speed, type, suppressed poison effect
           finduid(<tag(weaponuid)>).sniz_jed//pouzitim zmensime jed na zbrani
         endif
       endif
@@ -257,12 +259,14 @@ if (action==skill_swordsmanship)||(action==skill_fencing)
   endif
 endif
 return 0
+
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@aftergetswing
 on=@beforegetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 //////////////////////////////////////////////
@@ -393,7 +397,7 @@ if (more)
     cont.sysMessage("Nepovedlo se ti aplikovat jed.")
     if (<eval (1200-<cont.poisoning>)/12>>{0 1000})//otraveni sebe
       cont.sysMessage("Pri manipulaci jsi se <cont.sex("priotravil","priotravila")> pouzitym jedem.")
-      cont.f_poison_doPoison(<eval {<nastaveni_poison_<finduid(<more2>).id>>}>,<nastaveni_poison_<finduid(<more2>).tag(jed_typ)>>,<finduid(<more2>).tag(jed_typ)>) //args: (str, speed, type)
+      cont.f_poison_doPoison(<cont>,<eval {<nastaveni_poison_<finduid(<more2>).id>>}>,<nastaveni_poison_<finduid(<more2>).tag(jed_typ)>>,<finduid(<more2>).tag(jed_typ)>) //args: (str, speed, type)
     endif
   endif
   if (link.isarrow)||(link.isbolt)//pokud je to sip, tak uz to bylo stejne smazany
@@ -471,14 +475,18 @@ if (isPlayer)
   endif
 endif
 
+// argv(0) - poison strength
+// argv(1) - poison originator (char)
 [function poison_absoluteDmg]
-damage_noresponse(<eval argv(0)>,dam_god|dam_poison)
+damage_noresponse(<eval argv(0)>,dam_god|dam_poison,<argv(1)>)
 f_poison_dam_msg(<var(dmgedNoResp)>)
 var(dmgPoison,<var(dmgedNoResp)>) // zero value removes the poison memory
 
+// argv(0) - poison strength
+// argv(1) - poison originator (char)
 [function poison_c]
 arg(poison_dam,<eval (maxhits * argv(0))>)
-damage_noresponse(<eval arg(poison_dam)/100>,dam_god|dam_poison,0)
+damage_noresponse(<eval arg(poison_dam)/100>,dam_god|dam_poison,<argv(1)>)
 f_poison_dam_msg(<var(dmgedNoResp)>)
 var(dmgPoison,<var(dmgedNoResp)>) // zero value removes the poison memory
 
@@ -564,7 +572,7 @@ if (NPC)
   endif
 
   //damage
-  argv(0).f_poison_doPoison(<eval arg(dmg)>,<nastaveni_poison_poison_absoluteDmg>)
+  argv(0).f_poison_doPoison(<uid>,<eval arg(dmg)>,<nastaveni_poison_poison_absoluteDmg>)
 endif
 
 
@@ -615,7 +623,7 @@ if (<arg(poison_power)><=0)
   return 1
 endif
 
-if (<arg(target).f_poison_doPoison(<arg(poison_power)>,5,poison_c,0,snd_spell_poison)>==0)
+if (<arg(target).f_poison_doPoison(<arg(source)>,<arg(poison_power)>,5,poison_c,0,snd_spell_poison)>==0)
   arg(target).damage(1,dam_god,<arg(source)>) //add +1 instant damage if the target doesn't have cure or resist
 endif
 

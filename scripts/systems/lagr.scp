@@ -269,11 +269,12 @@ if (act.isplayer)
  endif
 endif
 
+on=@finalBlow
 on=@afterDoEffect
 on=@beforeGetSwing
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [EoF]

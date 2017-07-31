@@ -273,14 +273,17 @@ if (is_physical)//jinak uz se o to postaral @beforedoeffect
   var(ubrano,<eval (var(ubrano)*(100+thisdaemonbonus))/100>)
 endif
 return 0
+
 on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+thisdaemonbonus))/100>)
 return 0
+
+on=@finalBlow
 on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function thisdaemonbonus]
@@ -343,11 +346,12 @@ return 0
 on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+(thisdragonbonus)))/100>)
 return 0
+on=@finalBlow
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function thisdragonbonus]
@@ -387,11 +391,13 @@ return 0
 on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+thishumanbonus))/100>)
 return 0
+
+on=@finalBlow
 on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function thishumanbonus]
@@ -453,11 +459,13 @@ return 0
 on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+thisspiderbonus))/100>)
 return 0
+
+on=@finalBlow
 on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function thisspiderbonus]
@@ -509,11 +517,12 @@ on=@beforedoeffect
 var(spellpower,<eval (var(spellpower)*(100+thiseyebonus))/100>)
 return 0
 
+on=@finalBlow
 on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function thiseyebonus]
@@ -574,12 +583,14 @@ if (var(swingedchar).npc)
   endif
 endif
 return 0
+
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef tmi_112]
@@ -622,12 +633,14 @@ if (var(swingedchar).npc)
   endif
 endif
 return 0
+
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef tmi_113]
@@ -669,12 +682,14 @@ if (var(swingedchar).npc)
   endif
 endif
 return 0
+
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef tmi_121]
@@ -702,14 +717,15 @@ elseif (<wasHarmed>)
     act.paralyze
   endif
 endif
-
 return 0
+
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef tmi_131]
@@ -728,7 +744,7 @@ return 0
 on=@aftergetswing
 if (tag(mi_meleereflex)>{0 99})
   if (src.isfighting_melee)
-    src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>)
+    src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
     classmessage("Uder magicky odrazen")
     src.redmessage("Uder magicky odrazen")
     var(ubrano,0)
@@ -738,10 +754,11 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef tmi_132]
@@ -761,7 +778,7 @@ on=@aftergetswing
 arg(random,<eval({0 99})>)
 if (tag(mi_rangedreflex)><arg(random)>)
   if (src.isfighting_ranged)
-    src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>)
+    src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
     classmessage("Uder magicky odrazen")
     src.redmessage("Uder magicky odrazen")
     var(ubrano,0)
@@ -771,10 +788,11 @@ on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef tmi_133]
@@ -808,9 +826,10 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef tmi_134]
@@ -842,7 +861,8 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 [typedef tmi_135]
@@ -872,9 +892,10 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [typedef tmi_136]
@@ -909,9 +930,10 @@ on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [itemdef i_mi_bag]

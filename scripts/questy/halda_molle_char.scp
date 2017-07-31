@@ -894,6 +894,7 @@ on=@skillstroke
 on=@hittry
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect 
 on=@afterDoEffect
 on=@beforegeteffect

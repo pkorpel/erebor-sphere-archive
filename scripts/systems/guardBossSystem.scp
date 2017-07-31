@@ -22,9 +22,10 @@ on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function f_guardBossSystem_onHitCheckGuards]

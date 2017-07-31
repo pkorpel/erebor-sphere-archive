@@ -56,11 +56,12 @@ if (argn==48)
   update
 endif
 
+on=@finalBlow
 on=@beforegetswing
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [itemdef i_backStub_hide]

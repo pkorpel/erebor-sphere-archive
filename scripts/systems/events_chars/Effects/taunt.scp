@@ -301,7 +301,8 @@ on=@beforeGetEffect
 on=@beforeDoEffect
 on=@afterDoEffect
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 on=@aftergetswing

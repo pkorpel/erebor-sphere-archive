@@ -1,0 +1,206 @@
+// Globals (VAR):
+// pvpLeague_season    - holds the current season number (starting with 1)
+// pvpLeague           - holds UID of an item with all the tags relevant to the current season
+//    :Tags:
+//      : playersCount              - the number of ranked players stored
+//      : playerPosition[<uid>]     - holds a position (<pos> value) in the leaderboard identified by a player UID
+//      : player[<pos>]             - holds an UID of a player that
+//      : rank[<pos>]               - holds pvp rank of a given player
+//
+// pvpLeague_container - holds UID of the parent container of all the season items.
+//    :Tags:
+//      : seasonItem[<SEASON_NUM>]  - holds UID of the season item for the given season number
+//
+
+
+[defnames def_pvp_league]
+def_pvpLeague_playersStored        30  // the number of players to be stored
+def_pvpLeague_monthsInSeason        2  // the number of players to be stored
+
+
+////////////////////////////////////////
+//   General behavior
+////////////////////////////////////////
+
+// Initializes new season.
+[function f_pvpLeague_initSeason]
+f_pvpLeague_initCont
+var(pvpLeague_season,<eval var(pvpLeague_season)>+1)
+newitem(i_pvpLeague) //a placeholder for current season tags
+var(pvpLeague,<lastnew>)
+var(pvpLeague_container).tag(seasonItem[<var(pvpLeague_season)>],<lastnew>)
+lastnew.cont=<var(pvpLeague_container)>
+
+// Initializes league container. The container is created if it doesn't exist yet
+[function f_pvpLeague_initCont]
+if (!strlen(<var(pvpLeague_container)>))
+  newitem(i_pvpLeague_container)
+  lastnew.p=2282,2597,80,10 // zivejregion
+endif
+
+// Called upon the season object
+// argv(0) - player UID
+// argv(1) - rank the player has
+[function f_pvpLeague_storeRank]
+arg(playersCount,<eval tag(playersCount)>)
+arg(alreadyPresent,<tag(playerPosition[<argv(0)>])>)
+if (!strlen(<arg(alreadyPresent)>))
+  arg(orig_position,<arg(playersCount)>)
+else
+  arg(orig_position,<arg(alreadyPresent)>)
+  tag(rank[<arg(alreadyPresent)>],<argv(1)>) // update the rank of an already existing player record
+endif
+
+arg(new_position,<f_pvpLeague_getPlacement(<arg(orig_position)>,<argv(1)>)>)
+if (strlen(<arg(alreadyPresent)>))
+  if (<arg(new_position)> == <arg(orig_position)>)
+    return
+  endif
+elseif ((<arg(new_position)> > <def_pvpLeague_playersStored>) && (<arg(new_position)> != <arg(playersCount)>))
+  return
+endif
+
+if (!strlen(<arg(alreadyPresent)>)) // new player enters leaderBoard -> insert the values at the end of the list
+  tag(player[<arg(playersCount)>],<argv(0)>)
+  tag(rank[<arg(playersCount)>],<argv(1)>)
+  tag(playerPosition[<argv(0)>],<arg(orig_pos)>)
+  tag(playersCount,#+1)
+endif
+
+f_pvpLeague_swapPlaces(<arg(orig_position)>,<arg(new_position)>,<argv(0)>) // moves the player to the correct place in the leaderboard
+while (tag(playersCount) > def_pvpLeague_playersStored) // the number of players stored exceeds the limit
+  arg(lastPos,<eval (tag(playersCount)-1)>)
+  if (tag(rank[<arg(lastPos)>]) != tag(rank[<eval (<def_pvpLeague_playersStored>-1)>]))
+    tag(playersCount,#-1)
+    tag.remove(playerPosition[<tag(player[<arg(lastPos)>])>])
+    tag.remove(player[<arg(lastPos)>])
+    tag.remove(rank[<arg(lastPos)>])
+    tag.remove(player[<arg(lastPos)>])
+  else
+    return // cleaning done -> all the remaining records have the same value as the last ranking player stored
+  endif
+endwhile
+
+// argv(0) - the position, at which the player currently is
+// argv(1) - the position to which the player should be swapped
+// argv(2) - the uid of a player that is being moved
+[function f_pvpLeague_swapPlaces]
+arg(swapping,<argv(0)>)
+tag(playerPosition[<argv(2)>],<argv(1)>)
+while (<arg(swapping)> > <argv(1)>)
+  arg(tmp_player,<tag(player[<arg(swapping)>])>)
+  arg(tmp_rank,<tag(rank[<arg(swapping)>])>)
+  tag(playerPosition[<tag(player[<eval (arg(swapping)-1)>])>],#+1)
+  tag(player[<arg(swapping)>],<tag(player[<eval (arg(swapping)-1)>])>)
+  tag(rank[<arg(swapping)>],<tag(rank[<eval (arg(swapping)-1)>])>)
+  tag(player[<eval (arg(swapping)-1)>],<arg(tmp_player)>)
+  tag(rank[<eval (arg(swapping)-1)>],<arg(tmp_rank)>)
+  arg(swapping,#-1)
+endwhile
+
+
+// Called upon the season object - tests, whether the user qualifies within the leaderboard based on his
+// current rank.
+// Returns the players placement in the leaderboard. If the placement is >= def_pvpLeague_playersStored,
+// then the player does not qualify within the leaderboard and should not be stored.
+// argv(0) - original position of the player
+// argv(1) - player rank
+[function f_pvpLeague_getPlacement]
+arg(position,<argv(0)>)
+while (<arg(position)> > 0) // find the highest placement before the player with a higher rank
+  if (<argv(1)> < <tag(Rank[<eval (arg(position)-1)>])>)
+    return<arg(position)>
+  endif
+  arg(position,#-1)
+endwhile
+return<arg(position)>
+
+// Called upon any CHAR - usually a player, because a newitem call needs to pass
+// Tests season expiration and created new one if it doesn't exist at all or if the last
+// season is over.
+[function f_pvpLeague_checkExpiration]
+if (!strlen(<var(pvpLeague)>))
+  f_pvpLeague_initSeason
+elseif (<isTimeExceeded(<pvpLeague.tag(endYear)>,<pvpLeague.tag(endMonth)>,<pvpLeague.tag(endDay)>)>)
+  f_pvpLeague_initSeason
+endif
+return
+
+// Container holding all season objects. The container will be automatically created and placed in
+// the world to carry all the information on the pvp leagues both present and past. There should
+// always be just ONE occurence of the container in the world
+[itemdef i_pvpLeague_container]
+id=i_chest_metal_brass
+name=PvP Liga
+on=@create
+attr=090
+if (strlen(<var(pvpLeague_container)>))
+  src.accMsg("Pokus o vytvoreni druheho pvpLeague containeru! To se NESMI!")
+  remove
+endif
+color=color_o_valorite
+var(pvpLeague_container,<uid>)
+
+on=@destroy // the trigger doesn't seem to be working
+var(pvpLeague_container,"")
+var(pvpLeague_season,"")
+var(pvpLeague,"")
+
+on=@timer
+return 1
+
+[itemdef i_pvpLeague]
+id=i_book_open
+type=0
+
+on=@create
+name=Season <var(pvpLeague_season)>
+tag(playersCount,0)
+tag(endYear,<getYear>)
+tag(endDay,1)
+arg(month,<getMonth>+<def_pvpLeague_monthsInSeason>)
+while (<arg(month)> > 12)
+  arg(month,#-12)
+  tag(endYear,#+1)
+endwhile
+tag(endMonth,<arg(month)>)
+
+////////////////////////////////////////
+//   Player behavior
+////////////////////////////////////////
+
+// called upon Player the rank of which should be increased
+// argv(0) - number of points to be added
+[function f_pvpLeague_increaseRank]
+if (isGM)
+  return
+endif
+f_pvpLeague_checkExpiration
+arg(mem,<finduid(<f_pvpLeague_getLeagueMemory>)>)
+mem.more2=<eval mem.more2>+<argv(0)>
+var(pvpLeague).f_pvpLeague_storeRank(<uid>,<eval mem.more2>)
+
+[function f_pvpLeague_getLeagueMemory]
+arg(mem,<findid(i_memory_pvpLeague)>)
+if (<arg(mem)>)
+  if (<mem.more1> == <var(pvpLeague_season)>) // the player has the current memory item
+    return<arg(mem)>
+  endif
+  // TODO: give season reward
+  mem.remove // the player has a memory item from a different season -> remove and re-create current one
+endif
+newequip(i_memory_pvpLeague)
+return<lastnew>
+
+// Attributes:
+//   more1        - holds the season number for which the memory item is created
+//   more2        - holds the rank points the player gained in this season
+[itemdef i_memory_pvpLeague]
+name=PvP League Memory
+id=i_memory
+type=t_eq_script
+
+on=@create
+more1=<var(pvpLeague_season)>
+
+[eof]

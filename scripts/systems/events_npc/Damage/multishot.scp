@@ -10,6 +10,7 @@
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
 if (isSleeping)
@@ -20,7 +21,7 @@ f_e_npc_multishot
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@userkill
+on=@playerKill
 on=@npckill
 
 [function f_e_npc_multishot]
@@ -83,7 +84,7 @@ if (f_canseelos(<argv(0)>)) && !(isgm) && !(flag_invisible==1)  && !(flag_insubs
     endif
     src=<argv(0).link>
     effect(0,i_bolt_jagged_x)
-    damage_noresponse(<arg(damage)>,dam_physical)
+    damage_noresponse(<arg(damage)>,dam_physical,<src>)
     sysMessage("<sex("Byl jsi zasazen","Byla jsi zasazena")> rozdelenou strelou.")
   endif
 endif

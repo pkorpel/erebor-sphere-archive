@@ -144,22 +144,19 @@ if (isplayer)||(<src.tag(attack_type)>==1)  //cold damage - iba toto v PVP
     damage(<promilerange(<argv(0)>,<nastaveni_ability_mystikUC>)>,dam_magic|dam_cold,<src>)
     if (isplayer)
       if ({1 1000}>nastaveni_mystik_abilitychance_vP)
-       return
+        return
       elseif (src.tag(rangearrowdst))
-       fizzmagictravel
-       return
+        fizzmagictravel
+        return
       elseif (flag_reflection)
-       return 
+        return 
       endif
     else
       if ({1 1000}>nastaveni_mystik_abilitychance_vM)	// he? preco napevno a ne v zavislosti od schopnosti
-      //if ({0 100000} > <src.tag(ability)>)
         return
       endif
     endif
     events -e_spelleffect
-  //  spelleffect(s_paralyze,1000)
-  //  findid(i_rune_paralyze).timer=1  
     paralyze(10)
     events +e_spelleffect
     src.classmessage("Cil je zmrazen!")
@@ -655,12 +652,6 @@ endif
 events -e_spelleffect
 paralyze(10)
 events +e_spelleffect
-
-//if (<argv(0)>>{0 3000})
-// events -e_spelleffect
-// spelleffect(s_paralyze,1000)
-// events +e_spelleffect
-//endif // je to na nieco?
 src.classmessage("Cil zmrazen!")
 
 [function f_effect_a_summon_attendant]

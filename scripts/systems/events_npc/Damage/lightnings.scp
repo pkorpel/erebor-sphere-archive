@@ -29,7 +29,8 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 [function lightnings]
@@ -90,9 +91,9 @@ if !((<link.uid>) == (<src.uid>)) && (src.isPlayer || src.isPet)	//dame dmg i su
     endif
   endif
   if (strlen(<tag(damage)>))
-    src.damage_noresponse(<eval tag(damage)>,dam_lightning|dam_magic)
+    src.damage_noresponse(<eval tag(damage)>,dam_lightning|dam_magic,<link>)
   else
-    src.damage_noresponse(<eval {40 80}>,dam_lightning|dam_magic)
+    src.damage_noresponse(<eval {40 80}>,dam_lightning|dam_magic,<link>)
   endif
   src.events=+e_lightning_damage
   src.tag(lightningDamageStep,<serv.time>+20) // 2 seconds silence
@@ -112,7 +113,8 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
 on=@afterswing
-on=@userkill
+on=@finalBlow
+on=@playerKill
 on=@npckill
 
 [eof]

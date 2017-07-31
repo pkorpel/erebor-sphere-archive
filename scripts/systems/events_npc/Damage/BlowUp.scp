@@ -3,6 +3,7 @@
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+on=@finalBlow
 on=@beforegetswing
 if (!(src.isPlayer))  // nenecham se mlatit ani sumony, ani jinymi npc
   src.removefight
@@ -56,7 +57,7 @@ if (itemExists(<argo>))
 endif
 
 on=@npcKill
-on=@userKill
+on=@playerKill
 
 [function f_npc_blow_up_rage]
 if (<eval tag(npc_blow_up_target)> == 0)  // prvotni nastaveni cile
@@ -190,7 +191,7 @@ if ((f_canseelos(<argv(0)>)) && !(isgm) && !(flag_invisible==1)  && !(flag_insub
   lastnew.attr=010
   lastnew.timer={90 120}
   
-  damage_noresponse(<arg(damage)>,dam_god)
+  damage_noresponse(<arg(damage)>,dam_god,<src>)
 
   if (isPlayer)
     sysMessage("Zasahl te kus tela")
