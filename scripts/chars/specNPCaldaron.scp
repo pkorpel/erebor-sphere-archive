@@ -88,7 +88,7 @@ SpiritSpeak=100.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 /////////////////////////////////////////////
 /// ztracene_mesto new npcs - mini bosses ///
@@ -299,7 +299,7 @@ itemnewbie=i_necklace_gold
 Color=00
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=i_arrow,{200 250}
 ITEM=random_reagent,{50 75}
 ITEM=i_ztracene_mesto_kluc_2
@@ -400,7 +400,7 @@ itemnewbie=i_cape
 Color=0692
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=random_reagent,{50 75}
 ITEM=i_ztracene_mesto_kluc_3
 
@@ -504,7 +504,7 @@ itemnewbie=i_earrings_gold
 Color=0987
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=random_reagent,{50 75}
 ITEM=i_ztracene_mesto_kluc_4
 
@@ -843,9 +843,12 @@ ITEMNEWBIE=i_shield_kite_metal
 Color=098B
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=random_reagent,{50 75}
 ITEM=i_boss_skull_ztracene_mesto,1
+ITEM=i_mi_bag
+ITEM=i_mi_bag_high
+ITEM=i_mi_bag_superhigh
 
 
 /////////////////////////
@@ -936,7 +939,7 @@ taming=200.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 /////////////////////////////////////////////////
 
@@ -1025,7 +1028,7 @@ taming=200.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 /////////////////////////////////////////////////
 
@@ -1117,7 +1120,7 @@ taming=200.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 /////////////////////////////////////////////////
 
@@ -1205,7 +1208,7 @@ taming=200.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 ////////////////////////////////
 /// ZTRAZCE ZTRACENEHO MESTA ///
@@ -1888,7 +1891,7 @@ SpiritSpeak=100.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 /////////////////////////////////////////////////
 
@@ -2432,7 +2435,7 @@ taming=200.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 ////////////////
 
@@ -2595,7 +2598,7 @@ SpiritSpeak=60.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 ////////////////
 
@@ -2914,7 +2917,7 @@ ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEM=random_reagent,{20 30}
-item=i_gold
+ITEM=i_gold
 
 ///////////////////////////////////////////////////////////
 
@@ -3812,7 +3815,7 @@ ITEMNEWBIE=random_male_hair
 COLOR=colors_hair
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=random_reagent_necro,{10 20}
 
 ////////////////////////////////////////////////
@@ -3907,7 +3910,7 @@ Color=0989
 itemnewbie=i_boots_calf
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=i_arrow,{30 40}
 ITEM=random_reagent_necro,{10 20}
 
@@ -4321,7 +4324,7 @@ tag.mount=i_mt_horse_gray
 tag.mountcolor=0455
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=random_reagent,{50 75}
 
 ////////// vamp:

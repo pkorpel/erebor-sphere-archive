@@ -71,7 +71,7 @@ ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEM=random_reagent,{5 10}
-item=i_gold
+ITEM=i_gold
 
 //infikovana krysa z etherky - leap
 [CHARDEF c_crunch_kryska_leap]
@@ -146,7 +146,7 @@ ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEM=random_reagent,{5 10}
-item=i_gold
+ITEM=i_gold
 
 //////////////////////////////////////////////
 
@@ -218,7 +218,7 @@ ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEM=random_reagent,{10 22}
-item=i_gold
+ITEM=i_gold
 
 ////////////////////////////////////////////
 
@@ -405,8 +405,9 @@ tactics=120.0
 
 ITEMnewbie=i_monster_create
 ON=@NPCRestock
-item=i_gold
-item=random_reagent,{35 55}
+ITEM=i_gold
+ITEM=random_reagent,{35 55}
+ITEM=i_mi_bag
 
 ////////////////////////////////////////////////
 
@@ -604,8 +605,8 @@ tag(resist_cold,600)
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
-item=i_eth_boss_event
+ITEM=i_gold
+ITEM=i_eth_boss_event
 
 ON=@death
 newitemsafe=i_etheria_final_gate
@@ -729,7 +730,7 @@ COLOR=08f
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock 
-item=i_detheanorus_invul //jinak to nepujde !
+ITEM=i_detheanorus_invul //jinak to nepujde !
 
 ON=@npcseenewplayer 
    DORAND 3 
@@ -801,7 +802,7 @@ ITEMnewbie=i_monster_create
 ON=@NPCRestock
 ITEM=loot_TERATHAN
 ITEM=i_gold
-item=random_reagent,{15 25}
+ITEM=random_reagent,{15 25}
 
 
 [EOF]

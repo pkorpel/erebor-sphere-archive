@@ -141,6 +141,8 @@ ITEM=random_FOOD,{0 1}
 ITEM=RANDOM_REAGENT,{50 100}
 ITEM=RANDOM_REAGENT_NECRO,{40 50}
 ITEM=i_boss_skull_mahat,1
+ITEM=i_mi_bag
+ITEM=i_mi_bag_high
 
 ON=@hit 
 IF (RAND(10)==1)
@@ -504,6 +506,8 @@ ITEM=i_gold
 ITEM=RANDOM_REAGENT,{50 100}
 ITEM=RANDOM_REAGENT_NECRO,{30 50}
 ITEM=i_boss_skull_cd,1
+ITEM=i_mi_bag
+ITEM=i_mi_bag_high
 
 //////////////////////////////////////////
 
@@ -589,7 +593,7 @@ PROVOCATION=100.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 //////////////////////////////////////////
 
@@ -670,7 +674,7 @@ PROVOCATION=100.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 //////////////////////////////////////////
 
@@ -853,6 +857,7 @@ ITEM=i_gold
 ITEM=random_FOOD,{0 1}
 ITEM=RANDOM_REAGENT,{60 70}
 ITEM=i_boss_skull_md,1
+ITEM=i_mi_bag
 
 //////////////////////////////////////////
 
@@ -1033,8 +1038,10 @@ ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEM=random_FOOD,{0 1}
-item=i_gold
+ITEM=i_gold
 ITEM=i_boss_skull_to,1
+ITEM=i_mi_bag
+ITEM=i_mi_bag_high
 
 
 ///////////////////////////////////////////////////////////
@@ -1133,8 +1140,9 @@ SpiritSpeak=200.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=loot_DAEMON
+ITEM=i_mi_bag
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1338,6 +1346,7 @@ ITEMnewbie=i_monster_create
 ON=@NPCRestock
 ITEM=loot_SPIDER
 ITEM=i_gold
+ITEM=i_mi_bag
 
 
 //////////////////////////////////////////////////////
@@ -1529,7 +1538,7 @@ SpiritSpeak=55.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -1769,7 +1778,7 @@ ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 ITEM=loot_SPIDER
-item=i_gold
+ITEM=i_gold
 
 //////////////////////////////////////////////////////
 
@@ -1969,7 +1978,7 @@ SpiritSpeak=200.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 
 /////////////////////////////////////////////////
 
@@ -3155,6 +3164,7 @@ ON=@NPCRestock
 ITEM=i_gold
 ITEM=i_bylina,{0 1}       //na alchemy quest
 ITEM=random_FOOD,{1 3}
+ITEM=i_mi_bag,{0 1}
 
 ///////////////////////////////////////////////////////////
 
@@ -3614,8 +3624,8 @@ SpiritSpeak=125.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-//item=i_ore_adamantinum,1
-item=i_gold
+//ITEM=i_ore_adamantinum,1
+ITEM=i_gold
 
 //////////////////////////////////////////
 
@@ -4226,8 +4236,8 @@ ITEMnewbie=i_monster_create
 ITEMnewbie=i_halberd
 
 ON=@NPCRestock
-item=i_gold
-item=i_mi_bag
+ITEM=i_gold
+ITEM=i_mi_bag
 
 ON=@Hit
 IF (RAND(8)==1)

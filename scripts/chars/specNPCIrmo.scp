@@ -89,8 +89,10 @@ spiritspeak=150.0
 itemnewbie=i_monster_create
 
 on=@npcrestock
-item=loot_spider
-item=i_gold
+ITEM=loot_spider
+ITEM=i_gold
+ITEM=i_mi_bag
+ITEM=i_mi_bag_high
 
 
 //////////////
@@ -179,7 +181,7 @@ spiritspeak=60.0
 itemnewbie=i_monster_create
 
 on=@npcrestock
-item=i_gold
+ITEM=i_gold
 
 
 // sector.allchars(warcryEffect)
