@@ -2316,14 +2316,14 @@ endif
 newitem i_pouch
 arg(baguid,<act>)
 //sector.allchars(f_countfight) // this should be redundant end expensive!
-arg(mem,<memoryfindtype(MEMORY_WAR_TARG)>)
+arg(mem,<memoryfindtype(0209c)>)
 while (<arg(mem)>)
   if !(<charExists(<arg(mem).link>)>)  //whe have memory of the character, that does not exist anymore
     mem.remove
   elseif !(mem.link.f_countfight)
     mem.remove
   endif
-  arg(mem,<memoryfindtype(MEMORY_WAR_TARG)>)
+  arg(mem,<memoryfindtype(0209c)>)
 endwhile
 if !(act.rescount) // no usable memory items were found
   act.remove
@@ -2493,7 +2493,6 @@ endif
 if (src.memoryfind(<uid>))//zna me, jsem u nej zapsanej...
   arg(storeact,<act>)
   act=<src.memoryfind(<uid>).uid>
-  if (<act.color>&<MEMORY_WAR_TARG>)
     if (isplayer)
       if (src.isplayer)
         if (src.isPvPEvaluable(<uid>))
@@ -2512,8 +2511,7 @@ if (src.memoryfind(<uid>))//zna me, jsem u nej zapsanej...
     act.type=t_eq_script // place usable memory items into a temporary i_pouch (out of the memory layer of the died character)
     act.cont=<src.act>
     return 1
-  endif
-  act=<arg(storeact)>
+  act=<arg(storeact)>    // tohle nikdy nenastane, proc to tady je?
 endif
 return 0
 
