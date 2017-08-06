@@ -28,7 +28,7 @@ else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Min
   if (chance(<arg(chance)>,3))
     arg(silenced_time,<eval (<eval src.tag(ra_mind_blast_silenced_time)>+<nastaveni_spellcast_silence_mind_blast>)>)  // abilita na prodlouzeni doby silence 0-10 dsec + main nastaveni
     arg(silenced_time,<f_silence_add(<arg(silenced_time)>)>)
-    addFight(<src>)
+    f_addAllFightsForChar(<src>)
     src.classmessage("Cil je umlcen na <arg(silenced_time)>ds.")  
     return 1 // silence applied successfuly
   endif

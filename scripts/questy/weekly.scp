@@ -1386,7 +1386,6 @@ return<eval {<arg(minID)> <arg(maxId)>}>
 /////////////////////////////
 
 [function f_weekly_quest_healing]  // argv(0) - pocet vylecenych hp, cont-healer,link-cil leceni // provadi se na itemu i_mem_healing
-
 if !(cont.isEvent(e_weekly_healPlayer))
   return
 endif
@@ -1404,7 +1403,6 @@ if (weekly.f_weekly_increase(<arg(questId)>,<argv(0)>,1))
 endif
 
 [function f_weekly_quest_HuntingSign]  // argv(0) - pocet nalovenych bodu
-
 if !(isEvent(e_weekly_HuntingSign))
   return
 endif
