@@ -680,11 +680,11 @@ if !(isnonmobile)
         macefighting=<wrestling>
         if (act.srccombatLOS)
           if (act.isplayer) //player
-            if (act.distance>=nastaveni_global_mystikrangepvp+<eval tag(rangearrowdst)>)
+            if (<act.distance> >= <eval (<nastaveni_global_mystikrangepvp>+<eval tag(rangearrowdst)>)>)
               return 0
             endif
           endif
-          if (act.distance>=nastaveni_global_mystikrangepvm+<eval tag(rangearrowdst)>)
+          if (<act.distance> >= <eval (<nastaveni_global_mystikrangepvm>+<eval tag(rangearrowdst)>)>)
             return 0
           endif
           combat_storepos(<act>)

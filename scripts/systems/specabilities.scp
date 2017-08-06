@@ -742,71 +742,71 @@ tag(scrollcast,"")
 
 [Function leap]
 if (profession!=class_war)
- src.sysMessage(Toto muze pouzit jen valecnik.)
- return 1
+  src.sysMessage("Toto muze pouzit jen valecnik.")
+  return 1
 elseif !(isfighting)
- src.sysMessage(Lze pouzit jen pri boji)
- return 1 
+  src.sysMessage("Lze pouzit jen pri boji")
+  return 1 
 elseif !(act)
- src.sysMessage(Lze pouzit jen pri boji)
- return 1 
+  src.sysMessage("Lze pouzit jen pri boji")
+  return 1 
 elseif !(act.isplayer)
- src.sysMessage(Cil neni hrac)
- return 1 
+  src.sysMessage("Cil neni hrac")
+  return 1 
 elseif !(act.srccombatLOS) 
- src.sysMessage(Nevidis na cil.)
- return 1
+  src.sysMessage("Nevidis na cil.")
+  return 1
 elseif (act.flag_hidden)
- src.sysMessage(Nevidis na cil.)
- return 1 
-elseif (act.distance>9)
- src.sysMessage(Cil je prilis daleko.)
- return 1 
+  src.sysMessage("Nevidis na cil.")
+  return 1 
+elseif (<act.distance> > 9)
+  src.sysMessage("Cil je prilis daleko.")
+  return 1 
 elseif (isnonmobile) 
- src.sysMessage(You are frozen and cannot move.)
- return 1 
-elseif ({0 10000}> eval(tag(ra_leap)*nastaveni_ability_leapchange))
- src.redmessage(Utok se nepovedl.)
- src.tag(nextleap,<eval serv.time+nastaveni_ability_leapdelay>)
- return 1 
-elseif (tag(nextleap)>serv.time)
- src.sysMessage(Jeste nelze pouzit.)
- src.tag(nextleap,<eval serv.time+nastaveni_ability_leapdelay>)
- return 1 
+  src.sysMessage("You are frozen and cannot move.")
+  return 1 
+elseif ({0 10000} > <eval (<eval tag(ra_leap)>*<nastaveni_ability_leapchange>)>)
+  src.redmessage("Utok se nepovedl.")
+  src.tag(nextleap,<eval (<serv.time>+<nastaveni_ability_leapdelay>)>)
+  return 1 
+elseif (<eval tag(nextleap)> > <serv.time>)
+  src.sysMessage("Jeste nelze pouzit.")
+  src.tag(nextleap,<eval (<serv.time>+<nastaveni_ability_leapdelay>)>)
+  return 1 
 elseif (act.region.tag(housenumber))
- src.sysMessage(Nesmis utocit do domu.)
- src.tag(nextleap,<eval serv.time+nastaveni_ability_leapdelay>)
- return 1 
+  src.sysMessage("Nesmis utocit do domu.")
+  src.tag(nextleap,<eval (<serv.time>+<nastaveni_ability_leapdelay>)>)
+  return 1 
 endif
 //if (act.isconjured) //obsolete kdyz to jde jen na playery
 // src.sysMessage(Leap nelze pouzit na summony)
 // return 1
 //endif
 
-if (<nastaveni_leap_staminaloss_war> != 00) //ak to vobec je
-  arg(srcStaminaLoss,<eval(<distancefrom(<act>)>*<nastaveni_leap_staminaloss_war>)>)
+if (<nastaveni_leap_staminaloss_war>) //ak to vobec je
+  arg(srcStaminaLoss,<eval (<distancefrom(<act>)>*<nastaveni_leap_staminaloss_war>)>)
   reduceStamina(<srcStaminaLoss>) // bere staminut warovy podla vzdialenosti od ciela
 endif
 
 if (tag(rangearrowdst))
- if (act.distance<eval(nastaveni_ability_leaprange+1+<tag(rangearrowdst)>)>) 
-  go <act.p>
- else
-  runxtimes(<eval(nastaveni_ability_leaprange+<tag(rangearrowdst)>)>,movetoact)
-  src.classMessage(Nedostal ses az k cili...)
-  go <p>
- endif
+  if (<act.distance> < <eval (<nastaveni_ability_leaprange>+<tag(rangearrowdst)>)>) 
+    go <act.p>
+  else
+    runxtimes(<eval (<nastaveni_ability_leaprange>+<tag(rangearrowdst)>)>,movetoact)
+    src.classMessage("Nedostal ses az k cili...")
+    go <p>
+  endif
 else
- if (act.distance<eval(nastaveni_ability_leaprange+1)) 
-  go <act.p>
- else
-  runxtimes(<nastaveni_ability_leaprange>,movetoact)
-  src.classMessage(Nedostal ses az k cili...)
-  go <p>
- endif
+  if (<act.distance> < <eval (<nastaveni_ability_leaprange>+1)>) 
+    go <act.p>
+  else
+    runxtimes(<nastaveni_ability_leaprange>,movetoact)
+    src.classMessage("Nedostal ses az k cili...")
+    go <p>
+  endif
 endif
-tag(nextleap,<eval serv.time+nastaveni_ability_leapdelay>)
-tag(GM_step_resist,<eval serv.time+nastaveni_GM_Step_resist>)
+tag(nextleap,<eval (<serv.time>+<nastaveni_ability_leapdelay>)>)
+tag(GM_step_resist,<eval (<serv.time>+<nastaveni_GM_Step_resist>)>)
 
 [Function movetoact]
 dir=<getdir(<act>)>
@@ -1252,7 +1252,7 @@ if (charExists(<act>))
       //endif
     endif
     if (myTarget.srccombatLOS)
-      if (myTarget.distance < <nastaveni_throw_dist>+<eval tag(rangearrowdst)>)
+      if (<myTarget.distance> < <eval (<nastaveni_throw_dist>+<eval tag(rangearrowdst)>)>)
         //sysMessage(dist cile: <myTarget.distance>, thrdist: <nastaveni_throw_dist>)
         if (tag(nextthrow) < <serv.time>)
           tag(nextthrow,<eval (<serv.time> + <nastaveni_throw_delay>)>)
@@ -1686,7 +1686,7 @@ findUID(<var(cil)>).remove
 
 [Function hodbombu]
 if (var(cil).srccombatlos)
-  if (var(cil).distance < nastaveni_throw_dist_bomb+<eval tag(rangearrowdst)>)
+  if (<var(cil).distance> < <eval (<nastaveni_throw_dist_bomb>+<eval tag(rangearrowdst)>)>)
     if ({0 10000} > <eval (tag(ra_throwing)*1000)>)//ak neuspeje tak to hodi bohviekam nahodne
       arg(savePos,<findUID(<var(cil)>).p>)
       findUID(<var(cil)>).p=<eval <p_x>+{-7 7}>,<eval <p_y>+{-7 7}>
@@ -1701,10 +1701,10 @@ if (var(cil).srccombatlos)
     lastnew.tag(cil,<var(cil)>)
     lastnew.Equip
   else
-    src.sysMessage "Cil je prilis daleko."
+    src.sysMessage("Cil je prilis daleko.")
   endif 
 else
-  src.sysMessage "Nevidis na cil."
+  src.sysMessage("Nevidis na cil.")
 endif
 
 [itemdef i_hazitko]
