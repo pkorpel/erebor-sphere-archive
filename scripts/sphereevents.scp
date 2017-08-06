@@ -843,12 +843,12 @@ if (action==skill_macefighting)
   if (findlayer(2).type==t_weapon_bow_run)
     if (act.srccombatLOS)
       if (act.isplayer)
-        if (act.distance<nastaveni_global_Runbowrangepvp+<eval tag(rangearrowdst)>)
+        if (<act.distance> < <eval (<nastaveni_global_Runbowrangepvp>+<eval tag(rangearrowdst)>)>)
         else
           return 0
         endif
       elseif (act.npc)
-        if (act.distance<nastaveni_global_runbowrangepvm+<eval tag(rangearrowdst)>)
+        if (<act.distance> < <eval (<nastaveni_global_runbowrangepvm>+<eval tag(rangearrowdst)>)>)
         else
           return 0
         endif

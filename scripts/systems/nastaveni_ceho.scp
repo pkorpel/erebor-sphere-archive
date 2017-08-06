@@ -2104,9 +2104,9 @@ n_ability2_default[2]	2
 n_ability2[3]		rangearrow_effecttime
 n_ability2_name[3]	longrange trvani
 n_ability2_default[3]	10
-n_ability2[4]     	
-n_ability2_name[4]      
-n_ability2_default[4]   
+n_ability2[4]   rangearrow_staminaReduce  	
+n_ability2_name[4]  longrange stamina reduce    
+n_ability2_default[4] 50  
 n_ability2[5]     	throw_delay
 n_ability2_name[5]      prodleva vrhacich nozu
 n_ability2_default[5]   1

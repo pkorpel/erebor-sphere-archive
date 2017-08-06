@@ -841,23 +841,23 @@ endif
 
 [Function longrange]
 if (isnonmobile)
-  src.sysMessage(You are frozen and cannot move.)
+  src.sysMessage("You are frozen and cannot move.")
   return 1 
-elseif (stamina<10)
+elseif (<stamina> < <nastaveni_rangearrow_staminaReduce>)
   sysMessage("Uz ti nezbyvaji sily.")
   return 1
 elseif findid(i_delayer_longrange)
   sysMessage("Jeste nelze pouzit.")
   return 1 
-elseif ({0 10000}>eval(tag(ra_rangearrow)*nastaveni_rangearrow_chance))
+elseif ({0 10000}> <eval (<eval tag(ra_rangearrow)>*<nastaveni_rangearrow_chance>)>)
   src.redmessage("Nepovedlo se.")
   newEquip(i_delayer_longrange)
   return 1 
 endif
-src.sysMessage(dosah tve zbrane je vyssi)
+src.sysMessage("Tvuj dosah je nyni vetsi.")
 newEquip(i_delayer_longrange)
 newEquip(i_rangearrow_effect)
-reduceStamina(50) // safely decreases stamina
+reduceStamina(<nastaveni_rangearrow_staminaReduce>) // safely decreases stamina
 
 [itemdef i_delayer_longrange]
 id=i_memory
@@ -866,7 +866,7 @@ name=delay_longrange
 
 on=@create
 timer=<nastaveni_rangearrow_delay>
-tag(fizzrecall,<serv.time>+100)
+tag(fizzrecall,<eval (<serv.time>+(<nastaveni_rangearrow_effecttime>*10))>)
 
 on=@timer
 remove
@@ -888,22 +888,22 @@ remove
 
 [Function knockback]
 if (profession!=class_ranger)
- src.sysMessage("Toto muze pouzit jen ranger.")
- return 1
+  src.sysMessage("Toto muze pouzit jen ranger.")
+  return 1
 elseif (isnonmobile)
- src.sysMessage("You are frozen and cannot move.")
- return 1 
-elseif (stamina<10)
- src.sysMessage("Uz ti nezbyvaji sily.")
- return 1
-elseif ({0 10000}>eval(tag(ra_knockback)*nastaveni_knockback_chance))&&(src.isgm==0)
- src.redmessage("Nepovedlo se.")
- tag(nextrangearrow,<eval serv.time+(nastaveni_knockback_delay*10)>)
- return 1 
-elseif (tag(nextrangearrow)>serv.time)
- src.sysMessage("Jeste nelze pouzit.")
- tag(nextrangearrow,<eval serv.time+(nastaveni_knockback_delay*10)>)
- return 1 
+  src.sysMessage("You are frozen and cannot move.")
+  return 1 
+elseif (<stamina> < 15)
+  src.sysMessage("Uz ti nezbyvaji sily.")
+  return 1
+elseif ({0 10000} > <eval (<eval tag(ra_knockback)>*<nastaveni_knockback_chance>)>) && (src.isgm==0)
+  src.redmessage("Nepovedlo se.")
+  tag(nextrangearrow,<eval serv.time+(nastaveni_knockback_delay*10)>)
+  return 1 
+elseif (<eval tag(nextrangearrow)> > <serv.time>)
+  src.sysMessage("Jeste nelze pouzit.")
+  tag(nextrangearrow,<eval (<serv.time>+(nastaveni_knockback_delay*10))>)
+  return 1 
 endif
 src.sysMessage("Ucinek tve strelby je drtivy.")
 newEquip(i_knockback_effect)
