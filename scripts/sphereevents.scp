@@ -2487,31 +2487,31 @@ endif
 if !(ischar)
   return 0
 endif
-if (flag_conjured)||(distance>20)||(<src.mapplane> != <mapplane>)
+if (flag_conjured)||(ispet)||(distance>20)||(<src.mapplane> != <mapplane>)
   return 0
 endif
 if (src.memoryfind(<uid>))//zna me, jsem u nej zapsanej...
   arg(storeact,<act>)
   act=<src.memoryfind(<uid>).uid>
-    if (isplayer)
-      if (src.isplayer)
-        if (src.isPvPEvaluable(<uid>))
-          if (isnazgul)
-            f_fightNazgulKillTest
-          else
-            tag(playerkillstotal,<eval tag.playerkillstotal>+1)
-          endif     
-          f_pvpLeague_increaseRank(2) // add pvp league rank points for killing assistance
-        endif
-      else
-        f_signQuest_fightTest
-        tag(monsterkillstotal,<eval tag.monsterkillstotal>+1)
+  if (isplayer)
+    if (src.isplayer)
+      if (src.isPvPEvaluable(<uid>))
+        if (isnazgul)
+          f_fightNazgulKillTest
+        else
+          tag(playerkillstotal,<eval tag.playerkillstotal>+1)
+        endif     
+        f_pvpLeague_increaseRank(2) // add pvp league rank points for killing assistance
       endif
+    else
+      f_signQuest_fightTest
+      tag(monsterkillstotal,<eval tag.monsterkillstotal>+1)
     endif
-    act.type=t_eq_script // place usable memory items into a temporary i_pouch (out of the memory layer of the died character)
-    act.cont=<src.act>
-    return 1
-  act=<arg(storeact)>    // tohle nikdy nenastane, proc to tady je?
+  endif
+  act.type=t_eq_script // place usable memory items into a temporary i_pouch (out of the memory layer of the died character)
+  act.cont=<src.act>
+  act=<arg(storeact)>
+  return 1
 endif
 return 0
 
