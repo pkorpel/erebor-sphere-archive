@@ -465,13 +465,37 @@ f_dmgFinal_PvX_minimalDMG
 if (<var(ubrano)> > 0)
   f_thief_applyrebound
   f_dmgFinal_applyReactiveAR
-  addFight(<src>)
+  f_addAllFightsForChar(<src>)
   dmgHits(<var(ubrano)>)
   if (hits <= 0)
     var(killedChar,<uid>)
     src.trigger(@finalBlow)
     var(killedChar,)
   endif
+endif
+
+// args - the UID of a player the fight memories of whom should be added
+// Called upon the Character whom was hit/attacked.
+// The function will collect tags on player received through healing
+// to add fight memories of Clerics etc.
+[function f_addAllFightsForChar]
+addFight(<args>)
+if (strlen(<args.tag(isHealedUntil)>)) // the combat source has healing tags
+  arg(healTarget,<args>)
+  arg(fightSource,<uid>)
+elseif (strlen(<tag(isHealedUntil)>)) // the combat target has healing tags
+  arg(healTarget,<uid>)
+  arg(fightSource,<args>)
+endif
+if (!<arg(healTarget)>)
+  return
+endif
+if (<healTarget.tag(isHealedUntil)> > <serv.time>)
+  fightSource.addFight(<healTarget.tag(isHealedBy)>)
+  return
+else
+  healTarget.remove(isHealedUntil)
+  healTarget.tag.remove(isHealedBy)
 endif
 
 

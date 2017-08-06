@@ -115,7 +115,7 @@ if (argvcount)
   if (args)
     arg(zapnout,1)
   endif
-  arg(zapnout,0) 
+  arg(zapnout,0)
 elseif (isevent(e_emoteact))
   arg(zapnout,0)
 else
@@ -137,7 +137,7 @@ return 0
 
 on=@Create      // Newly created (not in the world yet)
 smsg "@Create\n"
-return 0  
+return 0
 on=@Death      //+I just got killed.
 smsg "@Death\n"
 return 0
@@ -173,7 +173,7 @@ on=@itemDAMAGE    // I have damaged item in some way
 smsg "@itemDAMAGE <act.name>\n"
 return 0
 
-on=@itemDestroy    
+on=@itemDestroy
 smsg "@itemDestroy\n"
 return 0
 
@@ -189,7 +189,7 @@ smsg "@itemDROPON_GROUND\n"
 on=@itemdropon_obj
 smsg "@itemdropon_obj act=<act> (<act.name>) argo=<argo> (<argo.name>)\n"
 smsg "<argn>:::<argn1>:::<argn2>:::<argn3>"
-  
+
 on=@itemEQUIP    // I have equipped an item
 if (act.type!=t_src_changer)
   smsg "@itemEQUIP <act.name>\n"
@@ -807,7 +807,7 @@ endif
 if (findid(i_customspell_timer))
   mana=<eval (<mana>-<eval (<a_manause[<findid(i_customspell_timer).tag(kouzlo)>]>)/2>)>
   consume(<a_scrollitem[<findid(i_customspell_timer).tag(kouzlo)>]>)
-  findid(i_customspell_timer).remove  
+  findid(i_customspell_timer).remove
   f_fizzleefect
 endif
 if (findid(i_vyrobce_svitku)) //pro specialni vyrobni funkci
@@ -927,7 +927,7 @@ name=temporary combatmain
 
 on=@equip
 cont.combat_main
-remove 
+remove
 return 1
 
 [EVENTS e_noclick]
@@ -1107,7 +1107,7 @@ if (<mapplane> == 2)
   return
 endif
 if !(src.isplayer)
-  return  
+  return
 endif
 if (<eval src.tag(GM_step_resist)> > <serv.time>)
   return
@@ -1116,13 +1116,13 @@ endif
 if (<eval (<src.stam>+20)> < <src.maxstam>)
   src.accmsg("detekovan GM STEP: prosel hracem <name>(<uid>) se silou <str> na pozici <p> aniz by mel plnou staminu. <eval (<src.stam>+10)>/<src.maxstam>")
   if (<nastaveni_GM_Step_krok_zpet>)
-    //src.move(<dir_inttochar(<dir_revert(<src.dir>)>)>)    
+    //src.move(<dir_inttochar(<dir_revert(<src.dir>)>)>)
     src.newequip(i_nostep)
     lastnew.morep=<src.p>
   endif
 endif
 if ((<eval (<src.stam>+10)> < 50) && (<nastaveni_GM_Step_paralyza>))
-  src.paralyze(<nastaveni_GM_Step_paralyza>) 
+  src.paralyze(<nastaveni_GM_Step_paralyza>)
 endif
 
 on=@itemuserclick
@@ -1183,7 +1183,7 @@ if (act.type==t_spell)
   return 0
 endif
 
-on=@itemequip  
+on=@itemequip
 if (act.type==t_container)
  accmsg("equipped uid=<?act?> (<?act.amount?> <?act.name?> with <?act.rescount?> items) on self at <?p?> (<?act.region.name?>)")
 else
@@ -1218,7 +1218,7 @@ return 0
 
 on=@ItemPickup_Ground //proti injection a podobnym
 if ((act.attr_movenever)||(act.attr_static))&&(ISGM==0)
-  RETURN 1 
+  RETURN 1
 endif
 if (act.type==t_container)
   accmsg("picked up uid=<?act?> (<?act.amount?> <?act.name?> with <?act.rescount?> items) from ground at <?act.p?> (<?act.region.name?>)")
@@ -1286,7 +1286,7 @@ endif
 
 on=@skillstart
 stopscriptedskills
-//if(nolightfizz(1))//ty se poserou/imo lol - Dinivan :)) 
+//if(nolightfizz(1))//ty se poserou/imo lol - Dinivan :))
 // //say(co vracim: <nolightfizz>)
 // if(action==skill_magery)
 //  //osetri si to @spellcast (kdyby kouzlil svetlo)
@@ -1348,7 +1348,7 @@ tag(lastlogoutedAt,<serv.time>)
 if (src.isgm)&&(src.tag(securelogin)==1)
   src.go(100,100)
 endif
-vyvrhel_prevest //docasne 
+vyvrhel_prevest //docasne
 makestring_abort
 events=+e_noclick
 tag(clienttype,"")
@@ -1411,7 +1411,7 @@ on=@environchange
   //return 0
  //endif
 //endif
-////stroj casu 
+////stroj casu
 if (region.flag_underground)
 else
   if (<eval(<var(lightlevel)>)>)
@@ -1506,7 +1506,7 @@ if(<serv.statclients>==1)
  if(var(wassave))
   if(<wassave>==1) //to by po reloadu nemelo bejt!
    var(wassave,0)
-  endif  
+  endif
  endif
  //finduid(<var(nastaveni_guardian_uid)>).nastaveni_uplatni_regions
 endif
@@ -1645,7 +1645,7 @@ if (<strlen(<tag(lastmurderbyf)>)>)
           logmsg("<serverTime> '<tag(lastmurderbyf).account.name>' commands <tag(lastmurderbyf).uid> (<tag(lastmurderbyf).name>): hrac <tag(lastmurderbyf).name> (<tag(lastmurderbyf).account.name>, <tag(lastmurderbyf).tag(level)>) v hypnoze podozrivo zabil hraca <name> (<account.name>, <tag(level)>)")
         endif
       else
-        accmsg("<name> (<account.name>, <tag(level)>) byl podezrele zabit hracem <tag(lastmurderbyf).name> (<tag(lastmurderbyf).account.name>, <tag(lastmurderbyf).tag(level)>)")        
+        accmsg("<name> (<account.name>, <tag(level)>) byl podezrele zabit hracem <tag(lastmurderbyf).name> (<tag(lastmurderbyf).account.name>, <tag(lastmurderbyf).tag(level)>)")
         if (<tag(lastmurderbyf).tag(hypno_mystik)>)
           logmsg("<serverTime> '<tag(lastmurderbyf).account.name>' commands <tag(lastmurderbyf).uid> (<tag(lastmurderbyf).name>): hrac <tag(lastmurderbyf).name> (<tag(lastmurderbyf).account.name>, <tag(lastmurderbyf).tag(level)>) v hypnoze podozrivo zabil hraca <name> (<account.name>, <tag(level)>)")
         endif
@@ -1699,7 +1699,7 @@ if !(<tag(hypno_mystik)>) //mystikovi v monstru to nedelame
   consume(1000 t_custom_dispellable)
   if (act)
     if (act.isplayer) //hrace zabil hrac
-      tag(lastmurderby,"<act>,<act.name>")     
+      tag(lastmurderby,"<act>,<act.name>")
     endif
   endif
   eqlayers(trigger(@userdeath))
@@ -1707,7 +1707,7 @@ if !(<tag(hypno_mystik)>) //mystikovi v monstru to nedelame
   if (tag(nextress)<serv.time)
     tag(nextress,<eval serv.time+{300 1200}>)
   endif
-  vyvrhel_prevest //docasne 
+  vyvrhel_prevest //docasne
   f_srovnatlevel
   newitemsafe(i_checkstats_timer)
   lastnew.attr=attr_invis
@@ -1719,7 +1719,7 @@ if !(<tag(hypno_mystik)>) //mystikovi v monstru to nedelame
 else
   tag(po_zasahu,5)
   hypnoswap_back
-  return 1 //neumre ! 
+  return 1 //neumre !
 endif
 
 
@@ -1737,7 +1737,7 @@ if(argn==7)
 	  if !(act.isplayer)
       redmessage("Toto kouzlo smis kouzlit jen na hrace.")
       action=-1
-    endif	
+    endif
   else //reactiv jen na sebe
   	if (act!=<uid>)
    		redmessage("Toto kouzlo smis kouzlit jen na sebe.")
@@ -1796,7 +1796,7 @@ if(act)//field ne na sebe
   if (argn==24)||(argn==28)||(argn==39)||(argn==47)||(argn==50)
     if (act.topobj==<uid>)
       accmsg(Buguje s kouzlenim kouzla cislo <argn> na predmet <act>, ktery je v <act.topobj>)
-      sysmessage("Jsem hnusny buger...") 
+      sysmessage("Jsem hnusny buger...")
       // damage 50 // Damage jsem zrusil, oni to lidi casto delaji omylem. Irmo
       return 1
     endif
@@ -1870,12 +1870,12 @@ if (isevil(<argn1>))
 endif
 
 if (argn1==53) //mana vampire
-  if (!act.magery)   
+  if (!act.magery)
     return 1
   endif
 endif
 
-if (mapplane>0) 
+if (mapplane>0)
  if (argn==02d)
   return 1
  endif
@@ -1908,7 +1908,7 @@ if !(isgm)
             else
               arg(realm_name,"Gondor")
             endif
-            arg(conquer_area,<abs(<lastnew.region.tag(bf)>)>)  
+            arg(conquer_area,<abs(<lastnew.region.tag(bf)>)>)
             //sysMessage(port na uzemi <realm_name> cislo <conquer_area>)
             if (<var(palantir_<realm_name>_<conquer_area>).tag(owners_realm)>!=<tag(realm)>)
               redmessage("Toto uzemi bys napred <sex(musel,musela)> dobyt.")
@@ -1917,15 +1917,15 @@ if !(isgm)
               return 1
             endif
             //zkontrolovat zda tam nekdo nevyhlasil valku (pak tam nesmi skakat)
-            if (!strcmpi(<var(war_declarator_1).tag(war_declared_on)>,"<realm_name>_<conquer_area>")) 
+            if (!strcmpi(<var(war_declarator_1).tag(war_declared_on)>,"<realm_name>_<conquer_area>"))
               if (<eval <var(war_declarator_1).tag(war_begins_day)>> == <getDay>)  //neprisel uz den valky?
                 arg(checkHour, <eval <getHour>+1>)
                 arg(declHour, <eval <var(war_declarator_1).tag(war_begins_hour)>>)
-                arg(declDay, <eval <var(war_declarator_1).tag(war_begins_day)>>) 
+                arg(declDay, <eval <var(war_declarator_1).tag(war_begins_day)>>)
                 if (<checkHour> == 24)
                   arg(checkHour,0)
-                endif             
-                if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat   
+                endif
+                if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat
                   redmessage("Na uzemi, na kterem brzy Gondor zacne (nebo uz zacal) valku, se nelze premistovat.")
                   lastnew.remove
                   src.action= -1
@@ -1937,19 +1937,19 @@ if !(isgm)
               if (<eval <var(war_declarator_2).tag(war_begins_day)>> == <getDay>)  //neprisel uz den valky?
                 arg(checkHour, <eval <getHour>+1>)
                 arg(declHour, <eval <var(war_declarator_2).tag(war_begins_hour)>>)
-                arg(declDay, <eval <var(war_declarator_2).tag(war_begins_day)>>) 
+                arg(declDay, <eval <var(war_declarator_2).tag(war_begins_day)>>)
                 if (<checkHour> == 24)
                   arg(checkHour,0)
-                endif             
-                if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat   
+                endif
+                if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat
                   redmessage("Na uzemi, na kterem brzy Mordor zacne (nebo uz zacal) valku, se nelze premistovat.")
                   lastnew.remove
                   src.action= -1
                   return 1
                 endif
-              endif            
+              endif
             endif
-          else //nemame tag(bf), pokracujeme podle klasickeho scenare          
+          else //nemame tag(bf), pokracujeme podle klasickeho scenare
             if (strlen(<lastnew.region.tag(realm)>))
               if (tag(realm)<0)
                 redmessage("Spociva na tobe hnev Valar. Jako vyvrhel tohoto sveta nedokazes pouzivat cestovni magii.")
@@ -1962,7 +1962,7 @@ if !(isgm)
                 lastnew.remove
                 src.action= -1
                 return 1
-              endif            
+              endif
             endif
           endif
           lastnew.remove //odebrani pomocneho predmetu
@@ -1994,16 +1994,16 @@ if (argn==52) // gate
     endif
     arg(conquer_area,<abs(<src.region.tag(bf)>)>)
     //zkontrolovat zda tam nekdo nevyhlasil valku (pak odtud nesmi gate)
-    if (!strcmpi(<var(war_declarator_1).tag(war_declared_on)>,"<realm_name>_<conquer_area>")) 
+    if (!strcmpi(<var(war_declarator_1).tag(war_declared_on)>,"<realm_name>_<conquer_area>"))
       kermel.sysMessage(checkujeme war1: day: <var(war_declarator_1).tag(war_begins_day)> hour: )
       if (<eval <var(war_declarator_1).tag(war_begins_day)>> <= <getDay>)  //neprisel uz den valky?
         arg(checkHour, <eval <getHour>+1>)
         arg(declHour, <eval <var(war_declarator_1).tag(war_begins_hour)>>)
-        arg(declDay, <eval <var(war_declarator_1).tag(war_begins_day)>>) 
+        arg(declDay, <eval <var(war_declarator_1).tag(war_begins_day)>>)
         if (<checkHour> == 24)
           arg(checkHour,0)
-        endif             
-        if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat 
+        endif
+        if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat
           redmessage("Z uzemi, kteremu Gondor vyhlasil valku, nelze otvirat cestovni brany.")
           src.action= -1
           return 1
@@ -2011,16 +2011,16 @@ if (argn==52) // gate
       endif
     endif
     if (!strcmpi(<var(war_declarator_2).tag(war_declared_on)>,"<realm_name>_<conquer_area>"))
-      kermel.sysMessage(checkujeme war2: day: <var(war_declarator_2).tag(war_begins_day)> hour: )            
+      kermel.sysMessage(checkujeme war2: day: <var(war_declarator_2).tag(war_begins_day)> hour: )
       if (<eval <var(war_declarator_1).tag(war_begins_day)>> == <getDay>)  //neprisel uz den valky?
         arg(checkHour, <eval <getHour>+1>)
         arg(declHour, <eval <var(war_declarator_2).tag(war_begins_hour)>>)
-        arg(declDay, <eval <var(war_declarator_2).tag(war_begins_day)>>) 
+        arg(declDay, <eval <var(war_declarator_2).tag(war_begins_day)>>)
         if (<checkHour> == 24)
           arg(checkHour,0)
-        endif        
-        kermel.sysMessage(chh: <checkHour> dh: <declHour>)     
-        if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat 
+        endif
+        kermel.sysMessage(chh: <checkHour> dh: <declHour>)
+        if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat
           redmessage("Z uzemi, kteremu Mordor vyhlasil valku, nelze otvirat cestovni brany.")
           src.action= -1
           return 1
@@ -2110,7 +2110,7 @@ if (topobj.isItem)
       if (src.flag_immobile==0)
         src.findid(i_looter_immobilizer).remove
       endif
-    else  
+    else
       src.newequip(i_looter_immobilizer)
       lastnew.timerd=5
     endif
@@ -2119,7 +2119,7 @@ if (topobj.isItem)
       if (src.isevent(e_nbdung))
        src.sysMessage("V tutorialu nemuzes obirat cizi mrtvoly.")
        return 1
-      endif 
+      endif
       if (<eval src.tag(skillrank)> < 3) && (src.findid(i_checkstats_timer))
         //po smrti nejakou dobu nesmim lootovat...
         src.sysMessage("Jeste nemuzes obirat cizi mrtvoly.")
@@ -2128,7 +2128,7 @@ if (topobj.isItem)
     endif
     if (src.tag(nextloot)<serv.time)
       if (src!=tag(iic_owner))//kdyz nejsem majitel
-        if (<src.findid(i_memory_guild).link> != <tag(iic_owner).findid(i_memory_guild).link>)  // nejsou ze stejne guildy 
+        if (<src.findid(i_memory_guild).link> != <tag(iic_owner).findid(i_memory_guild).link>)  // nejsou ze stejne guildy
           if (tag(iic_owner).ismurderer==0)
             src.criminal
           endif
@@ -2159,7 +2159,7 @@ endif
 if (src.tag(nextloot) < serv.time)
   if (<src> != <tag(iic_owner)>)//kdyz nejsem majitel
     if (charExists(<tag(iic_owner)>))
-      if (<src.findid(i_memory_guild).link> != <tag(iic_owner).findid(i_memory_guild).link>)  // nejsou ze stejne guildy 
+      if (<src.findid(i_memory_guild).link> != <tag(iic_owner).findid(i_memory_guild).link>)  // nejsou ze stejne guildy
         if (<tag(iic_owner).ismurderer> == 0)
           src.criminal
         endif
@@ -2345,57 +2345,32 @@ while (act.findcont(0))
   if (region.tag(realm) < 3)&&(arg(addfame) >100)&&((isplayer==0)||(tag(hypno_mystik)))//expstrop vcetne hypnotizovanejch
     arg(addfame,100)
   endif
-  if (profession==class_craft)//za krafty zadny expy
+  if (profession==class_craft) //za krafty zadny expy
     arg(addfame,0)
   endif
   tag(added_experience_bydeath,<arg(addfame)>)
-  if (<act.link.tag(awaitsexpforhealing)>) //ma dostat expy za leceni - klerik a shaman, nedostane je za vlastni zabiti
-    act.link.sysMessage("Zkusenosti ziskas za leceni.")
-    act.link.tag.remove(gotexpforhealingnow) //kdyby to mel z minula tak odstranit
-  elseif ((<strlen(<act.link.tag(pact_to)>)>)&&(<act.link.isInCity>!=1)&&(<strcmpi(<act.link.tag(pact_type)>,"blood")>==0))//pri bloodpacte nedostava normalne expy ale od toho s kym ma bloodpact
+  if ((<strlen(<act.link.tag(pact_to)>)>)&&(<act.link.isInCity>!=1)&&(<strcmpi(<act.link.tag(pact_type)>,"blood")>==0))//pri bloodpacte nedostava normalne expy ale od toho s kym ma bloodpact
     act.link.sysMessage("Zkusenosti ziskas od nositele paktu.")
-  else 
-    if(<act.link.tag(gotexpforhealingnow)>)//dostal za leceni a ucastnil se boje
-      act.link.tag.remove(gotexpforhealingnow)//jen odstranit tuhle indikaci a vic nic
-      act.link.sysMessage("Zkusenosti za leceni jsi jiz <act.link.sex(ziskal,ziskala)>.")
-    else //vubec nic
-      act.link.addexp(<arg(addfame)>) //pridat expy
-      trigger_kill(<uid>,<act.link>)
-    endif
+  else
+    act.link.addexp(<arg(addfame)>) //pridat expy
+    trigger_kill(<uid>,<act.link>)
   endif
   if (<act.link.tag(pact_by)>) //pact je aktivni
     if (<act.link.rescount(i_pact)> == 1) // JEN PRO SICHR
-      if(<act.link.tag(pact_by).isInCity> != 1)
+      if (<act.link.tag(pact_by).isInCity> != 1)
         if (<strcmpi(<act.link.tag(pact_type)>,"blood")>==0) //len pri pakte krvy dostava expy
           if (!isplayer)
             act.link.tag(pact_by).sysMessage("Ziskavas zkusenosti za aplikovany pakt na <act.link.name>.")
             act.link.tag(pact_by).addexp(<arg(addfame)>)
             trigger_kill(<uid>,<act.link.tag(pact_by)>)
           else
-            logmsg("<serverTime>: <act.link.name>(<act.link.uid>) zabil shamana ktory mu dal Pakt krve (<act.link.tag(pact_by).name> (<act.link.tag(pact_by).uid>))")
-            act.link.f_cancelpact_by //neviem preco ale trigger death nezareaguje dobre ak je zabity hracom od ktoreho dostal BP v evente e_bloodpact takze ho zrusim tu (aspon u mna na sphere)
+            logmsg("<serverTime>: <act.link.name>(<act.link.uid>) zabil shamana ktery mu dal Pakt krve (<act.link.tag(pact_by).name> (<act.link.tag(pact_by).uid>))")
+            act.link.f_cancelpact_by
           endif
         endif
       endif
-    endif   
-  endif
-  if (<act.link.tag(gethealedby)>) //nekdo ho lecil
-    if (<act.link.tag(gethealedby).tag(awaitsexpforhealing)>) //ma ten link jeste tenhle tag? nebo uz expy dostal?
-      if (act.link.tag(gethealedby).isinvis) //neviditelnej dostane hovno !
-        act.link.tag(gethealedby).sysMessage("Kdo se schovava, nezaslouzi zkusenosti.")
-      else
-        act.link.tag(gethealedby).sysMessage("Ziskavas zkusenosti za leceni <act.link.name>.")
-        act.link.tag(gethealedby).addexp(<arg(addfame)>)
-        trigger_kill(<uid>,<act.link.tag(gethealedby)>)
-      endif
-      act.link.tag(gethealedby).tag.remove(awaitsexpforhealing) //klerikovi odstranime
-      act.link.tag(gethealedby).tag(gotexpforhealingnow,1) //dat kleirkovi indikace ze jiz expy dostal
-      act.link.tag.remove(gethealedby) //lecenemu odstranime
-    else
-      act.link.sysMessage("Ten, kdo te lecil, za to ted nedostane zkusenosti.")
-      act.link.tag.remove(gethealedby) //klerik nic nedostane, jen odstranime tag
     endif
-  endif 
+  endif
   act.type=t_eq_memory_obj // move the processed memory object back on the dying character
   equip(<act>)
   act=<arg(baguid)>
@@ -2428,16 +2403,16 @@ if !(<flags>&statf_conjured) //neni to summon
 //  if (finduid(argo.more2).findid(i_qf_sign)) && (argo.tag(living)==finduid(argo.more2).findid(i_qf_sign).tag(hunted))
 //     finduid(argo.more2).findid(i_qf_sign).tag(qfcount,#+1)
 //  endif
-    if (<npc>==1) //umrelo zvire 
+    if (<npc>==1) //umrelo zvire
       if (<finduid(<argo.more2>).isplayer>) //vrahem je hrac, nedelej nic (nema mozek, ty ify dole pak hazej errory)
      //nic
       else
         if(<eval finduid(<argo.more2>).npc>==1) //zabilo ho zvire
           if(finduid(<argo.more2>).ispet)||(<finduid(<argo.more2>).tag(guardhire)>)||(isjezditko) //je to neco ochoceneho - mohl ho zabit cviceny zostrich, zejo)
             //nebo je to guard (to jsou taky animalove...)
-            //nedelej nic !! 
-          else //zvire nebylo ochocene - jedna se bud o bug nebo utocilo nejaky zvire - vem ho cert ! 
-            finduid(<argo.more2>).remove //odstrani toho pripadneho ducha (nebo utocici zvire - jak jsem rekl, vem ho cert !)  
+            //nedelej nic !!
+          else //zvire nebylo ochocene - jedna se bud o bug nebo utocilo nejaky zvire - vem ho cert !
+            finduid(<argo.more2>).remove //odstrani toho pripadneho ducha (nebo utocici zvire - jak jsem rekl, vem ho cert !)
           endif
         endif
       endif
@@ -2475,7 +2450,7 @@ if (charExists(<killer>))
     var(trigkillact,<argv(0)>)
     killer.trigger(@playerKill)
   elseif (npcExists(<killer>))
-    var(trigkillact,<argv(0)>) 
+    var(trigkillact,<argv(0)>)
     killer.trigger(@npckill)
   endif
 endif
@@ -2530,7 +2505,7 @@ else
     endwhile
     arg(prsten).tag(killed_2,<src>) //nova 2. pozice
     tag(playerkillstotal,<eval tag.playerkillstotal>+1)
-  endif 
+  endif
 endif
 var(zabil_ho,"")
 return
@@ -2556,7 +2531,7 @@ var(zabil_ho,0)
 while (<arg(i)> < 3) //pozice 0-2
   if (!<var(zabil_ho)>)
     if (strlen(<argv(0).tag(killed_<arg(i)>)>))
-      if (!strcmpi(<argv(0).tag(killed_<arg(i)>)>,<src>))          
+      if (!strcmpi(<argv(0).tag(killed_<arg(i)>)>,<src>))
         var(zabil_ho,1) //uz driv nez pred sedmi killy
         return
       endif
@@ -2910,13 +2885,13 @@ if (act.npc)&&(tag(level)>29)&&(var(is_physical))
                var(ubrano,<eval (var(ubrano)*nastaveni_doubleswing)/1000>)
              endif
           endif
-         endif 
+         endif
        endif
      endif
   endif
 endif
 return 0
-  
+
 on=@finalBlow
 on=@beforegetswing
 
@@ -3083,27 +3058,27 @@ if (findlayer(2))
     elseif ((findlayer(2).typedef.tdata1)==2)
       if (<arg(exp)> < 101)
       	return 1
-      endif    
+      endif
     elseif ((findlayer(2).typedef.tdata1)==5)
       if (<arg(exp)> < 151)
       	return 1
-      endif    
+      endif
     elseif ((findlayer(2).typedef.tdata1)==6)
       if (<arg(exp)> < 251)
       	return 1
-      endif   
+      endif
     elseif ((findlayer(2).typedef.tdata1)==7)
       if (<arg(exp)> < 401)
       	return 1
-      endif    
+      endif
     elseif ((findlayer(2).typedef.tdata1)==8)
       if (<arg(exp)> < 601)
       	return 1
-      endif    
+      endif
     elseif ((findlayer(2).typedef.tdata1)==9)
       if (<arg(exp)> < 901)
       	return 1
-      endif    
+      endif
     endif
   endif
 endif
@@ -3223,7 +3198,7 @@ if !(f_player_canEquip_mystik(<act>))
   return 1
 endif
 
-on=@HitMiss 
+on=@HitMiss
 combat_restorepos
 mana=<eval (mana*nastaveni_mystik_manaloss)/1000)>
 tag.remove(speedset)
@@ -3321,7 +3296,7 @@ tag(login_p,"<args>")
 arg(myx,<eval {1 192}>)
 arg(myy,<eval {3904 4095}>)
 p=<arg(myx)>,<arg(myy)>,0,50
- 
+
 
 
 [ITEMDEF i_logout_mover]
@@ -3334,7 +3309,7 @@ attr_invis=1
 attr_movenever=1
 
 ON=@Timer
-if (finduid(<tag(my_uid)>).account.privflags & priv_Connected) //connected 
+if (finduid(<tag(my_uid)>).account.privflags & priv_Connected) //connected
  finduid(<tag(my_uid)>).tag.remove(login_p)
 else
  finduid(<tag(my_uid)>).logout_player_move(<p>)

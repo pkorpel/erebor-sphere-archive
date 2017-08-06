@@ -279,7 +279,7 @@ else
   <arg(spelldefname)>.effect=<?promilerange(<argv(1)>,<arg(storeeffect)>)?>
   if (<argv(0)>==38) // paralyze
     paralyze({200 300}) //rand. 20-30s
-    addFight(<src>)
+    f_addAllFightsForChar(<src>)
   else
     events=-e_spelleffect
     spelleffect(<argv(0)>,1000)
