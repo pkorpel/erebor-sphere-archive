@@ -509,7 +509,7 @@ f_eqrune(i_a_clumsy,nastaveni_poison_poison_clumsy,<argv(0)>,3)
 var(dmgPoison,1) // sets the strength of a poison to non-zero value in order to preserve the poison memory item
 
 [function f_poisoning_weapon_checkPoisoningValues]
-if (strcmpi("<tag(jed_typ)>","nastaveni_poison_")!=0) && (strlen("<tag(jed_typ)>"))
+if (strcmpi("<tag(jed_typ)>","nastaveni_poison_")!=0) && (strlen(<tag(jed_typ)>))
   if (safe <eval tag(jed_sila)>)
     return 1
   endif
