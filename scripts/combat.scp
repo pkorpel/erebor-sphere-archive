@@ -494,7 +494,7 @@ if (<healTarget.tag(isHealedUntil)> > <serv.time>)
   fightSource.addFight(<healTarget.tag(isHealedBy)>)
   return
 else
-  healTarget.remove(isHealedUntil)
+  healTarget.tag.remove(isHealedUntil)
   healTarget.tag.remove(isHealedBy)
 endif
 
