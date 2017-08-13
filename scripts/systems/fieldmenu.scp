@@ -51,7 +51,7 @@ if (<src.ischar>)
  lastnew.name="veci z pole <?name?> - <?serv.rtimetext?>"
  lastnew.attr_invis=1
  lastnew.attr_movenever=1
- foreachlocked(trashvenditem)
+ foreachlocked(trashfielditem)
  array_clear(tag.lockedlist)
  if (finduid(tag(backpack_s_vecma)).rescount)
   finduid(tag(backpack_s_vecma)).cont=<tag(najemcont)>  

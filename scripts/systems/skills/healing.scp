@@ -57,7 +57,7 @@ if (src.profession==class_priest) //(src.profession==class_shaman)
       if (src.specability)
         src.classmessage("Lecis rychleji!")
         src.reveal
-        lastnew.timerd(<promilerange(<src.healing>,<nastaveni_ability_enlightment>)>)
+        lastnew.timerd=<promilerange(<src.healing>,<nastaveni_ability_enlightment>)>
         return
       endif
     endif
@@ -77,7 +77,7 @@ if (<remove_bloodyband>==1)
   src.consume 1 i_bandage_bloody
   arg(remove_bloodyband,"")
 endif
-lastnew.timerd(<promilerange(<src.healing>,<skill_healing.delay>)>)
+lastnew.timerd=<promilerange(<src.healing>,<skill_healing.delay>)>
 
 [ITEMDEF i_mem_ressurect]
 ID=i_memory 
