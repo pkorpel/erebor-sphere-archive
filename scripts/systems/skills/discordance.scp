@@ -48,7 +48,7 @@ if (more1)
     link.newitemsafe(i_rune_discordance)
     link.equip(<lastnew>)
     lastnew.timer=<eval 10+(<cont.enticement>/20)>
-    link.f_addAllFightsForChar(<cont>)
+    link.f_addAllWarTargsForChar(<cont>)
   else
     cont.redmessage("Oslabeni se nepovedlo.")
     link.findid(i_rune_discordance).remove

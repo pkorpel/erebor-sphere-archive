@@ -542,18 +542,25 @@ while (memoryfindtype(MEMORY_FIGHT))
   memoryfindtype(MEMORY_FIGHT).remove
 endwhile
 
-[function addFight] // args - UID charu, jehoz fight link se ma pridat
-if (<uid> == <args>)
+[function addWarTarg] // args - UID charu, jehoz fight link se ma pridat
+addMemoryFlag(<args>,<MEMORY_WAR_TARG>)
+return
+
+// called upon NPC upon which the memory should be added
+// arg 0 - UID of a memory link
+// arg 1 - flag to be added
+[function addMemoryFlag]
+if (<uid> == <argv(0)>)
   return
 endif
-if (memoryfind(<args>))
-  arg(mem,<memoryfind(<args>)>)
+if (memoryfind(<argv(0)>))
+  arg(mem,<memoryfind(<argv(0)>)>)
 else
   newequip(i_memory)
-  lastnew.link=<args>
+  lastnew.link=<argv(0)>
   arg(mem,<lastnew>)
 endif
-mem.color=<mem.color>|<MEMORY_WAR_TARG>|<MEMORY_FIGHT>
+mem.color=<mem.color>|<argv(1)>
 
 [function rewritetarget]  // args - UID cile, ktereho nechceme prepsat
 while (memoryfindtype(MEMORY_WAR_TARG))
@@ -3118,141 +3125,137 @@ if (src.isplayer)
   if (tag(brain)==6)
     accmsg("Hrac <name> uidcka <uid> se pokusil animatnout brain vendor.")
     src.sysmessage("Toto nelze ozivovat!")
-    return 1
+    return
   endif
   if (isitem&&<type>==t_corpse) // 06c pro testsphere, t_corpse pro morii
-      if (link)
-        return 1
+    if (link)
+      return
+    endif
+    src.newnpc <morex>
+    
+    if (<eval lastnewchar.tag(noanimate)>==1) //animatnout nepujde cokoliv, co ma tag(noanimate)
+      lastnewchar.remove
+      src.f_fizzleefect
+      src.redmessage("S timto telem nelze dale pracovat.")
+      return
+    endif
+    
+    if (<eval src.tag(ra_ucinnost)> > 0)
+      if (<eval src.tag(ra_ucinnost)> < 11)
+        arg(strop,(<eval src.tag(ra_ucinnost)>*2)+100)
+      else
+        arg(strop,<eval src.tag(ra_ucinnost)>+110)
       endif
-
-      src.newnpc <morex>
-      
-      if (<eval lastnewchar.tag(noanimate)>==1) //animatnout nepujde cokoliv, co ma tag(noanimate)
+    else
+      arg(strop,100)
+    endif
+    
+    arg(strop_spruce,<eval(500*100*<strop>)>/10000)
+    arg(strop_chestnut,<eval(1000*100*<strop>)>/10000)
+    arg(strop_oak,<eval(1500*100*<strop>)>/10000)
+    arg(strop_teak,<eval(2500*100*<strop>)>/10000)
+    arg(strop_mahagon,<eval(4000*100*<strop>)>/10000)
+    arg(strop_eben,<eval(6000*100*<strop>)>/10000)
+    arg(strop_elven,<eval(9000*100*<strop>)>/10000)
+    
+    if (<eval lastnewchar.tag(experience)> <= <strop_spruce>)
+      if (!src.hasStaff(spruce))
+        src.sysMessage("Na toto monstrum nestaci tvoje hul.")
         lastnewchar.remove
         src.f_fizzleefect
-        src.redmessage("S timto telem nelze dale pracovat.")
-        return 1
+        return
       endif
-      
-      if (<eval src.tag(ra_ucinnost)> > 0)
-        if (<eval src.tag(ra_ucinnost)> < 11)
-          arg(strop,(<eval src.tag(ra_ucinnost)>*2)+100)
-        else
-          arg(strop,<eval src.tag(ra_ucinnost)>+110)
-        endif
-      else
-        arg(strop,100)
+    elseif (<eval lastnewchar.tag(experience)> <= <strop_chestnut>)
+      if (!src.hasStaff(chestnut))
+        src.sysMessage("Na toto monstrum nestaci tvoje hul.")
+        lastnewchar.remove
+        src.f_fizzleefect
+        return
       endif
-      
-      arg(strop_spruce,<eval(500*100*<strop>)>/10000)
-      arg(strop_chestnut,<eval(1000*100*<strop>)>/10000)
-      arg(strop_oak,<eval(1500*100*<strop>)>/10000)
-      arg(strop_teak,<eval(2500*100*<strop>)>/10000)
-      arg(strop_mahagon,<eval(4000*100*<strop>)>/10000)
-      arg(strop_eben,<eval(6000*100*<strop>)>/10000)
-      arg(strop_elven,<eval(9000*100*<strop>)>/10000)
-      
-      if(<eval lastnewchar.tag(experience)> <= <strop_spruce>)
-        if (!src.hasStaff(spruce))
-          src.sysMessage("Na toto monstrum nestaci tvoje hul.")
-          lastnewchar.remove
-          src.f_fizzleefect
-          return 1
-        endif
-      elseif (<eval lastnewchar.tag(experience)> <= <strop_chestnut>)
-        if (!src.hasStaff(chestnut))
-          src.sysMessage("Na toto monstrum nestaci tvoje hul.")
-          lastnewchar.remove
-          src.f_fizzleefect
-          return 1
-        endif
-      elseif (<eval lastnewchar.tag(experience)> <= <strop_oak>)
-        if (!src.hasStaff(oak))
-          src.sysMessage("Na toto monstrum nestaci tvoje hul.")
-          lastnewchar.remove
-          src.f_fizzleefect
-          return 1
-        endif
-      elseif (<eval lastnewchar.tag(experience)> <= <strop_teak>)
-        if (!src.hasStaff(teak))
-          src.sysMessage("Na toto monstrum nestaci tvoje hul.")
-          lastnewchar.remove
-          src.f_fizzleefect
-          return 1
-        endif
-      elseif (<eval lastnewchar.tag(experience)> <= <strop_mahagon>)
-        if (!src.hasStaff(mahagon))
-          src.sysMessage("Na toto monstrum nestaci tvoje hul.")
-          lastnewchar.remove
-          src.f_fizzleefect
-          return 1
-        endif
-      elseif (<eval lastnewchar.tag(experience)> <= <strop_eben>)
-        if (!src.hasStaff(eben))
-          src.sysMessage("Na toto monstrum nestaci tvoje hul.")
-          lastnewchar.remove
-          src.f_fizzleefect
-          return 1
-        endif
-      elseif (<eval lastnewchar.tag(experience)> <= <strop_elven>)
-        if (!src.hasStaff(elven))
-          src.sysMessage("Na toto monstrum nestaci tvoje hul.")
-          lastnewchar.remove
-          src.f_fizzleefect
-          return 1
-        endif
+    elseif (<eval lastnewchar.tag(experience)> <= <strop_oak>)
+      if (!src.hasStaff(oak))
+        src.sysMessage("Na toto monstrum nestaci tvoje hul.")
+        lastnewchar.remove
+        src.f_fizzleefect
+        return
       endif
-      
-      sound snd_SPELL_ANIMATE_DEAD
-      contents(nonewbie(drop))
+    elseif (<eval lastnewchar.tag(experience)> <= <strop_teak>)
+      if (!src.hasStaff(teak))
+        src.sysMessage("Na toto monstrum nestaci tvoje hul.")
+        lastnewchar.remove
+        src.f_fizzleefect
+        return
+      endif
+    elseif (<eval lastnewchar.tag(experience)> <= <strop_mahagon>)
+      if (!src.hasStaff(mahagon))
+        src.sysMessage("Na toto monstrum nestaci tvoje hul.")
+        lastnewchar.remove
+        src.f_fizzleefect
+        return
+      endif
+    elseif (<eval lastnewchar.tag(experience)> <= <strop_eben>)
+      if (!src.hasStaff(eben))
+        src.sysMessage("Na toto monstrum nestaci tvoje hul.")
+        lastnewchar.remove
+        src.f_fizzleefect
+        return
+      endif
+    elseif (<eval lastnewchar.tag(experience)> <= <strop_elven>)
+      if (!src.hasStaff(elven))
+        src.sysMessage("Na toto monstrum nestaci tvoje hul.")
+        lastnewchar.remove
+        src.f_fizzleefect
+        return
+      endif
+    endif
     
-      lastnewchar.eqlayers(nonewbie(remove))
-      lastnewchar.findlayer(layer_pack).contents(nonewbie(remove))
-      lastnewchar.p=<p>
-      lastnewchar.updatex
-      lastnewchar.tag(isAnimated,1)
-      lastnewchar.tag(dupecount,0)  // Aby se animatnute monstrum nerozdvojovalo
-      lastnewchar.food=<lastnewchar.def.maxfood>
-      lastnewchar.skill 062
-      lastnewchar.events +e_animate_monster
-      lastnewchar.karma = 0
-      
-      src.newitemsafe(i_rune_vzboureni)
-      lastnew.link=<lastnewchar>
-      src.equip(lastnew)
+    sound snd_SPELL_ANIMATE_DEAD
+    contents(nonewbie(drop))
+  
+    lastnewchar.eqlayers(nonewbie(remove))
+    lastnewchar.findlayer(layer_pack).contents(nonewbie(remove))
+    lastnewchar.p=<p>
+    lastnewchar.updatex
+    lastnewchar.tag(isAnimated,1)
+    lastnewchar.tag(dupecount,0)  // Aby se animatnute monstrum nerozdvojovalo
+    lastnewchar.food=<lastnewchar.def.maxfood>
+    lastnewchar.skill 062
+    lastnewchar.events +e_animate_monster
+    lastnewchar.karma = 0
+    
+    src.newitemsafe(i_rune_vzboureni)
+    lastnew.link=<lastnewchar>
+    src.equip(lastnew)
 
-      lastnewchar.newmemory(<src>)
-      lastnew.color=memory_ipet|MEMORY_GUARD
-      lastnew.more1=04
-      lastnew.MORE2=<SERV.TIME>
-      lastnew.MOREP=<link.P>
-      
-      lastnewchar.newitem(i_npcanimate_remove)
-      arg(timer_an,<eval(<eval src.tag(level)>/2)>+50)
-      
-      if (<eval src.tag(ra_vydrz)> > 0)
-        if (<eval src.tag(ra_vydrz)> < 11) 
-          arg(timer_an,<eval((<timer_an>*100)*(((<eval src.tag(ra_vydrz)>*3)+100)))>/10000)
-        else
-          arg(timer_an,<eval((<timer_an>*100)*((<eval src.tag(ra_vydrz)>+120)))>/10000)
-        endif
+    lastnewchar.newmemory(<src>)
+    lastnew.color=memory_ipet|MEMORY_GUARD
+    lastnew.more1=04
+    lastnew.MORE2=<SERV.TIME>
+    lastnew.MOREP=<link.P>
+    
+    lastnewchar.newitem(i_npcanimate_remove)
+    arg(timer_an,<eval(<eval src.tag(level)>/2)>+50)
+    
+    if (<eval src.tag(ra_vydrz)> > 0)
+      if (<eval src.tag(ra_vydrz)> < 11) 
+        arg(timer_an,<eval((<timer_an>*100)*(((<eval src.tag(ra_vydrz)>*3)+100)))>/10000)
+      else
+        arg(timer_an,<eval((<timer_an>*100)*((<eval src.tag(ra_vydrz)>+120)))>/10000)
       endif
- 
-      
-      lastnew.timer = <timer_an> 
-      lastnew.link = <src>
-      lastnewchar.equip(<lastnew>)
-
-      remove
+    endif
+    lastnew.timer = <timer_an> 
+    lastnew.link = <src>
+    lastnewchar.equip(<lastnew>)
+    remove
   else
     src.redmessage("Toto neni telo.")
-    return 1
+    return
   endif
 else
   src.tag(animating,<uid>)
   src.summon(<morex>)
 endif
-return 1
+return
 
 [EVENTS e_animate_monster]
 ON=@death
