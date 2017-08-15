@@ -1,34 +1,51 @@
 [typedef t_lockpick]
 on=@userdclick
-TARGET Co chces odemknout ?
+if (src.isDead)
+  return 1
+endif
+TARGET("Co chces odemknout?")
 return 1
 
 on=@targon_item
-if (src.findid(i_lockpick))||(src.findid(i_lockpick_2))||(src.findid(i_lockpick_3))
-  if (src.findid(i_mem_lockpick))
-    src.sysMessage "Tahle prace vyzaduje trpelivost!"
-    return 1
-  elseif (src.targ.distance>2)||!(src.targ.srccombatLOS)
-    src.sysMessage Jsi moc daleko.
-    return 1
-  elseif (src.nolightfizz(1))
-    return 1
-  elseif (src.targ.type==t_container_locked) || (src.targ.type==t_ship_hold_lock)
-    src.hungryhurts
-    src.reveal
-    sound(577)
-    src.consume=i_lockpick_3
-    src.consume=i_lockpick_2
-    src.consume=i_lockpick
-    src.newitem i_mem_lockpick
-    src.act.link=<src.targ>
-    src.act.cont=<src.Uid>
-    src.act.timer=2
-    return 1
-  else
-    src.sysMessage("Na tohle nelze pouzit paklic.")
-    return 1
+if (src.findId(i_lockpick))
+  arg(lockID,i_lockpick)
+elseif (src.findId(i_lockpick_2))
+  arg(lockID,i_lockpick_2)
+elseif (src.findId(i_lockpick_3))
+  arg(lockID,i_lockpick_3)
+else
+  return
+endif
+if (src.findid(i_mem_lockpick))
+  src.sysMessage("Tahle prace vyzaduje trpelivost!")
+  return 1
+elseif (src.targ.distance>2)||!(src.targ.srccombatLOS)
+  src.sysMessage("Jsi moc daleko.")
+  return 1
+elseif (src.nolightfizz(1))
+  return 1
+elseif (src.targ.type==t_container_locked) || (src.targ.type==t_ship_hold_lock)
+  src.hungryhurts
+  src.reveal
+  sound(577)
+  src.consume(<arg(lockID)>)
+  if (<arg(lockID)> == i_lockpick_2)
+    src.sysMessage("wtf 1; <arg(lockID)>")
+    src.newitemsafe(i_lockpick)
+    lastnew.bounce
+  elseif (<arg(lockID)> == i_lockpick_3)
+    src.sysMessage("wtf 2; <arg(lockID)>")
+    src.newitemsafe(i_lockpick_2)
+    lastnew.bounce
   endif
+  src.newitem(i_mem_lockpick)
+  lastnew.link=<src.targ>
+  lastnew.cont=<src.Uid>
+  lastnew.timer=2
+  return 1
+else
+  src.sysMessage("Na tohle nelze pouzit paklic.")
+  return 1
 endif
 
 [itemdef i_mem_lockpick]

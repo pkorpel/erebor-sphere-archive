@@ -1158,30 +1158,31 @@ TYPE=T_LOCKPICK
 FLIP=1
 RESOURCES=1 i_ingot_iron
 WEIGHT=.1
+
 CATEGORY=Items by Professions
 SUBSECTION=Thief
 DESCRIPTION=Lockpick
 DUPELIST=014fc
 SKILLMAKE=TINKERING 45.0,t_tinker_tools
 
-
-
 [ITEMDEF 014fc]
-//lockpick
+//flipped lockpick
 
 [ITEMDEF i_lockpick_2]
 ID=i_lockpick
 NAME=Lockpick na 2 pokusy
 TYPE=T_LOCKPICK
+RESOURCES=2 i_ingot_iron
 WEIGHT=.1
 
 
 
 [ITEMDEF i_lockpick_3]
 ID=i_lockpick
-NAME=Lockpick
+NAME=Lockpick na 3 pokusy
 TYPE=T_LOCKPICK
-WEIGHT=.1
+RESOURCES=3 i_ingot_iron
+WEIGHT=.2
 
 
 [ITEMDEF 01eb8]
