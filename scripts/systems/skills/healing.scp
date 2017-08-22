@@ -24,10 +24,10 @@ if (src.findid(i_mem_healing))
 endif
 if (src.findid(i_mem_ressurect))
   src.findid(i_mem_ressurect).remove
-  src.sysmessage("Prerusil jsi ozivovani.")
+  src.sysmessage("<src.sex(Prerusil,Prerusila)> jsi ozivovani.")
 endif
 if (argv(0).distance > 6) 
-  src.sysmessage("cil je moc daleko.")
+  src.sysmessage("Cil je moc daleko.")
   return
 elseif (argv(0).issumon)
   src.sysmessage("Nelze lecit summony.")
@@ -145,12 +145,14 @@ ATTR=attr_decay
 ON=@TIMER
 src=<cont>
 if !(link)
+  remove
   return
 endif
 if (link.body==c_man)||(link.body==c_woman) //humanoid - skill healing
   if (cont.healing <= rand(1025)) //fizzlecheck podle healingu
-   cont.redmessage("Leceni se ti nepovedlo.")
-   return
+    cont.redmessage("Leceni se ti nepovedlo.")
+    remove
+    return
   endif
   if (cont.profession==class_priest)
     if (topobj!=link) //pokud neleci sebe
@@ -167,13 +169,16 @@ if (link.body==c_man)||(link.body==c_woman) //humanoid - skill healing
   endif
   if (link.findid(i_krvaceni)) //vyleceni krvaceni
     f_heal_bleeding
+    remove
     return
   endif
   f_heal_common
+  remove
   return
 else //nehumanoid - skill veterinary
   if (cont.veterinary <= rand(1025)) //fizzlecheck podle veterinary
     cont.redmessage("Osetreni se ti nepovedlo.")
+    remove
     return
   endif
   cont.giveitem(i_bandage_bloody)
@@ -181,12 +186,12 @@ else //nehumanoid - skill veterinary
   if (link.findid(i_krvaceni)) //vyleceni krvaceni
     link.findid(i_krvaceni).remove
     cont.sysmessage("Krvaceni zastaveno.")
+    remove
     return
-  else //pridani zivotu
-    link.hits=<eval link.hits+promilerange(<eval cont.veterinary+cont.anatomy>,<Skill_Vet.effect>)>  
-    if (link.hits>link.maxhits)
-      link.hits=<link.maxhits>
-    endif
+  endif //pridani zivotu
+  link.hits=<eval link.hits+promilerange(<eval cont.veterinary+cont.anatomy>,<Skill_Vet.effect>)>  
+  if (link.hits>link.maxhits)
+    link.hits=<link.maxhits>
   endif
   if (link!=cont)
     link.classmessage("<cont.name> te osetril.")
