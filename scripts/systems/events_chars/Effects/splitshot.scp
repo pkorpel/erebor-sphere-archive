@@ -1,0 +1,169 @@
+[Function splitShot]
+if (profession!=class_ranger)
+  RedMessage("Toto muze pouzit jen hranicar.")
+  return 1
+elseif (isnonmobile)
+  sysMessage("You are frozen and cannot move.")
+  return 1
+elseif !(<eval tag(ra_splitShot)>)
+  RedMessage("Neumis pouzivat tuto schopnost.")
+  return 1 
+elseif (isDead)
+  RedMessage("Jako duch nemuzes pouzivat tuto schopnost.")
+  return 1 
+elseif (<eval tag(nextSplitShot)> > <serv.time>)
+  RedMessage("Jeste nelze pouzit.")
+  return 1
+elseif (<stam> < <nastaveni_splitShot_stamina>)
+  RedMessage("Nemas dost staminy!")
+  return 1
+endif
+reduceStamina(<nastaveni_splitShot_stamina>) // safely decreases stamina
+newequip(i_mem_splitShot)
+sound(snd_WEAPONS_CROSSBOW_LOAD)
+sysMessage("Chystas se vystrelit rozdelenou strelu!")
+tag(nextSplitShot,<eval (<serv.time>+<nastaveni_splitShot_delay>)>)
+
+[itemdef i_mem_splitShot]
+ID=i_memory
+TYPE=t_eq_script
+name=splitShot
+
+on=@create
+if (<nastaveni_splitShot_multihits>)    // je aktivni vicenasobny vystrel
+  more2=<nastaveni_splitShot_hits_count>   // pocet vystrelu rozdelene strely
+else
+  more2=1
+endif
+timer=<nastaveni_splitShot_effecttime>
+
+on=@equip
+dialog(d_splitShot)
+cont.tag(splitShot,1)
+
+on=@timer
+if (<more1>)
+  more1=0
+  if !(<eval cont.tag(splitShot)>)
+    cont.sound(snd_WEAPONS_CROSSBOW_LOAD)
+    cont.sysMessage("Chystas se vystrelit rozdelenou strelu!")
+    cont.tag(splitShot,1)
+  endif
+  timer=<nastaveni_splitShot_effecttime>
+  return 1 
+endif
+
+more2=more2-1
+if (<more2> > 0)
+  more1=1
+  timer=1
+  cont.dialogclose(d_splitShot,1)
+  return 1
+elseif (<more2> == 0)
+  cont.tag(splitShot,"")
+  cont.dialogclose(d_splitShot,0)
+  timerd=1
+  return 1    // debug proti hlaseni erroru pri zavirani gumpu
+endif
+
+
+[dialog d_splitShot]
+10,24
+noclose=1
+nomove=0
+argo.gumppic(14,0,05215)
+
+if (<nastaveni_splitShot_multihits>)    // jestli je aktivni vicenasobny vystrel
+  arg(x,<eval (21-(<more2>*7))>)
+  arg(i,0)
+  while (i < <more2>)
+    argo.tilepichue(<eval((arg(i)*14)+arg(x))>,40,00F41)
+    arg(i,#+1)
+  endwhile
+endif
+
+
+[dialog d_splitShot button]
+on=0
+
+on=1 // reopen dialog -> used for reinitializing count of shots
+dialog(d_splitShot)
+
+
+[Function splitShotThem]
+newitemsafe(i_splitShotThem_srcChanger)
+lastnew.p=<act.p>
+lastnew.z=-100
+lastnew.link=<uid>
+lastnew.timerd=0
+
+[itemdef i_splitShotThem_srcChanger]
+id=i_memory
+layer=77
+type=t_src_changer
+name=splitShotThem srcChanger
+
+on=@timer
+var(splitShotThem_src,<link>)
+var(splitShotThem_src_act,<link.act>)
+var(splitShotThem_srcChanger,<uid>)
+var(splitShotThem_src_koef_PvM,<eval ((<link.tag(ra_splitShot)>*100*<eval (<nastaveni_splitShot_PvM_damage>-50)>)/2000)+50>)
+var(splitShotThem_src_koef_PvP,<eval ((<link.tag(ra_splitShot)>*100*<eval (<nastaveni_splitShot_PvP_damage>-50)>)/2000)+50>)
+var(splitShotThem_max_range,<eval ((<link.tag(ra_splitShot)>*100*<eval (<eval ((<link.distancefrom(<uid>)>*100)/<nastaveni_splitShot_AOE_koef>)-1>)>)/2000)+1>)
+
+if (<var(splitShotThem_max_range)> >= <nastaveni_splitShot_maxRange>)
+  var(splitShotThem_max_range,<eval (<nastaveni_splitShot_maxRange>-1)>)          // pro sichr, kdyby nahodou vystrelil na neco, co je dal nez by melo
+elseif (<var(splitShotThem_max_range)> == 0)                  
+  link.redmessage("Cil je prilis blizko pro utok rozdelenou strelou!")
+  remove
+  return 1
+endif
+
+link.effect(2,02ED0,0,32)
+sector.allchars(splitShot_damage)
+remove
+return 1
+
+[Function splitShot_damage]
+if (isgm)       // do GM nestrilim
+  return 1
+elseif (isdead)  // do duchu nestrilim
+  return 1                               
+elseif (<uid> == <var(splitShotThem_src)>)   // do sebe nestrilim
+  return 1
+elseif (<uid> == <var(splitShotThem_src).act>)  // do cile nestrilim 2x
+  return 1
+elseif !(<mapplane> == <var(splitShotThem_srcChanger).mapplane>)     // mimo mapplan taky nestrilim
+  return 1    
+endif
+arg(dist_from_act,<distancefrom(<var(splitShotThem_srcChanger)>))>)    // vzdalenost od primarniho targetu k sekundarnimu
+if (<arg(dist_from_act)> > <var(splitShotThem_max_range)>)
+  return 1
+endif
+
+src=<var(splitShotThem_src)>
+src.act=<uid>
+if !(srccanseelos)  // nevidim sekundarni target
+  return 1
+endif
+if (ismyfriend)     // je to muj friend (stejny realm, sumon, pet, guard)
+  return 1
+endif
+effect(0,<var(splitShotThem_src).findlayer(2).typedef.tdata4>,10,1)  
+arg(mainDmg,<eval src.combat_main_nonmystik_countDmg>) // counts the damage caused by ranger to the target
+if (isPlayer)       // PvP
+  arg(mainDmg2,<eval (<arg(mainDmg)>*<eval ((<nastaveni_splitShot_maxRange>-<arg(dist_from_act)>)*<var(splitShotThem_src_koef_PvP)>)>)/1000>)  // vypocet dmg v zavislosti na tom, jak deleko je cil od primarniho targetu
+  src.accmsg("zasahl rozdelenou strelou za <arg(mainDmg2)>(bez zapocteni AR) s dist. <arg(dist_from_act)> hrace <name>(<uid>) (Realm: <eval src.tag(realm)>vs<eval tag(realm)>)")  
+else                // PvM
+  arg(mainDmg2,<eval (<arg(mainDmg)>*<eval ((<nastaveni_splitShot_maxRange>-<arg(dist_from_act)>)*<var(splitShotThem_src_koef_PvM)>)>)/1000>)  // vypocet dmg v zavislosti na tom, jak deleko je cil od primarniho targetu
+endif
+if (<arg(mainDmg)> < <arg(mainDmg2)>)
+  src.accmsg("ERROR: Spatne nastaven DMG SplitShot! Ponizeny dmg je vetsi(<arg(mainDmg2)>) nez puvodni(<arg(mainDmg)>)! Cil: <name>(<uid>)")
+  src.redmessage("POZOR! Napis PAGE - Neadekvatni dmg Rozdelene Strely") 
+  arg(mainDmg2,1)
+endif
+src.combat_main_nonmystik_doDmg(<arg(mainDmg2)>) // applies the nonmystik damage to the src's act
+src.act=<var(splitShotThem_src_act)>          // vracim attack na primarni target
+
+
+[eof]

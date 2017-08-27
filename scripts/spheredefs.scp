@@ -410,6 +410,7 @@ snd_MONSTER_ETHEREAL          		757       // ethereal warrior
 snd_MONSTER_EXODUS            		768
 snd_MONSTER_INSECT_RACE       		959
 snd_MONSTER_KIRIN             		965
+snd_WEAPONS_CROSSBOW_LOAD         996
 snd_MONSTER_PIXIE1            		1127      // big one - Forest Queen
 snd_MONSTER_PIXIE2            		1133      // little pixies
 snd_MONSTER_MIMIC             		1100
