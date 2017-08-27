@@ -1623,6 +1623,12 @@ endif
 if (<tag(awaitsexpforhealing)>) //klerik
   tag.remove(awaitsexpforhealing)
 endif
+if (<eval tag(splitShot)>)     // ma aktivni rozdelenou strelu
+  tag(splitShot,"")
+  dialogclose(d_splitShot,0)
+  findid(i_mem_splitShot).more2=0   // debug proti hlaseni erroru pri zavirani gumpu
+  findid(i_mem_splitShot).timer=0
+endif
 
 //zrusit krvaceni
 if (findid(i_krvaceni))
@@ -2720,6 +2726,11 @@ if (specability)
   if (tag(atskill)==31)
     classmessage("Skvely zasah!")
     var(ubrano,<eval (var(ubrano)*nastaveni_ability_berssniper)/1000>)
+    if (tag(splitShot))
+      tag(splitShot,0)
+      splitShotthem
+      findid(i_mem_splitShot).timer=0
+    endif
     if (tag(knockback))
      act.knockbackhim
     endif
