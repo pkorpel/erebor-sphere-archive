@@ -542,8 +542,12 @@ while (memoryfindtype(MEMORY_FIGHT))
   memoryfindtype(MEMORY_FIGHT).remove
 endwhile
 
-[function addWarTarg] // args - UID charu, jehoz fight link se ma pridat
+[function addWarTarg] // args - UID charu, jehoz war-targ link se ma pridat -> npc bude na tohle UID utocit!
 addMemoryFlag(<args>,<MEMORY_WAR_TARG>)
+return
+
+[function addFight] // args - UID charu, jehoz fight link se ma pridat
+addMemoryFlag(<args>,<MEMORY_FIGHT>)
 return
 
 // called upon NPC upon which the memory should be added
