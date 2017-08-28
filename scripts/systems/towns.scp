@@ -229,6 +229,8 @@ on=@afterswing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
+on=@playerKill
+on=@npckill
 
 [function iscriminal]
 if(<flag_criminal>) 

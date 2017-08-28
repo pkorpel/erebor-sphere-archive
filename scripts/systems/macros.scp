@@ -855,6 +855,8 @@ on=@DrinkingPotion
 on=@afterswing
 on=@finalBlow
 on=@beforegeteffect
+on=@playerKill
+on=@npckill
 
 [events e_illusionist]
 on=@aftergetswing

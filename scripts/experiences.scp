@@ -1303,7 +1303,7 @@ elseif (strmatch("<args>","taunt"))
     redMessage("Vic bodu do teto ability nyni pridat nelze.")
   endif  
 elseif (strmatch("<args>","splitShot"))
-  if (tag(level)>39)&&(<eval tag(ra_<args>)> <10)
+  if (tag(level)>29)&&(<eval tag(ra_<args>)> <10)
     tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
   elseif (tag(level)>59)&&(<eval tag(ra_<args>)> <20)
     tag(ra_<args>,<?eval tag(ra_<args>)?>+1)

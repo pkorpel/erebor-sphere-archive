@@ -97,8 +97,8 @@ return 0
 
 [dialog d_magicCharge]
 10,24
-noclose=0
-nomove=0
+noclose=1
+nomove=1
 argo.gumppic(14,0,<hval def_charge_icon[<eval more1>]>)
 arg(i,0)
 while (i<more2)

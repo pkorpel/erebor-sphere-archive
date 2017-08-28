@@ -76,6 +76,8 @@ on=@afterswing
 on=@finalBlow
 on=@beforegetswing
 on=@created
+on=@playerKill
+on=@npckill
 
 [function emotedmg]
 if (argvcount)
@@ -918,6 +920,7 @@ on=@beforegeteffect
 on=@beforegetswing
 on=@playerKill
 on=@npckill
+on=@finalBlow
 
 [itemdef i_combat_main]
 id=i_memory
