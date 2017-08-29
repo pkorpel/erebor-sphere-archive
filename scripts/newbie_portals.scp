@@ -1803,7 +1803,8 @@ if (src.ismagic)
   src.redmessage("Nesmis byt pod zadnym magickym vlivem.")
   return 1
 endif
-dialog(d_YesNo_reset_abilit,<eval <eval tag(hrac[<src>])>*tag.price>)
+//dialog(d_YesNo_reset_abilit,<eval <eval tag(hrac[<src>])>*tag.price>)
+dialog(d_YesNo_reset_abilit,25000)
 return 1
 
 [dialog d_YesNo_reset_abilit]
@@ -1817,12 +1818,15 @@ if (src.ismagic)
   src.redmessage("Nesmis byt pod zadnym magickym vlivem.")
   return 1
 endif
-arg(toPay,<eval <eval tag(hrac[<src>])>*tag.price>)>)
+//arg(toPay,<eval <eval tag(hrac[<src>])>*tag.price>)>)
+arg(toPay,25000)
 if (<src.pay(<arg(toPay)>)>)
   src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval arg(toPay)> zlatych.")
-  src.redmessage("Tvoje ability byly resetovany. Rozdel si body znovu.")
-  tag(hrac[<src>],<eval tag(hrac[<src>])>+1)
+  src.accMsg("resetoval ability na levelu <eval src.tag(level)> za <eval arg(toPay)>")
+  //tag(hrac[<src>],<eval tag(hrac[<src>])>+1)
+
   src.resethim
+  src.redmessage("Tvoje ability byly resetovany. Rozdel si body znovu.")
 endif
 
 on=2
