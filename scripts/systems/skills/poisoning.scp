@@ -18,7 +18,7 @@ if (<argvcount> == 3)
 else
   arg(poisonType,<argv(3)>)
 endif
-if (f_poison_updatePoisonDmg(<argv(1)>,<arg(poisonType)>))
+if (f_poison_updatePoisonDmg(<argv(1)>,<arg(poisonType)>,<argv(0)>))
   newitemsafe(i_memory_jed)
   arg(poisonMemory,<lastnew>)
   arg(poisonMemory).tag(jed_sila,<argv(1)>)
@@ -521,6 +521,7 @@ return 0
 // var(noMessage) ~ denies messages pop up
 // argv(0) ~ poison strength
 // argv(1) ~ poison type
+// argv(2) ~ poison src(dealer)
 // returns: 0 ~ if poison changed
 //          1 ~ if poison item was NOT found
 [function f_poison_updatePoisonDmg]
@@ -529,6 +530,7 @@ if (strlen(<arg(poisonMemory)>))
   arg(currentDamage,<eval arg(poisonMemory).tag(jed_sila)>)
   if (<arg(currentDamage)> < <argv(0)>) // the new poison damage is greater
     arg(poisonMemory).tag(jed_sila,<argv(0)>)
+    arg(poisonMemory).tag(poisonDealer,<argv(2)>)
     if !(<eval var(noMessage)>)
       sysMessage("<sex("Dostal","Dostala")> jsi dalsi davku jedu!")
     endif

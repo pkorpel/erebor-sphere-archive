@@ -803,6 +803,9 @@ on=@itemUserDClick
 if (<src.flags>&statf_dead)
   return
 endif
+if (src.isParalyzed)
+  return
+endif
 findid(i_memory_weekly_quest).f_weekly_itemDClick(<act>)
 
 [function f_weekly_itemDClick] //argv(0) - act
@@ -847,7 +850,14 @@ on=@itemPICKUP_PACK
 if !(<eval act.tag(iic_owner)> > 0)  // jeste nikdo nelotl z tela monstra
   return
 endif
+if !(<eval act.tag(spawned_item)>)  // je to item, ktery byl v npc vytvoren pri spawnu
+  return
+endif
 if (<eval act.tag(looted)>)  // tento predmet lootlo NPC pomoci eventu e_looter (proti vychytralkum)
+  return
+endif
+if !(<eval act.tag(iic_amount)> == <act.amount>)  // Pocet predmetu v tele se od smrti zmenil. Pokus o bug?
+  accmsg("lootl <act.name>(<act>) z tela <act.topobj.name>(<act.topobj>) u nehoz se zmenil od smrti pocet kusu z <eval act.tag(iic_amount)> na <act.amount> pri plneni Weekly.")
   return
 endif
 if !(act.topobj.isItem)
@@ -911,6 +921,9 @@ endif
 if (<eval src.tag(realm)> == <eval tag(realm)>)  // ze stejneho realmu nene
   return
 endif
+if (!(src.flag_spawned) && !(src.isPlayer))
+  return
+endif
 if (<eval <var(ubrano)>> <= 0)
   return
 endif
@@ -936,7 +949,7 @@ while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
 endwhile
 
 on=@itemTimer          // SRC a UID je hrac, ACT je item co tikl
-if !((<act.id> == i_memory_jed) || (<act.id> == i_krvaceni))
+if !(<act.id> == i_memory_jed)
   return
 endif
 
@@ -948,16 +961,17 @@ while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
   arg(questId,<eval weekly.tag(receiveDmg[<eval arg(i)>])>)
   arg(subjectId,<weekly.tag(quest_subjectId[<arg(questId)>])>)
 
-  if (<act.id> == i_memory_jed)   // nevim jak osetrit jed ze stejneho realmu jako u bleedu
+  if (<act.id> == i_memory_jed)
+    if (charExists(<finduid(act.tag(poisonDealer))>))        // pokud je to hrac/npc kontrolujeme. Jinak to muze byt item/naslapka a tam neni treba kontroly
+      if (<eval (finduid(act.tag(poisonDealer)).tag(realm))> == <eval tag(realm)>)     // nechceme aby se poisnili navzajem hraci mezi sebou v ramci jednoho realmu
+        return
+      endif
+      if (!(finduid(act.tag(poisonDealer)).flag_spawned) && !(finduid(act.tag(poisonDealer)).isPlayer))  // nechceme aby se nechal poisnit v baraku od tamnute poison feny
+        return
+      endif
+    endif
     if (!strcmpi(neprime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>)) || (!strcmpi(jedem,<arg(subjectId)>))
       arg(received_dmg,<eval act.tag(jed_sila)>)
-    endif
-  elseif (<act.id> == i_krvaceni)
-    if (<eval tag(realm)> == <eval act.link.tag(realm)>)   // nechceme aby se bleedili navzajem hraci mezi sebou v ramci jednoho realmu
-      return
-    endif
-    if (!strcmpi(neprime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>)) || (!strcmpi(krvacenim,<arg(subjectId)>))
-      arg(received_dmg,<var(dmgedNoResp)>)
     endif
   endif
   if (arg(received_dmg) > 0)
@@ -979,6 +993,39 @@ on=@finalBlow
 on=@npcKill
 on=@playerKill
 on=@DrinkingPotion
+
+
+[function f_weekly_receiveDmg]    // <argv(0)> - dmg amount; <argv(1)> - src of bleed
+arg(weekly,<findid(i_memory_weekly_quest)>)
+arg(i,0) 
+
+while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
+  arg(received_dmg,0)
+  arg(questId,<eval weekly.tag(receiveDmg[<eval arg(i)>])>)
+  arg(subjectId,<weekly.tag(quest_subjectId[<arg(questId)>])>)
+
+  if (charExists(<argv(1)>))        // pokud je to hrac/npc kontrolujeme. Jinak to muze byt item/naslapka a tam neni treba kontroly
+    if (<eval tag(realm)> == <eval argv(1).tag(realm)>)   // nechceme aby se bleedili navzajem hraci mezi sebou v ramci jednoho realmu
+      return
+    endif
+    if (!(<argv(1).flag_spawned>) && !(<argv(1).isPlayer>))  // nechceme aby se nechal bleedit v baraku od tamnuteho drapka
+      return
+    endif
+  endif
+  
+  if (!strcmpi(neprime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>)) || (!strcmpi(krvacenim,<arg(subjectId)>))
+    arg(received_dmg,<argv(0)>)
+  endif
+
+  if (arg(received_dmg) > 0)
+    if (weekly.f_weekly_increase(<questId>,<arg(received_dmg)>))
+      weekly.f_weekly_removeItem(<arg(i)>,receiveDmg)
+      arg(i,#-1)
+    endif
+  endif
+  arg(i,#+1)
+endwhile
+
 
 /////////////////////////////
 

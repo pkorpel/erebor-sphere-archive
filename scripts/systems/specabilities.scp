@@ -667,6 +667,9 @@ endif
 arg(damag,<eval f_bleed_calculateCurrentValue(def_bleed_dmgCoeficient)>) // y=DMG * ( 1 - (x ^ 2) / (MAX_TICKS ^2) )
 
 cont.damage_noresponse(<arg(damag)>,dam_bleed|dam_god,<link>)
+if (cont.isevent(e_weekly_receiveDmg)) 
+  cont.f_weekly_receiveDmg(<arg(damag)>,<link>)
+endif
 if (var(dmgedNoResp) <= 0)
   remove
 endif

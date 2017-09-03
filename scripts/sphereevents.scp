@@ -2096,11 +2096,14 @@ return 0
 [function item_in_corpse]
 events=+t_item_in_corpse
 tag(iic_owner,<src>)
+tag(iic_amount,<amount>)
 updatex
 
 [function f_item_in_corpse_reset]
 events -t_item_in_corpse
 tag.remove(iic_owner)
+tag.remove(iic_amount)
+tag.remove(spawned_item)
 
 [typedef t_item_in_corpse]
 on=@pickup_pack
@@ -2153,8 +2156,7 @@ if (topobj.isItem)
     endif
   endif
 endif
-tag(iic_owner,"")
-events -t_item_in_corpse
+f_item_in_corpse_reset
 
 on=@pickup_ground
 if (<src> != <tag(iic_owner)>)

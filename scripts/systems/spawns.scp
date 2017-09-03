@@ -247,6 +247,7 @@ else
       if (<arg(gp)> > <eval {30 100000}*{1 17}>)
         giveitem(i_u_treasure_map)
       endif
+    findlayer(layer_pack).contents(tag(spawned_item,1))
     endif
   endif
   if (<eval tag(experience)> < 10) && (<eval tag(experience)> > 0)
