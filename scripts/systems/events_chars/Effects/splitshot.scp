@@ -144,9 +144,11 @@ endif
 src=<var(splitShotThem_src)>
 src.act=<uid>
 if !(srccanseelos)  // nevidim sekundarni target
+  src.act=<var(splitShotThem_src_act)>          // vracim attack na primarni target
   return 1
 endif
 if (ismyfriend)     // je to muj friend (stejny realm, sumon, pet, guard)
+  src.act=<var(splitShotThem_src_act)>          // vracim attack na primarni target
   return 1
 endif
 effect(0,<var(splitShotThem_src).findlayer(2).typedef.tdata4>,10,1)  
