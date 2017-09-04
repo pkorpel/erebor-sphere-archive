@@ -856,7 +856,7 @@ endif
 if (<eval act.tag(looted)>)  // tento predmet lootlo NPC pomoci eventu e_looter (proti vychytralkum)
   return
 endif
-if !(<eval act.tag(iic_amount)> == <act.amount>)  // Pocet predmetu v tele se od smrti zmenil. Pokus o bug?
+if (<eval act.tag(iic_amount)> < <act.amount>)  // Pocet predmetu v tele se od smrti zmenil. Pokus o bug?
   accmsg("lootl <act.name>(<act>) z tela <act.topobj.name>(<act.topobj>) u nehoz se zmenil od smrti pocet kusu z <eval act.tag(iic_amount)> na <act.amount> pri plneni Weekly.")
   return
 endif
