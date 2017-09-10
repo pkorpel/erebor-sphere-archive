@@ -5897,9 +5897,6 @@ TSPEECH=spk_guard
 TEVENTS=e_guard_ranged
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
-
-
 
 CATEGORY=Civilized
 SUBSECTION=Verbatim test guards
@@ -5913,9 +5910,9 @@ karma=10000
 
 STR=1000
 DEX=300
-INT=150
+INT=210
 
-maxhits=2500
+maxhits=5500
 maxstam=300
 maxmana=1500
 
@@ -5924,7 +5921,6 @@ tag.resist_poison=850
 
 tag.experience=<eval {40.0 60.0}>
 
-tag.npc_stun_time=10              //1 seconds of stun
 
 tag(noanimate,1)
 tag(hypnotizable,0)
@@ -5934,20 +5930,16 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 PROVOCATION=100.0
 PEACEMAKING=100.0
 PARRYING={90.0 100.0}
-RESIST={80.0 100.0}
+RESIST={130.0 160.0}
 MACEFIGHTING={90.0 100.0}
 Tactics={100.0 150.0}
 magery=120.0
 EI=100.0
 
 ITEMNEWBIE=i_spellbook
-addspell=s_harm
 addspell=s_fireball
-addspell=s_lightning
-
 
 ITEMnewbie=i_monster_create
-
 
 ITEM=i_npc_mount
 tag.mount=i_mt_horse_brown_dk
@@ -5984,7 +5976,6 @@ TSPEECH=spk_guard
 TEVENTS=e_guard_ranged
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
 
 CATEGORY=Civilized
 SUBSECTION=Guards & Law
@@ -5998,9 +5989,9 @@ karma=10000
 
 STR=1000
 DEX=300
-INT=150
+INT=210
 
-maxhits=2500
+maxhits=5500
 maxstam=300
 maxmana=1500
 
@@ -6008,8 +5999,6 @@ tag.resist_para=<eval {750 950}>
 tag.resist_poison=850
 
 tag.experience=<eval {40.0 60.0}>
-
-tag.npc_stun_time=10              //1 seconds of stun
 
 tag(noanimate,1)
 tag(hypnotizable,0)
@@ -6019,16 +6008,14 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 PROVOCATION=100.0
 PEACEMAKING=100.0
 PARRYING={90.0 100.0}
-RESIST={80.0 100.0}
+RESIST={130.0 160.0}
 MACEFIGHTING={90.0 100.0}
 Tactics={100.0 150.0}
 magery=150.0
-EI=150.0
+EI=100.0
 
 ITEMNEWBIE=i_spellbook
-addspell=s_harm
 addspell=s_fireball
-addspell=s_lightning
 
 ITEMnewbie=i_monster_create
 ITEM=i_npc_mount
@@ -6078,9 +6065,6 @@ TSPEECH=spk_guard
 TEVENTS=e_guard_ranged
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_stun
-
-
 
 CATEGORY=Civilized
 SUBSECTION=Guards & Law
@@ -6093,19 +6077,16 @@ COLOR=colors_skin
 karma=10000
 STR=1000
 DEX=250
-INT=160
+INT=210
 
-
-maxhits={1800 2200}
-maxstam={130 150}
+maxhits=5500
+maxstam=300
 maxmana=1200
 
 tag.resist_para=<eval {750 950}>
 tag.resist_poison=850
 
 tag.experience=<eval {40.0 60.0}>
-
-tag.npc_stun_time=10              //1 seconds of stun
 
 tag(noanimate,1)
 tag(hypnotizable,0)
@@ -6115,20 +6096,16 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 PROVOCATION=100.0
 PEACEMAKING=100.0
 PARRYING={90.0 100.0}
-RESIST={80.0 100.0}
+RESIST={130.0 160.0}
 MACEFIGHTING={90.0 100.0}
 Tactics={100.0 150.0}
 magery=150.0
-EI=150.0
+EI=100.0
 
 ITEMNEWBIE=i_spellbook
-addspell=s_harm
 addspell=s_fireball
-addspell=s_lightning
-
 
 ITEMnewbie=i_monster_create
-
 
 ITEM=i_npc_mount
 tag.mount=i_mt_horse_brown_dk
