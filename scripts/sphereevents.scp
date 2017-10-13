@@ -2236,6 +2236,7 @@ elseif (tag(myNameVarColor))
 else
  messagecol(<getnamehue>,"<name><qval(abbrevstatus," [<findid(i_memory_guild).link.tag(abbrev)>]","")>") //
 endif
+show_hitpoints
 return 1
 
 [events e_tryHit]
@@ -2317,6 +2318,7 @@ return 1
 
 on=@getHit
 tag(combatSource,<src>)
+show_damage_and_hitpoints(<var(ubrano)>)
 
 on=@death
 tag(lastmurderbyf,<act>)

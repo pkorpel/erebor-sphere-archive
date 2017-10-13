@@ -20,11 +20,18 @@ on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if (act.mana>12)
-  hits=(<hits>+<var(ubrano)>)
-  act.mana=mana-<eval{8 12}>
+if (act.mana > 12)
+  if (<eval (<hits>+<var(ubrano)>)> > 30000)
+    arg(healedAmount,<eval (30000-<hits>)>)
+    hits=30000
+  else
+    arg(healedAmount,<var(ubrano)>)
+    hits=(<hits> + <var(ubrano)>)
+  endif
+  show_damage_and_hitpoints(<arg(healedAmount)>,1)
+  act.mana=mana-<eval {8 12}>
   act.sysMessage("Monstrum se syti tvou manou!")
-elseif (act.mana<12)
+elseif (act.mana < 12)
   act.mana=0
 endif
 on=@finalBlow
@@ -439,6 +446,7 @@ if (tag(vypito)!=1)
     hits=(hits)+(maxhits/3)
     emote("drinking potion")
     emote("regenerating!")
+    show_damage_and_hitpoints(<eval (<maxhits>/3)>,1)
     return 0
   endif
   if ((<hits> < <maxhits>/2) && (rand(12)==1))
@@ -1481,6 +1489,7 @@ if !(isSilenced)
     lastnew.tag(lord,<UID>)
   elseif ((act.findid(i_curse_drainhps)) && (hits<30000))
     hits=<hits+(maxhits/20)>
+    show_damage_and_hitpoints(<eval (<maxhits>/20)>,1)
   endif
 endif
 
@@ -1533,6 +1542,7 @@ if !(findid(i_curse_givehps)
 endif
 if ((<act>==<findid(i_curse_givehps).tag(lord)>) && ((findid(i_curse_givehps).tag(lord).hits)<30000))
   findid(i_curse_givehps).tag(lord).hits=<findid(i_curse_givehps).tag(lord).hits>+<var(ubrano)>
+  findid(i_curse_givehps).tag(lord).show_damage_and_hitpoints(<var(ubrano)>,1)
   var(ubrano,<eval (var(ubrano)/100)>)
 endif
 
@@ -1722,40 +1732,42 @@ timer=6
 
 on=@equip
 if !(cont.tag(stopreg))
- cont.tag(stopreg,0)
+  cont.tag(stopreg,0)
 endif
 
 on=@timer
-if (cont.tag(stopreg)==12)
- cont.tag(dontregenerate,1)
- remove
+if (<cont.tag(stopreg)> == 12)
+  cont.tag(dontregenerate,1)
+  remove
 endif
 
-if ((<cont.hits>)>(<cont.maxhits>))
- remove
+if ((<cont.hits>) > (<cont.maxhits>))
+  remove
 endif
 
-if ((strlen(<cont.findid(i_a_curse)>)) && (rand(2)==1))
- remove
+if ((strlen(<cont.findid(i_a_curse)>)) && (rand(2) == 1))
+  remove
 endif
 
-if ((<cont.hits>)<(<cont.maxhits>))
- if (cont.tag(regespeed))
-  cont.hits=((<cont.hits>)+(<cont.maxhits>/<cont.tag(regespeed)>))
-  cont.emote=regenerating
+if ((<cont.hits>) < (<cont.maxhits>))
+  if (<eval cont.tag(regespeed)>)
+    arg(reg_amount,<eval (<cont.maxhits>/<cont.tag(regespeed)>)>)
+  else
+    arg(reg_amount,<eval (<cont.maxhits>/10)>)
+  endif
+  
+  cont.hits=<cont.hits>+<arg(reg_amount)>
+  if (<cont.hits> > <cont.maxhits>)
+    arg(reg_amount,#-<eval (<cont.hits> - <cont.maxhits>)>)  // kolik se ve skutecnosti vylecilo
+    cont.hits=<cont.maxhits>
+  endif
+  cont.emote("regenerating")
+  cont.show_damage_and_hitpoints(<reg_amount>,1)
   cont.tag(stopreg,#+1)
   timer=8
   return 1
- endif
 endif
 
-if ((<cont.hits>)<(<cont.maxhits>))
- cont.hits=<cont.hits>+<cont.maxhits>/10
- cont.emote=regenerating
- cont.tag(stopreg,#+1)
- timer=8
- return 1
-endif
 
 [itemdef i_statue_bless]
 ID=02d3d

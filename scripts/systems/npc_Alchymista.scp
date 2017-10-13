@@ -1,0 +1,537 @@
+[function f_npc_alchymista]
+arg(my_spawn,<memoryfindtype(Memory_ISpawned).link>)
+if (0<my_spawn.tag(realm)>==<src.tag(realm)>)
+  dialog(d_npc_alchymista)
+elseif !(src.isgm)
+  Say("Nech me byt !")
+endif
+
+if (src.isgm)
+  dialog(d_npc_alchymista_statistika,<my_spawn>)
+endif
+
+[speech spk_alchymista]
+ON = *hi*
+ON = *dobry*
+ON = *ahoj*
+ON = *zdravi*
+ON = *buy*
+ON = *koupit*
+ON = *nakup*
+
+if (canReachNPC(<src.targ>))
+  f_npc_alchymista
+endif
+return 1
+
+[DIALOG d_npc_alchymista]
+5,5
+page 0
+resizepic(20,200,2620,640,350)
+arg(prodejce,prodejce_<hval <memoryfindtype(Memory_ISpawned).link>>)
+arg(buy_radek_vyska,25)
+gumppic(30,210,03182) // podklad pod ksichtiky	
+gumppic(40,215,03116) // ksichtik   3000-3164
+
+argo.button(160,330,0988,0988,0,2,0)	// Kdo jsi ?/Jak jdou obchody
+argo.button(325,330,0988,0988,0,3,0)	// Mohu Pomoci?
+argo.button(490,330,0988,0988,0,4,0)	// Obchodovat ?
+//argo.button(160,360,0988,0988,0,5,0)	// Hledam praci
+//argo.button(325,360,0988,0988,0,6,0)	// Nesu ti ...
+argo.button(490,360,0988,0988,0,7,0)	// Prohlednout ...
+
+argo.settext(0,"<?name?>, Nejvyssi Akolyta")	// Jmeno a titul
+argo.text(220,210,52,0)		//
+
+if (<src.qtag(<prodejce>)>)	// uz se videli ?
+  argo.settext(1,"Jak jdou obchody?")
+  argo.text(182,332,1152,1)
+else
+  argo.settext(1,"Kdo Jsi?")
+  argo.text(215,332,1152,1)
+endif
+argo.settext(2,Mohu Pomoci?)
+argo.settext(3,Obchodovat?)
+argo.settext(4,Hledam Praci)
+argo.settext(5,Nesu Ti)
+argo.settext(6,Prohlednout)
+argo.text(360,332,1152,2)	//
+argo.text(538,332,1152,3)	//
+//argo.text(202,361,1152,4)	//
+//argo.text(385,361,1152,5)	//
+argo.text(540,361,142,6)	//
+
+page 1 // pozdrav na uvitanou
+if (<src.qtag(<prodejce>)>)
+  argo.settext(10," Radost te tu znovu videt! Nejake prani?")
+else
+  argo.settext(10," Vitam te! Mohu ti neco nabidnout?")
+endif
+argo.HTMLGUMP(170,230,440,100,10,0,36)
+
+page 2 // Kdo jsi, jak jdou obchody ?
+if (<src.qtag(<prodejce>)>)
+  argo.settext(20," Aah dekuji ti za optani, jde to skvele ! Poptavka je stale vysoka, to nemohu rict.")
+else
+  argo.settext(20," Obchoduji s nejruznejsimi alchymistickymi vyrobky, ktere nikde jinde ve Stredozemi nesezenes. Prodavam Krystaly videni a Elixiry poznani, ktere ti odhali zranitelnost priser, take ocarovane predmety, ktere te dokazou navratit k zivotu a jako posledni novinku tady mam Lekvary vnimani, ktere ti rozsiri tve vnimani okoli, zkus ho a nebudes litovat! Jen si prohlidni mou nabidku a uvidis <?src.sex sam sama?>...")
+endif
+src.qtag(<prodejce>,1)
+HTMLGUMP(170,230,440,100,20,0,36)
+
+page 3  //mohu pomoci ?
+argo.settext(30," Hmm... Nevim.. Opravdu nevim o nicem, s cim by jsi mi ted <?src.sex mohl mohla?> pomoci, je mi lito, vypadas schopne...")
+HTMLGUMP(170,230,440,100,30,0,36)
+
+page 4 //obchodovat
+argo.button(160,360,0988,0988,0,4,0)	// Dalsi zbozi
+argo.settext(50,"Dalsi zbozi")
+argo.text(202,361,777,50)		// Dalsi zbozi
+argo.button(325,360,0988,0988,1,0,1)	// Koupit
+argo.settext(51,"Koupit")
+argo.text(385,361,777,51)		// Koupit
+
+argo.settext(40," Tak se na to podivame... Co bys <?src.sex rad rada?>?<br> Zbozi, ktere se ti libi si nasbirej a ja ti to napocitam.")
+HTMLGUMP(170,230,440,100,40,0,36)
+argo.button(25,395,0fa5,0fa7,0,8,0)  // Elixir poznani
+argo.button(25,415,0fa5,0fa7,0,9,0)  // Krystal videni
+argo.button(25,435,0fa5,0fa7,0,10,0)  // Lektvary vnimani - NOVINKA
+argo.button(25,455,0fa5,0fa7,0,11,0)  // Artefakty zivota - Svice zivota a Schranka na duse
+
+argo.settext(41,"Elixir poznani")  // 5.000
+argo.settext(42,"Krystal videni")// 10.000
+argo.settext(43,"Lektvary vnimani") // slaby odvar - Elixir: 3.750, 7.125, 13.500, 24.000
+argo.settext(44,"NOVINKA")          // slaby odvar - Elixir: 3.750, 7.125, 13.500, 24.000
+argo.settext(45,"Artefakty zivota") // Svice zivota - 30.000 ; Schranka na dusi: 12.000
+argo.settext(46,"Svice zivota a Schranka na duse") // Svice zivota - 30.000 ; Schranka na dusi: 12.000
+argo.settext(47,"")
+argo.settext(48,"ks")
+argo.settext(49,"cena/ks :")
+
+argo.text(60,395,152,41)
+argo.text(60,415,152,42)
+argo.text(60,435,152,43)
+argo.text(210,435,142,44)
+argo.text(60,455,152,45)
+argo.text(210,455,142,46)
+
+page 5 // empty
+
+page 6 // empty
+
+page 7 // prohlednout
+argo.settext(70,"Moudry starik s dlouhym plnovousem.<br> Od prvniho pohledu je na tomto muzi neco tajemneho. Pres jeho kapi mu nejde videt do oci a tak tezko se odhaduji jeho umysly. Co lze vsak s jistotou rici je, ze je odhodlan prodat vsechny sve vyrobky do posledniho kusu...")
+HTMLGUMP(170,230,440,100,70,0,36)
+
+
+page 8 // Elixir poznani
+argo.button(160,360,0988,0988,0,4,0)	// Dalsi zbozi
+argo.settext(50,"Dalsi zbozi")
+argo.text(202,361,777,50)		// Dalsi zbozi
+argo.button(325,360,0988,0988,1,0,1)	// Koupit
+argo.settext(51,"Koupit")
+argo.text(385,361,777,51)		// Koupit
+
+gumppic(202,395,098D) // podklad pod pocet
+argo.settext(80,"Po vypiti tohoto Elixiru, zjistis nasledujicim uderem odolnosti prisery, proti ktere stojis.")
+argo.settext(81,"Elixir poznani:")
+argo.settext(811,"5.000 gp")
+HTMLGUMP(170,230,440,100,80,0,36)
+argo.text(60,395,152,81)
+argo.text(308,395,152,48)	// ks.
+argo.text(380,395,152,49)	// cena/ks:
+argo.text(480,395,152,811)
+argo.textentry(210,396+0*(buy_radek_vyska),90,<d_def_radek_vyska>,52,1,47)
+
+
+page 9 // Krystal videni
+argo.button(160,360,0988,0988,0,4,0)	// Dalsi zbozi
+argo.settext(50,"Dalsi zbozi")
+argo.text(202,361,777,50)		// Dalsi zbozi
+argo.button(325,360,0988,0988,1,0,1)	// Koupit
+argo.settext(51,"Koupit")
+argo.text(385,361,777,51)		// Koupit
+
+gumppic(202,395,098D) // podklad pod pocet
+argo.settext(90,"Aktivace tohoto krystalu ti umozni po nasledujicim udery odhalit zranitelnost prisery proti, ktere stojis.")
+argo.settext(91,"Krystal videni:")
+argo.settext(911,"10.000 gp")
+HTMLGUMP(170,230,440,100,90,0,36)
+argo.text(60,395,152,91)
+argo.text(308,395,152,48)	// ks.
+argo.text(380,395,152,49)	// cena/ks:
+argo.text(480,395,152,911)
+argo.textentry(210,396+0*(buy_radek_vyska),90,<d_def_radek_vyska>,52,2,47)
+
+
+page 10 // Lektvary vnimani - NOVINKA
+argo.button(160,360,0988,0988,0,4,0)	// Dalsi zbozi
+argo.settext(50,"Dalsi zbozi")
+argo.text(202,361,777,50)		// Dalsi zbozi
+argo.button(325,360,0988,0988,1,0,1)	// Koupit
+argo.settext(51,"Koupit")
+argo.text(385,361,777,51)		// Koupit
+
+gumppic(202,395+0*(buy_radek_vyska),098D) // podklad pod pocet
+gumppic(202,395+1*(buy_radek_vyska),098D) // podklad pod pocet
+gumppic(202,395+2*(buy_radek_vyska),098D) // podklad pod pocet
+gumppic(202,395+3*(buy_radek_vyska),098D) // podklad pod pocet
+argo.settext(100,"Toto je uplna novinka. Vypitim tohoto odvaru se ti na urcitou dobu rozsiri tve vnimani okoli. Budes schopen zretelneji videt co se behem boje okolo tebe deje.")
+argo.settext(101,"Elixir vnimani:")
+argo.settext(1011,"24.000 gp")
+argo.settext(102,"Silny odvar vnimani:")
+argo.settext(1021,"13.500 gp")
+argo.settext(103,"Lektvar vnimani:")
+argo.settext(1031,"7.125 gp")
+argo.settext(104,"Slaby odvar vnimani:")
+argo.settext(1041,"3.750 gp")
+
+HTMLGUMP(170,230,440,100,100,0,36)
+argo.text(60,395+0*(buy_radek_vyska),152,101)
+argo.text(60,395+1*(buy_radek_vyska),152,102)
+argo.text(60,395+2*(buy_radek_vyska),152,103)
+argo.text(60,395+3*(buy_radek_vyska),152,104)
+
+argo.text(308,395+0*(buy_radek_vyska),152,48)	// ks.
+argo.text(308,395+1*(buy_radek_vyska),152,48)	// ks.
+argo.text(308,395+2*(buy_radek_vyska),152,48)	// ks.
+argo.text(308,395+3*(buy_radek_vyska),152,48)	// ks.
+
+argo.text(380,395+0*(buy_radek_vyska),152,49)	// cena/ks:
+argo.text(380,395+1*(buy_radek_vyska),152,49)	// cena/ks:
+argo.text(380,395+2*(buy_radek_vyska),152,49)	// cena/ks:
+argo.text(380,395+3*(buy_radek_vyska),152,49)	// cena/ks:
+
+argo.text(480,395+0*(buy_radek_vyska),152,1011)
+argo.text(480,395+1*(buy_radek_vyska),152,1021)
+argo.text(480,395+2*(buy_radek_vyska),152,1031)
+argo.text(480,395+3*(buy_radek_vyska),152,1041)
+
+argo.textentry(210,396+0*(buy_radek_vyska),90,<d_def_radek_vyska>,52,3,47)
+argo.textentry(210,396+1*(buy_radek_vyska),90,<d_def_radek_vyska>,52,4,47)
+argo.textentry(210,396+2*(buy_radek_vyska),90,<d_def_radek_vyska>,52,5,47)
+argo.textentry(210,396+3*(buy_radek_vyska),90,<d_def_radek_vyska>,52,6,47)
+
+
+page 11 // Artefakty zivota - Svice zivota a Schranka na duse
+argo.button(160,360,0988,0988,0,4,0)	// Dalsi zbozi
+argo.settext(50,"Dalsi zbozi")
+argo.text(202,361,777,50)		// Dalsi zbozi
+argo.button(325,360,0988,0988,1,0,1)	// Koupit
+argo.settext(51,"Koupit")
+argo.text(385,361,777,51)		// Koupit
+
+gumppic(202,395+0*(buy_radek_vyska),098D) // podklad pod pocet
+gumppic(202,395+1*(buy_radek_vyska),098D) // podklad pod pocet
+argo.settext(110,"Schopny knez s pouzitim Svice zivota se dokaze navratit k zivotu.<br>A Shaman umi polapit dusi bojovnika do Schranky na duse a tim ho dokaze privolat zpet k zivotu.")
+argo.settext(111,"Svice zivota:")
+argo.settext(1111,"30.000 gp")
+argo.settext(112,"Schranka na duse:")
+argo.settext(1121,"12.000 gp")
+
+HTMLGUMP(170,230,440,100,100,0,36)
+argo.text(60,395+0*(buy_radek_vyska),152,111)
+argo.text(60,395+1*(buy_radek_vyska),152,112)
+
+argo.text(308,395+0*(buy_radek_vyska),152,48)	// ks.
+argo.text(308,395+1*(buy_radek_vyska),152,48)	// ks.
+
+argo.text(380,395+0*(buy_radek_vyska),152,49)	// cena/ks:
+argo.text(380,395+1*(buy_radek_vyska),152,49)	// cena/ks:
+
+argo.text(480,395+0*(buy_radek_vyska),152,1111)
+argo.text(480,395+1*(buy_radek_vyska),152,1121)
+
+argo.textentry(210,396+0*(buy_radek_vyska),90,<d_def_radek_vyska>,52,7,47)
+argo.textentry(210,396+1*(buy_radek_vyska),90,<d_def_radek_vyska>,52,8,47)
+
+[dialog d_npc_alchymista button]
+on=0
+say("Bylo mi potesenim")
+
+on=1
+if (<src.findid(i_alchymista_memory)>)
+  src.RedMessage("Nejdrive si vyrid prvni objednavku")
+  return 1
+endif
+src.newequip(i_alchymista_memory)
+lastnew.timer=600
+arg(elixir_poznani,<f_alchymista_check_value(<fixNumber(<argtxt(1)>)>,100)>) 		// 1.arg== pocet, 2.arg== maxamount
+arg(krystal_videni,<f_alchymista_check_value(<fixNumber(<argtxt(2)>)>,100)>) 		// 1.arg== pocet, 2.arg== maxamount
+arg(elixir_vnimani,<f_alchymista_check_value(<fixNumber(<argtxt(3)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
+arg(silny_odvar_vnimani,<f_alchymista_check_value(<fixNumber(<argtxt(4)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
+arg(lektvar_vnimani,<f_alchymista_check_value(<fixNumber(<argtxt(5)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
+arg(slaby_odvar_vnimani,<f_alchymista_check_value(<fixNumber(<argtxt(6)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
+arg(svice_zivota,<f_alchymista_check_value(<fixNumber(<argtxt(7)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
+arg(schranka_na_duse,<f_alchymista_check_value(<fixNumber(<argtxt(8)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
+dialog(d_npc_alchymista_souhrn,<elixir_poznani>,<krystal_videni>,<elixir_vnimani>,<silny_odvar_vnimani>,<lektvar_vnimani>,<slaby_odvar_vnimani>,<svice_zivota>,<schranka_na_duse>)
+
+
+[DIALOG d_npc_alchymista_souhrn]
+argo.SetLocation=205,150
+
+argo.tag(sirka,396)
+argo.tag(vyska,380)
+
+argo.dialog_prvni
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,73,180,113)
+argo.dialog_pozadi(<argo.tag(nexty)>,12,73,180,80,30)
+argo.dialog_pozadi(<argo.tag(nexty)>,2,256,113)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,256,113)
+argo.dialog_zpruhledni
+
+arg(sloupec_prvni_x,<d_def_okraj>+<d_def_skvira>+<d_def_odsazeni>)
+arg(sloupec_prvni_y,<d_def_okraj>+<d_def_skvira>)
+argo.texta(sloupec_prvni_x,sloupec_prvni_y+0*(<d_def_radek_vyska>+<d_def_skvira>),42,"Nakupni Listek")
+argo.button(sloupec_prvni_x+340,sloupec_prvni_y-3,0fb1,0fb3,1,0,0)//cancel
+
+argo.texta(sloupec_prvni_x,sloupec_prvni_y+1*(<d_def_radek_vyska>+<d_def_skvira>),<d_def_writecolor>,"Pocet ks:")
+argo.texta(sloupec_prvni_x+76,sloupec_prvni_y+1*(<d_def_radek_vyska>+<d_def_skvira>),<d_def_writecolor>,"Jmeno Polozky:")
+argo.texta(sloupec_prvni_x+256,sloupec_prvni_y+1*(<d_def_radek_vyska>+<d_def_skvira>),<d_def_writecolor>,"Cena:")
+
+
+arg(i,0)
+arg(k,0)
+arg(sum,0)
+arg(pamet,<src.findid(i_alchymista_memory)>)
+arg(sloupec_prvni_y,#+2*<d_def_radek_vyska>+<d_def_skvira>)
+while (<k> < 12)
+  if (argv(<k>) > 0)
+    argo.texta(sloupec_prvni_x,sloupec_prvni_y+<i>*<d_def_radek_vyska>,<d_def_writecolor>,<argv(<k>)>)
+    argo.texta(sloupec_prvni_x+69,sloupec_prvni_y+<i>*<d_def_radek_vyska>,<d_def_writecolor>,<f_alchymista_souhrn_name(<k>)>)
+    argo.texta(sloupec_prvni_x+256,sloupec_prvni_y+<i>*<d_def_radek_vyska>,<d_def_writecolor>,<argv(k)>*<f_alchymista_souhrn_value(<k>)>)
+    argo.button(sloupec_prvni_x+339,sloupec_prvni_y+(<i>*<d_def_radek_vyska>),4005,4007,1,0,<k>+1)
+    arg(sum,#+<argv(k)>*<f_alchymista_souhrn_value(<k>)>)
+    pamet.tag(pocet_<eval <k>+1>,<argv(<k>)>)
+    arg(i,#+1)
+  endif
+arg(k,#+1)
+endwhile
+
+arg(sloupec_prvni_y,#+(12*<d_def_radek_vyska>)+<d_def_skvira>)
+arg(konto,<eval src.findlayer(21).rescount(t_gold)+src.bankbalance>)
+arg(zustatek,<eval <konto>-<sum>>)
+argo.texta(210,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_writecolor>,"Soucet:")
+argo.texta(214,sloupec_prvni_y+1*<d_def_radek_vyska>,<d_def_writecolor>,"Konto:")
+argo.texta(sloupec_prvni_x+256,sloupec_prvni_y+0*<d_def_radek_vyska>,52,<sum>)
+argo.texta(sloupec_prvni_x+256,sloupec_prvni_y+1*<d_def_radek_vyska>,52,<konto>)
+
+arg(sloupec_prvni_y,#+(2*<d_def_radek_vyska>)+<d_def_skvira>)
+argo.texta(192,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_writecolor>,"Zustatek:")
+if (<zustatek> > 0)
+  argo.texta(sloupec_prvni_x+256,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_writecolor>,<zustatek>)
+else
+  argo.texta(sloupec_prvni_x+256,sloupec_prvni_y+0*<d_def_radek_vyska>,42,<zustatek>)
+endif
+pamet.tag(suma,<sum>)
+pamet.tag(zustatek,<zustatek>)
+argo.button(sloupec_prvni_x+340,sloupec_prvni_y+(1*<d_def_radek_vyska>),0fb7,0fb9,1,0,<k>+1)//ok
+
+
+[dialog d_npc_alchymista_souhrn button]
+ON=0
+src.SysMessage("Zbozi odmitnuto.")
+src.findid(i_alchymista_memory).remove
+say("Bylo mi potesenim, priste se ti snad neco bude hodit.")
+
+ON=1
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,1)
+
+ON=2
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,2)
+
+ON=3
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,3)
+
+ON=4
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,4)
+
+ON=5
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,5)
+
+ON=6
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,6)
+
+ON=7
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,7)
+
+ON=8
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,8)
+
+ON=9
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,9)
+
+ON=10
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,10)
+
+ON=11
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,11)
+
+ON=12
+f_alchymista_souhrn_nuluj(<src.findid(i_alchymista_memory)>,12)
+
+ON=13
+arg(pamet,<Src.findid(i_alchymista_memory)>)
+if !(pamet)
+  src.sysmessage("<name> zapomnel tvou objednavku, vyber si znovu")
+  return 1
+endif
+arg(cena,<eval finduid(pamet).tag(suma)>)
+if !(<src.pay(<cena>)>)
+  finduid(pamet).remove
+  return 1
+endif
+arg(alchymista_spawn,<memoryfindtype(Memory_ISpawned).link>)	// na spawn se budou logovat pocty prodanych itemu a cena
+if !(src.isgm)
+  f_npc_drazitel_vybrano(<cena>,<alchymista_spawn>)   // stejna funkce jako u drazitele
+endif
+
+f_alchymista_vydej_bagl(<eval <arg(pamet).tag(pocet_1)>>,i_empathy_bottle,1,<alchymista_spawn>,1)
+f_alchymista_vydej_bagl(<eval <arg(pamet).tag(pocet_2)>>,i_empathy_item,2,<alchymista_spawn>,0)
+f_alchymista_vydej_bagl(<eval <arg(pamet).tag(pocet_3)>>,i_potion_HPsightElixir,3,<alchymista_spawn>,1)
+f_alchymista_vydej_bagl(<eval <arg(pamet).tag(pocet_4)>>,i_potion_HPsightGreat,4,<alchymista_spawn>,1)
+f_alchymista_vydej_bagl(<eval <arg(pamet).tag(pocet_5)>>,i_potion_HPsight,5,<alchymista_spawn>,1)
+f_alchymista_vydej_bagl(<eval <arg(pamet).tag(pocet_6)>>,i_potion_HPsightLess,6,<alchymista_spawn>,1)
+f_alchymista_vydej_bagl(<eval <arg(pamet).tag(pocet_7)>>,i_svice_zivota,7,<alchymista_spawn>,0)
+f_alchymista_vydej_bagl(<eval <arg(pamet).tag(pocet_8)>>,i_soul_case,8,<alchymista_spawn>,1)
+finduid(pamet).remove
+
+
+[function f_alchymista_vydej_bagl]  // 0 - pocet predmetu; 1 - id predmetu; 2 - poradi tagu; 3 - uid spawnu npc; 4 - stackable item 0/1
+arg(un_numero_ici,<argv(0)>)
+if !(<un_numero_ici>)
+  return
+endif
+
+arg(alchymista_spawn,<argv(3)>)
+arg(my_bag,<src.findlayer(21)>)
+alchymista_spawn.tag(pocet_<argv(2)>,<eval <alchymista_spawn.tag(pocet_<argv(2)>)>+<un_numero_ici>>)
+
+if (<argv(4)> == 1)  // stackable item
+  src.newitem(<argv(1)>).cont=<my_bag>
+  lastnew.amount=<un_numero_ici>
+  lastnew.bounce
+else
+  if (<un_numero_ici> > 5)
+    src.newitem(i_bag).bounce
+    arg(my_bag,<lastnew>)
+    my_bag.name=Zbozi
+  endif
+  while <un_numero_ici>
+    src.newitem(<argv(1)>).cont=<my_bag>
+    arg(un_numero_ici,#-1)
+  endwhile
+endif
+
+[function f_alchymista_souhrn_nuluj]
+arg(pamet,<argv(0)>)
+pamet.tag(pocet_<argv(1)>,0)
+arg(elixir_poznani,<eval finduid(pamet).tag(pocet_1)>)
+arg(krystal_videni,<eval finduid(pamet).tag(pocet_2)>)
+arg(elixir_vnimani,<eval finduid(pamet).tag(pocet_3)>)
+arg(silny_odvar_vnimani,<eval pamet.tag(pocet_4)>)
+arg(lektvar_vnimani	,<eval pamet.tag(pocet_5)>)
+arg(slaby_odvar_vnimani,<eval pamet.tag(pocet_6)>)
+arg(svice_zivota,<eval pamet.tag(pocet_7)>)
+arg(schranka_na_duse,<eval pamet.tag(pocet_8)>)
+dialog(d_npc_alchymista_souhrn,<elixir_poznani>,<krystal_videni>,<elixir_vnimani>,<silny_odvar_vnimani>,<lektvar_vnimani>,<slaby_odvar_vnimani>,<svice_zivota>,<schranka_na_duse>)
+
+
+[function f_alchymista_souhrn_name]
+if <argv(0)> == 0
+  return Elixir poznani
+elseif <argv(0)> == 1
+  return Krystal videni
+elseif <argv(0)> == 2
+  return Elixir vnimani
+elseif <argv(0)> == 3
+  return Silny odvar vnimani
+elseif <argv(0)> == 4
+  return Lektvar vnimani
+elseif <argv(0)> == 5
+  return Slaby odvar vnimani
+elseif <argv(0)> == 6
+  return Svice zivota
+elseif <argv(0)> == 7
+  return Schranka na duse
+endif
+
+[function f_alchymista_souhrn_value]
+if <argv(0)> == 0
+  return 5000
+elseif <argv(0)> == 1
+  return 10000
+elseif <argv(0)> == 2
+  return 24000
+elseif <argv(0)> == 3
+  return 13500
+elseif <argv(0)> == 4
+  return 7125
+elseif <argv(0)> == 5
+  return 3750
+elseif <argv(0)> == 6
+  return 30000
+elseif <argv(0)> == 7
+  return 12000
+endif
+
+[function f_alchymista_check_value]
+if (0<argv(0)> > 0)
+  if (<argv(0)> > <argv(1)>)
+    return <argv(1)>
+  else
+    return <argv(0)>
+  endif
+else
+  return 0
+endif
+
+[itemdef i_alchymista_memory]
+name=alchymista pamet
+id=i_memory
+type=t_eq_script
+
+on=@timer
+remove
+
+///////////////////////////////////////////////////////////////////////
+////////////////////// S T A T I S T I K A   G M //////////////////////
+///////////////////////////////////////////////////////////////////////
+
+[DIALOG d_npc_alchymista_statistika]
+argo.SetLocation=205,150
+
+argo.tag(sirka,370)
+argo.tag(vyska,320)
+
+argo.dialog_prvni
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,180,161)
+argo.dialog_pozadi(<argo.tag(nexty)>,12,180,161)
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_zpruhledni
+
+arg(sloupec_prvni_x,<d_def_okraj>+<d_def_skvira>+<d_def_odsazeni>)
+arg(sloupec_prvni_y,<d_def_okraj>+<d_def_skvira>)
+argo.texta(sloupec_prvni_x,sloupec_prvni_y+0*(<d_def_radek_vyska>+<d_def_skvira>),42,"Statistika vykoupeneho zbozi")
+argo.button(sloupec_prvni_x+314,sloupec_prvni_y-3,0fb1,0fb3,1,0,0)		//cancel
+
+argo.texta(sloupec_prvni_x,sloupec_prvni_y+1*(<d_def_radek_vyska>+<d_def_skvira>),52,"Jmeno Polozky:")
+argo.texta(sloupec_prvni_x+183,sloupec_prvni_y+1*(<d_def_radek_vyska>+<d_def_skvira>),52,"Vykoupeno Ks:")
+
+arg(i,0)
+arg(k,0)
+arg(sloupec_prvni_y,#+2*<d_def_radek_vyska>+<d_def_skvira>)
+while (<k> < 8)
+  argo.texta(sloupec_prvni_x,sloupec_prvni_y+<i>*<d_def_radek_vyska>,<d_def_writecolor>,<f_alchymista_souhrn_name(<k>)>)
+  arg(k,#+1)
+  argo.texta(sloupec_prvni_x+186,sloupec_prvni_y+<i>*<d_def_radek_vyska>,<d_def_writecolor>,<f_value_cascade(<argv(0).tag(pocet_<k>)>)> ks)
+  arg(i,#+1)  
+endwhile
+
+arg(sloupec_prvni_y,#+(12*<d_def_radek_vyska>)+<d_def_skvira>)
+argo.texta(sloupec_prvni_x,sloupec_prvni_y+0*<d_def_radek_vyska>,52,"Celkem prodano za:")
+argo.texta(sloupec_prvni_x+186,sloupec_prvni_y+0*<d_def_radek_vyska>,<d_def_writecolor>,<argv(0).tag(milions)>M <argv(0).tag(thousands)>K <argv(0).tag(units)> gp)
+
+
+[eof]

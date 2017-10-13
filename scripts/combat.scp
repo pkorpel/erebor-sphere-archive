@@ -512,6 +512,7 @@ if (argv(0)>0)
       return 1
     endif
   endif
+  show_damage_and_hitpoints(<eval arg(toDmg)>,0)
   dmgHits(<eval arg(toDmg)>)
   if (<eval <argv(2)>>)
     if (hits <= 0)

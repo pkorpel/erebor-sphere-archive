@@ -291,14 +291,9 @@ ON=@Create
 color=0100
 
 on=@potioneffect
-src.trigger(@DrinkingPotion)
-if (<src.hits> > 0)
-  src.hits=<eval src.hits+(<random2(<nastaveni_potions_i_potion_HealLess>)>)>
-  if (src.hits>src.maxhits)
-    src.hits=src.maxhits
-  endif
-endif
+src.drinkHealPotion("HealLess")
 return 0
+
 on=@userdeath
 
 [ITEMDEF i_potion_Heal]
@@ -313,14 +308,9 @@ ON=@Create
 color=099
 
 on=@potioneffect
-src.trigger(@DrinkingPotion)
-if (<src.hits> > 0)
-  src.hits=<eval src.hits+(<random2(<nastaveni_potions_i_potion_Heal>)>)>
-  if (src.hits>src.maxhits)
-    src.hits=src.maxhits
-  endif
-endif
+src.drinkHealPotion("Heal")
 return 0
+
 on=@userdeath
 
 [ITEMDEF i_potion_HealGreat]
@@ -335,14 +325,9 @@ ON=@Create
 color=0160
 
 on=@potioneffect
-src.trigger(@DrinkingPotion)
-if (<src.hits> > 0)
-  src.hits=<eval src.hits+(<random2(<nastaveni_potions_i_potion_HealGreat>)>)>
-  if (src.hits>src.maxhits)
-    src.hits=src.maxhits
-  endif
-endif
+src.drinkHealPotion("HealGreat")
 return 0
+
 on=@userdeath
 
 [ITEMDEF i_potion_HealElixir]
@@ -355,14 +340,9 @@ ON=@Create
 color=0160
 
 on=@potioneffect
-src.trigger(@DrinkingPotion)
-if (<src.hits> > 0)
-  src.hits=<eval src.hits+promilerange(<random2(<nastaveni_potions_i_potion_HealElixir>)>,0,<src.maxhits>)>
-  if (src.hits>src.maxhits)
-    src.hits=src.maxhits
-  endif
-endif
+src.drinkHealPotion("HealElixir")
 return 0
+
 on=@userdeath
 
 [ITEMDEF i_potion_Nightsight]
@@ -1789,6 +1769,66 @@ WEIGHT=1.0
 CATEGORY=Provisions - Miscellaneous
 SUBSECTION=Etc.
 DESCRIPTION=Oil Flask
+
+[ITEMDEF i_potion_HPsightLess]
+NAME=Slaby odvar vnimani
+ID=0F03
+TYPE=t_allpotions
+TDATA1=i_bottle_empty
+
+ON=@Create
+color=08AB
+
+on=@potioneffect
+src.trigger(@DrinkingPotion)
+src.add_HPsight("HPsightLess")
+return 0
+on=@userdeath
+
+[ITEMDEF i_potion_HPsight]
+NAME=Lektvar vnimani
+ID=0F03
+TYPE=t_allpotions
+TDATA1=i_bottle_empty
+
+ON=@Create
+color=08AE
+
+on=@potioneffect
+src.trigger(@DrinkingPotion)
+src.add_HPsight("HPsight")
+return 0
+on=@userdeath
+
+[ITEMDEF i_potion_HPsightGreat]
+NAME=Silny odvar vnimani
+ID=0F03
+TYPE=t_allpotions
+TDATA1=i_bottle_empty
+
+ON=@Create
+color=08B0
+
+on=@potioneffect
+src.trigger(@DrinkingPotion)
+src.add_HPsight("HPsightGreat")
+return 0
+on=@userdeath
+
+[ITEMDEF i_potion_HPsightElixir]
+NAME=Elixir vnimani
+ID=i_flask1_blue_anim
+TYPE=t_allpotions
+TDATA1=i_bottle_empty
+
+ON=@Create
+color=08AF
+
+on=@potioneffect
+src.trigger(@DrinkingPotion)
+src.add_HPsight("HPsightElixir")
+return 0
+on=@userdeath
 
 
 [EOF]
