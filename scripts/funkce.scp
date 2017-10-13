@@ -2741,6 +2741,7 @@ if (strlen("<args>")) //v argumentu neco je ?
 endif
 return 0
 
+
 [function random2]
 return <eval {<argv(0)> <argv(1)>}>
 
@@ -7400,5 +7401,30 @@ lastnew.timer={10 15}
 
 [function null]
 return""
+
+
+[function drinkHealPotion]     // argv(0) - type of heal potion
+trigger(@DrinkingPotion)
+if (<hits> > 0)
+  arg(healed_amount,<random2(<nastaveni_potions_i_potion_<argv(0)>>)>)
+  hits=<eval (<hits>+<arg(healed_amount)>)>
+  if (<hits> > <maxhits>)
+    arg(healed_amount,#-<eval (hits-maxhits)>)  // kolik se ve skutecnosti vylecilo
+    hits=maxhits
+  endif
+  show_damage_and_hitpoints(<healed_amount>,1)
+endif
+
+[function canReachNPC] // argv(0) - NPC UID
+if (isGM)
+  return 1
+elseif (f_qIsDead)
+  return 0
+elseif (argv(0).distance > 3)
+  src.sysMessage("<argv(0).name> je prilis daleko.")
+  return 0
+endif
+return 1
+
 
 [eof]

@@ -138,6 +138,7 @@ scripts\systems\class_info.scp
 scripts\systems\distanceSearcher.scp
 scripts\systems\variableGate.scp
 scripts\systems\npc_drazitel.scp
+scripts\systems\npc_alchymista.scp
 scripts\systems\npc_drazitel_chars.scp
 scripts\systems\dungeon_bonusy.scp
 scripts\systems\dungeon_bonusy_beridor.scp
@@ -219,6 +220,7 @@ scripts\systems\secure_truhla.scp
 scripts\systems\heck.scp
 scripts\systems\aldaron.scp
 scripts\systems\scane.scp
+scripts\systems\zobrazovaniHP.scp
 scripts\tim\avatarveci.scp
 scripts\tim\ncpnewmounts.scp
 scripts\tim\testnewnpc.scp

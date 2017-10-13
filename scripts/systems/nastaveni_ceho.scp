@@ -1352,42 +1352,55 @@ n_regiontype[4]	r_default_grass
 n_potions[0]  i_potion_AgilityLess
 n_potions[1]  i_potion_Agility
 n_potions[2]  i_potion_AgilityGreat
-n_potions[3]    i_potion_AgilityElixir
-n_potions[5]  i_potion_CureLess
-n_potions[6]  i_potion_Cure
-n_potions[7]  i_potion_CureGreat
-n_potions[9]  i_potion_ExplosionLess
-n_potions[10]  i_potion_Explosion
-n_potions[11]  i_potion_ExplosionGreat
-n_potions[12]  i_potion_Lava
-n_potions[14]  i_potion_HealLess
-n_potions[15]  i_potion_Heal
-n_potions[16]	i_potion_HealGreat
-n_potions[17]   i_potion_HealElixir
-n_potions[19]  i_potion_RefreshLess
-n_potions[20]  i_potion_Refresh
-n_potions[21]  i_potion_RefreshGreater
-n_potions[22]	i_potion_RefreshElixir
-n_potions[24]  i_potion_StrengthLess
-n_potions[25]  i_potion_Strength
-n_potions[26]  i_potion_StrengthGreat
-n_potions[27]  i_potion_StrengthElixir
-n_potions[29]  i_potion_Invisibility
-n_potions[31]  i_potion_CleverLess
-n_potions[32]  i_potion_Clever
-n_potions[33]  i_potion_CleverGreat
-n_potions[34]	i_potion_CleverElixir
-n_potions[36]	i_potion_Shield
-n_potions[37]	i_potion_Shieldelixir
-n_potions[38]  i_potion_EnergyLess
-n_potions[39]  i_potion_Energy
-n_potions[40]	i_potion_EnergyGreat
-n_potions[41]  i_potion_EnergyElixir
-n_potions[42]  i_potion_Stoneskin
-n_potions[43]	i_potion_Stoneskinelixir
-n_potions[44]	i_potion_Mobility
-n_potions[45]   i_potion_nightsight
-n_potions[47]	i_potion_Explosiondispell
+n_potions[3]  i_potion_AgilityElixir
+n_potions[4]	i_potion_CureLess       
+n_potions[5]	i_potion_Cure           
+n_potions[6]	i_potion_CureGreat      
+n_potions[7]	i_potion_ExplosionLess  
+n_potions[8]	i_potion_Explosion      
+n_potions[9]	i_potion_ExplosionGreat 
+n_potions[10]	i_potion_Lava           
+n_potions[11]	i_potion_HealLess       
+n_potions[12]	i_potion_Heal           
+n_potions[13]	i_potion_HealGreat
+n_potions[14] i_potion_HealElixir      
+n_potions[15]	i_potion_RefreshLess    
+n_potions[16]	i_potion_Refresh        
+n_potions[17]	i_potion_RefreshGreater 
+n_potions[18]	i_potion_RefreshElixir
+n_potions[19]	i_potion_StrengthLess   
+n_potions[20]	i_potion_Strength       
+n_potions[21]	i_potion_StrengthGreat  
+n_potions[22]	i_potion_StrengthElixir 
+n_potions[23]	i_potion_Invisibility   
+n_potions[24]	i_potion_CleverLess     
+n_potions[25]	i_potion_Clever         
+n_potions[26]	i_potion_CleverGreat    
+n_potions[27]	i_potion_CleverElixir
+n_potions[28]	i_potion_Shield
+n_potions[29]	i_potion_Shieldelixir
+n_potions[30]	i_potion_EnergyLess     
+n_potions[31]	i_potion_Energy         
+n_potions[32]	i_potion_EnergyGreat
+n_potions[33]	i_potion_EnergyElixir    
+n_potions[34]	i_potion_Stoneskin 
+n_potions[35]	i_potion_Stoneskinelixir
+n_potions[36]	i_potion_Mobility
+n_potions[37] i_potion_nightsight
+n_potions[38]	i_potion_Explosiondispell
+n_potions[39]
+n_potions[40]	i_potion_HPsightLess
+n_potions[41]	i_potion_HPsight
+n_potions[42]	i_potion_HPsightGreat
+n_potions[43]	i_potion_HPsightElixir	
+n_potions[44]	
+n_potions[45]	
+n_potions[46]	
+n_potions[47]	
+n_potions[48]	
+n_potions[49]	
+n_potions[50]
+
 //n_material[0]	i_ingot_copper
 //n_material[1]	i_ingot_iron
 //n_material[2]	i_ingot_silver
