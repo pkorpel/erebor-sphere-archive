@@ -1,0 +1,173 @@
+[function show_damage_and_hitpoints]   // argv(0) - ubrano/pridano HP ; argv(1) - 0-dmg;1-heal
+if (<argv(0)> == 0)         // zasah/heal nebyl dost silny - nic nezmenil
+  return
+endif
+if (<eval (<argv(0)>*10000)> < <maxhits>)  // damage/heal je mensi nez 0,01% (zbytecne vypocitavat)
+  return
+endif
+
+if ((isgm) || (flag_invisible==1) || (flag_insubstantial==1) || (flag_hidden==1))   // Neviditelny a GM zobrazovat HP nebudou
+  return
+endif
+
+arg(hitpoint_changeAmount,<argv(0)>)
+if (<argv(1)>)         // je to heal
+  arg(damage,0)
+  arg(ch,"+")  
+else                   // je to dmg
+  arg(damage,<argv(0)>) 
+  if (<eval <Hits>-<arg(hitpoint_changeAmount)>> <= 0)     // cil ranu neprezil
+    return
+  endif
+  arg(ch,"-")
+endif
+
+arg(hitpoints_changePerc,"<CalcDecimalNumber(<eval (<arg(hitpoint_changeAmount)>*100)>,<eval (<MaxHits>)>,2)>")       // jak velka zmena byla
+arg(hitpoints,"<eval ((<eval <Hits>-<arg(damage)>>*100)/(<MaxHits>))>")  // stav hp po rane/healu
+
+arg(message_color,<hitpoints_color(<arg(hitpoints)>)>)                            // barva textu dle aktualniho stavu hp (z celych %)
+arg(message_colorBlind,<hitpoints_colorBlind(<arg(hitpoints)>)>)                  // ColorBlind barva textu dle aktualniho stavu hp (z celych %)
+if !(<eval <Hits>-<arg(damage)>> == <MaxHits>)  // aby se zbytecne nepocitalo desetine misto, kdyz vime, ze ma full zivoty
+  arg(hitpoints,"<CalcDecimalNumber(<eval ((<Hits>-<arg(damage)>)*100)>,<eval (<MaxHits>)>,2)>")
+endif
+
+newitemsafe(i_show_hitpoints)
+lastnew.p=<p>
+lastnew.link=<uid>
+lastnew.tag(message_color,<arg(message_color)>)
+lastnew.tag(message_colorBlind,<arg(message_colorBlind)>)
+lastnew.tag(ch,<arg(ch)>)
+lastnew.tag(hitpoints_changePerc,"<arg(hitpoints_changePerc)>")
+lastnew.tag(hitpoints,"<arg(hitpoints)>")
+lastnew.timerd=0
+
+
+[itemdef i_show_hitpoints]
+id=i_memory
+layer=77
+type=t_src_changer
+name=show hitpoints
+
+on=@create
+attr=090
+
+on=@timer
+if (<link.hits>)
+  sector.allclients(print_hitpoints(<tag(message_color)>,<tag(message_colorBlind)>,"<tag(ch)><tag(hitpoints_changePerc)>% [<tag(hitpoints)>%]",<link>))
+endif
+
+
+[function show_hitpoints]
+if (<Hits> <= 0)     // nad mrtvym/umirajicim nezobrazujeme zivoty
+  return
+endif
+
+if (isgm)   // GM zobrazovat HP nebudou
+  return
+endif
+
+arg(hitpoints,<eval ((<Hits>*100)/(<MaxHits>))>)
+
+arg(message_colorBlind,<hitpoints_colorBlind(<arg(hitpoints)>)>)
+arg(message_color,<hitpoints_color(<arg(hitpoints)>)>)
+
+
+if !(<Hits> == <MaxHits>)  // aby se zbytecne nepocitalo desetine misto, kdyz vime, ze ma full zivoty
+  arg(hitpoints,"<CalcDecimalNumber(<eval ((<Hits>)*100)>,<eval (<MaxHits>)>,2)>")
+endif
+
+src.print_hitpoints(<arg(message_color)>,<arg(message_colorBlind)>,"[<arg(hitpoints)>%]",<uid>)
+
+
+[function hitpoints_color]   // argv(0) - hitpoints
+if (<argv(0)> >= 95)
+  return 044
+elseif (<argv(0)> >= 80)
+  return 047
+elseif (<argv(0)> >= 65)
+  return 0fe
+elseif (<argv(0)> >= 50)
+  return 035
+elseif (<argv(0)> >= 40)
+  return 032
+elseif (<argv(0)> >= 30)
+  return 030
+elseif (<argv(0)> >= 20)
+  return 027
+elseif (<argv(0)> >= 0)
+  return 020
+endif
+
+[function hitpoints_colorBlind]   // argv(0) - hitpoints
+if (<argv(0)> >= 80)
+  return 05b
+elseif (<argv(0)> >= 60)
+  return 05f
+elseif (<argv(0)> >= 40)
+  return 0db
+elseif (<argv(0)> >= 20)
+  return 0142
+elseif (<argv(0)> >= 0)
+  return 020
+endif
+
+[function print_hitpoints]   // argv(0) - colored print; argv(1) - colorBlinded print; argv(2) - Text to print; argv(3) - uid(who print hitpoints)
+
+if (<eval tag(HPsight_timer)> < <serv.time>) && !(isGM)
+  return
+endif
+if !(<eval tag(HPsight_ON)>)  // Ma vypnute zobrazovani HP
+  return
+endif
+if (<distancefrom(<argv(3)>)> > 18)   // omezeny dosah videni hp
+  return
+endif
+arg(length,<eval (<strlen("<argv(2)>")>+45)>)
+if (arg(length) > <eval (83+45)>)
+  arg(length,<eval (83+45)>)
+endif
+sendpacket(01c <split2bytes(<arg(length)>)> <hval (<argv(3)>&0ff000000)/01000000> <hval (<argv(3)>&0ff0000)/010000> <hval (<argv(3)>&0ff00)/0100> <hval <argv(3)>&0ff> 00 00 03 <hval (<argv(<eval tag(HPsight_ColorBlind)>)>&0ff00)/0ff> <hval <argv(<eval tag(HPsight_ColorBlind)>)>&0ff> 00 03 <?strtoascii(30,"<argv(3).name>")?> <?strtoascii((<length>-45),"<argv(2)>")?> 00)
+
+
+[function CalcDecimalNumber]   // argv(0) - delenec; argv(1) - delitel; argv(2) - pocet desetinych mist
+if (<argv(1)> == 0)             // kontrola proti deleni nulou
+  accmsg("Deleni nulou ve funkci CalcDecimalNumber s hodnotami <argv(0)>/<argv(1)> na <argv(2)> desetinnych mist")
+  return 0
+endif
+
+arg(podil,<eval (<argv(0)>/<argv(1)>)>)
+arg(zbytek,<eval (<argv(0)>-(<arg(podil)>*<argv(1)>))>)
+arg(vysledek,"<eval (arg(podil))>")
+
+if (<arg(zbytek)>)    // mame zbytek - budeme pocitat desetinna mista
+  arg(vysledek,"<eval arg(vysledek)>,")    // pridame si do vysledku desetinnou carku
+  arg(i,0)
+  while (<i> < <argv(2)>)
+    arg(delenec2,<eval (<arg(zbytek)>*10)>)
+    arg(podil2,<eval (<arg(delenec2)>/<argv(1)>)>)
+    arg(zbytek,<eval (<arg(delenec2)>-(<arg(podil2)>*<argv(1)>))>)
+    arg(i,#+1)
+    if !(<arg(i)> > <argv(2)>)  // pokud to neni posledni cyklus - pocitame dal 
+      arg(vysledek,"<arg(vysledek)><eval arg(podil2)>")
+      if !(<arg(zbytek)>)         // pokud uz neni zbytek, tak koncime
+        arg(i,<argv(2)>)
+      endif
+    else                              // pokud je posledni cyklus
+      if (<arg(podil2)>)              // a vysledek posledniho desetineho mista by mel byt 0, tak ji tam nechceme
+        arg(vysledek,"<arg(vysledek)><arg(podil2)>")
+      endif
+    endif
+  endwhile
+endif
+return<arg(vysledek)>
+
+
+[function add_HPsight]       // argv(0) - type of HP sight potion
+tag(HPsight_ON,1)         // zapil potion -> chce videt HP
+if (<eval tag(HPsight_timer)> < <serv.time>)
+  tag(HPsight_timer,<eval (<serv.time>+<nastaveni_potions_i_potion_<argv(0)>>)>)  // pokud nema aktivni, nastavime od ted dobu po kterou bude aktivni
+else
+  tag(HPsight_timer,<eval (<tag(HPsight_timer)>+<nastaveni_potions_i_potion_<argv(0)>>)>)     // pokud ma jiz aktivni, prodlouzime dobu o patricnou dobu
+endif
+
+[eof]

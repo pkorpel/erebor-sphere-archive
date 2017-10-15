@@ -1292,7 +1292,7 @@ elseif (strmatch("<args>","magicCharge_fire")) || (strmatch("<args>","magicCharg
   if (tag(level)>60)&&(<eval tag(ra_<args>)> < nastaveni_charge_abilityPoints)
     tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
   else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
+    redMessage("Vic bodu uz do teto ability pridat nelze.")
   endif
 elseif (strmatch("<args>","taunt"))
   if (tag(level)>29)&&(<eval tag(ra_<args>)> <10)

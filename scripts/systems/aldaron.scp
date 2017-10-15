@@ -6032,7 +6032,7 @@ on=@spelleffect
 if !(findid(i_dragon_regenerator))
   newequip(i_dragon_regenerator)
   lastnew.tag(power,<tag(regeneration_hp)>)
-  lastnew.tag(speed,<tag(regeneration_speed)>)  
+  lastnew.tag(speed,<tag(regeneration_speed)>)
 endif
 return 0
 
@@ -6046,16 +6046,19 @@ timer=5
 
 on=@timer
 if (<topobj.hits> < <topobj.maxhits>)
-	if (<eval <topobj.hits>+<tag(power)>> < <topobj.maxhits>)
-		topobj.hits = <eval <topobj.hits>+<tag(power)>>
+  arg(regen,<tag(power)>)
+  if (<eval <topobj.hits>+<tag(power)>> < <topobj.maxhits>)
+    topobj.hits = <eval <topobj.hits>+<tag(power)>>
   else
-  	topobj.hits = <topobj.maxhits>
+    arg(regen,<eval (<topobj.maxhits>-<topobj.hits>)>)
+    topobj.hits = <topobj.maxhits>
   endif
   topobj.emote("is regenerating.")
+  topobj.show_damage_and_hitpoints(<regen>,1)
 else
   remove
-	return 1
-endif	
+  return 1
+endif
 timer=<tag(speed)>
 return 1
 
@@ -6281,6 +6284,7 @@ arg(drak,<argv(0)>)
 arg(hpToHeal,<argv(1)>)
 if (<arg(drak).maxhits> > 30000)
 	if (<eval <arg(drak).hits>+<arg(hpToHeal)>> > <arg(drak).maxhits>)
+    arg(hpToHeal,#-<eval (<arg(drak).hits>-<arg(drak).maxhits>)>)  // kolik se ve skutecnosti vylecilo
 		arg(drak).hits = <arg(drak).maxhits>
 	else
 		arg(drak).hits = <eval <arg(drak).hits>+<arg(hpToHeal)>>
@@ -6288,11 +6292,13 @@ if (<arg(drak).maxhits> > 30000)
 else
 	if (<eval <arg(drak).hits>+<arg(hpToHeal)>> > <arg(drak).maxhits>)
 		arg(drak).maxhits = <eval <arg(drak).hits>+<arg(hpToHeal)>>
+    arg(hpToHeal,<eval (<arg(drak).maxhits>-<arg(drak).hits>)>)  // kolik se ve skutecnosti vylecilo
 		arg(drak).hits = <arg(drak).maxhits>
 	else
 		arg(drak).hits = <eval <arg(drak).hits>+<arg(hpToHeal)>>
 	endif
 endif
+arg(drak).show_damage_and_hitpoints(<hpToHeal>,1)
 arg(drak).EFFECT(3,i_fx_sparkle,6,20,2)
 
 //////////// dragon cage

@@ -13,11 +13,10 @@ CATEGORY=Kvesty
 SUBSECTION=Drazitel
 DESCRIPTION=Drazitel Gondor
 
+
 on=@UserDclick
-if (SRC.TARG.DISTANCE > 3)
- SRC.SYSMESSAGE="Na takovou vzdalenost s tebou jednat nebude"
-else
- f_npc_drazitel
+if (canReachNPC(<src.targ>))
+  f_npc_drazitel
 endif
 
 
@@ -46,5 +45,78 @@ ITEMnewbie=i_studded_sleeves
 color=0763
 ITEMnewbie=i_bracelet_gold
 ITEMnewbie=i_monster_create
+
+
+[CHARDEF c_alchymista]
+NAME=Alchymista
+ID=C_MAN
+
+
+TSPEECH=spk_alchymista
+
+TEVENTS=e_character
+TEVENTS=e_monster 
+
+CATEGORY=Kvesty
+SUBSECTION=Alchymista
+DESCRIPTION=Alchymista
+
+on=@UserDclick
+if (canReachNPC(<src.targ>))
+  f_npc_alchymista
+endif
+
+
+
+ON=@Create
+COLOR=0909
+TITLE=Nejvyssi Akolyta
+NPC=brain_human
+STR=1000
+DEX=1000
+INT=1000
+
+WRESTLING=40.0
+Resist=30.0
+TACTICS=50.0
+
+ITEMNEWBIE=i_hair_long
+COLOR=0455
+ITEMNEWBIE=i_beard_long
+
+
+ON=@NPCRestock
+ITEMnewbie=i_boots_thigh
+ITEMnewbie=i_studded_leggings
+ITEMnewbie=i_studded_sleeves
+ITEMnewbie=i_studded_tunic
+ITEMnewbie=i_icestaff
+
+ITEMnewbie=i_robe
+COLOR=076b
+NAME=Roba s kapi
+ITEMnewbie=i_hat_cape_4
+COLOR=076b
+NAME=Roba s kapi
+
+ITEMnewbie=i_cape
+COLOR=099d
+NAME=Plast nejvyssiho Akolyta 
+
+ITEMnewbie=i_earrings_gold
+COLOR=099d
+NAME=Ametystove nausnice
+ITEMnewbie=i_necklace_gold
+COLOR=099d
+NAME=Ametystovy nahrdelnik
+ITEMnewbie=i_ring_gold
+COLOR=099d
+NAME=Ametystovy prsten
+ITEMnewbie=i_bracelet_gold
+COLOR=099d
+NAME=Ametystovy naramek
+
+ITEMnewbie=i_monster_create
+
 
 [eof]

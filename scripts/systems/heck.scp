@@ -166,7 +166,7 @@ argo.setlocation=5,5
 argo.page(0)
 arg(gump_x,<fixnumber((<used2>+<used>)*55)>)
 
-argo.resizepic(<boosty_x>,<boosty_y>,3000,gump_x+100,82)
+argo.resizepic(<boosty_x>,<boosty_y>,3000,gump_x+180,82)
 
 arg(column,0)
 arg(poloha_x,5)  
@@ -333,7 +333,8 @@ argo.button(<boosty_x>+<poloha_x>+16,<boosty_y>+26,03217,03218,1,0,2)
 argo.newTextLine(<boosty_x>+<poloha_x>+32,<boosty_y>+22,<def_questDialog_colorResponse>,"Legenda")
 argo.button(<boosty_x>+<poloha_x>+16,<boosty_y>+46,03217,03218,1,0,3)
 argo.newTextLine(<boosty_x>+<poloha_x>+32,<boosty_y>+42,<def_questDialog_colorResponse>,"Equipy")
-
+argo.button(<boosty_x>+<poloha_x>+90,<boosty_y>+6,03217,03218,1,0,4)
+argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+2,<def_questDialog_colorResponse>,"Vnimani")
 
 /////spec ability
 if src.findid(<i_spec_ability_counter>)
@@ -357,6 +358,9 @@ dialog(d_boosty_zoznam)
 
 on=3
 dialog(d_boosty_equip)
+
+on=4
+dialog(d_boosty_HPsight)
 
 ////////////DIALOG X Y////////////////////////////
 [dialog d_boostyxy]
@@ -540,6 +544,84 @@ endwhile
 
 on=0
 src.tag(boostyxy,<f_boostyxyX(<src.tag.boostyxy>)>,<f_boostyxyY(<src.tag.boostyxy>)>,0,<f_boostyCas(<src.tag.boostyxy>)>)
+
+[dialog d_boosty_HPsight]
+argo.setlocation=5,5
+argo.page(0)
+argo.resizepic(20,20,3000,150,23+(15*<d_def_radek_vyska>))
+if (<eval tag(HPsight_timer)> < <serv.time>)
+  tag(HPsight_ON,0)
+endif
+argo.textA(50,20,<def_questDialog_colorResponse>,"Zobrazovani HP")
+argo.textA(50,75,<def_questDialog_colorResponse>,"ON/OFF - ")
+argo.textA(25,98,<def_questDialog_colorResponse>,"Barvoslepy mod - ")
+argo.gumppic(60,175,0350E)
+
+if (<eval tag(HPsight_ON)>)
+  argo.textA(75,43,<def_questDialog_colorResponse>,"Zapnute")
+  argo.textA(75,135,020,"Troll")
+  if (<eval tag(HPsight_ColorBlind)>)
+    argo.button(135,67,0869,086a,1,0,1) 
+    argo.textA(70,155,<eval (<hitpoints_colorBlind(100)>-1)>,"[100%]")
+  else
+    argo.button(135,67,0869,086a,1,0,1) 
+    argo.textA(70,155,<eval (<hitpoints_color(100)>-1)>,"[100%]")
+  endif
+else
+  argo.textA(75,43,<def_questDialog_colorResponse>,"Vypnute") 
+  argo.button(135,67,0867,0868,1,0,2)
+  argo.textA(75,155,020,"Troll")
+endif
+
+if (<eval tag(HPsight_ColorBlind)>)
+  argo.button(135,92,0869,086a,1,0,3)
+else
+  argo.button(135,92,0867,0868,1,0,4)
+endif
+
+if (<eval tag(HPsight_timer)> > <serv.time>)
+  argo.textA(75,277,200,"Aktivni:")
+  argo.textA(50,300,200,<dsToRTime(<eval (tag(HPsight_timer)-<serv.time>)>,1)>)
+else
+  argo.textA(50,277,022,"Neaktivni, vypij")
+  argo.textA(50,300,022,"lektvar vnimani")
+endif
+
+arg(j,0)
+while (<j><=20)
+  if (<eval tag(HPsight_ColorBlind)>)
+    arg(barva,<eval (<hitpoints_colorBlind(<j>*5)>-1)>)
+  else
+    arg(barva,<eval (<hitpoints_color(<j>*5)>-1)>)
+  endif
+  if (<j>>0)
+    argo.newTextLine(40,260-<j>*4,<barva>,"_")
+  endif
+  arg(j,#+1)
+endwhile
+
+
+[dialog d_boosty_HPsight text]
+[dialog d_boosty_HPsight button]
+
+on=0
+src.tag(boostyxy,<f_boostyxyX(<src.tag.boostyxy>)>,<f_boostyxyY(<src.tag.boostyxy>)>,0,<f_boostyCas(<src.tag.boostyxy>)>)
+
+on=1
+tag(HPsight_ON,0)
+dialog(d_boosty_HPsight)
+
+on=2
+tag(HPsight_ON,1)
+dialog(d_boosty_HPsight)
+
+on=3
+tag(HPsight_ColorBlind,0)
+dialog(d_boosty_HPsight)
+
+on=4
+tag(HPsight_ColorBlind,1)
+dialog(d_boosty_HPsight)
 
 /////////////boosty timer - item//////////////////
 

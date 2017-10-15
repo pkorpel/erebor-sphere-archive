@@ -560,26 +560,29 @@ elseif !(src.tag(mi_hitsleech))
   src.tag.remove(mi_hitsleech)
 endif
 return 0
+
 [events e_hitsleech]
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
 if (var(swingedchar).npc)
-  if (hits<maxhits)
-   arg(vysat,<eval (var(ubrano)*hitsleech_sum*nastaveni_ability_leechpower)/100000>)
-   if (arg(vysat)>0)
-     classmessage(Vysavas zivoty!)
-     if (arg(vysat)>var(ubrano))//vysal vic nez uderil, nelze.
-       arg(vysat,<eval var(ubrano)>)
-     endif
-     if (arg(vysat)> <eval nastaveni_hitsleech_max>)
-       arg(vysat,<eval nastaveni_hitsleech_max>)
-     endif
-     hits=<hits>+<arg(vysat)>
-     if (hits>maxhits)
-       hits=<maxhits>
-     endif
-   endif
+  if (hits < maxhits)
+    arg(vysat,<eval (var(ubrano)*hitsleech_sum*nastaveni_ability_leechpower)/100000>)
+    if (<arg(vysat)> > 0)
+      classmessage("Vysavas zivoty!")
+      if (<arg(vysat)> > <var(ubrano)>)//vysal vic nez uderil, nelze.
+        arg(vysat,<eval var(ubrano)>)
+      endif
+      if (<arg(vysat)> > <eval nastaveni_hitsleech_max>)
+        arg(vysat,<eval nastaveni_hitsleech_max>)
+      endif
+      hits=<hits>+<arg(vysat)>
+      if (hits > maxhits)
+        arg(vysat,#-<eval (hits-maxhits)>)  // kolik se ve skutecnosti vylecilo
+        hits=<maxhits>
+      endif
+      show_damage_and_hitpoints(<vysat>,1)
+    endif
   endif
 endif
 return 0

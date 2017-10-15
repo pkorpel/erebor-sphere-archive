@@ -93,42 +93,42 @@ ON=@TIMER
 src=<cont>
 src.reveal
 if (more1==0)
- if ({700 1050}<cont.healing) //sance na uspech
-  cont.classmessage("<cont.sex(Ozivil,Ozivila)> jsi <link.link.Name>.")
-  link.link.P=<link.P>
-  src=<cont>
-  link.spelleffect(59,1000)
-  link.link.sysmessage("Ozivil te <?strmid(<link.Name>,5,50)?>.")
- else
-  cont.redmessage("<cont.sex(Selhal,Selhala)> jsi v ozivovani.")
- endif
-else
- if ( {700 1050}<cont.veterinary) //sance na uspech
-  cont.classmessage("Oziveni uspesne.")
-  if !(link.findid(i_nofame))
-   link.giveitem(i_nofame)
-  endif
-  if !(link.findid(i_poresu))
-   link.giveitem(i_poresu)
-  endif
-  cont.giveitem(i_bandage_bloody,20)
-  src=<cont>
-  if (<strlen(<link.tag(myFood)>)>)
-    arg(myFood,<link.tag(myFood)>)
-    if (<arg(myFood)> < 2)
-      arg(myFood,2)
-    endif
+  if ({700 1050} < cont.healing) //sance na uspech
+    cont.classmessage("<cont.sex(Ozivil,Ozivila)> jsi <link.link.Name>.")
+    link.link.P=<link.P>
+    src=<cont>
+    link.spelleffect(59,1000)
+    link.link.sysmessage("Ozivil te <?strmid(<link.Name>,5,50)?>.")
   else
-    arg(myFood,-1)
+    cont.redmessage("<cont.sex(Selhal,Selhala)> jsi v ozivovani.")
   endif
-  link.spelleffect(s_resurrection,1000)
-  if (<arg(myFood)> > 0)
-    lastnewchar.food=<arg(myFood)>
+else
+  if ({700 1050} < cont.veterinary) //sance na uspech
+    cont.classmessage("Oziveni uspesne.")
+    if !(link.findid(i_nofame))
+      link.giveitem(i_nofame)
+    endif
+    if !(link.findid(i_poresu))
+      link.giveitem(i_poresu)
+    endif
+    cont.giveitem(i_bandage_bloody,20)
+    src=<cont>
+    if (<strlen(<link.tag(myFood)>)>)
+      arg(myFood,<link.tag(myFood)>)
+      if (<arg(myFood)> < 2)
+        arg(myFood,2)
+      endif
+    else
+      arg(myFood,-1)
+    endif
+    link.spelleffect(s_resurrection,1000)
+    if (<arg(myFood)> > 0)
+      lastnewchar.food=<arg(myFood)>
+    endif
+    //lastnewchar.findlayer(21).remove
+  else
+    cont.redmessage("<cont.sex(Selhal,Selhala)> jsi v ozivovani.")
   endif
-  //lastnewchar.findlayer(21).remove
- else
-  cont.redmessage("<cont.sex(Selhal,Selhala)> jsi v ozivovani.")
- endif
 endif
 remove
 return 0
@@ -189,14 +189,18 @@ else //nehumanoid - skill veterinary
     remove
     return
   endif //pridani zivotu
-  link.hits=<eval link.hits+promilerange(<eval cont.veterinary+cont.anatomy>,<Skill_Vet.effect>)>  
+  arg(healed_amount,<promilerange(<eval cont.veterinary+cont.anatomy>,<Skill_Vet.effect>)>)
+  link.hits=<link.hits>+<eval healed_amount>
   if (link.hits>link.maxhits)
+    arg(healed_amount,#-<eval (link.hits-link.maxhits)>)  // kolik se ve skutecnosti vylecilo
     link.hits=<link.maxhits>
   endif
   if (link!=cont)
     link.classmessage("<cont.name> te osetril.")
   endif
+  link.show_damage_and_hitpoints(<healed_amount>,1)
 endif
+
 
 [function f_heal_bleeding]
 cont.classmessage("<link.name> prestal krvacet.")
@@ -227,6 +231,7 @@ endif
 if (link!=cont)
   link.classmessage("<cont.name> te osetril.")
 endif
+link.show_damage_and_hitpoints(<healed_amount>,1)
 f_weekly_quest_healing(<healed_amount>)
 
 // odstranit, zbytecny
