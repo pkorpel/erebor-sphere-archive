@@ -970,11 +970,11 @@ trigger @potioneffect
 on=@potioneffect
 var(bomba_src,<uid>)
 if (strmatch(<tag(bomba)>,dispellbomb))
-  sector.allchars(dispellbomb)
-  sector.allitems(dispellitem)
+  region.sectors.allchars(dispellbomb)
+  region.sectors.allitems(dispellitem)
 else
-  sector.allchars(exploze)
-  sector.allitems(znicsit)
+  region.sectors.allchars(exploze)
+  region.sectors.allitems(znicsit)
 endif
 effect(3,<s_explosion.EFFECTID>,6,15,1)
 sound=<s_explosion.sound>
