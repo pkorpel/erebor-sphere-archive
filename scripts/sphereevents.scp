@@ -2927,6 +2927,7 @@ on=@DrinkingPotion
 on=@afterswing
 if (action==Skill_fencing)||(tag(isstabbing))
 	arg(probo,0)
+  arg(holdsWarFork,<holdsTwoHand(i_war_fork)>)
   if (tag(isstabbing))
     skill -1
     stopscriptedskills
@@ -2937,22 +2938,27 @@ if (action==Skill_fencing)||(tag(isstabbing))
     endif
     reveal
     arg(probo,1)
-  elseif (f_thief_CanCauseBleeding(<var(swingedchar)>)) // arg1 == bleeding target
-    f_thief_doBleed(<var(swingedchar)>) // arg1 == bleeding target
+  elseif (!arg(holdsWarFork)) // warFork has different ability (charged strike, not bleed)
+    if (f_thief_CanCauseBleeding(<var(swingedchar)>)) // arg1 == bleeding target
+      f_thief_doBleed(<var(swingedchar)>) // arg1 == bleeding target
+    endif
   endif
-  if (act.npc)&&(tag(level)>29)
-    if (tag(ra_doubleswing))
-      if (<tag(ra_doubleswing)> > 0)
-        if (findlayer(2)) //empty layer would cause warning
-          if (findlayer(2).typedef.dispid==I_war_fork)
-            if (chance(<eval 100+(<tag(ra_doubleswing)>*5)>,3))
-              if (<stamina> >= <nastaveni_doubleswing_stam>)
-                reduceStamina(<nastaveni_doubleswing_stam>)
-                sound(512)
-                sound(566,5)
-                classmessage("Dvojity zasah!")
-                var(ubrano,<eval (var(ubrano)*nastaveni_doubleswing)/1000>)
-              endif
+  if (arg(holdsWarFork))
+    if (!strlen(<var(roundattack_src)>)) // the actual strike won't add another charges
+      if (specability)
+        if (charge_add(<def_charge_roundAttack>,<act>))
+          classMessage("Naprazeni k rychlemu utoku!")
+        endif
+      endif
+      if (act.npc)
+        if (0<tag(ra_doubleswing)> > 0)
+          if (chance(<eval 100+(<tag(ra_doubleswing)>*5)>,3))
+            if (<stamina> >= <nastaveni_doubleswing_stam>)
+              reduceStamina(<nastaveni_doubleswing_stam>)
+              sound(512)
+              sound(566,5)
+              classmessage("Dvojity zasah!")
+              var(ubrano,<eval (var(ubrano)*nastaveni_doubleswing)/1000>)
             endif
           endif
         endif

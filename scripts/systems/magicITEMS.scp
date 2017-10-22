@@ -533,15 +533,9 @@ if (act.ischar)
       arg(monstertypebonus,<eval(getmonstertypebonus(<act>,"golem",<tag(eyebonus)>))>)
     endif
     if(<arg(monstertypebonus)>!=0)//ak ma monstertype1|2|3 tak pocitame podla toho, ak ne tak zatial podla stareho
-      //src.say("daemon|undead bonus: <?arg(monstertypebonus)?>")
       return <arg(monstertypebonus)>  
     else
-//      if (act.body==c_gazer)
-//			elseif (atc.body==c_golem_copper)
-//      else
-        return 0
-//      endif
-//      return <eval(tag(eyebonus))>
+      return 0
     endif
   endif
 endif
@@ -565,6 +559,9 @@ return 0
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+if (0<var(leechSuppress_hits)>)
+  return
+endif
 if (var(swingedchar).npc)
   if (hits < maxhits)
     arg(vysat,<eval (var(ubrano)*hitsleech_sum*nastaveni_ability_leechpower)/100000>)
@@ -613,6 +610,9 @@ return 0
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+if (0<var(leechSuppress_mana)>)
+  return
+endif
 if (var(swingedchar).npc)
   if (var(swingedchar).magery)
     if (var(swingedchar).mana)
@@ -664,6 +664,9 @@ return 0
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+if (0<var(leechSuppress_stamina)>)
+  return
+endif
 if (var(swingedchar).npc)
   if (var(swingedchar).stamina)
     arg(vysat,<eval (var(ubrano)*stamleech_sum*nastaveni_ability_leechpower)/100000>)
