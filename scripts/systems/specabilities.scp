@@ -4,91 +4,84 @@ logmsg(<args>)
 
 [Function f_abilitycheck]
 if (0<tag.level><1)
- redmessage(Musis byt alespon na prvnim levelu.)
+  redmessage("Musis byt alespon na prvni urovni.")
 else
- f_setmainability
- if (<profession>!=<?class_<args>?>)
-  redmessage(Toto umi pouzit pouze <?class_<args>.name?>.)
- elseif (findid(i_spec_ability_counter))
-  findid(i_spec_ability_counter).remove
-  //COLOR= <oskin>
- elseif (stamina<3)
-  redmessage(Nemas dost staminy.)
- else
-   reduceStamina(3) // safely decreases stamina
-   newitemsafe(i_spec_ability_counter)
-   lastnew.Equip  
-   return 1                                                       
- endif
+  f_setmainability
+  if (<profession>!=<?class_<args>?>)
+    redmessage(Toto umi pouzit pouze <?class_<args>.name?>.)
+  elseif (findid(i_spec_ability_counter))
+    findid(i_spec_ability_counter).remove
+  elseif (reduceStamina(3,1))
+    newitemsafe(i_spec_ability_counter)
+    lastnew.Equip  
+    return 1                                                       
+  endif
 endif
 return 0 
 
 [Function berserker]
 if (f_abilitycheck(War))
- lastnew.name=berserker counter
- classMessage(Nyni jsi schopen zasadit kriticky uder.)
- f_fix_events
+  lastnew.name=berserker counter
+  classMessage("Nyni jsi <sex(schopen,schopna)> zasadit kriticky uder.")
+  f_fix_events
 endif
 
 [Function sniper]
 if (f_abilitycheck(Ranger))
- lastnew.name=sniper counter
- classMessage(Nyni jsi schopen zasadit kriticky uder.)
- f_fix_events
+  lastnew.name=sniper counter
+  classMessage("Nyni jsi <sex(schopen,schopna)> zasadit kriticky uder.")
+  f_fix_events
 endif
 
 [Function ripper]
 if (f_abilitycheck(Thief))
- lastnew.name=ripper counter
- classMessage(Nyni jsi schopen zasadit krvacejici ranu.)
- f_fix_events
- //COLOR= color_thief
+  lastnew.name=ripper counter
+  classMessage("Nyni jsi <sex(schopen,schopna)> zasadit mrstnou ranu.")
+  f_fix_events
 endif
 
 [Function enlightment]
 if (f_abilitycheck(Priest))
- lastnew.name=enlightment counter
- classMessage(Nyni jsi schopen rychleji lecit bandazemi.)
- f_fix_events
+  lastnew.name=enlightment counter
+  classMessage("Nyni jsi <sex(schopen,schopna)> rychleji lecit bandazemi.")
+  f_fix_events
 endif
 
 [Function improvement]
 if (f_abilitycheck(Shaman))
- lastnew.name=improvement counter
- classMessage(Nyni jsi schopen lecit lepe.)
- f_fix_events
- //COLOR= color_shaman
+  lastnew.name=improvement counter
+  classMessage("Nyni jsi <sex(schopen,schopna)> lecit lepe.")
+  f_fix_events
 endif
 
 [Function concentration]
 if (f_abilitycheck(Mag))
- lastnew.name=concentration counter
- classMessage(Nyni jsi schopen kouzlit za mene many.)
- f_fix_events
- //COLOR= color_mag
+  lastnew.name=concentration counter
+  classMessage("Nyni jsi <sex(schopen,schopna)> kouzlit za mene many.")
+  f_fix_events
 endif
 
 [Function astralpower]
 if (f_abilitycheck(Mystik))
- lastnew.name=astralpower counter
- if (<tag(attack_type)>==1)
-   classMessage(Tve udery jsou mrazive.)
- else
-   classMessage(Tve udery jsou ochromujici.)
- endif
- f_fix_events
+  lastnew.name=astralpower counter
+  if (<tag(attack_type)>==1)
+    classMessage("Tve udery jsou mrazive.")
+  else
+    classMessage("Tve udery jsou ochromujici.")
+  endif
+  f_fix_events
 endif
 
 [Function astralmorph]
 if (profession==class_shaman)
- if (<safe.tag.morphedbody>)
-  dismorph
-  return 1
- endif
- newitemsafe(i_astralmorph)
- lastnew.Equip
+  if (<safe.tag.morphedbody>)
+    dismorph
+    return 1
+  endif
+  newitemsafe(i_astralmorph)
+  lastnew.Equip
 else
-sysMessage Toto muze pouzit pouze Shaman.
+  sysMessage("Toto muze pouzit pouze Shaman.")
 endif
 
 [itemdef i_astralmorph]
@@ -134,7 +127,6 @@ if (src.targ.type==t_corpse)
    src.tag(m_vitchange,0)
    src.sysMessage("Tato prisera neni urcena k morfovani (pro alfatest je pripustne morfnout se ovsem bez zmeny statu)")
   endif
-  //src.smsg vit:<mstat_vit> str:<mstat_str> dex: <mstat_dex>
   src.body=<arg(morphdefname)>
   src.color=<src.targ.color>
   src.events +e_morphed
@@ -229,14 +221,13 @@ tag.morphedcolor=
 [Function darkpower]
 if (f_abilitycheck(Necro))
  lastnew.name=darkpower counter
- classMessage(Nyni ti muze byt navracena spotrebovana magenergie.)
- //COLOR= color_necro
+ classMessage("Nyni ti muze byt navracena spotrebovana mana.")
 endif
 
 [Function vigour]
 if (f_abilitycheck(Craft))
  lastnew.name=vigour counter
- classMessage(Nyni jsi schopen nalezt lepsi materialy...)
+ classMessage("Nyni jsi <sex(schopen,schopna)> nalezt lepsi materialy.")
 endif
 
 [itemdef i_spec_ability_counter]
@@ -245,7 +236,7 @@ TYPE=t_eq_script
 name=ability counter
 
 ON=@Equip
-more1=<nastaveni_ability_staminalowering>//mnozstvi many pridane za 10 sekund
+more1=<nastaveni_ability_staminalowering> //mnozstvi staminy odebrane za 1 sekundu
 cont.tag(mi_stamreg,<eval <cont.tag.mi_stamreg>>-<more1>)
 cont.regenrefresh
 timer=1
@@ -470,24 +461,25 @@ if (findlayer(2))
   if (findlayer(2).type==t_weapon_sword)
     tag(nextroundattack,<eval (<serv.time>+(<var(nastaveni_roundattack_delay)>*10))>)
     reduceStamina(<eval {10 20}>) // safely decreases stamina
-    sound(sex(1098,824))
-    sound(512)
-    sound(566,5)
-    sysMessage("Zurive bijes vse kolem sebe!")
-    roundattackthem
+    f_performRoundAttack(<var(nastaveni_roundattack_postih)>)
   else
     sysMessage("S timhle paratkem je to nemozne.")
     return 1
   endif
 endif
 
+[function f_performRoundAttack] // argv(0) - damage modificator in % (100 == base char damage)
+sound(sex(1098,824))
+sound(512)
+sound(566,5)
+sysMessage("Zurive bijes vse kolem sebe!")
 
-[Function roundattackthem]
 newitemsafe(i_roundattack_srcChanger)
 lastnew.p=<src.p>
 lastnew.z=-100
 lastnew.link=<uid>
 lastnew.timerd=1
+lastnew.more1=<argv(0)>
 flip
 flip
 flip
@@ -501,7 +493,9 @@ name=roundattack srcChanger
 
 on=@timer
 var(roundattack_src,<link>)
+var(roundattack_dmgMod,<more1>)
 sector.allchars(rounddamage)
+var(roundattack_src,)
 link.effect(2,02ED0,0,32)
 remove
 return 1
@@ -515,10 +509,11 @@ endif
 if (distancefrom(var(roundattack_src))==1)
   src=var(roundattack_src)
   src.act=<uid>
-  //var(ubrano,<eval ((var(ubrano) * nastaveni_roundattack_postih)/100)>)
-  arg(mainDmg,<eval src.combat_main_nonmystik_countDmg>) // counts the damage caused by warrior to the target
-  arg(mainDmg,<eval ((arg(mainDmg) * nastaveni_roundattack_postih)/100)>) // reduce the damage according to the in-game settings
+  arg(mainDmg,<eval src.combat_main_nonmystik_countDmg>) // counts the damage caused by the player to the target
+  arg(mainDmg,<eval ((arg(mainDmg) * roundattack_dmgMod)/100)>) // reduce the damage according to the in-game settings
+  var(leechSuppress_stamina,1)
   src.combat_main_nonmystik_doDmg(<arg(mainDmg)>) // applies the nonmystik damage to the src's act
+  var(leechSuppress_stamina,0)
 endif 
 
 
@@ -810,6 +805,38 @@ else
 endif
 tag(nextleap,<eval (<serv.time>+<nastaveni_ability_leapdelay>)>)
 tag(GM_step_resist,<eval (<serv.time>+<nastaveni_GM_Step_resist>)>)
+
+[function strike]
+if (isDead)
+  sysMessage("Jako duch nemuzes tuto abilitu pouzit!")
+  return
+elseif (<eval tag(nextStrike)> > <serv.time>)
+  redMessage("Jeste nelze pouzit.")
+  tag(nextStrike,<eval (<serv.time>+10)>)
+  return 1 
+endif
+
+arg(chargeType,<charge_getType>)
+if (!isStrikeChargeType(<arg(chargeType)>))
+  redMessage("Nemas pripraveny zadny uder!")
+  return 1
+endif
+
+if (<arg(chargeType)> == <def_charge_roundAttack>)
+  if (!reduceStamina(<nastaveni_strikeCharge_roundStamina>,1))
+    src.redMessage("Nemas dost staminy.")
+    return
+  endif
+  tag(nextStrike,<eval (<serv.time>+5)>)
+  arg(charges,<charge_get(def_charge_roundAttack)>)
+  arg(charge_bonuses,<eval (charges*charges)-1>)
+  arg(bonus,<eval (charge_bonuses)*nastaveni_strikeCharge_roundBonus>) // the bonus is intentionally calculated as 0 in the first iteration!
+  arg(base,<eval (charges)*nastaveni_strikeCharge_roundBase>)
+  arg(dmgMod,<eval (base+bonus)>)
+  f_performRoundAttack(<dmgMod>)
+  charge_decrease(<nastaveni_strikeCharge_roundLimit>)
+  return
+endif
 
 [Function movetoact]
 dir=<getdir(<act>)>
@@ -3256,7 +3283,7 @@ type=t_eq_script
 name=hazec veci na zem
 
 on=@timer
-cont.redmessage(V tomto tele nejsi schopen lootovani)
+cont.redmessage(V tomto tele nejsi <cont.sex(schopen,schopna)> lootovani)
 link.drop
 remove
 return 0
@@ -5148,12 +5175,12 @@ remove
 
 on=@Equip
 src.events=+e_getphysresists
-src.sysmessage("Nyni jsi schopen kratkou chvili rozpoznat rezisty.")
+src.sysmessage("Nyni jsi <src.sex(schopen,schopna)> kratkou chvili rozpoznat rezisty.")
 src.EFFECT(3,i_fx_sparkle_2,6,20,2)
 
 on=@unEquip
 src.events=-e_getphysresists
-src.sysmessage("Nyni jiz nejsi schopen rozpoznat rezisty.")
+src.sysmessage("Nyni jiz nejsi <src.sex(schopen,schopna)> rozpoznat rezisty.")
 
 [events e_getphysresists]
 on=@DrinkingPotion
