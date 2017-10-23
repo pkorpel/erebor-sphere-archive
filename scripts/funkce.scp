@@ -4000,21 +4000,21 @@ var(count,<count>+1)
 //What color should our name be? 
 //default obj = the name to examine 
 if (isItem) 
- return 0
+  return 0
 elseif (isGM)
- return 035
+  return 035
 elseif (isnazgul)
- return 03c2
+  return 03c2
 elseif (isinmyguild)
- //srcchangehighlight(2)
- return 044 //03c
+  //srcchangehighlight(2)
+  return 044 //03c
 elseif (ismurderer) 
- //I am bad
- return 026
+  //I am bad
+  return 026
 elseif (flag_criminal) //i am a graycolored 
- return 03e9
+  return 03e9
 elseif (isneutral)
- return 03e9
+  return 03e9
 elseif (src.MemoryFind(UID))
   if (src.MemoryFind(UID).color&01)
     //src saw me commit a crime 
@@ -4156,87 +4156,87 @@ target("Co chces presunout?")
 
 on=@targon_item 
 if (<src.targ.baseid> == i_truhla_heslo ) || (<src.targ.type> == mit_main) || (<src.targ.baseid> == i_gembox) // vyjimky
- src.redMessage("Sem nelze predmety presunout.")
- remove
- return 1
+  src.redMessage("Sem nelze predmety presunout.")
+  remove
+  return 1
 elseif (more1 == 0) && (<hval src.targ.cont> == <src>)
   src.redMessage("Prikaz nelze pouzit na predmety, ktere mas na sobe.")
   return 1
 endif
 if (more1)
- if (<src.targ.type>!=t_container)
-  target    
-  return 1        
- elseif (<src.targ.topobj>!=<src>)&&(src.isgm==0)
-  target
-  return 1  
- elseif (<src.targ>==<link>)
-  target
+  if (<src.targ.type>!=t_container)
+    target    
+    return 1        
+  elseif (<src.targ.topobj>!=<src>)&&(src.isgm==0)
+    target
+    return 1  
+  elseif (<src.targ>==<link>)
+    target
+    return 1
+  endif
+  var(itemcont,<src.targ>)
+  var(itemtype,<tag.itemtype>)
+  var(itembaseid,<tag.itembaseid>)
+  var(maxtomove,<tag.max>)
+  var(moved,0)
+  src.accmsg("moves from uid=<link> (<link.name>) topobj=<link.topobj> (<link.topobj.name>) to uid=<hval itemcont> (<finduid(itemcont).name>) topobj=<finduid(itemcont).topobj> (<finduid(itemcont).topobj.name>)")
+  var(cantmovenext,0)
+  link.contents2(f_sort<tag.function>)
+  var(cantmovenext,"")
+  remove
   return 1
- endif
- var(itemcont,<src.targ>)
- var(itemtype,<tag.itemtype>)
- var(itembaseid,<tag.itembaseid>)
- var(maxtomove,<tag.max>)
- var(moved,0)
- src.accmsg("moves from uid=<link> (<link.name>) topobj=<link.topobj> (<link.topobj.name>) to uid=<hval itemcont> (<finduid(itemcont).name>) topobj=<finduid(itemcont).topobj> (<finduid(itemcont).topobj.name>)")
- var(cantmovenext,0)
- link.contents2(f_sort<tag.function>)
- var(cantmovenext,"")
- remove
- return 1
 else
- if (src.targ.baseid==i_ring_power)||(src.targ.baseid==i_leading_ring_power)
-  src.sysMessage("Ani to nezkousej, bugere.")
-  remove
+  if (src.targ.baseid==i_ring_power)||(src.targ.baseid==i_leading_ring_power)
+    src.sysMessage("Ani to nezkousej, bugere.")
+    remove
+    return 1
+  endif
+  if (<src.targ.topobj>!=<src>)&&(src.isgm==0)
+    src.sysMessage("Vec musis mit u sebe.")
+    remove
+    return 1
+  endif
+  tag(itemtype,<src.targ.type>) //type of the item
+  tag(itembaseid,<src.targ.baseid>)//baseid of the item
+  more1=1
+  link=<src.targ.cont>//the bag the item is in
+  if (<src.targ.type>==t_container)
+    cont.sysMessage("Nelze aplikovat na kontejnery.")
+    return 1
+  endif
+  target("Kam je chces dat?")
   return 1
- endif
- if (<src.targ.topobj>!=<src>)&&(src.isgm==0)
-  src.sysMessage("Vec musis mit u sebe.")
-  remove
-  return 1
- endif
- tag(itemtype,<src.targ.type>) //type of the item
- tag(itembaseid,<src.targ.baseid>)//baseid of the item
- more1=1
- link=<src.targ.cont>//the bag the item is in
- if (<src.targ.type>==t_container)
-  cont.sysMessage("Nelze aplikovat na kontejnery.")
-  return 1
- endif
- target("Kam je chces dat?")
- return 1
 endif
 return 1
 
 [function f_sorttype]
 if (cantmovenext)
- //src.sysMessage("Vic se tam uz nevejde.")  -radsi bez hlasky
- return 1
+  //src.sysMessage("Vic se tam uz nevejde.")  -radsi bez hlasky
+  return 1
 endif 
 if (<cont>!=<itemcont>)
- if (moved<maxtomove)
-  if (type==itemtype)
-   if (movable==0)&&(src.isgm==0)
-    src.sysMessage("<name> nelze presunout.")
-   else    
-    if (<uid>==<itemcont.cont>) //chce to soupnout do neceho co uz ma v sobe (batoh do pytliku co je uvnitr napriklad)
-     src.accmsg("Hrac <src> (<src.name>) se snazi o podvod s kontejnery pri moveitem")
-     return 1
-    else 
-     if (itemcont.rescount < 255)
-      src.sysMessage("<amount>x <name>")
-      cont=<itemcont>
-     else      
-      var(cantmovenext,1)
-      return 1
-     endif
+  if (moved<maxtomove)
+    if (type==itemtype)
+      if (movable==0)&&(src.isgm==0)
+        src.sysMessage("<name> nelze presunout.")
+      else    
+        if (<uid>==<itemcont.cont>) //chce to soupnout do neceho co uz ma v sobe (batoh do pytliku co je uvnitr napriklad)
+          src.accmsg("Hrac <src> (<src.name>) se snazi o podvod s kontejnery pri moveitem")
+          return 1
+        else 
+          if (itemcont.rescount < 255)
+            src.sysMessage("<amount>x <name>")
+            cont=<itemcont>
+          else      
+            var(cantmovenext,1)
+            return 1
+          endif
+        endif
+        var(moved,<moved>+1)
+        src.accmsg("moves uid=<uid> (<amount> <name>)")
+      endif
     endif
-    var(moved,<moved>+1)
-    src.accmsg("moves uid=<uid> (<amount> <name>)")
-   endif
   endif
- endif
 endif
 
 [function f_sortitem]    

@@ -823,12 +823,14 @@ if (!isStrikeChargeType(<arg(chargeType)>))
 endif
 
 if (<arg(chargeType)> == <def_charge_roundAttack>)
-  if (!reduceStamina(<nastaveni_strikeCharge_roundStamina>,1))
-    src.redMessage("Nemas dost staminy.")
+  arg(charges,<charge_get(def_charge_roundAttack)>)
+  arg(reductions,<nastaveni_strikeCharge_roundLimit>-<arg(charges)>)
+  arg(stamReduce,<eval <nastaveni_strikeCharge_roundStamina>-(reductions*<nastaveni_strikeCharge_roundStaminaDrop>)>)
+  if (!reduceStamina(<arg(stamReduce)>,1))
+    redMessage("Nemas dost staminy.")
     return
   endif
   tag(nextStrike,<eval (<serv.time>+5)>)
-  arg(charges,<charge_get(def_charge_roundAttack)>)
   arg(charge_bonuses,<eval (charges*charges)-1>)
   arg(bonus,<eval (charge_bonuses)*nastaveni_strikeCharge_roundBonus>) // the bonus is intentionally calculated as 0 in the first iteration!
   arg(base,<eval (charges)*nastaveni_strikeCharge_roundBase>)

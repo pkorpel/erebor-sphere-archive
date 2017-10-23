@@ -2926,7 +2926,7 @@ on=@npckill
 on=@DrinkingPotion
 on=@afterswing
 if (action==Skill_fencing)||(tag(isstabbing))
-	arg(probo,0)
+  arg(probo,0)
   arg(holdsWarFork,<holdsTwoHand(i_war_fork)>)
   if (tag(isstabbing))
     skill -1
