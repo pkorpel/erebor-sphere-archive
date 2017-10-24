@@ -409,9 +409,23 @@ ON=@PICKUP_PACK
 attr=attr_move_never
 
 [Function roundattack]
-if findid(i_mem_roundattack)
+if (profession!=class_war)
+  RedMessage("Toto muze pouzit jen valecnik.")
+  return
+elseif (findid(i_mem_roundattack))
   RedMessage("Jeste nelze pouzit.")
-  return 0
+  return
+elseif (isnonmobile)
+  sysMessage("You are frozen and cannot move.")
+  return
+elseif (tag(nextroundattack)>serv.time)&&(!isGM)
+  RedMessage("Jeste nelze pouzit.")
+  return
+elseif !(findlayer(2).type==t_weapon_sword)
+  sysMessage("S timhle paratkem je to nemozne.")
+  return
+elseif (!reduceStamina(10,1)) 
+  return
 endif
 newitemsafe(i_mem_roundattack)
 arg(rounditem,<lastnew>)
@@ -427,23 +441,6 @@ on=@create
 timer=2
 
 on=@UserDClick
-if (src.profession!=class_war)
-  src.RedMessage("Toto muze pouzit jen valecnik.")
-  remove
-  return 1
-elseif (src.isnonmobile)
-  src.sysMessage("You are frozen and cannot move.")
-  remove
-  return 1 
-elseif (src.tag(nextroundattack)>serv.time)&&(src.isgm==0)
-  src.RedMessage("Jeste nelze pouzit.")
-  remove
-  return 1
-elseif !(src.findlayer(2).type==t_weapon_sword)
-  src.sysMessage("S timhle paratkem je to nemozne.")
-  remove
-  return 1
-endif
 src.sysMessage("Chystas se tvrde uderit!")
 return 1
 
@@ -460,7 +457,7 @@ endif
 if (findlayer(2))
   if (findlayer(2).type==t_weapon_sword)
     tag(nextroundattack,<eval (<serv.time>+(<var(nastaveni_roundattack_delay)>*10))>)
-    reduceStamina(<eval {10 20}>) // safely decreases stamina
+    reduceStamina(<eval {5 10}>) // safely decreases stamina
     f_performRoundAttack(<var(nastaveni_roundattack_postih)>,0)
   else
     sysMessage("S timhle paratkem je to nemozne.")
@@ -966,25 +963,26 @@ updatex
 
 [Function warcry]
 if (profession!=class_war)
- src.sysMessage(Toto muze pouzit jen valecnik.)
- return 1
+  src.sysMessage(Toto muze pouzit jen valecnik.)
+  return 1
 elseif (<src.flags>&statf_dead)
- src.sysMessage(You are dead!)
- return 1
+  src.sysMessage(You are dead!)
+  return 1
 elseif (isnonmobile)
- src.sysMessage(You are frozen and cannot move.)
- return 1 
+  src.sysMessage(You are frozen and cannot move.)
+  return 1 
 elseif ({0 10000}>eval(tag(ra_warcry)*nastaveni_warcry_chance))&&(src.isgm==0)
- src.redmessage(Nepovedlo se.)
- tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
- return 1 
+  src.redmessage(Nepovedlo se.)
+  tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
+  return 1 
 elseif (tag(nextcry)>serv.time)&&(src.isgm==0)
- src.sysMessage(Jeste nelze pouzit.)
- return 1 
+  src.sysMessage(Jeste nelze pouzit.)
+  return 1 
+elseif (!reduceStamina(<eval {5 8}>,1)) // safely decreases stamina
+  return
 endif
 emote(crying)
 tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
-reduceStamina(<eval {2 8}>) // safely decreases stamina
 mana=0
 sound(sex(1098,824))
 newitemsafe(i_warcry_srcChanger)
@@ -1761,30 +1759,28 @@ remove
 
 [Function forceback]
 if (profession!=class_priest)
- src.sysMessage(Toto muze pouzit jen priest.)
- return 1
+  src.sysMessage(Toto muze pouzit jen priest.)
+  return
 elseif (isnonmobile)
- src.sysMessage(You are frozen and cannot move.)
- return 1 
+  src.sysMessage(You are frozen and cannot move.)
+  return
 elseif (stamina<10)//bude nahrazeno body chramu
- src.sysMessage(Uz ti nezbyvaji sily.)
- return 1
+  src.sysMessage(Uz ti nezbyvaji sily.)
+  return
 elseif ({0 10000}>eval(tag(ra_knockback)*nastaveni_knockback_chance))&&(src.isgm==0)//pravdepodobnost nevim podle ceho bude
- src.redmessage(Nepovedlo se.)
- tag(nextforceback,<eval serv.time+(nastaveni_forceback_delay*10)>)
- return 1 
+  src.redmessage(Nepovedlo se.)
+  tag(nextforceback,<eval serv.time+(nastaveni_forceback_delay*10)>)
+  return
 elseif (tag(nextforceback)>serv.time)
- src.sysMessage(Jeste nelze pouzit.)
- tag(nextforceback,<eval serv.time+(nastaveni_forceback_delay*10)>)
- return 1 
+  src.sysMessage(Jeste nelze pouzit.)
+  tag(nextforceback,<eval serv.time+(nastaveni_forceback_delay*10)>)
+  return
+elseif (!reduceStamina(25,1)) // safely decreases stamina
+  return
 endif
 //tady by mel bejt nejakej grafickej efekt na klerikovi
 forcebackthem
-reduceStamina(<eval {15 40}>) // safely decreases stamina
 tag(nextforceback,<eval serv.time+(nastaveni_forceback_delay*10)>)
-
-
-
 
 
 
@@ -3701,31 +3697,38 @@ endif
 [Function catch]
 if !(0<tag(ra_catch)>)
   redMessage("Tuto schopnost neumis pouzit.")
+  return
 elseif findid(i_hypno_delka)
   redmessage("Nelze pouzit v hypnoze!")
+  return
 elseif findid(i_catchitem)
   sysMessage("<sex(Uvolnil,Uvolnila)> jsi svou mysl i mysl nepritele.")
   var(removecatch,1)
   findid(i_catchitem).remove
+  return
 elseif (findid(i_memory_catchField))
   sysMessage("Tva mysl je jiz plne zaneprazdnena.")
+  return
 elseif (!(profession==class_Mystik))
   redMessage("Tuto abilitu nemuzes pouzit.")
+  return
 elseif (<flags>&statf_dead)
-  redMesasge("<sex(Mrtvy,Mrtva)> tuto abilitu nemuzes pouzit.")
+  redMessage("<sex(Mrtvy,Mrtva)> tuto abilitu nemuzes pouzit.")
+  return
 elseif !(findid(i_hypnotizer))
   sysMessage("Musis mit u sebe kristalovou kouli.")
+  return
 elseif (tag(level)<20)
   sysMessage("Nejsi jeste dost <sex(zkuseny,zkusena)>.")
+  return
 elseif (mana<20)
   sysMessage("Nemas dost energie.")
-elseif (stamina<20)
-  sysMessage("Nemas dost energie.")
-else
-  newEquip(i_sevreni_zamerovac)
-  lastnew.timer=25
-  cont.reduceStamina(10) // safely decreases stamina
+  return
+elseif (!reduceStamina(10,1))
+  return
 endif
+newEquip(i_sevreni_zamerovac)
+lastnew.timer=25
 
 [itemdef i_sevreni_zamerovac]
 id=i_memory
@@ -3835,31 +3838,43 @@ endif
 [Function catchField]
 if !(0<tag(ra_catch)>)
   redMessage("Tuto schopnost neumis pouzit.")
+  return
 elseif (findid(i_memory_catchField))
   findID(i_memory_catchField).remove
+  return
 elseif (findid(i_catchitem))
   sysMessage("Tva mysl je jiz plne zaneprazdnena.")
+  return
 elseif (<tag(hypno_mystik)>)
   sysMessage("Tva mysl je jiz plne zaneprazdnena.")
+  return
 elseif !(profession==class_Mystik)
   redMessage("Tuto abilitu nemuzes pouzit.")
+  return
 elseif (<flags>&statf_dead)
-  redMesasge("<sex(Mrtvy,Mrtva)> tuto abilitu nemuzes pouzit.")
+  redMessage("<sex(Mrtvy,Mrtva)> tuto abilitu nemuzes pouzit.")
+  return
 elseif !(restest(1,i_hypnotizer))
   redMessage("Musis mit svou kristalovou kouli!")
+  return
 elseif (<eval <safe.tag(catchField_nextds)>> > <serv.time>)
   classMessage("Abilitu jeste nemuzes pouzit.")
+  return
 elseif (tag(level)<20)
   sysMessage("Nejsi jeste dost <sex(zkuseny,zkusena)>.")
+  return
 elseif (mana<120) || (stamina<80)
   sysMessage("Nemas dost energie.")
-else
-  if (isinvis)
-    reveal
-  endif
-  classMessage("Poutas na sebe monstra ve svem blizkem okoli.")
-  newEquip(i_memory_catchField)
+  return
+elseif (!reduceStamina(10,1) // safely decreases stamina
+  return
 endif
+
+if (isinvis)
+  reveal
+endif
+classMessage("Poutas na sebe monstra ve svem blizkem okoli.")
+newEquip(i_memory_catchField)
 
 [itemdef i_memory_catchField]
 name=CatchField Memory
@@ -3868,8 +3883,7 @@ type=t_eq_script
 
 on=@Equip
 cont.events=+e_catchField
-cont.mana=<cont.mana>-10
-cont.reduceStamina(10) // safely decreases stamina
+reduceMana(10)
 tag(catchingEffort,3)
 if (<eval 2*<cont.tag(ra_catch)>> >= <rand(41)>) // Vyjde ppst na abilitu
   f_catchField_capture
@@ -5944,25 +5958,25 @@ endif
 [function podriznuti]
 if !(profession==class_thief)
   sysmessage("Tohle neni pro tebe")
-  return 1
+  return
 endif
 if (<stam><50)
   sysMessage("Tohle ted nedokazes...")
-  return 1
+  return
 endif
 if !(tag(podriznuti_next))
 	tag(podriznuti_next,0)
 endif
 if (<tag(podriznuti_next)> > <serv.time>)
   classMessage("Abilitu jeste nemuzes pouzit.")
-  return 1
+  return
+endif
+if (!reduceStamina(45,1))
+  return
 endif
 
-reduceStamina(50)
-
 tag(podriznuti,1)
-sysmessage("Mozes monstrum podriznout!")
-
+sysMessage("Muzes monstrum podriznout!")
 tag(podriznuti_next,<eval <serv.time>+150>)
 
 //////////////////////////////
@@ -5971,26 +5985,22 @@ tag(podriznuti_next,<eval <serv.time>+150>)
 
 [function uderstitem]
 if !(profession==class_thief)
-  sysmessage("Tohle neni pro tebe")
-  return 1
-endif
-if (<stam><30)
-  sysMessage("Tohle ted nedokazes...")
-  return 1
+  sysMessage("Tohle neni pro tebe")
+  return
 endif
 if !(tag(uderstitem_next))
 	tag(uderstitem_next,0)
 endif
 if (<tag(uderstitem_next)> > <serv.time>)
   classMessage("Abilitu jeste nemuzes pouzit.")
-  return 1
+  return
 endif
 if !(tag(ra_uderstitem))
-	sysmessage("Tohle nedokazes")
-	return 1	
+	sysMessage("Tohle nedokazes")
+	return
 elseif (<tag(ra_uderstitem)> == 0)
-	sysmessage("Tohle nedokazes")
-	return 1
+	sysMessage("Tohle nedokazes")
+	return
 endif
 if (<tag(ra_uderstitem)> > 10)
 	arg(sanca,10)
@@ -5998,16 +6008,15 @@ else
 	arg(sanca,<tag(ra_uderstitem)>)
 endif
 if (chance(<arg(sanca)>,1))
+  if (!reduceStamina(30,1))
+    return
+  endif
   arg(prodleva,<eval 350-<eval <tag(ra_uderstitem)>*5>>)
-
-  reduceStamina(30)
-
   tag(zmrazeni,1)
-  sysmessage("Muzes zasadit uder stitem!")
-
+  sysMessage("Muzes zasadit uder stitem!")
   tag(uderstitem_next,<eval <serv.time>+<arg(prodleva)>>)
 else
-	sysmessage("Nepodarilo sa ti pripravit stit")
+	sysMessage("Nepodarilo se ti pripravit stit.")
 endif
 
 ///////////////////////////////////

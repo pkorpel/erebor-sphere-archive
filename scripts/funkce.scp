@@ -6811,18 +6811,29 @@ return
 // returns 1 if the stamina has been reduced
 //         0 if the stamina was left intact (only happens if 1 is passed as 2nd parameter)
 [function reduceStamina] //argv(0): amount of stamina that is wanted to be reduced ; argv(1) - pass 1 if the reduction should be ingored in case there isn't enough stamina left
+reduceStatResource("Stamina","staminy",<argv(0)>,<argv(1)>)
+
+// safely reduces the mana
+// returns 1 if the stamina has been reduced
+//         0 if the stamina was left intact (only happens if 1 is passed as 2nd parameter)
+[function reduceMana] //argv(0): amount of stamina that is wanted to be reduced ; argv(1) - pass 1 if the reduction should be ingored in case there isn't enough stamina left
+reduceStatResource("Mana","many",<argv(0)>,<argv(1)>)
+
+[function reduceStatResource]
 if (ischar)
-  arg(reduce,<eval argv(0)>)
-  if (<arg(reduce)> > <stamina>)
-    if (<eval argv(1)>)
+  arg(reduce,<eval argv(2)>)
+  arg(current,<eval <argv(0)>>)
+  if (<arg(reduce)> > <arg(current)>)
+    if (<eval argv(3)>)
       if (isPlayer)
-        redmessage("Nemas dost staminy.")
+        redMessage("Nemas dost <argv(1)>.")
       endif
       return 0
     endif
-    arg(reduce,<stamina>)
+    <argv(0)>=0
+    return 1
   endif
-  stamina=<eval (stamina-arg(reduce))>
+  <argv(0)>=<eval (<eval argv(0)>-arg(reduce))>
   return 1
 endif
 return 0
