@@ -461,14 +461,14 @@ if (findlayer(2))
   if (findlayer(2).type==t_weapon_sword)
     tag(nextroundattack,<eval (<serv.time>+(<var(nastaveni_roundattack_delay)>*10))>)
     reduceStamina(<eval {10 20}>) // safely decreases stamina
-    f_performRoundAttack(<var(nastaveni_roundattack_postih)>)
+    f_performRoundAttack(<var(nastaveni_roundattack_postih)>,0)
   else
     sysMessage("S timhle paratkem je to nemozne.")
     return 1
   endif
 endif
 
-[function f_performRoundAttack] // argv(0) - damage modificator in % (100 == base char damage)
+[function f_performRoundAttack] // argv(0) - damage modificator in % (100 == base char damage); argv(1) - suppress same realm PvP damage
 sound(sex(1098,824))
 sound(512)
 sound(566,5)
@@ -479,7 +479,8 @@ lastnew.p=<src.p>
 lastnew.z=-100
 lastnew.link=<uid>
 lastnew.timerd=1
-lastnew.more1=<argv(0)>
+lastnew.more1=<argv(0)> // damage modificator
+lastnew.moreX=<argv(1)> // suppress same realm pvpDmg
 flip
 flip
 flip
@@ -508,6 +509,15 @@ elseif (isdead)
 endif
 if (distancefrom(var(roundattack_src))==1)
   src=var(roundattack_src)
+  if (0<moreX>) // suppress same realm pvpDmg
+    if (isPlayer)
+      if (<eval tag.realm> == <eval src.tag(realm)>)
+        if !(0<region.tag(arena)>)
+          return 1
+        endif
+      endif
+    endif
+  endif
   src.act=<uid>
   arg(mainDmg,<eval src.combat_main_nonmystik_countDmg>) // counts the damage caused by the player to the target
   arg(mainDmg,<eval ((arg(mainDmg) * roundattack_dmgMod)/100)>) // reduce the damage according to the in-game settings
@@ -741,49 +751,47 @@ tag(scrollcast,"")
 [Function leap]
 if (profession!=class_war)
   src.sysMessage("Toto muze pouzit jen valecnik.")
-  return 1
+  return
 elseif !(isfighting)
   src.sysMessage("Lze pouzit jen pri boji")
-  return 1 
+  return 
 elseif !(act)
   src.sysMessage("Lze pouzit jen pri boji")
-  return 1 
+  return 
 elseif !(act.isplayer)
   src.sysMessage("Cil neni hrac")
-  return 1 
+  return 
 elseif !(act.srccombatLOS) 
   src.sysMessage("Nevidis na cil.")
-  return 1
+  return
 elseif (act.flag_hidden)
   src.sysMessage("Nevidis na cil.")
-  return 1 
+  return
 elseif (<act.distance> > 9)
   src.sysMessage("Cil je prilis daleko.")
-  return 1 
+  return
 elseif (isnonmobile) 
   src.sysMessage("You are frozen and cannot move.")
-  return 1 
+  return
 elseif ({0 10000} > <eval (<eval tag(ra_leap)>*<nastaveni_ability_leapchange>)>)
   src.redmessage("Utok se nepovedl.")
   src.tag(nextleap,<eval (<serv.time>+<nastaveni_ability_leapdelay>)>)
-  return 1 
+  return
 elseif (<eval tag(nextleap)> > <serv.time>)
   src.sysMessage("Jeste nelze pouzit.")
   src.tag(nextleap,<eval (<serv.time>+<nastaveni_ability_leapdelay>)>)
-  return 1 
+  return
 elseif (act.region.tag(housenumber))
   src.sysMessage("Nesmis utocit do domu.")
   src.tag(nextleap,<eval (<serv.time>+<nastaveni_ability_leapdelay>)>)
-  return 1 
+  return
 endif
-//if (act.isconjured) //obsolete kdyz to jde jen na playery
-// src.sysMessage(Leap nelze pouzit na summony)
-// return 1
-//endif
 
 if (<nastaveni_leap_staminaloss_war>) //ak to vobec je
   arg(srcStaminaLoss,<eval (<distancefrom(<act>)>*<nastaveni_leap_staminaloss_war>)>)
-  reduceStamina(<srcStaminaLoss>) // bere staminut warovy podla vzdialenosti od ciela
+  if (!reduceStamina(<srcStaminaLoss>,1)) // bere staminut warovy podla vzdialenosti od ciela
+    return
+  endif
 endif
 
 if (tag(rangearrowdst))
@@ -813,13 +821,13 @@ if (isDead)
 elseif (<eval tag(nextStrike)> > <serv.time>)
   redMessage("Jeste nelze pouzit.")
   tag(nextStrike,<eval (<serv.time>+10)>)
-  return 1 
+  return
 endif
 
 arg(chargeType,<charge_getType>)
 if (!isStrikeChargeType(<arg(chargeType)>))
   redMessage("Nemas pripraveny zadny uder!")
-  return 1
+  return
 endif
 
 if (<arg(chargeType)> == <def_charge_roundAttack>)
@@ -827,7 +835,6 @@ if (<arg(chargeType)> == <def_charge_roundAttack>)
   arg(reductions,<nastaveni_strikeCharge_roundLimit>-<arg(charges)>)
   arg(stamReduce,<eval <nastaveni_strikeCharge_roundStamina>-(reductions*<nastaveni_strikeCharge_roundStaminaDrop>)>)
   if (!reduceStamina(<arg(stamReduce)>,1))
-    redMessage("Nemas dost staminy.")
     return
   endif
   tag(nextStrike,<eval (<serv.time>+5)>)
@@ -835,9 +842,8 @@ if (<arg(chargeType)> == <def_charge_roundAttack>)
   arg(bonus,<eval (charge_bonuses)*nastaveni_strikeCharge_roundBonus>) // the bonus is intentionally calculated as 0 in the first iteration!
   arg(base,<eval (charges)*nastaveni_strikeCharge_roundBase>)
   arg(dmgMod,<eval (base+bonus)>)
-  f_performRoundAttack(<dmgMod>)
+  f_performRoundAttack(<dmgMod>,1)
   charge_decrease(<nastaveni_strikeCharge_roundLimit>)
-  return
 endif
 
 [Function movetoact]
@@ -874,22 +880,20 @@ endif
 [Function longrange]
 if (isnonmobile)
   src.sysMessage("You are frozen and cannot move.")
-  return 1 
-elseif (<stamina> < <nastaveni_rangearrow_staminaReduce>)
-  sysMessage("Uz ti nezbyvaji sily.")
-  return 1
+  return
 elseif findid(i_delayer_longrange)
   sysMessage("Jeste nelze pouzit.")
-  return 1 
+  return
 elseif ({0 10000}> <eval (<eval tag(ra_rangearrow)>*<nastaveni_rangearrow_chance>)>)
   src.redmessage("Nepovedlo se.")
   newEquip(i_delayer_longrange)
-  return 1 
+  return
+elseif (!reduceStamina(<nastaveni_rangearrow_staminaReduce>,1))
+  return
 endif
 src.sysMessage("Tvuj dosah je nyni vetsi.")
 newEquip(i_delayer_longrange)
 newEquip(i_rangearrow_effect)
-reduceStamina(<nastaveni_rangearrow_staminaReduce>) // safely decreases stamina
 
 [itemdef i_delayer_longrange]
 id=i_memory
@@ -921,25 +925,23 @@ remove
 [Function knockback]
 if (profession!=class_ranger)
   src.sysMessage("Toto muze pouzit jen ranger.")
-  return 1
+  return
 elseif (isnonmobile)
   src.sysMessage("You are frozen and cannot move.")
-  return 1 
-elseif (<stamina> < 15)
-  src.sysMessage("Uz ti nezbyvaji sily.")
-  return 1
+  return
 elseif ({0 10000} > <eval (<eval tag(ra_knockback)>*<nastaveni_knockback_chance>)>) && (src.isgm==0)
   src.redmessage("Nepovedlo se.")
   tag(nextrangearrow,<eval serv.time+(nastaveni_knockback_delay*10)>)
-  return 1 
+  return
 elseif (<eval tag(nextrangearrow)> > <serv.time>)
   src.sysMessage("Jeste nelze pouzit.")
   tag(nextrangearrow,<eval (<serv.time>+(nastaveni_knockback_delay*10))>)
-  return 1 
+  return
+elseif (!reduceStamina(25,1) // this one MUST be last!
+  return
 endif
 src.sysMessage("Ucinek tve strelby je drtivy.")
 newEquip(i_knockback_effect)
-reduceStamina(<eval {15 40}>) // safely decreases stamina
 tag(nextrangearrow,<eval serv.time+(nastaveni_knockback_delay*10)>)
 
 [itemdef i_knockback_effect]

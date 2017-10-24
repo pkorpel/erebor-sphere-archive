@@ -14,11 +14,9 @@ elseif (isDead)
 elseif (<eval tag(nextSplitShot)> > <serv.time>)
   RedMessage("Jeste nelze pouzit.")
   return 1
-elseif (<stam> < <nastaveni_splitShot_stamina>)
-  RedMessage("Nemas dost staminy!")
+elseif (!reduceStamina(<nastaveni_splitShot_stamina>,1))
   return 1
 endif
-reduceStamina(<nastaveni_splitShot_stamina>) // safely decreases stamina
 newequip(i_mem_splitShot)
 sound(snd_WEAPONS_CROSSBOW_LOAD)
 sysMessage("Chystas se vystrelit rozdelenou strelu!")
