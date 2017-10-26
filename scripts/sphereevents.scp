@@ -1742,16 +1742,16 @@ endif
 
 if(argn==7)
   //reactiv aj na inych (hracov)
-	if ( (profession==class_priest) || (profession==class_shaman) )
-	  if !(act.isplayer)
+  if ( (profession==class_priest) || (profession==class_shaman) )
+    if !(act.isplayer)
       redmessage("Toto kouzlo smis kouzlit jen na hrace.")
       action=-1
     endif
   else //reactiv jen na sebe
-  	if (act!=<uid>)
-   		redmessage("Toto kouzlo smis kouzlit jen na sebe.")
-   		action=-1
-   	endif
+    if (act!=<uid>)
+      redmessage("Toto kouzlo smis kouzlit jen na sebe.")
+      action=-1
+    endif
   endif
 endif
 
@@ -2926,21 +2926,18 @@ on=@npckill
 on=@DrinkingPotion
 on=@afterswing
 if (action==Skill_fencing)||(tag(isstabbing))
-  arg(probo,0)
-  arg(holdsWarFork,<holdsTwoHand(i_war_fork)>)
+  arg(holdsWarFork,<holdsTwoHand(i_war_fork,01405)>)
   if (tag(isstabbing))
-    skill -1
-    stopscriptedskills
-    if (act.isplayer)
-      var(ubrano,<eval (var(ubrano)*nastaveni_thief_backstabP_bonus)/1000>)
-    else
-      var(ubrano,<eval (var(ubrano)*nastaveni_thief_backstabM_bonus)/1000>)
+    f_thief_backStab
+  else
+    if (!arg(holdsWarFork)) // warFork has different ability (charged strike, not bleed)
+      if (f_thief_CanCauseBleeding(<var(swingedchar)>)) // arg1 == bleeding target
+        f_thief_doBleed(<var(swingedchar)>) // arg1 == bleeding target
+      endif
     endif
-    reveal
-    arg(probo,1)
-  elseif (!arg(holdsWarFork)) // warFork has different ability (charged strike, not bleed)
-    if (f_thief_CanCauseBleeding(<var(swingedchar)>)) // arg1 == bleeding target
-      f_thief_doBleed(<var(swingedchar)>) // arg1 == bleeding target
+    if (act.npc)
+      f_thief_fromBehind
+      f_thief_shieldStrike
     endif
   endif
   if (arg(holdsWarFork))
@@ -2951,7 +2948,7 @@ if (action==Skill_fencing)||(tag(isstabbing))
         endif
       endif
       if (act.npc)
-        if (0<tag(ra_doubleswing)> > 0)
+        if (0<tag(ra_doubleswing)>)
           if (chance(<eval 100+(<tag(ra_doubleswing)>*5)>,3))
             if (<stamina> >= <nastaveni_doubleswing_stam>)
               reduceStamina(<nastaveni_doubleswing_stam>)
@@ -2965,74 +2962,11 @@ if (action==Skill_fencing)||(tag(isstabbing))
       endif
     endif
   endif
-  if (<arg(probo)> == 0)
-    if (act.npc)
-    	if (tag(ra_utok_do_zad))
-  	  	if (<tag(ra_utok_do_zad)> > 0)
-  		  	if (f_isBackslash(<act.dir>))
-  		  		arg(distance,<distancefrom(<act>)>)
-  			  	if ((<arg(distance)> == 1)||(<arg(distance)> == 2))
-  				  	arg(body,<tag(ra_utok_do_zad)>)
-  					  arg(bonus,0)
-    					classmessage("Uder do zad!")
-
-    					if (<arg(body)> <= 10)
-  	  					arg(bonus,<eval <arg(body)>*10>)
-  		  			elseif (<arg(body)> > 10)
-  			  			arg(bonus,<eval 100+<eval <eval <arg(body)>-10>*12>>)
-  				  	endif
-  					  var(ubrano,<eval <var(ubrano)>+<eval <eval <var(ubrano)>*<arg(bonus)>>/1000>>)
-    					if (tag(podriznuti))
-    						if (<tag(podriznuti)> == 1)
-  	  						if (tag(ra_podriznuti))
-  		  						if (<tag(ra_podriznuti)> > 0)
-  			  						arg(body,<tag(ra_podriznuti)>)
-  				  					classmessage("Podriznuti!")
-  					  				arg(bonus,0)
-  							  		if (<arg(body)> <= 10)
-  						          arg(bonus,<eval <arg(body)>*4>)
-  					          elseif (<arg(body)> > 10)
-  						          arg(bonus,<eval 40+<arg(body)>>)
-    					        endif
-    					        var(ubrano,<eval <var(ubrano)>+<eval <eval <var(ubrano)>*<arg(bonus)>>/100>>)
-  		  						endif
-  			  				endif
-  				  		endif
-  					  endif
-    				endif
-    			endif
-  	  	endif
-    	endif
-    endif
-    if (act.npc)
-      if (findlayer(2))
-        if (findlayer(2).type==t_shield)
-        	if (tag(zmrazeni))
-        		if (<tag(zmrazeni)> == 1)
-        			if (f_thief_getfreezebyshield(<eval <act.tag(experience)>/10>))
-        				arg(uderstitem_delay,<eval <tag(uderstitem_next)>-<eval 200-<eval <tag(ra_uderstitem)>*5>>>)
-        				if (<arg(uderstitem_delay)> > <serv.time>)
-    						  act.paralyze(20)
-    						  classmessage("Uder stitem!")
-    						else
-    							sysmessage("Prilis dlouho si cekal a rana ti nevysla")
-    						endif
-    				  endif
-    				endif
-    			endif
-    		endif
-    	endif
-    endif
+  if (0<tag(podriznuti)>)
+    tag(podriznuti,0)
   endif
-  if (tag(podriznuti))
-  	if (<tag(podriznuti)> == 1)
-  		tag(podriznuti,0)
-  	endif
-  endif
-  if (tag(zmrazeni))
-    if (<tag(zmrazeni)> == 1)
-    	tag(zmrazeni,0)
-    endif
+  if (0<tag(zmrazeni)>)
+    tag(zmrazeni,0)
   endif
 endif
 
@@ -3077,31 +3011,31 @@ if (findlayer(2))
   if (findlayer(2).type==t_shield)
     if ((<findlayer(2).typedef.tdata1>)==1)
       if (<arg(exp)> < 51)
-      	return 1
+        return 1
       endif
     elseif ((findlayer(2).typedef.tdata1)==2)
       if (<arg(exp)> < 101)
-      	return 1
+        return 1
       endif
     elseif ((findlayer(2).typedef.tdata1)==5)
       if (<arg(exp)> < 151)
-      	return 1
+        return 1
       endif
     elseif ((findlayer(2).typedef.tdata1)==6)
       if (<arg(exp)> < 251)
-      	return 1
+        return 1
       endif
     elseif ((findlayer(2).typedef.tdata1)==7)
       if (<arg(exp)> < 401)
-      	return 1
+        return 1
       endif
     elseif ((findlayer(2).typedef.tdata1)==8)
       if (<arg(exp)> < 601)
-      	return 1
+        return 1
       endif
     elseif ((findlayer(2).typedef.tdata1)==9)
       if (<arg(exp)> < 901)
-      	return 1
+        return 1
       endif
     endif
   endif
