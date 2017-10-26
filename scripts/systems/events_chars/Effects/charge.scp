@@ -309,7 +309,7 @@ var(spellpower,<eval ((<var(spellpower)>*(1000+<arg(chargeEffect)>))/1000)>)
 
 
 ////////////////////////////////////////
-//       M A G I C   C H A R G E      //
+//      S T R I K E   C H A R G E     //
 ////////////////////////////////////////
 
 [events e_strikeCharge]

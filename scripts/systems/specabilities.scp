@@ -525,53 +525,46 @@ endif
 
 
 [Function backstab]
-if (findlayer(2))
-  if ( (findlayer(2).dispid==i_war_fork) || (findlayer(2).dispid==01405) || (findlayer(2).id==i_war_fork_mithril) || !(safe.findid(i_stealthbonus)) ) //neprobodavat vidlema
-    return 0
-  endif
+if ( (holdsTwoHand(i_war_fork,01405)) || !(safe.findid(i_stealthbonus)) )
+  classMessage("nedrzis pero v ruce")
+  return 1
+elseif (profession!=class_thief)
+  classMessage("Tato funkce neni urcena pro tebe.")
+  return 1
+elseif ((action != 0FFFFFFFF) && (action != 0) && (action != skill_hiding) && (action != 079))
+  sysMessage("Nesmis provadet zadny skill")
+  return 1
+elseif !(isinvis)||(tag(isstabbing)) //hidden, invis, or insubst
+  sysMessage("Nesmis byt videt...")
+  return 1
+elseif !(targ.srccombatLOS)
+  sysMessage("Nevidis na cil.")
+  return 1
+elseif (targ.distance>1)
+  sysMessage("Cil je moc daleko.")
+  return 1
+elseif (targ.z > (<z>+5)) || (targ.z < (<z>-5))//resi vysku
+  sysMessage("Nedosahnes na cil.")
+  return 1
+elseif (!reduceStamina(10,1))
+  return 1
 endif
-if (profession==class_thief)
-  //src.sysMessage("action: <action>")
-  if ((action == 0FFFFFFFF) || (action == 0) || (action == skill_hiding) || (action == 079))
-    if (isinvis)&&(!tag(isstabbing)) //hidden, invis, or insubst
-      if (targ.srccombatLOS)
-        if (targ.distance<2)
-    if (targ.z > (<z>+5)) || (targ.z < (<z>-5))//resi vysku
-     sysMessage("Nedosahnes na cil.")
-          return 1
-         endif
-          classMessage("Pripravujes se k bodnuti...")
-          skill -1
-          stopscriptedskills
-          newitemsafe(i_backstab)//opozdeny Equipnuti
-          lastnew.p=<p>
-          lastnew.z=-80
-          lastnew.tag(tostab,<targ>)
-          lastnew.tag(source,<uid>)
-          if !(tag(hitspeed))
-            f_getspeed_nonmystik
-          endif
-//lastnew.timerd=<tag(hitspeed)>
-          lastnew.timerd=1
-          anim({9 11})
-          tag(isstabbing, 1)
-          return 1
-        else
-          sysMessage("Cil je moc daleko.")
-          return 1
-        endif
-      else
-        sysMessage("Nevidis na cil.")
-        return 1
-      endif
-    else
-      sysMessage("Nesmis byt videt...")
-    endif
-  else
-    sysMessage("Nesmis provadet zadny skill")
-  endif
+classMessage("Pripravujes se k bodnuti...")
+
+skill -1
+stopscriptedskills
+newitemsafe(i_backstab)//opozdeny Equipnuti
+lastnew.p=<p>
+lastnew.z=-80
+lastnew.tag(tostab,<targ>)
+lastnew.tag(source,<uid>)
+if !(tag(hitspeed))
+  f_getspeed_nonmystik
 endif
-return 0
+lastnew.timerd=1
+anim({9 11})
+tag(isstabbing, 1)
+return 1
 
 [itemdef i_backstab]
 id=i_memory
@@ -633,6 +626,38 @@ on=@timer
 tag(source).act=<tag(tostab)>
 safe tag(source).Equip(<uid>)
 return 1
+
+//utok do zad
+[function f_thief_fromBehind]
+if (0<tag(ra_utok_do_zad)>)
+  if (f_isBackslash(<act.dir>))
+    arg(distance,<distancefrom(<act>)>)
+    if ((<arg(distance)> == 1)||(<arg(distance)> == 2))
+      classmessage("Uder do zad!")
+      arg(body,<tag(ra_utok_do_zad)>)
+      arg(bonus,0)
+      if (<arg(body)> <= 10)
+        arg(bonus,<eval <arg(body)>*10>)
+      elseif (<arg(body)> > 10)
+        arg(bonus,<eval 100+<eval <eval <arg(body)>-10>*12>>)
+      endif
+      var(ubrano,<eval <var(ubrano)>+<eval <eval <var(ubrano)>*<arg(bonus)>>/1000>>)
+      if (0<tag(podriznuti)>)
+        if (0<tag(ra_podriznuti)>)
+          arg(body,<tag(ra_podriznuti)>)
+          classmessage("Podriznuti!")
+          arg(bonus,0)
+          if (<arg(body)> <= 10)
+            arg(bonus,<eval <arg(body)>*4>)
+          elseif (<arg(body)> > 10)
+            arg(bonus,<eval 40+<arg(body)>>)
+          endif
+          var(ubrano,<eval <var(ubrano)>+<eval <eval <var(ubrano)>*<arg(bonus)>>/100>>)
+        endif
+      endif
+    endif
+  endif
+endif
 
 [itemdef i_krvaceni]
 ID=i_memory
@@ -5979,6 +6004,22 @@ tag(podriznuti,1)
 sysMessage("Muzes monstrum podriznout!")
 tag(podriznuti_next,<eval <serv.time>+150>)
 
+
+//////////////////////////////
+// thief probodnuti
+//
+
+[function f_thief_backStab]
+skill -1
+stopscriptedskills
+if (act.isplayer)
+  var(ubrano,<eval (var(ubrano)*nastaveni_thief_backstabP_bonus)/1000>)
+else
+  var(ubrano,<eval (var(ubrano)*nastaveni_thief_backstabM_bonus)/1000>)
+endif
+reveal
+
+
 //////////////////////////////
 // thief uderstitem
 //
@@ -6001,8 +6042,7 @@ if !(tag(ra_uderstitem))
 elseif (<tag(ra_uderstitem)> == 0)
 	sysMessage("Tohle nedokazes")
 	return
-endif
-if (<tag(ra_uderstitem)> > 10)
+elseif (<tag(ra_uderstitem)> > 10)
 	arg(sanca,10)
 else
 	arg(sanca,<tag(ra_uderstitem)>)
@@ -6017,6 +6057,21 @@ if (chance(<arg(sanca)>,1))
   tag(uderstitem_next,<eval <serv.time>+<arg(prodleva)>>)
 else
 	sysMessage("Nepodarilo se ti pripravit stit.")
+endif
+
+[function f_thief_shieldStrike]
+if (flag_hasshield))
+  if (0<tag(zmrazeni)>)
+    if (f_thief_getfreezebyshield(<eval <act.tag(experience)>/10>))
+      arg(uderstitem_delay,<eval <tag(uderstitem_next)>-<eval 200-<eval <tag(ra_uderstitem)>*5>>>)
+      if (<arg(uderstitem_delay)> > <serv.time>)
+        act.paralyze(20)
+        classmessage("Uder stitem!")
+      else
+        sysmessage("Prilis dlouho si cekal a rana ti nevysla")
+      endif
+    endif
+  endif
 endif
 
 ///////////////////////////////////
