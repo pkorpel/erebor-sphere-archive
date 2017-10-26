@@ -30,11 +30,11 @@ def_charge_size_icon[10] 01870      // roundAttack - yellow
 
 // executed upon player that's being charged
 // argv(0) - charge type
-// argv(1) - charge target - used to control, whether the charge should be incremented
+// argv(1) - charge target - used to verify, whether the charge can be incremented
 [function charge_add] 
 if (argv(1).isPlayer)
-  if (0<argv(1).tag(realm)> == 0<tag(realm)>)
-    return 0 // do not increment charge if the target is player from the same realm
+  if (<eval argv(1).tag(realm)> == <eval tag(realm)>) && !(0<region.tag(arena)>)
+    return 0 // do not increment charge if the target is player from the same realm except for the arena
   endif
 elseif (argv(1).isPet)
   return 0 // do not increment charge if the target is a pet (mount, summon, or other)
