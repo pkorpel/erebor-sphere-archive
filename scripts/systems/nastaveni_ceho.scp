@@ -820,7 +820,7 @@ tag(nastaveni_sufdefaulttype,"]")
 tag(nastaveni_sufdefault,")")
 nastaveni_dialog
 
-on=0 MagicCharge
+on=0 Magic Charge
 tag(nastaveni_finishfunkce,nastaveni_finish_globals)
 tag(nastaveni_nadpis,"Vlastnosti Magickeho Naboje")
 
@@ -836,6 +836,26 @@ tag(nastaveni_sufvalue,"")
 
 tag(nastaveni_prefdefault,"onestring(")
 tag(nastaveni_prefdefaulttype,"n_magicCharge_default[")
+tag(nastaveni_sufdefaulttype,"]")
+tag(nastaveni_sufdefault,")")
+nastaveni_dialog
+
+on=0 Strike Charge
+tag(nastaveni_finishfunkce,nastaveni_finish_globals)
+tag(nastaveni_nadpis,"Vlastnosti Rychleho Utoku")
+
+tag(nastaveni_prefname,"onestring(")
+tag(nastaveni_prefnametype,"n_strikeCharge_name[")
+tag(nastaveni_sufnametype,"]")
+tag(nastaveni_sufname,")")
+
+tag(nastaveni_prefvalue,"nastaveni_")
+tag(nastaveni_prefvaluetype,"n_strikeCharge[")
+tag(nastaveni_sufvaluetype,"]")
+tag(nastaveni_sufvalue,"")
+
+tag(nastaveni_prefdefault,"onestring(")
+tag(nastaveni_prefdefaulttype,"n_strikeCharge_default[")
 tag(nastaveni_sufdefaulttype,"]")
 tag(nastaveni_sufdefault,")")
 nastaveni_dialog
@@ -2561,6 +2581,27 @@ n_magicCharge[28]    charge_silenceBonus
 n_magicCharge_name[28] "Silence Bonus (%%)"
 n_magicCharge_default[28] 100
 
+n_strikeCharge[0]         strikeCharge_roundLimit
+n_strikeCharge_name[0]    "Round - pocet naboju"
+n_strikeCharge_default[0] 3
+n_strikeCharge[1]         strikeCharge_roundBase
+n_strikeCharge_name[1]    "Round - zaklad dmg %"
+n_strikeCharge_default[1] 30
+n_strikeCharge[2]         strikeCharge_roundBonus
+n_strikeCharge_name[2]    "Round - bonus dmg %"
+n_strikeCharge_default[2] 5
+n_strikeCharge[3]         strikeCharge_roundStamina
+n_strikeCharge_name[3]    "Round - stamina"
+n_strikeCharge_default[3] 30
+n_strikeCharge[4]         strikeCharge_roundStaminaDrop
+n_strikeCharge_name[4]    "Round - stamina drop"
+n_strikeCharge_default[4] 5
+n_strikeCharge[5]         strikeCharge_roundDuration
+n_strikeCharge_name[5]    "Round - charge duration(ds)"
+n_strikeCharge_default[5] 35
+n_strikeCharge[6]         strikeCharge_roundDropDuration
+n_strikeCharge_name[6]    "Round - charge drop (ds)"
+n_strikeCharge_default[6] 18
 
 
 n_poison[0]		poison_absoluteDmg

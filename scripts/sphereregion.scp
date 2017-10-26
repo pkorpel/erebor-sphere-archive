@@ -754,7 +754,6 @@ ON=@ENTER
   if (src.isplayer)
     src.events=+e_nbdung
   endif
-  src.sysmessage("Vitej v Tutorialu. Zde se naucis ovladat svou postavu, aby jsi ve svete byl schopnym bojovnikem.")
   SRC.MIDILIST=midi_Vesper
 
 ON=@CLIPERIODIC

@@ -2910,6 +2910,36 @@ elseif (findlayer(layer_hand2))
 endif
 return 0
 
+// compares dispIDs passed to the items held in the one hand layer
+[function holdsOneHand]
+if !(findlayer(1))
+  return 0
+else
+  arg(i,0)
+  while (arg(i) < <argvcount>)
+    if (findlayer(1).typedef.dispid==<argv(<i>)>)
+      return 1
+    endif
+    arg(i,#+1)
+  endwhile
+endif
+return 0
+
+
+[function holdsTwoHand]
+if !(findlayer(2))
+  return 0
+else
+  arg(i,0)
+  while (arg(i) < <argvcount>)
+    if (findlayer(2).typedef.dispid==<argv(<i>)>)
+      return 1
+    endif
+    arg(i,#+1)
+  endwhile
+endif
+return 0
+
 [function isbolt]
 if (typedef.dispid==i_xbolt)    
 else
@@ -3970,21 +4000,21 @@ var(count,<count>+1)
 //What color should our name be? 
 //default obj = the name to examine 
 if (isItem) 
- return 0
+  return 0
 elseif (isGM)
- return 035
+  return 035
 elseif (isnazgul)
- return 03c2
+  return 03c2
 elseif (isinmyguild)
- //srcchangehighlight(2)
- return 044 //03c
+  //srcchangehighlight(2)
+  return 044 //03c
 elseif (ismurderer) 
- //I am bad
- return 026
+  //I am bad
+  return 026
 elseif (flag_criminal) //i am a graycolored 
- return 03e9
+  return 03e9
 elseif (isneutral)
- return 03e9
+  return 03e9
 elseif (src.MemoryFind(UID))
   if (src.MemoryFind(UID).color&01)
     //src saw me commit a crime 
@@ -4047,6 +4077,17 @@ if (f_canseelosG(<args>))
   return 1
 endif
 return 0
+
+[function canReachNPC] // argv(0) - NPC UID
+if (isGM)
+  return 1
+elseif (f_qIsDead)
+  return 0
+elseif (argv(0).distance > 3)
+  src.sysMessage("<argv(0).name> je prilis daleko.")
+  return 0
+endif
+return 1
 
 [function f_canseelosG]  //line of sight of position on the ground
 newitemsafe(i_bag)
@@ -4115,87 +4156,87 @@ target("Co chces presunout?")
 
 on=@targon_item 
 if (<src.targ.baseid> == i_truhla_heslo ) || (<src.targ.type> == mit_main) || (<src.targ.baseid> == i_gembox) // vyjimky
- src.redMessage("Sem nelze predmety presunout.")
- remove
- return 1
+  src.redMessage("Sem nelze predmety presunout.")
+  remove
+  return 1
 elseif (more1 == 0) && (<hval src.targ.cont> == <src>)
   src.redMessage("Prikaz nelze pouzit na predmety, ktere mas na sobe.")
   return 1
 endif
 if (more1)
- if (<src.targ.type>!=t_container)
-  target    
-  return 1        
- elseif (<src.targ.topobj>!=<src>)&&(src.isgm==0)
-  target
-  return 1  
- elseif (<src.targ>==<link>)
-  target
+  if (<src.targ.type>!=t_container)
+    target    
+    return 1        
+  elseif (<src.targ.topobj>!=<src>)&&(src.isgm==0)
+    target
+    return 1  
+  elseif (<src.targ>==<link>)
+    target
+    return 1
+  endif
+  var(itemcont,<src.targ>)
+  var(itemtype,<tag.itemtype>)
+  var(itembaseid,<tag.itembaseid>)
+  var(maxtomove,<tag.max>)
+  var(moved,0)
+  src.accmsg("moves from uid=<link> (<link.name>) topobj=<link.topobj> (<link.topobj.name>) to uid=<hval itemcont> (<finduid(itemcont).name>) topobj=<finduid(itemcont).topobj> (<finduid(itemcont).topobj.name>)")
+  var(cantmovenext,0)
+  link.contents2(f_sort<tag.function>)
+  var(cantmovenext,"")
+  remove
   return 1
- endif
- var(itemcont,<src.targ>)
- var(itemtype,<tag.itemtype>)
- var(itembaseid,<tag.itembaseid>)
- var(maxtomove,<tag.max>)
- var(moved,0)
- src.accmsg("moves from uid=<link> (<link.name>) topobj=<link.topobj> (<link.topobj.name>) to uid=<hval itemcont> (<finduid(itemcont).name>) topobj=<finduid(itemcont).topobj> (<finduid(itemcont).topobj.name>)")
- var(cantmovenext,0)
- link.contents2(f_sort<tag.function>)
- var(cantmovenext,"")
- remove
- return 1
 else
- if (src.targ.baseid==i_ring_power)||(src.targ.baseid==i_leading_ring_power)
-  src.sysMessage("Ani to nezkousej, bugere.")
-  remove
+  if (src.targ.baseid==i_ring_power)||(src.targ.baseid==i_leading_ring_power)
+    src.sysMessage("Ani to nezkousej, bugere.")
+    remove
+    return 1
+  endif
+  if (<src.targ.topobj>!=<src>)&&(src.isgm==0)
+    src.sysMessage("Vec musis mit u sebe.")
+    remove
+    return 1
+  endif
+  tag(itemtype,<src.targ.type>) //type of the item
+  tag(itembaseid,<src.targ.baseid>)//baseid of the item
+  more1=1
+  link=<src.targ.cont>//the bag the item is in
+  if (<src.targ.type>==t_container)
+    cont.sysMessage("Nelze aplikovat na kontejnery.")
+    return 1
+  endif
+  target("Kam je chces dat?")
   return 1
- endif
- if (<src.targ.topobj>!=<src>)&&(src.isgm==0)
-  src.sysMessage("Vec musis mit u sebe.")
-  remove
-  return 1
- endif
- tag(itemtype,<src.targ.type>) //type of the item
- tag(itembaseid,<src.targ.baseid>)//baseid of the item
- more1=1
- link=<src.targ.cont>//the bag the item is in
- if (<src.targ.type>==t_container)
-  cont.sysMessage("Nelze aplikovat na kontejnery.")
-  return 1
- endif
- target("Kam je chces dat?")
- return 1
 endif
 return 1
 
 [function f_sorttype]
 if (cantmovenext)
- //src.sysMessage("Vic se tam uz nevejde.")  -radsi bez hlasky
- return 1
+  //src.sysMessage("Vic se tam uz nevejde.")  -radsi bez hlasky
+  return 1
 endif 
 if (<cont>!=<itemcont>)
- if (moved<maxtomove)
-  if (type==itemtype)
-   if (movable==0)&&(src.isgm==0)
-    src.sysMessage("<name> nelze presunout.")
-   else    
-    if (<uid>==<itemcont.cont>) //chce to soupnout do neceho co uz ma v sobe (batoh do pytliku co je uvnitr napriklad)
-     src.accmsg("Hrac <src> (<src.name>) se snazi o podvod s kontejnery pri moveitem")
-     return 1
-    else 
-     if (itemcont.rescount < 255)
-      src.sysMessage("<amount>x <name>")
-      cont=<itemcont>
-     else      
-      var(cantmovenext,1)
-      return 1
-     endif
+  if (moved<maxtomove)
+    if (type==itemtype)
+      if (movable==0)&&(src.isgm==0)
+        src.sysMessage("<name> nelze presunout.")
+      else    
+        if (<uid>==<itemcont.cont>) //chce to soupnout do neceho co uz ma v sobe (batoh do pytliku co je uvnitr napriklad)
+          src.accmsg("Hrac <src> (<src.name>) se snazi o podvod s kontejnery pri moveitem")
+          return 1
+        else 
+          if (itemcont.rescount < 255)
+            src.sysMessage("<amount>x <name>")
+            cont=<itemcont>
+          else      
+            var(cantmovenext,1)
+            return 1
+          endif
+        endif
+        var(moved,<moved>+1)
+        src.accmsg("moves uid=<uid> (<amount> <name>)")
+      endif
     endif
-    var(moved,<moved>+1)
-    src.accmsg("moves uid=<uid> (<amount> <name>)")
-   endif
   endif
- endif
 endif
 
 [function f_sortitem]    
@@ -6763,18 +6804,39 @@ if (<itemExists(<link>)>)
 else
   cont.sysMessage("WTF!")
 endif
-
-
-//safely reduces the stamina
-[function reduceStamina] //argv(0): amount of stamina that is wanted to be reduced
-if(src.ischar)
-  arg(reduce,<eval argv(0)>)
-  if (<arg(reduce)> > <stamina>)
-    arg(reduce,<stamina>)
-  endif
-  stamina=<eval (stamina-arg(reduce))>
-endif
 return
+
+
+// safely reduces the stamina
+// returns 1 if the stamina has been reduced
+//         0 if the stamina was left intact (only happens if 1 is passed as 2nd parameter)
+[function reduceStamina] //argv(0): amount of stamina that is wanted to be reduced ; argv(1) - pass 1 if the reduction should be ingored in case there isn't enough stamina left
+reduceStatResource("Stamina","staminy",<argv(0)>,<argv(1)>)
+
+// safely reduces the mana
+// returns 1 if the stamina has been reduced
+//         0 if the stamina was left intact (only happens if 1 is passed as 2nd parameter)
+[function reduceMana] //argv(0): amount of stamina that is wanted to be reduced ; argv(1) - pass 1 if the reduction should be ingored in case there isn't enough stamina left
+reduceStatResource("Mana","many",<argv(0)>,<argv(1)>)
+
+[function reduceStatResource]
+if (ischar)
+  arg(reduce,<eval argv(2)>)
+  arg(current,<eval <argv(0)>>)
+  if (<arg(reduce)> > <arg(current)>)
+    if (<eval argv(3)>)
+      if (isPlayer)
+        redMessage("Nemas dost <argv(1)>.")
+      endif
+      return 0
+    endif
+    <argv(0)>=0
+    return 1
+  endif
+  <argv(0)>=<eval (<eval argv(0)>-arg(reduce))>
+  return 1
+endif
+return 0
 
 /////////////////////////////////////////////////
 // L I N K S   A D D I N G   F R A M E W O R K //
@@ -7257,36 +7319,6 @@ if(((profession==class_war)||(profession==class_thief)||profession==class_ranger
     events +e_manaleech
   endif
 endif
-//arg(i,1)
-//arg(pos_e_class,0)
-//arg(pos_e_hitsleech,0)
-//if (<profession>==class_war)
-//  arg(event_class_name,"e_war")
-//elseif (<profession>==class_thief)
-//  arg(event_class_name,"e_thief")
-//elseif (<profession>==class_ranger)
-//  arg(event_class_name,"e_ranger")
-//else
-//  return 1
-//endif
-
-//while(<arg(i)><=<argvcount>)
-//  arg(event_name,<return_nth(<arg(i)>,<argv>)>)
-//  if (strcmpi(<arg(event_name)>,<arg(event_class_name)>)==0)
-//    arg(pos_e_class,<arg(i)>)    
-//  elseif (strcmpi(<event_name>,"e_hitsleech")==0)
-//    arg(pos_e_hitsleech,<arg(i)>)    
-//  endif
-//  arg(i,#+1)
-//endwhile
-
-//ak je e_hitsleech skor ako e_war/e_thief tak hodime e_hitsleech na koniec
-//if ((<arg(pos_e_class)>!=0)&&(<arg(pos_e_hitsleech)>!=0))
-//  if (<arg(pos_e_class)>><arg(pos_e_hitsleech)>)
-//    events -e_hitsleech
-//    events +e_hitsleech
-//  endif
-//endif
 
 [function isInCity]
 if ((<strlen(<region.tag(housenumber)>)>) || (<strlen(<region.tag(jmeno_mesta)>)>)) 
@@ -7296,67 +7328,51 @@ else
 endif
 
 [function omraceni]
-//if (profession==class_war)||(profession==class_priest)||(profession==class_craft)
-//  if (<tag(ra_stuntattack_disabled)>)
-//    tag.remove(ra_stuntattack_disabled)
-//    src.sysMessage("Aktivuji omracujici uder")
-//  else
-//    tag(ra_stuntattack_disabled,1)
-//    src.sysMessage("Deaktivuji omracujici uder")
-//  endif
-//else
-//  src.sysMessage("Nemuzes pouzivat tuto abilitu.")
-//endif
-if (profession==class_war)||(profession==class_priest)||(profession==class_craft)
-if (<stam><40)
-  sysMessage("Tohle ted nedokazes...")
+if (profession!=class_war)&&(profession!=class_priest)&&(profession!=class_craft)
+  sysmessage("Tohle neni pro tebe")
   return 1
 endif
 if !(tag(omraceni_next))
-	tag(omraceni_next,0)
+  tag(omraceni_next,0)
 endif
 if (<tag(omraceni_next)> > <serv.time>)
   classMessage("Abilitu jeste nemuzes pouzit.")
   return 1
-endif
-if !(tag(ra_stuntattack))
-	sysmessage("Tohle nedokazes")
-	return 1	
+elseif !(tag(ra_stuntattack))
+  sysmessage("Tohle nedokazes")
+  return 1	
 elseif (<tag(ra_stuntattack)> == 0)
-	sysmessage("Tohle nedokazes")
-	return 1
+  sysmessage("Tohle nedokazes")
+  return 1
 endif
+
 if (<tag(ra_stuntattack)> > 10)
-	arg(sanca,10)
+  arg(sanca,10)
 else
-	arg(sanca,<tag(ra_stuntattack)>)
+  arg(sanca,<tag(ra_stuntattack)>)
 endif
 
-if (chance(<arg(sanca)>,1))
-	arg(prodleva,200)
-	if (tag(ra_stuntattack_prodleva))
-		if  (<tag(ra_stuntattack_prodleva)> > 9) && (<tag(ra_stuntattack_prodleva)> < 20)
-			arg(prodleva,170)
-		elseif (<tag(ra_stuntattack_prodleva)> > 19) && (<tag(ra_stuntattack_prodleva)> < 30)
-			arg(prodleva,140)
-		elseif (<tag(ra_stuntattack_prodleva)> == 30)
-			arg(prodleva,110)
-		endif
-	endif
+if (!chance(<arg(sanca)>,1))
+  reduceStamina(10)
+  sysmessage("Nepodarilo se ti pripravit omracujici uder!")
+  return 1
+endif
 
-  reduceStamina(40)
-
+if (reduceStamina(40,1))
   tag(zmrazeni,1)
+  if (<eval tag(ra_stuntattack_prodleva)> < 10)
+    arg(prodleva,200)
+  elseif (<tag(ra_stuntattack_prodleva)> < 20)
+    arg(prodleva,170)
+  elseif (<tag(ra_stuntattack_prodleva)> < 30)
+    arg(prodleva,140)
+  else
+    arg(prodleva,110)
+  endif
   sysmessage("Muzes zasadit omracujici uder!")
-
-	//say("serv time: <serv.time>, prodleva: <arg(prodleva)>, spolu: <eval <serv.time>+<arg(prodleva)>>")
   tag(omraceni_next,<eval <serv.time>+<arg(prodleva)>>)
 else
-	sysmessage("Nepodarilo sa ti pripravit omracujici uder!")
-endif
-else
-	sysmessage("Tohle neni pro tebe")
-  return 1
+  tag(omraceni_next,<eval <serv.time>+50>)
 endif
 
 [function attack_is_physical]
@@ -7414,17 +7430,6 @@ if (<hits> > 0)
   endif
   show_damage_and_hitpoints(<healed_amount>,1)
 endif
-
-[function canReachNPC] // argv(0) - NPC UID
-if (isGM)
-  return 1
-elseif (f_qIsDead)
-  return 0
-elseif (argv(0).distance > 3)
-  src.sysMessage("<argv(0).name> je prilis daleko.")
-  return 0
-endif
-return 1
 
 
 [eof]

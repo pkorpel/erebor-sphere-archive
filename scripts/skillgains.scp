@@ -102,6 +102,7 @@ controlnpc
 standcast
 knockback
 roundattack
+strike
 longrange
 throw
 throwexplosion
