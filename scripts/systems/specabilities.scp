@@ -526,7 +526,6 @@ endif
 
 [Function backstab]
 if ( (holdsTwoHand(i_war_fork,01405)) || !(safe.findid(i_stealthbonus)) )
-  classMessage("nedrzis pero v ruce")
   return 1
 elseif (profession!=class_thief)
   classMessage("Tato funkce neni urcena pro tebe.")
