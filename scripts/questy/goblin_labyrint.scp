@@ -746,7 +746,7 @@ enddo
 
 [function f_goblin_treasure_evaluate]
 if (<eval act> > 0)  // bez toho hazi errory, kdyz zemre monstrum samovolne, act je pak 0
-  if ((act.isplayer) || (act.issumon) || (act.ispet))  // zabite hracem, petem a nebo sumonem  
+  if ((act.isplayer) || (act.issummon) || (act.ispet))  // zabite hracem, petem a nebo sumonem  
     if ((isDung) && (<eval tag(experience)> > 0)) // v dungach, nesumon a neressnute monstrum
       def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters,#+<eval tag(experience)>)  // pocitadlo monster zabitych v dungach
       if (<eval def_goblin_labyrint_memory_stone.tag(killed_dungeon_monsters)> >= def_goblin_treasure_monsters_to_kill)  // Bylo v dungu hracem zabita monstra za 500k expu

@@ -129,7 +129,7 @@ else
     if (strlen(<finduid(<more2>).tag(myid)>))
      tag(myid,<finduid(<more2>).tag(myid)>)
     endif
-    if (finduid(<more2>).issumon)
+    if (finduid(<more2>).isSummon)
       cont.newitemsafe(i_summonmountremover)
       lastnew.timer=600
       cont.equip(<lastnew>)

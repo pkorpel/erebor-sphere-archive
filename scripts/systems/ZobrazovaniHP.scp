@@ -22,13 +22,16 @@ else                   // je to dmg
   arg(ch,"-")
 endif
 
-arg(hitpoints_changePerc,"<CalcDecimalNumber(<eval (<arg(hitpoint_changeAmount)>*100)>,<eval (<MaxHits>)>,2)>")       // jak velka zmena byla
-arg(hitpoints,"<eval ((<eval <Hits>-<arg(damage)>>*100)/(<MaxHits>))>")  // stav hp po rane/healu
+arg(hitpoints_changePerc_compact,"<eval (<eval (<arg(hitpoint_changeAmount)>*100)>/(<MaxHits>))>")       // jak velka zmena byla v celych %
+arg(hitpoints_changePerc,"<CalcDecimalNumber(<eval (<arg(hitpoint_changeAmount)>*100)>,<eval (<MaxHits>)>,2)>")       // jak velka zmena byla vcetne des. mist
+arg(hitpoints_compact,"<eval ((<eval <Hits>-<arg(damage)>>*100)/(<MaxHits>))>")  // stav hp po rane/healu
 
-arg(message_color,<hitpoints_color(<arg(hitpoints)>)>)                            // barva textu dle aktualniho stavu hp (z celych %)
-arg(message_colorBlind,<hitpoints_colorBlind(<arg(hitpoints)>)>)                  // ColorBlind barva textu dle aktualniho stavu hp (z celych %)
+arg(message_color,<hitpoints_color(<arg(hitpoints_compact)>)>)                            // barva textu dle aktualniho stavu hp (z celych %)
+arg(message_colorBlind,<hitpoints_colorBlind(<arg(hitpoints_compact)>)>)                  // ColorBlind barva textu dle aktualniho stavu hp (z celych %)
 if !(<eval <Hits>-<arg(damage)>> == <MaxHits>)  // aby se zbytecne nepocitalo desetine misto, kdyz vime, ze ma full zivoty
   arg(hitpoints,"<CalcDecimalNumber(<eval ((<Hits>-<arg(damage)>)*100)>,<eval (<MaxHits>)>,2)>")
+else
+  arg(hitpoints,<hitpoints_compact>)
 endif
 
 newitemsafe(i_show_hitpoints)
@@ -39,6 +42,8 @@ lastnew.tag(message_colorBlind,<arg(message_colorBlind)>)
 lastnew.tag(ch,<arg(ch)>)
 lastnew.tag(hitpoints_changePerc,"<arg(hitpoints_changePerc)>")
 lastnew.tag(hitpoints,"<arg(hitpoints)>")
+lastnew.tag(hitpoints_changePerc_compact,"<arg(hitpoints_changePerc_compact)>")
+lastnew.tag(hitpoints_compact,"<arg(hitpoints_compact)>")
 lastnew.timerd=0
 
 
@@ -53,7 +58,11 @@ attr=090
 
 on=@timer
 if (<link.hits>)
-  sector.allclients(print_hitpoints(<tag(message_color)>,<tag(message_colorBlind)>,"<tag(ch)><tag(hitpoints_changePerc)>% [<tag(hitpoints)>%]",<link>))
+  if (link.isdung)
+    region.sectors.allclients(print_hitpoints(<tag(message_color)>,<tag(message_colorBlind)>,"<tag(ch)><tag(hitpoints_changePerc)>% [<tag(hitpoints)>%]",<link>,"<tag(ch)><tag(hitpoints_changePerc_compact)> [<tag(hitpoints_compact)>]"))
+  else
+    sector.allclients(print_hitpoints(<tag(message_color)>,<tag(message_colorBlind)>,"<tag(ch)><tag(hitpoints_changePerc)>% [<tag(hitpoints)>%]",<link>,"<tag(ch)><tag(hitpoints_changePerc_compact)> [<tag(hitpoints_compact)>]"))
+  endif
 endif
 
 
@@ -66,17 +75,17 @@ if (isgm)   // GM zobrazovat HP nebudou
   return
 endif
 
-arg(hitpoints,<eval ((<Hits>*100)/(<MaxHits>))>)
-
-arg(message_colorBlind,<hitpoints_colorBlind(<arg(hitpoints)>)>)
-arg(message_color,<hitpoints_color(<arg(hitpoints)>)>)
-
+arg(hitpoints_compact,<eval ((<Hits>*100)/(<MaxHits>))>)
+arg(message_colorBlind,<hitpoints_colorBlind(<arg(hitpoints_compact)>)>)
+arg(message_color,<hitpoints_color(<arg(hitpoints_compact)>)>)
 
 if !(<Hits> == <MaxHits>)  // aby se zbytecne nepocitalo desetine misto, kdyz vime, ze ma full zivoty
   arg(hitpoints,"<CalcDecimalNumber(<eval ((<Hits>)*100)>,<eval (<MaxHits>)>,2)>")
+else
+  arg(hitpoints,<hitpoints_compact>)
 endif
 
-src.print_hitpoints(<arg(message_color)>,<arg(message_colorBlind)>,"[<arg(hitpoints)>%]",<uid>)
+src.print_hitpoints(<arg(message_color)>,<arg(message_colorBlind)>,"[<arg(hitpoints)>%]",<uid>,"[<arg(hitpoints_compact)>]")
 
 
 [function hitpoints_color]   // argv(0) - hitpoints
@@ -111,22 +120,57 @@ elseif (<argv(0)> >= 0)
   return 020
 endif
 
-[function print_hitpoints]   // argv(0) - colored print; argv(1) - colorBlinded print; argv(2) - Text to print; argv(3) - uid(who print hitpoints)
 
+[function print_hitpoints]   // argv(0) - colored print; argv(1) - colorBlinded print; argv(2) - Text to print; argv(3) - uid(who print hitpoints);  argv(4) - Compact Text to print;
 if (<eval tag(HPsight_timer)> < <serv.time>) && !(isGM)
   return
 endif
 if !(<eval tag(HPsight_ON)>)  // Ma vypnute zobrazovani HP
   return
 endif
+if (<eval tag(HPsight_PersonalOption)>)   // Ma aktivni nejake osobni nastaveni zobrazovani
+  arg(isMyFriend,<argv(3).isMyFriend>)
+  if (!(<eval tag(HPsight_Friend)>) && (<arg(isMyFriend)>))       // je to muj pritel a nechci ho zobrazovat
+    return
+  endif
+  if (!(<eval tag(HPsight_Enemy)>) && !(<arg(isMyFriend)>))       // je to muj nepritel a nechci ho zobrazovat
+    return
+  endif
+  if (!(<eval tag(HPsight_NPC)>) && (<argv(3).NPC>))            // je to NPC a nechci ho zobrazovat
+    return
+  endif
+  if (!(<eval tag(HPsight_Player)>) && (<argv(3).isPlayer>))            // je to Hrac a nechci ho zobrazovat
+    return
+  endif
+  if (!(<eval tag(HPsight_PetSummon)>) && ((<argv(3).isPet>) || (<argv(3).isSummon>)))    // je to Pet nebo Summon a nechci ho zobrazovat
+    return
+  endif
+endif
+
 if (<distancefrom(<argv(3)>)> > 18)   // omezeny dosah videni hp
   return
 endif
-arg(length,<eval (<strlen("<argv(2)>")>+45)>)
+if (<eval tag(HPsight_ColorByTarget)>)  // ma aktivni barvu podle typu cile, budu menit barvu.
+  if (<argv(3)> == <uid>)               // je to ta sama osoba
+    arg(colorToPrint,035)               // zluta barva
+  else
+    arg(colorToPrint,<argv(3).getNameHue>)      // barva podle toho o koho se jedna (Nazghul,Mordor,Gondor,Criminal,Vlastni Guilda)
+  endif
+else
+  arg(colorToPrint,<argv(<eval tag(HPsight_ColorBlind)>)>)
+endif
+
+if (<eval tag(HPsight_Compact)>)  // ma aktivni kompaktni mod, beru tedy k printu jiny string
+  arg(textToPrint,"<argv(4)>")
+else
+  arg(textToPrint,"<argv(2)>")
+endif
+
+arg(length,<eval (<strlen("<arg(textToPrint)>")>+45)>)
 if (arg(length) > <eval (83+45)>)
   arg(length,<eval (83+45)>)
-endif
-sendpacket(01c <split2bytes(<arg(length)>)> <hval (<argv(3)>&0ff000000)/01000000> <hval (<argv(3)>&0ff0000)/010000> <hval (<argv(3)>&0ff00)/0100> <hval <argv(3)>&0ff> 00 00 03 <hval (<argv(<eval tag(HPsight_ColorBlind)>)>&0ff00)/0ff> <hval <argv(<eval tag(HPsight_ColorBlind)>)>&0ff> 00 03 <?strtoascii(30,"<argv(3).name>")?> <?strtoascii((<length>-45),"<argv(2)>")?> 00)
+endif                         
+sendpacket(01c <split2bytes(<arg(length)>)> <hval (<argv(3)>&0ff000000)/01000000> <hval (<argv(3)>&0ff0000)/010000> <hval (<argv(3)>&0ff00)/0100> <hval <argv(3)>&0ff> 00 00 03 <hval (<arg(colorToPrint)>&0ff00)/0ff> <hval <arg(colorToPrint)>&0ff> 00 03 <?strtoascii(30,"<argv(3).name>")?> <?strtoascii((<length>-45),"<arg(textToPrint)>")?> 00)
 
 
 [function CalcDecimalNumber]   // argv(0) - delenec; argv(1) - delitel; argv(2) - pocet desetinych mist
@@ -169,5 +213,13 @@ if (<eval tag(HPsight_timer)> < <serv.time>)
 else
   tag(HPsight_timer,<eval (<tag(HPsight_timer)>+<nastaveni_potions_i_potion_<argv(0)>>)>)     // pokud ma jiz aktivni, prodlouzime dobu o patricnou dobu
 endif
+
+
+[function HPsight_PersonalOption]      // soucet podkategorii Osobniho nastaveni urcuje, jestli je aktivni nebo ne
+tag(HPsight_PersonalOption,<eval (<eval tag(HPsight_Friend)>+<eval tag(HPsight_Enemy)>+<eval tag(HPsight_NPC)>+<eval tag(HPsight_Player)>+<eval tag(HPsight_PetSummon)>)>)
+if (<eval tag(HPsight_PersonalOption)> == 5)  // kdyz ma vsechny kategorie aktivni, chova se stejne jako by nemel zadnou kategorii aktivni
+  tag(HPsight_PersonalOption,0)
+endif
+freetag(HPsight_PersonalOption)
 
 [eof]

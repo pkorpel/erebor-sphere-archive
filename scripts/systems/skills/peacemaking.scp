@@ -33,7 +33,7 @@ return 1
 
 on=@targon_char
 link=<src.targ.uid>
-if (<link.npc>==0)||(<link.peacemaking>)||(link.issumon)
+if (<link.npc>==0)||(<link.peacemaking>)||(link.isSummon)
  cont.sysmessage(Tohle nemuzes uklidnit.)
  remove
  return 1

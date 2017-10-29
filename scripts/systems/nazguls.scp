@@ -998,7 +998,7 @@ if(<src>==<src.targ>)
  remove
  return 1
 endif
-if(!src.targ.isplayer && !src.targ.issumon)
+if(!src.targ.isplayer && !src.targ.isSummon)
  src.sysmessage(Straze lze poslat jen na hrace a jejich summony)
 endif
 if(src.isnazgul)||(src.isgm) 

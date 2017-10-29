@@ -1676,7 +1676,7 @@ if (<strlen(<tag(lastmurderbyf)>)>)
         endif
       endif
     endif
-  elseif (<findUID(<tag(lastmurderbyf)>).issumon>)
+  elseif (<findUID(<tag(lastmurderbyf)>).isSummon>)
     arg(killedByPlr,<tag(lastmurderbyf).memoryfindtype(memory_ipet).link>)
     if (<arg(killedByPlr)> != <uid>)
       if (<tag(level)> > <arg(killedByPlr).tag(level)>)

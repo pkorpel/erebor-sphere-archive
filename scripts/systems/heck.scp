@@ -548,54 +548,110 @@ src.tag(boostyxy,<f_boostyxyX(<src.tag.boostyxy>)>,<f_boostyxyY(<src.tag.boostyx
 [dialog d_boosty_HPsight]
 argo.setlocation=5,5
 argo.page(0)
-argo.resizepic(20,20,3000,150,23+(15*<d_def_radek_vyska>))
-if (<eval tag(HPsight_timer)> < <serv.time>)
-  tag(HPsight_ON,0)
-endif
+argo.resizepic(20,20,3000,385,23+(12*<d_def_radek_vyska>))
+
 argo.textA(50,20,<def_questDialog_colorResponse>,"Zobrazovani HP")
-argo.textA(50,75,<def_questDialog_colorResponse>,"ON/OFF - ")
-argo.textA(25,98,<def_questDialog_colorResponse>,"Barvoslepy mod - ")
-argo.gumppic(60,175,0350E)
-
-if (<eval tag(HPsight_ON)>)
-  argo.textA(75,43,<def_questDialog_colorResponse>,"Zapnute")
-  argo.textA(75,135,020,"Troll")
-  if (<eval tag(HPsight_ColorBlind)>)
-    argo.button(135,67,0869,086a,1,0,1) 
-    argo.textA(70,155,<eval (<hitpoints_colorBlind(100)>-1)>,"[100%]")
-  else
-    argo.button(135,67,0869,086a,1,0,1) 
-    argo.textA(70,155,<eval (<hitpoints_color(100)>-1)>,"[100%]")
-  endif
-else
-  argo.textA(75,43,<def_questDialog_colorResponse>,"Vypnute") 
-  argo.button(135,67,0867,0868,1,0,2)
-  argo.textA(75,155,020,"Troll")
-endif
-
-if (<eval tag(HPsight_ColorBlind)>)
-  argo.button(135,92,0869,086a,1,0,3)
-else
-  argo.button(135,92,0867,0868,1,0,4)
-endif
+argo.textA(50,45,<def_questDialog_colorResponse>,"ON/OFF")
+argo.textA(200,30,<def_questDialog_colorResponse>,"Kompaktni mod")
+argo.textA(200,55,<def_questDialog_colorResponse>,"Barvy podle NPC")
+argo.textA(200,80,<def_questDialog_colorResponse>,"Barvoslepy mod")
+argo.textA(200,95,<def_questDialog_colorResponse>,"_______________")
+argo.gumppic(70,125,0350E)
 
 if (<eval tag(HPsight_timer)> > <serv.time>)
-  argo.textA(75,277,200,"Aktivni:")
-  argo.textA(50,300,200,<dsToRTime(<eval (tag(HPsight_timer)-<serv.time>)>,1)>)
+  argo.textA(75,225,200,"Aktivni:")
+  argo.textA(50,248,200,<dsToRTime(<eval (tag(HPsight_timer)-<serv.time>)>,1)>)
 else
-  argo.textA(50,277,022,"Neaktivni, vypij")
-  argo.textA(50,300,022,"lektvar vnimani")
+  argo.textA(50,225,022,"Neaktivni, vypij")
+  argo.textA(50,248,022,"lektvar vnimani")
+  tag(HPsight_ON,0)
 endif
+
+if (<eval tag(HPsight_ON)>)
+  if (<eval tag(HPsight_Compact)>)
+    arg(TextPrint," [100]")
+  else
+    arg(TextPrint,"[100%]")
+  endif  
+  argo.textA(85,75,020,"Troll")
+  if (<eval tag(HPsight_ColorByTarget)>)  
+    argo.textA(80,95,020,<arg(TextPrint)>)
+  elseif (<eval tag(HPsight_ColorBlind)>)
+    argo.textA(80,95,<eval (<hitpoints_colorBlind(100)>-1)>,<arg(TextPrint)>)
+  else
+    argo.textA(80,95,<eval (<hitpoints_color(100)>-1)>,<arg(TextPrint)>)
+  endif
+  argo.button(150,42,0869,086a,1,0,1) 
+else
+  argo.button(150,42,0867,0868,1,0,2)
+  argo.textA(85,95,020,"Troll")
+endif
+
+if (<eval tag(HPsight_Compact)>)
+  argo.button(330,27,0869,086a,1,0,15)
+else
+  argo.button(330,27,0867,0868,1,0,16)
+endif
+if (<eval tag(HPsight_ColorByTarget)>)
+  argo.button(330,52,0869,086a,1,0,17)
+else
+  argo.button(330,52,0867,0868,1,0,18)
+endif
+if (<eval tag(HPsight_ColorBlind)>)
+  argo.button(330,77,0869,086a,1,0,3)
+else
+  argo.button(330,77,0867,0868,1,0,4)
+endif
+
+if (<eval tag(HPsight_PersonalOption)>) 
+  argo.textA(200,115,<def_questDialog_colorResponse>,"Zobrazovani dle skupin:")
+else
+  argo.textA(200,115,<def_questDialog_colorResponse>,"Zobrazovani vsech cilu:")
+endif
+
+argo.textA(200,140,<def_questDialog_colorResponse>,"Pratele")
+argo.textA(200,165,<def_questDialog_colorResponse>,"Nepratele")
+argo.textA(200,190,<def_questDialog_colorResponse>,"Hrace")
+argo.textA(200,215,<def_questDialog_colorResponse>,"NPC")
+argo.textA(200,240,<def_questDialog_colorResponse>,"Sumoni/Peti")
+if (<eval tag(HPsight_Friend)>)
+  argo.button(330,137,0869,086a,1,0,5)
+else
+  argo.button(330,137,0867,0868,1,0,6)
+endif
+if (<eval tag(HPsight_Enemy)>)
+  argo.button(330,162,0869,086a,1,0,7)
+else
+  argo.button(330,162,0867,0868,1,0,8)
+endif
+if (<eval tag(HPsight_Player)>)
+  argo.button(330,187,0869,086a,1,0,9)
+else
+  argo.button(330,187,0867,0868,1,0,10)
+endif
+if (<eval tag(HPsight_NPC)>)
+  argo.button(330,212,0869,086a,1,0,11)
+else
+  argo.button(330,212,0867,0868,1,0,12)
+endif
+if (<eval tag(HPsight_PetSummon)>)
+  argo.button(330,237,0869,086a,1,0,13)
+else
+  argo.button(330,237,0867,0868,1,0,14)
+endif
+
 
 arg(j,0)
 while (<j><=20)
-  if (<eval tag(HPsight_ColorBlind)>)
+  if (<eval tag(HPsight_ColorByTarget)>) 
+    arg(barva,020) 
+  elseif (<eval tag(HPsight_ColorBlind)>)
     arg(barva,<eval (<hitpoints_colorBlind(<j>*5)>-1)>)
   else
     arg(barva,<eval (<hitpoints_color(<j>*5)>-1)>)
   endif
   if (<j>>0)
-    argo.newTextLine(40,260-<j>*4,<barva>,"_")
+    argo.textA(40,210-<j>*4,<barva>,"_")
   endif
   arg(j,#+1)
 endwhile
@@ -616,11 +672,77 @@ tag(HPsight_ON,1)
 dialog(d_boosty_HPsight)
 
 on=3
-tag(HPsight_ColorBlind,0)
+tag(HPsight_ColorBlind,"")
 dialog(d_boosty_HPsight)
 
 on=4
 tag(HPsight_ColorBlind,1)
+dialog(d_boosty_HPsight)
+
+on=5
+tag(HPsight_Friend,"")
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=6
+tag(HPsight_Friend,1)
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=7
+tag(HPsight_Enemy,"")
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=8
+tag(HPsight_Enemy,1)
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=9
+tag(HPsight_Player,"")
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=10
+tag(HPsight_Player,1)
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=11
+tag(HPsight_NPC,"")
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=12
+tag(HPsight_NPC,1)
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=13
+tag(HPsight_PetSummon,"")
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=14
+tag(HPsight_PetSummon,1)
+HPsight_PersonalOption
+dialog(d_boosty_HPsight)
+
+on=15
+tag(HPsight_Compact,"")
+dialog(d_boosty_HPsight)
+
+on=16
+tag(HPsight_Compact,1)
+dialog(d_boosty_HPsight)
+
+on=17
+tag(HPsight_ColorByTarget,"")
+dialog(d_boosty_HPsight)
+
+on=18
+tag(HPsight_ColorByTarget,1)
 dialog(d_boosty_HPsight)
 
 /////////////boosty timer - item//////////////////
