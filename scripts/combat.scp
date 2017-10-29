@@ -297,24 +297,19 @@ damage_final(<src>)
 [function f_thief_applyrebound]
 if !(<src.isplayer>)
   if (<var(is_physical)>)
-    if (<eval tag(ra_thief_rebound)> > 0)
-      if (findlayer(layer_hand1))
-      if (findlayer(layer_hand1).dispid == i_kryss)||(findlayer(layer_hand1).dispid == 01401)
+    if (<eval tag(ra_thief_rebound)>)
+      if (holdsOneHand(i_kryss,01401))
         arg(chance,100)
-      elseif (findlayer(layer_hand1).dispid == i_scimitar)||(findlayer(layer_hand1).dispid == 013B6)
+      elseif (holdsOneHand(i_scimitar,013B6))
         arg(chance,50)
-      elseif (findlayer(layer_hand1).dispid == i_cutlass)||(findlayer(layer_hand1).dispid == 01441)
+      elseif (holdsOneHand(i_cutlass,01441))
         arg(chance,150)
       else
         return 0
       endif
       arg(chance,<eval <arg(chance)>+<eval <tag(ra_thief_rebound)>*5>>)
-      if (tag(vigilance))
-        if (<tag(vigilance)> == 1)
-          arg(chance,<eval <arg(chance)>*<eval 10+<tag(ra_thief_defstance)>>>)
-        else
-          arg(chance,<eval <arg(chance)>*10>)
-        endif
+      if (<eval tag(vigilance)>)
+        arg(chance,<eval <arg(chance)>*<eval 10+<tag(ra_thief_defstance)>>>)
       else
         arg(chance,<eval <arg(chance)>*10>)
       endif
@@ -322,11 +317,12 @@ if !(<src.isplayer>)
         src.damage_noresponse(<var(ubrano)>,<var(damage_flags)>,<uid>)
         var(ubrano,0)
         classmessage("Odrazil jsi uder!")
-      endif
+        return 1
       endif
     endif
   endif
 endif
+return 0
 
 [function f_dmgFinal_applyReactiveAR]
 if (flag_reactive)   //edited by heck - kolko absorbuje a vrati zavisi na nastaveni a armoru (tag.armorCount)
@@ -418,6 +414,43 @@ if (src.npc)
     endif
   endif
 endif
+if (<eval tag(mi_meleeblock)> > {0 99})
+  if (src.isfighting_melee)
+    classmessage("Uder magicky zastaven")
+    src.redmessage("Uder magicky zastaven")
+    var(ubrano,0)
+    return 1
+  endif
+endif
+if (<eval tag(mi_rangedblock)> > {0 99})
+  if (src.isfighting_ranged)
+    classmessage("Uder magicky zastaven")
+    src.redmessage("Uder magicky zastaven")
+    var(ubrano,0)
+    return 1
+  endif
+endif
+if (<eval tag(mi_meleereflex)> > {0 99})
+  if (src.isfighting_melee)
+    src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
+    classmessage("Uder magicky odrazen")
+    src.redmessage("Uder magicky odrazen")
+    var(ubrano,0)
+    return 1
+  endif
+endif
+if (<eval tag(mi_rangedreflex)> > {0 99})
+  if (src.isfighting_ranged)
+    src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
+    classmessage("Uder magicky odrazen")
+    src.redmessage("Uder magicky odrazen")
+    var(ubrano,0)
+    return 1
+  endif
+endif
+if (<f_thief_applyrebound>)
+  return 1
+endif
 return 0
 
 //supprot function, tells, whether the last attacked target
@@ -463,7 +496,6 @@ f_dmgFinal_MvM_minimalDMG
 f_dmgFinal_PvX_minimalDMG
 
 if (<var(ubrano)> > 0)
-  f_thief_applyrebound
   f_dmgFinal_applyReactiveAR
   f_addAllFightsForChar(<src>)
   dmgHits(<var(ubrano)>)
