@@ -958,7 +958,7 @@ elseif (<eval tag(nextrangearrow)> > <serv.time>)
   src.sysMessage("Jeste nelze pouzit.")
   tag(nextrangearrow,<eval (<serv.time>+(nastaveni_knockback_delay*10))>)
   return
-elseif (!reduceStamina(25,1)) // this one MUST be last!
+elseif (!reduceStamina(25,1) // this one MUST be last!
   return
 endif
 src.sysMessage("Ucinek tve strelby je drtivy.")

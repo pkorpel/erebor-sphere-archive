@@ -992,40 +992,36 @@ var(nastaveni_guardian_uid).p=<P>
 var(nastaveni_guardian_uid).removefromview
 
 [function f_shieldDodge_afterGetSwing]
-if (<var(dodged)>)
-  return
+if (<var(dodged)>!=1) && (tag(ra_vykryti))
+  if (<tag(ra_vykryti)> > {1 99}) && !(src.isplayer) && (src.isfighting_melee)
+    if (findlayer(2))
+      if (findlayer(2).type==t_shield)  //podminka jenom na shield je spolehlivejsi. Ostatni byly zbytecne - kazdy shield ma 2 dispID (otoceni na 2 strany) - pak nereaguje
+        if ((<findlayer(2).typedef.tdata1>)==1)
+          var(ubrano,<eval (var(ubrano)*85)/100>)
+          classmessage("<sex Vykryl Vykryla> jsi uder stitem.")
+        elseif ((findlayer(2).typedef.tdata1)==2)
+          var(ubrano,<eval (var(ubrano)*80)/100>)
+          classmessage("<sex Vykryl Vykryla> jsi uder stitem.")
+        elseif ((findlayer(2).typedef.tdata1)==5)
+          var(ubrano,<eval (var(ubrano)*75)/100>)
+          classmessage("<sex Vykryl Vykryla> jsi uder stitem.")
+        elseif ((findlayer(2).typedef.tdata1)==6)
+          var(ubrano,<eval (var(ubrano)*70)/100>)
+          classmessage("<sex Vykryl Vykryla> jsi uder stitem.")
+        elseif ((findlayer(2).typedef.tdata1)==7)
+          var(ubrano,<eval (var(ubrano)*65)/100>)
+          classmessage("<sex Vykryl Vykryla> jsi uder stitem.")
+        elseif ((findlayer(2).typedef.tdata1)==8)
+          var(ubrano,<eval (var(ubrano)*60)/100>)
+          classmessage("<sex Vykryl Vykryla> jsi uder stitem.")
+        elseif ((findlayer(2).typedef.tdata1)==9)
+          var(ubrano,<eval (var(ubrano)*50)/100>)
+          classmessage("<sex Vykryl Vykryla> jsi uder stitem.")
+        endif
+      endif
+    endif
+  endif
 endif
-if ((src.isplayer) || !(src.isfighting_melee))
-  return
-endif
-if !(<eval tag(ra_vykryti)> > {1 99})
-  return
-endif
-if !(findlayer(2))
-  return
-endif
-if !(findlayer(2).type==t_shield)  //podminka jenom na shield je spolehlivejsi. Ostatni byly zbytecne - kazdy shield ma 2 dispID (otoceni na 2 strany) - pak nereaguje
-  return
-endif
-arg(ShieldMaterial,<findlayer(2).typedef.tdata1>)          // pozn. tdata1 = 3 je silver a 4ka je golden
-if (<arg(ShieldMaterial)> == 1)                            // copper
-  var(ubrano,<eval (var(ubrano)*85)/100>)
-elseif (<arg(ShieldMaterial)> == 2)                        // iron
-  var(ubrano,<eval (var(ubrano)*80)/100>)
-elseif (<arg(ShieldMaterial)> == 5)                        // verite
-  var(ubrano,<eval (var(ubrano)*75)/100>)
-elseif (<arg(ShieldMaterial)> == 6)                        // valorite
-  var(ubrano,<eval (var(ubrano)*70)/100>)
-elseif (<arg(ShieldMaterial)> == 7)                        // obsidian
-  var(ubrano,<eval (var(ubrano)*65)/100>)
-elseif (<arg(ShieldMaterial)> == 8)                        // adamantinum
-  var(ubrano,<eval (var(ubrano)*60)/100>)
-elseif (<arg(ShieldMaterial)> == 9)                        // mithril
-  var(ubrano,<eval (var(ubrano)*50)/100>)
-else
-  return
-endif
-classmessage("<sex(Vykryl,Vykryla)> jsi uder stitem.")
 
 [events e_gethit]
 on=@gethit

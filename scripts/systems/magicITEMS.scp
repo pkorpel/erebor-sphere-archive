@@ -748,6 +748,14 @@ endif
 return 0
 [events e_meleereflex]
 on=@aftergetswing
+if (tag(mi_meleereflex)>{0 99})
+  if (src.isfighting_melee)
+    src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
+    classmessage("Uder magicky odrazen")
+    src.redmessage("Uder magicky odrazen")
+    var(ubrano,0)
+  endif
+endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
@@ -773,6 +781,15 @@ endif
 return 0
 [events e_rangedreflex]
 on=@aftergetswing
+arg(random,<eval({0 99})>)
+if (tag(mi_rangedreflex)><arg(random)>)
+  if (src.isfighting_ranged)
+    src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
+    classmessage("Uder magicky odrazen")
+    src.redmessage("Uder magicky odrazen")
+    var(ubrano,0)
+  endif
+endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
@@ -835,6 +852,14 @@ endif
 return 0
 [events e_meleeblock]
 on=@aftergetswing
+arg(random,<eval({0 99})>)
+if (tag(mi_meleeblock)><arg(random)>)
+  if (src.isfighting_melee)
+    classmessage("Uder magicky zastaven")
+    src.redmessage("Uder magicky zastaven")
+    var(ubrano,0)
+  endif
+endif
 on=@beforegetswing
 on=@beforegeteffect
 on=@beforedoeffect
@@ -860,6 +885,14 @@ endif
 return 0
 [events e_rangedblock]
 on=@aftergetswing
+arg(random,<eval({0 99})>)
+if (tag(mi_rangedblock)><arg(random)>)
+  if (src.isfighting_ranged)
+    classmessage("Uder magicky zastaven")
+    src.redmessage("Uder magicky zastaven")
+    var(ubrano,0)
+  endif
+endif
 on=@beforegetswing
 on=@beforegeteffect
 on=@Created
