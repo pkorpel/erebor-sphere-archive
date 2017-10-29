@@ -1762,6 +1762,9 @@ name=zmizni
 type=t_eq_script
 layer=30
 
+on=@equip
+cont.tag(hypnotizable,0)     // monstra co se budou mazat nepujde hypnout
+
 on=@timer
 cont.remove
 return 0
