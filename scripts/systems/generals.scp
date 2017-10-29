@@ -759,7 +759,7 @@ if(<src>==<src.targ>)
  remove
  return 1
 endif
-if(!src.targ.isplayer && !src.targ.issumon)
+if(!src.targ.isplayer && !src.targ.issummon)
  src.sysmessage(Straze lze poslat jen na hrace a jejich summony)
 endif
 if(strcmpi(<src.region>,<finduid(<tag(mesto)>).region>))

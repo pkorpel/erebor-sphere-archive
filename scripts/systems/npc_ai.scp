@@ -434,7 +434,7 @@ on=@ReceiveItem
 say Hmm, <argo.name> nepotrebuju. To si racej strcit za klobouk, vasnosto.
 return 1
 
-[function issumon]
+[function isSummon]
 if (npc)
   if (flag_conjured)
     return 1
@@ -443,7 +443,7 @@ endif
 return 0
 
 [function removeAgressiveSummon]
-if (issumon)
+if (isSummon)
   if (obody==mage_horse_brown) || (obody==necro_horse_undead)
   else
     if (<strlen(<tag(isAnimated)>)>)// chyba(animate) -> savovanie
@@ -1555,7 +1555,7 @@ on=@finalBlow
 
 [events e_issumon]
 on=@step
-if (issumon)
+if (isSummon)
  events=-e_issumon
 else
  remove
@@ -1634,7 +1634,7 @@ on=@skillstroke
 if (act)
   if (isfighting)
     if (act.ischar)
-      if (act.issumon) //act is a summon, so the npc is going to attack its owner
+      if (act.isSummon) //act is a summon, so the npc is going to attack its owner
         if (!act.memoryfindtype(MEMORY_IPET).link.isinvis)
           if (!act.memoryfindtype(MEMORY_IPET).link.isdead) && (distancefrom(<act.memoryfindtype(MEMORY_IPET).link>)<4)
             p = <act.memoryfindtype(MEMORY_IPET).link.p>
@@ -1643,7 +1643,7 @@ if (act)
           endif
         endif
       endif
-      if (act.npc) && (!act.issumon) //ostatni NPCcka = smazat targety 
+      if (act.npc) && (!act.isSummon) //ostatni NPCcka = smazat targety 
         removememories
       endif  
     endif

@@ -29,7 +29,7 @@ endif
 if (argv(0).distance > 6) 
   src.sysmessage("Cil je moc daleko.")
   return
-elseif (argv(0).issumon)
+elseif (argv(0).isSummon)
   src.sysmessage("Nelze lecit summony.")
   return
 elseif !(argv(0).srccombatLOS) 

@@ -61,7 +61,7 @@ elseif (strcmpi(<act.type>,t_telepad2)==0)||(strcmpi(<act.type>,t_telepad)==0)
 endif
 
 on=@personalspace
-if !((isPet) || (isSumon)))
+if !((isPet) || (isSummon)))
   return
 endif
 if (<mapplane> == 2)
@@ -90,7 +90,7 @@ on=@afterDoEffect
 on=@beforegeteffect
 on=@stopguarding
 on=@spelleffect
-if (issumon) && (<argn> == 44)
+if (isSummon) && (<argn> == 44)
   hits=0
 endif
 if (<src>)

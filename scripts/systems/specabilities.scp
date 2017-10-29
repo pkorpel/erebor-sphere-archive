@@ -1883,7 +1883,7 @@ elseif (src.targ.animallore > <cont.animallore>)
   cont.redmessage("V mysli cile se nedokazes orientovat") 
   return 1
 endif
-if (src.targ.ispet)||(src.targ.issumon) 
+if (src.targ.ispet)||(src.targ.isSummon) 
   if (src.targ.srccansee)
     if (src.targ.distance>5)
       src.redmessage("Cil je prilis daleko.")
@@ -3504,7 +3504,7 @@ if (<more2>==0)
   elseif !(<topobj.action> == 0FFFFFFFF)
     cont.redMessage("<cont.sex(Prerusil,Prerusila)> jsi soustredeni.")
     remove
-  elseif (<link.issumon>)
+  elseif (<link.isSummon>)
     cont.classMessage("Cil nema vlastni talent.")
     remove
   elseif (<link.rescount i_buffStealNPC>)

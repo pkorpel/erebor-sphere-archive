@@ -115,7 +115,7 @@ lastnewchar.tag(duped,-1) //uz se nebude duplikovat
 [EVENTS e_summoneater]
 on=@HitTry
 //say hittry
-if(act.issumon) //cil je summon
+if(act.isSummon) //cil je summon
   //say je to summon!
   act.remove
   return 1
@@ -137,7 +137,7 @@ on=@npckill
 ////////
 [EVENTS e_summoneater_vamp]
 on=@hittry  // Vsude pridana kontrola na 30.000, jelikoz promenna ma maximum okolo 32,5k, potom pretece a monstrum bud bugne a nebo zemre.
-if(act.issumon) //cil je summon
+if(act.isSummon) //cil je summon
   arg(maxValue,30000)
   
   str=<f_actAssignMax("str",<maxValue>)>
@@ -469,7 +469,7 @@ if (isplayer)
     return 0
   endif
   newitemsafe(i_selfress_timer)
-elseif (issumon)
+elseif (isSummon)
   events=-e_necroslave
   return 0
 else //this is a monster, that makes it's victoms corpses become undead after death
