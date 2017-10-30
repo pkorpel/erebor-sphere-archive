@@ -134,6 +134,7 @@ scripts\systems\craftmenu\inscrip.scp
 scripts\systems\craftmenu\tinkering.scp
 //scripts\systems\craftmenu\cartography.scp	// there's nothing in it
 scripts\systems\jezditka.scp
+scripts\systems\resists.scp
 scripts\systems\class_info.scp
 scripts\systems\distanceSearcher.scp
 scripts\systems\variableGate.scp
