@@ -545,8 +545,6 @@ elseif (targ.distance>1)
 elseif (targ.z > (<z>+5)) || (targ.z < (<z>-5))//resi vysku
   sysMessage("Nedosahnes na cil.")
   return 1
-elseif (!reduceStamina(10,1))
-  return 1
 endif
 classMessage("Pripravujes se k bodnuti...")
 
@@ -578,36 +576,37 @@ on=@Equip
 if (src.action == -1)
   if (tag(tostab).srccombatLOS)
     if (tag(tostab).distance<2)
-     if (<cont.findid(i_stealthbonus).tag(hidetime)> > (<serv.time>))
-      cont.sysMessage("Nejsi dostatecne dlouho skryty!")
-      cont.tag.remove(isstabbing)
-      remove 
-      return 1
-     endif
+      if (<cont.findid(i_stealthbonus).tag(hidetime)> > (<serv.time>))
+        cont.sysMessage("Nejsi dostatecne dlouho <cont.sex(skryty,skryta)>!")
+        cont.tag.remove(isstabbing)
+        remove 
+        return 1
+      endif
+      if (cont.act == cont)
+        cont.sysMessage("Pokousis se probodnout <cont.sex(sam,sama)> sebe.")
+        cont.tag.remove(isstabbing)
+        remove 
+        return 1
+      endif
+      if (!reduceStamina(10,1))
+        remove
+        return 1
+      endif
       if (cont.act.isplayer)
-        if !(cont.act == cont)
-          if (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabP_chance)>eval({0 999}))
-            cont.combat_main_nonmystik
-            cont.tag.remove(isstabbing)
-            cont.findid(i_stealthbonus).remove
-            remove 
-            return 1
-          endif
-        else
-          cont.sysMessage("Pokousis se probodnout sam sebe.")
-          cont.tag.remove(isstabbing)
-          remove 
-          return 1
-        endif
-      else
-        if (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabM_chance)>eval({0 999}))
-          cont.tag(isstabbing, 1)
+        if (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabP_chance)>eval({0 999}))
           cont.combat_main_nonmystik
           cont.tag.remove(isstabbing)
           cont.findid(i_stealthbonus).remove
           remove 
           return 1
         endif
+      elseif (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabM_chance)>eval({0 999}))
+        cont.tag(isstabbing, 1)
+        cont.combat_main_nonmystik
+        cont.tag.remove(isstabbing)
+        cont.findid(i_stealthbonus).remove
+        remove 
+        return 1
       endif
       cont.sysMessage("Utok se nepovedl.")
     else
