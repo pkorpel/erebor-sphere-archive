@@ -19,6 +19,7 @@
 var(tst_suppress_successfull,"")
 tst_mistri
 tst_weekly
+tst_resists
 
 
 ////////////////////////////////////////////////////////////
@@ -27,6 +28,7 @@ tst_weekly
 [function tst_mistri]
 var(tst_suppress_successfull,!0<argv(0)>)
 test_mistr_craft_computeExp
+classMessage("MISTRI done")
 
 [function test_mistr_craft_computeExp]
 arg(orig_Lvl,<src.tag(level)>)
@@ -67,10 +69,460 @@ var(nastaveni_craftexp_gold,<arg(orig_nastaveni_craftexp_gold)>)
 ////////////////////////////////////////////////////////////
 [function tst_weekly]
 var(tst_suppress_successfull,!0<argv(0)>)
+test_weekly_remove
 test_weekly_setQuest
+classMessage("WEEKLY done")
 
 [function test_weekly_setQuest]
-f_weekly_setQuest(0,low)
-//f_weekly_setQuest(0,medium)
-//f_weekly_setQuest(0,high)
+test_weekly_setQuestForLevel(20,4)
+test_weekly_setQuestForLevel(30,4)
+test_weekly_setQuestForLevel(40,5)
+test_weekly_setQuestForLevel(59,5)
+test_weekly_setQuestForLevel(100,8)
+test_weekly_setQuestForLevel(190,8)
+
 tst_success("WEEKLY setQuest passed")
+
+[function test_weekly_setQuestForLevel] // argv(0) - level; argv(1) - expected number of quests
+tst_alterLvl(<argv(0)>)
+test_weekly_generate
+tst_restoreLvl
+arg(weekly,<findid(i_memory_weekly_quest)>)
+if !(strlen(<arg(weekly)>))
+  tst_error("Couldn't create the weekly item!")
+  return
+endif
+if (<weeklyTag(qCount)> != <argv(1)>)
+  tst_error("Incorrect amount of quests! -> level <argv(0)>; expected <argv(1)>, but was <weeklyTag(qCount)>.")
+endif
+weekly.f_weekly_increase(0,999999,1)
+test_weekly_remove
+
+// generate new set of weekly quests
+[function test_weekly_generate]
+newequip(i_memory_weekly_quest)
+
+// dump tags of the weekly quests
+[function test_weekly_dump]
+findid(i_memory_weekly_quest).tag.dump
+
+// remove weekly quests
+[function test_weekly_remove]
+findid(i_memory_weekly_quest).remove
+f_weekly_clearEvents
+
+// set expiracy time of an existing weekly quest to an expired date
+[function test_weekly_wte]
+weeklyTag(expiracyTime,555)
+
+// increase number of completed subtasks of a quest
+[function wti] // argv(0) qnumber
+arg(weekly,<findid(i_memory_weekly_quest)>)
+weekly.f_weekly_increase(<argv(0)>,10,1)
+
+[function wtii] // argv(0) qnumber //
+arg(weekly,<findid(i_memory_weekly_quest)>)
+weekly.f_weekly_increase(<argv(0)>,1000,1)
+
+////////////////////////////////////////////////////////////
+// FILE:  resists.scp
+////////////////////////////////////////////////////////////
+
+[function tst_resists]
+//var(tst_suppress_successfull,!0<argv(0)>)
+test_resistModifiers_GET
+test_resistModifiers_storeOriginal
+test_resistModifiers_addRecord
+test_resistModifiers_tryAll
+test_resistModifiers_baseResistSolo
+test_resistModifiers_baseResistWithReduction
+classMessage("RESIST MODIFIERS done")
+
+//////////////////////
+
+[function test_resistModifiers_GET]
+var(tst_suppress_successfull,0)
+arg(item,<f_reduceResist_getMemory(slash)>)
+if !(strlen(<arg(item)>))
+  tst_error("Couldn't create the resist modifier for RESIST_SLASH!")
+  return
+elseif (<arg(item).id> != i_resistModifier_slash)
+  tst_error("The found slashing item is not of a correct type!")
+  return
+endif
+
+arg(item2,<f_reduceResist_getMemory(slash)>)
+if !(strlen(<arg(item2)>))
+  tst_error("Couldn't create the resist modifier for RESIST_SLASH!")
+  item.remove
+  return
+elseif (strcmpi(<item>,<item2>))
+  tst_error("The found resist items aren't the same!")
+  item.remove
+  item2.remove
+  return
+endif
+
+item.remove
+tst_success("Resist Modifier - GET!")
+
+//////////////////////
+
+[function test_resistModifiers_storeOriginal]
+test_fakeResist(slash,600)
+arg(item,<f_reduceResist_getMemory(slash)>)
+if !(<item.more1> == 600)
+  tst_error("Unexpected record of mutable basic value. Found <item.more1>; expected 600.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if !(<item.more2> == 600)
+  tst_error("Unexpected record of immutable basic value. Found <item.more2>; expected 600.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (strcmpi(<item.tag(resistType)>,slash))
+  tst_error("Incorrect type stored. Found: <item.tag(resistType)>; expected: slash")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+item.remove
+test_restoreResists
+tst_success("Resist Modifier - Store Original resist value!")
+
+[function test_resistModifiers_addRecord]
+test_fakeResist(pierce,600)
+reduceResist(pierce,45,200,0)
+arg(item,<f_reduceResist_getMemory(pierce)>)
+if (tag(resist_pierce) != 400)
+  tst_error("Absolute reduction failed _1. Found <tag(resist_pierce)> but expected 400.")
+  test_restoreResists
+  item.remove
+  return
+endif
+if (item.timerd != 45)
+  tst_error("The reduction timer is incorrect! Found <item.timerd>, expected 45")
+  test_restoreResists
+  item.remove
+  return
+endif
+
+// adds another, stronger resist and applies
+reduceResist(pierce,25,300,0)
+if (tag(resist_pierce) != 300)
+  tst_error("Absolute reduction failed _2. Found <tag(resist_pierce)> but expected 300.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.timerd != 25)
+  tst_error("The reduction timer is incorrect! Found <item.timerd>, expected 25")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.tag(records) != 2))
+  tst_error("The reduction timer has incorrect number of records _1! Found <item.tag(records)>, expected 2")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+// should remain the same ! No new resist added to the queue
+reduceResist(pierce,25,250,0)
+if (tag(resist_pierce) != 300)
+  tst_error("Absolute reduction failed _3. Found <tag(resist_pierce)> but expected 300.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.timerd != 25)
+  tst_error("The reduction timer is incorrect! Found <item.timerd>, expected 25")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.tag(records) != 2)
+  tst_error("The reduction timer has incorrect number of records _2! Found <item.tag(records)>, expected 2")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+// should prolong the current timer! No new added
+reduceResist(pierce,30,300,0)
+if (tag(resist_pierce) != 300)
+  tst_error("Absolute reduction failed _4. Found <tag(resist_pierce)> but expected 300.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.timerd != 30)
+  tst_error("The reduction timer is incorrect! Found <item.timerd>, expected 30")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.tag(records) != 2)
+  tst_error("The reduction timer has incorrect number of records _3! Found <item.tag(records)>, expected 2")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+// should add the resist in between the others, but WON'T apply
+reduceResist(pierce,35,250,0)
+if (tag(resist_pierce) != 300)
+  tst_error("Absolute reduction failed _5. Found <tag(resist_pierce)> but expected 300.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.timerd != 30)
+  tst_error("The reduction timer is incorrect! Found <item.timerd>, expected 30")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.tag(records) != 3)
+  tst_error("The reduction timer has incorrect number of records _4! Found <item.tag(records)>, expected 3")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (return_nth(2,<item.tag(record_1)>) != 250) // stored at 1st position -> correct
+  tst_error("the reduction 250 stored at incorrect position. Found <item.tag(record_1)>")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (return_nth(2,<item.tag(record_2)>) != 200) // the lowest resist stored at 2nd position -> correct
+  tst_error("the reduction 200 stored at incorrect position. Found <item.tag(record_2)>")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+// current layout:
+// id  reduction    timer
+//  0    300         30
+//  1    250         35
+//  2    200         45
+
+item.trigger(timer)
+arg(memId,<findId(i_resistModifier_pierce)>)
+if !(strlen(<arg(memId)>))
+  tst_error("Couldn't find resist modifier but should _1!")
+  test_restoreResists
+  return
+endif
+if (tag(resist_pierce) != 350) // 600 - 250
+  tst_error("Timer update failed. Found <tag(resist_pierce)> but expected 350.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.timerd != 35)
+  tst_error("The reduction timer is incorrect! Found <item.timerd>, expected 35")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.tag(records) != 2)
+  tst_error("The reduction timer has incorrect number of records _5! Found <item.tag(records)>, expected 2")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (return_nth(2,<item.tag(record_0)>) != 250) // stored at 1st position -> correct
+  tst_error("the reduction 250 stored at incorrect position. Found <item.tag(record_1)>")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (return_nth(2,<item.tag(record_1)>) != 200) // the lowest resist stored at 2nd position -> correct
+  tst_error("the reduction 200 stored at incorrect position. Found <item.tag(record_2)>")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+// current layout:
+// id  reduction    timer
+//  0    250         35
+//  1    200         45
+
+item.trigger(timer)
+arg(memId,<findId(i_resistModifier_pierce)>)
+if !(strlen(<arg(memId)>))
+  tst_error("Couldn't find resist modifier but should _2!")
+  test_restoreResists
+  return
+endif
+if (tag(resist_pierce) != 400) // 600 - 200
+  tst_error("Timer update failed. Found <tag(resist_pierce)> but expected 400.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.tag(records) != 1)
+  tst_error("The reduction timer has incorrect number of records _6! Found <item.tag(records)>, expected 1")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.timerd != 45)
+  tst_error("The reduction timer is incorrect! Found <item.timerd>, expected 45")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+// current layout:
+// id  reduction    timer
+//  0    200         45
+
+item.trigger(timer) // removal
+arg(memId,<findId(i_resistModifier_pierce)>)
+if (strlen(<arg(memId)>))
+  tst_error("Found resist modifier but shouldn't!")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (tag(resist_pierce) != 600)
+  tst_error("Resist update on item removal failed!. Found <tag(resist_pierce)> but expected 600.")
+  test_restoreResists
+  return
+endif
+
+test_restoreResists
+tst_success("Resist Modifier - Store Original resist value!")
+
+//////////////////////
+
+[function test_resistModifiers_tryAll]
+arg(i,1)
+while (arg(i) <= def_resistType_number)
+  arg(curr_resist,<def_resistType_<eval arg(i)>>)
+  test_fakeResist(<arg(curr_resist)>,600)
+  reduceResist(<arg(curr_resist)>,25,300,0)
+  arg(item,<f_reduceResist_getMemory(<arg(curr_resist)>)>)
+  if !(strlen(<arg(item)>))
+    tst_error("Couldn't create the resist modifier for <arg(curr_resist)>!")
+    test_restoreResists
+    return
+  endif
+  item.remove
+  arg(i,#+1)
+endwhile
+test_restoreResists
+tst_success("Resist Modifier - Try ALL!")
+
+//////////////////////
+
+[function test_resistModifiers_baseResistSolo]
+test_fakeResist(slash,600)
+reduceBaseResist(slash,200)
+arg(item,<f_reduceResist_getMemory(slash)>)
+if (tag(resist_slash) != 400)
+  tst_error("Base resist reduction failed _1. Found <tag(resist_slash)> but expected 400.")
+  item.remove
+  test_restoreResists
+  return
+endif
+restoreBaseResist(slash)
+
+if (tag(resist_slash) != 600)
+  tst_error("Base resist restoration failed _1.")
+  if (findId(i_resistModifier_pierce))
+    item.remove
+  endif
+  test_restoreResists
+  return
+endif
+
+tst_success("Resist Modifier - Base Resist Solo!")
+
+//////////////////////
+
+[function test_resistModifiers_baseResistWithReduction]
+test_fakeResist(slash,600)
+reduceBaseResist(slash,200)
+arg(item,<f_reduceResist_getMemory(slash)>)
+if (tag(resist_slash) != 400)
+  tst_error("Base resist reduction failed _1. Found <tag(resist_slash)> but expected 400.")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+reduceResist(slash,25,250,0)
+if (tag(resist_slash) != 150)
+  tst_error("Absolute reduction failed _1. Found <tag(resist_slash)> but expected 150.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.timerd != 25)
+  tst_error("The reduction timer is incorrect _1! Found <item.timerd>, expected 25")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+item.trigger(timer)
+if (tag(resist_slash) != 400)
+  tst_error("Base resist reduction failed _2. Found <tag(resist_slash)> but expected 400.")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+reduceResist(slash,25,250,0)
+restoreBaseResist(slash)
+if (tag(resist_slash) != 350)
+  tst_error("Base reist restoration with temporary resist failed _1. Found <tag(resist_slash)> but expected 350.")
+  item.remove
+  test_restoreResists
+  return
+endif
+if (item.timerd != 25)
+  tst_error("The reduction timer is incorrect _2! Found <item.timerd>, expected 25")
+  item.remove
+  test_restoreResists
+  return
+endif
+item.trigger(timer)
+arg(memId,<findId(i_resistModifier_pierce)>)
+if (strlen(<arg(memId)>))
+  tst_error("Found resist modifier but shouldn't!")
+  item.remove
+  test_restoreResists
+  return
+endif
+
+tst_success("Resist Modifier - Base Resist with Reduction!")
+
+
+//////////////////////
+//  helper functions
+
+// TYPE, VALUE
+[function test_fakeResist]
+tag(tst_orig_resist_value_<argv(0)>,<tag(resist_<argv(0)>)>)
+tag(resist_<argv(0)>,<argv(1)>)
+
+[function test_restoreResists]
+arg(i,1)
+while (i <= def_resistType_number)
+  tag(resist_<def_resistType_<i>>,<tag(tst_orig_resist_value_<def_resistType_<i>>)>)
+  tag.remove(tst_orig_resist_value_<def_resistType_<i>>)
+  arg(i,#+1)
+endwhile
+
+[eof]

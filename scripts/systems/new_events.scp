@@ -610,26 +610,26 @@ elseif (hits< ((maxhits*8)/10))&&(tag(jedem)==1)
   dex=350
   tag(jedem,2) 
   tag(npc_speed,900) 
-  f_reduceDmgResists(100)
+  reduceBaseDmgResists(100)
   temporary_null 
   emote("zacina zurive utocit a prestava se branit") 
 elseif (hits<((maxhits*5)/10))&&(tag(jedem)==2) 
   tag(jedem,3) 
   tag(npc_speed,1800) 
-  f_reduceDmgResists(200)
+  reduceBaseDmgResists(200)
   temporary_null 
   emote("se prestava ovladat") 
 elseif (hits<((maxhits*25)/100))&&(tag(jedem)==3) 
   tag(jedem,4) 
   tag(npc_speed,6000)
-  f_reduceDmgResists(400) 
+  reduceBaseDmgResists(400) 
   temporary_null 
   emote("propadl silenstvi")
 elseif (hits>((maxhits*81)/100))&&(tag(jedem)>1) 
   dex=<eval tag(dex_default)>
   tag(jedem,1) 
   tag(npc_speed,<eval tag(npc_speed_default)>)
-  f_restoreDmgResists 
+  restoreBaseDmgResists 
   temporary_null 
   emote("pusobi vyrovnane a odhodlane")    
 endif 
@@ -643,35 +643,6 @@ on=@afterDoEffect
 on=@beforegeteffect
 on=@playerKill
 on=@npckill
-
-[function f_reduceDmgResists]
-f_reduceResist(resist_sharp,<argv(0)>)
-f_reduceResist(resist_slash,<argv(0)>)
-f_reduceResist(resist_pierce,<argv(0)>)
-f_reduceResist(resist_blunt,<argv(0)>)
-f_reduceResist(resist_fire,<argv(0)>)
-f_reduceResist(resist_elect,<argv(0)>)
-f_reduceResist(resist_cold,<argv(0)>)
-
-[function f_reduceResist]
-if !(tag(<argv(0)>_default))
-  tag(<argv(0)>_default,<tag(<argv(0)>)>)
-endif 
-tag(<argv(0)>,<tag(<argv(0)>)>-<argv(1)>)
-
-[function f_restoreDmgResists]
-f_restoreResist(resist_sharp)
-f_restoreResist(resist_slash)
-f_restoreResist(resist_pierce)
-f_restoreResist(resist_blunt)
-f_restoreResist(resist_fire)
-f_restoreResist(resist_elect)
-f_restoreResist(resist_cold)
-
-[function f_restoreResist]
-if tag(<argv(0)>_default)
-  tag(<argv(0)>,<tag(<argv(0)>_default)>)
-endif
 
 [EVENTS e_balrog]
 on=@Created
