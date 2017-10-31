@@ -533,7 +533,7 @@ elseif (profession!=class_thief)
 elseif ((action != 0FFFFFFFF) && (action != 0) && (action != skill_hiding) && (action != 079))
   sysMessage("Nesmis provadet zadny skill")
   return 1
-elseif (!(isinvis) && (tag(isstabbing))) //hidden, invis, or insubst
+elseif !(isinvis) //hidden, invis, or insubst
   sysMessage("Nesmis byt videt...")
   return 1
 elseif !(targ.srccombatLOS)
