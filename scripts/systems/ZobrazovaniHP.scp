@@ -129,6 +129,7 @@ if !(<eval tag(HPsight_ON)>)  // Ma vypnute zobrazovani HP
   return
 endif
 if (<eval tag(HPsight_PersonalOption)>)   // Ma aktivni nejake osobni nastaveni zobrazovani
+  src=<uid>
   arg(isMyFriend,<argv(3).isMyFriend>)
   if (!(<eval tag(HPsight_Friend)>) && (<arg(isMyFriend)>))       // je to muj pritel a nechci ho zobrazovat
     return
