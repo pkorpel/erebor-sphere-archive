@@ -536,6 +536,9 @@ elseif ((action != 0FFFFFFFF) && (action != 0) && (action != skill_hiding) && (a
 elseif !(isinvis) //hidden, invis, or insubst
   sysMessage("Nesmis byt videt...")
   return 1
+elseif (tag(isstabbing)) //double backstab prevention
+  sysMessage("Pouzivas probodnuti prilis rychle po sobe!")
+  return 1  
 elseif !(targ.srccombatLOS)
   sysMessage("Nevidis na cil.")
   return 1
