@@ -117,7 +117,14 @@ else
   if (<eval tag(nightsight_decrease)>)
     src.nightsight = 0
   endif
-  src.food = <src.food> - <eval tag(food_decrease)>
+  if ((<src.food> == 0) && (<eval tag(food_decrease)>))
+    src.redmessage("Umiras hladem!")     
+    src.damage_noresponse(<eval tag(food_decrease)>,dam_god)
+  elseif (<src.food> <= <eval tag(food_decrease)>)
+    food = 0
+  else
+    src.food = <src.food> - <eval tag(food_decrease)>
+  endif
 endif
 
 [typedef t_ifNoTimerPort]
