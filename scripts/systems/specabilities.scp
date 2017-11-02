@@ -563,7 +563,7 @@ if !(tag(hitspeed))
 endif
 lastnew.timerd=1
 anim({9 11})
-tag(isstabbing, 1)
+tag(isstabbing,1)
 return 1
 
 [itemdef i_backstab]
@@ -577,7 +577,7 @@ cont.tag(isstabbing,"")
 
 on=@Equip
 if (src.action == -1)
-  if (tag(tostab).srccombatLOS)
+  if (<finduid(tag(tostab)).srccombatLOS>)
     if (tag(tostab).distance<2)
       if (<cont.findid(i_stealthbonus).tag(hidetime)> > (<serv.time>))
         cont.sysMessage("Nejsi dostatecne dlouho <cont.sex(skryty,skryta)>!")
@@ -604,7 +604,7 @@ if (src.action == -1)
           return 1
         endif
       elseif (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabM_chance)>eval({0 999}))
-        cont.tag(isstabbing, 1)
+        cont.tag(isstabbing,1)
         cont.combat_main_nonmystik
         cont.tag.remove(isstabbing)
         cont.findid(i_stealthbonus).remove
