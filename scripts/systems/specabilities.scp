@@ -526,7 +526,6 @@ endif
 
 [Function backstab]
 if ( (holdsTwoHand(i_war_fork,01405)) || !(safe.findid(i_stealthbonus)) )
-  classMessage("nedrzis pero v ruce")
   return 1
 elseif (profession!=class_thief)
   classMessage("Tato funkce neni urcena pro tebe.")
@@ -534,9 +533,12 @@ elseif (profession!=class_thief)
 elseif ((action != 0FFFFFFFF) && (action != 0) && (action != skill_hiding) && (action != 079))
   sysMessage("Nesmis provadet zadny skill")
   return 1
-elseif !(isinvis)||(tag(isstabbing)) //hidden, invis, or insubst
+elseif !(isinvis) //hidden, invis, or insubst
   sysMessage("Nesmis byt videt...")
   return 1
+elseif (tag(isstabbing)) //double backstab prevention
+  sysMessage("Pouzivas probodnuti prilis rychle po sobe!")
+  return 1  
 elseif !(targ.srccombatLOS)
   sysMessage("Nevidis na cil.")
   return 1
@@ -545,8 +547,6 @@ elseif (targ.distance>1)
   return 1
 elseif (targ.z > (<z>+5)) || (targ.z < (<z>-5))//resi vysku
   sysMessage("Nedosahnes na cil.")
-  return 1
-elseif (!reduceStamina(10,1))
   return 1
 endif
 classMessage("Pripravujes se k bodnuti...")
@@ -563,7 +563,7 @@ if !(tag(hitspeed))
 endif
 lastnew.timerd=1
 anim({9 11})
-tag(isstabbing, 1)
+tag(isstabbing,1)
 return 1
 
 [itemdef i_backstab]
@@ -577,38 +577,39 @@ cont.tag(isstabbing,"")
 
 on=@Equip
 if (src.action == -1)
-  if (tag(tostab).srccombatLOS)
+  if (<finduid(tag(tostab)).srccombatLOS>)
     if (tag(tostab).distance<2)
-     if (<cont.findid(i_stealthbonus).tag(hidetime)> > (<serv.time>))
-      cont.sysMessage("Nejsi dostatecne dlouho skryty!")
-      cont.tag.remove(isstabbing)
-      remove 
-      return 1
-     endif
+      if (<cont.findid(i_stealthbonus).tag(hidetime)> > (<serv.time>))
+        cont.sysMessage("Nejsi dostatecne dlouho <cont.sex(skryty,skryta)>!")
+        cont.tag.remove(isstabbing)
+        remove 
+        return 1
+      endif
+      if (cont.act == cont)
+        cont.sysMessage("Pokousis se probodnout <cont.sex(sam,sama)> sebe.")
+        cont.tag.remove(isstabbing)
+        remove 
+        return 1
+      endif
+      if (!cont.reduceStamina(10,1))
+        remove
+        return 1
+      endif
       if (cont.act.isplayer)
-        if !(cont.act == cont)
-          if (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabP_chance)>eval({0 999}))
-            cont.combat_main_nonmystik
-            cont.tag.remove(isstabbing)
-            cont.findid(i_stealthbonus).remove
-            remove 
-            return 1
-          endif
-        else
-          cont.sysMessage("Pokousis se probodnout sam sebe.")
-          cont.tag.remove(isstabbing)
-          remove 
-          return 1
-        endif
-      else
-        if (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabM_chance)>eval({0 999}))
-          cont.tag(isstabbing, 1)
+        if (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabP_chance)>eval({0 999}))
           cont.combat_main_nonmystik
           cont.tag.remove(isstabbing)
           cont.findid(i_stealthbonus).remove
           remove 
           return 1
         endif
+      elseif (eval(cont.tag(ra_backstab)*nastaveni_thief_backstabM_chance)>eval({0 999}))
+        cont.tag(isstabbing,1)
+        cont.combat_main_nonmystik
+        cont.tag.remove(isstabbing)
+        cont.findid(i_stealthbonus).remove
+        remove 
+        return 1
       endif
       cont.sysMessage("Utok se nepovedl.")
     else
@@ -959,7 +960,7 @@ elseif (<eval tag(nextrangearrow)> > <serv.time>)
   src.sysMessage("Jeste nelze pouzit.")
   tag(nextrangearrow,<eval (<serv.time>+(nastaveni_knockback_delay*10))>)
   return
-elseif (!reduceStamina(25,1) // this one MUST be last!
+elseif (!reduceStamina(25,1)) // this one MUST be last!
   return
 endif
 src.sysMessage("Ucinek tve strelby je drtivy.")
@@ -1884,7 +1885,7 @@ elseif (src.targ.animallore > <cont.animallore>)
   cont.redmessage("V mysli cile se nedokazes orientovat") 
   return 1
 endif
-if (src.targ.ispet)||(src.targ.issumon) 
+if (src.targ.ispet)||(src.targ.isSummon) 
   if (src.targ.srccansee)
     if (src.targ.distance>5)
       src.redmessage("Cil je prilis daleko.")
@@ -3505,7 +3506,7 @@ if (<more2>==0)
   elseif !(<topobj.action> == 0FFFFFFFF)
     cont.redMessage("<cont.sex(Prerusil,Prerusila)> jsi soustredeni.")
     remove
-  elseif (<link.issumon>)
+  elseif (<link.isSummon>)
     cont.classMessage("Cil nema vlastni talent.")
     remove
   elseif (<link.rescount i_buffStealNPC>)

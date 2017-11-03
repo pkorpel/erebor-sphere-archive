@@ -69,7 +69,7 @@ on=@beforegeteffect
 
 [events e_summonfrenzy]
 on=@aftergetswing
-if ((src.issumon) && (!(src.flags&statf_pet)))
+if ((src.isSummon) && (!(src.flags&statf_pet)))
   src.findid(i_rune_summon_creature).link=""
   src.findid(i_rune_summon_elem_air).link=""
   src.findid(i_rune_summon_daemon).link=""

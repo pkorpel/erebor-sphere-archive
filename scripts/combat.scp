@@ -297,24 +297,19 @@ damage_final(<src>)
 [function f_thief_applyrebound]
 if !(<src.isplayer>)
   if (<var(is_physical)>)
-    if (<eval tag(ra_thief_rebound)> > 0)
-      if (findlayer(layer_hand1))
-      if (findlayer(layer_hand1).dispid == i_kryss)||(findlayer(layer_hand1).dispid == 01401)
+    if (<eval tag(ra_thief_rebound)>)
+      if (holdsOneHand(i_kryss,01401))
         arg(chance,100)
-      elseif (findlayer(layer_hand1).dispid == i_scimitar)||(findlayer(layer_hand1).dispid == 013B6)
+      elseif (holdsOneHand(i_scimitar,013B6))
         arg(chance,50)
-      elseif (findlayer(layer_hand1).dispid == i_cutlass)||(findlayer(layer_hand1).dispid == 01441)
+      elseif (holdsOneHand(i_cutlass,01441))
         arg(chance,150)
       else
         return 0
       endif
       arg(chance,<eval <arg(chance)>+<eval <tag(ra_thief_rebound)>*5>>)
-      if (tag(vigilance))
-        if (<tag(vigilance)> == 1)
-          arg(chance,<eval <arg(chance)>*<eval 10+<tag(ra_thief_defstance)>>>)
-        else
-          arg(chance,<eval <arg(chance)>*10>)
-        endif
+      if (<eval tag(vigilance)>)
+        arg(chance,<eval <arg(chance)>*<eval 10+<tag(ra_thief_defstance)>>>)
       else
         arg(chance,<eval <arg(chance)>*10>)
       endif
@@ -322,11 +317,12 @@ if !(<src.isplayer>)
         src.damage_noresponse(<var(ubrano)>,<var(damage_flags)>,<uid>)
         var(ubrano,0)
         classmessage("Odrazil jsi uder!")
-      endif
+        return 1
       endif
     endif
   endif
 endif
+return 0
 
 [function f_dmgFinal_applyReactiveAR]
 if (flag_reactive)   //edited by heck - kolko absorbuje a vrati zavisi na nastaveni a armoru (tag.armorCount)
@@ -735,164 +731,4 @@ endif
 [typedef t_fake]
 
 
-///////////////////////////////////////////////////////////
-//                  R  E  S  I  S  T  S                  //
-//
-
-
-// these functions counts the total resists the character has and retuns its value.
-// the value is reduced to fit into the given range, which is from -40.000 to 1000
-// Values restriction is necessary for a valid resist calculation.
-
-//group resists:
-[function resist_magic]
-return<f_rsst_inRange(<eval tag(resist_magic)>+<eval typedef.tag(resist_magic)>)>
-
-[function resist_phys]
-return<f_rsst_inRange(<eval tag(resist_phys)>+<eval typedef.tag(resist_phys)>)>
-
-//magical resists:
-[function resist_fire]
-return<f_rsst_inRange(<eval tag(resist_fire)>+<eval typedef.tag(resist_fire)>)>
-
-[function resist_cold]
-return<f_rsst_inRange(<eval tag(resist_cold)>+<eval typedef.tag(resist_cold)>)>
-
-[function resist_acid]
-return<f_rsst_inRange(<eval tag(resist_acid)>+<eval typedef.tag(resist_acid)>)>
-
-[function resist_poison]
-return<f_rsst_inRange(<eval tag(resist_poison)>+<eval typedef.tag(resist_poison)>)>
-
-[function resist_elect]
-return<f_rsst_inRange(<eval tag(resist_elect)>+<eval typedef.tag(resist_elect)>)>
-
-[function resist_dragon]
-return<f_rsst_inRange(<eval tag(resist_dragon)>+<eval typedef.tag(resist_dragon)>)>
-
-//physical resists:
-[function resist_slash]
-return<f_rsst_inRange(<eval tag(resist_slash)>+<eval typedef.tag(resist_slash)>)>
-
-[function resist_pierce]
-return<f_rsst_inRange(<eval tag(resist_pierce)>+<eval typedef.tag(resist_pierce)>)>
-
-[function resist_blunt]
-return<f_rsst_inRange(<eval tag(resist_blunt)>+<eval typedef.tag(resist_blunt)>)>
-
-[function resist_sharp]
-return<f_rsst_inRange(<eval tag(resist_sharp)>+<eval typedef.tag(resist_sharp)>)>
-
-[function resist_bleed]
-return<f_rsst_inRange(<eval tag(resist_bleed)>+<eval typedef.tag(resist_bleed)>)>
-
-//special resists:
-[function resist_para]
-return<f_rsst_inRange(<eval tag(resist_para)>+<eval typedef.tag(resist_para)>)>
-
-[function resist_summon]
-return<f_rsst_inRange(<eval tag(resist_summon)>+<eval typedef.tag(resist_summon)>)>
-
-[function f_rsst_inRange]
-return<eval num_range(<argv(0)>,-40000,1000)>
-
-[function handleresists]//arg0 - dmg, arg1 - flags
-arg(fl,<hval argv(1)>)
-var(absoluteResist,0)
-var(is_physical ,<isbit(<fl>,1)>)
-var(is_magic    ,<isbit(<fl>,2)>)
-var(is_poison   ,<isbit(<fl>,3)>)
-var(is_fire     ,<isbit(<fl>,4)>)
-var(is_elect    ,<isbit(<fl>,5)>)
-//var(is_drain  ,<isbit(<fl>,6)>)
-//var(is_general,<isbit(<fl>,7)>)
-var(is_acid     ,<isbit(<fl>,8)>)
-var(is_cold     ,<isbit(<fl>,9)>)
-var(is_slash    ,<isbit(<fl>,10)>)
-var(is_piercing ,<isbit(<fl>,11)>)
-var(is_blunt    ,<isbit(<fl>,12)>)
-var(is_sharp    ,<isbit(<fl>,13)>)
-var(is_summon   ,<isbit(<fl>,14)>)
-var(is_bleed    ,<isbit(<fl>,15)>)
-var(is_dragon   ,<isbit(<fl>,16)>)
-
-arg(physFactor,<f_hndlRsst_count_physFactor>) // recounted physical dmg in promiles
-arg(magFactor,<f_hndlRsst_count_magFactor>)   // recounted magical dmg in promiles
-
-if (<var(physFlags)> && <var(magFlags)>)
-  arg(damFactor,<eval (<physFactor>+<magFactor>)/2>)
-elseif (<var(physFlags)>)
-  arg(damFactor,<physFactor>)
-elseif (<var(magFlags)>)
-  arg(damFactor,<magFactor>)
-else
-  arg(damFactor,1000) // 100.0% dmg
-endif
-
-arg(damFactor,<f_hndlRsst_applyGroupResist(<eval resist_summon*is_summon>,<arg(damFactor)>)>) // reduce damage via summon resist
-//say <arg(magFactor)>::<arg(physFactor)>-><arg(damFactor)>
-if (arg(damFactor) == 0) // no further damage will be generated
-  var(absoluteResist,1)
-  return 0
-else
-  var(absoluteResist,0)
-  //incomming resist values should be in a computable range - therefore no further value checking is needed
-  return<eval(((arg(damFactor)*argv(0))+500)/1000)> // number 500 ensures correct rounding UP (in sphere 999/1000 equals 0)
-endif
-
-
-// no physical resist influence: physFlag == 1000
-// maximal physical resist influence: physFlag == 0
-// increase dmg by negative resist: physFlag > 1000
-[function f_hndlRsst_count_physFactor]
-var(physFlags,<eval(is_blunt+is_sharp+is_slash+is_piercing+is_bleed)>)
-if (<eval physFlags>)
-  arg(physFactor,<eval(1000*physFlags)>)
-  arg(physFactor,#-(resist_slash*is_slash))
-  arg(physFactor,#-(resist_pierce*is_piercing))
-  arg(physFactor,#-(resist_blunt*is_blunt))
-  arg(physFactor,#-(resist_sharp*is_sharp))
-  arg(physFactor,#-(resist_bleed*is_bleed))
-  arg(physFactor,<eval(physFactor/physFlags)>) // arithmetic mean of all the physical resists
-else
-  arg(physFactor,1000)
-endif
-if (<is_physical> || <eval physFlags>)
-  arg(physFactor,<f_hndlRsst_applyGroupResist(<eval resist_phys>,<arg(physFactor)>)>)
-endif
-return <arg(physFactor)>
-
-
-// no physical resist influence: physFlag == 1000
-// maximal physical resist influence: physFlag == 0
-// increase dmg by negative resist: physFlag > 1000
-[function f_hndlRsst_count_magFactor]
-var(magFlags,<eval(var(is_poison)+var(is_fire)+var(is_cold)+var(is_elect)+var(is_acid)+var(is_dragon))>)
-if (<eval magFlags>)
-  arg(magFactor,<eval(1000*magFlags)>)
-  arg(magFactor,#-(resist_fire*is_fire))
-  arg(magFactor,#-(resist_cold*is_cold))
-  arg(magFactor,#-(resist_acid*is_acid))
-  arg(magFactor,#-(resist_poison*is_poison))
-  arg(magFactor,#-(resist_elect*is_elect))
-  arg(magFactor,#-(resist_dragon*is_dragon))
-  arg(magFactor,<eval(magFactor/magFlags)>) // arithmetic mean of all the magical resists
-else
-  arg(magFactor,1000)
-endif
-if (<is_magic> || <eval magFlags>)
-  arg(magFactor,<f_hndlRsst_applyGroupResist(<eval resist_magic>,<arg(magFactor)>)>)
-endif
-return <arg(magFactor)> //returns magFactor in the range between 0-40000
-
-//argv(0) - groupResist value
-//argv(1) - affected value (total resist)
-[function f_hndlRsst_applyGroupResist]
-if (<argv(0)> != 0)
-  arg(groupFactor,1000-<argv(0)>)
-  arg(groupFactor,<eval ((<arg(groupFactor)>*<argv(1)>)/1000)>)
-  return <eval arg(groupFactor)> // applies group resist onto the already counted resists
-else
-  return <eval argv(1)> // do no effect to an existing resist
-endif
 [eof]

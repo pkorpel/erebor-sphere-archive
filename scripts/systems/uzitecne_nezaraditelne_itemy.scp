@@ -456,7 +456,7 @@ endif
 
 on=@step
 if (!src.isgm)
-  if (src.issumon)
+  if (src.isSummon)
     src.remove
     return 1
   endif

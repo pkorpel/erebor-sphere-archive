@@ -247,54 +247,6 @@ src.f_weekly_clearEvents
 on=@timer
 return 1
 
-
-/////////////////////////////
-// TESTING FUNCTIONS TODO: REMOVE AFTER THE TESTING IS COMPLETE
-
-// generate new set of weekly quests
-[function wt]
-newequip(i_memory_weekly_quest)
-
-// dump tags of the weekly quests
-[function wtd]
-findid(i_memory_weekly_quest).tag.dump
-
-// remove weekly quests
-[function wtr]
-findid(i_memory_weekly_quest).remove
-f_weekly_clearEvents
-
-// increase number of completed subtasks of a quest
-[function wti] // argv(0) qnumber //
-arg(weekly,<findid(i_memory_weekly_quest)>)
-weekly.f_weekly_increase(<argv(0)>,10,1)
-[function wtii] // argv(0) qnumber //
-arg(weekly,<findid(i_memory_weekly_quest)>)
-weekly.f_weekly_increase(<argv(0)>,1000,1)
-
-// set expiracy time of an existing weekly quest to an expired date
-[function wte]
-weeklyTag(expiracyTime,555)
-
-[function f_weekly_clearEvents]
-events=-e_weekly_quest
-
-events=-e_weekly_itemDclick
-events=-e_weekly_itemLoot
-events=-e_weekly_meetMaster
-events=-e_weekly_dmgNPC
-events=-e_weekly_receiveDmg
-events=-e_weekly_killInDung
-events=-e_weekly_KillStreak
-events=-e_weekly_killPlayer
-events=-e_weekly_stepOnWeb
-events=-e_weekly_finishDungeon
-events=-e_weekly_healPlayer
-events=-e_weekly_HuntingSign
-
-
-/////////////////////////////
-
 ////////////////////////////////////////////////////////////////////////////////
 [function weeklyTag]
 arg(weekly,<findid(i_memory_weekly_quest)>)
@@ -797,6 +749,23 @@ cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber
 
 ////////////////////////////////////////////////////////////
 // E V E N T S 
+
+[function f_weekly_clearEvents]
+events=-e_weekly_quest
+
+events=-e_weekly_itemDclick
+events=-e_weekly_itemLoot
+events=-e_weekly_meetMaster
+events=-e_weekly_dmgNPC
+events=-e_weekly_receiveDmg
+events=-e_weekly_killInDung
+events=-e_weekly_KillStreak
+events=-e_weekly_killPlayer
+events=-e_weekly_stepOnWeb
+events=-e_weekly_finishDungeon
+events=-e_weekly_healPlayer
+events=-e_weekly_HuntingSign
+
 
 [events e_weekly_itemDclick]
 on=@itemUserDClick

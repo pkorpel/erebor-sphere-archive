@@ -107,13 +107,24 @@ DESCRIPTION=dlazdice srazi jidlo a svetlo
 ON=@Create
 attr=090
 COLOR=0481
+tag(food_decrease,5)
+tag(nightsight_decrease,1)
 
 ON=@step
 if src.isgm
   return 0
 else
-  src.nightsight = 0
-  src.food = 0
+  if (<eval tag(nightsight_decrease)>)
+    src.nightsight = 0
+  endif
+  if ((<src.food> == 0) && (<eval tag(food_decrease)>))
+    src.redmessage("Umiras hladem!")     
+    src.damage_noresponse(<eval tag(food_decrease)>,dam_god)
+  elseif (<src.food> <= <eval tag(food_decrease)>)
+    food = 0
+  else
+    src.food = <src.food> - <eval tag(food_decrease)>
+  endif
 endif
 
 [typedef t_ifNoTimerPort]

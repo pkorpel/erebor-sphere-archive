@@ -4,7 +4,7 @@
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if (act.isSumon)
+if (act.isSummon)
   if (<strlen(<tag(npc_summonKillerBoost)>)>)
     arg(boost,<tag(npc_summonKillerBoost)>)
   else
