@@ -332,7 +332,7 @@ if !(tag(hunted)==c_a_direwolf)
   tag(hunted,c_a_direwolf)
   tag(hunteda,c_a_wolf_gray)
   tag(huntedb,c_wolf)
-  tag(huntedexperience,5)
+  tag(huntedexperience,10)
   tag(huntedgold,11)
   tag(hlaska,fq_Vlci)
 else
@@ -344,7 +344,7 @@ if !(tag(hunted)==c_bear_grizzly)
   tag(hunted,c_bear_grizzly)
   tag(hunteda,c_bear_black)
   tag(huntedb,c_bear_brown)
-  tag(huntedexperience,10)
+  tag(huntedexperience,20)
   tag(huntedgold,21)
   tag(hlaska,fq_Medvedi)
 else
@@ -390,7 +390,7 @@ endif
 [function fq_Vlkodaf]
 if !(tag(hunted)==c_vlkodaf)
   tag(hunted,c_vlkodaf)
-  tag(huntedexperience,30)
+  tag(huntedexperience,45)
   tag(huntedgold,80)
   tag(hlaska,fq_Vlkodaf)
 else
@@ -400,7 +400,7 @@ endif
 [function fq_Gargoyle]
 if !(tag(hunted)==c_Gargoyle)
   tag(hunted,c_Gargoyle)
-  tag(huntedexperience,20)
+  tag(huntedexperience,30)
   tag(huntedgold,60)
   tag(hlaska,fq_Gargoyle)
 else
@@ -410,7 +410,7 @@ endif
 [function fq_Stone_Gargoyle]
 if !(tag(hunted)==c_gargoyle_stone)
   tag(hunted,c_gargoyle_stone)
-  tag(huntedexperience,28)
+  tag(huntedexperience,40)
   tag(huntedgold,68)
   tag(hlaska,fq_Stone_Gargoyle)
 else
@@ -420,7 +420,7 @@ endif
 [function fq_Harpy]
 if !(tag(hunted)==c_harpy)
   tag(hunted,c_harpy)
-  tag(huntedexperience,18)
+  tag(huntedexperience,25)
   tag(huntedgold,25)
   tag(hlaska,fq_Harpy)
 else
@@ -430,7 +430,7 @@ endif
 [function fq_Stone_harpy]
 if !(tag(hunted)==c_harpy_stone)
   tag(hunted,c_harpy_stone)
-  tag(huntedexperience,25)
+  tag(huntedexperience,35)
   tag(huntedgold,35)
   tag(hlaska,fq_Stone_harpy)
 else
@@ -440,7 +440,7 @@ endif
 [function fq_Efreet]
 if !(tag(hunted)==c_efreet)
   tag(hunted,c_efreet)
-  tag(huntedexperience,70)
+  tag(huntedexperience,80)
   tag(huntedgold,85)
   tag(hlaska,fq_Efreet)
 else
@@ -451,7 +451,7 @@ endif
 if !(tag(hunted)==c_cyclops)
   tag(hunted,c_cyclops)
   tag(hunteda,c_cyclops_mage)
-  tag(huntedexperience,60)
+  tag(huntedexperience,90)
   tag(huntedgold,100)
   tag(hlaska,fq_Cyclop)
 else
@@ -461,7 +461,7 @@ endif
 [function fq_Cyclop_king]
 if !(tag(hunted)==c_cyclops_king)
   tag(hunted,c_cyclops_king)
-  tag(huntedexperience,110)
+  tag(huntedexperience,160)
   tag(huntedgold,140)
   tag(hlaska,fq_Cyclop_king)
 else
@@ -473,7 +473,7 @@ if !(tag(hunted)==c_ogre)
   tag(hunted,c_ogre)
   tag(hunteda,c_ogre_lord)
   tag(huntedb,c_ogre_mage)
-  tag(huntedexperience,50)
+  tag(huntedexperience,70)
   tag(huntedgold,100)
   tag(hlaska,fq_Ogre)
 else
@@ -493,7 +493,7 @@ endif
 [function fq_Titanka]
 if !(tag(hunted)==c_titan_ranger)
   tag(hunted,c_titan_ranger)
-  tag(huntedexperience,70)
+  tag(huntedexperience,100)
   tag(huntedgold,130)
   tag(hlaska,fq_Titanka)
 else
@@ -503,7 +503,7 @@ endif
 [function fq_Titan_mage]
 if !(tag(hunted)==c_titan_mage)
   tag(hunted,c_titan_mage)
-  tag(huntedexperience,65)
+  tag(huntedexperience,85)
   tag(huntedgold,125)
   tag(hlaska,fq_Titan_mage)
 else
@@ -513,7 +513,7 @@ endif
 [function fq_Titan_lord]
 if !(tag(hunted)==c_titan_lord)
   tag(hunted,c_titan_lord)
-  tag(huntedexperience,75)
+  tag(huntedexperience,100)
   tag(huntedgold,140)
   tag(hlaska,fq_Titan_lord)
 else
@@ -525,7 +525,7 @@ if !(tag(hunted)==c_elem_earth)
   tag(hunted,c_elem_earth)
   tag(hunteda,c_elem_earth_elder)
   tag(huntedb,c_elem_earth_terror)
-  tag(huntedexperience,20)
+  tag(huntedexperience,30)
   tag(huntedgold,50)
   tag(hlaska,fq_Elem_Earth)
 else
@@ -535,7 +535,7 @@ endif
 [function fq_Elem_Rock]
 if !(tag(hunted)==c_elem_rock)
   tag(hunted,c_elem_rock)
-  tag(huntedexperience,30)
+  tag(huntedexperience,40)
   tag(huntedgold,75)
   tag(hlaska,fq_Elem_Rock)
 else
@@ -547,7 +547,7 @@ if !(tag(hunted)==c_Golem_copper)
   tag(hunted,c_Golem_copper)
   tag(hunteda,c_Golem_iron)
   tag(huntedb,c_Golem_silver)
-  tag(huntedexperience,100)
+  tag(huntedexperience,200)
   tag(huntedgold,100)
   tag(hlaska,fq_Golem_Low)
 else
@@ -559,7 +559,7 @@ if !(tag(hunted)==c_Golem_golden)
   tag(hunted,c_Golem_golden)
   tag(hunteda,c_Golem_verite)
   tag(huntedb,c_Golem_valorite)
-  tag(huntedexperience,160)
+  tag(huntedexperience,300)
   tag(huntedgold,125)
   tag(hlaska,fq_Golem_High)
 else
@@ -570,7 +570,7 @@ endif
 if !(tag(hunted)==c_bug)
   tag(hunted,c_bug)
   tag(hunteda,c_bug_worker)
-  tag(huntedexperience,19)
+  tag(huntedexperience,25)
   tag(huntedgold,20)
   tag(hlaska,fq_Brouci_low)
 else
@@ -582,7 +582,7 @@ if !(tag(hunted)==c_bug_drone)
   tag(hunted,c_bug_drone)
   tag(hunteda,c_bug_guard)
   tag(huntedb,c_bug_mage)
-  tag(huntedexperience,31)
+  tag(huntedexperience,40)
   tag(huntedgold,20)
   tag(hlaska,fq_Brouci_mid)
 else
@@ -593,7 +593,7 @@ endif
 if !(tag(hunted)==c_bug_shadow)
   tag(hunted,c_bug_shadow)
   tag(hunteda,c_bug_warrior)
-  tag(huntedexperience,49)
+  tag(huntedexperience,70)
   tag(huntedgold,90)
   tag(hlaska,fq_Brouci_high)
 else
@@ -604,7 +604,7 @@ endif
 if !(tag(hunted)==c_bug_elite)
   tag(hunted,c_bug_elite)
   tag(hunteda,c_bug_matka)
-  tag(huntedexperience,80)
+  tag(huntedexperience,110)
   tag(huntedgold,190)
   tag(hlaska,fq_Brouci_hard)
 else
@@ -614,7 +614,7 @@ endif
 [function fq_Lizard_king]
 if !(tag(hunted)==c_Lizard_king)
   tag(hunted,c_Lizard_king)
-  tag(huntedexperience,200)
+  tag(huntedexperience,250)
   tag(huntedgold,120)
   tag(hlaska,fq_Lizard_king)
 else
@@ -626,7 +626,7 @@ if !(tag(hunted)==c_lizardman)
   tag(hunted,c_lizardman)
   tag(hunteda,c_lizardman_mace)
   tag(huntedb,c_lizardman_spear)
-  tag(huntedexperience,16)
+  tag(huntedexperience,25)
   tag(huntedgold,25)
   tag(hlaska,fq_Lizardman)
 else
@@ -638,7 +638,7 @@ if !(tag(hunted)==c_orc)
   tag(hunted,c_orc)
   tag(hunteda,c_orc_king)
   tag(huntedb,c_orc_mage)
-  tag(huntedexperience,16)
+  tag(huntedexperience,20)
   tag(huntedgold,25)
   tag(hlaska,fq_Orc)
 else
@@ -649,7 +649,7 @@ endif
 if !(tag(hunted)==c_ratman)
   tag(hunted,c_ratman)
   tag(hunteda,c_ratman_mace)
-  tag(huntedexperience,15)
+  tag(huntedexperience,20)
   tag(huntedgold,25)
   tag(hlaska,fq_RatMan_low)
 else
@@ -661,7 +661,7 @@ if !(tag(hunted)==c_ratman_mage)
   tag(hunted,c_ratman_mage)
   tag(hunteda,c_ratman_ranger)
   tag(hunteda,c_ratman_chief)
-  tag(huntedexperience,20)
+  tag(huntedexperience,30)
   tag(huntedgold,25)
   tag(hlaska,fq_RatMan_high)
 else
@@ -695,7 +695,7 @@ if !(tag(hunted)==c_liche)
   tag(hunted,c_liche)
   tag(hunteda,c_liche_lord)
   tag(huntedb,c_liche_king)
-  tag(huntedexperience,20)
+  tag(huntedexperience,30)
   tag(huntedgold,50)
   tag(hlaska,fq_Liche)
 else
@@ -707,7 +707,7 @@ if !(tag(hunted)==c_mummy_stone)
   tag(hunted,c_mummy_stone)
   tag(hunteda,c_mummy_blood)
   tag(huntedb,c_mummy_adamantinum)
-  tag(huntedexperience,70)
+  tag(huntedexperience,150)
   tag(huntedgold,120)
   tag(hlaska,fq_Mummy_High)
 else
@@ -718,7 +718,7 @@ endif
 if !(tag(hunted)==c_spider_queen)
   tag(hunted,c_spider_queen)
   tag(hunteda,c_spider_king)
-  tag(huntedexperience,70)
+  tag(huntedexperience,100)
   tag(huntedgold,110)
   tag(hlaska,fq_Spider_Royal)
 else
@@ -730,7 +730,7 @@ if !(tag(hunted)==c_Tarantule)
   tag(hunted,c_Tarantule)
   tag(hunteda,c_Tarantule_shadow)
   tag(huntedb,c_Tarantule_snow)
-  tag(huntedexperience,130)
+  tag(huntedexperience,150)
   tag(huntedgold,160)
   tag(hlaska,fq_Tarantule)
 else
@@ -750,7 +750,7 @@ endif
 [function fq_Spirit_iron]
 if !(tag(hunted)==c_Spirit_iron)
   tag(hunted,c_Spirit_iron)
-  tag(huntedexperience,60)
+  tag(huntedexperience,100)
   tag(huntedgold,125)
   tag(hlaska,fq_Spirit_iron)
 else
@@ -762,7 +762,7 @@ if !(tag(hunted)==c_skeleton_archer)
   tag(hunted,c_skeleton_archer)
   tag(hunteda,c_skeleton_archer_lvl_2)
   tag(huntedb,c_skeleton_archer_lvl_3)
-  tag(huntedexperience,19)
+  tag(huntedexperience,25)
   tag(huntedgold,20)
   tag(hlaska,fq_Skeleton_Archer)
 else
@@ -774,7 +774,7 @@ if !(tag(hunted)==c_skeleton_mage)
   tag(hunted,c_skeleton_mage)
   tag(hunteda,c_skeleton_mage_lvl_2)
   tag(huntedb,c_skeleton_mage_lvl_3)
-  tag(huntedexperience,19)
+  tag(huntedexperience,25)
   tag(huntedgold,20)
   tag(hlaska,fq_Skeleton_Mage)
 else
@@ -786,7 +786,7 @@ if !(tag(hunted)==c_Spirit_verite)
   tag(hunted,c_Spirit_verite)
   tag(hunteda,c_Spirit_silver)
   tag(huntedb,c_Spirit_valorite)
-  tag(huntedexperience,90)
+  tag(huntedexperience,200)
   tag(huntedgold,155)
   tag(hlaska,fq_Spirit_High)
 else
@@ -808,7 +808,7 @@ if !(tag(hunted)==c_skeleton_axe)
   tag(hunted,c_skeleton_axe)
   tag(hunteda,c_skeleton_axe_lvl_2)
   tag(huntedb,c_skeleton_axe_lvl_3)
-  tag(huntedexperience,19)
+  tag(huntedexperience,25)
   tag(huntedgold,20)
   tag(hlaska,fq_Skeleton_Axe)
 else
@@ -820,7 +820,7 @@ if !(tag(hunted)==c_Zombie)
   tag(hunted,c_Zombie)
   tag(hunteda,c_spectre)
   tag(huntedb,c_elem_death)
-  tag(huntedexperience,10)
+  tag(huntedexperience,25)
   tag(huntedgold,20)
   tag(hlaska,fq_Undead_Low)
 else
@@ -832,7 +832,7 @@ if !(tag(hunted)==c_troll)
   tag(hunted,c_troll)
   tag(hunteda,c_troll_mace)
   tag(huntedb,c_troll_axe)
-  tag(huntedexperience,16)
+  tag(huntedexperience,20)
   tag(huntedgold,35)
   tag(hlaska,fq_troll)
 else
@@ -844,7 +844,7 @@ if !(tag(hunted)==c_ettin)
   tag(hunted,c_ettin)
   tag(hunteda,c_ettin_axe)
   tag(huntedb,c_ettin_lord)
-  tag(huntedexperience,18)
+  tag(huntedexperience,25)
   tag(huntedgold,50)
   tag(hlaska,fq_ettin)
 else
@@ -855,7 +855,7 @@ endif
 if !(tag(hunted)==c_beridor_war)
   tag(hunted,c_beridor_war)
   tag(hunteda,c_beridor_war_f)
-  tag(huntedexperience,40)
+  tag(huntedexperience,70)
   tag(huntedgold,100)
   tag(hlaska,fq_Beridor_War)
 else
@@ -866,7 +866,7 @@ endif
 if !(tag(hunted)==c_beridor_mage)
   tag(hunted,c_beridor_mage)
   tag(hunteda,c_beridor_mage_f)
-  tag(huntedexperience,40)
+  tag(huntedexperience,70)
   tag(huntedgold,100)
   tag(hlaska,fq_Beridor_Mage)
 else
@@ -877,7 +877,7 @@ endif
 if !(tag(hunted)==c_beridor_archer)
   tag(hunted,c_beridor_archer)
   tag(hunteda,c_beridor_archer_f)
-  tag(huntedexperience,40)
+  tag(huntedexperience,70)
   tag(huntedgold,100)
   tag(hlaska,fq_Beridor_Archer)
 else
@@ -888,7 +888,7 @@ endif
 if !(tag(hunted)==c_snow_warrior_male_w)
   tag(hunted,c_snow_warrior_male_w)
   tag(hunteda,c_snow_warrior_female_w)
-  tag(huntedexperience,40)
+  tag(huntedexperience,70)
   tag(huntedgold,100)
   tag(hlaska,fq_Snow_Warrior)
 else
@@ -899,7 +899,7 @@ endif
 if !(tag(hunted)==c_snow_mage_male_w)
   tag(hunted,c_snow_mage_male_w)
   tag(hunteda,c_snow_mage_female_w)
-  tag(huntedexperience,40)
+  tag(huntedexperience,70)
   tag(huntedgold,100)
   tag(hlaska,fq_Snow_Mage)
 else
@@ -910,7 +910,7 @@ endif
 if !(tag(hunted)==c_snow_archer_male_w)
   tag(hunted,c_snow_archer_male_w)
   tag(hunteda,c_snow_archer_female_w)
-  tag(huntedexperience,40)
+  tag(huntedexperience,70)
   tag(huntedgold,100)
   tag(hlaska,fq_Snow_Archer)
 else
@@ -922,7 +922,7 @@ if !(tag(hunted)==c_elem_snow)
   tag(hunted,c_elem_snow)
   tag(hunteda,c_elem_snow_mage)
   tag(huntedb,c_elem_snow_archer)
-  tag(huntedexperience,15)
+  tag(huntedexperience,25)
   tag(huntedgold,30)
   tag(hlaska,fq_Elem_Snow)
 else
@@ -934,7 +934,7 @@ if !(tag(hunted)==c_elem_ice)
   tag(hunted,c_elem_ice)
   tag(hunteda,c_elem_ice_mage)
   tag(huntedb,c_elem_ice_archer)
-  tag(huntedexperience,15)
+  tag(huntedexperience,25)
   tag(huntedgold,30)
   tag(hlaska,fq_Elem_Ice)
 else
@@ -944,7 +944,7 @@ endif
 [function fq_Serpent_Black]
 if !(tag(hunted)==c_serpent_black)
   tag(hunted,c_serpent_black)
-  tag(huntedexperience,10)
+  tag(huntedexperience,20)
   tag(huntedgold,20)
   tag(hlaska,fq_Serpent_Black)
 else
@@ -954,7 +954,7 @@ endif
 [function fq_Serpent_Gold]
 if !(tag(hunted)==c_serpent_gold)
   tag(hunted,c_serpent_gold)
-  tag(huntedexperience,10)
+  tag(huntedexperience,20)
   tag(huntedgold,20)
   tag(hlaska,fq_Serpent_Gold)
 else
@@ -966,7 +966,7 @@ if !(tag(hunted)==c_ophidian_warrior)
   tag(hunted,c_ophidian_warrior)
   tag(hunteda,c_ophidian_mage)
   tag(huntedb,c_ophidian_knight)
-  tag(huntedexperience,55)
+  tag(huntedexperience,110)
   tag(huntedgold,85)
   tag(hlaska,fq_Ophidian_Low)
 else
@@ -978,7 +978,7 @@ if !(tag(hunted)==c_ophidian_queen)
   tag(hunted,c_ophidian_queen)
   tag(hunteda,c_ophidian_king)
   tag(huntedb,c_ophidian_archmage)
-  tag(huntedexperience,150)
+  tag(huntedexperience,300)
   tag(huntedgold,200)
   tag(hlaska,fq_Ophidian_High)
 else
@@ -988,7 +988,7 @@ endif
 [function fq_Scorpion_Giant]
 if !(tag(hunted)==c_scorpion_giant)
   tag(hunted,c_scorpion_giant)
-  tag(huntedexperience,10)
+  tag(huntedexperience,20)
   tag(huntedgold,15)
   tag(hlaska,fq_Scorpion_Giant)
 else
@@ -998,7 +998,7 @@ endif
 [function fq_Scorpion_Prince]
 if !(tag(hunted)==c_scorpion_prince)
   tag(hunted,c_scorpion_prince)
-  tag(huntedexperience,13)
+  tag(huntedexperience,30)
   tag(huntedgold,19)
   tag(hlaska,fq_Scorpion_Prince)
 else
@@ -1008,7 +1008,7 @@ endif
 [function fq_Scorpion_Queen]
 if !(tag(hunted)==c_scorpion_queen)
   tag(hunted,c_scorpion_queen)
-  tag(huntedexperience,17)
+  tag(huntedexperience,60)
   tag(huntedgold,23)
   tag(hlaska,fq_Scorpion_Queen)
 else
@@ -1018,7 +1018,7 @@ endif
 [function fq_Scorpion_King]
 if !(tag(hunted)==c_scorpion_king)
   tag(hunted,c_scorpion_king)
-  tag(huntedexperience,22)
+  tag(huntedexperience,100)
   tag(huntedgold,30)
   tag(hlaska,fq_Scorpion_King)
 else
@@ -1030,7 +1030,7 @@ if !(tag(hunted)==c_terathan_avenger)
   tag(hunted,c_terathan_avenger)
   tag(hunteda,c_terathan_warrior)
   tag(huntedb,c_terathan_drone)
-  tag(huntedexperience,15)
+  tag(huntedexperience,20)
   tag(huntedgold,30)
   tag(hlaska,fq_Terathan)
 else
