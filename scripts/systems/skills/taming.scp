@@ -72,77 +72,79 @@ morex=0
 
 ON=@timer
 if (cont.ISGM)//&&(link.memoryfindtype.memory_ipet)
- taming_success
- return 0
+  taming_success
+  return 0
 endif
+
 if (link.restest(i_poresu))	// pokud je jezditko ressnuty a uz bylo tamly, tak pujde tamnout na prvni pokus po 2 s
   link.findid(i_poresu).remove
   taming_success
   return 0
 endif 
-if(link.flag_spawned) //zviratko je ze spawnu
- if(link.taming > 300)//aby jim to nelezlo na srackach
-  cont.SKILLGAIN(skill_taming)//2x rychlejsi gain pokud je na spawnu
- endif
- arg(carka1,<StrIndexOf("<link.home>","*,*")>)
- arg(homex,<StrLeft("<link.home>",<arg(carka1)>)>)
- arg(zbytek, <StrMid("<link.home>",<arg(carka1)>+1,<StrLen("<link.home>")>)>)
- arg(carka2,<StrIndexOf("<arg(zbytek)>","*,*")>)
- if (arg(carka2) < 0 )
-  arg(homey, <arg(zbytek)>)
- else
-  arg(homey,<StrLeft("<arg(zbytek)>",<arg(carka2)>)>)
- endif
- arg(distx, <link.p_x> - <arg(homex)>)
- arg(disty, <link.p_y> - <arg(homey)>)
- if (arg(distx) < 0)
-  arg(distx, <arg(distx)>*(-1))
- endif
- if (arg(disty) < 0)
-  arg(disty, <arg(disty)>*(-1))
- endif
- if (arg(distx) > 70)||(arg(disty) > 70) //jak daleko od spawnu se pri pokusu o taming portne zpet
-  link.go <link.home>
-  link.action=067
- endif
+
+if (link.flag_spawned) //zviratko je ze spawnu
+  if (link.taming > 300) && !(morex)//aby jim to nelezlo na srackach + aby umyslne neprerusovali taming kvuli sanci na gain
+    cont.SKILLGAIN(skill_taming)//2x rychlejsi gain pokud je na spawnu
+  endif
+  arg(carka1,<StrIndexOf("<link.home>","*,*")>)
+  arg(homex,<StrLeft("<link.home>",<arg(carka1)>)>)
+  arg(zbytek, <StrMid("<link.home>",<arg(carka1)>+1,<StrLen("<link.home>")>)>)
+  arg(carka2,<StrIndexOf("<arg(zbytek)>","*,*")>)
+  if (arg(carka2) < 0 )
+    arg(homey, <arg(zbytek)>)
+  else
+    arg(homey,<StrLeft("<arg(zbytek)>",<arg(carka2)>)>)
+  endif
+  arg(distx, <link.p_x> - <arg(homex)>)
+  arg(disty, <link.p_y> - <arg(homey)>)
+  if (arg(distx) < 0)
+    arg(distx, <arg(distx)>*(-1))
+  endif
+  if (arg(disty) < 0)
+    arg(disty, <arg(disty)>*(-1))
+  endif
+  if (arg(distx) > 70) || (arg(disty) > 70) //jak daleko od spawnu se pri pokusu o taming portne zpet
+    link.go <link.home>
+    link.action=067
+  endif
 endif
 
 if !(link)
- remove
+  remove
 elseif !(cont.f_canseelos(<link>))
- cont.sysmessage("<cont.sex Ztratil Ztratila> jsi svuj cil z dohledu.")
- remove
+  cont.sysmessage("<cont.sex Ztratil Ztratila> jsi svuj cil z dohledu.")
+  remove
 elseif (morex)
- cont.sysmessage("Ochocovani bylo preruseno.")
- remove
+  cont.sysmessage("Ochocovani bylo preruseno.")
+  remove
 elseif (link.memoryfindtype(memory_ipet))
- cont.sysmessage("Zvire je jiz ochocene.")
- remove
+  cont.sysmessage("Zvire je jiz ochocene.")
+  remove
 //elseif (<link.memoryfindtype.memory_fight>)
  //cont.sysmessage("Nemuzes ochocit bojujici zvire.")
  //remove 
  //return 1 
-elseif (cont.distancefrom(<link>)>5)
- cont.sysmessage("<link.NAME> je prilis daleko.")
- remove
+elseif (cont.distancefrom(<link>) > 5)
+  cont.sysmessage("<link.NAME> je prilis daleko.")
+  remove
 elseif (more1)
- if ({0 2}==0)
-  if (<eval cont.tag(realm)> == 1) && (!(strcmpi(<cont.tag(race)>,"Elf")) || (<cont.taming> > 95.0))
-   cont.taming_randomsayElf
-  else
-   cont.taming_randomsay(<link.name>)
+  if ({0 2} == 0)
+    if (<eval cont.tag(realm)> == 1) && (!(strcmpi(<cont.tag(race)>,"Elf")) || (<cont.taming> > 95.0))
+      cont.taming_randomsayElf
+    else
+      cont.taming_randomsay(<link.name>)
+    endif
   endif
- endif
- more1=<more1> - 1
- timer 2
- return 1
+  more1=<more1> - 1
+  timer 2
+  return 1
 else
- IF ({0 1000}<<eval <cont.TAMING>-<link.TAMING>> )||(<link.tag(tamed)>)
-  taming_success
- else
-  taming_failure
- endif
- remove 
+  if ({0 1000} < <eval <cont.TAMING>-<link.TAMING>>) || (<link.tag(tamed)>)
+    taming_success
+  else
+    taming_failure
+  endif
+  remove 
 endif
 return 1
 
