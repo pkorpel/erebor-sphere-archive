@@ -3677,7 +3677,7 @@ COLDCHANCE=00
 [AREA Tumma Osto level 2]
 GROUP=Dungeon Tajemna hora
 P=427,109,-28,2
-RECT=345,2,500,124
+RECT=365,2,483,124
 mapplane=2
 FLAGS=00812
 tag.realm=3
@@ -3688,7 +3688,7 @@ COLDCHANCE=00
 GROUP=Dungeon Tajemna hora
 P=247,20,-28,2
 mapplane=2
-RECT=203,2,344,110
+RECT=203,2,364,110
 FLAGS=00812
 tag.realm=3
 RAINCHANCE=00
@@ -3908,21 +3908,6 @@ MAPPLANE=10
 FLAGS=0081E
 tag.nobank=1
 tag.realm=3
-RAINCHANCE=00
-COLDCHANCE=00
-
-[AREA tutorial old]
-GROUP=startovni dungeon
-P=5412,2556,15,35
-RECT=5376,2368,5530,2566
-MAPPLANE=35
-FLAGS=0881E
-tag.realm=4
-tag.nobank=1
-tag.kick=1
-tag.nostuck=1
-events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
 
@@ -4284,6 +4269,16 @@ events=r_nofield
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Moina Filya]
+GROUP=Dung Moina Filya
+P=5412,2556,15,10
+RECT=5370,2368,5538,2566
+MAPPLANE=10
+FLAGS=00812
+tag.realm=3
+resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=00
+COLDCHANCE=00
 
 [AREA Etheria vstup]
 GROUP=Dung Etheria
