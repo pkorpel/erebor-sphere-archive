@@ -5752,11 +5752,10 @@ endif
 arg(skillname,<findres(skill,<args>).key>)
 arg(skillvalue,<?<arg(skillname)>?>)
 if (npc)||(<region.flags>&region_flag_safe)
- logmsg("skillgain none")
 else
  if (arg(skillvalue)<profession.<arg(skillname)>)
   arg(advrate,<eval (advrate_<arg(skillname)>)>)
-  arg(rand,<eval {0 <eval ((<arg(skillvalue)>*<arg(skillvalue)>)/(1000000/<arg(advrate)>))> }>)//mnozstvi pokusu na skillgain
+  arg(rand,<eval {0 <eval ((<arg(skillvalue)>*<arg(skillvalue)>*<arg(advrate)>)/(1000000*<argv(1)>))> }>)//mnozstvi pokusu na skillgain
   if !(arg(rand))//||(<isgm>)
    <arg(skillname)>=<eval <arg(skillvalue)>+1>
   endif
@@ -5929,7 +5928,7 @@ if strlen(<tag.spinrotate>)
 endif
 src.newitem(<more2>,<more1>)
 lastnew.bounce
-src.skillGain(skill_tailoring)
+src.skillGain(skill_tailoring,1)
 remove
 
 [function f_spinningwheel_rotate]
