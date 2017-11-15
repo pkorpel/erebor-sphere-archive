@@ -60,7 +60,7 @@ on=@timer
 if (link.type==t_ship_hold_lock)
   if ({300 1000} < <eval cont.lockpicking>)
     link.type=t_ship_hold
-    cont.skillgain(skill_lockpick,1)
+    cont.skillgain(skill_lockpick,100)
     cont.sysMessage("<cont.sex(Odemkl,Odemkla)> jsi podpalubi!")
   else
     cont.sysMessage("Zamek odolal.")
@@ -70,7 +70,7 @@ else
     lockpick_ok
   else
     cont.sysMessage("Zamek odolal.")
-    cont.skillgain(skill_lockpick,1)
+    cont.skillgain(skill_lockpick,100)
   endif
 endif
 remove
@@ -80,7 +80,7 @@ return 1
 link.type=t_container
 link.tag(lockpicked,1)
 cont.sysMessage("<cont.sex(Odemkl,Odemkla)> jsi zamek!")
-cont.skillgain(skill_lockpick,1)
+cont.skillgain(skill_lockpick,100)
 
 
 [eof]

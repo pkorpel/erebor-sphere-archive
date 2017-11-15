@@ -136,16 +136,16 @@ elseif (more1)
   timer 2
   return 1
 else
-  arg(GainBonus,1)
+  arg(GainBonus,100)
   if ({0 1000} < <eval <cont.TAMING>-<link.TAMING>>) || (<link.tag(tamed)>)
     if (link.taming > 300) && (link.flag_spawned) //aby jim to nelezlo na srackach
-      arg(GainBonus,<eval {5 6}>)  // Bonus k sanci na gain na spawnu
+      arg(GainBonus,<eval {500 600}>)  // Bonus k sanci na gain na spawnu
     endif
     taming_success
     cont.SKILLGAIN(skill_taming,<arg(GainBonus)>)
   else
     if (link.taming > 300) && (link.flag_spawned) //aby jim to nelezlo na srackach
-      arg(GainBonus,<eval {3 4}>)  // Bonus k sanci na gain na spawnu
+      arg(GainBonus,<eval {300 400}>)  // Bonus k sanci na gain na spawnu
     endif
     taming_failure
     cont.SKILLGAIN(skill_taming,<arg(GainBonus)>)
