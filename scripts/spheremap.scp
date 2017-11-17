@@ -3911,21 +3911,6 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA tutorial old]
-GROUP=startovni dungeon
-P=5412,2556,15,35
-RECT=5376,2368,5530,2566
-MAPPLANE=35
-FLAGS=0881E
-tag.realm=4
-tag.nobank=1
-tag.kick=1
-tag.nostuck=1
-events=e_startdung
-resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
-RAINCHANCE=00
-COLDCHANCE=00
-
 [AREA tutorial high old]
 GROUP=startovni dungeon
 P=5333,2444,-17,35

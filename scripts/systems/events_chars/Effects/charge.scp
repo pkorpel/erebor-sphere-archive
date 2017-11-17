@@ -41,7 +41,7 @@ elseif (argv(1).isPet)
 endif
 arg(chargeItem,<findid(i_charge)>)
 if (!strlen(<arg(chargeItem)>))
-  newequip(i_charge)
+  newEquip(i_charge)
   arg(chargeItem,<lastnew>)
 endif
 chargeItem.f_charge_increase(<argv(0)>)
@@ -64,7 +64,6 @@ if (strlen(<arg(chargeItem)>))
   return<chargeItem.more1>
 endif
 return 0
-if (<chargeItem.more1> != <def_charge_type[<var(spellNumber)>]>) // drop full charge if a harmufl spell of a different type is casted
 
 // executed upon player
 // argv(0) - number of charges to remove
@@ -101,51 +100,17 @@ name=Charge
 // more1 - charge TYPE
 // more2 - charge VALUE (the number of charged points)
 
-on=@equip
-if (<more1> < 10)
-  cont.events +e_magicCharge
-elseif (<more1> < 20)
-  cont.events +e_strikeCharge
-endif
-
-on=@unequip
-if (<more1> < 10)
-  cont.events -e_magicCharge
-elseif (<more1> < 20)
-  cont.events -e_strikeCharge
-endif
-
-on=@timer
-if (more1 == 0) //marked for removal
-  remove
-  return
-endif
-f_charge_decrease(1)
-return 1
-
-// REMOVE THIS AFTER DEPLOY
-[itemdef i_magicCharge]
-id=i_memory
-type=t_eq_script
-name=Charge
-
-// more1 - charge TYPE
-// more2 - charge VALUE (the number of charged points)
-
-on=@equip
-cont.events +e_magicCharge
-
-on=@unequip
+on=@unequip // more1 at this point is set to 0! It's necessary for the last "blank" timer, so that the dialog close doesn't trigger an error 
 cont.events -e_magicCharge
+cont.events -e_strikeCharge
 
 on=@timer
-if (more1 == 0) //marked for removal
+if (<more1> == 0) //marked for removal
   remove
   return
 endif
 f_charge_decrease(1)
 return 1
-
 
 // executed upon player for which the ability should be retrieved
 [function f_charge_getAbility]
@@ -177,13 +142,17 @@ if (more1 != <argv(0)>)
   more1=<argv(0)>
   more2=1
   if (arg(origMore) == 0) // first increase (the dialog was not shown yet)
+    if (<more1> < 10)
+      cont.events +e_magicCharge
+    elseif (<more1> < 20)
+      cont.events +e_strikeCharge
+    endif
     dialog(d_charge)
   else
     cont.dialogclose(d_charge,1)
   endif
   return
-endif
-if (more2 >= <arg(chargeLimit)>)
+elseif (more2 >= <arg(chargeLimit)>)
   return
 endif
 more2=<eval <more2>+1>
