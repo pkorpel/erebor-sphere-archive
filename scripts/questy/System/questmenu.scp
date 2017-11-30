@@ -1509,9 +1509,9 @@ endif
 
 [dialog d_questy_lovec_odlier text]
 Lovek Odlier 
-Odlier po tobe chce 50 kusu zpracovane kuze. 
+Odlier po tobe chce 15 kusu zpracovane kuze. 
 <?src.sex(Odevzdal,Odevzdala)?> jsi Odlierovi kuzi. Mozna ma pro tebe dalsi ukol. 
-Odlier po tobe chce 20 kusu stavnatych steaku z divoke zvere. 
+Odlier po tobe chce 10 kusu stavnatych steaku z divoke zvere. 
 Odlier ti je vdecny za tvou pomoc s kuzi a masem.
 
 [dialog d_questy_lovec_odlier button]
@@ -1537,7 +1537,7 @@ endif
 
 [dialog d_questy_akolytka_mirana text]
 Akolytka Mirana
-Mirana po tobe zada 200 obvazu.
+Mirana po tobe zada 50 obvazu.
 Mirana ti je vdecna za tvou pomoc.
 
 [dialog d_questy_akolytka_mirana button]
@@ -1637,9 +1637,9 @@ endif
 
 [dialog d_questy_rybar_broket text]
 Rybar Broket 
-Broket te pozadal o 10 kusu od kazdeho druhu ryby. To je doromady 40 kusu ryb. 
+Broket te pozadal o 5 kusu ryb.
 <?src.sex(Odevzdal,Odevzdala)?> jsi Broketovi ryby. Mozna ma pro tebe dalsi ukol. 
-Broket te pozadal o 100 kusu upecenych rybich steaku. 
+Broket te pozadal o 10 kusu upecenych rybich steaku. 
 Broket ti je vdecny za tvou pomoc.
 
 [dialog d_questy_rybar_broket button]

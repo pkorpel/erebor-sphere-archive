@@ -890,31 +890,6 @@ on=@beforegeteffect
 on=@playerKill
 on=@npckill
 
-[events e_nbdung]
-on=@Created
-on=@DrinkingPotion
-on=@afterswing
-if (act.isplayer)
- var(ubrano,0)
- return 1
-endif
-on=@beforedoeffect
-if (act.isplayer)
- if (uid==<act>)
- else
-  var(spellpower,0)
-  return 1
- endif
-endif
-
-on=@finalBlow
-on=@afterDoEffect
-on=@beforeGetSwing
-on=@aftergetswing
-on=@beforegeteffect
-on=@playerKill
-on=@npckill
-
 [events e_npc_summoner]
 on=@beforeGetSwing
 on=@aftergetswing
