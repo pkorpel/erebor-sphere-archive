@@ -659,7 +659,7 @@ BLOODCOLOR=020
 TEVENTS=e_monster
 TEVENTS=e_character
 
-CATEGORY=Monsters
+CATEGORY=Tutorial
 SUBSECTION=Ettins, Ogres, Titans
 DESCRIPTION=Troll
 
@@ -726,7 +726,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_knockback
 
-CATEGORY=Monsters
+CATEGORY=Tutorial
 SUBSECTION=Ettins, Ogres, Titans
 DESCRIPTION=Troll {Mace}
 
@@ -774,6 +774,79 @@ ON=@NPCRestock
 ITEM=loot_TROLL
 ITEM=i_gold
 
+////////////////////////////////////////////////////
+
+[CHARDEF c_tut_ettin]
+ID=c_ettin
+NAME=Ettin
+SOUND=snd_MONSTER_ETTIN1
+ICON=i_pet_ETTIN
+ANIM=078c7f
+CAN=MT_WALK|MT_USEHANDS|MT_RUN
+
+attack=30
+ARMOR=20
+moverate=3
+
+RESOURCES=8 i_ribs_raw
+FOODTYPE=
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_multishot
+
+CATEGORY=Tutorial
+SUBSECTION=Ettins, Ogres, Titans
+DESCRIPTION=Ettin
+
+ON=@Create
+NPC=brain_monster
+FAME={100 500}
+KARMA={-2000 -2999}
+
+STR=500
+DEX=70
+INT=40
+
+maxhits={380 450}
+maxstam={70 90}
+maxmana=0
+
+tag.experience=<eval {53.0 60.0}>
+
+tag.multishot_chance=250          // 25% chance pri zasahu monstra
+tag.multishot_delay=20,30         // prodleva nez znovu
+tag.multishot_dmg=15,20           // dmg
+
+tag(hypnotizable,0)
+
+tag.weapflag=dam_physical|dam_blunt
+
+tag(resist_poison,820)
+tag.resist_para=<eval {300 450}>
+tag(resist_summon,550)
+tag(resist_bleed,-100)
+
+tag(resist_sharp,-200)
+tag(resist_slash,-200)        //sekery
+tag(resist_pierce,-400)
+tag(resist_blunt,300)
+
+tag(resist_fire,150)
+tag(resist_elect,-250)
+tag(resist_cold,100)
+
+PARRYING={50.0 60.0}
+WRESTLING={50.0 60.0}
+RESIST={85.0 95.0}
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+
+
 
 /////////////////////////////////////////////////
 ///////////     M o n g b a t s      ////////////
@@ -796,7 +869,7 @@ RESOURCES=3 i_ribs_raw, 3 i_hide, 2 i_reag_batwing
 TEVENTS=e_monster
 TEVENTS=e_character
 
-CATEGORY=Monsters
+DESCRIPTION=Mongbat
 SUBSECTION=Orcs
 CATEGORY=Tutorial
 
