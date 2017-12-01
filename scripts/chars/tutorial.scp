@@ -218,7 +218,7 @@ ITEMnewbie=i_monster_create
 ///////////  W i l d   A n i m a l s ////////////
 /////////////////////////////////////////////////
 
-[CHARDEF c_hellcat_nb]
+[CHARDEF c_tut_hellcat]
 ID=c_panther
 NAME=Hellcat
 SOUND=snd_ANIMALS_PANTHER1
