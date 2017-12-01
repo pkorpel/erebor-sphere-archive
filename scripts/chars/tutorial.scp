@@ -285,7 +285,7 @@ ITEM=i_gold
 
 ///////////////////////////////////////
 
-[CHARDEF c_bear_grizzly_nb]
+[CHARDEF c_tut_bear_grizzly]
 ID=c_bear_grizzly
 NAME=Grizzly
 SOUND=snd_ANIMALS_GRIZZLY1
