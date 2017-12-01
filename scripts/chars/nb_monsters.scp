@@ -225,7 +225,7 @@ TEVENTS=e_selfreser
 
 CATEGORY=Monsters
 SUBSECTION=NB Monsters
-DESCRIPTION=Kostlivec Lucistni
+DESCRIPTION=Kostlivec Lucistnik
 
 ON=@Create
 Color=0542
@@ -978,6 +978,7 @@ SUBSECTION=NB Monsters
 DESCRIPTION=Liche Lord
 
 ON=@Create
+Color=098a
 NPC=brain_monster
 FAME=200
 KARMA={-4000 -4999}
