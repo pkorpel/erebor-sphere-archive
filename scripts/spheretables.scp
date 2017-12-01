@@ -45,6 +45,7 @@ scripts\chars\npc_evil_race.scp
 scripts\chars\special.scp
 scripts\chars\snowmonsters.scp
 scripts\chars\nb_monsters.scp
+scripts\chars\tutorial.scp
 scripts\chars\specNPC_dragons.scp
 scripts\chars\specNPC_Glammoreg.scp
 scripts\chars\specNPC_HCN.scp
