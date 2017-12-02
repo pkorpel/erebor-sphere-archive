@@ -1988,7 +1988,7 @@ src.sysMessage("Pred odchodem musis mit nastavenou postavu pomoci startovniho ka
 return 1
 
 [function startfinal]
-if (tag.level >= 3)
+if (<eval tag(level)> >= 3)
   tag(skillrank,1) // rovnou mu dame experta
 endif
 eqlayers(remove)
