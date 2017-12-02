@@ -384,6 +384,7 @@ while (<eval tag(experience)> > <eval((tag(level)+1)*nextlevel)>)
   arg(gainedLevel,1)
   classmessage("<sex("Presel","Presla")> jsi na dalsi level!")
   tag(level,#+1)
+  f_newLevel_customActions // may be replaced with a custom trigger in the future
   bouncepoint(5)
   tag(experience,#-(<tag.level>*<nextlevel>))
 endwhile
@@ -398,6 +399,13 @@ if (<arg(gainedLevel)>)
   f_weekly_check
 endif
 f_setmainability
+
+[function f_newLevel_customActions]
+if (isEvent e_nbdung)
+  if (<eval tag.level> > <def_tutorial_max_level>) // vyhodit z tutorialu, pokud tam je prilis dlouho
+    f_tutorial_leave
+  endif
+endif
 
 [function rankname]
 if (tag(skillrank)>2)

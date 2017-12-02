@@ -1,8 +1,6 @@
-/////////////////////////////////////////////////////////////////
-/////////////////// START DUNGEON - TUTORIAL ////////////////////
-/////////////////////////////////////////////////////////////////
-///////////// vERZE S RESISTAMA - 17 5 2008 /////////////////////
-/////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+//////////////////   NPC pro NB hrace /////////////////////
+///////////////////////////////////////////////////////////
 
 [CHARDEF c_skeleton_nb]
 ID=c_skeleton
@@ -227,7 +225,7 @@ TEVENTS=e_selfreser
 
 CATEGORY=Monsters
 SUBSECTION=NB Monsters
-DESCRIPTION=Kostlivec Lucistni
+DESCRIPTION=Kostlivec Lucistnik
 
 ON=@Create
 Color=0542
@@ -980,6 +978,7 @@ SUBSECTION=NB Monsters
 DESCRIPTION=Liche Lord
 
 ON=@Create
+Color=098a
 NPC=brain_monster
 FAME=200
 KARMA={-4000 -4999}
@@ -4044,95 +4043,6 @@ ON=@NPCRestock
 ITEM=i_gold
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-
-[CHARDEF c_uvitac_nb]
-ID=c_man
-NAME=Pomocnik novackum
-ICON=i_pet_MAN
-ANIM=0ffc78c7f
-CAN=MT_WALK|MT_USEHANDS|MT_run
-
-attack=20
-ARMOR=18
-moverate=3
-
-RESOURCES=10 i_ribs_raw
-FOODTYPE=
-BLOODCOLOR=020
-
-TEVENTS=e_monster
-TEVENTS=e_character
-TSPEECH=spk_uvitac_nb
-
-CATEGORY=Monsters
-SUBSECTION=NB
-DESCRIPTION=Uvitac NB
-
-ON=@Create
-NAME=Pomocnik
-COLOR=colors_skin 
-Title=Trener novacku
-NPC=brain_human
-fame={1000 1001}              
-karma={1000 1001}
-
-STR=900
-DEX=100
-INT=10
-INVUL=1
-
-maxhits={1000 1450}
-maxstam={160 180}
-maxmana=0
-
-tag.experience=10
-tag(hypnotizable,0)
-
-
-ITEMnewbie=i_monster_create
-itemnewbie=i_boots_thigh
-Color=00
-itemnewbie=i_studded_tunic_Golden
-Color=0995
-itemnewbie=i_surcoat
-Color=00
-itemnewbie=i_studded_sleeves_Golden
-Color=0995
-itemnewbie=i_studded_gloves_Golden
-Color=0995
-itemnewbie=i_cape
-Color=0484
-itemnewbie=i_spellbook
-Color=00
-itemnewbie=i_hat_feather
-Color=0484
-
-ON=@NPCRestock
-
-ON=@npcseenewplayer 
-dorand 4 
-  SAY("Vitej v tutorialu! Pokud chces dostat par rad do zacatku, staci se me zeptat...") 
-  SAY("Aaa, Dalsi novacek, vitej! Kdybys potreboval par rad do zacatku, muzes se me zeptat...") 
-  SAY("Preji Ti pekny den! Mohu Ti dat par rad do zacatku, ptej se kdybys neco nevedel...") 
-  SAY("Vitej! Na zlatych cedulkach naleznes mnoho zajimavych informaci, staci na ne jednou kliknout.")
-enddo
-
-ON=@UserDClick
-if (src.isGM)
-  return 0
-endif
-dorand 3 
-  SAY("Doporucuji jit po ceste do mesta <src.name> a navstivit par lidi, kteri Ti daji ukoly, za ktere dostanes odmenu.")
-  SAY("Ve meste muzes potkat same dobre duse. Pres most od mesta se potuluji pekelne kocky, orkove, obri a pirati, bacha na ne! Muzes potkat take domorodce, kteri jsou mirumilovni.")
-  SAY("Toto uzemi jsme objevili nedavno. Snazime se zde vycvicit novacky jako tebe <src.name>! Ziji zde puvodni domorodci, kteri maji utociste nekde v dzungli. Snazime se s nema vychazet vstric...")
-enddo
-
-ON=@UserClick
-if !(src.isGM)
-  SAY("Zdravim <src.name>, s NPC muzes komunikovat dvojklikem a nebo klicovymi slovy v jejich blizkosti. Prijd blize ke me a zkus si to...")
-endif
-
 /////////////////////////////////////////////////
 
 [CHARDEF 011]
@@ -4202,6 +4112,7 @@ ITEMnewbie=i_monster_create
 ON=@NPCRestock
 ITEM=loot_ORC
 ITEM=i_gold
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////
 [CHARDEF c_divoska_nb]
@@ -4360,6 +4271,5 @@ ITEMNEWBIE=i_club
 COLOR=05e5
 ON=@NPCRestock
 ITEM=i_gold
-/////////////////////////////////////////////////
 
 [EOF]

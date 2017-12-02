@@ -40,9 +40,9 @@ else
   Src.SysMessage("Hodnota quest tagu -<argv(0)>- :")
   arg(tag_value,"<qtag(<argv(0)>)>")
   if !(strcmpi(<tag_value>,00))
-    Src.RedMessage("Tag je nulovy.")
+    src.RedMessage("Tag je nulovy.")
   else
-    Src.RedMessage("<tag_value>")
+    src.RedMessage("<tag_value>")
   endif
 endif
 

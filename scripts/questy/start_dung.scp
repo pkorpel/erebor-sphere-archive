@@ -2,6 +2,139 @@
 //////////////////start_dung.scp//////////////////
 //////////////////////////////////////////////////
 
+[defnames def_tutorial]
+def_tutorial_min_level   1
+def_tutorial_max_level   5
+
+// tutTag
+[function tutTag]
+if !(ischar)
+  return""
+endif
+arg(MyQuestRune,<findid(i_tut_rune)>)
+if (<argvcount> >= 2) //zapisujeme novy tutTag
+  if !(<hval arg(MyQuestRune)>) // postava jeste nema tutorial quest runu
+    newequip(i_tut_rune)
+    arg(MyQuestRune,<lastnew>)
+  endif
+  MyQuestRune.tag(<argv(0)>,"<argv(1)>")
+  return""
+elseif (<argvcount> == 1) // cteme tutTag
+  if !(<findid(i_tut_rune)>)
+    return""
+  endif
+  if (strlen(<MyQuestRune.tag(<argv(0)>)>))
+    return<MyQuestRune.tag(<argv(0)>)>
+  else
+    return""
+  endif
+endif
+RedMessage("spatny pocet argumentu")
+Return""
+
+[function tutTagRemove]
+arg(MyQuestRune,<findid(i_tut_rune)>)
+if (<hval arg(MyQuestRune)>)
+  MyQuestRune.tag.remove.(<argv(0)>)
+endif
+return 1
+
+[function tutTagShow]
+if (<argvcount> == 0)
+  findid(i_tut_rune).tag(dump)
+else
+  src.SysMessage("Hodnota tutorial tagu -<argv(0)>- :")
+  arg(tag_value,"<qtag(<argv(0)>)>")
+  if !(strcmpi(<tag_value>,00))
+    src.RedMessage("Tag je nulovy.")
+  else
+    src.RedMessage("<tag_value>")
+  endif
+endif
+
+[itemdef i_tut_rune]
+id=i_rune_marker
+name=Runa na tutorial questy
+type=t_eq_script
+
+on=@create
+attr=094 // invis, nb, nevermove
+color=0989
+
+
+[function tutAddActionXP] // argv(0) - number of XP // argv(1) - action name key // argv(2) - action message
+if (0<tutTag(<argv(1)>)>) // player already received XP for this action
+  return
+endif
+classMessage(<argv(2)>)
+addExp(<argv(0)>)
+tutTag(<argv(1)>,1)
+
+///////////////////////////////////////////////////////
+
+[events e_nbdung]
+on=@itemUserDClick
+if (!<src.f_canReach(<act>)>)
+  src.sysMessage("can't reach")
+  return
+endif
+if (<src.flags>&statf_dead)
+  if (act.type == t_ress_ankh)
+    tutAddActionXP(20,resurrect_ankh,"<sex(Zjistil,Zjistila)> jsi, jak se ozivit po smrti!")
+  endif
+  return
+endif
+
+on=@itemEquip
+if (act.isArmor || act.isShield)
+  tutAddActionXP(20,equip_armor,"<sex(Zjistil,Zjistila)> jsi, jak si obleci zbroj!")
+  return
+endif
+if (act.isWeapon)
+  // TODO - test, zda ta zbran jde equipnout podle povolani
+  tutAddActionXP(20,equip_weapon,"<sex(Zjistil,Zjistila)> jsi, jak vzit do rukou zbran!")
+  return
+endif
+if (act.type == t_fish_pole)
+  tutAddActionXP(10,equip_fish_pole,"<sex(Zjistil,Zjistila)> jsi, jak vzit do rukou prut!")
+  return
+endif
+if (act.type == t_eq_horse)
+  tutAddActionXP(10,mount_horse,"<sex(Zjistil,Zjistila)> jsi, jak nasednout na zvire!")
+  return
+endif
+
+on=@DrinkingPotion
+tutAddActionXP(20,drinkingPotion,"<sex(Zjistil,Zjistila)> jsi, jak vypit lektvar!")
+
+on=@afterswing
+if (act.isplayer)
+ var(ubrano,0)
+ return 1
+endif
+
+on=@beforedoeffect
+if (act.isplayer)
+ if (uid==<act>)
+ else
+  var(spellpower,0)
+  return 1
+ endif
+endif
+
+on=@Created
+on=@finalBlow
+on=@afterDoEffect
+on=@beforeGetSwing
+on=@aftergetswing
+on=@beforegeteffect
+on=@playerKill
+on=@npckill
+tutAddActionXP(20,npcKill,"Vyborne! <sex(Zabil,Zabila)> jsi nepritele!")
+
+
+/////////////////////////////////////////
+
 [function nbTags_remove]
 qtagremove(nb001)
 qtagremove(nb002)
@@ -10,6 +143,10 @@ qtagremove(nb004)
 qtagremove(nb005)
 qtagremove(nb006)
 qtagremove(nb007)
+arg(MyTutRune,<findid(i_tut_rune)>)
+if (<hval arg(MyQuestRune)>)
+  MyTutRune.remove
+endif
 
 [function nbOffTtQTags_remove] //odstranit questy co nejsou z tutorialu
 // f_questy_checkFunctions         // neznama funkce, mozna byla smazana
@@ -101,7 +238,7 @@ argo.HTMLGUMP(170,230,440,100,6,0,36)
 
 argo.page(4)
 if (src.qtag(nb001)==1)
-	if (src.rescount(i_hides_cut)>=50)
+	if (src.rescount(i_hides_cut)>=15)
 		argo.HTMLGUMP(170,230,440,100,17,0,36)
 		argo.button(25,395,0fa5,0fa7,1,0,2)
 		argo.text(60,395,152,18)
@@ -146,12 +283,12 @@ Kdo jsi?	//1
 Muzu ti pomoci?	//2
 Nesu ti...	//3
 Bud <?src.sex(zdrav,pozdravena)?>. Jmenuji se Odlier. Lovim zde v okoli divokou zver pro vzacne kozesiny a chutne maso.	//4
-Pokud chces, muzes mi pomoci. Nezapomen, ze zabitou zver je treba stahnout z kuze nozem nebo jinou ostrou zbrani. Dale je mozne kuze zpracovat s pomoci nuzek a nastrihat ji tak na stejne dily. Pokud mi prineses 50 kusu zpracovane kuze, odmenim se ti. Dam ti take nuz a nuzky.//5
+Pokud chces, muzes mi pomoci. Nezapomen, ze zabitou zver je treba stahnout z kuze nozem nebo jinou ostrou zbrani. Dale je mozne kuze zpracovat s pomoci nuzek a nastrihat ji tak na stejne dily. Pokud mi prineses 15 kusu zpracovane kuze, odmenim se ti. Dam ti take nuz a nuzky.//5
 <basefont color="#ffff88">*Vidis statneho muze stredniho veku, odeneho do kuze s kusi v ruce*<basefont color="#ffffff">//6
 Dobre, dodam ti ty kuze.//7
 <?src.sex(Donesl,Donesla)?> jsi mi ty kozesiny?//8
 Ano, zde jsou.	//9
-Ano, prines mi 20 kusu stavnatych steaku z divoke zvere. Zver uz vykuchat umis. Nozem muzes ze stromu ziskat trisky. Polozis li trisky na zem, je mozne je podpalit a rozdelat ohen, na kterem potom maso uvaris. Ale nepripal ho!//10
+Ano, prines mi 10 kusu stavnatych steaku z divoke zvere. Zver uz vykuchat umis. Nozem muzes ze stromu ziskat trisky. Polozis li trisky na zem, je mozne je podpalit a rozdelat ohen, na kterem potom maso uvaris. Ale nepripal ho!//10
 Dekuji za radu. Pokusim se ho nepripalit.//11
 Tak co, <?src.sex(kuchtiku,kuchticko)?>? Hotovo?//12
 Ano, do zlatoucka opecene, zde ho mas!//13
@@ -182,10 +319,10 @@ if !(src.findid(i_scissors))
 endif
 
 ON=2
-if ((src.qtag(nb001)==1)&&(src.rescount(i_hides_cut))>=50)
+if ((src.qtag(nb001)==1)&&(src.rescount(i_hides_cut))>=15)
 	src.qtag(nb001,2)
 	src.consume(50,i_hides_cut)
-	src.addexp(50)
+	src.addexp(100)
 	say("Dekuji moc.")
 	f_quest_complete(23)  // splnenie questu "Lovec Odlier - kuze"
 endif
@@ -194,10 +331,10 @@ ON=3
 src.qtag(nb001,3)
 
 ON=4
-if ((src.qtag(nb001)==3)&&(src.rescount(i_ribs_cooked))>=20)
+if ((src.qtag(nb001)==3)&&(src.rescount(i_ribs_cooked))>=10)
 	src.qtag(nb001, 4)
 	src.consume(20,i_ribs_cooked)
-	src.addexp(50)
+	src.addexp(75)
 	say("Dekuji ti.")
 	 f_quest_complete(23,1)  // splnenie questu "Lovec Odlier - maso"
 endif
@@ -302,11 +439,11 @@ Kdo jsi?	//1
 Mohu ti pomoci?	//2
 Nesu ti...	//3
 Dobry den. Jsem akolytka radu bohyne Este. Mym poslanim je pomahat detem na svet a osetrovat zranene.	//4
-Ano, jdes jak na zavolanou! Potrebuji sehnat nove obvazy, jiz mi dochazeji. Obvazy ziskas rozstrihanim latky nebo kusu obleceni na male kousky. Latku lze utkat na tkacovskem stavu z niti. Nite muzes udelat z bavlny nebo z vlny tak, ze je upredes na kolovratku. Vlnu ziskas strihanim ovci a bavlnu sklizenim bavlniku.//5
+Ano, jdes jak na zavolanou! Potrebuji sehnat nove obvazy, jiz mi dochazeji. Obvazy ziskas rozstrihanim latky nebo kusu obleceni na male kousky. Latku lze utkat na tkacovskem stavu z niti. Nite muzes udelat z bavlny nebo z vlny tak, ze je upredes na kolovratku. Vlnu ziskas strihanim ovci a bavlnu sklizenim bavlniku. Dones mi 50 obvazu, budu ti za ne velmi vdecna!//5
 <basefont color="#ffff88">*Vidis mladou divku v dlouhem habitu s kapuci. Ze stinu kape si te zvedave prohlizeji tmave hnede oci*<basefont color="#ffffff">//6
-Pokusim se je sehnat.//7
-Mas ty obvazy?//8
-Ano zde je mas.//9
+Pokusim se je sehnat. //7
+Mas ty obvazy? //8
+Ano zde je mas. //9
 Prohlednout	//10
 Este budiz pochvalena! <?src.sex(Prinesl,prinesla)?> si je. Mohu se opet venovat sve praci. Zde mas svou odmenu.//11
 <?src.sex(Rad,Rada)?> sem <?src.sex(Poslouzil,Poslouzila)?>.//12
@@ -314,10 +451,10 @@ Uz nic nepotrebuji, dekuji. I tobe se obvazy mohou hodit. Staci je prilozit na r
 Promin, ale to je malo. Potrebuji vic.//14
 Promin, <?src.sex(zapomel,zapomela)?> jsem, co jsem <?src.sex(mel,mela)?> prinest.	//15
 Potrebuji od tebe 200 obvazu. <basefont color="#ffff88">*usmiva se*<basefont color="#ffffff">	//16
-Jak udelam obvazy?	//17
-Obvazy ziskas rozstrihanim latky nebo kusu obleceni na male kousky. Latku lze utkat na tkacovskem stavu z niti. Nite muzes udelat z bavlny nebo z vlny tak, ze je upredes na kolovratku. Vlnu ziskas strihanim ovci a bavlnu sklizenim bavlniku.	//18
-Potrebuji poradit	//19
-Ano? Jak ti mohu pomoci?	//20
+Jak udelam obvazy? //17
+Obvazy ziskas rozstrihanim latky nebo kusu obleceni na male kousky. Latku lze utkat na tkacovskem stavu z niti. Nite muzes udelat z bavlny nebo z vlny tak, ze je upredes na kolovratku. Vlnu ziskas strihanim ovci a bavlnu sklizenim bavlniku. //18
+Potrebuji poradit //19
+Ano? Jak ti mohu pomoci? //20
 
 [DIALOG d_nb002 button]
 ON=1
@@ -327,10 +464,10 @@ if !(src.findid(i_scissors))
 endif
 
 ON=2
-if ((src.qtag(nb002)==1)&&(src.rescount(i_bandage))>=200)
+if ((src.qtag(nb002)==1)&&(src.rescount(i_bandage))>=50)
 	src.qtag(nb002,2)
 	src.consume(200,i_bandage)
-	src.addexp(50)
+	src.addexp(75)
 	f_quest_complete(24)  // splnenie questu "Akolytka Mirana"
 endif
 		
@@ -479,10 +616,10 @@ Kdo jsi?	//1
 Muzu ti pomoci?	//2
 Nesu ti...	//3
 Zdravim. Jmenuji se Beorgrad. Jsem hornik.	//4
-Vlastne prichazis zrovna vhod, pomoc by se mi hodila. Potreboval by sem tak 30 kusu medene rudy. Je to jednoduchy, staci kdyz seberes krumpac do ruky a zacnes kopat. Jestli nemas krumpac tak ti jeden dam.//5
+Vlastne prichazis zrovna vhod, pomoc by se mi hodila. Potreboval bych tak 30 kusu medene rudy. Je to jednoduchy, staci kdyz seberes krumpac do ruky a zacnes kopat. Jestli nemas krumpac tak ti jeden dam.//5
 <basefont color="#ffff88">*Vidis statneho starsiho muze, v ruce drzi krumpac a tvar ma celou spinavou od uhli*<basefont color="#ffffff">//6
 Dobre, donesu vam tu rudu.//7
-Tak ako to vypada s moju rudou?//8
+Tak jak to vypada s mou rudou?//8
 Mam ji tady.	//9
 Ano muzes, prines mi 15 kusu zelezne rudy. Kopat uz umis tak do toho!//10
 Jdu na to.	//11
@@ -517,7 +654,7 @@ ON=2
 if ((src.qtag(nb003)==1)&&(src.rescount(i_ore_copper))>=30)
 	src.qtag(nb003,2)
 	src.consume(30,i_ore_copper)
-	src.addexp(50)
+	src.addexp(100)
 	say("Dekuji ti moc.")
 	f_quest_complete(25)  // splnenie questu "Hornik beorgrad - copper"
 endif
@@ -530,11 +667,11 @@ if ((src.qtag(nb003)==3)&&(src.rescount(i_ore_iron))>=15)
   if (src.mining > 39.9)
 	  src.qtag(nb003,4)
 	  src.consume(15,i_ore_iron)
-	  src.addexp(200)
+	  src.addexp(450)
 	  say("Dekuji ti.")
 	  f_quest_complete(25,1)  // splnenie questu "Hornik beorgrad - iron"
 	else
-    say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nakopat. Potrebuji abys to <?src.sex(nakopal sam,nakopala sama)?>.");	
+    say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nakopat. Potrebuji, abys to <?src.sex(nakopal sam,nakopala sama)?>.");	
 	endif
 endif
 		
@@ -546,11 +683,11 @@ if ((src.qtag(nb003)==5)&&(src.rescount(i_ore_pisek))>=10)
   if (src.mining > 44.9)
 	  src.qtag(nb003,6)
 	  src.consume(10,i_ore_pisek)
-	  src.addexp(300)
+	  src.addexp(750)
 	  say("Dekuji ti.")
     f_quest_complete(25,2)  // splnenie questu "Hornik beorgrad - kremik"
   else
-    say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nakopat. Potrebuji abys to <?src.sex(nakopal sam,nakopala sama)?>.");	
+    say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nakopat. Potrebuji, abys to <?src.sex(nakopal sam,nakopala sama)?>.");	
   endif
 endif
 
@@ -714,7 +851,7 @@ ON=2
 if ((src.qtag(nb004)==1)&&(src.rescount(i_log_copper))>=30)
 	src.qtag(nb004,2)
 	src.consume(30,i_log_copper)
-	src.addexp(50)
+	src.addexp(100)
 	say("Dekuji ti moc.")
 	f_quest_complete(26)  // splnenie questu "Lesnik Grarad - spruce"
 endif
@@ -727,7 +864,7 @@ if ((src.qtag(nb004)==3)&&(src.rescount(i_log_iron))>=15)
 	if (src.lumberjacking > 39.9)
 	  src.qtag(nb004,4)
 	  src.consume(15,i_log_iron)
-	  src.addexp(200)
+	  src.addexp(450)
 	  say("Dekuji ti.")
 	  f_quest_complete(26,1)  // splnenie questu "Lesnik Grarad - chestnut"
 	else
@@ -822,7 +959,7 @@ argo.HTMLGUMP(170,230,440,100,6,0,36)
 
 argo.page(4)
 if (src.qtag(nb005)==1)
-	if ((src.rescount(i_fish_big_1)>=10)&&(src.rescount(i_fish_big_2)>=10)&&(src.rescount(i_fish_big_3)>=10)&&(src.rescount(i_fish_big_4)>=10))
+  if (<src.f_nb005_countFish> >= 5)
 		argo.HTMLGUMP(170,230,440,100,17,0,36)
 		argo.button(25,395,0fa5,0fa7,1,0,2)
 		argo.text(60,395,152,18)
@@ -830,7 +967,7 @@ if (src.qtag(nb005)==1)
 		argo.HTMLGUMP(170,230,440,100,16,0,36)
 	endif
 elseif (src.qtag(nb005)==3)
-	if (src.rescount(i_fish_cut_cooked)>=100)
+	if (src.rescount(i_fish_cut_cooked)>=10)
 		argo.HTMLGUMP(170,230,440,100,20,0,36)
 		argo.button(25,395,0fa5,0fa7,1,0,4)
 		argo.text(60,395,152,18)
@@ -860,12 +997,12 @@ Kdo jsi?	//1
 Muzu ti pomoci?	//2
 Nesu ti...	//3
 Zdravim. Jmenuji se Broket. Jsem rybar.	//4
-Tvoje pomoc by se mi opravdu hodila. Lazaret spotrebuje velke mnozstvi jidla a ja nestiham. Potreboval by sem tak 10 kusu od kazdyho druhu ryby, tedy celkem 40 kusu. Je to jednoduche, staci kdyz vezmes udici do ruky a nahodis splavek do vody. Pokud udici nemas, jednu ti venuji.//5
+Tvoje pomoc by se mi opravdu hodila. Lazaret spotrebuje velke mnozstvi jidla a ja nestiham. Potreboval bych tak 5 kusu ryb. Je to jednoduche. Staci, kdyz vezmes udici do ruky a nahodis splavek do vody. Pokud udici nemas, jednu ti venuji.//5
 <basefont color="#ffff88">*Vidis starsiho muze, v ruce drzi rybarsky prut.<basefont color="#ffffff">//6
 Dobre, donesu vam ty ryby.//7
-Tak ako to vypada s rybami?//8
+Tak jak to vypada s rybami?//8
 Mam je.	//9
-Ano muzes, prines mi 100 uvarenych rybich stejku. Lovit uz umis tak do toho! Na to jak varit se zeptej Odliera.//10
+Ano muzes, prines mi 10 uvarenych rybich stejku. Lovit uz umis tak do toho! Na to jak varit se zeptej Odliera.//10
 Jdu na to.	//11
 Tak co? Hotovo?//12
 Ano, zde to mas!//13
@@ -877,8 +1014,8 @@ Skvele! Podej mi to. Kdyz budes chtit prijd, mozna pro tebe budu mit dalsi ukol.
 To nestaci! Potrebuji vic steaku! <basefont color="#ffff88">*mraci se*<basefont color="#ffffff">	//19
 Nadhera! Podej mi to. Dekuji.	//20
 Promin, <?src.sex(zapomel,zapomela)?> jsem, co jsem <?src.sex(mel,mela)?> prinest.	//21
-Chtel jsem po tobe, abys <?src.sex(nalovil,nalovila)?> 10 kusu z kazdeho druhu ryby a <?src.sex(prinesl,prinesla)?> mi je.	//22
-Chtel jsem po tobe, abys <?src.sex(prinesl,prinesla)?> 100 kusu rybacich steaku <?src.sex(prinesl,prinesla)?> mi je.	//23
+Chtel jsem po tobe, abys <?src.sex(nalovil,nalovila)?> 5 kusu ryb a <?src.sex(prinesl,prinesla)?> mi je.	//22
+Chtel jsem po tobe, abys <?src.sex(prinesl,prinesla)?> 10 kusu rybacich steaku <?src.sex(prinesl,prinesla)?> mi je.	//23
 Potrebuji poradit	//24
 Jak ti muzu poradit?	//25
 Jak mam lovit ryby?	//26
@@ -892,13 +1029,17 @@ if !(src.findid(i_fishing_pole))
 endif
 
 ON=2
-if ((src.qtag(nb005)==1)&&(src.rescount(i_fish_big_1)>=10)&&(src.rescount(i_fish_big_2)>=10)&&(src.rescount(i_fish_big_3)>=10)&&(src.rescount(i_fish_big_4)>=10))
+arg(toConsume,5)
+if ((src.qtag(nb005)==1)&&(<src.f_nb005_countFish> >= arg(toConsume)))
+  arg(i,1)
+  while (arg(toConsume) > 0) && (i < 5)
+    arg(num,<src.rescount(i_fish_big[<arg(i)>])>)
+	  src.consume(<arg(toConsume)>,i_fish_big_<arg(i)>)
+    arg(toConsume,#-<arg(num)>)
+    arg(i,#+1)
+  endwhile
 	src.qtag(nb005,2)
-	src.consume(10,i_fish_big_1)
-	src.consume(10,i_fish_big_2)
-	src.consume(10,i_fish_big_3)
-	src.consume(10,i_fish_big_4)
-	src.addexp(50)
+	src.addexp(75)
 	say("Dekuji ti moc.")
 	f_quest_complete(27)  // splnenie questu "Rybar Broket - ryby"
 endif
@@ -907,13 +1048,21 @@ ON=3
 src.qtag(nb005,3)
 
 ON=4
-if ((src.qtag(nb005)==3)&&(src.rescount(i_fish_cut_cooked))>=100)
+if ((src.qtag(nb005)==3)&&(src.rescount(i_fish_cut_cooked))>=10)
 	src.qtag(nb005,4)
 	src.consume(100,i_fish_cut_cooked)
 	src.addexp(100)
 	say("Dekuji ti.")
 	f_quest_complete(27,1)  // splnenie questu "rybar Broket - fish maso"
 endif
+
+[function f_nb005_countFish]
+arg(fish_1,<rescount(i_fish_big_1)>)
+arg(fish_2,<rescount(i_fish_big_2)>)
+arg(fish_3,<rescount(i_fish_big_3)>)
+arg(fish_4,<rescount(i_fish_big_4)>)
+arg(sum,<eval (fish_1+fish_2+fish_3+fish_4)>)
+return<sum>
 		
 [speech spk_nb005]
 ON = *ahoj*
@@ -1035,7 +1184,7 @@ ON=2
 if ((src.qtag(nb006)==1)&&(<src.findid(i_nb_collector_lichelord).tag.contentscount>>=1))
 	src.qtag(nb006,2)
 	src.consume(i_nb_collector_lichelord)
-	src.addexp(50)
+	src.addexp(200)
 	say("Dekuji ti moc.")
 	f_quest_complete(28)  // splnenie questu "Necromancer"
 endif
@@ -1476,7 +1625,7 @@ ON=2
 if ((src.rescount(i_wire_copper)>=50)&&(<src.findid(i_wire_copper).tag(craftedby)>==<src.uid>))
 	src.qtag(nb007,2)
 	src.consume(50,i_wire_copper)
-	src.addexp(50)
+	src.addexp(75)
 	say("Dekuji ti, mam pro tebe dalsi ukol")
 	f_quest_complete(29)  // splnenie questu "Imro - copper wire"
 endif
@@ -1488,7 +1637,7 @@ ON=4
 if ((src.rescount(i_crossbow_heavy_copper)>=1)&&(<src.findid(i_crossbow_heavy_copper).tag(craftedby)>==<src.uid>))
 	src.qtag(nb007,4)
 	src.consume(i_crossbow_heavy_copper)
-	src.addexp(80)
+	src.addexp(225)
 	say("Dekuji ti, mam pro tebe dalsi ukol")
 	f_quest_complete(29,1)  // splnenie questu "Imro - crossbow heavy copper"
 endif
@@ -1500,7 +1649,7 @@ ON=6
 if ((src.rescount(i_staff_gnarled_copper)>=2)&&(<src.findid(i_staff_gnarled_copper).tag(craftedby)>==<src.uid>))
 	src.qtag(nb007,6)
 	src.consume(2,i_staff_gnarled_copper)
-	src.addexp(100)
+	src.addexp(250)
 	say("Dekuji ti, mam pro tebe dalsi ukol")
 	f_quest_complete(29,2)  // splnenie questu "Imro - staff gn copper"
 endif
@@ -1512,7 +1661,7 @@ ON=8
 if ((src.rescount(i_kilt)>=10)&&(<src.findid(i_kilt).tag(craftedby)>==<src.uid>))
 	src.qtag(nb007,8)
 	src.consume(10,i_kilt)
-	src.addexp(100)
+	src.addexp(250)
 	say("Dekuji ti, mam pro tebe dalsi ukol")
 	f_quest_complete(29,3)  // splnenie questu "Imro - kilts"
 endif
@@ -1536,7 +1685,7 @@ ON=12
 if ((src.rescount(i_iron_closed_helm)>=5)&&(<src.findid(i_iron_closed_helm).tag(craftedby)>==<src.uid>))
 	src.qtag(nb007,12)
 	src.consume(5,i_iron_closed_helm)
-	src.addexp(400)
+	src.addexp(500)
 	say("Dekuji ti.")
 	f_quest_complete(29,5)  // splnenie questu "Imro - iron closed helm"
 endif
@@ -1607,7 +1756,7 @@ endif
 
 argo.page(2)
 if (<src.tag(level)>>=1)
-	argo.settext(5,"Pozorne poslouchej! Jelikoz jsi jiz dostatecne silny, tva cesta muze pokracovat dal. Nyni prisel cas volby. Ve svete zuri valka. Valka mezi Gondorem a Mordorem. Ty se musis rozhodnout, ke ktere strane se pridas. Zvolis li pokracovat dal, budes postaven pred tezkou volbu, ale ta volba je nutna. Po volbe strany budes portnut do mista, ktere ozkousi tve schopnosti a muze te povysit na rank Expert. Diky tomuto povyseni budes moci sve schopnosti nadale zvysovat. Postupem casu budes postupovat dalsi zkousky - mistrovskou a velmistrovskou, aby jsi dosahl dokonalosti ve tvych dovednostech. Prejes si podstoupit tuto cestu?")
+	argo.settext(5,"Pozorne poslouchej! Jelikoz jsi jiz dostatecne <src.sex(silny,silna)>, tva cesta muze pokracovat dal. Nyni prisel cas volby. Ve svete zuri valka. Valka mezi Gondorem a Mordorem. Ty se musis rozhodnout, ke ktere strane se pridas. Rozhodnes-li se pokracovat dal, budes <src.sex(postaven,postavena)> pred tezkou volbu, ale ta volba je nutna. Po volbe strany budes <src.sex(portnut,portnuta)> do rodneho mesta. Pokud jsi jiz <src.sex(dosahl,dosahla)> 3. urovne, budes rovnou <src.sex(povysen,povysena)> na rank Experta, v opacnem pripade budes muset vyhledat ve svete povysujici quest <src.sex(sam,sama)>. Diky tomuto povyseni budes moci navysovat nektere zakladni dovednosti nad uroven 30 bodu po osloveni mistra. Postupem casu budes postupovat dalsi zkousky - mistrovskou a velmistrovskou, ktere ti umozni prekrocit hranice 50 a 75 bodu. Prejes si podstoupit tuto cestu?")
 	argo.HTMLGUMP(170,230,440,100,5,0,36)
 	argo.button(25,395,0fa5,0fa7,1,0,1)
 	argo.settext(6,"Ano.")
@@ -1620,16 +1769,12 @@ else
 	argo.HTMLGUMP(170,230,440,100,5,0,36)
 endif
 
-
-[DIALOG d_nb_gatekeeper text]
-
 [DIALOG d_nb_gatekeeper button]
 ON=0
 
 ON=1
-if (<src.tag(level)>>=1)
-	src.go(4763,1362,10,35)
-  src.nbTags_remove
+if (<src.tag(level)> >= <def_tutorial_min_level>)
+  src.f_tutorial_leave
 endif
 		
 [speech spk_nb_gatekeeper]
@@ -1639,9 +1784,234 @@ ON = *dobry*
 ON = *ukol*
 
 if (<distance>>3)
-	Src.SysMessage("Na takovou vzdalenost s tebou jednat nebude")
+	src.SysMessage("Na takovou vzdalenost s tebou jednat nebude")
 else
 	f_nb_gatekeeper
 endif
+
+
+
+//////////////////////////////////////////////////
+//////////////      K A M E N Y     //////////////
+//////////////////////////////////////////////////
+
+[ITEMDEF I_stone_start]
+NAME=Stone of the Beginning
+ID=i_grave_stone_4
+type=t_script
+
+on=@create
+color=0481
+
+on=@userdclick
+src.DIALOG D_RACEclass_background
+src.DIALOG D_RACEclass_classes_tutor
+return 1
+
+
+[DIALOG D_RACEclass_classes_tutor]
+gumppic 140 200 2200
+button(170,210,2151,2152,1,0,1)
+button(170,246,2151,2152,1,0,2)
+button(170,282,2151,2152,1,0,3)
+button(170,318,2151,2152,1,0,4)
+button(170,354,2151,2152,1,0,5)
+
+button(325,210,2151,2152,1,0,6)
+button(325,246,2151,2152,1,0,7)//shaman
+button(325,282,2151,2152,1,0,8)
+button(325,318,2151,2152,1,0,9)
+//button(325,354,2151,2152,1,0,10)
+argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?seznamclass[0]?></BASEFONT> ,0,0)
+argo.HTMLGUMPa(365,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?seznamclass[1]?></BASEFONT> ,0,0)
+//BUTTON 170 380 4016 4016 1 0 8
+//BUTTON 435 380 4024 4024 1 0 9
+
+[DIALOG D_RACEclass_classes_tutor Button]
+on=0
+dialogclose(D_RACEclass_background, 0)
+
+on=@anybutton
+if (!strlen(<def_class[argn]>))
+  src.sysMessage("Chyba")
+  return 1
+endif
+TAG(class,<def_class[argn]>)
+if (strlen(<?classinfo_<TAG(class)>[0]?>)>5)
+  tag(startdialog,"classinfo_<TAG(class)>")
+  dialog(D_RACEclass_info,"dialog(D_RACEclass_classes)","dialog(D_RACEclass_races)")
+else
+  dialog(D_RACEclass_stats_tutor)
+endif
+
+[DIALOG D_RACEclass_stats_tutor]
+gumppic 140 200 2200
+
+//argo.BUTTON(170,380,4016,4016,1,0,1)
+argo.BUTTON(435,380,4024,4024,1,0,2)
+
+argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?choosestats[0]?></BASEFONT>,0,0)
+argo.HTMLGUMPa(335,215,110,20,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?choosestats[1]?></BASEFONT>,0,0)
+
+argo.texta(180,233,1000,"(<?basestats_<tag.class>_str_min?> - <?basestats_<tag.class>_str_max?>)")
+argo.texta(180,269,1000,"(<?basestats_<tag.class>_dex_min?> - <?basestats_<tag.class>_dex_max?>)")
+argo.texta(180,305,1000,"(<?basestats_<tag.class>_int_min?> - <?basestats_<tag.class>_int_max?>)")
+argo.texta(180,341,1000,"(<?basestats_<tag.class>_vit_min?> - <?basestats_<tag.class>_vit_max?>)")
+
+argo.gumppic(330,231,2445)
+argo.gumppic(330,267,2445)
+argo.gumppic(330,303,2445)
+argo.gumppic(330,339,2445)
+
+argo.settext(10,<?eval tag(basestr)?>)
+argo.settext(11,<?eval tag(basedex)?>)
+argo.settext(12,<?eval tag(baseintel)?>)
+argo.settext(13,<?eval tag(basevit)?>)
+
+argo.textentry(340,233,300,30,1000,100,10)
+argo.textentry(340,269,300,30,1000,101,11)
+argo.textentry(340,305,300,30,1000,102,12)
+argo.textentry(340,341,300,30,1000,103,13)
+
+
+[DIALOG D_RACEclass_stats_tutor Button]
+on=0
+dialogclose(D_RACEclass_background, 0)
+
+on=2
+tag(basestr,<fixNumber(<argtxt(100)>)>)
+tag(basedex,<fixNumber(<argtxt(101)>)>)
+tag(baseintel,<fixNumber(<argtxt(102)>)>)
+tag(basevit,<fixNumber(<argtxt(103)>)>)
+if (<eval tag.basestr>><basestats_<tag.class>_str_max>)||(<eval tag.basestr><<basestats_<tag.class>_str_min>)
+  redmessage("Sila neni v danem rozsahu!")
+  DIALOG D_RACEclass_stats_tutor
+  return 0
+elseif (<eval tag.basedex>><basestats_<tag.class>_dex_max>)||(<eval tag.basedex><<basestats_<tag.class>_dex_min>)
+  redmessage("Obratnost neni v danem rozsahu!")
+  DIALOG D_RACEclass_stats_tutor
+  return 0
+elseif (<eval tag.baseintel>><basestats_<tag.class>_int_max>)||(<eval tag.baseintel><<basestats_<tag.class>_int_min>)
+  redmessage("Inteligence neni v danem rozsahu!")
+  DIALOG D_RACEclass_stats_tutor
+  return 0
+elseif (<eval tag.basevit>><basestats_<tag.class>_vit_max>)||(<eval tag.basevit><<basestats_<tag.class>_vit_min>)
+  redmessage("Vitalita neni v danem rozsahu!")
+  DIALOG D_RACEclass_stats_tutor
+  return 0
+elseif (<eval tag(basevit)+tag(baseintel)+tag(basedex)+tag(basestr)>!=300)
+  redmessage("Soucet statu musi byt 300, je ale <eval tag(basevit)+tag(baseintel)+tag(basedex)+tag(basestr)>.")
+  DIALOG D_RACEclass_stats_tutor
+  return 0
+endif
+class(<tag.class>)
+tag.remove(resetting)
+//startrace	//je potreba tag race - nastavime az po tutorialu
+//startnation // pokud se nepletu, v tutorialu nam je nation nanic ?
+setplayer
+zakladstats
+zakladabilities
+tag.remove(startdialogpage)
+tag.remove(startdialog)
+tag.remove(resetting)
+accmsg(Chose profession #<tag(class)># and nation #<tag(nation)>#)
+dialogclose(D_RACEclass_background, 0)
+classmessage("Nyni projdi branou do tutorialu.")
+//novy postavy pote projdou startovni branou i_port_start do tutorialu
+
+
+[function f_tutorial_leave]
+go(4763,1362,10,35)
+nbTags_remove
+sysMessage("V tutorialu se jiz nic noveho nenaucis!")
+
+[itemdef i_port_start]
+name=Portal do tutorialu
+id=i_moongate_blue
+
+on=@Step
+if (strlen(<src.tag(class)>))
+  if (strlen(<src.tag(basestr)>))
+    src.f_port_tutorial
+    return 1
+  endif
+endif
+src.sysMessage("Pred odchodem musis mit nastavenou postavu pomoci startovniho kamene.")
+return 1
+
+[function f_port_tutorial]
+startclass
+go(tutorial)
+home=5412,2555,13,35 //tutorial
+events +e_noport // pridame mu noport
+underwear=0      // aby nedostavali CC pri zabiti, defaultne je 1
+hits=<src.maxhits>
+stam=<src.maxstam>
+mana=<src.maxmana>
+spelleffect(6,1000)  // svetlo
+
+[itemdef i_stone_start2]
+NAME=Stone of the Beginning
+ID=i_grave_stone_4
+type=t_script
+
+on=@create
+color=0481
+
+on=@userdclick
+src.DIALOG D_RACEclass_background
+src.DIALOG D_RACEclass_races
+return 1
+
+[itemdef i_port_start2]
+name=Portal do sveta
+id=i_moongate_blue
+
+on=@Step
+if (0<src.tag(level)> < <def_tutorial_min_level>)
+  src.f_port_tutorial
+  src.sysMessage("Nemuzes opustit tutorial pred dosazenim urovne <def_tutorial_min_level>.")
+  return 1
+endif
+if (strlen(<src.tag(nation)>))
+  if (strlen(<src.tag(race)>))
+    if (strlen(<src.tag(realm)>))
+      src.tag.remove(prevest)
+      src.startfinal
+      src.gohome
+      src.events -e_noport
+      return 1
+    endif
+  endif
+endif
+src.sysMessage("Pred odchodem musis mit nastavenou postavu pomoci startovniho kamene.")
+return 1
+
+[function startfinal]
+if (tag.level >= 3)
+  tag(skillrank,1) // rovnou mu dame experta
+endif
+eqlayers(remove)
+findlayer(layer_pack).remove
+findlayer(layer_dragging).remove
+givegold(15000)
+giveitem(i_rune_base)
+giveitem(i_crystal_<tag.class>)
+newloot(tm_<tag.class>newbie)
+findlayer(layer_hand1).bounce
+findlayer(layer_hand2).bounce
+findlayer(layer_hand2).bounce
+eqlayers(color=color_<tag.class>)
+arg(kolik_bodu,<eval <tag(level)>*5>)
+while (findlayer(layer_pack).findid(i_dovedbod))
+  findlayer(layer_pack).findid(i_dovedbod).remove
+endwhile
+if (<arg(kolik_bodu)>) //pokud to neni nula, jinak nedostane nic!
+  bouncepoint(<arg(kolik_bodu)>)
+endif
+zakladstats
+zakladabilities
+zakladskills
+nbOffTtQTags_remove
 
 [EOF]

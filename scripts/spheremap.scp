@@ -3235,7 +3235,6 @@ mapplane=56
 resources=r_default_rock, r_default_water, r_default_tree
 tag.arena=1
 tag.nobank=1
-events=e_startdung   // nejde zde zabijet, lootit jine
 RAINCHANCE=00
 COLDCHANCE=50
 

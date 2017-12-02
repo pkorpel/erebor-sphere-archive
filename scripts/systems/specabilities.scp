@@ -506,6 +506,9 @@ elseif (isdead)
 endif
 if (distancefrom(var(roundattack_src))==1)
   src=var(roundattack_src)
+  if ((<src.z> > <eval <z> +4>) || (<src.z> < <eval <z>-4>))
+    return
+  endif
   if (<argv(0)>) // suppress same realm pvpDmg
     if (isPlayer)
       if (<eval tag.realm> == <eval src.tag(realm)>)
