@@ -32,9 +32,13 @@ elseif ((<eval src.tag.q009_krejci> == 2) && (<eval src.tag.q009_krejci_ringtime
 elseif (<eval src.tag.q009_krejci> == 2)
   src.tag.q009_krejci_ringtime= (<eval src.tag(q009_krejci_ringtime)>+10800)
   DIALOG(d_q009_krejci_4)
-elseif ((<eval src.tag.q009_krejci> == 1) && (<src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 ))
-  DIALOG(d_q009_krejci_3)
-elseif (<eval src.tag.q009_krejci> == 1)
+elseif ((<eval src.tag.q009_krejci> == 1)
+  if (src.findlayer(layer_pack).findid(i_cashiers_check))
+    if (<eval src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 )
+      DIALOG(d_q009_krejci_3)
+      return
+    endif
+  endif
   DIALOG(d_q009_krejci_2)
 elseif (<eval src.tag.q009_krejci> == 0)
   DIALOG(d_q009_krejci_1)
@@ -256,14 +260,16 @@ Mas jen me slovo a jistotu, ze opustit toto staveni by pro mne bylo tezsi nez sm
 
 [dialog d_q009_krejci_3 button]
 on=1
- if (<src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 )
-   SAY("Tedy dohodnuto, stav se zde zitra, prsten by mel byt pripraven.")
-   src.findlayer(layer_pack).findid(i_cashiers_check).remove
-   src.tag(q009_krejci_ringtime,<eval (<serv.time>+86400)>)
-   src.tag(q009_krejci,2)
- else
-   SAY("Kam jsi dal ten sek ?")
- endif
+if (src.findlayer(layer_pack).findid(i_cashiers_check))
+  if (<eval src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 )
+    SAY("Tedy dohodnuto, stav se zde zitra, prsten by mel byt pripraven.")
+    src.findlayer(layer_pack).findid(i_cashiers_check).remove
+    src.tag(q009_krejci_ringtime,<eval (<serv.time>+86400)>)
+    src.tag(q009_krejci,2)
+    return
+  endif
+endif
+SAY("Kam jsi dal ten sek ?")
 
 
 on=2
