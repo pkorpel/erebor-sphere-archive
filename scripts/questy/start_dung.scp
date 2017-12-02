@@ -1939,7 +1939,7 @@ endif
 src.sysMessage("Pred odchodem musis mit nastavenou postavu pomoci startovniho kamene.")
 return 1
 
-[fucntion f_port_tutorial]
+[function f_port_tutorial]
 startclass
 go(tutorial)
 home=5412,2555,13,35 //tutorial
