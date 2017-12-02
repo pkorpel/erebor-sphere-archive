@@ -691,8 +691,8 @@ tag(resist_slash,-200)        //sekery
 tag(resist_pierce,-400)
 tag(resist_blunt,300)
 
-tag(resist_fire,150)
-tag(resist_elect,-350)
+tag(resist_fire,0)
+tag(resist_elect,-450)
 tag(resist_cold,100)
 
 WRESTLING={50.0 70.0}
@@ -833,8 +833,8 @@ tag(resist_slash,-200)        //sekery
 tag(resist_pierce,-400)
 tag(resist_blunt,300)
 
-tag(resist_fire,150)
-tag(resist_elect,-250)
+tag(resist_fire,-150)
+tag(resist_elect,-550)
 tag(resist_cold,100)
 
 PARRYING={50.0 60.0}
