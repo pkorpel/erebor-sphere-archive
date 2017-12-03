@@ -1157,8 +1157,8 @@ endif
 // MANUALLY ADDED
 // this function MUST be added manually to EACH of the defined vargates
 [function f_vg_finishDng] // argv(0) - the dungeon's ID defined in defnames
-if (src.isEvent(e_weekly_finishDungeon))
-  arg(weekly,<src.findid(i_memory_weekly_quest)>)
+if (isEvent(e_weekly_finishDungeon))
+  arg(weekly,<findid(i_memory_weekly_quest)>)
   arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<argv(0)>,finishDungeon)>)
   if (arg(questId) != -1)
     weekly.f_weekly_increase(<arg(questId)>,1,1)
