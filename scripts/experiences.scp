@@ -402,7 +402,7 @@ f_setmainability
 
 [function f_newLevel_customActions]
 if (isEvent e_nbdung)
-  if (<eval tag.level> > <def_tutorial_max_level>) // vyhodit z tutorialu, pokud tam je prilis dlouho
+  if (<eval tag.level> >= <def_tutorial_max_level>) // vyhodit z tutorialu, pokud tam je prilis dlouho
     f_tutorial_leave
   endif
 endif
