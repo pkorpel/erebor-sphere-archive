@@ -321,7 +321,7 @@ endif
 ON=2
 if ((src.qtag(nb001)==1)&&(src.rescount(i_hides_cut))>=15)
 	src.qtag(nb001,2)
-	src.consume(50,i_hides_cut)
+	src.consume(15,i_hides_cut)
 	src.addexp(100)
 	say("Dekuji moc.")
 	f_quest_complete(23)  // splnenie questu "Lovec Odlier - kuze"
@@ -333,10 +333,10 @@ src.qtag(nb001,3)
 ON=4
 if ((src.qtag(nb001)==3)&&(src.rescount(i_ribs_cooked))>=10)
 	src.qtag(nb001, 4)
-	src.consume(20,i_ribs_cooked)
+	src.consume(10,i_ribs_cooked)
 	src.addexp(75)
 	say("Dekuji ti.")
-	 f_quest_complete(23,1)  // splnenie questu "Lovec Odlier - maso"
+	f_quest_complete(23,1)  // splnenie questu "Lovec Odlier - maso"
 endif
 		
 [speech spk_nb001]
@@ -466,7 +466,7 @@ endif
 ON=2
 if ((src.qtag(nb002)==1)&&(src.rescount(i_bandage))>=50)
 	src.qtag(nb002,2)
-	src.consume(200,i_bandage)
+	src.consume(50,i_bandage)
 	src.addexp(75)
 	f_quest_complete(24)  // splnenie questu "Akolytka Mirana"
 endif
@@ -1050,7 +1050,7 @@ src.qtag(nb005,3)
 ON=4
 if ((src.qtag(nb005)==3)&&(src.rescount(i_fish_cut_cooked))>=10)
 	src.qtag(nb005,4)
-	src.consume(100,i_fish_cut_cooked)
+	src.consume(10,i_fish_cut_cooked)
 	src.addexp(100)
 	say("Dekuji ti.")
 	f_quest_complete(27,1)  // splnenie questu "rybar Broket - fish maso"
