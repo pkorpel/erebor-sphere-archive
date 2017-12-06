@@ -301,8 +301,8 @@ To nestaci! Potrebuji toho masa vic! <basefont color="#ffff88">*mraci se*<basefo
 To maso ale voni! Podej mi ho. Dekuji ti.	//20
 *Podat maso*	//21
 Promin, <?src.sex(zapomel,zapomela)?> jsem, co jsem <?src.sex(mel,mela)?> prinist.	//22
-Chtel jsem po tobe 50 kusu zpracovane kuze. <basefont color="#ffff88">*Pozorne se na tebe diva*<basefont color="#ffffff">	//23
-Chcel jsem po tobe 20 kousku stavnatych steaku z divoke zvere.	//24
+Chtel jsem po tobe 15 kusu zpracovane kuze. <basefont color="#ffff88">*Pozorne se na tebe diva*<basefont color="#ffffff">	//23
+Chtel jsem po tobe 10 kousku stavnatych steaku z divoke zvere.	//24
 Potrebuji poradit//25
 Jak ti muzu pomoct?	//26
 Jak ziskam kuzi?	//27
@@ -450,7 +450,7 @@ Este budiz pochvalena! <?src.sex(Prinesl,prinesla)?> si je. Mohu se opet venovat
 Uz nic nepotrebuji, dekuji. I tobe se obvazy mohou hodit. Staci je prilozit na ranu, ale pamatuj, ze obvazy musi byt udrzovany v cistote!//13
 Promin, ale to je malo. Potrebuji vic.//14
 Promin, <?src.sex(zapomel,zapomela)?> jsem, co jsem <?src.sex(mel,mela)?> prinest.	//15
-Potrebuji od tebe 200 obvazu. <basefont color="#ffff88">*usmiva se*<basefont color="#ffffff">	//16
+Potrebuji od tebe 50 obvazu. <basefont color="#ffff88">*usmiva se*<basefont color="#ffffff">	//16
 Jak udelam obvazy? //17
 Obvazy ziskas rozstrihanim latky nebo kusu obleceni na male kousky. Latku lze utkat na tkacovskem stavu z niti. Nite muzes udelat z bavlny nebo z vlny tak, ze je upredes na kolovratku. Vlnu ziskas strihanim ovci a bavlnu sklizenim bavlniku. //18
 Potrebuji poradit //19
@@ -1015,7 +1015,7 @@ To nestaci! Potrebuji vic steaku! <basefont color="#ffff88">*mraci se*<basefont 
 Nadhera! Podej mi to. Dekuji.	//20
 Promin, <?src.sex(zapomel,zapomela)?> jsem, co jsem <?src.sex(mel,mela)?> prinest.	//21
 Chtel jsem po tobe, abys <?src.sex(nalovil,nalovila)?> 5 kusu ryb a <?src.sex(prinesl,prinesla)?> mi je.	//22
-Chtel jsem po tobe, abys <?src.sex(prinesl,prinesla)?> 10 kusu rybacich steaku <?src.sex(prinesl,prinesla)?> mi je.	//23
+Chtel jsem po tobe, abys <?src.sex(prinesl,prinesla)?> 10 kusu rybich steaku.	//23
 Potrebuji poradit	//24
 Jak ti muzu poradit?	//25
 Jak mam lovit ryby?	//26
