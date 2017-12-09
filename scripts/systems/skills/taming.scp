@@ -114,7 +114,7 @@ elseif !(cont.f_canseelos(<link>))
 elseif (morex)
   cont.sysmessage("Ochocovani bylo preruseno.")
   if (<eval cont.tag(LastTamingAttemp)> >= <serv.time>)
-    cont.accmsg("hrac se pokousi podezrele rychle tamovat <link.name>(<link>) na pozici <p>. Pokus o zneuziti stareho bugu gainovani pres umyslny fizz?")
+    cont.accmsg("hrac se pokousi podezrele rychle tamovat <link.name>(<link>) na pozici <cont.p>(<cont.region.name>). Pokus o zneuziti stareho bugu gainovani pres umyslny fizz?")
   endif
   cont.tag(LastTamingAttemp,<eval (<serv.time>+30)>)
   remove

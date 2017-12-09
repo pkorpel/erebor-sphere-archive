@@ -5751,15 +5751,16 @@ endif
 [function skillgain]    // argv(0) - skill to increase, argv(1) - changer of chance (100 = 100% = without change)
 arg(skillname,<findres(skill,<args>).key>)
 arg(skillvalue,<?<arg(skillname)>?>)
-if (npc)||(<region.flags>&region_flag_safe)
+if (npc) || (<region.flags>&region_flag_safe)
 else
- if (arg(skillvalue)<profession.<arg(skillname)>)
-  arg(advrate,<eval (advrate_<arg(skillname)>)>)
-  arg(rand,<eval {0 <eval ((<arg(skillvalue)>*<arg(skillvalue)>*<arg(advrate)>)/(10000*<argv(1)>))> }>)//mnozstvi pokusu na skillgain
-  if !(arg(rand))//||(<isgm>)
-   <arg(skillname)>=<eval <arg(skillvalue)>+1>
-  endif
- endif 
+  if (arg(skillvalue)<profession.<arg(skillname)>)
+    arg(advrate,<eval (advrate_<arg(skillname)>)>)
+    arg(rand,<eval {0 <eval ((<arg(skillvalue)>*<arg(skillvalue)>*<arg(advrate)>)/(10000*<argv(1)>))> }>)//mnozstvi pokusu na skillgain
+    if !(arg(rand))//||(<isgm>)
+      accmgs("ziskal gain u skillu <arg(skillname)>(<arg(skillvalue)>%) s bonusem <argv(1)> na pozici <p>(<region.name>)")
+      <arg(skillname)>=<eval <arg(skillvalue)>+1>
+    endif
+  endif 
 endif
 
 [itemdef i_npc_mount]
