@@ -797,11 +797,11 @@ while (<arg(i)> < <tag(itemDClicksCount)>)
         arg(declarator,<var(war_declarator_1)>)
       endif
       if(!strcmpi(<declarator.tag(war_declared_on)>,<argv(0).tag(fort_name)>))  // je vyhlasena valka na tento palantir?
-       if !(declarator.canbewar) //je cas valky?
-        return
-       endif
+        if !(declarator.more1l) //je cas valky?
+          return
+        endif
       else
-       return
+        return
       endif
     endif
     if (f_weekly_increase(<arg(questId)>,1,1))
