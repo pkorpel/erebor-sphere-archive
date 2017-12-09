@@ -74,7 +74,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
           switchColor(<src.tag(realm)>)
           timer=1
           say("Obrana pevnosti byla prolomena! Uhlidej palantir po dobu <tag(timer_prolomeni)> s.")
-          scylla.delayedmessage("Dobyvani: <serverTime> obrana <d_area_<tag(fort_name)>_1> prolomena <src>-<src.name>(<src.account.name>)")
+//           scylla.delayedmessage("Dobyvani: <serverTime> obrana <d_area_<tag(fort_name)>_1> prolomena <src>-<src.name>(<src.account.name>)")
           src.accmsg("prolomil obranu pevnosti <d_area_<tag(fort_name)>_1> do uspesneho dobyti zbyva udrzet pevnost <eval tag(timer_prolomeni)>s.")
           tag(conquerors_realm,<src.tag(realm)>) //zapamatovat realm dobyvatele
           tag(prolomeni,1)
@@ -92,7 +92,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
           return 1
         else
           src.sysmessage("Jeste zbyvaji nejake straze k zabiti.")
-          scylla.delayedmessage("Dobyvani: <serverTime> Obrana <d_area_<tag(fort_name)>_1> neprolomena <src>-<src.name>(<src.account.name>) - zbyvaji straze k zabiti.")
+//           scylla.delayedmessage("Dobyvani: <serverTime> Obrana <d_area_<tag(fort_name)>_1> neprolomena <src>-<src.name>(<src.account.name>) - zbyvaji straze k zabiti.")
           return 1
         endif
       else //neni vyhlasena valka
@@ -100,7 +100,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
       endif    
     else //uz prolomili   
       src.sysmessage("Obrana jiz prolomena byla.")
-      scylla.delayedmessage("Dobyvani: <serverTime> Obrana <d_area_<tag(fort_name)>_1> jiz byla prolomena, nyni klikal <src>-<src.name>(<src.account.name>), zbyva uhlidat <tag(timer_prolomeni)> s.")
+//       scylla.delayedmessage("Dobyvani: <serverTime> Obrana <d_area_<tag(fort_name)>_1> jiz byla prolomena, nyni klikal <src>-<src.name>(<src.account.name>), zbyva uhlidat <tag(timer_prolomeni)> s.")
       return 1 
     endif
   else //klikl obrance
@@ -110,7 +110,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
     else //odvraceni prolomeni   
       say("Prolomeni bylo prozatim zvraceno.")
       switchColor(<src.tag(realm)>)
-      scylla.delayedmessage("Dobyvani: <serverTime> prolomeni <d_area_<tag(fort_name)>_1> odvraceno <src>-<src.name>(<src.account.name>).")
+//       scylla.delayedmessage("Dobyvani: <serverTime> prolomeni <d_area_<tag(fort_name)>_1> odvraceno <src>-<src.name>(<src.account.name>).")
       src.accmsg("odvratil prolomeni obrany pevnosti <d_area_<tag(fort_name)>_1> do uspesneho dobyti zbyvalo <eval tag(timer_prolomeni)>s.")
       tag(prolomeni,0)
       tag(conquerors_realm,<src.tag(realm)>)
@@ -129,7 +129,7 @@ else
 endif
 if (wasdeclaredwar(<tag(fort_name)>,<which_realm>) == 0) //byla vubec valka vyhlasena? (neskoncil uz nahodou odpocet?)
   say("Cas na uspesne dobyti pevnosti vyprsel. Pevnost byla ubranena.")
-  scylla.delayedmessage("Dobyvani: <serverTime> pevnost <d_area_<tag(fort_name)>_1> byla ubranena, vyprsel cas na dobyti.")
+//   scylla.delayedmessage("Dobyvani: <serverTime> pevnost <d_area_<tag(fort_name)>_1> byla ubranena, vyprsel cas na dobyti.")
   tag(prolomeni,0)
   tag(conquerors_realm,<tag(owners_realm)>) //vratit realm na default
   tag(timer_prolomeni,<nastaveni_pevnosti_doba_prolomeni>) //default
@@ -142,7 +142,7 @@ if (<tag(prolomeni)> == 1) //vyprsel timer a mame prolomeni
     if (<eval (<tag(timer_prolomeni)> % 10)> == 0) //Obcas hlaska 
       say("Uhlidej palantir jeste <tag(timer_prolomeni)> s.")
       if (<eval (<tag(timer_prolomeni)> % 60)> == 0) //Obcas zprava 
-        scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> jeste zbyva uhlidat <tag(timer_prolomeni)>s.")  
+//         scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> jeste zbyva uhlidat <tag(timer_prolomeni)>s.")  
         if (<tag(conquerors_realm)> == 1) //hlasi novy gondorsky palantir
           arg(gondr_msg,"Jeste <tag(timer_prolomeni)>s a pevnost <d_area_<tag(fort_name)>_1> je nase!")
           arg(mordr_msg,"Jeste <tag(timer_prolomeni)>s a prijdeme o pevnost <d_area_<tag(fort_name)>_1>!")
@@ -160,7 +160,7 @@ if (<tag(prolomeni)> == 1) //vyprsel timer a mame prolomeni
     return 1
   else //vyprselo to uplne (dano nastavenim doby prolomeni)
     say("Pevnost byla dobyta.")  
-    scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> byla dobyta.")   
+//     scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> byla dobyta.")   
     handleConqueredFort
     if (<tag(owners_realm)> == 1) //hlasi novy gondorsky palantir
       arg(gondr_msg,"Dobyli jsme pevnost <d_area_<tag(fort_name)>_1>!")
@@ -181,14 +181,14 @@ else //jen odvraceno prolomeni
     arg(k_ubraneni_zbyva,<eval (<nastaveni_pevnosti_doba_prolomeni>-<eval tag(timer_prolomeni)>)>)
     if (<eval (<eval k_ubraneni_zbyva> % 10)> == 0)
       say("Nedovol nepriteli dotknout se palantiru jeste alespon <k_ubraneni_zbyva> s.")
-      if (<eval (<eval k_ubraneni_zbyva> % 60)> == 0) //obcas zprava
-        scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> odvraceno prolomeni jeste zbyva uhlidat <tag(timer_prolomeni)> s.")   
-      endif
+//       if (<eval (<eval k_ubraneni_zbyva> % 60)> == 0) //obcas zprava
+//         scylla.delayedmessage("Dobyvani: <serverTime> <d_area_<tag(fort_name)>_1> odvraceno prolomeni jeste zbyva uhlidat <tag(timer_prolomeni)> s.")   
+//       endif
     endif
     timer=1
   else //pripocet dobehl az nahoru - konec prolomeni, ted to nevyslo
     say("Prolomeni odvraceno.")
-    scylla.delayedmessage("Dobyvani: <d_area_<tag(fort_name)>_1> odpocet dobehl - prolomeni odvraceno.")   
+//     scylla.delayedmessage("Dobyvani: <d_area_<tag(fort_name)>_1> odpocet dobehl - prolomeni odvraceno.")   
     tag(prolomeni,0)
     timer=-1  
     color=0 //neutralni barva, bez prolomeni
@@ -507,7 +507,7 @@ else
   plr.f_uniformRealm_set(12,<plr>)
 endif
 plr.classmessage("<plr.sex(Byl jsi jmenovan kapitanem,Byla jsi jmenovana kapitankou)> pevnosti <fort.tag(jmeno_mesta)>.")
-scylla.delayedmessage("Hrac <plr>-<plr.name>(<plr.account.name>) byl jmenovan kapitanem pevnosti <fort.tag(jmeno_mesta)>.")   
+// scylla.delayedmessage("Hrac <plr>-<plr.name>(<plr.account.name>) byl jmenovan kapitanem pevnosti <fort.tag(jmeno_mesta)>.")   
 return 1
 
 [function swapGuards] //Vymenit guardy v pevnosti za jejich protejsky
