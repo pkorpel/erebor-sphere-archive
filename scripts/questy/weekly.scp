@@ -124,15 +124,15 @@ def_weekly_medium_setupFunction[2]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[2]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_2_[0]   "prime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_2_[1]   50 // multiplier prijateho dmg
-def_weekly_medium_setupFunArg_2_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
-def_weekly_medium_rewardSize[2]       108
+def_weekly_medium_setupFunArg_2_[2]   30 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
+def_weekly_medium_rewardSize[2]       100
 
 def_weekly_medium_setupFunction[3]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[3]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_3_[0]   "neprime" //prvni argument setup funkce
-def_weekly_medium_setupFunArg_3_[1]   15 // multiplier prijateho dmg
-def_weekly_medium_setupFunArg_3_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta 
-def_weekly_medium_rewardSize[3]       115
+def_weekly_medium_setupFunArg_3_[1]   10 // multiplier prijateho dmg
+def_weekly_medium_setupFunArg_3_[2]   30 // kolik % z bezneho naroku pro maga/ranga/shamana/necra/mystika/crafta 
+def_weekly_medium_rewardSize[3]       110
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
