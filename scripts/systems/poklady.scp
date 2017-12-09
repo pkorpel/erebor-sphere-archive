@@ -479,7 +479,7 @@ elseif (type!=t_container_locked)
       endif
     endif
   endif
-  if (<eval tag(wasOpened)>==0)
+  if (<eval tag(wasOpened)> == 0)
     tag(wasOpened,1)
     treasureKeeper.f_treasure_generate(<uid>)
     treasureKeeper.f_treasure_initTreasureGenerator
@@ -490,8 +490,10 @@ elseif (type!=t_container_locked)
 endif
 
 on=@timer
-arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
-treasureKeeper.f_treasure_initTreasureGenerator
+if (<eval tag(wasOpened)> == 0)
+  arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
+  treasureKeeper.f_treasure_initTreasureGenerator
+endif
 return 0 // remove
 
 // argv(0) -> uid truhly
