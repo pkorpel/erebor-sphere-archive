@@ -1221,6 +1221,9 @@ endwhile
 src.equiptag(<argv(0)>,<uid>)
 if (isChar)
   src.classMessage("Charakter byl uspesne zaznamenan.")
+  if ((npc) && !(isPet))
+    src.accmsg("si nastavil NPC na <argv(0)> - <name>(<uid>) na pozici <p>(<region.name>)")
+  endif
 elseif (isItem)
   src.classMessage("Predmet byl uspesne zaznamenan.")
 endif
