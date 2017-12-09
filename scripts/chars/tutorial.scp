@@ -43,7 +43,7 @@ maxmana=0
 tag.experience=3.0
 
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCatute>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 
@@ -183,7 +183,7 @@ maxmana=0
 tag.experience=12.0
 
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCatute>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]> //str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 
@@ -610,7 +610,7 @@ maxmana=0
 tag.experience=30.0
 tag(hypnotizable,0)
 
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCatute> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
