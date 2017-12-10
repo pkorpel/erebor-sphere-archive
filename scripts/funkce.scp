@@ -5757,7 +5757,7 @@ else
     arg(advrate,<eval (advrate_<arg(skillname)>)>)
     arg(rand,<eval {0 <eval ((<arg(skillvalue)>*<arg(skillvalue)>*<arg(advrate)>)/(10000*<argv(1)>))> }>)//mnozstvi pokusu na skillgain
     if !(arg(rand))//||(<isgm>)
-      accmgs("ziskal gain u skillu <arg(skillname)>(<arg(skillvalue)>%) s bonusem <argv(1)> na pozici <p>(<region.name>)")
+      accmsg("ziskal gain u skillu <arg(skillname)>(<arg(skillvalue)>%) s bonusem <argv(1)> na pozici <p>(<region.name>)")
       <arg(skillname)>=<eval <arg(skillvalue)>+1>
     endif
   endif 
