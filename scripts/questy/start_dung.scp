@@ -246,7 +246,7 @@ if (src.qtag(nb001)==1)
 		argo.HTMLGUMP(170,230,440,100,16,0,36)
 	endif
 elseif (src.qtag(nb001)==3)
-	if (src.rescount(i_ribs_cooked)>=20)
+	if (src.rescount(i_ribs_cooked)>=10)
 		argo.HTMLGUMP(170,230,440,100,20,0,36)
 		argo.button(25,395,0fa5,0fa7,1,0,4)
 		argo.text(60,395,152,21)
