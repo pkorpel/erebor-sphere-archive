@@ -120,7 +120,7 @@ SOUND=snd_ANIMALS_PIG1
 ICON=i_pet_PIG
 CAN=MT_WALK|MT_RUN
 
-attack=12
+attack=10
 ARMOR=15
 moverate=7
 
@@ -133,6 +133,7 @@ DESCRIPTION=Zlate prasatko
 
 TEVENTS=e_monster
 TEVENTS=e_character
+TEVENTS=e_craft_monster
 
 ON=@Create
 NPC=brain_animal
@@ -140,12 +141,12 @@ FAME=1000
 KARMA={-2200 -2500}
 COLOR=0995
 
-str=120
-dex={90 120}
+str=100
+dex={50 70}
 int={10 14}
 
-maxhits=1000
-maxstam={560 880}
+maxhits=500
+maxstam={120 300}
 maxmana=0
 
 parrying=55.0
