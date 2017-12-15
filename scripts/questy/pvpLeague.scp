@@ -179,6 +179,7 @@ f_pvpLeague_checkExpiration
 arg(mem,<finduid(<f_pvpLeague_getLeagueMemory>)>)
 mem.more2=<eval mem.more2>+<argv(0)>
 var(pvpLeague).f_pvpLeague_storeRank(<uid>,<eval mem.more2>)
+f_christmasEvent_generateBulb_PvP(<argv(0)>)
 
 [function f_pvpLeague_getLeagueMemory]
 arg(mem,<findid(i_memory_pvpLeague)>)
