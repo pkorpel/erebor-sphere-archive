@@ -471,7 +471,7 @@ NAME=ChristmasQuest
 TYPE=T_EQ_SCRIPT
 
 ON=@EQUIP
-TIMER=1036800
+TIMER=3000000
 ATTR=094
 tag(odevzdanych_banek,0)
 tag(bonus_zkusenosti,0)
@@ -486,6 +486,6 @@ if (<eval tag(bonus_zkusenosti)> > 0)
 endif
 
 ON=@timer
-remove
+return 1
 
 [eof]
