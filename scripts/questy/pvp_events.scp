@@ -24,7 +24,11 @@ attr=attr_invis|attr_move_never
 timer=3
 
 on=@Timer
-arg(defaultPortP,"5280, 3472, 35,55")
+if (<eval cont.tag(Realm)> == 1)
+  arg(defaultPortP,"5280, 3472, 35, 0")   // Gondor Arena 
+else
+  arg(defaultPortP,"5280, 3472, 35,55")   // Mordor Arena
+endif
 cont.go(<cont.tag(PvP_deathP)>)
 cont.tag.remove(PvP_deathP)
 topobj.spelleffect(s_resurrection,1000)
