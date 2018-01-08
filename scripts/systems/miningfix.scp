@@ -280,7 +280,7 @@ lastnew.p=<src.act.p>
 lastnew.attr_movenever=1
 lastnew.move(<dir_inttochar(<var(mydirection)>)>)
 var.remove(mydirection)
-lastnew.timer=60*60*12
+lastnew.timer=60*60*20
 lastnew.name=dulni zaval 
 lastnew.events=t_zavalTriggers
 lastnew.type=t_efectedByPickAxe
@@ -295,7 +295,7 @@ endif
 
 on=@Pickaxed
 arg(player,<tag(PickaxingSrc)>)
-if ({800 1300} < <player.mining>)&&(player.distancefrom(<uid>)<3)
+if ({1001 1300} < <player.mining>)&&(player.distancefrom(<uid>)<3)
   player.sysMessage("<player.sex(Odstranil,Odstranila)> jsi zaval!")
   remove
 else
