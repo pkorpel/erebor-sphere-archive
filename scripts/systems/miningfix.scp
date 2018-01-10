@@ -295,7 +295,7 @@ endif
 
 on=@Pickaxed
 arg(player,<tag(PickaxingSrc)>)
-if ({1001 1300} < <player.mining>)&&(player.distancefrom(<uid>)<3)
+if ({1000 1300} < <player.mining>)&&(player.distancefrom(<uid>)<3)
   player.sysMessage("<player.sex(Odstranil,Odstranila)> jsi zaval!")
   remove
 else
