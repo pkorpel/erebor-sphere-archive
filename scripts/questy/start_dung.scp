@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////
 
 [defnames def_tutorial]
-def_tutorial_min_level   1
+def_tutorial_min_level   3
 def_tutorial_max_level   5
 
 // tutTag
