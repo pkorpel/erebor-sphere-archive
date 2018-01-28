@@ -777,8 +777,6 @@ tag(resist_fire,200)
 tag(resist_elect,100)
 tag(resist_cold,100)
 
-taming=65.1
-animallore=65.0
 
 ITEMnewbie=i_monster_create
 
