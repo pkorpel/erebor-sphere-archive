@@ -36,7 +36,7 @@ endif
 timer=<nastaveni_splitShot_effecttime>
 
 on=@equip
-dialog(d_splitShot)
+cont.dialog(d_splitShot)
 cont.tag(splitShot,1)
 
 on=@timer

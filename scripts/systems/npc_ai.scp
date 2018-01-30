@@ -1507,7 +1507,6 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
 on=@aftergetswing
-on=@stopguarding
 on=@playerKill
 on=@npckill
 

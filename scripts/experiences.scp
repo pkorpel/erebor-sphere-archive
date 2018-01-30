@@ -187,59 +187,8 @@ if (tag(ra_speldodge)>20)
   tag(ra_speldodge,20)
  endif
 endif
-if (profession==class_shaman)
-  tag.remove(ra_bloodpact)
-  tag.remove(ra_lifepact)
-  tag.remove(ra_lifepact_hp)
-  tag.remove(ra_lifepact_mana)
-  tag.remove(ra_lifepact_stamina)
-  tag.remove(nextbloodpact)
-  tag.remove(bloodpact_to)
-  tag.remove(ra_pakt_krve)
-  tag.remove(ra_pakt_zivota)
-  tag.remove(ra_woodoo_pakty)
-  tag.remove(ra_pact_boost)
-endif
-tag.remove(bloodpact_disabled)
-tag.remove(bloodpact_by)
-if (tag(ra_mystikDoubleswing)>0)
- if (profession==class_mystik)
-   if (tag(level) < 30)
-    tag(ra_mystikDoubleswing,0)
-  elseif (tag(level) < 60)&&(tag(ra_mystikDoubleswing) > 10)
-    tag(ra_mystikDoubleswing,10)
-  elseif (tag(level) < 100)&&(tag(ra_mystikDoubleswing) > 20)
-    tag(ra_mystikDoubleswing,20)
-  elseif (tag(level) < 150)&&(tag(ra_mystikDoubleswing) > 30)
-    tag(ra_mystikDoubleswing,30)
-  endif
- endif
-endif
-if (tag(ra_doubleswing)>0)
-   if (tag(level) < 30)
-    tag(ra_doubleswing,0)
-  elseif (tag(level) < 60)&&(tag(ra_doubleswing) > 10)
-    tag(ra_doubleswing,10)
-  elseif (tag(level) < 100)&&(tag(ra_doubleswing) > 20)
-    tag(ra_doubleswing,20)
-  elseif (tag(level) < 150)&&(tag(ra_doubleswing) > 30)
-    tag(ra_doubleswing,30)
-  endif
-endif
-if (tag(ra_stuntattack_prodleva)>0)
-   if (tag(ra_stuntattack_prodleva) > 30)
-    tag(ra_stuntattack_prodleva,30)
-  endif
-  if (tag(level) < 50)&&(tag(ra_stuntattack_prodleva) > 0)
-    tag(ra_stuntattack_prodleva,0)
-  elseif (tag(level) < 100)&&(tag(ra_stuntattack_prodleva) > 10)
-    tag(ra_stuntattack_prodleva,10)
-  elseif (tag(level) < 150)&&(tag(ra_stuntattack_prodleva) > 20)
-    tag(ra_stuntattack_prodleva,20)
-  endif
-endif
 if (!(<?eval <eval tag(level)*2>-<ratotal>?> >= 0))
-  logmsg("resetujem ability hracovi <name>, pretoze mal zaporny pocet abilit bodov")
+  logmsg("resetujem ability hracovi <name>, protoze mel zaporny pocet abilit bodu")
   zakladabilities
 endif
 if (tag(prevest))
@@ -284,9 +233,6 @@ endif
 
 [function levstatstotal]
 return <eval tag(strlev)+tag(dexlev)+tag(intellev)+tag(vitlev)>
-
-[function ratotal]
-return <eval tag(ra_manareg)+tag(ra_hitsreg)+tag(ra_stamreg)+tag(ra_weapdodge)+tag(ra_speldodge)+tag(ra_hitsleech)+tag(ra_manaleech)+tag(ra_stamleech)+tag(ra_backstab)+tag(ra_warcry)+tag(ra_rangearrow)+tag(ra_stuntattack)+tag(ra_stuntattack_prodleva)+tag(ra_stuntattack_ucinnost)+tag(ra_roundattack)+tag(ra_doubleswing)+tag(ra_woodoo)+tag(ra_woodoo_curse)+tag(ra_woodoo_obet)+tag(ra_archery)+tag(ra_crushing)+tag(ra_sharps)+tag(ra_twohand)+tag(ra_knockback)+tag(ra_throwing)+tag(ra_leap)+tag(ra_bleed_bolt)+tag(ra_controlnpc)+tag(ra_buffSteal)+tag(ra_catch)+tag(ra_vykryti)+tag(ra_defstance)+tag(ra_energyshield)+tag(ra_woodoo_pacts)+tag(ra_woodoo_pacts_boost)+tag(ra_woodoo_lifepact)+tag(ra_woodoo_lifepact_stats)+tag(ra_voodooshield)+tag(ra_selfres)+tag(ra_selfres_hp)+tag(ra_selfres_mana)+tag(ra_selfres_stamina)+tag(ra_vigourMining)+tag(ra_vigourLumber)+tag(ra_mystikDoubleswing)+tag(ra_thief_rebound)+tag(ra_thief_defstance)+tag(ra_utok_do_zad)+tag(ra_podriznuti)+tag(ra_uderstitem)+tag(ra_mana_narocnost)+tag(ra_ucinnost)+tag(ra_vydrz)+tag(ra_undeads_zivoty)+tag(ra_velky_vampyr_vylepseni)+tag(ra_lucistnik_vylepseni)+tag(ra_satan_vylepseni)+tag(ra_vylepseni_vydrz)+tag(ra_prokleti_ucinnost)+tag(ra_doba_prokleti)+tag(ra_mind_blast_silence)+tag(ra_mind_blast_silenced_time)+tag(ra_magicCharge_fire)+tag(ra_magicCharge_mind)+tag(ra_magicCharge_energy)+tag(ra_taunt)+tag(ra_splitShot)>
 
 [Dialog d_explevel]
 argo.SetLocation=0,0
@@ -568,7 +514,6 @@ if (<safe combskill_<arg(skillname)>>)
   
   roundskill(<arg(skillname)>)
   arg(skillmax,<?<profession>.<arg(skillname)>?>)
-  //arg(skillvalue,<?<args>?>)
   arg(skillvalue,<eval <arg(skillname)>>)
   if (<eval arg(skillvalue)+50>>arg(skillmax))
     src.classmessage("V teto dovednosti jsi uz <? src.sex(dosahl,dosahla) ?> maxima.")
@@ -620,6 +565,309 @@ elseif (((f_levelstatbonus+300)-levstatstotal)>0)
 endif
 DIALOG d_levelbonus
 
+
+[defnames def_rearAbilities]
+def_rearAbilities_number     67
+def_rearAbilities_1          manareg
+def_rearAbilities_2          hitsreg
+def_rearAbilities_3          stamreg
+def_rearAbilities_4          weapdodge
+def_rearAbilities_5          speldodge
+def_rearAbilities_6          hitsleech
+def_rearAbilities_7          manaleech
+def_rearAbilities_8          stamleech
+def_rearAbilities_9          backstab
+def_rearAbilities_10         warcry
+def_rearAbilities_11         rangearrow
+def_rearAbilities_12         stuntattack
+def_rearAbilities_13         stuntattack_prodleva
+def_rearAbilities_14         stuntattack_ucinnost
+def_rearAbilities_15         roundattack
+def_rearAbilities_16         doubleswing
+def_rearAbilities_17         woodoo
+def_rearAbilities_18         woodoo_curse
+def_rearAbilities_19         woodoo_obet
+def_rearAbilities_20         archery
+def_rearAbilities_21         crushing
+def_rearAbilities_22         sharps
+def_rearAbilities_23         twohand
+def_rearAbilities_24         knockback
+def_rearAbilities_25         throwing
+def_rearAbilities_26         leap
+def_rearAbilities_27         bleed_bolt
+def_rearAbilities_28         controlnpc
+def_rearAbilities_29         buffSteal
+def_rearAbilities_30         catch
+def_rearAbilities_31         vykryti
+def_rearAbilities_32         defstance
+def_rearAbilities_33         energyshield
+def_rearAbilities_34         woodoo_pacts
+def_rearAbilities_35         woodoo_pacts_boost
+def_rearAbilities_36         woodoo_lifepact
+def_rearAbilities_37         woodoo_lifepact_stats
+def_rearAbilities_38         voodooShield
+def_rearAbilities_39         selfres
+def_rearAbilities_40         selfres_hp
+def_rearAbilities_41         selfres_mana
+def_rearAbilities_42         selfres_stamina
+def_rearAbilities_43         vigourMining
+def_rearAbilities_44         vigourLumber
+def_rearAbilities_45         mystikDoubleswing
+def_rearAbilities_46         thief_rebound
+def_rearAbilities_47         thief_defstance
+def_rearAbilities_48         utok_do_zad
+def_rearAbilities_49         podriznuti
+def_rearAbilities_50         uderstitem
+def_rearAbilities_51         mana_narocnost
+def_rearAbilities_52         ucinnost
+def_rearAbilities_53         vydrz
+def_rearAbilities_54         undeads_zivoty
+def_rearAbilities_55         velky_vampyr_vylepseni
+def_rearAbilities_56         lucistnik_vylepseni
+def_rearAbilities_57         satan_vylepseni
+def_rearAbilities_58         vylepseni_vydrz
+def_rearAbilities_59         prokleti_ucinnost
+def_rearAbilities_60         doba_prokleti
+def_rearAbilities_61         mind_blast_silence
+def_rearAbilities_62         mind_blast_silenced_time
+def_rearAbilities_63         magicCharge_fire
+def_rearAbilities_64         magicCharge_mind
+def_rearAbilities_65         magicCharge_energy
+def_rearAbilities_66         taunt
+def_rearAbilities_67         splitshot
+//def_rearAbilities_68         crushingArrow // prozatim deaktivovano pro hrace
+
+//   NAME                                          every PAIR consists of 'MIN-LEVEL,MAX-VALUE`
+def_rearAbilities_manareg_desc                       "Regenerace many"
+def_rearAbilities_manareg[0]                         0,20
+def_rearAbilities_manareg_class[0]                   //everyone
+def_rearAbilities_hitsreg_desc                       "Regenerace zivotu"
+def_rearAbilities_hitsreg[0]                         0,20
+def_rearAbilities_hitsreg_class[0]                   //everyone
+def_rearAbilities_stamreg_desc                       "Regenerace staminy"
+def_rearAbilities_stamreg[0]                         0,20
+def_rearAbilities_stamreg_class[0]                   //everyone
+def_rearAbilities_hitsleech_desc                     "Vysavani zivotu"
+def_rearAbilities_hitsleech[0]                       0,20
+def_rearAbilities_hitsleech_class[0]                 //everyone
+def_rearAbilities_manaleech_desc                     "Vysavani many"
+def_rearAbilities_manaleech[0]                       0,20
+def_rearAbilities_manaleech_class[0]                 //everyone
+def_rearAbilities_stamleech_desc                     "Vysavani staminy"
+def_rearAbilities_stamleech[0]                       0,20
+def_rearAbilities_stamleech_class[0]                 //everyone
+def_rearAbilities_rangearrow_desc                    "Longrange attack"
+def_rearAbilities_rangearrow[0]                      0,10
+def_rearAbilities_rangearrow_class[0]                //everyone
+def_rearAbilities_throwing_desc                      "Hazeni"
+def_rearAbilities_throwing[0]                        0,10 
+def_rearAbilities_throwing_class[0]                  //everyone
+def_rearAbilities_weapdodge_desc                     "Uhnuti uderu"
+def_rearAbilities_weapdodge[0]                       0,20
+def_rearAbilities_weapdodge_class[0]                 mystik,mag,necro
+def_rearAbilities_weapdodge[1]                       0,20,61,30
+def_rearAbilities_weapdodge_class[1]                 war,ranger,priest,shaman,craft
+def_rearAbilities_weapdodge[2]                       0,20,61,40
+def_rearAbilities_weapdodge_class[2]                 thief
+def_rearAbilities_speldodge_desc                     "Absorbce kouzla"
+def_rearAbilities_speldodge[0]                       0,20
+def_rearAbilities_speldodge_class[0]                 war,thief,craft
+def_rearAbilities_speldodge[1]                       0,20,61,30
+def_rearAbilities_speldodge_class[1]                 ranger,priest,shaman
+def_rearAbilities_speldodge[2]                       0,20,61,40
+def_rearAbilities_speldodge_class[2]                 mystik,mag,necro
+def_rearAbilities_backstab_desc                      "Probodnuti ze zalohy"
+def_rearAbilities_backstab[0]                        0,20
+def_rearAbilities_backstab_class[0]                  thief 
+def_rearAbilities_warcry_desc                        "Warcry"
+def_rearAbilities_warcry[0]                          0,10
+def_rearAbilities_warcry_class[0]                    war
+def_rearAbilities_stuntattack_desc                   "Omracujici uder"
+def_rearAbilities_stuntattack[0]                     0,10
+def_rearAbilities_stuntattack_class[0]               war,craft,priest
+def_rearAbilities_stuntattack_prodleva_desc          "Omracujici uder - prodleva"
+def_rearAbilities_stuntattack_prodleva[0]            50,10,100,20,150,30
+def_rearAbilities_stuntattack_prodleva_class[0]      war,craft,priest
+def_rearAbilities_stuntattack_ucinnost_desc          "Povolani mrtvych - ucinnost"
+def_rearAbilities_stuntattack_ucinnost[0]            50,10,100,20,150,30
+def_rearAbilities_stuntattack_ucinnost_class[0]      war
+def_rearAbilities_roundattack_desc                   "Roundattack"
+def_rearAbilities_roundattack[0]                     0,10
+def_rearAbilities_roundattack_class[0]               war
+def_rearAbilities_doubleswing_desc                   "Dvojty zasah"
+def_rearAbilities_doubleswing[0]                     30,10,60,20,100,30,150,40
+def_rearAbilities_doubleswing_class[0]               thief,war
+def_rearAbilities_woodoo_desc                        "Pozitivni voodoo"
+def_rearAbilities_woodoo[0]                          20,10,100,20,150,30
+def_rearAbilities_woodoo_class[0]                    shaman
+def_rearAbilities_woodoo_curse_desc                  "Negativni voodoo"
+def_rearAbilities_woodoo_curse[0]                    25,10,50,20,100,30,150,40
+def_rearAbilities_woodoo_curse_class[0]              shaman
+def_rearAbilities_woodoo_obet_desc                   "Voodoo Obet - vylepseni"
+def_rearAbilities_woodoo_obet[0]                     20,10,100,20,150,30
+def_rearAbilities_woodoo_obet_class[0]               shaman
+def_rearAbilities_archery_desc                       "Cesta luku"
+def_rearAbilities_archery[0]                         0,20
+def_rearAbilities_archery_class[0]                   craft
+def_rearAbilities_crushing_desc                      "Cesta drtive sily"
+def_rearAbilities_crushing[0]                        0,20
+def_rearAbilities_crushing_class[0]                  craft
+def_rearAbilities_sharps_desc                        "Cesta mece"
+def_rearAbilities_sharps[0]                          0,20
+def_rearAbilities_sharps_class[0]                    craft
+def_rearAbilities_twohand_desc                       "Cesta prvni a druhe ruky"
+def_rearAbilities_twohand[0]                         0,20
+def_rearAbilities_twohand_class[0]                   craft
+def_rearAbilities_knockback_desc                     "Knockback attack"
+def_rearAbilities_knockback[0]                       0,10
+def_rearAbilities_knockback_class[0]                 ranger
+def_rearAbilities_leap_desc                          "Leap"
+def_rearAbilities_leap[0]                            0,10
+def_rearAbilities_leap_class[0]                      war
+def_rearAbilities_bleed_bolt_desc                    "Strelba zubatych sipek"
+def_rearAbilities_bleed_bolt[0]                      0,20
+def_rearAbilities_bleed_bolt_class[0]                thief,ranger,craft
+def_rearAbilities_controlnpc_desc                    "Ovladani NPC"
+def_rearAbilities_controlnpc[0]                      0,10
+def_rearAbilities_controlnpc_class[0]                mystik
+def_rearAbilities_buffSteal_desc                     "Ovladnuti talentu"
+def_rearAbilities_buffSteal[0]                       0,20
+def_rearAbilities_buffSteal_class[0]                 mystik
+def_rearAbilities_catch_desc                         "Uchopeni mysli"
+def_rearAbilities_catch[0]                           0,20
+def_rearAbilities_catch_class[0]                     mystik
+def_rearAbilities_vykryti_desc                       "Vykryti stitem"
+def_rearAbilities_vykryti[0]                         0,20
+def_rearAbilities_vykryti_class[0]                   thief,priest,war,ranger,shaman,craft
+def_rearAbilities_defstance_desc                     "Obranny postoj"
+def_rearAbilities_defstance[0]                       0,10
+def_rearAbilities_defstance_class[0]                 war
+def_rearAbilities_energyshield_desc                  "Energy shield"
+def_rearAbilities_energyshield[0]                    0,10,40,20,60,30,100,40,150,50 
+def_rearAbilities_energyshield_class[0]              mag,necro
+def_rearAbilities_woodoo_pacts_desc                  "Voodoo - pakty"
+def_rearAbilities_woodoo_pacts[0]                    20,10
+def_rearAbilities_woodoo_pacts_class[0]              shaman
+def_rearAbilities_woodoo_pacts_boost_desc            "Pakty - vylepseni"
+def_rearAbilities_woodoo_pacts_boost[0]              50,10,100,20 
+def_rearAbilities_woodoo_pacts_boost_class[0]        shaman
+def_rearAbilities_woodoo_lifepact_desc               "Pakt zivota - prodlouzeni"
+def_rearAbilities_woodoo_lifepact[0]                 50,10,100,20,150,30 
+def_rearAbilities_woodoo_lifepact_class[0]           shaman
+def_rearAbilities_woodoo_lifepact_stats_desc         "Pakt zivota - vylepseni"
+def_rearAbilities_woodoo_lifepact_stats[0]           25,10 
+def_rearAbilities_woodoo_lifepact_stats_class[0]     shaman
+def_rearAbilities_voodooShield_desc                  "Voodoo - shield"
+def_rearAbilities_voodooShield[0]                    0,10,40,20,60,30,100,40,150,50
+def_rearAbilities_voodooShield_class[0]              shaman
+def_rearAbilities_selfres_desc                       "Oziveni se"
+def_rearAbilities_selfres[0]                         0,20
+def_rearAbilities_selfres_class[0]                   priest
+def_rearAbilities_selfres_hp_desc                    "Oziveni se - stav zivota"
+def_rearAbilities_selfres_hp[0]                      0,10
+def_rearAbilities_selfres_hp_class[0]                priest
+def_rearAbilities_selfres_mana_desc                  "Oziveni se - stav many"
+def_rearAbilities_selfres_mana[0]                    0,10
+def_rearAbilities_selfres_mana_class[0]              priest
+def_rearAbilities_selfres_stamina_desc               "Oziveni se - stav staminy"
+def_rearAbilities_selfres_stamina[0]                 0,10
+def_rearAbilities_selfres_stamina_class[0]           priest
+def_rearAbilities_vigourMining_desc                  "Hornicina"
+def_rearAbilities_vigourMining[0]                    60,10,70,20,80,30,90,40,100,50,110,60,120,70,130,80,140,90,150,100,160,110,170,120,180,130,190,140
+def_rearAbilities_vigourMining_class[0]              craft
+def_rearAbilities_vigourLumber_desc                  "Drevorubectvi"
+def_rearAbilities_vigourLumber[0]                    60,10,70,20,80,30,90,40,100,50,110,60,120,70,130,80,140,90,150,100,160,110,170,120,180,130,190,140
+def_rearAbilities_vigourLumber_class[0]              craft
+def_rearAbilities_mystikDoubleswing_desc             "Zdrcujici uder"
+def_rearAbilities_mystikDoubleswing[0]               30,10,60,20,100,30,150,40
+def_rearAbilities_mystikDoubleswing_class[0]         mystik
+def_rearAbilities_thief_rebound_desc                 "Odrazeni utoku"
+def_rearAbilities_thief_rebound[0]                   50,10,100,20,150,30
+def_rearAbilities_thief_rebound_class[0]             thief
+def_rearAbilities_thief_defstance_desc               "Ostrazity postoj"
+def_rearAbilities_thief_defstance[0]                 50,10
+def_rearAbilities_thief_defstance_class[0]           thief
+def_rearAbilities_utok_do_zad_desc                   "Utok do zad"
+def_rearAbilities_utok_do_zad[0]                     0,10,50,20,100,30,150,40
+def_rearAbilities_utok_do_zad_class[0]               thief
+def_rearAbilities_podriznuti_desc                    "Podriznuti"
+def_rearAbilities_podriznuti[0]                      0,10,50,20,100,30,150,40
+def_rearAbilities_podriznuti_class[0]                thief
+def_rearAbilities_uderstitem_desc                    "Uder stitem"
+def_rearAbilities_uderstitem[0]                      0,10,50,20,100,30,150,40
+def_rearAbilities_uderstitem_class[0]                thief
+def_rearAbilities_mana_narocnost_desc                "Povolani mrtvych - mana"
+def_rearAbilities_mana_narocnost[0]                  0,10,50,20,100,30,150,40
+def_rearAbilities_mana_narocnost_class[0]            necro
+def_rearAbilities_ucinnost_desc                      "Povolani mrtvych - ucinnost"
+def_rearAbilities_ucinnost[0]                        50,10,100,20,150,30
+def_rearAbilities_ucinnost_class[0]                  necro
+def_rearAbilities_vydrz_desc                         "Povolani mrtvych - vydrz"
+def_rearAbilities_vydrz[0]                           50,10,100,20,150,30
+def_rearAbilities_vydrz_class[0]                     necro
+def_rearAbilities_undeads_zivoty_desc                "Summoni - vice zivotu"
+def_rearAbilities_undeads_zivoty[0]                  0,10,50,20,100,30,150,40
+def_rearAbilities_undeads_zivoty_class[0]            necro
+def_rearAbilities_velky_vampyr_vylepseni_desc        "Summoni - lepsi vampyr"
+def_rearAbilities_velky_vampyr_vylepseni[0]          50,10,100,20,150,30
+def_rearAbilities_velky_vampyr_vylepseni_class[0]    necro
+def_rearAbilities_lucistnik_vylepseni_desc           "Summoni - lepsi lucistnik"
+def_rearAbilities_lucistnik_vylepseni[0]             50,10,100,20,150,30
+def_rearAbilities_lucistnik_vylepseni_class[0]       necro
+def_rearAbilities_satan_vylepseni_desc               "Summoni - lepsi satan"
+def_rearAbilities_satan_vylepseni[0]                 50,10,100,20,150,30
+def_rearAbilities_satan_vylepseni_class[0]           necro
+def_rearAbilities_vylepseni_vydrz_desc               "Summoni - doba trvani"
+def_rearAbilities_vylepseni_vydrz[0]                 50,10,100,20,150,30
+def_rearAbilities_vylepseni_vydrz_class[0]           necro
+def_rearAbilities_prokleti_ucinnost_desc             "Prokleti - ucinnost"
+def_rearAbilities_prokleti_ucinnost[0]               50,10,100,20,150,30
+def_rearAbilities_prokleti_ucinnost_class[0]         necro
+def_rearAbilities_doba_prokleti_desc                 "Prokleti - doba prokelti"
+def_rearAbilities_doba_prokleti[0]                   50,10,100,20,150,30
+def_rearAbilities_doba_prokleti_class[0]             necro
+def_rearAbilities_mind_blast_silence_desc            "MindBlast Silence"
+def_rearAbilities_mind_blast_silence[0]              0,10
+def_rearAbilities_mind_blast_silence_class[0]        mag,shaman
+def_rearAbilities_mind_blast_silenced_time_desc      "Silence - ucinnost"
+def_rearAbilities_mind_blast_silenced_time[0]        75,10
+def_rearAbilities_mind_blast_silenced_time_class[0]  mag,shaman
+def_rearAbilities_magicCharge_fire_desc              "Magicky Naboj - ohen"
+def_rearAbilities_magicCharge_fire[0]                60,10
+def_rearAbilities_magicCharge_fire_class[0]          mag
+def_rearAbilities_magicCharge_mind_desc              "Magicky Naboj - mysl"
+def_rearAbilities_magicCharge_mind[0]                60,10
+def_rearAbilities_magicCharge_mind_class[0]          mag
+def_rearAbilities_magicCharge_energy_desc            "Magicky Naboj - energie"
+def_rearAbilities_magicCharge_energy[0]              60,10
+def_rearAbilities_magicCharge_energy_class[0]        mag
+def_rearAbilities_taunt_desc                         "Taunt"
+def_rearAbilities_taunt[0]                           30,10,75,20
+def_rearAbilities_taunt_class[0]                     war
+def_rearAbilities_splitshot_desc                     "Rozdelena strela"
+def_rearAbilities_splitshot[0]                       30,10,60,20
+def_rearAbilities_splitshot_class[0]                 ranger
+def_rearAbilities_crushingArrow_desc                 "Drtivy sip"
+def_rearAbilities_crushingArrow[0]                   30,20
+def_rearAbilities_crushingArrow_class[0]             ranger
+
+
+[function ratotal]
+arg(total,0)
+arg(i,1)
+while (i <= def_rearAbilities_number)
+  arg(total,#+<tag(ra_<def_rearAbilities_<i>>)>)
+  arg(i,#+1)
+endwhile
+return<total>
+
+[function zakladabilities]
+arg(i,1)
+while (i <= def_rearAbilities_number)
+  tag.remove(ra_<def_rearAbilities_<i>>)
+  arg(i,#+1)
+endwhile
+
 [Dialog d_rearability]
 argo.SetLocation=50,50
 if (profession==class_thief)
@@ -633,7 +881,7 @@ elseif (profession==class_shaman)
 elseif (profession==class_war)
   arg(classOrigAbilCount,10)
 elseif (profession==class_ranger)
-  arg(classOrigAbilCount,4)
+  arg(classOrigAbilCount,5)
 elseif (profession==class_craft)
   arg(classOrigAbilCount,10)
 elseif (profession==class_mag)
@@ -641,688 +889,136 @@ elseif (profession==class_mag)
 elseif (profession==class_necro)
   arg(classOrigAbilCount,11)
 endif
-argo.resizepic(0,0,2620,310,<eval 268+<eval arg(classOrigAbilCount)*20>>)
-argo.textA(20,20,37,"Vedlejsi ability: <?eval <eval tag(level)*2>-<ratotal>?> bodu")
+arg(sparePoints,<eval ((tag(level)*2)-<ratotal>)>)
+argo.resizepic(0,0,2620,310,<eval 288+<eval arg(classOrigAbilCount)*20>>)
+argo.textA(90,18,<d_def_subheadcolor>,"Vedlejsi ability")
+argo.textA(35,43,<d_def_writecolor>,"Bodu k rozdeleni: <eval arg(sparePoints)>")
 
 argo.tag(indentionNames,35)
 argo.tag(indentionValues,240)
 argo.tag(indentionButton,<eval(<argo.tag(indentionNames)>-15)>)
 argo.tag(line,0)
 
-argo.f_rearAbility_addLine("Regenerace many","<?eval tag(ra_manareg)?>",1)
-argo.f_rearAbility_addLine("Regenerace zivotu","<?eval tag(ra_hitsreg)?>",2)
-argo.f_rearAbility_addLine("Regenerace staminy","<?eval tag(ra_stamreg)?>",3)
-argo.f_rearAbility_addLine("Uhnuti uderu","<?eval tag(ra_weapdodge)?>",4)
-argo.f_rearAbility_addLine("Absorbce kouzla","<?eval tag(ra_speldodge)?>",5)
-argo.f_rearAbility_addLine("Vysavani zivotu","<?eval tag(ra_hitsleech)?>",6)
-argo.f_rearAbility_addLine("Vysavani staminy","<?eval tag(ra_stamleech)?>",7)
-argo.f_rearAbility_addLine("Vysavani many","<?eval tag(ra_manaleech)?>",8)
-argo.f_rearAbility_addLine("Longrange attack","<?eval tag(ra_rangearrow)?>",11)
-argo.f_rearAbility_addLine("Hazeni","<?eval tag(ra_throwing)?>",21)
-
-if (profession==class_thief)
-  argo.f_rearAbility_addLine("Probodnuti ze zalohy","<?eval tag(ra_backstab)?>",9)
-  argo.f_rearAbility_addLine("Dvojity zasah","<?eval tag(ra_Doubleswing)?>",14)
-  argo.f_rearAbility_addLine("Strelba zubatych sipek","<?eval tag(ra_bleed_bolt)?>",23)
-  argo.f_rearAbility_addLine("Odrazeni utoku","<?eval tag(ra_thief_rebound)?>",45)
-  argo.f_rearAbility_addLine("Ostrazity postoj","<?eval tag(ra_thief_defstance)?>",46)
-  argo.f_rearAbility_addLine("Vykryti stitem","<?eval tag(ra_vykryti)?>",28)
-  argo.f_rearAbility_addLine("Utok do zad","<?eval tag(ra_utok_do_zad)?>",50)
-  argo.f_rearAbility_addLine("Podriznuti","<?eval tag(ra_podriznuti)?>",51)
-  argo.f_rearAbility_addLine("Uder stitem","<?eval tag(ra_uderstitem)?>",52)
-elseif (profession==class_priest)
-  argo.f_rearAbility_addLine("Omracujici uder","<?eval tag(ra_stuntattack)?>",12)
-  argo.f_rearAbility_addLine("Omracujici uder - prodleva","<?eval tag(ra_stuntattack_prodleva)?>",54)
-  argo.f_rearAbility_addLine("Vykryti stitem","<?eval tag(ra_vykryti)?>",28)
-  argo.f_rearAbility_addLine("Oziveni se","<?eval tag(ra_selfres)?>",33)
-  argo.f_rearAbility_addLine("Oziveni se - stav zivota","<?eval tag(ra_selfres_hp)?>",34)
-  argo.f_rearAbility_addLine("Oziveni se - stav many","<?eval tag(ra_selfres_mana)?>",35)
-  argo.f_rearAbility_addLine("Oziveni se - stav staminy","<?eval tag(ra_selfres_stamina)?>",36)
-elseif (profession==class_mystik)
-  argo.f_rearAbility_addLine("Ovladani NPC","<?eval tag(ra_controlnpc)?>",24)
-  argo.f_rearAbility_addLine("Ovladnuti talentu","<?eval tag(ra_buffSteal)?>",25)
-  argo.f_rearAbility_addLine("Uchopeni mysli","<?eval tag(ra_catch)?>",26)
-  argo.f_rearAbility_addLine("Zdrcujici uder","<?eval tag(ra_mystikDoubleswing)?>",42)
-elseif (profession==class_shaman)
-  argo.f_rearAbility_addLine("Pozitivni voodoo","<?eval tag(ra_woodoo)?>",15)
-  argo.f_rearAbility_addLine("Negativni voodoo","<?eval tag(ra_woodoo_curse)?>",43)
-  argo.f_rearAbility_addLine("Voodoo Obet - vylepseni","<?eval tag(ra_woodoo_obet)?>",44)
-  argo.f_rearAbility_addLine("Vykryti stitem","<?eval tag(ra_vykryti)?>",28)
-  //argo.f_rearAbility_addLine("BloodPact","<?eval tag(ra_bloodpact)?>",30)
-  argo.f_rearAbility_addLine("Voodoo - shield","<?eval tag(ra_voodooshield)?>",31)
-  argo.f_rearAbility_addLine("Voodoo - pakty","<?eval tag(ra_woodoo_pacts)?>",47)
-  argo.f_rearAbility_addLine("Pakty - vylepseni","<?eval tag(ra_woodoo_pacts_boost)?>",48)
-  argo.f_rearAbility_addLine("Pakt zivota - prodlouzeni","<?eval tag(ra_woodoo_lifepact)?>",49)
-  argo.f_rearAbility_addLine("Pakt zivota - vylepseni","<?eval tag(ra_woodoo_lifepact_stats)?>",53)
-  argo.f_rearAbility_addLine("MindBlast Silence","<?eval tag(ra_mind_blast_silence)?>",66)
-  argo.f_rearAbility_addLine("Silence - ucinnost","<?eval tag(ra_mind_blast_silenced_time)?>",67)
-  //argo.f_rearAbility_addLine("LifePact","<?eval tag(ra_lifepact)?>",32)
-  //argo.f_rearAbility_addLine("LifePact - stav zivota","<?eval tag(ra_lifepact_hp)?>",37)
-  //argo.f_rearAbility_addLine("LifePact - stav many","<?eval tag(ra_lifepact_mana)?>",38)
-  //argo.f_rearAbility_addLine("LifePact - stav staminy","<?eval tag(ra_lifepact_stamina)?>",39)
-elseif (profession==class_war)
-  argo.f_rearAbility_addLine("Warcry","<?eval tag(ra_warcry)?>",10)
-  argo.f_rearAbility_addLine("Omracujici uder","<?eval tag(ra_stuntattack)?>",12)
-  argo.f_rearAbility_addLine("Omracujici uder - prodleva","<?eval tag(ra_stuntattack_prodleva)?>",54)
-  argo.f_rearAbility_addLine("Omracujici uder - ucinnost","<?eval tag(ra_stuntattack_ucinnost)?>",55)
-  argo.f_rearAbility_addLine("Roundattack","<?eval tag(ra_roundattack)?>",13)
-  argo.f_rearAbility_addLine("Dvojty zasah","<?eval tag(ra_Doubleswing)?>",14)
-  argo.f_rearAbility_addLine("Leap","<?eval tag(ra_leap)?>",22)
-  argo.f_rearAbility_addLine("Obranny postoj","<?eval tag(ra_defstance)?>",27)
-  argo.f_rearAbility_addLine("Vykryti stitem","<?eval tag(ra_vykryti)?>",28)
-  argo.f_rearAbility_addLine("Taunt","<?eval tag(ra_taunt)?>",71)
-elseif (profession==class_ranger)
-  argo.f_rearAbility_addLine("Knockback attack","<?eval tag(ra_knockback)?>",20)
-  argo.f_rearAbility_addLine("Strelba zubatych sipek","<?eval tag(ra_bleed_bolt)?>",23)
-  argo.f_rearAbility_addLine("Vykryti stitem","<?eval tag(ra_vykryti)?>",28)
-  argo.f_rearAbility_addLine("Rozdelena strela","<?eval tag(ra_splitShot)?>",72)
-elseif (profession==class_craft)
-  argo.f_rearAbility_addLine("Cesta luku","<?eval tag(ra_archery)?>",16)
-  argo.f_rearAbility_addLine("Cesta drtive sily","<?eval tag(ra_crushing)?>",17)
-  argo.f_rearAbility_addLine("Cesta mece","<?eval tag(ra_sharps)?>",18)
-  argo.f_rearAbility_addLine("Cesta prvni a druhe ruky","<?eval tag(ra_twohand)?>",19)
-  argo.f_rearAbility_addLine("Hornicina","<?eval tag(ra_vigourMining)?>",40)
-  argo.f_rearAbility_addLine("Drevorubectvi","<?eval tag(ra_vigourLumber)?>",41)
-  argo.f_rearAbility_addLine("Strelba zubatych sipek","<?eval tag(ra_bleed_bolt)?>",23)
-  argo.f_rearAbility_addLine("Omracujici uder","<?eval tag(ra_stuntattack)?>",12)
-  argo.f_rearAbility_addLine("Omracujici uder - prodleva","<?eval tag(ra_stuntattack_prodleva)?>",54)
-  argo.f_rearAbility_addLine("Vykryti stitem","<?eval tag(ra_vykryti)?>",28)
-elseif (profession==class_mag)
-  argo.f_rearAbility_addLine("Energy shield","<?eval tag(ra_energyshield)?>",29)
-  argo.f_rearAbility_addLine("MindBlast Silence","<?eval tag(ra_mind_blast_silence)?>",66)
-  argo.f_rearAbility_addLine("Silence - ucinnost","<?eval tag(ra_mind_blast_silenced_time)?>",67)
-  argo.f_rearAbility_addLine("Magicky Naboj - ohen","<?eval tag(ra_magicCharge_fire)?>",68)
-  argo.f_rearAbility_addLine("Magicky Naboj - mysl","<?eval tag(ra_magicCharge_mind)?>",69)
-  argo.f_rearAbility_addLine("Magicky Naboj - energie","<?eval tag(ra_magicCharge_energy)?>",70)
-elseif (profession==class_necro)
-  argo.f_rearAbility_addLine("Energy shield","<?eval tag(ra_energyshield)?>",29)
-  argo.f_rearAbility_addLine("Povolani mrtvych - mana ","<?eval tag(ra_mana_narocnost)?>",56)
-  argo.f_rearAbility_addLine("Povolani mrtvych - ucinnost ","<?eval tag(ra_ucinnost)?>",57)
-  argo.f_rearAbility_addLine("Povolani mrtvych - vydrz ","<?eval tag(ra_vydrz)?>",58)
-  argo.f_rearAbility_addLine("Summoni - vice zivotu ","<?eval tag(ra_undeads_zivoty)?>",59)
-  argo.f_rearAbility_addLine("Summoni - lepsi vampyr ","<?eval tag(ra_velky_vampyr_vylepseni)?>",60)
-  argo.f_rearAbility_addLine("Summoni - lepsi lucistnik ","<?eval tag(ra_lucistnik_vylepseni)?>",61)
-  argo.f_rearAbility_addLine("Summoni - lepsi satan ","<?eval tag(ra_satan_vylepseni)?>",62)
-  argo.f_rearAbility_addLine("Summoni - doba trvani ","<?eval tag(ra_vylepseni_vydrz)?>",63)
-  argo.f_rearAbility_addLine("Prokleti - ucinnost ","<?eval tag(ra_prokleti_ucinnost)?>",64)
-  argo.f_rearAbility_addLine("Prokleti - doba prokelti ","<?eval tag(ra_doba_prokleti)?>",65)
-endif
+arg(butt,10)
+arg(i,1)
+while (i <= def_rearAbilities_number)
+  arg(abName,<def_rearAbilities[<i>]>)
+  arg(hasClass,<f_ra_add_hasClass(<arg(abName)>)>)
+  if (<arg(hasClass)> >= 0)
+    arg(showIncreaseButton,1)
+    if !(arg(sparePoints))
+      arg(showIncreaseButton,0)
+    else
+      arg(abilityRestrictions,<def_rearAbilities_<arg(abName)>[<eval arg(hasClass)>]>)
+      if !(f_ra_add_meetsRestrictions(<arg(abName)>,0,<arg(abilityRestrictions)>))
+        arg(showIncreaseButton,0)
+      endif
+    endif
+    argo.f_rearAbility_addLine(<def_rearAbilities_<arg(abName)>_desc>,"<eval tag(ra_<arg(abName)>)>",<arg(showIncreaseButton)>,<arg(butt)>,<arg(abName)>)
+    arg(butt,#+1)
+  endif
+  arg(i,#+1)
+endwhile
 
 [DIALOG d_rearability BUTTON]
 on=0
 rarefresh
 explevel
 
-on=1
-ra_add(manareg)
-on=2
-ra_add(hitsreg)
-on=3
-ra_add(stamreg)
-on=4
-ra_add(weapdodge)
-on=5
-ra_add(speldodge)
-on=6
-ra_add(hitsleech)
-on=7
-ra_add(stamleech)
-on=8
-ra_add(manaleech)
-on=9
-if (profession==class_thief)
-  ra_add(backstab)
-endif
-on=10
-if (profession==class_war)
-  ra_add(warcry)
-endif
-on=11
-ra_add(rangearrow)
-on=12
-if (profession==class_war)||(profession==class_priest)||(profession==class_craft)
-  ra_add(stuntattack)
-endif
-on=13
-if (profession==class_war)
-  ra_add(roundattack)
-endif
-on=14
-if (profession==class_war)||(profession==class_thief)
-  ra_add(doubleswing)
-endif
-on=15
-if (profession==class_shaman)
-  ra_add(woodoo)
-endif
-on=16
-if (profession==class_craft)
-  ra_add(archery)
-endif
-on=17
-if (profession==class_craft)
-  ra_add(crushing)
-endif
-on=18
-if (profession==class_craft)
-  ra_add(sharps)
-endif
-on=19
-if (profession==class_craft)
-  ra_add(twohand)
-endif
-on=20
-if (profession==class_ranger)
-  ra_add(knockback)
-endif
-on=21
-if (tag(level)>29)
- ra_add(throwing)
-endif
-on=22
-if (profession==class_war)
-  ra_add(leap)
-endif
-on=23
-if (profession==class_ranger)||(profession==class_thief)||(profession==class_craft)
-  ra_add(bleed_bolt)
-endif
-on=24
-if (profession==class_mystik)
-  ra_add(controlnpc)
-endif
-on=25
-if (profession==class_mystik)
-  ra_add(buffSteal)
-endif
-on=26
-if (profession==class_mystik)
-  ra_add(catch)
-endif
-on=27
-if (profession==class_war)
-  ra_add(defstance)
-endif
-on=28
-if (profession==class_war)||(profession==class_thief)||(profession==class_craft)||(profession==class_ranger)||(profession==class_shaman)||(profession==class_priest)
-  ra_add(vykryti)
-endif
-on=29
-if (profession==class_mag) || (profession==class_necro)
-  ra_add(energyshield)
-endif
-on=30
-if (profession==class_shaman)
-//  ra_add(bloodpact)
-endif
-on=31
-if (profession==class_shaman)
-  ra_add(voodooshield)
-endif
-on=32
-if (profession==class_shaman)
-//  ra_add(lifepact)
-endif
-on=33
-if (profession==class_priest)
-  ra_add(selfres)
-endif
-on=34
-if (profession==class_priest)
-  ra_add(selfres_hp)
-endif
-on=35
-if (profession==class_priest)
-  ra_add(selfres_mana)
-endif
-on=36
-if (profession==class_priest)
-  ra_add(selfres_stamina)
-endif
-on=37
-if (profession==class_shaman)
-//  ra_add(lifepact_hp)
-endif
-on=38
-if (profession==class_shaman)
-//  ra_add(lifepact_mana)
-endif
-on=39
-if (profession==class_shaman)
-//  ra_add(lifepact_stamina)
-endif
-on=40
-if (profession==class_craft)
-  ra_add(vigourMining)
-endif
-on=41
-if (profession==class_craft)
-  ra_add(vigourLumber)
-endif
-on=42
-if (profession==class_mystik)
-  ra_add(mystikDoubleswing)
-endif
-on=43
-if (profession==class_shaman)
-  ra_add(woodoo_curse)
-endif
-on=44
-if (profession==class_shaman)
-  ra_add(woodoo_obet)
-endif
-on=45
-if (profession==class_thief)
-  ra_add(thief_rebound)
-endif
-on=46
-if (profession==class_thief)
-  ra_add(thief_defstance)
-endif
-on=47
-if (profession==class_shaman)
-  ra_add(woodoo_pacts)
-endif
-on=48
-if (profession==class_shaman)
-  ra_add(woodoo_pacts_boost)
-endif
-on=49
-if (profession==class_shaman)
-  ra_add(woodoo_lifepact)
-endif
-on=50
-if (profession==class_thief)
-  ra_add(utok_do_zad)
-endif
-on=51
-if (profession==class_thief)
-  ra_add(podriznuti)
-endif
-on=52
-if (profession==class_thief)
-  ra_add(uderstitem)
-endif
-on=53
-if (profession==class_shaman)
-  ra_add(woodoo_lifepact_stats)
-endif
-on=53
-if (profession==class_shaman)
-  ra_add(woodoo_lifepact_stats)
-endif
-on=54
-if (profession==class_war)||(profession==class_priest)||(profession==class_craft)
-  ra_add(stuntattack_prodleva)
-endif
-on=55
-if (profession==class_war)
-  ra_add(stuntattack_ucinnost)
-endif
-on=56
-if (profession==class_necro)
-  ra_add(mana_narocnost)
-endif
-on=57
-if (profession==class_necro)
-  ra_add(ucinnost)
-endif
-on=58
-if (profession==class_necro)
-  ra_add(vydrz)
-endif
-on=59
-if (profession==class_necro)
-  ra_add(undeads_zivoty)
-endif
-on=60
-if (profession==class_necro)
-  ra_add(velky_vampyr_vylepseni)
-endif
-on=61
-if (profession==class_necro)
-  ra_add(lucistnik_vylepseni)
-endif
-on=62
-if (profession==class_necro)
-  ra_add(satan_vylepseni)
-endif
-on=63
-if (profession==class_necro)
-  ra_add(vylepseni_vydrz)
-endif
-on=64
-if (profession==class_necro)
-  ra_add(prokleti_ucinnost)
-endif
-on=65
-if (profession==class_necro)
-  ra_add(doba_prokleti)
-endif
-on=66
-if (profession==class_mag) || (profession==class_shaman)
-  ra_add(mind_blast_silence)
-endif
-on=67
-if (profession==class_mag) || (profession==class_shaman)
-  ra_add(mind_blast_silenced_time)
-endif
-on=68
-if (profession==class_mag)
-  ra_add(magicCharge_fire)
-endif
-on=69
-if (profession==class_mag)
-  ra_add(magicCharge_mind)
-endif
-on=70
-if (profession==class_mag)
-  ra_add(magicCharge_energy)
-endif
-on=71
-if (profession==class_war)
-  ra_add(taunt)
-endif
-on=72
-if (profession==class_ranger)
-  ra_add(splitShot)
-endif
+on=@anyButton
+ra_add(<argo.tag(buttAbility[<argn>])>)
+DIALOG(d_rearability)
+rarefresh
 
-on=100
-omraceni
-dialog d_rearability 
-
-[function f_rearAbility_addLine] //argv(0) == name, argv(1) == tag, argv(2) == button
-textA(<tag(indentionNames)>,<eval(50+(tag(line)*20))>,3,"<argv(0)>")
-textA(<tag(indentionValues)>,<eval(50+(tag(line)*20))>,85,"<?eval argv(1)?>")
-button(<tag(indentionButton)>,<eval(57+(tag(line)*20))>,2104,2103,1,0,<argv(2)>)
+[function f_rearAbility_addLine] //argv(0) == name, argv(1) == tag, argv(2) == button should be shown, argv(3) == button, argv(4) == ability name
+textA(<tag(indentionNames)>,<eval(70+(tag(line)*20))>,3,"<argv(0)>")
+textA(<tag(indentionValues)>,<eval(70+(tag(line)*20))>,85,"<?eval argv(1)?>")
+if (<argv(2)>)
+  tag(buttAbility[<argv(3)>],<argv(4)>)
+  button(<tag(indentionButton)>,<eval(77+(tag(line)*20))>,2104,2103,1,0,<argv(3)>)
+endif
 tag(line,#+1)
 
-
+//args - short ability name (e.g. backstab)
 [function ra_add]
 if (ratotal >= <eval tag(level)*2>)
   redMessage("Jiz nemas dalsi body k rozdeleni.")
   return 1
 endif
-if ((strmatch("<args>","vigourLumber"))||(strmatch("<args>","vigourMining")))&&(profession==class_craft)
-  if (<eval(tag(level)-60)> > <eval tag(ra_<args>)>)
-    if (<eval tag(ra_<args>)> < 140)
-      tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-    else
-      redMessage("Vic bodu uz do teto ability pridat nelze.")
+
+arg(hasClass,<f_ra_add_hasClass(<args>)>)
+if (<arg(hasClass)> >= 0)
+  arg(abilityRestrictions,<def_rearAbilities_<args>[<eval arg(hasClass)>]>)
+  if (f_ra_add_meetsRestrictions(<args>,1,<arg(abilityRestrictions)>))
+    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
+    return 0
+  endif
+  return 1
+endif
+redMessage("Tato abilita neni pro tebe!")
+return 1
+
+// args - ability name
+// returns -1 if the class is not found
+//         >=0 if the class was found, the number represents the correct ability restriction index for the given class
+[function f_ra_add_hasClass]
+arg(i,0)
+arg(abilityRestrictions,<safe.def_rearAbilities_<args>[<eval i>]>)
+while (strlen(<arg(abilityRestrictions)>))
+  if (f_ra_add_hasClassSingle(<i>,<profession>,<safe.def_rearAbilities_<args>_class[<eval i>]>))
+    return<i>
+  endif
+  arg(i,#+1)
+  arg(abilityRestrictions,<safe.def_rearAbilities_<args>[<eval i>]>)
+endwhile
+return -1
+
+//arg0: iteration number - if this is the FIRST iteration an empty class list represents ALL classes
+//                         and should be allowed
+//arg1: class to be found; arg2+: list of classes to be matched
+// returns: 0 if the restrictions aren't met
+//          1 if the restriction test succeeds
+[function f_ra_add_hasClassSingle]
+if (<argv(0)> == 0) && (strlen(<argv(2)>) == 0) // first iteration and an empty list of classes -> allow
+  return 1
+endif
+
+arg(i,2)
+while (i < argvCount)
+  if (!strcmpi("<argv(1)>","class_<argv(<i>)>"))
+    return 1
+  endif
+  arg(i,#+1)
+endwhile
+return 0
+
+// argv(0):  ability name
+// argv(1):  1~should print warnings; 0 won't
+// argv(2+): list of ability restriction couples of the following format: 'min-level,max-ability-points' 
+// returns: 0 if the restrictions aren't met
+//          1 if the restriction test succeeds
+[function f_ra_add_meetsRestrictions]
+arg(i,0)
+arg(defs,<argvcount/2>)
+while (i < arg(defs))
+  arg(restrictionIndex,<eval ((i*2)+2)>)
+  if (<eval tag.level> >= <argv(<arg(restrictionIndex)>)>)
+    if (<eval tag(ra_<argv(0)>)> < <argv(<eval (arg(restrictionIndex)+1)>)>)
+      return 1
     endif
   else
-    redMessage("Nejsi dost <sex(zkuseny,zkusena)>, aby jsi <sex(navysil,navysila)> tuto abilitu.")
-  endif
-elseif (<eval tag(ra_<args>)><10) && !(strmatch("<args>","mystikDoubleswing")) && !(strmatch("<args>","doubleswing")) && !(strmatch("<args>","thief_rebound")) && !(strmatch("<args>","thief_defstance"))  && !(strmatch("<args>","woodoo_curse")) && !(strmatch("<args>","woodoo")) && !(strmatch("<args>","woodoo_obet")) && !(strmatch("<args>","woodoo_pacts")) && !(strmatch("<args>","woodoo_pacts_boost")) && !(strmatch("<args>","woodoo_lifepact")) && !(strmatch("<args>","utok_do_zad")) && !(strmatch("<args>","podriznuti")) && !(strmatch("<args>","uderstitem")) && !(strmatch("<args>","woodoo_lifepact_stats")) && !(strmatch("<args>","stuntattack_prodleva")) && !(strmatch("<args>","stuntattack_ucinnost")) && !(strmatch("<args>","mana_narocnost")) && !(strmatch("<args>","nesplasitelnost")) && !(strmatch("<args>","ucinnost")) && !(strmatch("<args>","vydrz")) && !(strmatch("<args>","undeads_zivoty")) && !(strmatch("<args>","velky_vampyr_vylepseni")) && !(strmatch("<args>","lucistnik_vylepseni")) && !(strmatch("<args>","satan_vylepseni")) && !(strmatch("<args>","vylepseni_vydrz")) && !(strmatch("<args>","prokleti_ucinnost")) && !(strmatch("<args>","doba_prokleti")) && !(strmatch("<args>","mind_blast_silenced_time")) && !(strmatch("<args>","magicCharge_fire")) && !(strmatch("<args>","magicCharge_mind")) && !(strmatch("<args>","magicCharge_energy")) && !(strmatch("<args>","taunt")) && !(strmatch("<args>","splitShot"))
-  tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-elseif (<eval tag(ra_<args>)> <20) && !(strmatch("<args>","energyshield")) && !(strmatch("<args>","bloodpact")) && !(strmatch("<args>","voodooshield")) && !(strmatch("<args>","mystikDoubleswing")) && !(strmatch("<args>","doubleswing")) && !(strmatch("<args>","thief_rebound")) && !(strmatch("<args>","thief_defstance")) && !(strmatch("<args>","woodoo_curse")) && !(strmatch("<args>","woodoo")) && !(strmatch("<args>","woodoo_obet"))  && !(strmatch("<args>","woodoo_pacts")) && !(strmatch("<args>","woodoo_pacts_boost")) && !(strmatch("<args>","woodoo_lifepact")) && !(strmatch("<args>","utok_do_zad")) && !(strmatch("<args>","podriznuti")) && !(strmatch("<args>","uderstitem")) && !(strmatch("<args>","woodoo_lifepact_stats")) && !(strmatch("<args>","stuntattack_prodleva")) && !(strmatch("<args>","stuntattack_ucinnost")) && !(strmatch("<args>","mana_narocnost")) && !(strmatch("<args>","nesplasitelnost")) && !(strmatch("<args>","ucinnost")) && !(strmatch("<args>","vydrz")) && !(strmatch("<args>","undeads_zivoty"))  && !(strmatch("<args>","velky_vampyr_vylepseni")) && !(strmatch("<args>","lucistnik_vylepseni")) && !(strmatch("<args>","satan_vylepseni")) && !(strmatch("<args>","vylepseni_vydrz")) && !(strmatch("<args>","prokleti_ucinnost")) && !(strmatch("<args>","doba_prokleti"))  && !(strmatch("<args>","mind_blast_silenced_time")) && !(strmatch("<args>","magicCharge_fire")) && !(strmatch("<args>","magicCharge_mind")) && !(strmatch("<args>","magicCharge_energy")) && !(strmatch("<args>","taunt")) && !(strmatch("<args>","splitShot"))
-  if (strmatch("<args>","manareg"))||(strmatch("<args>","hitsreg"))||(strmatch("<args>","stamreg"))||(strmatch("<args>","hitsleech"))||(strmatch("<args>","stamleech"))||(strmatch("<args>","manaleech"))||(strmatch("<args>","backstab"))||(strmatch("<args>","doubleswing"))||(strmatch("<args>","archery"))||(strmatch("<args>","crushing"))||(strmatch("<args>","sharps"))||(strmatch("<args>","twohand"))||(strmatch("<args>","speldodge"))||(strmatch("<args>","weapdodge"))||(strmatch("<args>","bleed_bolt"))||(strmatch("<args>","buffSteal"))||(strmatch("<args>","catch"))||(strmatch("<args>","vykryti"))||(strmatch("<args>","woodoo_lifepact"))||(strmatch("<args>","selfres"))
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu uz do teto ability pridat nelze.")
-  endif
-elseif (strmatch("<args>","speldodge"))
-  if (tag(level)>60)&&(<eval tag(ra_<args>)> <40)
-    if (profession==class_mystik) || (profession==class_necro) || (profession==class_mag)
-      tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-    elseif (profession!=class_war) && (profession!=class_thief) && (profession!=class_craft) && (<eval tag(ra_<args>)> <30)
-      tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-    else
-      redMessage("Vic bodu uz do teto ability pridat nelze.")
+    if (argv(1))
+      redMessage("Nejsi dost <sex(zkuseny,zkusena)>, aby jsi <sex(navysil,navysila)> tuto abilitu.")
     endif
-  else
-    redMessage("Vic bodu uz do teto ability pridat nelze.")
+    return 0
   endif
-elseif (strmatch("<args>","weapdodge"))
-  if (tag(level)>60)&&(<eval tag(ra_<args>)> <40)
-    if (profession==class_thief)
-      tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-    elseif (profession!=class_necro) && (profession!=class_mag)&&(profession!=class_mystik)&&(<eval tag(ra_<args>)> <30)
-      tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-    else
-      redMessage("Vic bodu uz do teto ability pridat nelze.")
-    endif
-  else
-    redMessage("Vic bodu uz do teto ability pridat nelze.")
-  endif
-elseif (strmatch("<args>","energyshield"))
-  if (tag(level)>39)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>59)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <50)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","voodooshield"))
-  if (tag(level)>39)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>59)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <50)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","mystikDoubleswing"))
-  if (tag(level)>29)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>59)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","doubleswing"))
-  if (tag(level)>29)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>59)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","thief_rebound"))
-  if (tag(level)>49)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","thief_defstance"))
-  if (tag(level)>49)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability pridat nelze.")
-  endif
-elseif (strmatch("<args>","woodoo_curse"))
-  if (tag(level)>24)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>49)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","woodoo"))
-  if (tag(level)>19)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","woodoo_obet"))
-  if (tag(level)>19)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","woodoo_pacts"))
-  if (tag(level)>19)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability pridat nelze.")
-  endif
-elseif (strmatch("<args>","woodoo_pacts_boost"))
-  if (tag(level)>49)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","woodoo_lifepact"))
-  if (tag(level)>49)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","woodoo_lifepact_stats"))
-  if (tag(level)>24)&&(<eval(tag.ra_<args>)> < 10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","utok_do_zad"))
-  if (tag(level)>0)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>49)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","podriznuti"))
-  if (tag(level)>0)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>49)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","uderstitem"))
-  if (tag(level)>0)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>49)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","stuntattack_prodleva"))
-  if (tag(level)>49)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif  
-elseif (strmatch("<args>","stuntattack_ucinnost"))
-  if (tag(level)>49)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","mana_narocnost")) || (strmatch("<args>","undeads_zivoty"))
-  if(<eval tag(ra_<args>)> < 10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>49)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <40)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif 
-elseif (strmatch("<args>","nesplasitelnost")) || (strmatch("<args>","ucinnost")) || (strmatch("<args>","vydrz")) || (strmatch("<args>","velky_vampyr_vylepseni")) || (strmatch("<args>","lucistnik_vylepseni")) || (strmatch("<args>","satan_vylepseni")) || (strmatch("<args>","vylepseni_vydrz")) || (strmatch("<args>","prokleti_ucinnost")) || (strmatch("<args>","doba_prokleti"))
-  if (tag(level)>49)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>99)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>149)&&(<eval tag(ra_<args>)> <30)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif
-elseif (strmatch("<args>","mind_blast_silenced_time"))
-  if (tag(level)>74)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif  
-elseif (strmatch("<args>","magicCharge_fire")) || (strmatch("<args>","magicCharge_mind")) || (strmatch("<args>","magicCharge_energy"))
-  if (tag(level)>60)&&(<eval tag(ra_<args>)> < nastaveni_charge_abilityPoints)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu uz do teto ability pridat nelze.")
-  endif
-elseif (strmatch("<args>","taunt"))
-  if (tag(level)>29)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>74)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif  
-elseif (strmatch("<args>","splitShot"))
-  if (tag(level)>29)&&(<eval tag(ra_<args>)> <10)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  elseif (tag(level)>59)&&(<eval tag(ra_<args>)> <20)
-    tag(ra_<args>,<?eval tag(ra_<args>)?>+1)
-  else
-    redMessage("Vic bodu do teto ability nyni pridat nelze.")
-  endif  
-else
+  arg(i,#+1)
+endwhile
+if (argv(1))
   redMessage("Vic bodu uz do teto ability pridat nelze.")
 endif
-DIALOG d_rearability 
-rarefresh
+return 0
+
 
 [function rarefresh]
 regenrefresh
@@ -1388,7 +1084,7 @@ TYPE=t_eq_script
 name=ra regenerace
 
 ON=@Equip
-timer 1
+timer=1
 morex=1//cetnost obnoveni
 
 on=@timer
@@ -1498,81 +1194,6 @@ else
   endif
 endif
 return <eval arg(statsLevel)>
-
-[function zakladabilities]
-tag.remove(ra_manareg)
-tag.remove(ra_hitsreg)
-tag.remove(ra_stamreg)
-tag.remove(ra_weapdodge)
-tag.remove(ra_speldodge)
-tag.remove(ra_manaleech)
-tag.remove(ra_hitsleech)
-tag.remove(ra_stamleech)
-tag.remove(ra_backstab)
-tag.remove(ra_warcry)
-tag.remove(ra_rangearrow)
-tag.remove(ra_stuntattack)
-tag.remove(ra_roundattack)
-tag.remove(ra_doubleswing)
-tag.remove(ra_woodoo)
-tag.remove(ra_woodoo_curse) // voodoo skola prokleti
-tag.remove(ra_woodoo_obet)
-tag.remove(ra_woodoo_pacts)
-tag.remove(ra_woodoo_pacts_boost)
-tag.remove(ra_woodoo_lifepact)
-tag.remove(ra_woodoo_lifepact_stats)
-tag.remove(ra_archery)
-tag.remove(ra_crushing)
-tag.remove(ra_sharps)
-tag.remove(ra_twohand)
-tag.remove(ra_knockback)
-tag.remove(ra_throwing)
-tag.remove(ra_leap)
-tag.remove(ra_bleed_bolt)
-tag.remove(ra_controlnpc)
-tag.remove(ra_buffSteal)
-tag.remove(ra_catch)
-tag.remove(ra_defstance)
-tag.remove(ra_vykryti)
-tag.remove(ra_energyshield)
-tag.remove(ra_bloodpact)
-tag.remove(ra_voodooshield)
-tag.remove(ra_lifepact)
-tag.remove(ra_lifepact_hp)
-tag.remove(ra_lifepact_mana)
-tag.remove(ra_lifepact_stamina)
-tag.remove(ra_selfres)
-tag.remove(ra_selfres_hp)
-tag.remove(ra_selfres_mana)
-tag.remove(ra_selfres_stamina)
-tag.remove(ra_vigourLumber)
-tag.remove(ra_vigourMining)
-tag.remove(ra_mystikDoubleswing)
-tag.remove(ra_thief_rebound)
-tag.remove(ra_thief_defstance)
-tag.remove(ra_utok_do_zad)
-tag.remove(ra_podriznuti)
-tag.remove(ra_uderstitem)
-tag.remove(ra_stuntattack_prodleva)
-tag.remove(ra_stuntattack_ucinnost)
-tag.remove(ra_mana_narocnost)
-tag.remove(ra_ucinnost)
-tag.remove(ra_vydrz)
-tag.remove(ra_undeads_zivoty)
-tag.remove(ra_velky_vampyr_vylepseni)
-tag.remove(ra_lucistnik_vylepseni)
-tag.remove(ra_satan_vylepseni)
-tag.remove(ra_vylepseni_vydrz)
-tag.remove(ra_prokleti_ucinnost)
-tag.remove(ra_doba_prokleti)
-tag.remove(ra_mind_blast_silence)
-tag.remove(ra_mind_blast_silenced_time)
-tag.remove(ra_magicCharge_fire)
-tag.remove(ra_magicCharge_mind)
-tag.remove(ra_magicCharge_energy)
-tag.remove(ra_taunt)
-tag.remove(ra_splitShot)
-
 
 [function vit]
 if (argvcount)

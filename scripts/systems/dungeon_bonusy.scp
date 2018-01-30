@@ -345,22 +345,22 @@ more2=1
 targetg("Zamer misto, kde se ma vytvaret zed")
 return 1
 
-on=5	//HELP
+on=5  //HELP
 f_wallBuilding_setDialogValues(<argtxt(1)>,<argChk(1)>,<argChk(2)>,<argChk(3)>,<argChk(4)>)
 dialog(d_pad_wallBuilding_help)
 dialog(d_pad_wallBuilding)
 
-on=6	//removeTrap dialog
+on=6  //removeTrap dialog
 f_wallBuilding_setDialogValues(<argtxt(1)>,<argChk(1)>,<argChk(2)>,<argChk(3)>,<argChk(4)>)
 dialog(d_trap_removeTrap,d_pad_wallBuilding)
 
-on=7	//moveTrap dialog
+on=7  //moveTrap dialog
 f_wallBuilding_setDialogValues(<argtxt(1)>,<argChk(1)>,<argChk(2)>,<argChk(3)>,<argChk(4)>)
 dialog(d_trap_moveTrap,d_pad_wallBuilding)
 
 on=@AnyButton
 f_wallBuilding_setDialogValues(<argtxt(1)>,<argChk(1)>,<argChk(2)>,<argChk(3)>,<argChk(4)>)
-if (<argn> >= 1000)	//handling remove of targets
+if (<argn> >= 1000) //handling remove of targets
   arg(buttToRemove,<eval <argn>-1000>)
   while (<arg(buttToRemove)+1> < <eval tag(wallsCount)>)
     tag(wallPosition[<eval buttToRemove>],<tag(wallPosition[<eval buttToRemove+1>])>)
@@ -628,7 +628,6 @@ return 1
 ///////////////////////////////////////////////
 //  W E S T   W A L L S   H A N D L I N G  //
 ///////////////////////////////////////////////
-
 
 [function f_pad_wallBuilding_buildWall_West]	//the lowest X pos starts
 tag(risedWalls,0)

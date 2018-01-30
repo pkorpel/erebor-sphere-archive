@@ -466,7 +466,7 @@ src.newequip(i_setKnockingNpc_target)
 on=@AfterGetSwing
 var(ubrano,0)
 hits=maxhits
-if (<strlen(<tag(hcn_npc_knocking_corner_ru)>)>==0) //the constraints haven't been set at this npc yet
+if (<strlen(<tag(hcn_npc_knocking_corner_ru)>)>==0) //the constraints haven't been set on this npc yet
   arg(spwn,<memoryfindtype(memory_ispawned).link>)
   tag(hcn_npc_knocking_corner_ru,<spwn.tag(hcn_npc_knocking_corner_ru)>)
   tag(hcn_npc_knocking_corner_ld,<spwn.tag(hcn_npc_knocking_corner_ld)>)

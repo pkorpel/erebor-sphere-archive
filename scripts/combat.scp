@@ -640,7 +640,7 @@ speedtimer
 tag(firststroke,1)
 if (act)
   if !(act.srccombatLOS)
-    sysmessage(Nevidis na cil)
+    sysmessage("Nevidis na cil!")
     return 0
   endif
 endif
