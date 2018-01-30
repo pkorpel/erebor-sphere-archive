@@ -2905,7 +2905,7 @@ if (findlayer(layer_hand1))
   endif
 elseif (findlayer(layer_hand2))
   if (findlayer(layer_hand2).isBow)
-    return 1
+    return 2
   endif
 endif
 return 0
@@ -7414,10 +7414,21 @@ lastnew.color=<argv(1)>
 lastnew.p=<p>
 lastnew.timer={10 15}
 
-
 [function null]
 return""
 
+// argv(0) - item ID with the timer. The item will be equipped if it doesn't exist yet
+// argv(1) - da timerD value for which the timer is to be set
+[function prolongTimer]
+arg(daItem,<findId(<argv(0)>)>)
+if (!strlen(<arg(daItem)>))
+  newEquipSafe(<argv(0)>)
+  lastnew.timerd=<argv(1)>
+  return
+endif
+if (daItem.timerd < argv(1))
+  daItem.timerd=<argv(1)>
+endif
 
 [function drinkHealPotion]     // argv(0) - type of heal potion
 trigger(@DrinkingPotion)

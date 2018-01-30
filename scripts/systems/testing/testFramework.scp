@@ -13,13 +13,28 @@ src.accMsg("TEST: SUCCESS - <args>")
 src.redMessage("ERROR - <args>")
 src.accMsg("TEST: ERROR - <args>")
 
-/// restore level ///
+/// alter level ///
 [function tst_alterLvl] // argv(0) - level to be applied
 if (<strlen(<tag(tstOrig_Lvl)>)> == 0)
   tag(tstOrig_Lvl,<tag(level)>)
 endif
 tag(level,<argv(0)>)
 
+/// restore level ///
 [function tst_restoreLvl]
-tag(level,<eval tag(tstOrig_Lvl)>)
-tag.remove(tstOrig_Lvl)
+if (strlen(<tag(tstOrig_Lvl)>))
+  tag(level,<eval tag(tstOrig_Lvl)>)
+  tag.remove(tstOrig_Lvl)
+endif
+
+
+[function tst_alterClass] // argv(0) - class 
+if (<strlen(<tag(tstOrig_Class)>)> == 0)
+  tag(tstOrig_Class,<class>)
+endif
+profession=class_<argv(0)>
+
+[function tst_restoreClass]
+if (strlen(<tag(tstOrig_Class)>))
+  profession=<tag(tstOrig_Class)>
+endif
