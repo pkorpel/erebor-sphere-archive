@@ -1051,21 +1051,21 @@ f_test_abilities_callRaAdd(mind_blast_silenced_time,200,10,1)
 
 f_test_abilities_callRaAdd(magicCharge_fire,59,0,1)
 f_test_abilities_callRaAdd(magicCharge_fire,60,0,0)
-f_test_abilities_callRaAdd(magicCharge_fire,60,10,1)
-f_test_abilities_callRaAdd(magicCharge_fire,60,9,0)
-f_test_abilities_callRaAdd(magicCharge_fire,200,10,1)
+f_test_abilities_callRaAdd(magicCharge_fire,60,20,1)
+f_test_abilities_callRaAdd(magicCharge_fire,60,19,0)
+f_test_abilities_callRaAdd(magicCharge_fire,200,20,1)
 
 f_test_abilities_callRaAdd(magicCharge_mind,59,0,1)
 f_test_abilities_callRaAdd(magicCharge_mind,60,0,0)
-f_test_abilities_callRaAdd(magicCharge_mind,60,10,1)
-f_test_abilities_callRaAdd(magicCharge_mind,60,9,0)
-f_test_abilities_callRaAdd(magicCharge_mind,200,10,1)
+f_test_abilities_callRaAdd(magicCharge_mind,60,20,1)
+f_test_abilities_callRaAdd(magicCharge_mind,60,19,0)
+f_test_abilities_callRaAdd(magicCharge_mind,200,20,1)
 
 f_test_abilities_callRaAdd(magicCharge_energy,59,0,1)
 f_test_abilities_callRaAdd(magicCharge_energy,60,0,0)
-f_test_abilities_callRaAdd(magicCharge_energy,60,10,1)
-f_test_abilities_callRaAdd(magicCharge_energy,60,9,0)
-f_test_abilities_callRaAdd(magicCharge_energy,200,10,1)
+f_test_abilities_callRaAdd(magicCharge_energy,60,20,1)
+f_test_abilities_callRaAdd(magicCharge_energy,60,19,0)
+f_test_abilities_callRaAdd(magicCharge_energy,200,20,1)
 
 tst_restoreLvl
 tst_restoreClass

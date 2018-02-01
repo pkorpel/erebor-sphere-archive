@@ -833,13 +833,13 @@ def_rearAbilities_mind_blast_silenced_time_desc      "Silence - ucinnost"
 def_rearAbilities_mind_blast_silenced_time[0]        75,10
 def_rearAbilities_mind_blast_silenced_time_class[0]  mag,shaman
 def_rearAbilities_magicCharge_fire_desc              "Magicky Naboj - ohen"
-def_rearAbilities_magicCharge_fire[0]                60,10
+def_rearAbilities_magicCharge_fire[0]                60,20
 def_rearAbilities_magicCharge_fire_class[0]          mag
 def_rearAbilities_magicCharge_mind_desc              "Magicky Naboj - mysl"
-def_rearAbilities_magicCharge_mind[0]                60,10
+def_rearAbilities_magicCharge_mind[0]                60,20
 def_rearAbilities_magicCharge_mind_class[0]          mag
 def_rearAbilities_magicCharge_energy_desc            "Magicky Naboj - energie"
-def_rearAbilities_magicCharge_energy[0]              60,10
+def_rearAbilities_magicCharge_energy[0]              60,20
 def_rearAbilities_magicCharge_energy_class[0]        mag
 def_rearAbilities_taunt_desc                         "Taunt"
 def_rearAbilities_taunt[0]                           30,10,75,20
