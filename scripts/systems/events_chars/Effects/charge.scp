@@ -8,6 +8,7 @@
 ////////////////////////////////////////
 
 [defnames def_charge]
+def_charge_abilityPoints    10
 // magic charges < 10
 def_charge_fire           1
 def_charge_mind           2
@@ -271,8 +272,8 @@ arg(coef,50) // percentage of the effect given for the first ability point
 arg(spellType,<eval def_charge_type[<var(spellNumber)>]>)
 arg(chargeEffect,<charge_get(<arg(spellType)>)>*<argv(0)>)
 arg(ability,<f_charge_getAbility(<arg(spellType)>)>)
-if (<arg(ability)> < nastaveni_charge_abilityPoints)
-  arg(chargeEffect,<eval (chargeEffect*((nastaveni_charge_baseEff*nastaveni_charge_abilityPoints)+(ability*(100-nastaveni_charge_baseEff))))/(100*nastaveni_charge_abilityPoints)>)
+if (<arg(ability)> < def_charge_abilityPoints)
+  arg(chargeEffect,<eval (chargeEffect*((nastaveni_charge_baseEff*def_charge_abilityPoints)+(ability*(100-nastaveni_charge_baseEff))))/(100*def_charge_abilityPoints)>)
 endif
 var(spellpower,<eval ((<var(spellpower)>*(1000+<arg(chargeEffect)>))/1000)>)
 

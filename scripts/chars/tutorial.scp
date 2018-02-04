@@ -43,7 +43,7 @@ maxmana=0
 tag.experience=3.0
 
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCatute>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 
@@ -183,7 +183,7 @@ maxmana=0
 tag.experience=12.0
 
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCatute>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]> //str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
 
@@ -610,7 +610,7 @@ maxmana=0
 tag.experience=30.0
 tag(hypnotizable,0)
 
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCatute> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
@@ -1786,7 +1786,7 @@ ICON=i_pet_LICH
 ANIM=07bc7f
 CAN=MT_WALK|MT_RUN|MT_EQUIP|mt_usehands
 
-ATTACK=30
+ATTACK=28
 ARMOR=25
 MOVERATE=3
 
@@ -1808,7 +1808,7 @@ KARMA={-4000 -4999}
 
 STR=750
 DEX=150
-INT=200
+INT=175
 
 maxhits={400 450}
 maxstam=130

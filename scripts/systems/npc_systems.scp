@@ -88,7 +88,6 @@ on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
-on=@stopguarding
 on=@spelleffect
 if (isSummon) && (<argn> == 44)
   hits=0

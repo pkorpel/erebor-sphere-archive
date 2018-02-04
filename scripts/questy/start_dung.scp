@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////
 
 [defnames def_tutorial]
-def_tutorial_min_level   1
+def_tutorial_min_level   3
 def_tutorial_max_level   5
 
 // tutTag
@@ -246,7 +246,7 @@ if (src.qtag(nb001)==1)
 		argo.HTMLGUMP(170,230,440,100,16,0,36)
 	endif
 elseif (src.qtag(nb001)==3)
-	if (src.rescount(i_ribs_cooked)>=20)
+	if (src.rescount(i_ribs_cooked)>=10)
 		argo.HTMLGUMP(170,230,440,100,20,0,36)
 		argo.button(25,395,0fa5,0fa7,1,0,4)
 		argo.text(60,395,152,21)
@@ -301,8 +301,8 @@ To nestaci! Potrebuji toho masa vic! <basefont color="#ffff88">*mraci se*<basefo
 To maso ale voni! Podej mi ho. Dekuji ti.	//20
 *Podat maso*	//21
 Promin, <?src.sex(zapomel,zapomela)?> jsem, co jsem <?src.sex(mel,mela)?> prinist.	//22
-Chtel jsem po tobe 50 kusu zpracovane kuze. <basefont color="#ffff88">*Pozorne se na tebe diva*<basefont color="#ffffff">	//23
-Chcel jsem po tobe 20 kousku stavnatych steaku z divoke zvere.	//24
+Chtel jsem po tobe 15 kusu zpracovane kuze. <basefont color="#ffff88">*Pozorne se na tebe diva*<basefont color="#ffffff">	//23
+Chtel jsem po tobe 10 kousku stavnatych steaku z divoke zvere.	//24
 Potrebuji poradit//25
 Jak ti muzu pomoct?	//26
 Jak ziskam kuzi?	//27
@@ -321,7 +321,7 @@ endif
 ON=2
 if ((src.qtag(nb001)==1)&&(src.rescount(i_hides_cut))>=15)
 	src.qtag(nb001,2)
-	src.consume(50,i_hides_cut)
+	src.consume(15,i_hides_cut)
 	src.addexp(100)
 	say("Dekuji moc.")
 	f_quest_complete(23)  // splnenie questu "Lovec Odlier - kuze"
@@ -333,10 +333,10 @@ src.qtag(nb001,3)
 ON=4
 if ((src.qtag(nb001)==3)&&(src.rescount(i_ribs_cooked))>=10)
 	src.qtag(nb001, 4)
-	src.consume(20,i_ribs_cooked)
+	src.consume(10,i_ribs_cooked)
 	src.addexp(75)
 	say("Dekuji ti.")
-	 f_quest_complete(23,1)  // splnenie questu "Lovec Odlier - maso"
+	f_quest_complete(23,1)  // splnenie questu "Lovec Odlier - maso"
 endif
 		
 [speech spk_nb001]
@@ -450,7 +450,7 @@ Este budiz pochvalena! <?src.sex(Prinesl,prinesla)?> si je. Mohu se opet venovat
 Uz nic nepotrebuji, dekuji. I tobe se obvazy mohou hodit. Staci je prilozit na ranu, ale pamatuj, ze obvazy musi byt udrzovany v cistote!//13
 Promin, ale to je malo. Potrebuji vic.//14
 Promin, <?src.sex(zapomel,zapomela)?> jsem, co jsem <?src.sex(mel,mela)?> prinest.	//15
-Potrebuji od tebe 200 obvazu. <basefont color="#ffff88">*usmiva se*<basefont color="#ffffff">	//16
+Potrebuji od tebe 50 obvazu. <basefont color="#ffff88">*usmiva se*<basefont color="#ffffff">	//16
 Jak udelam obvazy? //17
 Obvazy ziskas rozstrihanim latky nebo kusu obleceni na male kousky. Latku lze utkat na tkacovskem stavu z niti. Nite muzes udelat z bavlny nebo z vlny tak, ze je upredes na kolovratku. Vlnu ziskas strihanim ovci a bavlnu sklizenim bavlniku. //18
 Potrebuji poradit //19
@@ -466,7 +466,7 @@ endif
 ON=2
 if ((src.qtag(nb002)==1)&&(src.rescount(i_bandage))>=50)
 	src.qtag(nb002,2)
-	src.consume(200,i_bandage)
+	src.consume(50,i_bandage)
 	src.addexp(75)
 	f_quest_complete(24)  // splnenie questu "Akolytka Mirana"
 endif
@@ -1015,7 +1015,7 @@ To nestaci! Potrebuji vic steaku! <basefont color="#ffff88">*mraci se*<basefont 
 Nadhera! Podej mi to. Dekuji.	//20
 Promin, <?src.sex(zapomel,zapomela)?> jsem, co jsem <?src.sex(mel,mela)?> prinest.	//21
 Chtel jsem po tobe, abys <?src.sex(nalovil,nalovila)?> 5 kusu ryb a <?src.sex(prinesl,prinesla)?> mi je.	//22
-Chtel jsem po tobe, abys <?src.sex(prinesl,prinesla)?> 10 kusu rybacich steaku <?src.sex(prinesl,prinesla)?> mi je.	//23
+Chtel jsem po tobe, abys <?src.sex(prinesl,prinesla)?> 10 kusu rybich steaku.	//23
 Potrebuji poradit	//24
 Jak ti muzu poradit?	//25
 Jak mam lovit ryby?	//26
@@ -1050,7 +1050,7 @@ src.qtag(nb005,3)
 ON=4
 if ((src.qtag(nb005)==3)&&(src.rescount(i_fish_cut_cooked))>=10)
 	src.qtag(nb005,4)
-	src.consume(100,i_fish_cut_cooked)
+	src.consume(10,i_fish_cut_cooked)
 	src.addexp(100)
 	say("Dekuji ti.")
 	f_quest_complete(27,1)  // splnenie questu "rybar Broket - fish maso"
@@ -1988,7 +1988,7 @@ src.sysMessage("Pred odchodem musis mit nastavenou postavu pomoci startovniho ka
 return 1
 
 [function startfinal]
-if (tag.level >= 3)
+if (<eval tag(level)> >= 3)
   tag(skillrank,1) // rovnou mu dame experta
 endif
 eqlayers(remove)

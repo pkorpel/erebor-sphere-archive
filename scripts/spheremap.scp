@@ -3525,7 +3525,15 @@ COLDCHANCE=00
 //RAINCHANCE=00
 //COLDCHANCE=00
 
-
+[AREA Pavouci sluj]
+GROUP=Sluje
+P=5555,490,0,10
+mapplane=10
+RECT=5585,525,5522,444
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
 
 [AREA Mount dorlas vstup]
 GROUP=Dungeon Mont Dorlas

@@ -970,7 +970,7 @@ endif
 
 if (<tag(gateFlags)>&<vg_addItem>)	//this addItem cycle just determines, whether it is necessary to deny the player to go through the gate
   arg(i,0)
-  while (<arg(i)> < <eval tag(addFunctionsCount)>)
+  while (<arg(i)> < <eval tag(addItemsCount)>)
     if (<hval return_nth(4,<tag(itemToAdd_<eval arg(i)>)>)>&01)		//if I can not go through, without specific number of items
       if (<eval return_nth(3,<tag(itemToAdd_<eval arg(i)>)>)> == 1)	//searching for event
         arg(varGate_itType,<return_nth(1,<tag(itemToAdd_<eval arg(i)>)>)>)

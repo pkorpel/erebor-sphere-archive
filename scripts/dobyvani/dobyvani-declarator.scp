@@ -113,9 +113,9 @@ if (<more1> > 0) // Uz jsme zacali pocitat?
   more1 = <eval (<more1>-10)> // Snizit cas
   if (<eval(more1 % 10)> == 0) // Kazdych deset sekund informovat
     finduid(<tag(war_lord)>).redmessage("Na uspesne dobyti zbyva <more1l> s.")
-    if (<eval(more1 % 60)> == 0) // Kazdou minutu informovat
-      scylla.delayedmessage("Dobyvani: <serverTime> Na uspesne dobyti <tag(war_declared_on)> zbyva <more1l> s.")
-    endif
+//     if (<eval(more1 % 60)> == 0) // Kazdou minutu informovat
+//       scylla.delayedmessage("Dobyvani: <serverTime> Na uspesne dobyti <tag(war_declared_on)> zbyva <more1l> s.")
+//     endif
     var(palantir_<tag(war_declared_on)>).say("Na uspesne dobyti zbyva <more1l> s.")
   endif
   if ((<getMinute> % 5) == 0)
@@ -143,7 +143,7 @@ endif
 if (<getMonth> >= <eval tag(war_begins_month)>)&&(<getDay> >= <eval tag(war_begins_day)>)&&(<getHour> >= <eval tag(war_begins_hour)>)
   // Cas jiz pokrocil, muzeme zacit pocitat cas na dobyti pevnosti
   finduid(<tag(war_lord)>).delayedredmessage("Valka muze zacit!")
-  scylla.delayedmessage("Dobyvani: <serverTime> Dobyvani <tag(war_declared_on)> prave zacina.") 
+//   scylla.delayedmessage("Dobyvani: <serverTime> Dobyvani <tag(war_declared_on)> prave zacina.") 
   // jednorazova hlaska na chat
   if (<argv(0)> == 1) //hlasi Gondorsky kamen
     arg(gondr_msg,"Dobyvani pevnosti")
@@ -246,9 +246,9 @@ if (array_size(tag.warlords) > 0) //nejaky warlord tam je
   tag(war_lord,<array_getremove(tag.warlords,0)>)
   finduid(<tag(war_lord)>).delayedmessage(Tvuj utok na pevnost <d_area_<tag(war_declared_on)>_1> zacne <tag(war_begins_day)>.<tag(war_begins_month)> v <tag(war_begins_hour)>h)
   var(War_declarator_MemoryItem_<argv(0)>).timer=10 //zacneme pocitat a kontrolovat cas na dobyvani 
-  scylla.delayedmessage("Dobyvani: <serverTime> Valka skoncila. Nastavuje se dalsi valka.")
+//   scylla.delayedmessage("Dobyvani: <serverTime> Valka skoncila. Nastavuje se dalsi valka.")
 else //proste dokoncit to zruseni
-  scylla.delayedmessage("Dobyvani: <serverTime> Valka skoncila, zadna dalsi nenasleduje.")
+//   scylla.delayedmessage("Dobyvani: <serverTime> Valka skoncila, zadna dalsi nenasleduje.")
   tag(war_declared_on,0)
 endif
 
@@ -459,7 +459,7 @@ if (argchk(which_to_check+100) == 1)//cislo "10x" je prvni zaskrtnute (dalsi nas
       endif
       tag(war_lord,<src>)
       src.sysmessage("Valka pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod.")
-      scylla.delayedmessage("Dobyvani: <serverTime> Valka pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod. Player <src> (<src.name>)")
+//       scylla.delayedmessage("Dobyvani: <serverTime> Valka pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod. Player <src> (<src.name>)")
       src.accmsg("vyhlasil dobyvani pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <tag(war_begins_day)>. <tag(war_begins_month)>. - <tag(war_begins_hour)> hod.")
       //src.tag.remove(can_declare_war_on_<qval <eval tag(my_realm)-1>,"Gondor","Mordor">)
       var(War_declarator_MemoryItem_<region.tag(realm)>).timer=10 //zacneme pocitat a kontrolovat cas na dobyvani

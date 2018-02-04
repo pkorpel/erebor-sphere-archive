@@ -1042,7 +1042,6 @@ on=@beforegetswing
 on=@DrinkingPotion
 on=@afterswing
 on=@finalBlow
-on=@stopguarding
 on=@playerKill
 on=@npckill
 
@@ -2537,7 +2536,7 @@ elseif (<eval region.tag(arena)>)
   return 0
 elseif (findid(i_checkstats_timer))   // hrac po nedavne smrti (Resskily nepocitame)
   return 0
-elseif ( (<tag(skillrank)>==3)&&(!strcmpi(<profession>,class_craft)) ) //aby ziskal zasluhu, musi zabijet VMka a ne krafty
+elseif ((<eval tag(skillrank)> == 3) && (!strcmpi(<profession>,class_craft))) //aby ziskal zasluhu, musi zabijet VMka a ne krafty
   return 0
 endif
 return 1

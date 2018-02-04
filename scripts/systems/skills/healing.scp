@@ -199,6 +199,8 @@ else //nehumanoid - skill veterinary
     link.classmessage("<cont.name> te osetril.")
   endif
   link.show_damage_and_hitpoints(<healed_amount>,1)
+  remove
+  return
 endif
 
 

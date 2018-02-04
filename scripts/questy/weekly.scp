@@ -124,15 +124,15 @@ def_weekly_medium_setupFunction[2]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[2]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_2_[0]   "prime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_2_[1]   50 // multiplier prijateho dmg
-def_weekly_medium_setupFunArg_2_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
-def_weekly_medium_rewardSize[2]       108
+def_weekly_medium_setupFunArg_2_[2]   30 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
+def_weekly_medium_rewardSize[2]       100
 
 def_weekly_medium_setupFunction[3]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[3]     3 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_3_[0]   "neprime" //prvni argument setup funkce
-def_weekly_medium_setupFunArg_3_[1]   15 // multiplier prijateho dmg
-def_weekly_medium_setupFunArg_3_[2]   50 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta 
-def_weekly_medium_rewardSize[3]       115
+def_weekly_medium_setupFunArg_3_[1]   10 // multiplier prijateho dmg
+def_weekly_medium_setupFunArg_3_[2]   30 // kolik % z bezneho naroku pro maga/ranga/shamana/necra/mystika/crafta 
+def_weekly_medium_rewardSize[3]       110
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
@@ -797,11 +797,11 @@ while (<arg(i)> < <tag(itemDClicksCount)>)
         arg(declarator,<var(war_declarator_1)>)
       endif
       if(!strcmpi(<declarator.tag(war_declared_on)>,<argv(0).tag(fort_name)>))  // je vyhlasena valka na tento palantir?
-       if !(declarator.canbewar) //je cas valky?
-        return
-       endif
+        if !(declarator.more1l) //je cas valky?
+          return
+        endif
       else
-       return
+        return
       endif
     endif
     if (f_weekly_increase(<arg(questId)>,1,1))
@@ -866,7 +866,7 @@ if (<arg(dmgDealt)> > 0)
     arg(dmgDealt,<act.hits>)
   endif
   if (weekly.f_weekly_increase(<questId>,<arg(dmgDealt)>))
-    weekly.f_weekly_removeItem(<questId>,dmgNPC)
+    weekly.f_weekly_removeItem(0,dmgNPC)
   endif
 endif
 
@@ -894,6 +894,10 @@ if (!(src.flag_spawned) && !(src.isPlayer))
   return
 endif
 if (<eval <var(ubrano)>> <= 0)
+  return
+endif
+if (<flag_invul>)
+  accmsg("dostal dmg od <src.name>(<src>) kdyz mel Invul ve vysi <eval <var(ubrano)>> HP. Podezreni na ojebavani weekly questu. <p> (<region.name>)")
   return
 endif
 if (<var(ubrano)> >= <hits>)
@@ -938,6 +942,10 @@ while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
       if (!(finduid(act.tag(poisonDealer)).flag_spawned) && !(finduid(act.tag(poisonDealer)).isPlayer))  // nechceme aby se nechal poisnit v baraku od tamnute poison feny
         return
       endif
+      if (<flag_invul>)
+        accmsg("dostal poison od <finduid(act.tag(poisonDealer)).name>(<finduid(act.tag(poisonDealer))>) kdyz mel Invul ve vysi <eval act.tag(jed_sila)> HP. Podezreni na ojebavani weekly questu. <p> (<region.name>)")
+        return
+      endif
     endif
     if (!strcmpi(neprime,<arg(subjectId)>)) || (!strcmpi(jakekoli,<arg(subjectId)>)) || (!strcmpi(jedem,<arg(subjectId)>))
       arg(received_dmg,<eval act.tag(jed_sila)>)
@@ -978,6 +986,10 @@ while (<arg(i)> < <eval weekly.tag(receiveDmgsCount)>)
       return
     endif
     if (!(<argv(1).flag_spawned>) && !(<argv(1).isPlayer>))  // nechceme aby se nechal bleedit v baraku od tamnuteho drapka
+      return
+    endif
+    if (<flag_invul>)
+      accmsg("dostal bleed od <argv(1).name>(<argv(1)>) kdyz mel Invul ve vysi <argv(0)> HP. Podezreni na ojebavani weekly questu. <p> (<region.name>)")
       return
     endif
   endif
@@ -1077,7 +1089,7 @@ while (<arg(i)> < <eval tag(KillStreaksCount)>)
 
   if (<eval tag(KillStreak_kills[<arg(questId)>])> == <tag(quest_subjectId[<arg(questId)>])>)
     if (f_weekly_increase(<arg(questId)>,1,1))
-      f_weekly_removeItem(<arg(questId)>,KillStreak)
+      f_weekly_removeItem(<arg(i)>,KillStreak)
       arg(i,#-1)
     endif
     tag(KillStreak_kills[<arg(questId)>],0)
@@ -1145,7 +1157,7 @@ if (act.type==t_web)
     arg(weekly,<findid(i_memory_weekly_quest)>)
     arg(questId,<eval weekly.tag(stepOnWeb[0])>)
     if (weekly.f_weekly_increase(<questId>,1,1))
-      weekly.f_weekly_removeItem(<questId>,stepOnWeb)
+      weekly.f_weekly_removeItem(0,stepOnWeb)
     endif
   endif
 endif
@@ -1157,12 +1169,12 @@ endif
 // MANUALLY ADDED
 // this function MUST be added manually to EACH of the defined vargates
 [function f_vg_finishDng] // argv(0) - the dungeon's ID defined in defnames
-if (src.isEvent(e_weekly_finishDungeon))
-  arg(weekly,<src.findid(i_memory_weekly_quest)>)
+if (isEvent(e_weekly_finishDungeon))
+  arg(weekly,<findid(i_memory_weekly_quest)>)
   arg(questId,<weekly.f_weekly_getItemNumBySubjectId(<argv(0)>,finishDungeon)>)
   if (arg(questId) != -1)
     weekly.f_weekly_increase(<arg(questId)>,1,1)
-    weekly.f_weekly_removeItem(<arg(questId)>,finishDungeon)
+    weekly.f_weekly_removeItem_byQuestId(<arg(questId)>,finishDungeon)
   endif
 endif
 
@@ -1246,11 +1258,28 @@ return<eval tag(<argv(1)>[<eval argv(0)>])>
 // this function removes the item references generated by the f_weekly_addItem, including the event
 //
 // executed upon the weekly memory item
-[function f_weekly_removeItem] //argv(0) index of stored item in the qItemDClickN; argv(2) tag name  - will also be used as suffix of the event as e_weekly_<tagname>
+[function f_weekly_removeItem] //argv(0) index of stored item in the order it was added; argv(1) tag name  - will also be used as suffix of the event as e_weekly_<tagname>
 f_customLink_remove(<argv(1)>,<argv(0)>)
-if (0<tag(<argv(2)>sCount)> == 0) // this was the last stored item -> clean the event and tags entirely
-  events=-e_weekly_<argv(1)>
+if (0<tag(<argv(1)>sCount)> == 0) // this was the last stored item -> clean the event and tags entirely
+  cont.events=-e_weekly_<argv(1)>
 endif
+
+// this function removes the item references generated by the f_weekly_addItem, including the event
+//
+// executed upon the weekly memory item
+[function f_weekly_removeItem_byQuestId] //argv(0) questId that needs to match the stored tag value. If the value is found, the customLink with that value is removed; argv(1) tag name  - will also be used as suffix of the event as e_weekly_<tagname>
+src.sysMessage(entering: <argv(0)> , <argv(1)>)
+arg(i,0)
+while (<arg(i)> < <eval (<tag(<argv(1)>sCount)>)>)
+  arg(tagValue,<eval tag(<argv(1)>[<eval arg(i)>])>)                                
+  src.sysMessage(tagValue: <arg(tagValue)>)
+  if (<argv(0)>==<arg(tagValue)>)
+    src.sysMessage(removing item <arg(i)>)
+    f_weekly_removeItem(<arg(i)>,<argv(1)>)
+    return
+  endif
+  arg(i,#+1)
+endwhile
 
 // returns quest number in the week that has the required subjectId, or -1 in case the subjectId isn't found
 [function f_weekly_getItemNumBySubjectId] // argv(0) - subjectId to be found; argv(1) - tag name
@@ -1415,7 +1444,7 @@ endif
 arg(weekly,<cont.findid(i_memory_weekly_quest)>)
 arg(questId,<eval weekly.tag(healPlayer[0])>)
 if (weekly.f_weekly_increase(<arg(questId)>,<argv(0)>,1))
-  weekly.f_weekly_removeItem(<arg(questId)>,healPlayer)
+  weekly.f_weekly_removeItem(0,healPlayer)
 endif
 
 [function f_weekly_quest_HuntingSign]  // argv(0) - pocet nalovenych bodu
@@ -1429,7 +1458,7 @@ endif
 arg(weekly,<findid(i_memory_weekly_quest)>)
 arg(questId,<eval weekly.tag(HuntingSign[0])>)
 if (weekly.f_weekly_increase(<arg(questId)>,<argv(0)>,1))
-  weekly.f_weekly_removeItem(<arg(questId)>,HuntingSign)
+  weekly.f_weekly_removeItem(0,HuntingSign)
 endif
 
 

@@ -18,7 +18,7 @@ scripts\brneni\5verite_armor.scp
 scripts\brneni\6valorite_armor.scp
 scripts\brneni\7obsidian_armor.scp
 scripts\brneni\8adamantinum_armor.scp
-scripts\brneni\9mytheril_armor.scp
+scripts\brneni\9mithril_armor.scp
 scripts\chars\ucitele.scp
 scripts\chars\ents.scp
 scripts\chars\animals.scp
@@ -246,7 +246,7 @@ scripts\zbrane\3verite.scp
 scripts\zbrane\4valorite.scp
 scripts\zbrane\5obsidian.scp
 scripts\zbrane\6adamantinum.scp
-scripts\zbrane\7mytheril.scp
+scripts\zbrane\7mithril.scp
 scripts\zbrane\weapon_utils.scp
 darken.scp
 funkce.scp

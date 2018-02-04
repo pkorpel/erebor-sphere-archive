@@ -60,6 +60,7 @@ regy                //seznam regu
 bbmanbomb           //pro bomberman hru
 dobyvani            //Zobrazi nadchazejici Dobyvani/Braneni
 splitShot           //Rangerova abilita rozdelena strela
+crushingArrow       //Rangerova abilita drtivy sip
 
 //systemove
 setpassword

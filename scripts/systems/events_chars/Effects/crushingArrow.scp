@@ -1,0 +1,266 @@
+////////////////////////////////////////////////////////////
+//             C R U S H I N G   A R R O W                //
+//                     (c) Yavanna                        //
+////////////////////////////////////////////////////////////
+
+
+// NPC resist: tag.resist_crushingArrow=VALUE
+//        the value can be 0-1000 (no resist up to an invulnerability)
+
+////////////////////////////////////////
+// PUBLIC INTERFACE
+////////////////////////////////////////
+
+[function crushingArrow]
+if (profession!=class_ranger)
+  sysMessage("Toto muze pouzit jen ranger.")
+  return
+elseif (isDead)
+  sysMessage("Jako duch nemuzes tuto abilitu pouzit!")
+  return
+elseif (isnonmobile)
+  sysMessage("You are frozen and cannot move.")
+  return
+elseif !(<eval tag(ra_crushingArrow)>)
+  RedMessage("Neumis pouzivat tuto schopnost.")
+  return 1 
+elseif (<eval tag(nextCrushingArrow)> > <serv.time>)
+  sysMessage("Jeste nelze pouzit.")
+  tag(nextrangearrow,<eval (<tag(nextCrushingArrow)>+10)>)
+  return
+elseif !(hasBow)
+  sysMessage("Musis v ruce drzet strelnou zbran!")
+  return 
+elseif !(isfighting)
+  sysMessage("Lze pouzit jen pri boji")
+  return 
+elseif !(act)
+  sysMessage("Lze pouzit jen pri boji")
+  return 
+elseif !(act.isChar)
+  sysMessage("Lze pouzit jen pri boji")
+  return 
+elseif (distancefrom(<act>) > 15)
+  sysMessage("Cil je prilis daleko!")
+  return 
+elseif !(<act.srcCanSeeLos>)
+  redMessage("Nevidis na cil!")
+  return
+elseif (!reduceStamina(<nastaveni_crushingArrow_stamina>,1)) // this one MUST be last!
+  return
+endif
+arg(attackTarget,<act>)
+skill -1
+stopscriptedskills
+sound(snd_WEAPONS_CROSSBOW_LOAD)
+sysMessage("Chystas se vystrelit drtivou strelu!")
+newitem(i_mem_crushingArrow)
+lastnew.link=<arg(attackTarget)>
+lastnew.equip
+tag(nextCrushingArrow,<eval (<serv.time>+(nastaveni_crushingArrow_nextDelay*10))>)
+if (findlayer(layer_hand2).dispId != i_bow) // cannot run with anything else
+  events=+e_crushingArrow_noStep
+endif
+
+[itemdef i_mem_crushingArrow]
+ID=i_memory
+TYPE=t_eq_script
+name=Crushing Arrow
+
+on=@create
+timerd=<nastaveni_crushingArrow_delay>
+
+on=@equip
+cont.dialog(d_crushingArrow)
+cont.tag(crushingArrow,1)
+
+on=@timer
+cont.f_crushingArrow(<link>)
+cont.f_crushingArrow_cancel
+remove
+return
+
+[events e_crushingArrow_noStep]
+on=@step
+redMessage("Drtivy sip prerusen pohybem!")
+f_crushingArrow_cancel
+findid(i_mem_crushingArrow).remove
+
+[function f_crushingArrow_cancel]
+tag(crushingArrow,"")
+dialogclose(d_crushingArrow,0)
+events=-e_crushingArrow_noStep
+
+[dialog d_crushingArrow]
+10,24
+noclose=1
+nomove=0
+argo.gumppic(14,0,05209)
+
+[function f_crushingArrow]
+src=<uid>
+if !(<argv(0).srcCanSeeLos>)
+  redMessage("Nevidis na cil!")
+  return
+elseif (<argv(0).distance> > <eval (<nastaveni_global_runbowrangepvp>+<eval tag(rangearrowdst)>)>)
+  redMessage("Cil je prilis daleko!")
+  return
+elseif !(chance(<archery>,3))
+  sysMessage("<sex(Minul,Minula)> jsi cil!")
+  return
+endif
+if (argv(0).npc)
+  argv(0).f_crushingArrow_PvM
+else
+  argv(0).f_crushingArrow_PvP
+endif
+
+[function f_crushingArrow_PvM]
+arg(hasBow,<src.hasBow>)
+if !(<arg(hasBow)>)
+  src.sysMessage("Musis v ruce drzet strelnou zbran!")
+  return 
+endif
+arg(ca_resist,<eval tag(resist_crushingArrow)>)
+if (arg(ca_resist) < 250)
+  src.classMessage("Cil byl drtive zasazen!")
+elseif (arg(ca_resist) < 500)
+  src.classMessage("Cil byl drtive zasazen! Jen slabe odolal tvemu sipu.")
+elseif (arg(ca_resist) < 750)
+  src.classMessage("Cil z casti odolava tvemu drtivemu sipu!")
+elseif (arg(ca_resist) < 1000)
+  src.classMessage("Cil znacne odolava tvemu drtivemu sipu!")
+else
+  src.classMessage("Cil zcela odolava tvemu drtivemu sipu!")
+  return
+endif
+src.f_getatack_nonmystik // calculates UC
+arg(power,<eval (src.tag(ra_crushingArrow)*10)>)
+arg(power,#+<eval (<src.tag(uc)>*3)>)
+if (arg(ca_resist) > 0)
+  arg(power,#-<eval (arg(power)*arg(ca_resist))/1000>)
+endif
+arg(duration,<eval 20+(src.tag(ra_crushingArrow)*2)>)
+
+src.effect(0,3906)
+stopMagery
+reduceResist(sharp,<arg(duration)>,<arg(power)>)
+reduceResist(slash,<arg(duration)>,<arg(power)>)
+reduceResist(pierce,<arg(duration)>,<arg(power)>)
+reduceResist(blunt,<arg(duration)>,<arg(power)>)
+
+[function f_crushingArrow_PvP]
+if (flag_hasShield)
+  arg(hitTarget,<findlayer(layer_hand2)>)
+  if (!f_crushingArrow_calculateChance_PvP(<arg(hitTarget)>))
+    return
+  endif
+  prolongTimer(i_denyEquipTimer_hand2,25) // 2.5s fixed for now
+  src.classMessage("<src.sex(Srazil,Srazila)> jsi cili stit!")
+else
+  arg(hitTarget,<findlayer(layer_helm)>)
+  if (strlen(<arg(hitTarget)>))
+    if (!f_crushingArrow_calculateChance_PvP(<arg(hitTarget)>))
+      return
+    endif
+    prolongTimer(i_denyEquipTimer_helm,25) // 2.5s fixed for now
+    src.classMessage("<src.sex(Srazil,Srazila)> jsi cili helmu!")
+  endif
+endif
+
+arg(duration,<eval 10+(src.tag(ra_crushingArrow))>)
+src.effect(0,3906)
+stopMagery
+
+if (strlen(<arg(hitTarget)>))
+  lastnew.link=<arg(hitTarget)>
+  hitTarget.cont=<findlayer(21)>
+else
+  arg(mainDmg,<eval src.combat_main_nonmystik_countDmg>) // counts the damage caused by the player to the target
+  arg(mainDmg,<eval ((arg(mainDmg) * 125)/100)>)         // increase the dmg by 25%
+  src.combat_main_nonmystik_doDmg(<arg(mainDmg)>)        // applies the nonmystik damage to the src's act
+endif
+
+[function f_crushingArrow_calculateChance_PvP]
+arg(targMaterial,<argv(0).tdata1>)
+if !(<arg(targMaterial)>) // armour has tdata set -> 100% chance for clothes
+  return 1
+endif
+arg(srcHand,<src.findlayer(layer_hand2)>)
+arg(srcMaterial,<arg(srcHand).def.tdata1>)
+if (<arg(targMaterial)> < <arg(srcMaterial)>)
+  return 1 // 100% chance if the target material is lower than my own
+endif
+arg(materialPenalty<eval ((<arg(targMaterial)>-<arg(srcMaterial)>)*300)>
+arg(chance,<eval ((1000-<f_crushingArrow_getWeaponPenalty(<arg(srcHand)>)>)-<arg(materialPenalty)>)>)
+if (<arg(chance)> <= 0)
+  return 0
+endif
+if (chance(<arg(chance)>,3))
+  return 1
+endif
+
+return 0
+
+// argv(0) -> hand weapon UID
+[function f_crushingArrow_getWeaponPenalty]
+if (argv(0).dispId == i_crossbow_heavy)
+  return 0
+elseif (argv(0).dispId == i_crossbow)
+  return 100
+else // i_bow
+  return 200
+endif
+
+[itemdef i_denyEquipTimer_hand2]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=deny equip timer - hand2
+
+on=@equip
+cont.events=+e_denyEquip_hand2
+cont.redMessage("Sip ti vyrazil stit z ruky!")
+
+on=@unequip
+cont.events=-e_denyEquip_hand2
+f_contEquipLink
+
+[itemdef i_denyEquipTimer_helm]
+ID=i_memory
+TYPE=T_EQ_SCRIPT
+NAME=deny equip timer - helm
+
+on=@equip
+cont.events=+e_denyEquip_helm
+cont.redMessage("Sip ti z hlavy srazil zbroj!")
+
+on=@unequip
+cont.events=-e_denyEquip_helm
+f_contEquipLink
+
+[function f_contEquipLink]
+if (link)
+  if (link.topobj==cont)
+    cont.equip(<link>)
+  endif
+endif
+
+[events e_denyEquip_hand2]
+on=@itemequip
+if (act.def.layer==layer_hand2)
+  act.bounce
+  cont.redMessage("Prava ruka je stale ochromena a nemuzes do ni nic uchopit.")
+  return 1
+endif
+return 0
+
+[events e_denyEquip_helm]
+on=@itemequip
+if (act.def.layer==layer_helm)
+  act.bounce
+  cont.redMessage("Helmu jeste nelze obleknout.")
+  return 1
+endif
+return 0
+
+[eof]
