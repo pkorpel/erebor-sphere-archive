@@ -2374,7 +2374,6 @@ maxmana=1500
 tag.experience=<eval {200.0 220.0}>
 
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
@@ -2479,7 +2478,6 @@ tag.npc_stun_time=10              //1 seconds of stun
 Tag.npc_stun_chance=300           //30%, defaultne 20%
 
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
@@ -2565,7 +2563,6 @@ tag.stam_dmg_power=45               // takes 45 of stam
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 
@@ -2591,7 +2588,6 @@ tag(monstertype,humanoid,95)
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
 
-PEACEMAKING=100.0
 WRESTLING=160.0
 TACTICS=120.0
 Parrying=150.0
