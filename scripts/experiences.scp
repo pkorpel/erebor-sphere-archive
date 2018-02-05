@@ -688,7 +688,7 @@ def_rearAbilities_stuntattack_class[0]               war,craft,priest
 def_rearAbilities_stuntattack_prodleva_desc          "Omracujici uder - prodleva"
 def_rearAbilities_stuntattack_prodleva[0]            50,10,100,20,150,30
 def_rearAbilities_stuntattack_prodleva_class[0]      war,craft,priest
-def_rearAbilities_stuntattack_ucinnost_desc          "Povolani mrtvych - ucinnost"
+def_rearAbilities_stuntattack_ucinnost_desc          "Omracujici uder - ucinnost"
 def_rearAbilities_stuntattack_ucinnost[0]            50,10,100,20,150,30
 def_rearAbilities_stuntattack_ucinnost_class[0]      war
 def_rearAbilities_roundattack_desc                   "Roundattack"
