@@ -2645,7 +2645,6 @@ tag(npc_port_distance,10)
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
 
@@ -3040,7 +3039,7 @@ maxhits={5 10}
 maxstam={75 98}
 maxmana=0
 
-tag.experience=1     //<eval {3.0 7.0}>
+tag.experience=1.0
 
 tag.npc_critic_chance=500                //50% chance
 tag.npc_critic_dmg=10,15                 //dmg in between
