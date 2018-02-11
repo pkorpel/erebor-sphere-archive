@@ -860,14 +860,10 @@ if (action==skill_macefighting)
       if (<eval tag(firststroke)>)
         combat_storepos(<act>)
       else
-        if (findtype(<findlayer(2).typedef.tdata3>))
-          findtype(<findlayer(2).typedef.tdata3>).consume(1)
-          //consume 1 <findlayer(2).typedef.tdata3>
-        else
-          sysMessage("Nemas zadne strelivo.")
-          flags=<flags>&~020
+        if !(f_archer_validateAmmo)
           return 1
         endif
+        f_archer_consumeAmmoOnShot
         act.effect(0,<findlayer(2).typedef.tdata4>,10,1)
         combat_storepos(<act>)
       endif
@@ -921,6 +917,18 @@ on=@beforegetswing
 on=@playerKill
 on=@npckill
 on=@finalBlow
+
+[function f_archer_validateAmmo]
+if (findtype(<findlayer(2).typedef.tdata3>))
+  return 1
+else
+  sysMessage("Nemas zadne strelivo.")
+  flags=<flags>&~020
+  return 0
+endif
+
+[function f_archer_consumeAmmoOnShot]
+findtype(<findlayer(2).typedef.tdata3>).consume(1)
 
 [itemdef i_combat_main]
 id=i_memory

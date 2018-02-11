@@ -2482,14 +2482,26 @@ n_ability4[10]
 n_ability4_name[10]
 n_ability4_default[10]
 n_ability4[11]          crushingArrow_delay
-n_ability4_name[11]     "crushingArrow - Prodleva vystrelu (ds)"
+n_ability4_name[11]     "crushingArrow - Prodleva pred vystrelem (ds)"
 n_ability4_default[11]  15
 n_ability4[12]          crushingArrow_nextDelay
 n_ability4_name[12]     "crushingArrow - dalsi pouziti (s)"
 n_ability4_default[12]  20
 n_ability4[13]          crushingArrow_stamina
 n_ability4_name[13]     "crushingArrow - stamina"
-n_ability4_default[13]  35
+n_ability4_default[13]  45
+n_ability4[14]          crushingArrow_PvP_durationBase
+n_ability4_name[14]     "crushingArrow - PvP zakl. doba shozeni (ms)"
+n_ability4_default[14]  20
+n_ability4[15]          crushingArrow_PvP_durationAbilityPoint
+n_ability4_name[15]     "crushingArrow - PvP doba shozeni za abil. bod"
+n_ability4_default[15]  1
+n_ability4[16]          crushingArrow_PvM_durationBase
+n_ability4_name[16]     "crushingArrow - PvM zakl. doba shozeni (ms)"
+n_ability4_default[16]  20
+n_ability4[17]          crushingArrow_PvM_durationAbilityPoint
+n_ability4_name[17]     "crushingArrow - PvM doba shozeni za abil. bod"
+n_ability4_default[17]  2
 
 n_magicCharge[0]    charge_limit
 n_magicCharge_name[0]   "max. pocet naboju"

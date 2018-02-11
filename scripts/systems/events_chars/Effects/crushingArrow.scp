@@ -22,7 +22,7 @@ elseif (isnonmobile)
   sysMessage("You are frozen and cannot move.")
   return
 elseif !(<eval tag(ra_crushingArrow)>)
-  RedMessage("Neumis pouzivat tuto schopnost.")
+  redMessage("Neumis pouzivat tuto schopnost.")
   return 1 
 elseif (<eval tag(nextCrushingArrow)> > <serv.time>)
   sysMessage("Jeste nelze pouzit.")
@@ -46,6 +46,8 @@ elseif (distancefrom(<act>) > 15)
 elseif !(<act.srcCanSeeLos>)
   redMessage("Nevidis na cil!")
   return
+elseif !(f_archer_validateAmmo)
+  return 1
 elseif (!reduceStamina(<nastaveni_crushingArrow_stamina>,1)) // this one MUST be last!
   return
 endif
@@ -53,12 +55,12 @@ arg(attackTarget,<act>)
 skill -1
 stopscriptedskills
 sound(snd_WEAPONS_CROSSBOW_LOAD)
-sysMessage("Chystas se vystrelit drtivou strelu!")
+classMessage("Chystas se vystrelit drtivou strelu!")
 newitem(i_mem_crushingArrow)
 lastnew.link=<arg(attackTarget)>
 lastnew.equip
 tag(nextCrushingArrow,<eval (<serv.time>+(nastaveni_crushingArrow_nextDelay*10))>)
-if (findlayer(layer_hand2).dispId != i_bow) // cannot run with anything else
+if (findlayer(layer_hand2).type != t_weapon_bow_run) // cannot run with anything else
   events=+e_crushingArrow_noStep
 endif
 
@@ -99,28 +101,39 @@ argo.gumppic(14,0,05209)
 
 [function f_crushingArrow]
 src=<uid>
+skill -1
+arg(hasBow,<hasBow>)
+if !(<arg(hasBow)>)
+  sysMessage("Musis v ruce drzet strelnou zbran!")
+  return 
+endif
 if !(<argv(0).srcCanSeeLos>)
   redMessage("Nevidis na cil!")
   return
-elseif (<argv(0).distance> > <eval (<nastaveni_global_runbowrangepvp>+<eval tag(rangearrowdst)>)>)
-  redMessage("Cil je prilis daleko!")
-  return
-elseif !(chance(<archery>,3))
+elseif !(f_archer_validateAmmo)
+  return 1
+endif
+if !(chance(<archery>,3))
   sysMessage("<sex(Minul,Minula)> jsi cil!")
   return
 endif
-if (argv(0).npc)
-  argv(0).f_crushingArrow_PvM
+arg(weapon,<src.findlayer(<arg(hasBow)>)>)
+if (arg(weapon).type==t_weapon_bow_run)
+  arg(reach,<nastaveni_global_runBowRangePvM>+<eval src.tag(rangeArrowDst)>)
 else
-  argv(0).f_crushingArrow_PvP
+  arg(reach,12)
+endif
+if (<distance> > <arg(reach)>)
+  src.redMessage("Cil je prilis daleko!")
+  return
+endif
+if (argv(0).npc)
+  argv(0).f_crushingArrow_PvM(<arg(weapon)>)
+else
+  argv(0).f_crushingArrow_PvP(<arg(weapon)>)
 endif
 
 [function f_crushingArrow_PvM]
-arg(hasBow,<src.hasBow>)
-if !(<arg(hasBow)>)
-  src.sysMessage("Musis v ruce drzet strelnou zbran!")
-  return 
-endif
 arg(ca_resist,<eval tag(resist_crushingArrow)>)
 if (arg(ca_resist) < 250)
   src.classMessage("Cil byl drtive zasazen!")
@@ -134,43 +147,47 @@ else
   src.classMessage("Cil zcela odolava tvemu drtivemu sipu!")
   return
 endif
+
 src.f_getatack_nonmystik // calculates UC
 arg(power,<eval (src.tag(ra_crushingArrow)*10)>)
 arg(power,#+<eval (<src.tag(uc)>*3)>)
 if (arg(ca_resist) > 0)
   arg(power,#-<eval (arg(power)*arg(ca_resist))/1000>)
 endif
-arg(duration,<eval 20+(src.tag(ra_crushingArrow)*2)>)
+arg(duration,<eval nastaveni_crushingArrow_PvM_durationBase+(<src.tag(ra_crushingArrow)>*nastaveni_crushingArrow_PvM_durationAbilityPoint)>)
 
-src.effect(0,3906)
-stopMagery
+f_crushingArrow_successEffect(<argv(0)>)
 reduceResist(sharp,<arg(duration)>,<arg(power)>)
 reduceResist(slash,<arg(duration)>,<arg(power)>)
 reduceResist(pierce,<arg(duration)>,<arg(power)>)
 reduceResist(blunt,<arg(duration)>,<arg(power)>)
 
 [function f_crushingArrow_PvP]
+arg(duration,<eval nastaveni_crushingArrow_PvP_durationBase+(<src.tag(ra_crushingArrow)>*nastaveni_crushingArrow_PvP_durationAbilityPoint)>)
 if (flag_hasShield)
   arg(hitTarget,<findlayer(layer_hand2)>)
-  if (!f_crushingArrow_calculateChance_PvP(<arg(hitTarget)>))
+  if (!f_crushingArrow_calculateChance_PvP(<arg(hitTarget)>,<argv(0)>))
     return
   endif
-  prolongTimer(i_denyEquipTimer_hand2,25) // 2.5s fixed for now
+  prolongTimer(i_denyEquipTimer_hand2,<arg(duration)>)
   src.classMessage("<src.sex(Srazil,Srazila)> jsi cili stit!")
+  sound(snd_WEAPONS_HVYSWRD4)
 else
   arg(hitTarget,<findlayer(layer_helm)>)
   if (strlen(<arg(hitTarget)>))
-    if (!f_crushingArrow_calculateChance_PvP(<arg(hitTarget)>))
+    if (!f_crushingArrow_calculateChance_PvP(<arg(hitTarget)>,<argv(0)>))
       return
     endif
-    prolongTimer(i_denyEquipTimer_helm,25) // 2.5s fixed for now
-    src.classMessage("<src.sex(Srazil,Srazila)> jsi cili helmu!")
+    prolongTimer(i_denyEquipTimer_helm,<arg(duration)>)
+    src.classMessage("<src.sex(Srazil,Srazila)> jsi cili pokryvku hlavy!")
+    if (<arg(hitTarget).def.tdata1>)
+      sound(snd_WEAPONS_HVYSWRD4) // metal sound for armoured helmet
+    else
+      sound(snd_WEAPONS_SWISH02)  // swish sound for clothing (hats)
+    endif
   endif
 endif
-
-arg(duration,<eval 10+(src.tag(ra_crushingArrow))>)
-src.effect(0,3906)
-stopMagery
+f_crushingArrow_successEffect(<argv(0)>)
 
 if (strlen(<arg(hitTarget)>))
   lastnew.link=<arg(hitTarget)>
@@ -179,20 +196,33 @@ else
   arg(mainDmg,<eval src.combat_main_nonmystik_countDmg>) // counts the damage caused by the player to the target
   arg(mainDmg,<eval ((arg(mainDmg) * 125)/100)>)         // increase the dmg by 25%
   src.combat_main_nonmystik_doDmg(<arg(mainDmg)>)        // applies the nonmystik damage to the src's act
+  src.classMessage("<src.sex(Zasadil,Zasadila)> jsi cili drtivou ranu!")
 endif
 
+[function f_crushingArrow_successEffect] // argv(0) - wielding weapon UID
+effect(0,<argv(0).typedef.tdata4>,10,1)
+stopMagery
+if (argv(0).type != t_weapon_bow_run)
+  sound(snd_WEAPONS_CROSSBOW)
+else
+  sound(snd_WEAPONS_BLUNT01)
+endif
+f_archer_consumeAmmoOnShot
+
+// argv(0) - target piece of armor
+// argv(1) - attack source weapon (the ranger's bow/crossbow)
 [function f_crushingArrow_calculateChance_PvP]
-arg(targMaterial,<argv(0).tdata1>)
+arg(targMaterial,<argv(0).def.tdata1>)
 if !(<arg(targMaterial)>) // armour has tdata set -> 100% chance for clothes
+  sound(snd_WEAPONS_HVYSWRD4)
   return 1
 endif
-arg(srcHand,<src.findlayer(layer_hand2)>)
-arg(srcMaterial,<arg(srcHand).def.tdata1>)
+arg(srcMaterial,<argv(1).def.tdata1>)
 if (<arg(targMaterial)> < <arg(srcMaterial)>)
   return 1 // 100% chance if the target material is lower than my own
 endif
 arg(materialPenalty<eval ((<arg(targMaterial)>-<arg(srcMaterial)>)*300)>
-arg(chance,<eval ((1000-<f_crushingArrow_getWeaponPenalty(<arg(srcHand)>)>)-<arg(materialPenalty)>)>)
+arg(chance,<eval ((1000-<f_crushingArrow_getWeaponPenalty(<argv(1)>)>)-<arg(materialPenalty)>)>)
 if (<arg(chance)> <= 0)
   return 0
 endif
