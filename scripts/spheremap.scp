@@ -4287,6 +4287,16 @@ resources=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Doupe Kyklopu]
+GROUP=Dungeon Doupe Kyklopu
+P=4917,999,0,10
+RECT=4843,802,4952,1011
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
 [AREA Etheria vstup]
 GROUP=Dung Etheria
 P=1351, 3131
