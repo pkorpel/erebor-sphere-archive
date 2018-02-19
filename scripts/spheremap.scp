@@ -9473,5 +9473,13 @@ FLAGS=00812
 tag.nobank=1
 tag.realm=3
 
+[AREA Murdoc]
+P=5936,138,0,21
+RECT=5921,123,6008,155
+mapplane=21
+GROUP=a test
+RAINCHANCE=00  
+COLDCHANCE=00 
+
 [EOF]
 
