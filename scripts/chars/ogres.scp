@@ -2522,9 +2522,9 @@ ICON=i_pet_CYCLOPS
 ANIM=078c7f
 CAN=MT_WALK|MT_USEHANDS|MT_RUN|MT_FIRE_IMMUNE
 
-attack=100
+attack=125
 ARMOR=130
-MOVERATE=4
+MOVERATE=5
 
 RESOURCES=29 i_ribs_raw 
 BLOODCOLOR=020
@@ -2534,6 +2534,7 @@ TEVENTS=e_character
 TEVENTS=e_humanoid
 TEVENTS=e_npc_leaper
 TEVENTS=e_npc_stam_dmg              //mlacenim saje staminu
+TEVENTS=e_npc_stun
 
 CATEGORY=Monsters
 SUBSECTION=Special
@@ -2549,17 +2550,20 @@ STR=2200
 DEX=370
 INT=120
 
-maxhits={13000 15000}
+maxhits={18000 21000}
 maxstam={305 355}
 maxmana=0
 
-tag.experience=<eval {450.0 500.0}>
+tag.experience=<eval {750.0 800.0}>
 
 tag.npc_port_timer=10
-tag(npc_port_distance,6)
+tag(npc_port_distance,8)
 
 tag.stam_dmg_chance=350             // 35% chance to trigger this event
 tag.stam_dmg_power=45               // takes 45 of stam
+
+tag.npc_stun_time=20              //2 seconds of stun
+Tag.npc_stun_chance=350           //35%, defaultne 20%
 
 //mystik
 tag(hypnotizable,0)
@@ -2597,6 +2601,7 @@ ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 item=i_gold
+item=i_mi_bag
 
 ////////////////////////////////////////////////////
 //////////////////    OSTATNI   ////////////////////
@@ -2610,8 +2615,8 @@ ICON=i_pet_GAZER
 CAN=MT_WALK|MT_RUN|MT_FIRE_IMMUNE
 
 attack=45
-ARMOR=20
-moverate=4
+ARMOR=50
+moverate=6
 
 BLOODCOLOR=color_o_iron
 
@@ -2635,12 +2640,12 @@ STR=250
 DEX=1000
 INT=500
 
-maxhits={300 360}
+maxhits={400 450}
 maxstam={400 450}
 maxmana=0
 
-tag.experience=<eval {45.0 50.0}>
-tag(npc_port_distance,10)
+tag.experience=<eval {50.0 60.0}>
+tag(npc_port_distance,12)
 
 //mystik
 tag(hypnotizable,0)
@@ -2692,7 +2697,7 @@ CAN=MT_WALK|MT_run
 
 attack=75
 ARMOR=80
-moverate=5
+moverate=6
 
 RESOURCES=4 i_ribs_raw
 FOODTYPE=55 t_FISH,64 t_meat_raw
@@ -2771,7 +2776,7 @@ CAN=MT_WALK
 
 attack=60
 ARMOR=30
-moverate=5
+moverate=6
 
 RESOURCES=2 i_ribs_raw, 2 i_reag_batwing
 BLOODCOLOR=020
@@ -2891,7 +2896,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
 
 tag(monstertype,humanoid,95)
 
-tag.weapflag=dam_physical|dam_slashing|dam_piercing
+tag.weapflag=dam_physical|dam_slashing
 
 tag(resist_poison,700)
 tag.resist_para=<eval {800 900}>
@@ -2909,11 +2914,10 @@ tag(resist_cold,400)
 
 SWORDSMANSHIP={95.0 100.0}
 PARRYING={65.0 80.0}
-WRESTLING={95.0 100.0}
+WRESTLING={95.0 110.0}
 resist=50.0
 SpiritSpeak=20.0
 
-ITEMNEWBIE=i_sword_broad_iron
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
@@ -3055,7 +3059,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
 
 tag(monstertype,humanoid,95)
 
-tag.weapflag=dam_physical|dam_slashing|dam_piercing
+tag.weapflag=dam_physical|dam_slashing
 
 tag(resist_poison,700)
 tag.resist_para=<eval {800 900}>
@@ -3073,11 +3077,10 @@ tag(resist_cold,400)
 
 SWORDSMANSHIP={95.0 100.0}
 PARRYING={65.0 80.0}
-WRESTLING={95.0 100.0}
+WRESTLING={95.0 110.0}
 resist=50.0
 SpiritSpeak=20.0
 
-ITEMNEWBIE=i_sword_broad_iron
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock

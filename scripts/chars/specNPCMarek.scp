@@ -9,13 +9,13 @@ NAME=Pan Mahatu
 CATEGORY=Dungy
 SUBSECTION=Mahat
 DESCRIPTION=Boss Mahatu
-ID=C_MAN
+ID=c_fireant_daemon
 ICON=i_pet_MAN
 CAN=MT_EQUIP|MT_WALK|MT_RUN|MT_USEHANDS
 
 attack=120
 ARMOR=100
-moverate=4
+moverate=5
 
 BLOODCOLOR=020
 
@@ -32,14 +32,14 @@ TEVENTS=e_autoreflect
 TEVENTS=e_managain
 
 ON=@Create
-COLOR=colors_skin
+COLOR=098C
 NPC=brain_monster
 FAME=100
 KARMA=-5000
 
 STR=1000
 DEX=250
-INT=350
+INT=290
 
 maxhits={29000 30000}
 maxstam={200 250}
@@ -55,7 +55,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
 
-tag(npc_summoning_chance,50)            //5% chance
+tag(npc_summoning_chance,70)            //7% chance
 tag(npc_summoning_time,60)
 tag(npc_summoning_count,4)
 tag(npc_summoning_char[0],c_mahat_boss_sluha)
@@ -64,7 +64,7 @@ tag(npc_summoning_char[2],c_mahat_boss_leaper)
 tag(npc_summoning_char[3],c_mahat_boss_etheric)
 
 //typ monstra
-tag(monstertype,humanoid,50)
+tag(monstertype,daemon,70)
 
 tag(resist_poison,1000)
 tag(resist_para,1000) 
@@ -81,59 +81,24 @@ tag(resist_elect,300)          //brneni nepohlti energii
 tag(resist_cold,850)
 tag(resist_silence,1000)
 
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
-
 WRESTLING=150.0 
 RESIST={120.0 170.0}
 TACTICS={100.0 150.0}
 PARRYING={90.0 100.0}
 MACEFIGHTING={90.0 100.0}
 MAGERY=150.0
-EI=120.0
+EI=100.0
 PROVOCATION=100.0
 PEACEMAKING=100.0
 SpiritSpeak=200.0
 
 ITEMNEWBIE=i_spellbook
 addspell=s_lightning
-//addspell=s_flamestrike
-addspell=s_summon_elem_air
-addspell=s_summon_elem_fire
-//addspell=s_magic_reflection
+addspell=s_flamestrike
+addspell=s_mind_blast
+addspell=s_summon_daemon
 
 ITEMnewbie=i_monster_create
-ITEM=i_npc_mount
-tag.mount=i_mt_horse_gray
-tag.mountcolor=098f
-
-ITEMNEWBIE=i_light_source
-ITEMNEWBIE=random_female_hair
-ITEMnewbie=i_bone_helmet
-color=0989
-NAME=Prastara zbroj
-ITEMnewbie=i_sword_long
-color=098f
-NAME=Magicky mec
-ITEMnewbie=i_sandals
-color=0989
-ITEMnewbie=i_bone_leggings
-color=0989
-NAME=Prastara zbroj
-ITEMnewbie=i_bone_chest
-color=0989
-NAME=Prastara zbroj
-ITEMnewbie=i_necklance_silver
-color=0989
-ITEMnewbie=i_bone_gloves
-color=0989
-ITEMnewbie=i_shield_buckler
-color=098f
-NAME=Stit
-ITEMnewbie=i_bone_arms
-color=0989
-NAME=Prastara zbroj
 
 ON=@NPCRestock 
 ITEM=i_gold
@@ -462,7 +427,7 @@ tag.npc_curse_stam_delay=15,20         // delay between another possible strike
 tag.npc_curse_stam_dmg=20,30           // stam reduce in between 50 and 60
 
 //typ monstra
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag(resist_poison,1000)
 tag(resist_para,1000) 
@@ -479,10 +444,6 @@ tag(resist_elect,550)
 tag(resist_cold,300)
 tag(resist_silence,1000)
 
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
-
 WRESTLING=150.0 
 RESIST={150.0 170.0}
 TACTICS={100.0 150.0}
@@ -497,8 +458,6 @@ SpiritSpeak=200.0
 ITEMNEWBIE=i_spellbook
 addspell=s_lightning
 addspell=s_summon_elem_fire
-//addspell=s_energy_bolt
-//addspell=s_magic_reflection
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock 
@@ -580,10 +539,6 @@ tag(resist_fire,400)
 tag(resist_elect,-200)
 tag(resist_cold,100)
 
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
-
 POISONING={300.0 400.0}
 WRESTLING=140.0
 RESIST=250.0
@@ -661,9 +616,6 @@ tag(resist_fire,900)
 tag(resist_elect,400)
 tag(resist_cold,600)
 tag.reactivearmor_damagePerc=<eval {25 30}> // % dmg kolik bude vracet reactivearmor
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
 
 POISONING={300.0 400.0}
 WRESTLING=140.0
@@ -829,10 +781,6 @@ tag(resist_elect,450)
 tag(resist_cold,1000)
 tag(resist_silence,1000)
 
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
-
 //typ monstra
 tag(monstertype,humanoid,50)
 
@@ -906,11 +854,7 @@ tag(resist_blunt,1000)
 tag(resist_fire,1000)
 tag(resist_elect,1000)
 tag(resist_cold,1000)
-
-//tag(resist_phys,0)
 tag(resist_magic,1000)
-//tag(resist_acid,0)
-
 
 PARRYING={95.0 100.0}
 TACTICS={85.0 120.0}
@@ -996,7 +940,7 @@ tag.npc_curse_delay=15,17               // delay between another possible strike
 tag.npc_curse_dmg=35,40                 // dmg 
 
 //typ monstra
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag.weapflag=dam_physical
 
@@ -1014,10 +958,6 @@ tag(resist_fire,950)
 tag(resist_elect,700)
 tag(resist_cold,200)                 //citlivost na chlad demon
 tag(resist_silence,1000)
-
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
 
 peacemaking=100.0
 provocation=100.0
@@ -1106,7 +1046,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[10]>
 
 //typ monstra
-tag(monstertype,golem,60)
+tag(monstertype,golem,70)
 
 tag(e_explosiondispell_chance,150) //15% chance
 tag(e_explosiondispell_range,5)
@@ -1127,10 +1067,6 @@ tag(resist_blunt,150)            //golem tristi se
 tag(resist_fire,850)
 tag(resist_elect,150)            //kovovy golem
 tag(resist_cold,450)
-
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
 
 TACTICS=100.0
 WRESTLING=120.0
@@ -1180,7 +1116,6 @@ STR=1100
 DEX=400
 INT=320
 
-
 maxhits={1900 1999}
 maxstam=350
 maxmana=700
@@ -1217,10 +1152,6 @@ tag(resist_blunt,200)
 tag(resist_fire,600)
 tag(resist_elect,600)
 tag(resist_cold,400)
-
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
 
 PARRYING={85.0 100.0}
 RESIST={65.0 80.0}
@@ -1431,10 +1362,6 @@ tag(resist_elect,850)
 tag(resist_cold,550)
 tag(resist_silence,900)
 
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
-
 //typ monstra
 tag(monstertype,daemon,50)
 
@@ -1527,10 +1454,6 @@ tag(resist_blunt,150)
 tag(resist_fire,700)
 tag(resist_elect,800)
 tag(resist_cold,600)
-
-//tag(resist_phys,0)
-//tag(resist_magic,0)
-//tag(resist_acid,0)
 
 TACTICS=250.0
 WRESTLING=100.0
