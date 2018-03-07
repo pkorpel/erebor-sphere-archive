@@ -1086,9 +1086,9 @@ argo.HTMLGUMP(170,230,440,100,11,0,36)
 
 argo.page(2)
 if (realm==0)
-  argo.settext(22,"Me jmeno neni dulezite, ale rikaji mi vetesnik. Byl jsem poveren sberem magickych predmetu pro vyzkumne ucely. Bohuzel v tuto chvili mam nedostatek financnich prostredku a proto ti navrhnu jiny zpusob. Ty mi das pet predmetu libovolne kvality a ja ti daruji jeden novy neidentifikovany.")
+  argo.settext(22,"Me jmeno neni dulezite, ale rikaji mi vetesnik. Byl jsem poveren sberem magickych predmetu pro vyzkumne ucely. Bohuzel v tuto chvili mam nedostatek financnich prostredku a proto ti navrhnu jiny zpusob. Ty mi das magicke predmety, ktere budou mit v souctu alespon <def_imi_exchangeAttrs> magickych vlastnosti. Predmety mohou byt jakekoliv kvality a materialu, zajima mne pouze, kolik vlastnosti celkem budou mit. Ja ti obratem daruji jeden novy neidentifikovany.")
 else
-  argo.settext(22,"Co te po jmenu! Me jmeno neni dulezite, rikej mi vyberci. Dej mi pet magickych predmetu libovolne kvality, ty mas narok na jeden novy ode mne.")
+  argo.settext(22,"Co te po jmenu! Me jmeno neni dulezite, rikej mi vyberci. Dej mi magicke predmety libovolne kvality, s alespon <def_imi_exchangeAttrs> magickymi vlastnostmi v souctu. Ty mas narok na jeden novy ode mne vymenou.")
 endif
 argo.HTMLGUMP(170,230,440,100,22,0,36)
 
@@ -1111,7 +1111,7 @@ argo.settext(46,"Nemam zajem")
 argo.text(60,415,152,46)
 
 argo.page(5)
-argo.settext(55,"Zvaz dobre, co u sebe mas! Prejes si teda vymenit 5 tvych identifikovanych magickych predmetu za 1 novy neidentifikovany?")
+argo.settext(55,"Zvaz dobre, co u sebe mas! Prejes si teda vymenit nekolik tvych identifikovanych magickych predmetu za 1 novy neidentifikovany? Vezmu si prvni co u sebe neleznes, celkem si ale vezmu predmety s alespon <def_imi_exchangeAttrs> magickymi vlastnostmi v souctu.")
 argo.HTMLGUMP(170,230,440,100,55,0,36)
 argo.button(25,395,0fa5,0fa7,1,0,2)
 argo.settext(56,"Ano")
@@ -1131,7 +1131,7 @@ say("Tak co chces identifikovat?")
 
 ON=2
 say(Dobra, podivame se, co pro mne mas.)
-if(hasfivemagicals) 
+if (consumeXMagicals) 
   src.giveitem(i_mi_bag)
   say(Dekuji ti, zajimave predmety. Snad o ne nekdo bude mit zajem.)
   say(A zde je neco pro tebe, snad ti to bude k uzitku)
