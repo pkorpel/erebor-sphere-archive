@@ -142,7 +142,7 @@ endif
 ON=*vymena*
 ON=*menit*
 say(Dobra, podivame se, co pro mne mas.)
-if(hasfivemagicals) 
+if (consumeXMagicals) 
   src.giveitem(i_mi_bag)
   say (Dekuji ti, zajimave predmety. Snad o ne nekdo bude mit zajem.)
   say (A zde je neco pro tebe, snad ti to bude k uzitku.)
@@ -176,9 +176,9 @@ endif
 ON=*vymena*
 ON=*menit*
 say (Dost bylo okouneni, ukaz, co mas!)
-if (hasfivemagicals) 
+if (consumeXMagicals) 
   src.giveitem(i_mi_bag)
-  say (Hmm, nas pan nebude prilis potesen, ale svoji povinnost jsi splnil.)
+  say (Hmm, nas pan nebude moc potesen, ale svoji povinnost jsi splnil.)
   say (A zde je neco pro tebe.)
 else
   say (Neopovazuj se mne podvest! Nemas dost predmetu!)  
