@@ -25,7 +25,7 @@ questMenu_color_questActiveFont      #00F0FA
 questMenu_color_questInactiveFont    #383838
 questMenu_color_questDoneFont        #00FA55
 questMenu_color_questInactive        51
-questMenu_rows  53
+questMenu_rows  54
 //          |     Nazev questu     |           dialogName           |  1=qtag, 0=tag  |  relevantni tagy
 questMenu[0]  Zemedelec Borek           ,d_questy_borek                     ,1         ,gq002, mq002
 questMenu[1]  Alchymistka Mikkena       ,d_questy_mikena                    ,0         ,gq001
@@ -80,6 +80,7 @@ questMenu[49] Blaznivy Drakobijec       ,d_dragons_blazen                   ,1  
 questMenu[50] Drakobijci - brneni       ,d_dragons_kovar                    ,1         ,q040_dragons_kovar
 questMenu[51] Prestupny quest           ,d_prestupak                        ,1         ,q041_paserak
 questMenu[52] Halda Molle Hatlend       ,d_hm_hatlend                       ,1         ,q042_hatlend_rulik
+questMenu[53] Murdocovi Ucni            ,d_murdoc_ucni                      ,1         ,q043_tut,mq043,gq043
 
 questMenu_bg               9270
 questMenu_width            300
@@ -2436,7 +2437,7 @@ argo.f_qm_closeSubDialog
 
 ///////////////////
 //               //
-//  opily zarik  //
+//  Opily zarik  //
 //               //
 ///////////////////
 
@@ -2705,6 +2706,395 @@ elseif (<src.qtag(q042_hatlend_rulik)> == 4)
  argo.setText(1,"Hatlend se zaprisahnul, ze te zabije kdyz se k nemu priblizis.")
 endif
 argo.htmlGump(160,80,242,130,1,0,36)
+
+////////////////////////////
+//                        //
+//        MURDOC          //
+//                        //
+////////////////////////////
+
+[dialog d_murdoc_ucni]
+if (0<src.qtag(q043_tut)>)
+  argo.f_questmenu_murdoc_tutorial
+elseif (0<src.qtag(gq043)>)
+  argo.f_questmenu_murdoc_gondor
+else
+  argo.f_questmenu_murdoc_mordor
+endif
+
+[function f_questmenu_murdoc_tutorial]
+setText(0,"Argol")
+f_qDialogInstructions(003129)
+
+arg(tagValue,<src.qtag(q043_tut)>)
+if (<arg(tagValue)> == 7)
+  setText(1,"<src.sex(Pomohl,Pomohla)> si Argolovi sestavit pergamen, ktery patril nekromantu Murdocovi. Argol ti poradil, abys <src.sex(vyhledal,vyhledala)> jeho ucne."
+elseif (<arg(tqgValue)> == 6)
+  setText(1,"<src.sex(Nasel,Nasla)> si posledni cast svitku, Argol uz na tebe netrpelive ceka!")
+elseif (<arg(tqgValue)> == 5)
+  setText(1,"Jeste posledni cast a svitek bude kompletni! Podle Argola musi byt v podzemni kobce nemrtvych, co by Ettin kamenem dohodil.")
+elseif (<arg(tqgValue)> == 4)
+  setText(1,"<src.sex(Nasel,Nasla)> si dalsi cast svitku, Argol uz na tebe netrpelive ceka!")
+elseif (<arg(tqgValue)> == 3)
+  setText(1,"Svitek nebyl cely, musis se vydat na jih pres most, kde sidli Ettin, ktery ho ma ve sve moci.")
+elseif (<arg(tqgValue)> == 2)
+  setText(1," <src.sex(Nasel,Nasla)> si svitek, ale neni kompletni, vrat se za Argolem, on uz bude vedet co s tim.")
+elseif (<arg(tqgValue)> == 1)
+  setText(1,"<src.sex(Slibil,Slibila)> si, ze pro Argola ziskas ztraceny svitek. Pry je u veze na severozapadu.")
+endif
+htmlGump(160,80,242,130,1,0,36)
+
+////////////////////////////
+//                        //
+//  MURDOC UCNI MORDOR    //
+//                        //
+////////////////////////////
+
+[function f_questmenu_murdoc_mordor]
+setText(0,"Murdocovi Ucni")
+f_qDialogInstructions(003129)
+arg(tagValue,<eval src.qtag(mq043)>)
+
+if (<arg(tagValue)> > 220)&&<arg(tagValue)> < 250)
+  f_questy_murdoc_ucni_m_finale(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 250)
+  f_questy_murdoc_ucni_m_kronikar(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 200)
+  f_questy_murdoc_ucni_m_oran(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 150)
+  f_questy_murdoc_ucni_m_tran(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 100)
+  f_questy_murdoc_ucni_m_wran(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 50)
+  f_questy_murdoc_ucni_m_bran(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 1)
+  f_questy_murdoc_ucni_m_dran(<arg(tagValue)>)
+endif
+htmlGump(160,80,242,130,1,0,36)
+
+//KRONIKAR
+[function f_questy_murdoc_ucni_m_kronikar]
+if (<argv(0)> == 261)
+  setText(1,"Zatim pro tebe nema Torwin dalsi praci, ale brzy jiste bude potrebovat znovu pomoci.")
+elseif (<argv(0)> == 260)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, skvela prace! Rychle zpatky za Torwinem v Umbaru, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 259)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Barad-Duru.<BR>V mape mas poznacenou pozici<BR>X 3663 Y 2554")
+elseif (<argv(0)> == 258)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, tentokrat nic moc, rychle zpatky za Torwinem v Umbaru, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 257)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Rhunu.<BR>V mape mas poznacenou pozici<BR>X 3990 Y 1820")
+elseif (<argv(0)> == 256)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, mohlo to byt lepsi, rychle zpatky za Torwinem v Umbaru, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 255)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Nurnu.<BR>V mape mas poznacenou pozici<BR>X 3445 Y 3533")
+elseif (<argv(0)> == 254)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, tentokrat se ti to povedlo, rychle zpatky za Torwinem v Umbaru, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 253)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Haradu.<BR>V mape mas poznacenou pozici<BR>X 4035 Y 3810")
+elseif (<argv(0)> == 252)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, tentokrat nic moc, rychle zpatky za Torwinem v Umbaru, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 251)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Umbaru.<BR>V mape mas poznacenou pozici<BR>X 3112 Y 3328")
+elseif (<argv(0)> == 250)
+  setText(1,"Dran te poslal za Kronikarem Torwinem, ktery potrebuje pomoct s jeho nekromantskymi svitky, ktere mohou obsahovat dulezite informace. Najdes ho v Umbaru")
+endif
+return 0
+
+//FINALE
+[function f_questy_murdoc_ucni_m_finale]
+if (<argv(0)> == 223)
+  setText(1,"<src.sex(Pomohl,Pomohla)> si Dranovi dat dohromady vsechny chybejici pergameny, o kterych jeho bratri vedeli. Posila te za kronikarem Torwinem, ktery bude potrebovat tvou pomoc, az budes mistrem sveho umeni. Torwina najdes v Umbaru.")
+elseif (<argv(0)> == 222)
+  setText(1,"Uz mas vsechny pergameny! Odnes je zpatky do Barad-Duru k Dranovi, aby je mohl prelozit. Jiste dostanes odmenu!")
+endif
+return 0
+
+//ORAN
+[function f_questy_murdoc_ucni_m_oran]
+if (<argv(0)> == 207)
+  setText(1,"Od namornika uz mas posledni pergamen. Slava, zpatky za Oranem!")
+elseif (<argv(0)> == 206)
+  setText(1,"Denik mas! Vrat se Veselemu Narmonikovi v Umbaru!")
+elseif (<argv(0)> == 205)
+  setText(1,"<?null?>Najdi zradce, ktery ukradl kapitanuv denik a vrat ho namornikovi.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2578 Y 4068<BR>X 2649 Y 3982<BR>X 2839 Y 3753")
+elseif (<argv(0)> == 204)
+  setText(1,"Dalekohled mas! Vrat se Veselemu Narmonikovi v Umbaru!")
+elseif (<argv(0)> == 203)
+  setText(1,"<?null?>Najdi zradce, ktery ukradl kapitanuv dalekohled a vrat ho namornikovi.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2578 Y 4068<BR>X 2649 Y 3982<BR>X 2839 Y 3753")
+elseif (<argv(0)> == 202)
+  setText(1,"Nalov pro Veseleho Narmornika ryby a dones mu 20 syrovych steaku.")
+elseif (<argv(0)> == 201)
+  setText(1,"Oran te posila za oslavujicim namornikem, ktery ma pry podle nej svitek u sebe. Ziskej ho od nej!")
+elseif (<argv(0)> == 200)
+  setText(1,"Tran te posila za svym bratrem Oranem do Umbaru pro posledni svitek. Najdes ho v pristavu.")
+endif
+return 0
+
+//TRAN
+[function f_questy_murdoc_ucni_m_tran]
+if (<argv(0)> == 158)
+  setText(1,"Od Barta uz mas ukradeny pergamen zpet. Uz je v knize v bezpeci. Rychle za Tranem v Haradu!")
+elseif (<argv(0)> == 157)
+  setText(1,"Heslo je SMRDIS. Rekni ho Bartovi, snad ti uz da ten zatraceny pergamen.")
+elseif (<argv(0)> == 156)
+  setText(1,"<?null?>Ziskej pro Barta heslo do pokeroveho klubu, je v jeskyni primo pod mostem do mesta. <BR>V mape mas poznacene pozice jeskyni:<BR>X 4175 Y 4074<BR>X 4198 Y 3973<BR>X 4133 Y 3886")
+elseif (<argv(0)> == 155)
+  setText(1,"Boty mas! Odnes je zpatky Bartovi do Haradu. Pospes si! Hrozne smrdi!")
+elseif (<argv(0)> == 154)
+  setText(1,"<?null?>Ziskej pro Barta jeho ztracene boty, maji byt v jeskyni nedaleko Haradu.<BR>V mape mas poznacene pozice jeskyni:<BR>X 4175 Y 4074<BR>X 4198 Y 3973<BR>X 4133 Y 3886")
+elseif (<argv(0)> == 153)
+  setText(1,"Sperhaky mas! Odnes je zpatky Bartovi do Haradu.")
+elseif (<argv(0)> == 152)
+  setText(1,"<?null?>Ziskej pro Barta jeho ztracene sperhaky, maji byt v jeskyni nedaleko Haradu.<BR>V mape mas poznacene pozice jeskyni:<BR>X 4175 Y 4074<BR>X 4198 Y 3973<BR>X 4133 Y 3886")
+elseif (<argv(0)> == 151)
+  setText(1,"Tranovi pergamen ukradl zlodejicek Bart, najdi ho v Haradu a ziskej od nej pergamen zpet.")
+elseif (<argv(0)> == 150)
+  setText(1,"Wran te poslal za svym bratrem Tranem, ktereho najdes v Haradu.")
+endif
+return 0
+
+//WRAN
+[function f_questy_murdoc_ucni_m_wran]
+if (<argv(0)> == 108)
+  setText(1,"Runu se ti podarilo obstojne obkreslit, dones pergamen Wranovi ve Rhunu ke kontrole.")
+elseif (<argv(0)> == 107)
+  setText(1,"<?null?>Wran ti dal pergamen, ale runa na nem je vybledla, opis ji v nedaleke jeskyni.<BR>V mape mas poznacene pozice jeskyni:<BR>X 3921 Y 2215<BR>X 3702 Y 2093<BR>X 3837 Y 2237")
+elseif (<argv(0)> == 106)
+  setText(1,"Wranovu hul uz mas, rychle mu ji vrat, aby runa ve Rhunu nepohasla!")
+elseif (<argv(0)> == 105)
+  setText(1,"<?null?>Ziskej Wranovu hul, je v nedaleke jeskyni.<BR>V mape mas poznacene pozice jeskyni:<BR>X 3921 Y 2215<BR>X 3702 Y 2093<BR>X 3837 Y 2237")
+elseif (<argv(0)> == 104)
+  setText(1,"Potulny hrobar praci vezme, snad ti Wran ted da nalezeny pergamen.")
+elseif (<argv(0)> == 103)
+  setText(1,"Sud pro potulneho hrobare uz mas, je pekne tezky, rychle s nim zpatky k potulnemu hrobarovi ve Rhunu.")
+elseif (<argv(0)> == 102)
+  setText(1,"<?null?>Potulny hrobar by tu praci ve Rhunu vzal, ale chce po tobe soudek piva, ktery mu ukradli trollove.<BR>X 3921 Y 2215<BR>X 3702 Y 2093<BR>X 3837 Y 2237")
+elseif (<argv(0)> == 101)
+  setText(1,"Wran te pozadal o pomoc pri hledani noveho hrobare pro mistni hrbitov. Poohledni se kolem, jiste nekoho najdes!")
+elseif (<argv(0)> == 100)
+  setText(1,"Bran te poslal za svym bratrem Wranem, ktereho najdes ve Rhunu.")
+endif
+return 0
+
+ 
+//BRAN
+[function f_questy_murdoc_ucni_m_bran]
+if (<argv(0)> == 58)
+  setText(1,"Podarilo se ti runu obstojne obkreslit na pergamen. Vrat se za Branem do Nurnu, aby tvuj vytvor zkontroloval.")
+elseif (<argv(0)> == 57)
+  setText(1,"<?null?>Pergamen je cely, ale runa na nem je necitelna. Bran te posila do nedaleke jeskyne, kde by tato runa mela byt.<BR>V mape mas poznacene pozice jeskyni:<BR>X 3478 Y 3126<BR>X 3345 Y 3151<BR>X 3383 Y 3228")
+elseif (<argv(0)> == 56)
+  setText(1,"Druha cast pergamenu je na svete. Vypada, ze pasuje k te casti od hospodskeho. Vrat se rychle k Branovi v Nurnu, aby pergamen zkontroloval.")
+elseif (<argv(0)> == 55)
+  setText(1,"<?null?>Najdi druhou cast pergamenu, podle Brana by mohla byt v nedaleke jeskyni.<BR>V mape mas poznacene pozice jeskyni:<BR>X 3478 Y 3126<BR>X 3345 Y 3151<BR>X 3383 Y 3228")
+elseif (<argv(0)> == 54)
+  setText(1,"Pergamenu byla jen pulka, vrat se za Branem v Nurnu, on uz bude vedet, co dal.")
+elseif (<argv(0)> == 53)
+  setText(1,"Povedlo se ti ozralu uklidnit, rekni si hospodskemu o pergamen.")
+elseif (<argv(0)> == 52)
+  setText(1,"Hospodsky chce za pergamen protisluzbu! Pomoz mu zbavit se ozraly!")
+elseif (<argv(0)> == 51)
+  setText(1,"Bran je domluveny s hospodskym v Nurnu, ze ti preda pergamen. Najdi ho a dostan ho z nej!")
+elseif (<argv(0)> == 50)
+  setText(1,"Dran te poslal za svym bratrem Branem, ktereho najdes ve Nurnu u runy.")
+endif
+return 0
+ 
+//DRAN
+[function f_questy_murdoc_ucni_m_dran]
+if (<argv(0)> == 7)
+  setText(1,"Runu mas opsanou, nic moc, ale je to citelne. Dran uz na tebe ceka v Barad-Duru.")
+elseif (<argv(0)> == 6)
+  setText(1,"<?null?>Dran ti dal pergamen a pozadal te o opsani runy, ktera je v nedalekem podzemi.<BR>V mape mas poznacenou pozici<BR>X 3528 Y 2568")
+elseif (<argv(0)> == 5)
+  setText(1,"Podarilo se ti nalezt nekromantuv brk, rychle zpatky za Dranem do barad-Duru.")
+elseif (<argv(0)> == 4)
+  setText(1,"<?null?>Dran te posila pro nekromantuv brk, ktery by mohl byt v nedaleke jeskyni.<BR>V mape mas poznacenou pozici<BR>X 3661 Y 2838")
+elseif (<argv(0)> == 3)
+  setText(1,"Knihu jiz mas, rychle za Dranem do Barad-Duru.")
+elseif (<argv(0)> == 2)
+  setText(1,"<?null?>Dran te posila pro knihu nekromanta do nedaleke jeskyne.<BR>V mape mas poznacenou pozici<BR>X 3504 Y 2747")
+elseif (<argv(0)> == 1)
+  setText(1,"Argol ti povedel o ucni Dranovi, ktery bude nekde v Barad-Duru. Vyhledej ho, jiste pro tebe bude mit praci.")
+endif
+return 0
+
+////////////////////////////
+//                        //
+//  MURDOC UCNI GONDOR    //
+//                        //
+////////////////////////////
+
+[function f_questmenu_murdoc_gondor]
+setText(0,"Murdocovi Ucni")
+f_qDialogInstructions(003129)
+arg(tagValue,<eval src.qtag(gq043)>)
+
+if (<arg(tagValue)> > 220)&&<arg(tagValue)> < 250)
+  f_questy_murdoc_ucni_g_finale(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 250)
+  f_questy_murdoc_ucni_g_kronikar(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 200)
+  f_questy_murdoc_ucni_g_lenka(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 150)
+  f_questy_murdoc_ucni_g_magdalena(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 100)
+  f_questy_murdoc_ucni_g_helena(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 50)
+  f_questy_murdoc_ucni_g_alena(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 1)
+  f_questy_murdoc_ucni_g_anton(<arg(tagValue)>)
+endif
+htmlGump(160,80,242,130,1,0,36)
+
+//KRONIKAR
+[function f_questy_murdoc_ucni_g_kronikar]
+if (<argv(0)> == 261)
+  setText(1,"Zatim pro tebe nema Torwin dalsi praci, ale brzy jiste bude potrebovat znovu pomoci.")
+elseif (<argv(0)> == 260)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, skvela prace! Rychle zpatky za Torwinem v pristavu Dol Amroth, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 259)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Edorasu. <BR>V mape mas poznacenou pozici<BR>X 2492 Y 2672")
+elseif (<argv(0)> == 258)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, tentokrat nic moc, rychle zpatky za Torwinem v pristavu Dol Amroth, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 257)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Minas Tirithu. <BR>V mape mas poznacenou pozici<BR>X 2827 Y 2829")
+elseif (<argv(0)> == 256)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, mohlo to byt lepsi, rychle zpatky za Torwinem v pristavu Dol Amroth, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 255)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Lorienu. <BR>V mape mas poznacenou pozici<BR>X 2368 Y 1635")
+elseif (<argv(0)> == 254)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, tentokrat se ti to povedlo, rychle zpatky za Torwinem v pristavu Dol Amroth, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 253)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Hobitina. <BR>V mape mas poznacenou pozici<BR>X 1253 Y 1099")
+elseif (<argv(0)> == 252)
+  setText(1,"<src.sex(Opsal,Opsala)> si runu, tentokrat nic moc, rychle zpatky za Torwinem v pristavu Dol Amroth, aby tvou praci zkontroloval.")
+elseif (<argv(0)> == 251)
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko pristavu Dol Amroth. <BR>V mape mas poznacenou pozici<BR>X 2560 Y 3081")
+elseif (<argv(0)> == 250)
+  setText(1,"Anton te poslal za Kronikarem Torwinem, ktery potrebuje pomoct s jeho nekromantskymi svitky, ktere mohou obsahovat dulezite informace. Najdes ho v pristavu Dol Amroth")
+endif
+return 0
+
+//FINALE
+[function f_questy_murdoc_ucni_g_finale]
+if (<argv(0)> == 223)
+  setText(1,"<src.sex(Pomohl,Pomohla)> si Antonovi dat dohromady vsechny chybejici pergameny, o kterych jeho sestry vedeli. Posila te za kronikarem Torwinem, ktery bude potrebovat tvou pomoc, az budes mistrem sveho umeni. Torwina najdes v pristavu Dol Amroth.")
+elseif (<argv(0)> == 222)
+  setText(1,"Uz mas vsechny pergameny! Odnes je zpatky do Hobitina k Antonovi, aby je mohl prelozit. Jiste dostanes odmenu!")
+endif
+return 0
+
+//LENKA
+[function f_questy_murdoc_ucni_g_lenka]
+if (<argv(0)> == 207)
+  setText(1,"Od namornika uz mas posledni pergamen. Slava, zpatky za Lenkou!")
+elseif (<argv(0)> == 206)
+  setText(1,"Denik mas! Vrat se Veselemu Narmonikovi v pristavu Dol Amroth!")
+elseif (<argv(0)> == 205)
+  setText(1,"<?null?>Najdi zradce, ktery ukradl kapitanuv denik a vrat ho namornikovi.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2467 Y 3027<BR>X 2351 Y 3142<BR>X 2343 Y 3298")
+elseif (<argv(0)> == 204)
+  setText(1,"Dalekohled mas! Vrat se Veselemu Narmonikovi v pristavu Dol Amroth!")
+elseif (<argv(0)> == 203)
+  setText(1,"<?null?>Najdi zradce, ktery ukradl kapitanuv dalekohled a vrat ho namornikovi.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2467 Y 3027<BR>X 2351 Y 3142<BR>X 2343 Y 3298")
+elseif (<argv(0)> == 202)
+  setText(1,"Nalov pro Veseleho Narmornika ryby a dones mu 20 syrovych steaku.")
+elseif (<argv(0)> == 201)
+  setText(1,"Lenka te posila za oslavujicim namornikem, ktery ma pry podle ni svitek u sebe. Ziskej ho od nej!")
+elseif (<argv(0)> == 200)
+  setText(1,"Magdalena te posila za svou sestrou Lenkou do pristavu Dol Amroth pro posledni svitek. Najdes ji v pristavu.")
+endif
+return 0
+
+//Magdalena
+[function f_questy_murdoc_ucni_g_magdalena]
+if (<argv(0)> == 158)
+  setText(1,"Od Barta uz mas ukradeny pergamen zpet. Uz je v knize v bezpeci. Rychle za Magdalenou v Minas Tirithu!")
+elseif (<argv(0)> == 157)
+  setText(1,"Heslo je SMRDIS. Rekni ho Bartovi, snad ti uz da ten zatraceny pergamen.")
+elseif (<argv(0)> == 156)
+  setText(1,"<?null?>Ziskej pro Barta heslo do pokeroveho klubu, je v jeskyni pred mestem.<BR>V mape mas poznacene pozice jeskyni:<BR>X 5582 Y 4028<BR>X 5763 Y 3950<BR>X 5733 Y 3908")
+elseif (<argv(0)> == 155)
+  setText(1,"Boty mas! Odnes je zpatky Bartovi do Minas Tirithu. Pospes si! Hrozne smrdi!")
+elseif (<argv(0)> == 154)
+  setText(1,"<?null?>Ziskej pro Barta jeho ztracene boty, maji byt v jeskyni nedaleko Minas Tirithu.<BR>V mape mas poznacene pozice jeskyni:<BR>X 5582 Y 4028<BR>X 5763 Y 3950<BR>X 5733 Y 3908")
+elseif (<argv(0)> == 153)
+  setText(1,"Sperhaky mas! Odnes je zpatky Bartovi do Minas Tirithu.")
+elseif (<argv(0)> == 152)
+  setText(1,"<?null?>Ziskej pro Barta jeho ztracene sperhaky, maji byt v jeskyni nedaleko Minas Tirithu.<BR>V mape mas poznacene pozice jeskyni:<BR>X 5582 Y 4028<BR>X 5763 Y 3950<BR>X 5733 Y 3908")
+elseif (<argv(0)> == 151)
+  setText(1,"Magdalene pergamen ukradl zlodejicek Bart, najdi ho v Minas Tirithu a ziskej od nej pergamen zpet.")
+elseif (<argv(0)> == 150)
+  setText(1,"Helena te poslala za svou sestrou Magdalenou, kterou najdes v Minas Tirithu.")
+endif
+return 0
+
+//Helena
+[function f_questy_murdoc_ucni_g_helena]
+if (<argv(0)> == 108)
+  setText(1,"Runu se ti podarilo obstojne obkreslit, dones pergamen Helene v Edorasu ke kontrole.")
+elseif (<argv(0)> == 107)
+  setText(1,"<?null?>Helena ti dal pergamen, ale runa na nem je vybledla, opis ji v nedaleke jeskyni.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2080 Y 2491<BR>X 2219 Y 2350<BR>X 2359 Y 2650")
+elseif (<argv(0)> == 106)
+  setText(1,"Heleninu hul uz mas, rychle ji vrat majitelce, aby runa v Edorasu nepohasla!")
+elseif (<argv(0)> == 105)
+  setText(1,"<?null?>Ziskej Heleninu hul, je v nedaleke jeskyni.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2080 Y 2491<BR>X 2219 Y 2350<BR>X 2359 Y 2650")
+elseif (<argv(0)> == 104)
+  setText(1,"Potulny hrobar praci vezme, snad ti Helena ted da nalezeny pergamen.")
+elseif (<argv(0)> == 103)
+  setText(1,"Sud pro potulneho hrobare uz mas, je pekne tezky, rychle s nim zpatky k potulnemu hrobarovi v Edorasu.")
+elseif (<argv(0)> == 102)
+  setText(1,"<?null?>Potulny hrobar by tu praci v Edorasu vzal, ale chce po tobe soudek piva, ktery mu ukradli trollove.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2080 Y 2491<BR>X 2219 Y 2350<BR>X 2359 Y 2650")
+elseif (<argv(0)> == 101)
+  setText(1,"Helena te pozadal o pomoc pri hledani noveho hrobare pro mistni hrbitov. Poohledni se kolem, jiste nekoho najdes!")
+elseif (<argv(0)> == 100)
+  setText(1,"Alena te poslala za svou sestrou Helenou, kterou najdes v Edorasu.")
+endif
+return 0
+
+ 
+//ALENA
+[function f_questy_murdoc_ucni_g_alena]
+if (<argv(0)> == 58)
+  setText(1,"Podarilo se ti runu obstojne obkreslit na pergamen. Vrat se za Alenou do Lorienu, aby tvuj vytvor zkontrolovala.")
+elseif (<argv(0)> == 57)
+  setText(1,"<?null?>Pergamen je cely, ale runa na nem je necitelna. Alena te posila do nedaleke jeskyne, kde by tato runa mela byt.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2290 Y 1834<BR>X 2381 Y 1788<BR>X 2551 Y 1726")
+elseif (<argv(0)> == 56)
+  setText(1,"Druha cast pergamenu je na svete. Vypada, ze pasuje k te casti od hospodskeho. Vrat se rychle k Alene v Lorienu, aby pergamen zkontrolovala.")
+elseif (<argv(0)> == 55)
+  setText(1,"<?null?>Najdi druhou cast pergamenu, podle Aleny by mohla byt v nedaleke jeskyni.<BR>V mape mas poznacene pozice jeskyni:<BR>X 2290 Y 1834<BR>X 2381 Y 1788<BR>X 2551 Y 1726")
+elseif (<argv(0)> == 54)
+  setText(1,"Pergamenu byla jen pulka, vrat se za Alenou v Lorienu, on uz bude vedet, co dal.")
+elseif (<argv(0)> == 53)
+  setText(1,"Povedlo se ti ozralu uklidnit, rekni si hospodskemu o pergamen.")
+elseif (<argv(0)> == 52)
+  setText(1,"Hospodsky chce za pergamen protisluzbu! Pomoz mu zbavit se ozraly!")
+elseif (<argv(0)> == 51)
+  setText(1,"Alena je domluvena s hospodskym v Lorienu, ze ti preda pergamen. Najdi ho a dostan ho z nej!")
+elseif (<argv(0)> == 50)
+  setText(1,"Anton te poslal za svou sestrou Alenou, kterou najdes v Lorienu.")
+endif
+return 0
+ 
+//Anton
+[function f_questy_murdoc_ucni_g_anton]
+if (<argv(0)> == 7)
+  setText(1,"Runu mas opsanou, nic moc, ale je to citelne. Anton uz na tebe ceka v Hobitine.")
+elseif (<argv(0)> == 6)
+  setText(1,"<?null?>Anton ti dal pergamen a pozadal te o opsani runy, ktera je v nedalekem podzemi.<BR>V mape mas poznacenou pozici<BR>X 1130 Y 1158")
+elseif (<argv(0)> == 5)
+  setText(1,"Podarilo se ti nalezt nekromantuv brk, rychle zpatky za Antonem do Hobitina.")
+elseif (<argv(0)> == 4)
+  setText(1,"<?null?>Anton te posila pro nekromantuv brk, ktery by mohl byt v nedaleke jeskyni.<BR>V mape mas poznacenou pozici<BR>X 990  Y 1114")
+elseif (<argv(0)> == 3)
+  setText(1,"Knihu jiz mas, rychle za Antonem do Hobitina.")
+elseif (<argv(0)> == 2)
+  setText(1,"<?null?>Anton te posil  a pro knihu nekromanta do nedaleke jeskyne<BR>V mape mas poznacenou pozici<BR>X 856  Y 1471")
+elseif (<argv(0)> == 1)
+  setText(1,"Argol ti povedel o ucni Antonovi, ktery bude nekde v Hobitine. Vyhledej ho, jiste pro tebe bude mit praci.")
+endif
+return 0
 
 
 ///////////////////
