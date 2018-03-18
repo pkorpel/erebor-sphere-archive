@@ -1,0 +1,412 @@
+////// ZAKLADNI INFO
+////// MURDOC CHAIN QUEST
+////// q043_tut = tutorial
+////// gq043 = gondor newbie
+////// mq043 = mordor newbie 
+
+// q043 Tutorial quest - 1 npc, 3 staticke predmety
+//*
+///// ITEMY 3x
+// i_q043_tut_pergamenA
+// i_q043_tut_pergamenB
+// i_q043_tut_pergamenC
+//*
+///// NPC
+// c_q043_tut_argol
+//*
+///// DIALOGY
+// d_q043_tut_argol
+//*
+///// q043_tut POSLOUPNOUST  
+// 1 = najdi prvni stranku
+// 2 = odnes prvni stranku
+// 3 = najdi druhou stranku
+// 4 = odnes druhou stranku
+// 5 = najdi treti stranku
+// 6 = odnes treti stranku
+// 7 = quest hotovy
+
+////////////////////////////////////////////////////// DIALOG //////////////////////////////////////////////////////
+[dialog d_q043_tut_argol]
+argo.questDialog_create(12385,"<name>")       
+
+arg(tagValue,<eval src.qtag(q043_tut)>)
+
+argo.dialog_newPage("Pozdrav")                
+  
+if (<arg(tagValue)> == 0)          
+  argo.questDialog_baseButt(1)  
+else
+  argo.questDialog_basebutt(1,19,"Potrebuji pomoc")
+endif
+
+argo.questDialog_baseButt(2)              // Mohu pomoci?
+argo.questDialog_baseButt(3,43,Informace) // Informace
+argo.questDialog_baseButt(4)              // Hledam praci
+argo.questDialog_baseButt(5)              // Nesu ti
+argo.questDialog_baseButt(6)              // Prohlednout
+
+argo.dialog_page("Pozdrav")                       
+  if (<arg(tagValue)> == 7)               // quest hotovy 
+    argo.setText(argo.newTextLine,"Bud <src.sex(zdrav,zdrava)>. Dekuji ti za tvou pomoc, svitek je kompletni, prelozil jsem ho pro tebe!")
+  elseif (<arg(tagValue)> == 6)           // nese treti utrzek
+    argo.setText(argo.newTextLine,"Mas ho? Mas ho! Skvele! Pergamen bude opet cely!")
+  elseif (<arg(tagValue)> == 5)           // hleda treti utrzek
+    argo.setText(argo.newTextLine,"Stale jsi tu posledni cast nenasel? Posledni cast je snad nekde v kobce nemrtvych na vychod od mesta!")
+  elseif (<arg(tagValue)> == 4)           // nese druhy utrzek
+    argo.setText(argo.newTextLine,"Skvele! Dalsi cast, jen skoda, ze pergamen stale neni cely.")
+  elseif (<arg(tagValue)> == 3)           // hleda druhy utrzek
+    argo.setText(argo.newTextLine,"Tak co?! Nasel jsi ten zbytek pergamenu? Zbytek pergamenu musi byt v drzeni toho hrozneho obra Etina!")
+  elseif (<arg(tagValue)> == 2)           // nese prvni utrzek
+    argo.setText(argo.newTextLine,"Vidim, ze mas jen horni cast pergamenu! Alespon neco!")
+  elseif (<arg(tagValue)> == 1)           // hleda prvni utrzek
+    argo.setText(argo.newTextLine,"Tak co?! Nasel jsi ten pergamen? Pergamen by mel byt nekde na severozapadnim cipu v okoli veze!")
+  else                                    // nedostal quest
+    argo.setText(argo.newTextLine,"Me jmeno je Argol, jsem nekromantsky ucen. Snazim se stat hrdinou, stejne jako ty!")
+  endif
+  argo.questDialog_HTMLGUMP 
+
+if (<arg(tagValue)> == 0)
+  argo.dialog_page("Kdo jsi?")
+  argo.setText(argo.newTextLine,"Jsem nekromantsky ucen Argol, snazim se dostat do Stredozeme!")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Mam na tebe par otazek!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button      
+else
+  argo.dialog_page("Potrebuji pomoc")
+  argo.setText(argo.newTextLine,"Penize ode me necekej, jenom radu a informace!")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button  
+endif
+
+if (<arg(tagValue)> == 7 )
+  argo.dialog_page("qmur_web")
+  argo.setText(argo.newTextLine,"Prelozil jsem pro tebe ten pergamen, muzes si ho precist!")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Precist pergamen Otevre webovou stranku#")
+  argo.questDialog_addResponse(0,1,1,"q043_tut_zapisweb") // short text & exit button & new button
+  argo.setText(argo.newTextLine,"Tvuj ubohy pergamen uz me nezajima!")
+  argo.questDialog_addResponse(0,0,0,"q043_tut_blankresponse") // short text & page button & existing button  
+endif
+
+argo.dialog_page("Mohu pomoci?")
+  if (<arg(tagValue)> == 0)
+    argo.setText(argo.newTextLine,"Ooo ano! Potrebuji pomoc. Hledam zde ztracene stranky z deniku jednoho nekromantskeho mistra Murdoca. Pokud mi je pomuzes najit, odmena te nemine!")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Rad ti pomohu! Kde mam hledat?")
+    argo.questDialog_addResponse(0,1,1,"q043_tut_assignQuest") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Nekromantske knihy?! Jsi blazen, od toho ruce pryc!")
+    argo.questDialog_addResponse(0,0,1,"q043_tut_assignQuestReject") // short text & exit button & new button
+  elseif (<arg(tagValue)> < 3)
+    argo.setText(argo.newTextLine,"Najdi ten pergamen! Je nekde u veze na severu!")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
+    argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button   
+  elseif (<arg(tagValue)> < 5)
+    argo.setText(argo.newTextLine,"Najdi ten pergamen! Je nekde u obra Ettina za mostem!")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
+    argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button    
+  elseif (<arg(tagValue)> < 7)
+    argo.setText(argo.newTextLine,"Najdi ten pergamen! Je nekde v podzemi u nemrtvých!")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
+    argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button  
+  else
+    argo.setText(argo.newTextLine,"Jsem ti moc vdecny za tvou pomoc! Chces si precist pergamen?")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Vyborne! Nemohu se dockat, ukaz mi ten preklad!")
+    argo.questDialog_addResponse(0,0,1,"qmur_web") // short text & page button & new button   
+    argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
+    argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button     
+  endif
+
+argo.dialog_page("Informace")
+  argo.setText(argo.newTextLine,"Rad ti povim, co vim!")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Kdo je Murdoc?")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdocdetail") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Proc hledas jeho pergameny?")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdocexplain") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Kde najdu jeho ucne?")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdocucni") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Potrebuji byt nekromantem, abych ti pomohl?")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdochelp") // short text & page button & new button
+  if (<arg(tagValue)> == 7)    
+    argo.setText(argo.newTextLine,"Prelozils pro me ten pergamen?")
+    argo.questDialog_addResponse(0,0,0,"qmur_web") // short text & page button & existing button    
+  endif
+
+//// STRANKY NAVAZANE NA STRANKU Informace 
+argo.dialog_page("qmur_murdocdetail")
+  argo.setText(argo.newTextLine,"Murdoc je nekromantsky mistr - zije ve Stredozemi v Mordoru. Snazim se za nim dostat, aby me ucil umeni nekromantu. Popsal sve snazeni a uceni v deniku, jehoz utrzky se snazim ziskat!")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
+  argo.setText(argo.newTextLine,"Tve ubohe reci me nezajimaji!")
+  argo.questDialog_addResponse(0,0,1,"q043_tut_blankresponse") // short text & page button & new button  
+  
+argo.dialog_page("qmur_murdocexplain")
+  argo.setText(argo.newTextLine,"Ve svem deniku popsal svuj pribeh, podle nej ho snad budu moci ve Stredozemi najit a pozadat ho, aby me ucil. Krom toho po stranach zapisku je mnoho zajimavych run a kouzel, ktere zatim neznam, je to pro me zdroj nekromantskych vedomosti!")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
+  argo.setText(argo.newTextLine,"Tve ubohe reci me nezajimaji!") 
+  argo.questDialog_addResponse(0,0,0,"q043_tut_blankresponse") // short text & page button & new button 
+
+argo.dialog_page("qmur_murdocucni")
+  argo.setText(argo.newTextLine,"Znam jen 2 jeho ucne, jestli jich je uz vic, netusim. Podle dopisu, co jsem dostal, jeden ucen je v gondorskem meste Edoras - jeho jmeno je Cecil. Druhy ucen je nekde v Barad-duru v temnem mordoru, jeho jmeno je Dran! Mirim za nimi, ty bys mel taky, jiste pro tebe maji praci!")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Kde najdu Cecila?")
+  argo.questDialog_addResponse(0,0,1,"qmur_cecil") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Kde najdu Drana?!")
+  argo.questDialog_addResponse(0,0,1,"qmur_dran") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Tve ubohe reci me nezajimaji!")
+  argo.questDialog_addResponse(0,0,0,"q043_tut_blankresponse") // short text & page button & new button 
+  
+argo.dialog_page("qmur_murdochelp")
+  argo.setText(argo.newTextLine,"Muzes pomoci! I kdyz ze svitku nic nevyctes, ja ano. Mohu ti pak pribeh prelozit a hlavne... odmena za pomoc te nemine! *sibalsky se usmal*")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
+  
+argo.dialog_page("qmur_cecil")
+  argo.setText(argo.newTextLine,"Cecil by mel byt u Edoraske brany, hledej muze v cerne robe!")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
+  
+argo.dialog_page("qmur_dran")
+  argo.setText(argo.newTextLine,"Dran by mel byt u Barad-durske banky!")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
+  
+ 
+//// KONEC STRANEK NAVAZANYCH NA STRANKU Informace
+
+
+argo.dialog_page("Hledam praci")
+  argo.setText(argo.newTextLine,"Ja davam praci jen mrtvym.")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button     
+  
+argo.dialog_page("Nesu ti")
+  argo.setText(argo.newTextLine,"Copak pro me mas?")
+  argo.questDialog_HTMLGUMP
+  if (<arg(tagValue)> == 2)
+    argo.setText(argo.newTextLine,"<src.sex(Nasel,Nasla)> jsem ten pergamen! Ale cast ho chybi!")
+    argo.questDialog_addResponse(0,1,1,"q043_tut_havepergamenA") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Nemam tvuj ubohy pergamen")
+    argo.questDialog_addResponse(0,0,0,"q043_tut_blankResponse") // short text & page button & existing button
+  elseif (<arg(tagValue)> == 4)
+    argo.setText(argo.newTextLine,"<src.sex(Nasel,Nasla)> jsem dalsi cast pergamenu! Ale neni cely!")
+    argo.questDialog_addResponse(0,1,1,"q043_tut_havepergamenB") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Nemam tvuj ubohy pergamen")
+    argo.questDialog_addResponse(0,0,0,"q043_tut_blankResponse") // short text & page button & existing button
+  elseif (<arg(tagValue)> == 6)
+    argo.setText(argo.newTextLine,"<src.sex(Nasel,Nasla)> jsem posledni cast pergamenu!")
+    argo.questDialog_addResponse(0,1,1,"q043_tut_havepergamenC") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Nemam tvuj ubohy pergamen")
+    argo.questDialog_addResponse(0,0,0,"q043_tut_blankResponse") // short text & page button & existing button
+  endif
+
+argo.dialog_page("Prohlednout")
+  argo.setText(argo.newTextLine,"Mlady vybledly muz v rouchu nekromanta. Vypada dost prihlouple, ale vyraz v jeho tvari je odhodlany.")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("q043_tut_blankResponse")
+  argo.setText(argo.newTextLine,"Pro ubozaka kazdy ubozak, jednou ze mne bude mocny nekromant, vaz sva slova!")
+  argo.questDialog_HTMLGUMP
+    
+if (<arg(tagValue)> == 0)
+  argo.dialog_page("q043_tut_assignQuestReject")
+  argo.setText(argo.newTextLine,"Skoda! Kdyz si to rozmyslis, vrat se!")
+  argo.questDialog_HTMLGUMP
+endif
+
+//Button
+//////////////////////////////////////////////////////
+[dialog d_q043_tut_argol button]
+on=@anyButton
+arg(tagValue,<eval src.qtag(q043_tut)>)
+if (<argn> == argo.dialog_linkButton("q043_tut_assignQuest"))                //chces quest?
+  if (<arg(tagValue)> == 0)
+    src.qtag(q043_tut,1,53)
+    say("Pergamen bude nekde u veze na severni plazi!")
+  else
+    say("Zkousis me osalit?!")
+  endif
+
+elseif (<argn> == argo.dialog_linkButton("q043_tut_havepergamenA"))         //Odevzdani prvni casti pergamenu   
+  if (<arg(tagValue)> == 2)
+    say("Pergamenu je jen cast, musime najit zbytek! Vydej se po stopach Ettina jizne od mesta pres most!")
+    src.qtag(q043_tut,3,53)
+    src.addexp(100)
+  else
+    say("Zkousis me osalit?!")
+  endif  
+  
+elseif (<argn> == argo.dialog_linkButton("q043_tut_havepergamenB"))          //Odevzdani druhe casti pergamenu  
+  if (<arg(tagValue)> == 4)
+    say("Pergamen stale neni kompletni, posledni cast je snad nekde v kobce nemrtvych v pisecnem prusmyku!")
+    src.qtag(q043_tut,5,53)
+    src.addexp(100)
+  else
+    say("Zkousis me osalit?!")
+  endif
+
+elseif (<argn> == argo.dialog_linkButton("q043_tut_havepergamenC"))          //Odevzdani treti casti pergamenu  
+  if (<arg(tagValue)> == 6)
+    say("Konecne je pergamen kompletni, diky, diky! Precijen ze me bude nekromant! Prelozim ho pro tebe!")
+    src.qtag(q043_tut,7,53)
+    src.addexp(400)
+  else
+    say("Zkousis me osalit?!")
+  endif
+endif
+
+////////////////////////////////////////////////////// SPEECH & DOUBLE CLICK //////////////////////////////////////////////////////
+
+//Speech Argol
+//////////////////////////////////////////////////////
+[speech spk_q043_tut_argol]
+on = *ahoj*
+on = *utrzek*
+on = *pergamen*
+on = *ukol*
+on = *prace*
+on = *den*
+on = *pomoc*
+on = *quest*
+on = *hi*
+f_qSpeech(f_q043_tut_Argol_DClick)
+
+//ON DCLICK+SPEECH Argol Function
+//////////////////////////////////////////////////////
+[function f_q043_tut_Argol_DClick]
+if (<src.flags>&statf_dead)
+  return 1
+endif
+dialog(d_q043_tut_argol)
+
+////////////////////////////////////////////////////// QUEST ITEMY //////////////////////////////////////////////////////
+
+//Questovni predmety - Pergamen na zemi 1/3
+//////////////////////////////////////////////////////
+[ITEMDEF i_q043_tut_pergamenA]
+ID=00E34
+NAME=Horni cast podivneho pergamenu
+TYPE=t_normal
+
+CATEGORY=Moria Questy
+SUBSECTION=q043_tut
+DESCRIPTION=ZapisektutorialA //staticka stranka
+
+on=@create 
+attr=attr_move_never
+COLOR=0029
+
+ON=@userCLICK
+src.sysmessage("Kus pergamenu plny necitelnych znaku")
+
+on=@userdclick
+arg(tagValue,<eval src.qtag(q043_tut)>)
+if (<src.flags>&statf_dead)
+  return 1
+elseif (<src.targ.distance> > 1)
+  src.sysmessage("Z dalky vidis pergamen. Musis jit bliz.")
+  return 1
+endif
+if (<arg(tagValue) == 2)
+  src.sysmessage("Pergamen uz jsi <src.sex(opsal,opsala)>!") 
+elseif (<arg(tagValue)> == 1)
+  src.sysmessage("<src.sex(Ulozil,Ulozila)> jsi pergamen do sveho batohu.")
+  src.qtag(q043_tut,2,53)
+elseif (<arg(tagValue)> >= 3)
+  src.sysmessage("To je to misto, kde lezel jeden ze zapisku.")
+else
+  src.sysmessage("Pocmarana strana plna divnych run. Toho se nedotknes.")
+endif
+return 1
+
+//Questovni predmety - Pergamen na zemi 2/3
+//////////////////////////////////////////////////////
+[ITEMDEF i_q043_tut_pergamenB]
+ID=00E34
+NAME=Stredni cast podivneho pergamenu
+TYPE=t_normal
+
+CATEGORY=Moria Questy
+SUBSECTION=q043_tut
+DESCRIPTION=ZapisektutorialB //staticka stranka
+
+on=@create 
+attr=attr_move_never
+COLOR=00ea
+
+ON=@userCLICK
+src.sysmessage("Kus pergamenu plny necitelnych znaku")
+
+on=@userdclick
+arg(tagValue,<eval src.qtag(q043_tut)>)
+if (<src.flags>&statf_dead)
+  return 1
+elseif (<src.targ.distance> > 1)
+  src.sysmessage("Z dalky vidis pergamen. Musis jit bliz.")
+  return 1
+endif
+if (<arg(tagValue) == 4)
+  src.sysmessage("Pergamen uz jsi <src.sex(opsal,opsala)>!") 
+elseif (<arg(tagValue)> == 3)
+  src.sysmessage("<src.sex(Ulozil,Ulozila)> jsi pergamen do sveho batohu.")
+  src.qtag(q043_tut,4,53)
+elseif (<arg(tagValue)> >= 5)
+  src.sysmessage("To je to misto, kde lezel jeden ze zapisku.")
+else
+  src.sysmessage("Pocmarana strana plna divnych run. Toho se nedotknes.")
+endif
+return 1
+
+//Questovni predmety - Pergamen na zemi 3/3
+//////////////////////////////////////////////////////
+[ITEMDEF i_q043_tut_pergamenC]
+ID=00E34
+NAME=Spodni cast podivneho pergamenu
+TYPE=t_normal
+
+CATEGORY=Moria Questy
+SUBSECTION=q043_tut
+DESCRIPTION=ZapisektutorialC //staticka stranka
+
+on=@create 
+attr=attr_move_never
+COLOR=00ed
+
+ON=@userCLICK
+src.sysmessage("Kus pergamenu plny necitelnych znaku")
+
+on=@userdclick
+arg(tagValue,<eval src.qtag(q043_tut)>)
+if (<src.flags>&statf_dead)
+  return 1
+elseif (<src.targ.distance> > 1)
+  src.sysmessage("Z dalky vidis pergamen. Musis jit bliz.")
+  return 1
+endif
+
+if (<arg(tagValue) == 6)
+  src.sysmessage("Pergamen uz jsi <src.sex(opsal,opsala)>!") 
+elseif (<arg(tagValue)> == 5)
+  src.sysmessage("<src.sex(Ulozil,Ulozila)> jsi pergamen do sveho batohu.")
+  src.qtag(q043_tut,6,53)
+elseif (<arg(tagValue)> >= 7)
+  src.sysmessage("To je to misto, kde lezel jeden ze zapisku.")
+else
+  src.sysmessage("Pocmarana strana plna divnych run. Toho se nedotknes.")
+endif
+return 1
+
+[eof]

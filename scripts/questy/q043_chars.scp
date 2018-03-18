@@ -1,0 +1,557 @@
+/////NPC Murdocovi ucni newbie quest
+
+////////////////////////////////////////////////DRAN
+[chardef c_mq043_dran]
+id=c_man
+name=Dran
+
+TEVENTS=e_character
+TSPEECH=spk_mq043_dran
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Dran
+
+on=@UserDclick
+f_qDClick(f_mq043_Dran_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Murdocuv ucen
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+color=00774
+ITEMnewbie=i_beard_mustache
+color=00774
+ITEMnewbie=i_robe
+color=00774
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////BRAN
+[chardef c_mq043_bran]
+id=c_man
+name=Bran
+
+TEVENTS=e_character
+TSPEECH=spk_mq043_bran
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Bran
+
+on=@UserDclick
+f_qDClick(f_mq043_bran_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Bratr Drana
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_long
+color=00774
+ITEMnewbie=i_robe
+color=00774
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////WRAN
+[chardef c_mq043_wran]
+id=c_man
+name=Wran
+
+TEVENTS=e_character
+TSPEECH=spk_mq043_wran
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Wran
+
+on=@UserDclick
+f_qDClick(f_mq043_wran_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Bratr Drana
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+color=00774
+ITEMnewbie=i_robe
+color=00774
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////TRAN
+[chardef c_mq043_tran]
+id=c_man
+name=Tran
+
+TEVENTS=e_character
+TSPEECH=spk_mq043_tran
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Tran
+
+on=@UserDclick
+f_qDClick(f_mq043_Tran_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Bratr Drana
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_long
+color=00774
+ITEMnewbie=i_robe
+color=00774
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////ORAN
+[chardef c_mq043_oran]
+id=c_man
+name=Oran
+
+TEVENTS=e_character
+TSPEECH=spk_mq043_oran
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Oran
+
+on=@UserDclick
+f_qDClick(f_mq043_oran_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Bratr Drana
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+color=00774
+ITEMnewbie=i_beard_mustache
+ITEMnewbie=i_robe
+color=00774
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////Hospodsky
+[chardef c_q043_hospodsky]
+id=c_man
+name=Hospodsky
+
+TEVENTS=e_character
+TSPEECH=spk_q043_hospodsky
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Hospodsky
+
+on=@UserDclick
+f_qDClick(f_q043_hospodsky_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Jitrnicka
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+ITEMnewbie=i_beard_mustache
+ITEMnewbie=i_boots_calf
+color=0084d
+ITEMnewbie=i_pants_long
+COLOR=01b1
+ITEMnewbie=i_apron_half
+ITEMnewbie=i_surcoat
+COLOR=01b1
+ITEMnewbie=i_shirt_fancy
+color=0084d
+ITEMnewbie=i_bonnet
+color=0084d
+
+
+////////////////////////////////////////////////Ozrala
+[chardef c_q043_ozrala]
+id=c_man
+name=Ozrala
+
+TEVENTS=e_character
+TSPEECH=spk_q043_ozrala
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Ozrala
+
+on=@UserDclick
+f_qDClick(f_q043_ozrala_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Na hadry
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+ITEMnewbie=i_beard_mustache
+ITEMnewbie=i_boots_calf
+color=0084d
+ITEMNewbie=i_hat_straw_tall
+COLOR=0084d
+ITEMNewbie=i_shirt_plain
+COLOR=026
+ITEMNewbie=i_pants_short
+COLOR=01D9
+
+////////////////////////////////////////////////Hrobar
+[chardef c_q043_hrobar]
+id=c_man
+name=Hrobar
+
+TEVENTS=e_character
+TSPEECH=spk_q043_hrobar
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Hrobar
+
+on=@UserDclick
+f_qDClick(f_q043_hrobar_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Student uceni nekromantskeho
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+ITEMnewbie=i_beard_mustache
+COLOR=01ba
+ITEMnewbie=i_boots_calf
+COLOR=0084d
+ITEMnewbie=i_cape
+COLOR=0084d
+ITEMnewbie=i_hat_floppy
+COLOR=0084d
+ITEMnewbie=i_spellbook_necro
+ITEMnewbie=i_bone_leggings_copper
+ITEMnewbie=i_bone_chest_copper
+ITEMnewbie=i_bone_gloves_copper
+ITEMnewbie=i_bone_arms_copper
+
+color=0084d
+
+////////////////////////////////////////////////Zlodejicek
+[chardef c_q043_zlodejicek]
+id=c_man
+name=Zlodejicek Bart
+
+TEVENTS=e_character
+TSPEECH=spk_q043_zlodejicek
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Hrobar
+
+on=@UserDclick
+f_qDClick(f_q043_zlodejicek_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Grazl
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+ITEMnewbie=i_boots_calf
+COLOR=0084d
+ITEMnewbie=i_cape
+COLOR=0084d
+ITEMnewbie=i_skull_cap
+COLOR=0084d
+ITEMnewbie=i_valorite_chainmail_tunic
+ITEMnewbie=i_valorite_chainmail_leggings
+ITEMnewbie=i_valorite_chainmail_gloves
+ITEMnewbie=i_kryss_valorite
+
+////////////////////////////////////////////////Namornik
+[chardef c_q043_namornik]
+id=c_man
+name=Vesely Namornik
+
+TEVENTS=e_character
+TSPEECH=spk_q043_namornik
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Namornik
+
+on=@UserDclick
+f_qDClick(f_q043_namornik_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Prvni dustojnik
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+ITEMnewbie=i_boots_calf
+color=0084d
+ITEMnewbie=i_hat_tricorne
+color=0084d
+ITEMnewbie=i_bracelet_gold
+ITEMnewbie=i_tunic
+color=025D
+ITEMnewbie=i_pants_short
+color=0084d
+
+////////////////////////////////////////////////ANTON
+[chardef c_gq043_Anton]
+id=c_man
+name=Anton
+
+TEVENTS=e_character
+TSPEECH=spk_gq043_Anton
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Anton
+
+on=@UserDclick
+f_qDClick(f_gq043_Anton_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Murdocuv ucen
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+color=00774
+ITEMnewbie=i_beard_mustache
+color=00774
+ITEMnewbie=i_robe
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////ALENA
+[chardef c_gq043_Alena]
+id=c_woman
+name=Alena
+
+TEVENTS=e_character
+TSPEECH=spk_gq043_Alena
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Alena
+
+on=@UserDclick
+f_qDClick(f_gq043_Alena_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Sestra Antona
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_long
+color=028F
+ITEMnewbie=01eff
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////HELENA
+[chardef c_gq043_Helena]
+id=c_woman
+name=Helena
+
+TEVENTS=e_character
+TSPEECH=spk_gq043_Helena
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Helena
+
+on=@UserDclick
+f_qDClick(f_gq043_Helena_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Sestra Antona
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_long
+color=0161
+ITEMnewbie=01eff
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////MAGDALENA
+[chardef c_gq043_Magdalena]
+id=c_woman
+name=Magdalena
+
+TEVENTS=e_character
+TSPEECH=spk_gq043_Magdalena
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Magdalena
+
+on=@UserDclick
+f_qDClick(f_gq043_Magdalena_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Sestra Antona
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_long
+color=08f
+ITEMnewbie=01eff
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+////////////////////////////////////////////////LENKA
+[chardef c_gq043_Lenka]
+id=c_woman
+name=Lenka
+
+TEVENTS=e_character
+TSPEECH=spk_gq043_Lenka
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Lenka
+
+on=@UserDclick
+f_qDClick(f_gq043_Lenka_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Sestra Antona
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_long	
+color=01ba
+ITEMnewbie=01eff
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+
+
+////////////////////////////////////////////////KRONIKAR TORWIN
+[chardef c_q043_Kronikar]
+id=c_man
+name=Kronikar Torwin
+
+TEVENTS=e_character
+TSPEECH=spk_q043_Kronikar
+
+CATEGORY=Moria Questy
+SUBSECTION=q043 Murdocovi ucni
+DESCRIPTION=Kronikar Torwin
+
+on=@UserDclick
+f_qDClick(f_q043_Kronikar_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Kronikar Murdocova Bratrstva
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+color=00774
+ITEMnewbie=i_robe
+color=00774
+ITEMnewbie=i_hat_wizards
+color=0084d
+ITEMnewbie=i_spellbook_necro
+[eof]

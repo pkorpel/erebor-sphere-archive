@@ -464,7 +464,7 @@ if !(src.findid(i_scissors))
 endif
 
 ON=2
-if ((src.qtag(nb002)==1)&&(src.rescount(i_bandage))>=50)
+if (src.qtag(nb002)==1)&&((src.rescount(i_bandage))>=50)
 	src.qtag(nb002,2)
 	src.consume(50,i_bandage)
 	src.addexp(75)
@@ -1980,6 +1980,11 @@ if (strlen(<src.tag(nation)>))
       src.startfinal
       src.gohome
       src.events -e_noport
+      if (src.tag(realm)=1)
+      	src.qtag(gq043,1,53)
+      elseif (src.tag(realm)=2)
+      	src.qtag(mq043,1,53)
+      endif
       return 1
     endif
   endif
