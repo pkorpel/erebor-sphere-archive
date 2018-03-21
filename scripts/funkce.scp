@@ -2023,13 +2023,47 @@ debugtry(<tag.potvrd_funkce>)
 tag(potvrd_funkce,"")
 tag(potvrd_text,"")
 
-[function f_dialog_YesNo] // funkce Yes No pro potvrzeni jednoduchych akci - jde jen o hotove telo dialogu
-SetLocation=285,250
-tag(sirka,230)
+// Yes/No dialog to confirm simple actions - executes passed function only if the message is confirmed
+// arg0: function 2 execute on YES
+// arg1: string to ask
+// arg2: dialogWidth (optional)
+[dialog d_dialog_YesNo]
+argo.tag(actionRequested,<argv(0)>)
+argo.f_dialog_YesNo("<argv(1)>",<argv(2)>)
+
+[dialog d_dialog_YesNo button]
+on=0
+src.redMessage("Akce zrusena.")
+
+on=1
+<argo.tag(actionRequested)>
+
+on=2
+src.redMessage("Akce zrusena.")
+
+// funkce Yes No pro potvrzeni jednoduchych akci - jde jen o hotove telo dialogu
+// arg 0 - string zpravy (default: "Opravdu chces provest akci?")
+// arg 1 - sirka dialogu (default/minimum: 230)
+[function f_dialog_YesNo]
+arg(posx,285)
+arg(buttX[0],25)
+arg(buttX[1],145)
+arg(buttIndentY,7)
+arg(textIndent,5)
+if (<eval argv(1)> > arg(posx))
+  arg(posx,<eval ((800-<argv(1)>)/2)>) // center the dialog size; 800x600 resolution expected, fuck others
+endif
+
+SetLocation=<arg(posx)>,250
+if (<eval argv(1)> > 230)
+  tag(sirka,<argv(1)>)
+else
+  tag(sirka,230)
+endif
 tag(vyska,90)
 dialog_prvni
 dialog_pozadi(<tag(nexty)>,1)
-dialog_pozadi(<tag(nexty)>,2,102,101)
+dialog_pozadi(<tag(nexty)>,2)
 dialog_zpruhledni
 
 if (strlen(<argv(0)>))
@@ -2038,11 +2072,11 @@ else
   texta(<dialog_textpos(0,0)>,d_def_WriteColor,Opravdu chces provest akci?)
 endif
 //Yes button
-button(<tag(sloupec_x[0])>+<d_def_skvira>,<tag(obj_y[1])>+15,4005,4007,1,0,1)
-texta(<tag(sloupec_x[0])>+<d_def_button_sirka>+<d_def_skvira>,<tag(obj_y[1])>+15,d_def_WriteColor,Ano)
+button(<arg(buttX[0])>,<tag(obj_y[1])>+arg(buttIndentY),4005,4007,1,0,1)
+texta(<arg(buttX[0])>+d_def_button_sirka+arg(textIndent),<tag(obj_y[1])>+arg(buttIndentY),d_def_WriteColor,Ano)
 //No button
-button(<tag(sloupec_x[1])>+<d_def_skvira>,<tag(obj_y[1])>+15,4005,4007,1,0,2)
-texta(<tag(sloupec_x[1])>+<d_def_button_sirka>+<d_def_skvira>,<tag(obj_y[1])>+15,d_def_WriteColor,Ne)
+button(<arg(buttX[1])>,<tag(obj_y[1])>+arg(buttIndentY),4005,4007,1,0,2)
+texta(<arg(buttX[1])>+d_def_button_sirka+arg(textIndent),<tag(obj_y[1])>+arg(buttIndentY),d_def_WriteColor,Ne)
 
 [function singleparse]
 var(firstnumb,<StrGetTok("<args>",0," ")>)

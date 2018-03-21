@@ -2254,17 +2254,17 @@ argo.f_dialog_HelpCreator("HELP - t_dinamicSwitchChanger")
 
 [function f_dialog_HelpCreator]
 SetLocation=475,20
-tag(sirka,350)
+tag(sirka,450)
 tag(vyska,230)
 dialog_prvni
 dialog_pozadi(<tag(nexty)>,1)
 dialog_pozadi(<tag(nexty)>,8)
 dialog_zpruhledni
-texta(<dialog_textpos(0,0)>,42,<argv(0)>)
-button(<d_def_okraj>+<d_def_skvira>,(<tag(vyska)>-<d_def_okraj>)-23,0fb7,0fb9,1,0,0)	//ok
+texta(<dialog_textpos(0,0)>,<d_def_headcolor>,<argv(0)>)
+button(<dialog_buttonpos_bottom>,d_def_button_ok1,d_def_button_ok2,1,0,0)	//ok
 
 page(1)
-htmlGump(<dialog_textpos(1,0)>,320,150,1,0,1)
+htmlGump(<dialog_textpos(1,0)>,420,150,1,0,1)
 tag(pagesCount,1)
 
 [function f_dialog_HelpCreator_newPage]
@@ -2280,7 +2280,7 @@ arg(i,0)
 while (<arg(i)> < <eval argv(0).tag(linkNumber)>)
   texta(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_writecolor>,"Link <eval <arg(i)>+1>:")
   texta(<lastxpos>+<argv(1)>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,<argv(0).tag(link_<eval arg(i)>)>)
-  button(<lastxpos>+<argv(2)>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,0fb1,0fb3,1,0,<eval arg(i)> + 100)
+  button(<lastxpos>+<argv(2)>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,d_def_button_cancel1,d_def_button_cancel2,1,0,<eval arg(i)> + 100)
   arg(i,#+1)
 endwhile
 
@@ -3227,4 +3227,5 @@ dialog(d_wallKiller)
 on=0 Zapadne
 tag(wallKiller_direction,w)
 dialog(d_wallKiller)
+
 [eof]

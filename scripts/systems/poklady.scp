@@ -44,7 +44,7 @@ argo.dialog_pozadi(<argo.tag(nexty)>,<eval tag(addItemsCount)>,30,100,270,65,65,
 argo.dialog_zpruhledni
 
 argo.dialog_textpos(0,0)
-argo.newTextLine(<lastxpos>+220,<lastypos>,<d_def_headcolor>,"Administrace Pokladu")
+argo.newTextLine(<lastxpos>+250,<lastypos>,<d_def_headcolor>,"Administrace Pokladu")
 
 ///////// Info
 argo.newTextLine(<argo.dialog_textpos(1,0)>,<d_def_subheadcolor>,"Informace o pokladu")
