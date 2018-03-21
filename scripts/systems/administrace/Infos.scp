@@ -24,7 +24,7 @@ endif
 if !(argv(2))
   var(lastxbuttpos,#+<d_def_odsazeni>)
 endif
-var(lastybuttpos,<tag(obj_y[argv(0)])>-3)
+var(lastybuttpos,<tag(obj_y[argv(0)])>-2)
 return <var(lastxbuttpos)>,<var(lastybuttpos)>
 
 [function dialog_buttonpos_near]//obj, (sloupec), bez odsazeni
@@ -36,8 +36,26 @@ endif
 if !(argv(2))
   var(lastxbuttpos,#+<d_def_odsazeni>)
 endif
-var(lastybuttpos,<tag(obj_y[argv(0)])>-3)
+var(lastybuttpos,<tag(obj_y[argv(0)])>-2)
 return <var(lastxbuttpos)>,<var(lastybuttpos)>
+
+[function dialog_buttonpos_top]
+if (0<argv(0)>)
+  var(lastxbuttpos,<eval <dialog_xr>-(<argv(0)>*(<d_def_button_sirka>+<d_def_skvira>))>)
+else
+  var(lastxbuttpos,<dialog_xr>)
+endif
+var(lastybuttpos,<dialog_but_yu>)
+return <lastxbuttpos>,<lastybuttpos>
+
+[function dialog_buttonpos_bottom]
+if (0<argv(0)>)
+  var(lastxbuttpos,<eval <dialog_xr>-(<argv(0)>*(<d_def_button_sirka>+<d_def_skvira>))>)
+else
+  var(lastxbuttpos,<dialog_xr>)
+endif
+var(lastybuttpos,<dialog_but_yd>)
+return <lastxbuttpos>,<lastybuttpos>
 
 [function dialog_prvni]
 tag(icount,0)
@@ -72,6 +90,15 @@ if !(safe sloupec_noback[index])
   gumppictiled(<tag(sloupec_x[index])>,<argv(0)>,((<tag(sirka)>-<tag(sloupec_x[index])>)-(<d_def_okraj>+<d_def_skvira>)),<eval argv(1)>*<d_def_radek_vyska>,2624)
 endif
 
+[function dialog_nastav_sloupce] //sirka1,sirka2,sirka3...
+tag(sloupec_x[0],<eval(<d_def_okraj>+<d_def_skvira>)>) //nulty sloupec
+arg(index,0)
+while (index<argvcount)
+  tag(sirkasloupce[index],<eval argv(index)>) //treti argument a dale (sirka 1 atd...)
+  tag(sloupec_x[index+1],<eval(<d_def_skvira>+<tag(sloupec_x[index])>+<tag(sirkasloupce[index])>)>)
+  arg(index,#+1)
+endif
+
 [function dialog_zvyrazni]
 gumppictiled(<tag(sloupec_x[0])>,<args>,(<tag(sirka)>-((2*<d_def_okraj>)+<d_def_odsazeni>)),2,2624)
 gumppictiled(<tag(sloupec_x[0])>,<args>+<d_def_radek_vyska>-2,(<tag(sirka)>-((2*<d_def_okraj>)+<d_def_odsazeni>)),2,2624)
@@ -86,6 +113,8 @@ d_def_button_cancel1  0fb1
 d_def_button_cancel2  0fb3
 d_def_button_dialog1  0fab
 d_def_button_dialog2  0fad
+d_def_button_wee1     0fbd
+d_def_button_wee2     0fbf
 d_def_button_checkr1  0fa5
 d_def_button_checkr2  0fa7
 d_def_button_checkl1  0fae
@@ -658,33 +687,27 @@ return <arg(x)>,<arg(y)>
 
 //the x-coordinate aligned to the right
 [function dialog_xr]
-arg(x,<eval(<tag(sirka)>-(<d_def_skvira>+<d_def_okraj>+<d_def_button_sirka>))>)
-return <arg(x)>
+return <eval(<tag(sirka)>-(<d_def_skvira>+<d_def_okraj>+<d_def_button_sirka>))>
 
 [function dialog_xl]
-arg(x,<eval(<d_def_skvira>+<d_def_okraj>)>)
-return <arg(x)>
+return <eval(<d_def_skvira>+<d_def_okraj>)>
 
 //the y-coordinate aligned to the top
 [function dialog_yu]
-arg(y,<eval(d_def_okraj+d_def_skvira)>)
-return <arg(y)>
+return <eval(d_def_okraj+d_def_skvira)>
 
 //the y-coordinate aligned to the bottom
 [function dialog_yd]
-arg(y,<eval(<tag(vyska)>-(<d_def_skvira>+<d_def_okraj>+<d_def_radek_vyska>))>)
-return <arg(y)>
+return <eval(<tag(vyska)>-(<d_def_skvira>+<d_def_okraj>+<d_def_radek_vyska>))>
 
 
 //the button y-coordinate aligned to the top
 [function dialog_but_yu]
-arg(y,<eval(d_def_okraj+d_def_skvira-3)>)
-return <arg(y)>
+return <eval(d_def_okraj+d_def_skvira-2)>
 
 //the button y-coordinate aligned to the bottom
 [function dialog_but_yd]
-arg(y,<eval(<tag(vyska)>-(<d_def_okraj>+<d_def_button_vyska>+3))>)
-return <arg(y)>
+return <eval(<tag(vyska)>-(<d_def_okraj>+<d_def_button_vyska>+2))>
 
 //the button left upper coordinates
 [function dialog_but_lu]
@@ -704,11 +727,9 @@ return <arg(x)>,<arg(y)>
 
 //the button right upper coordinates
 [function dialog_but_ru]
-arg(x,<eval dialog_xr>)
-arg(y,<eval dialog_but_yu>)
-var(lastxbuttpos,<arg(x)>)
-var(lastybuttpos,<arg(y)>)
-return <arg(x)>,<arg(y)>
+var(lastxbuttpos,<eval dialog_xr>)
+var(lastybuttpos,<eval dialog_but_yu>)
+return <lastxbuttpos>,<lastybuttpos>
 
 //the button right down coordinates
 [function dialog_but_rd]

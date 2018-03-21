@@ -272,7 +272,6 @@ endif
 arg(expToGive,(<lvl_max>-<playerLvl>) * <tag.exp_const>)
 return <eval expToGive>
 
-
 [typedef t_nbexp_enhancer]
 on=@UserDClick
 if (src.isGM)
@@ -381,31 +380,249 @@ tag(time_limit,<argtxt(3)>)
 tag(message,<argtxt(4)>)
 tag(message2,<argtxt(5)>)
 
-if (argn == 2) //pressed button 7 - add Guards menu
+if (argn == 2) // add Guards menu
   dialog(d_guarditAdv,d_nbexp_enhancer)
   return 1
 endif
 
-[typedef t_link_dclick]
-on=@UserDClick
-if (src.isGM)
-  target("Na co chces predmet nalinkovat ?")
-else
-  link.dclick
+//////////////////////////////////////////////
+////////      Experience enhancer     ////////
+//////////////////////////////////////////////
+[function expEnhTag]
+if !(ischar)
+  return""
+endif
+arg(MyEnhanceRune,<findid(i_expEnh)>)
+if (<argvcount> == 2) //zapisujeme novy expEnhTag
+  if !(<hval arg(MyEnhanceRune)>) // postava jeste nema runu
+    newequip(i_expEnh)
+    arg(MyEnhanceRune,<lastnew>)
+  endif
+  MyEnhanceRune.tag(<argv(0)>,"<argv(1)>")
+  return""
+elseif (<argvcount> == 1) // cteme expEnhTag
+  if !(<hval arg(MyEnhanceRune)>) // postava jeste nema runu
+    return""
+  endif
+  if (strlen(<MyEnhanceRune.tag(<argv(0)>)>))
+    return<MyEnhanceRune.tag(<argv(0)>)>
+  else
+    return""
+  endif
+endif
+RedMessage("spatny pocet argumentu")
+Return""
+
+[function expEnhTagRemove]
+arg(MyEnhanceRune,<findid(i_expEnh)>)
+if (<hval arg(MyEnhanceRune)>)
+  MyEnhanceRune.tag.remove.(<argv(0)>)
 endif
 return 1
 
-on=@TargOn_Item
-link=<src.targ>
-return 1
-  
-on=@TargOn_Char
-link=<src.targ>
+[function expEnhTagshow]
+if (<argvcount> == 0)
+  findid(i_expEnh).tag(dump)
+else
+  src.SysMessage("Hodnota exp_enhancer tagu -<argv(0)>- :")
+  arg(tag_value,"<expEnhTag(<argv(0)>)>")
+  if !(strcmpi(<tag_value>,00))
+    src.RedMessage("Tag je nulovy.")
+  else
+    src.RedMessage("<tag_value>")
+  endif
+endif
+
+[itemdef i_expEnh]
+id=i_rune_marker
+name=Runa pro exp enhancery
+type=t_eq_script
+
+on=@create
+attr=094 // invis, nb, nevermove
+color=0989
+
+//arg1 - (1/0) Force -> will overwrite existing type if true
+//     - (2) converts old nbexp enhancer into the new one
+[function enhanceXp]
+if (isItem)
+  if (type != 0)
+    if (!<argv(0)>)
+      if (type == t_nbexp_enhancer)
+        dialog(d_dialog_yesno,enhanceXp(2),"Chces opravdu prevest stavajici NB enhancer na novejsi typ?",550)
+      else
+        dialog(d_dialog_yesno,enhanceXp(1),"Chces opravdu prepsat existujici TYPE predmetu? Stavajici TYPE: <type>",550)
+      endif
+      return
+    elseif  (<argv(0)> == 2) // convert t_nbexp_enhancer to a regular exp_enhancer
+      f_enhanceExp_convertNbexpEnhancer
+    else
+      src.classMessage("Predmet uspesne preveden na XP Enhancer!")
+    endif
+  endif
+  type=t_exp_enhancer
+  dclick
+else
+  src.sysMessage("Musis trefit item")
+endif
+
+// TODO: Remove this function along with the rest nbexp enhancer-related code once all the enhancers are transformed
+[function f_enhanceExp_convertNbexpEnhancer]
+tag(lvl_min,<eval return_nth(1,<tag(lvl_limit)>)>)
+tag(lvl_max,<tag(lvl_min)>)
+tag(lvl_drop_low,0)
+arg(orig_lvl_max,<eval return_nth(2,<tag(lvl_limit)>)>)
+if (<arg(orig_lvl_max)>)
+tag(lvl_drop_high,<eval ((arg(orig_lvl_max)-tag(lvl_min))-1)>)
+else
+tag(lvl_drop_high,0)
+endif
+tag(xp,<eval ((<eval return_nth(2,<tag(lvl_limit)>)>-<tag(lvl_min)>)*<tag(exp_const)>)>)
+if (<tag(lvl_drop_high)>)
+tag(xpDrop,<eval (tag(xp)/(tag(lvl_drop_high)+1))>)
+else
+tag(xpDrop,0)
+endif
+tag.remove(exp_const)
+tag.remove(lvl_limit)
+src.classMessage("XP Enhancer byl uspesne zkonvertovan na novejsi typ!")
+
+[typedef t_exp_enhancer]
+on=@UserDClick
+if (src.isGM)
+  dialog(d_exp_enhancer)//<tag.lvl_limit>,<tag.exp_const>,<tag.time_limit>,<tag.message>,<tag.message2>,<uid>)
+else
+  if (f_guarditAdv_CheckSpawns)	// 1 == strazce je nazivu
+    src.sysMessage("Predmet si potrebujes prohlednout v klidu, musis se nejak zbavit tech potvor okolo.")
+    return 1
+  endif
+  arg(enhancer_tag,enhancer_<hval <uid>>)
+  if (strlen(<src.expEnhTag(<enhancer_tag>)>))
+    if (<tag.time_limit> == 0))
+      src.SysMessage("Hmm... Tady uz nic zajimaveho nezjistis.")
+      return 1
+    elseif (src.expEnhTag(<enhancer_tag>) > <serv.time>) // too early
+      src.SysMessage(<tag.message2>)
+      return 1
+    endif
+  endif
+  arg(exp_to_give,<f_expEnh_calcExp>)
+  if (<exp_to_give> > 0)
+    src.addexp(<exp_to_give>)
+    src.expEnhTag(<enhancer_tag>,<serv.time>+10*60*60*<tag(time_limit)>)
+    src.SysMessage(<tag.message>)
+    src.accMsg("Hrac <src.name>, UID: <src> dostal <arg(exp_to_give)> expu na levelu <src.tag(level)> z Enhanceru <arg(enhancer_tag)>.")
+  else
+    src.SysMessage("Hmm... nic zajimaveho jsi <src.sex nezjistil nezjistila>.")
+    src.expEnhTagRemove(<enhancer_tag>)
+  endif
+endif
 return 1
 
-on=@TargOn_Ground
-target("Linkovat item na zem nema smysl.")
-return 1
+[function f_expEnh_calcExp]
+arg(lvl,<eval src.tag(level)>)
+if (arg(lvl) < tag(lvl_min))
+  if (arg(lvl) < <eval (tag(lvl_min)-<eval tag(lvl_drop_low)>)>)
+    return 0
+  endif
+  arg(drops,<eval (tag(lvl_min)-arg(lvl))>)
+elseif (arg(lvl) > tag(lvl_max))
+  if (arg(lvl) > <eval (tag(lvl_max)+<eval tag(lvl_drop_high)>)>)
+    return 0
+  endif
+  arg(drops,<eval (arg(lvl)-tag(lvl_max))>)
+endif
+arg(finalXp,<eval (tag(xp)-(arg(drops)*tag(xpDrop)))>)
+if (arg(finalXp) <= 0)
+  return 0
+endif
+return<arg(finalXp)>
+
+[dialog d_exp_enhancer]
+argo.SetLocation=15,5
+
+argo.tag(sirka,746)
+argo.tag(vyska,277)
+argo.dialog_prvni
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,5,248,70,60,70)
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,248,70)
+argo.dialog_nastav_sloupce(198,60,70,60,70) // sets the correct coordinates for columns
+argo.dialog_zpruhledni
+
+argo.dialog_textpos(0,0)
+argo.newTextLine(270,<lastypos>,<d_def_headcolor>,"Experience Enhancer")
+argo.button(<argo.dialog_buttonpos_top>,d_def_button_cancel1,d_def_button_cancel2,1,0,0) //cancel
+argo.button(<argo.dialog_buttonpos_top(1)>,d_def_button_wee1,d_def_button_wee2,1,0,3) //help
+
+argo.dialog_textpos(1,0)
+arg(lineY,<lastypos>)
+argo.newTextLine(lastxpos,lastypos+0*<d_def_radek_vyska>,<d_def_readcolor>,"Maximum XP")
+argo.newTextEntry(<argo.tag(sloupec_x[2])>,<lineY>,50,1,"<?eval tag(xp)?>")
+arg(lineY,#+<d_def_radek_vyska>)
+argo.newTextLine(lastxpos,lastypos+1*<d_def_radek_vyska>,<d_def_readcolor>,"Full XP lvl range:")
+argo.newTextLine(<argo.tag(sloupec_x[1])>,<lineY>,<d_def_readcolor>,"min")
+argo.newTextEntry(<argo.tag(sloupec_x[2])>,<lineY>,50,2,"<?eval tag(lvl_min)?>")
+argo.newTextLine(<argo.tag(sloupec_x[3])>,<lineY>,<d_def_readcolor>,"max")
+argo.newTextEntry(<argo.tag(sloupec_x[4])>,<lineY>,50,3,"<?eval tag(lvl_max)?>")
+arg(lineY,#+<d_def_radek_vyska>)
+argo.newTextLine(lastxpos,<lineY>,<d_def_readcolor>,"Lvl drop:")
+argo.newTextLine(<argo.tag(sloupec_x[1])>,<lineY>,<d_def_readcolor>,"nizsi")
+argo.newTextEntry(<argo.tag(sloupec_x[2])>,<lineY>,50,4,"<?eval tag(lvl_drop_low)?>")
+argo.newTextLine(<argo.tag(sloupec_x[3])>,<lineY>,<d_def_readcolor>,"vyssi")
+argo.newTextEntry(<argo.tag(sloupec_x[4])>,<lineY>,50,5,"<?eval tag(lvl_drop_high)?>")
+arg(lineY,#+<d_def_radek_vyska>)
+argo.newTextLine(lastxpos,<lineY>,<d_def_readcolor>,"Drop XP konstanta")
+argo.newTextEntry(<argo.tag(sloupec_x[2])>,<lineY>,50,6,"<?eval tag(xpDrop)?>")
+arg(lineY,#+<d_def_radek_vyska>)
+argo.newTextLine(lastxpos,<lineY>,<d_def_readcolor>,"Time limit / hodiny:")
+argo.newTextEntry(<argo.tag(sloupec_x[2])>,<lineY>,50,7,"<?eval tag(time_limit)?>")
+
+argo.newTextLine(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,Message - dostane expy:)
+argo.newTextEntry(<argo.dialog_textpos(3,0)>,710,8,"<?tag(message)?>")
+
+argo.newTextLine(<argo.dialog_textpos(4,0)>,<d_def_readcolor>,Message - prisel brzy - nedostane expy:)
+argo.newTextEntry(<argo.dialog_textpos(5,0)>,710,9,"<?tag(message2)?>")
+
+argo.newTextLine(<argo.dialog_textpos(6,0)>,<d_def_readcolor>,"Pridat Strazce")
+argo.button(<argo.dialog_buttonpos_near(6,1)>,d_def_button_dialog1,d_def_button_dialog2,1,0,2)	//Add Guards Menu
+argo.newTextLine(<argo.tag(sloupec_x[2])>,<lastypos>,<d_def_readcolor>,"<?eval tag(pocetSpawnu)?>")
+
+var(lastypos,<lastypos>+<d_def_radek_vyska>+<d_def_skvira>)
+argo.button(<argo.dialog_buttonpos_bottom>,d_def_button_ok1,d_def_button_ok2,1,0,1) //OK
+
+[dialog d_exp_enhancer button]
+on=0
+src.SysMessage("nastaveni stornovana")
+
+on=@AnyButton	// OK
+tag(xp,<argtxt(1)>)
+tag(lvl_min,<argtxt(2)>)
+tag(lvl_max,<argtxt(3)>)
+tag(lvl_drop_low,<argtxt(4)>)
+tag(lvl_drop_high,<argtxt(5)>)
+tag(xpDrop,<argtxt(6)>)
+tag(time_limit,<argtxt(7)>)
+
+tag(message,<argtxt(8)>)
+tag(message2,<argtxt(9)>)
+
+if (argn == 2) // add Guards menu
+  dialog(d_guarditAdv,d_exp_enhancer)
+  return 1
+elseif (argn == 3) // help
+  dialog(d_exp_enhancer)
+  dialog(d_exp_enhancer_help)
+  return 1
+endif
+
+[dialog d_exp_enhancer_help]
+argo.settext(1,"<?null?><b>Maximum XP</b>: udava pocet XP, ktere hrac dostane v optimalnim rozmezi levelu urcenym casti 'Full XP lvl range'<br><br><b>Full XP lvl range:</b> hrac dostane plne XP v rozmezi od min do max levelu vcetne.<br><br><b>Lvl drop:</b> udava, kolik levelu POD (nizsi) resp. NAD (vyssi) optimalni hranici bude hrac jeste dostavat snizene XP. XP se snizi s kazdym levelem o konstantu uvedenou v casti 'Drop XP konstanta', ale ma-li hrac level mimo optimalni hranici vzdaleny o vyssi pocet urovni, nez je uveden v lvl drop konstante, nedostane nic.<br><br><b>Time limit:</b> urcuje, po jake dobe hrac znovu muze dostat zkusenosti za poklikani na enhancer.<br><br><b>Message - dostane expy:</b> vepsana zprava se zobrazi, pokud hrac dostane zkuesnosti<br><b>Message - prisel brzy:</b> vepsana zprava se zobrazi, pokud hrac na zkusenosti nema narok.</b>")
+argo.f_dialog_HelpCreator("HELP - Experience Enhancer")
 
 //////////////////////////////////////////////
 ////////    B r a n a    L e v e l    ////////

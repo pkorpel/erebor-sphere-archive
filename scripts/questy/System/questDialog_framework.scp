@@ -260,6 +260,18 @@ return<arg(currentPos)>
 setText(newTextLine,"<argv(4)>")
 textEntry(<argv(0)>,<argv(1)>,<argv(2)>,<d_def_radek_vyska>,<d_def_writecolor>,<argv(3)>,<lastTextLine>)
 
+// argv(0) - x-position
+// argv(1) - y-position
+// argv(2) - width
+// argv(3) - height
+// argv(4) - show scroll-bar (default TRUE)
+[function newHTMLGump]
+arg(scroll,1)
+if (argvcount > 4)
+  arg(scroll,<argv(4)>)
+endif
+HTMLGUMP(<argv(0)>,<argv(1)>,<argv(2)>,<argv(3)>,<lastTextLine>,0,<arg(scroll)>)
+
 [function lastTextLine] // the number of the last added Text
 return<eval (<tag(textLines)>-1)>
 

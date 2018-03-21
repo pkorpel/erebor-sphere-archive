@@ -28,7 +28,7 @@ syn keyword sphscriptDatatype act arg argChk argn args argo argv argvcount argtx
 syn keyword sphscriptDatatype CurrentSkill currentSkillParam currentSkillTarget1 currentSkillTarget2
 syn keyword sphscriptDatatype lastnew lastnewchar link
 syn keyword sphscriptDatatype qtag
-syn keyword sphscriptDatatype serv src
+syn keyword sphscriptDatatype serv serv src
 syn keyword sphscriptDatatype tag targ this topobj Trigger
 syn keyword sphscriptDatatype var
 
@@ -37,7 +37,7 @@ syn keyword sphscriptTriggers abort
 syn keyword sphscriptTriggers fail
 syn keyword sphscriptTriggers select start stroke success
 syn match   sphscriptTriggers "on\ *=\ *[^\t /@]\+"
-syn match   sphscriptTriggers "on=@\(NPCRestock\|UserContextMenu\|Create\|Death\|DeathCorpse\|Destroy\|GetHit\|Hit\|HitMiss\|HitTry\|itemDAMAGE\|itemDestroy\|itemDROPON_CHAR\|itemDROPON_GROUND\|itemdropon_obj\|equip\|itemEQUIP\|itemPICKUP_GROUND\|itemPICKUP_PACK\|itemPICKUP_CHAR\|itemSPELLEffect\|step\|itemSTEP\|itemSTACKON\|itemTARGON_CHAR\|itemTARGON_GROUND\|itemTARGON_ITEM\|itemTimer\|itemUNEQUIP\|itemUserClick\|itemUserDClick\|itemUserToolTip\|LogIn\|LogOut\|NPCAcceptItem\|NPCHearGreeting\|NPCHearNeed\|NPCHearUnknown\|NPCRefuseItem\|NPCSeeNewPlayer\|NPCSeeWantItem\|PersonalSpace\|ReceiveItem\|SkillAbort\|SkillFail\|SkillMakeItem\|SkillSelect\|SkillStart\|SkillStroke\|SkillSuccess\|SpellCast\|SpellEffect\|targon_char\|targon_item\|targon_ground\|timer\|UserButton\|UserClick\|UserDClick\|UserToolTip\|afterswing\|finalBlow\|aftergetswing\|beforedoeffect\|afterDoEffect\|beforegeteffect\|beforegetswing\|Created\|DrinkingPotion\|aftergetswing\|playerKill\|npckill\|anybutton\|\)\>"
+syn match   sphscriptTriggers "on=@\(NPCRestock\|UserContextMenu\|Create\|Death\|DeathCorpse\|Destroy\|GetHit\|Hit\|HitMiss\|HitTry\|itemDAMAGE\|itemDestroy\|itemDROPON_CHAR\|itemDROPON_GROUND\|itemdropon_obj\|equip\|unequip\|itemEQUIP\|itemPICKUP_GROUND\|itemPICKUP_PACK\|itemPICKUP_CHAR\|itemSPELLEffect\|step\|itemSTEP\|itemSTACKON\|itemTARGON_CHAR\|itemTARGON_GROUND\|itemTARGON_ITEM\|itemTimer\|itemUNEQUIP\|itemUserClick\|itemUserDClick\|itemUserToolTip\|LogIn\|LogOut\|NPCAcceptItem\|NPCHearGreeting\|NPCHearNeed\|NPCHearUnknown\|NPCRefuseItem\|NPCSeeNewPlayer\|NPCSeeWantItem\|PersonalSpace\|ReceiveItem\|SkillAbort\|SkillFail\|SkillMakeItem\|SkillSelect\|SkillStart\|SkillStroke\|SkillSuccess\|SpellCast\|SpellEffect\|targon_char\|targon_item\|targon_ground\|timer\|UserButton\|UserClick\|UserDClick\|UserToolTip\|afterswing\|finalBlow\|aftergetswing\|beforedoeffect\|afterDoEffect\|beforegeteffect\|beforegetswing\|Created\|DrinkingPotion\|aftergetswing\|playerKill\|npckill\|anybutton\|\)\>"
 
 syn keyword sphscriptVariables action AddTimer advrate amount anim armor attr aversions
 syn keyword sphscriptVariables baseid bloodcolor body
@@ -71,8 +71,8 @@ syn keyword sphscriptFunction invul isChar isChardef isDead isGM isItem isItemde
 syn keyword sphscriptFunction makeitem message mount
 syn keyword sphscriptFunction newequip newequipsafe newitem newitemsafe newnpc npcExists nuke
 syn keyword sphscriptFunction playerExists profession
-syn keyword sphscriptFunction rand redmessage resurrect return remove RemoveTriggerGroup rescount restest
-syn keyword sphscriptFunction safe say sayU sayUA settext speak speakU sound skillCheck spellEffect srcCanSeeLOS strcmpi suicide sysMessage
+syn keyword sphscriptFunction rand redmessage reduceResist resurrect return remove RemoveTriggerGroup rescount restest
+syn keyword sphscriptFunction safe say sayU sayUA settext skill speak speakU sound skillCheck spellEffect srcCanSeeLOS stopMagery strcmpi suicide sysMessage
 syn keyword sphscriptFunction target Trigger_Fail Trigger_Start Trigger_Success
 syn keyword sphscriptFunction update unequip use
 " GUMPS
@@ -81,9 +81,9 @@ syn keyword sphscriptFunction checkertrans
 syn keyword sphscriptFunction lastTextLine
 syn keyword sphscriptFunction dialogclose dialog_buttonpos dialog_buttonpos_near dialog_forcePage dialog_linkButton dialog_newPage dialog_page dialog_textpos
 syn keyword sphscriptFunction gumppic
-syn keyword sphscriptFunction htmlgump
+syn keyword sphscriptFunction htmlgump newHTMLGump
 syn keyword sphscriptFunction lastTextLine
-syn keyword sphscriptFunction newTextLine
+syn keyword sphscriptFunction newTextLine noclose nomove
 syn keyword sphscriptFunction questDialog_addResponse questDialog_baseButt questDialog_create questDialog_HTMLGUMP
 syn keyword sphscriptFunction page
 syn keyword sphscriptFunction resizepic
@@ -126,7 +126,7 @@ syn match  sphscriptNumber		"\<\d\+\.\d*\>"
 " String and Character constants
 syn region  sphscriptString		start=+"+  end=+"+
 syn region  sphscriptComment		start="//" end="$" contains=sphscriptTodo
-"syn region  sphscriptLineNumber	start="^\d" end="\s"
+"syn match   sphscriptString		"\( \+[a-zA-Z]\+ \+=\)\@<=[^/]\+"
 syn match   sphscriptTypeSpecifier	"[a-zA-Z0-9][\$%&!#]"ms=s+1
 
 " Define the default highlighting.

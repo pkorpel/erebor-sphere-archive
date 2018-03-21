@@ -1680,6 +1680,25 @@ endif
 tag.remove(lastPortToSafeZone)
 tag.remove(positionOfPortToSafeZone)
 
+[typedef t_link_dclick]
+on=@UserDClick
+if (src.isGM)
+  target("Na co chces predmet nalinkovat ?")
+else
+  link.dclick
+endif
+return 1
 
+on=@TargOn_Item
+link=<src.targ>
+return 1
+  
+on=@TargOn_Char
+link=<src.targ>
+return 1
+
+on=@TargOn_Ground
+target("Linkovat item na zem nema smysl.")
+return 1
 
 [EOF]
