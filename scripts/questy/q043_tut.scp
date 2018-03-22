@@ -82,12 +82,8 @@ endif
 
 if (<arg(tagValue)> == 7 )
   argo.dialog_page("qmur_web")
-  argo.setText(argo.newTextLine,"Prelozil jsem pro tebe ten pergamen, muzes si ho precist!")
+  argo.setText(argo.newTextLine,"Prelozil jsem pro tebe ten pergamen, muzes si ho precist!<?null?>[ZDE NAJDES ODKAZ NA WIKI <a href="wiki.uoerebor.cz/index.php/Murdocuv_denik">Murdocuv denik</a>]")
   argo.questDialog_HTMLGUMP 
-  argo.setText(argo.newTextLine,"Precist pergamen Otevre webovou stranku#")
-  argo.questDialog_addResponse(0,1,1,"q043_tut_zapisweb") // short text & exit button & new button
-  argo.setText(argo.newTextLine,"Tvuj ubohy pergamen uz me nezajima!")
-  argo.questDialog_addResponse(0,0,0,"q043_tut_blankresponse") // short text & page button & existing button  
 endif
 
 argo.dialog_page("Mohu pomoci?")

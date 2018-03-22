@@ -19,15 +19,16 @@ COLOR=color_clovek
 STR=1000
 DEX=1000
 INT=1000
-Title=Hrobaruv ucen
+Title=Murdocuv ucen
 
 tag(noanimate,1)
 
 ITEMnewbie=i_hair_short
-color=0001
+color=00774
 ITEMnewbie=i_beard_mustache
-color=0001
+color=00774
 ITEMnewbie=i_robe
-color=0001
+ITEMnewbie=i_hat_wizards
+color=0084d
 ITEMnewbie=i_spellbook_necro
 [eof]
