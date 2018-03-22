@@ -2729,17 +2729,17 @@ f_qDialogInstructions(003129)
 arg(tagValue,<src.qtag(q043_tut)>)
 if (<arg(tagValue)> == 7)
   setText(1,"<src.sex(Pomohl,Pomohla)> si Argolovi sestavit pergamen, ktery patril nekromantu Murdocovi. Argol ti poradil, abys <src.sex(vyhledal,vyhledala)> jeho ucne."
-elseif (<arg(tqgValue)> == 6)
+elseif (<arg(tagValue)> == 6)
   setText(1,"<src.sex(Nasel,Nasla)> si posledni cast svitku, Argol uz na tebe netrpelive ceka!")
-elseif (<arg(tqgValue)> == 5)
+elseif (<arg(tagValue)> == 5)
   setText(1,"Jeste posledni cast a svitek bude kompletni! Podle Argola musi byt v podzemni kobce nemrtvych, co by Ettin kamenem dohodil.")
-elseif (<arg(tqgValue)> == 4)
+elseif (<arg(tagValue)> == 4)
   setText(1,"<src.sex(Nasel,Nasla)> si dalsi cast svitku, Argol uz na tebe netrpelive ceka!")
-elseif (<arg(tqgValue)> == 3)
+elseif (<arg(tagValue)> == 3)
   setText(1,"Svitek nebyl cely, musis se vydat na jih pres most, kde sidli Ettin, ktery ho ma ve sve moci.")
-elseif (<arg(tqgValue)> == 2)
+elseif (<arg(tagValue)> == 2)
   setText(1," <src.sex(Nasel,Nasla)> si svitek, ale neni kompletni, vrat se za Argolem, on uz bude vedet co s tim.")
-elseif (<arg(tqgValue)> == 1)
+elseif (<arg(tagValue)> == 1)
   setText(1,"<src.sex(Slibil,Slibila)> si, ze pro Argola ziskas ztraceny svitek. Pry je u veze na severozapadu.")
 endif
 htmlGump(160,80,242,130,1,0,36)
@@ -2783,7 +2783,7 @@ elseif (<argv(0)> == 259)
 elseif (<argv(0)> == 258)
   setText(1,"<src.sex(Opsal,Opsala)> si runu, tentokrat nic moc, rychle zpatky za Torwinem v Umbaru, aby tvou praci zkontroloval.")
 elseif (<argv(0)> == 257)
-  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Rhunu.<BR>V mape mas poznacenou pozici<BR>X 3990 Y 1820")
+  setText(1,"<?null?>Torwin te posila opsat runu v jeskyni nedaleko Rhunu.<BR>V mape mas poznacenou pozici<BR>X 3671 Y 2210")
 elseif (<argv(0)> == 256)
   setText(1,"<src.sex(Opsal,Opsala)> si runu, mohlo to byt lepsi, rychle zpatky za Torwinem v Umbaru, aby tvou praci zkontroloval.")
 elseif (<argv(0)> == 255)
@@ -2804,7 +2804,7 @@ return 0
 //FINALE
 [function f_questy_murdoc_ucni_m_finale]
 if (<argv(0)> == 223)
-  setText(1,"<src.sex(Pomohl,Pomohla)> si Dranovi dat dohromady vsechny chybejici pergameny, o kterych jeho bratri vedeli. Posila te za kronikarem Torwinem, ktery bude potrebovat tvou pomoc, az budes mistrem sveho umeni. Torwina najdes v Umbaru.")
+  setText(1,"<src.sex(Pomohl,Pomohla)> si Dranovi dat dohromady vsechny chybejici pergameny, o kterych jeho bratri vedeli. Zminil se o kronikari Torwinovi, ktery bude potrebovat tvou pomoc, az budes mistrem sveho umeni. Jakmile budes mistrem, promluv si znovu s Dranem!")
 elseif (<argv(0)> == 222)
   setText(1,"Uz mas vsechny pergameny! Odnes je zpatky do Barad-Duru k Dranovi, aby je mohl prelozit. Jiste dostanes odmenu!")
 endif
@@ -2980,7 +2980,7 @@ return 0
 //FINALE
 [function f_questy_murdoc_ucni_g_finale]
 if (<argv(0)> == 223)
-  setText(1,"<src.sex(Pomohl,Pomohla)> si Antonovi dat dohromady vsechny chybejici pergameny, o kterych jeho sestry vedeli. Posila te za kronikarem Torwinem, ktery bude potrebovat tvou pomoc, az budes mistrem sveho umeni. Torwina najdes v pristavu Dol Amroth.")
+  setText(1,"<src.sex(Pomohl,Pomohla)> si Antonovi dat dohromady vsechny chybejici pergameny, o kterych jeho sestry vedeli. Zminil se o kronikari Torwinovi, ktery bude potrebovat tvou pomoc, az budes mistrem sveho umeni. Jakmile budes mistrem, promluv si znovu s Antonem!")
 elseif (<argv(0)> == 222)
   setText(1,"Uz mas vsechny pergameny! Odnes je zpatky do Hobitina k Antonovi, aby je mohl prelozit. Jiste dostanes odmenu!")
 endif
