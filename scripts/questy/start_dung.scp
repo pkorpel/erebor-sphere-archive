@@ -414,7 +414,7 @@ argo.page(3)
 argo.HTMLGUMP(170,230,440,100,6,0,36)
 
 argo.page(4)
-if (src.rescount(i_bandage)>=200)
+if (src.rescount(i_bandage)>=50)
 	argo.HTMLGUMP(170,230,440,100,11,0,36)
 	argo.button(25,395,0fa5,0fa7,1,0,2)
 	argo.text(60,395,152,12)
