@@ -73,88 +73,99 @@ mif_finishitem
 name=Opilcova kosile
 
 ////////////////////////////////////////////////////////////////////////////////
-// E A S T E R   Q U E S T   2 0 1 6
+E A S T E R   Q U E S T   2 0 1 6
 
-// [ITEMDEF i_easter_egg]
-// ID=i_fruit_coconut
-// NAME=Velikonocni vejce
-// VALUE=50000
-// WEIGHT=0
-// TYPE=t_food
-// 
-// CATEGORY=Eventy
-// SUBSECTION=Easter
-// DESCRIPTION=Vejce
-// 
-// ON=@Create
-//   dorand 7
-//     color=0983
-//     color=06
-//     color=084D
-//     color=098e
-//     color=021
-//     color=0429
-//     color=0111
-//   enddo
-//   
-// ON=@DROPON_GROUND
-//   sfx(74)      // zvuk rozbiti vajec :-)
-//   remove
-//   src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
-// 
-// ON=@userCLICK
-// src.sysmessage("Velikonocni vejce, jsou opravdu krehke, tak opatrne.")
-// // sfx(74)      // zvuk rozbiti vajec :-)
-// // if (amount > 1)
-// //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-// //   remove
-// // else
-// //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-// //   remove
-// // endif
-// 
-// // ON=@Pickup_ground
-// // sfx(74)      // zvuk rozbiti vajec :-)
-// // if (amount > 1)
-// //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-// //   remove
-// // else
-// //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-// //   remove
-// // endif
-// 
-// // ON=@Pickup_pack
-// // sfx(74)      // zvuk rozbiti vajec :-)
-// // if (amount > 1)
-// //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-// //   remove
-// // else
-// //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-// //   remove
-// // endif
-// 
-// // ON=@UserDClick
-// // sfx(74)      // zvuk rozbiti vajec :-)
-// // if (amount > 1)
-// //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-// //   remove
-// // else
-// //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-// //   remove
-// // endif
-//   
-// ON=@Step
-// if (src.isgm)
-//   return 1
-// endif
-// if (<src.weight> > 3000)
-//   src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
-//   sfx(74)
+[ITEMDEF i_easter_egg]
+ID=i_fruit_coconut
+NAME=Velikonocni vejce
+VALUE=50000
+WEIGHT=0
+TYPE=t_food
+
+CATEGORY=Eventy
+SUBSECTION=Easter
+DESCRIPTION=Vejce
+
+ON=@Create
+  dorand 14
+    color=0983
+    color=06
+    color=084D
+    color=098e
+    color=021
+    color=0429
+    color=0111   
+    color=042d
+    color=099d
+    color=07c
+    color=0992
+    color=0980
+    color=0ac1
+    color=0985
+  enddo
+  
+ON=@DROPON_GROUND
+if (playerExists(<src>)) 
+  sfx(74)      // zvuk rozbiti vajec :-)
+  remove
+  src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
+endif
+
+
+
+ON=@userCLICK
+src.sysmessage("Velikonocni vejce, jsou opravdu krehke, tak opatrne.")
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
 //   remove
 // else
-//   src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
 // endif
-// 
+
+// ON=@Pickup_ground
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+
+// ON=@Pickup_pack
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+
+// ON=@UserDClick
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+  
+ON=@Step
+if (src.isgm)
+  return 1
+endif
+if (<src.weight> > 3000)
+  src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
+  sfx(74)
+  remove
+else
+  src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
+endif
+ 
 [ITEMDEF i_easter_port]
 ID=i_gate_3
 NAME=Port k zajickovi
@@ -339,7 +350,7 @@ ON=*yes*
 ON=*dukaz*
 ON=*duvera*
 if (src.findid(i_easterQuest_wentThrough))
-  say("Nabizim ti 5000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 5000 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")  
+  say("Nabizim ti 10000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 2500 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")  
 else
   say("Abych si otestoval Tve schopnosti, chci po tobe, aby jsi <src.sex(prosel,prosla)> az na konec doupete Velikonocniho zajicka. Az potom se s tebou budu bavit vice.")
 endif
@@ -352,7 +363,7 @@ ON=*nabidka*
 ON=*smena*
 ON=*kurz*
 if (src.findid(i_easterQuest_wentThrough))
-  say("Nabizim ti 5000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 5000 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")
+  say("Nabizim ti 10000 zlata za 100 vajicek, Magicky vacek za 1000 vajicek a nebo Tajemnou mapu za 2500 vajicek. Co si z toho prejes vymenit? Penize? Item? Mapu?")
 else
   say("Neverim ti, s tebou se bavit nehodlam. Musis mi dat dukaz, ze ti mohu duverovat.")
 endif
@@ -364,13 +375,13 @@ ON=*zlato*
 ON=*goldy*
 if (src.findid(i_easterQuest_wentThrough))
   if (<src.restest(100,i_easter_egg)>)
-    src.accMsg("Hrac <src.name>, UID: <src> dostal 5000 gp za 100 velikonocnich vajicek.")
+    src.accMsg("Hrac <src.name>, UID: <src> dostal 10000 gp za 100 velikonocnich vajicek.")
     src.consume(100,i_easter_egg)
-    src.givegold(5000)
+    src.givegold(10000)
     say("Dekuji ti, ale to nestaci. Prines mi jich vice, penez mam dost.")  
     src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+100)
     if (finduid(#040034663)) && !(src.isgm)
-      finduid(#040034663).tag(vyplaceno_zlata,#+5000)
+      finduid(#040034663).tag(vyplaceno_zlata,#+10000)
       f_logBestCollector
     endif
   else
@@ -409,12 +420,12 @@ ON=*mapu*
 ON=*mapa*
 ON=*tajemnou*
 if (src.findid(i_easterQuest_wentThrough))
-  if (<src.restest(5000,i_easter_egg)>)
-    src.accMsg("Hrac <src.name>, UID: <src> dostal 1x Tajemnou mapu za 5000 velikonocnich vajicek.")
-    src.consume(5000,i_easter_egg)
+  if (<src.restest(2500,i_easter_egg)>)
+    src.accMsg("Hrac <src.name>, UID: <src> dostal 1x Tajemnou mapu za 2500 velikonocnich vajicek.")
+    src.consume(2500,i_easter_egg)
     src.giveitem(i_u_treasure_map)
     say("Dekuji ti, ale stale jich mam malo. Prines mi jich vice, jeste nejake Tajemne mapy mam.")    
-    src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+5000)
+    src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec,#+2500)
     if (finduid(#040034663)) && !(src.isgm)
       finduid(#040034663).tag(tajemnych_map,#+1)
       f_logBestCollector
@@ -435,6 +446,31 @@ if ({1 3} == 1)
     giveitem(i_easter_egg,<arg(eggsNumber)>)
   endif
 endif
+
+// call upon an Player
+[function f_easterEvent_generateEgg_PvP]
+arg(eggsAmount,<eval(<argv(0)>*25)>)
+if (<arg(eggsAmount)> > 0)
+  giveitem(i_easter_egg,<arg(eggsAmount)>)
+  classmessage("<src.sex(Ziskal,Ziskala)> jsi Velikonocni Vajicka za PvP.")
+endif
+
+
+// call upon all characters ingame  - USE ONLY ON START EASTER EVENT
+[function f_easterEvent_generateEgg_World]
+if !(flag_spawned)
+  return
+endif
+if !(itemExists(<memoryFindType(MEMORY_ISPAWNED).link>)) 
+  return
+endif
+if !(<findid(i_gold)>)
+  return
+endif
+if (<findid(i_gold).amount> < 75)
+  return
+endif
+f_easterEvent_generateEgg 
 
 [function f_logBestCollector]
 if (<src.findid(i_easterQuest_wentThrough).tag(odevzdanych_vajec)> > <finduid(#040034663).tag(BestCollector_amount)>)
@@ -460,7 +496,7 @@ NAME=easterQuest
 TYPE=T_EQ_SCRIPT
 
 ON=@EQUIP
-TIMER=1036800
+TIMER=2036800
 ATTR=094
 tag(odevzdanych_vajec,0)
 if (finduid(#040034663)) && !(src.isgm)

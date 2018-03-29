@@ -2544,7 +2544,9 @@ elseif (<eval region.tag(arena)>)
   return 0
 elseif (findid(i_checkstats_timer))   // hrac po nedavne smrti (Resskily nepocitame)
   return 0
-elseif ((<eval tag(skillrank)> == 3) && (!strcmpi(<profession>,class_craft))) //aby ziskal zasluhu, musi zabijet VMka a ne krafty
+elseif (!strcmpi(<profession>,class_craft)) //aby ziskal zasluhu, musi zabijet VMka a ne krafty
+  return 0
+elseif (<eval tag(skillrank)> < 3)
   return 0
 endif
 return 1
@@ -2941,14 +2943,14 @@ if (action==Skill_fencing)||(tag(isstabbing))
   if (tag(isstabbing))
     f_thief_backStab
   else
+    if (act.npc)
+      f_thief_fromBehind
+      f_thief_shieldStrike
+    endif
     if (!arg(holdsWarFork)) // warFork has different ability (charged strike, not bleed)
       if (f_thief_CanCauseBleeding(<var(swingedchar)>)) // arg1 == bleeding target
         f_thief_doBleed(<var(swingedchar)>) // arg1 == bleeding target
       endif
-    endif
-    if (act.npc)
-      f_thief_fromBehind
-      f_thief_shieldStrike
     endif
   endif
   if (arg(holdsWarFork))
