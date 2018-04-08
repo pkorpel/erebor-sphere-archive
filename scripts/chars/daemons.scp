@@ -1275,3 +1275,92 @@ item=i_gold
  
 /////////////////////////////////////////////////////////////
 
+[CHARDEF c_daemon_black]
+ID=c_daemon_sword1
+NAME=Demon
+SOUND=snd_MONSTER_DAEMON1
+ICON=i_pet_DAEMON
+ANIM=03fbc7f
+can=mt_walk|mt_usehands|mt_run
+
+attack=85
+ARMOR=70
+moverate=4
+ 
+RESOURCES=9 i_ribs_raw, 18 i_reag_daemon_bone
+FOODTYPE=15 t_meat_raw
+BLOODCOLOR=
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_bleed
+TEVENTS=e_daemon
+TEVENTS=e_summoneater
+TEVENTS=e_lightnings
+
+CATEGORY=Monsters
+SUBSECTION=Demoni
+DESCRIPTION=Daemon
+
+ON=@Create
+color=0455
+NPC=brain_monster
+fame={400 800}
+karma={-5000 -5999}
+
+STR=1000
+DEX={150 180}
+INT={120 150}
+
+maxhits={3600 4000}
+maxstam={150 230}
+maxmana=0
+
+tag.experience=<eval {200.0 230.0}>
+
+tag.npc_bleed=300 //30.0%
+
+tag(e_lightnings_chance,330)   //33%
+tag(e_lightnings_range,2)     // kolik blesku v linii
+
+//mystik
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+//other resists
+tag(resist_poison,800)
+tag.resist_para=<eval {700 800}>
+tag(resist_summon,800)
+tag(resist_bleed,700)
+
+//weap resists
+tag(resist_sharp,500)
+tag(resist_slash,150)
+tag(resist_pierce,350)
+tag(resist_blunt,450)
+
+//magic resists
+tag(resist_fire,250)
+tag(resist_elect,900)
+tag(resist_cold,100)
+
+//typ monstra
+tag(monstertype,daemon)
+//weap flags
+tag.weapflag=dam_slashing|dam_physical|dam_fire
+
+PARRYING={55.0 95.0}
+TACTICS={80.0 100.0}
+Resist=75.0
+WRESTLING={95.0 110.0}
+peacemaking=100.0
+provocation=100.0
+SpiritSpeak=45.0
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=loot_DAEMON
+item=i_gold
+

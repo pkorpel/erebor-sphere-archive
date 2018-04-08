@@ -21,9 +21,7 @@ SUBSECTION=NPC_evil_race
 DESCRIPTION=Okultista valecnik
 
 ON=@Create
-NAME=#NAMES_HUMANMALE
 COLOR=colors_skin 
-Title=The Okultista
 NPC=brain_monster
 fame={2000 2999}              
 karma={-2999 -3999}
@@ -84,8 +82,8 @@ itemnewbie=i_bracelet_gold
 Color=00
 itemnewbie=i_necklace_gold
 Color=00
-itemnewbie=i_robe
-Color=098c
+itemnewbie=i_deathrobe
+Color=0455
 itemnewbie=i_shirt_plain
 Color=098a
 
@@ -117,9 +115,7 @@ SUBSECTION=npc_evil_race
 DESCRIPTION=Okultistka Ranger
 
 ON=@Create
-NAME=#NAMES_HUMANFEMALE
-COLOR=colors_skin 
-Title=The Okultistka
+COLOR=colors_skin
 NPC=brain_monster
 fame={100 300}
 karma={-2000 -2999}
@@ -208,9 +204,7 @@ SUBSECTION=Pirati
 DESCRIPTION=Okultista kouzelnik
 
 ON=@Create
-NAME=#NAMES_HUMANFEMALE
-COLOR=colors_skin 
-Title=The Okultista
+COLOR=colors_skin
 NPC=brain_monster
 fame={100 300}
 karma={-2000 -2999}
@@ -309,9 +303,7 @@ SUBSECTION=npc_evil_race
 DESCRIPTION=Okultista vyvolavac
 
 ON=@Create
-NAME=#NAMES_HUMANFEMALE
 COLOR=colors_skin 
-Title=The Okultista
 NPC=brain_monster
 fame={100 300}
 karma={-2000 -2999}
@@ -413,9 +405,7 @@ SUBSECTION=NPC_evil_race
 DESCRIPTION=Kanibal
 
 ON=@Create
-NAME=#NAMES_HUMANMALE
 COLOR=colors_skin 
-Title=The Okultista
 NPC=brain_monster
 fame={2000 2999}              
 karma={-2999 -3999}
@@ -500,9 +490,7 @@ SUBSECTION=npc_evil_race
 DESCRIPTION=Knihovnik
 
 ON=@Create
-NAME=#NAMES_HUMANFEMALE
 COLOR=colors_skin 
-Title=The Okultista
 NPC=brain_monster
 fame={100 300}
 karma={-2000 -2999}
@@ -992,14 +980,13 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_leaper
 TEVENTS=e_npc_detect
+TEVENTS=e_npc_critic
  
 CATEGORY=Monsters
 SUBSECTION=Zla Druzina 6
 DESCRIPTION=Proklety valecnik
 
 ON=@Create
-NAME=#NAMES_DREAD_LORD
-Title=The Proklety Valecnik
 COLOR=color_npc_maiar_dur
 NPC=brain_Human
 KARMA=-6000
@@ -1017,6 +1004,9 @@ tag.experience=<eval {170.0 175.0}>
 
 tag.npc_port_timer=5
 tag(npc_port_distance,6)
+
+tag.npc_critic_chance=400         //50% chance
+tag.npc_critic_dmg=15,25          //dmg in between
 
 tag(hypnotizable,0)  
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
@@ -1078,7 +1068,7 @@ item=i_gold
 
 [CHARDEF c_satan_vladce]
 id=c_satan
-NAME=Satan
+NAME=Satan Vladce
 SOUND=snd_MONSTER_DAEMON1
 ICON=i_pet_CYCLOPS
 anim=0ffc78c7f
@@ -1152,15 +1142,15 @@ tag(resist_summon,900) //individualni
 tag(resist_bleed,550) //individualni
 
 //weap resists
-tag(resist_sharp,450)
-tag(resist_slash,250)
-tag(resist_pierce,450)
+tag(resist_sharp,400)
+tag(resist_slash,200)
+tag(resist_pierce,400)
 tag(resist_blunt,500)
 
 //magic resists
 tag(resist_fire,800)
 tag(resist_elect,400)
-tag(resist_cold,500)
+tag(resist_cold,300)
 tag(resist_silence,850)
 
 //typ monstra
