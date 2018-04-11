@@ -648,6 +648,7 @@ return 0
 
 [function combat_stroke]
 if !(act)
+  action=""
   return
 endif
 if (isfighting_ranged)
@@ -655,6 +656,10 @@ if (isfighting_ranged)
     action=""
     return
   endif
+endif
+if (act.isdead)
+  action=""
+  return
 endif
 if !(isnonmobile)
   if (tag(firststroke))//prvni stroke

@@ -837,9 +837,13 @@ endif
 
 [EVENTS e_runarcher]
 on=@SkillStroke
-if (act)
-else
- return 1
+if !(act)
+  action=""
+  return 1
+endif
+if (act.isdead)
+  action=""
+  return 1
 endif
 if (action==skill_macefighting)
   if (findlayer(2).type==t_weapon_bow_run)
