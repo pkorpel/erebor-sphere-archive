@@ -1552,10 +1552,13 @@ endif
 return 0
 
 [function isDead]
+if (<charExists>)
+  return 0
+endif
 if (<flags>&statf_dead)
- return 1
+  return 1
 else
- return 0
+  return 0
 endif
 
 //checks whether the action is being triggered upon the character
