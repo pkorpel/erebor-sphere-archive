@@ -1552,7 +1552,7 @@ endif
 return 0
 
 [function isDead]
-if (<charExists>)
+if !(<charExists>)
   return 0
 endif
 if (<flags>&statf_dead)
