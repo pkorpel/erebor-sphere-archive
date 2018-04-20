@@ -1933,6 +1933,7 @@ on=@Step
 if (strlen(<src.tag(class)>))
   if (strlen(<src.tag(basestr)>))
     src.f_port_tutorial
+    src.underwear // aby nedostavali CC pri zabiti, defaultne je 1 -> pouze JEDNOU pri vstupu na 1. gate
     return 1
   endif
 endif
@@ -1944,7 +1945,6 @@ startclass
 go(tutorial)
 home=5412,2555,13,35 //tutorial
 events +e_noport // pridame mu noport
-underwear=0      // aby nedostavali CC pri zabiti, defaultne je 1
 hits=<src.maxhits>
 stam=<src.maxstam>
 mana=<src.maxmana>
