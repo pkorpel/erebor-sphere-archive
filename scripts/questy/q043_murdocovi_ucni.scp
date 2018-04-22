@@ -207,16 +207,15 @@ argo.questDialog_baseButt(5)              // Nesu ti
 argo.questDialog_baseButt(6)              // Prohlednout
 
 argo.dialog_page("Pozdrav")                        // volani vytvorene stranky - definice  
-  if(<arg(tagValue)> == 223) // quest splnen
-    argo.setText(argo.newTextLine,"Diky, <src.sex(hrdino,hrdinko)>, jsem ti hluboce zavazan! Pokud nam chces pomoci, muzes vyrazit za Torwinem, ktery hleda dalsi informace!")
+  if (<arg(tagValue)> >= 223) // quest splnen
+    argo.setText(argo.newTextLine,"Diky, <src.sex(hrdino,hrdinko)>, jsem ti hluboce zavazan! Pokud nam chces pomoci, muzes vyrazit za Torwinem [lvl 6-12] a nebo za Emberem [lvl 20+]!")
     argo.questDialog_HTMLGUMP    
-    argo.setText(argo.newTextLine,"<src.sex(Rad,Rada)> pomohu tomu Towinovi, o kterem mluvis!")    
+    argo.setText(argo.newTextLine,"<src.sex(Rad,Rada)> pomohu tomu Torwinovi, o kterem mluvis!")    
     argo.questDialog_addResponse(0,1,1,"mq043_kronikar") // short text & exit button & new button
-
+    argo.setText(argo.newTextLine,"<src.sex(Rad,Rada)> pomohu tomu Emberovi, o kterem mluvis!")    
+    argo.questDialog_addResponse(0,1,1,"mq043_ember") // short text & exit button & new button    
   else
-    if(<arg(tagValue)> > 223) // quest splnen
-      argo.setText(argo.newTextLine,"Diky, <src.sex(hrdino,hrdinko)>, jsem ti hluboce zavazan! Avsak pergameny nejsou vsechny! Musime hledat dal, az budu vedet kde, dozvis se to!")
-    elseif (<arg(tagValue)> == 222) // vraci se vsemi svitky
+    if (<arg(tagValue)> == 222) // vraci se vsemi svitky
       argo.setText(argo.newTextLine,"*Dran si netrpelive prohlizi tvou knihu v ruce* Tak co? Mas ty pergameny?!")
     elseif (<arg(tagValue)> > 7)&&(<arg(tagValue)> < 222) // beha po dalsich sourozencich
       argo.setText(argo.newTextLine,"Zdravim te, <src.sex(priteli,pritelkyne)>, tak jak se maji moji bratri?")
@@ -456,6 +455,20 @@ elseif (<argn> == argo.dialog_linkButton("mq043_finish"))          //Odevzdani F
     say("Zkousis me osalit?!")
   endif
   
+  
+elseif (<argn> == argo.dialog_linkButton("mq043_ember"))          //EMBER DUNG QUEST
+  if (<arg(tagValue)> >= 223)
+  	if (<eval src.qtag(q044)> <= 10)
+      say("Embera najdes na samem konci Rhunske pouste, na rozcesti, pobliz Edorasu. Priprav se na to, ze to nebude lehke!")
+      emote("se ti uklonil.")
+      src.qtag(q044,1,54)
+    else
+    	say("Emberovi uz pomahas, najdes ho na samem konci Rhunske pouste, na rozcesti, pobliz Edorasu!")
+    endif
+  else
+    say("Zkousis me osalit?!")
+  endif  
+  
 elseif (<argn> == argo.dialog_linkButton("mq043_kronikar"))          //TORWIN BONUS
   if (<arg(tagValue)> == 223)
   	if (src.tag(skillrank) >= 2)
@@ -467,8 +480,8 @@ elseif (<argn> == argo.dialog_linkButton("mq043_kronikar"))          //TORWIN BO
     	say("Vrat se, az budes mistrem sveho umeni!")
     endif
   else
-    say("Zkousis me osalit?!")
-  endif  
+    say("Torwinovi uz pomahas, najdes ho v pristavu Umbar!")
+  endif    
 endif
 
 
@@ -1309,11 +1322,13 @@ argo.questDialog_baseButt(5)              // Nesu ti
 argo.questDialog_baseButt(6)              // Prohlednout
 
 argo.dialog_page("Pozdrav")                        // volani vytvorene stranky - definice
-  if(<arg(tagValue)> == 223) // quest splnen
-    argo.setText(argo.newTextLine,"Diky, <src.sex(hrdino,hrdinko)>, jsem ti hluboce zavazan! Pokud nam chces pomoci, muzes vyrazit za Torwinem, ktery hleda dalsi informace!")
+  if (<arg(tagValue)> >= 223) // quest splnen
+    argo.setText(argo.newTextLine,"Diky, <src.sex(hrdino,hrdinko)>, jsem ti hluboce zavazan! Pokud nam chces pomoci, muzes vyrazit za Torwinem [lvl 6-12] a nebo za Emberem [lvl 20+]!")
     argo.questDialog_HTMLGUMP    
-    argo.setText(argo.newTextLine,"<src.sex(Rad,Rada)> pomohu tomu Towinovi, o kterem mluvis!")    
+    argo.setText(argo.newTextLine,"<src.sex(Rad,Rada)> pomohu tomu Torwinovi, o kterem mluvis!")    
     argo.questDialog_addResponse(0,1,1,"gq043_kronikar") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"<src.sex(Rad,Rada)> pomohu tomu Emberovi, o kterem mluvis!")    
+    argo.questDialog_addResponse(0,1,1,"gq043_ember") // short text & exit button & new button
   else
     if(<arg(tagValue)> > 223) // quest splnen
       argo.setText(argo.newTextLine,"Diky, <src.sex(hrdino,hrdinko)>, jsem ti hluboce zavazan! Avsak pergameny nejsou vsechny! Musime hledat dal, az budu vedet kde, dozvis se to!")
@@ -1568,9 +1583,21 @@ elseif (<argn> == argo.dialog_linkButton("gq043_kronikar"))          //TORWIN BO
     	say("Vrat se, az budes mistrem sveho umeni!")
     endif
   else
-    say("Zkousis me osalit?!")
+    say("Torwinovi uz pomahas, najdes ho v pristavu Dol Amrod!")
   endif  
-  
+
+elseif (<argn> == argo.dialog_linkButton("gq043_ember"))          //EMBER DUNG QUEST
+  if (<arg(tagValue)> >= 223)
+  	if (<eval src.qtag(q044)> <= 10)
+      say("Embera najdes na samem konci Rhunske pouste, na rozcesti, pobliz Edorasu. Priprav se na to, ze to nebude lehke!")
+      emote("se ti uklonil.")
+      src.qtag(q044,1,54)
+    else
+    	say("Emberovi uz pomahas, najdes ho na samem konci Rhunske pouste, na rozcesti, pobliz Edorasu!")
+    endif
+  else
+    say("Zkousis me osalit?!")
+  endif    
 endif
 
 

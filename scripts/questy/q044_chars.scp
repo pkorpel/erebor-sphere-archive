@@ -1,0 +1,99 @@
+/////NPC Zachrante Murdoca
+////////////////////////////////////////////////EMBER
+[chardef c_q044_ember]
+id=c_man
+name=Ember
+
+TEVENTS=e_character
+TSPEECH=spk_q044_ember
+
+CATEGORY=Moria Questy
+SUBSECTION=q044 Zachrante Murdoca
+DESCRIPTION=Informator Ember
+
+on=@UserDclick
+f_qDClick(f_q044_Ember_DClick)
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=Informator
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_long
+COLOR=015c
+ITEMnewbie=i_boots_calf
+c0084d
+ITEMnewbie=i_cape
+COLOR=0084d
+ITEMnewbie=i_obsidian_chainmail_tunic
+ITEMnewbie=i_obsidian_chainmail_leggings
+ITEMnewbie=i_obsidian_chainmail_gloves
+ITEMnewbie=i_kryss_obsidian
+
+////////////////////////////////////////////////DEMON ZVED
+[CHARDEF c_q044_demon_zved]
+id=c_mongbat
+NAME=Demon Zved
+SOUND=snd_MONSTER_MNGBAT1
+ICON=i_pet_mongbat
+ANIM=03f8c7f
+CAN=MT_WALK
+
+
+attack=27
+ARMOR=10
+moverate=5
+
+RESOURCES=2 i_ribs_raw, 2 i_reag_batwing
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+
+CATEGORY=Monsters
+SUBSECTION=Caves
+DESCRIPTION=Subterranean Mongbat
+
+ON=@Create
+NPC=brain_monster
+FAME=1000
+KARMA={-2000 -2999}
+COLOR=0084d
+
+STR={70 90}
+DEX={60 80}
+INT=60
+
+maxhits={1000 1250}
+maxstam={60 80}
+maxmana=0
+
+tag.experience=<eval {5.0 6.0}>
+
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[2]>
+
+tag(monstertype,undead)
+
+tag.weapflag=dam_physical
+
+tag.resist_poison={950 975}
+tag.resist_summon=<eval {390 500}>
+
+PARRYING={50.0 60.0}
+TACTICS={35.0 50.0}
+WRESTLING={40.0 55.0}
+SpiritSpeak=15.0
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+ITEM=i_gold
+
+[eof]
