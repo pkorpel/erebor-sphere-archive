@@ -25,7 +25,7 @@ questMenu_color_questActiveFont      #00F0FA
 questMenu_color_questInactiveFont    #383838
 questMenu_color_questDoneFont        #00FA55
 questMenu_color_questInactive        51
-questMenu_rows  54
+questMenu_rows  55
 //          |     Nazev questu     |           dialogName           |  1=qtag, 0=tag  |  relevantni tagy
 questMenu[0]  Zemedelec Borek           ,d_questy_borek                     ,1         ,gq002, mq002
 questMenu[1]  Alchymistka Mikkena       ,d_questy_mikena                    ,0         ,gq001
@@ -81,6 +81,7 @@ questMenu[50] Drakobijci - brneni       ,d_dragons_kovar                    ,1  
 questMenu[51] Prestupny quest           ,d_prestupak                        ,1         ,q041_paserak
 questMenu[52] Halda Molle Hatlend       ,d_hm_hatlend                       ,1         ,q042_hatlend_rulik
 questMenu[53] Murdocovi Ucni            ,d_murdoc_ucni                      ,1         ,q043_tut,mq043,gq043
+questMenu[54] Zachrante Murdoca         ,d_murdoc_zachrana                  ,1         ,q044
 
 questMenu_bg               9270
 questMenu_width            300
@@ -3096,6 +3097,114 @@ elseif (<argv(0)> == 1)
 endif
 return 0
 
+////////////////////////////
+//                        //
+//  ZACHRANTE MURDOCA     //
+//                        //
+////////////////////////////
+
+[dialog d_murdoc_zachrana]
+argo.f_questmenu_murdoc_zachrana
+
+[function f_questmenu_murdoc_zachrana]
+setText(0,"Zachrante Murdoca!")
+f_qDialogInstructions(003129)
+arg(tagValue,<eval src.qtag(q044)>)
+
+if (<arg(tagValue)> >= 50)
+  f_questy_murdoc_zachrana_E(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 40)
+  f_questy_murdoc_zachrana_D(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 30)
+  f_questy_murdoc_zachrana_C(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 20)
+  f_questy_murdoc_zachrana_B(<arg(tagValue)>)
+elseif (<arg(tagValue)> >= 1)
+  f_questy_murdoc_zachrana_A(<arg(tagValue)>)
+endif
+htmlGump(160,80,242,130,1,0,36)
+
+//PRVNI ZAPISEK
+[function f_questy_murdoc_zachrana_A]
+if (<argv(0)> < 10)
+  setText(1,"Musis se vydat za Emberem, ktery je nekde na pomezi mezi Mordorem a Gondorem. Tam, kde konci Rhunska poust.")
+elseif (<argv(0)> == 14)
+  setText(1,"Zapisek drzis v ruce! Rychle zpatky za Emberem!")
+elseif (<argv(0)> == 13)
+  setText(1,"Rezerva. Pokud toto vidite, prosim, kontaktujte GM TYM s kodem q044_13")       // rezerva
+elseif (<argv(0)> == 12)
+  setText(1,"<src.sex(Nasel,Nasla)> si kombinaci k truhle, vrat se k ni a zkus ji otevrit!")
+elseif (<argv(0)> == 11)
+  setText(1,"Truhlu v Beridoru si <src.sex(nasel,nasla)>. Ted je potreba najit kombinaci. Murdoc ji jiste ukryl nekde v okoli...")
+elseif (<argv(0)> == 10)
+  setText(1,"Ember te posila do Beridoru. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
+return 0
+
+//DRUHY ZAPISEK
+[function f_questy_murdoc_zachrana_B]
+if (<argv(0)> == 24)
+  setText(1,"Zapisek drzis v ruce! Rychle zpatky za Emberem!")
+elseif (<argv(0)> == 23)
+  setText(1,"Rezerva. Pokud toto vidite, prosim, kontaktujte GM TYM s kodem q044_23")       // rezerva
+elseif (<argv(0)> == 22)
+  setText(1,"<src.sex(Nasel,Nasla)> si kombinaci k truhle, vrat se k ni a zkus ji otevrit!")
+elseif (<argv(0)> == 21)
+  setText(1,"Truhlu v podzemi Snagum si <src.sex(nasel,nasla)>. Ted je potreba najit kombinaci. Murdoc ji jiste ukryl nekde v okoli...")
+elseif (<argv(0)> == 20) && (<eval var(q044_phase)> < 1)
+  setText(1,"Quest bude pokracovat v pristich dnech! Sledujte vyvesku!")
+elseif (<argv(0)> == 20)
+  setText(1,"Ember te posila do podzemi jmenem Snagum. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
+return 0
+
+//TRETI ZAPISEK
+[function f_questy_murdoc_zachrana_C]
+if (<argv(0)> == 34)
+  setText(1,"Zapisek drzis v ruce! Rychle zpatky za Emberem!")
+elseif (<argv(0)> == 33)
+  setText(1,"Rezerva. Pokud toto vidite, prosim, kontaktujte GM TYM s kodem q044_33")       // rezerva
+elseif (<argv(0)> == 32)
+  setText(1,"<src.sex(Nasel,Nasla)> si kombinaci k truhle, vrat se k ni a zkus ji otevrit!")
+elseif (<argv(0)> == 31)
+  setText(1,"Truhlu v Doupeti kyklopu si <src.sex(nasel,nasla)>. Ted je potreba najit kombinaci. Murdoc ji jiste ukryl nekde v okoli...")
+elseif (<argv(0)> == 30)&&(<eval var(q044_phase)> < 2)
+  setText(1,"Quest bude pokracovat v pristich dnech!")
+elseif (<argv(0)> == 30)
+  setText(1,"Ember te posila do Doupete kyklopu. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
+return 0
+
+//CTVRTY ZAPISEK
+[function f_questy_murdoc_zachrana_D]
+if (<argv(0)> == 44)
+  setText(1,"Zapisek drzis v ruce! Rychle zpatky za Emberem!")
+elseif (<argv(0)> == 43)
+  setText(1,"Rezerva. Pokud toto vidite, prosim, kontaktujte GM TYM s kodem q044_43")       // rezerva
+elseif (<argv(0)> == 42)
+  setText(1,"<src.sex(Nasel,Nasla)> si kombinaci k truhle, vrat se k ni a zkus ji otevrit!")
+elseif (<argv(0)> == 41)
+  setText(1,"Truhlu v Moina Filya si <src.sex(nasel,nasla)>. Ted je potreba najit kombinaci. Murdoc ji jiste ukryl nekde v okoli...")
+elseif (<argv(0)> == 40)&&(<eval var(q044_phase)> < 3)
+  setText(1,"Quest bude pokracovat v pristich dnech!")
+elseif (<argv(0)> == 40)
+  setText(1,"Ember te posila do podzemi Moina Filya. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
+return 0
+
+//PATY ZAPISEK
+[function f_questy_murdoc_zachrana_E]
+if (<argv(0)> == 60)
+  setText(1,"Ember ti velmi dekuje! Snazi se nyni rozlustit pergamen z Ledove Jeskyne.")
+elseif (<argv(0)> == 54)
+  setText(1,"Zapisek drzis v ruce! Rychle zpatky za Emberem!")
+elseif (<argv(0)> == 53)
+  setText(1,"Rezerva. Pokud toto vidite, prosim, kontaktujte GM TYM s kodem q044_53")       // rezerva
+elseif (<argv(0)> == 52)
+  setText(1,"<src.sex(Nasel,Nasla)> si kombinaci k truhle, vrat se k ni a zkus ji otevrit!")
+elseif (<argv(0)> == 51)
+  setText(1,"Truhlu v Ledove jeskyni si <src.sex(nasel,nasla)>. Ted je potreba najit kombinaci. Murdoc ji jiste ukryl nekde v okoli...")
+elseif (<argv(0)> == 50)&&(<eval var(q044_phase)> < 4)
+  setText(1,"Quest bude pokracovat v pristich dnech!")
+elseif (<argv(0)> == 50)
+  setText(1,"Ember te posila do Ledove Jeskyne. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
+return 0	
 
 ///////////////////
 //               //

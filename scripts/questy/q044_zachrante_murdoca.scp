@@ -1,0 +1,458 @@
+////// ZACHRANTE MURDOCA
+////// Diky Torwinovi se posunulo hledani Murdoca dal. Je na case navstivit par dungu a konecne zjisti, kde Murdoc je!
+
+////// ZAKLADNI INFO MURDOC CHAIN QUEST
+////// gq043, mq043, q043_tut = MURDOCOVI UCNI
+////// q044 - ZACHRANTE MURDOCA
+
+////// NPC 1 - c_q044_ember
+////// DIALOGY 2 - d_q044_ember ; d_q044_truhla
+////// ITEMY 2 - i_q044_truhla ; i_q044_kombinace
+////// NON-Q TAG 1 - q044_dung   - tento tag urcuje u truhly a kombinace dung (hodnoty 1-5)
+////// NON-Q TAG 2 - q044_phase- tento tag budeme pouzivat pro postupne otevirani questu ingame - globalka
+
+////// POSLOUPNOST QTAGU q044
+////// 0-10 Nabira quest/nema quest
+////// 10 - Jde hledat truhlu A
+////// 11 - Jde hledat kombinaci A
+////// 12 - Ma kombinaci A
+////// 13 - rezerva
+////// 14 - Vraci zapisek A
+////// 20 - Jde hledat truhlu B
+////// 21 - Jde hledat kombinaci B
+////// 22 - Ma kombinaci B
+////// 23 - rezerva
+////// 24 - Vraci zapisek B
+////// 30 - Jde hledat truhlu C
+////// 31 - Jde hledat kombinaci C
+////// 32 - Ma kombinaci C
+////// 33 - rezerva
+////// 34 - Vraci zapisek C
+////// 40 - Jde hledat truhlu D
+////// 41 - Jde hledat kombinaci D
+////// 42 - Ma kombinaci D
+////// 43 - rezerva
+////// 44 - Vraci zapisek D
+////// 50 - Jde hledat truhlu E
+////// 51 - Jde hledat kombinaci E
+////// 52 - Ma kombinaci E
+////// 53 - rezerva
+////// 54 - Vraci zapisek E
+
+////////////////////////////////////////////////////// DIALOGY          //////////////////////////////////////////////////////
+////////////////////////////////////////////////////// EMBER            /////////////////////////////////////////////////////
+[dialog d_q044_ember]
+argo.questDialog_create(003100,"<name>")    // 003051 cervena roba,  003100 trochu opicak,  00004B truhla zlata otevrena, 0008cc ikona truhly 
+
+arg(tagValue,<eval src.qtag(q044)>)
+
+argo.dialog_newPage("Pozdrav")    
+  
+if (<arg(tagValue)> < 10)                       
+  argo.questDialog_baseButt(1)   // Kdo jsi?
+else
+  argo.questDialog_basebutt(1,19,"Potrebuji pomoc") 
+endif
+
+argo.questDialog_baseButt(2)              // Mohu pomoci?
+argo.questDialog_baseButt(3,43,Informace) // Informace
+argo.questDialog_baseButt(4,50,Zapisky)   // Zapisky
+argo.questDialog_baseButt(5)              // Nesu ti
+argo.questDialog_baseButt(6)              // Prohlednout
+
+argo.dialog_page("Pozdrav")                        
+  if  (<arg(tagValue)> >= 10)   // zna
+    argo.setText(argo.newTextLine,"Zdravim te <src.sex(hrdino,hrdinko)>! Cas uz nam pomalu dochazi!")
+    argo.questDialog_HTMLGUMP 
+  else                          // nezna
+    argo.setText(argo.newTextLine,"Zdravim te <src.sex(hrdino,hrdinko)>! Me jmeno je Ember!")
+    argo.questDialog_HTMLGUMP  
+  endif  
+  
+argo.dialog_page("Prohlednout")
+  argo.setText(argo.newTextLine,"Ember ma temer atletickou postavu, ale pres brneni nedokazes odhadnout, jestli neni jen kost a kuze. Jeho oblicej vsak naznacuje, ze jeho hlavni prednosti neni sila, ale inteligence a charisma.")
+  argo.questDialog_HTMLGUMP
+  
+if (<arg(tagValue)> < 10)
+  argo.dialog_page("Kdo jsi?")
+  argo.setText(argo.newTextLine,"Jsem informator, ktery chce, aby svet zustal tak jak je. Nepotrebuju, aby mi sem demoni strkali nos... Pomoz mi a nebudes litovat!")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Mam na tebe par otazek!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button      
+else
+  argo.dialog_page("Potrebuji pomoc")
+  argo.setText(argo.newTextLine,"[Aktualni informace o questu vyvolas pomoci prikazu .questy] Vsechno potrebne vis, co chces vic?")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button  
+endif  
+
+//// STRANKY NAVAZANE NA STRANKU Informace 
+argo.dialog_page("Informace")
+  argo.setText(argo.newTextLine,"Povidej, co te zajima? Cas je dulezity! Musime najit Murdoca co nejdrive!")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Kdo je Murdoc?")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdocdetail") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Jak ses dozvedel, kde ho hledat?")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdocexplain") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Kdo jsi a proc pomahas Murdocovi?")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdocember") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Povez mi neco vic o spolecenstvi toho Murdoca!")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdochelp") // short text & page button & new button 
+
+argo.dialog_page("qmur_murdocdetail")
+  argo.setText(argo.newTextLine,"Murdoc je nekromantsky mistr. Bojuje proti demonum, kteri ohrozuji nas svet. Svuj pribeh popsal ve svem deniku. Ztratil se a on je jediny, kdo vi, co udelat, abychom nas svet ochranili pred invazi demonu!")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
+  argo.setText(argo.newTextLine,"Tve ubohe reci me nezajimaji!")
+  argo.questDialog_addResponse(0,0,1,"q044_blankresponse") // short text & page button & new button  
+  
+argo.dialog_page("qmur_murdocexplain")
+  argo.setText(argo.newTextLine,"Nejvic k tomu prispel Torwin. Diky jedne rune, kterou pro nej retusuji hrdinove jako ty! Runa, kterou mu opsali, nebyla cela, chybela ji komplexita. Murdoc navstevoval mista, ktera jsou mnohym lidem zapovezena!")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Co to znamena?! To si mi to moc nevysvetlil!")
+  argo.questDialog_addResponse(0,0,1,"qmur_murdocexplain2") // short text & page button & new button
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
+
+argo.dialog_page("qmur_murdocexplain2")
+  argo.setText(argo.newTextLine,"Hluboka podzemi a kobky hemzici se nemrtvimi. Beridor, Etheria, vsude, kde je koncentrovane zlo! A my meli stesti, protoze jsme zjistili, kde ta runa asi je. Snad tam najdeme dalsi voditka, protoze jsme vycerpali dalsi moznosti. Jestli to nevyjde, musime se pripravit na valku!")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button  
+  
+argo.dialog_page("qmur_murdocember")
+  argo.setText(argo.newTextLine,"Jsem informator, ktery chce, aby svet zustal tak jak je. Nepotrebuju, aby mi sem demoni strkali nos... Pomoz mi a nebudes litovat!")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Tve ubohe reci me nezajimaji!")
+  argo.questDialog_addResponse(0,0,0,"q044_blankresponse") // short text & page button & existing button  
+  
+argo.dialog_page("qmur_murdochelp")
+  argo.setText(argo.newTextLine,"Murdocovo spolecenstvo vzniklo za vyssim ucelem. Musime chranit nas svet proti demonum. Za tu dobu, co se venuji studiu demonu a nekromantskych svitku, jsem zjistil, ze hrozba je realna a zpusobu, jak se ji branit, je pramalo. Murdoc vsak cesty jak ochranit nas svet hledal mnohem dele, nez ja. Pokud nenajdeme jeho, musime najit jeho vedomosti!")
+  argo.questDialog_HTMLGUMP 
+  argo.setText(argo.newTextLine,"Mam dalsi otazku!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
+//// KONEC STRANEK NAVAZANYCH NA STRANKU Informace 
+
+argo.dialog_page("Mohu pomoci?")
+  if (<arg(tagValue)> < 10)
+    argo.setText(argo.newTextLine,"Ano! Muzes! Dostal jsem se diky informacim od Antona, Drana a Torwina velmi blizko k nalezeni Murdoca. Vim, kam miril, nez zmizel. Pomuzes mi ho najit?")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Jiste! Se mnou muzes pocitat! Co mam udelat?")
+    argo.questDialog_addResponse(0,1,1,"q044_ember_assign") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Murdoc je ubozak, ten nas svet nespasi!")
+    argo.questDialog_addResponse(0,0,0,"q044_blankresponse") // short text & exit button & existing button    
+  elseif (<arg(tagValue)> >= 10)
+    argo.setText(argo.newTextLine,"[Aktualni informace o questu vyvolas pomoci prikazu .questy] Vsechno potrebne vis, co chces vic? Nebo mi snad neco neses?")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Ano! Nesu ti...")
+    argo.questDialog_addResponse(0,0,0,"Nesu ti") // short text & page button & existing button   
+  endif
+
+argo.dialog_page("Nesu ti")
+  argo.setText(argo.newTextLine,"Copak pro me mas?")
+  argo.questDialog_HTMLGUMP
+  if (<arg(tagValue)> == 14)
+    argo.setText(argo.newTextLine,"<src.sex(Nasel,Nasla)> jsem tenhle utrzek, podivej!") //RUNA A
+    argo.questDialog_addResponse(0,1,1,"q044_ember_zapisekA") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Tvuj ubohy zapisek me nezajima!")
+    argo.questDialog_addResponse(0,0,0,"q044_blankresponse") // short text & page button & existing button
+  elseif (<arg(tagValue)> == 24)
+    argo.setText(argo.newTextLine,"<src.sex(Nasel,Nasla)> jsem tenhle utrzek, podivej!") //RUNA B
+    argo.questDialog_addResponse(0,1,1,"q044_ember_zapisekB") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Tvuj ubohy zapisek me nezajima!")
+    argo.questDialog_addResponse(0,0,0,"q044_blankresponse") // short text & page button & existing button
+  elseif (<arg(tagValue)> == 34)
+    argo.setText(argo.newTextLine,"<src.sex(Nasel,Nasla)> jsem tenhle utrzek, podivej!") //RUNA C
+    argo.questDialog_addResponse(0,1,1,"q044_ember_zapisekC") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Tvuj ubohy zapisek me nezajima!")
+    argo.questDialog_addResponse(0,0,0,"q044_blankresponse") // short text & page button & existing button
+  elseif (<arg(tagValue)> == 44)
+    argo.setText(argo.newTextLine,"<src.sex(Nasel,Nasla)> jsem tenhle utrzek, podivej!") //RUNA D
+    argo.questDialog_addResponse(0,1,1,"q044_ember_zapisekD") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Tvuj ubohy zapisek me nezajima!")
+    argo.questDialog_addResponse(0,0,0,"q044_blankresponse") // short text & page button & existing button
+  elseif (<arg(tagValue)> == 54)
+    argo.setText(argo.newTextLine,"<src.sex(Nasel,Nasla)> jsem tenhle utrzek, podivej!") //RUNA E
+    argo.questDialog_addResponse(0,1,1,"q044_ember_zapisekE") // short text & exit button & new button
+    argo.setText(argo.newTextLine,"Tvuj ubohy zapisek me nezajima!")
+    argo.questDialog_addResponse(0,0,0,"q044_blankresponse") // short text & page button & existing button
+  endif
+argo.dialog_page("q044_blankresponse")
+  argo.setText(argo.newTextLine,"Pro ubozaka kazdy ubozak, az ti demon sezere <src.sex(druzku a deti,druha a deti)>, budes se na to divat jinak!")
+  argo.questDialog_HTMLGUMP
+        
+argo.dialog_page("Zapisky")
+  argo.setText(argo.newTextLine,"<?null?>[ZDE NAJDES ODKAZ NA WIKI, KDE NAJDES VSECHNY ZAPISKY <a href="wiki.uoerebor.cz/index.php/Murdocuv_denik">Murdocuv denik</a>]")
+  argo.questDialog_HTMLGUMP
+  argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button     
+  
+///// button    
+[dialog d_q044_ember button]
+on=@anyButton
+arg(tagValue,<src.qtag(q044)>)
+
+if (<argn> == argo.dialog_linkButton("q044_ember_assign"))                
+  if (<arg(tagValue)> < 10)
+    src.qtag(q044,10,54)
+    src.addexp(100)
+    say("Nase voditko vede do podzemi plneho klapajicich zubu! Murdoc casto vyuzival neviditelnych truhel! Jestli nam nechal vzkaz, nebude jednoduche ho najit!")
+  else
+    say("Zkousis me osalit?!")
+  endif
+elseif (<argn> == argo.dialog_linkButton("q044_ember_zapisekA"))                
+  if (<arg(tagValue)> == 14)
+    src.qtag(q044,20,54)
+    src.addexp(2000)
+    src.giveitem(i_mi_pouch)
+    src.givegold(10000)
+    say("Dalsi voditko vede do podzemi plneho ostrych zubu! Jmenuje se Snagum. Jestli byl ten zapisek v neviditelne truhle, bude ten dalsi schovany stejne tak. Mej oci na stopkach!")
+    f_quest_complete(54,1) // Ukoncil prvni cast questu
+  else
+    say("Zkousis me osalit?!")
+  endif  
+elseif (<argn> == argo.dialog_linkButton("q044_ember_zapisekB"))                
+  if (<arg(tagValue)> == 24)
+    src.qtag(q044,30,54)
+    src.addexp(3000)
+    src.giveitem(i_mi_bag)
+    src.givegold(20000)
+    say("Dalsi voditko vede do podzemi plneho obru. Doupe Kyklopu mu rikaji! Mej se na pozoru, rozmacknou ti hlavu jednou rukou!")
+    f_quest_complete(54,2) // Ukoncil druhou cast questu
+  else
+    say("Na tenhle ukol si musis jeste pockat!")
+  endif    
+elseif (<argn> == argo.dialog_linkButton("q044_ember_zapisekC"))                
+  if (<arg(tagValue)> == 34)
+    src.qtag(q044,40,54)
+    src.addexp(5000)
+    src.giveitem(i_mi_pouch)
+    src.giveitem(i_mi_bag)
+    src.givegold(30000)
+    say("Dalsi voditko vede do podzemi plneho vselijake haveti. Jmenuje se Moina Filya. Snad tam Murdoc bude...")
+    f_quest_complete(54,3) // Ukoncil treti cast questu
+  else
+    say("Zkousis me osalit?! Na tenhle ukol si musis jeste pockat!")
+  endif  
+elseif (<argn> == argo.dialog_linkButton("q044_ember_zapisekD"))                
+  if (<arg(tagValue)> == 44)
+    src.qtag(q044,50,54)
+    src.addexp(6000)
+    src.giveitem(i_mi_pouch)
+    src.giveitem(i_mi_pouch_high)
+    src.givegold(40000)
+    say("Dalsi voditko vede do Ledove Jeskyne. Priprav si kozich a teple obleceni, budes ho potrebovat! Doufam, ze z Murdoca uz neni kostka ledu.")
+    f_quest_complete(54,4) // Ukoncil ctvrtou cast questu
+  else
+    say("Zkousis me osalit?! Na tenhle ukol si musis jeste pockat!")
+  endif    
+elseif (<argn> == argo.dialog_linkButton("q044_ember_zapisekE"))                
+  if (<arg(tagValue)> == 54)
+    src.qtag(q044,60,54)
+    src.addexp(8000)
+    src.giveitem(i_mi_pouch_superhigh)
+    src.givegold(50000)
+    say("Mnohokrat ti dekuji! Tenhle zapisek je poskozeny, bude chvili trvat, nez ho rozlustim! Budu od nekoho potrebovat pomoc... Brzy se zastav, urcite budu vedet vic!")
+    f_quest_complete(54) // Ukoncil cely quest
+  else
+    say("Zkousis me osalit?! Na tenhle ukol si musis jeste pockat!")
+  endif  
+endif
+
+/// EMBER SPEECH & DCLICK
+[speech spk_q044_ember]
+on = *ahoj*
+on = *zdravim*
+on = *murdoc*
+on = *ukol*
+on = *prace*
+on = *den*
+on = *pomoc*
+on = *quest*
+on = *hi*
+f_qSpeech(f_q044_ember_DClick)
+
+[function f_q044_ember_DClick]
+if (<src.flags>&statf_dead)
+  return 1
+elseif (src.profession == class_craft)
+  say("Potrebuji pomoc od hrdinu, remeslniky bude brzo potreba, ale ted ne, ted musime najit Murdoca!")
+  return 0	
+endif
+dialog(d_q044_ember)
+///
+    
+////////////////////////////////////////////////////// DIALOGY          //////////////////////////////////////////////////////
+////////////////////////////////////////////////////// TRUHLA           /////////////////////////////////////////////////////
+[dialog d_q044_truhla]
+argo.questDialog_create(003000,"<name>") 
+
+arg(tagValue,<eval src.qtag(q044)>)
+arg(dungValue,<eval tag(q044_dung)>)
+
+argo.dialog_newPage("Pozdrav")    
+argo.questDialog_baseButt(6)              // Prohlednout
+
+argo.dialog_page("Pozdrav")  
+  if ((<arg(tagValue)> % 10) == 0)                         //////////////////////////////////////////////////////UVODNI BUTTONY                  
+    argo.setText(argo.newTextLine,"Nahmatavas neviditelnou truhlu.")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Zkusit otevrit!") //DUNG A
+    if (<arg(dungValue)> == 1)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekA1") // short text & exit button & new button
+    elseif (<arg(dungValue)> == 2)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekB1") // short text & exit button & new button
+    elseif (<arg(dungValue)> == 3)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekC1") // short text & exit button & new button
+    elseif (<arg(dungValue)> == 4)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekD1") // short text & exit button & new button
+    elseif (<arg(dungValue)> == 5)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekE1") // short text & exit button & new button
+    else
+    	argo.setText(argo.newTextLine,"Spatny tag, nahlaste okamzite GM! Kod q044_314") //DUNG E
+      src.sysMessage("hodnota je <arg(dungValue)>")
+    endif
+  elseif ((<arg(tagValue)> % 10) == 2)
+    argo.setText(argo.newTextLine,"Nahmatavas tri posuvna kolecka na neviditelne truhle.")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Zadat kod!") //DUNG A
+    if (<arg(dungValue)> == 1)                       //////////////////////////////////////////////////////FINAL BUTTONY
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekA2") // short text & exit button & new button
+    elseif (<arg(dungValue)> == 2)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekB2") // short text & exit button & new button
+    elseif (<arg(dungValue)> == 3)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekC2") // short text & exit button & new button
+    elseif (<arg(dungValue)> == 4)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekD2") // short text & exit button & new button
+    elseif (<arg(dungValue)> == 5)
+      argo.questDialog_addResponse(0,1,1,"q044_truhla_zapisekE2") // short text & exit button & new button
+    endif
+  else
+  argo.setText(argo.newTextLine,"Neviditelna truhla, kterou nelze otevrit!")
+  argo.questDialog_HTMLGUMP
+  endif
+  
+argo.dialog_page("Prohlednout")
+  argo.setText(argo.newTextLine,"Nic nevidis, ale rukama nahmatavas chladnou truhlu. Co s ni?")
+  argo.questDialog_HTMLGUMP
+     
+///// button    
+[dialog d_q044_truhla button]
+on=@anyButton
+arg(tagValue,<src.qtag(q044)>)
+arg(dungValue,<eval tag(q044_dung)>)
+
+if (<argn> == argo.dialog_linkButton("q044_truhla_zapisekA1")) && (<arg(tagValue)> == 10) && (<arg(dungValue)> == 1)
+  src.qtag(q044,11,54)
+  emote("Nahmatavas tri posuvna kolecka, sem tam cvaknou, nekde tu musi byt kod...")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekB1")) && (<arg(tagValue)> == 20) && (<arg(dungValue)> == 2)
+  src.qtag(q044,21,54)
+  emote("Nahmatavas tri posuvna kolecka, sem tam cvaknou, nekde tu musi byt kod...")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekC1")) && (<arg(tagValue)> == 30) && (<arg(dungValue)> == 3)
+  src.qtag(q044,31,54)
+  emote("Nahmatavas tri posuvna kolecka, sem tam cvaknou, nekde tu musi byt kod...")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekD1")) && (<arg(tagValue)> == 40) && (<arg(dungValue)> == 4)
+  src.qtag(q044,41,54)
+  emote("Nahmatavas tri posuvna kolecka, sem tam cvaknou, nekde tu musi byt kod...")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekE1")) && (<arg(tagValue)> == 50) && (<arg(dungValue)> == 5)
+  src.qtag(q044,51,54)
+  emote("Nahmatavas tri posuvna kolecka, sem tam cvaknou, nekde tu musi byt kod...")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekA2")) && (<arg(tagValue)> == 12) && (<arg(dungValue)> == 1)
+  src.qtag(q044,14,54)
+  emote("ti vydala sve tajemstvi! Utrzek zapisku!")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekB2")) && (<arg(tagValue)> == 22) && (<arg(dungValue)> == 2)
+  src.qtag(q044,24,54)
+  emote("ti vydala sve tajemstvi! Utrzek zapisku!")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekC2")) && (<arg(tagValue)> == 32) && (<arg(dungValue)> == 3)
+  src.qtag(q044,34,54)
+  emote("ti vydala sve tajemstvi! Utrzek zapisku!")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekD2")) && (<arg(tagValue)> == 42) && (<arg(dungValue)> == 4)
+  src.qtag(q044,44,54)
+  emote("ti vydala sve tajemstvi! Utrzek zapisku!")
+elseif (<argn> == argo.dialog_linkButton("q044_truhla_zapisekE2")) && (<arg(tagValue)> == 52) && (<arg(dungValue)> == 5)
+  src.qtag(q044,54,54)
+  emote("ti vydala sve tajemstvi! Utrzek zapisku!")
+else
+  say("Truhlu neosalis!")    
+endif  
+
+
+//Questovni predmety - Truhla
+//////////////////////////////////////////////////////
+[ITEMDEF i_q044_truhla]
+ID=i_gold
+NAME=Neviditelna truhla
+TYPE=t_normal
+
+CATEGORY=Moria Questy
+SUBSECTION=q044
+DESCRIPTION=Neviditelna truhla
+
+on=@create 
+  attr=attr_move_never
+
+ON=@userClick
+  src.sysmessage("Nic nevidis, ale neco tam je.")
+
+on=@UserDClick
+if (<src.flags>&statf_dead)
+  return 1
+elseif (<src.targ.distance> > 1)                        // distance check
+  src.sysmessage("Z dalky vidis neco leskleho. Musis jit bliz.")
+  return 1
+else
+  dialog(d_q044_truhla)
+  return 1		
+endif
+///
+    
+//Questovni predmety - Kombinace
+//////////////////////////////////////////////////////
+[ITEMDEF i_q044_kombinace]
+ID=014EE
+NAME=Car pergamenu
+TYPE=t_normal
+
+CATEGORY=Moria Questy
+SUBSECTION=q044
+DESCRIPTION=Podivny car papiru
+
+on=@create 
+attr=attr_move_never
+
+ON=@userClick
+src.sysmessage("Kus papiru jakoby tam nepatril.")
+
+on=@userDClick
+arg(tagValue,<src.qtag(q044)>)
+arg(dungValue,<eval tag(q044_dung)>)
+
+if (<src.flags>&statf_dead)
+  return 1
+elseif (<src.targ.distance> > 1)                        // distance check
+  src.sysmessage("Z dalky vidis nejaky papir. Musis jit bliz.")
+  return 1
+endif
+
+if (<arg(dungValue)>==1)&&(<arg(tagValue)> == 11)
+  src.qtag(q044,12,54)
+  emote("ukazuje, ze kombinace k truhle je 666")  
+elseif (<arg(dungValue)>==2)&&(<arg(tagValue)> == 21)
+  src.qtag(q044,22,54)
+  emote("ukazuje, ze kombinace k truhle je 526")    
+elseif (<arg(dungValue)>==3)&&(<arg(tagValue)> == 31)
+  src.qtag(q044,32,54)
+  emote("ukazuje, ze kombinace k truhle je 625")   
+elseif (<arg(dungValue)>==4)&&(<arg(tagValue)> == 41)
+  src.qtag(q044,42,54)
+  emote("ukazuje, ze kombinace k truhle je 656")       
+elseif (<arg(dungValue)>==5)&&(<arg(tagValue)> == 51)
+  src.qtag(q044,52,54)
+  emote("ukazuje, ze kombinace k truhle je 626")     
+else                          //neplni quest
+  src.sysmessage("Kus papiru, nic zajimaveho...")
+endif
+return 1    
+    
