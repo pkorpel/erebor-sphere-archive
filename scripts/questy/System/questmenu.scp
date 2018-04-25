@@ -2729,7 +2729,7 @@ f_qDialogInstructions(003129)
 
 arg(tagValue,<src.qtag(q043_tut)>)
 if (<arg(tagValue)> == 7)
-  setText(1,"<src.sex(Pomohl,Pomohla)> si Argolovi sestavit pergamen, ktery patril nekromantu Murdocovi. Argol ti poradil, abys <src.sex(vyhledal,vyhledala)> jeho ucne."
+  setText(1,"<src.sex(Pomohl,Pomohla)> si Argolovi sestavit pergamen, ktery patril nekromantu Murdocovi. Argol ti poradil, abys <src.sex(vyhledal,vyhledala)> jeho ucne.")
 elseif (<arg(tagValue)> == 6)
   setText(1,"<src.sex(Nasel,Nasla)> si posledni cast svitku, Argol uz na tebe netrpelive ceka!")
 elseif (<arg(tagValue)> == 5)

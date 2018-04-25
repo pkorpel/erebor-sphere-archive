@@ -80,12 +80,6 @@ else
   argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button  
 endif
 
-if (<arg(tagValue)> >= 7 )
-  argo.dialog_page("qmur_web")
-  argo.setText(argo.newTextLine,"Prelozil jsem pro tebe ten pergamen, muzes si ho precist!<?null?>[ZDE NAJDES ODKAZ NA WIKI <a href="wiki.uoerebor.cz/index.php/Murdocuv_denik">Murdocuv denik</a>]")
-  argo.questDialog_HTMLGUMP 
-endif
-
 argo.dialog_page("Mohu pomoci?")
   if (<arg(tagValue)> == 0)
     argo.setText(argo.newTextLine,"Ooo ano! Potrebuji pomoc. Hledam zde ztracene stranky z deniku jednoho nekromantskeho mistra Murdoca. Pokud mi je pomuzes najit, odmena te nemine!")
@@ -118,6 +112,12 @@ argo.dialog_page("Mohu pomoci?")
     argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button     
   endif
 
+if (<arg(tagValue)> >= 7 )
+  argo.dialog_page("qmur_web")
+  argo.setText(argo.newTextLine,"Prelozil jsem pro tebe ten pergamen, muzes si ho precist!<?null?>[ZDE NAJDES ODKAZ NA WIKI <a href="wiki.uoerebor.cz/index.php/Murdocuv_denik">Murdocuv denik</a>]")
+  argo.questDialog_HTMLGUMP 
+endif
+
 argo.dialog_page("Informace")
   argo.setText(argo.newTextLine,"Rad ti povim, co vim!")
   argo.questDialog_HTMLGUMP
@@ -129,10 +129,6 @@ argo.dialog_page("Informace")
   argo.questDialog_addResponse(0,0,1,"qmur_murdocucni") // short text & page button & new button
   argo.setText(argo.newTextLine,"Potrebuji byt nekromantem, abych ti pomohl?")
   argo.questDialog_addResponse(0,0,1,"qmur_murdochelp") // short text & page button & new button
-  if (<arg(tagValue)> == 7)    
-    argo.setText(argo.newTextLine,"Prelozils pro me ten pergamen?")
-    argo.questDialog_addResponse(0,0,0,"qmur_web") // short text & page button & existing button    
-  endif
 
 //// STRANKY NAVAZANE NA STRANKU Informace 
 argo.dialog_page("qmur_murdocdetail")
@@ -177,11 +173,8 @@ argo.dialog_page("qmur_dran")
   argo.setText(argo.newTextLine,"Dran by mel byt u Barad-durske banky!")
   argo.questDialog_HTMLGUMP
   argo.setText(argo.newTextLine,"Mam dalsi otazku!")
-  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button
-  
- 
+  argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button 
 //// KONEC STRANEK NAVAZANYCH NA STRANKU Informace
-
 
 argo.dialog_page("Hledam praci")
   argo.setText(argo.newTextLine,"Ja davam praci jen mrtvym.")
