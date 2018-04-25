@@ -80,7 +80,7 @@ else
   argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button  
 endif
 
-if (<arg(tagValue)> == 7 )
+if (<arg(tagValue)> >= 7 )
   argo.dialog_page("qmur_web")
   argo.setText(argo.newTextLine,"Prelozil jsem pro tebe ten pergamen, muzes si ho precist!<?null?>[ZDE NAJDES ODKAZ NA WIKI <a href="wiki.uoerebor.cz/index.php/Murdocuv_denik">Murdocuv denik</a>]")
   argo.questDialog_HTMLGUMP 
@@ -109,7 +109,7 @@ argo.dialog_page("Mohu pomoci?")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
     argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button  
-  else
+  elseif (<arg(tagValue)> == 7)
     argo.setText(argo.newTextLine,"Jsem ti moc vdecny za tvou pomoc! Chces si precist pergamen?")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Vyborne! Nemohu se dockat, ukaz mi ten preklad!")
@@ -316,7 +316,7 @@ elseif (<src.targ.distance> > 1)
   src.sysmessage("Z dalky vidis pergamen. Musis jit bliz.")
   return 1
 endif
-if (<arg(tagValue) == 2)
+if (<arg(tagValue)> == 2)
   src.sysmessage("Pergamen uz jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 1)
   src.sysmessage("<src.sex(Ulozil,Ulozila)> jsi pergamen do sveho batohu.")
@@ -354,7 +354,7 @@ elseif (<src.targ.distance> > 1)
   src.sysmessage("Z dalky vidis pergamen. Musis jit bliz.")
   return 1
 endif
-if (<arg(tagValue) == 4)
+if (<arg(tagValue)> == 4)
   src.sysmessage("Pergamen uz jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 3)
   src.sysmessage("<src.sex(Ulozil,Ulozila)> jsi pergamen do sveho batohu.")
@@ -393,7 +393,7 @@ elseif (<src.targ.distance> > 1)
   return 1
 endif
 
-if (<arg(tagValue) == 6)
+if (<arg(tagValue)> == 6)
   src.sysmessage("Pergamen uz jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 5)
   src.sysmessage("<src.sex(Ulozil,Ulozila)> jsi pergamen do sveho batohu.")
