@@ -151,16 +151,16 @@ arg(ThisMinute,<getMinute>)
 if (<ThisYear> > <argv(0)>)
   return 1
 elseif (<ThisYear> == <argv(0)>)
-  if (<ThisMonth> > <argv(1)>)
+  if (<ThisMonth> > <eval argv(1)>)
     return 1
-  elseif (<ThisMonth> == <argv(1)>)
-    if (<ThisDay> > <argv(2)>)
+  elseif (<ThisMonth> == <eval argv(1)>)
+    if (<ThisDay> > <eval argv(2)>)
       return 1
-    elseif (<ThisDay> == <argv(2)>)
-      if (<ThisHour> > <argv(3)>)
+    elseif (<ThisDay> == <eval argv(2)>)
+      if (<ThisHour> > <eval argv(3)>)
         return 1
-      elseif (<ThisHour> == <argv(3)>)
-        if (<ThisMinute> > <argv(4)>)
+      elseif (<ThisHour> == <eval argv(3)>)
+        if (<ThisMinute> > <eval argv(4)>)
           return 1
         endif
       endif
