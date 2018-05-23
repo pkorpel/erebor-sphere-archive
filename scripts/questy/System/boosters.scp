@@ -1,0 +1,117 @@
+/////////////////////////////////////
+//                                 //
+//         Player Boosters         //
+//                                 //
+/////////////////////////////////////
+
+[function f_playerBooster_add] // argv0 booster number gathered as an order number of a booster from defnames
+arg(BoosterMemory,<findId(i_playerBoosters)>)
+if !(<hval arg(BoosterMemory)>) // the player hasn't got any boosters yet
+  newequip(i_playerBoosters)
+  arg(BoosterMemory,<lastnew>)
+endif
+f_playerBooster_storeBoostLink(<argv(0)>)
+
+[function f_playerBooster_storeBoostLink] // argv(0) booster number gathered as an order number of a booster from defnames
+arg(i,0)
+while (i < <eval BoosterMemory.tag(boostersCount)>)
+  if (BoosterMemory.tag(booster[<eval i>]) == argv(0))
+    BoosterMemory.tag(boosterNumber[<eval i>],#+1)
+    return // already has the link
+  endif
+endwhile
+BoosterMemory.f_customLink_add(<argv(0)>,booster) // add new link to the given booster number.
+BoosterMemory.f_customLink_add(1,boosterNumber) // link the number of the given boosters stored
+
+// called upon the player that has the booster
+// argv(0) - the booster number gathered from the booster ITEM
+//         - the order may vary for each player based on the order in which those were stored
+// return 0 - if the booster is applied successfully
+//        1 - if the player already has a running boost
+[function f_playerBooster_select] // applies one of the stored boosters
+if (findId(i_booster))
+ return 1
+endif
+arg(BoosterMemory,<findId(i_playerBoosters)>)
+newItemSafe(i_booster)
+lastnew.tag(boostNumber,<BoosterMemory.tag(booster[<eval argv(0)>])>)
+lastnew.equip
+if (BoosterMemory.tag(boosterNumber[<eval argv(0)>]) > 1)
+  BoosterMemory.tag(boosterNumber[<eval argv(0)>],#-1)
+else
+  BoosterMemory.f_customLink_remove(booster,<argv(0)>)
+  BoosterMemory.f_customLink_remove(boosterNumber,<argv(0)>)
+endif
+
+/////////////////////
+// B O O S T E R S //
+/////////////////////
+[defnames def_playerBoosters]
+def_playerBooster_typesNumber         1
+
+def_playerBooster_description[0]      "25% zkusenosti na 2h"
+def_playerBooster_icon[0]             03300
+def_playerBooster_type[0]             1 // XP
+def_playerBooster_value[0]            25
+def_playerBooster_duration[0]         2 //hours
+
+def_playerBooster_description[1]      "25% zkusenosti na 4h"
+def_playerBooster_icon[1]             03300
+def_playerBooster_type[1]             1 // XP
+def_playerBooster_value[1]            25
+def_playerBooster_duration[1]         4 // hours
+
+
+// serves as TAG storage
+[itemdef i_playerBoosters]
+ID=i_memory
+TYPE=t_eq_script
+name=Player Boosters
+
+on=@timer
+return 1
+
+[itemdef i_booster]
+ID=i_skull_candle_lit
+TYPE=t_eq_script
+name=Player Boost
+
+//tags
+// :boostNumber: - The number of a boost gathered from the defnames
+//   - ...
+
+on=@equip
+if (tag(boostType) == 1)
+  f_booster_xpBoost_apply
+endif
+
+on=@unEquip
+if (tag(boostType) == 1)
+  f_booster_xpBoost_remove
+endif
+
+on=@timer
+remove
+
+[itemdef i_booster_xp]
+ID=i_skull_candle_lit
+TYPE=t_eq_script
+name=Player Boost - XP
+
+on=@equip
+cont.events=+e_boosted_xp
+
+on=@unEquip
+cont.events=-e_boosted_xp
+
+[function f_booster_xpBoost_apply]
+cont.newitemsafe(i_booster_xp)
+link=<lastnew>
+lastnew.more1=<eval tag(boostNumber)>
+cont.equip(<lastnew>)
+
+[function f_booster_xpBoost_remove]
+cont.classMessage("Tvuj bonus do zkusenosti vyprsel!")
+//cont.findId(i_booster_xp).remove // the item is in LINK and should be removed automatically
+
+[eof]
