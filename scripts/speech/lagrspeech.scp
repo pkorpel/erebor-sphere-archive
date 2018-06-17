@@ -5,7 +5,6 @@ ON=*ahoj*
 ON=*buy*
 if (<eval(<src.account.tag(lagr)>)><8)
   say (Musis ziskat <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
-//say (Musis ziskat <eval(<trest_<src.account.tag(lagr)>>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
 else
   if (<eval(<src.tag(lagrlogu)>)>)
     say (Musis ziskat <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
@@ -26,7 +25,7 @@ if (<src.restest(100,i_log_lager)>)
   //src.newitem(i_gold_lagr)
   //src.act.bounce
 else
-  say Nemas dost dreva - pokud mi reknes "vymena", vymenim 100 spruce logu za 1 propusteci zlatak, nebo kvalitnejsi logy za spruce logy.
+  say Nemas dost dreva - pokud mi reknes "vymena", vymenim 100 spruce logu za 1 propusteci zlatak.
 endif
 
 ON=*sekera*
@@ -45,26 +44,15 @@ src.food=15
 
 ON=*propustit*
 if (<eval(<src.account.tag(lagr)>)><8)
- //if (<src.restest <eval(<trest_<src.account.tag(lagr)>>/100)> i_gold_lagr>)
- if (<src.restest <eval(<src.tag(lagrlogu)>/100)> i_gold_lagr>)
-  src.lagrpustit
-  //src.consume i_hatchet
-  //src.consume i_armor_female_skirt
-  //src.tag.remove(trestanec)
-  //src.account.tag.remove(vlagru)
-  //src.kills=<src.tag(lagrkills)>
-  //src.name=<src.tag(lagrname)>
-  //src.lumberjacking=<src.tag(lumberpits)>
-  //src.consume=<eval(<trest_<src.account.tag(lagr)>>/100)> i_gold_lagr
-  //src.findlayer(21).findid(i_gold_lagr).remove
-  //src.forgive
-  //src.sysmessage ("Jsi propusten.")
-  //src.gohome
- else
-  //say Potrebujes <eval(<trest_<src.account.tag(lagr)>>/100)> propoustecich zlataku, ty ziskas vymenou za normalni drevo, az budes mit dostatek dreva oslov me "vymena".
-  say("Mas u sebe jen <eval <src.rescount(i_gold_lagr)>> zlataku.")
-  say("Potrebujes celkem <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ty ziskas vymenou za normalni drevo. Az budes mit dostatek dreva, oslov me "vymena".")
- endif
+  if (<src.restest <eval(<src.tag(lagrlogu)>/100)> i_gold_lagr>)
+    src.lagrpustit
+  else
+    arg(goldLagr,<src.rescount(i_gold_lagr)>)
+    src.tag(lagrlogu,#-<eval (arg(goldLagr)*100)>)
+    src.consume(<arg(goldLagr)>,i_gold_lagr)
+    say("Mas u sebe jen <eval <arg(goldLagr)>> zlataku. Dej mi je a pokracuj.")
+    say("Potrebujes jeste <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ty ziskas vymenou za normalni drevo. Az budes mit dostatek dreva, oslov me "vymena".")
+  endif
 else
   if (<eval src.tag(lagrlogu)>)
     if (<src.restest <eval(<src.tag(lagrlogu)>/100)> i_gold_lagr>)
@@ -73,5 +61,6 @@ else
       say Potrebujes <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku, ty ziskas vymenou za normalni drevo, az budes mit dostatek dreva oslov me "vymena".
     endif
   else
-  say ("Kontaktuj GM pres page, tva postava je recidivista, ktery dostane specialni trest.")
+    say ("Kontaktuj GM pres page, tva postava je recidivista, ktery dostane specialni trest.")
+  endif
 endif
