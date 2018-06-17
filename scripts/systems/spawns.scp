@@ -352,8 +352,9 @@ return 1
 [function f_refreshSpawnTimer]
 arg(firstnumb,<StrGetTok("<moreP>",0,",")>)
 arg(secondnumb,<StrGetTok("<moreP>",1,",")>)
-arg(rndnumb,<eval {<eval arg(firstnumb)*60> <eval arg(secondnumb)*60>}>)
-timer=<arg(rndnumb)>
+// we need to add the seconds additionaly, as the max RAND span is cca 130k (around 1.5days in seconds)
+arg(rndnumb,<eval {<eval arg(firstnumb)> <eval arg(secondnumb)>}>)
+timer=<eval ((arg(rndnumb)*60)+<eval {0 60}>)>
 
 [function respawncertain] //args - id monster
 if (account.plevel < 6)
