@@ -8,8 +8,12 @@ hovno.scp
 roofing.txt
 rooftiles.cfg
 accounts/
-save/
 logs/
 muls/
 webout/
 scripts/web/*.st
+save/*
+!save/spheredata.scp
+!save/spherestatics.scp
+!save/spherechars.scp
+!save/sphereworld.scp
