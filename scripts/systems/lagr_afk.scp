@@ -33,21 +33,21 @@ endif
 
 [defnames afklagrinfo]
 //afk lagry
-afk_trest_1		2500
-afk_lumber_1		50
-afk_trest_2 		6000
-afk_lumber_2 		50
-afk_trest_3		12000
-afk_lumber_3		50
-afk_trest_4		18000
-afk_lumber_4		50
-afk_trest_5		25000
-afk_lumber_5		50
-afk_trest_6		75000
-afk_lumber_6		50
-afk_trest_7		150000
-afk_lumber_7		50
-afk_trestu		7
+afk_trest_1    1500
+afk_lumber_1   50
+afk_trest_2    3000
+afk_lumber_2   50
+afk_trest_3    6000
+afk_lumber_3   50
+afk_trest_4    12000
+afk_lumber_4   50
+afk_trest_5    20000
+afk_lumber_5   50
+afk_trest_6    50000
+afk_lumber_6   50
+afk_trest_7    100000
+afk_lumber_7   50
+afk_trestu     7
 
 [function afklagrodvolat]
 if (src==uid)&&(isgm)
