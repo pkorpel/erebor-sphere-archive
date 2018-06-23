@@ -33,7 +33,6 @@ lastnew.tag(boostType,<def_playerBooster_type[<arg(boostId)>]>)
 lastnew.more1=<def_playerBooster_value[<arg(boostId)>]>
 lastnew.equip
 lastnew.timer=<eval <def_playerBooster_duration[<arg(boostId)>]>*3600> // duration in hours
-src.sysMessage("timer: <eval <def_playerBooster_duration[<arg(boostId)>]>*3600>")
 f_playerBooster_decreaseBoostLink(<arg(BoosterMemory)>,<argv(0)>)
 
 /////////////////////
