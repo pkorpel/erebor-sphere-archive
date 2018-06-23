@@ -107,6 +107,10 @@ gumppictiled(<tag(sloupec_x[0])>,<args>+<d_def_radek_vyska>-2,(<tag(sirka)>-((2*
 checkertrans(<d_def_okraj>,<d_def_okraj>,(<tag(sirka)>-(2*<d_def_okraj>)),(<tag(nexty)>-<d_def_okraj>)))
 
 [defnames dialogy]
+center                <center>
+centere               </center>
+br                    <br>
+
 d_def_button_ok1      0fb7
 d_def_button_ok2      0fb9
 d_def_button_cancel1  0fb1

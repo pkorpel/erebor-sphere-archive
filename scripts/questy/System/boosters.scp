@@ -6,7 +6,7 @@
 
 // Rewards player with a new booster
 // argv0: booster number gathered as an order number of a booster from defnames
-[function f_playerBooster_add]
+[function playerBooster_add]
 arg(BoosterMemory,<findId(i_playerBoosters)>)
 if !(<hval arg(BoosterMemory)>) // the player hasn't got any boosters yet
   newequip(i_playerBoosters)
@@ -21,15 +21,19 @@ f_playerBooster_storeBoostLink(<arg(BoosterMemory)>,<argv(0)>)
 //         - the order may vary for each player based on the order in which the boosters were acquired
 // return 0 - if the booster is applied successfully
 //        1 - if the player already has a running boost
-[function f_playerBooster_use]
+[function playerBooster_use]
 if (findId(i_booster))
  return 1
 endif
 arg(BoosterMemory,<findId(i_playerBoosters)>)
+arg(boostId,<eval BoosterMemory.tag(boosterId[<eval argv(0)>])>)
 newItemSafe(i_booster)
-lastnew.tag(boostNumber,<BoosterMemory.tag(boosterId[<eval argv(0)>])>)
-lastnew.tag(boostType,<def_playerBooster_type[<eval lastnew.tag(boostNumber)>]>)
+lastnew.tag(boostId,<arg(boostId)>)
+lastnew.tag(boostType,<def_playerBooster_type[<arg(boostId)>]>)
+lastnew.more1=<def_playerBooster_value[<arg(boostId)>]>
 lastnew.equip
+lastnew.timer=<eval <def_playerBooster_duration[<arg(boostId)>]>*3600> // duration in hours
+src.sysMessage("timer: <eval <def_playerBooster_duration[<arg(boostId)>]>*3600>")
 f_playerBooster_decreaseBoostLink(<arg(BoosterMemory)>,<argv(0)>)
 
 /////////////////////
@@ -39,17 +43,41 @@ f_playerBooster_decreaseBoostLink(<arg(BoosterMemory)>,<argv(0)>)
 def_playerBooster_typesNumber         1
 def_playerBooster_type_XP             1
 
-def_playerBooster_description[0]      "25% zkusenosti na 2h"
+def_playerBooster_description[0]      "+25% zkusenosti na 2h"
 def_playerBooster_icon[0]             03300
 def_playerBooster_type[0]             def_playerBooster_type_XP
 def_playerBooster_value[0]            25
 def_playerBooster_duration[0]         2 //hours
 
-def_playerBooster_description[1]      "25% zkusenosti na 4h"
+def_playerBooster_description[1]      "+25% zkusenosti na 4h"
 def_playerBooster_icon[1]             03300
 def_playerBooster_type[1]             def_playerBooster_type_XP
 def_playerBooster_value[1]            25
 def_playerBooster_duration[1]         4 // hours
+
+def_playerBooster_description[2]      "+25% zkusenosti na 8h"
+def_playerBooster_icon[2]             03300
+def_playerBooster_type[2]             def_playerBooster_type_XP
+def_playerBooster_value[2]            25
+def_playerBooster_duration[2]         8 // hours
+
+def_playerBooster_description[3]      "+50% zkusenosti na 2h"
+def_playerBooster_icon[3]             03300
+def_playerBooster_type[3]             def_playerBooster_type_XP
+def_playerBooster_value[3]            50
+def_playerBooster_duration[3]         2 // hours
+
+def_playerBooster_description[4]      "+50% zkusenosti na 4h"
+def_playerBooster_icon[4]             03300
+def_playerBooster_type[4]             def_playerBooster_type_XP
+def_playerBooster_value[4]            50
+def_playerBooster_duration[4]         4 // hours
+
+def_playerBooster_description[5]      "+50% zkusenosti na 4h"
+def_playerBooster_icon[5]             03300
+def_playerBooster_type[5]             def_playerBooster_type_XP
+def_playerBooster_value[5]            50
+def_playerBooster_duration[5]         8 // hours
 
 //////////////////
 // C O M M O N  // 
@@ -72,7 +100,7 @@ TYPE=t_eq_script
 name=Player Boost
 
 //tags
-// :boostNumber: - The boost ID gathered from the defnames
+// :boostId:     - The boost ID gathered from the defnames
 // :boostType:   - The type of the boost
 
 on=@equip
@@ -129,6 +157,8 @@ cont.tag(xpBooster_link,<uid>) // in case we have more concurrent boosters in th
 cont.events=-e_boosted_xp
 cont.tag.remove(xpBooster_link)
 cont.classMessage("Tvuj bonus do zkusenosti vyprsel!")
+
+[events e_boosted_xp]
 
 ///////////////
 //    ? ?    //

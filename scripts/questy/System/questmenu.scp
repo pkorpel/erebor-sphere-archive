@@ -159,7 +159,7 @@ if (<argn> < 100) // main section pages were selected.
   f_qm_closeMainDialog
   dialog(d_questy,<argn>)
   return
-elseif (<argn> < 1000) // weekly detail was selected
+elseif (<argn> < 500) // weekly detail was selected (100+ button number)
   arg(weeklyNum,<eval (<argn>-99)>)
   if (arg(weeklyCheck)) // the weekly expired while watching the gump -> do not open the sub dialog, as the set of quests has been re-created
     arg(allowSubDialog,0)
@@ -173,7 +173,13 @@ elseif (<argn> < 1000) // weekly detail was selected
     arg(dialogName,d_questy_weeklyDetail<eval tag(qm_lastWeeklyDetailGmp)>)
   endif
   dialog(d_questy,10)
-else // main quest detail was selected
+elseif (<argn> < 1000) // booster selected (500+ button number)
+  playerBooster_use(<eval argn-500>)
+  arg(boosters,<src.findid(i_playerBoosters)>)
+  arg(boostNum,<eval argn-500>)
+  dialog(d_questy,3)
+  return
+else // main quest detail was selected (1000+ button number)
   arg(dialogName,<f_questMenu_getDialog(<questMenu[<eval <argn>-1000>]>)>)
   dialog(d_questy,1)
 endif
@@ -295,23 +301,49 @@ endwhile
 [function f_questy_buildMainDialog_boosters]
 src.f_dungeonMark_ClearLinks      // procisteni linku po timeru
 arg(middle,<eval (<questMenu_width>/2)>)
-arg(middleY,<eval (<questMenu_height>/2)>)
 arg(boosters,<src.findid(i_playerBoosters)>)
+arg(activeBooster,<src.findid(i_booster)>)
+
+// active booster section
+arg(posY,128)
+resizepic(80,<arg(posY)>,<questMenu_bg>,<questMenu_width>-75,80)
+newTextLine(<arg(middle)>,<arg(posY)>+10,<d_def_subheadcolor>,"Aktivni booster")
+if (<arg(activeBooster)>)
+  arg(boosterId,<arg(activeBooster).tag(boostId)>)
+  arg(pic,<def_playerBooster_icon[<arg(boosterId)>]>)
+  gumppic(100,<arg(posY)>+24,<arg(pic)>)
+  setText(newTextLine,"<basefont size=6 color=<?questMenu_color_questDoneFont?>><center><def_playerBooster_description[<arg(boosterId)>]>")
+  newHtmlGump(135,<arg(posY)>+30,<questMenu_width>-160,20,0)
+  setText(newTextLine,"<basefont size=6 color=<?questMenu_color_questDoneFont?>><center><dsToRTime(<arg(activeBooster).timerd>,1)>")
+  newHtmlGump(135,<arg(posY)>+48,<questMenu_width>-160,20,0)
+else
+  newTextLine(<arg(middle)>-40,<arg(posY)>+34,021,"Zadny Booster neni aktivni.")
+endif
+
+// available boosters list
 if !(<arg(boosters)>)     // nema zadny booster
-  newTextLine(<arg(middle)>-62,<arg(middleY)>-36,021,"Nemas zadne Boostery")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+18,<questMenu_color_questInactive>,"Boostery ziskas plnenim questu")
-  newTextLine(<arg(middle)>-62,<arg(middleY)>+36,<questMenu_color_questInactive>,"nebo za umisteni v PvP lize.")
   return 0
 endif
 
 arg(i,0)
 while (<arg(i)> < <eval boosters.tag(boosterIdsCount)>)
-  f_qm_setOffsetAndPaging(4,60,48)
+  f_qm_setOffsetAndPaging(3,64,130)
   arg(posY,<tag(yPos)>)
-  f_qm_itemButton(<arg(posY)>,60)
-  setText(newTextLine,"<basefont color=<?questMenu_color_questActiveFont?>><def_playerBooster_description[<eval boosters.tag(boosterId[<eval arg(i)>])>]>")
-  newHtmlGump(<arg(middle)>-62,<arg(posY)>+8,200,20,0)
-  newTextLine(<arg(middle)>-62,<arg(posY)>+28,questMenu_color_questInactive,"Pocet: <boosters.tag(boosterAmount[<eval arg(i)>])>")
+  f_qm_itemButton(<arg(posY)>,65,1)
+  arg(boosterId,<eval boosters.tag(boosterId[<eval arg(i)>])>)
+  resizepic(<questMenu_width>-50,<arg(posY)>,<questMenu_bg>,60,60)
+  setText(newTextLine,"<basefont color=<?questMenu_color_questActiveFont?>><center><def_playerBooster_description[<arg(boosterId)>]>")
+  newHtmlGump(<arg(middle)>-62,<arg(posY)>+12,160,20,0)
+  setText(newTextLine,"<basefont size=6 color=<?questMenu_color_questDoneFont?>><center><boosters.tag(boosterAmount[<eval arg(i)>])>x")
+  newHtmlGump(<arg(middle)>-62,<arg(posY)>+28,160,20,0)
+
+  arg(pic,<def_playerBooster_icon[<arg(boosterId)>]>)
+  if (<arg(activeBooster)>)
+    gumppic(<questMenu_width>-36,<arg(posY)>+14,<arg(pic)>)
+    checkertrans(<questMenu_width>-40,<arg(posY)>+10,38,38)
+  else
+    button(<questMenu_width>-36,<arg(posY)>+14,<arg(pic)>,<arg(pic)>,1,0,500+<arg(i)>)
+  endif
   arg(i,#+1)
 endwhile
 
@@ -435,7 +467,13 @@ endwhile
 ///////////
 
 [function f_qm_itemButton] // argv(0) - Y pos, argv(1) - step size
-resizepic(75,<argv(0)>,<g_bg[8]>,<questMenu_width>-65,<argv(1)>-5) //g_bg[5,6,7,8] | 5,7,8
+if (0<argv(2)>)
+  arg(bg,<questMenu_bg>)
+else
+  arg(bg,<g_bg[8]>)
+endif
+resizepic(75,<argv(0)>,<arg(bg)>,<questMenu_width>-65,<argv(1)>-5) //g_bg[5,6,7,8] | 5,7,8
+
 
 [function f_qm_weeklyAddDialogItem] // argv(0) color, argv(1) qnum, argv(2) step size, argv(3) - completed, argv(4) - totalAmount
 arg(yTxtOffset,8)

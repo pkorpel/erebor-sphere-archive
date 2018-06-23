@@ -3164,14 +3164,15 @@ endif
 if (<tag(hypno_mystik)>) //mystik v monstru neco zabil
   tag(experience,#+(<eval(args)>)) //jen expy, zadny levely ani nic.
 else
+  arg(rankBonus,0)
   if (<strlen(<tag(rp_rank)>)>)
-    arg(exptogive,<eval(args)>+(<eval(args)>*<RP_Rank[<tag(rp_rank)>]>)/100)
-  else
-    arg(exptogive,<eval(args)>)
+    arg(rankBonus,<eval (<args>*<RP_Rank[<tag(rp_rank)>]>)/100>)
   endif
+  arg(booster,0)
   if (isEvent(e_boosted_xp))
-    arg(exptogive,<eval(args)>+(<eval(args)>*<eval findId(i_booster_xp).more1>)/100)
+    arg(booster,<eval (<args>*<tag(xpBooster_link).more1>)/100>))
   endif
+  arg(exptogive,<eval (args+arg(rankBonus)+arg(booster))>)
   tag(experience,#+<exptogive>) 
   if (isplayer)
     f_srovnatlevel
