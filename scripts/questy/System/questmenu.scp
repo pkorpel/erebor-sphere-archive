@@ -305,13 +305,13 @@ if !(<arg(boosters)>)     // nema zadny booster
 endif
 
 arg(i,0)
-while (<arg(i)> < <eval boosters.tag(boostersCount)>)
+while (<arg(i)> < <eval boosters.tag(boosterIdsCount)>)
   f_qm_setOffsetAndPaging(4,60,48)
   arg(posY,<tag(yPos)>)
   f_qm_itemButton(<arg(posY)>,60)
-  setText(newTextLine,"<basefont color=<?questMenu_color_questActiveFont?>><arg(zone)>")
-  htmlGump(<arg(middle)>-62,<arg(posY)>+8,200,20,<lastTextLine>,0,0)
-  newTextLine(<arg(middle)>-62,<arg(posY)>+28,questMenu_color_questInactive,"Vyprsi za: <dsToRTime(<eval (<arg(time)>-<serv.time>)>,1)>")
+  setText(newTextLine,"<basefont color=<?questMenu_color_questActiveFont?>><def_playerBooster_description[<eval boosters.tag(boosterId[<eval arg(i)>])>]>")
+  newHtmlGump(<arg(middle)>-62,<arg(posY)>+8,200,20,0)
+  newTextLine(<arg(middle)>-62,<arg(posY)>+28,questMenu_color_questInactive,"Pocet: <boosters.tag(boosterAmount[<eval arg(i)>])>")
   arg(i,#+1)
 endwhile
 
