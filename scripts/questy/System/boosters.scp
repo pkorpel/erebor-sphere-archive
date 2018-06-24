@@ -72,7 +72,7 @@ def_playerBooster_type[4]             def_playerBooster_type_XP
 def_playerBooster_value[4]            50
 def_playerBooster_duration[4]         4 // hours
 
-def_playerBooster_description[5]      "+50% zkusenosti na 4h"
+def_playerBooster_description[5]      "+50% zkusenosti na 8h"
 def_playerBooster_icon[5]             03300
 def_playerBooster_type[5]             def_playerBooster_type_XP
 def_playerBooster_value[5]            50
@@ -104,12 +104,12 @@ name=Player Boost
 
 on=@equip
 if (tag(boostType) == def_playerBooster_type_XP)
-  f_booster_xpBoost_apply
+  cont.f_booster_xpBoost_apply
 endif
 
 on=@unEquip
 if (tag(boostType) == def_playerBooster_type_XP)
-  f_booster_xpBoost_remove
+  cont.f_booster_xpBoost_remove
 endif
 
 on=@timer
@@ -149,13 +149,13 @@ endif
 //    X P    //
 
 [function f_booster_xpBoost_apply]
-cont.events=+e_boosted_xp
-cont.tag(xpBooster_link,<uid>) // in case we have more concurrent boosters in the future, it's handy to store the direct link to an XP booster type
+events=+e_boosted_xp
+tag(xpBooster_link,<uid>) // in case we have more concurrent boosters in the future, it's handy to store the direct link to an XP booster type
 
 [function f_booster_xpBoost_remove]
-cont.events=-e_boosted_xp
-cont.tag.remove(xpBooster_link)
-cont.classMessage("Tvuj bonus do zkusenosti vyprsel!")
+events=-e_boosted_xp
+tag.remove(xpBooster_link)
+classMessage("Tvuj bonus do zkusenosti vyprsel!")
 
 [events e_boosted_xp]
 
