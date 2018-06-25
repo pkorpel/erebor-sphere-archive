@@ -1320,6 +1320,19 @@ if (ishungrymsg)
   skill -1
   return 1
 endif
+if (<action> == Skill_Magery)
+  if (<act> != uid)
+    if (distancefrom(<act>) > 15)
+      sysMessage("Cil je prilis daleko!")
+      skill -1
+      return 
+    elseif !(f_canseelos(<act>)) )
+      sysMessage("Nevidis na cil.")
+      skill -1
+      return 1
+    endif
+  endif
+endif
 if (<eval tag(LastCastSpell)> == 22)   // prave uspesne docaroval teleport
   tag(GM_step_resist,<eval serv.time+nastaveni_GM_Step_resist>)
 endif
