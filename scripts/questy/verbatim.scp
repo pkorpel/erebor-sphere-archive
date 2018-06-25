@@ -101,7 +101,7 @@ if (src.isgm)
   return 1
 elseif (src.npc)
   return 1
-elseif 
+else 
   tag(dvere1).timer=<tag.prodleva>
   return 1
 endif
@@ -259,12 +259,13 @@ respawncertain(c_vguard_orc_rhun)
 on=@aftergetswing
 if (var(damage_flags)& dam_sharp)
   if rand(15)==1
-  dorand 4
-    newnpc(c_ancient_ooze)
-    newnpc(c_smaragd_ooze)
-    newnpc(c_poison_ooze)
-    newnpc(c_magic_ooze)
-  enddo
+    dorand 4
+      newnpc(c_ancient_ooze)
+      newnpc(c_smaragd_ooze)
+      newnpc(c_poison_ooze)
+      newnpc(c_magic_ooze)
+    enddo
+  endif
   lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
   lastnewchar.fame=0
   lastnewchar.flag_conjured=1
@@ -1279,37 +1280,38 @@ cont.remove
 return 0
 on=@equip
 dorand 30
-cont.say "OOoooO Oo OoO oOOO"
-cont.say "OoOOOoO OoOoOOOoO oOoOOOoO"
-cont.say "Ted zemrete!"
-cont.say "Heru Beleg Ruin"
-cont.say "Na neeeee!"
-cont.say "Zde neprojdete!"
-cont.say "Sundam si zuby a rozkousu te mezi dasnema!"
-cont.say "Tady nemas co pohledavat"
-cont.say "We are the Borg"
-cont.say "You will be assimilated"
-cont.say "Odpor je marny"
-cont.say "Odejdi nebo zemri!"
-cont.say "Ty si dovolujes rusit muj klid?"
-cont.say "To je naposled, co jsi sem vstoupil!"
-cont.say "Prisel tvuj cas..."
-cont.say "Ahhh, cerstva krev!"
-cont.say "Kdo si dovoluje vstoupit na me uzemi?"
-cont.say "Tva smrt bude pomala..."
-cont.say "JIDLO...."
-cont.say "Mozkyyyy"
-cont.say "Tady nemas co pohledavat"
-cont.say "Pojd bliz a umres!"
-cont.say "Odtud se uz vcelku nedostanete!"
-cont.say "Deckaaa svacinaaaa"
-cont.say "Bubububububu"
-cont.say "Mugagagagaga"
-cont.say "Aby te mor hnal po poli a ty si zakopl!"
-cont.say "To bude pecka"
-cont.say "Beru si clerdu"
-cont.say "Banzaaaaaaaaaaaj"
-cont.say "Je cas udelat vybave papa..."
+  cont.say "OOoooO Oo OoO oOOO"
+  cont.say "OoOOOoO OoOoOOOoO oOoOOOoO"
+  cont.say "Ted zemrete!"
+  cont.say "Heru Beleg Ruin"
+  cont.say "Na neeeee!"
+  cont.say "Zde neprojdete!"
+  cont.say "Sundam si zuby a rozkousu te mezi dasnema!"
+  cont.say "Tady nemas co pohledavat"
+  cont.say "We are the Borg"
+  cont.say "You will be assimilated"
+  cont.say "Odpor je marny"
+  cont.say "Odejdi nebo zemri!"
+  cont.say "Ty si dovolujes rusit muj klid?"
+  cont.say "To je naposled, co jsi sem vstoupil!"
+  cont.say "Prisel tvuj cas..."
+  cont.say "Ahhh, cerstva krev!"
+  cont.say "Kdo si dovoluje vstoupit na me uzemi?"
+  cont.say "Tva smrt bude pomala..."
+  cont.say "JIDLO...."
+  cont.say "Mozkyyyy"
+  cont.say "Tady nemas co pohledavat"
+  cont.say "Pojd bliz a umres!"
+  cont.say "Odtud se uz vcelku nedostanete!"
+  cont.say "Deckaaa svacinaaaa"
+  cont.say "Bubububububu"
+  cont.say "Mugagagagaga"
+  cont.say "Aby te mor hnal po poli a ty si zakopl!"
+  cont.say "To bude pecka"
+  cont.say "Beru si clerdu"
+  cont.say "Banzaaaaaaaaaaaj"
+  cont.say "Je cas udelat vybave papa..."
+enddo
 return 0
 
 [DIALOG d_verbuvadvancedspawnpad]
@@ -1943,8 +1945,7 @@ DESCRIPTION=Oltar Krve
 
 ON=@Create
 color=0481
-Attr_MoveNever(1)
-Attr_Static(1)
+attr=attr_static|attr_move_never
 
 ON=@userDClick
 message("Citis slabe chveni")  
@@ -2484,7 +2485,7 @@ more2={0 65535}
 TYPE=t_qv1_unidentified_map
 TAG.qv1MAP=<eval {300 1000}>
 
-//poèítadlo a ms
+//pocitadlo a ms
 finduid(09fa43).tag(pocetmapek,<finduid(09fa43).tag(pocetmapek)>+1)
 //finduid(09fa43).delayedmessage(<servertime> Mapka QV1 <lastnew> vytvorena - celkem ve svete <finduid(09fa43).tag(pocetmapek)> mapek) 
 

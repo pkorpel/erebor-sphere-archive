@@ -457,7 +457,7 @@ arg(i,0)
 while (arg(i) < arg(miAmount))
   bankBox.giveItem(i_mi_bag)
   arg(i,#+1)
-endif
+endwhile
 def_weekly_stone.tag(SingleQuestCompleted,#+1)
 def_weekly_stone.tag(Reward_EXP,#+<tag(quest_rewXP[<eval argv(0)>])>)
 def_weekly_stone.tag(Reward_GP,#+<tag(quest_rewGold[<eval argv(0)>])>)
@@ -473,7 +473,7 @@ arg(i,0)
 while (arg(i) < arg(miAmount))
   bankBox.giveItem(i_mi_bag)
   arg(i,#+1)
-endif
+endwhile
 def_weekly_stone.tag(WeeklyQuestCompleted,#+1)
 def_weekly_stone.tag(Reward_EXP,#+<eval tag(rewXP)>)
 def_weekly_stone.tag(Reward_GP,#+<eval tag(rewGold)>)
@@ -1227,7 +1227,7 @@ endif
 return<arg(retVal)>
 
 [function f_weekly_isCompleted] // argv(0) - cislo miniquestu v tydnu
-if (<eval tag(quest_completed[<argv(0)>])> == <tag(quest_totalAmount[<argv(0)>])>)) //
+if (<eval tag(quest_completed[<argv(0)>])> == <tag(quest_totalAmount[<argv(0)>])>) //
   return 1
 endif
 return 0

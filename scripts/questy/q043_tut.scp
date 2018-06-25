@@ -99,7 +99,7 @@ argo.dialog_page("Mohu pomoci?")
     argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
     argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button    
   elseif (<arg(tagValue)> < 7)
-    argo.setText(argo.newTextLine,"Najdi ten pergamen! Je nekde v podzemi u nemrtvých!")
+    argo.setText(argo.newTextLine,"Najdi ten pergamen! Je nekde v podzemi u nemrtvych!")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
     argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button  

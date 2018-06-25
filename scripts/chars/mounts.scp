@@ -1601,7 +1601,7 @@ itemnewbie=i_monster_create
 
 [events e_spawninvul]
 on=@hit
-if {<memoryfindtype{MEMORY_ISPAWNED}>}
+if (<memoryfindtype(MEMORY_ISPAWNED)>)
 return 1
 else
 events -e_spawninvul

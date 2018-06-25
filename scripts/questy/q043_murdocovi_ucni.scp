@@ -266,7 +266,7 @@ argo.dialog_page("Mohu pomoci?")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
     argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button    
-  elseif (<arg(tagValue)> = 222)
+  elseif (<arg(tagValue)> == 222)
     argo.setText(argo.newTextLine,"Pomoz bratrum! A nebo si jim uz pomohl a neses mi pergameny?")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Ano!")
@@ -4057,7 +4057,7 @@ elseif (<arg(tagValue)> == 205) //TAG check pri plneni ukolu
   src.qtag(gq043,206,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
-  src.sysmessage("V knize jsou popsané listy, je to nejaky denik, k nicemu ti neni!")
+  src.sysmessage("V knize jsou popsane listy, je to nejaky denik, k nicemu ti neni!")
 endif
 return 1
 

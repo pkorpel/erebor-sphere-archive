@@ -406,6 +406,7 @@ if (src.qtag(q024) == 4) && (<src.findid(i_q024_vacek_strazci).tag.contentscount
   src.qtag(q024,5,34)
   src.consume(i_q024_vacek_strazci)
   src.addexp(800)
+endif
 on=3
 if ((src.qtag(q024) == 5) && (<src.rescount i_lockpick> >= 120)) && (<src.rescount i_q024_truhlicka> == 1))
   src.qtag(q024,6,34)

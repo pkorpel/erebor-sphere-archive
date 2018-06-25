@@ -89,12 +89,12 @@ argo.dialog_page("Obchodovat")
   if ((<arg(q039_shadow_weapon)> == 0)||(<arg(q039_shadow_weapon)> == 1)||(<arg(q039_shadow_weapon)> == 2)||(<arg(q039_shadow_weapon)> == 3))
     argo.setText(argo.newTextLine,"Nemyslim si, ze by jsi mi mohl nabidnout neco, co by mne zajimalo!")
     argo.questDialog_HTMLGUMP
-  elseif (<arg(q039_shadow_weapon)> == 4))
+  elseif (<arg(q039_shadow_weapon)> == 4)
     argo.setText(argo.newTextLine,"Zde je tva zbran, uzij ji ve zdravi!")
     argo.questDialog_HTMLGUMP
       argo.setText(argo.newTextLine,"Dekuji ti velice.")
       argo.questDialog_addResponse(0,1,1,"q039_accept_weapon")
-  elseif (<arg(q039_shadow_weapon)> == 6))
+  elseif (<arg(q039_shadow_weapon)> == 6)
     argo.setText(argo.newTextLine,"Vidim, ze jsi o svoji zbran prisel. Chces vyrobit novou?")
     argo.questDialog_HTMLGUMP
       argo.setText(argo.newTextLine,"Rad bych!")
@@ -127,7 +127,7 @@ argo.dialog_page("Hledam praci")
   
 argo.dialog_page("Drby")
   if (<arg(drby)> == 1)
-    argo.setText(<argo.newTextLine>,"Slysel jsem o nejvetsich hrdinech. Pochazeli pry z dalekeho vychodu a dle povery meli zbrane vyrobeny z podivných materialu - byly lehke, ale zvlast ucinne  proti monstrum.")
+    argo.setText(<argo.newTextLine>,"Slysel jsem o nejvetsich hrdinech. Pochazeli pry z dalekeho vychodu a dle povery meli zbrane vyrobeny z podivnych materialu - byly lehke, ale zvlast ucinne  proti monstrum.")
     argo.questDialog_HTMLGUMP
   elseif (<arg(drby)> == 2)
     argo.setText(<argo.newTextLine>,"Videl jsi mlynarku? Kdyz se na ni tak divam, rikam si, ze by bylo na case povesit kovarinu na hrebnicek a stat se otcem. Nebo aspon provadet veci s otcovstvim souvisejici... <def_questDialog_colorTextEmote> *vyznamne mrknul a zasmal se*")

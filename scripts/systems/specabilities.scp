@@ -115,12 +115,12 @@ if (src.targ.type==t_corpse)
    src.tag(m_strchange,<eval <src.str>-(<mstat_str>)>)
    src.tag(m_vitchange,<eval <src.vit>-(<mstat_vit>)>)
 
-   
-   if (morphstatsum<=??)
-    src.changestat(vit,-<src.tag.m_vitchange>)
-    src.changestat(str,-<src.tag.m_strchange>) 
-    src.changestat(dex,-<src.tag.m_dexchange>)
-   endif
+   // TODO: co je '??'
+   //if (morphstatsum<=??)
+   // src.changestat(vit,-<src.tag.m_vitchange>)
+   // src.changestat(str,-<src.tag.m_strchange>) 
+   // src.changestat(dex,-<src.tag.m_dexchange>)
+   //endif
   else
    src.tag(m_dexchange,0)
    src.tag(m_strchange,0)
@@ -687,7 +687,7 @@ on=@unequip
 cont.events -e_bleeding
 
 on=@timer
-if (! cont.hits) || (more1l >= more1h)
+if (!cont.hits) || (more1l >= more1h)
   remove
   return
 endif
@@ -1405,7 +1405,7 @@ elseif (src.findid(i_woodooeffect))
  src.sysMessage(Prokleti ti brani proklinat nekoho jinyho.)
  return 1 
 //elseif ({0 10000}>eval(src.tag(ra_woodoo)*nastaveni_woodoo_chance))
-elseif (chance(<eval 250+<eval 25*<src.tag(ra_woodoo_curse)>>,3))
+elseif (chance(<eval 250+<eval 25*<src.tag(ra_woodoo_curse)>>>,3))
  src.sysMessage(Nepovedlo se.)
  if (argv<10)
    src.woodooeffect(<argv>)
@@ -1630,7 +1630,7 @@ elseif (src.act.id==i_potion_AgilityLess)
 elseif (src.act.id==i_potion_Stoneskin)
  link.woodoohandle(14)
 else
-src.sysMessage (radeji ne)
+src.sysMessage(radeji ne)
 endif
 return 
 
@@ -2718,7 +2718,7 @@ if (<baseid>!=i_ring_power)&&(<baseid>!=i_leading_ring_power)
  endif
 endif
 
-[Function hypnoswap_back] src- mystik hrac
+[Function hypnoswap_back]// src- mystik hrac
 accmsg("HYPNOZA ZPET")
 accmsg("Hypnoza navrat <uid>-<name>: Navrat zpet do tela")
 if !(strlen(<tag(monster)>)) //mame vubec co vracet? (mozna kdyz se vraci timerem a zaroven umre tak se to posere)
@@ -3829,7 +3829,7 @@ if (topobj.findid(i_hypno_delka)) || (<topobj.flags>&statf_dead)
  remove
 endif
 
-tag(propocet,(<tag(expymonstra)>/(<topobj.tag(level)>*5))+(<tag(freezed)>*3))) //tady spocitame kolik to bude zrat many a stam
+tag(propocet,(<tag(expymonstra)>/(<topobj.tag(level)>*5))+(<tag(freezed)>*3)) //tady spocitame kolik to bude zrat many a stam
 
 if ( (<tag(propocet)> > <topobj.mana>) && !(tag(freezed)) )
  topobj.mana=0
@@ -3896,7 +3896,7 @@ elseif (tag(level)<20)
 elseif (mana<120) || (stamina<80)
   sysMessage("Nemas dost energie.")
   return
-elseif (!reduceStamina(10,1) // safely decreases stamina
+elseif (!reduceStamina(10,1)) // safely decreases stamina
   return
 endif
 
@@ -3933,7 +3933,7 @@ elseif (cont.isinvis)
   contreveal
 endif
 f_catchField_capture
-cont.action == 0FFFFFFFF
+cont.action=0FFFFFFFF
 cont.act=""
 if (<rand(450)> < <cont.tag(level)>) //vyjde lvl bonus snizeni snahy
   arg(effort,<eval <tag(catchingEffort)>/2>)
@@ -3988,7 +3988,7 @@ if (<distancefrom(<argv(0)>)> < 4) && (npc)
       tag(catchedBy,<argv(0)>)
       tag(catchPower,<tag(experience)>/<eval 400+<eval <tag(catchedBy).tag(level)>*3>>)
       findUID(<argv(1)>).tag(catchingEffort,<findUID(<argv(1)>).tag(catchingEffort)>+<tag(catchPower)>+2)
-      action == 0FFFFFFFF
+      action=0FFFFFFFF
       act=""
       if (findID(i_attack_guard))
         findID(i_attack_guard).remove
@@ -4215,7 +4215,7 @@ if (var(dodged)!=1) && !(src.isplayer)
   tag(energyofshield,#-<var(ubrano)>)
   if (<eval tag(energyofshield)> < 0)
     arg(rest_shield_power, <eval( var(ubrano) + tag(energyofshield) )>)
-    arg(temp, <eval( (arg(rest_shield_power) * 100) / var(ubrano) ) >)
+    arg(temp, <eval( (arg(rest_shield_power) * 100) / var(ubrano) )>)
     var(ubrano,<eval (var(ubrano)*<tag(shield_power)>)/<temp>>)
     //say("rest: <?rest_shield_power?> temp: <?temp?>")
     findid(i_energyshield).timer=0
@@ -4893,7 +4893,7 @@ on=@timer
 if tag(vymazse)
   src.classMessage("Nyni muzes pouzit voodoo stit znovu.")
   remove  
-else if cont.tag(voodooshield)
+elseif cont.tag(voodooshield)
   src.classMessage("Stit se vycerpal.")
 endif
 cont.events=-e_voodoo_shield
@@ -5702,7 +5702,7 @@ else
 	if (src.targ.tag(resist_cold) == 1000)
 		src.sysmessage("Obluda je odolna na tvoje voodoo")
 	else
-		if !(src.targ.restest(i_voodoo_enticement)>)
+		if !(<src.targ.restest(i_voodoo_enticement)>)
 			if (src.RESTEST(i_GEM_RUBY))
 				src.consume(i_GEM_RUBY)
 				src.targ.newequip(i_voodoo_enticement)
@@ -6065,7 +6065,7 @@ else
 endif
 
 [function f_thief_shieldStrike]
-if (flag_hasshield))
+if (flag_hasshield)
   if (0<tag(zmrazeni)>)
     if (f_thief_getfreezebyshield(<eval <act.tag(experience)>/10>))
       arg(uderstitem_delay,<eval <tag(uderstitem_next)>-<eval 200-<eval <tag(ra_uderstitem)>*5>>>)

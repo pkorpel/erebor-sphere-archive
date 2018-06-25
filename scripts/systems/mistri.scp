@@ -639,7 +639,7 @@ while (<i> < <stop>)
 endwhile  
 
 if (<kraftov>>15)
-  if (<eval(<start>+15)><<eval(<kraftov>))>))
+  if (<eval(<start>+15)><<eval(<kraftov>)>)
     argo.button(325,10,4005,4007,1,0,1)
   endif
 endif
@@ -868,7 +868,7 @@ argo.HTMLGUMP(170,230,440,100,11,0,36)
 argo.page(4)
 argo.HTMLGUMP(170,230,440,100,17,0,36)
 
-argo.page(5)<-O Co jde?
+argo.page(5)//<-O Co jde?
 argo.HTMLGUMP(170,230,440,100,6,0,36)
 argo.button(25,395,0fa5,0fa7,0,6,0)
 argo.text(60,395,152,7)	//Co je treba?

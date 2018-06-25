@@ -30,6 +30,7 @@ DIALOG d_nec
 return 1
 else
 return 0
+endif
 
 [dialog d_nec]
 40,63
@@ -214,7 +215,7 @@ spellcast(101)
  
 [FUNCTION magerycheck]
 if (<magery><<args>)&&(spellcheck==0)
-sysmessage It`s beyond your ability
+sysmessage It is beyond your ability
 var(spellcheck,1)
 endif
 
@@ -246,6 +247,7 @@ classmessage(Nesmis pouzivat toto kouzlo.)
 return 0
 else
 return 1
+endif
 
 [FUNCTION f_manacheck]
 IF (<src.mana><<args>)
@@ -351,6 +353,7 @@ else
  cont.act.equip
 endif
 remove
+endif
 return 1
 
 [itemdef i_necro_arms]

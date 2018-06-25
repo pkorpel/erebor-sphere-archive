@@ -19,7 +19,7 @@ elseif (<eval src.qtag(q016_prastary_poklad)> == 10)
   message("Uz jsi to vsechno <src.sex(vybral,vybrala)>...")
 else
   src.kill
-  message("<src.sex(DOSTAL,DOSTALA)> JSI SE SEM PODVODEM!!!")¨
+  message("<src.sex(DOSTAL,DOSTALA)> JSI SE SEM PODVODEM!!!")
 endIF
 
 

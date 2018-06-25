@@ -17,7 +17,7 @@ if (src.findid(i_mem_healing))
  src.sysmessage "Prerusil jsi leceni."
 endif
 if (src.findid(i_mem_ressurect))
- src.findid(i_mem_ressurect)remove
+ src.findid(i_mem_ressurect).remove
  src.sysmessage "Ozivovani nesmis uspechat!"
 endif
 if (src.targ.type==t_water_wash)  
@@ -101,7 +101,7 @@ if (src.findid(i_mem_healing))
  src.sysmessage "Prerusil jsi leceni."
 endif
 if (src.findid(i_mem_ressurect))
- src.findid(i_mem_ressurect)remove
+ src.findid(i_mem_ressurect).remove
  src.sysmessage "Ozivovani nesmis uspechat!"
 endif
 if (src.targ.type==t_blood)  

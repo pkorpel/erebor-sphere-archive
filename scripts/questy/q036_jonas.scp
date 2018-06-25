@@ -104,16 +104,16 @@ argo.dialog_page("Nesu ti")
   elseif ((<arg(q036_jonas)> == 1)||(<arg(q036_jonas)> == 2)||(<arg(q036_jonas)> == 3)||(<arg(q036_jonas)> == 4)||(<arg(q036_jonas)> == 5)||(<arg(q036_jonas)> == 6)||(<arg(q036_jonas)> == 7)||(<arg(q036_jonas)> == 8)||(<arg(q036_jonas)> == 9)||(<arg(q036_jonas)> == 10))
     argo.setText(argo.newTextLine,"Copak, mas uz ten mec?")
     argo.questDialog_HTMLGUMP
-    if <arg(q036_jonas)> == 2)
+    if (<arg(q036_jonas)> == 2)
     	argo.setText(argo.newTextLine,"<def_questDialog_colorTextResponse>Bohuzel. Evzen vzkazuje, ze si jej zatim nezaslouzis. Abys jej mohl ziskat, musis si jej nejprve zaslouzit.")
       argo.questDialog_addResponse(1,0,1,"q036_first_work_info") 
-    elseif <arg(q036_jonas)> == 4)
+    elseif (<arg(q036_jonas)> == 4)
       argo.setText(argo.newTextLine,"<def_questDialog_colorTextResponse>Porad nic. Evzen s usmevem na rtech rikal, ze tohle mu jako dukaz tve pripravenosti ziskat mec rozhodne nestaci - tohle pry zvladne kazdy mlicnak...")
       argo.questDialog_addResponse(1,0,1,"q036_second_work_info") 
-    elseif <arg(q036_jonas)> == 6)
+    elseif (<arg(q036_jonas)> == 6)
       argo.setText(argo.newTextLine,"<def_questDialog_colorTextResponse>Hubert vzkazuje, at upustis od zabijeni priser, to na takoveho mazaka, jakym je Evzen, neplati. Rikal, at to radeji zkusis pres ziskani nejake nedostupne zeny - to je totiz i pro tveho otce nezpochybnitelny dukaz toho, ze jsi poradny chlap!")
       argo.questDialog_addResponse(1,0,1,"q036_third_work_info") 
-    elseif <arg(q036_jonas)> == 10)
+    elseif (<arg(q036_jonas)> == 10)
       argo.setText(argo.newTextLine,"Presne tak! Tady ho mas!")
       argo.questDialog_addResponse(0,1,1,"q036_complete") 
     endif
@@ -125,7 +125,7 @@ argo.dialog_page("Prohlednout")
   argo.setText(argo.newTextLine,"<def_questDialog_colorTextEmote>*Mlady, uhrovity a na prvni pohled namysleny fakan, ktery se mermomoci snazi tvarit a pusobit jako ostrileny bojovnik. Kazdym svym sebemensim projevem vsak dava najevo, ze jim rozhodne neni a jeste pekne dlouho nebude.*")
   argo.questDialog_HTMLGUMP
  
-if <arg(q036_jonas)> == 2)
+if (<arg(q036_jonas)> == 2)
 	argo.dialog_page("q036_first_work_info") 
 	  argo.setText(argo.newTextLine,"Hmm, jak toho staryho paprdu presvedcit? Uz to mam! Tady mas truhlu a zabij pro me... ja nevim... treba ctyri titan lordy! urizni jim hlavy a hod je do truhly - tu pak i s hlavami dones memu otci s tim, ze to ja jsem je premohl a holyma rukama jim utrhl hlavy. To ho urcite presvedci!")
     argo.questDialog_HTMLGUMP
@@ -135,7 +135,7 @@ if <arg(q036_jonas)> == 2)
       argo.questDialog_addResponse(0,1,1,"q036_refuse") 
 endif
 
-if <arg(q036_jonas)> == 4)
+if (<arg(q036_jonas)> == 4)
 	argo.dialog_page("q036_second_work_info") 
 	  argo.setText(argo.newTextLine,"Sakra, dochazi mi napady. Ale jeste je preci jen nadeje - dojdi za Hubertem, je to stary lovec, ktery se s oblibou schovava v jeskyni u cervu a vsemoznych jinych plesnivych bestii nad Oazou Hagir. Je to zkuseny muz a zna se s mym otcem Evzenem - ten jiste bude vedet, co na nej plati!")
     argo.questDialog_HTMLGUMP
@@ -145,7 +145,7 @@ if <arg(q036_jonas)> == 4)
       argo.questDialog_addResponse(0,1,1,"q036_second_work_accept") 
 endif
 
-if <arg(q036_jonas)> == 6)
+if (<arg(q036_jonas)> == 6)
 	argo.dialog_page("q036_third_work_info") 
 	  argo.setText(argo.newTextLine,"Sakra, ze me to nenapadlo driv! To je vyborny napad, otec sam byl vzdycky na pekny zensky, co si tak vybavuju! Najdi Fiflenu, zije kdesi na hradku na nejakem svem zaplivanem ostruvku, kde odmita vsechny mozne i nemozne napadniky - je to ta nejnedostupnejsi zena, kterou znam. Pokud nejakym...ehm...zpusobem... ziskas jeji kalhotky a ty pak doneses memu otci...  Buwehe, ten bude cumet!")
     argo.questDialog_HTMLGUMP

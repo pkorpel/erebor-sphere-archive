@@ -1169,7 +1169,7 @@ arg(found,0)
 arg(notdone,1)
 arg(index,1)
 while notdone
-  arg(token,"<StrGetTok("<tag(mi_weapflags)>",arg(index),|)>")\
+  arg(token,"<StrGetTok("<tag(mi_weapflags)>",arg(index),|)>")
   if (strlen("<arg(token)>"))
     if (!arg(found))&&(!strcmpi("<arg(strtofind)>","<arg(token)>"))
       arg(found,1)

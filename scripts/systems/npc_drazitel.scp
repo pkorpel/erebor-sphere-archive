@@ -301,7 +301,7 @@ arg(tetiva_teak,<f_drazitel_check_value(<fixNumber(<argtxt(9)>)>,100)>) 	// 1.ar
 arg(tetiva_oak,<f_drazitel_check_value(<fixNumber(<argtxt(10)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
 arg(tetiva_chestnut,<f_drazitel_check_value(<fixNumber(<argtxt(11)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
 arg(tetiva_spruce,<f_drazitel_check_value(<fixNumber(<argtxt(12)>)>,100)>) 	// 1.arg== pocet, 2.arg== maxamount
-dialog(d_npc_drazitel_souhrn,<uhli>,<nit>,<krystal_maha>,<krystal_teak>,<krystal_oak>,<krystal_chestnut>,<krystal_spruce>,<tetiva_maha>,<tetiva_teak>,<tetiva_oak>,<tetiva_chestnut)>,<tetiva_spruce>)
+dialog(d_npc_drazitel_souhrn,<uhli>,<nit>,<krystal_maha>,<krystal_teak>,<krystal_oak>,<krystal_chestnut>,<krystal_spruce>,<tetiva_maha>,<tetiva_teak>,<tetiva_oak>,<tetiva_chestnut>,<tetiva_spruce>)
 
 
 [DIALOG d_npc_drazitel_souhrn]
@@ -489,7 +489,7 @@ arg(tetiva_teak,<eval pamet.tag(pocet_9)>)
 arg(tetiva_oak,<eval pamet.tag(pocet_10)>)
 arg(tetiva_chestnut,<eval pamet.tag(pocet_11)>)
 arg(tetiva_spruce,<eval pamet.tag(pocet_12)>)
-dialog(d_npc_drazitel_souhrn,<uhli>,<nit>,<krystal_maha>,<krystal_teak>,<krystal_oak>,<krystal_chestnut>,<krystal_spruce>,<tetiva_maha>,<tetiva_teak>,<tetiva_oak>,<tetiva_chestnut)>,<tetiva_spruce>)
+dialog(d_npc_drazitel_souhrn,<uhli>,<nit>,<krystal_maha>,<krystal_teak>,<krystal_oak>,<krystal_chestnut>,<krystal_spruce>,<tetiva_maha>,<tetiva_teak>,<tetiva_oak>,<tetiva_chestnut>,<tetiva_spruce>)
 
 
 [function f_drazitel_souhrn_name]
