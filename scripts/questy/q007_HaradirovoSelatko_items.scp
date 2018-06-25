@@ -50,7 +50,7 @@ ON=@Create
 color=0062
 
 
-[ITEMDEF i_kamen_krve]  // Sebr·n ze souboru uniques.scp
+[ITEMDEF i_kamen_krve]  // Sebr√°n ze souboru uniques.scp
 ID=01364
 NAME=krvavy kamen
 TYPE=T_AROCK
@@ -143,7 +143,7 @@ ON=@userCLICK
 SRC.SYSMESSAGE Toto pero zda se magii ocarovano tak ze inkoust na predmet jim naneseny, svou stopu navzdy zachova byt i neviditelna po case bude.
 
 ON=@userdCLICK
-elseif (<SRC.RESTEST 1 i_rune_tinker> )&&(<SRC.RESTEST 1 i_magicke_pero> )&&(<src.Inscription> > 84.9)
+if (<SRC.RESTEST 1 i_rune_tinker> )&&(<SRC.RESTEST 1 i_magicke_pero> )&&(<src.Inscription> > 84.9)
 src.consume=i_rune_tinker
 src.newitem=i_rune_marker
 src.act.bounce

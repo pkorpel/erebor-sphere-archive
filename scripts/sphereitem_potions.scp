@@ -1,6 +1,6 @@
 
 //****************************************************************************
-//SPHERE by : Menasoft ©1997-2000
+//SPHERE by : Menasoft ï¿½1997-2000
 //www.sphereserver.com
 // All SPHERE script files and formats are copyright Menasoft & Partners.
 // This file may be freely edited for personal use, but may not be distributed
@@ -359,7 +359,7 @@ color=0980
 on=@potioneffect
 src.trigger(@DrinkingPotion)
 src.effect=3,<s_night_sight.EFFECTID>,6,15,1
-src.f_eqrune_nodispell(i_a_nightsight_potion,<nastaveni_potions_i_potion_nightsight>)>,s_night_sight)
+src.f_eqrune_nodispell(i_a_nightsight_potion,<nastaveni_potions_i_potion_nightsight>,s_night_sight)
 return 1
 
 on=@userdeath

@@ -191,7 +191,6 @@ ELSE
 SRC.sysmessage Vzdyt jeste nemas krev jestera!
 Return 1
 ENDIF
-endif
 
 ON=3
 SAY=Bud sbohem! Doufam ze se brzy vratis..

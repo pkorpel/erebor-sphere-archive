@@ -428,7 +428,7 @@ while (arg(u)<16)
  enddo
  lastnew.fix
  arg(u,#+1)
-endif
+endwhile
 invis
 
 [itemdef i_fire_column_tart]

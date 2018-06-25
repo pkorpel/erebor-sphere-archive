@@ -125,7 +125,7 @@ src.body=<src.obody>
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////// CERNÕ JEZDCI ///////////////////////////////////////////////
+///////////////////////////// CERN√ç JEZDCI ///////////////////////////////////////////////
 
 [ITEMDEF i_premena_jezdec]
 ID=01174
@@ -280,8 +280,8 @@ src.sysmessage Vidis velmi uzkou skviru.
 
 ON=@step
 if (src.findlayer(layer_horse))
-  src.sysmessage Tato skvira je velmi uzka na to aby jsi ji protahl tak velkÈ zvire. Sotva se tam vejdes sam.
-elseif (<SRC.findtype(t_figurine))
+  src.sysmessage Tato skvira je velmi uzka na to aby jsi ji protahl tak velke zvire. Sotva se tam vejdes sam.
+elseif (<SRC.findtype(t_figurine)>)
   src.sysmessage Nesmis mit s sebou zvire...
 else
   src.go 4819,440,5

@@ -27,9 +27,9 @@ ON=@UserDeath
 /////// speech selka ///////
 
 [SPEECH spk_gq012_selka]
-ON *Ahoj*
-ON *Zdravim*
-ON *Dobry den*
+ON=*Ahoj*
+ON=*Zdravim*
+ON=*Dobry den*
 
 if (<distance> > 3)
   src.SYSMESSAGE("Na takovou vzdalenost s tebou jednat nebude")
@@ -131,7 +131,7 @@ return 1
 on=1  
 IF (<eval src.tag(gq012_selka)> == 1)
   src.sysmessage("Tento ukol uz jsi splnil nebo ho prave plnis !")
-ELSE (<eval src.tag(gq012_selka)> == 0)
+ELSEIF (<eval src.tag(gq012_selka)> == 0)
   src.sysmessage("Prijmas ukol od Selky Enricy")
   SRC.NEWITEM=i_gq012_selka_collector
   SRC.ACT.BOUNCE

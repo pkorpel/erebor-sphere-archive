@@ -32,7 +32,7 @@ elseif ((<eval src.tag.q009_krejci> == 2) && (<eval src.tag.q009_krejci_ringtime
 elseif (<eval src.tag.q009_krejci> == 2)
   src.tag.q009_krejci_ringtime= (<eval src.tag(q009_krejci_ringtime)>+10800)
   DIALOG(d_q009_krejci_4)
-elseif ((<eval src.tag.q009_krejci> == 1)
+elseif (<eval src.tag.q009_krejci> == 1)
   if (src.findlayer(layer_pack).findid(i_cashiers_check))
     if (<eval src.findlayer(layer_pack).findid(i_cashiers_check).more1> == 5000000 )
       DIALOG(d_q009_krejci_3)

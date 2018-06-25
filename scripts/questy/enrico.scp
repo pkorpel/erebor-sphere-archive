@@ -380,11 +380,11 @@ say("<act.name> act")
 
 
 [function masktrap]
-newitemsafe(i_masktraptarget]
+newitemsafe(i_masktraptarget)
 lastnew.equip
 
 [function zamaskuj]
-
+return
 
 [itemdef i_masktraptarget]
 id=i_memory
@@ -427,9 +427,10 @@ if !(src.isplayer)||(<src.flags>&statf_dead)||(src.isGM)||(tag(mytimer) > <serv.
  srs.sysMessage("Brany Dol Gulduru jsou uzavreny.")
  return 1
 else
-src.go 5220,649,50
-tag(mytimer,<eval <serv.time>+288000>)
-finduid(tag(spawndaemon)).timer=1
+ src.go 5220,649,50
+ tag(mytimer,<eval <serv.time>+288000>)
+ finduid(tag(spawndaemon)).timer=1
+endif
 
 [ITEMDEF i_gate_chartimer]
 name=brana
@@ -747,7 +748,7 @@ if (<tag(syr)>==1)
 elseif (<tag(syrtime)> > <serv.time>) 
   SAY("Joo to bylo dobry! Uz mam dost.")
 else 
-  SAY("Nazdar! *hic* Hele, mam chut na poradny kus *hic* syra, rozumis? Když mi ho sezenes, neco ti dam! *hic*")
+  SAY("Nazdar! *hic* Hele, mam chut na poradny kus *hic* syra, rozumis? Kdyz mi ho sezenes, neco ti dam! *hic*")
   tag(syr,1) 
 endif 
 
@@ -4906,7 +4907,7 @@ Fencing=70.0
 Wrestling=30.0
 
 
-[function obnovjharod]]
+[function obnovjharod]
 Name=Jharod
 Color=0903
 Timer=0

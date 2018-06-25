@@ -6,7 +6,7 @@
 //[function vm_namerank]
 //[function vm_findrankloop]
 //[function vm_section]//y,index,rank,text
-//[function f_vend_dorprih_mjtl_gm] //slouží pouze k rozhodnutí co zobrazit v menu -  jestli Dorovnat nebo Prihodit 50k
+//[function f_vend_dorprih_mjtl_gm] //slouÅ¾Ã­ pouze k rozhodnutÃ­ co zobrazit v menu -  jestli Dorovnat nebo Prihodit 50k
 //[function f_vend_unblockitem]
 //[function f_vend_cas_do_konce_drazby]
 
@@ -92,7 +92,7 @@ else
 endif
 
 [function f_fieldmenu]
-link.tag(lastusedsign,<src.uid>) //link v této funkci je link té cedule t_fieldmenu - coz je pole
+link.tag(lastusedsign,<src.uid>) //link v tÃ©to funkci je link tÃ© cedule t_fieldmenu - coz je pole
 src.f_eq_fieldsignlayer
 
 //nasledujici blok se pouzije v pripade, ze uz existuje v dane oblasti vendorplac 
@@ -172,7 +172,7 @@ if (!(safe finduid(link.tag(ownerscont)).isitem))//neni aktivovan (nema owneruv 
 endif
 
 //kontrola pritomnosti najemni truhlicky (jednou se mi stalo ze zmizela...)
-if !(finduid(link.tag(najemcont))).isitem //neexistuje-li truhlicka
+if !(finduid(link.tag(najemcont)).isitem) //neexistuje-li truhlicka
  src.newitemsafe(i_field_chest)
  lastnew.attr=attr_move_never
  lastnew.P=<P>
@@ -849,7 +849,7 @@ f_field_lock(2)
 //  src.sysmessage("Nemuzes zamknout vyvesku domu na osobu.")
 //else
 //  f_lock(<src>)
-endif
+//endif
 
  
 [function f_field_lock]//link - house, src.targ - zamknuta vec, args - level //upraveno
@@ -916,7 +916,7 @@ resizepic 100 100 2620 550 <eval (5*d_def_radek_vyska)+(3*d_def_okraj)>  //s gum
 //tag(uvodni_text,"<link.name>")
 //tag(nabidka,"<tag(nabidka)>")
 //tag(zajemce,"<tag(zajemce)>")
-argo.settext(100,Stav drazby pole "<?name?> - <?tag(housename)?>") //jméno linku (to je vendorplac)
+argo.settext(100,Stav drazby pole "<?name?> - <?tag(housename)?>") //jmÃ©no linku (to je vendorplac)
 argo.settext(101,Nabidka: <?tag(nabidka)?>)
 argo.settext(102,Zajemce s posledni nabidkou: <?tag(zajemce).name?>)
 

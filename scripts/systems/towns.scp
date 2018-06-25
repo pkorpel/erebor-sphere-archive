@@ -88,7 +88,10 @@ endif
 return 0
 
 [function iscaptain_gondorkeep]
+return
+
 [function iscaptain_mordorkeep]
+return
 
 [function isexecutioner]//methoda townstonu - muzu zde ovladat BannList?
 arg(player,<src>)
@@ -168,7 +171,7 @@ king		6
 
 
 [function town_dialog]
-if !(strlen(<tag(towntype)>))'
+if !(strlen(<tag(towntype)>))
  emote("Nema nastaven 'tag.towntype' - moznosti:'gondorcity', mordorcity', 'gondorkeep', 'mordorkeep'")
  return 1
 endif
@@ -384,19 +387,19 @@ dialog d_town_major
 arg(zbytek,<eval (<argv(0)>)>)
 arg(dni,<eval (arg(zbytek)/<den>)>)
 if(<arg(dni)>)
- return <arg(dni)/10> dni
+ return <eval arg(dni)/10> dni
 endif
 arg(hodin,<eval (arg(zbytek)/<hodina>)>) //hodina ma 3600s
 if(<arg(hodin)>) 
- return <arg(hodin)/10> hod
+ return <eval arg(hodin)/10> hod
 endif
 arg(minut,<eval (arg(zbytek)/<minuta>)>)
 if(<arg(minut)>)
- return <arg(minut)/10> min
+ return <eval arg(minut)/10> min
 endif
 arg(sekund,<eval (arg(zbytek)/10)>)
 if(<arg(sekund)>)
- return <arg(sekund)/10> s
+ return <eval arg(sekund)/10> s
 endif
 
 [itemdef i_guard_setp]

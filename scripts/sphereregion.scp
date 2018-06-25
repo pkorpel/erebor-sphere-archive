@@ -1,5 +1,5 @@
 //****************************************************************************
-//SPHERE by : Menasoft ©1997-2000
+//SPHERE by : Menasoft Â©1997-2000
 //www.sphereserver.com
 // All SPHERE script files and formats are copyright Menasoft & Partners.
 // This file may be freely edited for personal use, but may not be distributed
@@ -10,10 +10,10 @@
 // FILE LAST UPDATED: Friday, April 28, 2000
 //
 //VERSION=0.55
-/////////////////////////////////////////// nové r_ ////////////////////////
-//r_dungeons_morthie1 // težba shadows málo výskytu
-//r_dungeons_morthie2 // težba shadows stredne výskytu
-//r_dungeons_morthie3 // // težba shadows nejvíce výýskytu
+/////////////////////////////////////////// novÃ© r_ ////////////////////////
+//r_dungeons_morthie1 // teÅ¾ba shadows mÃ¡lo vÃ½skytu
+//r_dungeons_morthie2 // teÅ¾ba shadows stredne vÃ½skytu
+//r_dungeons_morthie3 // // teÅ¾ba shadows nejvÃ­ce vÃ½Ã½skytu
 //r_doly // klasika
 //r_moria_mesto 
 //r_roklinka
@@ -728,7 +728,7 @@ ON=@CLIPERIODIC
 // Bucs den
 
 ON=@ENTER
-  src.sysmessage("Vítej v Roklince, <SRC.NAME>.")
+  src.sysmessage("Vitej v Roklince, <SRC.NAME>.")
   SRC.MIDILIST=midi_ForestA
 
 ON=@CLIPERIODIC
@@ -798,6 +798,7 @@ ON=@ENTER
     src.giveitem(i_qv3_bag3)
     return 0
     src.say (Muhahahaha)
+    enddo
   endif
 
 //////////////////////////////////////////////////////////////////////////
@@ -1111,7 +1112,7 @@ ON=@ENTER
 	
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-//            kvestové lokace
+//            kvestovÃ© lokace
 
 [REGIONTYPE r_Moria_central]
 
@@ -1123,7 +1124,7 @@ ON=@ENTER
     src.sysmessage("se z tohoto mesta vratilo zivych...")
   else	
     src.sysmessage("<src.sex(Vstoupil,Vstoupila)> jsi do Khazad-dum.")
-
+  endif
 ON=@CLIPERIODIC
   SRC.SFX=021F,0244,
 //021F,0243,0244,0245,
@@ -1270,7 +1271,7 @@ ON=@EXIT
 //////////////////////////////////////////////////////////////////////////
 
 [REGIONTYPE r_Hrobky_Cernych_Numenorejcu]
-  ON=@ENTER
+ON=@ENTER
     if (src.isplayer)
     src.f_hcn_enter
   endif

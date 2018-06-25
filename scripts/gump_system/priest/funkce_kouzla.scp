@@ -58,7 +58,7 @@
 //tag.statusvira=(<tag.statusvira> -3)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [FUNCTION f_nestriletnasebe]
-if(<?src.targ.uid?>==<?src.uid?>
+if(<?src.targ.uid?>==<?src.uid?>)
 return 0
 endif
 

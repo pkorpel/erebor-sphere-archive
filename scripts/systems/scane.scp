@@ -605,8 +605,8 @@ on=@Death //kun smazat
 findlayer(25).remove
 
 [speech spk_miniquest]
-on = *zdravim*
-on = *ahoj*
+on=*zdravim*
+on=*ahoj*
 say Zdravim fesaku!
 
 [function f_lov_kill]

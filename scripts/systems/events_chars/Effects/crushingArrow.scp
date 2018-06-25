@@ -221,7 +221,7 @@ arg(srcMaterial,<argv(1).def.tdata1>)
 if (<arg(targMaterial)> < <arg(srcMaterial)>)
   return 1 // 100% chance if the target material is lower than my own
 endif
-arg(materialPenalty<eval ((<arg(targMaterial)>-<arg(srcMaterial)>)*300)>
+arg(materialPenalty,<eval ((<arg(targMaterial)>-<arg(srcMaterial)>)*300)>)
 arg(chance,<eval ((1000-<f_crushingArrow_getWeaponPenalty(<argv(1)>)>)-<arg(materialPenalty)>)>)
 if (<arg(chance)> <= 0)
   return 0
