@@ -1304,14 +1304,6 @@ endif
 
 on=@skillstart
 stopscriptedskills
-//if(nolightfizz(1))//ty se poserou/imo lol - Dinivan :))
-// //say(co vracim: <nolightfizz>)
-// if(action==skill_magery)
-//  //osetri si to @spellcast (kdyby kouzlil svetlo)
-// else
-//  action=-1
-// endif
-//endif
 safe(findid(i_customspell_timer).remove)
 return 0
 
@@ -1325,7 +1317,7 @@ if (<action> == Skill_Magery)
     if (distancefrom(<act>) > 15)
       sysMessage("Cil je prilis daleko!")
       skill -1
-      return 
+      return 1
     elseif !(f_canseelos(<act>)) )
       sysMessage("Nevidis na cil.")
       skill -1
