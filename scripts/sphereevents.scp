@@ -1314,7 +1314,7 @@ if (ishungrymsg)
 endif
 if (<action> == Skill_Magery)
   if (<act> != uid)
-    if (distancefrom(<act>) > 15)
+    if (distancefrom(<act>) > 18)
       sysMessage("Cil je prilis daleko!")
       skill -1
       return 1
