@@ -101,9 +101,9 @@ tag.fail_msg="Moc to nejde, ti vsechen prach spadl nazem..."
 ON=@CollectorCheck
 
 [SPEECH spk_q029_alchnezdar]
-ON=*Ahoj*
-ON=*Zdravim*
-ON=*Dobry den*
+ON *Ahoj*
+ON *Zdravim*
+ON *Dobry den*
  f_q029_alchnezdar_DClick
 return 1
 
@@ -732,7 +732,6 @@ elseif (( src.qtag(q029_alchnezdar)==8) && (<src.restest 1 i_qv1_torso_ajdy>) &&
   src.qtag(q029_alchnezdar,9)
   SAY= "Tady prosim, je jako nova ..." 
  return 0
-endif
 
 
 // ---------------------------- Ukol Popletalius 6 QV1---------------------

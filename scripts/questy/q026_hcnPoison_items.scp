@@ -475,7 +475,7 @@ elseif (<argn> >= 1000) // go to the floor
     src.redMessage("Nelze se presunout na predmet, ktery neni nastaveny !")
   endif
   dialog(d_q026_DG_secretDoor)
-elseif (<argn> >= 10) // replace existing floor position
+else (<argn> >= 10) // replace existing floor position
   arg(i,<eval <argn>-10>)
   f_customLink_target("floor",1,<eval <argn>-10>,"d_q026_DG_secretDoor")
 endif

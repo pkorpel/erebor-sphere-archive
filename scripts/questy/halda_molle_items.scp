@@ -282,7 +282,7 @@ elseif (src.targ.baseid == i_hm_prisada_4)
   tag(ruliku,<eval(tag(ruliku)+<src.targ.amount>)>)
   if (tag(ruliku)==1)
     src.sysmessage(<src.sex(Pridal,Pridala)> si rulik do kotle. Uz v nem mas <tag(ruliku)> kulicka ruliku.) 
-  elseif (tag(ruliku) < 5)
+  elseif(tag(ruliku) < 5)
     src.sysmessage(<src.sex(Pridal,Pridala)> si rulik do kotle. Uz v nem mas <tag(ruliku)> kulicky ruliku.)
   else
     src.sysmessage(<src.sex(Pridal,Pridala)> si rulik do kotle. Uz v nem mas <tag(ruliku)> kulicek ruliku.)
@@ -293,7 +293,7 @@ elseif (src.targ.baseid == i_hm_prisada_5)
   tag(turin,<eval(tag(turin)+<src.targ.amount>)>)
   if (tag(turin)==1)
     src.sysmessage(<src.sex(Pridal,Pridala)> si turin do kotle. Uz v nem mas <tag(turin)> kousek.) 
-  elseif (tag(turin) < 5)
+  elseif(tag(turin) < 5)
     src.sysmessage(<src.sex(Pridal,Pridala)> si turin do kotle. Uz v nem mas <tag(turin)> kousky.)
   else
     src.sysmessage(<src.sex(Pridal,Pridala)> si turin do kotle. Uz v nem mas <tag(turin)> kousku.)
@@ -344,7 +344,7 @@ color=0
 [function hm_dokoncit_jidlo]
 if(<cooking> < 500)
   return <chance(<cooking>/2,3)>
-elseif (<cooking> < 900)
+else (<cooking> < 900)
   return <chance(<cooking>,3)>
 endif
 

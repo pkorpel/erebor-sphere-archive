@@ -1505,18 +1505,15 @@ nationinfo_Sedy[1]		a stale cekaji na lod, ktera by ze Zapadu priplula.<br><br>V
 nationinfo_Lesni[0]		Obyvatele lesniho kralovstvi v Temnem hvozdu, kde ziji v souladu s prirodou jako za starych casu. Prilis se nestaraji o deni ve Stredozemi.
 nationinfo_Lesni[1]		<br>Vladce: Thranduil<br>Sidlo: Lesni Kralovstvi
 
-[defnames gumpfonts]
-std_basefont        <BASEFONT SIZE="+5" COLOR="#000080">
-basefont_green_2    <BASEFONT SIZE="+2" COLOR="#000800">
-
 [DIALOG D_RACEclass_background]
 argo.SetLocation(0,0)
 resizepic 0 0 2600 640 480
 gumppic 510 110 5536
 gumppic 35 110 5536
-argo.HTMLGUMPa(20,20,600,200,"<std_basefont><CENTER>Vitej na Ereboru!<br><br><SRC.NAME> Vesel jsi do tohoto sveta,<br>je cas Volby. Tvuj osud Te ocekava.<br>Vybirej moudre, a mozna se na tebe usmeje stesti.<br><br>Toto je kniha Pravdy.<br>Vyber si zde na jake strane zacnes,<br>kde skoncis je na Tobe.<CENTERE><basefont_end>",0,0)
+HTMLGUMP(20,20,600,200,0,0,0)
 
-[DIALOG D_RACEclass_background text]
+[DIALOG D_RACEclass_background TEXT]
+<BASEFONT SIZE="+5" COLOR="#000080"><CENTER>Vitej na Ereboru!<br><br><SRC.NAME> Vesel jsi do tohoto sveta,<br>je cas Volby. Tvuj osud Te ocekava.<br>Vybirej moudre, a mozna se na tebe usmeje stesti.<br><br>Toto je kniha Pravdy.<br>Vyber si zde na jake strane zacnes,<br>kde skoncis je na Tobe.</CENTER></BASEFONT>
 
 [DIALOG D_RACEclass_background Button]
 on=0
@@ -1525,9 +1522,9 @@ on=0
 gumppic(140,200,2200)
 argo.tag(back,<argv(0)>)
 argo.tag(forward,<argv(1)>)
-argo.HTMLGUMPa(170,215,135,160,"<?std_basefont?><?<tag(startdialog)>[0]?><?basefont_end?>",0,0)
-argo.HTMLGUMPa(325,215,135,160,"<?std_basefont?><?<tag(startdialog)>[1]?><?basefont_end?>",0,0)
-argo.HTMLGUMPa(200,382,235,25,<basefont_green_2> ZPET                     DALSI<?basefont_end?> ,0,0)
+argo.HTMLGUMPa(170,215,135,160,"<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?<tag(startdialog)>[0]?></BASEFONT>",0,0)
+argo.HTMLGUMPa(325,215,135,160,"<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?<tag(startdialog)>[1]?></BASEFONT>",0,0)
+argo.HTMLGUMPa(200,382,235,25,<?safe?><BASEFONT SIZE="+2" COLOR="#000800"> ZPET                     DALSI</BASEFONT> ,0,0)
 BUTTON(170,380,4016,4016,1,0,1)
 BUTTON(435,380,4024,4024,1,0,2)
 
@@ -1551,8 +1548,8 @@ button(325,246,2151,2152,1,0,7)//shaman
 button(325,282,2151,2152,1,0,8)
 button(325,318,2151,2152,1,0,9)
 //button(325,354,2151,2152,1,0,10)
-argo.HTMLGUMPa(210,215,110,160,<?std_basefont?><?seznamclass[0]?><?basefont_end?>,0,0)
-argo.HTMLGUMPa(365,215,110,160,<?std_basefont?><?seznamclass[1]?><?basefont_end?>,0,0)
+argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?seznamclass[0]?></BASEFONT> ,0,0)
+argo.HTMLGUMPa(365,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?seznamclass[1]?></BASEFONT> ,0,0)
 //BUTTON 170 380 4016 4016 1 0 8
 //BUTTON 435 380 4024 4024 1 0 9
 
@@ -1596,8 +1593,8 @@ argo.button(325,246,2151,2152,1,0,5)
 argo.button(325,282,2151,2152,1,0,6)
 //button(325,318,2151,2152,1,0,9)
 //button(325,354,2151,2152,1,0,10)
-argo.HTMLGUMPa(210,215,110,160,<?std_basefont?><?seznamras[0]?><?basefont_end?> ,0,0)
-argo.HTMLGUMPa(365,215,110,160,<?std_basefont?><?seznamras[1]?><?basefont_end?> ,0,0)
+argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?seznamras[0]?></BASEFONT> ,0,0)
+argo.HTMLGUMPa(365,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?seznamras[1]?></BASEFONT> ,0,0)
 //BUTTON 170 380 4016 4016 1 0 8
 //BUTTON 435 380 4024 4024 1 0 9
 
@@ -1649,22 +1646,22 @@ gumppic 140 200 2200
 argo.button(170,210,2151,2152,1,0,1)
 argo.button(170,246,2151,2152,1,0,2) 
 if !(strcmpi(<tag(race)>,Clovek))
-  arg(seznamnations[0],Gondoran<br>+++++++<br>Rohir<br>+++++++<br>Severan<br>+++++++<br>Mordoran<br>+++++++<br>)
-  arg(seznamnations[1],Haradwaith<br>+++++++<br>Cerny Numenorojec<br>+++++++<br>Nurn-man<br>+++++++)
+  arg(seznamnations[0],<?safe?>Gondoran<br>+++++++<br>Rohir<br>+++++++<br>Severan<br>+++++++<br>Mordoran<br>+++++++<br>)
+  arg(seznamnations[1],<?safe?>Haradwaith<br>+++++++<br>Cerny Numenorojec<br>+++++++<br>Nurn-man<br>+++++++)
   argo.button(170,282,2151,2152,1,0,3)
   argo.button(170,318,2151,2152,1,0,4)
   argo.button(325,210,2151,2152,1,0,5)
   argo.button(325,246,2151,2152,1,0,6)
   argo.button(325,302,2151,2152,1,0,7)
 elseif !(strcmpi(<tag(race)>,skret))
-  arg(seznamnations[0],Mordoran<br>+++++++<br>Divoky Skret<br>+++++++)
+  arg(seznamnations[0],<?safe?>Mordoran<br>+++++++<br>Divoky Skret<br>+++++++)
   arg(seznamnations[1],"")
 elseif !(strcmpi(<tag(race)>,elf))
-  arg(seznamnations[0],Sedy Elf<br>+++++++<br>Lesni Elf<br>+++++++)
+  arg(seznamnations[0],<?safe?>Sedy Elf<br>+++++++<br>Lesni Elf<br>+++++++)
   arg(seznamnations[1],"")
 endif
-argo.HTMLGUMPa(210,215,110,160,<?std_basefont?><?arg(seznamnations[0])?><?basefont_end?> ,0,0)
-argo.HTMLGUMPa(365,215,110,160,<?std_basefont?><?arg(seznamnations[1])?><?basefont_end?> ,0,0)
+argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?arg(seznamnations[0])?></BASEFONT> ,0,0)
+argo.HTMLGUMPa(365,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?arg(seznamnations[1])?></BASEFONT> ,0,0)
 
 [DIALOG D_raceclass_nations button]
 on=0
@@ -1708,8 +1705,8 @@ gumppic 140 200 2200
 //argo.BUTTON(170,380,4016,4016,1,0,1)
 argo.BUTTON(435,380,4024,4024,1,0,2)
 
-argo.HTMLGUMPa(210,215,110,160,<?std_basefont?><?choosestats[0]?><?basefont_end?>,0,0)
-argo.HTMLGUMPa(335,215,110,20,<?std_basefont?><?choosestats[1]?><?basefont_end?>,0,0)
+argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?choosestats[0]?></BASEFONT>,0,0)
+argo.HTMLGUMPa(335,215,110,20,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?choosestats[1]?></BASEFONT>,0,0)
 
 argo.texta(180,233,1000,"(<?basestats_<tag.class>_str_min?> - <?basestats_<tag.class>_str_max?>)")
 argo.texta(180,269,1000,"(<?basestats_<tag.class>_dex_min?> - <?basestats_<tag.class>_dex_max?>)")
@@ -1887,22 +1884,22 @@ gumppic 140 200 2200
 argo.button(170,210,2151,2152,1,0,1)
 argo.button(170,246,2151,2152,1,0,2) 
 if !(strcmpi(<tag(race)>,Clovek))
-  arg(seznamnations[0],Gondoran<br>+++++++<br>Rohir<br>+++++++<br>Severan<br>+++++++<br>Mordoran<br>+++++++<br>)
-  arg(seznamnations[1],Haradwaith<br>+++++++<br>Cerny Numenorojec<br>+++++++<br>Nurn-man<br>+++++++)
+  arg(seznamnations[0],<?safe?>Gondoran<br>+++++++<br>Rohir<br>+++++++<br>Severan<br>+++++++<br>Mordoran<br>+++++++<br>)
+  arg(seznamnations[1],<?safe?>Haradwaith<br>+++++++<br>Cerny Numenorojec<br>+++++++<br>Nurn-man<br>+++++++)
   argo.button(170,282,2151,2152,1,0,3)
   argo.button(170,318,2151,2152,1,0,4)
   argo.button(325,210,2151,2152,1,0,5)
   argo.button(325,246,2151,2152,1,0,6)
   argo.button(325,302,2151,2152,1,0,7)
 elseif !(strcmpi(<tag(race)>,skret))
-  arg(seznamnations[0],Mordoran<br>+++++++<br>Divoky Skret<br>+++++++)
+  arg(seznamnations[0],<?safe?>Mordoran<br>+++++++<br>Divoky Skret<br>+++++++)
   arg(seznamnations[1],"")
 elseif !(strcmpi(<tag(race)>,elf))
-  arg(seznamnations[0],Sedy Elf<br>+++++++<br>Lesni Elf<br>+++++++)
+  arg(seznamnations[0],<?safe?>Sedy Elf<br>+++++++<br>Lesni Elf<br>+++++++)
   arg(seznamnations[1],"")
 endif
-argo.HTMLGUMPa(210,215,110,160,<?std_basefont?><?arg(seznamnations[0])?><?basefont_end?> ,0,0)
-argo.HTMLGUMPa(365,215,110,160,<?std_basefont?><?arg(seznamnations[1])?><?basefont_end?> ,0,0)
+argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?arg(seznamnations[0])?></BASEFONT> ,0,0)
+argo.HTMLGUMPa(365,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?arg(seznamnations[1])?></BASEFONT> ,0,0)
 
 [DIALOG D_raceclass_nations_fix button]
 on=0
@@ -1993,8 +1990,8 @@ gumppic 140 200 2200
 //argo.BUTTON(170,380,4016,4016,1,0,1)
 argo.BUTTON(435,380,4024,4024,1,0,2)
 
-argo.HTMLGUMPa(210,215,110,160,<?std_basefont?><?choosestats[0]?><?basefont_end?>,0,0)
-argo.HTMLGUMPa(335,215,110,20,<?std_basefont?><?choosestats[1]?><?basefont_end?>,0,0)
+argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?choosestats[0]?></BASEFONT>,0,0)
+argo.HTMLGUMPa(335,215,110,20,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?choosestats[1]?></BASEFONT>,0,0)
 
 argo.texta(180,233,1000,"(<?basestats_<tag.class>_str_min?> - <?basestats_<tag.class>_str_max?>)")
 argo.texta(180,269,1000,"(<?basestats_<tag.class>_dex_min?> - <?basestats_<tag.class>_dex_max?>)")

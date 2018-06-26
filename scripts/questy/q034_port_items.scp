@@ -12,7 +12,7 @@ if (<more1> < 1)
   cont.go(<tag.portto>)
   remove
 endif
-cont.sysmessage("<?eval(more1)?> sekund do presunu")
+cont.sysmessage("<?eval(more1)?> sekund do presunu");
 more1=<more1>-1
 timer=1
 return 1

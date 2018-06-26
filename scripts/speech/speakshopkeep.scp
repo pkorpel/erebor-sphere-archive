@@ -1,5 +1,5 @@
 //****************************************************************************
-//SPHERE by : Menasoft ï¿½1997-2000
+//SPHERE by : Menasoft ©1997-2000
 //www.sphereserver.com
 // All SPHERE script files and formats are copyright Menasoft & Partners.
 // This file may be freely edited for personal use, but may not be distributed
@@ -100,7 +100,7 @@ ON=*zde*
 ON=*ress*
 ON=*pomoc*
 ON=*kdo*
-	SAY=Dekuji ti za navraceni Zlate otepi. Tento artefakt byl odcizen a jeho sila ne nesmela dostat do cizich rukou. Odmenou ti bud hlt elixiru prirodniho poznani ktery najdes v mem dome.
+	SAY=Dekuji ti za navraceni Zlate otepi. Tento artefakt byl odcizen a jeho sila ne nesmela dostat do cizich rukou. Odmenou ti bud hlt elixiru prirodniho poznani ktery najdeš v mem dome.
 
 [EOF]
 

@@ -7252,7 +7252,7 @@ CATEGORY=Ship Parts
 SUBSECTION=Gang Plank
 DESCRIPTION=Gang Plank
 
-[ITEMDEF 03e41] //(sail tip and side piece)
+[ITEMDEF 03e41] (sail tip and side piece)
 //ship
 TYPE=T_SHIP_SIDE_LOCKED
 

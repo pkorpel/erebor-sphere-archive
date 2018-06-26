@@ -664,7 +664,6 @@ if (<arg(q000_velmistr)> < 7) // did not heal Elvira
   return 0
 else
 dialog(d_q000_Elvira)
-endif
 
 
 [dialog d_q000_Elvira]

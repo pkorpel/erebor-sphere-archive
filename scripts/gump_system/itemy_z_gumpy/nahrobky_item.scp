@@ -13,7 +13,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
 
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0002]
@@ -31,7 +30,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0003]
 //stone pavers
@@ -48,8 +46,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0004]
 //stone pavers
@@ -66,8 +62,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0005]
 //stone pavers
@@ -84,8 +78,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0006]
 //stone pavers
@@ -102,8 +94,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0007]
 //stone pavers
@@ -120,8 +110,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0008]
 //stone pavers
@@ -138,8 +126,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0009]
 //stone pavers
@@ -156,8 +142,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0010]
 //stone pavers
@@ -174,8 +158,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0011]
 //stone pavers
@@ -192,8 +174,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0012]
 //stone pavers
@@ -210,8 +190,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0013]
 //stone pavers
@@ -228,8 +206,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0014]
 //stone pavers
@@ -246,8 +222,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0015]
 //stone pavers
@@ -264,8 +238,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0016]
 //stone pavers
@@ -282,8 +254,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0017]
 //stone pavers
@@ -300,8 +270,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0018]
 //stone pavers
@@ -318,8 +286,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0019]
 //stone pavers
@@ -336,8 +302,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0020]
 //stone pavers
@@ -354,8 +318,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0021]
 //stone pavers
@@ -372,8 +334,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0022]
 //stone pavers
@@ -390,8 +350,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0023]
 //stone pavers
@@ -408,8 +366,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0024]
 //stone pavers
@@ -426,8 +382,6 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
-
 ///////////////////////////////////////////////////
 [ITEMDEF Nahrobek_gump_0025]
 //stone pavers
@@ -444,5 +398,4 @@ return 1
 else
 src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
-endif
 ///////////////////////////////////////////////////

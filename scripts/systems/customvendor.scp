@@ -1858,7 +1858,7 @@ argo.button(<d_def_okraj>,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb7,0fb9,1,0,1)/
 argo.button(<d_def_okraj>+33,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb1,0fb3,1,0,0)//cancel
 
 if (isitem)
-	if (type==t_container)
+	if (type==t_container))
 		argo.button(lastxpos+150,lastypos,4005,4007,1,0,2)//
 		argo.texta(lastxpos+180,lastypos,0481,Co se prodava?)//
 	endif
@@ -2386,4 +2386,4 @@ a utrzene penize
 
 
 
-[eof]
+[eof]                  

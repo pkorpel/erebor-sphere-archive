@@ -13,7 +13,7 @@ else
   f_q099_vyvrhel
 endif
 
-[function f_q099_vyvrhel]
+[function f_q099_vyvrhel)
 if ((<src.tag(realm)><=-1)&&!(src.qtag(q099)))
   src.qtag(q099,1,30)
 endif

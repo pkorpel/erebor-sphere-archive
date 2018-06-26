@@ -122,7 +122,7 @@ while (var(placement) < argv(2))
   if (arg(cur_value) <= argv(1))
     if (arg(cur_endTime) < argv(0))
       tag(record[<eval var(placement)>],"<argv(0)>,<argv(1)>")
-      f_reduceResist_cleanInvalidRecords(<eval var(placement)+1>,<argv(2)>,<argv(0)>)
+      f_reduceResist_cleanInvalidRecords(<var(placement)+1>,<argv(2)>,<argv(0)>)
       if (var(placement) == 0)
         f_resistModifier_applyCurrResist
       endif

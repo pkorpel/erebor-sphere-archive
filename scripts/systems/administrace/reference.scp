@@ -142,7 +142,7 @@ if (strlen(<argo.tag(from)>))
     argo.texta(<argo.tag(sloupec_x[1])>+<d_def_odsazeni>,<ypos>,2301,"<safe argo.tag(from).Enummethod(index,1)>")
     argo.texta(<argo.tag(sloupec_x[2])>+<d_def_odsazeni>,<ypos>,2301,"<safe argo.tag(from).Enummethod(index,16)>")
     argo.texta(<argo.tag(sloupec_x[3])>+<d_def_odsazeni>,<ypos>,2301,"<safe argo.tag(from).Enummethod(index,4)>")
-    if (index%<argo.tag(radku)>)==0
+    if (index%<argo.tag(radku)>)==0)
       if (index)
         argo.button(<argo.tag(sirka)>-(<d_def_okraj>+<d_def_skvira>+16),<argo.tag(obj_y[2])>,0fa,0fb,1,0,1) // prev
       endif

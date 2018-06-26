@@ -960,7 +960,7 @@ if ((<tag(playerAmount)>>20)&&(<rozdiel><0))
   argo.button(385,540,4005,4007,1,0,1)
 endif
 
-if (<eval tag(pom)-20>>0)
+if (<tag(pom)-20>>0)
   argo.button(345,540,4014,4015,1,0,2)
 endif
 
@@ -1244,10 +1244,11 @@ while (arg(i)<=<od>+20)
   argo.text(440,20+25*j,152,2500+i)
   arg(i,#+1)
   arg(j,#+1)
+  endif
 endwhile
 
 if (<more1>>20)
-  if (<eval(more2+20)><<eval(more1)>)
+  if (<eval(more2+20)><<eval(more1))>))
     argo.button(385,540,4005,4007,1,0,1)
   endif
 endif
@@ -1699,7 +1700,7 @@ on=@timer
 if (<more2>==0)
   cont.events=+e_zmrznutej
   cont.color=0480
-  cont.paralyze(<eval tag(timer)*10>,1)
+  cont.paralyze(<tag(timer)*10>,1)
   cont.sysmessage("<?cont.sex(Umrzl,Umrzla)?> jsi")
   timer=<tag(timer)>
   more2=1
@@ -2223,7 +2224,7 @@ on=@targon_char
 return 1
 
 on=@targon_item
-if (<src.targ.type>==01 || <src.targ.type>==t_container)
+if (<src.targ.type>=01 || <src.targ.type>=t_container)
   if (<tag(target)>==1)  
     src.tag(contentmoveto,<src.targ>)
     src.newitemsafe(i_contentmove_target)

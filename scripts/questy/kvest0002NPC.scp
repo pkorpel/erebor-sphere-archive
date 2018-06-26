@@ -1,6 +1,6 @@
 /////////////////////////////////////////////
 //
-//     **   GondorskÃ© Kvesty  **
+//     **   Gondorské Kvesty  **
 //
 //
 //
@@ -29,7 +29,7 @@
 
 [CHARDEF c_h_quest_postava_0007]
 
-//   umÃ­stÄ›nÃ­: Bard recnik a pohodar  Kdekoliv v Minas Tirith
+//   umístìní: Bard recnik a pohodar  Kdekoliv v Minas Tirith
 
 
 NAME=Bard Kardusaj 
@@ -63,7 +63,7 @@ DEX={200 300}
 KARMA=1000
 MAGERY={90.0 100.0} 
 WRESTLING={70.0 80.0} 
-TACTICS={40.0 60.0} 
+TACTICS{40.0 60.0} 
 tag.experience=<eval {40.0 60.0}>
 DETECTINGHIDDEN={90.0 100.0}
 provocation=100
@@ -114,7 +114,7 @@ sfx 1048
 
 [CHARDEF C_m_vypravec_0001]
 
-//   umÃ­stÄ›nÃ­: dva pÅ™ed brÃ¡nou do krÃ¡lovskÃ½ch zahrad a citadeli..   5840 3874 20
+//   umístìní: dva pøed bránou do královských zahrad a citadeli..   5840 3874 20
 
 
 NAME=straz citadely
@@ -261,7 +261,7 @@ ON=@NPCRefuseItem
 /////////////////////////////////////////////////////////////////////
 //////////////////  cestna straz MT citadela  ///////////////////////
 
-//   umÃ­stÄ›nÃ­: dva pÅ™ed brÃ¡nou do krÃ¡lovskÃ½ch zahrad a citadeli..   5840 3874 20
+//   umístìní: dva pøed bránou do královských zahrad a citadeli..   5840 3874 20
 
 
 

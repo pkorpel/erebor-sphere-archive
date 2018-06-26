@@ -622,7 +622,7 @@ DUPELIST=0119b
 
 CATEGORY=Decoration - Dungeons and The Dead
 SUBSECTION=Traps
-DESCRIPTION=Floor Spikes Yavanna's
+DESCRIPTION=Floor Spikes Yavanna`s
 
 on=@Create
 attr=010
@@ -639,7 +639,7 @@ DUPELIST=011a1
 
 CATEGORY=Decoration - Dungeons and The Dead
 SUBSECTION=Traps
-DESCRIPTION=Floor Spikes 2 Yavanna's
+DESCRIPTION=Floor Spikes 2 Yavanna`s
 
 on=@Create
 attr=010
@@ -656,7 +656,7 @@ DUPELIST=01109
 
 CATEGORY=Decoration - Dungeons and The Dead
 SUBSECTION=Traps
-DESCRIPTION=Floor Spikes 2 Yavanna's
+DESCRIPTION=Floor Spikes 2 Yavanna`s
 
 on=@Create
 attr=010
@@ -674,7 +674,7 @@ DUPELIST=0111c
 
 CATEGORY=Decoration - Dungeons and The Dead
 SUBSECTION=Traps
-DESCRIPTION=Floor Spikes 2 Yavanna's
+DESCRIPTION=Floor Spikes 2 Yavanna`s
 
 on=@Create
 attr=010
@@ -2835,7 +2835,7 @@ tag(pocetSpawnu,#+1)
 
 [function f_guarditAdv_RemoveSpawn] // argv0 - spawn to remove
 arg(i,<argv(0)>)
-while (<eval i+1> < <tag(pocetSpawnu)>)
+while (<i+1> < <tag(pocetSpawnu)>)
   tag(spawn_<eval i>,<tag(spawn_<eval i+1>)>)
   arg(i,#+1)
 endwhile
@@ -2943,7 +2943,7 @@ elseif (<argn> >= 1000) // go to the spawn
   else
     dialog(d_guarditAdv)
   endif
-elseif (<argn> >= 10) // replace existing position
+else (<argn> >= 10) // replace existing position
   f_guarditAdvTargetSpawn(<eval argn-10>,<uid>,<argo.tag(baseDialog)>)
 endif
 return 1
@@ -3141,7 +3141,7 @@ target("Zamer zed, ktera ma byt aktivovana jako vrazedna.")
 timer=60
 
 on=@TargOn_Item
-if !(<src.targ.f_wallKiller_create>) // the item couldn't be converted to wall killer
+if !(<src.targ.f_wallKiller_create) // the item couldn't be converted to wall killer
   target("Zkus to znovu")
 endif
 return 1
@@ -3184,6 +3184,7 @@ argo.button(<argo.dialog_but_ru>,d_def_button_dialog1,d_def_button_dialog2,1,0,2
 on=0
 
 on=1 // ok
+if (<strlen 
 
 on=2 // help
 dialog(d_wallKiller)

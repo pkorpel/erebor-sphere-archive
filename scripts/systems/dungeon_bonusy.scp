@@ -362,7 +362,7 @@ on=@AnyButton
 f_wallBuilding_setDialogValues(<argtxt(1)>,<argChk(1)>,<argChk(2)>,<argChk(3)>,<argChk(4)>)
 if (<argn> >= 1000) //handling remove of targets
   arg(buttToRemove,<eval <argn>-1000>)
-  while (<eval arg(buttToRemove)+1> < <eval tag(wallsCount)>)
+  while (<arg(buttToRemove)+1> < <eval tag(wallsCount)>)
     tag(wallPosition[<eval buttToRemove>],<tag(wallPosition[<eval buttToRemove+1>])>)
     arg(buttToRemove,#+1)
   endwhile
@@ -1332,7 +1332,7 @@ on=@AnyButton
 f_wallMoving_setDialogValues(<argtxt(1)>,<argtxt(2)>,<argChk(1)>,<argChk(2)>,<argChk(3)>,<argChk(4)>,<argChk(5)>)
 if (<argn> >= 1000)	//handling remove of targets
   arg(buttToRemove,<eval <argn>-1000>)
-  while (<eval arg(buttToRemove)+1> < <eval tag(wallsCount)>)
+  while (<arg(buttToRemove)+1> < <eval tag(wallsCount)>)
     tag(wallUID[<eval buttToRemove>],<tag(wallUID[<eval buttToRemove+1>])>)
     arg(buttToRemove,#+1)
   endwhile

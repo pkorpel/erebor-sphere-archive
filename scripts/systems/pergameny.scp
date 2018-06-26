@@ -191,9 +191,9 @@ Pergamen nesmi byt kopirovan
 ON=0
 if (tag(copy)==-1)
 SRC.sysMessage Pergamen smi byt volne kopirovan.
-elseif (tag(copy==0))
+elseif (tag(copy==0)
 SRC.sysMessage Pergamen nesmi byt kopirovan.
-elseif (tag(copy==1))
+elseif (tag(copy==1)
 SRC.sysMessage Pergamen smi byt jednou kopirovan.
 endif
 

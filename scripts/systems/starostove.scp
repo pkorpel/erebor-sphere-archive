@@ -280,7 +280,7 @@ return 1
 ////////////////////////
 [function navrhban]
 //if(strlen(<src.region.tag(jmeno_mesta)>))&&(<eval src.tag(realm)>==<eval src.region.tag(realm)>)
-if(<src.tag(realm)>==1) //gondoÅ™i
+if(<src.tag(realm)>==1) //gondoøi
  if(strlen(<src.tag(mesto)>))
   if(strlen(<var(townstone_<src.tag(mesto)>)>)) //existuje townstone? snad jo ! 
    src.newitemsafe(i_navrhban_target)
@@ -288,11 +288,11 @@ if(<src.tag(realm)>==1) //gondoÅ™i
    lastnew.equip
    return 1
   else
-   src.sysmessage(Chyba kterou jsi nezavinil. Opravit lze kliknutim na mestsky kamen, pak zkus navrhnout znovu)
+   src.sysmessage(Chyba kterou jsi nezavinil. Opravit lze kliknutím na mìstský kámen, pak zkus navrhnout znovu)
    return 1 
   endif
  else
-  src.sysmessage(Navrhovat mohou pouze obcane mest)
+  src.sysmessage(Navrhovat mohou pouze obèané mìst)
   return 1
  endif 
 else //mordori to maj blby   
@@ -303,7 +303,7 @@ else //mordori to maj blby
    lastnew.equip
    return 1
   else
-   src.sysmessage(Chyba kterou jsi nezavinil. Opravit lze kliknutim na mestsky kamen, pak zkus navrhnout znovu)
+   src.sysmessage(Chyba kterou jsi nezavinil. Opravit lze kliknutím na mìstský kámen, pak zkus navrhnout znovu)
    return 1 
   endif
  else
@@ -498,7 +498,7 @@ tag.remove(rememberuid)
 tag.remove(remembername)
 tag.remove(oldpos)
 //////////////////////
-//konec hracskych funkci
+//konec hráèských funkcí
 //////////////////////
 //////////////////////////
 //funkce starosta only
@@ -735,7 +735,7 @@ if(<tag(starosta)>)||(isgm)||(<tag(general)>)
   arg(i,0)
   while(i < pocet_strazi)
    //arg(j,<eval {0 <eval (<arg(pocet_strazi)>-1)>}>) //nahodna straz ve meste
-   if (guardcont.findcont(i).link) //umisteny spawnem
+   if(guardcont.findcont(i).link>) //umisteny spawngem
     arg(guard,<guardcont.findcont(i).link.tag(lastspawned)>)     
     if(<finduid(guard).npc>) //spawnuta straz
      if(<src.distancefrom(<finduid(guard)>)> <= 15)      
@@ -1845,7 +1845,7 @@ if (<argo.tag(cislo)> == 9) //hlasovani o (ne)prijeti
 endif
 if (<argo.tag(cislo)> == 11) //Navrzeni na vyhosteni
   if (link.f_star_checkrightsmes(3))
-    say()        // wtf? Co to je? Proc to tu je? Nechavam, protoze nevÃ­m, jestli to neplni nejakou me neznamou funkci
+    say()        // wtf? Co to je? Proc to tu je? Nechavam, protoze nevím, jestli to neplni nejakou me neznamou funkci
     if (<findcont(radek).tag(nextTime)> > <serv.time>)
       src.sysmessage("<findcont(radek).link.name> je v ochrane lhute jednoho tydne.")
       return 1

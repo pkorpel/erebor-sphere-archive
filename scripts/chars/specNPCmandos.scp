@@ -24,7 +24,7 @@ KARMA=-1000
 
 MAGERY={90.0 100.0} 
 WRESTLING={70.0 80.0} 
-TACTICS={40.0 60.0}
+TACTICS{40.0 60.0}
 
 flag_invul(1)
 tag(noanimate,1)

@@ -1,5 +1,5 @@
 //****************************************************************************
-//SPHERE by : Menasoft ï¿½1997-2000
+//SPHERE by : Menasoft ©1997-2000
 //www.sphereserver.com
 // All SPHERE script files and formats are copyright Menasoft & Partners.
 // This file may be freely edited for personal use, but may not be distributed
@@ -101,7 +101,7 @@ ON=*chces*zlato ?*
 ON=*Minas tirith*
 ON=*z*Tirith*
           DORAND 3
-			SAY "Minas Tirith je nejhezci mesto pod hvezdami."
+			SAY "Minas Tirith je nejhezci mesto pod hvìzdami."
 			SAY "Minas Tirith je mesto vzneseneho krale Elessara"
 			SAY "Neznam nikoho kdo by nechtel zit v Minas Tirith"
                 ENDDO

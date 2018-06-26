@@ -409,8 +409,9 @@ elseif (src.qtag(q022)==9)
     argo.HTMLGUMP(170,230,440,100,15,0,36)
   endif
 
-else
-  argo.HTMLGUMP(170,230,440,100,12,0,36)
+  else
+    argo.HTMLGUMP(170,230,440,100,12,0,36)
+  endif
 endif
 
 [dialog d_q022_Kuchar text]

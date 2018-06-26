@@ -9,7 +9,7 @@ ON=*co*delas*?*
 ON=*occupation*
 	IF ( <COMPLEXITY.HIGH> || <COMPLEXITY.MEDIUM> )
 		DORAND 3
-			SAY Jsem banker, <SRC.SEX milord milady>.
+			SAYJsem banker, <SRC.SEX milord milady>.
 			SAY Zastupuji banku v  <REGION.NAME>, <SRC.SEX milord milady>.
 			
 		ENDDO
@@ -24,6 +24,7 @@ ON=*occupation*
 ON=*Balance*
 ON=*stav*penez*
 	SAY=Na vasich depozitnich uctech je <SRC.BANKBALANCE> zlatych.
+        ENDIF 
 
 ON=*Bank*
 ON=*k*uctu*
@@ -31,6 +32,7 @@ ON=*ulozit*penize*
 ON=*ulozit*prachy*
 ON=*ulozit*cenosti*
 	src.BANKSELF
+        ENDIF
 
 
 ON=hi
@@ -43,10 +45,12 @@ ON=*hej*ty*
 ON=*dobrej*
 ON=*dobrej*bankeri*
 	SAY=Zdravim Vas, nase penezni sluzby Vam jsou k dispozici?
+        ENDIF       
 
 
 ON=*to*je*doba*
 	SAY="hech..   Jaka doba ?  Chcete si to snad skusit misto me ?
+        ENDIF
 
 ON=*rob*
 ON=*steal*
@@ -82,12 +86,15 @@ ON=*account*
 
 ON=*gold*
         SAY "Zlato, si u nas muzete kdykoli uschovat i vyzvednout"
+ 	ENDDO
 
 ON=*silver*
         SAY "Stribro si u nas muzete kdykoli uschovat i vyzvednout"
+	ENDDO
 
 ON=*copper*
 	SAY Medene a jine blbosti, si u nas muzete kdykoli uschovat i vyzvednout, i jine cennosti
+	ENDDO
 
 ON=Bye
 ON=Goodbye
@@ -97,7 +104,7 @@ ON=Farewell
 	return 1
 
 ON=ACCOUNT
-	SAY=Sorry tyto informace jsou privatni.
+	SAY=Sorry tyto informace jsou provatni.
 
 ON=COIN
 	SAY=We accept only the coin of the realm.
@@ -141,24 +148,26 @@ ON=*kde*se*nachazim?
         ENDDO
 
 ON=*hi*
-	SAY=" se necemu smejes ? "
+	SAY= " se necemu smejes ? "
+        ENDo       
 
 
 ON=*hej*ty*
           DORAND 2
-              SAY=" to jako ja ? "
-              SAY=" To mluvis na me ? "
-        ENDDO
+              SAY= " to jako ja ? "
+              SAY= " To mluvis na me ? "
+        ENDo       
 
 ON=*jo*
           DORAND 2
-              SAY="Co jo ?"
-              SAY="Jo co ?"
-        ENDDO
+              SAY= "Co jo ?"
+              SAY= "Jo co ?"
+        ENDo       
 
 
 ON=*kapitan*
                    SAY= Kapitana straze najdes v kasarnach pobliz brany do mesta .
+        ENDDO
 
 
 

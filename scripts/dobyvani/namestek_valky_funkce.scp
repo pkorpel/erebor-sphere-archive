@@ -21,7 +21,7 @@ ON=*hi*
 if (<eval src.tag.realm> == 2)
   say("Chces zautocit...?")
   dialog(d_namestek_valky_m)
- return 1
+ r eturn 1
 else
   say("Tahni!")
 endif

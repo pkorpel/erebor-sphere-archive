@@ -1861,7 +1861,7 @@ BLOODCOLOR=072c
 
 CATEGORY=Monsters
 SUBSECTION=Summons
-DESCRIPTION=MAGE Elemental zeme
+DESCRIPTION=MAGE Elemental zemì
 TEVENTS=e_monster
 TEVENTS=e_character
 

@@ -150,7 +150,7 @@ argo.dialog_page("Mohu pomoci?")
   elseif (<eval src.qtag(q020)>==10)
     argo.setText(argo.newTextLine,"A uz mas to srdce?")
     argo.questDialog_HTMLGUMP
-  elseif (<eval src.qtag(q020)> > 10)
+  elseif (<eval src.qtag(q020)>10)
     argo.setText(argo.newTextLine,"Uz jsi mi pomohl dost, nic vic nepotrebuji.")
     argo.questDialog_HTMLGUMP
   else

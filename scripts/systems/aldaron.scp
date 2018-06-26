@@ -120,12 +120,12 @@ attr=010
 color=0987
 
 ON=@Timer
- if (0<tag(aktivovane)> == 1)
+ if (0<tag(aktivovane) == 1>)
   name=Seal
  	color=0987
  	tag(aktivovane,0)
  endif
- if (0<tag(spawnute)> == 1)
+ if (0<tag(spawnute) == 1>)
  	tag(spawnute,0)
  endif
 return 1
@@ -208,7 +208,7 @@ attr=090
 color=0986
 
 on=@timer
-if (0<tag(otvorene)> == 1)
+if (0<tag(otvorene) == 1>)
 tag(dvere).type=t_door_locked
 endif
 tag(otvorene,0)
@@ -433,7 +433,7 @@ finduid(<arg(ovladac)>).tag(bag<finduid(<arg(ovladac)>).tag(preslo)>,<arg(backui
 while(arg(layercount))
   findlayer(<layer_move_<arg(layercount)>>).cont = <arg(backuid)>
   arg(layercount,<eval <arg(layercount)>-1>)
-endwhile
+endif
 if (<safe finduid(<src.findlayer.21>).rescount>)
   arg(count,<finduid(<src.findlayer.21>).rescount>)
   while (arg(count))
@@ -522,7 +522,7 @@ return 1
 
 //////////////
 // Guards
-//
+/
 
 [EVENTS e_guard_ocs]    
 on=@hittry
@@ -807,7 +807,7 @@ attr=090
 color=0986
 
 on=@timer
-if (0<tag(otvorene)> == 1)
+if (0<tag(otvorene) == 1>)
 tag(dvere).type=t_door_locked
 endif
 tag(otvorene,0)
@@ -892,7 +892,7 @@ COLOR=0481
 on=@step
 if !(src.isplayer)
 	if (0<src.tag(walker) == 1>)
-		if (0<tag(last_changer)> == 1)
+		if (0<tag(last_changer) == 1>)
 			src.action 067			
 		else
 			if (ocs_player_is_close)
@@ -1279,7 +1279,7 @@ on=@beforegeteffect
 
 [function f_explosionlava_setVars]
 if (strlen(<tag(explosionlava_varsChecked)>) == 0)
-  if (strlen(<tag(e_explosionlava_chance)> == 0))
+  if (strlen(<tag(e_explosionlava_chance)> == 0)
     tag(e_explosionlava_chance,50) //default 5.0%
   endif
   if (strlen(<tag(e_explosionlava_range)>) == 0)
@@ -1349,7 +1349,7 @@ if (isplayer)
 	if (!(isgm))
   	if (<eval arg(distance)> < 5)
     	if (<eval arg(distance)> > 1)
-    	  damage_noResponse(<eval (<argv(1)> - (<eval arg(distance)> * 5))>,dam_fire|dam_magic)
+    	  damage_noResponse(<(<argv(1)> - (<eval arg(distance)> * 5))>,dam_fire|dam_magic)
    	    //damage_noResponse(500,dam_fire|dam_magic)
       else
   	    damage_noResponse(<argv(1)>,dam_fire|dam_magic)
@@ -1372,8 +1372,8 @@ endif
 //
 
 [function f_ocs_vg_qtag]
-if (<eval src.qtag(<<args>.tag(qtag_nazov)>)> == <args>.tag(qtag_needed))
-	src.qtag(<<args>.tag(qtag_nazov)>,<<args>.tag(qtag_wanted)>)
+if (<eval src.qtag(<(<args>).tag(qtag_nazov)>)> == (<args>).tag(qtag_needed))
+	src.qtag(<(<args>).tag(qtag_nazov)>,<(<args>).tag(qtag_wanted)>)
 	return 0 // succeed -> player can go through
 else
 	return 1 
@@ -1569,7 +1569,7 @@ tag.remove(sud_2_hrac_[<args>])
 tag.remove(sud_3_hrac_[<args>])
 tag.remove(sud_4_hrac_[<args>])
 tag.remove(sud_5_hrac_[<args>])
-tag.remove(sud_6_hrac_[<args>])
+tag.remove(sud_6_hrac_[<args)>])
 
 ///////////////////////////
 // RUNE FOR RESIST RESTORE
@@ -1606,7 +1606,7 @@ else
  	 if (src.profession==class_thief)  
  	 	 if (src.isnazgul) 	
  	 	 	 if (strlen("<src.tag(maskattribs)>"))
- 	 		   tag(first_name,<src.tag(playersname)>)
+ 	 		   tag(first_name,<src.tag(playersname>)
  	 	 	   tag(first_realm,<src.tag(realm)>)
  	 	 	   f_rune_reset_mask_set(<src.tag(maskattribs)>)
  	 	   else
@@ -1803,12 +1803,10 @@ else
  	       else
  	 	   	   src.sysMessage("Nesouhlasi tvuj realm.")
  	 	   	   return 0
-				 endif
  	   	 else
  	   	 	 src.redmessage("Chyba c. 6, kontaktuj GM, nejlepe GM Aldarona.")
  	   	 	 return 0
  	   	 endif
-			endif
  	 	 endif
    endif
  endif
@@ -2773,17 +2771,17 @@ argo.texta(<argo.dialog_textpos(0,0)>,42,"VETESNIK")
 argo.texta(lastxpos+333,lastypos+20,<d_def_readcolor>,"Od 8.10.2015:")
 argo.texta(<argo.dialog_textpos(1,0)>,<d_def_readcolor>,"Prachy za ident:")
 argo.texta(<argo.dialog_textpos(1,1)>,<d_def_writecolor>,"<finduid(#0400075A4).tag(payedgold)>")
-argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(payedgold)>-0>")       //p≈Øvodnƒõ -704996000, nevim proƒç (?), pro jistotu nasadim -0
+argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(payedgold)>-0>")       //p˘vodnÏ -704996000, nevim proË (?), pro jistotu nasadim -0
 argo.texta(<argo.dialog_textpos(2,0)>,<d_def_readcolor>,"Identifik. itemy:")
 argo.texta(<argo.dialog_textpos(2,1)>,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(payedgold)>/5000>")
-argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval (<finduid(#0400075A4).tag(payedgold)>/5000)-0>")    //p≈Øvodnƒõ -(704996000/5000)
+argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval (<finduid(#0400075A4).tag(payedgold)>/5000)-0>")    //p˘vodnÏ -(704996000/5000)
 argo.texta(<argo.dialog_textpos(3,0)>,<d_def_readcolor>,"Vymena:")
 argo.texta(<argo.dialog_textpos(4,0)>,<d_def_readcolor>,"Vybrali itemov:")
 argo.texta(<argo.dialog_textpos(4,1)>,<d_def_writecolor>,"<eval finduid(#0400075A4).tag(collected_items)>")
-argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(collected_items)>-0>")    //p≈Øvodnƒõ -1490
+argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(collected_items)>-0>")    //p˘vodnÏ -1490
 argo.texta(<argo.dialog_textpos(5,0)>,<d_def_readcolor>,"Rozdali itemov:")
 argo.texta(<argo.dialog_textpos(5,1)>,<d_def_writecolor>,"<eval <finduid(#0400075A4).tag(collected_items)>/5>")
-argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval (<finduid(#0400075A4).tag(collected_items)>/5)-0>")   //p≈Øvodnƒõ -(1490/5)
+argo.texta(lastxpos+207,lastypos,<d_def_writecolor>,"<eval (<finduid(#0400075A4).tag(collected_items)>/5)-0>")   //p˘vodnÏ -(1490/5)
 argo.texta(<argo.dialog_textpos(6,0)>,42,"MAGICKE ITEMY")
 argo.texta(<argo.dialog_textpos(7,1)>,<d_def_readcolor>,"Zelene")
 argo.texta(lastxpos+140,lastypos,<d_def_readcolor>,"Hnede")
@@ -4717,7 +4715,7 @@ return 1
 
 [function f_dragon_armor_creator]
 events +t_dragon_armor
-name=Draci brneni
+name Draci brneni
 color 09CE
 tag(dragon_resist,<args>)
 
@@ -5676,7 +5674,7 @@ if !(<mapplane> == <argv(3)>)
 	return 1
 endif
 if (<distancefrom(<argv(0)>)>==1) // && ((isplayer)||(ispet))
-  if !(<uid> == <argv(0)>)
+  if !(<uid> == <argv(0)>).
     arg(my_dmg,<argv(2)>)
     if (npc) && !(strcmpi(<act>,<src>))
       damage(<eval <my_dmg>*6>,<argv(1)>,<argv(0)>)

@@ -336,13 +336,14 @@ type=t_eq_script
 name=badspawncheck
 
 on=@timer
-if (link.more1==0)||(link.more2==0)
+if (link.more1==0)||link.more2==0)
   link.remove
   if (cont.isGM)
     cont.sysMessage("Spatny spawn - smazan")
   endif
 elseif (cont.isGM)
     cont.sysMessage("Spawn nastaven a inicializovan v poradku")
+  endif
 endif
 remove
 return 1

@@ -1,6 +1,6 @@
 /////////////////////////////////////////////
 //
-//     **   MordorskÃ© Kvesty  **
+//     **   Mordorské Kvesty  **
 //
 //
 //
@@ -814,7 +814,7 @@ DEX={200 300}
 KARMA=-1000
 MAGERY={90.0 100.0} 
 WRESTLING={70.0 80.0} 
-TACTICS={40.0 60.0} 
+TACTICS{40.0 60.0} 
 
 NPC=brain_vendor
 
@@ -829,7 +829,7 @@ color=0036
 
 ON=@npcseenewplayer
       DORAND 3
-         say "Burlug hlidat Toto uzemi Bratrstva !!  "
+         say "Burlug hlidat Toto uzemí Bratrstva !!  "
          say "Burlug dobre hlidat..  "
          say "Burlug hlidat Bratrstvo..  a  on pak dostat najist..  "
            enddo
@@ -872,7 +872,7 @@ DEX={200 300}
 KARMA=-1000
 MAGERY={90.0 100.0} 
 WRESTLING={70.0 80.0} 
-TACTICS={40.0 60.0} 
+TACTICS{40.0 60.0} 
 
 NPC=brain_vendor
 
@@ -887,7 +887,7 @@ color=0036
 
 ON=@npcseenewplayer
       DORAND 3
-         say "Burlug hlidat Toto uzemi Bratrstva !!  "
+         say "Burlug hlidat Toto uzemí Bratrstva !!  "
          say "Burlug dobre hlidat..  "
          say "Burlug hlidat Bratrstvo..  a  on pak dostat najist..  "
            enddo

@@ -129,20 +129,20 @@ if (ischar)
       //nastaveni
       if (<src.npc>)||(<src.tag(hypno_mystik)>)  // utoci NPC nebo hypnomystik
         //kermel.sysMessage(puvodni spellpower: <var(spellpower)>, koef: <nastaveni_global_MvSM>)
-        var(spellpower,<eval ((<var(spellpower)>*<nastaveni_global_MvSM>)/1000)>)
+        var(spellpower,<eval (<var(spellpower)>*<nastaveni_global_MvSM>)/1000)>)
         //kermel.sysMessage(Utoci mystik uid: <uid>, src: <src>, spellpower: <var(spellpower)>)
       endif
       if (isplayer)&&!(<src.tag(hypno_mystik)>) //utok na playera a neutoci hypno mystik (vetsinou)
         if (src.isplayer)           // utoci hrac
           if(<tag(hypno_mystik)>)   // cilem je mystik v tele monstra
-            var(spellpower,<eval ((var(spellpower)*nastaveni_global_vMSM)/1000)>)
+            var(spellpower,<eval (var(spellpower)*nastaveni_global_vMSM)/1000)>)
           else   // normalni dmg
-            var(spellpower,<eval ((var(spellpower)*nastaveni_global_pvpSM)/1000)>)
+            var(spellpower,<eval (var(spellpower)*nastaveni_global_pvpSM)/1000)>)
           endif
         endif
       else   // utok na monstrum
         if (<npc>==15)   // mozek stojiciho mystikova obrazu
-          var(spellpower,<eval ((var(spellpower)*nastaveni_global_pvpSM)/1000)>)
+          var(spellpower,<eval (var(spellpower)*nastaveni_global_pvpSM)/1000)>)
         elseif ((<var(spellnumber)>==28) || (<var(spellnumber)>==39) || (<var(spellnumber)>==47))   // nechceme aby field mel bonus ze standcastu
           if (<src.tag(level)> > 200)                               // ale dame mu fix bonus +0,25% za level (max +50%)
             arg(useable_level,50)
@@ -819,7 +819,7 @@ if (<eval a_flags[<argv(0)>]>&csflag_mass) //overit flagy (masove kouzlo), v tom
     var(distanceuid,<lastnew>) //vzdalenost od pomocneho itemu
     arg(removeitem,1)
   endif
-  sector.allchars(f_a_massspell_dist(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>,<a_mass_distance[<argv(0)>]>,<eval <eval a_flags[<argv(0)>]>&csflag_noLOS>))
+  sector.allchars f_a_massspell_dist(<argv(0)>,<calcspelleffect(<argv(0)>)>,<uid>,<a_mass_distance[<argv(0)>]>,<eval <eval a_flags[<argv(0)>]>&csflag_noLOS>)
   if (<arg(removeitem)>)
     finduid(var(distanceuid)).remove
     var(distanceuid,"")
@@ -871,7 +871,7 @@ on=@equip
 timer=3
 
 on=@timer
-  topobj.damage_noresponse(<nastaveni_<var(bomba_src).id>>,dam_god)
+  topobj.damage_noresponse(<nastaveni_<var(bomba_src).id>,dam_god)
   topobj.effect(3,<s_explosion.EFFECTID>,6,15,1)
   topobj.sound=<s_explosion.sound>
 
@@ -955,7 +955,7 @@ trigger @userdclick
 
 on=@timer
 timer=1
-say(<tag(bum)>)
+say <tag(bum)>
 tag(bum,#-1)
 if (tag(bum)==0)
   trigger @potioneffect

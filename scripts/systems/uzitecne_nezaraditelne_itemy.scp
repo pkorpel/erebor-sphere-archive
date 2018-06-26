@@ -463,7 +463,7 @@ if (!src.isgm)
   arg(dispelled,0)
   while (src.findid(i_rune_hassummon))
     arg(dispelled,1)
-    src.findid(i_rune_hassummon).link.remove //odstranÃ­ to zviratko 
+    src.findid(i_rune_hassummon).link.remove //odstraní to zviratko 
   endwhile
   if (dispelled)
     src.sysMessage("<tag(napis_step)>")
@@ -690,7 +690,7 @@ morep=1001 1001
 
 on=@userdclick
 if (src.isGM)
-  src.sysMessage(Pouziti - nastav more1 podle cisla realmu tj 1 gondor, 2 mordor, do morep uloz misto kam ma hazet)
+  src.sysMessage(Pouziti - nastav more1 podle cisla realmu tj 1 gondor, 2 mordor, do morep uloz místo kam ma hazet)
   return 1
 endif
 

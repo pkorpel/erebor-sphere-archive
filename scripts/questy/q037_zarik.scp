@@ -913,4 +913,4 @@ elseif (<argn> == argo.dialog_linkButton("q037_refuse"))
   say("Tak me nezdrzuj...")
 elseif (<argn> == argo.dialog_linkButton("goodbye"))
   say("Mej se...")
-endif
+endif  

@@ -226,7 +226,7 @@ if !(safe finduid(link.tag(friendscont)).isitem)//neni aktivovan
 endif
 
 //kontrola pritomnosti najemni truhlicky (jednou se mi stalo ze zmizela...)
-if !(finduid(link.tag(najemcont)).isitem) //neexistuje-li truhlicka
+if !(finduid(link.tag(najemcont))).isitem //neexistuje-li truhlicka
  src.newitemsafe(i_najem_chest)
  lastnew.attr=attr_move_never
  lastnew.P=<P>
@@ -1268,10 +1268,8 @@ button 175 340 2466 2467 1 0 44
 button 260 340 2469 2470 1 0 45
 
 [DIALOG d_house_menu_sign_2 TEXT]
-[DIALOG d_house_menu_sign_2 BUTTON]
-ON=1
-DIALOG d_house_menu_SIGN_2
-ON=2
+[DIALOG d_house_menu_sign_2 BUTTON]ON=1
+DIALOG d_house_menu_SIGN_2ON=2
 changesigdispid=0BCD
 ON=3
 changesigdispid=0BCF
@@ -1415,8 +1413,7 @@ button 175 340 2466 2467 1 0 26
 button 260 340 2469 2470 1 0 27
 
 [DIALOG d_house_menu_sign_3 TEXT]
-[DIALOG d_house_menu_sign_3 BUTTON]
-ON=1
+[DIALOG d_house_menu_sign_3 BUTTON]ON=1
 TIMER=<EVAL ((30*24*60*60)+60)>
 DIALOG d_house_menu_SIGN_3
 ON=2

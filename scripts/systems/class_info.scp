@@ -178,13 +178,13 @@ class_info_class_thief_name[11] Provokace
 class_info_class_thief_tag[11] none
 class_info_class_thief_max_points[11] none
 class_info_class_thief_function[11] provo
-class_info_class_thief_description[11] "Zlodej je schopen za pomoci hudebniho nastroje vyprovokovat dve monstra k tomu, aby na sebe zautocila. Tato schopnost neni klasicka abilita, vychazi ze skillu Provocation a Musicianship"
+class_info_class_thief_description[11] "Zlodej je schopen za pomoci hudebniho nastroje vyprovokovat dve monstra k tomu, aby na sebe zautocila. Tato schopnost neni klasicka abilita, vych�zi ze skillu Provocation a Musicianship"
 
 class_info_class_thief_name[12] Oslabeni
 class_info_class_thief_tag[12] none
 class_info_class_thief_max_points[12] none
 class_info_class_thief_function[12] none
-class_info_class_thief_description[12] "Zlodej je schopen za pomoci hudebniho nastroje oslabit monstrum. Tato schopnost neni klasicka abilita, vychazi ze skillu Enticement a Musicianship"
+class_info_class_thief_description[12] "Zlodej je schopen za pomoci hudebniho nastroje oslabit monstrum. Tato schopnost neni klasicka abilita, vych�zi ze skillu Enticement a Musicianship"
 
 class_info_class_thief_name[13] Vykryti stitem
 class_info_class_thief_tag[13] ra_vykryti
@@ -433,7 +433,7 @@ class_info_class_necro_name[13] Provokace
 class_info_class_necro_tag[13] none
 class_info_class_necro_max_points[13] none
 class_info_class_necro_function[13] provo
-class_info_class_necro_description[13] "Nekromant je schopen za pomoci hudebniho nastroje vyprovokovat dve monstra k tomu, aby na sebe zautocila. Tato schopnost neni klasicka abilita, vychazi ze skillu Provocation a Musicianship"
+class_info_class_necro_description[13] "Nekromant je schopen za pomoci hudebniho nastroje vyprovokovat dve monstra k tomu, aby na sebe zautocila. Tato schopnost neni klasicka abilita, vych�zi ze skillu Provocation a Musicianship"
 
 class_info_class_necro_name[14] Energeticky stit
 class_info_class_necro_tag[14] ra_energyshield

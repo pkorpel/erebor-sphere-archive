@@ -2788,7 +2788,7 @@ ON=@NPCRefuseItem
 [CHARDEF c_vguard_dol_hala_pesak]
 
 ID=C_MAN
-NAME=Pesak z jezerniho mesta s halou
+NAME=Pesak z jezerniho mìsta s halou
 
 ICON=i_pet_MAN
 

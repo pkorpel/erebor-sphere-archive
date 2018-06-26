@@ -281,6 +281,8 @@ elseif (argo.f_q000_shouldBePromoted_Button(<argn>))
   return
 endif
 
+endif
+
 [speech spk_q023_CarodejUnas]
 ON = *ahoj*
 ON = *zdravi*

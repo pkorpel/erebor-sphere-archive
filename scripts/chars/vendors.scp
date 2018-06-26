@@ -1,5 +1,5 @@
 // ****************************************************************************
-// SPHERE by : Menasoft Â©1997-2000
+// SPHERE by : Menasoft ©1997-2000
 // www.sphereserver.com
 // All SPHERE script files and formats are copyright Menasoft & Partners.
 // This file may be freely edited for personal use, but may not be distributed
@@ -96,7 +96,7 @@ DESCRIPTION=Vendor female
 
 ON=@Create
 NAME=#NAMES_HUMANfeMALE
-tag(provize,10)
+tag{provize,10}
 tag(noanimate,1)
 title=the Vendor
 provocation=1
@@ -125,7 +125,7 @@ DESCRIPTION=Vendor
 
 ON=@Create
 NAME=#NAMES_HUMANMALE
-tag(provize,10)
+tag{provize,10}
 tag(noanimate,1)
 title=the Vendor
 provocation=1

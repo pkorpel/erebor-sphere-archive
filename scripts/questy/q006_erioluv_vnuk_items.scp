@@ -137,7 +137,7 @@ src.scroll sc_q006_pergamen
 return 1
 
 [scroll sc_q006_pergamen]
-"...uz se z cernoknezneho kralovstvi Angmaru rozletlo po Stredozemi mnoho strasnych a tryznivych duchu, kteri se zoufale chteji skryt pred hladovym slunecnim svetlem. Demonim jejichz tela byla znicena, hledaji jina tela, v nichz by se mohli usidlit jejich zly duchove. Tak se z Mohylovych vrchu stalo strasidelne a obavane misto. Z demonu se stali mohylovi duchove, Nemrtvi, ktere ozivovali kosti a drahokamy posazena brneni davnych lidskych kralu, kteri tento kraj obyvali v Prvnim slunecnim veku..."
+„...uz se z cernoknezneho kralovstvi Angmaru rozletlo po Stredozemi mnoho strasnych a tryznivych duchu, kteri se zoufale chteji skryt pred hladovym slunecnim svetlem. Demonim jejichz tela byla znicena, hledaji jina tela, v nichz by se mohli usidlit jejich zly duchove. Tak se z Mohylovych vrchu stalo strasidelne a obavane misto. Z demonu se stali mohylovi duchove, Nemrtvi, ktere ozivovali kosti a drahokamy posazena brneni davnych lidskych kralu, kteri tento kraj obyvali v Prvnim slunecnim veku...“
 
 [ITEMDEF i_roba_alchemisty]
 ID=i_robe
@@ -176,7 +176,7 @@ if(src.tag(altered_alch))
 	endif
 endif
 
-ON=@UserClick
+ON=UserClick
 	src.sysmessage("+ 10% ke skillu Alchemy")
 	
 

@@ -830,7 +830,8 @@ ITEMnewbie=i_platemail_arms
 color=097F			
 ITEMnewbie=i_shield_order			
 color=097F			
-
+				
+		 	
 ITEMnewbie=i_monster_create			
 								
 ON=@NPCRestock			

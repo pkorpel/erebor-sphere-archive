@@ -42,7 +42,7 @@ ON=@TIMER
   RETURN 1
 
 ON=@userdclick
-  IF (<more2>==2)
+  IF (more2>==2)
     src.sysmessage("Zamer farmarku.")
     TARGET
   ENDIF

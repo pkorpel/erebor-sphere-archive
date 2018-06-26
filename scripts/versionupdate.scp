@@ -133,7 +133,7 @@ var(probihaprevadeni,1)
 while (var(probihaprevadeni))
   var(probihaprevadeni,0)
   contents2(prevod_rozlozit)
-endwhile
+endif
 contents2(prevod_item)
 
 

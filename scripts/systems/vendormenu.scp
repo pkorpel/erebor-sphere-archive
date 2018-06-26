@@ -238,7 +238,7 @@ else
 endif
 
 [function f_vendormenu]
-link.tag(lastusedsign,<src.uid>) //link v tÃ©to funkci je link tÃ© cedule t_vendormenu - coz je samozrejme ten dum/stanek
+link.tag(lastusedsign,<src.uid>) //link v této funkci je link té cedule t_vendormenu - coz je samozrejme ten dum/stanek
 src.f_eq_vmsignlayer
 
 //nasledujici blok se pouzije v pripade, ze uz existuje v dane oblasti vendorplac 
@@ -311,7 +311,7 @@ if (!(safe finduid(link.tag(ownerscont)).isitem))//neni aktivovan (nema owneruv 
 endif
 
 //kontrola pritomnosti najemni truhlicky (jednou se mi stalo ze zmizela...)
-if !(finduid(link.tag(najemcont)).isitem) //neexistuje-li truhlicka
+if !(finduid(link.tag(najemcont))).isitem //neexistuje-li truhlicka
  src.newitemsafe(i_vendor_chest)
  lastnew.attr=attr_move_never
  lastnew.P=<P>
@@ -463,7 +463,7 @@ arg(dnu,<eval (arg(zbyva_casu)/864000)>) //den ma 86400s (tohle je v decisekunda
 arg(hodin,<eval ((arg(zbyva_casu)-(arg(dnu)*864000))/36000)>) //hodina ma 3600s
 arg(minut,<eval (((arg(zbyva_casu)-(arg(dnu)*864000))-(arg(hodin)*36000))/600)>)
 arg(sekund,<eval ((((arg(zbyva_casu))-(arg(dnu)*864000))-(arg(hodin)*36000))-(arg(minut)*600))/10>)
-return(<eval arg(dnu)/10> dni <eval arg(hodin)/10> hodin <eval arg(minut)/10> minut <eval arg(sekund)/10> sekund)
+return(<arg(dnu)/10> dni <arg(hodin)/10> hodin <arg(minut)/10> minut <arg(sekund)/10> sekund)
 
 [function vm_namerank]
 doswitch <args>
@@ -974,7 +974,7 @@ f_vend_lock(1)
 on=5 //GM
 f_vend_lock(2)
 
-[function f_vend_dorprih_mjtl_gm] //slouÅ¾Ã­ pouze k rozhodnutÃ­ co zobrazit v menu -  jestli Dorovnat nebo Prihodit
+[function f_vend_dorprih_mjtl_gm] //slouží pouze k rozhodnutí co zobrazit v menu -  jestli Dorovnat nebo Prihodit
 if(var(vm_rank)==0)               //v zavislosti na ranku postavy 
  return 0
 endif
@@ -1052,7 +1052,7 @@ endif
 [DIALOG d_vendmenu_nabidka]
 0,0
 resizepic 100 100 2620 550 <eval (5*d_def_radek_vyska)+(3*d_def_okraj)>  //s gumpem width=480
-argo.settext(100,Stav drazby prodejniho mista "<?name?> - <?tag(housename)?>") //jmÃ©no linku (to je vendorplac)
+argo.settext(100,Stav drazby prodejniho mista "<?name?> - <?tag(housename)?>") //jméno linku (to je vendorplac)
 argo.settext(101,Nabidka: <?tag(nabidka)?>)
 argo.settext(102,Zajemce s posledni nabidkou: <?tag(zajemce).name?>)
 
@@ -1075,6 +1075,6 @@ arg(dnu,<eval (arg(zbyva_casu)/864000)>) //den ma 86400s (*10 - decisekundy)
 arg(hodin,<eval ((arg(zbyva_casu)-(arg(dnu)*864000))/36000)>) //hodina ma 3600s
 arg(minut,<eval (((arg(zbyva_casu)-(arg(dnu)*864000))-(arg(hodin)*36000))/600)>)
 arg(sekund,<eval ((((arg(zbyva_casu))-(arg(dnu)*864000))-(arg(hodin)*36000))-(arg(minut)*600))/10>)
-return(<eval arg(dnu)/10> dni <eval arg(hodin)/10> hodin <eval arg(minut)/10> minut <eval arg(sekund)/10> sekund)
+return(<arg(dnu)/10> dni <arg(hodin)/10> hodin <arg(minut)/10> minut <arg(sekund)/10> sekund)
 
 [eof]

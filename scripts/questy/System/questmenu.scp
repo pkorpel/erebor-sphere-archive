@@ -2560,15 +2560,15 @@ elseif (<src.qtag(q040_dragons)> == 14)
 elseif (<src.qtag(q040_dragons)> == 15)
   argo.setText(1,"Zabij bileho draka a jako dukaz dones jeho supinu.")  
 elseif (<src.qtag(q040_dragons)> == 16)
-  argo.setText(1,"Zabil jsi vsech sest zakladnich druhu draku. Promluv si s Vartianem.")  
+  argo.setText(1,"Zabil jsi všech šest zakladnich druhu draku. Promluv si s Vartianem.")  
 elseif (<src.qtag(q040_dragons)> == 17)
   argo.setText(1,"Zabij zleteho draka a jako dukaz dones jeho supinu.")  
 elseif (<src.qtag(q040_dragons)> == 18)
-  argo.setText(1,"Zabil jsi i zlateho draka - nyni jsi pravym drakobijcem. Promluv si s Vartianem.")  
+  argo.setText(1,"Zabil jsi i zlateho draka – nyní jsi pravym drakobijcem. Promluv si s Vartianem.")  
 elseif (<src.qtag(q040_dragons)> == 19)
-  argo.setText(1,"Nyni te ceka nejtezsi zkouska - zabit Margutha Zapomenuteho. Nez se za nim vydas, mel by jsi mit kompletni drakobijeckou zbroj.")  
+  argo.setText(1,"Nyní te ceka nejtezsi zkouska – zabit Margutha Zapomenuteho. Nez se za nim vydas, mel by jsi mit kompletni drakobijeckou zbroj.")  
 elseif (<src.qtag(q040_dragons)> == 20)
-  argo.setText(1,"Vratil jsi drakobijcum jejich cest - zabil jsi Margutha Zapomenuteho.")  
+  argo.setText(1,"Vratil jsi drakobijcum jejich cest – zabil jsi Margutha Zapomenuteho.")  
 elseif (<src.qtag(q040_dragons)> == 50)
   argo.setText(1,"Odmitnul jsi rict drakobijci sve jmeno. Zkus jej presvedcit...")  
 elseif (<src.qtag(q040_dragons)> == 51)
@@ -2591,7 +2591,7 @@ argo.setText(0,"Drakobijec Alchymista")
 argo.f_qDialogInstructions(03159)
 
 if (<src.qtag(q040_dragons_alchymista)> == 1)
-  argo.setText(1,"Alchymista ti zadal ukol - dones mu 30x Elixir leceni a osvezeni, dale 10x kazdy dalsi elixir.")
+  argo.setText(1,"Alchymista ti zadal ukol – dones mu 30x Elixir leceni a osvezeni, dale 10x kazdy dalsi elixir.")
 elseif (<src.qtag(q040_dragons_alchymista)> == 2)
   argo.setText(1,"Splnil jsi alchymistyuv ukol, nyni s nim muzes obchodovat.")
 elseif (<src.qtag(q040_dragons_alchymista)> == 100)
@@ -2756,7 +2756,7 @@ setText(0,"Murdocovi Ucni")
 f_qDialogInstructions(003129)
 arg(tagValue,<eval src.qtag(mq043)>)
 
-if (<arg(tagValue)> > 220)&&(<arg(tagValue)> < 250)
+if (<arg(tagValue)> > 220)&&<arg(tagValue)> < 250)
   f_questy_murdoc_ucni_m_finale(<arg(tagValue)>)
 elseif (<arg(tagValue)> >= 250)
   f_questy_murdoc_ucni_m_kronikar(<arg(tagValue)>)
@@ -2932,7 +2932,7 @@ setText(0,"Murdocovi Ucni")
 f_qDialogInstructions(003129)
 arg(tagValue,<eval src.qtag(gq043)>)
 
-if (<arg(tagValue)> > 220)&&(<arg(tagValue)> < 250)
+if (<arg(tagValue)> > 220)&&<arg(tagValue)> < 250)
   f_questy_murdoc_ucni_g_finale(<arg(tagValue)>)
 elseif (<arg(tagValue)> >= 250)
   f_questy_murdoc_ucni_g_kronikar(<arg(tagValue)>)
@@ -3138,7 +3138,6 @@ elseif (<argv(0)> == 11)
   setText(1,"Truhlu v Beridoru si <src.sex(nasel,nasla)>. Ted je potreba najit kombinaci. Murdoc ji jiste ukryl nekde v okoli...")
 elseif (<argv(0)> == 10)
   setText(1,"Ember te posila do Beridoru. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
-endif
 return 0
 
 //DRUHY ZAPISEK
@@ -3155,7 +3154,6 @@ elseif (<argv(0)> == 20) && (<eval var(q044_phase)> < 1)
   setText(1,"Quest bude pokracovat v pristich dnech! Sledujte vyvesku!")
 elseif (<argv(0)> == 20)
   setText(1,"Ember te posila do podzemi jmenem Snagum. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
-endif
 return 0
 
 //TRETI ZAPISEK
@@ -3172,7 +3170,6 @@ elseif (<argv(0)> == 30)&&(<eval var(q044_phase)> < 2)
   setText(1,"Quest bude pokracovat v pristich dnech!")
 elseif (<argv(0)> == 30)
   setText(1,"Ember te posila do Doupete kyklopu. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
-endif
 return 0
 
 //CTVRTY ZAPISEK
@@ -3189,7 +3186,6 @@ elseif (<argv(0)> == 40)&&(<eval var(q044_phase)> < 3)
   setText(1,"Quest bude pokracovat v pristich dnech!")
 elseif (<argv(0)> == 40)
   setText(1,"Ember te posila do podzemi Moina Filya. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
-endif
 return 0
 
 //PATY ZAPISEK
@@ -3208,7 +3204,6 @@ elseif (<argv(0)> == 50)&&(<eval var(q044_phase)> < 4)
   setText(1,"Quest bude pokracovat v pristich dnech!")
 elseif (<argv(0)> == 50)
   setText(1,"Ember te posila do Ledove Jeskyne. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
-endif
 return 0	
 
 ///////////////////

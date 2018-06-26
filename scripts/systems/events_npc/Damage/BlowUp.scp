@@ -225,7 +225,7 @@ if (<strlen(<tag(monstertype)>)>)
   say("Jsem <return_nth(1,<tag(monstertype)>)>")
   return"<return_nth(1,<tag(monstertype)>)>" 
 else
-  return 0
+  retun 0
 endif
 [eof]
 

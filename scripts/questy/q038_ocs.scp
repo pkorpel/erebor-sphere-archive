@@ -1039,7 +1039,7 @@ argo.dialog_page("Pozdrav")
   
 if (<arg(q038_ocs)> == 17)
   argo.dialog_page("Kdo jsi?") // kdo jsi
-    argo.setText(argo.newTextLine,"Rikaji mi Baltazar a uz delsi dobu ziju tady, v tabore Sermatu. Muj otec dela strazce veznice, ale uz jsem ho strasne dlouho nevidel. Kdo vi, jak to tam ted kolem zalare vypad, pry je tam dost dusno... No a mival jsem bratra, ale ten, kdyz se rozhodl pridat na stranu druheho klanu, pro me umrel.")
+    argo.setText(argo.newTextLine,"Rikaji mi Baltazar a uz delsi dobu ziju tady, v tabore Sermatù. Muj otec dela strazce veznice, ale uz jsem ho strasne dlouho nevidel. Kdo vi, jak to tam ted kolem zalare vypad, pry je tam dost dusno... No a mival jsem bratra, ale ten, kdyz se rozhodl pridat na stranu druheho klanu, pro me umrel.")
     argo.questDialog_HTMLGUMP
 
   argo.dialog_page("Potrebujete pomoc?") 
@@ -1877,7 +1877,7 @@ argo.dialog_page("Nesu ti")
   argo.questDialog_addResponse(0,1,1,"goodbye") 
   if (<arg(q038_ocs)> == 36)
 		argo.setText(argo.newTextLine,"Byli jsme u lecitele - mam tu protilatku!")
-    argo.questDialog_addResponse(0,0,1,"q038_have_cure")
+    argo.questDialog_addResponse(0,0,1,"q038_have_cure")]
   endif
   
 if (<arg(q038_ocs)> == 36)
@@ -1920,7 +1920,7 @@ elseif (<argn> == argo.dialog_linkButton("q038_refuse"))
 elseif (<argn> == argo.dialog_linkButton("refuse"))
   say("Jdi radsi pryc...")
 endif
-endif
+
 
 ///////////////////////////
 

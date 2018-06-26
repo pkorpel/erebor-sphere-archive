@@ -139,7 +139,7 @@ ON=@UserDeath
 
 [ITEMDEF i_q035_herman_collector_07]
 ID=i_crate_small
-NAME=Bedna na hlavy pro neviditelne brouky
+NAME=Bedna na hlavy pro neviditelné brouky
 TYPE=t_collector
 WEIGHT=1
 

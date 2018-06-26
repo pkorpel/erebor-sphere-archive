@@ -669,7 +669,7 @@ if(<argo.tag(cislo)>==8) //prijimani navrhu na bl
 endif
 if(<argo.tag(cislo)>==9) //novinky
  if(argn > 999) //mazani
-  src.classmessage(Smazal jsi novinku cislo <eval radek+1>)
+  src.classmessage(Smazal jsi novinku cislo <radek+1>)
   findcont(radek).remove 
  else //cist novinku
   findcont(radek).dialog(d_news_read,0,0,<radek>+1)  

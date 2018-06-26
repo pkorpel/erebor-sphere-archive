@@ -165,12 +165,12 @@ if (eval(<src.tag(level)>) > 12)
 endif
 
 arg(mountResult,<eval src.f_nbMount_equip>)
-if (mountResult == 0)
+if (mountResult = 0)
     say("Zde mas svou lamku, <src.name>.")
-elseif (mountResult == 1)
+elseif (mountResult = 1)
     say("Co to je? Zase slysim duchy? Ufff, ne, asi se mi to zdalo.")
     emote("shake in fear")
-elseif (mountResult == 2)
+elseif (mountResult = 2)
     say("Nedelej si ze me srandu. Uz na necem jezdis!")
 else
     say("<src.name>, jsi uz dost <src.sex(zkuseny,zkusena)> si vydelat na vlastni lamu!")

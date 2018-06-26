@@ -127,32 +127,32 @@ ON=@STEP
         tag(dvere1).tag(zamknute,"0")
         tag(dvere1).Type=t_door
         tag(dvere1).tag(LockPicking,"0")
-      endif  
+      end if  
       if (<tag(dvere2)>!=0)
         tag(dvere2).tag(zamknute,"0")
         tag(dvere2).Type=t_door
         tag(dvere2).tag(LockPicking,"0")
-      endif  
+      end if  
       if (<tag(dvere3)>!=0)
         tag(dvere3).tag(zamknute,"0")
         tag(dvere3).Type=t_door
         tag(dvere3).tag(LockPicking,"0")
-      endif  
+      end if  
       if (<tag(dvere4)>!=0)
         tag(dvere4).tag(zamknute,"0")
         tag(dvere4).Type=t_door
         tag(dvere4).tag(LockPicking,"0")
-      endif  
+      end if  
       if (<tag(dvere5)>!=0)
         tag(dvere5).tag(zamknute,"0")
         tag(dvere5).Type=t_door
         tag(dvere5).tag(LockPicking,"0")
-      endif  
+      end if  
       if (<tag(dvere6)>!=0)
         tag(dvere6).tag(zamknute,"0")
         tag(dvere6).Type=t_door
         tag(dvere6).tag(LockPicking,"0")
-      endif  
+      end if  
     ENDIF
   ELSE
     return 0
@@ -165,37 +165,37 @@ ON=@TIMER
       tag(dvere1).Type=t_door_locked
       tag(dvere1).tag(LockPicking,"5000")
       tag(dvere1).Timer=1 
-    endif
+    end if
     if (<tag(dvere2)>!=0)
       tag(dvere2).tag(zamknute,"1")
       tag(dvere2).Type=t_door_locked
       tag(dvere2).tag(LockPicking,"5000")
       tag(dvere2).Timer=1 
-    endif
+    end if
     if (<tag(dvere3)>!=0)
       tag(dvere3).tag(zamknute,"1")
       tag(dvere3).Type=t_door_locked
       tag(dvere3).tag(LockPicking,"5000")
       tag(dvere3).Timer=1 
-    endif
+    end if
     if (<tag(dvere4)>!=0)
       tag(dvere4).tag(zamknute,"1")
       tag(dvere4).Type=t_door_locked
       tag(dvere4).tag(LockPicking,"5000")
       tag(dvere4).Timer=1 
-    endif
+    end if
     if (<tag(dvere5)>!=0)
       tag(dvere5).tag(zamknute,"1")
       tag(dvere5).Type=t_door_locked
       tag(dvere5).tag(LockPicking,"5000")
       tag(dvere5).Timer=1 
-    endif
+    end if
     if (<tag(dvere6)>!=0)
       tag(dvere6).tag(zamknute,"1")
       tag(dvere6).Type=t_door_locked
       tag(dvere6).tag(LockPicking,"5000")
       tag(dvere6).Timer=1 
-    endif
+    end if
 
     MORE2=1
   ENDIF
@@ -265,7 +265,7 @@ ON=@STEP
         tag(dvere).Type=t_door_locked
         tag(dvere).tag(LockPicking,"5000")
         tag(dvere).timer=0
-      endif 
+      end if 
     ENDIF
   else
     return 0

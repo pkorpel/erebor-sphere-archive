@@ -6549,7 +6549,7 @@ GROUP=Rooms
 tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 126]//Minas Tirith
+[AREA dum 126]/Minas Tirith
 P=5518,3998,-80//minas
 RECT=5514,3989,5522,3998
 tag.housenumber=126

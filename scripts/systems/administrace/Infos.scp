@@ -77,7 +77,7 @@ while (index<(argvcount-1))
   tag(sirkasloupce[index-1],<eval argv(index+1)>) //treti argument a dale (sirka 1 atd...)
   tag(sloupec_x[index],<eval(<d_def_skvira>+<tag(sloupec_x[index-1])>+<tag(sirkasloupce[index-1])>)>)
   arg(index,#+1)		//(((<tag(sirka)>-(2*(<d_def_okraj>+<d_def_skvira>)))*<argv(index+1)>)/1000)
-endwhile
+endif
 arg(index,0)
 while (index<(argvcount-2))
   //src.smsg zacatek sloupce <index>:<tag(sloupec_x[index])>
@@ -85,7 +85,7 @@ while (index<(argvcount-2))
     gumppictiled(<tag(sloupec_x[index])>,<argv(0)>,<tag(sirkasloupce[index])>,<eval argv(1)>*<d_def_radek_vyska>,2624)
   endif
   arg(index,#+1)
-endwhile
+endif
 if !(safe sloupec_noback[index])
   gumppictiled(<tag(sloupec_x[index])>,<argv(0)>,((<tag(sirka)>-<tag(sloupec_x[index])>)-(<d_def_okraj>+<d_def_skvira>)),<eval argv(1)>*<d_def_radek_vyska>,2624)
 endif
@@ -97,14 +97,14 @@ while (index<argvcount)
   tag(sirkasloupce[index],<eval argv(index)>) //treti argument a dale (sirka 1 atd...)
   tag(sloupec_x[index+1],<eval(<d_def_skvira>+<tag(sloupec_x[index])>+<tag(sirkasloupce[index])>)>)
   arg(index,#+1)
-endwhile
+endif
 
 [function dialog_zvyrazni]
 gumppictiled(<tag(sloupec_x[0])>,<args>,(<tag(sirka)>-((2*<d_def_okraj>)+<d_def_odsazeni>)),2,2624)
 gumppictiled(<tag(sloupec_x[0])>,<args>+<d_def_radek_vyska>-2,(<tag(sirka)>-((2*<d_def_okraj>)+<d_def_odsazeni>)),2,2624)
 
 [function dialog_zpruhledni]
-checkertrans(<d_def_okraj>,<d_def_okraj>,(<tag(sirka)>-(2*<d_def_okraj>)),(<tag(nexty)>-<d_def_okraj>))
+checkertrans(<d_def_okraj>,<d_def_okraj>,(<tag(sirka)>-(2*<d_def_okraj>)),(<tag(nexty)>-<d_def_okraj>)))
 
 [defnames dialogy]
 d_def_button_ok1      0fb7
@@ -193,8 +193,6 @@ iflag_string	01000//pro kontrolu
 
 //047e
 [function blank]
-return
-
 [function f_inforow_apply]
 //<argv(0)>	index
 //<argv(1)>	argcheck
@@ -230,7 +228,7 @@ elseif (<iflags>&iflag_check)//iflag_bitmask
     if (<iflags>&iflag_bitmask)
       finduid(<tag(from)>).try <argv(4)>(<hval (finduid(tag(from)).<argv(4)>)&~<argv(6)>>)
     else
-      finduid(<tag(from)>).try <argv(4)>(0)
+      finduid(<tag(from)>).try <argv(4)>(0))
     endif
   elseif ((!ovalue)&&(nvalue))
     if (<iflags>&iflag_bitmask)
@@ -245,7 +243,7 @@ else
   endif
 endif
 
-[function debugtry]
+[function debugtry)
 accmsg(<args>)
 <args>
 

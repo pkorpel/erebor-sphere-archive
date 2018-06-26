@@ -3021,7 +3021,7 @@ item=i_gold
 
 ///////////////////////////////////////////
 
-[CHARDEF C_rat_craft]
+[CHARDEF=C_rat_craft]
 ID=c_rat_giant
 NAME=Kryska
 SOUND=snd_MONSTER_GRAT1
@@ -3091,7 +3091,7 @@ ITEMnewbie=i_monster_create
 
 ///////////////////////////////////////
 
-[CHARDEF C_WOLF_craft]
+[CHARDEF=C_WOLF_craft]
 ID=c_wolf
 NAME=Vlcek
 SOUND=snd_ANIMALS_WOLF1
@@ -3161,7 +3161,7 @@ ITEMnewbie=i_monster_create
 
 ///////////////////////////////////////
 
-[CHARDEF c_bear_grizzly_craft]
+[CHARDEF=c_bear_grizzly_craft]
 ID=c_bear_grizzly
 NAME=Grizzlik
 SOUND=snd_ANIMALS_GRIZZLY1

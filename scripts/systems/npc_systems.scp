@@ -61,7 +61,7 @@ elseif (strcmpi(<act.type>,t_telepad2)==0)||(strcmpi(<act.type>,t_telepad)==0)
 endif
 
 on=@personalspace
-if !((isPet) || (isSummon))
+if !((isPet) || (isSummon)))
   return
 endif
 if (<mapplane> == 2)

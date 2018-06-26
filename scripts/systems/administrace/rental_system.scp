@@ -19,7 +19,7 @@ endif
 if(!strcmpi(<city>,"Barad-dur"))
  arg(city,Barad_dur)
 endif
-if(array_size("var.housing_<city>")) //mame uÅ¾ nÄ›co v tom poli
+if(array_size("var.housing_<city>")) //mame u nìco v tom poli
  src.dialog(d_show_housing_info,0,"var.housing_<city>",<city>)
 else
  src.newitemsafe(i_bag)
@@ -727,7 +727,7 @@ endif
 var(nalezen_krystal,"")
 src.rentalinfo(<src.region.tag(jmeno_mesta)>)
 
-[function tryrealmban] //uid: kdo, src: typicky klikatel na ÄudlÃ­Äek v menu
+[function tryrealmban] //uid: kdo, src: typicky klikatel na èudlíèek v menu
 src.newitemsafe(i_town_crystal)
 arg(krystal,<lastnew>)
 krystal.name=<name>
@@ -822,7 +822,7 @@ return<argv(0)>//name
 return <argv(3)>//realm
 
 // zisti skutocne meno majitela
-[function getRealNameByRealm]//argv(0)=realm
+[function getRealNameByRealm]argv(0)=realm
 if(profession!=class_thief)
   return<name>
 else

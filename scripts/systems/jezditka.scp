@@ -161,7 +161,7 @@ else
   cont.tag(lastjezdik,<mylastnewchar>)
   if (tag(mycolor))
   else
-    tag(mycolor,0)
+    tag (mycolor,0)
   endif
   mylastnewchar.color=<tag(mycolor)>
   mylastnewchar.oskin=<tag(mycolor)>

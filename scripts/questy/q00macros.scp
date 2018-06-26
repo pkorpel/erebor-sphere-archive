@@ -597,7 +597,7 @@ if !(tag(hunted)==c_bug_shadow)
   tag(huntedgold,90)
   tag(hlaska,fq_Brouci_high)
 else
-  say("Dnes je vyhlasen lov na silnejsi neviditelne brouky a bojovniky!")
+  say("Dnes je vyhlasen lov na silnejsi neviditelné brouky a bojovniky!")
 endif
 
 [function fq_Brouci_hard]
@@ -1168,9 +1168,9 @@ if safe.finduid(<tag(npchrac)>)
   hrac.sysmessage("Souper hodil celkem <tag(npccelkem)>.")
   if (<tag(npccelkem)>)<(<tag(hraccelkem)>)
     if safe.finduid(#0400075A4)
-      finduid(#0400075A4).tag(vyhrano,#+<eval tag(vsazeno)*2>)
+      finduid(#0400075A4).tag(vyhrano,#+<tag(vsazeno)*2>)
     endif
-    tag(vyhrano,#+<eval tag(vsazeno)*2>)
+    tag(vyhrano,#+<tag(vsazeno)*2>)
     hrac.say("<hrac.sex VYHRAL JSEM!,VYHRALA JSEM!>")
     hrac.newitem=i_cashiers_mesec
     lastnew.more=(<tag(vsazeno)>*2)
@@ -1186,7 +1186,7 @@ if safe.finduid(<tag(npchrac)>)
   else
     npchrac.say("VYHRAL JSEM!")
     if safe.finduid(#0400075A4)
-      finduid(#0400075A4).tag(prohrano,#+<eval tag(vsazeno)*2>)
+      finduid(#0400075A4).tag(prohrano,#+<tag(vsazeno)*2>)
     endif
     hrac.accMsg("Hrac <hrac.name> (<arg(hrac)>, <arg(hrac).account.name>) vsadil v kostkach <tag(vsazeno)>gp a prohral.")
   endif

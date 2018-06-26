@@ -1,5 +1,5 @@
 //****************************************************************************
-//SPHERE by : Menasoft ï¿½1997-2000
+//SPHERE by : Menasoft ©1997-2000
 //www.sphereserver.com
 // All SPHERE script files and formats are copyright Menasoft & Partners.
 // This file may be freely edited for personal use, but may not be distributed
@@ -197,7 +197,7 @@ ON=@userDClick    //on timer not executing in packs or containers, so do this fo
     elseif (<TIMER>>3600)
       src.message The egg seems to be getting hard and the velvet has fallen off.
     elseif (<TIMER>>1800)
-      src.message("The egg is very hard, it may hatch soon if you don't sell it quickly.")
+      src.message The egg is very hard, it may hatch soon if you don't sell it quickly.
     elseif (<TIMER>>20)
       src.message You swear you can feel movement inside the egg...
     else
@@ -219,7 +219,7 @@ ON=@PICKUP_GROUND
 
 ON=@PICKUP_PACK
   if (<MORE>==1)
-    TRIGGER(@DCLICK)
+    TRIGGER=@DCLICK
     return 0
   endif
   MORE=1

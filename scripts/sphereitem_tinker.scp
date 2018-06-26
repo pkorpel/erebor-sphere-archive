@@ -1715,7 +1715,7 @@ if (src.targ.type==t_efectedByPickAxe)
     return 1
   endif
   src.targ.tag(PickaxingSrc,<src>) // sets the last player that is pickacking the target
-  if (<src.targ.trigger(@triggerPickaxing)> == 1) // user denied further action
+  if (<src.targ.trigger(@triggerPickaxing)> == 1)) // user denied further action
     return 1
   endif
   src.dismount

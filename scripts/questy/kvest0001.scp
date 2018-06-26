@@ -1,6 +1,6 @@
 /////////////////////////////////////////////
 //
-//     **   MordorskÃ© Kvesty  **
+//     **   Mordorské Kvesty  **
 //
 //
 //
@@ -405,7 +405,7 @@ COLOR=009a
 on=@userDClick
 if (!more2)
   message("Tento svitek si nasel u Harghalagha ")
-  more2=1
+¨ more2=1
 else
   src.scroll(SCROLL_kvest_Harghalaghuv_dopis)
   more2=0
@@ -431,7 +431,7 @@ COLOR=009a
 on=@userDClick
 if (!more2)
   message("Tento svitek z kuze byval kdysi Urghalaghuv osobni denik ")
-  more2=1
+¨ more2=1
 else
   src.scroll(SCROLL_kvest_Urghalaghuv_denik)
   more2=0
@@ -505,49 +505,72 @@ say Burlug se radovat,Tys zvladl prinest vse prinyst bez me pomoci,Reyla a Akhba
 src.addexp(400)
 src.consume=i_kvest_Reyliny_saty
 src.TAG.kvest0001dokoncen=1
+else 
+
 elseIF (<i_Akhbaruv_retizek_01>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_01
+else 
+
 elseIF (<i_Akhbaruv_retizek_02>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_02
+else 
+
 elseIF (<i_Akhbaruv_retizek_03>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_03
+else 
+
 elseIF (<i_Akhbaruv_retizek_04>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_04
+else 
+
 elseIF (<i_Akhbaruv_retizek_05>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_05
+else 
+
 elseIF (<i_Akhbaruv_retizek_06>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_06
+else 
+
 elseIF (<i_Akhbaruv_retizek_07>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_07
+else 
+
 elseIF (<i_Akhbaruv_retizek_08>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_08
+else 
+
 elseIF (<i_Akhbaruv_retizek_09>)
 say Burlug se radovat,Tys prinest retizek straceny dobry pan Akhbar  
 src.addexp(10)
 src.consume=i_Akhbaruv_retizek_09
+else 
 elseIF (<src.RESTEST 1 i_kvest_Reyliny_saty>)
 say Burlug se radovat, protoze Akhbar a Reyla se radovat z navraceni cervena sat. Ja vezmu k sobe a saty vyprat oni byt spina.
 src.addexp(200)
 src.TAG.kvest0001dokoncen=1
 src.consume=i_kvest_Reyliny_saty
+else 
+
 elseIF (<src.RESTEST 1 i_kvest_Urghalaghuv_denik>)
 say Burlug nedoporucovat boj ze zlobry,ale ty tam muset a mozna bojovat. Nasgardsky prusmyk lezi daleko na jiho a vychod  uprostred velka skala 
+else 
+
 elseIF (<src.RESTEST 1 i_kvest_Harghalaghuv_dopis>)
 say Burlug si spominat ze jmenovana tabor Bagrong je po piskove ceste smer jih od Cerna Vez Barad-Dur 
 else 
@@ -558,7 +581,7 @@ endif
 
 ON=*suport*
      DORAND 3
-         say "Burlug hlidat Toto uzemi Bratrstva !!  AT se deje cokoliv..  "
+         say "Burlug hlidat Toto uzemí Bratrstva !!  AT se deje cokoliv..  "
          say "Burlug dobre hlidat.. ale o suportu nebyt ani rec!! "
          say "Burlug hlidat Bratrstvo..  a  a obcas dat ukoly..  Ale o Suportu zde nebyt rec  "
            enddo
@@ -605,6 +628,7 @@ ON=@CREATE
 ON=@userDClick
   src.racemessage("Nahle si uvedomujes zes nechtic "vypil" celou lahev leku pro Liguka")
 src.racemessage(Nejsi vyvolen k poziti elixiru poznani.)
+endif
 src.go 3003,506,20
 return 1
 
@@ -733,7 +757,7 @@ ON=@userDClick
 	else
 		message "Past se ti nepodarilo zneskodnit"
 		if (rand(2))                             jestli ze je u pasti blizko    pak vybuch :o)))))
-			TRIGGER @step
+			TRIGGER=@step
 		else
 			message "Past staci zajistit jen jednou. Ted uz muzes jit dal"
 		endif
@@ -769,7 +793,7 @@ ON=@userDClick
 	else
 		message "Past se ti nepodarilo zneskodnit"
 		if (rand(2))                             jestli ze je u pasti blizko    pak vybuch :o)))))
-			TRIGGER @step
+			TRIGGER=@step
 		else
 			message "Past staci zajistit jen jednou. Ted uz muzes jit dal"
 		endif
@@ -807,7 +831,7 @@ ON=@userDClick
 	else
 		message "Past se ti nepodarilo zneskodnit"
 		if (rand(2))                             jestli ze je u pasti blizko    pak vybuch :o)))))
-			TRIGGER @step
+			TRIGGER=@step
 		else
 			message "Past staci zajistit jen jednou. Ted uz muzes jit dal"
 		endif

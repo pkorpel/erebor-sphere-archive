@@ -232,7 +232,7 @@ while(i <= <d_afk_<letter>_length>)
  arg(i,#+1)
 endwhile
 
-[function getXPos]//argumentem je defname sestÃ¡vajÃ­cÃ­ ze dvou ÄÃ­sel (tj cosi jako "x,y")
+[function getXPos]//argumentem je defname sestávající ze dvou èísel (tj cosi jako "x,y")
 return <argv(0)>
 
 [function getYPos]
@@ -303,7 +303,7 @@ else
  else
   var(wassave,0)
  endif
- if(<wassave> == 0) //1 v pÅ™Ã­padÄ› Å¾e mezitÃ­m probÄ›hl save... 
+ if(<wassave> == 0) //1 v pøípadì e mezitím probìhl save... 
   if(cont.account.tag(vlagru)) 
    if(cont.deservesLager)   
     if(isdefined(cont.tag(nachytanafk)))
@@ -654,7 +654,7 @@ else
  //kontrola jestli jsme nepresvihli baseskill...
  if(isdefined(base_<macroersUID.tag(class)>_<macroersSkill>))
   if(<eval macroersUID.<macroersSkill>> < <eval base_<macroersUID.tag(class)>_<macroersSkill>>)
-   macroersUID.<macroersSkill>=<eval base_<macroersUID.tag(class)>_<macroersSkill>
+   macroersUID.<macroersSkill>=<eval base_<macroersUID.tag(class)>_<macroersSkill>>)
   endif  
  endif
  src.sysmessage(Snizil jsi hraci <macroersUID> <macroersUID.name> skill <macroersSkill> o <argv(0)> na <finduid(<macroersUID>).<macroersSkill>>)
@@ -766,11 +766,11 @@ endif
 [function getTime] //argv(0) - ds
 arg(zpracovat_ds,<argv(0)>)
 arg(dni,<eval (arg(zpracovat_ds)/<den>)>)
-arg(zbyde,<eval (<zpracovat_ds>-(<dni>*<den>))>) //hodiny v decisekundÃ¡ch
+arg(zbyde,<eval (<zpracovat_ds>-(<dni>*<den>))>) //hodiny v decisekundách
 arg(hodin,<eval (<zbyde>/36000)>) //hodina ma 3600s
-arg(zbyde,<eval (<zbyde>-(<hodin>*36000))>) //minuty v decisekundÃ¡ch
+arg(zbyde,<eval (<zbyde>-(<hodin>*36000))>) //minuty v decisekundách
 arg(minut,<eval (<zbyde>/600)>)
-arg(zbyde,<eval (<zbyde>-(<minut>*600))>) //sekundy v decisekundÃ¡ch
+arg(zbyde,<eval (<zbyde>-(<minut>*600))>) //sekundy v decisekundách
 arg(sekund,<eval (<zbyde>/10)>)
 arg(zbyde,<eval (<zbyde>-(<sekund>*10))>) //decisekundy
 return"<arg(dni)>:<arg(hodin)>:<arg(minut)>:<arg(sekund)>.<arg(zbyde)>"
@@ -798,9 +798,9 @@ if (strlen(<tag(firstsuccesslesscontrol)>) < 11)
   return 1
  endif
  arg(days,<eval (<zbyva_cas>/<den>)>)
- arg(zbyde,<eval (<zbyva_cas>-(<days>*<den>))>) //hodiny v decisekundÃ¡ch
+ arg(zbyde,<eval (<zbyva_cas>-(<days>*<den>))>) //hodiny v decisekundách
  arg(NeededHour,<eval (<zbyde>/36000)>) //hodina ma 3600s
- arg(zbyde,<eval (<zbyde>-(<NeededHour>*36000))>) //minuty v decisekundÃ¡ch
+ arg(zbyde,<eval (<zbyde>-(<NeededHour>*36000))>) //minuty v decisekundách
  arg(NeededMinute,<eval (<zbyde>/600)>)
  arg(ThisMonth,<getMonth>)
  arg(ThisDay,<getDay>)

@@ -2604,7 +2604,7 @@ BLOODCOLOR=020
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_looter
-TEVENTS=e_npc_sniper       //PÅ™idÃ¡ dmg k Ãºtoku
+TEVENTS=e_npc_sniper       //Pøidá dmg k útoku
 
 CATEGORY=Monsters
 SUBSECTION=Pirati
@@ -2822,7 +2822,7 @@ TEVENTS=e_character
 TEVENTS=e_summoneater_vamp
 TEVENTS=e_npc_curse
 TEVENTS=e_lifeLeech          //kazda rana saje HP
-TEVENTS=e_npc_detect         //spouÅ¡tÃ­ detekci kaÅ¾dÃ½ch 55s
+TEVENTS=e_npc_detect         //spouští detekci každých 55s
 
 CATEGORY=Monsters
 SUBSECTION=Pirati
