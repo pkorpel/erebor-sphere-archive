@@ -1313,15 +1313,17 @@ if (ishungrymsg)
   return 1
 endif
 if (<action> == Skill_Magery)
-  if (<act> != uid)
-    if (distancefrom(<act>) > 18)
-      sysMessage("Cil je prilis daleko!")
-      skill -1
-      return 1
-    elseif !(f_canseelos(<act>)) )
-      sysMessage("Nevidis na cil.")
-      skill -1
-      return 1
+  if (<act>)
+    if (<act> != uid)
+      if (distancefrom(<act>) > 18)
+        sysMessage("Cil je prilis daleko!")
+        skill -1
+        return 1
+      elseif !(f_canseelos(<act>)) )
+        sysMessage("Nevidis na cil.")
+        skill -1
+        return 1
+      endif
     endif
   endif
 endif
