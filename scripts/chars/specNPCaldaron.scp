@@ -1320,7 +1320,7 @@ ITEM=i_gold
 ///// ork zo ztraceneho mesta /////
 ///////////////////////////////////
 
-[CHARDEF=c_ztracene_mesto_orc]
+[CHARDEF c_ztracene_mesto_orc]
 ID=c_orc
 NAME=Orc
 SOUND=snd_MONSTER_ORC1
@@ -1400,7 +1400,7 @@ ITEM=i_gold
 
 /////////////////////////////////////////////////
 
-[CHARDEF=c_ztracene_mesto_orc_ranger]
+[CHARDEF c_ztracene_mesto_orc_ranger]
 ID=c_orc
 NAME=Orc
 SOUND=snd_MONSTER_ORC1
@@ -1488,7 +1488,7 @@ ITEM=RANDOM_REAGENT,{10 20}
 ///// lizard zo ztraceneho mesta /////
 ///////////////////////////////////////
 
-[CHARDEF=c_ztracene_mesto_lizard]
+[CHARDEF c_ztracene_mesto_lizard]
 ID=c_lizardman
 NAME=Jester
 SOUND=snd_MONSTER_LZRDMN1
@@ -1568,7 +1568,7 @@ ITEM=i_gold
 
 /////////////////////////////////////////////////
 
-[CHARDEF=c_ztracene_mesto_lizard_ranger]
+[CHARDEF c_ztracene_mesto_lizard_ranger]
 ID=c_lizardman
 NAME=Jester
 SOUND=snd_MONSTER_LZRDMN1
@@ -3276,7 +3276,7 @@ WRESTLING=100.0
 MAGERY=120.0
 wrestling=100.0
 tactics=100.0 
-ei=120.0`
+ei=120.0
 SpiritSpeak=55.0
 
 // knows spells 
@@ -3837,7 +3837,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_looter
 TEVENTS=e_ocs_citizen
-TEVENTS=e_npc_sniper       //Pøidá dmg k útoku
+TEVENTS=e_npc_sniper       //PÅ™idÃ¡ dmg k Ãºtoku
 
 CATEGORY=Dungy
 SUBSECTION=ocs

@@ -21,7 +21,7 @@ return 1
 on=@timer
 remove
 
-[function isDefined]//arg - hodnota promìnné
+[function isDefined]//arg - hodnota promÄ›nnÃ©
 if (safe(<eval (<args>)>))
   return 1
 else
@@ -111,7 +111,7 @@ if (isplayer)
   spelleffect(11,1000) //cure 
   events(+e_spelleffect) 
   say("all stay") //zastavit kone
-  eqlayers(cont=<findlayer(layer_pack)>) //svléct
+  eqlayers(cont=<findlayer(layer_pack)>) //svlÃ©ct
   zakladstats //resetovat
 endif
 
@@ -310,8 +310,13 @@ endif
 
 [function fixNumber]
 arg(len, <strlen(<args>)>)
-while (arg(len)>0) 
-  arg(pattern,<arg(pattern)>[-0123456789])
+if (len<=0)
+  return <args>
+endif
+
+arg(pattern,[-0123456789])
+while (arg(len)>1)
+  arg(pattern,"<arg(pattern)>[-0123456789]")
   arg(len, <eval arg(len)-1>)
 endwhile
 
@@ -350,7 +355,7 @@ if (src.isplayer)
     if (src.p_z == p_z)
       arg(badposition, 0)
     endif
-  endif
+  endwhile
   src.go(<src.p>)
 endif
 
@@ -517,19 +522,19 @@ lastnew.equip
 arg(zbyva_casu,<eval (<argv(1)>-(<serv.time>-<argv(0)>))>) 
 arg(dni,<eval (arg(zbyva_casu)/<den>)>)
 if (<arg(dni)>)
- return <arg(dni)/10> dni
+ return <eval arg(dni)/10> dni
 endif
 arg(hodin,<eval (arg(zbyva_casu)/36000)>) //hodina ma 3600s
 if (<arg(hodin)>)
- return <arg(hodin)/10> hodin
+ return <eval arg(hodin)/10> hodin
 endif
 arg(minut,<eval ((arg(zbyva_casu)-(arg(hodin)*36000))/600)>)
 if (<arg(minut)>)
- return <arg(minut)/10> minut
+ return <eval arg(minut)/10> minut
 endif
 arg(sekund,<eval ((((arg(zbyva_casu))-(arg(hodin)*36000))-(arg(minut)*600))/10)>)
 if (<arg(sekund)>)
- return <arg(sekund)/10> sekund
+ return <eval arg(sekund)/10> sekund
 endif
 
 [function removetarget]
@@ -1584,7 +1589,7 @@ if (hval(<hval uid>&0ff000000)==0a2000000)
 endif
 return 0
 
-[function new]
+[function newobject]
 act=0
 if !(argvcount)
  MENU MENU_ADDITEM
@@ -2755,7 +2760,7 @@ return 0
 
 [function newitemSafeChar]
 if (strlen("<args>")) //v argumentu neco je ?
-  nastaveni_guardian_uid.newitem(<hval argv(0)>)
+  var(nastaveni_guardian_uid).newitem(<hval argv(0)>)
   return<lastnew>
 endif
 return 0
@@ -2818,7 +2823,7 @@ endif
 [function destroyevents]
 while (<eval events>)
  removefirstevent(<events>)
-endif
+endwhile
 
 [function removefirstevent]
 events -<argv(0)>
@@ -2878,6 +2883,7 @@ if (typedef.dispid==i_dagger)||(id==i_knife_skinning)
 elseif (type==T_WEAPON_FENCE)
  return 1
 endif
+return 0
 
 [function issword]
 if (typedef.dispid==i_hatchet)
@@ -2885,6 +2891,7 @@ if (typedef.dispid==i_hatchet)
 elseif (type==T_WEAPON_sword)
  return 1
 endif
+return 0
 
 [function isleather]
 if (type==t_armor_leather)
@@ -3048,10 +3055,9 @@ elseif (obody==c_ostard_zostrich_jmeno3)
 elseif (obody==c_ostard_zostrich_green)
 elseif (obody==c_mount_polar_bear)
 else
-  return 1
-else
   return 0
 endif
+
 return 1
 
 [function isconjured]
@@ -3493,7 +3499,7 @@ else
   src.targ.type=t_container_guarded
   dclick
   return 1
- elseif (src.targ.type==t_telepad)||(<src.targ.type==t_telepad_guarded)
+ elseif (src.targ.type==t_telepad)||(src.targ.type==t_telepad_guarded)
   src.targ.type=t_telepad_guarded
   dclick
   return 1
@@ -4090,7 +4096,7 @@ endif
 [function f_canReach] //argv(0) - the item to reach, <uid> - the source that is being tested for reach
 if (<hval argv(0).topobj> == <uid>)
   return 1
-elseif ( (findUID(<argv(0)>).srccanseelos) && (distancefrom(<argv(0)>)<5)) )
+elseif ( (findUID(<argv(0)>).srccanseelos) && (distancefrom(<argv(0)>)<5))
   return 1
 endif
 return 0
@@ -5028,7 +5034,7 @@ arg(u,<argv(0)>)
 while (u>0)
  <argv(1)>
  arg(u,#-1)
-enddo
+endwhile
 
 [function f_fizzleefect]
 // odstranen src -> imho je zbytecny
@@ -5681,7 +5687,7 @@ return 0
 
 [function gotofirstchar]
 var(gotofirst,0)
-nukecharall f_ftfirst
+nukecharall(f_ftfirst)
 
 [function f_ftfirst]
 if (<gotofirst>==0)
@@ -6041,7 +6047,7 @@ if ((act.type==t_telepad2)&&(act.id!=i_port_start2))
  return 1
 endif
 
-[function nolightfizz] argv0  -0 bez napisu, 1 s napisem
+[function nolightfizz]// argv0  -0 bez napisu, 1 s napisem
 //je mi lito ale musi to bejt takhle vetveny protoze kdyz to bylo v jednom radku 
 //tak napr absence cehokoliv v ruce pusobila chybove vypisy a tech se radeji vyvarujeme, ze 
 if (flag_nightsight==1)||(<sector.light> < <eval {0 64}>)||(isneartype(t_light_lit,2))||(safe findid(i_hypno_delka))
@@ -6149,7 +6155,7 @@ id=i_memory
 name=test majitele
 type=t_eq_script
 
-on@=create
+on=@create
 attr=attr_invis|attr_decay
 timer=10
 
@@ -6214,7 +6220,7 @@ while (arg(u)<16)
   enddo
   lastnew.fix
   arg(u,#+1)
-endif
+endwhile
 
 [function nakrm]
 newitemsafe(i_krmitko)
@@ -7428,7 +7434,7 @@ if (<tag(weapflag)>)
 endif
 return 0
 
-[function newnpcTime] // argv(0) - baseid, argv(1) - cas v sekundach kdy se ma smazat * vrací uid vytvoøeného charu
+[function newnpcTime] // argv(0) - baseid, argv(1) - cas v sekundach kdy se ma smazat * vracÃ­ uid vytvoÅ™enÃ©ho charu
 newnpc(argv(0))
 newitemsafe(i_hm_npc_remove)
 lastnewchar.equip(<lastnew>)
@@ -7442,7 +7448,7 @@ return <lastnewchar>
 if ((<eval argv(0)>+<eval act.<argv(0)>>) < <eval argv(1)>) 
   return (<eval argv(0)>+<eval act.<argv(0)>>)
 else
-  return <eval argv(1)>)
+  return <eval argv(1)>
 endif
 
 [function f_doBloodStain]  // argv(0) - DispID, argv(1) - color

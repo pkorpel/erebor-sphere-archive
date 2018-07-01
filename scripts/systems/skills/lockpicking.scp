@@ -54,7 +54,7 @@ type=t_eq_script
 name=lockpicking
 
 on=@Create
-attr attr_decay
+attr=attr_decay
 
 on=@timer
 if (link.type==t_ship_hold_lock)

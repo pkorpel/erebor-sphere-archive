@@ -60,7 +60,7 @@ src.sysmessage("dlazdice s tajemnymi ornamenty")
 ON=@step
 src.sysmessage("Dlazdice zapadla do podlahy - cosi se spustilo...")
 act.tag(etherka_dlazka, 3)
-¨
+
 //dlazdice do etherky, davajici tag hodnoty 4, potrebnej k dostani se do dalsiho lvlu dungu
 
 [ITEMDEF i_etherka_dlazdice4]

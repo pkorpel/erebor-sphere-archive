@@ -197,7 +197,7 @@ on=0
 return 1
 
 on=1
-IF {<eval src.tag.q31_kuchar> ==0}
+IF (<eval src.tag.q31_kuchar>==0)
   say("Doufam ze se vratis co nejdrive, hodne stesti.")
   src.tag.q31_kuchar=1
   src.redmessage(Prijmas ukol)
@@ -217,9 +217,6 @@ on=3
 SAY("Nesnasim lhare a lidi kteri si vymysleji. Jdi prosim, mam praci.")
 src.tag.remove(q31_kuchar)
 src.tag.q31_neuspel=1
-
-
-endif
 
 [dialog d_q31_kuchar_2]
 5,5
@@ -277,7 +274,6 @@ say("HMMMMMMMMM ... pripravil jsi mne o mnoho casu. At uz te tu nevidim ! A ten 
 src.tag.remove(q31_kuchar)
 src.tag.q31_neuspel=1
 src.consume(i_q31_kuchar_kolektor)
-endif
 
 on=4
 if (<src.restest i_q31_kuchar_kolektor>)

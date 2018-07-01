@@ -123,7 +123,6 @@ else // don't have enough gp
   classmessage("potrebujes <arg(shouldpay)> gp.") //refuse transaction
   accmsg(Hasn't got #<arg(shouldpay)># gp.)
   return 0
-else //you have enough to pay
 endif
 accmsg(Has now #<eval args># gp.)
 return 1
@@ -169,7 +168,7 @@ if (<argo.type> == t_gold)
     src.redMessage("Mesec i penize musis mit u sebe")
     return 1    
   endif
-elseif ((<argo.id> == i_cashiers_mesec) || (<argo.id> = i_cashiers_pokladnicka))
+elseif ((<argo.id> == i_cashiers_mesec) || (<argo.id> == i_cashiers_pokladnicka))
   if ((<f_what_is_this_container> == 1) || (<f_what_is_this_container> == 2))    //mesec je na charu nebo v bance
     if ((<eval more1> + <eval argo.more1>) <= <nastaveni_max_amount_mesec>) //celkovej pocet mensi nez max mesec
       more1 = <more1> + <eval argo.more1>
@@ -243,7 +242,7 @@ if (<argo.type> == t_gold)
     src.redMessage("Mesec i penize musis mit u sebe")
     return 1    
   endif
-elseif ((<argo.id> == i_cashiers_mesec) || (<argo.id> = i_cashiers_pokladnicka))
+elseif ((<argo.id> == i_cashiers_mesec) || (<argo.id> == i_cashiers_pokladnicka))
   if ((<f_what_is_this_container> == 1) || (<f_what_is_this_container> == 2))    //mesec je na charu nebo v bance
     if ((<eval more1> + <eval argo.more1>) <= <nastaveni_max_amount_pokladnice>)  //celkovej pocet mensi nez max mesec
       more1 = <more1> + <eval argo.more1>

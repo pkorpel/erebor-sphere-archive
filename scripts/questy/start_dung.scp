@@ -671,7 +671,7 @@ if ((src.qtag(nb003)==3)&&(src.rescount(i_ore_iron))>=15)
 	  say("Dekuji ti.")
 	  f_quest_complete(25,1)  // splnenie questu "Hornik beorgrad - iron"
 	else
-    say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nakopat. Potrebuji, abys to <?src.sex(nakopal sam,nakopala sama)?>.");	
+    say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nakopat. Potrebuji, abys to <?src.sex(nakopal sam,nakopala sama)?>.")
 	endif
 endif
 		
@@ -687,7 +687,7 @@ if ((src.qtag(nb003)==5)&&(src.rescount(i_ore_pisek))>=10)
 	  say("Dekuji ti.")
     f_quest_complete(25,2)  // splnenie questu "Hornik beorgrad - kremik"
   else
-    say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nakopat. Potrebuji, abys to <?src.sex(nakopal sam,nakopala sama)?>.");	
+    say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nakopat. Potrebuji, abys to <?src.sex(nakopal sam,nakopala sama)?>.")
   endif
 endif
 
@@ -868,7 +868,7 @@ if ((src.qtag(nb004)==3)&&(src.rescount(i_log_iron))>=15)
 	  say("Dekuji ti.")
 	  f_quest_complete(26,1)  // splnenie questu "Lesnik Grarad - chestnut"
 	else
-	  say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nasekat. Potrebuji abys to <?src.sex(nasekal sam,nasekala sama)?>.");
+	  say("Je mi lito, ale s tvymi dovednostmi jsi to <?src.sex(nemohl,nemohla)?> nasekat. Potrebuji abys to <?src.sex(nasekal sam,nasekala sama)?>.")
 	endif
 endif
 		
@@ -1795,6 +1795,9 @@ endif
 //////////////      K A M E N Y     //////////////
 //////////////////////////////////////////////////
 
+[defnames start_dung_dialogs]
+basefont_start_dung		<BASEFONT SIZE="+5" COLOR="#000080">
+
 [ITEMDEF I_stone_start]
 NAME=Stone of the Beginning
 ID=i_grave_stone_4
@@ -1822,8 +1825,8 @@ button(325,246,2151,2152,1,0,7)//shaman
 button(325,282,2151,2152,1,0,8)
 button(325,318,2151,2152,1,0,9)
 //button(325,354,2151,2152,1,0,10)
-argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?seznamclass[0]?></BASEFONT> ,0,0)
-argo.HTMLGUMPa(365,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?seznamclass[1]?></BASEFONT> ,0,0)
+argo.HTMLGUMPa(210,215,110,160,<basefont_start_dung><seznamclass[0]><basefont_end> ,0,0)
+argo.HTMLGUMPa(365,215,110,160,<basefont_start_dung><seznamclass[1]><basefont_end> ,0,0)
 //BUTTON 170 380 4016 4016 1 0 8
 //BUTTON 435 380 4024 4024 1 0 9
 
@@ -1850,8 +1853,8 @@ gumppic 140 200 2200
 //argo.BUTTON(170,380,4016,4016,1,0,1)
 argo.BUTTON(435,380,4024,4024,1,0,2)
 
-argo.HTMLGUMPa(210,215,110,160,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?choosestats[0]?></BASEFONT>,0,0)
-argo.HTMLGUMPa(335,215,110,20,<?safe?><BASEFONT SIZE="+5" COLOR="#000080"><?choosestats[1]?></BASEFONT>,0,0)
+argo.HTMLGUMPa(210,215,110,160,<basefont_start_dung><choosestats[0]><basefont_end>,0,0)
+argo.HTMLGUMPa(335,215,110,20,<basefont_start_dung><choosestats[1]><basefont_end>,0,0)
 
 argo.texta(180,233,1000,"(<?basestats_<tag.class>_str_min?> - <?basestats_<tag.class>_str_max?>)")
 argo.texta(180,269,1000,"(<?basestats_<tag.class>_dex_min?> - <?basestats_<tag.class>_dex_max?>)")
@@ -1980,9 +1983,9 @@ if (strlen(<src.tag(nation)>))
       src.startfinal
       src.gohome
       src.events -e_noport
-      if (src.tag(realm)=1)
+      if (src.tag(realm)==1)
       	src.qtag(gq043,1,53)
-      elseif (src.tag(realm)=2)
+      elseif (src.tag(realm)==2)
       	src.qtag(mq043,1,53)
       endif
       return 1

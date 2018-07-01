@@ -738,7 +738,7 @@ item=random_reagent,{25 35}
 
 ///////////////////////////////////////////////////////////
 
-[chardef c_strazce_vzduchu
+[chardef c_strazce_vzduchu]
 ID=c_ghost
 name=Strazce Vzduchu
 SOUND=snd_ELEMENTL_AIRELEM1

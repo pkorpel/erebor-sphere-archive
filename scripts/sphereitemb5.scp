@@ -6045,7 +6045,7 @@ ON=@Create
 ON=@EQUIP
 	if <src.isgm>
 		return 0
-	elseif ! <src.memoryfindtype.memory_guild>
+	elseif !<src.memoryfindtype.memory_guild>
 		src.sound=snd_SPELL_LIGHTNING
 		src.message("Your are unable to wear this shield.")
 		remove

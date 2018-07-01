@@ -84,7 +84,7 @@ ON=@npcseenewplayer
     SAY("Mame hosty!")
     SAY("Dobrej vecir.")
     SAY("Cau.")
-    SAY("Zdravim te, cizince."
+    SAY("Zdravim te, cizince.")
     SAY("Vitej, cizince.")
   enddo 
 

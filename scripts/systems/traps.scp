@@ -36,7 +36,7 @@ target("Co chces vlozit do pasti?")
 return 1
 
 on=@targon_item
-if (tag(mytimer)><serv.time)
+if (tag(mytimer)><serv.time>)
   src.sysmessage("Nebud <src.sex(zbrkly,zbrkla)> !")
   src.damage_noresponse(<eval {0 50}>,dam_physical)
 endif
@@ -158,7 +158,7 @@ tag(pocetmonster,<eval argtxt(1)>)
 MORE2=<eval <argtxt(2)>>
 arg(i,1)
 
-while (<i+1> < <eval <tag(pocetmonster)>+1>)
+while (<eval i+1> < <eval <tag(pocetmonster)>+1>)
   tag(monstrum_<eval <i>>,<argtxt(<eval <i>+100>)>)
   arg(i,#+1)
 endwhile
@@ -169,7 +169,7 @@ if (<argn> >= 2000)
   src.sysMessage("remove")
   arg(i,<argn>-2000)
   tag.remove(monstrum_<eval <arg(i)>>)
-  while (<i+1> < <eval <tag(pocetmonster)>+1>)
+  while (<eval i+1> < <eval <tag(pocetmonster)>+1>)
     tag(monstrum_<eval <arg(i)> >,<tag(monstrum_<eval <arg(i)>+1 >)>)
     arg(i,#+1)
   endwhile

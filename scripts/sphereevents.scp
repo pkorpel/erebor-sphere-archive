@@ -1093,7 +1093,7 @@ if(<argn>==41)//dispel zoznam dispelnutelnych kuziel v magie_custom.scp
   return 1
 endif
 
-if (<nastaveni_poison_use_custom_poison>==1)
+if (<var(nastaveni_poison_use_custom_poison)>==1)
   if (<src>)
     if (<argn>==20) && (<src.isplayer>)//kuzlo poison, len od hraca
       spell_poison_custom(<src>)
@@ -2340,7 +2340,7 @@ return 1
 
 on=@getHit
 tag(combatSource,<src>)
-show_damage_and_hitpoints(<var(ubrano)>)
+show_damage_and_hitpoints(<var(ubrano)>,0)
 
 on=@death
 tag(lastmurderbyf,<act>)
@@ -2531,7 +2531,7 @@ f_fightNazgullKillCompute(<arg(prsten)>)
 if (<var(zabil_ho)>==2)
   tag(playerkillstotal,<eval tag.playerkillstotal>+1)
 else
-  if (<var(zabil_ho)>)==0) //zabil nejdrive pred sedmi killy a v poli je plno
+  if (<var(zabil_ho)>==0) //zabil nejdrive pred sedmi killy a v poli je plno
     arg(j,0)
     while (<arg(j)> < 1) //pozice 0-0 posunout o jedno nahoru (0. vyhodit - mozno ho uz zabit znova) |Pozn Yavanna: while cyklus tu je z historickych duvodu, kdy byl ukladan vetsi pocet hracu nez posledni 3. Pro pripad ze by se to znovu menilo tu ten cyklus ponechavam pripraven
       arg(k,<eval (<arg(j)>+1)>)
@@ -3182,7 +3182,7 @@ endif
 
 on=@HitMiss
 combat_restorepos
-mana=<eval (mana*nastaveni_mystik_manaloss)/1000)>
+mana=<eval (mana*nastaveni_mystik_manaloss)/1000>
 tag.remove(speedset)
 tag(hitspeed,0)
 sound 0fc

@@ -406,7 +406,8 @@ endif
 if (0<argv(1).tag(pocetSpawnu)> && !0<argv(0).tag(wasOpened)>)
   argv(0).type=t_treasure_guarded //this intentionally overwrites the t_container_locked as the guarded type has precedence
 else
-return<strcmpi(<argv(0)>,t_container)>
+  return<strcmpi(<argv(0)>,t_container)>
+endif
 
 
 [itemdef i_mem_treasureGenerator]
@@ -613,7 +614,7 @@ elseif (<eval (<serv.time> - <tag(guardSpawnTime)>)> < 90) // otevrit truhlu puj
   return 1
 else
   src.sysMessage("Vsichni strazci se zdaji byt mrtvi.")
-  if (0<tag(lockpick)> && ! 0<tag(lockpicked)>) //wasn't lockpicked yet
+  if (0<tag(lockpick)> && !0<tag(lockpicked)>) //wasn't lockpicked yet
     type=t_container_locked
   else
     type=t_container

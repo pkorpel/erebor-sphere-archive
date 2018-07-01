@@ -398,7 +398,7 @@ if (<eval src.qtag(q006)> == 0) // bring 10 torches
 elseif (<eval src.qtag(q006)> == 1) // brought 10 torches
   if (<argn> == argo.dialog_linkButton("gq006_giveSubQuestResources_1"))
     if (src.rescount(i_torch)>=10)
-      src.consume.(i_torch,10)
+      src.consume(i_torch,10)
       src.addexp(50)
       src.qtag(q006,2,22)
     endif

@@ -134,7 +134,7 @@ elseif (<uid> == <var(splitShotThem_src).act>)  // do cile nestrilim 2x
 elseif !(<mapplane> == <var(splitShotThem_srcChanger).mapplane>)     // mimo mapplan taky nestrilim
   return 1    
 endif
-arg(dist_from_act,<distancefrom(<var(splitShotThem_srcChanger)>))>)    // vzdalenost od primarniho targetu k sekundarnimu
+arg(dist_from_act,<distancefrom(<var(splitShotThem_srcChanger)>)>)    // vzdalenost od primarniho targetu k sekundarnimu
 if (<arg(dist_from_act)> > <var(splitShotThem_max_range)>)
   return 1
 endif

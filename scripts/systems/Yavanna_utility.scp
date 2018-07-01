@@ -62,7 +62,7 @@ else
   endwhile
 endif
 if (<ThisDay> > <d_month_days_<ThisMonth>>)
-  arg(ThisDay,<d_month_days_<ThisMonth>)
+  arg(ThisDay,<d_month_days_<ThisMonth>>)
 endif
 arg(CountedXMonthsLater,"<ThisYear>,<ThisMonth>,<ThisDay>,<ThisHour>,<ThisMinute>")
 return<CountedXMonthsLater>
@@ -85,7 +85,7 @@ else
   endwhile
 endif
 if (<ThisDay> > <d_month_days_<ThisMonth>>)
-  arg(ThisDay,<d_month_days_<ThisMonth>)
+  arg(ThisDay,<d_month_days_<ThisMonth>>)
 endif
 arg(CountedXMonthsLater,"<ThisYear>,<ThisMonth>,<ThisDay>,<ThisHour>,<ThisMinute>")
 return<CountedXMonthsLater>
@@ -498,7 +498,7 @@ else
   endif
   arg(enhancer_tag,enhancer_<hval <uid>>)
   if (strlen(<src.expEnhTag(<enhancer_tag>)>))
-    if (<tag.time_limit> == 0))
+    if (<tag.time_limit> == 0)
       src.SysMessage("Hmm... Tady uz nic zajimaveho nezjistis.")
       return 1
     elseif (src.expEnhTag(<enhancer_tag>) > <serv.time>) // too early

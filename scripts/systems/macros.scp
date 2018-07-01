@@ -1329,7 +1329,7 @@ endif
 if (isgm)
   newitem(i_negatnispawny) 
   lastnew.p=<p> 
-  lastnew.p=<(p_z)-100> 
+  lastnew.p=<eval (p_z)-100> 
 endif 
  
 [itemdef i_negatnispawny] 
@@ -1488,12 +1488,12 @@ if !(isSilenced)
     act.newequip(i_curse_drainhp)
     lastnew.tag(lord,<UID>)
   elseif ((act.findid(i_curse_drainhps)) && (hits<30000))
-    hits=<hits+(maxhits/20)>
+    hits=<eval hits+(maxhits/20)>
     show_damage_and_hitpoints(<eval (<maxhits>/20)>,1)
   endif
 endif
 
-on=@aftergetswíng
+on=@aftergetswing
 if ((isSleeping) || (isSilenced))
   return 0
 endif
@@ -1536,7 +1536,7 @@ topobj.events=-e_curse_givehps
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if !(findid(i_curse_givehps)
+if !(findid(i_curse_givehps))
   events=-e_curse_givehps
   return 0
 endif

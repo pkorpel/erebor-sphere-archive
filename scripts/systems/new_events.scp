@@ -729,6 +729,7 @@ if (topobj.mana>10)&&(tag(start)==1)&&(!(tag(efekt)))
 endif
 if (topobj.hits>5)
   topobj.damage_noresponse(<eval{10 20}>,dam_magic)
+endif
 if (topobj.mana<10) //ta spodni cast je kvuli nepretoceni do zaporu-tudiz nechtenyho navyseni na strasny hodnoty
   topobj.mana=0
 endif
@@ -853,7 +854,7 @@ if (findlayer.layer_horse)
   if (rand(10) == 1)
     classmessage("V sedle nejsi <sex schopen schopna> s touto kusi dobre manipulovat")
   endif
-else (action==Skill_archery)
+elseif (action==Skill_archery)
   if (chance(<eval (<eval tag(ra_bleed_bolt)>*45)>,3))
     arg(arrowTypeNumber,<eval (<eval findtype(<tag(weaponuid).typedef.tdata3>).typedef.tdata1>+25)>) //the bleed bonus settings is moved by 25 positions, see nastaveni.scp:n_arrows for more detailed view
     arg(boltMaterial_BleedCoefficient,<nastaveni_arrowdamage_<eval arg(arrowTypeNumber)>>)
@@ -1156,7 +1157,7 @@ on=@afterDoEffect
 on=@beforegeteffect
 
 [events e_managain]
-on=gethit
+on=@gethit
 if !(tag(e_managain_hits))
   tag(e_managain_hits,<hits>)
 endif
@@ -1571,7 +1572,7 @@ if (src.isplayer)
     arg(weapon,<src.getArmed>)
     if (<arg(weapon)>)
       if (!strcmpi(<arg(weapon).tag(craftedby)>,<src>))
-        if ({1 4} = 2)
+        if ({1 4} == 2)
           src.classmessage("<?sex("Zasadil","Zasadila")?> jsi kriticky uder.")
           hits=<hits>-{15 25}
         endif

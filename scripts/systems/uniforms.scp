@@ -190,7 +190,8 @@ if (isEvent(e_uniform_realm))
     if (<eval uniformTag(deniedUniform)>)
       uniformTag(deniedUniform,0)
       uniformTag(nextUniformSwitch,<serv.time>+10*60*5)
-      classMessage("Zobrazeni realmove uniformy bylo zapnuto.")f_uniformRealm_check
+      classMessage("Zobrazeni realmove uniformy bylo zapnuto.")
+      f_uniformRealm_check
       if (<uniformTag(hasAllRequirements)>)
         f_uniformRealm_ColorAllLayers(1)	//adds colors to all equipped items
       endif
