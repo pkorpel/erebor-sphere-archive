@@ -60,9 +60,6 @@ if (playerExists(<act>))
     return 0
   endif
 endif
-else
-  
-endif
 
 [itemdef i_hcn_SectorSearcher]
 NAME=TagKeg

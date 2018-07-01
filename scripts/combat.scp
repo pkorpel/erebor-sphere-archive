@@ -1,5 +1,5 @@
 [function typ_boje]
-say(muj typ boje: <tag(combattype)>, <tag(weapflag)<tag(mi_weapflags)>>)
+say("muj typ boje: <tag(combattype)>, <tag(weapflag)><tag(mi_weapflags)>")
 return
 
 ////
@@ -144,8 +144,8 @@ if (<tag(manashield)>)
     mana=0
   endif
 endif
-//
-mana=<eval (mana*nastaveni_mystik_manaloss)/1000)>
+
+mana=<eval (mana*nastaveni_mystik_manaloss)/1000>
 tag.remove(speedset)
 tag(hitspeed,0)
 combat_restorepos
@@ -363,8 +363,8 @@ endif
 if (tag(energyofshield)&&(var(spellpower))&&!(src.isplayer))
   tag(energyofshield,<eval tag(energyofshield)>-<var(ubrano)>)
   if (<tag(energyofshield)> < 0)
-    arg(rest_shield_power, <eval( var(ubrano) + tag(energyofshield) ) > )
-    arg(temp, <eval( (arg(rest_shield_power) * 100) / var(ubrano) ) >)
+    arg(rest_shield_power, <eval( var(ubrano) + tag(energyofshield) )> )
+    arg(temp, <eval( (arg(rest_shield_power) * 100) / var(ubrano) )>)
     var(ubrano,<eval (var(ubrano)*<tag(shield_power)>)/<temp>>)
     findid(i_energyshield).timer=0
     classmessage("Kouzlo castesne pohlceno.")
@@ -578,7 +578,7 @@ endif
 tag(hitspeed,<eval 0fffff/arg(speed)>)
 
 [function f_getspeed_nonmystik]
-arg(sqrtdex,<sqrt_int(<eval DEX>)-2>) //-new
+arg(sqrtdex,<eval sqrt_int(<eval DEX>)-2>) //-new
 if (zbran_char)
  arg(speed,<eval arg(sqrtdex)*nastaveni_weapspeed_<tag(weaponuid).typedef.dispid>>)
 else

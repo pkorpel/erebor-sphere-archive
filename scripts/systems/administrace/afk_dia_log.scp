@@ -18,7 +18,7 @@ lastnew.equip
 [itemdef i_vypisovac]
 id=i_memory
 type=t_eq_script
-name=Vypisovac messagÌ
+name=Vypisovac messages
 
 on=@create
 more1=0
@@ -52,7 +52,7 @@ if(strmatch(<arg(text)>,"*lagru*")) //afk log_message kde se vyskytuje slovo "la
 endif
 return <eval argv(0)+d_def_radek_vyska>
 
-[dialog d_afk_dialog]//argv(1) - pokud je - vyhled·vacÌ kriterium argv(2)(zrusene) - limit sprav (kolko sprav od poslednej dozadu)
+[dialog d_afk_dialog]//argv(1) - pokud je - vyhled√°vac√≠ kriterium argv(2)(zrusene) - limit sprav (kolko sprav od poslednej dozadu)
 20,20
 noclose=1
 argo.events=+e_afk_dialog
@@ -74,7 +74,7 @@ argo.dialog_pozadi(<argo.tag(nexty)>,1,200,250,32) //dve pole navic - napis o di
 argo.checkertrans(<d_def_okraj>,<d_def_okraj>,(<argo.tag(sirka)>-(2*<d_def_okraj>)),(<d_def_radek_vyska>+<d_def_okraj>))
 argo.settext(200,"")
 argo.textA(<argo.dialog_textpos(0,1)>,0481,"Vyhledavaci kriterium: ")
-argo.textEntry(<argo.tag(sloupec_x[1])>+180,<argo.tag(obj_y[0])>,115,d_def_radek_Vyska,0481,1,200) //index 1 - pro argtxt(1) ûe? :) 
+argo.textEntry(<argo.tag(sloupec_x[1])>+180,<argo.tag(obj_y[0])>,115,d_def_radek_Vyska,0481,1,200) //index 1 - pro argtxt(1) ≈æe? :) 
 button(<argo.tag(sloupec_x[2])>+1,<argo.tag(obj_y[0])>-1,4011,4013,1,0,3)//Vyhledat
 
 //Druhej prouzek s popisy sloupecku
@@ -215,10 +215,10 @@ cont.afk_array_clear
 
 [function afk_array_add_string]//like the one before
 //<argv(0)>   value 
-//<argv(1)>   po¯adÌ
-//<argv(2)>   po¯adÌ origin·lnÌ
+//<argv(1)>   po≈ôad√≠
+//<argv(2)>   po≈ôad√≠ origin√°ln√≠
 src.tag(filteredmsg_<argv(1)>,<argv(0)>)
-src.tag(orderfiltered_<argv(1)>,<argv(2)>) //pomocnÈ pole ve kterÈm je info o tom kolik·t· ta msg byla v p˘vodnÌm seznamu
+src.tag(orderfiltered_<argv(1)>,<argv(2)>) //pomocn√© pole ve kter√©m je info o tom kolik√°t√° ta msg byla v p≈Øvodn√≠m seznamu
 
 [function afk_array_clear]
 arg(u,1)
@@ -238,5 +238,5 @@ endwhile
 //<argv(0)> position
 return<src.tag(filteredmsg_<argv(0)>)>
 
-[function message_number] //arg-kolik·t· v naöem poli
+[function message_number] //arg-kolik√°t√° v na≈°em poli
 return<src.tag(orderfiltered_<argv(0)>)>

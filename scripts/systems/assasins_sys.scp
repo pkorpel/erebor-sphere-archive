@@ -50,13 +50,4 @@ on=@userdclick
 
 return 1
 
-[dialog d_assasin]
-
-
-[dialog d_assasin button]
-
-
-
-
-
 [eof]

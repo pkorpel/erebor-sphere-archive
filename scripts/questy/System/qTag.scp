@@ -56,7 +56,7 @@ attr=094 // invis, nb, nevermove
 color=0989
 
 [function ensureQTag]
-if !(strlen(<qtag(argv(0))>)
+if !(strlen(<qtag(argv(0))>))
   tag(<argv(0)>,0)
 endif
 

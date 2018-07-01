@@ -2397,7 +2397,6 @@ SRC.ACT.MOVE nw
 SRC.ACT.MOVE nw
 SRC.ACT.MOVE nw
 SRC.ACT.MOVE nw
-endif  E
 
 /////////////////////////////////
 [FUNCTION stribrny3]

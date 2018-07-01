@@ -506,7 +506,7 @@ if !(arg(button))
 elseif (arg(button)==1)&&(src.iscommander)
  src.newitemsafe(i_bag)
  arg(itemtopaste,<src.findlayer(21).findcont(0)>)
- src.accmsg(uid=<arg(itemtopaste)> (<arg(itemtopaste).name> ; <arg(itemtopaste).baseid>) pasted to craftmenu)
+ src.accmsg("uid=<arg(itemtopaste)> (<arg(itemtopaste).name> ; <arg(itemtopaste).baseid>) pasted to craftmenu")
  src.findlayer(21).findcont(0).cont=<lastnew>
  arg(radek,#-1)
  while (radek>=0)
@@ -518,7 +518,7 @@ elseif (arg(button)==1)&&(src.iscommander)
  dialog(d_craftmenu,<argo.tag(from)>)
 elseif (arg(button)==2)&&(src.iscommander)
  arg(itemtocut,<argo.tag(itemtomake[radek])>)
- src.accmsg(uid=<arg(itemtocut)> (<arg(itemtocut).name> ; <arg(itemtocut).baseid>) cut from craftmenu)
+ src.accmsg("uid=<arg(itemtocut)> (<arg(itemtocut).name> ; <arg(itemtocut).baseid>) cut from craftmenu")
  arg(itemtocut).bounce
  dialog(d_craftmenu,<argo.tag(from)>)
 elseif (arg(button)==3)&&(src.iscommander)
@@ -592,6 +592,9 @@ while (u<argvcount)
  arg(u,#+1)
 endwhile
 
+[defnames cm_system_dialogs]
+cm_system_basefont <BASEFONT COLOR="#c0c0c0">
+
 [dialog d_craftitem_info]
 100,100
 argo.tag(command,<args>)
@@ -621,22 +624,22 @@ argo.dialog_zpruhledni
 
 
 argo.texta(<argo.dialog_textpos(0,0)>,2301,Nazev:)
-argo.HTMLGumpa(<lastxpos>+70,lastypos,200,100,<?safe?><BASEFONT COLOR="#c0c0c0">"<?name?>"</BASEFONT>,0,0)
+argo.HTMLGumpa(<lastxpos>+70,lastypos,200,100,<cm_system_basefont><name><basefont_end>,0,0)
 
 //(ix,iy,isx,isy,sTextId,ibBoundBox,ibScrollable)
 argo.tilepichue(<lastxpos>+260,lastypos,<dispiddec>,10)
 
 argo.texta(<argo.dialog_textpos(1,0)>,2301,Material:)
-argo.HTMLGumpa(<lastxpos>+70,lastypos,300,100,<?safe?><BASEFONT COLOR="#c0c0c0">"<?resourcetext?>"</BASEFONT>,0,0)
+argo.HTMLGumpa(<lastxpos>+70,lastypos,300,100,<cm_system_basefont><resourcetext><basefont_end>,0,0)
 
 argo.texta(<argo.dialog_textpos(2,0)>,2301,Typ:)
-argo.HTMLGumpa(<lastxpos>+70,lastypos,300,100,<?safe?><BASEFONT COLOR="#c0c0c0">"<?typename?>"</BASEFONT>,0,0)
+argo.HTMLGumpa(<lastxpos>+70,lastypos,300,100,<cm_system_basefont><typename><basefont_end>,0,0)
 
 if (cm_displaymore)
 argo.texta(<argo.dialog_textpos(3,0)>,2301,UC/OC:)
-argo.HTMLGumpa(<lastxpos>+70,lastypos,300,100,<?safe?><BASEFONT COLOR="#c0c0c0"><?typedef.dam?></BASEFONT>,0,0)
+argo.HTMLGumpa(<lastxpos>+70,lastypos,300,100,<cm_system_basefont><typedef.dam><basefont_end>,0,0)
 argo.texta(<argo.dialog_textpos(4,0)>,2301,Vydrz:)
-argo.HTMLGumpa(<lastxpos>+70,lastypos,300,100,<?safe?><BASEFONT COLOR="#c0c0c0"><?more1h?></BASEFONT>,0,0)
+argo.HTMLGumpa(<lastxpos>+70,lastypos,300,100,<cm_system_basefont><more1h><basefont_end>,0,0)
 //argo.textA(<argo.tag(sloupec_x[2])>+<d_def_odsazeni>,ypos,2301,"<argo.tag(itemtomake[index]).name>")
 endif
 

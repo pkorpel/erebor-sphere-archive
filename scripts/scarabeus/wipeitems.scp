@@ -19,7 +19,6 @@ endif
    var(item_to_wipe,<item_to_wipe>+1)
   endif
  endif
-endif
 
 [function wipeitem]
 dialog d_maj_select_region

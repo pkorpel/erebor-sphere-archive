@@ -48,6 +48,7 @@ ENDDO
 Elseif <src.mana><50 
 bounce 
 src.msg you need more mana to use this 
+endif
 
 [FUNCTION FREEZE] 
 src.targ.damage_noresponse(30,dam_cold|dam_magic))
@@ -176,8 +177,6 @@ SRC.targ.ACT.ATTR=attr_static|attr_decay
 src.targ.act.COLOR=0480 
 
 return 1 
-
-endif
 
 [itemdef i_deed_ballista_n] 
 NAME=deed to a Ballista (N) 

@@ -13,7 +13,7 @@
 //f_warmenu			minipanel obsahujci zakladni spousteci prvky pro boj: Ability, piti lahvi  //zobrazi dialog dle povolani
 //f_questmenu			Zde by mel byt prehled o splnenych kvestech,(system dopracuji standartizuji pozdeji)			
 //f_vlastnosti			pro spravne zobrazeni stranky castici(u  klerdu knihy viry, u Druida knihy jine)   
-//f_vlastnosti_kouzel		pro spravne zobrazeni stranky informativni vuci strance casticí
+//f_vlastnosti_kouzel		pro spravne zobrazeni stranky informativni vuci strance casticÃ­
 //f_jakevlasnosti		pomocna funkce slouzi k dosazeni promenych do infopanelu  			
 //
 //f_dejvsechny_vlastnosti	JEN TESTOVACI !!!!  da ti vsechny vlastnosti
@@ -759,7 +759,7 @@ textentry 200 365 170 25 152 0 2
 textentry 200 405 170 25 152 1 1
 button 455 380 0344a 0344b 1 0 5//potvrzeni
 if (<src.tag.vlastnosti>&010000000)
-
+endif
 
 
 
@@ -789,7 +789,7 @@ DIALOG=d_osobni_nastaveni_acount
 
 
 on=5
-if (<argtxt(1)> ==***)
+if (!strcmp(<argtxt(1)>,"***"))
 say("Nebylo zadano spravne heslo, zmeneno.")
 //src.account.password=<argtxt(1)>
 DIALOG=d_osobni_nastaveni_acount

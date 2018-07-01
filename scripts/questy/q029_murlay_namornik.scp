@@ -398,13 +398,13 @@ argo.dialog_page("Pozdrav")
   endif
 
 argo.dialog_page("Hledam praci")
-  if (<arg(q029_murlay)> < 4))
+  if (<arg(q029_murlay)> < 4)
     argo.setText(argo.newTextLine,"Nevim jak bych te mohla zamestnat...")
     argo.questDialog_HTMLGUMP
   elseif (<arg(q029_murlay)> == 4)
     argo.setText(argo.newTextLine,"Uz ode me ulohu prece mas!")
     argo.questDialog_HTMLGUMP
-  elseif (<arg(q029_murlay)> < 7))
+  elseif (<arg(q029_murlay)> < 7)
     argo.setText(argo.newTextLine,"Uz tu nemam nic, s cim bys mi mohl pomoct.")
     argo.questDialog_HTMLGUMP
   endif

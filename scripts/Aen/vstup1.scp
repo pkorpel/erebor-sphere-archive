@@ -263,11 +263,11 @@ ON=@CREATE
   ATTR=010
   MORE2=15
   TIMER=-1
-  tag(podstavecohne,"0")  # more2 2 
-  tag(podstavecvzduchu,"0") # 3
-  tag(podstavecvody,"0")  # 4
-  tag(podstaveczeme,"0")  # 5
-  tag(umistenirakve,"0")  # 6
+  tag(podstavecohne,"0")  //# more2 2 
+  tag(podstavecvzduchu,"0") //# 3
+  tag(podstavecvody,"0")  //# 4
+  tag(podstaveczeme,"0")  //# 5
+  tag(umistenirakve,"0")  //# 6
   tag(rakev1,"0")
   tag(rakev2,"0")
   tag(rakev3,"0")

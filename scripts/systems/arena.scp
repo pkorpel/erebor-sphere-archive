@@ -14,7 +14,7 @@ ON=*hi*
 SAY "Zda se ti na me mne neco smesneho ?  Jestli jo  tak *Arena* ten problem vyresi.." 
 
 ON=*ahoj*
-SAY" jejda obludo tebe jsem dlouho nevidel.jak te znam  tak  chces jit "do areny"
+SAY(" jejda obludo tebe jsem dlouho nevidel. Jak te znam  tak  chces jit 'do areny'")
 
 ON=*arena*
 ON=*do*areny*
@@ -39,7 +39,7 @@ ON=*hi*
 SAY "Zda se ti na me mne neco smesneho ?  Jestli jo  tak *Arena* ten problem vyresi.." 
 
 ON=*ahoj*
-SAY" Jejda <src.name>  tebe jsem dlouho nevidel.jak te znam  tak  chces jit "do areny"
+SAY(" Jejda <src.name>  tebe jsem dlouho nevidel. Jak te znam  tak  chces jit 'do areny'")
 
 ON=*arena*
 ON=*do*areny*
@@ -858,9 +858,8 @@ on=@targon_char
  src.targ.tag(pvp_team,<strright(<strleft(<nastaveni_hraci_pvpturnaj_<button_pvpvyber>>,6)>,1)>)
  remove
  return 1
-endif
 
-[itemdef i_stone_pvp_turnaj
+[itemdef i_stone_pvp_turnaj]
 ID=01174
 Name=Cesta na turnaj
 

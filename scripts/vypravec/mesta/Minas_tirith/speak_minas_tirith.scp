@@ -1,5 +1,5 @@
 ///****************************************************************************
-//SPHERE by : Menasoft ©1997-2006
+//SPHERE by : Menasoft Â©1997-2006
 //www.sphereserver.com
 // All SPHERE script files and formats are copyright Menasoft & Partners.
 // This file may be freely edited for personal use, but may not be distributed
@@ -645,25 +645,21 @@ src.tag.remove.mamuctenkynakusu
     f_probehl_obchod_skill
     enddo
   endif
-  endif
   if(<?src.tag.skill_obchodnictvi?>>299)&&(<?src.tag.skill_obchodnictvi?><600)
     dorand 5
     f_probehl_obchod_skill
     f_probehl_obchod_skill
     enddo
   endif
-  endif
   if(<?src.tag.skill_obchodnictvi?>>599)&&(<?src.tag.skill_obchodnictvi?><900)
     dorand 6
     f_probehl_obchod_skill
     enddo
   endif
-  endif
   if(<?src.tag.skill_obchodnictvi?>>899)&&(<?src.tag.skill_obchodnictvi?><1001)
     dorand 7
     f_probehl_obchod_skill
     enddo
-  endif
   endif
   if(<?src.tag.skill_obchodnictvi?>>1000)
     src.sysmessage="Jsi bozskym obchodnikem"
@@ -2914,7 +2910,7 @@ return 1
     ENDDO
            DIALOG(d_manwehoknez)
            return 1
-  ELSE (<SRC.BODY> == c_woman)&&(src.profession==class_priest)
+  ELSEIF (<SRC.BODY> == c_woman)&&(src.profession==class_priest)
     DORAND 4
       say= "Manwe te ochranuj"
       say= "Zdravim sestro.."
@@ -2967,7 +2963,7 @@ return 1
   Nejake drby ?
   Obchodovat ?
   Hledam praci
-  Nesu vám ...
+  Nesu vam ...
   Prohlednout..
   xx
   xx
@@ -4191,7 +4187,7 @@ on=1 // odted mas pristup ke sluzbam pruvodce
     src.f_bugar_minas_porter
   endif
 
-on=2 nekromant smireny se svou situaci
+on=2 // nekromant smireny se svou situaci
   src.ensureTag(hotoveQuesty_2)
   src.tag.hotovequesty_2 = <src.tag.hotovequesty_2>|01000
   
@@ -4729,7 +4725,7 @@ DIALOG(d_banker_ok)
   Nejake drby ?
   Obchodovat ? //5
   Hledam praci
-  Nesu vám ...
+  Nesu vam ...
   Prohlednout..
   Banker pusobi solidnim dojmem a diva se na tebe s uctivym zajmem.
   Typicky banker. Formalni a nudny. //10
@@ -5012,13 +5008,13 @@ if(strlen(<src.tag(captain)>) > 0) //uz je kapitanem
 endif
 arg(jehorealm,<eval src.tag(realm)>)
 if(<jehorealm> == 1)
- if(<eval var(war_declarator_<jehorealm>).tag(conquered)) == -3>
+ if(<eval var(war_declarator_<jehorealm>).tag(conquered)> == -3)
   //Gondor uz dobyl vse az po pevnost -3
   say("Vzdyt uz jsi tem Mordoranum vsechno dobyl!")
   return 1
  endif
 else
- if(<eval var(war_declarator_<jehorealm>).tag(conquered)) == 3>
+ if(<eval var(war_declarator_<jehorealm>).tag(conquered)> == 3)
   //Mordor uz dobyl vse az po pevnost -3
   say("Vzdyt uz jsi tem prasivejm Gondorum vsechno dobyl!")
   return 1

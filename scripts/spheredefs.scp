@@ -1658,4 +1658,10 @@ d_blocked_ips        0
 //d_blocked_low_ip[7]  88.103.147.115   //Lu-Tze -> block kvuli brachovi + povoleny jen jeho accounty
 //d_blocked_hi_ip[7]   88.103.147.115
 
+[DEFNAMES htmlgump_constants]
+basefont_end        </BASEFONT>
+br                  <br>
+CENTER              <CENTER>
+CENTERE             </CENTER>
+
 [EOF]

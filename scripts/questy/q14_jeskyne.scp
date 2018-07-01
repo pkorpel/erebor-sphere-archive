@@ -360,7 +360,7 @@ src.scroll sc_q14_bluescroll
 return 1
 
 [scroll sc_q14_bluescroll]
-Potvrzuji, ze jsem prevzala tento material: 100ks Spider's Silk, 100ks Nightshade, 100ks Blood Moss, 300 kostí ze skeletona, 50 zlatych otepi
+Potvrzuji, ze jsem prevzala tento material: 100ks Spider's Silk, 100ks Nightshade, 100ks Blood Moss, 300 kosti ze skeletona, 50 zlatych otepi
 
 [itemdef i_q14_dopis_pepe]
 id=i_deed

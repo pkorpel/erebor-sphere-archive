@@ -1,6 +1,6 @@
 /////////////////////////////////////////////
 //
-//     **   Mordorské Kvesty  **
+//     **   MordorskÃ© Kvesty  **
 //
 //
 //
@@ -16,7 +16,7 @@
 //
 //   Kvest Neutralni-006 xxxxxxxxxxxxxx
 //
-//   Kvest Neutralni-007  - Pøesunuto(Heradirovo_Selatko.scp)   editedBY SirGlorg
+//   Kvest Neutralni-007  - PÅ™esunuto(Heradirovo_Selatko.scp)   editedBY SirGlorg
 //
 //   Kvest Neutralni-008 xxxxxxxxxxxxxx
 //
@@ -448,7 +448,7 @@ DEX={200 300}
 KARMA=-1000
 MAGERY={90.0 100.0} 
 WRESTLING={70.0 80.0} 
-TACTICS{40.0 60.0} 
+TACTICS={40.0 60.0} 
 
 NPC=BRAIN_HUMAN
 

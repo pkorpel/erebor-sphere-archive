@@ -22,6 +22,7 @@ src.newitem=i_svitek_cas
 src.act.bounce
 src.go=MOREP
 return 1
+endif
 
 [itemdef i_svitek_cas]
 NAME=Svitek casu
@@ -138,7 +139,6 @@ if (<src.account.plevel> >= 2)
 else
   remove
   src.redmessage(Toto se Ti nemelo dostat do ruky !!!)
-endif
 ENDIF
 
 
@@ -685,7 +685,7 @@ NAME=Smrt
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 src.hits=0
 
 
@@ -697,7 +697,7 @@ NAME=Ostatni pismena
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.abchadanka>==10)
 src.tag.remove(abchadanka)
 SAY Cvak
@@ -718,7 +718,7 @@ NAME=T
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag(abchadanka)> == 10)
 src.tag.abchadanka=1
 SAY Cvak
@@ -745,7 +745,7 @@ NAME=A
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.abchadanka> == 1 )
 src.tag.abchadanka=2
 SAY Cvak
@@ -765,7 +765,7 @@ NAME=J
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.abchadanka> == 2)
 src.tag.abchadanka=3
 SAY Cvak
@@ -785,7 +785,7 @@ NAME=E
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.abchadanka> == 3)
 src.tag.abchadanka=4
 SAY Cvak
@@ -805,7 +805,7 @@ NAME=M
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.abchadanka> == 4)
 src.tag.abchadanka=5
 SAY Cvak
@@ -825,7 +825,7 @@ NAME=S
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.abchadanka> == 5)
 src.tag.abchadanka=6
 SAY Cvak
@@ -846,7 +846,7 @@ NAME=V
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.abchadanka> == 7)
 src.tag.abchadanka=8
 SAY Cvak
@@ -867,7 +867,7 @@ NAME=I
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.abchadanka> == 8)
 src.tag.remove(abchadanka)
 src.go 5959,135
@@ -886,7 +886,7 @@ NAME=-2
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.interval> == 0 )
 src.tag.interval=1
 ELSEIF (<src.tag.interval> == 1)
@@ -903,7 +903,7 @@ NAME=-1
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.interval> == 1 )
 src.tag.interval=2
 ELSEIF (<src.tag.interval> == 2)
@@ -920,7 +920,7 @@ NAME=0
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 IF (<src.tag.interval> == 2 )
 src.tag.interval=3
 ELSEIF (<src.tag.interval> == 3)
@@ -938,7 +938,7 @@ ON=@Create
 COLOR=0985
 ATTR=080
 
-ON=Step
+ON=@Step
 IF (<src.tag.interval> == 3)
 src.go 5971,148
 else
@@ -953,7 +953,7 @@ NAME=Cesta ven
 ON=@Create
 COLOR=0985
 
-ON=Step
+ON=@Step
 src.tag.remove(abchadanka)
 src.tag.remove(interval)
 src.go Severni spoust

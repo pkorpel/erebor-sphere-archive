@@ -1414,12 +1414,13 @@ NEWNPC c_pisecny_sumon_golem
 //act.anim 10
 //act.NEWNPC c_pisecny_sumon_golem
 //  attack
+endif
 return
 
 on=@aftergetswing  // nekdo me zasahl
 if (src.profession!=class_war)  
     say  Valecniku  blaznivej...   takovich jako ty jsem uz v mladi skolil desitky..  
-
+endif
 
 
 on=@death     //  pri smrti
@@ -1731,7 +1732,7 @@ if (<arg(dist)> < 0) // no need for further leap
 endif
 if (<strlen(<cont.tag(npc_port_distance)>)>)
   arg(dist,<cont.tag(npc_port_distance)>)
-else (arg(dist)>3)
+elseif (arg(dist)>3)
   arg(dist,3)
 endif
 if (<strlen(<cont.tag(npc_port_timer)>)>)//moze portovat len 1x za tento cas
