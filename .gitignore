@@ -17,3 +17,6 @@ save/*
 !save/spherestatics.scp
 !save/spherechars.scp
 !save/sphereworld.scp
+/_dev/paket/.paket
+/_dev/paket/packages
+/_dev/paket/paket-files
