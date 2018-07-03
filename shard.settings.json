@@ -1,0 +1,44 @@
+{
+  "ScriptsPath": "./scripts",
+  "SavePath": "./save",
+  "IgnoredScripts": [
+    "scripts/gump_system/itemy_z_gumpy/druid_dialog.scp",
+    "scripts/gump_system/itemy_z_gumpy/druid_items.scp",
+    "scripts/gump_system/itemy_z_gumpy/priest_dialog.scp",
+    "scripts/gump_system/itemy_z_gumpy/priest_item.scp",
+    "scripts/gump_system/priest/dialog.scp",
+    "scripts/gump_system/priest/npc.scp",
+    "scripts/questy/knihy.scp",
+    "scripts/questy/kvest0002.scp",
+    "scripts/questy/kvest0003.scp",
+    "scripts/questy/kvest0004NPC.scp",
+    "scripts/questy/q019_pocestny.scp",
+    "scripts/questy/q039_shadow_items.scp",
+    "scripts/questy/q043_murdocovi_ucni.scp",
+    "scripts/questy/q043_tut.scp",
+    "scripts/questy/q044_chars.scp",
+    "scripts/questy/q044_zachrante_murdoca.scp",
+    "scripts/questy/q099_vyvrhel.scp",
+    "scripts/spherebook.scp",
+    "scripts/spherehelp.scp",
+    "scripts/sphereirc.scp",
+    "scripts/spheremenu.scp",
+    "scripts/spherespeech.scp",
+    "scripts/spheretables.scp",
+    "scripts/systems/craftmenu/cartography.scp",
+    "scripts/systems/skills/tracking.scp",
+    "scripts/temporary_arjan.scp",
+    "scripts/web/web.scp"
+  ],
+  "PrePatches": [
+    {
+      "Scope": "scripts/newbie_portals.scp",
+      "Patches": {
+        "\"dialog(D_RACEclass_classes)\"": "\"dialog D_RACEclass_classes\"",
+        "\"dialog(D_RACEclass_races)\"": "\"dialog D_RACEclass_races\"",
+        "\"dialog(D_raceclass_nations)\"": "\"dialog D_raceclass_nations\"",
+        "\"dialog(D_RACEclass_stats)\"": "\"dialog D_RACEclass_stats\""
+      }
+    }
+  ]
+}
