@@ -1326,7 +1326,7 @@ if ((strlen(<monster.tag(monstertype)>)))//ma ten tag? // monstertype
   endif
 endif
 if ((strlen(<monster.tag(monstertype2)>)))
-  if (<strcmp(<arg(monsterkind)>,<return_nth(1,<monster.tag(monsterftype2)>)>)>==0)
+  if (<strcmp(<arg(monsterkind)>,<return_nth(1,<monster.tag(monstertype2)>)>)>==0)
     if (<strlen(<return_nth(2,<monster.tag(monstertype2)>)>)>)
       arg(bonus_percent,<eval(<return_nth(2,<monster.tag(monstertype2)>)>)>)
     endif
