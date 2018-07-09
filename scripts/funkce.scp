@@ -490,6 +490,13 @@ endif
  //src.sysMessage({<arg(dolni_mez)>, <arg(horni_mez)>}, skill: <arg(compareskill)>)
 return 1
 
+[function failSkill]
+skill -1
+if (strlen(<args>))
+  sysMessage(<args>)
+endif
+return 1
+
 [function wait_then_port]//argv(0) - jak dlouho cekat, argv(1,2,3,4) - kam portovat (x,y,z,m)
 src.newitemsafe(i_wait_then_port)
 lastnew.morep(<argv(1)> <argv(2)> <argv(3)> <argv(4)>)

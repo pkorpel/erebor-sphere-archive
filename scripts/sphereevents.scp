@@ -1309,20 +1309,17 @@ return 0
 
 on=@skillsuccess
 if (ishungrymsg)
-  skill -1
-  return 1
+  return<failSkill>
 endif
 if (<action> == Skill_Magery)
-  if (<act>)
+  if (!isGM && <act>)
     if (<act> != uid)
       if (distancefrom(<act>) > 18)
-        sysMessage("Cil je prilis daleko!")
-        skill -1
-        return 1
-      elseif !(f_canseelos(<act>)) )
-        sysMessage("Nevidis na cil.")
-        skill -1
-        return 1
+        return<failSkill("Cil je prilis daleko!")>
+      elseif (!f_los_free_spell(<tag(LastCastSpell)>))
+        if !(f_canseelos(<act>)) )
+          return<failSkill("Nevidis na cil.")>
+        endif
       endif
     endif
   endif
@@ -2091,6 +2088,12 @@ on=@afterDoEffect
 on=@beforegetswing
 on=@npckill
 on=@playerKill
+
+[function f_los_free_spell]
+if (<args> == spell_Recall) || (<args> == spell_Gate_Travel) || (<args> == spell_Dispel_Field)
+  return 1
+endif
+return 0
 
 [itemdef i_nostep]
 id=i_memory
