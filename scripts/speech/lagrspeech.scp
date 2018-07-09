@@ -47,9 +47,9 @@ if (<eval(<src.account.tag(lagr)>)><8)
   if (<src.restest <eval(<src.tag(lagrlogu)>/100)> i_gold_lagr>)
     src.lagrpustit
   else
-    arg(goldLagr,<src.rescount(i_gold_lagr)>)
+    arg(goldLagr,<eval src.rescount(i_gold_lagr)>)
     src.tag(lagrlogu,#-<eval (arg(goldLagr)*100)>)
-    src.consume(<arg(goldLagr)>,i_gold_lagr)
+    src.consume(i_gold_lagr,<arg(goldLagr)>)
     say("Mas u sebe jen <eval <arg(goldLagr)>> zlataku. Dej mi je a pokracuj.")
     say("Potrebujes jeste <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ty ziskas vymenou za normalni drevo. Az budes mit dostatek dreva, oslov me "vymena".")
   endif
