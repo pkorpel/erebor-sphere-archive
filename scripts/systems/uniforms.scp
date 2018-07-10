@@ -37,7 +37,7 @@ lastnew.timerd=1
 lastnew.link=<cont>
 lastnew.attr=attr_invis
 lastnew.p=<cont.p>
-src.tag.uniform=<src.tag.uniform-1>
+src.tag.uniform=<eval src.tag.uniform-1>
 if (<eval src.tag.uniform><1)
  src.events -e_uniform
  src.tag.uniform=""

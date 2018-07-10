@@ -104,7 +104,7 @@ src.qtag(q018,1,31)
 on=2
 if (src.qtag(q018)==5)&&(<src.rescount(i_q018_zlata_snura)>>=1)
 	src.addexp(1000)
-	src.givegold 20000
+	src.givegold(20000)
 	src.findid(i_q018_zlata_snura).remove
 	src.qtag(q018,6,31)
 	f_quest_complete(31)  // splnenie questu "Zlaty Losos"

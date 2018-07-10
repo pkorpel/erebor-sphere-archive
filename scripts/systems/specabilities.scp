@@ -4999,7 +4999,7 @@ target("Zamer hrace kteremu chces darovat LifePact.")
 on=@targon_char
 arg(hrac,<src.targ>)
 if (<hrac.isplayer>)
-  if (<hrac.tag.realm==src.tag.realm>)
+  if (<hrac.tag.realm>==<src.tag.realm>)
     if (hrac.flag_dead)
       src.sysmessage("Nezameruj mrtvoly.")
       return 1

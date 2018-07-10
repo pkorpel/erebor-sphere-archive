@@ -156,7 +156,7 @@ ON=@UserDClick
         src.act.attr attr_can_decay|attr_move_never
         src.act.timer 2
         src.update
-        src.soun snd_spell_explosion
+        src.sound snd_spell_explosion
         return 0
       endif
     endif

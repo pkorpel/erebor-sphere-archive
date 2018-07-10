@@ -47,7 +47,7 @@ if !(safe link.isvendorplac)//neni linknuta
 endif
 link.f_checkfieldnajem
 src.smsg(Mesicni najem pole cislo <eval link.tag.housenumber> cini <link.tag(najem)> gp.)
-src.smsg(Najem je zaplacen na <link.paiduntildays]> dni dopredu.)
+src.smsg(Najem je zaplacen na <link.paiduntildays> dni dopredu.)
 
 on=@dropon_obj
 say(<src.name> do mne hodil <argo.name>)

@@ -174,14 +174,6 @@ on=@death
 act.say Pred smrti zamumlal neco o sile sveho naroda a pak zemrel
 act.LINK=<uid>
 
-[events e_more_attackage] //vybrano z orcs.scp kde to nema co delat
-on=@hit 
-src.sound=snd_SPELL_LIGHTNING 
-SRC.EFFECT=2,i_FX_Energy_Ray,6,15,1 
-src.tag.dohit=1
-src.attackage <eval {1 10}> 
-return 0 
-
 [EVENTS e_scales] //vybrano z orcs.scp kde to nema co delat
 on=@gethit
 arg(scale,<eval Rand(3)>)
