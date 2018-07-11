@@ -1317,7 +1317,7 @@ if (<action> == Skill_Magery)
       if (distancefrom(<act>) > 18)
         return<failSkill("Cil je prilis daleko!")>
       elseif (!f_los_free_spell(<tag(LastCastSpell)>))
-        if !(f_canseelos(<act>)) )
+        if !(f_canseelos(<act>))
           return<failSkill("Nevidis na cil.")>
         endif
       endif

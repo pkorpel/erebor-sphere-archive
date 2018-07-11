@@ -408,7 +408,7 @@ if (src.qtag(q024) == 4) && (<src.findid(i_q024_vacek_strazci).tag.contentscount
   src.addexp(800)
 endif
 on=3
-if ((src.qtag(q024) == 5) && (<src.rescount i_lockpick> >= 120)) && (<src.rescount i_q024_truhlicka> == 1))
+if ((src.qtag(q024)==5) && (<src.rescount i_lockpick> >= 120)) && (<src.rescount i_q024_truhlicka> == 1)
   src.qtag(q024,6,34)
   src.consume(i_q024_truhlicka)
   src.consume(120,i_lockpick)
@@ -627,7 +627,7 @@ if (0<src.qtag(q024)> ==0)
 endif
 
 on=2
-if (src.qtag(q024) == 2) && (<src.rescount i_q024_truhlicka> == 1))
+if (src.qtag(q024) == 2) && (<src.rescount i_q024_truhlicka> == 1)
   src.qtag(q024,3,34)
   src.addexp(100)
   say("Hodne stesti u toho staryho lapky!")
@@ -636,7 +636,7 @@ else
 endif
 
 on=3
-if (src.qtag(q024) == 6) && (<src.rescount i_q024_sutr> >= 1))
+if (src.qtag(q024) == 6) && (<src.rescount i_q024_sutr> >= 1)
   src.qtag(q024,7,34)
   src.addexp(500)
   say("Hugo obdivuje krasu fontany na ostrove Imperatoru...")
@@ -645,7 +645,7 @@ else
 endif
 
 on=4
-if (src.qtag(q024) == 9) && (<src.rescount i_q024_prsten> >= 1))
+if (src.qtag(q024) == 9) && (<src.rescount i_q024_prsten> >= 1)
   src.qtag(q024,10,34)
   src.addexp(500)
   say("Fiflena trucuje na rhunskem ostrove...")

@@ -5560,7 +5560,7 @@ updatex
 
 [function logpc]
 arg(moveto,<finduid(args)>)
-src.Accmsg(moved uid=<uid> (<name>) TO pos=<args>)
+src.Accmsg("moved uid=<uid> (<name>) TO pos=<args>")
 p=<args>
 updatex
 

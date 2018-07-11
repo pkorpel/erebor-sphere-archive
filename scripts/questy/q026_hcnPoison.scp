@@ -158,7 +158,7 @@ if (<eval src.qtag(q026_hcnPoison)> == 4) // potrebuju rady od maga.
   setText(newTextLine,"<?def_questDialog_colorTextResponse?>Zdravim te. Shanim se po nejakem magovi, ktery se vyzna v praktikach starych nekromantu. <?src.sex("Byl jsem otraven","Byla jsem otravena")?> v hrobkach cernych Numenorejcu a nikdo si mou otravou nevi rady.")
   questDialog_addResponse(1,0,1,"q026_hcnPoison") // long text & link to page & new page
 elseif (<eval src.qtag(q026_hcnPoison)> == 5) //shanim informace primo Unase
-  setText(newTextLine,"<?def_questDialog_colorTextResponse?>Ah ! Prave tebe shanim! <?src.sex("Dozvedel","Dozvedela")?>") jsem se, ze mas obsahle znalosti o praktikach starych nekromantu. Potrebuji vylecit mou otravu z hrobek cernych Numenorejcu.")
+  setText(newTextLine,"<?def_questDialog_colorTextResponse?>Ah ! Prave tebe shanim! <?src.sex("Dozvedel","Dozvedela")?> jsem se, ze mas obsahle znalosti o praktikach starych nekromantu. Potrebuji vylecit mou otravu z hrobek cernych Numenorejcu.")
   questDialog_addResponse(1,0,1,"q026_hcnPoison") // long text & link to page & new page
 elseif (<eval src.qtag(q026_hcnPoison)> == 11) //mam knihu z chramu poznani
   setText(newTextLine,"<?def_questDialog_colorTextResponse?>Znovu te zdravim priteli. Podarilo se mi dostat do chramu vedeni a ziskat z Numenorejske knihovny tuto knihu. Jeji obsah je vsak pro mne necitelny. Dokazes jej rozlustit? Potrebuji lek na svou otravu.")

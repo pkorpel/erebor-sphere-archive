@@ -283,13 +283,13 @@ endif
 [typedef t_collection]
 on=@userclick
 if (src.isgm)
- src.sysMessage(Pouziti: Do nasledujicich tagu uloz pozadovane informace:)
- src.sysMessage(tag(collector_id) - id predmetu ktery bude odpovidajicim collectorem)
- src.sysMessage(- teprve zamereni tohoto t_collectoru na tohle t_collection vyvola pozadovanou odezvu)
- src.sysMessage(tag(next_pick) - sem na zacatek uloz 0, toto je automaticky tag urcujici jestli uz lze sebrat dalsi vec)
- src.sysMessage(tag(pick_delay) - sem uloz cas v sekundach znacici prodlevu mezi jednotlivymi ziskavanimi itemu)
- src.sysMessage(tag(items_to_pick) - sem uloz pocet veci ktere pujde z teto kolekce ziskat celkem)
- src.sysMessage(tag(infinite) - 1 pokud ma byt pocet sebratelnych predmetu nekonecny. defaultne nastav 0)
+ src.sysMessage("Pouziti: Do nasledujicich tagu uloz pozadovane informace:")
+ src.sysMessage("tag(collector_id) - id predmetu ktery bude odpovidajicim collectorem")
+ src.sysMessage("- teprve zamereni tohoto t_collectoru na tohle t_collection vyvola pozadovanou odezvu")
+ src.sysMessage("tag(next_pick) - sem na zacatek uloz 0, toto je automaticky tag urcujici jestli uz lze sebrat dalsi vec")
+ src.sysMessage("tag(pick_delay) - sem uloz cas v sekundach znacici prodlevu mezi jednotlivymi ziskavanimi itemu")
+ src.sysMessage("tag(items_to_pick) - sem uloz pocet veci ktere pujde z teto kolekce ziskat celkem")
+ src.sysMessage("tag(infinite) - 1 pokud ma byt pocet sebratelnych predmetu nekonecny. defaultne nastav 0")
 endif
 
 [function f_collector_isFull] // argv(0): optional - item ID that should be checked for existence. ; returns 0 if no Collector found or found collector is not full

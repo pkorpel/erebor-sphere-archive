@@ -1753,7 +1753,7 @@ ON=@Create
 color=0480
 Attr_CanDecay(1)
 Attr_MoveAlways(1)
-finduid(09fa43).delayedmessage(<servertime> QV-item (Ulomek) <lastnew>. Pozice <cont.P>) 
+finduid(09fa43).delayedmessage("<servertime> QV-item (Ulomek) <lastnew>. Pozice <cont.P>")
 
 ON=@userDClick
 message("Ulomek neceho kovoveho")  

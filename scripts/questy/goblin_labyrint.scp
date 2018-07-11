@@ -874,7 +874,7 @@ WEIGHT=1
 
 on=@create
 color=0995
-tag(unreaded_yet,1))
+tag(unreaded_yet,1)
 
 on=@DROPON_GROUND
 src.newitem(i_gold)

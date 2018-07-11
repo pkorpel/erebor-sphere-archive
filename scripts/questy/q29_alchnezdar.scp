@@ -798,7 +798,7 @@ return 1
 //  prijeti ukolu
 on=1 
  
-if ( src.qtag(q029_alchnezdar)==9) && (<src.restest 1 i_qv1_pr_ajdy>) && (<src.rescount i_bandage> >= 250) && (<src.rescount i_potion_healgreat> >=10) && (<src.rescount i_gold> >= 10000))
+if (( src.qtag(q029_alchnezdar)==9) && (<src.restest 1 i_qv1_pr_ajdy>) && (<src.rescount i_bandage> >= 250) && (<src.rescount i_potion_healgreat> >=10) && (<src.rescount i_gold> >= 10000))
   EMOTE=jak opatrne bali hnilobne maso do bandazi
   src.consume i_qv1_pr_ajdy
   src.consume 10 i_potion_healgreat

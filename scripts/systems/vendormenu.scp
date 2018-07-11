@@ -191,7 +191,7 @@ return 0
 if !(src) 
  src=<more1> 
 endif
-src.accmsg(trashes vendorplac uid=<uid> (<name>))
+src.accmsg("trashes vendorplac uid=<uid> (<name>)")
 if (<src.ischar>) 
   src.newitemsafe(i_backpack)
   tag(backpack_s_vecma,<lastnew>)
@@ -232,7 +232,7 @@ else
    link(0)
   else
    removefromview
-   src.accmsg(trashes item uid=<uid> (<amount> <name>))
+   src.accmsg("trashes item uid=<uid> (<amount> <name>)")
    cont=<lastnew>
   endif
 endif
@@ -342,7 +342,7 @@ endif
 if(<src.isgm>) 
  if (!(link.tag(vendorplaced))) //neni li na barak linkovan zadny vendor
   var(vendorfound,0) 
-  sector.allchars(findvendor(<uid>))) //melo by nalezt vendora v sektoru v nemz lezi link s timto UID (tj. cedule
+  sector.allchars(findvendor(<uid>)) //melo by nalezt vendora v sektoru v nemz lezi link s timto UID (tj. cedule
   if(var(vendorfound)) //nalezl stareho vendora
    src.sysmessage(Stary hracsky vendor nalezen a zaznamenan)
    link.tag(vendorplaced,1)
@@ -567,9 +567,9 @@ else
   arg(ypos,<argo.vm_section(<ypos>,10,1,Predat vlastnictvi stanku)>)
   
   arg(ypos,<argo.vm_section(<ypos>,11,2,<qval(<tag(block)>,Od,Za)>blokovat stanek)>)
-  arg(ypos,<argo.vm_section(<ypos>,12,2,Trash stanek (necha vendora))>) //=trashvendorplac
-  arg(ypos,<argo.vm_section(<ypos>,8,2,<qval(<tag(vendor_trest)>,Vratit vendora z trestu,Odstranit vendora (trest))>)>) //trashvendor
-  arg(ypos,<argo.vm_section(<ypos>,18,2,Odstranit vendora (uplne))>) //trashvendor_itagy
+  arg(ypos,<argo.vm_section(<ypos>,12,2,"Trash stanek (necha vendora)")>) //=trashvendorplac
+  arg(ypos,<argo.vm_section(<ypos>,8,2,<qval(<tag(vendor_trest)>,"Vratit vendora z trestu","Odstranit vendora (trest)")>)>) //trashvendor
+  arg(ypos,<argo.vm_section(<ypos>,18,2,"Odstranit vendora (uplne)")>) //trashvendor_itagy
   arg(ypos,<argo.vm_section(<ypos>,13,2,Vynulovat zaplaceni)>)
   arg(ypos,<argo.vm_section(<ypos>,14,2,Nastavit najem)>)
   arg(ypos,<argo.vm_section(<ypos>,15,2,<qval(<tag(autorent)>,Vy,Za)>pnout autorent)>) 

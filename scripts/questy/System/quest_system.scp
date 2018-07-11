@@ -4,7 +4,7 @@ if (isqueststone)
   arg(prvy_arg,<return_nth(1,<args(0)>)>)
   arg(druhy_arg,<return_nth(2,<args(0)>)>)
   if (<argvcount> == 2)
-    finduid(<quest_stone_uid>).tag(quest_<prvy_arg>_<druhy_arg>,<finduid(<quest_stone_uid>).tag(quest_<prvy_arg>_<druhy_arg>)>+1))
+    finduid(<quest_stone_uid>).tag(quest_<prvy_arg>_<druhy_arg>,<finduid(<quest_stone_uid>).tag(quest_<prvy_arg>_<druhy_arg>)>+1)
   elseif (<argvcount> == 1)
     finduid(<quest_stone_uid>).tag(quest_<prvy_arg>_00,<finduid(<quest_stone_uid>).tag(quest_<prvy_arg>_00)>+1)
   endif

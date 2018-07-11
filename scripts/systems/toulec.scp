@@ -103,7 +103,7 @@ argo.textA(<argo.dialog_textpos(1,0)>,d_def_readcolor,"Druh sipu")
 if (strlen(<tag(name_arrows)>))
   argo.textA(<argo.dialog_textpos(1,1)>,d_def_valuecolor,<tag(name_arrows)>)
 else
-  argo.textA(<argo.dialog_textpos(1,1)>,d_def_NAcolor," prazdny")>)
+  argo.textA(<argo.dialog_textpos(1,1)>,d_def_NAcolor," prazdny")
 endif
 
 argo.textA(<argo.dialog_textpos(2,0)>,d_def_readcolor,"Pocet")

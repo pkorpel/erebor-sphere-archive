@@ -563,7 +563,7 @@ endif
 if(!<tag(allowhire[0])>) 
  if(<src.isgm>)
   src.sysmessage(Nastav dostupne kralovske straze!)
-  src.sysmessage(Pouziti: ".x kingguards(jmeno_mesta), viceslovne nazvy provaz podtrzitkem")
+  src.sysmessage("Pouziti: '.x kingguards(jmeno_mesta)', viceslovne nazvy provaz podtrzitkem")
   src.sysmessage(Napriklad: Minas_Tirith, Minas_Morgul atd.)
   return 1
  else
@@ -1009,7 +1009,7 @@ if((link.baseid == i_generalstone)||(link.baseid == i_lordnazgulsstone))
  arg(spawn_jmeno_mesta,<finduid(<tag(crystal)>).tag(guardspawn).region.tag(jmeno_mesta)>)
 endif
 if((link.baseid == i_captainstone)||(link.baseid == i_mordorcaptainstone))
- arg(spawn_jmeno_mesta,<finduid(<tag(crystal)>).tag(guardspawn).getNearestKeepName(<src.region.tag(realm)>)>)>)
+ arg(spawn_jmeno_mesta,<finduid(<tag(crystal)>).tag(guardspawn).getNearestKeepName(<src.region.tag(realm)>)>)
 endif
   kermel.smsg(porovnavam mesta - pevnost: <jmeno_mesta> spawns - <spawn_jmeno_mesta>)
 if (<strcmpi(<jmeno_mesta>,<spawn_jmeno_mesta>)>!=0)

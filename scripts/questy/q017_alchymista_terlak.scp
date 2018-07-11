@@ -222,7 +222,7 @@ if(<src.tag(terlak_item)>)
   src.redmessage("Nemuzes nosit dve odmeny soucasne.")
   src.tag(terlak_item).bounce
 endif
-if(strcmpi(<src.profession>,class_war))) //0 pokud je to stejne
+if(strcmpi(<src.profession>,class_war)) //0 pokud je to stejne
  src.redmessage(Stit urceny pouze pro wary!)
  f_svlikaci_pauza(0,2) //ruka
 else
@@ -254,7 +254,7 @@ if(<src.tag(terlak_item)>)
   src.redmessage("Nemuzes nosit dve odmeny soucasne.")
   src.tag(terlak_item).bounce
 endif
-if(strcmpi(<src.profession>,class_mag))) //0 pokud je to stejne
+if(strcmpi(<src.profession>,class_mag)) //0 pokud je to stejne
  src.redmessage(Klobouk urcen pouze pro magy!)
  f_svlikaci_pauza(0,6) //hlava
 else
@@ -286,7 +286,7 @@ if(<src.tag(terlak_item)>)
   src.tag(terlak_item).bounce
 endif
 //src.vit=<eval <src.vit>+10>
-if(strcmpi(<src.profession>,class_priest))) //0 pokud je to stejne
+if(strcmpi(<src.profession>,class_priest)) //0 pokud je to stejne
  src.redmessage(Stit urcen pouze pro priesty!)
  f_svlikaci_pauza(0,2) //druha ruka
 else
@@ -528,7 +528,7 @@ on=*vymenit*
 on=*zamen*
 on=*artefakt*
 
-if !(strcmpi(<src.profession>,class_war)))  //ak to JE war
+if !(strcmpi(<src.profession>,class_war))  //ak to JE war
   if (src.findid(i_hammer_war_obsidian)||src.findid(i_axe_double_obsidian))  //ma obsid kladivo alebo sekeru
     if (src.findid(i_hammer_war_obsidian).isevent(t_scout_warova_odmena))  //ma obsid kladivo od terlaka (s tym eventom)
 //      if (strcmpi(<src.findid(i_hammer_war_obsidian).name>,"Nejake kladivo"))  //ak sa vec NEVOLA "..." - nemusi byt 
@@ -567,7 +567,7 @@ if !(strcmpi(<src.profession>,class_war)))  //ak to JE war
   return(1)
 endif
 
-if !(strcmpi(<src.profession>,class_mag)))  //ak to je mag
+if !(strcmpi(<src.profession>,class_mag))  //ak to je mag
   if (src.findid(i_hat_wizards))
     if (src.findid(i_hat_wizards).isevent(t_scout_magova_odmena))
       if (strcmpi(<src.findid(i_hat_wizards).name>,"Klobouk maga"))
@@ -594,7 +594,7 @@ if !(strcmpi(<src.profession>,class_mag)))  //ak to je mag
   return(1)
 endif
 
-if !(strcmpi(<src.profession>,class_priest)))  //ak to je priest
+if !(strcmpi(<src.profession>,class_priest))  //ak to je priest
   if (src.findid(i_obsidian_HEATER_SHIELD))
     if (src.findid(i_obsidian_HEATER_SHIELD).isevent(t_scout_priestova_odmena))
       if (strcmpi(<src.findid(i_obsidian_heater_shield).name>,"Stit lecitele"))
@@ -621,7 +621,7 @@ if !(strcmpi(<src.profession>,class_priest)))  //ak to je priest
   return(1)
 endif
 
-if !(strcmpi(<src.profession>,class_necro)))  //ak to je necro
+if !(strcmpi(<src.profession>,class_necro))  //ak to je necro
   if (src.findid(i_robe))
     if (src.findid(i_robe).isevent(t_scout_necroova_odmena))
       if (strcmpi(<src.findid(i_robe).name>,"Roba temneho"))
@@ -648,7 +648,7 @@ if !(strcmpi(<src.profession>,class_necro)))  //ak to je necro
   return(1)
 endif
 
-if !(strcmpi(<src.profession>,class_thief)))  //ak to je thief
+if !(strcmpi(<src.profession>,class_thief))  //ak to je thief
   if (src.findid(i_scimitar_obsidian))
     if (src.findid(i_scimitar_obsidian).isevent(t_scout_thiefova_odmena))
       say("Ano to je ono!")
@@ -671,7 +671,7 @@ if !(strcmpi(<src.profession>,class_thief)))  //ak to je thief
   return(1)
 endif
 
-if !(strcmpi(<src.profession>,class_mystik)))  //ak to je mystik
+if !(strcmpi(<src.profession>,class_mystik))  //ak to je mystik
   if (src.findid(i_cape))
     if (src.findid(i_cape).isevent(t_scout_mystikova_odmena))
       say("Ano to je ono!")
@@ -694,7 +694,7 @@ if !(strcmpi(<src.profession>,class_mystik)))  //ak to je mystik
   return(1)
 endif
 
-if !(strcmpi(<src.profession>,class_craft)))  //ak to je craft
+if !(strcmpi(<src.profession>,class_craft))  //ak to je craft
   if (src.findid(i_pickaxe))
     if (src.findid(i_pickaxe).isevent(t_scout_craftova_odmena))
       if (strcmpi(<src.findid(i_pickaxe).name>,"Adamantiovy krumpac"))
@@ -721,7 +721,7 @@ if !(strcmpi(<src.profession>,class_craft)))  //ak to je craft
   return(1)
 endif
 
-if !(strcmpi(<src.profession>,class_ranger)))  //ak to je ranger
+if !(strcmpi(<src.profession>,class_ranger))  //ak to je ranger
   if (src.findid(i_obsidian_CHAINMAIL_gloves))
     if (src.findid(i_obsidian_CHAINMAIL_gloves).isevent(t_scout_rangerova_odmena))
       if (strcmpi(<src.findid(i_obsidian_CHAINMAIL_gloves).name>,"Rukavice presneho zasahu"))
@@ -748,7 +748,7 @@ if !(strcmpi(<src.profession>,class_ranger)))  //ak to je ranger
   return(1)
 endif
 
-if !(strcmpi(<src.profession>,class_shaman)))  //ak to je shaman
+if !(strcmpi(<src.profession>,class_shaman))  //ak to je shaman
   if (src.findid(i_obsidian_RINGMAIL_leggings))
     if (src.findid(i_obsidian_RINGMAIL_leggings).isevent(t_scout_shamanova_odmena))
       if (strcmpi(<src.findid(i_obsidian_RINGMAIL_leggings).name>,"Voodoo kalhoty"))

@@ -732,7 +732,7 @@ ON=@userDClick
 		message "past zajistena"
 	else
 		message "Past se ti nepodarilo zneskodnit"
-		if (rand(2))                             jestli ze je u pasti blizko    pak vybuch :o)))))
+		if (rand(2))                             // jestli ze je u pasti blizko    pak vybuch :o)))))
 			TRIGGER @step
 		else
 			message "Past staci zajistit jen jednou. Ted uz muzes jit dal"
@@ -768,7 +768,7 @@ ON=@userDClick
 		message "past zajistena"
 	else
 		message "Past se ti nepodarilo zneskodnit"
-		if (rand(2))                             jestli ze je u pasti blizko    pak vybuch :o)))))
+		if (rand(2))                             // jestli ze je u pasti blizko    pak vybuch :o)))))
 			TRIGGER @step
 		else
 			message "Past staci zajistit jen jednou. Ted uz muzes jit dal"
@@ -806,7 +806,7 @@ ON=@userDClick
 		message "past zajistena"
 	else
 		message "Past se ti nepodarilo zneskodnit"
-		if (rand(2))                             jestli ze je u pasti blizko    pak vybuch :o)))))
+		if (rand(2))                             // jestli ze je u pasti blizko    pak vybuch :o)))))
 			TRIGGER @step
 		else
 			message "Past staci zajistit jen jednou. Ted uz muzes jit dal"

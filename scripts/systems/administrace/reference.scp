@@ -18,7 +18,7 @@ if (<strlen(<argo.tag(from)>)>)
   if (<safe strlen(<argo.tag(from).typedef>)>)
     argo.texta(<argo.dialog_textpos(0)>,2301,"Property k "<argo.tag(from).name>" - instanci tridy <argo.tag(from).GetObjectClass>")
     argo.button(400,<var(lastypos)>,4005,4007,1,0,3)
-    argo.texta(430,<var(lastypos)>,2301,typedef reference(<argo.tag(from).baseid>))
+    argo.texta(430,<var(lastypos)>,2301,"typedef reference(<argo.tag(from).baseid>)")
   else
     argo.texta(<argo.dialog_textpos(0)>,2301,"Property k "<argo.tag(from).name>" - <argo.tag(from).GetObjectClass>")
   endif
@@ -114,7 +114,7 @@ if (<strlen(<argo.tag(from)>)>)
     if (<safe strlen(<argo.tag(from).typedef.uid>)>)
       argo.texta(<argo.dialog_textpos(0)>,2301,"Property k "<name>" - instanci tridy <GetObjectClass>")
       argo.button(400,<var(lastypos)>,4005,4007,1,0,3)
-      argo.texta(430,<var(lastypos)>,2301,typedef reference(<baseid>))
+      argo.texta(430,<var(lastypos)>,2301,"typedef reference(<baseid>)")
     else
       argo.texta(<argo.dialog_textpos(0)>,2301,"Property k "<name>" - <GetObjectClass>")
     endif

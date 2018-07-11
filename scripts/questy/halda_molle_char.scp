@@ -902,7 +902,7 @@ on=@beforegetswing
 
 on=@aftergetswing
 if(<eval tag(nextTimeWarniak)> < <serv.time>)
-  if (chance(<tag(e_warniak_hit_chance)>,3)))
+  if (chance(<tag(e_warniak_hit_chance)>,3))
     tag(nextTimeWarniak,<serv.time>+100)
     DORAND 5
       newnpcTime(c_hm_warniak_2,3600)
