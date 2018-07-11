@@ -64,7 +64,7 @@ return 1
 
 ON=@UserDclick
 if(<tag(ready)>)
-  if (chance(600,3)))
+  if (chance(600,3))
     src.f_poison_doPoison(0,100,2)
     src.sysmessage("<src.sex(Rizl,Rizla)> si se o turin.")
   endif

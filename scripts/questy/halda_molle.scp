@@ -272,7 +272,7 @@ on=@aftergetswing
 hm_frost_wave
 
 [function hm_frost_wave]
-if (chance(<tag(e_frosty_wave_chance)>,3)))
+if (chance(<tag(e_frosty_wave_chance)>,3))
   newitem(i_frosty_wave)
   lastnew.p = <p>
   lastnew.move -1,0
@@ -469,7 +469,7 @@ endif
 [EVENTS e_drop_egg]
 on=@Created
 ON=@NPCSeeNewPlayer
-if (chance(500,3)))
+if (chance(500,3))
   hm_newEgg
 endif
 

@@ -174,7 +174,7 @@ try remove
 if !(src)
   src=<more1> //more1 - z toho worldgemu ! more dela mozna potize 
 endif  
-src.accmsg(trashes house uid=<uid> (<name>), majitel: <more1> <?finduid(<more1>).name?>)
+src.accmsg("trashes house uid=<uid> (<name>), majitel: <more1> <?finduid(<more1>).name?>")
 if (safe src.ischar) 
  src.newitemsafe(i_backpack)
   tag(backpack_s_vecma,<lastnew>)
@@ -246,7 +246,7 @@ else
   else
    //kermel.sysmessage(Trashing LockedItem)
    removefromview
-   src.accmsg(trashes item uid=<uid> (<amount> <name>))
+   src.accmsg("trashes item uid=<uid> (<amount> <name>)")
    cont=<lastnew>
   endif
  endif
@@ -282,7 +282,7 @@ if (topobj.isitem)&&(!strcmpi(<topobj.region>,<finduid(<argv(0)>).region>)) //re
   endif
   //kermel.sysmessage(Trashing NonLocked)
   removefromview
-  src.accmsg(trashes item uid=<uid> (<amount> <name>))
+  src.accmsg("trashes item uid=<uid> (<amount> <name>)")
   cont=<lastnew>
   return 1
  endif

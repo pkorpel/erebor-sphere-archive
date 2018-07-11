@@ -183,7 +183,7 @@ while (<column> < <boosty_menu_column>)
     if ((<column>==18)||(<column>==16))  //hiding a bloodritual
       arg(Text_to_print,"inf.")
     elseif (<column>==11)    //poison time=more2*i_rune_poitson.timer
-      arg(Text_to_print,<eval(<src.findid(<f_boosty_name(<boosty_menu[<column>]>)>).morey>)>/10)>)
+      arg(Text_to_print,<eval(<src.findid(<f_boosty_name(<boosty_menu[<column>]>)>).morey>)>/10)
     else
       arg(Text_to_print,<src.findid(<f_boosty_name(<boosty_menu[<column>]>)>).timer>)
     endif
@@ -1171,7 +1171,7 @@ if (finduid(tag(kontrolor)))  // existuje kontrolor?
     if ((src.isplayer)&&!(src.isgm))
       arg(i,0)
       arg(pocet,<eval(<tag(kontrolor).more1>)>)  //more1 - pocet hracov
-      while (arg(i))<<pocet>)
+      while (arg(i)<<pocet>)
         if (<src.uid>==<tag(kontrolor).tag.player_<i>>)
           tag(kontrolor).tag(time_<i>,<getDay>.<getMonth>.<getYear> <getHour>:<getMinute>:<getSecond>)
           morep=<uid.p>  //suradnice dlazdice

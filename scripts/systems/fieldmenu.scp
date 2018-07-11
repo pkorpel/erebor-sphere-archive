@@ -44,7 +44,7 @@ endif
 if !(src) 
  src=<more1> 
 endif
-src.accmsg(trashes fieldplac uid=<uid> (<name>))
+src.accmsg("trashes fieldplac uid=<uid> (<name>)")
 if (<src.ischar>) 
  src.newitemsafe(i_backpack)
  tag(backpack_s_vecma,<lastnew>)
@@ -86,7 +86,7 @@ else
    link(0)
   else
    removefromview
-   src.accmsg(trashes item uid=<uid> (<amount> <name>))
+   src.accmsg("trashes item uid=<uid> (<amount> <name>)")
    cont=<lastnew>
   endif
 endif

@@ -314,7 +314,7 @@ if(<src.flags>&statf_dead)
  return 1
 endif
 if(<src.tag(general)>)||(<src.isgm>)||(<src.tag(lordnazgul)>)
- arg(pocet_strazi,<finduid(<tag(mesto)>).tag(guardcont)>).rescount>)
+ arg(pocet_strazi,<finduid(<tag(mesto)>).tag(guardcont)>.rescount>)
  arg(guardcont,<finduid(<tag(mesto)>).tag(guardcont)>)
 else
  if(<src.tag(starosta)>)

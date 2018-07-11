@@ -138,7 +138,7 @@ var(odpovidanapage,<argv(0)>)
 src.input("Odpovez na page: <argv(0).reason> hraci: <komuplayer>(<komuplayer.account.name>)-<komuplayer.name>",pageresponse,)
 
 [function pageresponse]
-src.sysmessage(Na co odpovidam: <puvpage>. Co odpovidam: <args>. Komu:<komuplayer>(<komuplayer.name>))
+src.sysmessage("Na co odpovidam: <puvpage>. Co odpovidam: <args>. Komu:<komuplayer>(<komuplayer.name>)")
 odpovidanapage.tag(odpovidac,<var(odpovidac)>)
 odpovidanapage.tag(odpovedka,<args>)
 odpovidanapage.tag(replied,1)

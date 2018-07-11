@@ -123,7 +123,7 @@ if (tag(atskill)==31)//archery
 endif
 //oprava podle zniceni zbrane
 if (tag(atskill)!=43)
-  arg(durkvocient, <eval ((<tag(weaponuid).more1h>-<tag(weaponuid).more1l>)*1000)/<tag(weaponuid).more1h> >)
+  arg(durkvocient, <eval ((<tag(weaponuid).more1h>-<tag(weaponuid).more1l>)*1000)/<tag(weaponuid).more1h>>)
   tag(UC,<eval tag(UC)-((<eval tag(UC)>*<arg(durkvocient)>)/2000)>)
 endif
 

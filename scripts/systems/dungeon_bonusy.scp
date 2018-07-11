@@ -1653,7 +1653,7 @@ while (<arg(i)> < <eval Dung_mark.tag(mark_zonesCount)>)
       Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)
       return 1
     else                    // budeme mazat
-      redmessage("Pokracovanim v dungeonu jsi <src.sex(prisel,prisla)> o moznost vratit se do <arg(Zone)>"))
+      redmessage("Pokracovanim v dungeonu jsi <src.sex(prisel,prisla)> o moznost vratit se do <arg(Zone)>")
       accmsg("pokracoval v dungeonu s aktivnim Markem do <arg(Zone)>. Mark byl smazan. <p>")
       Dung_mark.f_customLink_remove("mark_timer",<eval arg(i)>)
       Dung_mark.f_customLink_remove("mark_zone",<eval arg(i)>)

@@ -23,7 +23,7 @@ endif
 if(!strlen(<tag(jmeno_mesta)>)) 
  if(<src.isgm>)
   src.sysmessage(Nastav dostupne mestske straze!)
-  src.sysmessage(Pouziti: ".x townguards(jmeno_mesta), viceslovne nazvy provaz podtrzitkem")
+  src.sysmessage("Pouziti: '.x townguards(jmeno_mesta)', viceslovne nazvy provaz podtrzitkem")
   src.sysmessage(Napriklad: Minas_Morgul atd.)
   return 1
  else

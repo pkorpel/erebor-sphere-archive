@@ -55,7 +55,7 @@ endif
 
 [function townguards] //args - jmeno mesta
 if(!<argvcount>)
- src.sysmessage(Pouziti: ".x townguards(jmeno_mesta), viceslovne nazvy provaz podtrzitkem")
+ src.sysmessage("Pouziti: '.x townguards(jmeno_mesta)', viceslovne nazvy provaz podtrzitkem")
  src.sysmessage(Napriklad: Minas_Tirith, Minas_Morgul atd.)
  return 1
 endif
@@ -85,7 +85,7 @@ src.sysmessage(Mestske straze nastaveny, mesto pripraveno)
 
 [function kingguards] //args - jmeno mesta
 if(!<argvcount>)
- src.sysmessage(Pouziti: ".x kingguards(jmeno_mesta), viceslovne nazvy provaz podtrzitkem")
+ src.sysmessage("Pouziti: '.x kingguards(jmeno_mesta)', viceslovne nazvy provaz podtrzitkem")
  src.sysmessage(Napriklad: Minas_Tirith, Minas_Morgul atd.)
  return 1
 endif
@@ -121,7 +121,7 @@ endif
 if(!strlen(<tag(jmeno_mesta)>)) 
  if(<src.isgm>)
   src.sysmessage(Nastav dostupne mestske straze!)
-  src.sysmessage(Pouziti: ".x townguards(jmeno_mesta), viceslovne nazvy provaz podtrzitkem")
+  src.sysmessage("Pouziti: '.x townguards(jmeno_mesta)', viceslovne nazvy provaz podtrzitkem")
   src.sysmessage(Napriklad: Minas_Tirith, Minas_Morgul atd.)
   return 1
  else

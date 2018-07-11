@@ -1366,7 +1366,7 @@ return 1
 if (<strlen(<tag(nation)>)>)
   home=<?home_<tag(nation)>?>
   tag(realm,<realm_<tag(nation)>>)
-  kills=<eval (tag(realm)-1)*30000)>
+  kills=<eval (tag(realm)-1)*30000>
   return 0
 endif
 redMessage("Jeste nemas vybranou narodnost.")
@@ -1973,7 +1973,7 @@ if (src.ismagic)
   src.redmessage("Nesmis byt pod zadnym magickym vlivem.")
   return 1
 endif
-arg(toPay,<eval <eval tag(hrac[<src>])>*tag.price>)>)
+arg(toPay,<eval <eval tag(hrac[<src>])>*tag.price>)
 if (<src.pay(<arg(toPay)>)>)
   src.sysmessage("<src.sex(Zaplatil,Zaplatila)> jsi <eval arg(toPay)> zlatych.")
   src.dialog(D_RACEclass_stats_fix)

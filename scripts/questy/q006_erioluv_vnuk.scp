@@ -411,7 +411,7 @@ elseif (<eval src.qtag(q006)> == 2) // bring a dog
   return
 elseif (<eval src.qtag(q006)> == 3) // brought a dog
   if (<argn> == argo.dialog_linkButton("gq006_giveSubQuestResources_2"))
-    if (src.rescount(i_pet_dog)>=1))
+    if (src.rescount(i_pet_dog)>=1)
       src.consume.(i_pet_dog)
       src.addexp(100)
       src.qtag(q006,4,22)

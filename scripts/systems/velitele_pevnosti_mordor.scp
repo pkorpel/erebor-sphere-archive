@@ -309,7 +309,7 @@ endif
 if(!<tag(allowhire[0])>)
  if(<src.isgm>)
   src.sysmessage(Nastav dostupne Marghulovy straze!)
-  src.sysmessage(Pouziti: ".x kingguards(jmeno_pevnosti), viceslovne nazvy provaz podtrzitkem")
+  src.sysmessage("Pouziti: '.x kingguards(jmeno_pevnosti)', viceslovne nazvy provaz podtrzitkem")
   src.sysmessage(Napriklad: Minas_Morgul atd.)
   return 1
  else
