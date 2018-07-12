@@ -409,7 +409,7 @@ else
  arg(ypos,<argo.hm_section(<ypos>,13,3,Vynulovat zaplaceni)>)
  arg(ypos,<argo.hm_section(<ypos>,14,3,Nastavit najem)>)
  arg(ypos,<argo.hm_section(<ypos>,15,3,<qval(<tag(autorent)>,Vy,Za)>pnout autorent)>) 
- arg(ypos,<argo.hm_section(<ypos>,16,3,"Redeed (jen multi)")
+ arg(ypos,<argo.hm_section(<ypos>,16,3,"Redeed (jen multi)")>)
 endif
 
 [DIALOG d_house_menu BUTTON]

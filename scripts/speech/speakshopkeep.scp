@@ -25,12 +25,12 @@ on=*hlava*
 on=*sell*
 if (src.findid(i_flesh_head).link==(024B9F2))
   src.giveitem(i_gold,50000)
-  src.findid((i_flesh_head).link==(024B9F2)).remove
+  src.findid(i_flesh_head).link.remove
   say Skvele ! Tady je odmena
   return 0
 elseif (src.findid(i_flesh_head).link==(0228696))
   src.giveitem(i_gold,50000)
-  src.findid((i_flesh_head).link==(0228696)).remove  
+  src.findid(i_flesh_head).link.remove  
   say Skvele ! Tady je odmena
   return 0
 elseif (src.restest(i_flesh_head))

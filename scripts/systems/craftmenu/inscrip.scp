@@ -31,7 +31,7 @@ newTOPOBJ(Inscription)
 [function scribesection]//cislo kruhu
 arg(u,((<argv>-1)*8)+1)
 while (u<=((<argv>)*8))
- cm_newitem(<findres(spell,u).scrollitem)>)
+ cm_newitem(<findres(spell,u).scrollitem>)
  arg(u,#+1)
 endwhile
 

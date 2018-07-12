@@ -51,7 +51,7 @@ src.SYSMESSAGE you need more mana to use this
 endif
 
 [FUNCTION FREEZE] 
-src.targ.damage_noresponse(30,dam_cold|dam_magic))
+src.targ.damage_noresponse(30,dam_cold|dam_magic)
 src.targ.spelleffect 38, 100.0 
 
 [FUNCTION MANAregen] 

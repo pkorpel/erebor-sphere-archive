@@ -225,7 +225,7 @@ if (item.timerd != 25)
   test_restoreResists
   return
 endif
-if (item.tag(records) != 2))
+if (item.tag(records) != 2)
   tst_error("The reduction timer has incorrect number of records _1! Found <item.tag(records)>, expected 2")
   item.remove
   test_restoreResists
