@@ -92,7 +92,7 @@ HTMLGUMP(170,230,440,100,10,0,36)
 
 
 page 5
-if (src.qtag(q033) == 3) && (<src.rescount i_q033_piratovo_lano> == 1))
+if (src.qtag(q033) == 3) && (<src.rescount i_q033_piratovo_lano> == 1)
   argo.HTMLGUMP(170,230,440,100,11,0,36)
   argo.button 25 395 0fa5 0fa7 0 8 2
   argo.text 60 395 152 20  
