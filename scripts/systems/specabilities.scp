@@ -2683,7 +2683,7 @@ findUID(argv(1)).findlayer(21).contents(movenonstatic(<lastnew>)) //nacpat do ba
 
 [Function prenes_itemy] //argv(0) - komu
 if (<baseid>!=i_ring_power)&&(<baseid>!=i_leading_ring_power)
- topobj.accmsg("Prenos itemu <baseid> z layeru <layer> od <topobj>-<topobj.name> ke <argv(0)>-<findUID(<argv(0)>).name)>")
+ topobj.accmsg("Prenos itemu <baseid> z layeru <layer> od <topobj>-<topobj.name> ke <argv(0)>-<findUID(<argv(0)>).name>")
  if (layer==25) //kone zalohovat
   findUID(<argv(0)>).newitemsafe(<baseid>) //vytvorit novej kterej bude mit ten panak
   lastnew.color=<color>

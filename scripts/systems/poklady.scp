@@ -139,7 +139,7 @@ while (<arg(i)> < <eval tag(addItemsCount)>)
   argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(chance)?>%")
   argo.dialog_textpos(10,5)
   if (0<argo.tag(itPeriod)>)
-    argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(itPeriod))?>h")
+    argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"<?eval argo.tag(itPeriod)?>h")
   else
     argo.newTextLine(<lastxpos>,<lastypos>+<arg(i)>*<d_def_radek_vyska>,<d_def_readcolor>,"OFF")
   endif

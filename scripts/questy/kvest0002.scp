@@ -53,7 +53,6 @@ say Chces-li mohu nabidnout ti "vers" "citaty" "vtip" "pribeh" ci lidove "moudro
 ON=*jidlo*
 say= tady kousni si do chleba 
 src.food=5
-endif
 
 ON=*prsten*
 say= Tri prsteny elfim kralum pod oblohou modrou, Sedm vladcum trpasliku v salech v horskem lune, Devet muzum smrtelnym, podle sudby padnou, Jeden pro Temneho pana na svem temnem trune V cerne zemi Mordor, nad niz stiny vladnou.       Jeden prsten kazee vsem, Jeden ma je najit, Jeden muze privest je, v temnote je spojit V cerne zemi Mordor, nad niz stiny vladnou.

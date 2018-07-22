@@ -4460,7 +4460,7 @@ giveitem(i_fish_cut_cooked,15)
 giveitem(i_pet_llama)
 
 [function f_pvp_giveitem]
-if !(safe<<args>.def>)
+if !(safe <<args>.def>)
   redmessage(Tento predmet neexistuje: <args>)
   return 0
 endif

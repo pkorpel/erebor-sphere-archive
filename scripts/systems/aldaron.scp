@@ -140,7 +140,7 @@ on=@userDClick
    color=098C
    timer=300
  endif
- if ((0<tag(seal).tag(aktivovane) == 1>) && (0<tag(aktivovane) == 1>) && (tag(spawnute) == 0) && (0<tag(seal).tag(aktivovane) == 1>))
+ if ((0<tag(seal).tag(aktivovane)> == 1) && (0<tag(aktivovane)> == 1) && (tag(spawnute) == 0) && (0<tag(seal).tag(aktivovane)> == 1))
    src.newnpc(<c_ztracene_mesto_paladin>)
    src.act.p=784,642,0,2
    src.act.home=784,642,0,2
@@ -891,7 +891,7 @@ COLOR=0481
 
 on=@step
 if !(src.isplayer)
-	if (0<src.tag(walker) == 1>)
+	if (0<src.tag(walker)> == 1)
 		if (0<tag(last_changer)> == 1)
 			src.action 067			
 		else
