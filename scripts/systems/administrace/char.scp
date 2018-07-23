@@ -287,7 +287,7 @@ dialog d_canflags
 [dialog d_canflags]
 0,0
 argo.tag(from,<uid>)
-IF (safe argo.tag(from).ischar)||safe argo.tag(from).isitem)
+IF (safe argo.tag(from).ischar)||(safe argo.tag(from).isitem)
 argo.tag(from,<typedef.uid>)
 endif
 

@@ -2096,7 +2096,7 @@ Morem.
 [BOOK kniha_073Gondor 3]
 Mec dlouhy, kopi britke
 mel,
-zar prilby zdali´s uvidel;
+zar prilby zdali's uvidel;
 nescetne hvezdy ve
 svem trpytu
 se zrcadlily v jeho stitu.
@@ -11375,7 +11375,7 @@ MORE1=kniha_040Gondor
 
 [BOOK kniha_039Gondor]
 PAGES=5    
-TITLE="Správci Gondoru"
+TITLE="Spravci Gondoru"
 AUTHOR=Grellon Tirithsky
 
 [BOOK kniha_039Gondor 1]
@@ -11427,7 +11427,7 @@ XXVI. Denethor II.
 ID=i_book_lg
 CATEGORY=Knihy
 SUBSECTION=Gondorske Knihy
-DESCRIPTION=Správci Gondoru
+DESCRIPTION=Spravci Gondoru
 
 ON=@Create
 MORE1=kniha_039Gondor
@@ -15827,7 +15827,7 @@ AUTHOR=Morian z Lebenu
 [BOOK kniha_017Numenor 1]
 Kado Zigurun
 zabathan unakkha...
-Êruhinim dubdam
+Eruhinim dubdam
 Ugru-dalad... 
 Ar-Pharazonun
 azaggara Avaloiyada...
@@ -15836,10 +15836,10 @@ Barim an-Adun
 
 [BOOK kniha_017Numenor 2]
 yurahtam daira
-saibêth-ma Êruvo 
+saibeth-ma Eruvo 
 azriya du-phursa
 akhasada  
-Anadunê ziran
+Anadune ziran
 hikallaba...
 bawiba dulgi... 
 balik hazad an-Nimruzir
@@ -15847,17 +15847,17 @@ balik hazad an-Nimruzir
 [BOOK kniha_017Numenor 3]
 azulada... 
 Agannalo buroda
-nênud...  
-zaira nênud... 
+nenud...  
+zaira nenud... 
 adun izindi batan taido
 ayadda: ido katha
 batina lokhi...
-Êphalak idon Yozayan
+Ephalak idon Yozayan
 
 [BOOK kniha_017Numenor 4]
 "Predaleka
-Êphal êphalak idon
-hi-Akallabêth
+Ephal ephalak idon
+hi-Akallabeth
 
 [ITEMDEF i_kniha_017_Numenor]
 ID=i_book_lg
@@ -16236,7 +16236,7 @@ odvozeny od reci Lidi,
 kteri se spojili s Elfy
 proti Morgothovi.
 
-Na Anadunê, jak byl
+Na Anadune, jak byl
 nazyvan Numenor
 
 [BOOK kniha_015Numenor 20]
@@ -16261,7 +16261,7 @@ dvojhlasky ai a au
 
 [BOOK kniha_015Numenor 22]
 zjednoduseny na
-dlouhe ê a o. Stranou
+dlouhe e a o. Stranou
 fonologickych zmen se
 jazyk menil urcitym
 vlivem vypujcenych
@@ -16286,7 +16286,7 @@ jina Elfska jmena,
 obzvlaste jmena Valar:
 Aman "Manwe",
 Avradi "Varda",
-Mulkhêr "Melkor". I
+Mulkher "Melkor". I
 kdyz se nektera slova
 
 [BOOK kniha_015Numenor 25]
@@ -16445,12 +16445,12 @@ neprelozeno
 
 [BOOK kniha_014Numenor 12]
 
-Akallabêth
+Akallabeth
 "Ta,
 jez
 padla"
 (tez
-hi-Akallabêth),
+hi-Akallabeth),
 nazev
 
 [BOOK kniha_014Numenor 13]
@@ -16501,7 +16501,7 @@ z
 Aman-thani)
 
 ammi,
-ammê
+amme
 
 [BOOK kniha_014Numenor 18]
 "matka"
@@ -16587,7 +16587,7 @@ kali
 "muz,zena").
 
 
-Anadunê
+Anadune
 "Zapadni
 zem,
 Numenor"
@@ -16750,7 +16750,7 @@ znamena
 zapadu".
 
 
-Arminalêth
+Arminaleth
 =
 
 [BOOK kniha_014Numenor 43]
@@ -16886,7 +16886,7 @@ atto
 [BOOK kniha_014Numenor 56]
 
 
-Avalê
+Avale
 "bohyne,
 *Valie"
 
@@ -16966,7 +16966,7 @@ azra
 [BOOK kniha_014Numenor 64]
 
 
-Azrubêl
+Azrubel
 "Milovnik
 more"
 (=
@@ -17081,7 +17081,7 @@ bawiba
 "vetry",
 
 
-bêth
+beth
 
 [BOOK kniha_014Numenor 76]
 "vyjadreni,vysloveni,porekadlo,uslovi,slovo"
@@ -17097,7 +17097,7 @@ ve
 slozenine,
 napr.
 u
-izindu-bêth).
+izindu-beth).
 
 BITH
 "rici,rikat,pravit,dit"
@@ -17169,28 +17169,28 @@ se
 vylila)"
 
 
-êphalak
+ephalak
 "daleky,odlehly,vzdaleny,nepritomny(-a,-e)";
-êphal
+ephal
 
 [BOOK kniha_014Numenor 85]
-êphalak
+ephalak
 "predaleky,velmi
 vzdaleny(-a,-e)"
 
 
 
-Êru
+Eru
 "Jediny",
 
 [BOOK kniha_014Numenor 86]
 Buh
 (Quenyjsky
-Eru);Êruvo
+Eru);Eruvo
 "od
 Era"
 ;
-Êruhinim
+Eruhinim
 =
 
 [BOOK kniha_014Numenor 87]
@@ -17294,7 +17294,7 @@ rodu?
 
 
 [BOOK kniha_014Numenor 97]
-hi-Akallabêth
+hi-Akallabeth
 "Ta,
 jez
 padla",
@@ -17421,14 +17421,14 @@ tez
 s
 zenskym
 jmenem
-Inzilbêth
+Inzilbeth
 
 [BOOK kniha_014Numenor 110]
 ("Vypravecka
 kvetin"???)
 zminenem
 v
-Akallabêth.
+Akallabeth.
 
 
 izindi
@@ -17436,17 +17436,17 @@ izindi
 [BOOK kniha_014Numenor 111]
 "rovny,primy,poctivy,cestny,uprimny,otevreny,slusny,logicky,jasny,ryzi,cisty(-a,-e)"
 
-izindu-bêth
+izindu-beth
 "prorok,vestec,zvestovatel"
 
 
-izrê
+izre
 (<
 
 [BOOK kniha_014Numenor 112]
-izrêi
+izrei
 <
-izrêyi)
+izreyi)
 "milacek,drahousek,mily(-a),milovany(-a,-e)"
 
 
@@ -17550,8 +17550,8 @@ khoi
 khibil
 "jaro,pramen"
 
-kêw,
-kêu
+kew,
+keu
 
 [BOOK kniha_014Numenor 123]
 ???
@@ -17567,7 +17567,7 @@ KIRIB
 
 
 
-kitabdahê!
+kitabdahe!
 "dotykej
 (dotkni)
 se
@@ -17577,7 +17577,7 @@ me!"
 (z
 fraze
 ba
-kitabdahê
+kitabdahe
 "nedotykej
 se
 me!"
@@ -17597,7 +17597,7 @@ afixem
 *ki-
 "ty,vy"
 a
-*-hê
+*-he
 "mi,me"?
 
 
@@ -17607,8 +17607,8 @@ KIW
 ???
 Srovnej
 s
-kêw,
-kêu.
+kew,
+keu.
 
 
 koy,
@@ -17887,14 +17887,14 @@ naru
 "muz,samec"
 
 
-?nên
+?nen
 -
 "my,nam,nas"
 
 
 
 [BOOK kniha_014Numenor 157]
-nênud
+nenud
 "na
 nas"
 
@@ -17935,7 +17935,7 @@ Nimir
 
 [BOOK kniha_014Numenor 161]
 
-Nimriyê
+Nimriye
 "Nimriansky
 
 *Elfsky*
@@ -18061,7 +18061,7 @@ par
 predlozkovy
 afix.
 V
-Êruvo.
+Eruvo.
 
 [BOOK kniha_014Numenor 174]
 
@@ -18139,7 +18139,7 @@ raba
 masculinum
 rabo,
 femininum
-rabê
+rabe
 "fena"
 
 
@@ -18204,7 +18204,7 @@ uvodnich
 odstavcich
 
 [BOOK kniha_014Numenor 188]
-Akallabêth
+Akallabeth
 a
 v
 PM
@@ -18278,9 +18278,9 @@ s
 usaphda.
 
 
-saibêth
+saibeth
 "souhlas";
-saibêth-ma
+saibeth-ma
 "se
 
 [BOOK kniha_014Numenor 196]
@@ -18440,7 +18440,7 @@ z
 NAKH
 
 
-urê
+ure
 "slunce",
 
 [BOOK kniha_014Numenor 212]
@@ -18684,7 +18684,7 @@ jmeno
 
 
 [BOOK kniha_014Numenor 236]
--zê
+-ze
 "v,ve"
 
 
@@ -21875,7 +21875,7 @@ Ctvrta tradice. V dobe vychovy je Otec odpovedny za ciny sveho potomka (az do Uv
 * Archon *
 Urad pouzivany v Kamarille. Pomocnik Justicara, prosazujici jeho vuli. 
 *Autarkis*
-(lat. samostatny, nezavisly) Upir, prislu¹snik jednoho z Kamarillovych  klanu, ktery se ke Kamarille nehlasi. Tento pojem se pouziva i pro Gangrely, kteri opustili Kamarillu.
+(lat. samostatny, nezavisly) Upir, prislusnik jednoho z Kamarillovych  klanu, ktery se ke Kamarille nehlasi. Tento pojem se pouziva i pro Gangrely, kteri opustili Kamarillu.
 
 
 [itemdef i_pergamen_601]

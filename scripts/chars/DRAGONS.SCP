@@ -65,11 +65,11 @@ maxstam={600 750}
 maxmana=0
 
 tag(effectn,4)	//kolik ma efektu celkem
-tag(effect_1,50 f_npc_roundattack)
-tag(effect_2,20 f_dragon_stamp(2,20))
-tag(effect_3,20 f_dragon_breath_poison(15))
-tag(effect_4,10 f_dragon_acid_damage(89))
-tag(brain_timer,4 8) // timer rozptyl 4-8s
+tag(effect_1,"50 f_npc_roundattack")
+tag(effect_2,"20 f_dragon_stamp(2,20)")
+tag(effect_3,"20 f_dragon_breath_poison(15)")
+tag(effect_4,"10 f_dragon_acid_damage(89)")
+tag(brain_timer,"4 8") // timer rozptyl 4-8s
 
 tag(stamp_dmg,120)
 tag(brainRegeHP,50)	//pocet regenerovanych HP za 1 brainTimer

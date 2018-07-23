@@ -381,7 +381,7 @@ if (src.iscommander==2)
  argo.Texta(<argo.tag(sloupec_x[3])>-70,argo.tag(obj_y[1]),2301,flip)//flip
 endif
 
-argo.button((<argo.tag(sirka)>-<d_def_okraj>)-30,<argo.tag(obj_y[0])>,0fb1,0fb3,1,0,0)/cancel
+argo.button((<argo.tag(sirka)>-<d_def_okraj>)-30,<argo.tag(obj_y[0])>,0fb1,0fb3,1,0,0)//cancel
 if (argo.tag(from).cont)
 argo.button((<argo.tag(sirka)>-<d_def_okraj>)-60,<argo.tag(obj_y[0])>,0fae,0fb0,1,0,1)
 endif
@@ -901,7 +901,7 @@ endwhile
 newitem(i_pouch)
 lastnew.cont=<thiscont>
 lastnew.name="<argv(1)>"
-src.accmsg(created a new cm section uid=<lastnew> (<lastnew.name>) in uid=<lastnew.cont> (<lastnew.cont.name>))
+src.accmsg("created a new cm section uid=<lastnew> (<lastnew.name>) in uid=<lastnew.cont> (<lastnew.cont.name>)")
 if (argv(2))
 lastnew.tag(cm_dispid,<argv(2)>)
 endif
@@ -911,7 +911,7 @@ var(newsect,<lastnew>)
 //baseID
 newitem(<args>)
 lastnew.cont=<newsect>
-src.accmsg(created a new cm item uid=<lastnew> (<lastnew.name>) in uid=<lastnew.cont> (<lastnew.cont.name>))
+src.accmsg("created a new cm item uid=<lastnew> (<lastnew.name>) in uid=<lastnew.cont> (<lastnew.cont.name>)")
 
 [function run_cm_alchemy]
 if (src.findtype(t_mortar))
