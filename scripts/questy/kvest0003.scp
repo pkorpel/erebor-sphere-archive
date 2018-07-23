@@ -215,10 +215,10 @@ elseif !(<safe.src.TAG.GOT>)
 endif
 
 if (src.profession==class_ranger)||(src.profession==class_thief)
- SAY "Dekuji ti za nalezeni Zlate otepi. Tento artefakt byl odcizen a jeho sila se nesmela dostat do cizich rukou. Odmenou ti bud hlt elixiru prirodniho poznani ktery najdeš v mem dome.
+ SAY "Dekuji ti za nalezeni Zlate otepi. Tento artefakt byl odcizen a jeho sila se nesmela dostat do cizich rukou. Odmenou ti bud hlt elixiru prirodniho poznani ktery najdes v mem dome."
  src.go 2456,839,7
 else
- SAY "Dekuji ti za nalezeni Zlate otepi. Tento artefakt byl odcizen a jeho sila se nesmela dostat do cizich rukou.
+ SAY "Dekuji ti za nalezeni Zlate otepi. Tento artefakt byl odcizen a jeho sila se nesmela dostat do cizich rukou."
  src.go 3003,506,20
  src.addexp(500)
 endif

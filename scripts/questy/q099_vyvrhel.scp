@@ -45,7 +45,7 @@ else
   if (src.qtag(q099)==1)
     argo.settext(11,"Bud zdrav, vyvrheli! <basefont color="#ffff88">*smeje se*<basefont color="#ffffff"> Urcite si me vyhledal, aby ses zbavil sveho vyhnanstvi! Je to tak? <basefont color="#ffff88">*smeje se*<basefont color="#ffffff"> Jesli ano, nejdriv musis splnit nekolik mych ukolu!")
   elseif ((src.qtag(q099)==2)&&(src.findid(i_q099_vyvrhel_1)))
-    if (<src.findid(i_q099_vyvrhel_1).tag.contentscount>>=100))
+    if (<src.findid(i_q099_vyvrhel_1).tag.contentscount>>=100)
       argo.settext(11,"Vyborne! Podej mi ten vacek!")
       argo.button(25,395,0fa5,0fa7,1,0,2)
       argo.settext(45,"Podat vacek")

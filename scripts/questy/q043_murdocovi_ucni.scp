@@ -381,7 +381,7 @@ argo.dialog_page("Nesu ti")
     argo.questDialog_addResponse(0,1,1,"mq043_haverunadran") // short text & exit button & new button
     argo.setText(argo.newTextLine,"Tva uboha runa me nezajima!")
     argo.questDialog_addResponse(0,0,0,"mq043_blankResponse") // short text & page button & existing button
-  elseif (<arg(tagValue)> = 222)
+  elseif (<arg(tagValue)> == 222)
     argo.setText(argo.newTextLine,"Mam vsechny svitky od tvych bratru! Podivej!!")
     argo.questDialog_addResponse(0,1,1,"mq043_finish") // short text & exit button & new button
   endif
@@ -710,6 +710,7 @@ elseif (<argn> == argo.dialog_linkButton("mq043_haverunabran"))          //Odevz
     src.givegold(2000)
   else
     say("Zkousis me osalit?!")
+  endif
 endif
 
 ////////////////////////////////////////////////////// DIALOGY   //////////////////////////////////////////////////////
@@ -1133,7 +1134,7 @@ argo.questDialog_baseButt(4)              // Hledam praci
 argo.questDialog_baseButt(5)              // Nesu ti
 argo.questDialog_baseButt(6)              // Prohlednout
 
-argo.dialog_page("Pozdrav")                        /s/ volani vytvorene stranky - definice
+argo.dialog_page("Pozdrav")                        // volani vytvorene stranky - definice
   if(<arg(tagValue)> >= 223) // quest splnen
     argo.setText(argo.newTextLine,"Diky, jsem ti hluboce zavazan! Avsak pergameny nejsou vsechny! Musime hledat dal, az budu vedet kde, dozvis se to!")
   elseif (<arg(tagValue)> >= 220) // nese vse Dranovi
@@ -1383,7 +1384,7 @@ argo.dialog_page("Mohu pomoci?")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
     argo.questDialog_addResponse(0,0,0,"Informace") // short text & page button & existing button    
-  elseif (<arg(tagValue)> = 222)
+  elseif (<arg(tagValue)> == 222)
     argo.setText(argo.newTextLine,"Pomoz sestram! A nebo si jim uz pomohl a neses mi pergameny?")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Ano!")
@@ -1498,7 +1499,7 @@ argo.dialog_page("Nesu ti")
     argo.questDialog_addResponse(0,1,1,"gq043_haverunaAnton") // short text & exit button & new button
     argo.setText(argo.newTextLine,"Tva uboha runa me nezajima!")
     argo.questDialog_addResponse(0,0,0,"gq043_blankResponse") // short text & page button & existing button
-  elseif (<arg(tagValue)> = 222)
+  elseif (<arg(tagValue)> == 222)
     argo.setText(argo.newTextLine,"Mam vsechny svitky od tvych bratru! Podivej!!")
     argo.questDialog_addResponse(0,1,1,"gq043_finish") // short text & exit button & new button
   endif
@@ -1826,6 +1827,7 @@ elseif (<argn> == argo.dialog_linkButton("gq043_haverunaAlena"))          //Odev
     src.givegold(2000)
   else
     say("Zkousis me osalit?!")
+  endif
 endif
 
 ////////////////////////////////////////////////////// DIALOGY   //////////////////////////////////////////////////////
@@ -2249,7 +2251,7 @@ argo.questDialog_baseButt(4)              // Hledam praci
 argo.questDialog_baseButt(5)              // Nesu ti
 argo.questDialog_baseButt(6)              // Prohlednout
 
-argo.dialog_page("Pozdrav")                        /s/ volani vytvorene stranky - definice
+argo.dialog_page("Pozdrav")                        // volani vytvorene stranky - definice
   if(<arg(tagValue)> >= 223) // quest splnen
     argo.setText(argo.newTextLine,"Diky, jsem ti hluboce zavazana! Avsak pergameny nejsou vsechny! Musime hledat dal, az budu vedet kde, dozvis se to!")
   elseif (<arg(tagValue)> >= 220) // nese vse Antonovi
@@ -2675,17 +2677,17 @@ if  (<arg(tagValue)> > 103)
   argo.dialog_page("Pozdrav")                          // uz po
   argo.setText(argo.newTextLine,"Zdravim te a dekuji ti za tu prilezitost. Mistni hrbitov bude jenom vzkvetat")
   argo.questDialog_HTMLGUMP
-elseif (<arg(tagValue)> = 101)  
+elseif (<arg(tagValue)> == 101)  
   argo.dialog_page("Pozdrav")                 // hledas hrobare
   argo.setText(argo.newTextLine,"Potulny hrobar postava a nabira sily pred cestou dal. Mel bys vyuzit prilezitosti!")
   argo.questDialog_HTMLGUMP 
   argo.setText(argo.newTextLine,"Zdravim te! Nemas zajem o praci? Zdejsi hrbitov potrebuje udrzbu!")
   argo.questDialog_addResponse(0,1,1,"q043_hrobar_sud") // short text & exit button & new button
-elseif (<arg(tagValue)> = 102) 
+elseif (<arg(tagValue)> == 102) 
   argo.dialog_page("Pozdrav")                  // hledas sud
   argo.setText(argo.newTextLine,"Mas ten sud? Ne? Tak na co cekas?![Aktualni informace o questu vyvolas pomoci prikazu .questy]")
   argo.questDialog_HTMLGUMP 
-elseif (<arg(tagValue)> = 103) 
+elseif (<arg(tagValue)> == 103) 
   argo.dialog_page("Pozdrav")                  // nese sud
   argo.setText(argo.newTextLine,"Mas ten sud?")
   argo.questDialog_HTMLGUMP 
@@ -2695,7 +2697,7 @@ elseif (<arg(tagValue)> < 101)
   argo.dialog_page("Pozdrav")                      
   argo.setText(argo.newTextLine,"*Typek v kostenem brneni s lopatou. Nezvykla kombinace. Postava kolem. Nereaguje*")
   argo.questDialog_HTMLGUMP  
-endif  
+endif
   
 argo.dialog_page("Prohlednout")
   argo.setText(argo.newTextLine,"Asi potulny hrobar. S poctem mrtvych i nemrtvych je jich v posledni dobe videt pomerne dost. Jsou to povetsinou ucni nekromantu.")
@@ -3051,7 +3053,7 @@ argo.dialog_page("Mohu pomoci?")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Ano! Nesu ti...")
     argo.questDialog_addResponse(0,0,0,"Nesu ti") // short text & page button & existing button   
-  elseif (<arg(tagValue)> = 261)
+  elseif (<arg(tagValue)> == 261)
     argo.setText(argo.newTextLine,"Zatim nemam zadne dalsi pergameny k doplneni, vrat se pozdeji!")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Mam na tebe par otazek!")
@@ -3076,12 +3078,12 @@ argo.dialog_page("Nesu ti")
     argo.questDialog_addResponse(0,1,1,"q043_kronikar_runaC") // short text & exit button & new button
     argo.setText(argo.newTextLine,"Tva uboha runa me nezajima!")
     argo.questDialog_addResponse(0,0,0,"mq043_blankResponse") // short text & page button & existing button
-  elseif (<arg(tagValue)> = 258)
+  elseif (<arg(tagValue)> == 258)
     argo.setText(argo.newTextLine,"<src.sex(Opsal,Opsala)> jsem tu runu, podivej!") //RUNA D
     argo.questDialog_addResponse(0,1,1,"q043_kronikar_runaD") // short text & exit button & new button
     argo.setText(argo.newTextLine,"Tva uboha runa me nezajima!")
     argo.questDialog_addResponse(0,0,0,"mq043_blankResponse") // short text & page button & existing button
-  elseif (<arg(tagValue)> = 260)
+  elseif (<arg(tagValue)> == 260)
     argo.setText(argo.newTextLine,"<src.sex(Opsal,Opsala)> jsem tu runu, podivej!") //RUNA E
     argo.questDialog_addResponse(0,1,1,"q043_kronikar_finale_prvni") // short text & exit button & new button
     argo.setText(argo.newTextLine,"Tva uboha runa me nezajima!")
@@ -3569,9 +3571,9 @@ if (<arg(tagValue)> > 2)      //uz splnil
   src.sysmessage("To je to misto, kde lezela kniha!") 
 elseif (<arg(tagValue)> == 2) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Ulozil,Ulozila)> si knihu do sveho batohu.")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,3,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,3,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3609,9 +3611,9 @@ if (<arg(tagValue)> > 4)      //uz splnil
   src.sysmessage("To je to misto, kde lezel brk!") 
 elseif (<arg(tagValue)> == 4) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Ulozil,Ulozila)> si brk do sveho batohu.")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,5,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,5,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3649,9 +3651,9 @@ if (<arg(tagValue)> > 6)      //uz splnil
   src.sysmessage("To je ta runa, co jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 6) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Opsal,Opsala)> si runu na svitek.")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,7,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,7,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3689,9 +3691,9 @@ if (<arg(tagValue)> > 57)      //uz splnil
   src.sysmessage("To je ta runa, co jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 57) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Opsal,Opsala)> si runu na svitek.")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,58,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,58,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3729,9 +3731,9 @@ if (<arg(tagValue)> > 107)      //uz splnil
   src.sysmessage("To je ta runa, co jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 107) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Opsal,Opsala)> si runu na svitek.")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
     src.qtag(mq043,108,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
     src.qtag(gq043,108,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3769,9 +3771,9 @@ if (<arg(tagValue)> > 55)      //uz splnil
   src.sysmessage("To je to misto, kde lezel svitek!") 
 elseif (<arg(tagValue)> == 55) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Ulozil,Ulozila)> si svitek do sveho batohu. Vypada to, ze sedi s tim od Hospodskeho! Hura!")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,56,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,56,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3810,9 +3812,9 @@ if (<arg(tagValue)> > 102)      //uz splnil
   src.sysmessage("To je to misto, kde byl sud. Mas vidiny?") 
 elseif (<arg(tagValue)> == 102) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Nalozil,Nalozila)> si sud na zada! Vzhuru za hrobarem!")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,103,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,103,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3851,9 +3853,9 @@ if (<arg(tagValue)> > 105)      //uz splnil
   src.sysmessage("To je to misto, kde lezela hul!") 
 elseif (<arg(tagValue)> == 105) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Ulozil,Ulozila)> si hul do sveho batohu. Rychle odsud pryc!")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,106,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,106,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3891,9 +3893,9 @@ if (<arg(tagValue)> > 152)      //uz splnil
   src.sysmessage("To je to misto, kde lezely sperhaky!") 
 elseif (<arg(tagValue)> == 152) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Ulozil,Ulozila)> si sperhaky do sveho batohu. Jsou jiste Bartovi, snad je vymenis za pergamen.")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,153,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,153,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3931,9 +3933,9 @@ if (<arg(tagValue)> > 154)      //uz splnil
   src.sysmessage("To je to misto, kde lezely boty!") 
 elseif (<arg(tagValue)> == 154) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Ulozil,Ulozila)> si boty do sveho batohu. Ted uz snad dostanes od Barta ten pergamen!")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,155,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,155,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -3971,9 +3973,9 @@ if (<arg(tagValue)> > 156)      //uz splnil
   src.sysmessage("To je to misto, kde lezelo heslo! Smrdis... hahahaha") 
 elseif (<arg(tagValue)> == 156) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Zapsal,Zapsala)> sis heslo. Heslo je Smrdis. Bart ti ted uz snad da ten pergamen.")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,157,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,157,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -4011,9 +4013,9 @@ if (<arg(tagValue)> > 203)      //uz splnil
   src.sysmessage("To je to misto, kde lezel delekohled!") 
 elseif (<arg(tagValue)> == 203) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Ulozil,Ulozila)> si dalekohled do sveho batohu. Snad ti ten vesely namornik da pergamen.")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,204,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,204,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -4051,9 +4053,9 @@ if (<arg(tagValue)> > 205)      //uz splnil
   src.sysmessage("To je to misto, kde lezel lodni denik.") 
 elseif (<arg(tagValue)> == 205) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Ulozil,Ulozila)> si lodni denik do sveho batohu. Vzhuru k namornikovi pro pergamen!")
-  if (<tag.q043_realm>=2)      //mordor TAG check
+  if (<tag.q043_realm>==2)      //mordor TAG check
   src.qtag(mq043,206,53)         //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1) //gondor TAG check
+  elseif (<tag.q043_realm>==1) //gondor TAG check
   src.qtag(gq043,206,53)        //gondor TAG upgrade
   endif
 else                          //neplni quest
@@ -4091,9 +4093,9 @@ if (<arg(tagValue)> > 251)      //uz splnil
   src.sysmessage("To je ta runa, co jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 251) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Opsal,Opsala)> si runu na svitek.")
-  if (<tag.q043_realm>=2)       //mordor TAG check
+  if (<tag.q043_realm>==2)       //mordor TAG check
     src.qtag(mq043,252,53)      //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1)   //gondor TAG check
+  elseif (<tag.q043_realm>==1)   //gondor TAG check
     src.qtag(gq043,252,53)      //gondor TAG upgrade
   endif
 else                            //neplni quest
@@ -4131,9 +4133,9 @@ if (<arg(tagValue)> > 253)      //uz splnil
   src.sysmessage("To je ta runa, co jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 253) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Opsal,Opsala)> si runu na svitek.")
-  if (<tag.q043_realm>=2)       //mordor TAG check
+  if (<tag.q043_realm>==2)       //mordor TAG check
     src.qtag(mq043,254,53)      //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1)   //gondor TAG check
+  elseif (<tag.q043_realm>==1)   //gondor TAG check
     src.qtag(gq043,254,53)      //gondor TAG upgrade
   endif
 else                            //neplni quest
@@ -4171,9 +4173,9 @@ if (<arg(tagValue)> > 255)      //uz splnil
   src.sysmessage("To je ta runa, co jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 255) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Opsal,Opsala)> si runu na svitek.")
-  if (<tag.q043_realm>=2)       //mordor TAG check
+  if (<tag.q043_realm>==2)       //mordor TAG check
     src.qtag(mq043,256,53)      //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1)   //gondor TAG check
+  elseif (<tag.q043_realm>==1)   //gondor TAG check
     src.qtag(gq043,256,53)      //gondor TAG upgrade
   endif
 else                            //neplni quest
@@ -4211,9 +4213,9 @@ if (<arg(tagValue)> > 257)      //uz splnil
   src.sysmessage("To je ta runa, co jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 257) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Opsal,Opsala)> si runu na svitek.")
-  if (<tag.q043_realm>=2)       //mordor TAG check
+  if (<tag.q043_realm>==2)       //mordor TAG check
     src.qtag(mq043,258,53)      //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1)   //gondor TAG check
+  elseif (<tag.q043_realm>==1)   //gondor TAG check
     src.qtag(gq043,258,53)      //gondor TAG upgrade
   endif
 else                            //neplni quest
@@ -4251,9 +4253,9 @@ if (<arg(tagValue)> > 259)      //uz splnil
   src.sysmessage("To je ta runa, co jsi <src.sex(opsal,opsala)>!") 
 elseif (<arg(tagValue)> == 259) //TAG check pri plneni ukolu
   src.sysmessage("<src.sex(Opsal,Opsala)> si runu na svitek.")
-  if (<tag.q043_realm>=2)       //mordor TAG check
+  if (<tag.q043_realm>==2)       //mordor TAG check
     src.qtag(mq043,260,53)      //mordor TAG upgrade
-  elseif (<tag.q043_realm>=1)   //gondor TAG check
+  elseif (<tag.q043_realm>==1)   //gondor TAG check
     src.qtag(gq043,260,53)      //gondor TAG upgrade
   endif
 else                            //neplni quest
