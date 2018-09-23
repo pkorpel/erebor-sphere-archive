@@ -1109,6 +1109,9 @@ if (src.isPlayer) // zabil hrace
   if (src.findid(i_checkstats_timer)) || (src.profession == class_craft)  // resskilly a CK nechceme pocitat
     return
   endif
+  if (<eval src.tag(skillrank)> < 3)
+    return
+  endif
   findid(i_memory_weekly_quest).f_weekly_killPlayer
 endif
 
