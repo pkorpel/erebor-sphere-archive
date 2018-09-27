@@ -745,6 +745,9 @@ COLOR=0447
 on=@potioneffect
 src.trigger(@DrinkingPotion)
 safe(findlayer(50).remove)
+if (<src.flags>&statf_hidden)
+  src.accMsg("WARNING: The player <src.name> (UID: <src>, acc <src.account.name>) is drinking invis even though he's hidden already!")
+endif
 src.newitemsafe(1)
 lastnew.type=t_potion
 lastnew.MORE1=s_Invisibility
@@ -753,6 +756,7 @@ lastnew.p=<src.p>
 lastnew.dclick
 src.findlayer(44).timer=<nastaveni_potions_i_potion_Invisibility>
 return 1
+
 on=@userdeath
 
 //[ITEMDEF i_potion_Manaless]
