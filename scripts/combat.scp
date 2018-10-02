@@ -97,12 +97,12 @@ else
   endif
 endif
 
-arg(tactics_dam,<eval ((arg(base_dam)*(tactics*Skill_Tactics.effect))+500000)/1000000>)
-arg(str_dam,<eval ((arg(base_dam)*(str*nastaveni_global_strUC))+50000)/100000>)
-arg(anatomy_dam,<eval ((arg(base_dam)*(anatomy*SKILL_ANATOMY.effect))+500000)/1000000>)
-arg(armslor_dam,<eval ((arg(base_dam)*(armslore*SKILL_ARMSLORE.effect))+500000)/1000000>)
+arg(tactics_dam,<eval (arg(base_dam)*(tactics*Skill_Tactics.effect))>)
+arg(str_dam,<eval (arg(base_dam)*(str*nastaveni_global_strUC)*10)>)
+arg(anatomy_dam,<eval (arg(base_dam)*(anatomy*SKILL_ANATOMY.effect))>)
+arg(armslor_dam,<eval (arg(base_dam)*(armslore*SKILL_ARMSLORE.effect))>)
 
-tag(UC,<eval arg(tactics_dam)+arg(str_dam)+arg(anatomy_dam)+arg(armslor_dam)>)
+tag(UC,<eval ((arg(tactics_dam)+arg(str_dam)+arg(anatomy_dam)+arg(armslor_dam)+500000)/1000000)>)
 tag(fizzlechance,1000)
 tag(piercing,<?eval nastaveni_weappiercing_<tag(weaponuid).typedef.dispid>?>)
 if (tag(atskill)==31)//archery
