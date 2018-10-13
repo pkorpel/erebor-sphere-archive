@@ -233,7 +233,7 @@ return(<arg(i)>) // return found button number
 tag(textLines,0)
 
 // counts the next free text position, returns its value and increments the textLines Counter
-// if the arguments aren't empty, it also writes new text line places new text into the position
+// if the arguments aren't empty, it also writes the passed text
 // argv(0) - x-position
 // argv(1) - y-position
 // argv(2) - color

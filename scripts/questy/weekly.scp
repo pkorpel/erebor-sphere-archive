@@ -1212,7 +1212,7 @@ if (cont.f_weekly_check)
 elseif (f_weekly_isCompleted(<argv(0)>))
   return 0
 endif
-if ((<eval <tag(quest_completed[<argv(0)>])>+<argv(1)>>) >= <tag(quest_totalAmount[<argv(0)>])>)  // kdyz narust serovna a nebo presahne maximalni pozadovany pocet
+if ((<eval <tag(quest_completed[<argv(0)>])>+<argv(1)>>) >= <tag(quest_totalAmount[<argv(0)>])>)  // kdyz narust se rovna a nebo presahne maximalni pozadovany pocet
   arg(retVal,1)
   tag(quest_completed[<argv(0)>],<tag(quest_totalAmount[<argv(0)>])>) // tak aktualni stav se bude rovnat maximalnimu pozadovanemu poctu
   f_weekly_giveReward(<argv(0)>)
