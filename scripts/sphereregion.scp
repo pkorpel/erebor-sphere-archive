@@ -753,6 +753,8 @@ on=@exit
 ON=@ENTER
   if (src.isplayer)
     src.events=+e_nbdung
+    src.tag(HPsight_ON,1) 
+    src.tag(HPsight_timer,<eval (<serv.time>+864000)>)  // Nastavi v Tutorialu na 12h
   endif
   SRC.MIDILIST=midi_Vesper
 

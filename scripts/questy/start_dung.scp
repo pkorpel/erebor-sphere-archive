@@ -143,6 +143,8 @@ qtagremove(nb004)
 qtagremove(nb005)
 qtagremove(nb006)
 qtagremove(nb007)
+tag(HPsight_ON,0) 
+tag(HPsight_timer,<serv.time>)  // Zrusi nastaveni videni HP pri exitu z tutu
 arg(MyTutRune,<findid(i_tut_rune)>)
 if (<hval arg(MyQuestRune)>)
   MyTutRune.remove
