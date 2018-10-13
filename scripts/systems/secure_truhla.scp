@@ -79,6 +79,7 @@ Heslo:
 
 [dialog d_truhla_zaheslovana button]
 on=1
+src.accmsg("Zadal heslo (<argtxt(1)>) (Spravne je <tag.heslo>) pro otevreni truhly <name> (<uid>) na pozici <p> (<region.name>)")
 if (<STRCMPI(<tag.heslo>,<argtxt(1)>)>==0)
   tag(truhla_id).open
 else
