@@ -2113,14 +2113,13 @@ cont.flag_freeze=0
 cont.update
 //cont.resync
 
+
 [itemdef 0A2000EB0]
 id=i_dialog_context
 
-on=@equip
-accmsg("equipped uid=<uid> (<amount> <name> <more1>) from <link.name> (<link>) on self at <p> (<region.name>)")
-
 on=@unequip
 accmsg("unequipped uid=<uid> (<amount> <name> <more1>) from <link.name> (<link>) on self at <p> (<region.name>)")
+
 
 [events e_splend]
 on=@spellcast
