@@ -2118,7 +2118,7 @@ cont.update
 id=i_dialog_context
 
 on=@unequip
-accmsg("unequipped uid=<uid> (<amount> <name> <more1>) from <link.name> (<link>) on self at <p> (<region.name>)")
+src.accmsg("unequipped uid=<uid> (<amount> <name> <more1>) from <link.name> (<link>) on self at <src.p> (<region.name>)")
 
 
 [events e_splend]
