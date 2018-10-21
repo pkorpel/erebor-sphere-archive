@@ -507,4 +507,35 @@ endif
 // remove
 // return 1
 
+[ITEMDEF i_realm_gate]
+ID=i_gate_3
+NAME=Port do Eventu
+  
+ON=@create
+attr=010
+color=00
+tag(location_gondor,6091,3198,1,10)
+tag(location_mordor,6115,3198,1,10)
+  
+ON=@step
+if (src.isDead)
+  return 1
+endif
+  
+if (src.isPlayer)
+  if (<eval src.tag(realm)> == 1)
+    src.p=<tag(location_gondor)>
+    src.resync
+  elseif (<eval src.tag(realm)> == 2)
+    src.p=<tag(location_mordor)>
+    src.resync
+  else
+    return 1
+  endif
+endif
+  
+ON=@timer
+return 1
+
+
 [eof]
