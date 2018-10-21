@@ -3351,7 +3351,7 @@ COLDCHANCE=00
 GROUP=Dungeony
 P=6047,3506,20,10
 RECT=5816,3257,6136,3672
-RECT=5968,3184,6128,3264
+RECT=5968,3184,6073,3264
 mapplane=10
 FLAGS=00812
 resources=r_default_rock, r_default_water, r_default_tree
@@ -3478,6 +3478,66 @@ FLAGS=0881E
 resources=r_default_rock, r_default_water, r_default_tree
 tag.realm=3
 events=r_nofield, r_nosumon, r_notele
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Ulmova Pyramida Vstup]
+P=6109,2877,20,10
+RECT=6094,2733,6143,2891
+mapplane=10
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Ulmova Pyramida patro 1]
+P=6102,3189,0,10
+RECT=6072,2913,6134,3201
+mapplane=10
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Ulmova Pyramida patro 2]
+P=6102,3189,0,11
+RECT=6072,2913,6134,3201
+mapplane=11
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Ulmova Pyramida patro 3]
+P=6102,3189,0,12
+RECT=6072,2913,6134,3201
+mapplane=12
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Ulmova Pyramida patro 4]
+P=6102,3189,0,13
+RECT=6072,2913,6134,3201
+mapplane=13
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Ulmova Pyramida Srdce Pyramidy]
+P=6125,3249,11,10
+RECT=6090,3214,6128,3252
+mapplane=10
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
