@@ -2394,6 +2394,9 @@ while (act.findcont(0))
   if (profession==class_craft) //za krafty zadny expy
     arg(addfame,0)
   endif
+  if (act.link.isplayer) && (<eval act.link.tag(realm)> == <eval tag(realm)>)  //za kill vlastniho realmu zadne expy
+    arg(addfame,0)
+  endif
   tag(added_experience_bydeath,<arg(addfame)>)
   if ((<strlen(<act.link.tag(pact_to)>)>)&&(<act.link.isInCity>!=1)&&(<strcmpi(<act.link.tag(pact_type)>,"blood")>==0))//pri bloodpacte nedostava normalne expy ale od toho s kym ma bloodpact
     act.link.sysMessage("Zkusenosti ziskas od nositele paktu.")
