@@ -60,35 +60,23 @@ def_playerBooster_type[2]             def_playerBooster_type_XP
 def_playerBooster_value[2]            25
 def_playerBooster_duration[2]         4 // hours
 
-def_playerBooster_description[3]      "+25% zkusenosti na 8h"
+def_playerBooster_description[3]      "+50% zkusenosti na 1h"
 def_playerBooster_icon[3]             03300
 def_playerBooster_type[3]             def_playerBooster_type_XP
-def_playerBooster_value[3]            25
-def_playerBooster_duration[3]         8 // hours
+def_playerBooster_value[3]            50
+def_playerBooster_duration[3]         1 // hours
 
-def_playerBooster_description[4]      "+50% zkusenosti na 1h"
+def_playerBooster_description[4]      "+50% zkusenosti na 2h"
 def_playerBooster_icon[4]             03300
 def_playerBooster_type[4]             def_playerBooster_type_XP
 def_playerBooster_value[4]            50
-def_playerBooster_duration[4]         1 // hours
+def_playerBooster_duration[4]         2 // hours
 
-def_playerBooster_description[5]      "+50% zkusenosti na 2h"
+def_playerBooster_description[5]      "+50% zkusenosti na 4h"
 def_playerBooster_icon[5]             03300
 def_playerBooster_type[5]             def_playerBooster_type_XP
 def_playerBooster_value[5]            50
-def_playerBooster_duration[5]         2 // hours
-
-def_playerBooster_description[6]      "+50% zkusenosti na 4h"
-def_playerBooster_icon[6]             03300
-def_playerBooster_type[6]             def_playerBooster_type_XP
-def_playerBooster_value[6]            50
-def_playerBooster_duration[6]         4 // hours
-
-def_playerBooster_description[7]      "+50% zkusenosti na 8h"
-def_playerBooster_icon[7]             03300
-def_playerBooster_type[7]             def_playerBooster_type_XP
-def_playerBooster_value[7]            50
-def_playerBooster_duration[7]         8 // hours
+def_playerBooster_duration[5]         4 // hours
 
 //////////////////
 // C O M M O N  // 
