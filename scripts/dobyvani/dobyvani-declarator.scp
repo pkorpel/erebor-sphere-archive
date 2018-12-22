@@ -15,21 +15,22 @@ tag(war_lord,0)
 tag(my_realm,0)
 
 on=@userdclick
-var(war_declarator_<region.tag(realm)>,<uid>)
-if (src.isgm) 
-  tag(my_realm,<region.tag(realm)>)
-  if (strlen(<tag(realmname)>)==0)
-    tag(realmname,<qval <eval tag(my_realm)-1>,"Mordor","Gondor">)
-    name=<tag(realmname)>sky <name>
-  endif
-  src.sysmessage("<name> nastaven.")
-else
-  if (<src.tag(can_declare_war_on_<qval <eval tag(my_realm)-1>,"Gondor","Mordor">)>)
-    dialog(dialog_declare_war)
-  else
-    src.redMessage("Nejsi <src.sex(opravnen,opravnena)> vyhlasit <qval <eval tag(my_realm)-1>,"Gondor","Mordor">u valku.")
-  endif
-endif
+// var(war_declarator_<region.tag(realm)>,<uid>)
+// if (src.isgm) 
+//   tag(my_realm,<region.tag(realm)>)
+//   if (strlen(<tag(realmname)>)==0)
+//     tag(realmname,<qval <eval tag(my_realm)-1>,"Mordor","Gondor">)
+//     name=<tag(realmname)>sky <name>
+//   endif
+//   src.sysmessage("<name> nastaven.")
+// else
+//   if (<src.tag(can_declare_war_on_<qval <eval tag(my_realm)-1>,"Gondor","Mordor">)>)
+//     dialog(dialog_declare_war)
+//   else
+//     src.redMessage("Nejsi <src.sex(opravnen,opravnena)> vyhlasit <qval <eval tag(my_realm)-1>,"Gondor","Mordor">u valku.")
+//   endif
+// endif
+src.redmessage("Je Non-PvP obdobi. Nelze vyhlasovat valky...")
 return 1
 
 on=@Timer
