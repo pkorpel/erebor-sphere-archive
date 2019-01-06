@@ -113,12 +113,14 @@ def_weekly_medium_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_0_[0]   RANDOM_POTION_BOOST //prvni argument setup funkce
 def_weekly_medium_setupFunArg_0_[1]   4  // multiplier poctu potionu
 def_weekly_medium_rewardSize[0]       80
+def_weekly_medium_rewardMaxMI[0]      0
 
 def_weekly_medium_setupFunction[1]    f_weekly_setup_dmgNPC
 def_weekly_medium_setupFunArgn[1]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_1_[0]   35 // multiplier udeleneho dmg pro ostatni povolani krome krafta/priesta
 def_weekly_medium_setupFunArg_1_[1]   15 // multiplier udeleneho dmg pro krafta/priesta
 def_weekly_medium_rewardSize[1]       100
+def_weekly_medium_rewardMaxMI[1]      1
 
 def_weekly_medium_setupFunction[2]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[2]     3 // pocet argumentu setup funkce
@@ -126,6 +128,7 @@ def_weekly_medium_setupFunArg_2_[0]   "prime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_2_[1]   50 // multiplier prijateho dmg
 def_weekly_medium_setupFunArg_2_[2]   30 // o kolik % snizeni naroku pro maga/ranga/shamana/necra/mystika/crafta
 def_weekly_medium_rewardSize[2]       100
+def_weekly_medium_rewardMaxMI[2]      1
 
 def_weekly_medium_setupFunction[3]    f_weekly_setup_receiveDmg
 def_weekly_medium_setupFunArgn[3]     3 // pocet argumentu setup funkce
@@ -133,6 +136,7 @@ def_weekly_medium_setupFunArg_3_[0]   "neprime" //prvni argument setup funkce
 def_weekly_medium_setupFunArg_3_[1]   10 // multiplier prijateho dmg
 def_weekly_medium_setupFunArg_3_[2]   30 // kolik % z bezneho naroku pro maga/ranga/shamana/necra/mystika/crafta 
 def_weekly_medium_rewardSize[3]       110
+def_weekly_medium_rewardMaxMI[3]      1
 
 def_weekly_medium_setupFunction[4]    f_weekly_setup_killInDung
 def_weekly_medium_setupFunArgn[4]     2 // pocet argumentu setup funkce
@@ -142,16 +146,19 @@ def_weekly_medium_iconId[4]           0212E
 def_weekly_medium_iconId_moveY[4]     9  // move the custom icon 9 pixels up
 def_weekly_medium_iconId_moveX[4]     8 // move the custom icon 8 pixels to the left
 def_weekly_medium_rewardSize[4]       115
+def_weekly_medium_rewardMaxMI[4]      1
 
 def_weekly_medium_setupFunction[5]    f_weekly_setup_killPlayer                 // OTESTOVANO
 def_weekly_medium_setupFunArgn[5]     1 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_5_[0]   0 // jakykoliv hrac bez omezeni
 def_weekly_medium_rewardSize[5]       115
+def_weekly_medium_rewardMaxMI[5]      2
 
 def_weekly_medium_setupFunction[6]    f_weekly_setup_conqueror
 def_weekly_medium_setupFunArgn[6]     0 // pocet argumentu setup funkce
 def_weekly_medium_iconId[6]           3629
 def_weekly_medium_rewardSize[6]       100
+def_weekly_medium_rewardMaxMI[6]      1
 
 def_weekly_medium_setupFunction[7]    f_weekly_setup_HuntingSign
 def_weekly_medium_setupFunArgn[7]     1 // pocet argumentu setup funkce
@@ -160,11 +167,13 @@ def_weekly_medium_iconId[7]           0340E
 def_weekly_medium_iconId_moveY[7]     12 // move the custom icon 12 pixels up
 def_weekly_medium_iconId_moveX[7]     -6 // move the custom icon 5 pixels to the right
 def_weekly_medium_rewardSize[7]       93
+def_weekly_medium_rewardMaxMI[7]      1
 
 def_weekly_medium_setupFunction[8]    f_weekly_setup_finishDungeon
 def_weekly_medium_setupFunArgn[8]     1  // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_8_[0]   65 // player level limit (78 dng level max)
 def_weekly_medium_rewardSize[8]       120
+def_weekly_medium_rewardMaxMI[8]      2
 
 def_weekly_medium_setupFunction[9]    f_weekly_setup_KillStreak
 def_weekly_medium_setupFunArgn[9]     1 // pocet argumentu setup funkce
@@ -173,6 +182,7 @@ def_weekly_medium_iconId[9]           021FC
 def_weekly_medium_iconId_moveY[9]     9  // move the custom icon 9 pixels up
 def_weekly_medium_iconId_moveX[9]     15 // move the custom icon 15 pixels to the left
 def_weekly_medium_rewardSize[9]       100
+def_weekly_medium_rewardMaxMI[9]      1
 
 // HIGH quests
 
@@ -181,16 +191,19 @@ def_weekly_high_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_0_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument setup funkce
 def_weekly_high_setupFunArg_0_[1]   5 // multiplier poctu potionu
 def_weekly_high_rewardSize[0]       100
+def_weekly_high_rewardMaxMI[0]      0
 
 def_weekly_high_setupFunction[1]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[1]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_1_[0]   1 // hrac konkretni profese
 def_weekly_high_rewardSize[1]       147
+def_weekly_high_rewardMaxMI[1]      2
 
 def_weekly_high_setupFunction[2]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[2]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_2_[0]   2 // zabiti na konkretnim uzemi
 def_weekly_high_rewardSize[2]       140
+def_weekly_high_rewardMaxMI[2]      2
 
 def_weekly_high_setupFunction[3]    f_weekly_setup_killInDung
 def_weekly_high_setupFunArgn[3]     2 // pocet argumentu setup funkce
@@ -200,11 +213,13 @@ def_weekly_high_iconId[3]           02132
 def_weekly_high_iconId_moveY[3]     9  // move the custom icon 9 pixels up
 def_weekly_high_iconId_moveX[3]     8 // move the custom icon 8 pixels to the left
 def_weekly_high_rewardSize[3]       160
+def_weekly_high_rewardMaxMI[3]      2
 
 def_weekly_high_setupFunction[4]    f_weekly_setup_finishDungeon
 def_weekly_high_setupFunArgn[4]     1 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_4_[0]   100 // player level limit (120 dng level max)
 def_weekly_high_rewardSize[4]       175
+def_weekly_high_rewardMaxMI[4]      2
 
 
 [DEFNAMES WEEKLY_POTIONS]
@@ -410,9 +425,12 @@ tag(sum_prize,#+<arg(single_prize)>)
 
 tag(quest_rewGold[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_gold)>) // amount of GP in the reward
 tag(quest_rewXP[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_exp)>) // amount of XP in the reward
+
 if (strcmpi(<argv(1)>,low))
-logmsg("Nejsem LOW, jsem <argv(1)>")
   tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_magicItem)>) // amount of magic items in the reward
+  if (<tag(quest_rewMI[<eval tag(qAssigned)>])> > <eval def_weekly_<argv(1)>_rewardMaxMI[<eval argv(0)>]>) // Max amount of Magic Items in reward per Quest type
+    tag(quest_rewMI[<eval tag(qAssigned)>],<eval def_weekly_<argv(1)>_rewardMaxMI[<eval argv(0)>]>)
+  endif
 else
   tag(quest_rewMI[<eval tag(qAssigned)>],0)
 endif
@@ -1364,7 +1382,7 @@ return<arg(typeDMG)>
 /////////////////////////////
 
 [defnames def_weekly_finishDungeon]
-def_weekly_finishDungeon_count  14
+def_weekly_finishDungeon_count  18
 
 // dungeon IDs (the values below are used as subjectID of the quest and MUSTN'T be changed, as players may already have them set)
 def_weekly_finishDungeon[1]     "Etheria"
@@ -1381,6 +1399,10 @@ def_weekly_finishDungeon[11]    "Tumma Osto Bonus"
 def_weekly_finishDungeon[12]    "Carn Dum"
 def_weekly_finishDungeon[13]    "Carn Dum Bonus"
 def_weekly_finishDungeon[14]    "Ztracene Mesto"
+def_weekly_finishDungeon[15]    "Doupe Kyklopu"
+def_weekly_finishDungeon[16]    "Mahatske Peklo 1. cast"
+def_weekly_finishDungeon[17]    "Mahatske Peklo Bonus"
+def_weekly_finishDungeon[18]    "Mahatske Peklo"
 
 // level translation -> these defnames serve to define ID to dungeon LEVEL translation
 // based on the dungeon level, the dungeon is either available to player for selection or not
@@ -1401,6 +1423,10 @@ def_weekly_finishDungeon_lvl[11]     11,         90
 def_weekly_finishDungeon_lvl[12]     12,         90
 def_weekly_finishDungeon_lvl[13]     13,        100
 def_weekly_finishDungeon_lvl[14]     14,         95
+def_weekly_finishDungeon_lvl[15]     15,         40
+def_weekly_finishDungeon_lvl[16]     16,         60
+def_weekly_finishDungeon_lvl[17]     17,         70
+def_weekly_finishDungeon_lvl[18]     18,         90
 
 // selects random dungeon ID in the player's level range
 // Player can only receive dungeons that have their level:
