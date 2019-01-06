@@ -36,13 +36,13 @@ def_weekly_low_setupFunction[3]    f_weekly_setup_drinkPotion                   
 def_weekly_low_setupFunArgn[3]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_3_[0]   i_potion_nightSight //prvni argument setup funkce
 def_weekly_low_setupFunArg_3_[1]   6 // multiplier poctu potionu
-def_weekly_low_rewardSize[3]       65
+def_weekly_low_rewardSize[3]       55
 
 def_weekly_low_setupFunction[4]    f_weekly_setup_drinkPotion                   // OTESTOVANO
 def_weekly_low_setupFunArgn[4]     2 // pocet argumentu setup funkce
 def_weekly_low_setupFunArg_4_[0]   RANDOM_POTION_BOOST_LESS //prvni argument setup funkce
 def_weekly_low_setupFunArg_4_[1]   2 // multiplier poctu potionu
-def_weekly_low_rewardSize[4]       75
+def_weekly_low_rewardSize[4]       65
 
 def_weekly_low_setupFunction[5]    f_weekly_setup_stepOnWeb                     // OTESTOVANO
 def_weekly_low_setupFunArgn[5]     0 // pocet argumentu setup funkce
@@ -112,7 +112,7 @@ def_weekly_medium_setupFunction[0]    f_weekly_setup_drinkPotion
 def_weekly_medium_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_medium_setupFunArg_0_[0]   RANDOM_POTION_BOOST //prvni argument setup funkce
 def_weekly_medium_setupFunArg_0_[1]   4  // multiplier poctu potionu
-def_weekly_medium_rewardSize[0]       100
+def_weekly_medium_rewardSize[0]       80
 
 def_weekly_medium_setupFunction[1]    f_weekly_setup_dmgNPC
 def_weekly_medium_setupFunArgn[1]     2 // pocet argumentu setup funkce
@@ -180,7 +180,7 @@ def_weekly_high_setupFunction[0]    f_weekly_setup_drinkPotion
 def_weekly_high_setupFunArgn[0]     2 // pocet argumentu setup funkce
 def_weekly_high_setupFunArg_0_[0]   RANDOM_POTION_BOOST_GREAT //prvni argument setup funkce
 def_weekly_high_setupFunArg_0_[1]   5 // multiplier poctu potionu
-def_weekly_high_rewardSize[0]       130
+def_weekly_high_rewardSize[0]       100
 
 def_weekly_high_setupFunction[1]    f_weekly_setup_killPlayer                   // OTESTOVANO
 def_weekly_high_setupFunArgn[1]     1 // pocet argumentu setup funkce
@@ -410,7 +410,12 @@ tag(sum_prize,#+<arg(single_prize)>)
 
 tag(quest_rewGold[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_gold)>) // amount of GP in the reward
 tag(quest_rewXP[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_exp)>) // amount of XP in the reward
-tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_magicItem)>) // amount of magic items in the reward
+if (strcmpi(<argv(1)>,low))
+logmsg("Nejsem LOW, jsem <argv(1)>")
+  tag(quest_rewMI[<eval tag(qAssigned)>],<eval (arg(single_prize)/def_weekly_prize_magicItem)>) // amount of magic items in the reward
+else
+  tag(quest_rewMI[<eval tag(qAssigned)>],0)
+endif
 
 //tag(quest_rewChance[<eval tag(qAssigned)>],<f_weekly_getChanceReward(<arg(rewardSize)>>) // TODO: complete lucky reward -> a possiblity to gain ONE additional reward object
 
