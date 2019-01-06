@@ -1444,7 +1444,7 @@ arg(minID,1)
 arg(maxID,0) // value lower than the first dungeon ID is intentional
 arg(foundRange,0)
 arg(i,1)
-while (!arg(found) && (arg(i) <= def_weekly_finishDungeon_count) )
+while (!arg(foundRange) && (arg(i) <= def_weekly_finishDungeon_count) )
   arg(curLvl,<return_nth(2,<def_weekly_finishDungeon_lvl[<eval arg(i)>]>)>)
   if (<arg(curLvl)> < <arg(minDngLevel)>)
     arg(minID,#+1)
