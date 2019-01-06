@@ -104,7 +104,7 @@ name=Player Boost
 
 on=@equip
 if (tag(boostType) == def_playerBooster_type_XP)
-  cont.f_booster_xpBoost_apply
+  cont.f_booster_xpBoost_apply(<uid>)
 endif
 
 on=@unEquip
@@ -148,9 +148,9 @@ endif
 ///////////////
 //    X P    //
 
-[function f_booster_xpBoost_apply]
+[function f_booster_xpBoost_apply]   // argv(0) - UID of Booster memory item
 events=+e_boosted_xp
-tag(xpBooster_link,<uid>) // in case we have more concurrent boosters in the future, it's handy to store the direct link to an XP booster type
+tag(xpBooster_link,<argv(0)>) // in case we have more concurrent boosters in the future, it's handy to store the direct link to an XP booster type
 
 [function f_booster_xpBoost_remove]
 events=-e_boosted_xp
