@@ -1411,22 +1411,22 @@ def_weekly_finishDungeon[18]    "Mahatske Peklo"
 //       def name                 dung ID    Level (ordered)
 def_weekly_finishDungeon_lvl[1]       1,         35
 def_weekly_finishDungeon_lvl[2]       2,         40
-def_weekly_finishDungeon_lvl[3]       3,         45
-def_weekly_finishDungeon_lvl[4]       4,         50
-def_weekly_finishDungeon_lvl[5]       5,         50
-def_weekly_finishDungeon_lvl[6]       6,         55
-def_weekly_finishDungeon_lvl[7]       7,         55
-def_weekly_finishDungeon_lvl[8]       8,         60
-def_weekly_finishDungeon_lvl[9]       9,         70
-def_weekly_finishDungeon_lvl[10]     10,         80
-def_weekly_finishDungeon_lvl[11]     11,         90
-def_weekly_finishDungeon_lvl[12]     12,         90
-def_weekly_finishDungeon_lvl[13]     13,        100
-def_weekly_finishDungeon_lvl[14]     14,         95
-def_weekly_finishDungeon_lvl[15]     15,         40
-def_weekly_finishDungeon_lvl[16]     16,         60
-def_weekly_finishDungeon_lvl[17]     17,         70
-def_weekly_finishDungeon_lvl[18]     18,         90
+def_weekly_finishDungeon_lvl[3]      15,         40
+def_weekly_finishDungeon_lvl[4]       3,         45
+def_weekly_finishDungeon_lvl[5]       4,         50
+def_weekly_finishDungeon_lvl[6]       5,         50
+def_weekly_finishDungeon_lvl[7]       6,         55
+def_weekly_finishDungeon_lvl[8]       7,         55
+def_weekly_finishDungeon_lvl[9]       8,         60
+def_weekly_finishDungeon_lvl[10]     16,         60
+def_weekly_finishDungeon_lvl[11]      9,         70
+def_weekly_finishDungeon_lvl[12]     17,         70
+def_weekly_finishDungeon_lvl[13]     10,         80
+def_weekly_finishDungeon_lvl[14]     11,         90
+def_weekly_finishDungeon_lvl[15]     12,         90
+def_weekly_finishDungeon_lvl[16]     18,         90
+def_weekly_finishDungeon_lvl[17]     14,         95
+def_weekly_finishDungeon_lvl[18]     13,        100
 
 // selects random dungeon ID in the player's level range
 // Player can only receive dungeons that have their level:
