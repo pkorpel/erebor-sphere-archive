@@ -71,6 +71,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
 			    return 1
 		    endif
         if (!aretheremoreguards)
+          f_dobyvani_bonus_gain_point(1)  // Dobyvatel dostane bod za ucast az po zabiti strazi
           switchColor(<src.tag(realm)>)
           timer=1
           say("Obrana pevnosti byla prolomena! Uhlidej palantir po dobu <tag(timer_prolomeni)> s.")
@@ -104,6 +105,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
       return 1 
     endif
   else //klikl obrance
+    f_dobyvani_bonus_gain_point(1)  // obrance nemusi plnit jine podminky k ziskani bodu za ucast v dobyvani
     if (<eval tag(prolomeni)> == 0)
       src.sysmessage("Palantir pevnosti <d_area_<tag(fort_name)>_1>. Dobre jej hlidej!")
       return 1
@@ -367,6 +369,7 @@ tag(conquerors_realm,0)
 tag(prolomeni,0)
 tag(timer_prolomeni,<nastaveni_pevnosti_doba_prolomeni>)
 color=00 //neutralni barva
+f_dobyvani_GiveBonus(<winners_realm>)
 
 winners_declarstone.tag(war_declared_on,0) //Rychle smazat info o valce - uz nikdo nesmi mit moznost kliknout na sutrak :)
 winners_declarstone.tag(war_begins_hour,0) 
@@ -551,5 +554,61 @@ endwhile
 tag(war_begins_day,<getDay>)
 tag(war_begins_hour,<getHour>)
 timer=1
+
+
+[itemdef i_dobyvani_bonus_stone]
+id=i_rune_marker
+name=Dobyvaci Bonus
+
+on=@create
+color=098b
+attr=090
+tag(VictoryRealm,0)
+
+
+[function f_dobyvani_getBonusType]    // argv(0) - amount of points
+if (<argv(0)> >= 10)
+  return 2                // 4 hours + 25% exp
+elseif (<argv(0)> >= 2)
+  return 1                // 2 hours + 25% exp
+else
+  return 0                // 1 hour  + 25% exp
+endif
+
+[function f_dobyvani_GiveBonus]     // argv(0) - Vitezny realm, ktery dostane bod navic  ; volano nad palantirem
+if (strlen(<tag(Bonus_stone)>))       // exsituje bonusstone? Zucastnil se nekdo dobyvani?
+  arg(BonusStone,<finduid(<tag(Bonus_stone)>)>)  
+  arg(i,0)
+  while (<arg(i)> < <eval (<BonusStone.tag(BonussCount)>)>)   
+    arg(PlayerToBonus,<BonusStone.tag(Bonus[<eval arg(i)>])>) 
+    if (<eval arg(PlayerToBonus).tag(realm)> == <argv(0)>)
+      BonusStone.tag(Bonus_for_<hval arg(PlayerToBonus)>,#+1)       // Bonusovy bod pro vitezny realm
+    endif
+    arg(TypeOfBonus,<f_dobyvani_getBonusType(<eval BonusStone.tag(Bonus_for_<hval arg(PlayerToBonus)>)>)>)                
+    finduid(<BonusStone.tag(Bonus[<eval arg(i)>])>).playerBooster_add(<arg(TypeOfBonus)>)
+    finduid(<BonusStone.tag(Bonus[<eval arg(i)>])>).classmessage("Ziskal jsi za ucast v dobyvani odmenu booster <def_playerBooster_description[<arg(TypeOfBonus)>]>")
+    arg(i,#+1)
+  endwhile
+  BonusStone.remove
+  tag(Bonus_stone,"")   // smazani tagu
+endif
+
+[function f_dobyvani_bonus_gain_point]  // <argv(0)> - 1 = zucastneni dostane jen jednou, 2/3 = assist/kill pricitam vzdy
+if (src.profession==class_craft)        // do NOT give bonus to crafts
+  return 0
+endif
+if !(<eval tag(Bonus_stone)>)
+  src.newitem(i_dobyvani_bonus_stone)
+  lastnew.p=<p>
+  lastnew.z=<z>+10
+  tag(Bonus_stone,<lastnew>) 
+endif
+if !(strlen(<tag(Bonus_stone).tag(Bonus_for_<hval src>)>))   //    neexistuje - pridam
+  tag(Bonus_stone).f_customLink_add(<src>,"Bonus")
+  tag(Bonus_stone).tag(Bonus_for_<hval src>,1)            //    pri vytvoreni vzdy +1 za ucast
+endif
+if (<argv(0)> > 1)                                        //    nejedna se o poklikani ale o assist nebo kill
+  tag(Bonus_stone).tag(Bonus_for_<hval src>,#+<argv(0)>)  //    prictu
+endif
 
 [eof]

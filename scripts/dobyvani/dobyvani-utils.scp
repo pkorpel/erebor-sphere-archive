@@ -144,8 +144,8 @@ endif
 
 
 [defnames dobyvani_pevnosti]
-d_fort_warFrom		17	
-d_fort_warTo		22
+d_fort_warFrom		19	
+d_fort_warTo		21
 
 d_fort_weekend_warFrom  17
 d_fort_weekend_warTo	22

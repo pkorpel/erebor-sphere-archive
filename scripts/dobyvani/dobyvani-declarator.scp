@@ -220,9 +220,11 @@ scylla.delayedmessage("Dobyvani: <serverTime> EndWar. Cas na uspesne dobyti pevn
 if (<argv(0)> == 1) //hlasi gondorsky kamen
   arg(gondr_msg,"Nepritel pevnost <d_area_<tag(war_declared_on)>_1> ubranil!")
   arg(mordr_msg,"Ubranili jsme pevnost <d_area_<tag(war_declared_on)>_1>!")
+  var(palantir_<tag(war_declared_on)>).f_dobyvani_GiveBonus(2)         // spusti funkci, ktera rozdeli odmenu za ucast v dobyvani
 else
   arg(gondr_msg,"Ubranili jsme pevnost <d_area_<tag(war_declared_on)>_1>!")
   arg(mordr_msg,"Nepritel pevnost <d_area_<tag(war_declared_on)>_1> ubranil!") 
+  var(palantir_<tag(war_declared_on)>).f_dobyvani_GiveBonus(1)         // spusti funkci, ktera rozdeli odmenu za ucast v dobyvani
 endif
 
 var(chatmessageG,"*Gondorsky herold* <gondr_msg>")
