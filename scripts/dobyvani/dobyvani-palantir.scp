@@ -101,6 +101,7 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
       endif    
     else //uz prolomili   
       src.sysmessage("Obrana jiz prolomena byla.")
+      f_dobyvani_bonus_gain_point(1)  // Dobyvatel dostane bod za ucast az po zabiti strazi
 //       scylla.delayedmessage("Dobyvani: <serverTime> Obrana <d_area_<tag(fort_name)>_1> jiz byla prolomena, nyni klikal <src>-<src.name>(<src.account.name>), zbyva uhlidat <tag(timer_prolomeni)> s.")
       return 1 
     endif
@@ -587,6 +588,7 @@ if (strlen(<tag(Bonus_stone)>))       // exsituje bonusstone? Zucastnil se nekdo
     arg(TypeOfBonus,<f_dobyvani_getBonusType(<eval BonusStone.tag(Bonus_for_<hval arg(PlayerToBonus)>)>)>)                
     finduid(<BonusStone.tag(Bonus[<eval arg(i)>])>).playerBooster_add(<arg(TypeOfBonus)>)
     finduid(<BonusStone.tag(Bonus[<eval arg(i)>])>).classmessage("Ziskal jsi za ucast v dobyvani odmenu booster <def_playerBooster_description[<arg(TypeOfBonus)>]>")
+    finduid(<BonusStone.tag(Bonus[<eval arg(i)>])>).accmsg("ziskal za ucast v dobyvani odmenu booster <def_playerBooster_description[<arg(TypeOfBonus)>]>")
     arg(i,#+1)
   endwhile
   BonusStone.remove
@@ -595,6 +597,7 @@ endif
 
 [function f_dobyvani_bonus_gain_point]  // <argv(0)> - 1 = zucastneni dostane jen jednou, 2/3 = assist/kill pricitam vzdy
 if (src.profession==class_craft)        // do NOT give bonus to crafts
+  src.redmessage("Jako Kraft se nemuzes aktivne zucastnit Dobyvani.")
   return 0
 endif
 if !(<eval tag(Bonus_stone)>)
@@ -606,6 +609,8 @@ endif
 if !(strlen(<tag(Bonus_stone).tag(Bonus_for_<hval src>)>))   //    neexistuje - pridam
   tag(Bonus_stone).f_customLink_add(<src>,"Bonus")
   tag(Bonus_stone).tag(Bonus_for_<hval src>,1)            //    pri vytvoreni vzdy +1 za ucast
+  src.classmessage("Tva ucast v Dobyvani byla zaznamenana.")
+  src.accmsg("se zucastnil dobyvani a zaznamenal svou ucast. <src.p> (<src.region.name>)")
 endif
 if (<argv(0)> > 1)                                        //    nejedna se o poklikani ale o assist nebo kill
   tag(Bonus_stone).tag(Bonus_for_<hval src>,#+<argv(0)>)  //    prictu
