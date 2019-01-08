@@ -1,5 +1,5 @@
 [defnames scroll_case]
-maxscrolls	999
+maxscrolls	9999
 
 [ITEMDEF i_scroll_case]
 ID=i_spellbook
@@ -386,6 +386,7 @@ argo.button(243,185,2230,2230,1,0,32)
 argo.button(279,185,2231,2231,1,0,33)
 argo.button(316,185,2232,2232,1,0,33)
 
+
 argo.button(0,15,02635,02635,1,0,34)  //necro
 argo.button(0,40,02634,02634,1,0,35)  //other
 
@@ -484,6 +485,10 @@ if (<argn>==19) //vybrat (1 z kazdeho)
 endif
 
 if (<argn> > 0) && (<argn> < 17)  //vyberanie
+  if (topobj.uid!=src.uid)&&(src.isgm==0)
+    src.sysmessage Svitkovac musis mit v batohu!
+    return 1
+  endif
   src.tag.dynamdialog=<src.tag.dynamdialog>+<argn>  //ulozime to co budeme vyberat
   dialog(d_scroll_case2_remove)
 endif
