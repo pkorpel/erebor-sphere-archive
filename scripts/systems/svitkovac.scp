@@ -19,17 +19,13 @@ SUBSECTION=Svitkovac
 DESCRIPTION=Svitkovac
 
 
-//ATTR=04
-
 [typedef t_svitkovac]
-ON=@userDCLICK
-//if !(f_checkrightsmes(<itemlevel>))
-  SRC.SOUND=85
-  src.tag(dynamdialog,0)
-  DIALOG d_scroll_case2
-//endif
-RETURN 1
 
+ON=@userDCLICK
+SRC.SOUND=85
+src.tag(dynamdialog,0)
+DIALOG d_scroll_case2
+RETURN 1
 
 ON=@TARGON_ITEM
 IF (src.targ.topobj.uid!=src.uid)&&(src.isgm==0)
@@ -462,12 +458,21 @@ on=35
   dialog(d_scroll_case2)
 
 on=@anybutton
+if (topobj.uid!=src.uid)&&(src.isgm==0)
+  src.sysmessage Svitkovac musis mit v batohu!
+  return 1
+endif
 if (<argn>==18) //pridat
   target
 endif
 
 if (<argn>==19) //vybrat (1 z kazdeho)
   arg(u,1)
+  if (topobj.uid!=src.uid)&&(src.isgm==0)
+    src.sysmessage Svitkovac musis mit v batohu!
+    return 1
+  endif
+
   while (arg(u)<71)
     if (<eval <safe.tag(scroll[arg(u)])>>)
       src.newitem <findres(spell,arg(u)).scrollitem>
