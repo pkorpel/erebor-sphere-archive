@@ -6,7 +6,7 @@ on=*hi*
 on=*dobry*
 on=*zdravim*
 
-say ("I ja preju dobry den.")
+say("I ja preju dobry den.")
 
 
 
@@ -17,13 +17,13 @@ on=*hi*
 on=*dobry*
 on=*zdravim*
 on=*den*
-say ("Nerus, musim se soustredit. Co vlastne chces?")
+say("Nerus, musim se soustredit. Co vlastne chces?")
 
 on=*balzam*
 on=*balzamovat*
 
 if (<src.tag.qv1_balzam>==2)
-  SAY ("Uz jsi tu zase? To nemyslis vazne, uz ti pomahat nebudu, jdi pryc!")
+  say("Uz jsi tu zase? To nemyslis vazne, uz ti pomahat nebudu, jdi pryc!")
 elseif (<src.tag.qv1_balzam>==1)
   SAY= "Zdravim, jak jsi byl minule spokojen s mou praci? Jo aha, ty mi neses dalsi?" 
   SAY= "Druha sluzba bude drazsi, pomaham rad ale nenecham se zneuzivat"
@@ -141,20 +141,20 @@ endif
 
 ON=*vymena*
 ON=*menit*
-say(Dobra, podivame se, co pro mne mas.)
+say("Dobra, podivame se, co pro mne mas.")
 if (consumeXMagicals) 
   src.giveitem(i_mi_bag)
-  say (Dekuji ti, zajimave predmety. Snad o ne nekdo bude mit zajem.)
-  say (A zde je neco pro tebe, snad ti to bude k uzitku.)
+  say("Dekuji ti, zajimave predmety. Snad o ne nekdo bude mit zajem.")
+  say("A zde je neco pro tebe, snad ti to bude k uzitku.")
 else
-  say (Je mi lito, nemas dost predmetu k vymene.)  
+  say("Je mi lito, nemas dost predmetu k vymene.")  
 endif
 
 ON=*identifikace*
 ON=*identifikuj*
 //src.identification_i_mi_magic(<UID>)
 src.identification_i_mi_magic(<UID>,<tag.price>)
-say ("Tak copak chces identifikovat?")
+say("Tak copak chces identifikovat?")
 
 [speech magic_item_exchanger_mordor]
 ON=*dobry*
@@ -164,28 +164,28 @@ ON=*ahoj*
 ON=*zdar*
 ON=*cus*
 if (<distance>>3)
-  src.sysmessage ("Na takovou vzdalenost s tebou jednat nebude.")
+  src.sysmessage("Na takovou vzdalenost s tebou jednat nebude.")
 else
   dialog(d_magic_item_exchanger,1)
 endif
 
-//say (Dej mi pet magickych predmetu libovolne kvality a ja ti dam jeden novy.)
-//say (Zvaz dobre, co u sebe mas a budes-li si jist, ze jsou to ty spravne pro vymenu, oslov mne "Vymena".)
-//say (Pokud budes chtit identifikovat magicky predmet, oslov mne "identifikace".)
+//say(Dej mi pet magickych predmetu libovolne kvality a ja ti dam jeden novy.)
+//say(Zvaz dobre, co u sebe mas a budes-li si jist, ze jsou to ty spravne pro vymenu, oslov mne "Vymena".)
+//say(Pokud budes chtit identifikovat magicky predmet, oslov mne "identifikace".)
 
 ON=*vymena*
 ON=*menit*
-say (Dost bylo okouneni, ukaz, co mas!)
+say("Dost bylo okouneni, ukaz, co mas!")
 if (consumeXMagicals) 
   src.giveitem(i_mi_bag)
-  say (Hmm, nas pan nebude moc potesen, ale svoji povinnost jsi splnil.)
-  say (A zde je neco pro tebe.)
+  say("Hmm, nas pan nebude moc potesen, ale svoji povinnost jsi splnil.")
+  say("A zde je neco pro tebe.")
 else
-  say (Neopovazuj se mne podvest! Nemas dost predmetu!)  
+  say("Neopovazuj se mne podvest! Nemas dost predmetu!")  
 endif
 
 on=*identifikace*
 on=*identifikuj*
 //src.identification_i_mi_magic(<UID>)
 src.identification_i_mi_magic(<UID>,<tag.price>)
-say ("Tak copak chces identifikovat?")
+say("Tak copak chces identifikovat?")

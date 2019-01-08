@@ -4,10 +4,10 @@ ON=*hi*
 ON=*ahoj*
 ON=*buy*
 if (<eval(<src.account.tag(lagr)>)><8)
-  say (Musis ziskat <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
+  say(Musis ziskat <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
 else
   if (<eval(<src.tag(lagrlogu)>)>)
-    say (Musis ziskat <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
+    say(Musis ziskat <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku. Ziskas je u me vymenou za drevo, kdyz reknes "vymena". Pokud nemas svetlo, rekni "svetlo", pokud postradas sekeru, rekni "sekera". Az budes mit propousteci zlataky, oslov mne "propustit". Mas-li hlad, rekni "jidlo".)
   else
     say Kontaktuj GM pres page, tva postava je recidivista, ktery dostane specialni trest.
   endif
@@ -61,6 +61,6 @@ else
       say Potrebujes <eval(<src.tag(lagrlogu)>/100)> propoustecich zlataku, ty ziskas vymenou za normalni drevo, az budes mit dostatek dreva oslov me "vymena".
     endif
   else
-    say ("Kontaktuj GM pres page, tva postava je recidivista, ktery dostane specialni trest.")
+    say("Kontaktuj GM pres page, tva postava je recidivista, ktery dostane specialni trest.")
   endif
 endif

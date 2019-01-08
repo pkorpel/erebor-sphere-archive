@@ -799,7 +799,7 @@ ON=@ENTER
     src.giveitem(i_qv3_bag2)
     src.giveitem(i_qv3_bag3)
     return 0
-    src.say (Muhahahaha)
+    src.say(Muhahahaha)
     enddo
   endif
 
