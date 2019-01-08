@@ -559,7 +559,7 @@ endif
 // argv(0) - the section button number
 // argv(1) - the button is active, i.e. NOT selected (pass 0 or empty to disable)
 [function f_questMenu_mainSubsectionButton] 
-arg(baseX,<eval 35+((<questMenu_width>-(<questMenu_subsection_number>*<questMenu_subsection_width+6>))/2)>)
+arg(baseX,<eval(35+((<questMenu_width>-(<questMenu_subsection_number>*(<questMenu_subsection_width>+6)))/2))>)
 arg(x,<baseX>+(argv(0)*(questMenu_subsection_width+6)))
 arg(y,73)
 resizepic(<arg(x)>,<arg(y)>,<questMenu_bg>,<questMenu_subsection_width>,<questMenu_subsection_height>)
