@@ -101,7 +101,7 @@ RETURN 1
 ON=@TARGON_ITEM
 if (src.targ.type!=020)&&(src.targ.type!=t_scroll)&&(src.targ.type!=t_customspell_scroll)
   src.sysmessage Toto neni svitek!
-  DIALOG d_scroll_case2
+  target Uloz dalsi svitek?
 else 
   arg(amount,<SRC.TARG.AMOUNT>)
   arg(inbook,<eval <safe.TAG(scroll[<src.targ.morex>])>>)
@@ -111,6 +111,7 @@ else
     arg(taken,<arg(free)>)
   endif
   TAG(scroll[<src.targ.morex>],<eval arg(inbook)+arg(taken)>)
+  src.sysmessage Svitek <src.targ.name> ulozen do svitkovace.
   src.targ.consume(<arg(taken)>)
   target Uloz dalsi svitek?
 endif
