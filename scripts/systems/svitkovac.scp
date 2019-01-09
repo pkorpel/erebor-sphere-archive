@@ -4,41 +4,41 @@ svitkovac_spell_shortcut[1] "Clumsy"
 svitkovac_spell_shortcut[2] "Create Food"
 svitkovac_spell_shortcut[3] "Feeblemind"
 svitkovac_spell_shortcut[4] "Heal"
-svitkovac_spell_shortcut[5] "MagicArrow"
-svitkovac_spell_shortcut[6] "NightSight"
-svitkovac_spell_shortcut[7] "Reactive Ar."
+svitkovac_spell_shortcut[5] "Magic Arrow"
+svitkovac_spell_shortcut[6] "Night Sight"
+svitkovac_spell_shortcut[7] "Reactive Armor"
 svitkovac_spell_shortcut[8] "Weaken"
 svitkovac_spell_shortcut[9] "Agility"
 svitkovac_spell_shortcut[10] "Cunning"
 svitkovac_spell_shortcut[11] "Cure"
 svitkovac_spell_shortcut[12] "Harm"
-svitkovac_spell_shortcut[13] "Trap"
-svitkovac_spell_shortcut[14] "Untrap"
+svitkovac_spell_shortcut[13] "Magic Trap"
+svitkovac_spell_shortcut[14] "Magic Untrap"
 svitkovac_spell_shortcut[15] "Protection"
 svitkovac_spell_shortcut[16] "Strength"
 svitkovac_spell_shortcut[17] "Bless"
 svitkovac_spell_shortcut[18] "Fireball"
-svitkovac_spell_shortcut[19] "Lock"
+svitkovac_spell_shortcut[19] "Magic Lock"
 svitkovac_spell_shortcut[20] "Poison"
 svitkovac_spell_shortcut[21] "Telekinesis"
 svitkovac_spell_shortcut[22] "Teleport"
 svitkovac_spell_shortcut[23] "Unlock"
 svitkovac_spell_shortcut[24] "Stone Wall"
-svitkovac_spell_shortcut[25] "ArchCure"
-svitkovac_spell_shortcut[26] "ArchProtect."
+svitkovac_spell_shortcut[25] "Arch Cure"
+svitkovac_spell_shortcut[26] "Arch Protection"
 svitkovac_spell_shortcut[27] "Curse"
-svitkovac_spell_shortcut[28] "FireField"
+svitkovac_spell_shortcut[28] "Fire Field"
 svitkovac_spell_shortcut[29] "Greater Heal"
 svitkovac_spell_shortcut[30] "Lightning"
 svitkovac_spell_shortcut[31] "Mana Drain"
 svitkovac_spell_shortcut[32] "Recall"
 svitkovac_spell_shortcut[33] "Blade Spirit"
-svitkovac_spell_shortcut[34] "DispelField"
+svitkovac_spell_shortcut[34] "Dispel Field"
 svitkovac_spell_shortcut[35] "Incognito"
 svitkovac_spell_shortcut[36] "Reflection"
 svitkovac_spell_shortcut[37] "Mind Blast"
 svitkovac_spell_shortcut[38] "Paralyze"
-svitkovac_spell_shortcut[39] "PoisonField"
+svitkovac_spell_shortcut[39] "Poison Field"
 svitkovac_spell_shortcut[40] "Summon"
 svitkovac_spell_shortcut[41] "Dispel"
 svitkovac_spell_shortcut[42] "Energy Bolt"
@@ -46,15 +46,15 @@ svitkovac_spell_shortcut[43] "Explosion"
 svitkovac_spell_shortcut[44] "Invisibility"
 svitkovac_spell_shortcut[45] "Mark"
 svitkovac_spell_shortcut[46] "Mass Curse"
-svitkovac_spell_shortcut[47] "ParaField"
+svitkovac_spell_shortcut[47] "Paralyze Field"
 svitkovac_spell_shortcut[48] "Reveal"
-svitkovac_spell_shortcut[49] "Chain Light."
-svitkovac_spell_shortcut[50] "EnergyField"
+svitkovac_spell_shortcut[49] "Chain Lightning"
+svitkovac_spell_shortcut[50] "Energy Field"
 svitkovac_spell_shortcut[51] "Flame Strike"
 svitkovac_spell_shortcut[52] "Gate Travel"
 svitkovac_spell_shortcut[53] "Mana Vampire"
 svitkovac_spell_shortcut[54] "Mass Dispel"
-svitkovac_spell_shortcut[55] "Meteor Sw."
+svitkovac_spell_shortcut[55] "Meteor Swarm"
 svitkovac_spell_shortcut[56] "Polymorph"
 svitkovac_spell_shortcut[57] "Earthquake"
 svitkovac_spell_shortcut[58] "Energy Vortex"
@@ -69,6 +69,8 @@ svitkovac_spell_shortcut[66] "Animate Dead"
 svitkovac_spell_shortcut[67] "Bone Armor"
 svitkovac_spell_shortcut[68] "Light"
 svitkovac_spell_shortcut[69] "Fire Bolt"
+svitkovac_spell_shortcut[101] "Frost Bolt"
+svitkovac_spell_shortcut[104] "Mana Shield"
 
 [ITEMDEF i_scroll_case]
 ID=i_spellbook
@@ -444,7 +446,7 @@ argo.gumppic(115,50,58)
 argo.gumppic(130,50,58)
 argo.gumppic(140,50,59)
 
-argo.gumppic(200,50,57)//ciara hore napravo
+argo.gumppic(193,50,57)//ciara hore napravo
 argo.gumppic(220,50,58)
 argo.gumppic(235,50,58)
 argo.gumppic(250,50,58)
@@ -453,8 +455,8 @@ argo.gumppic(280,50,58)
 argo.gumppic(295,50,58)
 argo.gumppic(305,50,59)
 
-argo.button(320,38,4033,4033,1,0,19) //vybrat z kazdeho 1
-argo.button(150,38,4033,4033,1,0,18) //pridat
+argo.button(305,38,4033,4033,1,0,19) //vybrat z kazdeho 1
+argo.button(140,38,4033,4033,1,0,18) //pridat
 
 argo.button(40,185,2225,2225,1,0,30) //1st - 8th circle buttons
 argo.button(77,185,2226,2226,1,0,30)
@@ -469,37 +471,43 @@ argo.button(316,185,2232,2232,1,0,33)
 argo.button(0,15,02635,02635,1,0,34)  //necro
 argo.button(0,40,02634,02634,1,0,35)  //other
 
-argo.texta(35,15,0,"Nekro")
-argo.texta(35,38,0,"Jine")
-argo.texta(102,35,1300,"Pridat")
-argo.texta(267,35,1300,"Vybrat")
+argo.setText(newTextLine,"Nekro")
+argo.newHtmlGump(35,15,400,20,0)
+argo.setText(newTextLine,"Jine")
+argo.newHtmlGump(35,38,400,20,0)
+
+argo.setText(newTextLine,"Pridat")
+argo.newHtmlGump(102,35,400,20,0)
+argo.setText(newTextLine,"Vybrat")
+argo.newHtmlGump(262,35,400,20,0)
 
 if (<src.tag.dynamdialog> < 64)
-  argo.texta(90,14,1300,"<?eval (<src.tag(dynamdialog)>/8)+1)?>. Kruh")
-  argo.texta(250,14,1300,"<?eval (<src.tag(dynamdialog)>/8)+2)?>. Kruh")
+  argo.setText(newTextLine,"<?eval (<src.tag(dynamdialog)>/8)+1)?>. Kruh")
+  argo.newHtmlGump(90,14,400,20,0)
+
+  argo.setText(newTextLine,"<?eval (<src.tag(dynamdialog)>/8)+2)?>. Kruh")
+  argo.newHtmlGump(250,14,400,20,0)
 else 
   if (<src.tag.dynamdialog> < 80)
-    argo.texta(90,12,1300,"Nekro")
+    argo.setText(newTextLine,"Nekro")
+    argo.newHtmlGump(90,12,400,20,0)
   else
-    argo.texta(90,12,1300,"Jine")
+    argo.setText(newTextLine,"Jine")
+    argo.newHtmlGump(90,12,400,20,0)
   endif
 endif
-
 arg(ii,<src.tag.dynamdialog>+1)
 arg(yy,0)
 arg(xx,35)
 while (<arg(ii)> <= <src.tag.dynamdialog>+16) 
   if (<safe.TAG(scroll[<arg(ii)>])>)
     argo.button(<arg(xx)>,<eval 65+<arg(yy)>*15>,2103,2104,1,0,<eval(<arg(ii)>-<src.tag.dynamdialog>)>) // buttony 1-16
-    argo.texta(<arg(xx)>+12,<eval 60+<arg(yy)>*15>,0,<f_svitkovac_formatAmount(<safe.TAG(scroll[<arg(ii)>])>)>)
-    if (<arg(ii)> < 96) //kvoli customspellom
-      argo.texta(<arg(xx)>+53,<eval 60+<arg(yy)>*15>,0,<?safe.svitkovac_spell_shortcut[<arg(ii)>]?>)
-    else
-      if (<arg(ii)>==101)//frostbolt
-        argo.texta(<arg(xx)>+53,<eval 60+<arg(yy)>*15>,0,"Frost Bolt")
-      elseif (<arg(ii)>==104)//manashield
-        argo.texta(<arg(xx)>+53,<eval 60+<arg(yy)>*15>,0,"Mana Shield")
-      endif
+    argo.setText(newTextLine,<f_svitkovac_formatAmount(<safe.TAG(scroll[<arg(ii)>])>)>)
+    argo.newHtmlGump(<arg(xx)>+12,<eval 60+<arg(yy)>*15>,400,20,0)
+
+    if (<arg(ii)>)
+      argo.setText(newTextLine,<?safe.svitkovac_spell_shortcut[<arg(ii)>]?>)
+      argo.newHtmlGump(<arg(xx)>+48,<eval 60+<arg(yy)>*15>,400,20,0)
     endif
     arg(yy,#+1)
   endif
