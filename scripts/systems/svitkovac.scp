@@ -93,6 +93,11 @@ DESCRIPTION=Svitkovac
 [typedef t_svitkovac]
 
 ON=@userDCLICK
+if (cont!=src.findlayer(layer_pack))&&(src.isgm==0)
+  src.sysmessage("Svitkovac musis mit v batohu!")
+  return 1
+endif
+
 SRC.SOUND=85
 src.tag(dynamdialog,0)
 DIALOG d_scroll_case2
@@ -100,8 +105,8 @@ RETURN 1
 
 ON=@TARGON_ITEM
 if (src.targ.type!=020)&&(src.targ.type!=t_scroll)&&(src.targ.type!=t_customspell_scroll)
-  src.sysmessage Toto neni svitek!
-  target Uloz dalsi svitek?
+  src.sysmessage("Toto neni svitek!")
+  target("Uloz dalsi svitek?")
 else 
   arg(amount,<SRC.TARG.AMOUNT>)
   arg(inbook,<eval <safe.TAG(scroll[<src.targ.morex>])>>)
@@ -111,9 +116,9 @@ else
     arg(taken,<arg(free)>)
   endif
   TAG(scroll[<src.targ.morex>],<eval arg(inbook)+arg(taken)>)
-  src.sysmessage Svitek <src.targ.name> ulozen do svitkovace.
+  src.sysmessage("Svitek <src.targ.name> ulozen do svitkovace.")
   src.targ.consume(<arg(taken)>)
-  target Uloz dalsi svitek?
+  target("Uloz dalsi svitek")
 endif
 return 1
 
@@ -388,7 +393,7 @@ textentry  40 83 250 20 32 0 3
 button 40 120 249 248 1 0 2//okay
 
 [dialog d_scroll_case_remove text]
-<?safe.svitkovac_spell_shortcut[<src.tag(dynamdialog)>)]?>
+<?svitkovac_spell_shortcut[<src.tag(dynamdialog)>)]?>
 Kolik svitku odebrat??
 Vsechny (max 60.000)
 1 //5
@@ -402,8 +407,8 @@ f_scroll_case_remove(<fixnumber(<argtxt(0)>)>)
 
 //* f_scroll_case_remove
 [function f_scroll_case_remove]
-if (topobj.uid!=src.uid)&&(src.isgm==0)
-  src.sysmessage Svitkovac musis mit v batohu!
+if (cont!=src.findlayer(layer_pack))&&(src.isgm==0)
+  src.sysmessage("Svitkovac musis mit v batohu!")
   return 1
 endif
 
@@ -477,28 +482,28 @@ argo.button(316,185,2232,2232,1,0,33)
 argo.button(0,15,02635,02635,1,0,34)  //necro
 argo.button(0,40,02634,02634,1,0,35)  //other
 
-argo.setText(newTextLine,"Nekro")
+argo.setText(argo.newTextLine,"Nekro")
 argo.newHtmlGump(35,15,400,20,0)
-argo.setText(newTextLine,"Jine")
+argo.setText(argo.newTextLine,"Jine")
 argo.newHtmlGump(35,38,400,20,0)
 
-argo.setText(newTextLine,"Pridat")
+argo.setText(argo.newTextLine,"Pridat")
 argo.newHtmlGump(102,35,400,20,0)
-argo.setText(newTextLine,"Vybrat")
+argo.setText(argo.newTextLine,"Vybrat")
 argo.newHtmlGump(262,35,400,20,0)
 
 if (<src.tag.dynamdialog> < 64)
-  argo.setText(newTextLine,"<?eval (<src.tag(dynamdialog)>/8)+1)?>. Kruh")
+  argo.setText(argo.newTextLine,"<?eval (<src.tag(dynamdialog)>/8)+1)?>. Kruh")
   argo.newHtmlGump(90,14,400,20,0)
 
-  argo.setText(newTextLine,"<?eval (<src.tag(dynamdialog)>/8)+2)?>. Kruh")
+  argo.setText(argo.newTextLine,"<?eval (<src.tag(dynamdialog)>/8)+2)?>. Kruh")
   argo.newHtmlGump(250,14,400,20,0)
 else 
   if (<src.tag.dynamdialog> < 80)
-    argo.setText(newTextLine,"Nekro")
+    argo.setText(argo.newTextLine,"Nekro")
     argo.newHtmlGump(90,12,400,20,0)
   else
-    argo.setText(newTextLine,"Jine")
+    argo.setText(argo.newTextLine,"Jine")
     argo.newHtmlGump(90,12,400,20,0)
   endif
 endif
@@ -508,11 +513,11 @@ arg(xx,35)
 while (<arg(ii)> <= <src.tag.dynamdialog>+16) 
   if (<safe.TAG(scroll[<arg(ii)>])>)
     argo.button(<arg(xx)>,<eval 65+<arg(yy)>*15>,2103,2104,1,0,<eval(<arg(ii)>-<src.tag.dynamdialog>)>) // buttony 1-16
-    argo.setText(newTextLine,<f_svitkovac_formatAmount(<safe.TAG(scroll[<arg(ii)>])>)>)
+    argo.setText(argo.newTextLine,<f_svitkovac_formatAmount(<safe.TAG(scroll[<arg(ii)>])>)>)
     argo.newHtmlGump(<arg(xx)>+12,<eval 60+<arg(yy)>*15>,400,20,0)
 
     if (<arg(ii)>)
-      argo.setText(newTextLine,<?safe.svitkovac_spell_shortcut[<arg(ii)>]?>)
+      argo.setText(argo.newTextLine,<?svitkovac_spell_shortcut[<arg(ii)>]?>)
       argo.newHtmlGump(<arg(xx)>+48,<eval 60+<arg(yy)>*15>,400,20,0)
     endif
     arg(yy,#+1)
@@ -552,8 +557,8 @@ on=35
   dialog(d_scroll_case2)
 
 on=@anybutton
-if (topobj.uid!=src.uid)&&(src.isgm==0)
-  src.sysmessage Svitkovac musis mit v batohu!
+if (cont!=src.findlayer(layer_pack))&&(src.isgm==0)
+  src.sysmessage("Svitkovac musis mit v batohu!")
   return 1
 endif
 
@@ -598,7 +603,7 @@ argo.textentry(40,83,250,20,32,0,3)
 argo.button(40,120,249,248,1,0,2)//okay
 
 [dialog d_scroll_case2_remove text]
-<?safe.svitkovac_spell_shortcut[<arg(scroll)>)]?> ( <?safe.TAG(scroll[<arg(scroll)>])?> )
+<?svitkovac_spell_shortcut[<arg(scroll)>)]?> ( <?safe.TAG(scroll[<arg(scroll)>])?> )
 Kolik svitku odebrat?
 Vsechny (max 60k)
 1
