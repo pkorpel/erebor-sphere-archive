@@ -89,11 +89,10 @@ CATEGORY=Svitkovac
 SUBSECTION=Svitkovac
 DESCRIPTION=Svitkovac
 
-
 [typedef t_svitkovac]
 
 ON=@userDCLICK
-if (cont!=src.findlayer(layer_pack))&&(src.isgm==0)
+if (!src.backpack_contains(<uid>)) && (src.isgm==0)
   src.sysmessage("Svitkovac musis mit v batohu!")
   return 1
 endif
@@ -104,7 +103,10 @@ DIALOG d_scroll_case2
 RETURN 1
 
 ON=@TARGON_ITEM
-if (src.targ.type!=020)&&(src.targ.type!=t_scroll)&&(src.targ.type!=t_customspell_scroll)
+IF (src.targ.topobj!=src)&&(src.isgm==0)
+  src.sysmessage("Svitek musis mit v batohu!")
+  return 1
+elseif (src.targ.type!=020)&&(src.targ.type!=t_scroll)&&(src.targ.type!=t_customspell_scroll)
   src.sysmessage("Toto neni svitek!")
   target("Uloz dalsi svitek?")
 else 
@@ -407,7 +409,7 @@ f_scroll_case_remove(<fixnumber(<argtxt(0)>)>)
 
 //* f_scroll_case_remove
 [function f_scroll_case_remove]
-if (cont!=src.findlayer(layer_pack))&&(src.isgm==0)
+if (!src.backpack_contains(<uid>)) && (src.isgm==0)
   src.sysmessage("Svitkovac musis mit v batohu!")
   return 1
 endif
@@ -417,22 +419,22 @@ arg(wanted,<eval <args>>)
 
 // maximum amount of items is 65535, then the amount overflows
 // and some scrolls may be lost.
-if (arg(wanted)>60000)
+if (arg(wanted) > 60000)
   arg(wanted,60000)
 endif
-if (arg(scrolls)<arg(wanted))
+if (arg(scrolls) < arg(wanted))
  arg(wanted,<arg(scrolls)>)
 endif
-if (arg(wanted)<=0)
+if (arg(wanted) <= 0)
  src.sysmessage Cislo musi byt vetsi nez 0.
  return 1
 endif
 if (<src.tag.dynamdialog> < 96)  //kvoli customscrollom
   src.newitem=<findres(spell,<src.tag(dynamdialog)>).scrollitem>
 else
-  if (<src.tag.dynamdialog>==101)  //frostbolt
+  if (<src.tag.dynamdialog> == 101)  //frostbolt
     src.newitem=i_customscroll_frostbolt
-  elseif (<src.tag.dynamdialog>==104)  //manashield
+  elseif (<src.tag.dynamdialog> == 104)  //manashield
     src.newitem=i_customscroll_manashield
   endif
 endif
@@ -557,7 +559,7 @@ on=35
   dialog(d_scroll_case2)
 
 on=@anybutton
-if (cont!=src.findlayer(layer_pack))&&(src.isgm==0)
+if (!src.backpack_contains(<uid>)) && (src.isgm==0)
   src.sysmessage("Svitkovac musis mit v batohu!")
   return 1
 endif
