@@ -34,6 +34,7 @@ lastnew.more1=<def_playerBooster_value[<arg(boostId)>]>
 lastnew.equip
 lastnew.timer=<eval <def_playerBooster_duration[<arg(boostId)>]>*3600> // duration in hours
 f_playerBooster_decreaseBoostLink(<arg(BoosterMemory)>,<argv(0)>)
+accmsg("pouzil Booster <def_playerBooster_description[<arg(boostId)>]> na pozici <p> (<region.name>)")
 
 /////////////////////
 // B O O S T E R S //
