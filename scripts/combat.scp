@@ -218,7 +218,7 @@ else //utok na playera
     act.damagecust_MvP(<arg(celk_dam)>,<hval tag(weapflag)<tag(mi_weapflags)>>,<eval tag(piercing)+typedef.tag(piercing)>)
   endif
 endif
-if (var(ubrano)) && !(var(dodged))
+if (wasHarmed)
   if (poisoning)
     f_poisoning_Trigger(<act>)
   endif
@@ -293,36 +293,6 @@ var(ubrano,<eval ((arg(utok)*(1000-(arg(obrana)/nastaveni_global_MvP_armorfactor
 var(ubrano,<eval ((var(ubrano)*{<nastaveni_global_MvP_randomfactor>})+500)/1000>)
 var(damage_flags,<hval(argv(1))>)
 damage_final(<src>)
-
-[function f_thief_applyrebound]
-if !(<src.isplayer>)
-  if (<var(is_physical)>)
-    if (<eval tag(ra_thief_rebound)>)
-      if (holdsOneHand(i_kryss,01401))
-        arg(chance,100)
-      elseif (holdsOneHand(i_scimitar,013B6))
-        arg(chance,50)
-      elseif (holdsOneHand(i_cutlass,01441))
-        arg(chance,150)
-      else
-        return 0
-      endif
-      arg(chance,<eval <arg(chance)>+<eval <tag(ra_thief_rebound)>*5>>)
-      if (<eval tag(vigilance)>)
-        arg(chance,<eval <arg(chance)>*<eval 10+<tag(ra_thief_defstance)>>>)
-      else
-        arg(chance,<eval <arg(chance)>*10>)
-      endif
-      if (chance(<arg(chance)>,4))
-        src.damage_noresponse(<var(ubrano)>,<var(damage_flags)>,<uid>)
-        var(ubrano,0)
-        classmessage("Odrazil jsi uder!")
-        return 1
-      endif
-    endif
-  endif
-endif
-return 0
 
 [function f_dmgFinal_applyReactiveAR]
 if (flag_reactive)   //edited by heck - kolko absorbuje a vrati zavisi na nastaveni a armoru (tag.armorCount)
@@ -412,6 +382,36 @@ if (src.npc)
       classmessage("<sex(Uhnul,Uhnula)> jsi uderu.")
       return 1
     endif
+    if (f_thief_rebound)
+      return 1
+    endif
+  endif
+endif
+return 0
+
+[function f_thief_rebound]
+if (<eval tag(ra_thief_rebound)>)
+  if (holdsOneHand(i_kryss,01401))
+    arg(chance,100)
+  elseif (holdsOneHand(i_scimitar,013B6))
+    arg(chance,50)
+  elseif (holdsOneHand(i_cutlass,01441))
+    arg(chance,150)
+  else
+    return 0
+  endif
+  arg(chance,<eval <arg(chance)>+<eval <tag(ra_thief_rebound)>*5>>)
+  if (<eval tag(vigilance)>)
+    arg(chance,<eval <arg(chance)>*<eval 10+<tag(ra_thief_defstance)>>>)
+  else
+    arg(chance,<eval <arg(chance)>*10>)
+  endif
+  if (chance(<arg(chance)>,4))
+    var(dodged,1)
+    src.damage_noresponse(<var(ubrano)>,<var(damage_flags)>,<uid>)
+    var(ubrano,0)
+    classmessage("<sex(Odrazil,Odrazila)> jsi uder!")
+    return 1
   endif
 endif
 return 0
@@ -436,7 +436,7 @@ src=<argv(0)> // this helps in custom damage calls
 trigger(@beforegetswing)
 var(ubrano,<handleresists(<var(ubrano)>,<hval var(damage_flags)>)>)
 if !(var(reflected)) // this is NOT a reflected strike
-  if (physicaldodge) // first of all - try to AVOID the punch!
+  if (physicaldodge) // first of all - try to AVOID the punch completely!
     src.trigger(@afterswing) //we need physical dodge variables here
     return 1 //target was not hit -> no need to trigger aftergetswing
   endif
@@ -459,7 +459,6 @@ f_dmgFinal_MvM_minimalDMG
 f_dmgFinal_PvX_minimalDMG
 
 if (<var(ubrano)> > 0)
-  f_thief_applyrebound
   f_dmgFinal_applyReactiveAR
   f_addAllFightsForChar(<src>)
   dmgHits(<var(ubrano)>)
