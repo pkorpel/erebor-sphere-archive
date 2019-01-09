@@ -401,6 +401,11 @@ f_scroll_case_remove(<fixnumber(<argtxt(0)>)>)
 
 //* f_scroll_case_remove
 [function f_scroll_case_remove]
+if (topobj.uid!=src.uid)&&(src.isgm==0)
+  src.sysmessage Svitkovac musis mit v batohu!
+  return 1
+endif
+
 arg(scrolls,<tag(scroll[<src.tag.dynamdialog>])>)
 arg(wanted,<eval <args>>)
 
@@ -550,16 +555,13 @@ if (topobj.uid!=src.uid)&&(src.isgm==0)
   src.sysmessage Svitkovac musis mit v batohu!
   return 1
 endif
+
 if (<argn>==18) //pridat
   target
 endif
 
 if (<argn>==19) //vybrat (1 z kazdeho)
   arg(u,1)
-  if (topobj.uid!=src.uid)&&(src.isgm==0)
-    src.sysmessage Svitkovac musis mit v batohu!
-    return 1
-  endif
 
   while (arg(u)<71)
     if (<eval <safe.tag(scroll[arg(u)])>>)
@@ -572,10 +574,6 @@ if (<argn>==19) //vybrat (1 z kazdeho)
 endif
 
 if (<argn> > 0) && (<argn> < 17)  //vyberanie
-  if (topobj.uid!=src.uid)&&(src.isgm==0)
-    src.sysmessage Svitkovac musis mit v batohu!
-    return 1
-  endif
   src.tag.dynamdialog=<src.tag.dynamdialog>+<argn>  //ulozime to co budeme vyberat
   dialog(d_scroll_case2_remove)
 endif
