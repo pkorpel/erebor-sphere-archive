@@ -1,5 +1,76 @@
 [defnames scroll_case]
-maxscrolls	999
+maxscrolls	999999
+svitkovac_spell_shortcut[1] "Clumsy"
+svitkovac_spell_shortcut[2] "Create Food"
+svitkovac_spell_shortcut[3] "Feeblemind"
+svitkovac_spell_shortcut[4] "Heal"
+svitkovac_spell_shortcut[5] "Magic Arrow"
+svitkovac_spell_shortcut[6] "Night Sight"
+svitkovac_spell_shortcut[7] "Reactive Armor"
+svitkovac_spell_shortcut[8] "Weaken"
+svitkovac_spell_shortcut[9] "Agility"
+svitkovac_spell_shortcut[10] "Cunning"
+svitkovac_spell_shortcut[11] "Cure"
+svitkovac_spell_shortcut[12] "Harm"
+svitkovac_spell_shortcut[13] "Magic Trap"
+svitkovac_spell_shortcut[14] "Magic Untrap"
+svitkovac_spell_shortcut[15] "Protection"
+svitkovac_spell_shortcut[16] "Strength"
+svitkovac_spell_shortcut[17] "Bless"
+svitkovac_spell_shortcut[18] "Fireball"
+svitkovac_spell_shortcut[19] "Magic Lock"
+svitkovac_spell_shortcut[20] "Poison"
+svitkovac_spell_shortcut[21] "Telekinesis"
+svitkovac_spell_shortcut[22] "Teleport"
+svitkovac_spell_shortcut[23] "Unlock"
+svitkovac_spell_shortcut[24] "Stone Wall"
+svitkovac_spell_shortcut[25] "Arch Cure"
+svitkovac_spell_shortcut[26] "Arch Protection"
+svitkovac_spell_shortcut[27] "Curse"
+svitkovac_spell_shortcut[28] "Fire Field"
+svitkovac_spell_shortcut[29] "Greater Heal"
+svitkovac_spell_shortcut[30] "Lightning"
+svitkovac_spell_shortcut[31] "Mana Drain"
+svitkovac_spell_shortcut[32] "Recall"
+svitkovac_spell_shortcut[33] "Blade Spirit"
+svitkovac_spell_shortcut[34] "Dispel Field"
+svitkovac_spell_shortcut[35] "Incognito"
+svitkovac_spell_shortcut[36] "Reflection"
+svitkovac_spell_shortcut[37] "Mind Blast"
+svitkovac_spell_shortcut[38] "Paralyze"
+svitkovac_spell_shortcut[39] "Poison Field"
+svitkovac_spell_shortcut[40] "Summon"
+svitkovac_spell_shortcut[41] "Dispel"
+svitkovac_spell_shortcut[42] "Energy Bolt"
+svitkovac_spell_shortcut[43] "Explosion"
+svitkovac_spell_shortcut[44] "Invisibility"
+svitkovac_spell_shortcut[45] "Mark"
+svitkovac_spell_shortcut[46] "Mass Curse"
+svitkovac_spell_shortcut[47] "Paralyze Field"
+svitkovac_spell_shortcut[48] "Reveal"
+svitkovac_spell_shortcut[49] "Chain Lightning"
+svitkovac_spell_shortcut[50] "Energy Field"
+svitkovac_spell_shortcut[51] "Flame Strike"
+svitkovac_spell_shortcut[52] "Gate Travel"
+svitkovac_spell_shortcut[53] "Mana Vampire"
+svitkovac_spell_shortcut[54] "Mass Dispel"
+svitkovac_spell_shortcut[55] "Meteor Swarm"
+svitkovac_spell_shortcut[56] "Polymorph"
+svitkovac_spell_shortcut[57] "Earthquake"
+svitkovac_spell_shortcut[58] "Energy Vortex"
+svitkovac_spell_shortcut[59] "Resurrection"
+svitkovac_spell_shortcut[60] "Air Eleme."
+svitkovac_spell_shortcut[61] "Daemon"
+svitkovac_spell_shortcut[62] "Earth Elem."
+svitkovac_spell_shortcut[63] "Fire Elem."
+svitkovac_spell_shortcut[64] "Water Elem."
+svitkovac_spell_shortcut[65] "Summon Undead"
+svitkovac_spell_shortcut[66] "Animate Dead"
+svitkovac_spell_shortcut[67] "Bone Armor"
+svitkovac_spell_shortcut[68] "Light"
+svitkovac_spell_shortcut[69] "Fire Bolt"
+svitkovac_spell_shortcut[101] "Frost Bolt"
+svitkovac_spell_shortcut[104] "Mana Shield"
 
 [ITEMDEF i_scroll_case]
 ID=i_spellbook
@@ -18,26 +89,26 @@ CATEGORY=Svitkovac
 SUBSECTION=Svitkovac
 DESCRIPTION=Svitkovac
 
-
-//ATTR=04
-
 [typedef t_svitkovac]
+
 ON=@userDCLICK
-//if !(f_checkrightsmes(<itemlevel>))
-  SRC.SOUND=85
-  src.tag(dynamdialog,0)
-  DIALOG d_scroll_case2
-//endif
+if (!src.backpack_contains(<uid>)) && (src.isgm==0)
+  src.sysmessage("Svitkovac musis mit v batohu!")
+  return 1
+endif
+
+SRC.SOUND=85
+src.tag(dynamdialog,0)
+DIALOG d_scroll_case2
 RETURN 1
 
-
 ON=@TARGON_ITEM
-IF (src.targ.topobj.uid!=src.uid)&&(src.isgm==0)
-  src.sysmessage Svitek musis mit v batohu!
+IF (src.targ.topobj!=src)&&(src.isgm==0)
+  src.sysmessage("Svitek musis mit v batohu!")
   return 1
 elseif (src.targ.type!=020)&&(src.targ.type!=t_scroll)&&(src.targ.type!=t_customspell_scroll)
-  src.sysmessage Toto neni svitek!
-  DIALOG d_scroll_case2
+  src.sysmessage("Toto neni svitek!")
+  target("Uloz dalsi svitek?")
 else 
   arg(amount,<SRC.TARG.AMOUNT>)
   arg(inbook,<eval <safe.TAG(scroll[<src.targ.morex>])>>)
@@ -47,8 +118,9 @@ else
     arg(taken,<arg(free)>)
   endif
   TAG(scroll[<src.targ.morex>],<eval arg(inbook)+arg(taken)>)
+  src.sysmessage("Svitek <src.targ.name> ulozen do svitkovace.")
   src.targ.consume(<arg(taken)>)
-  target Uloz dalsi svitek?
+  target("Uloz dalsi svitek")
 endif
 return 1
 
@@ -66,6 +138,13 @@ return 0
 else
 return -1
 endif
+
+[function f_svitkovac_formatAmount]
+if (<argv(0)> > 999)
+  return"<eval <argv(0)>/1000>k"
+endif
+
+return <argv(0)>
 
 [DIALOG d_scroll_case]
 100, 100
@@ -316,9 +395,9 @@ textentry  40 83 250 20 32 0 3
 button 40 120 249 248 1 0 2//okay
 
 [dialog d_scroll_case_remove text]
-<?findres(spell,<src.tag(dynamdialog)>).name?>
+<?svitkovac_spell_shortcut[<src.tag(dynamdialog)>)]?>
 Kolik svitku odebrat??
-Vsechny
+Vsechny (max 60.000)
 1 //5
 
 [dialog d_scroll_case_remove button]
@@ -330,21 +409,32 @@ f_scroll_case_remove(<fixnumber(<argtxt(0)>)>)
 
 //* f_scroll_case_remove
 [function f_scroll_case_remove]
+if (!src.backpack_contains(<uid>)) && (src.isgm==0)
+  src.sysmessage("Svitkovac musis mit v batohu!")
+  return 1
+endif
+
 arg(scrolls,<tag(scroll[<src.tag.dynamdialog>])>)
 arg(wanted,<eval <args>>)
-if (arg(scrolls)<arg(wanted))
+
+// maximum amount of items is 65535, then the amount overflows
+// and some scrolls may be lost.
+if (arg(wanted) > 60000)
+  arg(wanted,60000)
+endif
+if (arg(scrolls) < arg(wanted))
  arg(wanted,<arg(scrolls)>)
 endif
-if (arg(wanted)<=0)
+if (arg(wanted) <= 0)
  src.sysmessage Cislo musi byt vetsi nez 0.
  return 1
 endif
 if (<src.tag.dynamdialog> < 96)  //kvoli customscrollom
   src.newitem=<findres(spell,<src.tag(dynamdialog)>).scrollitem>
 else
-  if (<src.tag.dynamdialog>==101)  //frostbolt
+  if (<src.tag.dynamdialog> == 101)  //frostbolt
     src.newitem=i_customscroll_frostbolt
-  elseif (<src.tag.dynamdialog>==104)  //manashield
+  elseif (<src.tag.dynamdialog> == 104)  //manashield
     src.newitem=i_customscroll_manashield
   endif
 endif
@@ -369,7 +459,7 @@ argo.gumppic(115,50,58)
 argo.gumppic(130,50,58)
 argo.gumppic(140,50,59)
 
-argo.gumppic(200,50,57)//ciara hore napravo
+argo.gumppic(193,50,57)//ciara hore napravo
 argo.gumppic(220,50,58)
 argo.gumppic(235,50,58)
 argo.gumppic(250,50,58)
@@ -378,8 +468,8 @@ argo.gumppic(280,50,58)
 argo.gumppic(295,50,58)
 argo.gumppic(305,50,59)
 
-argo.button(320,38,4033,4033,1,0,19) //vybrat z kazdeho 1
-argo.button(150,38,4033,4033,1,0,18) //pridat
+argo.button(305,38,4033,4033,1,0,19) //vybrat z kazdeho 1
+argo.button(140,38,4033,4033,1,0,18) //pridat
 
 argo.button(40,185,2225,2225,1,0,30) //1st - 8th circle buttons
 argo.button(77,185,2226,2226,1,0,30)
@@ -390,40 +480,47 @@ argo.button(243,185,2230,2230,1,0,32)
 argo.button(279,185,2231,2231,1,0,33)
 argo.button(316,185,2232,2232,1,0,33)
 
+
 argo.button(0,15,02635,02635,1,0,34)  //necro
 argo.button(0,40,02634,02634,1,0,35)  //other
 
-argo.texta(32,15,0,"Nekro")
-argo.texta(32,38,0,"Jine")
-argo.texta(110,38,1300,"Pridat")
-argo.texta(280,38,1300,"Vybrat")
+argo.setText(argo.newTextLine,"Nekro")
+argo.newHtmlGump(35,15,400,20,0)
+argo.setText(argo.newTextLine,"Jine")
+argo.newHtmlGump(35,38,400,20,0)
+
+argo.setText(argo.newTextLine,"Pridat")
+argo.newHtmlGump(102,35,400,20,0)
+argo.setText(argo.newTextLine,"Vybrat")
+argo.newHtmlGump(262,35,400,20,0)
 
 if (<src.tag.dynamdialog> < 64)
-  argo.texta(90,12,1300,"<?eval (<src.tag(dynamdialog)>/8)+1)?>. Kruh")
-  argo.texta(250,12,1300,"<?eval (<src.tag(dynamdialog)>/8)+2)?>. Kruh")
+  argo.setText(argo.newTextLine,"<?eval (<src.tag(dynamdialog)>/8)+1)?>. Kruh")
+  argo.newHtmlGump(90,14,400,20,0)
+
+  argo.setText(argo.newTextLine,"<?eval (<src.tag(dynamdialog)>/8)+2)?>. Kruh")
+  argo.newHtmlGump(250,14,400,20,0)
 else 
   if (<src.tag.dynamdialog> < 80)
-    argo.texta(90,12,1300,"Nekro")
+    argo.setText(argo.newTextLine,"Nekro")
+    argo.newHtmlGump(90,12,400,20,0)
   else
-    argo.texta(90,12,1300,"Jine")
+    argo.setText(argo.newTextLine,"Jine")
+    argo.newHtmlGump(90,12,400,20,0)
   endif
 endif
-
 arg(ii,<src.tag.dynamdialog>+1)
 arg(yy,0)
 arg(xx,35)
 while (<arg(ii)> <= <src.tag.dynamdialog>+16) 
   if (<safe.TAG(scroll[<arg(ii)>])>)
     argo.button(<arg(xx)>,<eval 65+<arg(yy)>*15>,2103,2104,1,0,<eval(<arg(ii)>-<src.tag.dynamdialog>)>) // buttony 1-16
-    argo.texta(<arg(xx)>+15,<eval 60+<arg(yy)>*15>,0,<?safe.TAG(scroll[<arg(ii)>])?>)
-    if (<arg(ii)> < 96) //kvoli customspellom
-      argo.texta(<arg(xx)>+45,<eval 60+<arg(yy)>*15>,0,<?findres(spell,<arg(ii)>).name?>)
-    else
-      if (<arg(ii)>==101)//frostbolt
-        argo.texta(<arg(xx)>+45,<eval 60+<arg(yy)>*15>,0,"Frost Bolt")
-      elseif (<arg(ii)>==104)//manashield
-        argo.texta(<arg(xx)>+45,<eval 60+<arg(yy)>*15>,0,"Mana Shield")
-      endif
+    argo.setText(argo.newTextLine,<f_svitkovac_formatAmount(<safe.TAG(scroll[<arg(ii)>])>)>)
+    argo.newHtmlGump(<arg(xx)>+12,<eval 60+<arg(yy)>*15>,400,20,0)
+
+    if (<arg(ii)>)
+      argo.setText(argo.newTextLine,<?svitkovac_spell_shortcut[<arg(ii)>]?>)
+      argo.newHtmlGump(<arg(xx)>+48,<eval 60+<arg(yy)>*15>,400,20,0)
     endif
     arg(yy,#+1)
   endif
@@ -462,12 +559,18 @@ on=35
   dialog(d_scroll_case2)
 
 on=@anybutton
+if (!src.backpack_contains(<uid>)) && (src.isgm==0)
+  src.sysmessage("Svitkovac musis mit v batohu!")
+  return 1
+endif
+
 if (<argn>==18) //pridat
   target
 endif
 
 if (<argn>==19) //vybrat (1 z kazdeho)
   arg(u,1)
+
   while (arg(u)<71)
     if (<eval <safe.tag(scroll[arg(u)])>>)
       src.newitem <findres(spell,arg(u)).scrollitem>
@@ -502,9 +605,9 @@ argo.textentry(40,83,250,20,32,0,3)
 argo.button(40,120,249,248,1,0,2)//okay
 
 [dialog d_scroll_case2_remove text]
-<?findres(spell,<arg(scroll)>).name?> ( <?safe.TAG(scroll[<arg(scroll)>])?> )
+<?svitkovac_spell_shortcut[<arg(scroll)>)]?> ( <?safe.TAG(scroll[<arg(scroll)>])?> )
 Kolik svitku odebrat?
-Vsechny
+Vsechny (max 60k)
 1
 
 [dialog d_scroll_case2_remove button]

@@ -6827,6 +6827,21 @@ else //the item bag is laying on the ground
   argv(0).p=<p>
 endif
 
+[function contains]
+if (argv(0).isitem)
+  if (argv(0).cont == uid)
+    return 1
+  else
+    if (argv(0).cont)
+      return <contains(<argv(0).cont>)>
+    endif
+  endif
+endif
+
+return 0
+
+[function backpack_contains]
+return <findlayer(layer_pack).contains(<argv(0)>)>
 
 //this typedef should have defined:
 //   tag.
