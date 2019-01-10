@@ -115,7 +115,7 @@ if !(src.f_check_tag_realm)
   endif
   if (src.flag_dead)
 	  if (distance<5)
-  		src.dospell_final(59,1000)
+  		src.resurrect_player
   	endif
   endif
 endif
@@ -128,7 +128,7 @@ if (src.tag(realm)<0)
 endif
 if (src.flag_dead)
   if (srccanseelos)
-    src.dospell_final(59,1000)
+    src.resurrect_player
   endif
 endif
 

@@ -9891,9 +9891,9 @@ if (src.flag_dead)
     return 0
   endif
 	if (distance<5)
-    src.sysmessage("Duchove poutniku jez se obnovi do stavu predeslemu obtiznemu boji.")
-    src.accmsg("se ozivil u Ress Krize (<uid>) na pozici <p>")
-		src.dospell_final(59,1000)
+      src.sysmessage("Duchove poutniku jez se obnovi do stavu predeslemu obtiznemu boji.")
+      src.accmsg("se ozivil u Ress Krize (<uid>) na pozici <p>")
+      src.resurrect_player
 	endif
 else
   src.sysmessage("Artefakt, jenz mrtve k zivotu dokaze privezt.")

@@ -1066,17 +1066,18 @@ else
 endif
 
 [function manaleech_sum]
-return <eval <eval tag(ra_manaleech)/2>+tag(mi_manaleech)>
+return <eval tag(ra_manaleech)+<eval tag(mi_manaleech)*2>>
 [function stamleech_sum]
-return <eval <eval tag(ra_stamleech)/2>+tag(mi_stamleech)>
+return <eval tag(ra_stamleech)+<eval tag(mi_stamleech)*2>>
 [function hitsleech_sum]
-return <eval <eval tag(ra_hitsleech)/2>+tag(mi_hitsleech)>
+return <eval tag(ra_hitsleech)+<eval tag(mi_hitsleech)*2>>
+
 [function manaregen_sum]
-return <eval <eval tag(ra_manareg)/2>+tag(mi_manareg)>
+return <eval tag(ra_manareg)+<eval tag(mi_manareg)*2>>
 [function stamregen_sum]
-return <eval <eval tag(ra_stamreg)/2>+tag(mi_stamreg)>
+return <eval tag(ra_stamreg)+<eval tag(mi_stamreg)*2>>
 [function hitsregen_sum]
-return <eval <eval tag(ra_hitsreg)/2>+tag(mi_hitsreg)>
+return <eval tag(ra_hitsreg)+<eval tag(mi_hitsreg)*2>>
 
 [itemdef i_ra_regen]
 ID=i_memory
@@ -1094,7 +1095,8 @@ if !(cont)
 endif
 timer=<morex>
 if (<cont.flags>&statf_dead)
-  return 0
+  remove
+  return 1
 endif
 if (cont.hits) //kdyz uz je na nule, mel by umrit, a ne regenerovat.
   arg(regen_hits,<cont.hitsregen_sum>*<morex>)
@@ -1108,18 +1110,36 @@ if (arg(regen_hits)==0)&&(arg(regen_mana)==0)&&(arg(regen_stam)==0)
   remove
   return 1
 endif
-if (<more>==10)
+
+if (<eval tag(regendividier)> == 0)
+  arg(regen_hits,<eval (arg(regen_hits)/2)+(arg(regen_hits)%2)>)
+  arg(regen_mana,<eval (arg(regen_mana)/2)+(arg(regen_mana)%2)>)
+  arg(regen_stam,<eval (arg(regen_stam)/2)+(arg(regen_stam)%2)>)
+else
+  arg(regen_hits,<eval (arg(regen_hits)/2)>)
+  arg(regen_mana,<eval (arg(regen_mana)/2)>)
+  arg(regen_stam,<eval (arg(regen_stam)/2)>)
+endif
+
+if (<more>==9)
+  more=0
+
   arg(datmana,<eval arg(regen_mana)-tag(zbytmana)>)
   arg(dathits,<eval arg(regen_hits)-tag(zbythits)>)
   arg(datstam,<eval arg(regen_stam)-tag(zbytstam)>)
-  more=0
-elseif (<more><10)&&(1<<more>)
+  if (<eval tag(regendividier)> == 1)
+    tag(regendividier,0)
+  else
+    tag(regendividier,1)
+  endif
+elseif (<more><9)&&(1<<more>)
   arg(datmana,<eval (arg(regen_mana)-tag(zbytmana))/(11-more)>)
   arg(dathits,<eval (arg(regen_hits)-tag(zbythits))/(11-more)>)
   arg(datstam,<eval (arg(regen_stam)-tag(zbytstam))/(11-more)>)
   tag(zbytmana,<eval tag(zbytmana)+arg(datmana)>)
   tag(zbythits,<eval tag(zbythits)+arg(dathits)>)
   tag(zbytstam,<eval tag(zbytstam)+arg(datstam)>)
+  more=<more>+1
 else
   arg(datmana,<eval (arg(regen_mana))/10>)
   arg(dathits,<eval (arg(regen_hits))/10>)
@@ -1127,11 +1147,11 @@ else
   tag(zbytmana,<arg(datmana)>)
   tag(zbythits,<arg(dathits)>)
   tag(zbytstam,<arg(datstam)>)
+  more=<more>+1
 endif
 cont.changestatpoint(hits,<arg(dathits)>)
 cont.changestatpoint(mana,<arg(datmana)>)
 cont.changestatpoint(stam,<arg(datstam)>)
-more=<more>+1
 return 1
 
 on=@userdclick
