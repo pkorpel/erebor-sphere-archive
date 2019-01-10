@@ -152,6 +152,10 @@ if (npc)&&(flag_invul==1)&&(!isvendor)
   invul=0
 endif
 
+[function resurrect_player]
+spelleffect(s_resurrection,1000)
+regenrefresh
+
 [function redeedship]
 if (src.isdead)
   src.redMessage("Musis byt nazivu.")

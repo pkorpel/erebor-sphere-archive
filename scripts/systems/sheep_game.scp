@@ -1002,7 +1002,7 @@ on=@equip
 timer=6
 
 ON=@timer
-cont.spelleffect(59,1000)
+cont.resurrect_player
 remove
 
 [itemdef i_sheep_game_gate_out]

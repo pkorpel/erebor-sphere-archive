@@ -44,7 +44,7 @@ if ( <cont> )
     TIMER=1
     return 1
   else
-    cont.spelleffect(59,1000)
+    cont.resurrect_player
     cont.go <cont.tag(murdoc)>
     cont.tag.remove(murdoc)
     cont.events -e_murdoc_general_pvp
@@ -466,7 +466,7 @@ if (<eval findUID(<arg(memory)>).tag(dmgValuesCount)> > 0)
 endif
 
 findUID(<arg(memory)>).f_customLink_add(<var(ubrano)>,dmgValue)
-arg(vysat,<eval (var(ubrano)*hitsleech_sum*nastaveni_ability_leechpower)/100000>)
+arg(vysat,<eval (var(ubrano)*hitsleech_sum*nastaveni_ability_leechpower)/200000>)
 findUID(<arg(memory)>).f_customLink_add(<arg(vysat)>,leechMax)
 if (<arg(vysat)> > <eval nastaveni_hitsleech_max>)
   arg(vysat,<eval nastaveni_hitsleech_max>)
@@ -551,7 +551,7 @@ if (<eval findUID(<arg(memory)>).tag(dmgValuesCount)> > 0)
 endif
 
 findUID(<arg(memory)>).f_customLink_add(<var(ubrano)>,dmgValue)
-arg(vysat,<eval (var(ubrano)*stamleech_sum*nastaveni_ability_leechpower)/100000>)
+arg(vysat,<eval (var(ubrano)*stamleech_sum*nastaveni_ability_leechpower)/200000>)
 findUID(<arg(memory)>).f_customLink_add(<arg(vysat)>,leechMax)
 if (arg(vysat))
   if (arg(vysat)>var(swingedchar).stamina)
@@ -642,7 +642,7 @@ if (<eval findUID(<arg(memory)>).tag(dmgValuesCount)> > 0)
 endif
 
 findUID(<arg(memory)>).f_customLink_add(<var(ubrano)>,dmgValue)
-arg(vysat,<eval (var(ubrano)*manaleech_sum*nastaveni_ability_leechpower)/100000>)
+arg(vysat,<eval (var(ubrano)*manaleech_sum*nastaveni_ability_leechpower)/200000>)
 findUID(<arg(memory)>).f_customLink_add(<arg(vysat)>,leechMax)
 arg(vysatReduced,0)
 if (var(swingedchar).npc)

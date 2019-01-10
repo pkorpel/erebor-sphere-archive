@@ -1068,7 +1068,7 @@ return 1
 [Function resurrection]
 if (region.tag(arena)) && (<flags>&statf_dead)
   if (memoryfindtype(01000).link.UID.AGE>30)
-    spelleffect(59,1000)
+    resurrect_player
     return 0
   endif
   return 0
@@ -1099,7 +1099,7 @@ if ( (<eval(tag.ra_selfres)>*45) < <rand(1001)> )
   return 0
 else
   tag(priest_next_selfres,<eval serv.time+nastaveni_ability_resurrectiondelay_succes>)
-  spelleffect(59,1000)
+  resurrect_player
   findid(i_svice_zivota_lit).remove
   if (<eval <tag(ra_selfres_hp)> >==0)
     hits=3
@@ -4926,7 +4926,7 @@ if (flag_dead)
           return 1
         endif
       endif
-      spelleffect(59,1000)
+      resurrect_player
       hits=<eval((<maxhits>*10)/100)>//10%
       mana=<eval((<maxmana>*10)/100)>
       stam=<eval((<maxstam>*10)/100)>

@@ -291,6 +291,10 @@ else
     events=+e_spelleffect
   endif
   <arg(spelldefname)>.effect(<arg(storeeffect)>)
+
+  if ((<argv(0)> == s_resurrection) && (!isDead))
+    regenrefresh
+  endif
 endif
 
 [function f_spellchecklos] //
