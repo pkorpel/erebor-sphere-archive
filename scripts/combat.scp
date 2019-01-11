@@ -373,23 +373,100 @@ if (src.isplayer)
   endif
 endif
 
-[function physicaldodge]
-if (src.npc)
-  if (var(is_physical))
-    if (<eval <eval tag(ra_weapdodge)>*nastaveni_ability_pvMdodge> > {0 999})
-      var(ubrano,0)
-      var(dodged,1)
-      classmessage("<sex(Uhnul,Uhnula)> jsi uderu.")
-      return 1
-    endif
-    if (f_thief_rebound)
-      return 1
-    endif
+////////////////////////////////////
+//  D M G  F i n a l   D O D G E  //
+////////////////////////////////////
+
+// the abilities are ORDERED, so that the most valuable abilities come first (reflex before block etc.)
+[function f_dmgFinal_dodge]
+if (!var(is_physical))
+  return 0
+endif
+
+// prioritized abilities
+
+if (f_dmgFinal_thief_rebound)
+  return 1
+endif
+
+// magical abilities
+
+if (src.isfighting_melee)
+  if (f_dmgFinal_melee_reflex)
+    return 1
   endif
+  if (f_dmgFinal_melee_block)
+    return 1
+  endif
+elseif (src.isfighting_ranged)
+  if (f_dmgFinal_ranged_reflex)
+    return 1
+  endif
+  if (f_dmgFinal_ranged_block)
+    return 1
+  endif
+endif
+
+// non-prioritized abilities
+
+if (f_dmgFinal_phys_dodge)
+  return 1
 endif
 return 0
 
-[function f_thief_rebound]
+
+///////////////////////////////////////////
+//  D o d g i n g   a l g o r i t h m s  //
+
+// M A G I C A L
+
+[function f_dmgFinal_melee_reflex]
+if (!isEvent(e_meleereflex))
+  return
+endif
+if (tag(mi_meleereflex)>{0 99})
+  src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
+  classmessage("Uder magicky odrazen")
+  src.redmessage("Uder magicky odrazen")
+endif
+
+[function f_dmgFinal_melee_block]
+if (!isEvent(e_meleeblock))
+  return
+endif
+arg(random,<eval({0 99})>)
+if (tag(mi_meleeblock) ><arg(random)>)
+  classmessage("Uder magicky zastaven")
+  src.redmessage("Uder magicky zastaven")
+endif
+
+[function f_dmgFinal_ranged_reflex]
+if (!isEvent(e_rangedreflex))
+  return
+endif
+arg(random,<eval({0 99})>)
+if (tag(mi_rangedreflex)><arg(random)>)
+  src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
+  classmessage("Uder magicky odrazen")
+  src.redmessage("Uder magicky odrazen")
+endif
+
+[function f_dmgFinal_ranged_block]
+if (!isEvent(e_rangedblock))
+  return
+endif
+arg(random,<eval({0 99})>)
+if (tag(mi_rangedblock)><arg(random)>)
+  classmessage("Uder magicky zastaven")
+  src.redmessage("Uder magicky zastaven")
+endif
+
+// P L A Y E R   A B I L I T I E S
+
+[function f_dmgFinal_thief_rebound]
+if (!src.npc)
+  return 0
+endif
 if (<eval tag(ra_thief_rebound)>)
   if (holdsOneHand(i_kryss,01401))
     arg(chance,100)
@@ -407,14 +484,25 @@ if (<eval tag(ra_thief_rebound)>)
     arg(chance,<eval <arg(chance)>*10>)
   endif
   if (chance(<arg(chance)>,4))
-    var(dodged,1)
     src.damage_noresponse(<var(ubrano)>,<var(damage_flags)>,<uid>)
-    var(ubrano,0)
     classmessage("<sex(Odrazil,Odrazila)> jsi uder!")
     return 1
   endif
 endif
 return 0
+
+[function f_dmgFinal_phys_dodge]
+if (!src.npc)
+  return 0
+endif
+if (<eval <eval tag(ra_weapdodge)>*nastaveni_ability_pvMdodge> > {0 999})
+  classmessage("<sex(Uhnul,Uhnula)> jsi uderu.")
+  return 1
+endif
+return 0
+
+//////////////////////////////////////////////////////////
+
 
 //supprot function, tells, whether the last attacked target
 //was successfully hit (ie the damage was done)
@@ -436,7 +524,9 @@ src=<argv(0)> // this helps in custom damage calls
 trigger(@beforegetswing)
 var(ubrano,<handleresists(<var(ubrano)>,<hval var(damage_flags)>)>)
 if !(var(reflected)) // this is NOT a reflected strike
-  if (physicaldodge) // first of all - try to AVOID the punch completely!
+  if (f_dmgFinal_dodge) // first of all - try to AVOID the punch completely!
+    var(dodged,1)
+    var(ubrano,0)
     src.trigger(@afterswing) //we need physical dodge variables here
     return 1 //target was not hit -> no need to trigger aftergetswing
   endif
