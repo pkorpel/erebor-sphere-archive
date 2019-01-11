@@ -72,6 +72,16 @@ svitkovac_spell_shortcut[69] "Fire Bolt"
 svitkovac_spell_shortcut[101] "Frost Bolt"
 svitkovac_spell_shortcut[104] "Mana Shield"
 
+[function svitkovac_canUse]
+if (isgm == 0)
+  if (!f_canseelos(<argv(0)>)) || (distancefrom(<argv(0)>) > 4)
+    src.sysmessage("Nedosahnes na svitkovac.")
+    return 0
+  endif
+endif
+
+return 1
+
 [ITEMDEF i_scroll_case]
 ID=i_spellbook
 RESOURCES=10 i_scroll_blank,15 I_LOG_obsidian, 10 i_gem_diamond
@@ -92,8 +102,7 @@ DESCRIPTION=Svitkovac
 [typedef t_svitkovac]
 
 ON=@userDCLICK
-if (!src.backpack_contains(<uid>)) && (src.isgm==0)
-  src.sysmessage("Svitkovac musis mit v batohu!")
+if (!src.svitkovac_canUse(<uid>))
   return 1
 endif
 
@@ -409,8 +418,7 @@ f_scroll_case_remove(<fixnumber(<argtxt(0)>)>)
 
 //* f_scroll_case_remove
 [function f_scroll_case_remove]
-if (!src.backpack_contains(<uid>)) && (src.isgm==0)
-  src.sysmessage("Svitkovac musis mit v batohu!")
+if (!src.svitkovac_canUse(<uid>))
   return 1
 endif
 
@@ -559,8 +567,7 @@ on=35
   dialog(d_scroll_case2)
 
 on=@anybutton
-if (!src.backpack_contains(<uid>)) && (src.isgm==0)
-  src.sysmessage("Svitkovac musis mit v batohu!")
+if (!src.svitkovac_canUse(<uid>))
   return 1
 endif
 

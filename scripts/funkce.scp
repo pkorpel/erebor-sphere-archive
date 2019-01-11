@@ -6847,6 +6847,9 @@ return 0
 [function backpack_contains]
 return <findlayer(layer_pack).contains(<argv(0)>)>
 
+[function bankbox_contains]
+return <findlayer(layer_bankbox).contains(<argv(0)>)>
+
 //this typedef should have defined:
 //   tag.
 [typedef t_efectedByPickAxe]
