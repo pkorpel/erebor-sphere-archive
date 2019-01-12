@@ -6739,37 +6739,57 @@ return <arg(armorCount)>
 
 [function armorCountLogIn]//pri logine to spocita armorCount -> je to novy tag tak aby s tym neboli problemy // ak to bude niekto menit tak mente rovnako aj tie cisla vo funkcii returnArmorByLayer (tie nasobitele)
 arg(countedArmor,0)
+arg(lastLayer,0)
 if (<findlayer(layer_hand2)>)
   if (findlayer(layer_hand2).type==t_shield)
     arg(countedArmor,#+(<findlayer(layer_pants).typedef.tdata1>))
+    arg(lastLayer,layer_hand2)
   endif
 endif
 if (<findlayer(layer_pants)>)
   if (findlayer(layer_pants).type==t_armor) || (findlayer(layer_pants).type==t_armor_leather)
     arg(countedArmor,#+(3*<findlayer(layer_pants).typedef.tdata1>))
+    arg(lastLayer,layer_pants)
   endif
 endif
 if (<findlayer(layer_helm)>)
   if (findlayer(layer_helm).type==t_armor) || (findlayer(layer_helm).type==t_armor_leather)
     arg(countedArmor,#+(2*<findlayer(layer_helm).typedef.tdata1>))
+    arg(lastLayer,layer_helm)
   endif
 endif
 if (<findlayer(layer_gloves)>)
   if (findlayer(layer_gloves).type==t_armor) || (findlayer(layer_gloves).type==t_armor_leather)
     arg(countedArmor,#+(<findlayer(layer_chest).typedef.tdata1>))
+    arg(lastLayer,layer_gloves)
   endif
 endif
 if (<findlayer(layer_chest)>)
   if (findlayer(layer_chest).type==t_armor) || (findlayer(layer_chest).type==t_armor_leather)
     arg(countedArmor,#+(4*<findlayer(layer_chest).typedef.tdata1>))
+    arg(lastLayer,layer_chest)
   endif
 endif
 if (<findlayer(layer_arms)>)
   if (findlayer(layer_arms).type==t_armor) || (findlayer(layer_arms).type==t_armor_leather)
+    arg(lastLayer,layer_arms)
     arg(countedArmor,#+(2*<findlayer(layer_arms).typedef.tdata1>))
   endif
 endif
 tag.armorCount=<arg(countedArmor)>
+
+// Fix armor value sent to a client - Injection makes it more visible and wrong number here
+// confuses players.
+// Armor is not stored in the save file and it is recalculated only after equiping an item or casting a spell affecting armor.
+// Doesn't work for a player that is logged as first after Sphere start.
+if (arg(lastLayer))
+  arg(lastLayerItem,<findlayer(<arg(lastLayer)>)>)
+  if (f_player_canEquip(<arg(lastLayerItem)>))
+    finduid(<arg(lastLayerItem)>).drop
+    finduid(<arg(lastLayerItem)>).equip
+  endif
+endif
+
 return 1
 
 [defnames regy_defs]

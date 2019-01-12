@@ -164,7 +164,7 @@ if (layer>0)
  tag.onlineminutes=<eval tag.onlineminutes>+1
 else
  p=<link.p>
- src=<serv.clientsenum(1)> //prostì nìkdo :), aby se objevily ohnì
+ src=<serv.clientsenum(1)> //prostÄ› nÄ›kdo :), aby se objevily ohnÄ›
  trigger(dropon_ground)
 endif
 return 1
@@ -282,7 +282,7 @@ if (layer>0)
  tag.onlineminutes=<eval tag.onlineminutes>+1
 else
  p=<link.p>
- src=<serv.clientsenum(1)> //prostì nìkdo :), aby se objevily ohnì
+ src=<serv.clientsenum(1)> //prostÄ› nÄ›kdo :), aby se objevily ohnÄ›
  trigger(dropon_ground)
 endif
 return 1
@@ -724,23 +724,23 @@ return 1
 [function f_player_canEquip_war]
 if (isGM)
   return 1
-elseif (act.isarmor)
-  if !(act.isbone)
+elseif (argv(0).isarmor)
+  if !(argv(0).isbone)
     return 1
   endif
-elseif (act.isshield)
-  if (act.typedef.tdata3==armortype_plate) || (act.dispid==i_shield_heater)
+elseif (argv(0).isshield)
+  if (argv(0).typedef.tdata3==armortype_plate) || (argv(0).dispid==i_shield_heater)
     return 1
   endif
 else
-  if (act.typedef.dispid==i_scimitar)
-  elseif (act.typedef.dispid==i_cutlass)
-  elseif (act.typedef.dispid==i_kryss)
-  elseif (act.typedef.dispid==i_hammer_pick)
-  elseif (act.typedef.dispid==i_mace)
-  elseif (act.typedef.dispid==i_maul)
-  elseif (act.typedef.dispid==i_war_fork)
-  elseif (act.isbow)
+  if (argv(0).typedef.dispid==i_scimitar)
+  elseif (argv(0).typedef.dispid==i_cutlass)
+  elseif (argv(0).typedef.dispid==i_kryss)
+  elseif (argv(0).typedef.dispid==i_hammer_pick)
+  elseif (argv(0).typedef.dispid==i_mace)
+  elseif (argv(0).typedef.dispid==i_maul)
+  elseif (argv(0).typedef.dispid==i_war_fork)
+  elseif (argv(0).isbow)
   else
     return 1
   endif
@@ -753,21 +753,21 @@ return 0
 [function f_player_canEquip_necro]
 if (isGM)
   return 1
-elseif (act.isshield)
-elseif (act.isarmor)||(act.isshield)
-  if (act.isplate)
-  elseif (act.ischain)
-  elseif (act.isring)
-  elseif (act.isstudded)
-  elseif (act.isleather)
+elseif (argv(0).isshield)
+elseif (argv(0).isarmor)||(argv(0).isshield)
+  if (argv(0).isplate)
+  elseif (argv(0).ischain)
+  elseif (argv(0).isring)
+  elseif (argv(0).isstudded)
+  elseif (argv(0).isleather)
   else
     return 1
   endif
-elseif (act.isweapon)
-  if (act.isfencing)
-  elseif (act.issword)
-  elseif (act.ismace)
-  elseif (act.isbow)
+elseif (argv(0).isweapon)
+  if (argv(0).isfencing)
+  elseif (argv(0).issword)
+  elseif (argv(0).ismace)
+  elseif (argv(0).isbow)
   else
     return 1
   endif
@@ -782,20 +782,20 @@ return 0
 [function f_player_canEquip_mystik]
 if (isGM)
   return 1
-elseif (act.canbeweapon)
-  if (act.isstaff)
+elseif (argv(0).canbeweapon)
+  if (argv(0).isstaff)
     return 1
-  elseif (!act.isweapon)
+  elseif (!argv(0).isweapon)
     return 1
-  elseif (act.typedef.dispid==i_dagger)||(act.id==i_knife_skinning)
+  elseif (argv(0).typedef.dispid==i_dagger)||(argv(0).id==i_knife_skinning)
     return 1
-  elseif (act.typedef.dispid==i_hatchet)||(act.typedef.dispid==i_pickaxe)
+  elseif (argv(0).typedef.dispid==i_hatchet)||(argv(0).typedef.dispid==i_pickaxe)
     return 1
   endif
-elseif (act.isarmor)||(act.isshield)
-  if (act.isplate)
-  elseif (act.isring)
-  elseif (act.ischain)
+elseif (argv(0).isarmor)||(argv(0).isshield)
+  if (argv(0).isplate)
+  elseif (argv(0).isring)
+  elseif (argv(0).ischain)
   else
     return 1
   endif
@@ -810,20 +810,20 @@ return 0
 [function f_player_canEquip_mag]
 if (isGM)
   return 1
-elseif (act.isshield)
-elseif (act.isarmor)||(act.isshield)
-  if (act.isbone)
-  elseif (act.isplate)
-  elseif (act.ischain)
-  elseif (act.isring)
+elseif (argv(0).isshield)
+elseif (argv(0).isarmor)||(argv(0).isshield)
+  if (argv(0).isbone)
+  elseif (argv(0).isplate)
+  elseif (argv(0).ischain)
+  elseif (argv(0).isring)
   else
     return 1
   endif
-elseif (act.canbeweapon)
-  if (act.isfencing)
-  elseif (act.issword)
-  elseif (act.ismace)
-  elseif (act.isbow)
+elseif (argv(0).canbeweapon)
+  if (argv(0).isfencing)
+  elseif (argv(0).issword)
+  elseif (argv(0).ismace)
+  elseif (argv(0).isbow)
   else
     return 1
   endif
@@ -838,18 +838,18 @@ return 0
 [function f_player_canEquip_priest]
 if (isGM)
   return 1
-elseif (act.isarmor)
-  if !(act.isbone)
+elseif (argv(0).isarmor)
+  if !(argv(0).isbone)
     return 1
   endif
-elseif (act.isshield)
-  if (act.typedef.tdata3==armortype_plate)
+elseif (argv(0).isshield)
+  if (argv(0).typedef.tdata3==armortype_plate)
     return 1
   endif
-elseif (act.canbeweapon)
-  if (act.isfencing)
-  elseif (act.issword)
-  elseif (act.isbow)
+elseif (argv(0).canbeweapon)
+  if (argv(0).isfencing)
+  elseif (argv(0).issword)
+  elseif (argv(0).isbow)
   else
     return 1
   endif
@@ -864,18 +864,18 @@ return 0
 [function f_player_canEquip_shaman]
 if (isGM)
   return 1
-elseif (act.canbeweapon)
-  if (act.isshield) && (act.isplate)
-  elseif (act.isfencing)
-  elseif (act.issword)
-  elseif (act.isbow)
-  elseif (act.istwohandmace)
+elseif (argv(0).canbeweapon)
+  if (argv(0).isshield) && (argv(0).isplate)
+  elseif (argv(0).isfencing)
+  elseif (argv(0).issword)
+  elseif (argv(0).isbow)
+  elseif (argv(0).istwohandmace)
   else
     return 1
   endif
-elseif (act.isarmor)
-  if (act.isplate)
-  elseif (act.isbone)
+elseif (argv(0).isarmor)
+  if (argv(0).isplate)
+  elseif (argv(0).isbone)
   else
     return 1
   endif
@@ -890,20 +890,20 @@ return 0
 [function f_player_canEquip_ranger]
 if (isGM)
   return 1
-elseif (act.isarmor)||(act.isshield)
-  if (act.isbone)
-  //elseif (act.ischain)
-  elseif (act.isplate)
+elseif (argv(0).isarmor)||(argv(0).isshield)
+  if (argv(0).isbone)
+  //elseif (argv(0).ischain)
+  elseif (argv(0).isplate)
   else
     return 1
   endif
-elseif (act.canbeweapon)
-  if (act.ismace)
-  elseif (act.isstaff)
-  elseif (act.issword)
-  elseif (act.typedef.dispid==i_scimitar)
-  elseif (act.typedef.dispid==i_cutlass)
-  elseif (act.typedef.dispid==i_kryss)
+elseif (argv(0).canbeweapon)
+  if (argv(0).ismace)
+  elseif (argv(0).isstaff)
+  elseif (argv(0).issword)
+  elseif (argv(0).typedef.dispid==i_scimitar)
+  elseif (argv(0).typedef.dispid==i_cutlass)
+  elseif (argv(0).typedef.dispid==i_kryss)
   else
     return 1
   endif
@@ -918,20 +918,20 @@ return 0
 [function f_player_canEquip_thief]
 if (isGM)
   return 1
-elseif (act.isarmor)||(act.isshield)
-  if (act.isbone)
-  elseif (act.isplate)
-  elseif (act.isring)
+elseif (argv(0).isarmor)||(argv(0).isshield)
+  if (argv(0).isbone)
+  elseif (argv(0).isplate)
+  elseif (argv(0).isring)
   else
     return 1
   endif
-elseif (act.canbeweapon)
-  if (act.issword)
-  elseif (act.ismace)
-  elseif (act.isstaff) 
-  elseif (act.typedef.dispid==i_crossbow_heavy)
-  elseif (act.isfencing)
-    if (act.typedef.dispid==i_war_fork)||(act.typedef.dispid==i_scimitar)||(act.typedef.dispid==i_cutlass)||(act.typedef.dispid==i_dagger)||(act.typedef.dispid==i_kryss)||(act.typedef.dispid==i_katana)||(act.id==i_knife_skinning)
+elseif (argv(0).canbeweapon)
+  if (argv(0).issword)
+  elseif (argv(0).ismace)
+  elseif (argv(0).isstaff) 
+  elseif (argv(0).typedef.dispid==i_crossbow_heavy)
+  elseif (argv(0).isfencing)
+    if (argv(0).typedef.dispid==i_war_fork)||(argv(0).typedef.dispid==i_scimitar)||(argv(0).typedef.dispid==i_cutlass)||(argv(0).typedef.dispid==i_dagger)||(argv(0).typedef.dispid==i_kryss)||(argv(0).typedef.dispid==i_katana)||(argv(0).id==i_knife_skinning)
       return 1
     endif
   else
@@ -948,13 +948,13 @@ return 0
 [function f_player_canEquip_craft]
 if (isGM)
   return 1
-elseif (act.typedef.dispid==i_scimitar)
-elseif (act.typedef.dispid==i_cutlass)
-elseif (act.typedef.dispid==i_kryss)
-elseif (act.typedef.dispid==i_hammer_pick)
-elseif (act.typedef.dispid==i_mace)
-elseif (act.typedef.dispid==i_maul)
-elseif (act.typedef.dispid==i_war_fork)
+elseif (argv(0).typedef.dispid==i_scimitar)
+elseif (argv(0).typedef.dispid==i_cutlass)
+elseif (argv(0).typedef.dispid==i_kryss)
+elseif (argv(0).typedef.dispid==i_hammer_pick)
+elseif (argv(0).typedef.dispid==i_mace)
+elseif (argv(0).typedef.dispid==i_maul)
+elseif (argv(0).typedef.dispid==i_war_fork)
 else
   return 1
 endif
