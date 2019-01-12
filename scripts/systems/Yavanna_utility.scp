@@ -169,6 +169,27 @@ elseif (<ThisYear> == <argv(0)>)
 endif
 return 0
 
+//tests whether the current date exceeded the timestamp passed in arguments
+[function isTimeDateExceeded]
+if (<argvcount> == 0)
+  return 0
+endif
+arg(ThisYear,<getYear>)
+arg(ThisMonth,<getMonth>)
+arg(ThisDay,<getDay>)
+if (<ThisYear> > <argv(0)>)
+  return 1
+elseif (<ThisYear> == <argv(0)>)
+  if (<ThisMonth> > <eval argv(1)>)
+    return 1
+  elseif (<ThisMonth> == <eval argv(1)>)
+    if (<ThisDay> > <eval argv(2)>)
+      return 1
+    endif
+  endif
+endif
+return 0
+
 [function timeMonthLaterSH]
 return"<argv(0)>:<argv(1)>:<argv(2)>:<argv(3)>:<argv(4)>"
 

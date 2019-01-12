@@ -35,7 +35,7 @@ return 1
 
 [function qtagshow]
 if (<argvcount> == 0)
-  findid(i_quest_rune).tag(dump)
+  findid(i_quest_rune).tag.dump
 else
   Src.SysMessage("Hodnota quest tagu -<argv(0)>- :")
   arg(tag_value,"<qtag(<argv(0)>)>")

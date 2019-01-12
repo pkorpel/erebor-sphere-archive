@@ -1,0 +1,143 @@
+///////////////////////////////////////////////////
+//              P H A S E    T A G               //
+///////////////////////////////////////////////////
+
+// Phase tag is deleted whenever a global VAR(event_phase) is incremented.
+[function phaseTag]
+if !(ischar)
+  return""
+endif
+arg(MyQuestRune,<f_phaseTag_getRune>)
+if (<argvcount> >= 2) //zapisujeme novy phaseTag
+  MyQuestRune.tag(<argv(0)>,"<argv(1)>")
+  if (<argvcount> == 3) // mame odkaz na quest dialog -> budeme reportovat postup v questu
+    f_questMenu_reportQuest(<argv(2)>)
+  endif
+  return""
+elseif (<argvcount> == 1) // cteme phaseTag
+  if (strlen(<MyQuestRune.tag(<argv(0)>)>))
+    return<MyQuestRune.tag(<argv(0)>)>
+  else
+    return""
+  endif
+endif
+RedMessage("spatny pocet argumentu")
+Return""
+
+[function phaseTagRemove]
+arg(MyQuestRune,<f_phaseTag_getRune>)
+MyQuestRune.tag.remove.(<argv(0)>)
+return 1
+
+[function phaseTagShow]
+if (<argvcount> == 0)
+  f_phaseTag_getRune.tag.dump
+else
+  src.SysMessage("Hodnota phase tagu -<argv(0)>- :")
+  arg(tag_value,"<phaseTag(<argv(0)>)>")
+  if !(strcmpi(<tag_value>,00))
+    src.RedMessage("Tag je nulovy.")
+  else
+    src.RedMessage("<tag_value>")
+  endif
+endif
+
+///////////////////////////////////////////////
+//              D A Y    T A G               //
+///////////////////////////////////////////////
+// Phase tag is deleted whenever a global VAR(event_phase) is incremented.
+[function dayTag]
+if !(ischar)
+  return""
+endif
+arg(MyQuestRune,<f_dayTag_getRune>)
+if (<argvcount> >= 2) //zapisujeme dayTag
+  if (<argvcount> == 3) // the tag will be deleted the day after it's completed
+    MyQuestRune.tag(<argv(0)>,"1,<getYear>:<getMonth>:<getDay>,<argv(1)>")
+  else
+    MyQuestRune.tag(<argv(0)>,"0,0,<argv(1)>")
+  endif
+  return""
+elseif (<argvcount> == 1) // cteme dayTag
+  if (strlen(<MyQuestRune.tag(<argv(0)>)>))
+    if (<return_nth(1,<MyQuestRune.tag(<argv(0)>)>)>) // the tag should be deleted the day after it was set
+      arg(dateExceeded,<return_nth(2,<MyQuestRune.tag(<argv(0)>)>)>)
+      if (<isTimeDateExceeded(<StrGetTok("<arg(dateExceeded)>",0,":")>,<StrGetTok("<arg(dateExceeded)>",1,":")>,<StrGetTok("<arg(dateExceeded)>",2,":")>)>)
+        MyQuestRune.tag.remove.(<argv(0)>)
+        return""
+      endif
+    endif
+    return<return_nth(3,<MyQuestRune.tag(<argv(0)>)>)>
+  endif
+  return""
+endif
+RedMessage("spatny pocet argumentu")
+Return""
+
+[function dayTagRemove]
+arg(MyQuestRune,<f_dayTag_getRune>)
+MyQuestRune.tag.remove.(<argv(0)>)
+return 1
+
+[function dayTagShow]
+if (<argvcount> == 0)
+  f_dayTag_getRune.tag.dump
+else
+  src.SysMessage("Hodnota day tagu -<argv(0)>- :")
+  arg(tag_value,"<dayTag(<argv(0)>)>")
+  if !(strcmpi(<tag_value>,00))
+    src.RedMessage("Tag je nulovy.")
+  else
+    src.RedMessage("<tag_value>")
+  endif
+endif
+
+////////////////////////////////////////////////
+//      h e l p e r    f u n c t i o n s      //
+////////////////////////////////////////////////
+[function f_phaseTag_getRune]
+arg(MyQuestRune,<findid(i_phase_tag_rune)>)
+if (<hval arg(MyQuestRune)>)
+  if (MyQuestRune.tag(createdPhase) != <eval var(event_phase)>)
+    MyQuestRune.remove
+  else
+    return<arg(MyQuestRune)>
+  endif
+endif
+newequip(i_phase_tag_rune)
+return<lastnew>
+
+[function f_dayTag_getRune] // argv(0) : boolean - 0 ~ won't delete;
+arg(MyQuestRune,<findid(i_day_tag_rune)>)
+if (<hval arg(MyQuestRune)>)
+  if (MyQuestRune.tag(createdPhase) != <eval var(event_phase)>)
+    MyQuestRune.remove
+  else
+    return<arg(MyQuestRune)>
+  endif
+endif
+newequip(i_day_tag_rune)
+return<lastnew>
+
+
+[itemdef i_phase_tag_rune]
+id=i_rune_marker
+name=Runa na phase tagy
+type=t_eq_script
+
+on=@create
+attr=094 // invis, nb, nevermove
+color=0989
+tag(createdPhase,<eval var(event_phase)>)
+
+[itemdef i_day_tag_rune]
+id=i_rune_marker
+name=Runa na day tagy
+type=t_eq_script
+
+on=@create
+attr=094 // invis, nb, nevermove
+color=0989
+tag(createdPhase,<eval var(event_phase)>)
+
+[eof]

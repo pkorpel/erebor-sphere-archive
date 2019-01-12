@@ -121,7 +121,7 @@ return<arg(position)>
 [function f_pvpLeague_checkExpiration]
 if (!strlen(<var(pvpLeague)>))
   f_pvpLeague_initSeason
-elseif (<isTimeExceeded(<pvpLeague.tag(endYear)>,<pvpLeague.tag(endMonth)>,<pvpLeague.tag(endDay)>)>)
+elseif (<isTimeDateExceeded(<pvpLeague.tag(endYear)>,<pvpLeague.tag(endMonth)>,<pvpLeague.tag(endDay)>)>)
   f_pvpLeague_initSeason
 endif
 return

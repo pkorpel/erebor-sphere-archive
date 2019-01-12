@@ -101,10 +101,10 @@ statistikapovolani
 ON=0 Rychle cestovani: prikaz .gomap
 gomap
 
-ON=0 Kolik je itemu v sektoru?
+ON=0 Kolik je itemu v regionu?
 var(count,0)
 region.sectors(raisecount)
-smsg v tomto sectoru se nachazi <count> itemu
+smsg v tomto regionu se nachazi <count> itemu
 
 ON=0 Informace o spawnech v okoli
 spawncount
