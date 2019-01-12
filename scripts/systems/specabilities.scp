@@ -1299,96 +1299,114 @@ tag(maskkills,"")
 //src.sysMessage(hazim na: <src.act.name>)
 reveal
 findlayer(2).unEquip
-if (charExists(<act>))
-  if (src.profession==class_thief)
-    arg(myTarget,<act>)  //safe backup of variable <act>
-    if !(safe.findid(i_kudla))
-      sysMessage("Nemas u sebe ani jeden vrhaci nuz!")
-      return 1
-    else
-      arg(kudla,<findid(i_kudla)>)
-      //if (strlen(<findUID(<arg(kudla)>).tag(jed_sila)>)) // je otraveno
-      //  arg(isPoisoned,1)
-      //else
-      //  arg(isPoisoned,0)
-      //endif
-    endif
-    if (myTarget.srccombatLOS)
-      if (<myTarget.distance> < <eval (<nastaveni_throw_dist>+<eval tag(rangearrowdst)>)>)
-        //sysMessage(dist cile: <myTarget.distance>, thrdist: <nastaveni_throw_dist>)
-        if (tag(nextthrow) < <serv.time>)
-          tag(nextthrow,<eval (<serv.time> + <nastaveni_throw_delay>)>)
-          ANIM 11
-          SOUND 0145 
-          myTarget.effect(0,9598,5,0,0)
-          if ({0 10000} < <eval (tag(ra_throwing)*950)>)  //pri plny abilite 95% sance zasahu
-            myTarget.sound(sex(0436,0325))
-            classMessage("<sex(Zasahl,Zasahla)> jsi cil")
-            if (myTarget.isplayer) //isplayer a nema immune
-              if (<findid(i_delayer_longrange)>)
-                if (<eval findid(i_delayer_longrange).tag(fizzrecall)> > <serv.time>)
-                  myTarget.fizzmagictravel
-                endif
-              endif
-              if (<eval myTarget.tag(kudlyimmune)> < <serv.time>)
-                arg(myTargetStamina_before,<myTarget.stamina>)
-                //arg(myTargetARInfluence,<myTarget.CountArmorByMaterial>/4)
-                arg(myTargetARInfluence,<eval myTarget.tag(armorCount)>/4) //tag.myTarget might not have tag(armorCount) for some funny reason, so it is better to evaluate it (that the formula will be complete ie. <0/4> instead of simple </4>)
-                arg(myTargetStamina_take,<eval((<myTarget.maxstam>*(<nastaveni_throw_staminaloss>-<arg(myTargetARInfluence)>))/100)>)  //pokus to rozpisat do viac krokov, mozno to pomoze?
-                arg(myTargetStamina,<eval(<myTarget.stamina>-<myTargetStamina_take>)>)
-                if (<eval myTarget.tag(mi_rangedblock)> > {1 99})
-                  myTarget.classMessage("Dyka byla magicky zablokovana.")
-                elseif (<eval myTarget.tag(mi_rangedreflex)> > {1 99})
-                  myTarget.classMessage("Dyka byla magicky odrazena.")
-                  stamina=(<stamina>*4)/5
-                elseif (arg(myTargetStamina)>0)
-                  myTarget.stamina=<myTargetStamina>
-                else
-                  myTarget.paralyze(5)
-                  myTarget.stamina=0
-                endif
-                myTarget.tag(kudlyimmune,<eval <serv.time>+<nastaveni_throw_immune>>)
-                //finduid(02B7C73).delayedmessage("<?servertime?> | <?src.name?> (<?src.uid?>) hodil do <?myTarget.name?> (<?myTarget.uid?>) [stamina pred: <?arg(myTargetStamina_before)?>] -> [stamina po: <?myTarget.stamina?>] | [arg(myTargetStamina_take)=<?arg(myTargetStamina_take)?>]")
-                if (<nastaveni_throw_staminaloss_thief> != 00) //ak to vobec je
-                  arg(srcStaminaLoss,<eval(<distancefrom(<arg(myTarget)>)>*<nastaveni_throw_staminaloss_thief>)>)
-                  reduceStamina(<srcStaminaLoss>) // bere staminut thiefovy podla vzdialenosti od ciela (1 policko = <nastaveni> staminy)
-                endif
-              endif
-            else  //PvM
-              myTarget.reduceStamina(50) // safely decreases stamina
-              myTarget.damage_noresponse(1,dam_piercing|dam_physical|dam_god,<uid>)
-            endif
-            if (<eval {0 2}> == 2)
-              newitemsafe(i_kudla)
-              lastnew.p = <myTarget.p>
-              lastnew.timer=300
-              lastnew.attr_decay=1
-            endif
-            if (strlen(<findUID(<arg(kudla)>).tag(jed_sila)>))  //target was hit and there is still some poison on the dagger
-              if (findUID(<arg(kudla)>).f_poisoning_weapon_checkPoisoningValues)
-                myTarget.f_poison_doPoison(<uid>,<findUID(<arg(kudla)>).tag(jed_sila)>,<nastaveni_poison_<findUID(<arg(kudla)>).tag(jed_typ)>>,<findUID(<arg(kudla)>).tag(jed_typ)>)
-              endif
-            endif
-          else
-            classMessage("<sex(Minul,Minula)> jsi cil!")
-          endif
-        else 
-          classMessage("<sex(Pokusil,Pokusila)> jsi se hodit prilis rychle a dyka ti vypadla z ruky!")
-          tag(nextthrow,<eval (<serv.time> + <nastaveni_throw_delay>)>)  // znovu prodlouzime timer na hozeni. At si nezvykaj hazeni kudel spamovat!
-          newitemsafe(i_kudla)  // hodime podsebe novou kudlu + tu co mame u sebe mazem
-          lastnew.p = <p>
-          lastnew.timer=300
-          lastnew.attr_decay=1
-        endif
-        consume(1 i_kudla)
-      endif 
-    endif
-  else
-    sysMessage("Toto muze pouzit jen zlodej.")
-  endif
-else 
+if (!charExists(<act>))
   sysMessage("Nemas zadny cil.")
+  return
+elseif (src.profession!=class_thief)
+  sysMessage("Toto muze pouzit jen zlodej.")
+  return
 endif
+arg(kudla,<findid(i_kudla)>)
+if !(0<arg(kudla)>)
+  sysMessage("Nemas u sebe ani jeden vrhaci nuz!")
+  return
+endif
+arg(myDistance,<myTarget.distance>)
+if (<arg(myDistance)> >= <eval (<nastaveni_throw_dist>+<eval tag(rangearrowdst)>)>)
+  sysMessage("Cil je prilis daleko!")
+  return
+endif
+arg(myTarget,<act>)  //safe backup of variable <act>
+if (!<myTarget.srccombatLOS>)
+  sysMessage("Nevidis na cil!")
+  return
+elseif (0<nastaveni_throw_staminaloss_thief>) //pokud to vubec je
+  arg(srcStaminaLoss,<eval(<arg(myDistance)>*<nastaveni_throw_staminaloss_thief>)>)
+  if (stamina < <arg(srcStaminaLoss)>)
+    sysMessage("Nemas dost staminy!")
+    return
+  endif
+  reduceStamina(<arg(srcStaminaLoss)>) // bere staminu thiefovi podle vzdalenosti od cile (1 policko = <nastaveni> staminy)
+endif
+
+arg(poisonCheck,<kudla.f_poisoning_weapon_checkPoisoningValues>)
+if (<arg(poisonCheck)>)
+  arg(poison_pow,<kudla.tag(jed_sila)>)
+  arg(poison_type,<kudla.tag(jed_typ)>)
+endif
+consume(1 i_kudla)
+arg(nextThrow,<tag(nextthrow)>)
+tag(nextthrow,<eval (<serv.time>+<nastaveni_throw_delay>)>)  // prodlouzime timer na hazeni uz ted. At si nezvykaj hazeni kudel spamovat!
+if (arg(nextThrow) >= <serv.time>)
+  classMessage("<sex(Pokusil,Pokusila)> jsi se hodit prilis rychle a dyka ti vypadla z ruky!")
+  throw_dropDaggerAt(<uid>) // hodime podsebe novou kudlu + tu co mame u sebe mazem
+  return
+endif
+
+// throwing
+anim(11)
+sound(0145)
+myTarget.effect(0,9598,5,0,0)
+
+// rebounce
+if (<eval myTarget.tag(mi_rangedreflex)> > {1 99})
+  myTarget.classMessage("Dyka byla magicky odrazena.")
+  stamina=(<stamina>*4)/5
+  if (<eval {0 2}> == 2)
+    throw_dropDaggerAt(<uid>) // hodime podsebe novou kudlu (odrazena zpatky ke zdroji)
+  endif
+  return
+elseif (<eval {0 2}> == 2)
+  throw_dropDaggerAt(<arg(myTarget)>)
+endif
+
+// block
+if (<eval myTarget.tag(mi_rangedblock)> > {1 99})
+  myTarget.classMessage("Dyka byla magicky zablokovana.")
+  return
+elseif ({0 10000} >= <eval (tag(ra_throwing)*950)>)  //pri plny abilite 95% sance zasahu
+  classMessage("<sex(Minul,Minula)> jsi cil!")
+  return
+endif
+
+// HIT
+myTarget.sound(sex(0436,0325))
+classMessage("<sex(Zasahl,Zasahla)> jsi cil")
+if (myTarget.isplayer) //isplayer a nema immune
+  if (<eval myTarget.tag(kudlyimmune)> >= <serv.time>)
+    classMessage("Cil je jeste imunni vuci utoku kudlou!")
+    return
+  endif
+  myTarget.tag(kudlyimmune,<eval <serv.time>+<nastaveni_throw_immune>>)
+  if (<findid(i_delayer_longrange)>)
+    if (<eval findid(i_delayer_longrange).tag(fizzrecall)> > <serv.time>)
+      myTarget.fizzmagictravel
+    endif
+  endif
+  arg(myTargetARInfluence,<eval myTarget.tag(armorCount)>/4) //tag.myTarget might not have tag(armorCount) for some funny reason, so it is better to evaluate it (that the formula will be complete ie. <0/4> instead of </4>)
+  arg(myTargetStamina_take,<eval((<myTarget.maxstam>*(<nastaveni_throw_staminaloss>-<arg(myTargetARInfluence)>))/100)>)
+  arg(myTargetStamina,<eval(<myTarget.stamina>-<myTargetStamina_take>)>)
+  if (arg(myTargetStamina)>0)
+    myTarget.stamina=<myTargetStamina>
+  else
+    myTarget.paralyze(5)
+    myTarget.stamina=0
+  endif
+else  //PvM
+  myTarget.reduceStamina(50) // safely decreases stamina
+  myTarget.damage_noresponse(1,dam_piercing|dam_physical|dam_god,<uid>)
+endif
+myTarget.f_addAllFightsForChar(<uid>)
+if (<arg(poisonCheck)>)
+  myTarget.f_poison_doPoison(<uid>,<arg(poison_pow)>,<nastaveni_poison_<arg(poison_type)>>,<arg(poison_type)>)
+endif
+
+// args - obj at the position of whom the dagger should be dropped
+[function throw_dropDaggerAt]
+newitemsafe(i_kudla)
+lastnew.p=<args.p>
+lastnew.timer=300
+lastnew.attr_decay=1
 
 //voodoo
 [Function woodoo]
