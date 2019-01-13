@@ -210,6 +210,9 @@ SKILLMAKE=BLACKSMITHING 40.0, CARPENTRY 35.0
 ON=@Create
 weaponcreate(Iron)
 
+on=@equip
+src.f_weap_enforceTwoHand
+
 [ITEMDEF i_sword_broad_iron]
 NAME=iron broad sword
 ID=i_sword_broad
@@ -332,6 +335,9 @@ RESOURCES=16 i_ingot_iron, 4 I_LOG_iron
 
 ON=@Create
 weaponcreate(Iron)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage
@@ -523,6 +529,9 @@ SKILLMAKE=BLACKSMITHING 40.0, CARPENTRY 35.0
 
 ON=@Create
 weaponcreate(Iron)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage

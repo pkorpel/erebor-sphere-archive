@@ -2964,7 +2964,7 @@ on=@npckill
 on=@DrinkingPotion
 on=@afterswing
 if (action==Skill_fencing)||(tag(isstabbing))
-  arg(holdsWarFork,<holdsTwoHand(i_war_fork,01405)>)
+  arg(holdsWarFork,<holdsOneHand(i_war_fork,01405)>)
   if (tag(isstabbing))
     f_thief_backStab
   else
