@@ -1307,17 +1307,16 @@ elseif (src.profession!=class_thief)
   return
 endif
 arg(kudla,<findid(i_kudla)>)
-if !(0<arg(kudla)>)
+if !(strlen(<arg(kudla)>))
   sysMessage("Nemas u sebe ani jeden vrhaci nuz!")
   return
 endif
+arg(myTarget,<act>)  //safe backup of variable <act>
 arg(myDistance,<myTarget.distance>)
 if (<arg(myDistance)> >= <eval (<nastaveni_throw_dist>+<eval tag(rangearrowdst)>)>)
   sysMessage("Cil je prilis daleko!")
   return
-endif
-arg(myTarget,<act>)  //safe backup of variable <act>
-if (!<myTarget.srccombatLOS>)
+elseif (!<myTarget.srccombatLOS>)
   sysMessage("Nevidis na cil!")
   return
 elseif (0<nastaveni_throw_staminaloss_thief>) //pokud to vubec je
