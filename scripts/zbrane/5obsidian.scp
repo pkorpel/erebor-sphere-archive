@@ -282,6 +282,9 @@ SKILLMAKE=BLACKSMITHING 85.0, CARPENTRY 70.0
 ON=@Create
 weaponcreate(obsidian)
 
+on=@equip
+src.f_weap_enforceTwoHand
+
 [ITEMDEF i_sword_broad_obsidian]
 NAME=obsidian broad sword
 ID=i_sword_broad
@@ -403,6 +406,9 @@ RESOURCES=16 i_ingot_obsidian, 4 I_LOG_obsidian
 
 ON=@Create
 weaponcreate(obsidian)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage
@@ -597,6 +603,9 @@ SKILLMAKE=BLACKSMITHING 85.0, CARPENTRY 70.0
 
 ON=@Create
 weaponcreate(obsidian)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage

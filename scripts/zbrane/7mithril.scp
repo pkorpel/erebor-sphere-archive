@@ -269,6 +269,7 @@ weaponcreate(mithril)
 
 ON=@equip
 cont.events=+e_mithril
+src.f_weap_enforceTwoHand
 
 on=@unequip
 cont.events=-e_mithril
@@ -434,6 +435,7 @@ weaponcreate(mithril)
 
 ON=@equip
 cont.events=+e_mithril
+src.f_weap_enforceTwoHand
 
 on=@unequip
 cont.events=-e_mithril
@@ -697,6 +699,7 @@ weaponcreate(mithril)
 
 ON=@equip
 cont.events=+e_mithril
+src.f_weap_enforceTwoHand
 
 on=@unequip
 cont.events=-e_mithril

@@ -1227,12 +1227,12 @@ if (<topobj> == <src>) || (src.isgm)
 endif
 
 on=@equip
-if (typedef.layer==2)
+if (typedef.layer == 2)
   arg(index,0)
-  while (arg(index)<cont.rescount)
+  while (arg(index) < cont.rescount)
    arg(founditem,<cont.findcont(arg(index))>)
-   if (arg(founditem).layer==2)
-     if (arg(founditem)!=uid)
+   if (arg(founditem).layer == 2)
+     if (arg(founditem) != uid)
        arg(founditem).unequip
        break
      endif
@@ -1249,6 +1249,12 @@ on=@targon_ground
 if !(src.f_canReachG(<src.targp>))
   return 1
 endif
+
+[function f_weap_enforceTwoHand]
+if (flag_hasshield)
+  findlayer(layer_hand2).bounce
+endif
+temporary_null
 
 [function showbowtype_old]
 if (type==t_weapon_bow_run)
@@ -1354,10 +1360,10 @@ if (<topobj> == <src>) || (src.isgm)
 endif
 
 [typedef t_allshields]
-on=@userdclick
-safe src.findlayer(layer_hand2).bounce
-
 on=@equip
+if (src.holdsOneHand(i_war_fork,01405,i_maul,0143b,i_hammer_pick,0143d))
+  src.findlayer(layer_hand1).bounce
+endif
 src.temporary_null
 src.tag.armorCount=<eval <src.tag.armorCount>+<returnArmorByLayer(<typedef.layer>,<typedef.tdata1>)> >
 

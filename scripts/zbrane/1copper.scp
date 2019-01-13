@@ -220,6 +220,9 @@ SKILLMAKE=BLACKSMITHING 30.0, CARPENTRY 25.0
 ON=@Create
 weaponcreate(copper)
 
+on=@equip
+src.f_weap_enforceTwoHand
+
 [ITEMDEF i_sword_broad_copper]
 NAME=copper broad sword
 ID=i_sword_broad
@@ -341,6 +344,9 @@ RESOURCES=16 i_ingot_copper, 4 I_LOG_copper
 
 ON=@Create
 weaponcreate(copper)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage
@@ -533,6 +539,9 @@ SKILLMAKE=BLACKSMITHING 30.0, CARPENTRY 25.0
 
 ON=@Create
 weaponcreate(copper)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage

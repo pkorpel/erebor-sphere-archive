@@ -233,6 +233,9 @@ SKILLMAKE=BLACKSMITHING 90.0, CARPENTRY 85.0
 ON=@Create
 weaponcreate(adamantinum)
 
+on=@equip
+src.f_weap_enforceTwoHand
+
 [ITEMDEF i_sword_broad_adamantinum]
 NAME=adamantinum broad sword
 ID=i_sword_broad
@@ -354,6 +357,9 @@ RESOURCES=16 i_ingot_adamantinum, 4 I_LOG_adamantinum
 
 ON=@Create
 weaponcreate(adamantinum)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage
@@ -546,6 +552,9 @@ SKILLMAKE=BLACKSMITHING 90.0, CARPENTRY 85.0
 
 ON=@Create
 weaponcreate(adamantinum)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage

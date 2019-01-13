@@ -258,6 +258,9 @@ SKILLMAKE=BLACKSMITHING 75.0, CARPENTRY 60.0
 ON=@Create
 weaponcreate(valorite)
 
+on=@equip
+src.f_weap_enforceTwoHand
+
 [ITEMDEF i_sword_broad_valorite]
 NAME=valorite broad sword
 ID=i_sword_broad
@@ -379,6 +382,9 @@ RESOURCES=16 i_ingot_valorite, 4 I_LOG_valorite
 
 ON=@Create
 weaponcreate(valorite)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage
@@ -571,6 +577,9 @@ SKILLMAKE=BLACKSMITHING 75.0, CARPENTRY 60.0
 
 ON=@Create
 weaponcreate(valorite)
+
+on=@equip
+src.f_weap_enforceTwoHand
 
 on=@targon_item
 f_wrongBlacksmithUsage_LogMessage
