@@ -3967,16 +3967,16 @@ endwhile
 [function recallhome]
 if (<src.restest 1 i_scroll_recall>)
   safe(src.findid(i_scroll_recall).dclick)
-  act=<findid(i_rune_base).uid>
-  last //what was this ? an Error triggering call /// maybe it calls error, but it's not working without it
+  act=<findid(i_rune_base)>
+  last // fake previous target
   return 1
 else
   if (strlen(<findtype(t_spellbook)>))
     arg(mySpellbook,<findtype(t_spellbook)>)
-    if (<arg(mySpellbook).hasspell(32)>)  // has recall in spellbook ?
-      safe(cast 020)
-      act=<findid(i_rune_base).uid>
-      last //what was this ? an Error triggering call
+    if (<arg(mySpellbook).hasspell(<spell_recall>)>)
+      safe(cast <spell_recall>)
+      act=<findid(i_rune_base)>
+      last // fake previous target
       return 1
     endif
   endif
@@ -3986,16 +3986,16 @@ redMessage("Nemas u sebe recall formuli!")
 [function gatehome]
 if (<src.restest 1 i_scroll_gate_travel>)
   safe(src.findid(i_scroll_gate_travel).dclick)
-  act=<findid(i_rune_base).uid>
-  last
+  act=<findid(i_rune_base)>
+  last // fake previous target
   return 1
 else
   if (strlen(<findtype(t_spellbook)>))
     arg(mySpellbook,<findtype(t_spellbook)>)
-    if (<arg(mySpellbook).hasspell(52)>)  // has recall in spellbook ?
-      safe(cast 52)
-      act=<findid(i_rune_base).uid>
-      last
+    if (<arg(mySpellbook).hasspell(<spell_gate_travel>)>)
+      safe(cast <spell_gate_travel>)
+      act=<findid(i_rune_base)>
+      last // fake previous target
       return 1
     endif
   endif
