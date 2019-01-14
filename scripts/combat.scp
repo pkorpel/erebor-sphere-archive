@@ -422,44 +422,52 @@ return 0
 
 [function f_dmgFinal_melee_reflex]
 if (!isEvent(e_meleereflex))
-  return
+  return 0
 endif
 if (tag(mi_meleereflex)>{0 99})
   src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
   classmessage("Uder magicky odrazen")
   src.redmessage("Uder magicky odrazen")
+  return 1
 endif
+return 0
 
 [function f_dmgFinal_melee_block]
 if (!isEvent(e_meleeblock))
-  return
+  return 0
 endif
 arg(random,<eval({0 99})>)
 if (tag(mi_meleeblock) ><arg(random)>)
   classmessage("Uder magicky zastaven")
   src.redmessage("Uder magicky zastaven")
+  return 1
 endif
+return 0
 
 [function f_dmgFinal_ranged_reflex]
 if (!isEvent(e_rangedreflex))
-  return
+  return 0
 endif
 arg(random,<eval({0 99})>)
 if (tag(mi_rangedreflex)><arg(random)>)
   src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
   classmessage("Uder magicky odrazen")
   src.redmessage("Uder magicky odrazen")
+  return 1
 endif
+return 0
 
 [function f_dmgFinal_ranged_block]
 if (!isEvent(e_rangedblock))
-  return
+  return 0
 endif
 arg(random,<eval({0 99})>)
 if (tag(mi_rangedblock)><arg(random)>)
   classmessage("Uder magicky zastaven")
   src.redmessage("Uder magicky zastaven")
+  return 1
 endif
+return 0
 
 // P L A Y E R   A B I L I T I E S
 
