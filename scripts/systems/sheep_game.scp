@@ -1002,7 +1002,7 @@ on=@equip
 timer=6
 
 ON=@timer
-cont.resurrect_player
+cont.resurrect_player(<uid>)
 remove
 
 [itemdef i_sheep_game_gate_out]

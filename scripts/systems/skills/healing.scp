@@ -97,7 +97,7 @@ if (more1==0)
     cont.classmessage("<cont.sex(Ozivil,Ozivila)> jsi <link.link.Name>.")
     link.link.P=<link.P>
     src=<cont>
-    link.link.resurrect_player
+    link.link.resurrect_player(<uid>)
     link.link.sysmessage("Ozivil te <?strmid(<link.Name>,5,50)?>.")
   else
     cont.redmessage("<cont.sex(Selhal,Selhala)> jsi v ozivovani.")

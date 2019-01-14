@@ -121,7 +121,7 @@ if (<more2> > 0)
   cont.redmessage("<more2l> sec do oziveni...")
   more2=<more2>-1
 else
-  cont.resurrect_player
+  cont.resurrect_player(<uid>)
   cont.f_CTF_renew_player
   cont.f_CTF_go_start_position
   cont.giveitem(i_pet_llama)

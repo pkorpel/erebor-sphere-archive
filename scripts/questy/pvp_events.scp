@@ -31,7 +31,7 @@ else
 endif
 cont.go(<cont.tag(PvP_deathP)>)
 cont.tag.remove(PvP_deathP)
-topobj.resurrect_player
+topobj.resurrect_player(<uid>)
 arg(myJezdik,<finduid(<cont.tag(lastjezdik)>)>)
 if (arg(myJezdik).distance > 20)
   cont.sysmessage("Tve zvire je prilis daleko.")

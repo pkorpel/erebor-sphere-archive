@@ -292,8 +292,9 @@ else
   endif
   <arg(spelldefname)>.effect(<arg(storeeffect)>)
 
-  if ((<argv(0)> == s_resurrection) && (!isDead))
+  if ((<findres(spell,<argv(0)>)> == s_resurrection) && (!isDead))
     regenrefresh
+    accMsg("resurrected.")
   endif
 endif
 
