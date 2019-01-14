@@ -153,7 +153,7 @@ if (npc)&&(flag_invul==1)&&(!isvendor)
 endif
 
 [function resurrect_player]
-accMsg("resurrecting at <p> by <argv(0).name> (uid=<argv(0).uid>).")
+accMsg("resurrecting at <p> by <argv(0).name> (uid=<argv(0)>).")
 spelleffect(s_resurrection,1000)
 
 [function redeedship]
