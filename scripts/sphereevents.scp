@@ -44,7 +44,7 @@ if ( <cont> )
     TIMER=1
     return 1
   else
-    cont.resurrect_player
+    cont.resurrect_player(<uid>)
     cont.go <cont.tag(murdoc)>
     cont.tag.remove(murdoc)
     cont.events -e_murdoc_general_pvp
