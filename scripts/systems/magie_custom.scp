@@ -61,22 +61,9 @@ a_defname[43]		a_explosion
 a_explosion		43
 a_defname[69]		a_fire_bolt
 a_fire_bolt		69
+a_defname[70]		a_frost_bolt
+a_frost_bolt		70
 
-//frost bolt:
-a_frost_bolt		101
-a_defname[101]		a_frost_bolt
-a_name[101]		Frost Bolt
-a_flags[101]		csflag_TARG_CHAR|csflag_SM|csflag_evil|csflag_computed//|csflag_mass|csflag_TARG_xyz
-a_resources[101]	0
-a_wop[101]		Helca Ril Sul
-a_MANAUSE[101]		nastaveni_cs_101_manause
-a_staminause[101]	0
-a_CASTTIME[101]		nastaveni_cs_101_casttime
-a_SKILL[101]		magery
-a_req[101]		800
-a_difficulty[101]	700
-a_scrollitem[101]	i_customscroll_frostbolt
-a_mass_distance[101]	8
 
 //mass bless
 a_mass_bless		102
@@ -295,12 +282,6 @@ damagecust(<promilerange(<argv(0)>,<s_explosion.effect>)>,dam_magic|dam_fire,<re
 
 [function f_effect_a_fire_bolt]
 damagecust(<promilerange(<argv(0)>,<s_fire_bolt.effect>)>,dam_magic|dam_fire,<return_nth(3,<s_fire_bolt.effect>)>)
-
-[function f_effect_a_dispel]
-consume(1000 t_custom_dispellable)
-events -e_spelleffect
-spelleffect 41,1000
-events +e_spelleffect
 
 [function f_effect_a_mind_blast]
 arg(silenced,0)
@@ -636,7 +617,7 @@ cont.<args>(<eval cont.<args>+tag(lowed<args>)>)
 [function f_effect_a_frost_bolt]//sila, source
 EFFECT(0,03818,12,1,0)
 sound(0456)
-damagecust(<promilerange(<argv(0)>,<nastaveni_cs_101_effect>)>,dam_magic|dam_cold,<return_nth(3,<nastaveni_cs_101_effect>)>)//<argv(0)>	ut. cislo; <argv(1)>	flag; <argv(2)>	piercing
+damagecust(<promilerange(<argv(0)>,<s_frost_bolt.effect>)>,dam_magic|dam_cold,<return_nth(3,<s_frost_bolt.effect>)>)//<argv(0)>	ut. cislo; <argv(1)>	flag; <argv(2)>	piercing
 if (distancefrom(<src>) > 7)
   return 1
 endif

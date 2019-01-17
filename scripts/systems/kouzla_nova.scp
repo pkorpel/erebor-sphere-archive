@@ -46,6 +46,7 @@ if(argo.type==t_spellbook)
  endif
 endif
 
+
 [ITEMDEF i_customscroll_mass_bless]
 id=i_scroll_blank
 Name=Mass Bless Scroll

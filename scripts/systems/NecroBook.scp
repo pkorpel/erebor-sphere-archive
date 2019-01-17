@@ -24,6 +24,7 @@ color=038d
 on=@userdclick
 return <f_necrobook>
 
+
 [function f_necrobook]
 if (morex)&&(src.profession==class_necro)&&(morem)
 DIALOG d_nec
@@ -36,7 +37,7 @@ endif
 40,63
 gumppic 77 53 2220
 page 1
-button 127 61 2205 2205 1 1 7
+button 127 61 2205 2205 1 1 6
 button 398 61 2206 2206 0 2
 
 button 173 100 2299 2299 1 1 1//firebolt
@@ -49,7 +50,7 @@ gumppic 185 170 2101
 gumppic 200 170 2101
 gumppic 215 170 2101
 gumppic 230 170 2101
-text 145 190 967 <qval(<isbit(<morex>,4)>,4,0)>
+text 145 190 967 <qval(<isbit(<morex>,4)>,1,0)>
 
 button 330 100 2299 2299 1 1 2//animate
 resizepic 325 90 83 60 60
@@ -62,16 +63,15 @@ gumppic 345 170 2101
 gumppic 360 170 2101
 gumppic 375 170 2101
 gumppic 390 170 2101
-text 300 190 967 <qval(<eval <isbit(<morex>,1)>+<isbit(<more2>,26)>>==2,6,0)>
+text 300 190 967 <qval(isbit(<morex>,1),2,0)>
 
 page 2
 button 127 61 2205 2205 0 1
 button 398 61 2206 2206 0 3
 
-button 174 98 2299 2299 1 1 3//darkness
+button 172 100 2299 2299 1 1 3//frost
 resizepic 165 90 83 60 60
-tilepic 157 98 14031
-tilepic 171 106 7960
+tilepic 180 101 9007
 gumppic 140 170 2101
 gumppic 155 170 2101
 gumppic 170 170 2101
@@ -79,7 +79,7 @@ gumppic 185 170 2101
 gumppic 200 170 2101
 gumppic 215 170 2101
 gumppic 230 170 2101
-text 145 190 967 <qval(isbit(<morex>,5),5,0)>
+text 145 190 967 <qval(isbit(<morex>,5),3,0)>
 
 button 330 100 2299 2299 1 1 4//summon
 resizepic 325 90 83 60 60
@@ -91,11 +91,10 @@ gumppic 345 170 2101
 gumppic 360 170 2101
 gumppic 375 170 2101
 gumppic 390 170 2101
-text 300 190 967 <qval(isbit(<morex>,7),1,0)>
+text 300 190 967 <qval(<eval <isbit(<morex>,0)>+<isbit(<more2>,7)>>==2,4,0)>
 
 page 3
 button 127 61 2205 2205 0 2
-button 398 61 2206 2206 0 4 
 
 button 172 100 2299 2299 1 1 5//bone armor
 resizepic 165 90 83 60 60
@@ -107,9 +106,9 @@ gumppic 185 170 2101
 gumppic 200 170 2101
 gumppic 215 170 2101
 gumppic 230 170 2101
-text 145 190 967 <qval(isbit(<morex>,2),3,0)>
+text 145 190 967 <qval(isbit(<morex>,2),5,0)>
 
-button 330 100 2299 2299 1 1 6//light
+button 330 100 2299 2299 1 1 7//light
 resizepic 325 90 83 60 60
 tilepic 332 106 2594
 gumppic 300 170 2101
@@ -119,35 +118,18 @@ gumppic 345 170 2101
 gumppic 360 170 2101
 gumppic 375 170 2101
 gumppic 390 170 2101
-text 300 190 967 <qval(isbit(<morex>,3),2,0)>
+text 300 190 967 <qval(isbit(<morex>,3),6,0)>
 
-page 4
-button 127 61 2205 2205 0 3
-button 398 61 2206 2206 1 1 7
-
-
-button 172 100 2299 2299 1 1 8
-resizepic 165 90 83 60 60
-tilepic 180 101 9007
-gumppic 140 170 2101
-gumppic 155 170 2101
-gumppic 170 170 2101
-gumppic 185 170 2101
-gumppic 200 170 2101
-gumppic 215 170 2101
-gumppic 230 170 2101
-text 145 190 967 <qval(isbit(<morex>,6),7,0)>
 
 
 [dialog d_nec text]
-Neni v knize
-Summon Undead//1
-Light//2
-Bone Armor//3
-Firebolt//4
-Darkness//5
-Animate Dead//6
-Frost bolt //7
+Neni v knize    //0
+Firebolt        //1
+Animate Dead    //2
+Frost bolt      //3
+Summon Undead   //4
+Bone Armor      //5
+Light           //6
 
 [dialog d_nec button]
 onbutton=1
@@ -155,60 +137,27 @@ src.necrobolt
 onbutton=2
 src.necroanimate
 onbutton=3
-src.necroDarkness
+src.frostbolt
 onbutton=4
 src.necrosummon
 onbutton=5
 src.necroarmor
 onbutton=6
-src.necrolight
-onbutton=7
 morem=
 dclick
 morem=1
-onbutton=8
-src.f_frostbolt
-
-//necrolight
+onbutton=7
+src.necrolight
 
 
 [FUNCTION frostbolt]
-if (<src.profession>==class_necro)||(<src.profession>==class_shaman)
- stopmagery
- arg(spellbook,<findtype(t_spellbook)>)
- if (findid(i_customscroll_frostbolt))
-  findid(i_customscroll_frostbolt).dclick
-  return 1
- endif
- if (isbit(<arg(spellbook).morex>,6))
-  f_frostbolt
-  return 1
- endif
-else
- classmessage(Nesmis pouzivat toto kouzlo.)
- return 0
-endif 
-
-
-[FUNCTION f_frostbolt]
-if(<tag(manashield)>)
-  findid(i_a_mana_shield).remove
-  if(<mana> > <eval <int>/2>)
-    mana=<eval (<mana>-<eval <int>/2>)>
-  else
-    mana=0
-  endif 
-endif
-spellcast(101)
+ safe.cast(s_frost_bolt)
 
 [FUNCTION necrobolt]
  safe.cast(s_fire_bolt)
 
 [FUNCTION necroanimate]
  safe.cast(s_animate_dead)
-
-[FUNCTION necroDarkness]
- safe.cast(s_Hallucination)
 
 [FUNCTION necrosummon]
  safe.cast(s_summon_creature)
@@ -485,18 +434,23 @@ morex=69
 morey=25.0
 ATTR_MAGIC=1
 
-[itemdef i_scroll_hallucination]
-id=i_scroll_cunning
-name=Scroll of Darkness
-type=t_scroll
-RESOURCES=i_scroll_blank
-SKILLMAKE=INSCRIPTION 30.0,MAGERY 30.0
+[ITEMDEF i_scroll_frostbolt]
+id=i_scroll_blank
+Name=Frost Bolt Scroll
+RESOURCES=i_scroll_blank//, i_reag_garlic, i_reag_ginseng, i_reag_mandrake_root, i_reag_sulfur_ash
+SKILLMAKE=INSCRIPTION 75.0, MAGERY 60.0
+TYPE=t_scroll
+WEIGHT=0.1
+CATEGORY=Provisions - Alchemy & Magic
+SUBSECTION=Scrolls - Special
+DESCRIPTION=Frost Bolt Scroll
 
-on=@create
-color=0774
-morex=70
-morey=25.0
+ON=@Create
 ATTR_MAGIC=1
+MOREX=70 //cislo kouzla
+morey=25.0
+color=044d
+
 
 
 [TEMPLATE tm_reagbag]

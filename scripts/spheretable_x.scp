@@ -1003,7 +1003,7 @@ EFFECTID=0
 EFFECT=0
 DURATION=0.0
 MANAUSE=100
-SKILLREQ=MAGERY 99.0
+SKILLREQ=MAGERY 99.0                 
 
 [Spell 60]
 DEFNAME=s_summon_elem_air
@@ -1173,20 +1173,18 @@ MANAUSE=32
 SKILLREQ=MAGERY 70.0
 
 [Spell 70]
-DEFNAME=s_Hallucination
-NAME=Hallucination
-SOUND=snd_Z_END_MYSTERY1
-RUNES=WN
+DEFNAME=s_frost_bolt
+NAME=Frost Bolt
+RUNES=TUH
 CASTTIME=2.0
-////RESOURCES=i_reag_garlic,i_reag_nightshade
-RUNEITEM=i_rune_MIND_BLAST
-SCROLLITEM=i_scroll_hallucination
-FLAGS=SpELLFLAG_DIR_ANIM|SPELLFLAG_FX_TARG|spellflag_evil|spellflag_SM//SPELLFLAG_TARG_CHAR
-EFFECTID=i_fx_curse
-EFFECT=0,2,5
-DURATION=1*60.0,3*60.0
+////RESOURCES=i_reag_black_pearl,i_reag_sulfur_ash,i_reag_nightshade
+RUNEITEM=i_rune_FIREBALL
+SCROLLITEM=i_scroll_frostbolt
+FLAGS=SPELLFLAG_DIR_ANIM|spellflag_evil|spellflag_SM|spellflag_harm
+EFFECTID=0
+EFFECT=0,30
 MANAUSE=20
-SKILLREQ=MAGERY 60.0
+SKILLREQ=MAGERY 70.0
 
 // Potions are just spells that have and effect attached at the potion layer.
 // All spells and potion effects can be added to equipped items.
@@ -1330,5 +1328,6 @@ RUNEITEM=i_RUNE_ALCHEM_3
 MANAUSE=200
 SKILLREQ=MAGERY 200.0
 EFFECT=1,15
+
 
 [EOF] 

@@ -1,8 +1,8 @@
 //SPELLFLAG_TARG_OBJ
 
 [function spellskillvalue]
-if (<args><100)
-return <eval magery>
+if (<args> < 100)
+  return <eval magery>
 endif
 return <?<a_SKILL[<args>]>?>
 
@@ -662,7 +662,7 @@ else
     lastnew.equip
     timer=0
   else
-    targetg("Zamer cil.") //ostatni pripady
+    target("Zamer cil.") //ostatni pripady
   endif
 endif
 
@@ -775,7 +775,7 @@ return 1
 
 
 [function f_customspell_delayed]//argv(0)-cislo kouzla, argv(1) - cil, argv(2) - pozice (je-li)
-//src.sysMessage(src - <src.name>, kouzlo - <argv(0)>, cil - <argv(1)>, pozice - <argv(2)>)
+// src.sysMessage(src - <src.name>, kouzlo - <argv(0)>, cil - <argv(1)>, pozice - <argv(2)>)
 safe(act=<argv(1)>) //zamereni
 if (npc)
  events=-e_npccustomcasting

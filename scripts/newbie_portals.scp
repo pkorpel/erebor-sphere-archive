@@ -579,7 +579,7 @@ base_Druid_Fishing=300
 
 [DEFNAMES kouzla] //jsou to jen priklady :)
 spells_necro_0_0	0c4ee3ab5 //more1 spellbooku - prvni 4 kruhy  //revided
-spells_necro_0_1	063cb1aa //more2 spellbooku - 5-8 kruh
+spells_necro_0_1	063cb1aa  //more2 spellbooku - 5-8 kruh
 spells_necro_0_2	63       //morex spellbooku - necro kouzla
 
 spells_mag_0_0		0e8e67ab5 //revided
@@ -616,7 +616,7 @@ spells_priest_0_2	0
 
 spells_shaman_0_0	0C4284EF5 //pridan jeste poison - puvodne 0C4204Ef5
 spells_shaman_0_1	04AA1372
-spells_shaman_0_2	0
+spells_shaman_0_2	40
 
 spells_Druid_0_0	091a83438
 spells_Druid_0_1	08091a4
