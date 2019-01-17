@@ -69,7 +69,7 @@ svitkovac_spell_shortcut[66] "Animate Dead"
 svitkovac_spell_shortcut[67] "Bone Armor"
 svitkovac_spell_shortcut[68] "Light"
 svitkovac_spell_shortcut[69] "Fire Bolt"
-svitkovac_spell_shortcut[101] "Frost Bolt"
+svitkovac_spell_shortcut[70] "Frost Bolt"
 svitkovac_spell_shortcut[104] "Mana Shield"
 
 [function svitkovac_canUse]
