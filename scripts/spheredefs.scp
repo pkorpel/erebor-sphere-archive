@@ -1493,8 +1493,8 @@ spell_Summon_Undead		65
 spell_Animate_Dead		66
 spell_Bone_Armor		67
 spell_Light			68
-spell_Fire_Bolt			69
-spell_Hallucination		70	
+spell_Fire_Bolt			69     
+spell_frost_bolt		70
 spell_Stone			71
 spell_Shrink			72
 spell_Refresh			73
@@ -1585,7 +1585,7 @@ spellDescription[66]	"Animate Dead"
 spellDescription[67]	"Bone Armor"
 spellDescription[68]	"Light"
 spellDescription[69]	"Fire Bolt"
-spellDescription[70]	"Hallucination"
+spellDescription[70]	"Frostbolt"
 spellDescription[71]	"Stone"
 spellDescription[72]	"Shrink"
 spellDescription[73]	"Refresh"

@@ -457,32 +457,32 @@ Uzeraan's Mansion
 
 
 [RUNES]		//PREKLAD SLOV MOCI DO ELFSTINY BY TIM.
-Ruth 		//hnev
-Er 		//jeden,malo
-Mor 		//temny
-Curu 		//dovednost
-Dol 		//hlava
-Ruin 		//plamen
-Esgal 		//z�st�na
-Sul 		//vitr
-Anna 		//dar
-Del 		//hruza
-Heru 		//p�n
-Fuin 		//temnota
-Aina 		// svaty
-Sereg 		//krev
-Morgul 		//temna magie
-Kel 		// odejit
-Gor 		//hruza,des
-Faroth 		//pronasledovat
-Tir 		//bdit strezit
-Barad 		//vez
-Ril 		//trpit
-Beleg 		//Mohutny
-Loth 		//magick� kv�t
-Val 		//mocnost
-Kemen 		//zeme
-Fea 		//duch
+Ruth    //hnev
+Er      //jeden,malo
+Mor     //temny
+Curu    //dovednost
+Dol     //hlava
+Ruin    //plamen
+Esgal   //zastena
+Sul     //vitr
+Anna    //dar
+Del     //hruza
+Heru    //pan
+Fuin    //temnota
+Aina    // svaty
+Sereg   //krev
+Morgul  //temna magie
+Kel     // odejit
+Gor     //hruza,des
+Faroth  //pronasledovat
+Tir     //bdit strezit
+Helca   //Chlad
+Ril     //trpit
+Beleg   //Mohutny
+Loth    //magicky kvet
+Val     //mocnost
+Kemen   //zeme
+Fea     //duch
 
 
 //skilly majici ADVRATE=0fffffff maji manualni rust, rychlost je definovana v souboru skillgains.scp
