@@ -283,6 +283,12 @@ damagecust(<promilerange(<argv(0)>,<s_explosion.effect>)>,dam_magic|dam_fire,<re
 [function f_effect_a_fire_bolt]
 damagecust(<promilerange(<argv(0)>,<s_fire_bolt.effect>)>,dam_magic|dam_fire,<return_nth(3,<s_fire_bolt.effect>)>)
 
+[function f_effect_a_dispel]
+consume(1000 t_custom_dispellable)
+events -e_spelleffect
+spelleffect 41,1000
+events +e_spelleffect
+
 [function f_effect_a_mind_blast]
 arg(silenced,0)
 arg(dmged,0)
