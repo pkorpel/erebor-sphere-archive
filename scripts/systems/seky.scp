@@ -194,11 +194,11 @@ else
 endif
 
 on=@userDClick
-if (<topobj> == <src>)
+if (src.isCarrying(<uid>))
   dialog(d_cashiers_mesec,<more>)
   return 1
 else
-  src.sysMessage("Zde nelze mesec vyprazdnit.")
+  src.redMessage("Zde nelze mesec vyprazdnit.")
   return 1
 endif
 
@@ -269,7 +269,7 @@ else
 endif
 
 on=@userDClick
-if (<topobj> == <src>)
+if (src.isCarrying(<uid>))
   dialog(d_cashiers_mesec,<more>)
   return 1
 else
@@ -303,7 +303,7 @@ src.sysMessage("<src.sex Stornoval Stornovala> jsi volbu.")
 
 
 on=1
-if (<topobj> == src)
+if (src.isCarrying(<uid>))
   arg(mnyAmount,<fixNumber(<argtxt(1)>)>)
   if (<arg(mnyAmount)> >= 500) && ((<more1>-<arg(mnyAmount)>) >= 500)
     src.f_vytvor_mesec(<arg(mnyAmount)>,<cont>)
@@ -314,14 +314,14 @@ if (<topobj> == src)
       remove
     endif
   else
-    src.sysMessage("Na tuto hodnotu penize nerozdelis.")
+    src.redMessage("Na tuto hodnotu penize nerozdelis.")
   endif
 else
-  src.sysMessage("Predmet musis mit u sebe!")
+  src.redMessage("Predmet musis mit u sebe!")
 endif
 
 on=2
-if (<topobj> == <src>)
+if (src.isCarrying(<uid>))
   arg(my_nosnost,<eval 20+<eval 4*<topobj.Str>>>)
   arg(my_weight,<eval <topobj.Weight>/10>)
   arg(money_weight,<eval <more1>/500>)
@@ -347,7 +347,7 @@ if (<topobj> == <src>)
     remove
   endif
 else
-  src.sysMessage("Predmet musis mit u sebe!")
+  src.redMessage("Predmet musis mit u sebe!")
 endif
 return 1
 

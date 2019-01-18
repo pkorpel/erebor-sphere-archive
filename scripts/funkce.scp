@@ -4138,11 +4138,10 @@ else
 endif
 
 [function f_canReach] //argv(0) - the item to reach, <uid> - the source that is being tested for reach
-if (<hval argv(0).topobj> == <uid>)
-  return 1
-elseif ( (findUID(<argv(0)>).srccanseelos) && (distancefrom(<argv(0)>)<5))
-  return 1
+if (f_canseelos(<argv(0)>)) && (distancefrom(<argv(0)>) < 5)
+    return 1
 endif
+
 return 0
 
 [function f_canReachZ] // can reach item considering the Z position
@@ -4163,6 +4162,29 @@ if (f_canseelosG(<args>))
   endif
   return 1
 endif
+return 0
+
+// argv(0) an item to use
+// returns 1 when player is GM or item is in player's backpack, open bank, is in maximum distance 4 and is in line of sight
+// returns 0 when player is dead or item is in player's closed bank, is further than maximum distance 4 or is not in line of sight
+[function canUse]
+if (isGM == 1)
+  return 1
+endif
+
+if (isDead)
+  return 0
+endif
+
+return <f_canReach(<argv(0)>)>
+
+[function isCarrying]
+if (argv(0).topobj == <uid>)
+  if (canUse(<argv(0)>)) // item is not in closed bank
+    return 1
+  endif
+endif
+
 return 0
 
 [function canReachNPC] // argv(0) - NPC UID
@@ -6807,10 +6829,10 @@ tag.armorCount=<arg(countedArmor)>
 // confuses players.
 // Armor is not stored in the save file and it is recalculated only after equiping an item or casting a spell affecting armor.
 // Doesn't work for a player that is logged as first after Sphere start.
-if (arg(lastLayer))
+if (arg(lastLayer) && !isgm)
   arg(lastLayerItem,<findlayer(<arg(lastLayer)>)>)
   if (f_player_canEquip(<arg(lastLayerItem)>))
-    finduid(<arg(lastLayerItem)>).drop
+    var(nastaveni_guardian_uid).bounce(<arg(lastLayerItem)>)
     finduid(<arg(lastLayerItem)>).equip
   endif
 endif
