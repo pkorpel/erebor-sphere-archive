@@ -1,0 +1,181 @@
+// argv(0) Search distance
+// argv(1) Operation to perform on each character found in given distnace
+// Function has to be called on an character or item you want to
+// search arouned.
+// Maximum search range is 25, which is an arbitrary selected limit to
+// minimize potential performance impact. The hard limit is the
+// sector size, which is  64.
+[function foreachNearbyChar]
+return <foreachNearby(<args>,1)>
+
+// argv(0) Search distance
+// argv(1) Operation to perform on each item found in given distnace
+// Function has to be called on an character or item you want to
+// search arouned.
+// Maximum search range is 25, which is an arbitrary selected limit to
+// minimize potential performance impact. The hard limit is the
+// sector size, which is 64.
+[function foreachNearbyItem]
+return <foreachNearby(<args>,0)>
+
+[function foreachNearby]
+if (argv(0) < 25)
+  arg(distance,<eval argv(0)>)
+else
+  arg(distance,25)
+endif
+
+arg(itemFactory,<var(nastaveni_guardian_uid)>)
+arg(testitem,0)
+arg(charfun,"foreachNearby_evaluate(<arg(distance)>,<argv(1)>,<uid>)")
+
+arg(insideCenterX,<eval p_x%64>)
+arg(insideCenterY,<eval p_y%64>)
+arg(maxX,<get_mapWidth>)
+arg(maxY,<get_mapHeight>)
+
+if (<argv(2)>)
+  sector.allchars(<arg(charfun)>)
+else
+  sector.allitems(<arg(charfun)>)
+endif
+
+// north
+if (arg(insideCenterY) < arg(distance)) && (p_y > arg(distance))
+  if (!arg(testitem))
+    arg(itemFactory).newitem(i_nearby_itemmover)
+    arg(testitem,<lastnew>)
+  endif
+  arg(testitem).p=<p>
+  arg(testitem).p=<p_x> <eval p_y-arg(distance)> <p_z>
+  if (<argv(2)>)
+    arg(testitem).sector.allchars(<arg(charfun)>)
+  else
+    arg(testitem).sector.allitems(<arg(charfun)>)
+  endif
+endif
+
+// northeast
+if (arg(insideCenterY) < arg(distance)) && ((63 - arg(insideCenterX)) <= arg(distance)) && (p_x < (arg(maxX) - arg(distance))) && (p_y > arg(distance))
+  if (!arg(testitem))
+    arg(itemFactory).newitem(i_nearby_itemmover)
+    arg(testitem,<lastnew>)
+  endif
+  arg(testitem).p=<p>
+  arg(testitem).p=<eval p_x+arg(distance)> <eval p_y-arg(distance)> <p_z>
+  if (<argv(2)>)
+    arg(testitem).sector.allchars(<arg(charfun)>)
+  else
+    arg(testitem).sector.allitems(<arg(charfun)>)
+  endif
+endif
+
+// east
+if ((63 - arg(insideCenterX)) < arg(distance)) && (p_x < (arg(maxX) - arg(distance)))
+  if (!arg(testitem))
+    arg(itemFactory).newitem(i_nearby_itemmover)
+    arg(testitem,<lastnew>)
+  endif
+  arg(testitem).p=<p>
+  arg(testitem).p=<eval p_x+arg(distance)> <p_y> <p_z>
+  if (<argv(2)>)
+    arg(testitem).sector.allchars(<arg(charfun)>)
+  else
+    arg(testitem).sector.allitems(<arg(charfun)>)
+  endif
+endif
+
+// southeast
+if ((63 - arg(insideCenterX)) <= arg(distance)) && ((63 - arg(insideCenterY)) <= arg(distance)) && (p_x < (arg(maxX) - arg(distance))) && (p_y < (arg(maxY) - arg(distance)))
+  if (!arg(testitem))
+    arg(itemFactory).newitem(i_nearby_itemmover)
+    arg(testitem,<lastnew>)
+  endif
+  arg(testitem).p=<p>
+  arg(testitem).p=<eval p_x+arg(distance)> <eval p_y+arg(distance)> <p_z>
+  if (<argv(2)>)
+    arg(testitem).sector.allchars(<arg(charfun)>)
+  else
+    arg(testitem).sector.allitems(<arg(charfun)>)
+  endif
+endif
+
+// south
+if ((63 - arg(insideCenterY)) <= arg(distance)) && (p_y < (arg(maxY) - arg(distance)))
+  if (!arg(testitem))
+    arg(itemFactory).newitem(i_nearby_itemmover)
+    arg(testitem,<lastnew>)
+  endif
+  arg(testitem).p=<p>
+  arg(testitem).p=<p_x> <eval p_y+arg(distance)> <p_z>
+  if (<argv(2)>)
+    arg(testitem).sector.allchars(<arg(charfun)>)
+  else
+    arg(testitem).sector.allitems(<arg(charfun)>)
+  endif
+endif
+
+// southwest
+if ((63 - arg(insideCenterY)) <= arg(distance)) && (arg(insideCenterX) < arg(distance)) && (p_x > arg(distance)) && (p_y < (arg(maxY) - arg(distance)))
+  if (!arg(testitem))
+    arg(itemFactory).newitem(i_nearby_itemmover)
+    arg(testitem,<lastnew>)
+  endif
+  arg(testitem).p=<p>
+  arg(testitem).p=<eval p_x-arg(distance)> <eval p_y+arg(distance)> <p_z>
+  if (<argv(2)>)
+    arg(testitem).sector.allchars(<arg(charfun)>)
+  else
+    arg(testitem).sector.allitems(<arg(charfun)>)
+  endif
+endif
+
+// west
+if (arg(insideCenterX) < arg(distance)) && (p_x > arg(distance))
+  if (!arg(testitem))
+    arg(itemFactory).newitem(i_nearby_itemmover)
+    arg(testitem,<lastnew>)
+  endif
+  arg(testitem).p=<p>
+  arg(testitem).p=<eval p_x-arg(distance)> <p_y> <p_z>
+  if (<argv(2)>)
+    arg(testitem).sector.allchars(<arg(charfun)>)
+  else
+    arg(testitem).sector.allitems(<arg(charfun)>)
+  endif
+endif
+
+// northwest
+if (arg(insideCenterX) < arg(distance)) && (arg(insideCenterY) < arg(distance)) && (p_x > arg(distance)) && (p_y > arg(distance))
+  if (!arg(testitem))
+    arg(itemFactory).newitem(i_nearby_itemmover)
+    arg(testitem,<lastnew>)
+  endif
+  arg(testitem).p=<p>
+  arg(testitem).p=<eval p_x-arg(distance)> <eval p_y-arg(distance)> <p_z>
+  if (<argv(2)>)
+    arg(testitem).sector.allchars(<arg(charfun)>)
+  else
+    arg(testitem).sector.allitems(<arg(charfun)>)
+  endif
+endif
+
+if (arg(testitem))
+  arg(testitem).remove
+endif
+
+return
+
+[function foreachNearby_evaluate]
+if (<distanceFrom(<argv(2).uid>)> <= <argv(0)>)
+  <argv(1)>
+endif
+
+[itemdef i_nearby_itemmover]
+id=i_gold
+type=t_script
+
+on=@create
+attr_Invis=1
+
+[eof]

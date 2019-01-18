@@ -172,12 +172,12 @@ arg(safeSrc,<src>)
 src=#00
 sector.allChars.<tag(searchFunction)>
 src=<arg(safeSrc)>
-var(distanceSearcher_SRC).say("am in position <p>")
 
 on=@SearchForItems
 sector.allItems.<tag(searchFunction)>
 
 [function f_distanceSearcher_addChars]
+var(charcount,#+1)
 if (<distancefrom(<var(distanceSearcher_SRC)>)> <= <var(distanceSearcher_DISTANCE)>)
   var(distanceSearcher_UID).f_customLink_add(<uid>,object)
 endif

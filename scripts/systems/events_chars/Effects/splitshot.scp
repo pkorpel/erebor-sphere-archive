@@ -118,7 +118,7 @@ elseif (<var(splitShotThem_max_range)> == 0)
 endif
 
 link.effect(2,02ED0,0,32)
-sector.allchars(splitShot_damage)
+foreachNearbyChar(<var(splitShotThem_max_range)>,splitShot_damage)
 remove
 return 1
 

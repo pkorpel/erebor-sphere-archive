@@ -138,6 +138,7 @@ scripts\systems\craftmenu\tinkering.scp
 scripts\systems\jezditka.scp
 scripts\systems\resists.scp
 scripts\systems\class_info.scp
+scripts\systems\nearbySearch.scp
 scripts\systems\distanceSearcher.scp
 scripts\systems\variableGate.scp
 scripts\systems\npc_drazitel.scp

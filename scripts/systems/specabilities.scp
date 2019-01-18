@@ -492,7 +492,7 @@ name=roundattack srcChanger
 on=@timer
 var(roundattack_src,<link>)
 var(roundattack_dmgMod,<more1>)
-sector.allchars("rounddamage(<moreX>)")
+foreachNearbyChar(1,rounddamage(<moreX>))
 var(roundattack_src,)
 link.effect(2,02ED0,0,32)
 remove
@@ -1029,7 +1029,7 @@ name=warcry srcChanger
 
 on=@timer
 var(warcry_src,<link>)
-sector.allchars(warcryEffect)
+foreachNearbyChar(<var(nastaveni_warcry_range)>,warcryEffect)
 remove 
 return 1
 
@@ -1038,7 +1038,6 @@ if (<uid>!=<var(warcry_src)>)
   if (distancefrom(var(warcry_src))<=nastaveni_warcry_range)
     redmessage("Jsi v soku!")
     stopmagery
-//    newEquip(i_warcry_effect)//zruseno, marek chce dat jen fizz
   endif
 endif
 
