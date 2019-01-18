@@ -73,11 +73,9 @@ svitkovac_spell_shortcut[70] "Frost Bolt"
 svitkovac_spell_shortcut[104] "Mana Shield"
 
 [function svitkovac_canUse]
-if (isgm == 0)
-  if (!f_canseelos(<argv(0)>)) || (distancefrom(<argv(0)>) > 4)
-    src.sysmessage("Nedosahnes na svitkovac.")
-    return 0
-  endif
+if (!canUse(<argv(0)>))
+  redmessage("Nedosahnes na svitkovac.")
+  return 0
 endif
 
 return 1
@@ -112,12 +110,12 @@ DIALOG d_scroll_case2
 RETURN 1
 
 ON=@TARGON_ITEM
-IF (src.targ.topobj!=src)&&(src.isgm==0)
-  src.sysmessage("Svitek musis mit v batohu!")
+IF (!src.canUse(<src.targ>))
+  src.redmessage("Nedosahnes na svitek.")
   return 1
 elseif (src.targ.type!=020)&&(src.targ.type!=t_scroll)&&(src.targ.type!=t_customspell_scroll)
-  src.sysmessage("Toto neni svitek!")
-  target("Uloz dalsi svitek?")
+  src.redMessage("Toto neni svitek.")
+  target("Uloz dalsi svitek")
 else 
   arg(amount,<SRC.TARG.AMOUNT>)
   arg(inbook,<eval <safe.TAG(scroll[<src.targ.morex>])>>)

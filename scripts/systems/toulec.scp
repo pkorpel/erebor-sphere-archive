@@ -2,6 +2,14 @@
 ////////////////// TOULEC ///////////////////
 /////////////////////////////////////////////
 
+[function toulec_canUse]
+if (!canUse(<argv(0)>))
+  redmessage("Nedosahnes na toulec.")
+  return 0
+endif
+
+return 1
+
 [itemdef i_toulec]
 ID=i_toolkit_empty
 NAME=Toulec
@@ -22,7 +30,7 @@ endif
 return 1
 
 ON=@UserDclick
-if(<src>==<topobj>)
+if(src.toulec_canUse(<uid>))
   dialog(d_toulec_arrows)
 endif
 return 1
@@ -30,7 +38,7 @@ return 1
 ON=@TargOn_Item
 arg(item,<src.targ>)
 if(<item.typedef.id>==01BFB)||(<item.typedef.id>==0F3F)||(<item.typedef.id>==038D8)
-  if(<item.topobj>==<src.topobj>)
+  if(src.canUse(<arg(item)>))
     if(<tag(arrows)>)
       if(<tag(type_arrows)>==<item.baseid>)
         arg(zbyva,<tag(max_arrows)>-<tag(arrows)>)
@@ -42,7 +50,7 @@ if(<item.typedef.id>==01BFB)||(<item.typedef.id>==0F3F)||(<item.typedef.id>==038
           tag(arrows,<tag(max_arrows)>)
         endif
       else
-        src.sysmessage("Uz tam mas jiny druch sipu.")
+        src.redMessage("Uz tam mas jiny druch sipu.")
       endif
     else
       if(0<item.tag(jed_sila)> > 0)
@@ -63,10 +71,10 @@ if(<item.typedef.id>==01BFB)||(<item.typedef.id>==0F3F)||(<item.typedef.id>==038
       endif    
     endif
   else
-    src.sysmessage("Sipy musis mit u sebe.")
+    src.redMessage("Nedosahnes na sipy.")
   endif
 else
-  src.sysmessage("Do toulce muzes dat jen sipy.")
+  src.redMessage("Do toulce muzes dat jen sipy.")
 endif
 target
 return 1
@@ -123,6 +131,10 @@ on=0
 //Exit (rclick)
 
 on=@anybutton
+if (!src.toulec_canUse(<uid>))
+  return 1
+endif
+
 if (<argn>==1)
   target("Zamer sipy ktere chces pridat do toulce.")
 endif
