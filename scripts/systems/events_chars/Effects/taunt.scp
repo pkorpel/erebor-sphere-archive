@@ -136,7 +136,7 @@ on=@create
 timer=0
 
 on=@timer
-sector.allchars(f_masstaunt_effect(<uid>))
+foreachNearbyChar(<nastaveni_taunt_max_range>,f_masstaunt_effect(<uid>))
 
 
 [function f_masstaunt_effect]

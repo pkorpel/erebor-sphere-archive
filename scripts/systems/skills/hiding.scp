@@ -121,7 +121,7 @@ name=detect srcChanger
 
 on=@timer
 var(detect_src,<link>)
-sector.allchars(tryreveal)
+foreachNearbyChar(25,tryreveal)
 link.sysmessage("Hledani ukonceno.")
 remove
 return 1

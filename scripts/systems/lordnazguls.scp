@@ -196,7 +196,7 @@ type=t_eq_script
 name=Honor pro vse v okoli
 
 on=@timer
-sector.allchars(makeme_numb)
+foreachNearbyChar(25,makeme_numb)
 var(whos_screaming,"")
 remove
 return 1

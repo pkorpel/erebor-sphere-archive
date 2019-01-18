@@ -42,7 +42,7 @@ type=t_eq_script
 name=Honor pro vse v okoli
 
 on=@timer
-sector.allchars(makeme_encouraged)
+foreachNearbyChar(<var(nastaveni_generals_honor_distance)>,makeme_encouraged)
 var(whos_honouring,"")
 remove
 return 1

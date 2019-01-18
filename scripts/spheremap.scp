@@ -9541,5 +9541,17 @@ GROUP=a test
 RAINCHANCE=00  
 COLDCHANCE=00 
 
+[function get_mapWidth]
+if (<mapplane> == 2)
+  return 2303
+endif
+return 6143
+
+[function get_mapHeight]
+if (<mapplane> == 2)
+  return 1599
+endif
+return 4095
+
 [EOF]
 

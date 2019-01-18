@@ -882,25 +882,29 @@ on=@timer
 
 
 [function exploze]
-if (distancefrom(<var(bomba_src)>) < 5)
-  arg(bombarmor,<eval armorsum+(nastaveni_global_armorchange_vP_<profession.name>)>)
-  if (distancefrom(<var(bomba_src)>) > 1)&&(<eval nastaveni_potions_<var(bomba_src).id>-arg(bombarmor)> > 0)
-    damage_noresponse(<eval <eval nastaveni_potions_<var(bomba_src).id>-arg(bombarmor)>/<distancefrom(<var(bomba_src)>)>>,dam_magic|dam_fire)
+if (ischar)
+  if (isplayer)
+    arg(bombarmor,<eval armorsum+(nastaveni_global_armorchange_vP_<profession.name>)>)
   else
-    damage_noresponse(<eval nastaveni_potions_<var(bomba_src).id>-arg(bombarmor)>,dam_magic|dam_fire)
+    arg(bombarmor,<eval armorsum>)  
   endif
-  effect(3,<s_explosion.EFFECTID>,6,15,1)
-  sound=<s_explosion.sound>
 else
+    arg(bombarmor,0)  
 endif
+
+if (distancefrom(<var(bomba_src)>) > 1)&&(<eval nastaveni_potions_<var(bomba_src).id>-arg(bombarmor)> > 0)
+  damage_noresponse(<eval <eval nastaveni_potions_<var(bomba_src).id>-arg(bombarmor)>/<distancefrom(<var(bomba_src)>)>>,dam_magic|dam_fire)
+else
+  damage_noresponse(<eval nastaveni_potions_<var(bomba_src).id>-arg(bombarmor)>,dam_magic|dam_fire)
+endif
+effect(3,<s_explosion.EFFECTID>,6,15,1)
+sound=<s_explosion.sound>
 
 [function znicsit]
 if (type==t_web)&&(timer!=-1)
-  if (distancefrom(<var(bomba_src)>) < 5)
-    effect(3,<s_explosion.EFFECTID>,6,15,1)
-    sound=<s_explosion.sound>
-    timer=1
-  endif
+  effect(3,<s_explosion.EFFECTID>,6,15,1)
+  sound=<s_explosion.sound>
+  timer=1
 elseif (id==i_rock_plain)&&(timer!=-1)
   arg(bombdist,distancefrom(<var(bomba_src)>))
   if (arg(bombdist) < 5)
@@ -918,21 +922,17 @@ endif
 
 [function dispellitem]
 if ((type==t_spell)||(type==t_telepad2))&&(timer!=-1)
- if (distancefrom(<var(bomba_src)>) < 5)
   effect(3,<s_explosion.EFFECTID>,6,15,1)
   sound=<s_explosion.sound>
   timer=1
- endif
 endif
 
 [function dispellbomb]
-if (distancefrom(<var(bomba_src)>) < 5)
- effect(3,<s_explosion.EFFECTID>,6,15,1)
- sound=<s_explosion.sound>
- events=-e_spelleffect
- spelleffect(41,1000)
- events=+e_spelleffect
-endif
+effect(3,<s_explosion.EFFECTID>,6,15,1)
+sound=<s_explosion.sound>
+events=-e_spelleffect
+spelleffect(41,1000)
+events=+e_spelleffect
 
 
 
@@ -975,11 +975,11 @@ trigger @potioneffect
 on=@potioneffect
 var(bomba_src,<uid>)
 if (strmatch(<tag(bomba)>,dispellbomb))
-  region.sectors.allchars(dispellbomb)
-  region.sectors.allitems(dispellitem)
+  foreachNearbyChar(5,dispellbomb)
+  foreachNearbyItem(5,dispellitem)
 else
-  region.sectors.allchars(exploze)
-  region.sectors.allitems(znicsit)
+  foreachNearbyChar(5,exploze)
+  foreachNearbyItem(5,znicsit)
 endif
 effect(3,<s_explosion.EFFECTID>,6,15,1)
 sound=<s_explosion.sound>
