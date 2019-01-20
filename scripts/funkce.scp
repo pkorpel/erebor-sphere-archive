@@ -153,8 +153,10 @@ if (npc)&&(flag_invul==1)&&(!isvendor)
 endif
 
 [function resurrect_player]
-accMsg("resurrecting at <p> by <argv(0).name> (uid=<argv(0)>).")
-spelleffect(s_resurrection,1000)
+if (isonline)
+  accMsg("resurrecting at <p> by <argv(0).name> (uid=<argv(0)>).")
+  spelleffect(s_resurrection,1000)
+endif
 
 [function redeedship]
 if (src.isdead)
@@ -7035,6 +7037,14 @@ tag(<arg(tagName)>[<eval tag(<arg(tagName)>sCount)>],<argv(0)>)
 tag(<arg(tagName)>sCount,<eval <tag(<arg(tagName)>sCount)>+1>)
 return 1
 
+//argv(0): the string value, that should be added
+//argv(1): name of the adding tag
+[function f_customLink_addStr]
+arg(tagName,<argv(1)>)
+tag(<arg(tagName)>[<eval tag(<arg(tagName)>sCount)>],"<argv(0)>")
+tag(<arg(tagName)>sCount,<eval <tag(<arg(tagName)>sCount)>+1>)
+return 1
+
 //argv(0): name of the removing tag; argv(1): link number
 [function f_customLink_remove]
 arg(tagName,<argv(0)>)
@@ -7236,7 +7246,7 @@ return 0
 //adds unified player UID & appropriate tag onto the item
 //argv(0) - player UID, argv(1) - time to add in ds, argv(2) - tag name
 [function f_playerTime_add]
-f_customLink_add("<argv(0)>,<eval <serv.time>+<argv(1)>>",<argv(2)>)
+f_customLink_addStr("<argv(0)>,<eval <serv.time>+<argv(1)>>",<argv(2)>)
 
 //goes through the list and removes expired tags
 //argv(0) - tag name
@@ -7244,7 +7254,7 @@ f_customLink_add("<argv(0)>,<eval <serv.time>+<argv(1)>>",<argv(2)>)
 arg(i,0)
 arg(removed,0)
 while (<arg(i)> < <eval tag(<argv(0)>sCount)>)
-  if (<return_nth(2,<tag(<argv(0)>[<eval arg(i)>])>)> < <serv.time>)
+  if (<eval return_nth(2,<tag(<argv(0)>[<eval arg(i)>])>)> < <serv.time>)
     arg(removed,#+1)
     tag.remove(<argv(0)>[<eval arg(i)>])
   else
@@ -7265,12 +7275,12 @@ arg(removed,0)
 arg(playerIsRecorded,0)
 arg(totalCount,<eval tag(<argv(1)>sCount)>)
 while (<arg(i)> < <eval arg(totalCount)>)
-  if (<return_nth(2,<tag(<argv(1)>[<eval arg(i)>])>)> < <serv.time>)
+  if (<eval return_nth(2,<tag(<argv(1)>[<eval arg(i)>])>)> < <serv.time>)
     arg(removed,#+1)
     tag.remove(<argv(1)>[<eval arg(i)>])
   else
     if (<arg(playerIsRecorded)> == 0)
-      if (<return_nth(1,<tag(<argv(1)>[<eval arg(i)>])>)> == <argv(0)>) // this is the player that we are looking for
+      if (<eval return_nth(1,<tag(<argv(1)>[<eval arg(i)>])>)> == <argv(0)>) // this is the player that we are looking for
         arg(playerIsRecorded,1)
       endif
     endif
