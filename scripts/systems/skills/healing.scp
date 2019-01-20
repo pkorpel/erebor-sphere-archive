@@ -94,14 +94,16 @@ src=<cont>
 src.reveal
 if (more1==0)
   if ({700 1050} < cont.healing) //sance na uspech
+    cont.classmessage("<cont.sex(Ozivil,Ozivila)> jsi <link.link.Name>.")
+    link.link.P=<link.P>
+    src=<cont>
     if (link.link.isonline)
-      cont.classmessage("<cont.sex(Ozivil,Ozivila)> jsi <link.link.Name>.")
-      link.link.P=<link.P>
-      src=<cont>
-      link.link.resurrect_player(<uid>)
-      link.link.sysmessage("Ozivil te <?strmid(<link.Name>,5,50)?>.")
+      arg(resurrectedPlayer,<link.link>)
+      arg(resurrectingPlayer,<cont>)
+      link.link.spelleffect(59,1000)
+      arg(resurrectedPlayer).sysmessage(Ozivil te <arg(resurrectingPlayer).Name>.)
     else
-      cont.redMessage("<link.link.Name> neni pripojen.")
+      link.spelleffect(59,1000)
     endif
   else
     cont.redmessage("<cont.sex(Selhal,Selhala)> jsi v ozivovani.")

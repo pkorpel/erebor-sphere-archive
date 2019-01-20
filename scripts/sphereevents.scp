@@ -1609,6 +1609,10 @@ endif
 //pri logine spocita armorCount - armor na kudly // mozno sa neskor vyuzije aj na nieco ine
 src.armorCountLogIn
 
+if (!isdead)
+  regenrefresh
+endif
+
 events=+e_noclick
 temporary_null
 return 0
