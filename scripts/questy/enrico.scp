@@ -1233,14 +1233,20 @@ return 0
 [function f_equipForPlayer]
 if (<strlen(<argv(0)>)>)
   if (finduid(<argv(0)>))
-    if (finduid(<argv(0)>).topobj==<uid>)
-      finduid(<argv(0)>).dclick
-    elseif (<finduid(<argv(0)>).isItem>)
+    if (<finduid(<argv(0)>).isItem>)
       if (finduid(<argv(0)>).type==t_housemenu) || (finduid(<argv(0)>).type==t_vendormenu)
         finduid(<argv(0)>).trigger(userdclick)
+        return
       endif
     endif
+    if (isCarrying(<argv(0)>))
+      finduid(<argv(0)>).dclick
+    else
+      redMessage("Predmet musis mit u sebe nebo v otevrene bance.")
+    endif
   endif
+else
+  redMessage("Neni zaznamenan zadny predmet.")
 endif
 
 //vychytavky
