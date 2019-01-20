@@ -63,6 +63,15 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
     src.redmessage("Pevnost neni nastavena, kontaktuj Iustuse.")
     return 1
   endif
+  if (<eval tag(owners_realm)> == 1)    // Vlastni Gondor -> Ptam se mordorskeho kamene
+    arg(declarator,2)
+  else                                  // Vlastni Mordor -> Ptam se gondorskeho kamene
+    arg(declarator,1)
+  endif
+  if !(wasDeclaredWar(<tag(fort_name)>,<arg(declarator)>,1))
+    return 1
+  endif
+  src.f_dobyvani_bonus_gain_point(1)
   if (<eval src.tag(realm)> != <eval tag(owners_realm)>) //klika budouci dobyvatel (mozna)
     if (<eval tag(prolomeni)> == 0) //jeste neprolomili   
       if (wasDeclaredWar(<tag(fort_name)>,<eval src.tag(realm)>,1)) //byla vubec valka vyhlasena?
@@ -71,7 +80,6 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
 			    return 1
 		    endif
         if (!aretheremoreguards)
-          f_dobyvani_bonus_gain_point(1)  // Dobyvatel dostane bod za ucast az po zabiti strazi
           switchColor(<src.tag(realm)>)
           timer=1
           say("Obrana pevnosti byla prolomena! Uhlidej palantir po dobu <tag(timer_prolomeni)> s.")
@@ -101,12 +109,10 @@ else //Klika bud dobyvatel nebo obyvatel - odlisime tyto dva stavy :)
       endif    
     else //uz prolomili   
       src.sysmessage("Obrana jiz prolomena byla.")
-      f_dobyvani_bonus_gain_point(1)  // Dobyvatel dostane bod za ucast az po zabiti strazi
 //       scylla.delayedmessage("Dobyvani: <serverTime> Obrana <d_area_<tag(fort_name)>_1> jiz byla prolomena, nyni klikal <src>-<src.name>(<src.account.name>), zbyva uhlidat <tag(timer_prolomeni)> s.")
       return 1 
     endif
   else //klikl obrance
-    f_dobyvani_bonus_gain_point(1)  // obrance nemusi plnit jine podminky k ziskani bodu za ucast v dobyvani
     if (<eval tag(prolomeni)> == 0)
       src.sysmessage("Palantir pevnosti <d_area_<tag(fort_name)>_1>. Dobre jej hlidej!")
       return 1
@@ -376,6 +382,7 @@ winners_declarstone.tag(war_declared_on,0) //Rychle smazat info o valce - uz nik
 winners_declarstone.tag(war_begins_hour,0) 
 winners_declarstone.tag(war_begins_day,0) 
 winners_declarstone.tag(war_begins_month,0)
+var(ConqueredRegion,"")        // Smazani Globalky na konci dobyvani
 
 //zrusit pravo na vyhlaseni valky u warlordu
 arg(u,0)
@@ -552,6 +559,7 @@ while (<arg(w)> < <arg(pocet_guardu)>) // switch all guards on the stone
 endwhile
 
 [function testboj]
+tag(war_begins_month,<getMonth>)
 tag(war_begins_day,<getDay>)
 tag(war_begins_hour,<getHour>)
 timer=1
@@ -568,27 +576,37 @@ tag(VictoryRealm,0)
 
 
 [function f_dobyvani_getBonusType]    // argv(0) - amount of points
-if (<argv(0)> >= 10)
-  return 2                // 4 hours + 25% exp
-elseif (<argv(0)> >= 2)
+// if (<argv(0)> >= 15)
+//   return 2                // 4 hours + 25% exp
+if (<argv(0)> >= 7)
   return 1                // 2 hours + 25% exp
-else
+elseif (<argv(0)> >= 3)
   return 0                // 1 hour  + 25% exp
 endif
+return
 
 [function f_dobyvani_GiveBonus]     // argv(0) - Vitezny realm, ktery dostane bod navic  ; volano nad palantirem
 if (strlen(<tag(Bonus_stone)>))       // exsituje bonusstone? Zucastnil se nekdo dobyvani?
   arg(BonusStone,<finduid(<tag(Bonus_stone)>)>)  
   arg(i,0)
   while (<arg(i)> < <eval (<BonusStone.tag(BonussCount)>)>)   
-    arg(PlayerToBonus,<BonusStone.tag(Bonus[<eval arg(i)>])>) 
+    arg(PlayerToBonus,<BonusStone.tag(Bonus[<eval arg(i)>])>)
+    if (PlayerToBonus.isGM)        // U GM to hazi errory s pravy clienta, kvuli prepisu SRC a pak se cyklus nedokonci. Proto pojistka
+      arg(i,#+1)                   // proto jdeme na dalsiho v poradi
+      arg(PlayerToBonus,<BonusStone.tag(Bonus[<eval arg(i)>])>)
+    endif
     if (<eval arg(PlayerToBonus).tag(realm)> == <argv(0)>)
       BonusStone.tag(Bonus_for_<hval arg(PlayerToBonus)>,#+1)       // Bonusovy bod pro vitezny realm
     endif
-    arg(TypeOfBonus,<f_dobyvani_getBonusType(<eval BonusStone.tag(Bonus_for_<hval arg(PlayerToBonus)>)>)>)                
-    finduid(<BonusStone.tag(Bonus[<eval arg(i)>])>).playerBooster_add(<arg(TypeOfBonus)>)
-    finduid(<BonusStone.tag(Bonus[<eval arg(i)>])>).classmessage("Ziskal jsi za ucast v dobyvani odmenu booster <def_playerBooster_description[<arg(TypeOfBonus)>]>")
-    finduid(<BonusStone.tag(Bonus[<eval arg(i)>])>).accmsg("ziskal za ucast v dobyvani odmenu booster <def_playerBooster_description[<arg(TypeOfBonus)>]>")
+    arg(TypeOfBonus,<f_dobyvani_getBonusType(<eval BonusStone.tag(Bonus_for_<hval arg(PlayerToBonus)>)>)>)  
+    src=<arg(PlayerToBonus)>          // nutne kvuli accmsg - jinak hodi error kvuli pravoum clienta
+    if (strlen(<arg(TypeOfBonus)>))   // neziskal dost bodu pro odmenu      
+      PlayerToBonus.playerBooster_add(<arg(TypeOfBonus)>)
+      PlayerToBonus.classmessage("Ziskal jsi za ucast v dobyvani odmenu booster <def_playerBooster_description[<arg(TypeOfBonus)>]>")
+      PlayerToBonus.accmsg("ziskal za ucast v dobyvani odmenu booster <def_playerBooster_description[<arg(TypeOfBonus)>]>")
+    else
+      PlayerToBonus.accmsg("neziskal za ucast v dobyvani dostatek bodu(<eval BonusStone.tag(Bonus_for_<hval arg(PlayerToBonus)>)>) pro odmenu.")
+    endif
     arg(i,#+1)
   endwhile
   BonusStone.remove
@@ -596,24 +614,30 @@ if (strlen(<tag(Bonus_stone)>))       // exsituje bonusstone? Zucastnil se nekdo
 endif
 
 [function f_dobyvani_bonus_gain_point]  // <argv(0)> - 1 = zucastneni dostane jen jednou, 2/3 = assist/kill pricitam vzdy
-if (src.profession==class_craft)        // do NOT give bonus to crafts
-  src.redmessage("Jako Kraft se nemuzes aktivne zucastnit Dobyvani.")
+if (profession==class_craft)        // do NOT give bonus to crafts
+  redmessage("Jako Kraft se nemuzes aktivne zucastnit Dobyvani.")
   return 0
 endif
-if !(<eval tag(Bonus_stone)>)
-  src.newitem(i_dobyvani_bonus_stone)
-  lastnew.p=<p>
-  lastnew.z=<z>+10
-  tag(Bonus_stone,<lastnew>) 
+if !(strlen(<var(ConqueredRegion)>))   // Probiha prave valka ?
+  return 0
 endif
-if !(strlen(<tag(Bonus_stone).tag(Bonus_for_<hval src>)>))   //    neexistuje - pridam
-  tag(Bonus_stone).f_customLink_add(<src>,"Bonus")
-  tag(Bonus_stone).tag(Bonus_for_<hval src>,1)            //    pri vytvoreni vzdy +1 za ucast
-  src.classmessage("Tva ucast v Dobyvani byla zaznamenana.")
-  src.accmsg("se zucastnil dobyvani a zaznamenal svou ucast. <src.p> (<src.region.name>)")
+arg(Palantir,<var(palantir_<var(ConqueredRegion)>)>)  // Palantir o ktery prave bezi valka
+
+if !(<eval Palantir.tag(Bonus_stone)>)
+  newitem(i_dobyvani_bonus_stone)
+  lastnew.p=<Palantir.p>
+  lastnew.z=<Palantir.z>+10
+  Palantir.tag(Bonus_stone,<lastnew>) 
+endif
+if !(strlen(<Palantir.tag(Bonus_stone).tag(Bonus_for_<hval uid>)>))   //    neexistuje - pridam
+  Palantir.tag(Bonus_stone).f_customLink_add(<uid>,"Bonus")
+  Palantir.tag(Bonus_stone).tag(Bonus_for_<hval uid>,1)            //    pri vytvoreni vzdy +1 za ucast
+  classmessage("Tva ucast v Dobyvani byla zaznamenana.")
+  accmsg("se zucastnil dobyvani o <d_area_<var(ConqueredRegion)>_1> a zaznamenal svou ucast. <p> (<region.name>)")
 endif
 if (<argv(0)> > 1)                                        //    nejedna se o poklikani ale o assist nebo kill
-  tag(Bonus_stone).tag(Bonus_for_<hval src>,#+<argv(0)>)  //    prictu
+  Palantir.tag(Bonus_stone).tag(Bonus_for_<hval uid>,#+<argv(0)>)  //    prictu
+  accmsg("dal frag behem dobyvani o <d_area_<var(ConqueredRegion)>_1>. <p> (<region.name>)")
 endif
 
 [eof]

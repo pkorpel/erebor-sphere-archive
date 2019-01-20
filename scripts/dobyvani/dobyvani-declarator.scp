@@ -159,6 +159,7 @@ if (<getMonth> >= <eval tag(war_begins_month)>)&&(<getDay> >= <eval tag(war_begi
   var(palantir_<tag(war_declared_on)>).respawnGuards
   more1=<nastaveni_pevnosti_cas_na_dobyti>
   var(War_declarator_MemoryItem_<argv(0)>).timer=10
+  var(ConqueredRegion,<tag(war_declared_on)>)  // Globalka pro ostatni funkce, aby se usetrilo hledani aktivniho regionu behem dobyvani
   return 1
 else //jenom posunout timer a pocitame znova
   if ((<getMinute> % 59) == 0) //kazdou 59. minutu
@@ -238,6 +239,7 @@ tag(war_begins_month,0)
 tag(war_begins_hour,0)
 tag(war_lord,0)
 callOtherWarlord(<argv(0)>)
+var(ConqueredRegion,"")        // Smazani Globalky na konci dobyvani
 
 [function callOtherWarlord] // jsou-li v poradi dalsi vyhlasovatele na tu samou pevnost, pak se warlord presune na dalsiho  (<argv(0)> - Cislo realmu)
 if (array_size(tag.warlords) > 0) //nejaky warlord tam je
