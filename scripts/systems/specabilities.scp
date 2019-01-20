@@ -1409,65 +1409,64 @@ lastnew.attr_decay=1
 //voodoo
 [Function woodoo]
 if (src.profession!=class_shaman)
- src.sysMessage(Co tim chces dokazat ?)
- return 1
+  src.sysMessage("Co tim chces dokazat?")
+  return 1
 elseif (src.tag(level)<20)
- src.sysMessage("Nejsi jeste dost dobry saman.")
- return 1
+  src.sysMessage("Nejsi jeste dost dobry saman.")
+  return 1
 elseif (src.isnonmobile)
- src.sysMessage(You are frozen and cannot move.)
- return 1 
+  src.sysMessage("You are frozen and cannot move.")
+  return 1 
+elseif (src.tag(nextwoodoo) > serv.time) && (src.isgm==0)
+  src.sysMessage("Jeste nelze pouzit.")
+  return 1
 elseif (src.findid(i_woodooeffect))
- src.sysMessage(Prokleti ti brani proklinat nekoho jinyho.)
- return 1 
-//elseif ({0 10000}>eval(src.tag(ra_woodoo)*nastaveni_woodoo_chance))
-elseif (chance(<eval 250+<eval 25*<src.tag(ra_woodoo_curse)>>>,3))
- src.sysMessage(Nepovedlo se.)
- if (argv<10)
-   src.woodooeffect(<argv>)
- endif
- src.tag(nextwoodoo,<eval serv.time+(nastaveni_woodoo_delay)>)
- return 1 
-elseif (src.tag(nextwoodoo)>serv.time)&&(src.isgm==0)
- src.sysMessage(Jeste nelze pouzit.)
- return 1
+  src.sysMessage("Prokleti ti brani proklinat nekoho jinyho.")
+  return 1 
+elseif (!chance(<eval 250+<eval (20*<src.tag(ra_woodoo_curse)>)>>,3))
+  src.sysMessage("Nepovedlo se.")
+  if (<argv(0)> < 10)
+    src.woodooeffect(<argv(0)>)
+  endif
+  src.tag(nextwoodoo,<eval (<serv.time>+<var(nastaveni_woodoo_delay)>)>)
+  return 1 
 endif
   
   
 src.reveal
-src.say "Heru Curu Mor Tir"
+src.say("Heru Curu Mor Tir")
 
 
-if (argv<10)
- src.tag(nextwoodoo,<eval serv.time+(nastaveni_woodoo_delay*10)>)
+if (argv(0) < 10)
+  src.tag(nextwoodoo,<eval serv.time+(nastaveni_woodoo_delay*10)>)
 else
- src.tag(nextwoodoo,<eval serv.time+(nastaveni_woodoo_delay)>)
+  src.tag(nextwoodoo,<eval serv.time+(nastaveni_woodoo_delay)>)
 endif 
 
-src.act.link.woodoohandle(<argv>)
-if !(src.act.tag(vydrz))
- src.act.tag(vydrz,100)
+src.act.link.woodoohandle(<argv(0)>)
+if !(<src.act.tag(vydrz)>)
+  src.act.tag(vydrz,100)
 else
- if ({0 100} > src.act.tag(vydrz))
-  src.act.remove
-  src.sysMessage(hlava se rozpadla)
- endif
- src.act.tag(vydrz,<eval (src.act.tag(vydrz)-{1 10})>)
- src.stamina=0
- src.mana=(eval src.mana/2)
+  if ({0 100} > <src.act.tag(vydrz)>)
+    src.act.remove
+    src.sysMessage("Hlava se rozpadla.")
+  endif
+  src.act.tag(vydrz,<eval (src.act.tag(vydrz)-{1 10})>)
+  src.stamina=0
+  src.mana=<eval (<src.mana>/2)>
 endif
 More1L=<eval <more1L>-1>
 if (<more1L> == 0)
-  src.sysmessage("Dyka sa rozpadla")
+  src.sysmessage("Dyka sa rozpadla.")
   remove
   return 1
 endif
 
 [Function woodoohandle]
 newitemsafe(i_mem_woodoo)
-lastnew.tag(woodooeffect,<argv>)
+lastnew.tag(woodooeffect,<argv(0)>)
 lastnew.tag(srcshaman,<src>)
-if (argv >10)
+if (argv(0) >10)
  lastnew.timer=5
 else
  lastnew.timer=10
@@ -1478,55 +1477,55 @@ Equip(lastnew)
 // sysmessage(":<argv(0)>")
 newitemsafe(i_woodooeffect)
 var(woodooboost,0)
-if (argv(0)==1)
+if (argv(0) == 1)
   lastnew.tag(woodooon,damage_noresponse(hits/5))
   lastnew.tag(woodoooff,say "Aaaach to je uleva")
-elseif (argv(0)==2)
+elseif (argv(0) == 2)
   lastnew.tag(woodooon,stamina=0)
   lastnew.tag(woodoooff,say "Aaaach to je uleva")
-elseif (argv(0)==3)
+elseif (argv(0) == 3)
   lastnew.tag(woodooon,woodoobleed)
   lastnew.tag(woodoooff,consume 1000 i_krvaceni)
-elseif (argv(0)==4)
+elseif (argv(0) == 4)
   lastnew.tag(woodooon,poison(1000))
   lastnew.tag(woodoooff,dospell_final(s_cure,1000))
-elseif (argv(0)==5)
+elseif (argv(0) == 5)
   lastnew.tag(woodooon,events=+e_warcry_effect)
   lastnew.tag(woodoooff,events=-e_warcry_effect)
-elseif (argv(0)==6)
+elseif (argv(0) == 6)
   lastnew.tag(woodooon,events=+e_noport)
   lastnew.tag(woodoooff,events=-e_noport)
-elseif (argv(0)==7)
+elseif (argv(0) == 7)
   lastnew.tag(woodooon,events=+e_nohorse)
   lastnew.tag(woodoooff,events=-e_nohorse)
-elseif (argv(0)==11)
+elseif (argv(0) == 11)
   var(woodooboost,1)
   var(woodoosaman,<argv(1)>)
   lastnew.tag(woodooon,f_effect_a_strength(<eval (1334*<findUID(<argv(1)>).spiritspeak>)/1000>))
   lastnew.tag(gvoodoo,1)
-elseif (argv(0)==12)
+elseif (argv(0) == 12)
   var(woodooboost,1)
   var(woodoosaman,<argv(1)>)
   lastnew.tag(woodooon,f_effect_a_cunning(<eval (1334*<findUID(<argv(1)>).spiritspeak>)/1000>))
   lastnew.tag(gvoodoo,1)
-elseif (argv(0)==13)
+elseif (argv(0) == 13)
   var(woodooboost,1)
   var(woodoosaman,<argv(1)>)
   lastnew.tag(woodooon,f_effect_a_agility(<eval (1334*<findUID(<argv(1)>).spiritspeak>)/1000>))
   lastnew.tag(gvoodoo,1)
-elseif (argv(0)==14)
+elseif (argv(0) == 14)
   lastnew.tag(woodooon,woodooprotect(<eval(14*<findUID(<argv(1)>).spiritspeak>)>/10))
   lastnew.tag(gvoodoo,1)
 endif
 lastnew.timer=30
 Equip(lastnew)
-if (argv(0)<8)
+if (argv(0) < 8)
   newEquip(i_warcry_effect)
 endif
 
 [function woodooprotect]
 spelleffect(15 2000)
-lastnew.morep=15,<eval(<argv>)>
+lastnew.morep=15,<eval(<argv(0)>)>
 lastnew.timer=1200
 safe cont.findlayer(13).unequip
 
