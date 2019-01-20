@@ -424,10 +424,12 @@ return 0
 if (!isEvent(e_meleereflex))
   return 0
 endif
-if (tag(mi_meleereflex)>{0 99})
+if (tag(mi_meleereflex) > {0 99})
   src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
   classmessage("Uder magicky odrazen")
   src.redmessage("Uder magicky odrazen")
+  effect(3,#01153,6,10,1)
+  sound(512)
   return 1
 endif
 return 0
@@ -437,9 +439,11 @@ if (!isEvent(e_meleeblock))
   return 0
 endif
 arg(random,<eval({0 99})>)
-if (tag(mi_meleeblock) ><arg(random)>)
+if (tag(mi_meleeblock) > <arg(random)>)
   classmessage("Uder magicky zastaven")
   src.redmessage("Uder magicky zastaven")
+  effect(3,#01153,6,10,1)
+  sound(324)
   return 1
 endif
 return 0
@@ -449,10 +453,12 @@ if (!isEvent(e_rangedreflex))
   return 0
 endif
 arg(random,<eval({0 99})>)
-if (tag(mi_rangedreflex)><arg(random)>)
+if (tag(mi_rangedreflex) > <arg(random)>)
   src.damage_noresponse(<var(ubrano)>,<hval(var(damage_flags))>,<uid>)
   classmessage("Uder magicky odrazen")
   src.redmessage("Uder magicky odrazen")
+  effect(3,#01153,6,10,1)
+  sound(512)
   return 1
 endif
 return 0
@@ -462,9 +468,11 @@ if (!isEvent(e_rangedblock))
   return 0
 endif
 arg(random,<eval({0 99})>)
-if (tag(mi_rangedblock)><arg(random)>)
+if (tag(mi_rangedblock) > <arg(random)>)
   classmessage("Uder magicky zastaven")
   src.redmessage("Uder magicky zastaven")
+  effect(3,#01153,6,10,1)
+  sound(324)
   return 1
 endif
 return 0
@@ -505,6 +513,7 @@ if (!src.npc)
 endif
 if (<eval <eval tag(ra_weapdodge)>*nastaveni_ability_pvMdodge> > {0 999})
   classmessage("<sex(Uhnul,Uhnula)> jsi uderu.")
+  sound(snd_WEAPONS_SWISH02)
   return 1
 endif
 return 0
