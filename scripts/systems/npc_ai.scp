@@ -1255,22 +1255,30 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 if (action==skill_magery)
- return 0
+  return
 endif
-if !(<eval act.tag(hypno_mystik)>)	//mystikum v hypno nebudeme shazovat zbran -> zustava pak v baglu nevermove
-  if (act.findlayer(1))&&(act.findlayer(21))
-    if(act.findlayer(1).isweapon)&&(<rand(3)>==2)
-      act.findlayer(1).cont=<act.findlayer(21)>
-      act.sysmessage(Dostal jsi strasnou ranu pri ktere ti vypadla zbran z ruky)
-    endif
-  else
-    if (act.findlayer(2))&&(act.findlayer(21))
-      if(act.findlayer(2).isweapon)&&(<rand(3)>==2)
-        act.findlayer(2).cont=<act.findlayer(21)>
-        act.sysmessage(Dostal jsi strasnou ranu pri ktere ti vypadla zbran z ruky)
-      endif
-    endif
+if (!<act.wasHarmed>)
+  return
+endif
+if (<eval act.tag(hypno_mystik)>) //mystikum v hypno nebudeme shazovat zbran -> zustava pak v baglu nevermove
+  return
+endif
+if (!act.isPlayer || (<rand(3)> != 2))
+  return
+endif
+
+if (act.findlayer(1))
+  if (act.findlayer(1).isweapon)
+    arg(targLayer,1)
   endif
+elseif (act.findlayer(2))
+  if (act.findlayer(2).isweapon)
+    arg(targLayer,2)
+  endif
+endif
+if (0<arg(targLayer)>)
+  act.bounce(<act.findlayer(<arg(targLayer)>)>)
+  act.classMessage("<act.sex(Dostal,Dostala)> jsi strasnou ranu, pri ktere ti vypadla zbran z ruky.")
 endif
 
 on=@finalBlow
@@ -1332,7 +1340,6 @@ on=@npckill
 //     lastnew.timerd=1
 
 [EVENTS e_sumoner_bombaku]
-
 ON=@NPCSeeNewPlayer //Co to je za silenost? poreste si ty elseify to byla hruza co tam bylo !!! - Dinivan
 if (src.flag_invul)
  return 1
