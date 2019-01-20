@@ -153,10 +153,8 @@ if (npc)&&(flag_invul==1)&&(!isvendor)
 endif
 
 [function resurrect_player]
-if (isonline)
-  accMsg("resurrecting at <p> by <argv(0).name> (uid=<argv(0)>).")
-  spelleffect(s_resurrection,1000)
-endif
+accMsg("resurrecting at <p> by <argv(0).name>, uid=<argv(0)>.")
+spelleffect(s_resurrection,1000)
 
 [function redeedship]
 if (src.isdead)

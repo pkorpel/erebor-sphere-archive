@@ -48,9 +48,6 @@ elseif ((src.profession==class_shaman))&&(src.targ.link)
  elseif (src.anatomy<800)
   src.sysmessage "Nejsi dost vzdelan v anatomii."
   return 1
- elseif (!src.targ.link.isonline)
-  src.sysmessage("<src.targ.link.name> neni pripojen.")
-  return 1
  elseif (src.targ.link.distancefrom(src.targ)>4)
   src.sysmessage "Duch je prilis daleko."
   return 1  
@@ -132,9 +129,6 @@ elseif ((src.profession==class_priest)||(src.profession==class_shaman))&&(src.ta
   return 1
  elseif (src.anatomy<800)
   src.sysmessage "Nejsi dost vzdelan v anatomii."
-  return 1
- elseif (!src.targ.link.isonline)
-  src.sysmessage("<src.targ.link.name> neni pripojen.")
   return 1
  elseif (src.targ.link.distancefrom(src.targ)>4)
   src.sysmessage "Duch je prilis daleko."
