@@ -1568,44 +1568,49 @@ ON=@CREATE
 ATTR=attr_invis|attr_decay
            
 on=@Equip
-if  (<src.region.uid>==<tag(srcshaman).region.uid>)  
- cont.sysMessage(Mas pocit jako by nekdo tancil na tvem hrobe!)
- dorand 4
- cont.emote(Citis jako by te probodla dyka)
- cont.emote(Citis podivnou bolest)
- cont.emote(Citis se velmi divne)
- cont.emote(Mas neblahe tuseni smrti)
- enddo
- cont.sound(019d)
- tag(srcshaman).sysMessage(prokleti voodoo seslano uspesne) 
+if  (<src.region> == <tag(srcshaman).region>)  
+  cont.sysMessage("Mas pocit jako by nekdo tancil na tvem hrobe!")
+  dorand 4
+    cont.emote("Citis jako by te probodla dyka")
+    cont.emote("Citis podivnou bolest")
+    cont.emote("Citis se velmi divne")
+    cont.emote("Mas neblahe tuseni smrti")
+  enddo
+  cont.sound(019d)
+  tag(srcshaman).classmessage("Prokleti voodoo seslano uspesne") 
 else
- tag(srcshaman).sysMessage(prokleti nenalezlo cil.)
- remove
+  tag(srcshaman).redmessage("Prokleti nenalezlo cil.")
+  more2=1       // invalidni woodoo, ukoncim jej hned
+  timer=0
 endif
 
 on=@timer
-if (tag(woodooeffect)<10)
- //if (cont.findid(i_a_bless))||(cont.findid(i_woodooeffect))
- if (cont.findid(i_woodooeffect))
-  cont.sysMessage(neprijemny pocit pominul)
-  tag(srcshaman).sysMessage(cil <cont.name> odolal)
-  tag(srcshaman).woodooeffect(<tag(woodooeffect)>)
- elseif (cont.flag_reflection==1)
-  tag(srcshaman).sysMessage(Tva magie byla odrazena !)
-  cont.sysMessage(Citis jakoby nekdo v dalce vykrikl prekvapenim.)
-  tag(srcshaman).woodooeffect(<tag(woodooeffect)>)
-  tag(srcshaman).newEquip(i_warcry_effect)
- else
-  tag(srcshaman).sysMessage(Cil podlehl voodoo!)
-  cont.sysMessage(jsi pod vlivem voodoo magie!)
+if (<more2>)   // invalidni woodoo, mazu safe cestou na triggeru @Timer
+  remove
+  return
+endif
+if (tag(woodooeffect) < 10)
+  //if (cont.findid(i_a_bless))||(cont.findid(i_woodooeffect))
+  if (cont.findid(i_woodooeffect))
+    cont.sysMessage("Neprijemny pocit pominul.")
+    tag(srcshaman).classmessage("Cil <cont.name> odolal.")
+    tag(srcshaman).woodooeffect(<tag(woodooeffect)>)
+  elseif (cont.flag_reflection==1)
+    tag(srcshaman).classmessage("Tva magie byla odrazena!")
+    cont.sysMessage("Citis jakoby nekdo v dalce vykrikl prekvapenim.")
+    tag(srcshaman).woodooeffect(<tag(woodooeffect)>)
+    tag(srcshaman).newEquip(i_warcry_effect)
+  else
+    tag(srcshaman).classmessage("Cil podlehl voodoo!")
+    cont.sysMessage("Jsi pod vlivem voodoo magie!")
+    cont.woodooeffect(<tag(woodooeffect)>,<tag(srcshaman)>)
+    remove
+  endif
+else
+  tag(srcshaman).classmessage("Cil podlehl voodoo!")
+  cont.sysMessage("Jsi pod vlivem voodoo magie!")
   cont.woodooeffect(<tag(woodooeffect)>,<tag(srcshaman)>)
   remove
- endif
-else
-tag(srcshaman).sysMessage(Cil podlehl voodoo!)
-cont.sysMessage(jsi pod vlivem voodoo magie!)
-cont.woodooeffect(<tag(woodooeffect)>,<tag(srcshaman)>)
-remove
 endif
 
 [Function gvoodoo]
