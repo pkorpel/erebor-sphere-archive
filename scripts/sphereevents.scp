@@ -1662,7 +1662,7 @@ if (findid(i_krvaceni))
 endif
 
 if (findid(i_bulletin_board).type == t_eq_trade_window)
-  accmsg("zemrel behem aktivniho Trade Menu s <findid(i_bulletin_board).link.name> (<findid(i_bulletin_board).link>)")
+  accmsg("zemrel behem aktivniho Trade Menu s <findid(i_bulletin_board).link.topobj.name> (<findid(i_bulletin_board).link.topobj>)")
   findid(i_bulletin_board).remove
 endif
 
