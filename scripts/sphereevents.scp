@@ -1661,9 +1661,11 @@ if (findid(i_krvaceni))
   findid(i_krvaceni).remove
 endif
 
-if (findid(i_bulletin_board).type == t_eq_trade_window)
-  accmsg("zemrel behem aktivniho Trade Menu s <findid(i_bulletin_board).link.topobj.name> (<findid(i_bulletin_board).link.topobj>)")
-  findid(i_bulletin_board).remove
+if (findid(i_bulletin_board))
+  if (findid(i_bulletin_board).type == t_eq_trade_window)
+    accmsg("zemrel behem aktivniho Trade Menu s <findid(i_bulletin_board).link.topobj.name> (<findid(i_bulletin_board).link.topobj>)")
+    findid(i_bulletin_board).remove
+  endif
 endif
 
 //opatrne odstranit aby to nebuglo skill...
