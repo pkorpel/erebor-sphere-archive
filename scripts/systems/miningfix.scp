@@ -79,9 +79,10 @@ endif
 // Why is this here - resource probe holder?
 newnpc c_mining_dummy
 arg(miningDummy,<lastnewchar>)
+miningDummy.flags=statf_insubstantial
+miningDummy.flags=statf_invul
 miningDummy.equip(<probeuid>)
 miningDummy.P=<TARGP>
-miningDummy.flags=statf_insubstantial
 miningDummy.removeFromView
 
 // restore act

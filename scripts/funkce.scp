@@ -5156,14 +5156,6 @@ act=<arg(vpredsafact)>
 
 
 
-
-[chardef c_dummy]
-id=c_man
-name=dummy
-
-on=@create
-flag_insubstantial=1
-
 [events e_nomove]
 on=@step
 move <dir_inttochar(<dir_revert(<dir>)>)>

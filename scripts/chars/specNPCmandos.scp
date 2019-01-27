@@ -1,4 +1,12 @@
 ////////////////////////////////////////////
+[chardef c_dummy]
+id=c_man
+name=dummy
+
+on=@create
+flag_insubstantial=1
+flag_invul=1
+
 
 [CHARDEF c_h_strazce_lagru]
 NAME=Strazce pracovniho tabora
