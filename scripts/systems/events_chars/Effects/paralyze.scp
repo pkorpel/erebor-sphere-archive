@@ -74,7 +74,9 @@ effect(3,i_fx_curse,6,15,1)
 //handles the freezing and suppres the item removal by setting the global check value
 [function f_freeze]
 var(wasFrozen,1)
-flag_freeze=1
+flag_immobile=1
+events +e_paralyzed
+action=""
 
 //Handles the paralize effect for a constantly defined
 //number of seconds
@@ -91,12 +93,40 @@ on=@create
 timer=0
 
 on=@unequip
-topobj.flag_freeze=0
+topobj.flag_immobile=0
+topobj.events -e_paralyzed
 
 on=@timer
 if (more2 == 1) //ethernal para
   return 1
 endif
 remove
+
+[events e_paralyzed]
+on=@skillstart
+if !(isfighting)
+  redmessage("Nyni nejsi <sex(schopen,schopna)> zadne cinnosti.")
+endif
+action=""
+return 1
+
+on=@HitTry
+return 1
+
+on=@Hit
+Return 1
+
+on=@itemUserDClick 
+redmessage("Nyni nejsi <sex(schopen,schopna)> zadne cinnosti.")
+return 1
+
+on=@itemPICKUP_GROUND
+redmessage("Nyni nejsi <sex(schopen,schopna)> zadne cinnosti.")
+return 1
+
+on=@itemPICKUP_PACK  // picked up from inside some container.
+redmessage("Nyni nejsi <sex(schopen,schopna)> zadne cinnosti.")
+return 1
+
 
 [eof]
