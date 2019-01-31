@@ -3695,6 +3695,7 @@ SUBSECTION=Stone Wall 1
 [ITEMDEF 02c6c]
 CATEGORY=Decoration - Furniture
 SUBSECTION=Regals
+DUPELIST=02c6d
 
 [ITEMDEF 02c6d] 
 CATEGORY=Decoration - Furniture
