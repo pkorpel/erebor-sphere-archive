@@ -183,10 +183,16 @@ arg(storeAct,<act>)
 act.damagecust(<argv(0)>,<hval tag(weapflag)<tag(mi_weapflags)>>,<eval tag(piercing)>)
 act=<arg(storeAct)>
 
-if (var(ubrano))
-  if (act.isplayer) && (tag(fizzlechance)<={0 999})
-    return 0
+f_nonmystik_calcFizz
+
+[function f_nonmystik_calcFizz]
+if (act.isplayer)
+  if (<var(ubrano)> >= <eval (<act.maxhits>/10)>)
+    if (tag(fizzlechance) > {0 999})
+      act.stopmagery
+    endif
   endif
+elseif (<var(ubrano)> >= 5) // npc
   act.stopmagery
 endif
 
