@@ -171,6 +171,7 @@ scripts\systems\arena.scp
 scripts\systems\mistri.scp
 scripts\systems\ctf.scp
 scripts\systems\regbox.scp
+scripts\systems\foodbox.scp
 scripts\systems\lagr.scp
 scripts\systems\lagr_afk.scp
 scripts\systems\necrobook.scp

@@ -1,0 +1,393 @@
+[defnames foodbox definitions]
+foodboxOrder[0] i_fruit_apple           // apple
+foodboxOrder[1] i_fruit_banana          // banana
+foodboxOrder[2] i_pie_baked             // baked pie
+foodboxOrder[3] i_bread_loaf            // bread loaf
+foodboxOrder[4] i_fruit_dates           // bunch of dates
+foodboxOrder[5] i_cake                  // cake
+foodboxOrder[6] i_fruit_cantelope       // cantelope
+foodboxOrder[7] i_fruit_carrot          // carrot
+foodboxOrder[8] i_chicken_leg           // chicken leg
+foodboxOrder[9] i_fruit_coconut         // coconut
+foodboxOrder[10] i_bird_cooked          // cooked bird
+foodboxOrder[11] i_ribs_raw             // cut of raw ribs
+foodboxOrder[12] i_ribs_cooked          // cut of ribs
+foodboxOrder[13] i_fruit_corn           // ear of corn
+foodboxOrder[14] i_fish_cut_cooked      // fish steak
+foodboxOrder[15] i_bread_french         // French bread 
+foodboxOrder[16] i_fruit_gourd1         // gourd
+foodboxOrder[17] i_fruit_gourd2         // gourd
+foodboxOrder[18] i_fruit_grapes         // grape bunch
+foodboxOrder[21] i_ham                  // ham
+foodboxOrder[19] i_fruit_cabbage        // head of cabbage
+foodboxOrder[20] i_crop_sprouts3        // head of lettuce
+foodboxOrder[22] i_fruit_honeydewmelon  // honeydew melon
+foodboxOrder[23] i_jar_honey            // jar of honey
+foodboxOrder[24] i_lamb_leg             // leg of lamb
+foodboxOrder[25] i_fruit_lemon          // lemon
+foodboxOrder[26] i_fruit_lime           // lime
+foodboxOrder[27] i_muffin               // muffin
+foodboxOrder[28] i_fruit_onion          // onion
+foodboxOrder[29] i_fruit_peach          // peach
+foodboxOrder[30] i_fruit_pear           // pear 
+foodboxOrder[31] i_pizza                // pizza 
+foodboxOrder[32] i_fruit_pumpkin        // pumpkin
+foodboxOrder[34] i_bird_raw             // raw bird
+foodboxOrder[35] i_fish_cut_raw         // raw fish steak
+foodboxOrder[33] i_sausages             // sausages
+foodboxOrder[36] i_bacon_slice          // slice of bacon
+foodboxOrder[37] i_fruit_squash         // squash
+foodboxOrder[38] i_fruit_turnip         // turnip
+foodboxOrder[39] i_fruit_watermelon     // watermelon
+foodboxOrder[40] i_cheese_wheel         // wheel of cheese
+
+foodboxOrderCount 41
+
+foodboxIconShiftX_i_cake 7
+foodboxIconShiftX_i_fruit_pumpkin -7
+foodboxIconShiftX_i_ribs_raw 5
+foodboxIconShiftX_i_fruit_corn -10
+foodboxIconShiftX_i_fruit_watermelon 10
+foodboxIconShiftX_i_fruit_gourd1 -10
+foodboxIconShiftX_i_fruit_gourd2 5
+foodboxIconShiftX_i_fruit_squash -7
+foodboxIconShiftX_i_fruit_cabbage -7
+foodboxIconShiftX_i_fish_cut_cooked -5
+foodboxIconShiftX_i_fruit_honeydewmelon -5
+
+foodboxAllowed_i_ribs_raw 1
+foodboxAllowed_i_bird_raw 1
+foodboxAllowed_i_fish_cut_raw 1
+foodboxAllowed_i_chicken_leg 1
+foodboxAllowed_i_bird_cooked 1
+foodboxAllowed_i_ribs_cooked 1
+foodboxAllowed_i_fish_cut_cooked 1
+foodboxAllowed_i_ham 1
+foodboxAllowed_i_lamb_leg 1
+foodboxAllowed_i_sausages 1
+foodboxAllowed_i_bacon_slice 1
+
+foodboxAllowed_i_pie_baked 1
+foodboxAllowed_i_bread_loaf 1
+foodboxAllowed_i_cake 1
+foodboxAllowed_i_bread_french 1
+foodboxAllowed_i_muffin 1
+foodboxAllowed_i_pizza 1
+foodboxAllowed_i_jar_honey 1
+foodboxAllowed_i_cheese_wheel 1
+
+foodboxAllowed_i_fruit_apple 1
+foodboxAllowed_i_fruit_banana 1
+foodboxAllowed_i_fruit_dates 1
+foodboxAllowed_i_fruit_cantelope 1
+foodboxAllowed_i_fruit_carrot 1
+foodboxAllowed_i_fruit_coconut 1
+foodboxAllowed_i_fruit_corn 1
+foodboxAllowed_i_fruit_cabbage 1
+foodboxAllowed_i_crop_sprouts3 1
+foodboxAllowed_i_fruit_gourd1 1
+foodboxAllowed_i_fruit_gourd2 1
+foodboxAllowed_i_fruit_grapes 1
+foodboxAllowed_i_fruit_honeydewmelon 1
+foodboxAllowed_i_fruit_lemon 1
+foodboxAllowed_i_fruit_lime 1
+foodboxAllowed_i_fruit_onion 1
+foodboxAllowed_i_fruit_peach 1
+foodboxAllowed_i_fruit_pear 1
+foodboxAllowed_i_fruit_pumpkin 1
+foodboxAllowed_i_fruit_squash 1
+foodboxAllowed_i_fruit_turnip 1
+foodboxAllowed_i_fruit_watermelon 1
+
+// arbitrary selected limit for each food type
+foodbox_MaxFoodCount 10000000
+
+[ITEMDEF i_foodbox]
+id=02c6c
+name="Spizirna"
+FLIP=1
+WEIGHT=200.0
+RESOURCES=20 i_log_verite, 10 i_log_valorite, 30 i_nails
+CATEGORY=Decoration - Furniture
+SUBSECTION=Regals
+
+on=@userDClick
+dialog(d_foodbox_menu)
+return 1
+
+on=@stackOn
+if (argo.f_foodboxIsFood)
+  if (src.f_foodboxCanUse(<uid>))
+    if (!argo.f_addFood(<uid>))
+      argo.bounce
+    endif
+  endif
+  return 1
+else
+  src.redMessage("Muzes vkladat pouze jidlo.")
+  argo.bounce
+  return 1
+endif
+
+[DIALOG d_foodbox_menu]
+if (<eval(foodboxOrderCount % 4)> == 0)
+  arg(radku,<eval(foodboxOrderCount/4))>)
+else
+  arg(radku,<eval((foodboxOrderCount/4)+1)>)
+endif
+arg(vyska,<eval((arg(radku)*63)+105)>)
+arg(prvni_radek,50)
+arg(posun,16)
+argo.resizepic(0, 0, 5054, 700, arg(vyska))
+argo.resizepic(10, 10, 3000, 680, <eval(arg(vyska)-20)>)
+argo.button(650,15,4017,4019,1,0,0) //zavrit
+argo.htmlgumpa(330,15,100,20,"Spizirna",0,0)
+argo.button(20,15,4005,4007,1,0,1) //pridat jidlo
+argo.htmlgumpa(55,15,100,20,"Pridat jidlo",0,0)
+
+arg(i,0)
+while (i < foodboxOrderCount)
+  arg(iconShiftX,<safe foodboxIconShiftX_<foodboxOrder[i]>>)
+
+  arg(count,<eval tag(food_count_<foodboxOrder[i]>)>)
+  argo.button(20,arg(prvni_radek)+(arg(i)*arg(posun))-2,4017,4019,1,0,<eval(101 + i)>)
+  argo.htmlgumpa(55,arg(prvni_radek)+(arg(i)*arg(posun)),110,20,<findres(itemdef,<foodboxOrder[i]>).name>,0,0)
+  argo.htmlgumpa(55,arg(prvni_radek)+20+(arg(i)*arg(posun)),100,20,"Pocet:",0,0)
+  argo.htmlgumpa(95,arg(prvni_radek)+20+(arg(i)*arg(posun)),100,20,<arg(count)>,0,0)
+  argo.checkbox(20,arg(prvni_radek)+38+(arg(i)*arg(posun)),9903,9904,0,<eval(101 + i)>)
+  argo.htmlgumpa(55,arg(prvni_radek)+38+(arg(i)*arg(posun)),50,20,"Vyndat:",0,0)
+  argo.textentrya(100,arg(prvni_radek)+38+(arg(i)*arg(posun)),65,20,0,<eval(101 +  i)>,6)
+  argo.tilepic(<eval 138+arg(iconShiftX)>,<eval(arg(prvni_radek)+(arg(i)*arg(posun)))>,<findres(itemdef,<foodboxOrder[i]>).id>)
+  argo.tilepic(<eval 143+arg(iconShiftX)>,<eval(arg(prvni_radek)+5+(arg(i)*arg(posun)))>,<findres(itemdef,<foodboxOrder[i]>).id>)
+  if ((i+1) < foodboxOrderCount)
+    arg(iconShiftX,<safe foodboxIconShiftX_<foodboxOrder[i+1]>>)
+    arg(count,<eval tag(food_count_<foodboxOrder[i+1]>)>)
+  
+    argo.button(185,arg(prvni_radek)+(arg(i)*arg(posun))-2,4017,4019,1,0,<eval(102 + i)>)
+    argo.htmlgumpa(220,arg(prvni_radek)+(arg(i)*arg(posun)),110,20,<findres(itemdef,<foodboxOrder[i+1]>).name>,0,0)
+    argo.htmlgumpa(220,arg(prvni_radek)+17+(arg(i)*arg(posun)),100,20,"Pocet:",0,0)
+    argo.htmlgumpa(260,arg(prvni_radek)+17+(arg(i)*arg(posun)),100,20,<arg(count)>,0,0)
+    argo.checkbox(185,arg(prvni_radek)+34+(arg(i)*arg(posun)),9903,9904,0,<eval(102 + i)>)
+    argo.htmlgumpa(220,arg(prvni_radek)+34+(arg(i)*arg(posun)),50,20,"Vyndat:",0,0)
+    argo.textentrya(265,arg(prvni_radek)+34+(arg(i)*arg(posun)),65,20,0,<eval(102 + i)>,6)
+    argo.tilepic(<eval 303+arg(iconShiftX)>,<eval(arg(prvni_radek)+(arg(i)*arg(posun)))>,<findres(itemdef,<foodboxOrder[i+1]>).id>)
+    argo.tilepic(<eval 308+arg(iconShiftX)>,<eval(arg(prvni_radek)+5+(arg(i)*arg(posun)))>,<findres(itemdef,<foodboxOrder[i+1]>).id>)
+  endif
+  if ((i+2) < foodboxOrderCount)
+    arg(iconShiftX,<safe foodboxIconShiftX_<foodboxOrder[i+2]>>)
+    arg(count,<eval tag(food_count_<foodboxOrder[i+2]>)>)
+
+    argo.button(350,arg(prvni_radek)+(arg(i)*arg(posun))-2,4017,4019,1,0,<eval(103 + i)>)
+    argo.htmlgumpa(385,arg(prvni_radek)+(arg(i)*arg(posun)),110,20,<findres(itemdef,<foodboxOrder[i+2]>).name>,0,0)
+    argo.htmlgumpa(385,arg(prvni_radek)+17+(arg(i)*arg(posun)),100,20,"Pocet:",0,0)
+    argo.htmlgumpa(425,arg(prvni_radek)+17+(arg(i)*arg(posun)),100,20,<arg(count)>,0,0)
+    argo.checkbox(350,arg(prvni_radek)+34+(arg(i)*arg(posun)),9903,9904,0,<eval(103 + i)>)
+    argo.htmlgumpa(385,arg(prvni_radek)+34+(arg(i)*arg(posun)),50,20,"Vyndat:",0,0)
+    argo.textentrya(430,arg(prvni_radek)+34+(arg(i)*arg(posun)),65,20,0,<eval(103 + i)>,6)
+    argo.tilepic(<eval 468+arg(iconShiftX)>,<eval(arg(prvni_radek)+(arg(i)*arg(posun)))>,<findres(itemdef,<foodboxOrder[i+2]>).id>)
+    argo.tilepic(<eval 473+arg(iconShiftX)>,<eval(arg(prvni_radek)+5+(arg(i)*arg(posun)))>,<findres(itemdef,<foodboxOrder[i+2]>).id>)
+  endif
+  if ((i+3) < foodboxOrderCount)
+    arg(iconShiftX,<safe foodboxIconShiftX_<foodboxOrder[i+3]>>)
+    arg(count,<eval tag(food_count_<foodboxOrder[i+3]>)>)
+
+    argo.button(515,arg(prvni_radek)+(arg(i)*arg(posun))-2,4017,4019,1,0,<eval(104 + i)>)
+    argo.htmlgumpa(550,arg(prvni_radek)+(arg(i)*arg(posun)),110,20,<findres(itemdef,<foodboxOrder[i+3]>).name>,0,0)
+    argo.htmlgumpa(550,arg(prvni_radek)+17+(arg(i)*arg(posun)),100,20,"Pocet:",0,0)
+    argo.htmlgumpa(590,arg(prvni_radek)+17+(arg(i)*arg(posun)),100,20,<arg(count)>,0,0)
+    argo.checkbox(515,arg(prvni_radek)+34+(arg(i)*arg(posun)),9903,9904,0,<eval(104 + i)>)
+    argo.htmlgumpa(550,arg(prvni_radek)+34+(arg(i)*arg(posun)),50,20,"Vyndat:",0,0)
+    argo.textentrya(595,arg(prvni_radek)+34+(arg(i)*arg(posun)),65,20,0,<eval(104 + i)>,6)
+    argo.tilepic(<eval 633+arg(iconShiftX)>,<eval(arg(prvni_radek)+(arg(i)*arg(posun)))>,<findres(itemdef,<foodboxOrder[i+3]>).id>)
+    argo.tilepic(<eval 638+arg(iconShiftX)>,<eval(arg(prvni_radek)+5+(arg(i)*arg(posun)))>,<findres(itemdef,<foodboxOrder[i+3]>).id>)
+  endif
+  arg(i,#+4)
+endwhile
+argo.button(20,<eval(arg(vyska)-40)>,4023,4025,1,0,4) //OK
+
+[DIALOG d_foodbox_menu TEXT]
+
+[DIALOG d_foodbox_menu BUTTON]
+on=0
+return
+
+on=1
+if (!src.f_foodboxCanUse(<uid>))
+  return 1
+endif
+
+src.findID(i_food_add).remove
+src.newitem i_food_add
+lastnew.link=<uid>
+lastnew.equip
+lastnew.target
+return 1
+
+on=4
+if (!src.f_foodboxCanUse(<uid>))
+  return 1
+endif
+
+arg(i,1)
+while (i <= foodboxOrderCount)
+  if (<argChk(<eval(i+100)>)>)
+    arg(foodAmount,<fixNumber(0<argTxt(<eval(i+100)>)>)>)
+    if (<arg(foodAmount)> > 0)
+      f_takeoutFood(<foodboxOrder[<eval arg(i)-1>]>,<arg(foodAmount)>)
+    endif
+  endif
+  arg(i,#+1)
+endwhile
+useitem
+return 1
+
+on=@anyButton
+if (!src.f_foodboxCanUse(<uid>))
+  return 1
+endif
+
+arg(foodDefName,<foodboxOrder[<eval argn-101>]>)
+f_takeoutFood(<arg(foodDefName)>,<tag(food_count_<arg(foodDefName)>)>)
+useitem
+return 1
+
+// argv(0) food defname.
+// argv(1) amount of food to take out.
+[function f_takeoutFood]
+arg(foodId,<argv(0)>)
+arg(foodAmount,<argv(1)>)
+arg(foodAvailable,<eval tag(food_count_<arg(foodId)>)>)
+
+if (!arg(foodAvailable)) || (arg(foodAmount) <= 0)
+  return
+endif
+
+if (arg(foodAmount) > arg(foodAvailable))
+  arg(foodAmount,arg(foodAvailable))
+endif
+
+if (!findres(itemdef,<arg(foodId)>).can_pile)
+  if (arg(foodAmount) > 100)
+    arg(foodAmount,100)
+  endif
+  
+  while (arg(foodAmount) > 0)
+    src.newitem <arg(foodId)>
+    arg(foodAmount,<eval arg(foodAmount)-1>)
+    lastnew.bounce
+    src.accMsg("vyndava z foodboxu (<uid>) <lastnew.amount> <lastnew.name> (<lastnew>).")
+    arg(foodAvailable,#-<lastnew.amount>)
+    tag(food_count_<arg(foodId)>,arg(foodAvailable))
+  endwhile
+
+  return
+endif
+
+while (arg(foodAmount) > 0)
+  src.newitem <arg(foodId)>
+  if (foodAmount>60000)
+    lastnew.amount=60000
+    arg(foodAmount,#-60000)
+  else
+    lastnew.amount=<foodAmount>
+    arg(foodAmount,0)
+  endif
+  src.accMsg("vyndava z foodboxu (<uid>) <lastnew.amount> <lastnew.name> (<lastnew>).")
+  tag(food_count_<arg(foodId)>,<eval tag(food_count_<argv(0)>)-lastnew.amount>)
+  lastnew.bounce
+endwhile
+
+[itemdef i_food_add]
+name="Pridat jidlo"
+type=t_eq_script
+layer=30
+
+on=@create
+attr_decay=1
+timer=60
+
+on=@targOn_char
+return 1
+
+on=@targOn_item
+if (!src.targ.f_foodboxIsFood) && (src.targ.type != t_container)
+  src.redMessage("Toto neni jidlo.")
+  return 1
+endif
+
+if (!src.isCarrying(<src.targ>))
+  src.redMessage("<src.targ.name> musis mit u sebe.")
+  return 1
+endif
+
+if (!src.f_foodboxCanUse(<link>))
+  return 1
+endif
+
+if (src.targ.f_foodboxIsFood)
+  src.targ.f_addFood(<link>)
+elseif (src.targ.type == t_container)
+  src.targ.contents(f_addfood(<link>))
+endif
+
+target("Pridej jidlo.")
+
+return 1
+
+// Should run on item instance.
+// Returns 1 when the item instance is eligible for foodbox.
+[function f_foodboxIsFood]
+if (<safe foodboxAllowed_<id>>))
+  return 1
+endif
+
+return 0
+
+// argv(0) foodbox instance.
+// Should run on item instance.
+// Returns 1 if whole item amount is added to foodbox, otherwise 0.
+[function f_addFood]
+if (!f_foodboxIsFood)
+  return 0
+endif
+
+arg(foodBox,<argv(0)>)
+arg(foodDefName,<id>)
+arg(availableFood,<eval arg(foodBox).tag(food_count_<arg(foodDefName)>)>)
+
+if (arg(availableFood) < foodbox_MaxFoodCount)
+  if (<eval amount+arg(availableFood)> > foodbox_MaxFoodCount)
+    arg(insertCount,<eval (foodbox_MaxFoodCount - arg(availableFood))>)
+    amount=<eval(amount-arg(insertCount))>
+    arg(availableFood,#+<arg(insertCount)>)
+    arg(foodBox).tag(food_count_<arg(foodDefName)>,<arg(availableFood)>)
+    src.accMsg("vklada do foodboxu (<arg(foodBox)>) <arg(insertCount)> <name> (<uid>).")
+    src.redMessage("<src.sex(Vlozil,Vlozila)> jsi do spizirny <arg(insertCount)> <name>. Vic se tam nevejde.")
+    return 0
+  else
+    arg(availableFood,#+<amount>)
+    arg(foodbox).tag(food_count_<arg(foodDefName)>,<arg(availableFood)>)
+    src.accMsg("vklada do foodboxu (<arg(foodBox)>) <amount> <name> (<uid>).")
+    src.sysMessage("<src.sex(Vlozil,Vlozila)> jsi do spizirny <amount> <name>.")
+    remove
+    return 1
+  endif
+else
+  src.redMessage("Spizirna je plna, vic <name> se do ni nevejde.")
+  return 0
+endif
+
+return 1
+
+// argv(0) foodbox instance.
+// Should run on char instance.
+// Returns 1 if player can use the foodbox instance, otherwise 0.
+[function f_foodboxCanUse]
+if (!canUse(<argv(0)>))
+  redMessage("Nedosahnes na spizirnu.")
+  return 0
+endif
+
+return 1
+
+[eof]
