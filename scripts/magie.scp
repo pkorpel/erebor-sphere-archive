@@ -212,7 +212,7 @@ if (ischar)
         f_spellResistedMsg
       endif
       if (var(spellnumber)==5)||(spellnumber==12)   // magic arrow || harm
-        flags=<flags>&~statf_freeze
+        paralyze_remove
       endif
     else
       if (var(spellnumber)==38)||(var(spellnumber)==47)
