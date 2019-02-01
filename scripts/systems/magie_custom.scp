@@ -223,7 +223,7 @@ endif
 timer=<nastaveni_ms_manasuck_time>
 return 1
 
-[function manashield] //argv(0) - zdroj, argv(1) - ubrano, argv(2) - flagy, argv(3) - pro pøípad mindblastu jedine (jeho spellpower)
+[function manashield] //argv(0) - zdroj, argv(1) - ubrano, argv(2) - flagy, argv(3) - pro pripad mindblastu jedine (jeho spellpower)
 if (<eval tag(manashield)> == 0)
   return 0 // manashield not used
 elseif (<mana>) //mame-li vubec manu

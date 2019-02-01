@@ -101,8 +101,7 @@ while (<column> < <boosty_menu_column>)
       src.findid(i_rune_invisibility).remove  //po odinvisnuti ten item na hracovi zostava - toto ho zmaze
       arg(used,#-1)
     endif
-    if ((<column>==14)&&(!src.flag_freeze))
-      //src.findid(i_rune_paralyze).remove  //uz by nemelo byt potreba
+    if ((<column>==14)&&(!src.isParalyzed))
       arg(used,#-1)
     endif   
     if ((<column>==28)&&!(<src.poisonManager.f_pm_isImmune>==1))

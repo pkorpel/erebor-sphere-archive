@@ -6828,21 +6828,6 @@ if (src.charIsUnsafe) //gm/ghost ...
 endif
 remove
 
-//DEPRICATED ITEM - REMOVE ON SIGHT !
-[itemdef i_parafield_delay]
-id=i_memory
-name=odparni
-type=t_eq_script
-layer=30
-
-on=@equip
-topobj.flag_freeze=1
-
-on=@timer
-topobj.flag_freeze=0
-remove
-return 0
-
 [ITEMDEF 03968]
 //field of paralysis
 DUPEITEM=03967

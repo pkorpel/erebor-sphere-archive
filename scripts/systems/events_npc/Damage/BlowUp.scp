@@ -87,7 +87,6 @@ TYPE=T_EQ_SCRIPT
 
 ON=@Equip
 topobj.color=098c
-//topobj.flag_freeze=1
 TIMER=1
 ATTR=094
 MORE1=2
