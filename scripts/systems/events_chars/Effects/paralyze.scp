@@ -104,10 +104,11 @@ remove
 
 [events e_paralyzed]
 on=@skillstart
-if (action == skill_magery) || (action == 079)
-  return
+if (isCasting) || (action == 079)
+  return 0
+elseif !(isFighting)
+  redmessage("Jsi <sex(paralyzovan,paralyzovana)>.")
 endif
-redmessage("Jsi <sex(paralyzovan,paralyzovana)>.")
 action=""
 return 1
 
