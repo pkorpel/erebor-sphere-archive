@@ -124,7 +124,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag.npc_bleed=300 //30.0%
 
@@ -132,6 +132,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {500 650}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,200)
 
 tag(resist_sharp,850)
 tag(resist_slash,850)
@@ -206,12 +207,13 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 tag.npc_bleed=400 //40.0%
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag(resist_poison,1000)
 tag.resist_para=<eval {600 750}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,300)
 
 tag(resist_sharp,850)
 tag(resist_slash,850)
@@ -287,12 +289,13 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 tag.npc_bleed=500 //50.0%
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag(resist_poison,1000)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,400)
 
 tag(resist_sharp,850)
 tag(resist_slash,850)
@@ -371,7 +374,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
 
-tag(monstertype,daemon,40)
+tag(monstertype,daemon,70)
 
 tag.npc_bleed=600 //60.0%
 
@@ -379,6 +382,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {800 950}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,650)
 
 tag(resist_sharp,850)
 tag(resist_slash,850)
@@ -462,7 +466,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[9]>
 
-tag(monstertype,daemon,30)
+tag(monstertype,daemon,70)
 
 tag.npc_bleed=900 //90.0%
 
@@ -477,6 +481,7 @@ tag(resist_poison,1000)
 tag(resist_para,1000) 
 tag(resist_summon,1000)
 tag(resist_bleed,900)
+tag(resist_curse,850)
 
 tag(resist_sharp,850)
 tag(resist_slash,850)
@@ -558,7 +563,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag.npc_bleed=200 //20.0%
 
@@ -566,6 +571,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {400 550}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,100)
 
 tag(resist_sharp,850)
 tag(resist_slash,450)
@@ -647,7 +653,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag.npc_bleed=300 //30.0%
 
@@ -655,6 +661,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {500 650}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,300)
 
 tag(resist_sharp,850)
 tag(resist_slash,450)
@@ -737,7 +744,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag.npc_bleed=400 //40.0%
 
@@ -745,6 +752,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {600 750}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,500)
 
 tag(resist_sharp,850)
 tag(resist_slash,450)
@@ -824,7 +832,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
 
-tag(monstertype,daemon,40)
+tag(monstertype,daemon,70)
 
 tag.npc_bleed=500 //50.0%
 
@@ -832,6 +840,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,700)
 
 tag(resist_sharp,850)
 tag(resist_slash,450)
@@ -912,7 +921,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[9]>
 
-tag(monstertype,daemon,30)
+tag(monstertype,daemon,70)
 
 tag.npc_bleed=600 //60.0%
 
@@ -932,6 +941,7 @@ tag(resist_poison,1000)
 tag(resist_para,1000) 
 tag(resist_summon,1000)
 tag(resist_bleed,900)
+tag(resist_curse,850)
 
 tag(resist_sharp,850)
 tag(resist_slash,450)
@@ -1009,12 +1019,13 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag(resist_poison,1000)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,250)
 
 tag(resist_sharp,850)
 tag(resist_slash,850)
@@ -1099,12 +1110,13 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag(resist_poison,1000)
 tag.resist_para=<eval {750 900}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,350)
 
 tag(resist_sharp,850)
 tag(resist_slash,850)
@@ -1192,7 +1204,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag(e_explosiondispell_chance,67) //6.7% chance
 tag(e_explosiondispell_range,5)
@@ -1202,6 +1214,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {800 950}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,550)
 
 tag(resist_sharp,650)
 tag(resist_slash,850)
@@ -1296,7 +1309,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 
-tag(monstertype,daemon,40)
+tag(monstertype,daemon,70)
 
 tag(e_explosiondispell_chance,150) //15% chance
 tag(e_explosiondispell_range,5)
@@ -1310,6 +1323,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {850 980}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,750)
 
 tag(resist_sharp,650)
 tag(resist_slash,850)
@@ -1404,7 +1418,7 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[9]>
 
-tag(monstertype,daemon,30)
+tag(monstertype,daemon,70)
 
 tag(npc_summoner_count,2)
 tag(npc_summoner_char[0],c_glmm_rat)
@@ -1424,6 +1438,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {900 1000}>
 tag(resist_summon,950)
 tag(resist_bleed,800)
+tag(resist_curse,900)
 
 tag(resist_sharp,650)
 tag(resist_slash,850)
@@ -1524,12 +1539,13 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
 
-tag(monstertype,daemon,50)
+tag(monstertype,daemon,70)
 
 tag(resist_poison,1000)
 tag.resist_para=<eval {400 550}>
 tag(resist_summon,950)
 tag(resist_bleed,200)
+tag(resist_curse,550)
 
 tag(resist_sharp,850)
 tag(resist_slash,850)
@@ -1539,6 +1555,7 @@ tag(resist_blunt,350)
 tag(resist_fire,200)
 tag(resist_elect,200)
 tag(resist_cold,100)
+tag(resist_silence,550)
 
 //tag(resist_phys,0)
 //tag(resist_magic,0)

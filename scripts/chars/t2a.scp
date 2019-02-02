@@ -53,15 +53,16 @@ tag(resist_poison,700)
 tag.resist_para=<eval {500 650}>
 tag(resist_summon,350)
 tag(resist_bleed,300)
+tag(resist_curse,200)
 
 tag(resist_sharp,50)
 tag(resist_slash,150)        //sekery
 tag(resist_pierce,-50)
 tag(resist_blunt,-50)
 
-tag(resist_fire,200)
-tag(resist_elect,200)
-tag(resist_cold,100)
+tag(resist_fire,-150)
+tag(resist_elect,400)
+tag(resist_cold,50)
 
 provocation=100.0
 WRESTLING={90.0 100.0}
@@ -137,15 +138,16 @@ tag(resist_poison,850)
 tag.resist_para=<eval {500 650}>
 tag(resist_summon,350)
 tag(resist_bleed,100)
+tag(resist_curse,250)
 
 tag(resist_sharp,50)
 tag(resist_slash,-50)        //sekery
 tag(resist_pierce,-50)
 tag(resist_blunt,-50)
 
-tag(resist_fire,300)
-tag(resist_elect,300)
-tag(resist_cold,200)
+tag(resist_fire,-50)
+tag(resist_elect,500)
+tag(resist_cold,50)
 tag(resist_silence,350)
 
 PARRYING={85.0 95.0}
@@ -220,21 +222,22 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 tag.weapflag=dam_physical|dam_slashing
 
 //typ monstra
-tag(monstertype,daemon,70)
+tag(monstertype,daemon,80)
 
 tag(resist_poison,750)
 tag.resist_para=<eval {600 750}>
 tag(resist_summon,550)
 tag(resist_bleed,300)
+tag(resist_curse,250)
 
 tag(resist_sharp,50)
 tag(resist_slash,-100)        //sekery
 tag(resist_pierce,-50)
 tag(resist_blunt,-150)
 
-tag(resist_fire,200)
-tag(resist_elect,200)
-tag(resist_cold,100)
+tag(resist_fire,-50)
+tag(resist_elect,500)
+tag(resist_cold,50)
 tag(resist_silence,400)
 
 peacemaking=100.0
@@ -310,7 +313,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
 //typ monstra
-tag(monstertype,daemon,70)
+tag(monstertype,daemon,80)
 
 tag.weapflag=dam_physical|dam_slashing
 
@@ -318,15 +321,16 @@ tag(resist_poison,800)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,550)
 tag(resist_bleed,300)
+tag(resist_curse,350)
 
 tag(resist_sharp,50)
 tag(resist_slash,150)        //sekery
 tag(resist_pierce,-50)
 tag(resist_blunt,250)
 
-tag(resist_fire,300)
-tag(resist_elect,300)
-tag(resist_cold,200)
+tag(resist_fire,0)
+tag(resist_elect,550)
+tag(resist_cold,100)
 tag(resist_silence,450)
 
 peacemaking=100.0
@@ -409,15 +413,16 @@ tag(resist_poison,800)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,750)
 tag(resist_bleed,300)
+tag(resist_curse,400)
 
 tag(resist_sharp,50)
 tag(resist_slash,-100)        //sekery
 tag(resist_pierce,-50)
 tag(resist_blunt,-150)
 
-tag(resist_fire,300)
-tag(resist_elect,300)
-tag(resist_cold,200)
+tag(resist_fire,50)
+tag(resist_elect,550)
+tag(resist_cold,150)
 tag(resist_silence,500)
 
 peacemaking=100.0
@@ -510,15 +515,16 @@ tag(resist_poison,700)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,650)
 tag(resist_bleed,100)
+tag(resist_curse,400)
 
 tag(resist_sharp,150)
 tag(resist_slash,450)        //sekery
 tag(resist_pierce,450)
 tag(resist_blunt,450)
 
-tag(resist_fire,300)
-tag(resist_elect,300)
-tag(resist_cold,200)
+tag(resist_fire,50)
+tag(resist_elect,550)
+tag(resist_cold,150)
 
 peacemaking=100.0
 provocation=100.0
@@ -586,6 +592,7 @@ tag(resist_poison,880)
 tag.resist_para=<eval {200 330}>
 tag(resist_summon,350)
 tag(resist_bleed,200)
+tag(resist_curse,-100)
 
 tag(resist_sharp,00)
 tag(resist_slash,00)
@@ -660,6 +667,7 @@ tag(resist_poison,880)
 tag.resist_para=<eval {300 450}>
 tag(resist_summon,350)
 tag(resist_bleed,200)
+tag(resist_curse,-100)
 
 tag(resist_sharp,00)
 tag(resist_slash,-100)
@@ -738,6 +746,7 @@ tag(resist_poison,880)
 tag.resist_para=<eval {300 330}>
 tag(resist_summon,350)
 tag(resist_bleed,200)
+tag(resist_curse,-100)
 
 tag(resist_sharp,00)
 tag(resist_slash,-100)
@@ -811,6 +820,7 @@ tag(resist_poison,800)
 tag.resist_para=<eval {300 450}>
 tag(resist_summon,350)
 tag(resist_bleed,200)
+tag(resist_curse,50)
 
 tag(resist_sharp,00)
 tag(resist_slash,-100)
@@ -900,6 +910,7 @@ tag(resist_poison,800)
 tag.resist_para=<eval {900 950}>
 tag(resist_summon,350)
 tag(resist_bleed,200)
+tag(resist_curse,100)
 
 tag(resist_sharp,100)
 tag(resist_slash,-100)
