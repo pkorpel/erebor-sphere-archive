@@ -4482,6 +4482,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {300 450}>
 tag(resist_summon,300)
 tag(resist_bleed,1000) //kostlivec nekrvaci
+tag(resist_curse,100)
 
 //weap resists
 tag(resist_sharp,-100)
@@ -4490,12 +4491,12 @@ tag(resist_pierce,100)
 tag(resist_blunt,-400) // kosti rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,100)
-tag(resist_elect,-200)
-tag(resist_cold,-300)
+tag(resist_fire,-400)
+tag(resist_elect,-250)
+tag(resist_cold,200)
 
 //typ monstra
-tag(monstertype,undead,80)
+tag(monstertype,undead,100)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -4569,6 +4570,7 @@ tag(resist_poison,1000) //kostlivci jsou z 99% imunni proti jedu
 tag.resist_para=<eval {500 650}>
 tag(resist_summon,600) //indivindi podle monstra
 tag(resist_bleed,1000) //kostlivec nekrvaci
+tag(resist_curse,150)
 
 //weap resists
 tag(resist_sharp,200)
@@ -4577,12 +4579,12 @@ tag(resist_pierce,200)
 tag(resist_blunt,-400) // kosti rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,100)
-tag(resist_elect,-800)
-tag(resist_cold,-400)
+tag(resist_fire,-250)
+tag(resist_elect,-100)
+tag(resist_cold,250)
 
 //typ monstra
-tag(monstertype,undead,80)
+tag(monstertype,undead,95)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -4655,6 +4657,7 @@ tag(resist_poison,1000) //kostlivci jsou z 99% imunni proti jedu
 tag.resist_para=<eval {650 750}>
 tag(resist_summon,700) //indivindi podle monstra
 tag(resist_bleed,1000) //kostlivec nekrvaci
+tag(resist_curse,200)
 
 //weap resists
 tag(resist_sharp,150)
@@ -4663,12 +4666,12 @@ tag(resist_pierce,150)
 tag(resist_blunt,-400) // kosti rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,100)
-tag(resist_elect,-600)  //nachylnost na elektrinu
-tag(resist_cold,-400)   //nachylnost na chlad
+tag(resist_fire,-150)
+tag(resist_elect,0)  //nachylnost na elektrinu
+tag(resist_cold,300)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,undead,80)
+tag(monstertype,undead,90)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -4741,6 +4744,7 @@ tag(resist_poison,1000) //kostlivci jsou z 99% imunni proti jedu
 tag.resist_para=<eval {650 750}>
 tag(resist_summon,700) //indivindi podle monstra
 tag(resist_bleed,1000) //kostlivec nekrvaci
+tag(resist_curse,250)
 
 //weap resists
 tag(resist_sharp,350)
@@ -4749,12 +4753,12 @@ tag(resist_pierce,150)
 tag(resist_blunt,-400) // kosti rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,400)
-tag(resist_elect,-400)  //nachylnost na elektrinu
-tag(resist_cold,-200)   //nachylnost na chlad
+tag(resist_fire,-100)
+tag(resist_elect,50)  //nachylnost na elektrinu
+tag(resist_cold,300)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,undead,60)
+tag(monstertype,undead,90)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -4831,6 +4835,7 @@ tag(resist_poison,1000) //kostlivci jsou z 99% imunni proti jedu
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,800) //indivindi podle monstra
 tag(resist_bleed,1000) //kostlivec nekrvaci
+tag(resist_curse,300)
 
 //weap resists
 tag(resist_sharp,600)
@@ -4839,12 +4844,12 @@ tag(resist_pierce,450)
 tag(resist_blunt,100)  // kosti rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,600)
-tag(resist_elect,-50)  //nachylnost na elektrinu
-tag(resist_cold,150)   //nachylnost na chlad
+tag(resist_fire,-50)
+tag(resist_elect,100)  //nachylnost na elektrinu
+tag(resist_cold,350)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,undead,60)
+tag(monstertype,undead,85)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -4920,6 +4925,7 @@ tag(resist_poison,1000) //kostlivci jsou z 99% imunni proti jedu
 tag.resist_para=<eval {850 950}>
 tag(resist_summon,800) //indivindi podle monstra
 tag(resist_bleed,1000) //kostlivec nekrvaci
+tag(resist_curse,400)
 
 //weap resists
 tag(resist_sharp,600)
@@ -4928,12 +4934,12 @@ tag(resist_pierce,450)
 tag(resist_blunt,100)  // kosti rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,600)
-tag(resist_elect,-50)  //nachylnost na elektrinu
-tag(resist_cold,150)   //nachylnost na chlad
+tag(resist_fire,0)
+tag(resist_elect,150)  //nachylnost na elektrinu
+tag(resist_cold,400)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,undead,60)
+tag(monstertype,undead,80)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -5008,6 +5014,7 @@ tag(resist_poison,1000)     //kostlivci jsou z 99% imunni proti jedu
 tag(resist_para,1000)       //indivindi podle monstra - vetsinou immune
 tag(resist_summon,850)      //indivindi podle monstra
 tag(resist_bleed,1000)      //kostlivec nekrvaci
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,600)
@@ -5016,12 +5023,12 @@ tag(resist_pierce,450)
 tag(resist_blunt,100)  // kosti rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,600)
-tag(resist_elect,-50)  //nachylnost na elektrinu
-tag(resist_cold,150)   //nachylnost na chlad
+tag(resist_fire,50)
+tag(resist_elect,200)  //nachylnost na elektrinu
+tag(resist_cold,450)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,undead,50)
+tag(monstertype,undead,80)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -5101,6 +5108,7 @@ tag(resist_poison,1000)    //kostlivci jsou z 99% imunni proti jedu
 tag(resist_para,1000)      //indivindi podle monstra - vetsinou immune
 tag(resist_summon,950)     //indivindi podle monstra
 tag(resist_bleed,1000)     //kostlivec nekrvaci
+tag(resist_curse,650)
 
 //weap resists
 tag(resist_sharp,800)
@@ -5109,12 +5117,12 @@ tag(resist_pierce,650)
 tag(resist_blunt,200)  // kosti rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,800)
-tag(resist_elect,-50)  //nachylnost na elektrinu
-tag(resist_cold,150)   //nachylnost na chlad
+tag(resist_fire,100)
+tag(resist_elect,250)  //nachylnost na elektrinu
+tag(resist_cold,600)   //nachylnost na chlad
 
 //typ monstra
-tag(monstertype,undead,40)
+tag(monstertype,undead,80)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical

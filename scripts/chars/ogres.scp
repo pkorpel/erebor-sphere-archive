@@ -1138,6 +1138,7 @@ tag(resist_poison,1000) //
 tag(resist_summon,950)
 tag(resist_para,990)   // nemelo by skoro jit
 tag(resist_bleed,600)  //krvaci malo
+tag(resist_curse,900)
 
 tag(resist_sharp,450)
 tag(resist_slash,-50)   // sekery
@@ -1216,7 +1217,7 @@ maxhits={3000 3450}
 maxstam={85 103}
 maxmana=0
 
-tag.experience=<eval {90.0 91.0}>
+tag.experience=<eval {90.0 105.0}>
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
@@ -1224,7 +1225,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,85)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -1233,14 +1234,15 @@ tag(resist_poison,450)
 tag.resist_para=<eval {550 700}>
 tag(resist_summon,600)
 tag(resist_bleed,300)  //krvaci
+tag(resist_curse,-100)
 
-tag(resist_sharp,-150)
-tag(resist_slash,-150)   // sekery
+tag(resist_sharp,-50)
+tag(resist_slash,-350)   // sekery
 tag(resist_pierce,150)
 tag(resist_blunt,00)
 
-tag(resist_fire,200)
-tag(resist_elect,100)
+tag(resist_fire,-100)
+tag(resist_elect,200)
 tag(resist_cold,100)
 
 PARRYING={70.0 80.0}
@@ -1292,7 +1294,7 @@ maxhits={2200 2650}
 maxstam={120 150}
 maxmana=1500
 
-tag.experience=<eval {100.0 110.0}>
+tag.experience=<eval {100.0 115.0}>
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
@@ -1300,7 +1302,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,80)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -1309,9 +1311,10 @@ tag(resist_poison,550)
 tag.resist_para=<eval {650 800}>
 tag(resist_summon,700)
 tag(resist_bleed,300)  //krvaci
+tag(resist_curse,-50)
 
-tag(resist_sharp,-150)
-tag(resist_slash,-150)   // sekery
+tag(resist_sharp,-50)
+tag(resist_slash,-350)   // sekery
 tag(resist_pierce,150)
 tag(resist_blunt,00)
 
@@ -1391,7 +1394,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,80)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -1400,15 +1403,16 @@ tag(resist_poison,600)
 tag.resist_para=<eval {650 800}>
 tag(resist_summon,600)
 tag(resist_bleed,300)  //krvaci
+tag(resist_curse,100)
 
-tag(resist_sharp,-150)
-tag(resist_slash,-150)   // sekery
+tag(resist_sharp,-50)
+tag(resist_slash,-250)   // sekery
 tag(resist_pierce,150)
 tag(resist_blunt,00)
 
-tag(resist_fire,300)
-tag(resist_elect,200)
-tag(resist_cold,200)
+tag(resist_fire,-50)
+tag(resist_elect,300)
+tag(resist_cold,100)
 
 PARRYING={70.0 100.0}
 WRESTLING={90.0 100.0}
@@ -1471,7 +1475,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,85)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -1480,6 +1484,7 @@ tag(resist_poison,550)
 tag.resist_para=<eval {700 800}>
 tag(resist_summon,600)
 tag(resist_bleed,300)  //krvaci
+tag(resist_curse,-100)
 
 tag(resist_sharp,-50)
 tag(resist_slash,-50)   // sekery
@@ -1551,7 +1556,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//dex 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,85)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -1560,6 +1565,7 @@ tag(resist_poison,650)
 tag.resist_para=<eval {700 800}>
 tag(resist_summon,600)
 tag(resist_bleed,100)  //krvaci
+tag(resist_curse,-100)
 
 tag(resist_sharp,-50)
 tag(resist_slash,-50)   // sekery
@@ -1642,15 +1648,16 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,85)
 
-tag.weapflag=dam_lightning|dam_magic
+tag.weapflag=dam_physical|dam_blunt
 
 //other resists
 tag(resist_poison,550)
 tag.resist_para=<eval {800 880}>
 tag(resist_summon,850)
 tag(resist_bleed,200)
+tag(resist_curse,-50)
 
 tag(resist_sharp,-100)
 tag(resist_slash,-100)   // sekery
@@ -1744,7 +1751,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,85)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -1753,6 +1760,7 @@ tag(resist_poison,650)
 tag.resist_para=<eval {900 980}>
 tag(resist_summon,800)
 tag(resist_bleed,300)  //krvaci
+tag(resist_curse,50)
 
 tag(resist_sharp,-50)
 tag(resist_slash,-50)   // sekery
@@ -1842,6 +1850,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {950 1000}>
 tag(resist_summon,1000)
 tag(resist_bleed,990)
+tag(resist_curse,500)
 
 tag(resist_sharp,900)
 tag(resist_slash,900)   // sekery
@@ -1933,6 +1942,7 @@ tag(resist_poison,950)
 tag.resist_para=<eval {900 980}>
 tag(resist_summon,1000)
 tag(resist_bleed,750)
+tag(resist_curse,450)
 
 tag(resist_sharp,650)
 tag(resist_slash,650)
@@ -2016,6 +2026,7 @@ tag(resist_poison,750)
 tag.resist_para=<eval {950 1000}>
 tag(resist_summon,1000)
 tag(resist_bleed,350)  //krvaci
+tag(resist_curse,550)
 
 tag(resist_sharp,150)
 tag(resist_slash,150)   // sekery
@@ -2115,6 +2126,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {900 980}>
 tag(resist_summon,950)
 tag(resist_bleed,700)
+tag(resist_curse,400)
 
 tag(resist_sharp,750)
 tag(resist_slash,750)
@@ -2215,7 +2227,7 @@ tag(npc_summoning_count,2)                         //pocet
 tag(npc_summoning_char[0],c_titan_leap)
 tag(npc_summoning_char[1],c_titan_sluha)
 
-tag(monstertype,humanoid,40)
+tag(monstertype,humanoid,75)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -2224,6 +2236,7 @@ tag(resist_poison,1000)
 tag(resist_para,950)            // nemelo by skoro jit
 tag(resist_summon,950)
 tag(resist_bleed,900)           //krvaci malo
+tag(resist_curse,800)
 
 tag(resist_sharp,50)
 tag(resist_slash,750)           // sekery
@@ -2491,6 +2504,7 @@ tag(resist_poison,480)
 tag.resist_para=<eval {800 900}>
 tag(resist_summon,850)
 tag(resist_bleed,500)  //krvaci
+tag(resist_curse,250)
 
 tag(resist_sharp,250)
 tag(resist_slash,200)   // sekery
@@ -2580,6 +2594,7 @@ tag(resist_poison,600)
 tag.resist_para=<eval {850 950}>
 tag(resist_summon,950)
 tag(resist_bleed,500)  //krvaci
+tag(resist_curse,350)
 
 tag(resist_sharp,300)
 tag(resist_slash,300)   // sekery
@@ -2665,6 +2680,7 @@ tag(resist_poison,700)
 tag.resist_para=<eval {800 1000}>
 tag(resist_summon,1000)
 tag(resist_bleed,300)  //krvaci
+tag(resist_curse,450)
 
 tag(resist_sharp,250)
 tag(resist_slash,250)   // sekery
@@ -2749,6 +2765,7 @@ tag(resist_poison,800)
 tag.resist_para=<eval {900 1000}>
 tag(resist_summon,1000)
 tag(resist_bleed,400)  //krvaci
+tag(resist_curse,600)
 
 tag(resist_sharp,300)
 tag(resist_slash,300)   // sekery
@@ -2853,6 +2870,7 @@ tag(resist_poison,900)
 tag.resist_para=<eval {950 1000}>
 tag(resist_summon,600)
 tag(resist_bleed,900)  //krvaci
+tag(resist_curse,550)
 
 tag(resist_sharp,700)
 tag(resist_slash,700)   // sekery
@@ -2938,6 +2956,7 @@ tag(resist_poison,500) //na humanoidy silny
 tag.resist_para=<eval {850 950}>
 tag(resist_summon,600) //individualni
 tag(resist_bleed,400) //individualni
+tag(resist_curse,650)
 
 //weap resists
 tag(resist_sharp,350)
@@ -3265,6 +3284,7 @@ tag(resist_poison,700)
 tag.resist_para=<eval {800 900}>
 tag(resist_summon,800)
 tag(resist_bleed,400)
+tag(resist_curse,-150)
 
 tag(resist_sharp,400)
 tag(resist_slash,400)        //sekery
@@ -3346,6 +3366,7 @@ tag(resist_poison,600)
 tag.resist_para=<eval {800 900}>
 tag(resist_summon,700)
 tag(resist_bleed,300)
+tag(resist_curse,-150)
 
 tag(resist_sharp,350)
 tag(resist_slash,350)        //sekery

@@ -224,6 +224,7 @@ tag(resist_poison,1000) //indivindi podle monstra
 tag(resist_para,1000) //indivindi podle monstra
 tag(resist_summon,750) //indivindi podle monstra
 tag(resist_bleed,350) //snih nejak moc nekrvaci
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,00)
@@ -238,9 +239,9 @@ tag(resist_cold,800)
 
 //typ monstra
 tag(monstertype,snow)
-tag(monstertype2,golem,50)
+tag(monstertype2,golem,70)
 //weap flags
-tag.weapflag=dam_blunt|dam_physical|dam_cold
+tag.weapflag=dam_magic|dam_cold
 
 WRESTLING=120.0
 RESIST=250.0
@@ -311,6 +312,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {600 850}>
 tag(resist_summon,750)
 tag(resist_bleed,350)
+tag(resist_curse,550)
 
 //weap resists
 tag(resist_sharp,-100)
@@ -327,7 +329,7 @@ tag(resist_silence,600)
 //typ monstra
 tag(monstertype,snow)
 //weap flags
-tag.weapflag=dam_blunt|dam_physical|dam_cold
+tag.weapflag=dam_magic|dam_cold
 
 WRESTLING=120.0
 RESIST=250.0
@@ -405,6 +407,7 @@ tag(resist_poison,1000) //indivindi podle monstra
 tag.resist_para=<eval {900 1000}>
 tag(resist_summon,800) //indivindi podle monstra
 tag(resist_bleed,350) //snih nejak moc nekrvaci
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,500)
@@ -498,6 +501,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {600 750}>
 tag(resist_summon,350)
 tag(resist_bleed,350)
+tag(resist_curse,100)
 
 //weap resists
 tag(resist_sharp,00)
@@ -514,7 +518,7 @@ tag(resist_cold,800)
 tag(monstertype,snow)
 tag(monstertype2,spider,60)
 //weap flags
-tag.weapflag=dam_piercing|dam_physical|dam_cold
+tag.weapflag=dam_magic|dam_cold
 
 WRESTLING=100.0
 RESIST=100.0
@@ -585,6 +589,7 @@ tag(resist_poison,500) //na humanoidy silny
 tag.resist_para=<eval {800 925}>
 tag(resist_summon,700) //individualni
 tag(resist_bleed,400) //individualni
+tag(resist_curse,650)
 
 //weap resists
 tag(resist_sharp,250)
@@ -599,9 +604,9 @@ tag(resist_cold,800)
 
 //typ monstra
 tag(monstertype,snow)
-tag(monstertype2,humanoid,60)
+tag(monstertype2,humanoid,75)
 //weap flags
-tag.weapflag=dam_blunt|dam_physical|dam_cold
+tag.weapflag=dam_magic|dam_cold
 
 WRESTLING=120.0
 RESIST=100.0
@@ -669,6 +674,7 @@ tag(resist_poison,820)
 tag.resist_para=<eval {300 650}>
 tag(resist_summon,300)
 tag(resist_bleed,400)
+tag(resist_curse,-200)
 
 tag(resist_sharp,-50)
 tag(resist_slash,-50)
@@ -758,6 +764,7 @@ tag(resist_poison,750)
 tag.resist_para=<eval {300 650}>
 tag(resist_summon,300)
 tag(resist_bleed,400)
+tag(resist_curse,-150)
 
 tag(resist_sharp,50)
 tag(resist_slash,50)
@@ -1025,6 +1032,7 @@ tag(resist_poison,620)
 tag.resist_para=<eval {900 1000}>
 tag(resist_summon,800)
 tag(resist_bleed,500)  //krvaci
+tag(resist_curse,50)
 
 tag(resist_sharp,250)
 tag(resist_slash,250)   // sekery
@@ -1039,7 +1047,7 @@ tag(resist_cold,800)
 tag(monstertype,snow)
 tag(monstertype2,humanoid,60)
 //weap flags
-tag.weapflag=dam_blunt|dam_physical|dam_cold
+tag.weapflag=dam_magic|dam_cold
 
 WRESTLING={100.0 110.0}
 RESIST=100.0

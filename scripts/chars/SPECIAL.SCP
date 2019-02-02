@@ -58,6 +58,7 @@ tag(resist_poison,500) //na humanoidy silny
 tag.resist_para=<eval {650 750}>
 tag(resist_summon,600) //individualni
 tag(resist_bleed,100) //individualni
+tag(resist_curse,250)
 
 //weap resists
 tag(resist_sharp,350)
@@ -151,6 +152,7 @@ tag(resist_poison,100) //na humanoidy silny
 tag.resist_para=<eval {800 925}>
 tag(resist_summon,700) //individualni
 tag(resist_bleed,150) //individualni
+tag(resist_curse,450)
 
 //weap resists
 tag(resist_sharp,150)
@@ -247,6 +249,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {925 980}>
 tag(resist_summon,1000)
 tag(resist_bleed,700)
+tag(resist_curse,700)
 
 tag(resist_sharp,350)
 tag(resist_slash,250)
@@ -402,7 +405,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,75)
 
 tag.weapflag=dam_blunt|dam_physical
 
@@ -411,17 +414,18 @@ tag(resist_poison,500)
 tag.resist_para=<eval {800 900}>
 tag(resist_summon,600) //individualni
 tag(resist_bleed,100) //individualni
+tag(resist_curse,350)
 
 //weap resists
-tag(resist_sharp,-150)
-tag(resist_slash,-150)
-tag(resist_pierce,-100)
+tag(resist_sharp,-50)
+tag(resist_slash,-250)
+tag(resist_pierce,100)
 tag(resist_blunt,650)
 
 //magic resists
-tag(resist_fire,250)
-tag(resist_elect,250)
-tag(resist_cold,100)
+tag(resist_fire,150)
+tag(resist_elect,450)
+tag(resist_cold,-50)
 
 Resist=175.0
 WRESTLING=120.0
@@ -469,7 +473,7 @@ KARMA={-2000 -2500}
 
 STR=6900
 DEX=440
-INT=50
+INT=0
 
 maxhits={10500 10500}
 maxstam={380 400}
@@ -489,7 +493,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 
-tag(monstertype,humanoid,60)
+tag(monstertype,humanoid,75)
 
 tag.weapflag=dam_physical|dam_blunt
 
@@ -498,6 +502,7 @@ tag(resist_poison,600)
 tag.resist_para=<eval {850 950}>
 tag(resist_summon,600)
 tag(resist_bleed,100)
+tag(resist_curse,450)
 
 //weap resists
 tag(resist_sharp,-250)
@@ -506,9 +511,9 @@ tag(resist_pierce,-100)
 tag(resist_blunt,650)
 
 //magic resists
-tag(resist_fire,250)
-tag(resist_elect,250)
-tag(resist_cold,100)
+tag(resist_fire,200)
+tag(resist_elect,150)
+tag(resist_cold,250)
 
 Resist=175.0
 WRESTLING=150.0
@@ -591,6 +596,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {700 850}>
 tag(resist_summon,500)
 tag(resist_bleed,1000)
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,-200)
@@ -606,7 +612,7 @@ tag(resist_silence,400)
 
 //typ monstra
 tag(monstertype,fire)
-tag(monstertype2,humanoid,40)
+tag(monstertype2,humanoid,70)
 
 //weap flags
 tag.weapflag=dam_magic|dam_fire
@@ -702,6 +708,7 @@ tag(resist_poison,1000)
 tag(resist_para,1000)
 tag(resist_summon,550)
 tag(resist_bleed,-500)
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,-350)
@@ -716,7 +723,7 @@ tag(resist_cold,-100)
 
 //typ monstra
 tag(monstertype,water)
-tag(monstertype2,humanoid,40)
+tag(monstertype2,humanoid,70)
 
 //weap flags
 tag.weapflag=dam_cold|dam_magic
@@ -808,6 +815,7 @@ tag(resist_poison,1000)
 tag(resist_para,1000)
 tag(resist_summon,850)
 tag(resist_bleed,1000)
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,400)
@@ -823,7 +831,7 @@ tag(resist_silence,600)
 
 //typ monstra
 tag(monstertype,air)
-tag(monstertype2,humanoid,40)
+tag(monstertype2,humanoid,70)
 //weap flags
 tag.weapflag=dam_lightning|dam_magic
 
@@ -920,6 +928,7 @@ tag(resist_poison,1000)
 tag(resist_para,1000)
 tag(resist_summon,600)
 tag(resist_bleed,1000)
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,800)
@@ -934,7 +943,7 @@ tag(resist_cold,200)
 
 //typ monstra
 tag(monstertype,earth)
-tag(monstertype2,humanoid,40)
+tag(monstertype2,humanoid,70)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -1034,6 +1043,7 @@ tag(resist_poison,-250)
 tag(resist_para,1000)
 tag(resist_summon,450)
 tag(resist_bleed,-500)
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,-100)
@@ -1048,7 +1058,7 @@ tag(resist_cold,-300)
 
 //typ monstra
 tag(monstertype,blood)
-tag(monstertype2,humanoid,40)
+tag(monstertype2,humanoid,70)
 //weap flags
 tag.weapflag=dam_sharp|dam_physical
 
@@ -1146,6 +1156,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {800 950}>
 tag(resist_summon,550)
 tag(resist_bleed,1000)
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,800)
@@ -1160,7 +1171,7 @@ tag(resist_cold,1000)
 
 //typ monstra
 tag(monstertype,snow)
-tag(monstertype2,humanoid,60)
+tag(monstertype2,humanoid,70)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical|dam_cold
@@ -1250,6 +1261,7 @@ tag(resist_poison,1000)
 tag.resist_para=<eval {800 950}>
 tag(resist_summon,750)
 tag(resist_bleed,1000)
+tag(resist_curse,500)
 
 //weap resists
 tag(resist_sharp,800)
@@ -1265,7 +1277,7 @@ tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,snow)
-tag(monstertype2,humanoid,60)
+tag(monstertype2,humanoid,70)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical|dam_cold
@@ -1343,6 +1355,7 @@ tag(resist_poison,-1000)
 tag(resist_para,1000)
 tag(resist_summon,550)
 tag(resist_bleed,-500)
+tag(resist_curse,600)
 
 //weap resists
 tag(resist_sharp,-150)
@@ -1357,7 +1370,7 @@ tag(resist_cold,-500)
 tag(resist_silence,650)
 
 //typ monstra
-tag(monstertype,daemon,40)
+tag(monstertype,daemon,70)
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
 
