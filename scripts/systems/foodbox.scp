@@ -18,9 +18,9 @@ foodboxOrder[15] i_bread_french         // French bread
 foodboxOrder[16] i_fruit_gourd1         // gourd
 foodboxOrder[17] i_fruit_gourd2         // gourd
 foodboxOrder[18] i_fruit_grapes         // grape bunch
-foodboxOrder[21] i_ham                  // ham
-foodboxOrder[19] i_fruit_cabbage        // head of cabbage
-foodboxOrder[20] i_crop_sprouts3        // head of lettuce
+foodboxOrder[19] i_ham                  // ham
+foodboxOrder[20] i_fruit_cabbage        // head of cabbage
+foodboxOrder[21] i_crop_sprouts3        // head of lettuce
 foodboxOrder[22] i_fruit_honeydewmelon  // honeydew melon
 foodboxOrder[23] i_jar_honey            // jar of honey
 foodboxOrder[24] i_lamb_leg             // leg of lamb
@@ -32,16 +32,18 @@ foodboxOrder[29] i_fruit_peach          // peach
 foodboxOrder[30] i_fruit_pear           // pear 
 foodboxOrder[31] i_pizza                // pizza 
 foodboxOrder[32] i_fruit_pumpkin        // pumpkin
-foodboxOrder[34] i_bird_raw             // raw bird
+foodboxOrder[33] i_bird_raw             // raw bird
+foodboxOrder[34] i_chicken_leg_raw      // raw chicken leg
 foodboxOrder[35] i_fish_cut_raw         // raw fish steak
-foodboxOrder[33] i_sausages             // sausages
-foodboxOrder[36] i_bacon_slice          // slice of bacon
-foodboxOrder[37] i_fruit_squash         // squash
-foodboxOrder[38] i_fruit_turnip         // turnip
-foodboxOrder[39] i_fruit_watermelon     // watermelon
-foodboxOrder[40] i_cheese_wheel         // wheel of cheese
+foodboxOrder[36] i_lamb_leg_raw         // raw leg of lamb
+foodboxOrder[37] i_sausages             // sausages
+foodboxOrder[38] i_bacon_slice          // slice of bacon
+foodboxOrder[39] i_fruit_squash         // squash
+foodboxOrder[40] i_fruit_turnip         // turnip
+foodboxOrder[41] i_fruit_watermelon     // watermelon
+foodboxOrder[42] i_cheese_wheel         // wheel of cheese
 
-foodboxOrderCount 41
+foodboxOrderCount 43
 
 foodboxIconShiftX_i_cake 7
 foodboxIconShiftX_i_fruit_pumpkin -7
@@ -54,6 +56,7 @@ foodboxIconShiftX_i_fruit_squash -7
 foodboxIconShiftX_i_fruit_cabbage -7
 foodboxIconShiftX_i_fish_cut_cooked -5
 foodboxIconShiftX_i_fruit_honeydewmelon -5
+foodboxIconShiftX_i_lamb_leg_raw 2
 
 foodboxAllowed_i_ribs_raw 1
 foodboxAllowed_i_bird_raw 1
@@ -98,6 +101,8 @@ foodboxAllowed_i_fruit_pumpkin 1
 foodboxAllowed_i_fruit_squash 1
 foodboxAllowed_i_fruit_turnip 1
 foodboxAllowed_i_fruit_watermelon 1
+foodboxAllowed_i_lamb_leg_raw 1
+foodboxAllowed_i_chicken_leg_raw 1
 
 // arbitrary selected limit for each food type
 foodbox_MaxFoodCount 10000000
