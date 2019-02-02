@@ -3949,6 +3949,17 @@ COLDCHANCE=00
 
 [AREA Dol Guldur Level 2]
 GROUP=Dungeon Dol Guldur
+P=5259, 830, 10, 10
+RECT=5200,820,5300,932
+MAPPLANE=10
+FLAGS=0081E
+tag.nobank=1
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Dol Guldur Level 3]
+GROUP=Dungeon Dol Guldur
 P=5294, 649, 30, 10
 RECT=5258,644,5308,697
 mapplane=10
@@ -3957,23 +3968,12 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Dol Guldur level 3]
+[AREA Dol Guldur bonus]
 GROUP=Dungeon Dol Guldur
 P=5638, 3381, 0, 10
 RECT=5196,3364,5672,3458
 mapplane=10
 FLAGS=0081E
-tag.realm=3
-RAINCHANCE=00
-COLDCHANCE=00
-
-[AREA Dol Guldur Level 4]
-GROUP=Dungeon Dol Guldur
-P=5259, 830, 10, 10
-RECT=5200,820,5300,932
-MAPPLANE=10
-FLAGS=0081E
-tag.nobank=1
 tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
