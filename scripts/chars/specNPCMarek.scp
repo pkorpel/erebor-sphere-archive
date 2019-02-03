@@ -4296,7 +4296,7 @@ ON=@NPCRestock
 ITEM=i_mi_pouch_high
 ITEM=i_mi_pouch_superhigh
 ITEM=i_gold
-ITEM=300 i_reag_bone
+ITEM=i_reag_bone,300
 
 /////////////////////////////////
 
