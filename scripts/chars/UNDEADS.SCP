@@ -1056,9 +1056,9 @@ ICON=i_pet_SKELETON
 ANIM=078c7f
 CAN=MT_WALK|MT_EQUIP|MT_FIRE_IMMUNE
 
-ATTACK=100
-ARMOR=100
-MOVERATE=3
+ATTACK=120
+ARMOR=140
+MOVERATE=6
 
 RESOURCES=16 i_reag_bone
 BLOODCOLOR=-1
@@ -1069,6 +1069,8 @@ TEVENTS=e_selfreser
 TEVENTS=e_NPC_Bleed
 TEVENTS=e_npc_critic
 TEVENTS=e_undead
+TEVENTS=e_npc_leaper
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Undeads
@@ -1084,13 +1086,15 @@ STR=1100
 DEX=1500
 INT=0
 
-maxhits={5000 5500}
+maxhits={10000 12500}
 maxstam=320
 maxmana=0
 
-tag.experience=<eval {220.0 235.0}>
+tag.experience=<eval {450.0 500.0}>
 
-tag.npc_bleed=300             //30%
+tag.npc_bleed=400             //40%
+
+tag(npc_port_distance,5)
 
 tag.npc_critic_chance=300         //30% chance
 tag.npc_critic_dmg=25,30          //dmg in between
@@ -1102,30 +1106,30 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
 
 tag(resist_poison,1000)
-tag.resist_para=<eval {800 950}>
-tag(resist_summon,750)
+tag(resist_para,1000)
+tag(resist_summon,1000)
 tag(resist_bleed,1000)
 
-tag(resist_sharp,-50)
-tag(resist_slash,-50)        //sekery
-tag(resist_pierce,250)
-tag(resist_blunt,-150)
+tag(resist_sharp,550)
+tag(resist_slash,50)        //sekery
+tag(resist_pierce,550)
+tag(resist_blunt,250)
 
 tag(resist_fire,-50)
 tag(resist_elect,50)
 tag(resist_cold,550)
 
 //typ monstra
-tag(monstertype,undead,40)
+tag(monstertype,undead,85)
 //weap flags
-tag.weapflag=dam_slashing|dam_physical //ruzne
+tag.weapflag=dam_cold|dam_magic //ruzne
 
 tag(resstimer,<eval {45 90}>)
 
 PARRYING={95.0 110.0}
 TACTICS={95.0 110.0}
-WRESTLING={95.0 110.0}
-Fencing={95.0 110.0}
+WRESTLING=130.0
+Fencing=130.0
 peacemaking=100.0
 provocation=100.0
 SpiritSpeak=60.0
