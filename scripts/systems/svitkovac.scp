@@ -93,13 +93,26 @@ ON=@CREATE
 tag(scroll[1],0)
 COLOR=0985
 
+on=@stackon
+if (argo.f_svitkovacIsScroll)
+  if (!argo.f_svitkovacAddScroll(<uid>))
+    argo.bounce
+  endif
+  return 1
+else
+  src.redMessage("Muzes vkladat pouze svitky.")
+endif
+
 CATEGORY=Svitkovac
 SUBSECTION=Svitkovac
 DESCRIPTION=Svitkovac
 
 [typedef t_svitkovac]
-
 ON=@userDCLICK
+if (f_lockeditem)
+  return 1
+endif
+
 if (!src.svitkovac_canUse(<uid>))
   return 1
 endif
@@ -107,29 +120,67 @@ endif
 SRC.SOUND=85
 src.tag(dynamdialog,0)
 DIALOG d_scroll_case2
-RETURN 1
+
+return 1
 
 ON=@TARGON_ITEM
-IF (!src.canUse(<src.targ>))
-  src.redmessage("Nedosahnes na svitek.")
+if (!src.svitkovac_canUse(<uid>))
   return 1
-elseif (src.targ.type!=020)&&(src.targ.type!=t_scroll)&&(src.targ.type!=t_customspell_scroll)
-  src.redMessage("Toto neni svitek.")
-  target("Uloz dalsi svitek")
-else 
-  arg(amount,<SRC.TARG.AMOUNT>)
-  arg(inbook,<eval <safe.TAG(scroll[<src.targ.morex>])>>)
-  arg(free,<maxscrolls>-<arg(inbook)>)
-  arg(taken,<arg(amount)>)
-  if (arg(free)<arg(amount))
-    arg(taken,<arg(free)>)
-  endif
-  TAG(scroll[<src.targ.morex>],<eval arg(inbook)+arg(taken)>)
-  src.sysmessage("Svitek <src.targ.name> ulozen do svitkovace.")
-  src.targ.consume(<arg(taken)>)
-  target("Uloz dalsi svitek")
 endif
+
+if (!src.isCarrying(<src.targ>))
+  src.redmessage("<src.targ.name> musis mit u sebe.")
+elseif (src.targ.f_svitkovacIsScroll)
+  src.targ.f_svitkovacAddScroll(<uid>)
+elseif (src.targ.type == t_container)
+  src.targ.contents(f_svitkovacAddItem(<uid>))
+else 
+  src.redMessage("Toto neni svitek.")
+endif
+
+target("Uloz dalsi svitek")
 return 1
+
+// argv(0)   svitkovac
+// this      item
+[function f_svitkovacAddItem]
+if (!f_svitkovacIsScroll)
+  return
+endif
+
+f_svitkovacAddScroll(<argv(0)>)
+
+// argv(0)   svitkovac
+// this      scroll
+[function f_svitkovacAddScroll]
+arg(amount,<amount>)
+arg(inbook,<eval argv(0).tag(scroll[<morex>])>)
+arg(free,<eval maxscrolls-arg(inbook)>)
+arg(taken,<arg(amount)>)
+if (arg(free) < arg(amount))
+  arg(taken,<arg(free)>)
+  if (!arg(free))
+    src.redMessage("Nemuzes dat vic <name> do svitkovace. Svitkovac je plny.")
+    arg(result,0)
+  else
+    src.redMessage("Do svitkovace jsi <src.sex(vlozil,vlozila)> pouze <arg(taken)> <name>. Pro zbytek tam neni misto.")
+    arg(result,0)
+  endif
+else
+  src.sysmessage("<src.sex(Vlozil,Vlozila)> jsi do svitkovace <arg(taken)> <name>.")
+  arg(result,1)
+endif
+
+argv(0).tag(scroll[<morex>],<eval arg(inbook)+arg(taken)>)
+consume(<arg(taken)>)
+
+return <arg(result)>
+
+[function f_svitkovacIsScroll]
+if (type==020)||(type==t_scroll)||(type==t_customspell_scroll)
+  return 1
+endif
+return 0
 
 //////////////Start the GUMP//////////////////
 
@@ -447,7 +498,7 @@ endif
 src.act.amount=arg(wanted)
 src.act.bounce
 tag(scroll[<src.tag(dynamdialog)>],<eval <tag(scroll[<src.tag(dynamdialog)>])>-arg(wanted)>)
-src.sysmessage You take out <arg(wanted)> scrolls.
+src.sysmessage("<src.sex(Vybral,Vybrala)> jsi ze svitkovace <arg(wanted)> <src.act.name>.")
 return 1
 
 //novy svitkovac (by heck)
