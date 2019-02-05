@@ -425,6 +425,10 @@ return 0
 //  D o d g i n g   a l g o r i t h m s  //
 
 // M A G I C A L
+[defnames snd_combat]
+def_snd_reflex       {953 956}
+def_snd_magic_reflex {323 1 {553 555} 6 {953 956} 5}
+def_snd_magic_block  {320 1 326 1 {950 951} 2 {953 956} 4}
 
 [function f_dmgFinal_melee_reflex]
 if (!isEvent(e_meleereflex))
@@ -435,7 +439,7 @@ if (tag(mi_meleereflex) > {0 99})
   classmessage("Uder magicky odrazen")
   src.redmessage("Uder magicky odrazen")
   effect(3,#01153,6,10,1)
-  sound(512)
+  sound(def_snd_magic_reflex)
   return 1
 endif
 return 0
@@ -449,7 +453,7 @@ if (tag(mi_meleeblock) > <arg(random)>)
   classmessage("Uder magicky zastaven")
   src.redmessage("Uder magicky zastaven")
   effect(3,#01153,6,10,1)
-  sound(324)
+  sound(def_snd_magic_block)
   return 1
 endif
 return 0
@@ -464,7 +468,7 @@ if (tag(mi_rangedreflex) > <arg(random)>)
   classmessage("Uder magicky odrazen")
   src.redmessage("Uder magicky odrazen")
   effect(3,#01153,6,10,1)
-  sound(512)
+  sound(def_snd_magic_reflex)
   return 1
 endif
 return 0
@@ -478,7 +482,7 @@ if (tag(mi_rangedblock) > <arg(random)>)
   classmessage("Uder magicky zastaven")
   src.redmessage("Uder magicky zastaven")
   effect(3,#01153,6,10,1)
-  sound(324)
+  sound(def_snd_magic_block)
   return 1
 endif
 return 0
@@ -508,6 +512,7 @@ if (<eval tag(ra_thief_rebound)>)
   if (chance(<arg(chance)>,4))
     src.damage_noresponse(<var(ubrano)>,<var(damage_flags)>,<uid>)
     classmessage("<sex(Odrazil,Odrazila)> jsi uder!")
+    sound(def_snd_reflex)
     return 1
   endif
 endif
@@ -519,7 +524,7 @@ if (!src.npc)
 endif
 if (<eval <eval tag(ra_weapdodge)>*nastaveni_ability_pvMdodge> > {0 999})
   classmessage("<sex(Uhnul,Uhnula)> jsi uderu.")
-  sound(snd_WEAPONS_SWISH02)
+  sound({snd_WEAPONS_SWISH01 snd_WEAPONS_SWISH03})
   return 1
 endif
 return 0
