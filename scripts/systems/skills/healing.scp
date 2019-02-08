@@ -97,13 +97,15 @@ if (more1==0)
     cont.classmessage("<cont.sex(Ozivil,Ozivila)> jsi <link.link.Name>.")
     link.link.P=<link.P>
     src=<cont>
-    if (link.link.isonline)
-      arg(resurrectedPlayer,<link.link>)
-      arg(resurrectingPlayer,<cont>)
-      link.link.spelleffect(59,1000)
-      arg(resurrectedPlayer).sysmessage(Ozivil te <arg(resurrectingPlayer).Name>.)
-    else
-      link.spelleffect(59,1000)
+    
+    arg(resurrectedPlayer,<link.link>)
+    arg(resurrectingPlayer,<cont>)
+    
+    link.spelleffect(59,1000)
+
+    if (arg(resurrectedPlayer).isonline)
+      arg(resurrectedPlayer).classmessage("Ozivil te <arg(resurrectingPlayer).Name>.")
+      arg(resurrectedPlayer).regenrefresh
     endif
   else
     cont.redmessage("<cont.sex(Selhal,Selhala)> jsi v ozivovani.")
