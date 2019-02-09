@@ -31,6 +31,7 @@ endif
 link.checknajem
 src.smsg(Mesicni najem domu cislo <eval link.tag.housenumber> cini <link.tag(najem)> gp.)
 src.smsg(Najem je zaplacen na <link.paiduntildays> dni dopredu.)
+f_clear_backup_backpacks
 
 on=@dropon_obj
 src.say(<src.name> do mne hodil <argo.name>)
@@ -341,6 +342,19 @@ else
  try tag(block,"")
  foreachlocked(unblockitem)
  src.classmessage(Dum odblokovan.)
+endif
+
+[function f_clear_backup_backpacks]
+if ((<id> == i_najem_chest) || (<id> == i_vendor_chest))
+  contents(f_remove_old_backups)
+endif
+
+[function f_remove_old_backups]
+if (<age> > 31536000) // 1 rok
+  if ((<id> == i_backpack) && (<attr> == 090)) 
+    src.accmsg("zaloha <name>(<uid>) byla smazana z najemni truhly(<topobj>) jelikoz byla starsi jak rok.")
+    remove
+  endif
 endif
 
 [eof]
