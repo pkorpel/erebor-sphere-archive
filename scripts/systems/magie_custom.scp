@@ -39,6 +39,8 @@ a_strength		16
 a_defname[16]		a_strength
 a_bless			17
 a_defname[17]		a_bless
+a_poison        20
+a_defname[20]       a_poison
 a_curse			27
 a_defname[27]		a_curse
 a_defname[46]		a_curse
@@ -558,6 +560,17 @@ if (argvcount)
 MAXMANA=<argv(0)>
 endif
 return <MAXMANA>
+
+[function f_effect_a_poison]
+arg(pois_eff,<eval ((<src.tag.SM>*<src.poisoning>*<nastaveni_poison_spell_poisoning_effect>)+5000000)/1000>)
+arg(magery_eff,<eval ((<src.tag.SM>*<src.magery>*<nastaveni_poison_spell_magery_effect>)+5000000)/1000>)
+arg(pois_dmg,<eval <arg(pois_eff)>+<arg(magery_eff)>>)
+if (npc)
+  arg(pois_dmg,<eval <eval <arg(pois_dmg)>*<nastaveni_poison_pvm_coefficient>>/1000000>)
+else
+  arg(pois_dmg,<eval <eval <arg(pois_dmg)>*<nastaveni_poison_pvp_coefficient>>/1000000>)
+endif
+f_poison_doPoison(<src>,<arg(pois_dmg)>,5,poison_absoluteDmg,0,517)
 
 [itemdef i_a_curse]
 id=i_rune_curse
