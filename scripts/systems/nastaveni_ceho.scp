@@ -2706,12 +2706,24 @@ n_poison_default[25]  100
 n_poison[26]    pvm_coefficient
 n_poison_name[26]  Koeficient PvM jedu
 n_poison_default[26]  2500
-n_poison[27]
-n_poison_name[27]
-n_poison_default[27]
-n_poison[28]    use_custom_poison
-n_poison_name[28]  pouzivat custom poison
-n_poison_default[28] 0
+n_poison[27]    pvp_coefficient
+n_poison_name[27]  Koeficient PvP jedu
+n_poison_default[27]  100
+n_poison[28]
+n_poison_name[28]
+n_poison_default[28]
+n_poison[29]    use_custom_poison
+n_poison_name[29]  pouzivat custom poison
+n_poison_default[29] 0
+n_poison[30]
+n_poison_name[30]
+n_poison_default[30]
+n_poison[31]	spell_poisoning_effect
+n_poison_name[31]	kouzlo poison - vliv poisoningu koeficient
+n_poison_default[31]	205
+n_poison[32]	spell_magery_effect
+n_poison_name[32]	kouzlo poison - vliv magery koeficient
+n_poison_default[32]	82
 
 n_jine[0]    craftexp_i_log_copper
 n_jine_name[0]  "Craftexp - spruce"
