@@ -46,6 +46,7 @@ endif
 link.f_checkvendornajem
 src.smsg(Mesicni najem prostoru pro vendora cislo <eval link.tag.housenumber> cini <link.tag(najem)> gp.)
 src.smsg(Najem je zaplacen na <link.paiduntildays> dni dopredu.)
+f_clear_backup_backpacks
 
 on=@dropon_obj
 say(<src.name> do mne hodil <argo.name>)
