@@ -2,6 +2,7 @@
 //updates current paralyze time if the target is already paralised
 //argv(0) duration in deci-seconds (default == 20), -1 for eternal paralysis
 //argv(1) paralysis strength (default == 0 ~ can be undone using harm)
+//argv(2) paralyze with stun, if argv(2) exist, paralyze remove action of target too
 [function paralyze]
 if (charIsUnsafe)
   return 1
@@ -27,6 +28,9 @@ if (<paraItem.timer> < <eval arg(paraTime)/10>) //newly set timer is higher than
 elseif (<arg(paraTime)> < 0) //an ethernal para impact
   paraItem.more2 = 1 //ethernal
   paraItem.timer=0
+endif
+if (<argvcount> > 2) // paralyze with stun?
+  action=""
 endif
 f_paralyze_effect
 f_freeze
@@ -66,17 +70,16 @@ if (<restest(i_rune_paralyze_field)>)
 endif
 
 [function isParalyzed]
-return <flag_immobile>
+return <flag_freeze>
 
 [function f_paralyze_effect]
 effect(3,i_fx_curse,6,15,1)
 
 //handles the freezing and suppres the item removal by setting the global check value
 [function f_freeze]
+tag(storeact,<act>)
 var(wasFrozen,1)
-flag_immobile=1
-events +e_paralyzed
-action=""
+flag_freeze=1
 
 //Handles the paralize effect for a constantly defined
 //number of seconds
@@ -93,8 +96,8 @@ on=@create
 timer=0
 
 on=@unequip
-topobj.flag_immobile=0
-topobj.events -e_paralyzed
+topobj.flag_freeze=0
+topobj.addMemoryFlag(<topobj.tag(storeact)>,0200C)
 
 on=@timer
 if (more2 == 1) //ethernal para
@@ -109,7 +112,7 @@ if (isCasting) || (action == 079)
 elseif !(isFighting)
   redmessage("Jsi <sex(paralyzovan,paralyzovana)>.")
 endif
-action=""
+// action=""
 return 1
 
 on=@HitTry
