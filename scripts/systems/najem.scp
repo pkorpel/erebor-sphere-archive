@@ -96,6 +96,9 @@ src.say(<src.name> do mne hodil <argo.name>)
 //potvrdit(tag(paiduntil,<serv.time>),"Opravdu chces vynulovat najem?")
 
 [function checknajem]
+if !(paiduntildays)
+  tag(paiduntil,<serv.time>)  
+endif
 while (tag(najemcont).findtype(t_gold)) && !(tag(paiduntil) == 2147483600)//25920000 - decisekund za mesic //2147483600 - maximalni rozlisitelnost v signed 32Integeru
   arg(pridatcasu,<eval ((tag(najemcont).findtype(t_gold).amount*2592)/tag(najem))*10000>)
   if (<eval (2147483600-tag(paiduntil))> < arg(pridatCasu) ) // doslo by prictenim celeho casu k preteceni ?
@@ -125,8 +128,10 @@ endif
 //timer=<nextday>
 
 [function paiduntildays]
+if (<eval (tag(paiduntil)-serv.time)> <= 0)
+  return 0
+endif
 return <eval ((tag(paiduntil)-serv.time)/864000)>
-//24*3600
 
 
 [function redeedhouse]

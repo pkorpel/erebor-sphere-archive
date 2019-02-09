@@ -1,5 +1,5 @@
 [defnames vendor_constants]
-def_vendor_baseRent    30000
+def_vendor_baseRent    50000
 def_vendor_drazba      6048000
 def_vendor_drazba_max  6048000
 
@@ -60,6 +60,9 @@ endif
 
 
 [function f_checkvendornajem]
+if !(paiduntildays)
+  tag(paiduntil,<serv.time>)  
+endif
 arg(foundGoldID,<tag(najemcont).findtype(t_gold)>)
 while (arg(foundGoldID)) && !(tag(paiduntil) == 2147483600) //25920000 - decisekund za mesic (30 dni) //2147483600 - maximalni rozlisitelnost v signed 32Integeru
   arg(pridatcasu,<eval ((arg(foundGoldID).amount*2592)/tag(najem))*10000>)
@@ -1075,6 +1078,6 @@ arg(dnu,<eval (arg(zbyva_casu)/864000)>) //den ma 86400s (*10 - decisekundy)
 arg(hodin,<eval ((arg(zbyva_casu)-(arg(dnu)*864000))/36000)>) //hodina ma 3600s
 arg(minut,<eval (((arg(zbyva_casu)-(arg(dnu)*864000))-(arg(hodin)*36000))/600)>)
 arg(sekund,<eval ((((arg(zbyva_casu))-(arg(dnu)*864000))-(arg(hodin)*36000))-(arg(minut)*600))/10>)
-return(<eval arg(dnu)/10> dni <eval arg(hodin)/10> hodin <eval arg(minut)/10> minut <eval arg(sekund)/10> sekund)
+return(<arg(dnu)> dni <arg(hodin)> hodin <arg(minut)> minut <arg(sekund)> sekund)
 
 [eof]
