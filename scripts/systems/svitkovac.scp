@@ -667,9 +667,19 @@ Vsechny (max 60k)
 1
 
 [dialog d_scroll_case2_remove button]
+on=0
+f_svitkovacReopen
+
 on=1 //remove all
 f_scroll_case_remove(<tag(scroll[<src.tag.dynamdialog>])>)
+f_svitkovacReopen
+
 on=2 //remove x
 f_scroll_case_remove(<fixnumber(<argtxt(0)>)>)
+f_svitkovacReopen
+
+[function f_svitkovacReopen]
+src.tag(dynamdialog,<eval(((src.tag(dynamdialog)-1)/16)*16)>)
+dialog(d_scroll_case2)
 
 [eof]
