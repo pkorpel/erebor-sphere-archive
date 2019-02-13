@@ -1154,7 +1154,7 @@ tag(monstertype,animal)
 
 tag.weapflag=dam_sharp|dam_physical
 
-tag(resist_poison,-780)
+tag(resist_poison,250)
 tag.resist_para=<eval {400 550}> 
 tag(resist_summon,250)
 tag(resist_bleed,-400)
