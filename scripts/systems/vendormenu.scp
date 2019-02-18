@@ -80,7 +80,7 @@ f_payRentFrom(i_cashiers_mesec)
 f_payRentFrom(i_cashiers_pokladnicka)
 
 if (tag(autorent))
-  if (<eval(tag(paiduntil))> < <eval(serv.time)>)
+  if (<eval(tag(paiduntil))> <= <eval(serv.time)>)
     src.redmessage(Nedostatecne zaplaceny najem - vystehovavam prostor pro vendora.)
     trashvendorplac
     trashvendor_itagy

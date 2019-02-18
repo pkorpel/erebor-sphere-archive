@@ -121,7 +121,7 @@ endif
 
 //src.smsg pridat:<sectodays(<pridatcasu>)>:: <eval pridatcasu/(3600*24)>dni
 if (tag(autorent))
- if (<eval tag(paiduntil)> < <eval (serv.time)>)
+ if (<eval tag(paiduntil)> <= <eval (serv.time)>)
   src.redmessage(Nedostatecne zaplaceny najem - vystehovavam dum.)
   trashhouse
  endif
