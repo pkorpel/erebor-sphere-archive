@@ -175,7 +175,11 @@ elseif ((src.qtag(q022)==11)&&(src.rescount(i_q022_uhli)>=1))
   argo.button(25,395,0fa5,0fa7,1,0,8)
   argo.text(60,395,152,43)
 else
-  argo.HTMLGUMP(170,230,440,100,34,0,36)
+  if (<eval src.tag(realm)> == 1)
+    argo.HTMLGUMP(170,230,440,100,34,0,36)
+  else
+    argo.HTMLGUMP(170,230,440,100,44,0,36)
+  endif
   argo.button(25,395,0fa5,0fa7,1,0,5)
   argo.text(60,395,152,35)
 endif
@@ -218,7 +222,7 @@ A kde ji mas?!  //30
 Dobry den. Posila me Velitel strazi pro zasilku zbrani.  //31
 <basefont color="#ffff88">*Starik zvedl hlavu od kovadliny a prohlizi si te*<basefont color="#ffffff">. Velitel strazi? Pro zasilku? <basefont color="#ffff88">*Chvili na tebe nechapave mzoura, ale pak se mu tvar zachmuri*<basefont color="#ffffff"> Jo, tohleto. <basefont color="#ffff88">*Mraci se*<basefont color="#ffffff"> Tak to jeste neni hotovy. Dosel mi material a nemam cas schanet novy. <basefont color="#ffff88">*Uzavrel jsi dohodu s velitelem strazi tak ji koukej dostat nebo vrat penize! Mracis se pro zmenu ty* *Starik opet ustal v praci a kouka na tebe*<basefont color="#ffffff">. Mno, snad to nebude tak horky. Kdyz mi trochu pomuzes tak to dame behem par dni dokupy. Uz mi chybi dodelat jen par kousku. Kdyz se do toho dame hned tak je to pozitri hotovy. <basefont color="#ffff88">*Jenom jsi neco zabrucel a cekas co dal ze starika vyleze*<basefont color="#ffffff"> //32
 Tak kde zacnem?  //33
-Mno, nejlip asi od zeleza. To mi vetsinou dodava trpaslik Gorug, ted nedavno jsme se ale trosku nepohodli tak asi nebude moc privetivy. Ale snad ti nejake zelezne ingoty ukove. Tak 150 by jich melo stacit. Ale kde ho ted najdes nevim. Naposled kdyz jsem ho videl tak rikal ze uz ma toho komandovani doma pokrk a pujde si provetrat hlavu nekam na venkov. Myslim ze rikal neco o hobitech ale jisty si nejdem. Mno, ale ty si jiste poradis, ze? <basefont color="#ffff88">*S tim s tebou starik pro ted ocividne skoncil, protoze se opet usadil ke kovadline a zacal znovu usilovne klepat kaadivkem*<basefont color="#ffffff">  //34
+Mno, nejlip asi od zeleza. To mi vetsinou dodava trpaslik Gorug, ted nedavno jsme se ale trosku nepohodli tak asi nebude moc privetivy. Ale snad ti nejake zelezne ingoty ukove. Tak 150 by jich melo stacit. Ale kde ho ted najdes nevim. Naposled kdyz jsem ho videl tak rikal ze uz ma toho komandovani doma pokrk a pujde si provetrat hlavu nekam na venkov. Myslim ze rikal neco o hobitech ale jisty si nejsem. Mno, ale ty si jiste poradis, ze? <basefont color="#ffff88">*S tim s tebou starik pro ted ocividne skoncil, protoze se opet usadil ke kovadline a zacal znovu usilovne klepat kaadivkem*<basefont color="#ffffff">  //34
 Dobre, ja se ho pokusim najit.  //35
 Hotovo. Tady jsou ty ingoty.  //36
 Vyborne, vidim ze sis poradil. <basefont color="#ffff88">*Vzal do ruky jeden z Ingotu a zblizka si ho prohlizi*<basefont color="#ffffff"> Mno zadna slava to neni, jak se ostatne dalo ocekavat, ale nam to bude stacit. Doufam ze stejne dobre pochodis i u truhlare. Jmenuje se Miro a ma svoji dilnu nedaleko Edorasu, nekde na zapad od pevnosti vo Vychodni Marce. Mam u nej objednana ratiste na kopi a halapartny.  //37
@@ -228,6 +232,7 @@ Tak a ted uz jen par kyblu uhli a muzeme se do toho pustit. <basefont color="#ff
 Mam to uhli!  //41
 Tak to muzu konecne dononcit... Tady to je, dal sem to vsechno do tyhle bedny. Ale pozor je tezka...  //42
 *vzit bednu*  //43
+Mno, nejlip asi od zeleza. To mi vetsinou dodava trpaslik Gorug, ted nedavno jsme se ale trosku nepohodli tak asi nebude moc privetivy. Ale snad ti nejake zelezne ingoty ukove. Tak 150 by jich melo stacit. Ale kde ho ted najdes nevim. Naposled kdyz jsem ho videl tak rikal ze uz ma toho komandovani doma pokrk a utece. Myslim ze rikal neco o Rhunu ale jisty si nejsem. Mno, ale ty si jiste poradis, ze? <basefont color="#ffff88">*S tim s tebou starik pro ted ocividne skoncil, protoze se opet usadil ke kovadline a zacal znovu usilovne klepat kaadivkem*<basefont color="#ffffff">  //44
 
 [dialog d_q021_Remeslnik button]
 on=1
