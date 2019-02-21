@@ -189,7 +189,6 @@ resizepic 16 65 5100 469 25 // Square Grey box
 //button 50 266 247 248 1 0 0 // Okay button 0
 text 60 35 0 0 // 
 
-
 page <eval ((<src.tag(dynamdialog)>)/(<src.tag(dynamdialog)>-1))-1>
 button 25 69 5209 5003 1 0 1 // predchozi strana
 text 60 69 0 1 //
@@ -197,98 +196,44 @@ page <eval ((<src.tag(st_pointnumb[15])>)/(<src.tag(st_pointnumb[15])>-1))-1>
 button 459 69 5209 5003 1 0 2 // Dalsi strana
 text 360 69 1157 2 // 
 
-//<tag.placeuid[<src.tag.dynamdialog>+1]>
-page <qval(<src.tag(st_pointnumb[1])>,0,-1)>
-text 37 100 995 4 
-text 175 100 995 5
-button 20 103 1209 1210 1 0 4 
-page <qval(<src.tag(st_pointnumb[2])>,0,-1)>
-text 37 120 995 6
-text 175 120 995 7 
-button 20 123 1209 1210 1 0 5 
-page <qval(<src.tag(st_pointnumb[3])>,0,-1)>
-text 37 140 995 8
-text 175 140 995 9 
-button 20 143 1209 1210 1 0 6
-page <qval(<src.tag(st_pointnumb[4])>,0,-1)>
-text 37 160 995 10
-text 175 160 995 11
-button 20 163 1209 1210 1 0 7 
-page <qval(<src.tag(st_pointnumb[5])>,0,-1)>
-text 37 180 995 12
-text 175 180 995 13 
-button 20 183 1209 1210 1 0 8 
-page <qval(<src.tag(st_pointnumb[6])>,0,-1)>
-text 37 200 995 14
-text 175 200 995 15 
-button 20 203 1209 1210 1 0 9 
-page <qval(<src.tag(st_pointnumb[7])>,0,-1)>
-text 37 220 995 16
-text 175 220 995 17
-button 20 223 1209 1210 1 0 10
-//
-page <qval(<src.tag(st_pointnumb[8])>,0,-1)>
-text 272 100 995 18 
-text 410 100 995 19
-button 255 103 1209 1210 1 0 11 
-page <qval(<src.tag(st_pointnumb[9])>,0,-1)>
-text 272 120 995 20
-text 410 120 995 21 
-button 255 123 1209 1210 1 0 12 
-page <qval(<src.tag(st_pointnumb[10])>,0,-1)>
-text 272 140 995 22 
-text 410 140 995 23 
-button 255 143 1209 1210 1 0 13 
-page <qval(<src.tag(st_pointnumb[11])>,0,-1)>
-text 272 160 995 24 
-text 410 160 995 25 
-button 255 163 1209 1210 1 0 14 
-page <qval(<src.tag(st_pointnumb[12])>,0,-1)>
-text 272 180 995 26 
-text 410 180 995 27 
-button 255 183 1209 1210 1 0 15 
-page <qval(<src.tag(st_pointnumb[13])>,0,-1)>
-text 272 200 995 28 
-text 410 200 995 29 
-button 255 203 1209 1210 1 0 16 
-page <qval(<src.tag(st_pointnumb[14])>,0,-1)>
-text 272 220 995 30 
-text 410 220 995 31 
-button 255 223 1209 1210 1 0 17 
+arg(i,1)
+arg(break,0)
+while ((i < 8) && (!break))
+  arg(moneyDist,<safe.f_moneydist(<src.tag(st_pointnumb[i])>)>)
+  if (0FFFFFF > moneyDist)
+    argo.page <qval(<src.tag(st_pointnumb[i])>,0,-1)>
+    argo.text 37 <eval(80+(i*20))> 995 <eval((i*2)+2)>
+    argo.settext(<eval((i*2)+2)>,"<?safe.st_name[<src.tag(st_pointnumb[i])>]?>")
+    argo.text 175 <eval(80+(i*20))> 995 <eval((i*2)+3)>
+    argo.settext(<eval((i*2)+3)>,"<?safe.f_moneydist(<src.tag(st_pointnumb[i])>)?> gp")
+    argo.button 20 <eval(83+(i*20))> 1209 1210 1 0 <eval(i+3)> 
+  else
+    arg(break,1)
+  endif
+  arg(i,#+1)
+endwhile
+
+while ((i < 15) && (!break))
+  arg(moneyDist,<safe.f_moneydist(<src.tag(st_pointnumb[i])>)>)
+  if ((0FFFFFF > moneyDist) && (!break))
+    argo.page <qval(<src.tag(st_pointnumb[i])>,0,-1)>
+    argo.text 272 <eval(80+((i-7)*20))> 995 <eval((i*2)+2)>
+    argo.settext(<eval((i*2)+2)>,"<?safe.st_name[<src.tag(st_pointnumb[i])>]?>")
+    argo.text 410 <eval(80+((i-7)*20))> 995 <eval((i*2)+3)>
+    argo.button 255 <eval(83+((i-7)*20))> 1209 1210 1 0 <eval(i+3)> 
+    argo.settext(<eval((i*2)+3)>,"<?safe.f_moneydist(<src.tag(st_pointnumb[i])>)?> gp")
+  else
+    arg(break,1)
+  endif
+  arg(i,#+1)
+endwhile
+
 
 [DIALOG d_stone_travel TEXT]
 Stanice dostavniku a povozu.
 Na zacatek seznamu // texty k tlacitkum
 Dalsi trasy
 GUILDS
-<?safe.st_name[<src.tag(st_pointnumb[1])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[1])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[2])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[2])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[3])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[3])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[4])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[4])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[5])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[5])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[6])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[6])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[7])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[7])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[8])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[8])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[9])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[9])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[10])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[10])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[11])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[11])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[12])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[12])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[13])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[13])>)?> gp
-<?safe.st_name[<src.tag(st_pointnumb[14])>]?>
-<?safe.f_moneydist(<src.tag(st_pointnumb[14])>)?> gp
 
 [DIALOG d_stone_travel BUTTON]
 on=0
@@ -402,9 +347,9 @@ return 0ffffff
 if (src.isgm)
 return 0
 endif
-if (src.ismurderer)&&(<args>==1)
+if (src.ismurderer)&&(<eval(args)>==1)
   return 1
-elseif !(src.ismurderer)&&(<args>==2)
+elseif !(src.ismurderer)&&(<eval(args)>==2)
  return 1
 endif
 return 0
