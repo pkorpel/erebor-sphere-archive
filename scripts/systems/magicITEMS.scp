@@ -677,9 +677,13 @@ return 0
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if (act.isplayer && findlayer(2).type==t_weapon_mace_staff)
-  return 0
-elseif (<wasHarmed>)
+if (act.isplayer && findlayer(2))
+  if (findlayer(2).type==t_weapon_mace_staff)
+    return 0
+  endif
+endif
+
+if (<wasHarmed>)
   arg(random,<eval({0 99})>)
   if (tag(paralising)><arg(random)>) && (var(swingedchar).tag(resist_para) < (700 + {-200 200}))
     act.paralyze

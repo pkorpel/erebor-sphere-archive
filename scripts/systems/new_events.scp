@@ -317,7 +317,7 @@ on=@DeathCorpse
 if !(strlen(<tag(lastmurderbyf)>))
  return 1
 endif
-if !(safe <argo>) //kdyz nebude mrtvola tak na to seru ! 
+if !(safe argo) //kdyz nebude mrtvola tak na to seru ! 
  return 1
 endif
 finduid(<tag(lastmurderbyf)>).newitemsafe(i_selfress_timer) //item vytvori jeste to monstrum
