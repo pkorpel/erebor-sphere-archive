@@ -192,6 +192,72 @@ class_info_class_thief_max_points[13] 20
 class_info_class_thief_function[13] none
 class_info_class_thief_description[13] "Tato automaticka schopnost umoznuje zlodejovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
 
+//////////////////////////////////////////////////////////////////
+////////////////////////////  PRIEST  ////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+// class priest
+class_info_class_priest_abilities 10 // number of abilities == kazda pridana abilita +1
+
+class_info_class_priest_name[0] Enlightment
+class_info_class_priest_tag[0] none
+class_info_class_priest_max_points[0] none
+class_info_class_priest_function[0] enlightment
+class_info_class_priest_description[0] "Specialni schopnost snizujici cas na provedeni bandaze. Sance na uspesnost se zvysuje s levelem."
+
+class_info_class_priest_name[1] Longrange
+class_info_class_priest_tag[1] ra_rangearrow
+class_info_class_priest_max_points[1] 10
+class_info_class_priest_function[1] longrange
+class_info_class_priest_description[1] "Tato schopnost umoznuje prodlouzit vzdalenost, na kterou je schopen hodit bombu ci dispelbombu."
+
+class_info_class_priest_name[2] Omracujici uder
+class_info_class_priest_tag[2] ra_stuntattack
+class_info_class_priest_max_points[2] 10
+class_info_class_priest_function[2] omraceni
+class_info_class_priest_description[2] "Tato schopnost umoznuje zasahnout monstrum tak, aby bylo omraceno na dobu dvou vterin. K teto schopnosti je treba uzivat drtive zbrane (kladiva) a mit dostatek staminy. Tuto schopnost je mozno dale vylepsovat.."
+
+class_info_class_priest_name[3] Omracujici uder - prodleva
+class_info_class_priest_tag[3] ra_stuntattack_prodleva
+class_info_class_priest_max_points[3] 30
+class_info_class_priest_function[3] omraceni
+class_info_class_priest_description[3] "Omracujici uder je mozno 3x po deseti bodech vylepsit a zkratit tak dobu, kdy je mozno pouzit uder znovu."
+
+class_info_class_priest_name[4] Hazeni
+class_info_class_priest_tag[4] ra_throwing
+class_info_class_priest_max_points[4] 10
+class_info_class_priest_function[4] throw
+class_info_class_priest_description[4] "Tato schopnost umoznuje hazet bomby (prikaz .throwexplosion). Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
+
+class_info_class_priest_name[5] Vykryti stitem
+class_info_class_priest_tag[5] ra_vykryti
+class_info_class_priest_max_points[5] 20
+class_info_class_priest_function[5] none
+class_info_class_priest_description[5] "Tato automaticka schopnost umoznuje snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+
+class_info_class_priest_name[6] Oziveni se
+class_info_class_priest_tag[6] ra_selfres
+class_info_class_priest_max_points[6] 20
+class_info_class_priest_function[6] resurrection
+class_info_class_priest_description[6] "Schopnost priesta sebeozivit se po smrti. Schopnost je mozno uspesne pouzit jednou za urcitou dobu. Dale je tuto schopnost mozno vylepsit na stav urciteho statu po uspesnem oziveni se."
+
+class_info_class_priest_name[7] Oziveni se - stav zivota
+class_info_class_priest_tag[7] ra_selfres_hp
+class_info_class_priest_max_points[7] 10
+class_info_class_priest_function[7] none
+class_info_class_priest_description[7] "Tato schopnost zvysuje mnozstvi zivotu po sebeoziveni."
+
+class_info_class_priest_name[8] Oziveni se - stav many
+class_info_class_priest_tag[8] ra_selfres_mana
+class_info_class_priest_max_points[8] 10
+class_info_class_priest_function[8] none
+class_info_class_priest_description[8] "Tato schopnost zvysuje mnozstvi many po sebeoziveni."
+
+class_info_class_priest_name[9] Oziveni se - stav staminy
+class_info_class_priest_tag[9] ra_selfres_stamina
+class_info_class_priest_max_points[9] 10
+class_info_class_priest_function[9] none
+class_info_class_priest_description[9] "Tato schopnost zvysuje mnozstvi staminy po sebeoziveni."
 
 //////////////////////////////////////////////////////////////////
 ///////////////////////////////  WAR  ////////////////////////////
@@ -253,7 +319,7 @@ class_info_class_war_name[8] Hazeni
 class_info_class_war_tag[8] ra_throwing
 class_info_class_war_max_points[8] 10
 class_info_class_war_function[8] throwexplosion
-class_info_class_war_description[8] "Tato schopnost umoznuje valecnikovi hazet bomby. Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
+class_info_class_war_description[8] "Tato schopnost umoznuje valecnikovi hazet bomby (prikaz .throwexplosion). Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
 
 class_info_class_war_name[9] Obranny postoj
 class_info_class_war_tag[9] ra_defstance
@@ -323,7 +389,7 @@ class_info_class_craft_name[7] Hazeni
 class_info_class_craft_tag[7] ra_throwing
 class_info_class_craft_max_points[7] 10
 class_info_class_craft_function[7] throwexplosion
-class_info_class_craft_description[7] "Tato schopnost umoznuje remeslnikovi hazet bomby. Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
+class_info_class_craft_description[7] "Tato schopnost umoznuje remeslnikovi hazet bomby (prikaz .throwexplosion). Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
 
 class_info_class_craft_name[8] Longrange
 class_info_class_craft_tag[8] ra_rangearrow
@@ -441,7 +507,103 @@ class_info_class_necro_max_points[14] 50
 class_info_class_necro_function[14] energyshield
 class_info_class_necro_description[14] "Nekromant je schopen vyvolat mocne kouzlo, ktere ho chrani pred udery a kouzly od monster. Vydrz stitu je umerna poctu bodu v abilite. Ve stitu nelze pouzit schopnost standcast. K provedeni teto schopnosti je treba drahokam - Ametyst. Stit je mozno kouzlit pouze jednou za ctyri minuty. Stit je mozno zrusit prikazem - cancelenergyshield. Teto schopnosti se nekromant muze ucit od levelu 20."
 
+//////////////////////////////////////////////////////////////////
+////////////////////////////// RANGER ////////////////////////////
+//////////////////////////////////////////////////////////////////
 
+// class ranger
+class_info_class_ranger_abilities 7 // number of abilities == kazda pridana abilita +1
+
+class_info_class_ranger_name[0] Sniper
+class_info_class_ranger_tag[0] none
+class_info_class_ranger_max_points[0] none
+class_info_class_ranger_function[0] sniper
+class_info_class_ranger_description[0] "Specialni schopnost rangera udelit vetsi poskozeni pri zasahu. Sance na uspesnost se zvysuje s levelem."
+
+class_info_class_ranger_name[1] Longrange
+class_info_class_ranger_tag[1] ra_rangearrow
+class_info_class_ranger_max_points[1] 10
+class_info_class_ranger_function[1] longrange
+class_info_class_ranger_description[1] "Tato schopnost umoznuje prodlouzit vzdalenost, na kterou je schopen hodit bombu ci dispelbombu."
+
+class_info_class_ranger_name[2] Knockback attack
+class_info_class_ranger_tag[2] ra_knockback
+class_info_class_ranger_max_points[2] 10
+class_info_class_ranger_function[2] knockback
+class_info_class_ranger_description[2] "Umoznuje docasne odstrelit pri utoku svou silou nepritele o urcitou vzdalenost zpet. Aktivovani ability vyzaduje urcity pocet staminy."
+
+class_info_class_ranger_name[3] Hazeni
+class_info_class_ranger_tag[3] ra_throwing
+class_info_class_ranger_max_points[3] 10
+class_info_class_ranger_function[3] throw
+class_info_class_ranger_description[3] "Tato schopnost umoznuje hazet bomby (prikaz .throwexplosion). Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
+
+class_info_class_ranger_name[4] Strelba zubatych sipek
+class_info_class_ranger_tag[4] ra_bleed_bolt
+class_info_class_ranger_max_points[4] 20
+class_info_class_ranger_function[4] none
+class_info_class_ranger_description[4] "Tato schopnost umoznuje strilet z male kuse i zubate sipky, ktere zasadi cily krvaceni. Tuto schopnost vsak neni mozne zasadit z hrbetu jezditka, ale pouze pesmo."
+
+class_info_class_ranger_name[5] Vykryti stitem
+class_info_class_ranger_tag[5] ra_vykryti
+class_info_class_ranger_max_points[5] 20
+class_info_class_ranger_function[5] none
+class_info_class_ranger_description[5] "Tato automaticka schopnost umoznuje snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+
+class_info_class_ranger_name[6] Rozdelena strela
+class_info_class_ranger_tag[6] ra_splitshot
+class_info_class_ranger_max_points[6] 20
+class_info_class_ranger_function[6] splitshot
+class_info_class_ranger_description[6] "Tato schopnost umoznuje zasahnout jednim rozdelenym sipem vice nepratel v okoli primarniho cile utoku a lze ji pouzit se vsemi strelnymi zbranemi. Rozdelena strela funguje jak v PvM tak v PvP."
+
+//////////////////////////////////////////////////////////////////
+////////////////////////////// MYSTIK ////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+// class mystik
+class_info_class_mystik_abilities 7 // number of abilities == kazda pridana abilita +1
+
+class_info_class_mystik_name[0] Astral power
+class_info_class_mystik_tag[0] none
+class_info_class_mystik_max_points[0] none
+class_info_class_mystik_function[0] astralpower
+class_info_class_mystik_description[0] "Specialni schopnost umoznujici zasadit omracujici uder pri utoku. Sance uspesnosti na hrace je snizena o 66%. Sance na uspesnost se zvysuje s levelem."
+
+class_info_class_mystik_name[1] Longrange
+class_info_class_mystik_tag[1] ra_rangearrow
+class_info_class_mystik_max_points[1] 10
+class_info_class_mystik_function[1] longrange
+class_info_class_mystik_description[1] "Tato schopnost umoznuje prodlouzit vzdalenost, na kterou je schopen hodit bombu ci dispelbombu."
+
+class_info_class_mystik_name[2] Hazeni
+class_info_class_mystik_tag[2] ra_throwing
+class_info_class_mystik_max_points[2] 10
+class_info_class_mystik_function[2] throw
+class_info_class_mystik_description[2] "Tato schopnost umoznuje hazet bomby (prikaz .throwexplosion). Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
+
+class_info_class_mystik_name[3] Ovladani NPC
+class_info_class_mystik_tag[3] ra_controlnpc
+class_info_class_mystik_max_points[3] 20
+class_info_class_mystik_function[3] controlnpc
+class_info_class_mystik_description[3] "Schopnost ovladnout summona nebo ochocenou jezdeckou zver. Vzhledem k jezdecke zveri je potreba mit i skill Animal Lore. K teto schopnosti je potreba mit kristalovou kouli."
+
+class_info_class_mystik_name[4] Uchopeni mysli
+class_info_class_mystik_tag[4] ra_catch
+class_info_class_mystik_max_points[4] 20
+class_info_class_mystik_function[4] catch
+class_info_class_mystik_description[4] "Schopnost mystika se prevtelit do urciteho monstra. Abilita je zavisla na rozdilu levelu hrace a poctu zkusenosti z monstra. Na schopnost je potreba mit krystalovou kouli."
+
+class_info_class_mystik_name[5] Ovladnuti talentu
+class_info_class_mystik_tag[5] ra_buffSteal
+class_info_class_mystik_max_points[5] 20
+class_info_class_mystik_function[5] buffsteal
+class_info_class_mystik_description[5] "Schopnost ukrast monstru urcity talent. Tento talent ma k ovladnuti kazda potvora jiny. Na abilitu je potreba urcity pocet many, staminy a vlastnit krystalovou kouli."
+
+class_info_class_mystik_name[6] Zdrcujici uder
+class_info_class_mystik_tag[6] ra_mystikDoubleswing
+class_info_class_mystik_max_points[6] 40
+class_info_class_mystik_function[6] none
+class_info_class_mystik_description[6] "Pasivni schopnost pri jakemkoli utoku do monstra udelit zdrujici uder, ktery zvysi silu utoku."
 
 //////////////////////////////////////////////////////////////////
 /////////////////////////////// xxxxx ////////////////////////////
