@@ -1412,7 +1412,11 @@ argo.f_qm_closeSubDialog
 argo.f_qDialogInstructions(03029)
 
 if (src.qtag(q022)==1) 
-  argo.htmlGump(160,80,242,130,1,0,36)
+  if (<eval src.tag(realm)> == 1)
+    argo.htmlGump(160,80,242,130,1,0,36)
+  else
+    argo.htmlGump(160,80,242,130,14,0,36)
+  endif
 elseif (src.qtag(q022)==2) 
   argo.htmlGump(160,80,242,130,2,0,36)
 elseif (src.qtag(q022)==3) 
@@ -1455,6 +1459,7 @@ Valduk uz netrpezlive ceka na svuji medovinu.
 Konecne mas uhli ktere po tobe chtel Navin.
 Navin mohl konecne dokoncit svoji praci. Ted muzes odnist bednu so zbranami spatky veliteli strazi.
 Velitel strazi ti je vdecny za tvoji pomoc.
+Remeslnik potrebuje ingoty od trpaslika Goruga. Remeslnik taky rikal, ze Gorug odjel nekam na venkov a rikal taky neco o Rhunu.
 
 [dialog d_questy_transport button]
 on=0
