@@ -7657,7 +7657,7 @@ GROUP=Rooms
 tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 219     //Erebor
+[AREA dum 219]     //Erebor
 P=4800,2114
 RECT=4786,2108,4800,2116
 tag.housenumber=219
@@ -8372,6 +8372,18 @@ P=5599,3741,-80
 RECT=5583,3742,5591,3750
 RECT=5590,3736,5599,3750
 tag.housenumber=281
+FLAGS=01192
+RAINCHANCE=00  
+COLDCHANCE=00  
+GROUP=Rooms
+tag.houserealm=1
+EVENTS=r_playerhouse, r_nosumon
+
+[AREA dum 282]
+P=2481,2966
+RECT=2488,2978,2476,2956
+RECT=2476,2975,2469,2956
+tag.housenumber=282
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
