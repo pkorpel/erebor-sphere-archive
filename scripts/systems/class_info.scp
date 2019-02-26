@@ -561,7 +561,7 @@ class_info_class_ranger_description[6] "Tato schopnost umoznuje zasahnout jednim
 //////////////////////////////////////////////////////////////////
 
 // class mystik
-class_info_class_mystik_abilities 7 // number of abilities == kazda pridana abilita +1
+class_info_class_mystik_abilities 9 // number of abilities == kazda pridana abilita +1
 
 class_info_class_mystik_name[0] Astral power
 class_info_class_mystik_tag[0] none
@@ -569,41 +569,53 @@ class_info_class_mystik_max_points[0] none
 class_info_class_mystik_function[0] astralpower
 class_info_class_mystik_description[0] "Specialni schopnost umoznujici zasadit omracujici uder pri utoku. Sance uspesnosti na hrace je snizena o 66%. Sance na uspesnost se zvysuje s levelem."
 
-class_info_class_mystik_name[1] Longrange
-class_info_class_mystik_tag[1] ra_rangearrow
-class_info_class_mystik_max_points[1] 10
-class_info_class_mystik_function[1] longrange
-class_info_class_mystik_description[1] "Tato schopnost umoznuje prodlouzit vzdalenost, na kterou je schopen hodit bombu ci dispelbombu."
+class_info_class_mystik_name[1] Zmena druhu uderu
+class_info_class_mystik_tag[1] none
+class_info_class_mystik_max_points[1] none
+class_info_class_mystik_function[1] switchmagic
+class_info_class_mystik_description[1] "Schopnost menit svuj zakladni uder mezi dvema moznymi magickymi skolami chladu a energie. Tato schopnost dava mystikovi moznost reagovat na resisty monster."
 
-class_info_class_mystik_name[2] Hazeni
-class_info_class_mystik_tag[2] ra_throwing
+class_info_class_mystik_name[2] Longrange
+class_info_class_mystik_tag[2] ra_rangearrow
 class_info_class_mystik_max_points[2] 10
-class_info_class_mystik_function[2] throw
-class_info_class_mystik_description[2] "Tato schopnost umoznuje hazet bomby (prikaz .throwexplosion). Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
+class_info_class_mystik_function[2] longrange
+class_info_class_mystik_description[2] "Tato schopnost umoznuje prodlouzit vzdalenost, na kterou je schopen hodit bombu ci dispelbombu."
 
-class_info_class_mystik_name[3] Ovladani NPC
-class_info_class_mystik_tag[3] ra_controlnpc
-class_info_class_mystik_max_points[3] 20
-class_info_class_mystik_function[3] controlnpc
-class_info_class_mystik_description[3] "Schopnost ovladnout summona nebo ochocenou jezdeckou zver. Vzhledem k jezdecke zveri je potreba mit i skill Animal Lore. K teto schopnosti je potreba mit kristalovou kouli."
+class_info_class_mystik_name[3] Hazeni
+class_info_class_mystik_tag[3] ra_throwing
+class_info_class_mystik_max_points[3] 10
+class_info_class_mystik_function[3] throw
+class_info_class_mystik_description[3] "Tato schopnost umoznuje hazet bomby (prikaz .throwexplosion). Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
 
-class_info_class_mystik_name[4] Uchopeni mysli
-class_info_class_mystik_tag[4] ra_catch
+class_info_class_mystik_name[4] Ovladani NPC
+class_info_class_mystik_tag[4] ra_controlnpc
 class_info_class_mystik_max_points[4] 20
-class_info_class_mystik_function[4] catch
-class_info_class_mystik_description[4] "Schopnost mystika se prevtelit do urciteho monstra. Abilita je zavisla na rozdilu levelu hrace a poctu zkusenosti z monstra. Na schopnost je potreba mit krystalovou kouli."
+class_info_class_mystik_function[4] controlnpc
+class_info_class_mystik_description[4] "Schopnost ovladnout summona nebo ochocenou jezdeckou zver. Vzhledem k jezdecke zveri je potreba mit i skill Animal Lore. K teto schopnosti je potreba mit kristalovou kouli."
 
-class_info_class_mystik_name[5] Ovladnuti talentu
-class_info_class_mystik_tag[5] ra_buffSteal
+class_info_class_mystik_name[5] Uchopeni mysli
+class_info_class_mystik_tag[5] ra_catch
 class_info_class_mystik_max_points[5] 20
-class_info_class_mystik_function[5] buffsteal
-class_info_class_mystik_description[5] "Schopnost ukrast monstru urcity talent. Tento talent ma k ovladnuti kazda potvora jiny. Na abilitu je potreba urcity pocet many, staminy a vlastnit krystalovou kouli."
+class_info_class_mystik_function[5] catch
+class_info_class_mystik_description[5] "Schopnost docasne znehybnit cil silou sve mysli. Pouziti uchopeni mysli vyzaduje hypnokouli."
 
-class_info_class_mystik_name[6] Zdrcujici uder
-class_info_class_mystik_tag[6] ra_mystikDoubleswing
-class_info_class_mystik_max_points[6] 40
-class_info_class_mystik_function[6] none
-class_info_class_mystik_description[6] "Pasivni schopnost pri jakemkoli utoku do monstra udelit zdrujici uder, ktery zvysi silu utoku."
+class_info_class_mystik_name[6] Ovladnuti talentu
+class_info_class_mystik_tag[6] ra_buffSteal
+class_info_class_mystik_max_points[6] 20
+class_info_class_mystik_function[6] buffsteal
+class_info_class_mystik_description[6] "Schopnost ukrast monstru urcity talent. Tento talent ma k ovladnuti kazda potvora jiny. Na abilitu je potreba urcity pocet many, staminy a vlastnit krystalovou kouli."
+
+class_info_class_mystik_name[7] Zdrcujici uder
+class_info_class_mystik_tag[7] ra_mystikDoubleswing
+class_info_class_mystik_max_points[7] 40
+class_info_class_mystik_function[7] none
+class_info_class_mystik_description[7] "Pasivni schopnost pri jakemkoli utoku do monstra udelit zdrujici uder, ktery zvysi silu utoku."
+
+class_info_class_mystik_name[8] Hypnoza
+class_info_class_mystik_tag[8] none
+class_info_class_mystik_max_points[8] none
+class_info_class_mystik_function[8] hypnotize
+class_info_class_mystik_description[8] "Schopnost ovladnuti tela nekterych NPC, tak ze svou dusi premisti do tela obludy. K uspesne hypnoze je potreba aktivovana hypnotizerska koule a magicka hul z dubu (oak) nebo lepsiho materialu. Deaktivuje se rovnez tak, smrti NPC, nebo sama casem, ktery zavisi na levelu postavy a narocnosti cile. Moznost pouziti neni omezena levelem postavy ani investovanymi body."
 
 //////////////////////////////////////////////////////////////////
 /////////////////////////////// xxxxx ////////////////////////////
