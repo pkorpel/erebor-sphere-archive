@@ -486,17 +486,9 @@ if (arg(wanted) <= 0)
  src.sysmessage Cislo musi byt vetsi nez 0.
  return 1
 endif
-if (<src.tag.dynamdialog> < 96)  //kvoli customscrollom
-  src.newitem=<findres(spell,<src.tag(dynamdialog)>).scrollitem>
-else
-  if (<src.tag.dynamdialog> == 101)  //frostbolt
-    src.newitem=i_customscroll_frostbolt
-  elseif (<src.tag.dynamdialog> == 104)  //manashield
-    src.newitem=i_customscroll_manashield
-  endif
-endif
-src.act.amount=arg(wanted)
-src.act.bounce
+src.newScroll(<src.tag.dynamdialog>)
+lastnew.amount=arg(wanted)
+lastnew.bounce
 tag(scroll[<src.tag(dynamdialog)>],<eval <tag(scroll[<src.tag(dynamdialog)>])>-arg(wanted)>)
 src.sysmessage("<src.sex(Vybral,Vybrala)> jsi ze svitkovace <arg(wanted)> <src.act.name>.")
 return 1
@@ -627,14 +619,11 @@ endif
 if (<argn>==19) //vybrat (1 z kazdeho)
   arg(u,1)
 
-  while (arg(u)<71)
-    if (<eval <safe.tag(scroll[arg(u)])>>)
-      src.newitem <findres(spell,arg(u)).scrollitem>
-      src.act.bounce
-      tag(scroll[arg(u)],<tag(scroll[arg(u)])>-1)
-    endif
-    arg(u,<arg(u)>+1)
+  while (u < 71)
+    f_svitkovacRemoveOne(<u>)
+    arg(u,#+1)
   endwhile
+  f_svitkovacRemoveOne(104)
 endif
 
 if (<argn> > 0) && (<argn> < 17)  //vyberanie
@@ -643,6 +632,26 @@ if (<argn> > 0) && (<argn> < 17)  //vyberanie
 endif
 
 return(1)
+
+// Removes one scroll from svtikovac. 
+// argv(0) scroll id
+[function f_svitkovacRemoveOne]
+arg(scrollId,<argv(0)>)
+if (<eval(<safe.tag(scroll[scrollId])>)>)
+  src.newScroll(<scrollId>)
+  lastnew.bounce
+  tag(scroll[scrollId],<eval(tag(scroll[scrollId])-1)>)
+endif
+
+// Creates a scroll. Some scrolls are not binded to a spell. This function handles these cases.
+// argv(0) Spell id of a spell for which you want create a scroll.
+[function newScroll]
+arg(scrollId,<argv(0)>)
+if (scrollId == 104)
+  src.newitem(i_customscroll_manashield)
+else
+  src.newitem(<findres(spell,<scrollId>).scrollitem>)
+endif
 
 [dialog d_scroll_case2_remove]
 arg(scroll,<src.tag.dynamdialog>)
