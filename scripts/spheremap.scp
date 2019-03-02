@@ -2108,14 +2108,18 @@ COLDCHANCE=05
 [AREA Kralovstvi lesnich elfu]
 GROUP=Mesta Gondor
 P=2976,1248
-RECT=2920,1208,3032,1288
+RECT=2935,1213,3042,1301
+RECT=2925,1248,3042,1301
+RECT=2989,1143,3054,1191
+RECT=2988,1190,3045,1197
+RECT=2963,1199,3035,1237
 TAG.GUARDOWNER=the city
 CLASS=48
 FLAGS=0100 // 0100 available
 tag.realm=1
 tag.jmeno_mesta=Kralovstvi_lesnich_elfu
 tag.kick=1
-events=r_nohorsehigh
+events=r_noclickhigh
 RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=20
 COLDCHANCE=05
@@ -6341,17 +6345,15 @@ tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 103] // Kralovstvi lesnich elfu
-P=2987,1266,45
-RECT=2981,1259,3012,1280
+P=2941,1261,45
+RECT=2929,1252,2941,1270
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
 tag.housenumber=103
 GROUP=Rooms
-EVENTS=r_playerhouse, r_nosumon, r_nohorsehigh
+EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
 tag.houserealm=1
-tag.strom=1
-
 
 [AREA dum 104] // Harad 
 P=4157,4024
@@ -7657,7 +7659,7 @@ GROUP=Rooms
 tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 219]     //Erebor
+[AREA dum 219     //Erebor
 P=4800,2114
 RECT=4786,2108,4800,2116
 tag.housenumber=219
@@ -7669,53 +7671,52 @@ tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 220]   //kralovstvi lesnich elfu
-P=2976,1234,45
-RECT=2974,1219,2995,1234
+P=2947,1235,45
+RECT=2941,1220,2956,1235
 tag.housenumber=220
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
 GROUP=Rooms
-EVENTS=r_playerhouse, r_nosumon, r_nohorsehigh
+EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
 tag.houserealm=1
-tag.strom=1
-
 
 [AREA dum 221]  //kralovstvi lesnich elfu
-P=2956,1228,45
-RECT=2952,1217,2964,1228
+P=2970,1282,45
+RECT=2952,1282,2962,1292
+RECT=2961,1278,2970,1292
 tag.housenumber=221
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
 GROUP=Rooms
-EVENTS=r_playerhouse, r_nosumon, r_nohorsehigh
+EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
 tag.houserealm=1
-tag.strom=1
 
 [AREA dum 222]   //kralovstvi lesnich elfu
-P=2983,1252,45
-RECT=2970,1240,2986,1252
+P=2986,1280,45
+RECT=2975,1267,2984,1277
+RECT=2983,1267,2989,1280
+RECT=2988,1266,2996,1279
 tag.housenumber=222
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
 GROUP=Rooms
-EVENTS=r_playerhouse, r_nosumon, r_nohorsehigh
+EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
 tag.houserealm=1
-tag.strom=1
 
 [AREA dum 223]   //kralovstvi lesnich elfu
-P=2963,1260,45
-RECT=2951,1252,2963,1263
+P=3023,1290,45
+RECT=3013,1269,3034,1290
+RECT=3027,1270,3040,1299
 tag.housenumber=223
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
 GROUP=Rooms
-EVENTS=r_playerhouse, r_nosumon, r_nohorsehigh
+EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
 tag.houserealm=1
-tag.strom=1
 
 [AREA dum 224]   //Radovsko
 P=1298,1396,0
@@ -8379,17 +8380,17 @@ GROUP=Rooms
 tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 282]
-P=2481,2966
-RECT=2488,2978,2476,2956
-RECT=2476,2975,2469,2956
+[AREA dum 282]   //kralovstvi lesnich elfu
+P=2996,1244,45
+RECT=2986,1241,2996,1247
 tag.housenumber=282
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
 GROUP=Rooms
+EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
 tag.houserealm=1
-EVENTS=r_playerhouse, r_nosumon
+
 
 ////////////////////////////////////////////////////////////////////////////
 //                  Kvest rooms    

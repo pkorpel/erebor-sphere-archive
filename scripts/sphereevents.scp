@@ -1,3 +1,63 @@
+[events e_noclickhigh] // Kvuli kle, aby to neslo brat zespodu
+on=@itemdropon_ground
+act.events=+t_noclickhigh
+
+on=@spellcast
+on=@beforegetswing
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@beforedoeffect
+on=@beforegeteffect
+on=@aftergetswing
+
+
+[typedef t_noclickhigh]
+on=@UserDclick
+if(f_noclickhigh(<p_z>,<src.p_z>))
+return 1
+endif
+return 0
+
+on=@PickUp_Ground
+if(f_noclickhigh(<p_z>,<src.p_z>))
+return 1
+endif
+events=-t_noclickhigh
+return 0
+
+on=@PickUp_pack
+if(f_noclickhigh(<p_z>,<src.p_z>))
+return 1
+endif
+events=-t_noclickhigh
+return 0
+
+on=@Equip
+if(f_noclickhigh(<p_z>,<src.p_z>))
+return 1
+endif
+events=-t_noclickhigh
+return 0
+
+on=@EquipTest
+if(f_noclickhigh(<p_z>,<src.p_z>))
+return 1
+endif
+events=-t_noclickhigh
+return 0
+
+[function f_noclickhigh]
+if (<eval <argv(0)>-<argv(1)>>>20)
+src.sysmessage "Tam nedosahnes"
+return 1
+elseif (<eval <argv(1)>-<argv(0)>>>20)
+src.sysmessage "Tam nedosahnes"
+return 1
+endif
+return 0 
+///////////////////////////////////////////
+
 [events e_mithril]
 on=@Created
 on=@DrinkingPotion

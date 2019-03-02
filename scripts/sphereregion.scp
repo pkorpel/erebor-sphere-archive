@@ -38,7 +38,7 @@
 
 
 
-[REGIONRESOURCE o_copper]
+[RegionResource o_copper]
 // copper makes terrible armor
 // t_rock
 SKILL=0.0,40.0
@@ -46,35 +46,35 @@ AMOUNT=50,75
 REAP=i_ore_copper
 REGEN=60*30*1
 
-[REGIONRESOURCE o_iron]
+[RegionResource o_iron]
 // t_rock
 SKILL=30.0,70.0
 AMOUNT=50,75
 REAP=i_ore_iron
 REGEN=60*60*1
 
-[REGIONRESOURCE o_silver]
+[RegionResource o_silver]
 // t_rock
 SKILL=55.0,95.0
 AMOUNT=20,40
 REAP=i_ore_silver
 REGEN=60*30*1
 
-[REGIONRESOURCE o_gold]
+[RegionResource o_gold]
 // t_rock - Gold makes terrible armor.
 SKILL=60.0,100.0
 AMOUNT=10,30
 REAP=i_ore_gold
 REGEN=60*30*1
 
-[REGIONRESOURCE o_verite]
+[RegionResource o_verite]
 // t_rock
 SKILL=70.0,110.0
 AMOUNT=10,15
 REAP=i_ore_verite
 REGEN=60*30*1
 
-[REGIONRESOURCE o_Valorite]
+[RegionResource o_Valorite]
 // t_rock
 SKILL=75.0,115.0
 AMOUNT=5,10
@@ -82,42 +82,42 @@ REAP=i_ore_Valorite
 REGEN=60*30*1
 
 
-[REGIONRESOURCE o_obsidian]
+[RegionResource o_obsidian]
 // t_rock
 SKILL=90.0,130.0
 AMOUNT=8,10
 REAP=i_ore_obsidian
 REGEN=60*30*1
 
-[REGIONRESOURCE o_adamantinum]
+[RegionResource o_adamantinum]
 // t_rock
 SKILL=99.0,139.0
 AMOUNT=4,5
 REAP=i_ore_adamantinum
 REGEN=60*30*1
 
-[REGIONRESOURCE o_shadow]
+[RegionResource o_shadow]
 // t_rock
 SKILL=90.0,130.0
 AMOUNT=4,5
 REAP=i_ore_shadow
 REGEN=60*30*1
 
-[REGIONRESOURCE o_mithril]
+[RegionResource o_mithril]
 // t_rock
 SKILL=105.0,145.0
 AMOUNT=3,4
 REAP=i_ore_mithril
 REGEN=60*30*1
 
-[REGIONRESOURCE o_pisek]
+[RegionResource o_pisek]
 // t_rock
 SKILL=45.0,95.0
 AMOUNT=30,40
 REAP=i_ore_pisek
 REGEN=60*30*1
 
-[REGIONRESOURCE o_marble]
+[RegionResource o_marble]
 // Mramor
 // t_rock
 SKILL=80.0,110.0
@@ -126,103 +126,103 @@ REAP=i_marble_rock
 REGEN=60*30*1
 
 
-[REGIONRESOURCE o_diamond]
+[RegionResource o_diamond]
 // t_rock
 SKILL=80.0,110.0
 amount=1,5
 REAP=i_gem_diamond
 REGEN=60*30*1
 
-[REGIONRESOURCE o_ruby]
+[RegionResource o_ruby]
 // t_rock
 SKILL=80.0,110.0
 amount=1,4
 REAP=i_gem_ruby
 REGEN=60*30*1
 
-[REGIONRESOURCE o_citrine]
+[RegionResource o_citrine]
 // t_rock
 SKILL=70.0,110.0
 amount=1,4
 REAP=i_gem_citrine
 REGEN=60*30*1
 
-[REGIONRESOURCE o_Emerald]
+[RegionResource o_Emerald]
 // t_rock
 SKILL=70.0,110.0
 amount=1,4
 REAP=i_gem_Emerald
 REGEN=60*30*1
 
-[REGIONRESOURCE o_Star_Sapphire]
+[RegionResource o_Star_Sapphire]
 // t_rock
 SKILL=70.0,110.0
 amount=1,4
 REAP=i_gem_Star_Sapphire
 REGEN=60*30*1
 
-[REGIONRESOURCE o_Sapphire]
+[RegionResource o_Sapphire]
 // t_rock
 SKILL=70.0,110.0
 amount=1,4
 REAP=i_gem_Sapphire
 REGEN=60*30*1
 
-[REGIONRESOURCE o_Amethyst]
+[RegionResource o_Amethyst]
 // t_rock
 SKILL=70.0,110.0
 amount=1,5
 REAP=i_gem_Amethyst
 REGEN=60*30*1
 
-[REGIONRESOURCE o_Tourmaline]
+[RegionResource o_Tourmaline]
 // t_rock
 SKILL=70.0,110.0
 amount=1,4
 REAP=i_gem_Tourmaline
 REGEN=60*30*1
 
-//[REGIONRESOURCE r_POKLAD1]
+//[RegionResource r_POKLAD1]
 // t_rock
 //SKILL=0.0,100.0
 //amount=1,1
 //REAP=i_chest_treasure1
 //REGEN=60*30*1
 
-//[REGIONRESOURCE r_POKLAD2]
+//[RegionResource r_POKLAD2]
 // t_rock
 //SKILL=0.0,100.0
 //amount=1,1
 //REAP=i_chest_treasure2
 //REGEN=60*30*1
 
-//[REGIONRESOURCE r_POKLAD3]
+//[RegionResource r_POKLAD3]
 // t_rock
 //SKILL=0.0,100.0
 //amount=1,1
 //REAP=i_chest_treasure3
 //REGEN=60*30*1
 
-//[REGIONRESOURCE r_POKLAD4]
+//[RegionResource r_POKLAD4]
 // t_rock
 //SKILL=0.0,100.0
 //amount=1,1
 //REAP=i_chest_treasure4
 //REGEN=60*30*1
 
-//[REGIONRESOURCE r_POKLAD5]
+//[RegionResource r_POKLAD5]
 // t_rock
 //SKILL=0.0,100.0
 //amount=1,1
 //REAP=i_chest_treasure5
 //REGEN=60*30*1
 
-[REGIONRESOURCE r_nothing]
+[RegionResource r_nothing]
 // there is nothing here
 REAP=i_unused
 REGEN=60*30*1
 
-[REGIONRESOURCE w_fish1]
+[RegionResource w_fish1]
 // fishing default
 // t_water
 skill=1.0,100.0
@@ -230,7 +230,7 @@ amount=9,30
 REAP=i_fish_big_1
 REGEN=60*30*1
 
-[REGIONRESOURCE w_fish2]
+[RegionResource w_fish2]
 // fishing default
 // t_water
 skill=1.0,100.0
@@ -238,7 +238,7 @@ REAP=i_fish_big_2
 amount=9,30
 REGEN=60*30*1
 
-[REGIONRESOURCE w_fish3]
+[RegionResource w_fish3]
 // fishing default
 // t_water
 skill=1.0,100.0
@@ -246,7 +246,7 @@ amount=9,30
 REAP=i_fish_big_3
 REGEN=60*30*1
 
-[REGIONRESOURCE w_fish4]
+[RegionResource w_fish4]
 // fishing default
 // t_water
 skill=1.0,100.0
@@ -254,7 +254,7 @@ amount=9,30
 REAP=i_fish_big_4
 REGEN=60*30*1
 
-[REGIONRESOURCE w_treasure_map]
+[RegionResource w_treasure_map]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -262,7 +262,7 @@ amount=1,1
 REAP=i_u_treasure_map
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf1]
+[RegionResource w_jf1]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -270,7 +270,7 @@ amount=1,1
 REAP=i_junkfish1
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf2]
+[RegionResource w_jf2]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -278,7 +278,7 @@ amount=1,1
 REAP=i_junkfish2
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf3]
+[RegionResource w_jf3]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -287,7 +287,7 @@ REAP=i_junkfish3
 REGEN=60*30*1
 
 
-[REGIONRESOURCE w_jf4]
+[RegionResource w_jf4]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -295,7 +295,7 @@ amount=1,1
 REAP=i_junkfish4
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf5]
+[RegionResource w_jf5]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -303,7 +303,7 @@ amount=1,1
 REAP=i_junkfish5
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf6]
+[RegionResource w_jf6]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -311,7 +311,7 @@ amount=1,1
 REAP=i_junkfish6
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf7]
+[RegionResource w_jf7]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -319,7 +319,7 @@ amount=1,1
 REAP=i_junkfish7
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf8]
+[RegionResource w_jf8]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -327,7 +327,7 @@ amount=1,1
 REAP=i_junkfish8
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf9]
+[RegionResource w_jf9]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -335,7 +335,7 @@ amount=1,1
 REAP=i_junkfish9
 REGEN=60*30*1
 
-[REGIONRESOURCE w_jf10]
+[RegionResource w_jf10]
 // fishing default
 // t_water
 skill=75.0,125.0
@@ -343,7 +343,7 @@ amount=1,1
 REAP=i_junkfish10
 REGEN=60*30*1
 
-[REGIONRESOURCE l_lagr]
+[RegionResource l_lagr]
 // lumberjacking default
 // t_tree
 skill=0.0,40.0
@@ -353,7 +353,7 @@ REGEN=60*30*1
 
 
 
-[REGIONRESOURCE l_copper]
+[RegionResource l_copper]
 // lumberjacking default
 // t_tree
 skill=0.0,40.0
@@ -361,38 +361,38 @@ amount=5,20
 REAP=i_log_copper
 REGEN=60*30*1
 
-[REGIONRESOURCE l_iron]
+[RegionResource l_iron]
 skill=40.0,80.0
 amount=4,15
 REAP=i_log_iron
 REGEN=60*30*1
 
-[REGIONRESOURCE l_verite]
+[RegionResource l_verite]
 skill=55.0,95.0
 amount=3,11
 REAP=i_log_verite
 REGEN=60*30*1
 
-[REGIONRESOURCE l_valorite]
+[RegionResource l_valorite]
 skill=70.0,110.0
 amount=2,8
 REAP=i_log_valorite
 REGEN=60*30*1
 
-[REGIONRESOURCE l_obsidian]
+[RegionResource l_obsidian]
 skill=90.0,130.0
 amount=1,5
 REAP=i_log_obsidian
 REGEN=60*30*1
 
-[REGIONRESOURCE l_adamantinum]
+[RegionResource l_adamantinum]
 // t_tree
 skill=99.0,139.0
 amount=1,4
 REAP=i_log_adamantinum
 REGEN=60*30*1
 
-[REGIONRESOURCE l_mithril]
+[RegionResource l_mithril]
 // t_tree
 skill=105.0,135.0
 amount=1,3
@@ -400,13 +400,13 @@ REAP=i_log_mithril
 REGEN=60*30*1
 
 
-[REGIONRESOURCE r_grass]
+[RegionResource r_grass]
 // t_grass
 REAP=i_hay_sheaf
 amount=9,30
 REGEN=60*60*10
 
-[REGIONTYPE r_default_rock t_rock]
+[RegionType r_default_rock t_rock]
 RESOURCES=100 r_nothing
 resources=1 o_copper
 resources=4 o_pisek
@@ -414,7 +414,7 @@ resources=1 o_iron
 resources=1 o_ruby
 
 
-[REGIONTYPE r_default_water t_water]
+[RegionType r_default_water t_water]
 RESOURCES=100 r_nothing
 resources=15 w_fish1
 resources=8 w_fish2
@@ -438,7 +438,7 @@ resources=1 w_jf10
 //resources=7 r_POKLAD4
 //resources=7 r_POKLAD5
 
-[REGIONTYPE r_tutorial_water t_water]
+[RegionType r_tutorial_water t_water]
 RESOURCES=10 r_nothing
 resources=15 w_fish1
 resources=15 w_fish2
@@ -446,7 +446,7 @@ resources=15 w_fish3
 resources=15 w_fish4
 
 
-[REGIONTYPE r_default_tree t_tree]
+[RegionType r_default_tree t_tree]
 RESOURCES=3500 r_nothing
 resources=3500 l_copper
 resources=2500 l_iron
@@ -456,19 +456,19 @@ resources=27 l_obsidian
 //resources=15 l_adamantinum
 //resources=0 l_mithril
 
-[REGIONTYPE r_tutorial_tree t_tree]
+[RegionType r_tutorial_tree t_tree]
 RESOURCES=1000 r_nothing
 resources=3500 l_copper
 resources=2500 l_iron
 resources=250 l_verite
 
 
-[REGIONTYPE r_lagr_tree t_tree]
+[RegionType r_lagr_tree t_tree]
 RESOURCES=3500 r_nothing
 resources=3500 l_lagr
 
 
-[REGIONTYPE r_tree_ithilien t_tree]
+[RegionType r_tree_ithilien t_tree]
 RESOURCES=7000 r_nothing
 resources=3500 l_copper
 resources=2500 l_iron
@@ -477,7 +477,7 @@ resources=15 l_adamantinum
 resources=5 l_mithril
 
 
-[REGIONTYPE r_tree_ostrovrhun t_tree]
+[RegionType r_tree_ostrovrhun t_tree]
 RESOURCES=7500 r_nothing
 resources=104 l_verite
 resources=54 l_valorite
@@ -486,14 +486,14 @@ resources=30 l_adamantinum
 resources=8 l_mithril
 
 
-[REGIONTYPE r_tree_ebenoveostrovy t_tree]
+[RegionType r_tree_ebenoveostrovy t_tree]
 RESOURCES=400 r_nothing
 resources=5 l_adamantinum
 resources=8 l_mithril
 
 
 
-[REGIONTYPE r_doly t_rock]
+[RegionType r_doly t_rock]
 RESOURCES=3000 r_nothing
 resources=7000 o_copper
 resources=3000 o_pisek
@@ -513,13 +513,13 @@ resources=157 o_Sapphire
 //resources=9 r_POKLAD5
 
 
-[REGIONTYPE r_default_grass t_grass]
+[RegionType r_default_grass t_grass]
 RESOURCES=1000 r_nothing
 resources=10 r_grass
 
 //////////////////////////////////////////
 
-[REGIONTYPE r_piskovna t_rock]
+[RegionType r_piskovna t_rock]
 RESOURCES=3000 r_nothing
 resources=10 o_copper
 resources=300 o_pisek
@@ -535,7 +535,7 @@ resources=1 o_adamantinum
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_dolybarad t_rock]
+[RegionType r_dolybarad t_rock]
 // mordor dul na nizsi rudy a nahodne ada
 RESOURCES=3000 r_nothing
 resources=7000 o_copper
@@ -551,7 +551,7 @@ resources=20 o_Emerald
 resources=40 o_Sapphire
 resources=61 o_Star_Sapphire
  
-[REGIONTYPE r_dolyMordor t_rock]
+[RegionType r_dolyMordor t_rock]
 // mordor dul na val a obsid + hodne prazdny
 RESOURCES=6000 r_nothing
 resources=3000 o_copper
@@ -566,7 +566,7 @@ resources=7 o_ruby
 resources=57 o_Emerald
 resources=7 o_Sapphire
  
-[REGIONTYPE r_dolyerebor t_rock]
+[RegionType r_dolyerebor t_rock]
 // Gondor na Copper a IRon + nahodny obsid
 RESOURCES=3000 r_nothing
 resources=7000 o_copper
@@ -581,7 +581,7 @@ resources=7 o_ruby
 resources=7 o_Emerald
 resources=5 o_Sapphire
  
-[REGIONTYPE r_dolyzelpas t_rock]
+[RegionType r_dolyzelpas t_rock]
 // Gondor nb dul
 RESOURCES=1000 r_nothing
 resources=7000 o_copper
@@ -596,7 +596,7 @@ resources=20 o_diamond
 resources=27 o_ruby
 resources=37 o_Emerald
  
-[REGIONTYPE r_dolykrajske t_rock]
+[RegionType r_dolykrajske t_rock]
 //spatnej dul
 RESOURCES=4000 r_nothing
 resources=3000 o_copper
@@ -612,7 +612,7 @@ resources=77 o_Emerald
 resources=12 o_Star_Sapphire
 resources=1 o_Sapphire
  
-[REGIONTYPE r_dolyosameni t_rock]
+[RegionType r_dolyosameni t_rock]
 // drahokamovy dul
 RESOURCES=4000 r_nothing
 resources=2000 o_copper
@@ -628,7 +628,7 @@ resources=247 o_Emerald
 resources=197 o_Sapphire
 resources=191 o_Star_Sapphire
  
-[REGIONTYPE r_dolyseveru t_rock]
+[RegionType r_dolyseveru t_rock]
 // bidny dul se slusnym Val a Obs
 RESOURCES=3000 r_nothing
 resources=2000 o_copper
@@ -643,7 +643,7 @@ resources=7 o_ruby
 resources=7 o_Emerald
 resources=47 o_Sapphire
  
-[REGIONTYPE r_dolyskalni t_rock]
+[RegionType r_dolyskalni t_rock]
 // diamantovy dul + ada obsid, bez veritu a valu
 RESOURCES=5000 r_nothing
 resources=700 o_copper
@@ -658,7 +658,7 @@ resources=7 o_ruby
 resources=7 o_Emerald
 resources=7 o_Sapphire
  
-[REGIONTYPE r_dolystezka t_rock]
+[RegionType r_dolystezka t_rock]
 // Druhej nejlepsi bez mithu
 RESOURCES=5500 r_nothing
 resources=1700 o_copper
@@ -674,7 +674,7 @@ resources=7 o_Emerald
 resources=2 o_Sapphire
 resources=1 o_Star_Sapphire
  
-[REGIONTYPE r_dolymoria t_rock]
+[RegionType r_dolymoria t_rock]
 //dul mithril
 RESOURCES=3000 r_nothing
 resources=7000 o_copper
@@ -713,7 +713,7 @@ nexto_marble		o_marble
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_moria_mesto]
+[RegionType r_moria_mesto]
 
 ON=@ENTER
   src.sysmessage("Nachazis se v Morii.")
@@ -724,7 +724,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_roklinka]
+[RegionType r_roklinka]
 // Bucs den
 
 ON=@ENTER
@@ -736,7 +736,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////	
 
-[REGIONTYPE e_beridor]
+[RegionType e_beridor]
 ON=@ENTER
   if (src.isplayer)
     src.events=+e_necroslave
@@ -748,7 +748,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE e_startdung]
+[RegionType e_startdung]
 
 ON=@ENTER
   if (src.isplayer)
@@ -766,7 +766,7 @@ on=@exit
 
   //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_SafeZone]
+[RegionType r_SafeZone]
 
 ON=@ENTER
   if (src.isplayer)
@@ -788,7 +788,7 @@ on=@exit
   
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE e_qv3_dejloot]
+[RegionType e_qv3_dejloot]
 
 ON=@ENTER
   if (src.flag_spawned)
@@ -805,14 +805,14 @@ ON=@ENTER
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_nosumon]
+[RegionType r_nosumon]
 
 ON=@ENTER
   src.removeAgressiveSummon
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_noHorse]
+[RegionType r_noHorse]
 
 ON=@ENTER
   if (src.isJezditko)
@@ -821,7 +821,7 @@ ON=@ENTER
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_playerhouse_nohorsehigh]
+[RegionType r_playerhouse_nohorsehigh]
 ON=@ENTER
   if (src.gm)
   else
@@ -833,6 +833,15 @@ ON=@ENTER
 ON=@EXIT
   src.events=-e_tahniven_lorien
 
+//////////////////////////////////////////////////////////////////////////
+
+[RegionType r_noclickhigh]
+
+on=@enter
+src.events=+e_noclickhigh
+
+on=@exit
+src.events=-e_noclickhigh
 //////////////////////////////////////////////////////////////////////////
 
 [EVENTS e_tahniven_lorien]
@@ -859,7 +868,7 @@ on=@step
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_playerhouse]
+[RegionType r_playerhouse]
 ON=@ENTER
 src.removeAgressiveSummon
 if(src.isplayer)
@@ -898,7 +907,7 @@ endwhile
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_nofield]
+[RegionType r_nofield]
 
 ON=@ENTER
   if (src.isgm)
@@ -910,7 +919,7 @@ on=@exit
   src.events=-e_nofield
 
 //////////////////////////////////////////////////////////////////////////
-[REGIONTYPE r_notele]
+[RegionType r_notele]
 
 ON=@ENTER
   if !(src.isgm)
@@ -922,7 +931,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_nohorsehigh]
+[RegionType r_nohorsehigh]
 
 ON=@ENTER
   if (src.isgm)
@@ -935,7 +944,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_lorien]
+[RegionType r_lorien]
 // Bucs den
 
 ON=@ENTER
@@ -963,7 +972,7 @@ ON=@REGPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_edoras]
+[RegionType r_edoras]
 // Bucs den
 
 ON=@ENTER
@@ -976,7 +985,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 	
-[REGIONTYPE r_minas_morgul]
+[RegionType r_minas_morgul]
 // Bucs den
 
 ON=@ENTER
@@ -989,7 +998,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_barad_dur]
+[RegionType r_barad_dur]
 
 ON=@ENTER
   src.removeAgressiveSummon
@@ -1001,7 +1010,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 	
-[REGIONTYPE r_nurn]
+[RegionType r_nurn]
 
 ON=@ENTER
   src.removeAgressiveSummon
@@ -1013,7 +1022,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_rhun]
+[RegionType r_rhun]
 
 ON=@ENTER
   src.removeAgressiveSummon
@@ -1025,7 +1034,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 	
-[REGIONTYPE r_minas_tirith]
+[RegionType r_minas_tirith]
 
 ON=@ENTER
   src.removeAgressiveSummon
@@ -1037,7 +1046,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_doly_nohorse]
+[RegionType r_doly_nohorse]
 
 on=@enter
   src.removeAgressiveSummon
@@ -1050,7 +1059,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 	
-[REGIONTYPE r_pelenorska_pole]
+[RegionType r_pelenorska_pole]
 
 ON=@ENTER
   src.sysmessage("Vitej, poutniku, na pelennorskych polich, predmesti Minas Tirith.")
@@ -1061,7 +1070,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 	
-[REGIONTYPE r_hobitin]
+[RegionType r_hobitin]
 
 ON=@ENTER
   src.removeAgressiveSummon
@@ -1073,7 +1082,7 @@ ON=@CLIPERIODIC
 	
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_gondor]
+[RegionType r_gondor]
 
 ON=@ENTER
   src.sysmessage("Nachazis se na gondorskem uzemi.")
@@ -1084,7 +1093,7 @@ ON=@CLIPERIODIC
 	
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_mordor]
+[RegionType r_mordor]
 
 ON=@ENTER
   src.sysmessage("Mordorske uzemi je plne nebezpeci.")
@@ -1096,7 +1105,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 	
-[REGIONTYPE r_led_plane]
+[RegionType r_led_plane]
 
 ON=@ENTER
   src.sysmessage("Jen chlad a utrpeni te budou provazet v techto ledovych planich.")
@@ -1107,7 +1116,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_hadiostrovy]
+[RegionType r_hadiostrovy]
 
 ON=@ENTER
   SRC.TAG.mistrquest=1
@@ -1116,7 +1125,7 @@ ON=@ENTER
 //////////////////////////////////////////////////////////////////////////
 //            kvestové lokace
 
-[REGIONTYPE r_Moria_central]
+[RegionType r_Moria_central]
 
 ON=@ENTER	
   if (src.profession==class_necro)
@@ -1133,7 +1142,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_Manweho_chram]
+[RegionType r_Manweho_chram]
 
 ON=@ENTER
   if (src.profession==class_necro)
@@ -1151,7 +1160,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_sidlo_kleriku_Valar_Vardy]
+[RegionType r_sidlo_kleriku_Valar_Vardy]
 
 ON=@ENTER
   if (src.profession==class_necro)
@@ -1169,7 +1178,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_Chram_Valar_Varaaaaa]
+[RegionType r_Chram_Valar_Varaaaaa]
 
 ON=@ENTER
   if (src.profession==class_necro)
@@ -1187,7 +1196,7 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_Chram_Valar_Vardy]
+[RegionType r_Chram_Valar_Vardy]
 ON=@ENTER	
   IF ( (src.ClientRes >= 3) )
     src.MidiList=Music_Arabian1
@@ -1204,14 +1213,14 @@ ON=@CLIPERIODIC
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_Kvalita_stromu]
+[RegionType r_Kvalita_stromu]
 
 ON=@ENTER
   src.sysmessage("Zda se, ze stromy jsou zde mnohem kvalitnejsi nez jinde.")
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE e_Cardolanske_pohrebiste]
+[RegionType e_Cardolanske_pohrebiste]
 ON=@ENTER
 if (src.isplayer)
   src.sysmessage("Citis zatuchlinu a hnilobu, ktera k tobe prichazi odkudsi z hlubin podzemni chodby.")
@@ -1250,7 +1259,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_oblast_cerne_smrti]
+[RegionType r_oblast_cerne_smrti]
 
 on=@exit
   if (src.isplayer)
@@ -1259,7 +1268,7 @@ on=@exit
   
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_domov_drakulu]
+[RegionType r_domov_drakulu]
 ON=@ENTER
   if (src.isplayer)
     src.f_domov_drakulu_enter
@@ -1272,7 +1281,7 @@ ON=@EXIT
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_Hrobky_Cernych_Numenorejcu]
+[RegionType r_Hrobky_Cernych_Numenorejcu]
 ON=@ENTER
     if (src.isplayer)
     src.f_hcn_enter
@@ -1285,7 +1294,7 @@ ON=@EXIT
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_Hrobky_Cernych_Numenorejcu_Lvl2]
+[RegionType r_Hrobky_Cernych_Numenorejcu_Lvl2]
 ON=@ENTER
   if (src.isplayer)
     src.f_hcn2_enter
@@ -1298,7 +1307,7 @@ ON=@EXIT
 
 ///////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_PvP_PortZone]
+[RegionType r_PvP_PortZone]
 ON=@ENTER
 if (src.isPlayer)
   src.f_PvP_PortZoneEnter
@@ -1311,7 +1320,7 @@ endif
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_lagr]
+[RegionType r_lagr]
 ON=@ENTER
   if (src.isplayer)
     src.events=+e_lagr_nodmg
@@ -1324,7 +1333,7 @@ on=@exit
 //////////////////////    D R A C I   ////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_dragon_fortress]
+[RegionType r_dragon_fortress]
 
 ON=@ENTER
   if (src.isplayer)
@@ -1339,7 +1348,7 @@ on=@exit
 
 /////////////////////////////////////////////////////
 
-[REGIONTYPE r_bahno]
+[RegionType r_bahno]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
@@ -1354,7 +1363,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_bahenni]
+[RegionType r_bahenni]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
@@ -1369,7 +1378,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_hnedy]
+[RegionType r_hnedy]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
@@ -1384,7 +1393,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_zeleny]
+[RegionType r_zeleny]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
@@ -1399,7 +1408,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_ledovy]
+[RegionType r_ledovy]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
@@ -1414,7 +1423,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_ohnivy]
+[RegionType r_ohnivy]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
@@ -1429,7 +1438,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_cerny]
+[RegionType r_cerny]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
@@ -1444,7 +1453,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_bily]
+[RegionType r_bily]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
@@ -1459,7 +1468,7 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
-[REGIONTYPE r_zlaty]
+[RegionType r_zlaty]
 
 ON=@ENTER
 //  src.removeAgressiveSummon
