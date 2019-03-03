@@ -7659,7 +7659,7 @@ GROUP=Rooms
 tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 219     //Erebor
+[AREA dum 219]     //Erebor
 P=4800,2114
 RECT=4786,2108,4800,2116
 tag.housenumber=219
