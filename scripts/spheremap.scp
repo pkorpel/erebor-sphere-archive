@@ -1,4 +1,4 @@
-////////////////// vzor sriptu uzemi a jeho vyklad - co je na co ///////////////
+﻿////////////////// vzor sriptu uzemi a jeho vyklad - co je na co ///////////////
 //[AREA cave]                 /// nazev lokace, urci nazev runy - "cave", .kde (Jsem v "cave" + souradnice)
 //CLASS=13                    /// tak tohle nevim a zajimalo by me, to co to definuje 
 //TITLE=JESKYNE               /// jmeno regionu - nevim kde se ukaze (TITLE REGION)
@@ -8380,16 +8380,28 @@ GROUP=Rooms
 tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 282]   //kralovstvi lesnich elfu
+[AREA dum 282]
+P=2481,2966
+RECT=2488,2978,2476,2956
+RECT=2476,2975,2469,2956
+tag.housenumber=282
+FLAGS=01192
+RAINCHANCE=00
+COLDCHANCE=00  
+GROUP=Rooms
+tag.houserealm=1
+EVENTS=r_playerhouse, r_nosumon
+
+[AREA dum 283]   //kralovstvi lesnich elfu
 P=2996,1244,45
 RECT=2986,1241,2996,1247
-tag.housenumber=282
+tag.housenumber=283
 FLAGS=01192
 RAINCHANCE=00  
 COLDCHANCE=00  
 GROUP=Rooms
-EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
 tag.houserealm=1
+EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
 
 
 ////////////////////////////////////////////////////////////////////////////
