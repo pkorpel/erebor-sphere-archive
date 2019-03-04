@@ -246,24 +246,37 @@ while (arg(mainSubsection) < <questMenu_subsection_number>)
 endwhile
 
 if (argv(0) == 1)
-  f_questy_buildMainDialog_basic
+  f_questy_buildMainDialog_basic(0)
+  f_questy_buildMainDialog_basic(1)
 elseif (argv(0) == 2)
   f_questy_buildMainDialog_dungeonMarks
 else
   f_questy_buildMainDialog_boosters
 endif
 
+// argv(0) 0 active quests displayed; 1 done quests displayed
 [function f_questy_buildMainDialog_basic]
+arg(showDone,<argv(0)>)
 arg(questNumber,0)
 arg(middle,<eval (<questMenu_width>/2)>)
+
+if (arg(showDone))
+  arg(nameColor,<questMenu_color_questDoneFont>)
+else
+  arg(nameColor,<questMenu_color_questActiveFont>)
+endif
+
 while (<questNumber> < <questMenu_rows>)
   if (<f_questMenu_hasRelevantTag(<questMenu[<questNumber>]>)>)
-    f_qm_setOffsetAndPaging(7,40,48)
-    arg(posY,<tag(yPos)>)
-    f_qm_itemButton(<arg(posY)>,40)
-    button(<questMenu_width>-10,<arg(posY)>,0828,01F,1,0,<eval <questNumber>+1000>)
-    setText(newTextLine,"<basefont color=<?questMenu_color_questActiveFont?>><?f_questMenu_getName(<questMenu[<questNumber>]>)?>")
-    htmlGump(<arg(middle)>-32,<arg(posY)>+8,150,20,<lastTextLine>,0,0)
+    if (showDone == f_questMenu_isDone(<questNumber>))
+      f_qm_setOffsetAndPaging(7,40,48)
+      arg(posY,<tag(yPos)>)
+      f_qm_itemButton(<arg(posY)>,40)
+      button(<questMenu_width>-10,<arg(posY)>,0828,01F,1,0,<eval <questNumber>+1000>)
+      
+      setText(newTextLine,"<basefont color=<?arg(nameColor)?>><?f_questMenu_getName(<questMenu[<questNumber>]>)?>")
+      htmlGump(<arg(middle)>-32,<arg(posY)>+8,150,20,<lastTextLine>,0,0)
+    endif
   endif
   arg(questNumber,#+1)
 endwhile
@@ -621,6 +634,9 @@ dialog(d_questy,10)
 //                   //
 ///////////////////////
 
+[function f_isDone_d_questy_borek]
+return <eval((<eval src.qtag(gq002)> == 5) || (<eval src.qtag(mq002)> == 5))>
+
 [dialog d_questy_borek]
 argo.f_qDialogInstructions(03118)
 
@@ -670,6 +686,9 @@ argo.f_qm_closeSubDialog
 //               //
 ///////////////////
 
+[function f_isDone_d_questy_gorug]
+return <eval((0<src.qtag(gq002_kovar)> == 3) || (0<src.qtag(mq002_kovar)> == 3))>
+
 [dialog d_questy_gorug]
 argo.f_qDialogInstructions(03022)
 if ( (0<src.qtag(gq002_kovar)> == 1) || (0<src.qtag(mq002_kovar)> ==1) )
@@ -697,6 +716,9 @@ argo.f_qm_closeSubDialog
 //  Mikkena  //
 //           //
 ///////////////
+
+[function f_isDone_d_questy_mikena]
+return <eval(0<src.tag(gq001) > 0)>
 
 [dialog d_questy_mikena]
 argo.f_qDialogInstructions(03139)
@@ -734,6 +756,9 @@ argo.f_qm_closeSubDialog
 /////////////////
 
 // Gondor
+
+[function f_isDone_d_questy_zmocnenecg]
+return <eval(<eval src.qtag(gq030_zmocnenec)> == 28)>
 
 [dialog d_questy_zmocnenecg]
 argo.setText(0,"Zmocnenec Gondoru")
@@ -786,6 +811,9 @@ on=0
 argo.f_qm_closeSubDialog
 
 // Mordor
+[function f_isDone_d_questy_zmocnenecm]
+return <eval(28 < <eval src.qtag(mq030_zmocnenec)>)>
+
 [dialog d_questy_zmocnenecm]
 argo.setText(0,"Zmocnenec Mordoru")
 argo.f_qDialogInstructions(03111)
@@ -840,6 +868,9 @@ argo.f_qm_closeSubDialog
 //                   //
 ///////////////////////
 
+[function f_isDone_d_questy_kuchar]
+return <eval((0<src.tag(q31_neuspel)> == 1) || (0<src.tag(q31_kuchar)> == 2))>
+
 [dialog d_questy_kuchar]
 argo.f_qDialogInstructions(03001)
 
@@ -869,6 +900,9 @@ argo.f_qm_closeSubDialog
 //                 //
 /////////////////////
 
+[function f_isDone_d_questy_lavovyjester]
+return <eval((0<src.tag(q1_lavovyjester)> == 2) || (0<src.tag(q1_neuspel)> == 1))>
+
 [dialog d_questy_lavovyjester]
 argo.f_qDialogInstructions(03036)
 
@@ -897,6 +931,9 @@ argo.f_qm_closeSubDialog
 //  Haradirovo selatko  //
 //                      //
 //////////////////////////
+
+[function f_isDone_d_questy_Haradirovo_selatko]
+return <eval(0<src.qtag(q007_haradirovo_selatko)> == 8)>
 
 [dialog d_questy_Haradirovo_selatko]
 argo.f_qDialogInstructions(03106)
@@ -934,6 +971,8 @@ Haradir od tebe velmi vdecne selatko prijal. Jedine, co ti mohl nabidnout vymeno
 on=0
 argo.f_qm_closeSubDialog
 
+[function f_isDone_d_questy_kniha_inscripce]
+return <eval(0<src.qtag(q007_stary_inscripter)> == 3)>
 
 [dialog d_questy_kniha_inscripce]
 argo.f_qDialogInstructions(03053)
@@ -956,6 +995,8 @@ Tento mocny carodej ti napise Knihu Inskripce, pokud mu doneses tri kameny:<br><
 on=0
 argo.f_qm_closeSubDialog
 
+[function f_isDone_d_questy_adamantinove_kladivko]
+return <eval (0<src.qtag(q007_prastary_kovar)> == 2)>
 
 [dialog d_questy_adamantinove_kladivko]
 argo.f_qDialogInstructions(03059)
@@ -984,6 +1025,9 @@ argo.f_qm_closeSubDialog
 //             //
 /////////////////
 
+[function f_isDone_d_questy_mastickar]
+return <eval(0<src.qtag(q010_mastickar)> == 2)>
+
 [dialog d_questy_mastickar]
 argo.f_qDialogInstructions(03008)
 
@@ -1009,6 +1053,17 @@ argo.f_qm_closeSubDialog
 //  Prekupnik  //
 //             //
 /////////////////
+
+[function f_isDone_d_questy_prekupnik]
+if ((0<src.tag.gq011_prekupnik> == 6) || (0<src.tag.mq011_prekupnik> == 7))
+  return 1
+endif
+
+if ((0<src.tag(gq011_neuspel)> != 0) || (0<src.tag.mq011_neuspel> != 0))
+  return 1
+endif
+
+return 0
 
 [dialog d_questy_prekupnik]
 if ( (0<src.tag(gq011_neuspel)> !=0) || (0<src.tag.gq011_prekupnik> !=0) ) // gondorsky prekupnik
@@ -1084,6 +1139,11 @@ argo.f_qm_closeSubDialog
 //                  //
 //////////////////////
 
+[function f_isDone_d_questy_experimentator]
+arg(gondorPhase,<eval src.qtag(gq013_experimentator)>)
+arg(mordorPhase,<eval src.qtag(mq013_experimentator)>)
+return <eval((gondorPhase == 2) || (gondorPhase == 3) || (mordorPhase == 2) || (mordorPhase == 3))>
+
 [dialog d_questy_experimentator]
 if (0<src.qtag(gq013_experimentator)>!=0)
   argo.f_qDialogInstructions(03030)
@@ -1128,6 +1188,9 @@ argo.f_qm_closeSubDialog
 //                   //
 ///////////////////////
 
+[function f_isDone_d_questy_paradnice]
+return <eval((<eval(src.tag(q015_paradnice))> == 2) || (<eval(src.tag(q015_neuspel))> != 0))>
+
 [dialog d_questy_paradnice]
 argo.f_qDialogInstructions(03023)
 
@@ -1157,6 +1220,10 @@ argo.f_qm_closeSubDialog
 //  Prastary poklad  //
 //                   //
 ///////////////////////
+
+[function f_isDone_d_questy_prastary_poklad]
+arg(q016Phase,0<src.qtag(q016_prastary_poklad)>)
+return <eval((q016Phase == 011) || (q016Phase == 012) || (q016Phase == 013) || (q016Phase == 014))>
 
 [dialog d_questy_prastary_poklad]
 argo.f_qDialogInstructions(03001)
@@ -1220,6 +1287,9 @@ argo.f_qm_closeSubDialog
 //                     //
 /////////////////////////
 
+[function f_isDone_d_alchymista_terlak]
+return <eval(0<src.qtag(q017_terlak)> !=0)>
+
 [dialog d_alchymista_terlak]
 argo.f_qDialogInstructions(03000)
 
@@ -1247,6 +1317,10 @@ argo.f_qm_closeSubDialog
 //  Hobitin (zahradnice Ambra)  //
 //                              //
 //////////////////////////////////
+
+[function f_isDone_d_questy_hobitin]
+arg(q100Phase,<eval(0<src.tag.q100_hobitin_ambra>)>)
+return <eval((q100Phase == 1) || (q100Phase == 2) || (0<src.tag(q100_hobitin_ambra_neuspel)> != 0))>
 
 [dialog d_questy_hobitin]
 argo.f_qDialogInstructions(03000)
@@ -1278,6 +1352,9 @@ argo.f_qm_closeSubDialog
 //  Kouzelna dyka  //
 //                 //
 /////////////////////
+
+[function f_isDone_d_questy_kouzelnadyka]
+return <eval(0<src.qtag(q023)> == 8)>
 
 [dialog d_questy_kouzelnadyka]
 if ((0<src.qtag(q023)> == 1) || (0<src.qtag(q023)> == 4) || (0<src.qtag(q023)> == 8))
@@ -1328,6 +1405,9 @@ argo.f_qm_closeSubDialog
 //  Carodejka  //
 //             //
 /////////////////
+
+[function f_isDone_d_questy_carodejka]
+return <eval(src.qtag(q020) == 11)>
 
 [dialog d_questy_carodejka]
 argo.f_qDialogInstructions(03121)
@@ -1382,6 +1462,9 @@ argo.f_qm_closeSubDialog
 //                           //
 ///////////////////////////////
 
+[function f_isDone_d_questy_remeslnik_navin]
+return <eval(src.qtag(q021) == 2)>
+
 [dialog d_questy_remeslnik_navin]
 argo.f_qDialogInstructions(03140)
 
@@ -1407,6 +1490,9 @@ argo.f_qm_closeSubDialog
 //  Transport  //
 //             //
 /////////////////
+
+[function f_isDone_d_questy_transport]
+return <eval(src.qtag(q022) == 13)>
 
 [dialog d_questy_transport]
 argo.f_qDialogInstructions(03029)
@@ -1472,6 +1558,9 @@ argo.f_qm_closeSubDialog
 //  Erioluv vnuk  //
 //                //
 ////////////////////
+
+[function f_isDone_d_questy_erioluv_vnuk]
+return <eval(src.qtag(q006) == 24)>
 
 [dialog d_questy_erioluv_vnuk]
 argo.f_qDialogInstructions(03070)
@@ -1574,6 +1663,9 @@ f_qm_closeSubDialog
 //                          //
 //////////////////////////////
 
+[function f_isDone_d_questy_lovec_odlier]
+return <eval(src.qtag(nb001) == 4)>
+
 [dialog d_questy_lovec_odlier]
 argo.f_qDialogInstructions(03123)
 
@@ -1606,6 +1698,9 @@ argo.f_qm_closeSubDialog
 //                            //
 ////////////////////////////////
 
+[function f_isDone_d_questy_akolytka_mirana]
+return <eval(src.qtag(nb002) == 2)>
+
 [dialog d_questy_akolytka_mirana]
 argo.f_qDialogInstructions(03135)
 
@@ -1631,6 +1726,9 @@ argo.f_qm_closeSubDialog
 //  NB quest Hornik Beorgrad  //
 //                            //
 ////////////////////////////////
+
+[function f_isDone_d_questy_hornik_beorgrad]
+return <eval(src.qtag(nb003) == 6)>
 
 [dialog d_questy_hornik_beorgrad]
 argo.f_qDialogInstructions(03045)
@@ -1670,6 +1768,9 @@ argo.f_qm_closeSubDialog
 //                          //
 //////////////////////////////
 
+[function f_isDone_d_questy_lesnik_grarad]
+return <eval(src.qtag(nb004) == 4)>
+
 [dialog d_questy_lesnik_grarad]
 argo.f_qDialogInstructions(03022)
 
@@ -1701,6 +1802,9 @@ argo.f_qm_closeSubDialog
 //  NB quest Rybar Broket  //
 //                         //
 /////////////////////////////
+
+[function f_isDone_d_questy_rybar_broket]
+return <eval(src.qtag(nb005)==4)>
 
 [dialog d_questy_rybar_broket]
 argo.f_qDialogInstructions(03099)
@@ -1734,6 +1838,9 @@ argo.f_qm_closeSubDialog
 //                      //
 //////////////////////////
 
+[function f_isDone_d_questy_necromancer]
+return <eval(src.qtag(nb006) == 2)>
+
 [dialog d_questy_necromancer]
 argo.f_qDialogInstructions(03088)
 
@@ -1759,6 +1866,9 @@ argo.f_qm_closeSubDialog
 //  NB quest Remeslnik Imro  //
 //                           //
 ///////////////////////////////
+
+[function f_isDone_d_questy_remeslnik_imro]
+return <eval(src.qtag(nb007) == 12)>
 
 [dialog d_questy_remeslnik_imro]
 argo.f_qDialogInstructions(03042)
@@ -1810,6 +1920,9 @@ argo.f_qm_closeSubDialog
 //                   //
 ///////////////////////
 
+[function f_isDone_d_questy_vyvrhel]
+return <eval(src.qtag(q099) == 9)>
+
 [dialog d_questy_vyvrhel]
 argo.f_qDialogInstructions(03030)
 
@@ -1842,6 +1955,9 @@ Podivin po tobe chce 80 usi elementala zeme do batohu ktery ti dal.
 Podivin po tobe chce 50 esenci z monstra zvaneho oko (Eye).
 Podivin po tobe chce 5 pirek jedoveho fenixe.
 Jestli jsi <?src.sex(pripraven,pripravena)?> Podivin je pripraven zbavit te vyhnanstvi!
+
+[function f_isDone_d_questy_zlaty_losos]
+return <eval(src.qtag(q018)==6)>
 
 [dialog d_questy_zlaty_losos]
 argo.f_qDialogInstructions(03122)
@@ -1881,6 +1997,9 @@ argo.f_qm_closeSubDialog
 //                    //
 ////////////////////////
 
+[function f_isDone_d_questy_pocestny]
+return <eval(0<src.qtag(q019_pocestny)> == 1)>
+
 [dialog d_questy_pocestny]
 argo.f_qDialogInstructions(03053)
 
@@ -1903,6 +2022,9 @@ argo.f_qm_closeSubDialog
 //  Volani more  //
 //               //
 ///////////////////
+
+[function f_isDone_d_questy_volani_more]
+return <eval(0<src.qtag(q033)> == 8)>
 
 [dialog d_questy_volani_more]
 argo.f_qDialogInstructions(03102)
@@ -1948,6 +2070,9 @@ argo.f_qm_closeSubDialog
 //  Zasnubni prsten  //
 //                   //
 ///////////////////////
+
+[function f_isDone_d_questy_zasnubni_prsten]
+return <eval(0<src.qtag(q024)> == 12)>
 
 [dialog d_questy_zasnubni_prsten]
 argo.f_qDialogInstructions(03029)
@@ -2005,6 +2130,18 @@ argo.f_qm_closeSubDialog
 //  Palirna  //
 //           //
 ///////////////
+[function f_isDone_d_questy_palirna]
+if (src.qtag(q025) & <q025_hosp_odmena_a>)
+  return 1
+elseif (src.qtag(q025) & <q025_hosp_odmena_b>)
+  return 1
+elseif (src.qtag(q025) & <q025_pal_odmena_a>)
+  return 1
+elseif (src.qtag(q025) & <q025_pal_odmena_b>)
+  return 1
+endif
+
+return 0
 
 [dialog d_questy_palirna]
 argo.f_qDialogInstructions(03115)
@@ -2121,6 +2258,9 @@ argo.f_qm_closeSubDialog
 //                   //
 ///////////////////////
 
+[function f_isDone_d_questy_HCNPoison]
+return <eval (<eval src.qtag(q026_hcnPoison)> == 15)>
+
 [dialog d_questy_HCNPoison]
 argo.setText(0,"Otrava z hrobek")
 argo.f_qDialogInstructions(01b6b,0,57,83)
@@ -2168,6 +2308,10 @@ argo.f_qm_closeSubDialog
 //  Umbarska hadka  //
 //                  //
 //////////////////////
+
+[function f_isDone_d_questy_umbarskaHadka]
+arg(questPhase,<eval src.qtag(mq027_umbarskaHadka)>)
+return <eval((questPhase == 35) || (questPhase == 36) || (questPhase == 37))>
 
 [dialog d_questy_umbarskaHadka]
 argo.setText(0,"Umbarska hadka")
@@ -2272,6 +2416,9 @@ argo.f_qm_closeSubDialog
 //                  //
 //////////////////////
 
+[function f_isDone_d_questy_velmistr]
+return <eval(<eval src.qtag(q000_velmistr)> == 13)>
+
 [dialog d_questy_velmistr]
 argo.setText(0,"Ztracene Dcery")
 argo.f_qDialogInstructions(03000)
@@ -2316,6 +2463,9 @@ argo.f_qm_closeSubDialog
 //                   //
 ///////////////////////
 
+[function f_isDone_d_questy_murlay_namornik]
+return <eval(0<src.qtag(q029_murlay_namornik)> == 6)>
+
 [dialog d_questy_murlay_namornik]
 argo.setText(0,"Namornik Murlay")
 argo.f_qDialogInstructions(03104)
@@ -2345,6 +2495,9 @@ argo.f_qm_closeSubDialog
 //                  //
 //////////////////////
  
+[function f_isDone_d_questy_menegil]
+return <eval(0<src.qtag(mq032_menegil)> == 28)>
+
 [dialog d_questy_menegil]
 argo.setText(0,"Prodejce Menegil")
 argo.f_qDialogInstructions(03142)
@@ -2414,9 +2567,12 @@ argo.f_qm_closeSubDialog
 
 //////////////////////
 //                  //
-//  herman  //
+//  herman          //
 //                  //
 //////////////////////
+
+[function f_isDone_d_questy_herman]
+return <eval(<eval src.qtag(q035_herman)> == 22)>
 
 [dialog d_questy_herman]
 argo.setText(0,"Herman")
@@ -2481,6 +2637,9 @@ argo.f_qm_closeSubDialog
 //                  //
 //////////////////////
 
+[function f_isDone_d_questy_jonas]
+return <eval(0<src.qtag(q036_jonas)> == 11)>
+
 [dialog d_questy_jonas]
 argo.setText(0,"Uhrovity Jonas")
 argo.f_qDialogInstructions(03082)
@@ -2519,6 +2678,8 @@ argo.f_qm_closeSubDialog
 //  Opily zarik  //
 //               //
 ///////////////////
+[function f_isDone_d_questy_zarik]
+return <eval(0<src.qtag(q037_zarik)> == 14)>
 
 [dialog d_questy_zarik]
 argo.setText(0,"Opily Zarik")
@@ -2564,6 +2725,8 @@ argo.f_qm_closeSubDialog
 //  OBLAST CERNE SMRTI  //
 //                      //
 //////////////////////////
+[function f_isDone_d_ocs]
+return 0
 
 [dialog d_ocs]
 argo.setText(0,"Oblast cerne smrti")
@@ -2574,6 +2737,8 @@ argo.f_qDialogInstructions(03164)
 //  Shadow weapons  //
 //                  //
 //////////////////////
+[function f_isDone_d_shadow_weapon]
+return <eval(0<src.qtag(q039_shadow_weapon)> == 5)>
 
 [dialog d_shadow_weapon]
 argo.setText(0,"Kovar")
@@ -2602,6 +2767,9 @@ argo.htmlGump(160,80,242,130,1,0,36)
 //  Spolecenstvi drakobijcu  //
 //                           //
 ///////////////////////////////
+
+[function f_isDone_d_dragons]
+return <eval(0<src.qtag(q040_dragons)> == 101)>
 
 [dialog d_dragons]
 argo.setText(0,"Spolecenstvi drakobijcu")
@@ -2664,6 +2832,9 @@ argo.htmlGump(160,80,242,130,1,0,36)
 //                                        //
 ////////////////////////////////////////////
 
+[function f_isDone_d_dragons_alchymista]
+return <eval(0<src.qtag(q040_dragons_alchymista)> == 2)>
+
 [dialog d_dragons_alchymista]
 argo.setText(0,"Drakobijec Alchymista")
 argo.f_qDialogInstructions(03159)
@@ -2682,6 +2853,9 @@ argo.htmlGump(160,80,242,130,1,0,36)
 //  Spolecenstvi drakobijcu - rakchin  //
 //                                     //
 /////////////////////////////////////////
+
+[function f_isDone_d_dragons_rakchin]
+return <eval(0<src.qtag(q040_dragons_rakchin)> == 2)>
 
 [dialog d_dragons_rakchin]
 argo.setText(0,"Drakobijec Rakchin")
@@ -2702,6 +2876,9 @@ argo.htmlGump(160,80,242,130,1,0,36)
 //                                    //
 ////////////////////////////////////////
 
+[function f_isDone_d_dragons_blazen]
+return <eval(0<src.qtag(q040_dragons_blazen)> == 2)>
+
 [dialog d_dragons_blazen]
 argo.setText(0,"Blaznivy Drakobijec")
 argo.f_qDialogInstructions(03159)
@@ -2721,6 +2898,9 @@ argo.htmlGump(160,80,242,130,1,0,36)
 //                                            //
 ////////////////////////////////////////////////
 
+[function f_isDone_d_dragons_kovar]
+return <eval(0<src.qtag(q040_dragons_kovar)> == 2)>
+
 [dialog d_dragons_kovar]
 argo.setText(0,"Drakobijci - brneni")
 argo.f_qDialogInstructions(03093)
@@ -2737,6 +2917,9 @@ argo.htmlGump(160,80,242,130,1,0,36)
 //  Prestupak - Paserak  //
 //                       //
 ///////////////////////////
+
+[function f_isDone_d_prestupak]
+return <eval(0<src.qtag(q041_paserak)> == 10)>
 
 [dialog d_prestupak]
 argo.setText(0,"Paserak")
@@ -2770,6 +2953,9 @@ argo.htmlGump(160,80,242,130,1,0,36)
 //  Halda Molle Hatlend  //
 //                        //
 ////////////////////////////
+[function f_isDone_d_hm_hatlend]
+arg(questPhase,0<src.qtag(q042_hatlend_rulik)>)
+return <eval((questPhase == 2) || (questPhase == 3) || (questPhase == 4))>
 
 [dialog d_hm_hatlend]
 argo.setText(0,"Hatlend")
@@ -2791,6 +2977,9 @@ argo.htmlGump(160,80,242,130,1,0,36)
 //        MURDOC          //
 //                        //
 ////////////////////////////
+
+[function f_isDone_d_murdoc_ucni]
+return <eval((<eval src.qtag(gq043)> == 223) || (<eval src.qtag(mq043)> == 223))>
 
 [dialog d_murdoc_ucni]
 if (0<src.qtag(q043_tut)>)
@@ -3181,6 +3370,9 @@ return 0
 //                        //
 ////////////////////////////
 
+[function f_isDone_d_murdoc_zachrana]
+return 0
+
 [dialog d_murdoc_zachrana]
 argo.f_questmenu_murdoc_zachrana
 
@@ -3317,6 +3509,14 @@ return<argv(0)>
 
 [function f_questMenu_getDialog]
 return<argv(1)>
+
+[function f_questMenu_isDone]
+arg(funName,"f_isDone_<f_questMenu_getDialog(<questMenu[<argv(0)>]>)>")
+if (funName)
+  return 1
+endif
+
+return 0
 
 [function f_questMenu_hasRelevantTag]
 arg(tagCount,<argvcount>-3)
