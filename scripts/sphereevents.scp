@@ -13,6 +13,9 @@ on=@aftergetswing
 
 
 [typedef t_noclickhigh]
+on=@afterDoEffect
+on=@userclick
+
 on=@UserDclick
 if(f_noclickhigh(<p_z>,<src.p_z>))
 return 1
