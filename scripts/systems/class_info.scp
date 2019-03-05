@@ -648,8 +648,8 @@ argo.dialog_pozadi(<argo.tag(nexty)>,1)
 argo.dialog_pozadi(<argo.tag(nexty)>,1,30,243,77,123)
 arg(i,0)
 while (i < class_info_<src.profession>_abilities)
-	argo.dialog_pozadi(<argo.tag(nexty)>,1,30,243,77,123)
-	arg(i,#+1)
+  argo.dialog_pozadi(<argo.tag(nexty)>,1,30,243,77,123)
+  arg(i,#+1)
 endwhile
 argo.dialog_zpruhledni
 
@@ -660,35 +660,37 @@ argo.texta(lastxpos+80,lastypos,textcolor,"Prikaz:")
 argo.texta(<argo.dialog_textpos(1,4)>,textcolor,"Info")
 arg(i,0)
 while (i < class_info_<src.profession>_abilities)
-	if (strcmpi("<class_info_<src.profession>_function[<arg(i)>]>","none"))
-		argo.button(<argo.dialog_textpos(<eval <arg(i)>+2>,0)>,d_def_button_select1,d_def_button_select2,1,0,<eval 1000+class_info_profession_<src.profession>+<arg(i)>>)
-	endif
-	argo.texta(<argo.dialog_textpos(<eval <arg(i)>+2>,1)>,textcolor,"<class_info_<src.profession>_name[<arg(i)>]>")
-	if (strcmpi("<class_info_<src.profession>_max_points[<arg(i)>]>","none"))
-		argo.texta(<argo.dialog_textpos(<eval <arg(i)>+2>,2)>,textcolor,"<src.tag(<class_info_<src.profession>_tag[<arg(i)>]>)>/<class_info_<src.profession>_max_points[<arg(i)>]>")
-	else
-		argo.texta(<argo.dialog_textpos(<eval <arg(i)>+2>,2)>,textcolor,"-/-")
-	endif
-	if (strcmpi("<class_info_<src.profession>_function[<arg(i)>]>","none"))
-		argo.texta(lastxpos+80,lastypos,textcolor,".<class_info_<src.profession>_function[<arg(i)>]>")
-	else
-		argo.texta(lastxpos+80,lastypos,textcolor,"-")
-	endif
-	argo.button(lastxpos+205,lastypos,d_def_button_dialog1,d_def_button_dialog2,1,0,<eval class_info_profession_<src.profession>+<arg(i)>>)
-	arg(i,#+1)
+  if (strcmpi("<class_info_<src.profession>_function[<arg(i)>]>","none"))
+    argo.button(<argo.dialog_textpos(<eval <arg(i)>+2>,0)>,d_def_button_select1,d_def_button_select2,1,0,<eval 1000+class_info_profession_<src.profession>+<arg(i)>>)
+  endif
+  argo.texta(<argo.dialog_textpos(<eval <arg(i)>+2>,1)>,textcolor,"<class_info_<src.profession>_name[<arg(i)>]>")
+  if (strcmpi("<class_info_<src.profession>_max_points[<arg(i)>]>","none"))
+  argo.texta(<argo.dialog_textpos(<eval <arg(i)>+2>,2)>,textcolor,"<src.tag(<class_info_<src.profession>_tag[<arg(i)>]>)>/<class_info_<src.profession>_max_points[<arg(i)>]>")
+  else
+    argo.texta(<argo.dialog_textpos(<eval <arg(i)>+2>,2)>,textcolor,"-/-")
+  endif
+  if (strcmpi("<class_info_<src.profession>_function[<arg(i)>]>","none"))
+    argo.texta(lastxpos+80,lastypos,textcolor,".<class_info_<src.profession>_function[<arg(i)>]>")
+  else
+    argo.texta(lastxpos+80,lastypos,textcolor,"-")
+  endif
+  argo.button(lastxpos+205,lastypos,d_def_button_dialog1,d_def_button_dialog2,1,0,<eval class_info_profession_<src.profession>+<arg(i)>>)
+  arg(i,#+1)
 endwhile
 
 
 [dialog d_class_info button]
 on=0
+  src.dialogclose(d_class_info_ability,0)
 
 on=@anybutton
-if (<argn> < 1000)
-	src.dialog d_class_info_ability,<argn>
-	src.dialog(d_class_info)
+if (argn < 1000)
+  src.dialogclose(d_class_info_ability,0)
+  src.dialog(d_class_info_ability,<argn>)
+  src.dialog(d_class_info)
 else
-	arg(abilita,<eval <eval <argn>-class_info_profession_<src.profession>>-1000>)
-	src.<class_info_<src.profession>_function[<arg(abilita)>]>
+  arg(abilita,<eval <eval <argn>-class_info_profession_<src.profession>>-1000>)
+  src.<class_info_<src.profession>_function[<arg(abilita)>]>
 endif
 
 [dialog d_class_info_ability]
