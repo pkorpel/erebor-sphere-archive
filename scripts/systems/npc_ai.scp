@@ -1170,12 +1170,12 @@ else
  //nemame bojove info - neni s kym bojovat
  return 1
 endif
-if(victim) //mam vubec nejaky bojovy cil
- if(victim.ischar) //je to char
-  if(victim.npc) 
+if (arg(victim)) //mam vubec nejaky bojovy cil
+ if (victim.ischar) //je to char
+  if (victim.npc) 
   else //vidim neco co neni NPC - zrejme hrac :)
-   if(victim.isplayer)//pouze kdyz je to player - zrejme je to linkovalo na fish steaky! 
-    if(link)
+   if (victim.isplayer)//pouze kdyz je to player - zrejme je to linkovalo na fish steaky! 
+    if (link)
     else  
      link=<victim>
     endif
@@ -1718,7 +1718,7 @@ if (cont.isTaunted)  // npc je tauntnute, utoci tedy jen na wara
   src.accmsg("leapujici monstrum <cont.name>(<cont>) se pokusilo leapnout2 na <victim.name>(<victim>) ikdyz bylo TAUNT -nute.")
   arg(victim,<cont.findid(i_taunter).link>)
 endif
-if (victim) //mam vubec nejaky bojovy cil
+if (arg(victim)) //mam vubec nejaky bojovy cil
   if (victim.ischar) //je to char
     link=<victim>
   endif
