@@ -276,6 +276,14 @@ if (finduid(def_goblin_labyrint_memory_stone))
   def_goblin_labyrint_memory_stone.tag(last_time_of_move,<servertime>)
 endif
 
+// argv(0) prize bonus
+[function f_goblin_labyrint_item_chance]
+arg(prize_bonus,<argv(0)>)
+arg(item_chance,(200+(<eval src.qtag(Goblin_Labyrint)>*4))) // fix 20% sance + (pocet_projiti*0,4%) => 200 projiti =100%
+arg(item_chance,<eval <item_chance>+(<eval (<item_chance>*<eval prize_bonus>)/100>)>) // Bonus za precizni projiti
+
+return <item_chance>
+
 [function f_goblin_labyrint_prize]
 if (src.isPlayer)
   if (<eval src.qtag(Goblin_Labyrint)> == 0)
@@ -293,8 +301,7 @@ if (src.isPlayer)
   else  // od 5ti pruchodu exp a gp odmena je fixni + sance na item
     arg(exp_prize,1000)
     arg(gp_prize,20000)
-    arg(item_chance,(200+(<eval src.qtag(Goblin_Labyrint)>*4))) // fix 20% sance + (pocet_projiti*0,4%) => 200 projiti =100%
-    arg(item_chance,<eval <item_chance>+(<eval (<item_chance>*<eval prize_bonus>)/100>)>) // Bonus za precizni projiti
+    arg(item_chance,<f_goblin_labyrint_item_chance(<prize_bonus>)>)
     if (<eval {1 1000}> < <eval item_chance>)
       src.giveitem(i_mi_bag)
       def_goblin_labyrint_memory_stone.tag(gived_items,#+1)
@@ -306,7 +313,7 @@ if (src.isPlayer)
   
   src.f_vytvor_mesec(<gp_prize>,<src.findlayer(layer_bankbox)>)  // penize kvuli vaze do banky
   src.addexp(<exp_prize>)
-  src.qtag(Goblin_Labyrint,(<eval src.qtag(Goblin_Labyrint)>+1))  // nevim proc, ale qtag neumi navysit hodnotu tagu pres #+1
+  src.qtag(Goblin_Labyrint,(<eval src.qtag(Goblin_Labyrint)>+1),55)  // nevim proc, ale qtag neumi navysit hodnotu tagu pres #+1
 
   if (finduid(def_goblin_labyrint_memory_stone))  
     def_goblin_labyrint_memory_stone.tag(count_success,#+1)
