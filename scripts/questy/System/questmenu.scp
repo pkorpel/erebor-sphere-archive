@@ -635,7 +635,7 @@ dialog(d_questy,10)
 ///////////////////////
 
 [function f_isDone_d_questy_borek]
-return <eval((<eval src.qtag(gq002)> == 5) || (<eval src.qtag(mq002)> == 5))>
+return <eval((<eval src.qtag(gq002)> == 5) || (<eval src.qtag(mq002)> == 5) || (<eval src.qtag(gq002)> == 6) || (<eval src.qtag(mq002)> == 6))>
 
 [dialog d_questy_borek]
 argo.f_qDialogInstructions(03118)
@@ -972,7 +972,7 @@ on=0
 argo.f_qm_closeSubDialog
 
 [function f_isDone_d_questy_kniha_inscripce]
-return <eval(0<src.qtag(q007_stary_inscripter)> == 3)>
+return <eval((0<src.qtag(q007_stary_inscripter)> == 2) || 0<src.qtag(q007_stary_inscripter)> == 3)>
 
 [dialog d_questy_kniha_inscripce]
 argo.f_qDialogInstructions(03053)
@@ -1055,7 +1055,7 @@ argo.f_qm_closeSubDialog
 /////////////////
 
 [function f_isDone_d_questy_prekupnik]
-if ((0<src.tag.gq011_prekupnik> == 6) || (0<src.tag.mq011_prekupnik> == 7))
+if ((0<src.tag.gq011_prekupnik> == 6) || (0<src.tag.mq011_prekupnik> == 6))
   return 1
 endif
 
