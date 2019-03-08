@@ -1,6 +1,62 @@
 //////////////////////////////
 ////  CLASS INFO DIALOGS
 //
+///////////////////////////////////////////////////////////////////
+//////////////////////////////// MAG //////////////////////////////
+///////////////////////////////////////////////////////////////////
+
+[defnames class_info]
+// class_mag
+class_info_class_mag_abilities 8 // number of abilities
+
+class_info_class_mag_name[0] Longrange
+class_info_class_mag_tag[0] ra_rangearrow
+class_info_class_mag_max_points[0] 10
+class_info_class_mag_function[0] longrange
+class_info_class_mag_description[0] "Tato schopnost umoznuje prodlouzit vzdalenost, na kterou je schopen hodit bombu ci dispelbombu."
+
+class_info_class_mag_name[1] Hazeni
+class_info_class_mag_tag[1] ra_throwing
+class_info_class_mag_max_points[1] 10
+class_info_class_mag_function[1] throw
+class_info_class_mag_description[1] "Tato schopnost umoznuje hazet bomby (prikaz .throwexplosion). Prodlouzeni dosahu hodu je mozne za pomoci ability Longrange. Dale je tuto schopnost mozno vyuzit i na hazeni dispelujici bomby - prikaz .throwdispel."
+
+class_info_class_mag_name[2] Energeticky stit
+class_info_class_mag_tag[2] ra_energyshield
+class_info_class_mag_max_points[2] 50
+class_info_class_mag_function[2] energyshield
+class_info_class_mag_description[2] "Mag je schopen vyvolat mocne kouzlo, ktere ho chrani pred udery a kouzly od monster. Vydrz stitu je umerna poctu bodu v abilite. Ve stitu nelze pouzit schopnost standcast. K provedeni teto schopnosti je treba drahokam - Ametyst. Stit je mozno kouzlit pouze jednou za 3 minuty a 45 sekund. Stit je mozno zrusit prikazem - cancelenergyshield. Teto schopnosti se nekromant muze ucit od levelu 20."
+
+class_info_class_mag_name[3] MindBlast Silence
+class_info_class_mag_tag[3] ra_mind_blast_silence
+class_info_class_mag_max_points[3] 10
+class_info_class_mag_function[3] none
+class_info_class_mag_description[3] "Tato pasivni schopnost zamezuje monstrum po urcitou dobu kouzlit ci vyvolavat eventy magickeho typu (napr. Curse, Lighting kriz, Summoneni, Manashield). V pripade, ze umlcene monstrum ma rozcarovane kouzlo, toto kouzlo fizzne. Sance je krome ability take zavisla na materialu hole a inteligenci maga. Nektera monstra, jako bossove, mohou byt na silence imunni."
+
+class_info_class_mag_name[4] Silence - ucinnost
+class_info_class_mag_tag[4] ra_mind_blast_silenced_time
+class_info_class_mag_max_points[4] 10
+class_info_class_mag_function[4] none
+class_info_class_mag_description[4] "Tato schopnost prodluzuje ucinek MindBlast Silence. Zakladni delka umlceni je 1,5 sec. Pomoci ability se da navysit az na 2,5 sec."
+
+class_info_class_mag_name[5] Magicky Naboj - ohen
+class_info_class_mag_tag[5] ra_magicCharge_fire
+class_info_class_mag_max_points[5] 20
+class_info_class_mag_function[5] none
+class_info_class_mag_description[5] "Magicky naboj je abilita, ktera kouzelnikovi dava moznost soustredit se na kouzla. Kazde uspesne seslani kouzla Fire Ball zvysi koncentraci kouzelnika a kouzla Magic Arrow, Explosion, Flamestrike a Meteor Swarm jsou posilena. Magicky naboj trva 15 sekund, po kterych zacne po jednom naboji padat. Naboj vsak nadale pada rychleji, a to kazdych 5 sekund."
+
+class_info_class_mag_name[6] Magicky Naboj - mysl
+class_info_class_mag_tag[6] ra_magicCharge_mind
+class_info_class_mag_max_points[6] 20
+class_info_class_mag_function[6] none
+class_info_class_mag_description[6] "Magicky naboj je abilita, ktera kouzelnikovi dava moznost soustredit se na kouzla. Kazde uspesne seslani kouzla Harm zvysi koncentraci kouzelnika a kouzlo Mind Blast je posileno. Magicky naboj trva 15 sekund, po kterych zacne po jednom naboji padat. Naboj vsak nadale pada rychleji, a to kazdych 5 sekund."
+
+class_info_class_mag_name[7] Magicky Naboj - energie
+class_info_class_mag_tag[7] ra_magicCharge_energy
+class_info_class_mag_max_points[7] 20
+class_info_class_mag_function[7] none
+class_info_class_mag_description[7] "Magicky naboj je abilita, ktera kouzelnikovi dava moznost soustredit se na kouzla. Kazde uspesne seslani kouzla Lightning (blesk) zvysi koncentraci kouzelnika a kouzla Energy Bolt a Chain Lightning jsou posilena. Magicky naboj trva 15 sekund, po kterych zacne po jednom naboji padat. Naboj vsak nadale pada rychleji, a to kazdych 5 sekund."
+
 
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////// SHAMAN ////////////////////////////
@@ -81,18 +137,6 @@ class_info_class_shaman_tag[11] ra_pakty
 class_info_class_shaman_max_points[11] 10
 class_info_class_shaman_function[11] staminapact
 class_info_class_shaman_description[11] "Pakt staminy je soucasti skoly voodoo pakty - umoznuje samanovi sobe nebo svym spolubojovnikum vyrazne zvysit regeneraci staminy. Tato schopnost zadne specialni body nevyzaduje."
-
-//class_info_class_shaman_name[12] Voodoo stity - Osobni stit
-//class_info_class_shaman_tag[12] none
-//class_info_class_shaman_max_points[12] 40
-//class_info_class_shaman_function[12] voodooshield
-//class_info_class_shaman_description[12] "Osobni stit je soucasti skoly voodoo stity - umoznuje samanovi vytvorit magicky stit, ktery pohlcuje kouzla od monster. Vydrz stitu je umerna poctu bodu v abilite. Ve stitu nelze kouzlit kouzla Recall a Gate travel. K provedeni teto schopnosti je treba drahokam - Citrin. Tato schopnost zadne specialni body nevyzaduje. Stit je mozno zrusit prikazem - cancelvoodooshield."
-
-//class_info_class_shaman_name[13] Voodoo stity - skupinovy stit
-//class_info_class_shaman_tag[13] none
-//class_info_class_shaman_max_points[13] 40
-//class_info_class_shaman_function[13] voodooshieldmass
-//class_info_class_shaman_description[13] "Skupinovy stit je soucasti skoly voodoo stity - umoznuje samanovi vytvorit magicky stit pro celou skupinu, ktery pohlcuje kouzla od monster. Vydrz stitu je umerna poctu bodu v abilite. Ve stitu nelze kouzlit kouzla Recall a Gate travel. K provedeni teto schopnosti je treba drahokam - Citrin. Tato schopnost zadne specialni body nevyzaduje. Stit je mozno zrusit prikazem - cancelvoodooshieldmass."
 
 class_info_class_shaman_name[12] Standcast
 class_info_class_shaman_tag[12] none
@@ -505,7 +549,7 @@ class_info_class_necro_name[14] Energeticky stit
 class_info_class_necro_tag[14] ra_energyshield
 class_info_class_necro_max_points[14] 50
 class_info_class_necro_function[14] energyshield
-class_info_class_necro_description[14] "Nekromant je schopen vyvolat mocne kouzlo, ktere ho chrani pred udery a kouzly od monster. Vydrz stitu je umerna poctu bodu v abilite. Ve stitu nelze pouzit schopnost standcast. K provedeni teto schopnosti je treba drahokam - Ametyst. Stit je mozno kouzlit pouze jednou za ctyri minuty. Stit je mozno zrusit prikazem - cancelenergyshield. Teto schopnosti se nekromant muze ucit od levelu 20."
+class_info_class_necro_description[14] "Nekromant je schopen vyvolat mocne kouzlo, ktere ho chrani pred udery a kouzly od monster. Vydrz stitu je umerna poctu bodu v abilite. Ve stitu nelze pouzit schopnost standcast. K provedeni teto schopnosti je treba drahokam - Ametyst. Stit je mozno kouzlit pouze jednou za 3 minuty a 45 sekund. Stit je mozno zrusit prikazem - cancelenergyshield. Teto schopnosti se nekromant muze ucit od levelu 20."
 
 //////////////////////////////////////////////////////////////////
 ////////////////////////////// RANGER ////////////////////////////
