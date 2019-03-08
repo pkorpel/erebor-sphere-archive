@@ -25,7 +25,7 @@ class_info_class_mag_name[2] Energeticky stit
 class_info_class_mag_tag[2] ra_energyshield
 class_info_class_mag_max_points[2] 50
 class_info_class_mag_function[2] energyshield
-class_info_class_mag_description[2] "Mag je schopen vyvolat mocne kouzlo, ktere ho chrani pred udery a kouzly od monster. Vydrz stitu je umerna poctu bodu v abilite. Ve stitu nelze pouzit schopnost standcast. K provedeni teto schopnosti je treba drahokam - Ametyst. Stit je mozno kouzlit pouze jednou za 3 minuty a 45 sekund. Stit je mozno zrusit prikazem - cancelenergyshield. Teto schopnosti se nekromant muze ucit od levelu 20."
+class_info_class_mag_description[2] "Mag je schopen vyvolat mocne kouzlo, ktere ho chrani pred udery a kouzly od monster. Vydrz stitu je umerna poctu bodu v abilite. Ve stitu nelze pouzit schopnost standcast. K provedeni teto schopnosti je treba drahokam - Ametyst. Stit je mozno kouzlit pouze jednou za 3 minuty a 45 sekund. Stit je mozno zrusit prikazem - cancelenergyshield. Do teto schopnosti je mozne pridavat body od levelu 20."
 
 class_info_class_mag_name[3] MindBlast Silence
 class_info_class_mag_tag[3] ra_mind_blast_silence
