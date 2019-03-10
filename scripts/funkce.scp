@@ -313,15 +313,15 @@ if (<dispid>==i_pet_wisp)&&(<baseid>==i_worldgem_bit)&&(<type>==t_spawn_char)&&(
 endif
 
 [function fixNumber]
-arg(len, <strlen(<args>)>)
+arg(len,<strlen(<args>)>)
 if (len<=0)
-  return <args>
+  return 0
 endif
 
 arg(pattern,[-0123456789])
 while (arg(len)>1)
   arg(pattern,"<arg(pattern)>[-0123456789]")
-  arg(len, <eval arg(len)-1>)
+  arg(len,<eval arg(len)-1>)
 endwhile
 
 if (STRMATCH(<args>,<arg(pattern)>))

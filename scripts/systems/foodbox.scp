@@ -236,7 +236,7 @@ endif
 arg(i,1)
 while (i <= foodboxOrderCount)
   if (<argChk(<eval(i+100)>)>)
-    arg(foodAmount,<fixNumber(0<argTxt(<eval(i+100)>)>)>)
+    arg(foodAmount,<fixNumber(<argTxt(<eval(i+100)>)>)>)
     if (<arg(foodAmount)> > 0)
       f_takeoutFood(<foodboxOrder[<eval arg(i)-1>]>,<arg(foodAmount)>)
     endif
