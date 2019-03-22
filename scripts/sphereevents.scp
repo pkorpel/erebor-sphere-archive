@@ -10,10 +10,9 @@ on=@afterswing
 on=@beforedoeffect
 on=@beforegeteffect
 on=@aftergetswing
-
+on=@afterDoEffect
 
 [typedef t_noclickhigh]
-on=@afterDoEffect
 on=@userclick
 
 on=@UserDclick
