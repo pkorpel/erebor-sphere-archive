@@ -3545,6 +3545,106 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
+[Area Bitva o Vychodni Osgiliath Mix]
+P=6044,3890,-80
+RECT=5973,3698,6143,4095
+mapplane=10
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Zapadni Osgiliath Mix]
+P=5902,3891,-80
+RECT=5973,3698,5589,4095
+mapplane=10
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Vychodni Osgiliath 1]
+P=6044,3890,-80
+RECT=5973,3698,6143,4095
+mapplane=11
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Zapadni Osgiliath 1]
+P=5902,3891,-80
+RECT=5973,3698,5589,4095
+mapplane=11
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Vychodni Osgiliath 2]
+P=6044,3890,-80
+RECT=5973,3698,6143,4095
+mapplane=12
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Zapadni Osgiliath 2]
+P=5902,3891,-80
+RECT=5973,3698,5589,4095
+mapplane=12
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Vychodni Osgiliath 3]
+P=6044,3890,-80
+RECT=5973,3698,6143,4095
+mapplane=13
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Zapadni Osgiliath 3]
+P=5902,3891,-80
+RECT=5973,3698,5589,4095
+mapplane=13
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Vychodni Osgiliath 4]
+P=6044,3890,-80
+RECT=5973,3698,6143,4095
+mapplane=14
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
+[Area Bitva o Zapadni Osgiliath 4]
+P=5902,3891,-80
+RECT=5973,3698,5589,4095
+mapplane=14
+flags=08012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree
+RAINCHANCE=25
+COLDCHANCE=00
+
 //[AREA draci sluj]
 //GROUP=Dungeony
 //P=3906,3886
