@@ -4211,7 +4211,7 @@ CAN=MT_WALK|MT_FIRE_IMMUNE|mt_run
 
 ATTACK=160
 ARMOR=100
-MOVERATE=4
+MOVERATE=5
 
 RESOURCES=50 i_reag_bone
 BLOODCOLOR=1
@@ -4224,6 +4224,7 @@ TEVENTS=e_npc_critic
 TEVENTS=e_inexhaustible
 TEVENTS=e_dragon_regeneration
 TEVENTS=e_fire_dragon
+TEVENTS=e_summoneater_vamp
 
 CATEGORY=Dungy
 SUBSECTION=Dol Guldur
