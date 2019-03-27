@@ -468,33 +468,30 @@ elseif !(src.targ.srccombatLOS)||(src.targ.distance>6)
  remove
  return 1
 else
- src.dismount
- if (src.targ.body==c_llama_pack)
-  src.newitem(i_mt_llama_pack)
- elseif (src.targ.body==c_horse_pack)
-  src.newitem(i_mt_horse_pack)
+ arg(player,<src>)
+ src=src.targ
+ player.dismount
+ if (src.body==c_llama_pack)
+  player.newitem(i_mt_llama_pack)
+ elseif (src.body==c_horse_pack)
+  player.newitem(i_mt_horse_pack)
  else
-  src.targ.dclick
+  src.dclick
   remove
   return 1
  endif
  arg(mymemjezdik,<lastnew>)
- mymemjezdik.tag(mount_pack_id,<src.targ.id>)
- mymemjezdik.more2=<src.targ>
- mymemjezdik.color=<src.targ.color>
- mymemjezdik.tag(mycolor,<src.targ.color>)//ne, neni to zbytecne ackoli to tak vypada
- mymemjezdik.tag(myhits,<src.targ.hits>)
- mymemjezdik.name=<src.targ.name>
- mymemjezdik.tag(bagl,<src.targ.findlayer(21)>)
- mymemjezdik.tag(myfood,<src.targ.food>)
+ mymemjezdik.tag(mount_pack_id,<src.id>)
+ mymemjezdik.more2=<src>
+ mymemjezdik.color=<src.color>
+ mymemjezdik.tag(mycolor,<src.color>)//ne, neni to zbytecne ackoli to tak vypada
+ mymemjezdik.tag(myhits,<src.hits>)
+ mymemjezdik.name=<src.name>
+ mymemjezdik.tag(bagl,<src.findlayer(21)>)
+ mymemjezdik.tag(myfood,<src.food>)
  finduid(mymemjezdik.tag(bagl)).cont=04002CA40
- src.equip(mymemjezdik)
+ player.equip(mymemjezdik)
 endif
-//cont.newitemsafe(i_hladovitko)
-//lastnew.tag(myfood,<src.targ.food>)     
-//lastnew.tag(myuid,<mymemjezdik>)
-//cont.equip(<lastnew>)
-//tag(fooduid,<lastnew>)
 remove
 return 1
 
