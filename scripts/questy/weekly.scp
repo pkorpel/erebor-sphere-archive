@@ -738,7 +738,7 @@ tag(quest_description[<currentQNumber>],"Dokonci Dungeon:<br><?def_weekly_finish
 tag(quest_subjectId[<currentQNumber>],<arg(dungeonToFinish)>)
 tag(quest_iconId[<currentQNumber>],02203)
 tag(quest_iconId_moveX[<currentQNumber>],-8) // move the custom icon 4 pixels to the right
-cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>")
+cont.accmsg("byl vygenerovan Weekly quest <tag(quest_totalAmount[<currentQNumber>])>x <tag(quest_description[<currentQNumber>])>, level limit <argv(0)>, player level <src.tag(level)>")
 
 [function f_weekly_setup_KillStreak]    // argv(0) koef obtiznosti (velikost i pocet KillStreaku)
 arg(currentQNumber,<eval tag(qAssigned)>)
@@ -1459,8 +1459,9 @@ endwhile
 if (!arg(maxId))
   return 0
 endif
-return<eval {<arg(minID)> <arg(maxId)>}>
 
+arg(result,<eval {<arg(minID)> <arg(maxId)>}>)
+return<return_nth(1,<def_weekly_finishDungeon_lvl[arg(result)]>)>
 
 /////////////////////////////
 
