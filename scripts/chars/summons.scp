@@ -1748,6 +1748,7 @@ CATEGORY=Monsters
 SUBSECTION=Summons
 DESCRIPTION=MAGE Vortex
 
+TEVENTS=e_berserkbrain_distance_fix
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_roundattack
@@ -2192,6 +2193,7 @@ CAN=MT_WALK|MT_RUN
 attack=40
 ARMOR=40
 
+TEVENTS=e_berserkbrain_distance_fix
 TEVENTS=e_monster
 TEVENTS=e_character
 
