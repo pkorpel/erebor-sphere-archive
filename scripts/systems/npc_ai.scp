@@ -1787,6 +1787,15 @@ if ({1 <arg(chance)>}==1)
   attack(<src>)
 endif
 
+// Monsters with berserk brain can deal damage to any monster they see
+// disregarding their distance. Their attack also bypasses @tryHit
+// and has to be stopped at @hit trriger.
+[events e_berserkbrain_distance_fix]
+on=@hit
+if (distanceFrom(<act>) > 1)
+  return 1
+endif
+
 
 // promazany eventy 
 [events e_snowmonster]
