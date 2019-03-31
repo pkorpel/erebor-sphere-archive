@@ -571,7 +571,8 @@ MEMORY_GUILD		00400	// This is my guild stone. (never time out)
 MEMORY_TOWN		00800	// This is my town stone. (never time out)
 MEMORY_FOLLOW		01000	// I am following this Object (never time out)
 MEMORY_WAR_TARG		02000	// This is one of my current war targets.
-memory_friend		04000
+MEMORY_FRIEND		04000   // It is my friend, it can control me.
+MEMORY_OTHER        08000   // Memorytype for temporary changes (example function isPetFriend)
 
 [DEFNAMES STAT_FLAGS]
 // apply to chars

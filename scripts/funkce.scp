@@ -67,7 +67,6 @@ else
 endif
 
 arg(stringtosend, 0bf <split2bytes(13)> <split2bytes(04)> <split4bytes(<hval arg(dialoguid)>)> <split4bytes(<hval arg(buttonid)>)>)
-//logmsg(<arg(stringtosend)>)
 sendpacket(<arg(stringtosend)>)
 
 
@@ -1742,7 +1741,6 @@ while arg(i)<1000
   arg(counter,#+<skillcheck(hiding,<eval args>)>)
   arg(i,#+1)
 endwhile
-logmsg("skill <hiding>:::value <eval args>:::success <arg(counter)>")
 
 [function reveal]
 if (<flags>&0800008)
@@ -2820,7 +2818,6 @@ while (arg(tryarmor)<=150)
       arg(celkdam,<arg(celkdam)>+<eval 1000-<hits>>)
       arg(u,#+1)
     endwhile
-    logmsg("a:<?arg(tryarmor)?>,d:<?arg(trydam)?>, celkdam:<?arg(celkdam)?>")
     arg(trydam,<arg(trydam)>+5)
   endwhile
   arg(tryarmor,<arg(tryarmor)>+5)
@@ -3182,6 +3179,27 @@ if (ispet)
 else
  return <uid>
 endif
+
+[function isPetFriend]
+if !(ispet)
+  return 0
+else
+  arg(SRC_found,0)
+  arg(MemoryFound,0)
+  while (memoryfindtype(MEMORY_FRIEND) && !arg(SRC_found))
+    arg(MemoryFound,<memoryfindtype(MEMORY_FRIEND)>)
+    if (<arg(MemoryFound).link> == <src>)
+      arg(SRC_found,1)
+    endif
+    arg(MemoryFound).tag(Restore_color,<arg(MemoryFound).color>)
+    arg(MemoryFound).color=MEMORY_OTHER
+  endwhile
+  while (memoryfindtype(MEMORY_OTHER))
+    arg(MemoryFound,<memoryfindtype(MEMORY_OTHER)>)
+    arg(MemoryFound).color=<arg(MemoryFound).tag(Restore_color)>
+  endwhile
+endif
+return <arg(SRC_found)>
 
 [function addexp]
 if !(<eval tag(experience)>)
@@ -4072,7 +4090,6 @@ src.sendpacket(01c <split2bytes(<arg(length)>)> <hval (<uid>&0ff000000)/01000000
 
 [function paperdoll]
 var(packet,"088 <split4bytes(<this>)><strtoascii(60,<args>)> <hval(FLAG_war)>")
-//logmsg(<var(packet)>)
 src.sendpacket(<var(packet)>)
 
 [function counsectors]
@@ -4095,6 +4112,14 @@ elseif (isnazgul)
 elseif (isinmyguild)
   //srcchangehighlight(2)
   return 044 //03c
+elseif (ispet)
+  if (isPetFriend) || (isMyMaster)
+    return 0176
+  elseif (ismurderer)
+    return 090
+  else
+    return 03e9 
+  endif
 elseif (ismurderer) 
   //I am bad
   return 026
@@ -5458,7 +5483,6 @@ endif
 serv.smsg("<args>\n")
 
 [function accmsg]
-//logmsg("accmsg: uid=<uid> (<name>) src=<src> (<src.name>)")
 if (charExists(<uid>))
   if (isplayer)
     try s(<serverTime> <?args?>)
@@ -5477,7 +5501,6 @@ dupe(detamount)
 endif
 
 [function contents]
-//logmsg("object of contents:<uid>, <name>, id:<Baseid>")
 if (<safe rescount>)
  arg(count,<rescount>)
  while (arg(count))
