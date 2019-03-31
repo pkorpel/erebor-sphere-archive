@@ -663,9 +663,11 @@ if (f_vend_checkrightsmes(1))
      if(finduid(<tag(vendoruid)>).body==c_man)
         finduid(<tag(vendoruid)>).body=c_woman
         finduid(<tag(vendoruid)>).speech=spk_vendor_custom  //protoze to maze jejich rec   
+        finduid(<tag(vendoruid)>).events=+e_vendor_custom  //protoze to maze jejich chovani  
      else
         finduid(<tag(vendoruid)>).body=c_man   
-        finduid(<tag(vendoruid)>).speech=spk_vendor_custom  //protoze to maze jejich rec   
+        finduid(<tag(vendoruid)>).speech=spk_vendor_custom  //protoze to maze jejich rec  
+        finduid(<tag(vendoruid)>).events=+e_vendor_custom  //protoze to maze jejich chovani   
      endif
      src.sysmessage(Pohlavi vendora zmeneno.)    
     endif

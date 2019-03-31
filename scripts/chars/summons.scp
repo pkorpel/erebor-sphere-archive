@@ -666,7 +666,7 @@ TEVENTS=e_undeads_ability_life
 ON=@Create
 Color=098a
 NPC=brain_monster
-KARMA={-1000 -6000}
+KARMA=00
 
 STR=300
 DEX=100
@@ -1133,7 +1133,7 @@ TEVENTS=e_undeads_ability_life
 
 ON=@Create
 NPC=brain_monster
-KARMA={-3000 -5000}
+KARMA=00
 
 str=3500
 dex=300
@@ -1191,7 +1191,7 @@ TEVENTS=e_undeads_ability_life
 
 ON=@Create
 NPC=brain_monster
-KARMA={-3000 -5000}
+KARMA=00
 
 str=3500
 dex=300
@@ -1249,7 +1249,7 @@ TEVENTS=e_undeads_ability_life
 
 ON=@Create
 NPC=brain_monster
-KARMA={-3000 -5000}
+KARMA=00
 
 str=3500
 dex=300
@@ -1307,7 +1307,7 @@ TEVENTS=e_undeads_ability_life
 
 ON=@Create
 NPC=brain_monster
-KARMA={-3000 -5000}
+KARMA=00
 
 str=3500
 dex=300
