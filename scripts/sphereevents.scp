@@ -1656,7 +1656,7 @@ endif
 tag(stepcount,0)
 tag(firststeptime,<serv.time>)
 fixweight
-accmsg("Logged in.")
+accmsg("Logged in from IP address: <account.lastip>")
 arg(guildStone,<findID(i_memory_guild)>)
 if (strlen(<arg(guildStone)>))
   guildMsg("--*<name> se <sex(pripojil,pripojila)>*--")
