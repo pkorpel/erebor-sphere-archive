@@ -409,8 +409,8 @@ else
   endif
 
   arg(baseY,<questMenu_height>+25)
-  resizepic(70,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-60,40)
-  newTextLine(<var(middle)>-72,<arg(baseY)>+9,<d_def_subheadcolor>,<arg(timeNotification)>)
+  resizepic(70,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-60,50)
+  newTextLine(<var(middle)>-66,<arg(baseY)>+15,<d_def_subheadcolor>,<arg(timeNotification)>)
 endif
 
 // QUESTY
@@ -452,9 +452,15 @@ endwhile
 src.f_pvpLeague_checkExpiration
 f_questMenu_sectionButton(2)
 
+arg(mem,<finduid(<src.f_pvpLeague_getLeagueMemory>)>)
+arg(myRank,<mem.more2>)
+
 arg(baseY,<questMenu_height>+25)
-resizepic(70,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-60,40)
-newTextLine(<var(middle)>-85,<arg(baseY)>+9,<d_def_subheadcolor>,"Konec Sezony  <DatePrint(-2,<pvpLeague.tag(endYear)>,<pvpLeague.tag(endMonth)>,<pvpLeague.tag(endDay)>)>")
+resizepic(70,<arg(baseY)>,<questMenu_bg>,<questMenu_width>-60,70)
+newTextLine(<var(middle)>-85,<arg(baseY)>+15,<d_def_subheadcolor>,"Tvuj Rank")
+newTextLine(<var(middle)>+30,<arg(baseY)>+15,<d_def_subheadcolor>,"<eval arg(myRank)>")
+newTextLine(<var(middle)>-85,<arg(baseY)>+35,<d_def_subheadcolor>,"Konec Sezony")
+newTextLine(<var(middle)>+30,<arg(baseY)>+35,<d_def_subheadcolor>,"<DatePrint(-2,<pvpLeague.tag(endYear)>,<pvpLeague.tag(endMonth)>,<pvpLeague.tag(endDay)>)>")
 
 arg(middle,<eval (<questMenu_width>/2)>)
 newTextLine(<eval (<questMenu_width>/2)-12>,45,<d_def_subheadcolor>,"PvP Sezona <pvpLeague_season>")
@@ -473,8 +479,12 @@ while (<i> < <players>)
   else
     arg(lineColor,<questMenu_color_questInactive>)
   endif
+  arg(playerName,<finduid(<pvpLeague.tag(player[<arg(i)>])>).name>)
+  if (strlen(<arg(playerName)>) > 14)
+    arg(playerName,"<strMid(<arg(playerName)>,0,15)>...")
+  endif
   newTextLine(<arg(middle)>-72,<arg(posY)>,<arg(lineColor)>,"<eval (arg(i)+1)>.")
-  newTextLine(<arg(middle)>-42,<arg(posY)>,<arg(lineColor)>,"<finduid(<pvpLeague.tag(player[<arg(i)>])>).name>")
+  newTextLine(<arg(middle)>-42,<arg(posY)>,<arg(lineColor)>,"<arg(playerName)>")
   newTextLine(<arg(middle)>+90,<arg(posY)>,<arg(lineColor)>,"<pvpLeague.tag(rank[<arg(i)>])>")
   arg(i,#+1)
 endwhile
