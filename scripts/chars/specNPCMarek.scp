@@ -4278,8 +4278,8 @@ tag(resist_elect,200)
 tag(resist_cold,550)
 
 //typ monstra
-tag(monstertype,undead,50)
-tag(monstertype,dragon,100)             
+tag(monstertype,dragon,100)
+tag(monstertype2,undead,50)             
 
 //weap flags
 tag.weapflag=dam_fire|dam_magic
