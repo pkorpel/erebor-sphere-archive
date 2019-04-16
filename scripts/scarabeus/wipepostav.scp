@@ -89,3 +89,22 @@ endwhile
 src.sysmessage "Pocet accountu celkem: <arg(accounts_celkem)>"
 src.sysmessage "Pocet accountu prazdnych a smazanych: <arg(accounts_deleted)>"
 src.sysmessage "Pocet accountu blocknutych: <arg(accounts_blocked)>"
+
+[function wipeacc2]
+arg(accounts_celkem,1)
+arg(accounts_deleted,0)
+while (<accounts_celkem> < 2500)
+  if (<eval accountmgr.findenum(<accounts_celkem>).plevel> < 2)
+    if (<strlen(<accountmgr.findenum(<accounts_celkem>).lastconnectdate>)>)
+      if (<strleft("<accountmgr.findenum(<accounts_celkem>).lastconnectdate>",4)> < 2018)
+        accountmgr.findenum(<accounts_celkem>).delete
+        arg(accounts_deleted,#+1)
+      endif
+    endif
+  endif
+  arg(accounts_celkem,#+1)
+endwhile
+src.sysmessage "Pocet accountu celkem: <arg(accounts_celkem)> "
+src.sysmessage "Pocet accountu smazanych: <arg(accounts_deleted)>"
+
+[EOF]
