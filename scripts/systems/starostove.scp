@@ -332,7 +332,7 @@ endif
 //if (strlen(<src.region.tag(jmeno_mesta)>)) && (<eval src.tag(realm)> == <eval src.region.tag(realm)>)
 if (<eval src.tag(realm)> == 1)
   //if (!<src.tag(obcan)>) || (strcmpi(<src.tag(mesto)>,<link.tag(jmeno_mesta)>))
-  // src.sysmessage(Nemas zde pravomoc navrhovat na blacklist)
+  // src.sysmessage("Nemas zde pravomoc navrhovat na blacklist")
   // remove
   // return 1
   //endif
@@ -348,7 +348,7 @@ if (<eval src.tag(realm)> == 1)
     return 1
   endif
   //if (<src.targ.tag(general)>)
-  //src.sysmessage(Generala Gondoru nemuzes pridat na blacklist)
+  //src.sysmessage("Generala Gondoru nemuzes pridat na blacklist")
   //remove
   //return 1
   //endif
@@ -388,7 +388,7 @@ if (src.targ.isgm)
   return 1
 endif
 //else
-// src.sysmessage(Abys nekoho navrhl na blacklist, musis byt ve meste sveho realmu)
+// src.sysmessage("Abys nekoho navrhl na blacklist, musis byt ve meste sveho realmu")
 // remove
 // return 1
 input("Udej duvod tveho navrhu:",navrhni,"")
@@ -808,7 +808,7 @@ if (index)
 endif
 arg(maxi,<eval index+5>)
 while (tag(allowhire[index])) && (index<maxi)
-  //kermel.sysmessage(guard <index>: <tag(allowhire[index])>, maxi: <maxi>)
+  //kermel.sysmessage("guard <index>: <tag(allowhire[index])>, maxi: <maxi>")
   argo.button(<argo.tag(sloupec_x[0])>,ypos,4005,4007,1,0,index+1000)
   argo.texta(argo.tag(sloupec_x[1])+d_def_odsazeni,ypos,955,"<?<tag(allowhire[index])>.name?>")
   argo.texta(argo.tag(sloupec_x[4])+d_def_odsazeni-15,ypos,955,"<?<tag(allowhire[index])>.tag(guardhire)?>")
@@ -1060,9 +1060,9 @@ arg(maxi,<eval index+13>)
 while (tag(guardcont).findcont(index)) && (<arg(index)> < <arg(maxi)>)
   arg(thisitem,<tag(guardcont).findcont(index)>)
   //arg(uplynulo,<eval (<serv.time>-<finduid(<arg(thisitem)>).tag(lastcheck)>)>)
-  //src.sysmessage(bylo:<arg(thisitem).more2>)
+  //src.sysmessage("bylo:<arg(thisitem).more2>")
   //arg(thisitem).more2=<eval (<arg(thisitem).more2>-<arg(uplynulo)>)>
-  //src.sysmessage(last: <finduid(<arg(thisitem)>).tag(lastcheck)>, uplyn: <arg(uplynulo)>, zbylo: <arg(thisitem).more2>)
+  //src.sysmessage("last: <finduid(<arg(thisitem)>).tag(lastcheck)>, uplyn: <arg(uplynulo)>, zbylo: <arg(thisitem).more2>")
   //if (<arg(thisitem).more2> > 0) //jeste mame zaplaceno 
   if (<arg(thisitem).hasbeenpaid>) //provede kontrolu guardu
     arg(guarddefname,<findres(chardef,arg(thisitem).more).defname>)
@@ -1082,7 +1082,7 @@ while (tag(guardcont).findcont(index)) && (<arg(index)> < <arg(maxi)>)
   endif
   //zbytek neni dulezity, probehne pripadne jiz v "hasbeenpaid"
   //else //nezaplaceno, odstranit strazce, spawngem a krystal
-  // src.redmessage(Nedostatecne odmenovana straz)
+  // src.redmessage("Nedostatecne odmenovana straz")
   // if (arg(thisitem).tag(guardspawn))
   //  if (<finduid(<arg(thisitem).tag(guardspawn)>)>)
   //   arg(thisitem).timer=<finduid(<arg(crystal).tag(guardspawn)>).timer>      
@@ -1161,7 +1161,7 @@ endif
 [function kontrola_dani]
 arg(cas_konce,<eval tag(cas_dani)>)
 arg(cas_ted,<serv.time>)
-//src.sysmessage(kon: <cas_konce>, ted: <cas_ted>)
+//src.sysmessage("kon: <cas_konce>, ted: <cas_ted>")
 if (<arg(cas_ted)> > <arg(cas_konce)>)
   tag(cas_dani,#+<eval (<argv(0)>)>) //nove dane za mesic
   finduid(<tag(citizenscont)>).contents(prover_dane_obcanu)
@@ -1236,7 +1236,7 @@ endif
 
 [function secti_hlasy]
 arg(obcanu,<finduid(<cont.link.tag(citizenscont)>).rescount>)
-//kermel.sysmessage(scitam hlasy <link.name>, obcanu: <arg(obcanu)>, pulka:<eval (<arg(obcanu)>/2)>)
+//kermel.sysmessage("scitam hlasy <link.name>, obcanu: <arg(obcanu)>, pulka:<eval (<arg(obcanu)>/2)>")
 if (<more1> < <eval (<arg(obcanu)>/2)>) //more1 - pocet hlasu 
   if (<argv(0)> == 9) //vyhosteni
     link.delayedredmessage("Obcane odhlasovali tve vyhosteni z mesta <link.tag(mesto)>")
@@ -1267,7 +1267,7 @@ if (<more1> < <eval (<arg(obcanu)>/2)>) //more1 - pocet hlasu
   endif
 else //nadpolovicni vetsina hlasu
   if (<argv(0)> == 9) //Nevyhosteni
-    //link.delayedmessage(Hlasovani o tvem vyhosteni z mesta <link.tag(mesto)> skoncilo. Zustavas nadale obcanem)
+    //link.delayedmessage("Hlasovani o tvem vyhosteni z mesta <link.tag(mesto)> skoncilo. Zustavas nadale obcanem")
     link.tag.remove(candidateout)
     finduid(<cont.link.tag(citizenscont)>).contents(zrus_tag(<link>,0)) 
     finduid(<cont.link.tag(citizenscont)>).contents(zprava_volby(<link>,1))
@@ -1346,13 +1346,13 @@ else //vice moznosti
     finduid(<tag(candidatesmajorcont)>).findcont(0).link.delayedmessage("Byl jsi zvolen starostou mesta <tag(jmeno_mesta)>")
     finduid(<tag(candidatesmajorcont)>).contents(konec_voleb) 
   else //vice vitezu
-    //kermel.sysmessage(Vice vitezu)
+    //kermel.sysmessage("Vice vitezu")
     var(je_tam_starosta,0)
     je_tam_starosta
     if (<var(je_tam_starosta)>)
-      //kermel.sysmessage(Mezi nimi starosta)
+      //kermel.sysmessage("Mezi nimi starosta")
     else //nebyl starosta, rozhodne los
-      //kermel.sysmessage(Rozhodne mezi nimi los)
+      //kermel.sysmessage("Rozhodne mezi nimi los")
       arg(kterej,<eval {0 <eval (<finduid(<tag(candidatesmajorcont)>).rescount>-1)>}>)
       if (<more1>) //byl starosta
         finduid(<more1>).tag.remove(starosta)
@@ -1373,21 +1373,21 @@ else //vice moznosti
 endif
 
 [function kdo_vyhral]
-//kermel.sysmessage(KDO VYHRAL)
+//kermel.sysmessage("KDO VYHRAL")
 var(icko,0)
 var(rescountbyl,<rescount>)
 var(pomocny, <eval (<rescount>-1)>)
 while (<var(icko)> < <var(pomocny)>)
-  //kermel.sysmessage(porovnani:<findcont(<var(icko)>).name> s <findcont(<eval (<var(icko)>+1)>).name>, hlasy: <findcont(<var(icko)>).more1> a <findcont(<eval (<var(icko)>+1)>).more1>)
+  //kermel.sysmessage("porovnani:<findcont(<var(icko)>).name> s <findcont(<eval (<var(icko)>+1)>).name>, hlasy: <findcont(<var(icko)>).more1> a <findcont(<eval (<var(icko)>+1)>).more1>")
   var(jecko,<eval (<var(icko)>+1)>)
   if (<findcont(<var(icko)>).more1> == <findcont(<var(jecko)>).more1>)  
-    //kermel.sysmessage(icko:<var(icko)>,jecko:<var(jecko)>,pomoc:<var(pomocny)>,rescountbyl:<var(rescountbyl)>)
+    //kermel.sysmessage("icko:<var(icko)>,jecko:<var(jecko)>,pomoc:<var(pomocny)>,rescountbyl:<var(rescountbyl)>")
     var(icko,#+1) //nemazeme nic
   endif 
   if (<findcont(<var(jecko)>)>)
     if (<findcont(<var(icko)>).more1> < <findcont(<var(jecko)>).more1>)  
-      //kermel.sysmessage(icko:<var(icko)>,jecko:<var(jecko)>,pomoc:<var(pomocny)>,rescountbyl:<var(rescountbyl)>)
-      //kermel.sysmessage(mazu: <findcont(<var(icko)>).name>)
+      //kermel.sysmessage("icko:<var(icko)>,jecko:<var(jecko)>,pomoc:<var(pomocny)>,rescountbyl:<var(rescountbyl)>")
+      //kermel.sysmessage("mazu: <findcont(<var(icko)>).name>")
       findcont(<var(icko)>).link.tag.remove(candidatemajor_<link.tag(jmeno_mesta)>)
       finduid(<link.tag(citizenscont)>).contents(zrus_tag(<findcont(<var(icko)>).link>,1)) //zrusit hlasovani u vsech obcanu, 1- kandidatury 
       findcont(<var(icko)>).remove  
@@ -1396,8 +1396,8 @@ while (<var(icko)> < <var(pomocny)>)
   endif
   if (<findcont(<var(jecko)>)>)
     if (<findcont(<var(icko)>).more1> > <findcont(<var(jecko)>).more1>)   
-      //kermel.sysmessage(icko:<var(icko)>,jecko:<var(jecko)>,pomoc:<var(pomocny)>,rescountbyl:<var(rescountbyl)>)
-      //kermel.sysmessage(mazu: <findcont(<var(jecko)>).name>)
+      //kermel.sysmessage("icko:<var(icko)>,jecko:<var(jecko)>,pomoc:<var(pomocny)>,rescountbyl:<var(rescountbyl)>")
+      //kermel.sysmessage("mazu: <findcont(<var(jecko)>).name>")
       findcont(<var(jecko)>).link.tag.remove(candidatemajor_<link.tag(jmeno_mesta)>)
       finduid(<link.tag(citizenscont)>).contents(zrus_tag(<findcont(<var(jecko)>).link>,1)) //zrusit hlasovani u vsech obcanu, 1- kandidatury 
       findcont(<var(jecko)>).remove   
@@ -1736,7 +1736,7 @@ if (<argo.tag(cislo)> == 3) //hlasovani ve volbach starosty
     else
       var(hlasoval,0)
       finduid(<link.tag(citizenscont)>).contents(hlasoval_pro(<findcont(radek).link>,1))
-      //src.sysmessage(hlasoval: <var(hlasoval)>)
+      //src.sysmessage("hlasoval: <var(hlasoval)>")
       if (<var(hlasoval)> == 2)
         src.sysmessage("Sam pro sebe hlasovat nemuzes")
         var(hlasoval,"")
@@ -1784,7 +1784,7 @@ if (<argo.tag(cislo)> == 7) //hlasovani o vyhosteni
   if (link.f_star_checkrightsmes(2))
     var(hlasoval,0)
     finduid(<link.tag(citizenscont)>).contents(hlasoval_pro(<findcont(radek).link>,0))
-    //src.sysmessage(hlasoval: <var(hlasoval)>)
+    //src.sysmessage("hlasoval: <var(hlasoval)>")
     if (<var(hlasoval)> == 1)
       src.sysmessage("Pro nevyhosteni <findcont(radek).name> uz jsi hlasoval")   
       var(hlasoval,"")
@@ -1813,7 +1813,7 @@ if (<argo.tag(cislo)> == 9) //hlasovani o (ne)prijeti
   if (link.f_star_checkrightsmes(2))
     var(hlasoval,0)
     finduid(<link.tag(citizenscont)>).contents(hlasoval_pro(<findcont(radek).link>,1))
-    //src.sysmessage(hlasoval: <var(hlasoval)>)
+    //src.sysmessage("hlasoval: <var(hlasoval)>")
     if (<var(hlasoval)> == 1)
       src.sysmessage("Proti prijeti <findcont(radek).name> uz jsi hlasoval")   
       var(hlasoval,"")
@@ -1863,7 +1863,7 @@ if (<argo.tag(cislo)> == 11) //Navrzeni na vyhosteni
         lastnew.link.tag(candidateout,1)
         //finduid(<link.tag(citizenscont)>).contents(hlas_pro(<findcont(radek).link>),0) //hlasoval !
         finduid(<link.tag(citizenscont)>).contents(novy_kandidat(0)) //0 - out
-        //kermel.sysmessage(kdo: <lastnew.tag(kdo)>, kdodec: <eval (<lastnew.tag(kdo)>)> , kolik: <link.tag(candidatesoutcont).rescount>)
+        //kermel.sysmessage("kdo: <lastnew.tag(kdo)>, kdodec: <eval (<lastnew.tag(kdo)>)> , kolik: <link.tag(candidatesoutcont).rescount>")
         lastnew.tag(time,<serv.time>) //cas zahajeni    
         dialog(d_tmseznam,0,11)
       endif
@@ -1932,7 +1932,7 @@ endif
 
 [function hlas_pro] //argv(0) - pro koho; argv(1) - 0 proti, 1 pro
 arg(protidec,<eval (<argv(0)>)>)
-//kermel.sysmessage(pro: <argv(0)>, src: <src>, link: <link>)
+//kermel.sysmessage("pro: <argv(0)>, src: <src>, link: <link>")
 if (<argv(1)>) //pro
   if (<link> == <src>)  
     tag(hlas_pro_<arg(protidec)>,1)
@@ -1945,7 +1945,7 @@ endif
 
 [function hlasoval_pro] //argv(0) - pro koho; argv(1) - 0 proti, 1 pro
 arg(prodec,<eval (<argv(0)>)>)
-//src.sysmessage(prodec: <arg(prodec)>)
+//src.sysmessage("prodec: <arg(prodec)>")
 if (<argv(1)>) //pro
   if (<link> == <src>)
     if !(strcmpi(<src>,<argv(0)>))   
@@ -1961,9 +1961,9 @@ if (<argv(1)>) //pro
     endif
   endif
 else //proti
-  //src.sysmessage(proti: <argv(0)>, kdo <src>, link: <link>)
+  //src.sysmessage("proti: <argv(0)>, kdo <src>, link: <link>")
   if !(strcmpi(<link>,<src>))
-    //src.sysmessage(<link> == prej <src>)
+    //src.sysmessage("<link> == prej <src>")
     if !(strcmpi(<src>,<argv(0)>))   
       var(hlasoval,2)
       return 1
@@ -2212,7 +2212,7 @@ endif
 if (tag(daneNextUpdate) < <serv.time>)
   tag(daneNextUpdate,<serv.time>+6048000) // jeden tyden
   tag(dane,<fixnumber(<args>)>)                                                                         
-  finduid(<tag(citizenscont)>).contents(link.delayedredmessage(Nove dane: <tag(dane)>))
+  finduid(<tag(citizenscont)>).contents(link.delayedredmessage("Nove dane: <tag(dane)>"))
 else
   src.redmessage("Upravu dan muzes provest jen jednou tydne.")
 endif 
@@ -2288,17 +2288,17 @@ if (<link> == <argv(0)>)
 endif
 
 [function kandidovat] //uid - townstone, src - player
-//src.sysmessage(uid: <uid>, <name>)
+//src.sysmessage("uid: <uid>, <name>")
 if (<src.isgm>)
   src.sysmessage("GM na starostu nekandiduji")
   return 1
 endif
 //if (<src.tag(candidateout)>)
-// src.sysmessage(Jsi adeptem na vyhozeni z mesta, nemuzes kandidovat na starostu)
+// src.sysmessage("Jsi adeptem na vyhozeni z mesta, nemuzes kandidovat na starostu")
 // return 1
 //endif
 //if (<src.tag(starosta)>)
-// src.sysmessage(Starostou uz jsi)
+// src.sysmessage("Starostou uz jsi")
 // return 1
 //endif
 if (<src.tag(candidatemajor_<tag(jmeno_mesta)>)>)
