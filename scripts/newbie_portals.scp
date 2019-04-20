@@ -578,7 +578,7 @@ base_Druid_Fishing=300
 
 
 [DEFNAMES kouzla] //jsou to jen priklady :)
-spells_necro_0_0	0c4ee3ab5 //more1 spellbooku - prvni 4 kruhy  //revided
+spells_necro_0_0	0CCEE3AB5 //more1 spellbooku - prvni 4 kruhy  //revided
 spells_necro_0_1	063cb1aa  //more2 spellbooku - 5-8 kruh
 spells_necro_0_2	63       //morex spellbooku - necro kouzla
 
