@@ -901,6 +901,7 @@ finduid(#0400075A4).tag(padnute_cierne,#+1)
 
 [typedef mit_main]
 on=@userdclick
+var(MagickyVacekUID,<uid>)
 if (src.tag(realm) == 1)
   arg(realmTgName,gondori)
 else
@@ -921,7 +922,8 @@ else
   finduid(#0400075A4).tag(<arg(realmTgName)><arg(sizeTgName)>_zelene,<eval tag(<arg(realmTgName)><arg(sizeTgName)>_zelene)>+1)
 endif
 f_mif_create
-src.accmsg("rozbaluje magicky vacek (<uid>) a vznika magicky predmet <lastnewitem.baseid> s uid: <lastnewitem>.")
+src.accmsg("rozbaluje magicky vacek (<var(MagickyVacekUID)>) a vznika magicky predmet <lastnewitem.baseid> s uid: <lastnewitem> na pozici <src.p>(<region.name>)")
+var(MagickyVacekUID,"")
 if (lastnewitem.color == 098b)
 	finduid(#0400075A4).tag(padnute<arg(sizeTgName)>_mithil,<eval tag(padnute<arg(sizeTgName)>_mithil)>+1)
 elseif (lastnewitem.color == 07d6)
@@ -992,30 +994,27 @@ if (src.distancefrom(<tag(vetesnik)>) > 6)
   remove
   return 0
 endif
-if (src.targ.topobj!=<src.uid>)
-  src.sysmessage("Vec musis mit u sebe!")
+if (<src.targ.topobj> != <src>)
+  src.sysmessage("Vec musis mit u sebe.")
   remove
   return 1
-elseif (<src.targ.cont> == <src>)
-  src.targ.bounce
 endif
-arg(cena,<tag.Price>)
-if (src.targ.tag(unidentified)==1)
-  if (src.pay(<eval arg(cena)>))
-    if (finduid(#0400075A4)) && !(src.isgm)
-     finduid(#0400075A4).tag(payedgold,#+<cena>)
-    endif
-    src.targ.tag(unidentified,"")
-    src.targ.mif_finishitem
-    finduid(<tag(vetesnik)>).say("Moc pekna vecicka...nechces ji rovnou vymenit?")
-  else
-    src.sysmessage("Zadarmo ani kure nehrabe!")
-  endif
+var(IdentifyContainerInvalid,0)
+var(Identified,0)
+if (src.targ.iscontainer)
+  src.targ.contents(f_identify_items(<tag(Price)>))
 else
-  src.sysmessage("Zameruj neidentifikovane magicke predmety!")
+  if (0<src.targ.f_identify_items(<tag(Price)>)>)
+    src.sysmessage("Zameruj neidentifikovane magicke predmety.")
+  endif
+endif
+if (<var(Identified)> > 1)
+  src.classmessage("<src.sex(Identifikoval,Identifikovala)> jsi <var(Identified)> magickych predmetu.")
+elseif (<var(Identified)> == 1) 
+  src.classmessage("<src.sex(Identifikoval,Identifikovala)> jsi magicky predmet.")
 endif
 remove
-RETURN 1 
+return 1
 
 ON=@TARGON_GROUND
 src.sysmessage("Tady neni co identifikovat.")
@@ -1030,6 +1029,29 @@ RETURN 1
 on=@timer
 remove
 return 0
+
+[function f_identify_items]     // argv(0) - Cena za identifikaci
+if (<var(IdentifyContainerInvalid)>)
+  return  
+endif
+arg(cena,<argv(0)>)
+if (<eval tag(unidentified)> == 1)
+  if (src.pay(<eval arg(cena)>))
+    if (finduid(#0400075A4)) && !(src.isgm)
+      finduid(#0400075A4).tag(payedgold,#+<cena>)
+    endif
+    tag(unidentified,"")
+    mif_finishitem
+    src.accmsg("identifikoval predmet <name> (<uid>) na pozici <src.p>(<region.name>)")
+    var(Identified,#+1)
+  else
+    src.redmessage("Nemas dostatek zlataku pro identifikaci.")
+    var(IdentifyContainerInvalid,1)   // Dosly mu penize, dalsi itemy v konktejneru nebudu ani zkouset identifikovat
+  endif
+else
+  return 1
+endif
+
 
 [function getidentifygold]
 if (isgm)
