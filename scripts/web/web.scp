@@ -61,9 +61,247 @@ if(finduid(<argv(2)>))
    arg(web_afk_out,<?web_afk_out?><tr><td><?od?></td><td><?adresat.tag(message_<od>)?></td></tr>)
    arg(od,#+1)
   endwhile
-  //kermel.sysmessage("Vypisovani zprav <argv(0)> az <argv(1)> done, celkem msg: <adresat.tag(messagescount)>")
-  //adresat.sysmessage(Vysledek: <web_afk_out>)
+  //kermel.sysMessage("Vypisovani zprav <argv(0)> az <argv(1)> done, celkem msg: <adresat.tag(messagescount)>")
+  //adresat.sysMessage(Vysledek: <web_afk_out>)
   return<web_afk_out>
  endif
 endif
+
+[function aukce]   // argv(0) - StartPrize ; argv(1) - BuyOutPrize ; argv(2) - Auction time in days
+if (<eval tag(aukceTester)> == 0)
+  redMessage("Nejsi Tester Aukce. Nemuzes zatim tuto funkci vyuzivat...")
+  return
+endif
+if (<VAR(AuctionChest).type> != t_container)
+  redMessage("Aukcni truhla je spatne nastavena! Kontaktuj GM.")
+  accmsg("WARNING: Aukcni truhla je spatne nastavena!")
+  return
+endif
+if !(<eval tag(Realm)>)
+  redMessage("Bez zvoleneho Realmu nemuzes pridavat veci do Webove Aukce.")
+endif
+if (<argvcount> > 3)
+  redMessage("Nespravny pocet parametru! Zadavej .Aukce(PocetecniCena,VykupniCena,DobaDrazby)")
+  return
+endif
+if (<eval argv(0)> > 1000000000)       // ochrana proti pretekani promennych
+  redMessage("Startovni cena presahuje povolene maximum 1000M.")
+  return
+elseif (<eval argv(1)> > 1000000000)   // ochrana proti pretekani promennych
+  redMessage("Vykupni cena presahuje povolene maximum 1000M.")
+  return
+elseif (<eval argv(2)> > 180)
+  redMessage("Doba Aukce presahuje povolene maximum 180 dni.")
+  return
+endif 
+classMessage("Zamerujes predmety do Webove Aukce s:")
+classMessage("Startovni cenou <eval argv(0)>, Vykupni cenou <eval argv(1)> na <eval argv(2)> dni.")
+newequip(i_zamerovatko_aukce)
+lastnew.tag(StartPrize,<eval argv(0)>)
+lastnew.tag(BuyOutPrize,<eval argv(1)>)
+lastnew.tag(AuctionTime,<eval argv(2)>)
+
+
+
+[itemdef i_zamerovatko_aukce]
+id=i_memory
+name=zamerovatko na aukci
+type=t_eq_script
+
+on=@create
+timer=15
+
+on=@equip
+target("Zamer predmet, ktery chces pridat do Webove Aukce.")
+
+ON=@TARGON_ITEM
+if (<src.targ.topobj> != <src>)
+  src.sysMessage("Vec musis mit u sebe.")
+  remove
+  return 1
+endif
+
+VAR(AuctionsCount,0)
+if (src.targ.iscontainer)
+  src.targ.contents(f_AddItemToAuction(<tag(StartPrize)>,<tag(BuyOutPrize)>,<tag(AuctionTime)>))
+else
+  if (0<src.targ.f_AddItemToAuction(<tag(StartPrize)>,<tag(BuyOutPrize)>,<tag(AuctionTime)>)>)
+    src.sysMessage("Tento predmet nelze pridat do aukce.")
+  endif
+endif
+
+if (<VAR(AuctionsCount)> > 1)
+  src.classMessage("<src.sex(Pridal,Pridala)> jsi <VAR(AuctionsCount)> predmetu do Webove Aukce.")
+elseif (<VAR(AuctionsCount)> == 1) 
+  src.classMessage("<src.sex(Pridal,Pridala)> jsi predmet do Webove Aukce.")
+endif
+VAR(AuctionsCount,"")
+return 1
+
+ON=@TARGON_GROUND
+src.sysMessage("Zamer predmet nebo kontejner...")
+RETURN 1 
+
+ON=@TARGON_CHAR
+src.sysMessage("Zamer predmet nebo kontejner...")
+RETURN 1 
+
+on=@timer
+remove
+
+[function f_AddItemToAuction]
+// if (<attr_newbie> || <attr_movenever>)
+//   return 1
+// endif
+// if (<type> == t_container)
+//   return 1                                  
+// endif
+// if (<eval tag(unidentified)>)
+//   return 1
+// endif
+// if ((<baseID> == i_gold) || (<baseID> == i_cashiers_check) || (<baseID> == i_cashiers_mesec) || (<baseID> == i_cashiers_pokladnicka))
+//   return 1
+// endif
+if !(isevent(tmi_info))  // Povolime jen Magicke predmety
+  return 1
+endif
+// logmsg("Funkce f_AddItemToAuction: <name>(<uid>)")
+VAR(AuctionChest).f_customLink_add(<uid>,"Item_Aukce")
+VAR(AuctionChest).f_customLink_add(<topobj>,"Majitel")
+VAR(AuctionChest).f_customLink_add("<argv(0)>;<argv(1)>;<argv(2)>","ParametryAukce")
+VAR(AuctionsCount,#+1)
+
+
+[function f_GiveMeInfo]
+if (<VAR(AuctionChest).type> != t_container)
+  return
+endif
+if !(<VAR(AuctionChest).tag(Item_Aukce[<eval argv(0)>])>) // nebudu projizdet nasledujici desitku, kdyz vim ze tam nic uz neni
+  return"0"
+endif
+arg(vypis_item,"0")
+arg(i,<argv(0)>) 
+while(i <= <argv(1)>)
+  arg(Item_v_aukci,<argv(2).tag(Item_Aukce[<eval arg(i)>])>)
+  arg(Majitel_itemu_v_aukci,<argv(2).tag(Majitel[<eval arg(i)>])>)
+  arg(Parametry_itemu_v_aukci,<argv(2).tag(ParametryAukce[<eval arg(i)>])>)
+  if (<hval arg(item_v_aukci)>)
+    arg(vypis_item,"<?vypis_item?><?i?>;<?Majitel_itemu_v_aukci?>;<?eval Majitel_itemu_v_aukci.tag(Realm)?>;<?Item_v_aukci.name?>;<?Item_v_aukci?>;<?Parametry_itemu_v_aukci?>;<?Item_v_aukci.color?>;<?Item_v_aukci.f_getItemDurability?>;<?Item_v_aukci.f_itemCategory?>;<?Item_v_aukci.f_getArmorType?>;<?Item_v_aukci.typedef.layer?>")
+    if (Item_v_aukci.isevent(tmi_info))
+      arg(vypis_item,"<?vypis_item?>;<?Item_v_aukci.mif_skillinfo2(<Item_v_aukci.tag(imi_skill_present)>)?><?Item_v_aukci.mif_othersinfo2(<Item_v_aukci.tag(imi_other_present)>)?>")
+    else
+      arg(vypis_item,"<?vypis_item?>;0;0;0;0;")
+    endif    
+    arg(vypis_item,"<?vypis_item?>\r\n")
+  endif
+  arg(i,#+1)
+endwhile
+// logmsg("<arg(vypis_item)>")
+// logmsg("Pocet znaku stringu: <strlen(<arg(vypis_item)>)>")
+
+return<vypis_item>
+
+[function f_ClearAuctionRecords]
+
+arg(i,0)
+while(i <= <argv(0)>)
+//   logmsg("Odstranuji item s poradovym cislem <arg(i)> z Aukce.")
+//   logmsg("Jedna se o item <VAR(AuctionChest).tag(Item_Aukce[<arg(i)>]).name> (<VAR(AuctionChest).tag(Item_Aukce[<arg(i)>])>)")
+  if (<VAR(AuctionChest).tag(Item_Aukce[0])>)
+    VAR(AuctionChest).f_customLink_remove("Item_Aukce",0)
+    VAR(AuctionChest).f_customLink_remove("Majitel",0)
+    VAR(AuctionChest).f_customLink_remove("ParametryAukce",0)
+  endif
+  arg(i,#+1)
+endwhile
+VAR(LastAuctionUpdate,<serv.time>)
+return"EOF"
+
+
+// [function pocet_bonusu_MAGICITEM]
+// arg(skills,<mif_count(<tag.imi_skill_present>)>)
+// arg(others,<mif_count(<tag.imi_other_present>)>)
+// arg(total_bonuses,<eval (<arg(skills)>+<arg(others)>)>)
+// logmsg("Pocet Bonusu: <arg(skills)>+<arg(others)>=<arg(total_bonuses)>")
+// mif_skillinfo2(<tag.imi_skill_present>)
+// mif_othersinfo2(<tag.imi_other_present>)
+// return<total_bonuses>
+// 
+// [function mif_count]
+// if (<ARGVCOUNT>)
+//   arg(argumentu,<eval (<ARGVCOUNT>-1)>)
+// else
+//   arg(argumentu,0)
+// endif
+// return<argumentu>
+
+
+[function mif_skillinfo2]
+arg(v,0)
+while (arg(v)<ARGVCOUNT-1)
+  arg(type,<?argv(<arg(v)>)?>)
+  if (<arg(v)> > 0)
+    arg(text,"<arg(text)><arg(type)>;<tag(imi_value[<arg(type)>])>;")
+  else
+    arg(text,"<arg(type)>;<tag(imi_value[<arg(type)>])>;")
+  endif
+  arg(v,<arg(v)>+1)
+endwhile
+if (<arg(v)> == 0)
+  return""
+else
+  return<text>
+endif
+
+[function mif_othersinfo2]
+arg(v,0)
+while (arg(v)<ARGVCOUNT-1)
+  arg(type,<?argv(<arg(v)>)?>)
+  if (<arg(v)> > 0)
+    arg(text,"<arg(text)><arg(type)>;<tag(imi_value[<arg(type)>])>;")
+  else
+    arg(text,"<arg(type)>;<tag(imi_value[<arg(type)>])>;")
+  endif
+  arg(v,<arg(v)>+1)
+endwhile
+if (<arg(v)> == 0)
+  return""
+else
+  return<text>
+endif
+
+[function f_itemCategory]
+if (isWeapon)
+  return 1
+elseif (isArmor || isShield)
+  return 2
+elseif (isJewelry)
+  return 3
+elseif (isClothing)
+  return 4
+endif
+return 0"
+
+[function f_getArmorType]
+if (isArmor)
+  return <eval typedef.tdata3>
+else
+  return 0
+endif
+
+[function f_getItemDurability]
+if (isArmor || isShield || isWeapon)
+  return"<more1L>/<more1H>"
+else
+  return 0
+endif
+
+
+[function TestRemoveAuction]
+logmsg("Odstranuji item s poradovym cislem <argv(0)> z Aukce.")
+logmsg("Jedna se o item <VAR(AuctionChest).tag(Item_Aukce[<argv(0)>]).name> (<VAR(AuctionChest).tag(Item_Aukce[<argv(0)>])>)")
+VAR(AuctionChest).f_customLink_remove("Item_Aukce",<argv(0)>)
+VAR(AuctionChest).f_customLink_remove("Majitel",<argv(0)>)
+VAR(AuctionChest).f_customLink_remove("ParametryAukce",<argv(0)>)
+
 [eof]

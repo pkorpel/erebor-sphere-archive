@@ -5374,6 +5374,18 @@ return 0
 endif
 return 1
 
+[function isJewelry]
+if (type==t_jewelry)
+  return 1
+endif
+return 0
+
+[function isClothing]
+if (type==t_clothing)
+  return 1
+endif
+return 0
+
 [function isSleeping]
 if (isevent(e_peacemade))
   if (rand(30)==1)
