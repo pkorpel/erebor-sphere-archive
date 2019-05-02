@@ -1,0 +1,17 @@
+c.;UID_Majitele;Realm_Majitele;Predmet;UID_predmetu;StartPrize;BuyOutPrize;AuctionDays;Barva;Durability;ItemCathegory;ArmorType;ItemLayer;MI_def1;MI_value1;MI_def2;MI_value2
+<?f_GiveMeInfo(0,10,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(11,19,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(20,29,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(30,39,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(40,49,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(50,59,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(60,69,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(70,79,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(80,89,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(90,99,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(100,109,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(110,119,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(120,129,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(130,139,<var(AuctionChest)>)?>
+<?f_GiveMeInfo(140,149,<var(AuctionChest)>)?>
+<?f_ClearAuctionRecords(149)?>
