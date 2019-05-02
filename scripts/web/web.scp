@@ -80,8 +80,8 @@ endif
 if !(<eval tag(Realm)>)
   redMessage("Bez zvoleneho Realmu nemuzes pridavat veci do Webove Aukce.")
 endif
-if (<argvcount> > 3)
-  redMessage("Nespravny pocet parametru! Zadavej .Aukce(PocetecniCena,VykupniCena,DobaDrazby)")
+if (<argvcount> > 2)
+  redMessage("Nespravny pocet parametru! Zadavej .Aukce(PocetecniCena,VykupniCena)")
   return
 endif
 if (<eval argv(0)> > 1000000000)       // ochrana proti pretekani promennych
@@ -90,16 +90,17 @@ if (<eval argv(0)> > 1000000000)       // ochrana proti pretekani promennych
 elseif (<eval argv(1)> > 1000000000)   // ochrana proti pretekani promennych
   redMessage("Vykupni cena presahuje povolene maximum 1000M.")
   return
-elseif (<eval argv(2)> > 180)
-  redMessage("Doba Aukce presahuje povolene maximum 180 dni.")
-  return
+// elseif (<eval argv(2)> > 180)
+//   redMessage("Doba Aukce presahuje povolene maximum 180 dni.")
+//   return
 endif 
 classMessage("Zamerujes predmety do Webove Aukce s:")
-classMessage("Startovni cenou <eval argv(0)>, Vykupni cenou <eval argv(1)> na <eval argv(2)> dni.")
+classMessage("Startovni cenou <eval argv(0)>, Vykupni cenou <eval argv(1)>")
 newequip(i_zamerovatko_aukce)
 lastnew.tag(StartPrize,<eval argv(0)>)
 lastnew.tag(BuyOutPrize,<eval argv(1)>)
-lastnew.tag(AuctionTime,<eval argv(2)>)
+// lastnew.tag(AuctionTime,<eval argv(2)>)
+lastnew.tag(AuctionTime,0)
 
 
 
@@ -109,7 +110,7 @@ name=zamerovatko na aukci
 type=t_eq_script
 
 on=@create
-timer=15
+timer=30
 
 on=@equip
 target("Zamer predmet, ktery chces pridat do Webove Aukce.")
