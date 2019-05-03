@@ -134,7 +134,7 @@ endif
 if (<VAR(AuctionsCount)> > 1)
   src.classMessage("<src.sex(Pridal,Pridala)> jsi <VAR(AuctionsCount)> predmetu do Webove Aukce.")
 elseif (<VAR(AuctionsCount)> == 1) 
-  src.classMessage("<src.sex(Pridal,Pridala)> jsi predmet do Webove Aukce.")
+  src.classMessage("<src.sex(Pridal,Pridala)> jsi <src.targ.name> do Webove Aukce.")
 endif
 VAR(AuctionsCount,"")
 return 1
