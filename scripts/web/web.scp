@@ -136,6 +136,15 @@ if (<VAR(AuctionsCount)> > 1)
 elseif (<VAR(AuctionsCount)> == 1) 
   src.classMessage("<src.sex(Pridal,Pridala)> jsi <src.targ.name> do Webove Aukce.")
 endif
+if (<VAR(AuctionsCount)>)
+  arg(NextUpdateLow,<eval ((<VAR(LastAuctionUpdate)>+6000-<serv.time>)/600)>)
+  arg(NextUpdateHigh,<eval ((<VAR(LastAuctionUpdate)>+7800-<serv.time>)/600)>)
+  if (<arg(NextUpdateLow)>)
+    src.classMessage("Predmety budou nacteny do webove aukce za <arg(NextUpdateLow)> az <arg(NextUpdateHigh)> minut.")
+  else
+    src.classMessage("Predmety budou nacteny do webove aukce do <arg(NextUpdateHigh)> minut.")
+  endif
+endif
 VAR(AuctionsCount,"")
 return 1
 
@@ -150,7 +159,7 @@ RETURN 1
 on=@timer
 remove
 
-[function f_AddItemToAuction]
+[function f_AddItemToAuction]   // argv(0) - StartPrize ; argv(1) - BuyOutPrize ; argv(2) - Auction time in days
 // if (<attr_newbie> || <attr_movenever>)
 //   return 1
 // endif
@@ -166,7 +175,13 @@ remove
 if !(isevent(tmi_info))  // Povolime jen Magicke predmety
   return 1
 endif
+if (isevent(e_Auction))  // Tento predmet jiz byl za poslednich 24h pridan
+  src.sysMessage("Tento predmet jiz byl do aukce pridan.")
+  return 0
+endif
 // logmsg("Funkce f_AddItemToAuction: <name>(<uid>)")
+events=+e_Auction
+tag(AuctionServTime,<serv.time>)
 VAR(AuctionChest).f_customLink_add(<uid>,"Item_Aukce")
 VAR(AuctionChest).f_customLink_add(<topobj>,"Majitel")
 VAR(AuctionChest).f_customLink_add("<argv(0)>;<argv(1)>;<argv(2)>","ParametryAukce")
@@ -281,7 +296,7 @@ elseif (isJewelry)
 elseif (isClothing)
   return 4
 endif
-return 0"
+return 0
 
 [function f_getArmorType]
 if (isArmor)
@@ -296,6 +311,20 @@ if (isArmor || isShield || isWeapon)
 else
   return 0
 endif
+
+[EVENTS e_Auction]  // Tento event je jen docasne reseni, aby hrac nemohl hodit totozny item behem dne do aukce 2x, nez se budou itemy zabavovat do truhly
+ON=@UserClick
+if (<eval (tag(AuctionServTime)+864000)> >= <serv.time>)
+  tag(AuctionServTime,"")
+  events=-e_Auction
+endif
+
+ON=@UserDClick
+if (<eval (tag(AuctionServTime)+864000)> >= <serv.time>)
+  tag(AuctionServTime,"")
+  events=-e_Auction
+endif
+
 
 
 [function TestRemoveAuction]
