@@ -186,6 +186,7 @@ VAR(AuctionChest).f_customLink_add(<uid>,"Item_Aukce")
 VAR(AuctionChest).f_customLink_add(<topobj>,"Majitel")
 VAR(AuctionChest).f_customLink_add("<argv(0)>;<argv(1)>;<argv(2)>","ParametryAukce")
 VAR(AuctionsCount,#+1)
+src.accmsg("pridal do Webove aukce <name> (<uid>) s startovni cenou: <argv(0)> a vykupni cenou: <argv(1)>")
 
 
 [function f_GiveMeInfo]
