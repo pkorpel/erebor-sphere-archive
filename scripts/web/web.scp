@@ -68,10 +68,6 @@ if(finduid(<argv(2)>))
 endif
 
 [function aukce]   // argv(0) - StartPrize ; argv(1) - BuyOutPrize ; argv(2) - Auction time in days
-if (<eval tag(aukceTester)> == 0)
-  redMessage("Nejsi Tester Aukce. Nemuzes zatim tuto funkci vyuzivat...")
-  return
-endif
 if (<VAR(AuctionChest).type> != t_container)
   redMessage("Aukcni truhla je spatne nastavena! Kontaktuj GM.")
   accmsg("WARNING: Aukcni truhla je spatne nastavena!")
@@ -131,10 +127,14 @@ else
   endif
 endif
 
-if (<VAR(AuctionsCount)> > 1)
+if (<VAR(AuctionsCount)> >= 5)
   src.classMessage("<src.sex(Pridal,Pridala)> jsi <VAR(AuctionsCount)> predmetu do Webove Aukce.")
-elseif (<VAR(AuctionsCount)> == 1) 
+elseif (<VAR(AuctionsCount)> > 1)
+  src.classMessage("<src.sex(Pridal,Pridala)> jsi <VAR(AuctionsCount)> predmety do Webove Aukce.")
+elseif ((<VAR(AuctionsCount)> == 1) && !(src.targ.iscontainer)) 
   src.classMessage("<src.sex(Pridal,Pridala)> jsi <src.targ.name> do Webove Aukce.")
+elseif ((<VAR(AuctionsCount)> == 1) && (src.targ.iscontainer)) 
+  src.classMessage("<src.sex(Pridal,Pridala)> jsi 1 predmet do Webove Aukce.")
 endif
 if (<VAR(AuctionsCount)>)
   arg(NextUpdateLow,<eval ((<VAR(LastAuctionUpdate)>+6000-<serv.time>)/600)>)
@@ -160,18 +160,9 @@ on=@timer
 remove
 
 [function f_AddItemToAuction]   // argv(0) - StartPrize ; argv(1) - BuyOutPrize ; argv(2) - Auction time in days
-// if (<attr_newbie> || <attr_movenever>)
-//   return 1
-// endif
-// if (<type> == t_container)
-//   return 1                                  
-// endif
-// if (<eval tag(unidentified)>)
-//   return 1
-// endif
-// if ((<baseID> == i_gold) || (<baseID> == i_cashiers_check) || (<baseID> == i_cashiers_mesec) || (<baseID> == i_cashiers_pokladnicka))
-//   return 1
-// endif
+if (<attr_newbie> || <attr_movenever>)
+  return 1
+endif
 if !(isevent(tmi_info))  // Povolime jen Magicke predmety
   return 1
 endif
@@ -179,7 +170,6 @@ if (isevent(e_Auction))  // Tento predmet jiz byl za poslednich 24h pridan
   src.sysMessage("Tento predmet jiz byl do aukce pridan.")
   return 0
 endif
-// logmsg("Funkce f_AddItemToAuction: <name>(<uid>)")
 events=+e_Auction
 tag(AuctionServTime,<serv.time>)
 VAR(AuctionChest).f_customLink_add(<uid>,"Item_Aukce")
@@ -213,17 +203,12 @@ while(i <= <argv(1)>)
   endif
   arg(i,#+1)
 endwhile
-// logmsg("<arg(vypis_item)>")
-// logmsg("Pocet znaku stringu: <strlen(<arg(vypis_item)>)>")
 
 return<vypis_item>
 
 [function f_ClearAuctionRecords]
-
 arg(i,0)
 while(i <= <argv(0)>)
-//   logmsg("Odstranuji item s poradovym cislem <arg(i)> z Aukce.")
-//   logmsg("Jedna se o item <VAR(AuctionChest).tag(Item_Aukce[<arg(i)>]).name> (<VAR(AuctionChest).tag(Item_Aukce[<arg(i)>])>)")
   if (<VAR(AuctionChest).tag(Item_Aukce[0])>)
     VAR(AuctionChest).f_customLink_remove("Item_Aukce",0)
     VAR(AuctionChest).f_customLink_remove("Majitel",0)
@@ -325,14 +310,5 @@ if (<eval (tag(AuctionServTime)+864000)> >= <serv.time>)
   tag(AuctionServTime,"")
   events=-e_Auction
 endif
-
-
-
-[function TestRemoveAuction]
-logmsg("Odstranuji item s poradovym cislem <argv(0)> z Aukce.")
-logmsg("Jedna se o item <VAR(AuctionChest).tag(Item_Aukce[<argv(0)>]).name> (<VAR(AuctionChest).tag(Item_Aukce[<argv(0)>])>)")
-VAR(AuctionChest).f_customLink_remove("Item_Aukce",<argv(0)>)
-VAR(AuctionChest).f_customLink_remove("Majitel",<argv(0)>)
-VAR(AuctionChest).f_customLink_remove("ParametryAukce",<argv(0)>)
 
 [eof]
