@@ -166,7 +166,7 @@ endif
 if !(isevent(tmi_info))  // Povolime jen Magicke predmety
   return 1
 endif
-if (isevent(e_Auction))  // Tento predmet jiz byl za poslednich 15min pridan
+if (f_AuctionServTime_Check)  // Tento predmet jiz byl za poslednich 15min pridan
   src.sysMessage("Tento predmet jiz ceka na odeslani do Webove Aukce.")
   return 0
 endif
@@ -300,15 +300,19 @@ endif
 
 [EVENTS e_Auction]  // Tento event je jen docasne reseni, aby hrac nemohl hodit totozny item behem dne do aukce 2x, nez se budou itemy zabavovat do truhly
 ON=@UserClick
-if (<eval (tag(AuctionServTime))> >= <serv.time>)
-  tag(AuctionServTime,"")
-  events=-e_Auction
-endif
-
+f_AuctionServTime_Check
 ON=@UserDClick
-if (<eval (tag(AuctionServTime))> >= <serv.time>)
+f_AuctionServTime_Check
+
+[function f_AuctionServTime_Check]
+if !(isevent(e_Auction))
+  return 0
+endif
+if (<eval (tag(AuctionServTime))> <= <serv.time>)
   tag(AuctionServTime,"")
   events=-e_Auction
+  return 0
 endif
+return 1
 
 [eof]
