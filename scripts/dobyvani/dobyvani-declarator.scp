@@ -197,6 +197,9 @@ else
     bluemessage("Dobyvani pevnosti <d_area_<var(war_declarator_<arg(muj_realm)>).tag(war_declared_on)>_1> prave probiha!")
   else  
     bluemessage("Dobyvani pevnosti <d_area_<var(war_declarator_<arg(muj_realm)>).tag(war_declared_on)>_1> zacne <eval var(war_declarator_<arg(muj_realm)>).tag(war_begins_day)>.<eval var(war_declarator_<arg(muj_realm)>).tag(war_begins_month)> v <eval var(war_declarator_<arg(muj_realm)>).tag(war_begins_hour)>h")
+    if (<eval var(war_declarator_<arg(muj_realm)>).tag(begins_day_00)>)
+      bluemessage("Nasledujici dobyvani pevnosti <d_area_<var(war_declarator_<arg(muj_realm)>).tag(war_declared_on)>_1> zacne <eval var(war_declarator_<arg(muj_realm)>).tag(begins_day_00)>.<eval var(war_declarator_<arg(muj_realm)>).tag(begins_month_00)> v <eval var(war_declarator_<arg(muj_realm)>).tag(begins_hour_00)>h")
+    endif
   endif
 endif
 
@@ -207,11 +210,17 @@ else
     redmessage("Braneni nasi pevnosti <d_area_<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>_1> prave probiha!")
   else  
     redmessage("Braneni nasi pevnosti <d_area_<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>_1> zacne <eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_day)>.<eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_month)> v <eval var(war_declarator_<arg(druhy_realm)>).tag(war_begins_hour)>h")
+    if (<eval var(war_declarator_<arg(druhy_realm)>).tag(begins_day_00)>)
+      redmessage("Nasledujici braneni nasi pevnosti <d_area_<var(war_declarator_<arg(druhy_realm)>).tag(war_declared_on)>_1> zacne <eval var(war_declarator_<arg(druhy_realm)>).tag(begins_day_00)>.<eval var(war_declarator_<arg(druhy_realm)>).tag(begins_month_00)> v <eval var(war_declarator_<arg(druhy_realm)>).tag(begins_hour_00)>h") 
+    endif
   endif
 endif
 
 
 [function endWar] //ukoncit valku - vynulovat tagy, pocitadla a informovat warlorda.  <argv(0)> - cislo realmu
+var(palantir_<tag(war_declared_on)>).tag(prolomeni,0)
+var(palantir_<tag(war_declared_on)>).tag(timer_prolomeni,<nastaveni_pevnosti_doba_prolomeni>)
+var(palantir_<tag(war_declared_on)>).timer=0
 finduid(<tag(war_lord)>).redmessage("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
 finduid(<tag(war_lord)>).redmessage("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
 var(palantir_<tag(war_declared_on)>).say("Cas na dobyti pevnosti vyprsel. Pevnost byla ubranena!")
@@ -471,7 +480,9 @@ if (argchk(which_to_check+100) == 1)//cislo "10x" je prvni zaskrtnute (dalsi nas
       if ((array_find(tag.warlords,<src>) != -1) || (strcmpi(<tag(war_lord)>,<src>) == 0)) //je v poradi nebo je to dokonce sam aktualni warlord 
         src.redmessage("Ty jiz jsi valku teto pevnosti <src.sex(vyhlasil,vyhlasila)>!")
       else
-        if (timeAfterLastWarlord(<fixnumber(<argtxt(201)>)>,<fixnumber(<argtxt(202)>)>,<fixnumber(<argtxt(203)>)>)) //zkontrolovat den a hodinu vyhlaseni - musi byt PO aktualnim warlordovi
+        if (timeAfterLastWarlord(<fixnumber(<argtxt(201)>)>,<fixnumber(<argtxt(202)>)>,<fixnumber(<argtxt(203)>)>)) //zkontrolovat den a hodinu vyhlaseni - musi byt PO aktualnim warlordovi   
+          src.sysmessage("Valka pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <fixnumber(<argtxt(201)>)>. <fixnumber(<argtxt(202)>)>. - <fixnumber(<argtxt(203)>)> hod.")
+          src.accmsg("vyhlasil nahradni dobyvani pevnosti <d_area_<tag(war_declared_on)>_1> vyhlasena na den <fixnumber(<argtxt(201)>)>. <fixnumber(<argtxt(202)>)>. - <fixnumber(<argtxt(203)>)> hod.")
           addNextWarlord(<src>,<fixnumber(<argtxt(201)>)>,<fixnumber(<argtxt(202)>)>,<fixnumber(<argtxt(203)>)>)
         endif
       endif
