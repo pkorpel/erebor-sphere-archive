@@ -71,6 +71,7 @@ tag(labyrint_yellow,0)
 tag(labyrint_brown,0)
 tag(labyrint_summary,0)
 tag(labyrint_finished,0)
+tag(qday,<getDay>)
 
 ON=@timer
 remove
@@ -217,6 +218,9 @@ if (src.isPlayer)
     if ((<eval tag(count_players)> == 0) && (timer > 30))
       timer=30  // Prvni pruchozi spusti Timer na gate na 30sec - pote se presune jinam
     endif
+    if ((src.findid(i_goblin_labyrint_memory)) && (<eval src.findid(i_goblin_labyrint_memory).tag(qday)>!=<getDay>)) // novy pruchod za mene jak 24h, ale v novem dni, tak smazu memory-mark pro umozneni noveho pruchodu
+      src.findid(i_goblin_labyrint_memory).remove
+    endif            
     if  (src.findid(i_goblin_labyrint_memory))
       src.redmessage("Brana te odmita, jeste nemuzes znova projit.")
     else
