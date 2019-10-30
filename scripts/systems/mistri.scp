@@ -244,7 +244,7 @@ while (skillmakenumb<argvcount-1)//(strcmpi(<argv(skillmakenumb)>,<argv(skillmak
   //src.smsg <argv(skillmakenumb)>
  singleparse(<argv(skillmakenumb)>)
  if (<firstnumb>>1)
-  if (safe <?nastaveni_craftexp_<secondnumb>?>)
+  if (<safe nastaveni_craftexp_<secondnumb>>)
    var(skillmakesum,<eval var(skillmakesum)+(firstnumb*nastaveni_craftexp_<secondnumb>)>)
   endif
  endif
