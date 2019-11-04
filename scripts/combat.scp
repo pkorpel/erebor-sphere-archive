@@ -224,7 +224,7 @@ else //utok na playera
     act.damagecust_MvP(<arg(celk_dam)>,<hval tag(weapflag)<tag(mi_weapflags)>>,<eval tag(piercing)+typedef.tag(piercing)>)
   endif
 endif
-if (wasHarmed)
+if (wasHarmed||(issummon&&(!act.isplayer)))
   if (poisoning)
     f_poisoning_Trigger(<act>)
   endif
