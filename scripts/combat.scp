@@ -767,6 +767,9 @@ return 0
 if !(act)
   action=""
   return
+elseif (!act.isChar)
+  action=""
+  return
 endif
 if (isfighting_ranged)
   if (absolute(<eval(act.p_z-p_z)>)>19)
