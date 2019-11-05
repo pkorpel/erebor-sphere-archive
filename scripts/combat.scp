@@ -769,6 +769,7 @@ if !(act)
   return
 elseif (!act.isChar)
   action=""
+  logmsg("<serverTime> noncharact uid <uid>; id <id>")
   return
 endif
 if (isfighting_ranged)
