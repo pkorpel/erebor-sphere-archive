@@ -208,7 +208,9 @@ else
   //kermel.sysmessage(utoci normal monstrum)
   arg(celk_dam,<eval ((typedef.dam*nastaveni_global_MUC)+500)/1000>)
 endif
+arg(origact,<act>)
 if (<act.npc>)//Utok jde na M
+  arg(isnpc,1)
   //kermel.sysmessage(utok na npc)
   arg(celk_dam,<eval ((arg(celk_dam)*nastaveni_global_vMweapattack)+500)/1000>)
   //if(<tag(hypno_mystik)>)
@@ -216,6 +218,7 @@ if (<act.npc>)//Utok jde na M
   //endif
   act.damagecust(<arg(celk_dam)>,<hval tag(weapflag)<tag(mi_weapflags)>>,<eval tag(piercing)+typedef.tag(piercing)>)
 else //utok na playera
+  arg(isnpc,0)
   if (<act.tag(hypno_mystik)>) //utoci se na mystikovo monstrum
     //kermel.sysmessage(utok na mystika v tele monstra)
     arg(celk_dam,<eval ((arg(celk_dam)*nastaveni_global_vMweapattack)+500)/1000>)
@@ -224,7 +227,10 @@ else //utok na playera
     act.damagecust_MvP(<arg(celk_dam)>,<hval tag(weapflag)<tag(mi_weapflags)>>,<eval tag(piercing)+typedef.tag(piercing)>)
   endif
 endif
-if (wasHarmed || (issummon && (act.npc)))
+if (arg(origact)!=act)
+  logmsg("<serverTime> combatmainnpc - act changed! src:<src.id>,<src.uid>; newact: <act.id>,<act.uid>; origact:<arg(origact).id>,<arg(origact).uid>")
+endif
+if (wasHarmed || (issummon && arg(isnpc)))
   if (poisoning)
     f_poisoning_Trigger(<act>)
   endif
@@ -769,7 +775,7 @@ if !(act)
   return
 elseif (!act.isChar)
   action=""
-  logmsg("<serverTime> noncharact uid <uid>; id <id>")
+  logmsg("<serverTime> noncharact uid <uid>; id <id>; act.uid <act.uid>; act.id <act.id>")
   return
 endif
 if (isfighting_ranged)
