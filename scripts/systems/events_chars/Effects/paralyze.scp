@@ -77,7 +77,12 @@ effect(3,i_fx_curse,6,15,1)
 
 //handles the freezing and suppres the item removal by setting the global check value
 [function f_freeze]
-tag(storeact,<act>)
+if (issummon)
+  tag(storeact,<memoryfindtype(MEMORY_WAR_TARG).link>)
+  tag(storeAction,<action>)
+else
+  tag(storeact,<act>)
+endif
 var(wasFrozen,1)
 flag_freeze=1
 
@@ -98,6 +103,9 @@ timer=0
 on=@unequip
 topobj.flag_freeze=0
 topobj.addMemoryFlag(<topobj.tag(storeact)>,0200C)
+if (topobj.issummon)
+  topobj.action=<tag(storeAction)>
+endif
 
 on=@timer
 if (more2 == 1) //ethernal para
