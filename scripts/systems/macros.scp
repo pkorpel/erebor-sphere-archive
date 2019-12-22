@@ -218,7 +218,7 @@ endwhile
 return 0
 
 [function f_fireColumnDmg_place] //x,y,z,mapplane, <optional> damage
-newitem(<i_fire_column_damage>)
+newitemsafe(i_fire_column_damage)
 lastnew.p=<eval argv(0)>,<eval argv(1)>,<eval argv(2)>,<eval argv(3)>
 lastnew.link=<UID>
 lastnew.update
@@ -247,7 +247,7 @@ if (chance(<arg(chance)>,3))
     arg(coolDown,50) // next para in 5s
   endif
   tag(paraKrik_cd,<serv.time>+<arg(coolDown)>) // won't cry for at least the next 5s
-  newitem(<i_src_changer_parakrik>)
+  newitemsafe(i_src_changer_parakrik)
   lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
   emote("crying awfully.")
 endif
@@ -318,7 +318,7 @@ if (isSleeping)
 endif
 
 if (rand(12)==1)
-  newitem(<i_src_changer_odinvis>)
+  newitemsafe(i_src_changer_odinvis)
   lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
   emote("crying.")
 endif
@@ -382,7 +382,7 @@ if (tag(dalsidetek) > 10)
   remove
 else
   topobj.emote("Detecting hidden.")
-  topobj.newitem(<i_src_changer_odinvis>)
+  topobj.newitemsafe(i_src_changer_odinvis)
   lastnew.p=<eval(<topobj.p_x>)>,<eval(<topobj.p_y>)>,<eval(<topobj.p_z>-100)>,<topobj.mapplane>
   timer=55
   tag(dalsidetek,<tag(dalsidetek)>+1)
@@ -1629,7 +1629,7 @@ on=@finalBlow
 on=@aftergetswing
 on=@beforedoeffect
 if ((act.isplayer) && (rand(6)==1))
-  newitem(<i_src_changer_parakrik>)
+  newitemsafe(i_src_changer_parakrik)
   lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
   say("Heru Ruth Dol Kel")
 endif

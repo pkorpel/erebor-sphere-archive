@@ -168,7 +168,7 @@ endif
 if !(safe finduid(link.tag(friendscont)).isitem)//neni aktivovan
  src.classmessage(Toto je nyni tvuj dum.)
  if !(safe link.isitem)//neni to multidum
-  src.newitem i_worldgem_bit
+  src.newitemsafe(i_worldgem_bit)
   link=<lastnew>
   lastnew.attr=0b0
   lastnew.p=<p>

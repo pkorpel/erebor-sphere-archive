@@ -63,7 +63,7 @@ elseif (<j>==1)
 endif
 
 [function f_lightningDmg_place] //x,y,z,mapplane, <optional> damage
-newitem(<i_lightning_damage>)
+newitemsafe(i_lightning_damage)
 lastnew.p=<eval argv(0)>,<eval argv(1)>,<eval argv(2)>,<eval argv(3)>
 lastnew.link=<UID>
 lastnew.update
