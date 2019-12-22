@@ -12,7 +12,7 @@ if findid(i_targetmassleap)
 endif
 
 if (src.isplayer) && rand(14)==1
-  newitem(i_src_changer_massleap)
+  newitemsafe(i_src_changer_massleap)
   lastnew.p=<p>
   lastnew.tag(creator,<uid>)
 endif

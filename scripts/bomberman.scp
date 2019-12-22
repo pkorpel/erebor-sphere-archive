@@ -408,7 +408,7 @@ if (argn>20)
   endwhile
   arg(x,1)
   while(<x><=<?map_<tag(mapload)>_player_count?>)
-    src.newitem(i_worldgem_bit)
+    src.newitemsafe(i_worldgem_bit)
     arg(posx,<tag(start_x)>+<?map_<tag(mapload)>_player_<x>_x?>-1)
     arg(posy,<tag(start_y)>+<?map_<tag(mapload)>_player_<x>_y?>-1)
     lastnew.p = <posx>,<posy>,<eval(<tag(altitude)>)>,<eval(<tag(mapplan)>)> 

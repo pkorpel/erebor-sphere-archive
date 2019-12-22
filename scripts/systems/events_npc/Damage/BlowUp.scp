@@ -74,7 +74,7 @@ endif
 [function f_npc_blow_up]
 if (<eval tag(blow_up_yet)> == 0)  // jeste nevybouchl
   tag(blow_up_yet,1) // aby se funkce nespustila vicekrat
-  newitem(i_blow_up_damage_dealer)
+  newitemsafe(i_blow_up_damage_dealer)
   lastnew.p=<p>
   lastnew.link=(<uid>)
   var(blowupedmonster,<UID>)

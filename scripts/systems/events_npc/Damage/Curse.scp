@@ -38,7 +38,7 @@ if (<eval tag(npc_curse_time)> < <serv.time>)
     else
       tag(npc_curse_time,<serv.time>+30)
     endif
-    newitem(i_src_changer_npcCurse)
+    newitemsafe(i_src_changer_npcCurse)
     lastnew.p=<p>
     lastnew.link=(<UID>)
     var(cursingmonster,<UID>)

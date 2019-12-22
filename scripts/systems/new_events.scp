@@ -984,7 +984,7 @@ if (chance(<tag(e_explosiondispell_chance)>,3))
     emote("throws dispell bomb")
     arg(start_x,<eval(-tag(e_explosiondispell_range)+<rand(2*tag(e_explosiondispell_range)+1)>)>)
     arg(start_y,<eval(-tag(e_explosiondispell_range)+<rand(2*tag(e_explosiondispell_range)+1)>)>)
-    newitem=i_potion_explosiondispell
+    newitemsafe(i_potion_explosiondispell)
     lastnew.p=<p_x>+start_x,<p_y>+start_y,<p_z>,<mapplane>
     lastnew.attr=attr_static|attr_decay|attr_move_never 
     lastnew.trigger(userdclick)
@@ -1242,7 +1242,7 @@ if (<eval tag(npc_curse_mana_time)> < <serv.time>)
     else
       tag(npc_curse_mana_time,<serv.time>+30)
     endif
-    newitem(i_src_changer_npcCurseMana)
+    newitemsafe(i_src_changer_npcCurseMana)
     lastnew.p=<p>
     lastnew.link=(<UID>)
     var(cursingmanamonster,<UID>)
@@ -1334,7 +1334,7 @@ if (<eval tag(npc_curse_stam_time)> < <serv.time>)
     else
       tag(npc_curse_stam_time,<serv.time>+30)
     endif
-    newitem(i_src_changer_npcCursestam)
+    newitemsafe(i_src_changer_npcCursestam)
     lastnew.p=<p>
     lastnew.link=(<UID>)
     var(cursingstammonster,<UID>)
