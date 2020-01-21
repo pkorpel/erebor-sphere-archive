@@ -421,10 +421,10 @@ elseif (isnonmobile)
 elseif (tag(nextroundattack)>serv.time)&&(!isGM)
   RedMessage("Jeste nelze pouzit.")
   return
-elseif !(findlayer(2).type==t_weapon_sword)
+elseif !((findlayer(2).type==t_weapon_sword) || (findlayer(2).type==t_weapon_mace_smith) || (findlayer(2).type==t_weapon_fence))
   sysMessage("S timhle paratkem je to nemozne.")
   return
-elseif (!reduceStamina(10,1)) 
+elseif (!reduceStamina(<nastaveni_roundattack_staminacost>, 1)) 
   return
 endif
 newitemsafe(i_mem_roundattack)
@@ -455,9 +455,8 @@ if ({0 10000}>eval(tag(ra_roundattack)*nastaveni_roundattack_chance))
   return 1 
 endif
 if (findlayer(2))
-  if (findlayer(2).type==t_weapon_sword)
+  if ((findlayer(2).type==t_weapon_sword) || (findlayer(2).type==t_weapon_mace_smith) || (findlayer(2).type==t_weapon_fence))
     tag(nextroundattack,<eval (<serv.time>+(<var(nastaveni_roundattack_delay)>*10))>)
-    reduceStamina(<eval {5 10}>) // safely decreases stamina
     f_performRoundAttack(<var(nastaveni_roundattack_postih)>,0)
   else
     sysMessage("S timhle paratkem je to nemozne.")

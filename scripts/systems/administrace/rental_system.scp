@@ -52,9 +52,9 @@ else
  if(!strcmpi(<city>,"Severni_ctvrtka"))
   bag.p="Severni ctvrtka"  
  endif
- if(!strcmpi(<city>,"Nurnske_hradiste"))
-  bag.p="Nurnske hradiste"  
- endif
+// if(!strcmpi(<city>,"Nurnske_hradiste"))
+//  bag.p="Nurnske hradiste"  
+// endif
  if(!strcmpi(<city>,"Tharbad"))
   bag.p=1603,1925  
  endif
