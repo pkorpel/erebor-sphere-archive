@@ -59,7 +59,7 @@ nastav_vyjimku(Hurecko,Fornost)
 nastav_vyjimku(1592 1938,Fornost) //Tharbad - .go tharbad hazi na gondorske uzemi kousek vedle  !
 nastav_vyjimku(Hurka,Fornost)
 //nastav_vyjimku(3492 3190,Nurn)  //Nurnen - zruseno, je to cely obrovsky uzemi :)
-nastav_vyjimku(Nurnske hradiste,3470 3249 12)  //Nurn
+//nastav_vyjimku(Nurnske hradiste,3470 3249 12)  //Nurn
 nastav_vyjimku(Tahabar,Umbar)
 nastav_vyjimku(Oaza Hagir,Umbar)
 nastav_vyjimku(Bagronk,Barad-dur)
@@ -2190,9 +2190,9 @@ n_ability2_default[13]  60
 n_ability2[14]          roundattack_postih
 n_ability2_name[14]      % ze standard utoku
 n_ability2_default[14]  60
-n_ability2[15]
-n_ability2_name[15]
-n_ability2_default[15]
+n_ability2[15]          roundattack_staminacost
+n_ability2_name[15]     redukce staminy roundattack
+n_ability2_default[15]  45
 n_ability2[16]          doubleswing
 n_ability2_name[16]     ucinnost doubleswingu
 n_ability2_default[16]  2000

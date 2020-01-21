@@ -1,4 +1,4 @@
-﻿////////////////// vzor sriptu uzemi a jeho vyklad - co je na co ///////////////
+////////////////// vzor sriptu uzemi a jeho vyklad - co je na co ///////////////
 //[AREA cave]                 /// nazev lokace, urci nazev runy - "cave", .kde (Jsem v "cave" + souradnice)
 //CLASS=13                    /// tak tohle nevim a zajimalo by me, to co to definuje 
 //TITLE=JESKYNE               /// jmeno regionu - nevim kde se ukaze (TITLE REGION)
@@ -5239,14 +5239,14 @@ COLDCHANCE=00
 
 
 //////////////////////////////////////// najemni domy //////////////////////////////////////
-[AREA Nurnske hradiste] // opevnene mestecko v Nurnu, lze pronajmout jako celek s polema
-P=3509,3287,26
-RECT=3492,3287,3534,3318//hradiste s domy
-FLAGS=01192
-RAINCHANCE=00  
-COLDCHANCE=00  
-GROUP=Mesta Mordor
-tag.jmeno_mesta=Nurn
+// [AREA Nurnske hradiste] // opevnene mestecko v Nurnu, nahrazeno domem 284 jako celek
+// P=3509,3287,26
+// RECT=3492,3287,3534,3318//hradiste s domy
+// FLAGS=01192
+// RAINCHANCE=00  
+// COLDCHANCE=00  
+// GROUP=Mesta Mordor
+// tag.jmeno_mesta=Nurn
 
 
 [AREA dum 1] // Barad dur  gild haus
@@ -5696,27 +5696,27 @@ tag.housenumber=38
 tag.houserealm=2
 EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 39] // Nurn
-P=3503,3302,25
-RECT=3494,3294,3503,3308
-FLAGS=01192
-RAINCHANCE=00  
-COLDCHANCE=00  
-GROUP=Rooms
-tag.housenumber=39
-tag.houserealm=2
-EVENTS=r_playerhouse, r_nosumon
+// [AREA dum 39] // Nurn, nahrazeno sjednocenym hradistem dum 284
+// P=3503,3302,25
+// RECT=3494,3294,3503,3308
+// FLAGS=01192
+// RAINCHANCE=00  
+// COLDCHANCE=00  
+// GROUP=Rooms
+// tag.housenumber=39
+// tag.houserealm=2
+// EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 40] // Nurn
-P=3520,3313,25
-RECT=3521,3310,3534,3318
-FLAGS=01192
-RAINCHANCE=00  
-COLDCHANCE=00  
-GROUP=Rooms
-tag.housenumber=40
-tag.houserealm=2
-EVENTS=r_playerhouse, r_nosumon
+// [AREA dum 40] // Nurn, nahrazeno sjednocenym hradistem dum 284
+// P=3520,3313,25
+// RECT=3521,3310,3534,3318
+// FLAGS=01192
+// RAINCHANCE=00  
+// COLDCHANCE=00  
+// GROUP=Rooms
+// tag.housenumber=40
+// tag.houserealm=2
+// EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 41] // Rhun
 P=3834,2129
@@ -5740,17 +5740,17 @@ tag.housenumber=42
 tag.houserealm=2
 EVENTS=r_playerhouse, r_nosumon
 
-[AREA dum 43] // Nurn
-P=3529,3309,25
-RECT=3523,3291,3534,3298
-RECT=3526,3296,3534,3309
-FLAGS=01192
-RAINCHANCE=00  
-COLDCHANCE=00  
-GROUP=Rooms
-tag.housenumber=43
-tag.houserealm=2
-EVENTS=r_playerhouse, r_nosumon
+// [AREA dum 43] // Nurn, nahrazeno sjednocenym hradistem dum 284
+// P=3529,3309,25
+// RECT=3523,3291,3534,3298
+// RECT=3526,3296,3534,3309
+// FLAGS=01192
+// RAINCHANCE=00  
+// COLDCHANCE=00  
+// GROUP=Rooms
+// tag.housenumber=43
+// tag.houserealm=2
+// EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 44] //edoras
 P=2361,2601
@@ -8502,6 +8502,17 @@ COLDCHANCE=00
 GROUP=Rooms
 tag.houserealm=1
 EVENTS=r_playerhouse, r_nosumon, r_noclickhigh
+
+[AREA dum 284] // opevnene mestecko v Nurnu, lze pronajmout jako celek s polema
+P=3509,3287,26
+RECT=3492,3287,3534,3318//hradiste s domy
+tag.housenumber=284
+FLAGS=01192
+RAINCHANCE=00  
+COLDCHANCE=00  
+GROUP=Rooms
+tag.houserealm=2
+EVENTS=r_playerhouse, r_nosumon
 
 
 ////////////////////////////////////////////////////////////////////////////
