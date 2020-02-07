@@ -33,12 +33,12 @@ return 1
 
 on=@targon_char
 link=<src.targ.uid>
-if (<link.npc>==0)||(<link.peacemaking>)||(link.isSummon)
+if (<link.npc>==0)||(link.isSummon)
  cont.sysmessage(Tohle nemuzes uklidnit.)
  remove
  return 1
 endif
-if (<eval(promilerange(<eval(<cont.peacemaking>)>,<SKILL_PEACEMAKING.effect>))> < <link.tag(experience)>)
+if (<eval(<cont.peacemaking>)> <= <eval(<link.peacemaking>)> || <eval(promilerange(<eval(<cont.peacemaking>)>,<SKILL_PEACEMAKING.effect>))> < <link.tag(experience)>)
  cont.sysmessage(Uklidneni teto prisery presahuje tve moznosti.)
  remove
  return 1
@@ -48,7 +48,7 @@ if (<cont.musicianship> < {0 1025})
  cont.sysmessage(You play poorly.)
  cont.sound(<cont.findtype(t_musical).typedef.tdata2>)
 else
-  arg(power,<eval(randfakt(<eval(<cont.peacemaking>)>,<SKILL_PEACEMAKING.effect>))>)
+  arg(power,<eval(randfakt(<eval(cont.peacemaking)>,<SKILL_PEACEMAKING.effect>))>)
   if (<arg(power)> < <link.tag(experience)>)
    morex=0
    cont.sound(<cont.findtype(t_musical).typedef.tdata1>)
