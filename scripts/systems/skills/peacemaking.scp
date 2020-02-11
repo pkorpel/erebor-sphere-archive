@@ -38,7 +38,7 @@ if (<link.npc>==0)||(link.isSummon)
  remove
  return 1
 endif
-if (<eval(<cont.peacemaking>)> <= <eval(<link.peacemaking>)> || <eval(promilerange(<eval(<cont.peacemaking>)>,<SKILL_PEACEMAKING.effect>))> < <link.tag(experience)>)
+if ((<eval(<cont.peacemaking>)> <= <eval(<link.peacemaking>)>) || (<eval(promilerange(<eval(<cont.peacemaking>)>,<SKILL_PEACEMAKING.effect>))> < <link.tag(experience)>))
  cont.sysmessage(Uklidneni teto prisery presahuje tve moznosti.)
  remove
  return 1
