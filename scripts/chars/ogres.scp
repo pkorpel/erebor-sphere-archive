@@ -1100,6 +1100,7 @@ maxstam={450 500}
 maxmana=0
 
 tag.experience=<eval {450.0 475.0}>
+tag(isBoss,1)
 
 tag.roundattack_damage=55,60           //dmg od - do
 tag.roundattack_time=10,15             //prodleva od - do
@@ -2202,6 +2203,7 @@ maxstam={500 550}
 maxmana=0
 
 tag.experience=<eval {730.0 775.0}>
+tag(isBoss,1)
 
 tag.roundattack_damage=70,80    //dmg od - do
 tag.roundattack_time=10,12      //prodleva od - do

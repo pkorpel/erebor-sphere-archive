@@ -1183,7 +1183,7 @@ ICON=i_pet_DAEMON
 ANIM=03fbc7f
 can=mt_walk|mt_usehands|mt_run
 
-attack=120
+attack=105
 ARMOR=180
 moverate=3
  
@@ -1200,7 +1200,8 @@ TEVENTS=e_parakrik
 TEVENTS=e_explosiondispell
 TEVENTS=e_npc_curse
 TEVENTS=e_npc_bleed
-TEVENTS=e_npc_magicshield
+TEVENTS=e_summoneater
+TEVENTS=e_dragon_regeneration
 //TEVENTS=e_phoenix_fire
 
 CATEGORY=Monsters
@@ -1215,14 +1216,14 @@ KARMA=-3000
 
 str=5000
 dex={276 350}
-int=300
+int=10
 
-maxhits={16250 16900}
+maxhits=30000
 maxstam={376 450}
 maxmana=0
 
-tag.experience=<eval {750.0 770.0}>
-tag.npc_magicshield=70
+tag.experience=<eval {1050.0 1100.0}>
+tag(isBoss,1)
 
 tag.npc_bleed=300             //30%
 
@@ -1237,6 +1238,9 @@ tag.roundattack_chance=200   //20.0%
 tag(e_explosiondispell_chance,500) //50% chance
 tag(e_explosiondispell_range,6)
 tag(e_explosiondispell_time,15)
+
+tag.regeneration_hp=150                 // pocet hp ktore zregeneruje
+tag.regeneration_speed=10               // rychlost regeneracie v sekundach
 
 //mystik
 tag(hypnotizable,0)
@@ -1253,20 +1257,20 @@ tag(resist_curse,700)
 
 //weap resists
 tag(resist_sharp,300)
-tag(resist_slash,300)       //sekery
-tag(resist_pierce,00)
+tag(resist_slash,50)       //sekery
+tag(resist_pierce,50)
 tag(resist_blunt,750)
 
 //magic resists
-tag(resist_fire,900)
-tag(resist_elect,100)
+tag(resist_fire,950)
+tag(resist_elect,300)
 tag(resist_cold,-300)   //mraz ano
 tag(resist_silence,500)
 
 //typ monstra
 tag(monstertype,daemon)
 //weap flags
-tag.weapflag=dam_slashing|dam_physical|dam_fire
+tag.weapflag=dam_magic|dam_fire
 
 PARRYING={190.0 200.0}
 Resist=150.0
