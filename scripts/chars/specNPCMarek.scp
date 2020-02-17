@@ -46,6 +46,7 @@ maxstam={200 250}
 maxmana=1000
 
 tag.experience=<eval {1900.0 2000.0}>
+tag(isBoss,1)
 
 tag.npc_curse_chance=250                // 25% chance to trigger this event
 tag.npc_curse_delay=12,15               // delay between another possible strike
@@ -395,6 +396,7 @@ maxstam={300 330}
 maxmana=2000
 
 tag.experience=<eval {1700.0 1799.0}>
+tag(isBoss,1)
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
@@ -748,6 +750,7 @@ maxstam={200 230}
 maxmana=1000
 
 tag.experience=<eval {1500.0 1599.0}>
+tag(isBoss,1)
 
 tag.multishot_chance=50                        // 5% chance pri zasahu monstra
 tag.multishot_delay=15,20                      // prodleva nez znovu
@@ -923,6 +926,7 @@ maxstam={250 290}
 maxmana=1000
 
 tag.experience=<eval {2000.0 2100.0}>
+tag(isBoss,1)
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
@@ -1037,6 +1041,7 @@ maxstam={430 460}
 maxmana=0
 
 tag.experience=<eval {1700.0 1800.0}>
+tag(isBoss,1)
 
 tag.roundattack_damage=50,55        //dmg od - do
 tag.roundattack_time=15,17          //prodleva od - do v sek
@@ -1230,6 +1235,7 @@ maxstam={200 300}
 maxmana=0
 
 tag.experience=<eval {750.0 800.0}>
+tag(isBoss,1)
 
 tag.roundattack_damage=30,40    //dmg od - do
 tag.roundattack_time=10,15      //prodleva od - do v sek
@@ -1332,6 +1338,7 @@ maxhits={9000 9500}
 maxmana=2000
 
 tag.experience=<eval {200.0 220.0}>
+tag(isBoss,1)
 
 tag.npc_curse_chance=250                // 25% chance to trigger this event
 tag.npc_curse_delay=15,17               // delay between another possible strike
@@ -3031,6 +3038,7 @@ maxstam={400 450}
 maxmana=0
 
 tag.experience=<eval {800.0 815.0}>
+tag(isBoss,1)
 
 tag.roundattack_damage=55,65    //dmg od - do
 tag.roundattack_time=10,12      //prodleva od - do
@@ -3310,6 +3318,7 @@ maxstam={400 420}
 maxmana=0
 
 tag.experience=<eval {670.0 700.0}>
+tag(isBoss,1)
 
 Tag.explode_dmg=45
 
@@ -3407,6 +3416,7 @@ maxstam={225 275}
 maxmana=1000
 
 tag.experience=<eval {550.0 600.0}>
+tag(isBoss,1)
 
 tag(e_explosiondispell_chance,200) //20% chance
 tag(e_explosiondispell_range,6)
@@ -3515,6 +3525,7 @@ maxstam={370 420}
 maxmana=0
 
 tag.experience=<eval {800.0 850.0}>
+tag(isBoss,1)
 
 tag(e_pushall_time,10)
 tag(e_pushall_chance,500) // 50.0%
@@ -3611,6 +3622,7 @@ maxstam={400 450}
 maxmana=0
 
 tag.experience=<eval {610.0 620.0}>
+tag(isBoss,1)
 
 tag.npc_sniper_dmg=30           //o 30 HP
 tag.npc_sniper_chance=300       //30% Defaultne 20%
@@ -4116,6 +4128,7 @@ maxstam=350
 maxmana=0
 
 tag.experience=<eval {1100.0 1500.0}>
+tag(isBoss,1)
 tag.npc_speed=300
 
 tag.npc_stun_time=20             // 2 seconds of stun
@@ -4245,6 +4258,7 @@ maxstam=730
 maxmana=0
 
 tag.experience=<eval {1800.0 2000.0}>
+tag(isBoss,1)
 
 tag.npc_critic_chance=400         //40% chance
 tag.npc_critic_dmg=40,50          //dmg in between
