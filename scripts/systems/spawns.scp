@@ -223,9 +223,18 @@ else
   if (findid(i_gold))
     if !(isResurrectedNPC)
       if (isDung)
-        arg(gp,<eval (<eval <tag.experience>>*900)/1000>) // +20% drop goldu a tim padem i itemu v dungach
+        arg(gp,<eval (<eval tag(experience)>*900)/1000>) // +20% drop goldu a tim padem i itemu v dungach
       else
-        arg(gp,<eval (<eval <tag.experience>>*750)/1000>) // standard drop na povrchu a ostrovech
+        if (<eval tag(experience)> >= 1000)   // Minimalni expy pro monstrum, ktere se muze stat elitnim je 100. 
+          arg(chanceToElite,<eval ((<tag(experience)>*20)/100)>)    // sance na to, aby monstrum se stalo elitnim
+          if (<arg(chanceToElite)> > 500)
+            arg(chanceToElite,500)    // min 2% a max 5% sance na elitku
+          endif
+          if (<arg(chanceToElite)> >=  {1 10000})
+            f_TransformToElite
+          endif
+        endif
+        arg(gp,<eval (<eval tag(experience)>*750)/1000>) // standard drop na povrchu a ostrovech
       endif
       findid(i_gold).amount=<arg(gp)>
       f_creatureStart_giveMIBag(<arg(gp)>) 

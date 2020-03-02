@@ -159,6 +159,9 @@ endif
 if (src.tag(dragonbonus)) // Bonus k drakum
   arg(used2,#+1)
 endif
+if (<eval src.tag(level)> >= 200)  // Bonus na Elitni monstra
+  arg(used2,#+1)
+endif
 /////
 
 argo.setlocation=5,5
@@ -302,6 +305,27 @@ if (src.tag(dragonbonus))  // Bonus k drakum
   arg(poloha_x,#+55)
 endif
 
+arg(EliteBonus,<src.f_getEliteBonus>)
+if (<arg(EliteBonus)>)  // Bonus na Elitni monstra
+  arg(BonusLevel,<eval src.tag(level)-200>)
+  if (<arg(BonusLevel)> % 2)
+    if (<arg(BonusLevel)> >= 160)
+      arg(move_x,1)
+    else
+      arg(move_x,3)
+    endif
+  else
+    if (<arg(BonusLevel)> >= 160)
+      arg(move_x,4)
+    else
+      arg(move_x,10)
+    endif
+  endif
+  argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05006)
+  argo.newTextLine(<boosty_x>+<poloha_x>+<arg(move_x)>,<boosty_y>+60,<def_questDialog_colorResponse>,"<CalcDecimalNumber(<arg(EliteBonus)>,10,1)>%") 
+  arg(poloha_x,#+60)
+endif
+
 /////
 
 
@@ -403,7 +427,7 @@ src.tag(boostyxy,<boostyx>,<boostyy>,0,<f_boostyCas(<src.tag.boostyxy>)>)
 [dialog d_boosty_zoznam]
 argo.setlocation=5,5
 argo.page(0)
-argo.resizepic(20,20,3000,770,630)
+argo.resizepic(20,20,3000,770,680)
 
 arg(column,0)
 arg(row,0)
@@ -506,6 +530,9 @@ argo.newTextLine(533,610,<def_questDialog_colorResponse>,"a Oci")
 
 argo.gumppic(635,590,05322)
 argo.newTextLine(683,600,<def_questDialog_colorResponse>,"Draci")  
+
+argo.gumppic(35,640,05006)
+argo.newTextLine(83,650,<def_questDialog_colorResponse>,"Elity")  
 
 [dialog d_boosty_zoznam button]
 on=0

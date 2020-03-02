@@ -1988,6 +1988,15 @@ n_global3_default[15]  5
 n_global3[16]    GM_Step_resist
 n_global3_name[16]  "GM Step_ochrana(ds) po leapu/teleportu"
 n_global3_default[16]  20
+n_global3[17]
+n_global3_name[17]
+n_global3_default[17]
+n_global3[18]    base_elite_bonus
+n_global3_name[18]  "Zakladni bonus proti elitkam"
+n_global3_default[18]  200
+n_global3[19]    level_elite_bonus
+n_global3_name[19]  "Bonus proti elitkam za kazdy lvl nad 200"
+n_global3_default[19]  5
 
 
 n_ability[0]    ability_leaprange
