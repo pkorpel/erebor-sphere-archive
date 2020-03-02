@@ -2161,6 +2161,12 @@ on=@afterDoEffect
 on=@beforegetswing
 on=@npckill
 on=@playerKill
+if (<eval var(trigkillact).tag(npc_elite)>)  
+  arg(storesrc,<src>)
+  src=<uid>
+  accmsg("zabil na levelu <tag(level)> Elitni monstrum <var(trigkillact).name>(<var(trigkillact)>) za <eval var(trigkillact).tag(experience)/10> expu s obtiznosti <var(trigkillact).tag(npc_elite)> na pozici <var(trigkillact).p> (<var(trigkillact).region.name>)")
+  src=<arg(storesrc)>
+endif
 
 [function f_los_free_spell]
 if (<args> == spell_Recall) || (<args> == spell_Gate_Travel) || (<args> == spell_Dispel_Field)
@@ -2464,7 +2470,7 @@ arg(addfame,<eval arg(losefame)/act.rescount>)
 while (act.findcont(0))
   act=<act.findcont(0).uid>
   if (region.tag(realm) < 3)&&(arg(addfame) >100)&&((isplayer==0)||(tag(hypno_mystik)))//expstrop vcetne hypnotizovanejch
-    if !(<tag(npc_elite)>)     // Elitky nejsou ovlivneny stropem
+    if !(<eval tag(npc_elite)>)     // Elitky nejsou ovlivneny stropem
       arg(addfame,100)
     endif
   endif
