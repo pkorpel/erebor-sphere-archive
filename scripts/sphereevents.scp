@@ -2332,15 +2332,17 @@ return 0
 return 1
 
 [function showname_old]
-if(isnazgul)
- messagecol(03c2,NAZGUL)
+if (isnazgul)
+  messagecol(03c2,NAZGUL)
 endif
-if (tag(hypno_mystik))
- messagecol(<getnamehue>,"<name>") //bez guildy, takovej Kostlivec[Vyvoleny] je docela dobrej
+if (<eval tag(npc_elite)>)
+  messagecol(<getnamehue>,"<name> [Elite]")
+elseif (tag(hypno_mystik))
+  messagecol(<getnamehue>,"<name>") //bez guildy, takovej Kostlivec[Vyvoleny] je docela dobrej
 elseif (tag(myNameVarColor))
- messagecol(<tag(myNameVarColor)>,"<name>")
+  messagecol(<tag(myNameVarColor)>,"<name>")
 else
- messagecol(<getnamehue>,"<name><qval(abbrevstatus," [<findid(i_memory_guild).link.tag(abbrev)>]","")>") //
+  messagecol(<getnamehue>,"<name><qval(abbrevstatus," [<findid(i_memory_guild).link.tag(abbrev)>]","")>") //
 endif
 show_hitpoints
 return 1

@@ -7,7 +7,6 @@ endif
 if (<eval tag(isBoss)>)    // toto npc je bossem, nechceme z ni udelat Elite bosse
   return
 endif
-name=<name> "[Elite]"
 tag(npc_elite,<eval (500 + (((<eval tag(experience)>-1000)*2667)/10000))>)   // koef 2667 (liearne rostouci od 100 expu po 250expu, kde vychozi hodnota je 500 na 100 a max je 900 na 250expech)
 if (<tag(npc_elite)> > 900)
   tag(npc_elite,900)
@@ -22,9 +21,10 @@ if (<eval tag(resist_poison)> < <tag(npc_elite)>)     // zvyseni rezistu na jedy
   tag(resist_poison,<tag(npc_elite)>)
 endif
 
-changestatpoint(str,<eval ((<str>*25)/100)>)           // navyseni sily o +25%
-changestatpoint(dex,<eval ((<dex>*25)/100)>)           // navyseni obratnosti o +25%
-changestatpoint(int,<eval ((<int>*25)/100)>)           // navyseni inteligence o +25%
+changestat(str,<eval ((<str>*25)/100)>)           // navyseni sily o +25%
+changestat(dex,<eval ((<dex>*25)/100)>)           // navyseni obratnosti o +25%
+changestat(int,<eval ((<int>*25)/100)>)           // navyseni inteligence o +25%
+f_checkStatPoints
 
 tag(experience,<eval <tag(experience)>*5>)      // exp bonus pro elitky + ovlivni jeji drop gp/itemu/map/atd
 giveitem(i_mi_pouch)                            // jista odmena maly zeleny vacek

@@ -2119,6 +2119,20 @@ if (<argv(1)> != 0)
   endif
 endif
 
+[function f_checkStatPoints]
+if (<maxhits> < <str>)
+  maxhits=<str>
+  hits=<maxhits>
+endif
+if (<maxstam> < <dex>)
+  maxstam=<dex>
+  stam=<maxstam>
+endif
+if (<maxmana> < <int>)
+  maxmana=<int>
+  mana=<maxmana>
+endif
+
 [function promilerange]
 //power
 //effect min
