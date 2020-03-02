@@ -2464,7 +2464,9 @@ arg(addfame,<eval arg(losefame)/act.rescount>)
 while (act.findcont(0))
   act=<act.findcont(0).uid>
   if (region.tag(realm) < 3)&&(arg(addfame) >100)&&((isplayer==0)||(tag(hypno_mystik)))//expstrop vcetne hypnotizovanejch
-    arg(addfame,100)
+    if !(<tag(npc_elite)>)     // Elitky nejsou ovlivneny stropem
+      arg(addfame,100)
+    endif
   endif
   if (profession==class_craft) //za krafty zadny expy
     arg(addfame,0)
