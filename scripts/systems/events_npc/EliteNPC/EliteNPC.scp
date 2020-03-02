@@ -18,6 +18,9 @@ endif
 if (<eval tag(regeneration_speed)> > 5) 
   tag(regeneration_speed,5)                           // rychlost regenerace beze zmeny
 endif
+if (<eval tag(resist_poison)> < <tag(npc_elite)>)     // zvyseni rezistu na jedy u nachylnych monster podle obtiznosti elitky (500-900)
+  tag(resist_poison,<tag(npc_elite)>)
+endif
 
 changestatpoint(str,<eval ((<str>*25)/100)>)           // navyseni sily o +25%
 changestatpoint(dex,<eval ((<dex>*25)/100)>)           // navyseni obratnosti o +25%
