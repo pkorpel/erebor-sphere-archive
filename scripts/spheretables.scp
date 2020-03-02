@@ -314,6 +314,7 @@ scripts\systems\events_npc\Behavior\
 scripts\systems\events_npc\Boosts\
 scripts\systems\events_npc\Damage\
 scripts\systems\events_npc\OtherEffects\
+scripts\systems\events_npc\EliteNPC\
 scripts\questy\system\
 scripts\questy\
 scripts\speech\

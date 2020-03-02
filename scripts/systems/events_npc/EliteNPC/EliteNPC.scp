@@ -1,0 +1,163 @@
+/////  E L I T E   N P C  /////
+
+[function f_TransformToElite]
+if (<eval tag(npc_elite)>)    // toto npc je jiz elitnim
+  return
+endif
+if (<eval tag(isBoss)>)    // toto npc je bossem, nechceme z ni udelat Elite bosse
+  return
+endif
+name=<name> "[Elite]"
+tag(npc_elite,<eval (500 + (((<eval tag(experience)>-1000)*2667)/10000))>)   // koef 2667 (liearne rostouci od 100 expu po 250expu, kde vychozi hodnota je 500 na 100 a max je 900 na 250expech)
+if (<tag(npc_elite)> > 900)
+  tag(npc_elite,900)
+endif
+if (<eval tag(regeneration_hp)> < <eval (<tag(npc_elite)>/10)>) 
+  tag(regeneration_hp,<eval (<tag(npc_elite)>/10)>)   // cim vyssi elitka, tim vice regeneruje hp
+endif
+if (<eval tag(regeneration_speed)> > 5) 
+  tag(regeneration_speed,5)                           // rychlost regenerace beze zmeny
+endif
+
+changestatpoint(str,<eval ((<str>*25)/100)>)           // navyseni sily o +25%
+changestatpoint(dex,<eval ((<dex>*25)/100)>)           // navyseni obratnosti o +25%
+changestatpoint(int,<eval ((<int>*25)/100)>)           // navyseni inteligence o +25%
+
+tag(experience,<eval <tag(experience)>*5>)      // exp bonus pro elitky + ovlivni jeji drop gp/itemu/map/atd
+giveitem(i_mi_pouch)                            // jista odmena maly zeleny vacek
+giveitem(RANDOM_REAGENT_High,<eval (<tag(npc_elite)>/10)>)   // jista odmena cene regy ginserg/garlic 50-90ks
+giveitem(RANDOM_REAGENT_High,<eval (<tag(npc_elite)>/10)>)   // jista odmena cene regy ginserg/garlic 50-90ks
+giveitem(RANDOM_REAGENT_ALL,<eval (<tag(npc_elite)>/20)>)    // jista odmena jakekoli regy 25-45ks
+giveitem(RANDOM_REAGENT_ALL,<eval (<tag(npc_elite)>/20)>)    // jista odmena jakekoli regy 25-45ks
+giveitem(random_JEWEL,<eval (<tag(npc_elite)>/50)>)          // jista odmena jakekoli gemy 10-18ks
+giveitem(i_gem_diamond,<eval (<tag(npc_elite)>/100)>)        // jista odmena diamanty 5-9ks
+events +e_npc_elite
+events +e_dragon_regeneration
+
+sound=254
+NewItemSafe=i_fx_sparkle
+lastnew.COLOR=0995
+lastnew.ATTR=attr_static|attr_decay 
+lastnew.TIMER=1
+lastnew.P=<P>
+lastnew.MOVE n
+NewItemSafe=i_fx_sparkle
+lastnew.COLOR=0995
+lastnew.ATTR=attr_static|attr_decay 
+lastnew.TIMER=1
+lastnew.P=<P>
+lastnew.MOVE s 
+NewItemSafe=i_fx_sparkle
+lastnew.COLOR=0995
+lastnew.ATTR=attr_static|attr_decay 
+lastnew.TIMER=1 
+lastnew.P=<P> 
+lastnew.MOVE w 
+NewItemSafe=i_fx_sparkle
+lastnew.COLOR=0995
+lastnew.ATTR=attr_static|attr_decay 
+lastnew.TIMER=1
+lastnew.P=<P>
+lastnew.MOVE e
+
+// tags to edit behavior:
+// tag.npc_elite=900 // monster gains 90% DMG resistence vs non 200+ char
+[events e_npc_elite]
+on=@Created
+on=@DrinkingPotion
+on=@afterswing
+on=@finalBlow
+on=@beforedoeffect 
+on=@afterDoEffect
+on=@beforegeteffect
+on=@beforegetswing
+if !(src.isplayer)
+  return 0
+endif
+if (0<tag(npc_elite)>)
+  arg(eliteForce,<eval tag(npc_elite)>)
+else
+  arg(eliteForce,950)
+endif
+arg(EliteBonus,<src.f_getEliteBonus>)
+if !(<arg(EliteBonus)>)
+  var(ubrano,<eval (var(ubrano)-((var(ubrano)*arg(eliteForce))/1000))>)
+  src.sysMessage("Cil pohltil vetsinu tveho utoku")
+else
+  var(ubrano,<eval (var(ubrano)-((var(ubrano)*(arg(eliteForce)-(<arg(EliteBonus)>)))/1000))>)
+  src.sysMessage("Diky svym zkusenostem jsi <sex(zasadil,zasadila)> silnejsi ranu")        
+endif
+
+on=@aftergetswing
+on=@playerKill
+on=@npckill
+
+ON=@NpcSeeNewPlayer
+if !(findid(i_remover_eliteNPC))
+  giveitem(i_remover_eliteNPC)
+  say("Ha! Nepritel! Jsi dost <src.sex(silny,silna)> na to, aby jsi me <src.sex(porazil,porazila)>?")
+endif
+
+ON=@GetHit
+if (findid(i_remover_eliteNPC))
+  arg(eliteNPC_remover,<findid(i_remover_eliteNPC)>)
+  if (eliteNPC_remover.more1 == 1)  // casti gatu
+    flag_freeze=0
+    eliteNPC_remover.more1=2  // uz necasti
+    eliteNPC_remover.timer=5  // 5 sec pauza na dalsi casteni
+    f_fizzleefect
+  endif
+else
+  giveitem(i_remover_eliteNPC)
+  say("Ha! Nepritel! Jsi dost <src.sex(silny,silna)> na to, aby jsi me <src.sex(porazil,porazila)>?")  
+endif
+
+[function f_getEliteBonus]
+arg(PlayerLevel,<eval tag(level)>)
+if (<arg(PlayerLevel)> < 200)
+  return 0
+else
+  if (<arg(PlayerLevel)> > 400)
+    arg(BonusLevel,200)
+  else    
+    arg(BonusLevel,<eval arg(PlayerLevel)-200>)
+  endif
+  return <eval (<nastaveni_base_elite_bonus>+(arg(BonusLevel)*<nastaveni_level_elite_bonus>))>
+endif
+
+[ITEMDEF i_remover_eliteNPC]
+ID=i_memory
+NAME=EliteNPC Remover
+TYPE=T_EQ_SCRIPT
+
+ON=@Equip
+TIMER=1200  // 20 min nez zmizi
+ATTR=094
+MORE1=2
+
+ON=@Timer
+if (more1==2)  // bojuje
+  more1=1  // casti gatu, kdyz dostane pecku, zrusi mu to a prodlouzi timer do dalsiho castu gaty
+  topobj.flag_freeze=1
+  topobj.say("Beleg Foroth Kel")
+  timer=3
+  topobj.anim(11)
+  return 1
+elseif (more1==1)  // casti
+  more1=0  // docastil, odporti, leda ze by ho zabili
+  topobj.say("Nejsi pro me adekvatnim souperem!")
+  timer=2
+  topobj.newitem=i_fx_yavanna
+  arg(gata,<lastnew>)
+  topobj.tag(gata_out,<gata>)
+  gata.color=<topobj.color>
+  gata.name="Magicka brana"
+  gata.p=<topobj.p>
+  gata.sfx(248)
+  return 1
+elseif (more1==0)  // docastil, zmizi(uz tomu nezabrani)
+  topobj.go(planSTO)  // pro efekt odporteni
+  topobj.hits 0
+endif
+
+[eof]
