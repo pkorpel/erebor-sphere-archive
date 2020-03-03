@@ -17,8 +17,17 @@ endif
 if (<eval tag(regeneration_speed)> > 5) 
   tag(regeneration_speed,5)                           // rychlost regenerace beze zmeny
 endif
-if (<eval tag(resist_poison)> < <tag(npc_elite)>)     // zvyseni rezistu na jedy u nachylnych monster podle obtiznosti elitky (500-900)
+if (<eval tag(npc_summonKillerBoost)> < <eval (<tag(npc_elite)>/3)>)   // Bonus k dmg proti summonum (166-300%)
+  tag(npc_summonKillerBoost,<eval (<tag(npc_elite)>/3)>)
+endif
+if (<eval tag(resist_poison)> < 700)                  // spodni hranice rezistu na poison u Elitek
+  tag(resist_poison,700)
+endif
+if (<eval tag(resist_poison)> < <tag(npc_elite)>)     // zvyseni rezistu na jedy u nachylnych monster podle obtiznosti elitky (700-900)
   tag(resist_poison,<tag(npc_elite)>)
+endif
+if (<eval tag(resist_summon)> < 970)                  // spodni hranice rezistu na summony u Elitek
+  tag(resist_summon,970)
 endif
 
 changestat(str,<eval ((<str>*25)/100)>)           // navyseni sily o +25%
@@ -34,8 +43,14 @@ giveitem(RANDOM_REAGENT_ALL,<eval (<tag(npc_elite)>/20)>)    // jista odmena jak
 giveitem(RANDOM_REAGENT_ALL,<eval (<tag(npc_elite)>/20)>)    // jista odmena jakekoli regy 25-45ks
 giveitem(random_JEWEL,<eval (<tag(npc_elite)>/50)>)          // jista odmena jakekoli gemy 10-18ks
 giveitem(i_gem_diamond,<eval (<tag(npc_elite)>/100)>)        // jista odmena diamanty 5-9ks
+
 events +e_npc_elite
-events +e_dragon_regeneration
+if !(isevent(e_dragon_regeneration))
+  events +e_dragon_regeneration
+endif
+if !(isevent(e_npc_summonKiller))
+  events +e_npc_summonKiller
+endif
 
 sound=254
 NewItemSafe=i_fx_sparkle
@@ -69,6 +84,8 @@ lastnew.MOVE e
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
+var(ubrano,<eval (var(ubrano)*1200)/1000>)     // Bonus +20% do dmg od predlohy
+
 on=@finalBlow
 on=@beforedoeffect 
 on=@afterDoEffect
