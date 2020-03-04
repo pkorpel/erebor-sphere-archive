@@ -11,11 +11,11 @@ tag(npc_elite,<eval (500 + (((<eval tag(experience)>-1000)*2667)/10000))>)   // 
 if (<tag(npc_elite)> > 900)
   tag(npc_elite,900)
 endif
-if (<eval tag(regeneration_hp)> < <eval (<tag(npc_elite)>/10)>) 
-  tag(regeneration_hp,<eval (<tag(npc_elite)>/10)>)   // cim vyssi elitka, tim vice regeneruje hp
+if (<eval tag(regeneration_hp)> < <eval (<tag(npc_elite)>/7)>) 
+  tag(regeneration_hp,<eval (<tag(npc_elite)>/7)>)   // cim vyssi elitka, tim vice regeneruje hp
 endif
-if (<eval tag(regeneration_speed)> > 5) 
-  tag(regeneration_speed,5)                           // rychlost regenerace beze zmeny
+if ((<eval tag(regeneration_speed)> > 2) || (<eval tag(regeneration_speed)> == 0)) 
+  tag(regeneration_speed,2)                           // rychlost regenerace beze zmeny
 endif
 if (<eval tag(npc_summonKillerBoost)> < <eval (<tag(npc_elite)>/3)>)   // Bonus k dmg proti summonum (166-300%)
   tag(npc_summonKillerBoost,<eval (<tag(npc_elite)>/3)>)
@@ -35,7 +35,8 @@ changestat(dex,<eval ((<dex>*25)/100)>)           // navyseni obratnosti o +25%
 changestat(int,<eval ((<int>*25)/100)>)           // navyseni inteligence o +25%
 f_checkStatPoints
 
-tag(experience,<eval <tag(experience)>*5>)      // exp bonus pro elitky + ovlivni jeji drop gp/itemu/map/atd
+arg(expBonus,<eval (300+((<tag(npc_elite)>-500)/2))>)                // dynamicky rostouci bonus k expum podle obtiznosti elitky (300-500%)
+tag(experience,<eval (<tag(experience)>*<arg(expBonus)>)/100>)      // exp bonus pro elitky + ovlivni jeji drop gp/itemu/map/atd
 giveitem(i_mi_pouch)                            // jista odmena maly zeleny vacek
 giveitem(RANDOM_REAGENT_High,<eval (<tag(npc_elite)>/10)>)   // jista odmena cene regy ginserg/garlic 50-90ks
 giveitem(RANDOM_REAGENT_High,<eval (<tag(npc_elite)>/10)>)   // jista odmena cene regy ginserg/garlic 50-90ks
