@@ -4,18 +4,41 @@
 
 ////////////////////////////////////////////////////////////////////--
 [FUNCTION testfollow]//peknej binec
-tag(t_follow,0)
-events=+e_testfollow
-
-[function no_testfollow]
-events=-e_test_follw
-
-[EVENTS e_testfollow]//nepridavat podminky bez konzultace s mandosem - naopak je treba pak zeditovat speheremap aby to bylo jednodussi
-on=@Step
+if !(playerExists(<uid>))
+  return 0
+endif
 if (isGM)
   events=-e_testfollow
   return 0
 endif
+if ((<nastaveni_FollowScript_check>) || (<src.isGM>))  // moznost vypnout followscript plosne v nastaveni a zaroven manualne jej nastavit individualnimu hraci
+  tag(t_follow,0)
+  events=+e_testfollow
+  if (<src.isGM>)
+    src.redmessage("Na hraci <name> byl zapnut Test Follow Scriptu!")
+    src.accmsg("zapnul Test Follow Scriptu na hraci <name>(<uid>) na pozici <p>(<region.name>)")
+  endif
+endif
+
+[function no_testfollow]
+if !(playerExists(<uid>))
+  return 0
+endif
+events=-e_testfollow
+if (<src.isGM>)
+  src.redmessage("Na hraci <name> byl vypnut Test Follow Scriptu...")
+  src.accmsg("vypnul Test Follow Scriptu na hraci <name>(<uid>) na pozici <p>(<region.name>)")
+endif
+
+[function f_testfollow]
+if (isevent(e_testfollow))
+  no_testfollow
+else
+  testfollow
+endif
+
+[EVENTS e_testfollow]//nepridavat podminky bez konzultace s mandosem - naopak je treba pak zeditovat speheremap aby to bylo jednodussi
+on=@Step
 if (region.tag(kick))
 elseif (region.flags==01192)
 elseif (region.flags==00812)

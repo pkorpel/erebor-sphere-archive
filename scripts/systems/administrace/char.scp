@@ -52,7 +52,7 @@ charinfo_1_row[43]	iflag_rename|iflag_string				,tag.komentar,			Komentar
 charinfo_1_row[44]	iflag_rename|iflag_pc|iflag_nowrite			,Guildmem.name,			Guilda
 charinfo_1_row[45]	iflag_rename|iflag_pc|iflag_nowrite			,prislusnost_realmu,		Vyvrhel
 
-charinfocom_1_rows	20
+charinfocom_1_rows	21
 charinfocom_1_row[0]	iflag_button|iflag_rename|iflag_notext			,blank	,Edit,Edit()
 charinfocom_1_row[1]	iflag_button|iflag_rename|iflag_notext			,blank	,Remove,Remove
 charinfocom_1_row[2]	iflag_button|iflag_rename|iflag_notext			,blank	,Taglist,tag(dump)
@@ -73,6 +73,7 @@ charinfocom_1_row[16]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,M
 charinfocom_1_row[17]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,Vyvrhel,vyvrhel
 charinfocom_1_row[18]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,RP Rank,rprank
 charinfocom_1_row[19]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,Uniforma,dialog(d_uniform_realm)
+charinfocom_1_row[20]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,FollowScript,f_testfollow
 
 [DIALOG d_CHARPROP1]
 0,0
