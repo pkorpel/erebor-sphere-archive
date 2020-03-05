@@ -1,4 +1,4 @@
-[RESOURCES]
+﻿[RESOURCES]
 // sphere.ini and spheretable.scp are automatic.
 // All the other scripts we want to load.
 //sux 
@@ -227,6 +227,7 @@ scripts\systems\heck.scp
 scripts\systems\aldaron.scp
 scripts\systems\scane.scp
 scripts\systems\zobrazovaniHP.scp
+scripts\systems\Catacombs.scp
 scripts\tim\avatarveci.scp
 scripts\tim\ncpnewmounts.scp
 scripts\tim\testnewnpc.scp

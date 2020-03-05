@@ -1,0 +1,104 @@
+///// Knihy do katakomb
+[ITEMDEF i_otviraci_kniha]
+id=i_book_lg
+type=t_normal
+weight=1.0
+
+CATEGORY=Dungy
+SUBSECTION=Katakomby
+DESCRIPTION=Kniha na otvirani - 1
+
+on=@create
+attr_movenever=1
+name=Kniha
+tag(opened,0)
+
+on=@timer
+if (<tag(opened)>==1)
+  tag(opened,0)
+  dispid=i_book_lg
+  update
+endif
+return 1
+
+on=@Userdclick
+if (src.isgm)
+  src.sysMessage("Kniha ovladajici port na 4970 3857 0 10")
+  dialog(d_guarditAdv)
+else
+  if (f_guarditAdv_CheckSpawns)	// 1 == guard is alive
+    src.sysMessage("Pres strazce se ke knize jentak nedostanes")
+  else
+    src.sysMessage("Kniha se po otevreni zacla rychle pretacet ... jakoby neco spustila")
+    dispid=i_book_lg_open
+    update
+    tag(opened,1)
+    src.newitem(i_podzemi_secretPort)
+    lastnew.p=4970 3857 0 10
+    lastnew.morep=4961 3806 0 10
+    SOUND=snd_SPELL_GATE_TRAVEL
+    timer=500
+  endif
+endif
+return 1
+
+[Itemdef i_podzemi_secretPort]
+name=Podivny portal
+id=i_moongate_red
+type=t_telepad
+
+on=@Create
+color=0992
+timer=180
+
+on=@timer
+cont.remove
+remove
+
+on=@UserClick
+src.sysMessage("Portal v podzemi, ktery se vytvoril z knihy ...")
+return 1
+  
+[ITEMDEF i_otviraci_kniha2]
+id=i_book_lg
+type=t_normal
+weight=1.0
+
+CATEGORY=Dungy
+SUBSECTION=Katakomby
+DESCRIPTION=Kniha na otvirani - 2
+
+on=@create
+attr_movenever=1
+name=Kniha
+tag(opened,0)
+
+on=@timer
+if (<tag(opened)>==1)
+  tag(opened,0)
+  dispid=i_book_lg
+  update
+endif
+return 1
+
+on=@Userdclick
+if (src.isgm)
+  src.sysMessage("Kniha ovladajici port na 4797 4041 0 10")
+  dialog(d_guarditAdv)
+else
+  if (f_guarditAdv_CheckSpawns)
+    src.sysMessage("Pres strazce se ke knize jentak nedostanes")
+  else
+    src.sysMessage("Kniha se po otevreni zacla rychle pretacet ... jakoby neco spustila")
+    dispid=i_book_lg_open
+    update
+    tag(opened,1)
+    src.newitem(i_podzemi_secretPort)
+    lastnew.p=4797 4041 0 10
+    lastnew.morep=4854 4080 0 10
+    SOUND=snd_SPELL_GATE_TRAVEL
+    timer=500
+  endif
+endif
+return 1
+[eof]
