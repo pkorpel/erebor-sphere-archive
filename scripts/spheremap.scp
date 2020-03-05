@@ -1,4 +1,4 @@
-////////////////// vzor sriptu uzemi a jeho vyklad - co je na co ///////////////
+﻿////////////////// vzor sriptu uzemi a jeho vyklad - co je na co ///////////////
 //[AREA cave]                 /// nazev lokace, urci nazev runy - "cave", .kde (Jsem v "cave" + souradnice)
 //CLASS=13                    /// tak tohle nevim a zajimalo by me, to co to definuje 
 //TITLE=JESKYNE               /// jmeno regionu - nevim kde se ukaze (TITLE REGION)
@@ -318,6 +318,24 @@ RESOURCES=r_default_water, r_default_tree, r_default_grass, r_default_rock
 
 
 //////////special areas
+[AREA Katakomby]
+p=4962,3804,0,10
+RECT=4895,3735,5003,3896
+RECT=4788,3945,4869,4081
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Katakomby 2]
+p=4816,4082,0,10
+RECT=4785,4035,4829,4089
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
 
 [AREA test]//na testy
 P=5615,801,0,100
