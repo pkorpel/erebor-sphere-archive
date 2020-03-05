@@ -144,6 +144,24 @@ endif
 if (<src.poisonManager.f_pm_isImmune>==1)
   arg(used2,#+1)
 endif
+if (<eval src.tag(mi_meleeblock)>)
+  arg(used2,#+1)
+endif
+if (<eval src.tag(mi_meleereflex)>)
+  arg(used2,#+1)
+endif
+if (<eval src.tag(mi_rangedblock)>)
+  arg(used2,#+1)
+endif
+if (<eval src.tag(mi_rangedreflex)>)
+  arg(used2,#+1)
+endif
+if (<eval src.tag(mi_spellblock)>)
+  arg(used2,#+1)
+endif
+if (<eval src.tag(mi_spellreflex)>)
+  arg(used2,#+1)
+endif
 if (src.tag(humanbonus))  // Bonus k humanoidum
   arg(used2,#+1)
 endif
@@ -272,6 +290,45 @@ endif
 if (src.findid(i_delayer_longrange))  //longrange
   argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05209)
   argo.newTextLine(<boosty_x>+<poloha_x>+10,<boosty_y>+60,32,<src.findid(i_delayer_longrange).timer>) 
+  arg(poloha_x,#+55)
+endif
+
+if (<eval src.tag(mi_meleeblock)>)
+  argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05325)
+  argo.newTextLine(<boosty_x>+<poloha_x>+10,<boosty_y>+60,<def_questDialog_colorResponse>,"<eval src.tag(mi_meleeblock)>%") 
+  arg(poloha_x,#+55)
+endif 
+
+if (<eval src.tag(mi_meleereflex)>)
+  argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05325)
+  argo.gumppic(<boosty_x>+<poloha_x>+22,<boosty_y>+30,05780)
+  argo.newTextLine(<boosty_x>+<poloha_x>+10,<boosty_y>+60,<def_questDialog_colorResponse>,"<eval src.tag(mi_meleereflex)>%") 
+  arg(poloha_x,#+55)
+endif
+
+if (<eval src.tag(mi_rangedblock)>)
+  argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05216)
+  argo.newTextLine(<boosty_x>+<poloha_x>+10,<boosty_y>+60,<def_questDialog_colorResponse>,"<eval src.tag(mi_rangedblock)>%") 
+  arg(poloha_x,#+55)
+endif
+
+if (<eval src.tag(mi_rangedreflex)>)
+  argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05216)
+  argo.gumppic(<boosty_x>+<poloha_x>+22,<boosty_y>+30,05780)
+  argo.newTextLine(<boosty_x>+<poloha_x>+10,<boosty_y>+60,<def_questDialog_colorResponse>,"<eval src.tag(mi_rangedreflex)>%") 
+  arg(poloha_x,#+55)
+endif
+
+if (<eval src.tag(mi_spellblock)>)
+  argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05420)
+  argo.newTextLine(<boosty_x>+<poloha_x>+10,<boosty_y>+60,<def_questDialog_colorResponse>,"<eval src.tag(mi_spellblock)>%") 
+  arg(poloha_x,#+55)
+endif
+
+if (<eval src.tag(mi_spellreflex)>)
+  argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05420)
+  argo.gumppic(<boosty_x>+<poloha_x>+22,<boosty_y>+30,05780)
+  argo.newTextLine(<boosty_x>+<poloha_x>+10,<boosty_y>+60,<def_questDialog_colorResponse>,"<eval src.tag(mi_spellreflex)>%") 
   arg(poloha_x,#+55)
 endif
 
@@ -427,7 +484,7 @@ src.tag(boostyxy,<boostyx>,<boostyy>,0,<f_boostyCas(<src.tag.boostyxy>)>)
 [dialog d_boosty_zoznam]
 argo.setlocation=5,5
 argo.page(0)
-argo.resizepic(20,20,3000,770,680)
+argo.resizepic(20,20,3000,770,550)
 
 arg(column,0)
 arg(row,0)
@@ -453,6 +510,12 @@ while (<pocet> < <boosty_menu_column>)
   arg(row,#+1)
   arg(pocet,#+1)
 endwhile
+
+argo.button(690,550,09A7,09A6,1,0,1)
+argo.newTextLine(753,547,<def_questDialog_colorResponse>,"1/2")
+
+// argo.button(<boosty_x>+<poloha_x>+16,<boosty_y>+26,03217,03218,1,0,2)
+// argo.newTextLine(<boosty_x>+<poloha_x>+32,<boosty_y>+22,<def_questDialog_colorResponse>,"Legenda")
 
 argo.newTextLine(635,255,<def_questDialog_colorResponse>,"Special ability:")
 argo.gumppic(655,280,0939)
@@ -509,34 +572,91 @@ argo.newTextLine(383,510,<def_questDialog_colorResponse>,"Lifepact")
 argo.gumppic(485,500,05212)
 argo.newTextLine(533,510,<def_questDialog_colorResponse>,"Catchfield")
 
-argo.newTextLine(35,550,<def_questDialog_colorResponse>,"_________________________________________________________")
-argo.newTextLine(35,570,<def_questDialog_colorResponse>,"Bonusy k utoku:")
 
-// Bonusy 1. rada
-argo.gumppic(35,590,0500A)
-argo.newTextLine(83,600,<def_questDialog_colorResponse>,"Humanoidi")
-
-argo.gumppic(185,590,05000)
-argo.newTextLine(233,595,<def_questDialog_colorResponse>,"Nermtvi")
-argo.newTextLine(233,610,<def_questDialog_colorResponse>,"a Demoni") 
-
-argo.gumppic(335,590,0500B)
-argo.newTextLine(383,595,<def_questDialog_colorResponse>,"Zvirata") 
-argo.newTextLine(383,610,<def_questDialog_colorResponse>,"a Pavouci") 
-
-argo.gumppic(485,590,05005)
-argo.newTextLine(533,595,<def_questDialog_colorResponse>,"Golemove")
-argo.newTextLine(533,610,<def_questDialog_colorResponse>,"a Oci") 
-
-argo.gumppic(635,590,05322)
-argo.newTextLine(683,600,<def_questDialog_colorResponse>,"Draci")  
-
-argo.gumppic(35,640,05006)
-argo.newTextLine(83,650,<def_questDialog_colorResponse>,"Elity")  
 
 [dialog d_boosty_zoznam button]
 on=0
 src.tag(boostyxy,<f_boostyxyX(<src.tag.boostyxy>)>,<f_boostyxyY(<src.tag.boostyxy>)>,0,<f_boostyCas(<src.tag.boostyxy>)>)
+
+on=1
+dialog(d_boosty_zoznam2) 
+
+[dialog d_boosty_zoznam2]
+argo.setlocation=5,5
+argo.page(0)
+argo.resizepic(20,20,3000,770,550)
+
+arg(column,0)
+arg(row,0)
+arg(pocet,0)
+arg(poloha_x,10)  
+  
+argo.button(660,550,09A4,09A3,1,0,1)
+argo.newTextLine(753,547,<def_questDialog_colorResponse>,"2/2")
+
+argo.newTextLine(35,20,<def_questDialog_colorResponse>,"Bonusy k utoku:")
+
+// Bonusy 1. rada
+argo.gumppic(35,45,0500A)
+argo.newTextLine(83,55,<def_questDialog_colorResponse>,"Humanoidi")
+
+argo.gumppic(185,45,05000)
+argo.newTextLine(233,50,<def_questDialog_colorResponse>,"Nermtvi")
+argo.newTextLine(233,65,<def_questDialog_colorResponse>,"a Demoni") 
+
+argo.gumppic(335,45,0500B)
+argo.newTextLine(383,50,<def_questDialog_colorResponse>,"Zvirata") 
+argo.newTextLine(383,65,<def_questDialog_colorResponse>,"a Pavouci") 
+
+argo.gumppic(485,45,05005)
+argo.newTextLine(533,50,<def_questDialog_colorResponse>,"Golemove")
+argo.newTextLine(533,65,<def_questDialog_colorResponse>,"a Oci") 
+
+argo.gumppic(635,45,05322)
+argo.newTextLine(683,55,<def_questDialog_colorResponse>,"Draci")  
+
+// Bonusy 2. rada
+argo.gumppic(35,95,05006)
+argo.newTextLine(83,105,<def_questDialog_colorResponse>,"Elity")
+
+argo.newTextLine(35,145,<def_questDialog_colorResponse>,"_________________________________________________________")
+argo.newTextLine(35,165,<def_questDialog_colorResponse>,"Blokace a odrazeni:")
+
+// Magicke predmety 1. rada
+argo.gumppic(35,185,05325)
+argo.newTextLine(83,190,<def_questDialog_colorResponse>,"Blokace")
+argo.newTextLine(83,205,<def_questDialog_colorResponse>,"z blizka")
+
+argo.gumppic(185,185,05325)
+argo.gumppic(207,210,05780)
+argo.newTextLine(233,190,<def_questDialog_colorResponse>,"Odraz")
+argo.newTextLine(233,205,<def_questDialog_colorResponse>,"z blizka")
+
+argo.gumppic(335,185,05216)
+argo.newTextLine(383,190,<def_questDialog_colorResponse>,"Blokace")
+argo.newTextLine(383,205,<def_questDialog_colorResponse>,"z dalky")
+
+argo.gumppic(485,185,05216)
+argo.gumppic(507,210,05780)
+argo.newTextLine(533,190,<def_questDialog_colorResponse>,"Odraz")
+argo.newTextLine(533,205,<def_questDialog_colorResponse>,"z dalky")
+
+argo.gumppic(635,185,05420)
+argo.newTextLine(683,190,<def_questDialog_colorResponse>,"Blokace")
+argo.newTextLine(683,205,<def_questDialog_colorResponse>,"kouzla")
+
+// Magicke predmety 2. rada
+argo.gumppic(35,235,05420)
+argo.gumppic(57,260,05780)
+argo.newTextLine(83,240,<def_questDialog_colorResponse>,"Odraz")
+argo.newTextLine(83,255,<def_questDialog_colorResponse>,"kouzla")
+
+[dialog d_boosty_zoznam2 button]
+on=0
+src.tag(boostyxy,<f_boostyxyX(<src.tag.boostyxy>)>,<f_boostyxyY(<src.tag.boostyxy>)>,0,<f_boostyCas(<src.tag.boostyxy>)>)
+
+on=1
+dialog(d_boosty_zoznam) 
 
 [dialog d_boosty_equip]
 argo.setlocation=5,5
