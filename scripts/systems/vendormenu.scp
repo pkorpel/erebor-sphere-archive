@@ -159,9 +159,9 @@ return 0
 [function trashvendor] //premisteni vendora bez smazani tagu (nelze pridat noveho)
 var(vendorfound,<tag(vendoruid)>)
  if(var(vendorfound)) //a vratit vendorovo UID
-  arg(kamvendora_x,<eval {5917 5922}>)  //vybrani nahodne pozice v rohu mistnosti s truhlama
-  arg(kamvendora_y,<eval {94 99}>)
-  finduid(var(vendorfound)).go(<arg(kamvendora_x)>,<arg(kamvendora_y)>,0,10) //presun vendora (mistnost s truhlama, 10 mapplan)
+  arg(kamvendora_x,<eval {4714 4719}>)  //vybrani nahodne pozice v rohu mistnosti s truhlama
+  arg(kamvendora_y,<eval {1117 1128}>)
+  finduid(var(vendorfound)).go(<arg(kamvendora_x)>,<arg(kamvendora_y)>,0,100) //presun vendora (mistnost s truhlama, 100 mapplan)
   tag(vendor_trest,1)
   return 1  
  else 
@@ -174,9 +174,9 @@ return 0
 [function trashvendor_itagy]
 var(vendorfound,<tag(vendoruid)>)
 if(var(vendorfound)) //a vratit vendorovo UID
-  arg(kamvendora_x,<eval {5917 5922}>)  //vybrani nahodne pozice v rohu mistnosti s truhlama
-  arg(kamvendora_y,<eval {94 99}>)
-  finduid(var(vendorfound)).go(<arg(kamvendora_x)>,<arg(kamvendora_y)>,0,10) //presun vendora (mistnost s truhlama, 10 mapplan)
+  arg(kamvendora_x,<eval {4714 4719}>)  //vybrani nahodne pozice v rohu mistnosti s truhlama
+  arg(kamvendora_y,<eval {1117 1128}>)
+  finduid(var(vendorfound)).go(<arg(kamvendora_x)>,<arg(kamvendora_y)>,0,100) //presun vendora (mistnost s truhlama, 100 mapplan)
   tag(vendpos_nastavena,0) 
   tag(vendorplaced,0)
   tag.remove(vendpos)
