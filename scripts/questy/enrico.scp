@@ -3,7 +3,7 @@
 
 
 ////////////////////////////////////////////////////////////////////--
-[FUNCTION testfollow]//peknej binec
+[FUNCTION testFollow]//peknej binec
 if !(playerExists(<uid>))
   return 0
 endif
@@ -11,31 +11,61 @@ if (isGM)
   events=-e_testfollow
   return 0
 endif
-if ((<nastaveni_FollowScript_check>) || (<src.isGM>))  // moznost vypnout followscript plosne v nastaveni a zaroven manualne jej nastavit individualnimu hraci
+if (<nastaveni_FollowScript_check>)  // moznost vypnout followscript plosne v nastaveni
   tag(t_follow,0)
   events=+e_testfollow
-  if (<src.isGM>)
-    src.redmessage("Na hraci <name> byl zapnut Test Follow Scriptu!")
-    src.accmsg("zapnul Test Follow Scriptu na hraci <name>(<uid>) na pozici <p>(<region.name>)")
-  endif
+else 
+  events=-e_testfollow
 endif
 
-[function no_testfollow]
-if !(playerExists(<uid>))
-  return 0
-endif
-events=-e_testfollow
-if (<src.isGM>)
-  src.redmessage("Na hraci <name> byl vypnut Test Follow Scriptu...")
-  src.accmsg("vypnul Test Follow Scriptu na hraci <name>(<uid>) na pozici <p>(<region.name>)")
-endif
-
-[function f_testfollow]
-if (isevent(e_testfollow))
-  no_testfollow
+[function f_testFollow]
+if (<nastaveni_FollowScript_check>)
+  src.accmsg("vypnul Test Follow Scriptu pro vsechny hrace.")
+  src.redmessage("Vypnul jsi Test Follow Scriptu pro vsechny hrace.")
+  var(nastaveni_FollowScript_check,0)
 else
-  testfollow
+  src.accmsg("zapnul Test Follow Scriptu pro vsechny hrace.")
+  src.redmessage("Zapnul jsi Test Follow Scriptu pro vsechny hrace.")
+  var(nastaveni_FollowScript_check,1)
 endif
+serv.allclients(testfollow)
+
+[dialog d_testFollow]
+argo.SetLocation=225,35
+
+argo.tag(sirka,420)
+argo.tag(vyska,115)
+
+argo.dialog_prvni
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1)
+argo.dialog_pozadi(<argo.tag(nexty)>,1,110)
+argo.dialog_zpruhledni
+
+argo.texta(<argo.dialog_textpos(0,0)>,42,"Test Follow Scriptu")
+
+argo.dialog_textpos(1,0)
+
+argo.texta(lastxpos,lastypos+(0*<d_def_radek_vyska>),<d_def_writecolor>,"Opravdu chces zapnout Test Follow Scriptu pro vsechny hrace?")
+argo.texta(lastxpos,lastypos+(1*<d_def_radek_vyska>)+2,<d_def_writecolor>,"Aktualni stav:")
+if (<nastaveni_FollowScript_check>)
+  argo.texta(lastxpos+110,lastypos+(1*<d_def_radek_vyska>)+2,<def_questDialog_colorResponse>,"ZAPNUTO")
+else
+  argo.texta(lastxpos+110,lastypos+(1*<d_def_radek_vyska>)+2,<def_questDialog_colorResponse>,"VYPNUTO")
+endif
+
+argo.dialog_textpos(1,1)                                 
+
+argo.button(<d_def_okraj>+<d_def_skvira>,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb7,0fb9,1,0,1)//ok
+argo.button(<d_def_okraj>+<d_def_skvira>+365,(<argo.tag(vyska)>-<d_def_okraj>)-23,0fb1,0fb3,1,0,0)//cancel
+
+[dialog d_testFollow button]
+on=0
+src.sysMessage("Nastaveni stornovano")
+
+on=1
+f_testFollow
+
 
 [EVENTS e_testfollow]//nepridavat podminky bez konzultace s mandosem - naopak je treba pak zeditovat speheremap aby to bylo jednodussi
 on=@Step

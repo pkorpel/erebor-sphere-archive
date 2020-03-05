@@ -73,7 +73,7 @@ charinfocom_1_row[16]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,M
 charinfocom_1_row[17]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,Vyvrhel,vyvrhel
 charinfocom_1_row[18]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,RP Rank,rprank
 charinfocom_1_row[19]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,Uniforma,dialog(d_uniform_realm)
-charinfocom_1_row[20]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,FollowScript,f_testfollow
+charinfocom_1_row[20]	iflag_button|iflag_rename|iflag_notext|iflag_pc		,blank	,FollowScript,dialog(d_testFollow)
 
 [DIALOG d_CHARPROP1]
 0,0
