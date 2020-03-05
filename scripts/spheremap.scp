@@ -8061,7 +8061,7 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 245]   //barad
 P=3586,2776
-RECT=3578,2772,3586,2778
+RECT=3578,2772,3586,2779
 tag.housenumber=245
 FLAGS=01192
 RAINCHANCE=00  
