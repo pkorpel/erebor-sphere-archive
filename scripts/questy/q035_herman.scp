@@ -334,9 +334,9 @@ if(<lowlvl> != 1)
       argo.questDialog_addResponse(0,1,1,"q035_herman_13_accept")
       argo.setText(argo.newTextLine,"Neviditelne brouky? Jsi sileny!")
       argo.questDialog_addResponse(0,1,1,"q035_herman_false")
-  elseif (<eval src.qtag(q035_herman)> == 14) // BROUK ELITE
+  elseif (<eval src.qtag(q035_herman)> == 14) // BROUK ZABIJAK
     argo.dialog_Page("q035_herman_15")
-      argo.setText(<argo.newTextLine>,"Neviditelne brouky jsi <src.sex(zvladnul,zvladla)>. Avsak neni vsem dnum konec! Ted potrebuji 3 hlavy elitnich brouku. Jsou rychli a maji velkou silu, tak si dej na ne pozor!")
+      argo.setText(<argo.newTextLine>,"Neviditelne brouky jsi <src.sex(zvladnul,zvladla)>. Avsak neni vsem dnum konec! Ted potrebuji 3 hlavy Brouku Zabijaku. Jsou rychli a maji velkou silu, tak si dej na ne pozor!")
       argo.questDialog_HTMLGUMP
       argo.setText(argo.newTextLine,"Mno snad to zvladnu, jdu na to!")
       argo.questDialog_addResponse(0,1,1,"q035_herman_15_accept")
@@ -401,7 +401,7 @@ elseif (<argn> == argo.dialog_linkButton("q035_herman_13_accept")) // BROUK SHAD
   src.newitem(i_q035_herman_collector_07)
   src.act.bounce
   say("Vrat se brzy!")
-elseif (<argn> == argo.dialog_linkButton("q035_herman_15_accept")) // BROUK ELITE
+elseif (<argn> == argo.dialog_linkButton("q035_herman_15_accept")) // BROUK ZABIJAK
   src.qtag("q035_herman",15,41)
   src.newitem(i_q035_herman_collector_08)
   src.act.bounce
@@ -468,7 +468,7 @@ elseif (<argn> == argo.dialog_linkButton("q035_herman_finish_13")) // BROUK SHAD
   src.qtag(q035_herman,14,41)
   src.addexp(600)
   src.givegold(5000)
-elseif (<argn> == argo.dialog_linkButton("q035_herman_finish_15")) // BROUK ELITE
+elseif (<argn> == argo.dialog_linkButton("q035_herman_finish_15")) // BROUK ZABIJAK
   say("No konecne!")
   src.consume(i_q035_herman_collector_08)
   src.qtag(q035_herman,16,41)

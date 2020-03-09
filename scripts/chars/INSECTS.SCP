@@ -580,7 +580,7 @@ item=i_gold
 
 [CHARDEF c_bug_elite]
 ID=c_fireant_warrior
-NAME=Brouk elitni
+NAME=Brouk Zabijak
 SOUND=snd_MONSTER_TERA_DRONE1
 ICON=i_pet_terathan_drone
 ANIM=078c7f
@@ -603,7 +603,7 @@ TEVENTS=e_npc_critic
 
 CATEGORY=Monsters
 SUBSECTION=Bugs
-DESCRIPTION=Bug elite
+DESCRIPTION=Bug
 
 ON=@Create
 color=00

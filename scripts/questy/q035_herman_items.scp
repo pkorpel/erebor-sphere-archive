@@ -163,7 +163,7 @@ ON=@UserDeath
 
 [ITEMDEF i_q035_herman_collector_08]
 ID=i_crate_small
-NAME=Bedna na hlavy elitnich brouku.
+NAME=Bedna na hlavy vyspelych brouku.
 TYPE=t_collector
 WEIGHT=1
 
@@ -171,12 +171,12 @@ ON=@CREATE
 COLOR=044c
 ATTR=010|04
 tag("contentsinfo","V bedne je")
-tag("contentstype","hlav od elitnich brouku.")
+tag("contentstype","hlav od Vyspelych Brouku.")
 tag("contentsamount",0)
 tag("maxcontents",3)
 tag("target_remove",1)
 tag("target_desc","Od jakeho brouka chces vzit hlavu?")
-tag("target_id","Body of Brouk elitni")
+tag("target_id","Body of Brouk Zabijak")
 tag("absolute_success",200)
 tag("value_to_check",200)
 tag("contentscount",0)

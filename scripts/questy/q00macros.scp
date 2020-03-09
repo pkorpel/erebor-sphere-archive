@@ -608,7 +608,7 @@ if !(tag(hunted)==c_bug_elite)
   tag(huntedgold,190)
   tag(hlaska,fq_Brouci_hard)
 else
-  say("Dnes je vyhlasen lov na matky brouku a elitni brouky!")
+  say("Dnes je vyhlasen lov na matky brouku a brouky zabijaky!")
 endif
 
 [function fq_Lizard_king]

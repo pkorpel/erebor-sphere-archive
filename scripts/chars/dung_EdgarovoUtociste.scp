@@ -1,321 +1,321 @@
-[CHARDEF c_eu_valecnik]				
-ID=c_man			
-NAME=Valecnik			
-ICON=i_pet_MAN			
-				
-CAN=MT_WALK|MT_RUN|MT_USEHANDS			
+[CHARDEF c_eu_valecnik]
+ID=c_man
+NAME=Valecnik
+ICON=i_pet_MAN
 
-attack=95			
-ARMOR=100			
-MOVERATE=4			
-				
-BLOODCOLOR=020			
-				
-TEVENTS=e_monster			
-TEVENTS=e_character			
-TEVENTS=e_npc_stun			
+CAN=MT_WALK|MT_RUN|MT_USEHANDS
+
+attack=95
+ARMOR=100
+MOVERATE=4
+
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_stun
 TEVENTS=e_summoneater
-				
-CATEGORY=Monsters			
-				
-ON=@Create			
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
-KARMA={-5000 -9000}			
-				
-STR=3750			
-DEX=350			
-INT=30			
-				
-maxhits={4400 4600}			
-maxstam={200 240}			
-maxmana=0			
-				
-tag.experience=<eval {180.0 195.0}>			
-				
-tag.npc_stun_time=15 // 1,5 sekund omracka			
-Tag.npc_stun_chance=100 // 10% sance			
-				
-//mystik			
-tag(hypnotizable,0)			
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>			
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>			
-tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str			
-tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>			
-				
-//other resists			
-tag(resist_poison,500)		
-tag.resist_para=<eval {700 850}>			
-tag(resist_summon,800)		
-tag(resist_bleed,500)
-tag(resist_curse,250)			
-				
-//weap resists			
-tag(resist_sharp,500)			
-tag(resist_slash,500)			
-tag(resist_pierce,250)			
-tag(resist_blunt,250) 			
-				
-//magic resists			
-tag(resist_fire,500)			
-tag(resist_elect,250) 			
-tag(resist_cold,250) 			
-				
-//typ monstra			
-tag(monstertype,humanoid,90)			
-				
-//weap flags			
-tag.weapflag=dam_blunt|dam_physical			
 
-TACTICS=100.0			
-WRESTLING=120.0			
-RESIST=180.0			
+CATEGORY=Monsters
+
+ON=@Create
+color=colors_skin
+NPC=brain_monster
+FAME=900
+KARMA={-5000 -9000}
+
+STR=3750
+DEX=350
+INT=30
+
+maxhits={4400 4600}
+maxstam={200 240}
+maxmana=0
+
+tag.experience=<eval {180.0 195.0}>
+
+tag.npc_stun_time=15 // 1,5 sekund omracka
+Tag.npc_stun_chance=100 // 10% sance
+
+//mystik
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+//other resists
+tag(resist_poison,500)
+tag.resist_para=<eval {700 850}>
+tag(resist_summon,800)
+tag(resist_bleed,500)
+tag(resist_curse,250)
+
+//weap resists
+tag(resist_sharp,500)
+tag(resist_slash,500)
+tag(resist_pierce,250)
+tag(resist_blunt,250)
+
+//magic resists
+tag(resist_fire,500)
+tag(resist_elect,250)
+tag(resist_cold,250)
+
+//typ monstra
+tag(monstertype,humanoid,90)
+
+//weap flags
+tag.weapflag=dam_blunt|dam_physical
+
+TACTICS=100.0
+WRESTLING=120.0
+RESIST=180.0
 SpiritSpeak=35.0
 MACEFIGHTING={110.0 120.0}
-				
-ITEMNEWBIE=i_hair_long
-Color=0986	
-ITEMnewbie=i_hammer_war			
-Color=0986			
-ITEMnewbie=i_platemail_chest			
-Color=0997				
-ITEMnewbie=i_platemail_leggings			
-Color=0997			
-ITEMnewbie=i_platemail_gloves			
-Color=0997			
-ITEMnewbie=i_platemail_gorget			
-Color=0997			
-ITEMnewbie=i_platemail_arms			
-Color=0997			
-ITEMnewbie=i_cape			
-Color=0986
-ITEMnewbie=i_kilt			
-Color=0986
-ITEMnewbie=i_sash			
-Color=0986
-ITEMnewbie=i_sandals			
-Color=0986		
 
-ITEMnewbie=i_monster_create			
-								
-ON=@NPCRestock			
-		
+ITEMNEWBIE=i_hair_long
+Color=0986
+ITEMnewbie=i_hammer_war
+Color=0986
+ITEMnewbie=i_platemail_chest
+Color=0997
+ITEMnewbie=i_platemail_leggings
+Color=0997
+ITEMnewbie=i_platemail_gloves
+Color=0997
+ITEMnewbie=i_platemail_gorget
+Color=0997
+ITEMnewbie=i_platemail_arms
+Color=0997
+ITEMnewbie=i_cape
+Color=0986
+ITEMnewbie=i_kilt
+Color=0986
+ITEMnewbie=i_sash
+Color=0986
+ITEMnewbie=i_sandals
+Color=0986
+
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+
 item=i_gold
 
 
-[CHARDEF c_eu_valecnik_elitni]				
-ID=c_man			
-NAME=Elitni valecnik			
-ICON=i_pet_MAN			
-				
-CAN=MT_WALK|MT_RUN|MT_USEHANDS			
+[CHARDEF c_eu_valecnik_elitni]
+ID=c_man
+NAME=Serzant
+ICON=i_pet_MAN
 
-attack=115			
-ARMOR=125			
-MOVERATE=5			
-				
-BLOODCOLOR=020			
-				
-TEVENTS=e_monster			
-TEVENTS=e_character			
-TEVENTS=e_npc_stun			
+CAN=MT_WALK|MT_RUN|MT_USEHANDS
+
+attack=115
+ARMOR=125
+MOVERATE=5
+
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_stun
 TEVENTS=e_summoneater
-TEVENTS=e_npc_critic				
+TEVENTS=e_npc_critic
 
-CATEGORY=Monsters			
-				
-ON=@Create			
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
-KARMA={-5000 -9000}			
-				
-STR=4000			
-DEX=400		
-INT=30			
-				
-maxhits={6700 7000}			
-maxstam={200 240}			
-maxmana=0			
-				
-tag.experience=<eval {250.0 275.0}>			
-				
-tag.npc_stun_time=15 // 1,5 sekund omracka			
-Tag.npc_stun_chance=150 // 15% sance			
+CATEGORY=Monsters
+
+ON=@Create
+color=colors_skin
+NPC=brain_monster
+FAME=900
+KARMA={-5000 -9000}
+
+STR=4000
+DEX=400
+INT=30
+
+maxhits={6700 7000}
+maxstam={200 240}
+maxmana=0
+
+tag.experience=<eval {250.0 275.0}>
+
+tag.npc_stun_time=15 // 1,5 sekund omracka
+Tag.npc_stun_chance=150 // 15% sance
 tag.npc_critic_chance=300         //30% chance
 tag.npc_critic_dmg=20,25
-				
-//mystik			
-tag(hypnotizable,0)			
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>			
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>			
-tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str			
-tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>			
-				
-//other resists			
-tag(resist_poison,600)			
-tag.resist_para=<eval {700 850}>			
-tag(resist_summon,800)			
-tag(resist_bleed,600)
-tag(resist_curse,250)			
-				
-//weap resists			
-tag(resist_sharp,600)			
-tag(resist_slash,600)			
-tag(resist_pierce,300)			
-tag(resist_blunt,300) 			
-				
-//magic resists			
-tag(resist_fire,600)			
-tag(resist_elect,300) 			
-tag(resist_cold,300) 			
-				
-//typ monstra			
-tag(monstertype,humanoid,90)			
-				
-//weap flags			
-tag.weapflag=dam_blunt|dam_physical			
 
-TACTICS=100.0			
-WRESTLING=120.0			
-RESIST=180.0			
+//mystik
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
+
+//other resists
+tag(resist_poison,600)
+tag.resist_para=<eval {700 850}>
+tag(resist_summon,800)
+tag(resist_bleed,600)
+tag(resist_curse,250)
+
+//weap resists
+tag(resist_sharp,600)
+tag(resist_slash,600)
+tag(resist_pierce,300)
+tag(resist_blunt,300)
+
+//magic resists
+tag(resist_fire,600)
+tag(resist_elect,300)
+tag(resist_cold,300)
+
+//typ monstra
+tag(monstertype,humanoid,90)
+
+//weap flags
+tag.weapflag=dam_blunt|dam_physical
+
+TACTICS=100.0
+WRESTLING=120.0
+RESIST=180.0
 SpiritSpeak=35.0
 MACEFIGHTING=100.0
-FENCING=100.0 
-SWORDSMANSHIP=100.0				
+FENCING=100.0
+SWORDSMANSHIP=100.0
 
 ITEMNEWBIE=i_hair_long
-Color=0986	
-ITEMnewbie=i_halberd			
-COLOR=0981		
-ITEMnewbie=i_platemail_chest			
-Color=0997				
-ITEMnewbie=i_platemail_leggings			
-Color=0997		
-ITEMnewbie=i_platemail_gloves			
-Color=0997			
-ITEMnewbie=i_platemail_gorget			
-Color=0997			
-ITEMnewbie=i_platemail_arms			
-Color=0997			
-ITEMnewbie=i_cape			
+Color=0986
+ITEMnewbie=i_halberd
+COLOR=0981
+ITEMnewbie=i_platemail_chest
+Color=0997
+ITEMnewbie=i_platemail_leggings
+Color=0997
+ITEMnewbie=i_platemail_gloves
+Color=0997
+ITEMnewbie=i_platemail_gorget
+Color=0997
+ITEMnewbie=i_platemail_arms
+Color=0997
+ITEMnewbie=i_cape
 Color=0981
-ITEMnewbie=i_kilt			
+ITEMnewbie=i_kilt
 Color=0981
-ITEMnewbie=i_sash			
+ITEMnewbie=i_sash
 Color=0981
-ITEMnewbie=i_sandals			
-Color=0981		
+ITEMnewbie=i_sandals
+Color=0981
 
-ITEMnewbie=i_monster_create			
-								
-ON=@NPCRestock			
-		
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+
 item=i_gold
 
-[CHARDEF c_eu_vrah]				
-ID=c_man			
-NAME=Vrahoun			
-ICON=i_pet_MAN			
-				
-CAN=MT_WALK|MT_RUN|MT_USEHANDS			
+[CHARDEF c_eu_vrah]
+ID=c_man
+NAME=Vrahoun
+ICON=i_pet_MAN
 
-attack=50			
-ARMOR=60			
-MOVERATE=6			
-				
-BLOODCOLOR=020			
-				
-TEVENTS=e_monster			
-TEVENTS=e_character			
+CAN=MT_WALK|MT_RUN|MT_USEHANDS
+
+attack=50
+ARMOR=60
+MOVERATE=6
+
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
 TEVENTS=e_summoneater
-TEVENTS=e_npc_critic				
+TEVENTS=e_npc_critic
 TEVENTS=e_npc_bleed
 TEVENTS=e_looter
 
-CATEGORY=Monsters			
-				
-ON=@Create			
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
-KARMA={-5000 -9000}			
-				
-STR=4000			
-DEX=400		
-INT=30			
-				
-maxhits={4900 5500}			
-maxstam={200 240}			
-maxmana=0			
-				
-tag.experience=<eval {160.0 185.0}>			
-				
-tag.npc_bleed=500  			
+CATEGORY=Monsters
+
+ON=@Create
+color=colors_skin
+NPC=brain_monster
+FAME=900
+KARMA={-5000 -9000}
+
+STR=4000
+DEX=400
+INT=30
+
+maxhits={4900 5500}
+maxstam={200 240}
+maxmana=0
+
+tag.experience=<eval {160.0 185.0}>
+
+tag.npc_bleed=500
 tag.npc_critic_chance=500         //50% chance
 tag.npc_critic_dmg=45,60
-				
-//mystik			
-tag(hypnotizable,0)			
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>			
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>			
-tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex			
-tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>			
-				
-//other resists			
-tag(resist_poison,800) //			
-tag.resist_para=<eval {400 500}>			
-tag(resist_summon,800) //			
-tag(resist_bleed,400) //
-tag(resist_curse,250)			
-				
-//weap resists			
-tag(resist_sharp,400)			
-tag(resist_slash,250)			
-tag(resist_pierce,300)			
-tag(resist_blunt,400) 			
-				
-//magic resists			
-tag(resist_fire,250)			
-tag(resist_elect,350) 			
-tag(resist_cold,200) 			
-				
-//typ monstra			
-tag(monstertype,humanoid,90)			
-				
-//weap flags			
-tag.weapflag=dam_slashing|dam_physical			
 
-TACTICS=100.0			
-WRESTLING=120.0			
-RESIST=180.0			
+//mystik
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[3]>//dex
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[3]>
+
+//other resists
+tag(resist_poison,800) //
+tag.resist_para=<eval {400 500}>
+tag(resist_summon,800) //
+tag(resist_bleed,400) //
+tag(resist_curse,250)
+
+//weap resists
+tag(resist_sharp,400)
+tag(resist_slash,250)
+tag(resist_pierce,300)
+tag(resist_blunt,400)
+
+//magic resists
+tag(resist_fire,250)
+tag(resist_elect,350)
+tag(resist_cold,200)
+
+//typ monstra
+tag(monstertype,humanoid,90)
+
+//weap flags
+tag.weapflag=dam_slashing|dam_physical
+
+TACTICS=100.0
+WRESTLING=120.0
+RESIST=180.0
 SpiritSpeak=35.0
 MACEFIGHTING=100.0
-FENCING=100.0 
-SWORDSMANSHIP=100.0				
+FENCING=100.0
+SWORDSMANSHIP=100.0
 
 ITEMNEWBIE=i_hair_long
-Color=0986	
-ITEMnewbie=i_kryss			
-COLOR=0986			
-ITEMnewbie=i_chainmail_tunic			
-Color=0997			
-ITEMnewbie=i_chainmail_leggings			
-Color=0997			
-ITEMnewbie=i_chainmail_gloves			
-Color=0997			
-ITEMnewbie=i_chainmail_gorget			
-Color=0997		
-ITEMnewbie=i_chainmail_sleeves			
-Color=0997			
-ITEMnewbie=i_shield_metal			
-Color=0997	
+Color=0986
+ITEMnewbie=i_kryss
+COLOR=0986
+ITEMnewbie=i_chainmail_tunic
+Color=0997
+ITEMnewbie=i_chainmail_leggings
+Color=0997
+ITEMnewbie=i_chainmail_gloves
+Color=0997
+ITEMnewbie=i_chainmail_gorget
+Color=0997
+ITEMnewbie=i_chainmail_sleeves
+Color=0997
+ITEMnewbie=i_shield_metal
+Color=0997
 
-ITEMnewbie=i_monster_create			
-								
-ON=@NPCRestock			
-		
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+
 item=i_gold
 
 [CHARDEF c_eu_mag]
@@ -327,21 +327,21 @@ CAN=MT_EQUIP|MT_WALK|MT_RUN|MT_USEHANDS
 attack=60
 ARMOR=40
 moverate=4
- 
+
 BLOODCOLOR=020
 
 TEVENTS=e_character
 TEVENTS=e_summoneater
 TEVENTS=e_monster
 TEVENTS=e_npc_infiniteMana
- 
+
 
 CATEGORY=Monsters
 
-ON=@Create			
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
+ON=@Create
+color=colors_skin
+NPC=brain_monster
+FAME=900
 KARMA={-5000 -9000}
 
 STR=1000
@@ -352,12 +352,12 @@ maxhits={4350 4800}
 maxstam={120 140}
 maxmana=1200
 
-tag.experience=<eval {150.0 180.0}> 
+tag.experience=<eval {150.0 180.0}>
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
 
@@ -384,7 +384,7 @@ tag(monstertype,humanoid,90)
 //weap flags
 tag.weapflag=dam_slashing|dam_physical|dam_cold
 
-WRESTLING=90.0 
+WRESTLING=90.0
 RESIST={120.0 170.0}
 TACTICS={100.0 110.0}
 PARRYING={90.0 100.0}
@@ -399,7 +399,7 @@ ITEMNEWBIE=i_spellbook
 addspell=s_lightning
 
 
- 
+
 
 ITEMNEWBIE=i_light_source
 ITEMNEWBIE=random_male_hair
@@ -416,7 +416,7 @@ ITEMNEWBIE=i_staff_gnarled
 Color=0986
 
 
-ON=@NPCRestock 
+ON=@NPCRestock
 ITEM=i_gold
 ITEM=RANDOM_REAGENT,{10 20}
 ITEM=RANDOM_REAGENT_NECRO,{5 10}
@@ -430,7 +430,7 @@ CAN=MT_EQUIP|MT_WALK|MT_RUN|MT_USEHANDS
 attack=70
 ARMOR=50
 moverate=4
- 
+
 BLOODCOLOR=020
 
 TEVENTS=e_character
@@ -441,10 +441,10 @@ TEVENTS=e_npc_infiniteMana
 
 CATEGORY=Monsters
 
-ON=@Create			
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
+ON=@Create
+color=colors_skin
+NPC=brain_monster
+FAME=900
 KARMA={-5000 -9000}
 
 STR=1000
@@ -455,12 +455,12 @@ maxhits={5600 5800}
 maxstam={120 140}
 maxmana=1200
 
-tag.experience=<eval {250.0 275.0}> 
+tag.experience=<eval {250.0 275.0}>
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
@@ -486,7 +486,7 @@ tag(monstertype,humanoid,90)
 //weap flags
 tag.weapflag=dam_slashing|dam_physical|dam_cold
 
-WRESTLING=90.0 
+WRESTLING=90.0
 RESIST={120.0 170.0}
 TACTICS={100.0 110.0}
 PARRYING={90.0 100.0}
@@ -499,9 +499,9 @@ SpiritSpeak=40.0
 
 ITEMNEWBIE=i_spellbook
 addspell=s_flamestrike
-addspell=s_explosion 
+addspell=s_explosion
 
- 
+
 ITEMNEWBIE=i_light_source
 ITEMNEWBIE=random_male_hair
 Color=0986
@@ -518,7 +518,7 @@ Color=0981
 ITEMNEWBIE=i_cape
 Color=0981
 
-ON=@NPCRestock 
+ON=@NPCRestock
 ITEM=i_gold
 ITEM=RANDOM_REAGENT,{20 30}
 ITEM=RANDOM_REAGENT_NECRO,{5 10}
@@ -546,9 +546,9 @@ CATEGORY=Monsters
 
 
 ON=@Create
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
+color=colors_skin
+NPC=brain_monster
+FAME=900
 KARMA={-5000 -9000}
 
 STR=1200
@@ -559,7 +559,7 @@ maxhits={4900 5400}
 maxstam={220 240}
 maxmana=0
 
-tag.experience=<eval {170.0 185.0}> 
+tag.experience=<eval {170.0 185.0}>
 
 tag.npc_sniper_dmg=30
 tag.npc_sniper_chance=250
@@ -567,8 +567,8 @@ tag.npc_sniper_chance=250
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
 
@@ -605,25 +605,25 @@ MACEFIGHTING={110.0 120.0}
 PROVOCATION=100.0
 PEACEMAKING=100.0
 SpiritSpeak=35.0
- 
+
 
 ITEMNEWBIE=random_male_hair
 Color=0986
 ITEMNEWBIE=i_ringmail_tunic
-Color=0997	
+Color=0997
 ITEMNEWBIE=i_ringmail_gloves
-Color=0997	
+Color=0997
 ITEMNEWBIE=i_ringmail_gorget
-Color=0997	
+Color=0997
 ITEMNEWBIE=i_cringmail_leggings
-Color=0997	
-ITEMnewbie=i_cape			
+Color=0997
+ITEMnewbie=i_cape
 Color=0986
-ITEMnewbie=i_kilt			
+ITEMnewbie=i_kilt
 Color=0986
-ITEMnewbie=i_sash			
+ITEMnewbie=i_sash
 Color=0986
-ITEMnewbie=i_sandals			
+ITEMnewbie=i_sandals
 Color=0986
 
 ITEMNEWBIE=i_bow
@@ -631,7 +631,7 @@ Color=0986
 ITEMNEWBIE=i_arrow,500
 
 
-ON=@NPCRestock 
+ON=@NPCRestock
 ITEM=i_gold
 
 
@@ -657,9 +657,9 @@ CATEGORY=Monsters
 
 
 ON=@Create
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
+color=colors_skin
+NPC=brain_monster
+FAME=900
 KARMA={-5000 -9000}
 
 STR=1200
@@ -670,15 +670,15 @@ maxhits={4900 5400}
 maxstam={220 240}
 maxmana=0
 
-tag.experience=<eval {180.0 190.0}> 
+tag.experience=<eval {180.0 190.0}>
 
 tag.npc_sniper_dmg=45           //
 tag.npc_sniper_chance=350       //
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
@@ -715,7 +715,7 @@ MACEFIGHTING={110.0 120.0}
 PROVOCATION=100.0
 PEACEMAKING=100.0
 SpiritSpeak=35.0
- 
+
 
 ITEMNEWBIE=random_male_hair
 Color=0986
@@ -729,13 +729,13 @@ ITEMNEWBIE=i_ringmail_leggings
 Color=0997
 ITEMNEWBIE=i_ringmail_sleeves
 Color=0997
-ITEMnewbie=i_cape			
+ITEMnewbie=i_cape
 Color=0986
-ITEMnewbie=i_kilt			
+ITEMnewbie=i_kilt
 Color=0986
-ITEMnewbie=i_sash			
+ITEMnewbie=i_sash
 Color=0986
-ITEMnewbie=i_sandals			
+ITEMnewbie=i_sandals
 Color=0986
 
 ITEMNEWBIE=i_crossbow_heavy
@@ -743,12 +743,12 @@ Color=0986
 ITEMNEWBIE=i_bolt_jagged,500
 
 
-ON=@NPCRestock 
+ON=@NPCRestock
 ITEM=i_gold
 
 
 [CHARDEF c_eu_kus_elitni]
-NAME=Elitni Kusostrelec
+NAME=Serzant Kusostrelec
 ID=C_MAN
 ICON=i_pet_MAN
 CAN=MT_EQUIP|MT_WALK|MT_RUN|MT_USEHANDS
@@ -770,9 +770,9 @@ CATEGORY=Monsters
 
 
 ON=@Create
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
+color=colors_skin
+NPC=brain_monster
+FAME=900
 KARMA={-5000 -9000}
 
 STR=1200
@@ -784,15 +784,15 @@ maxstam={220 240}
 maxmana=0
 
 flag_immobile(1)
-tag.experience=<eval {280.0 300.0}> 
+tag.experience=<eval {280.0 300.0}>
 
 tag.npc_sniper_dmg=60
 tag.npc_sniper_chance=500
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
+tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
@@ -829,7 +829,7 @@ MACEFIGHTING={110.0 120.0}
 PROVOCATION=100.0
 PEACEMAKING=100.0
 SpiritSpeak=35.0
- 
+
 
 ITEMNEWBIE=random_male_hair
 Color=0986
@@ -841,20 +841,20 @@ ITEMNEWBIE=i_ringmail_gorget
 Color=0997
 ITEMNEWBIE=i_cringmail_leggings
 Color=0997
-ITEMnewbie=i_cape			
+ITEMnewbie=i_cape
 Color=0981
-ITEMnewbie=i_kilt			
+ITEMnewbie=i_kilt
 Color=0981
-ITEMnewbie=i_sash			
+ITEMnewbie=i_sash
 Color=0981
-ITEMnewbie=i_sandals			
+ITEMnewbie=i_sandals
 Color=0981
 ITEMNEWBIE=i_crossbow_heavy
 Color=0981
 ITEMNEWBIE=i_bolt_jagged,500
 
 
-ON=@NPCRestock 
+ON=@NPCRestock
 ITEM=i_gold
 
 
@@ -945,129 +945,129 @@ ON=@NPCRestock
 ITEM=i_gold
 ITEM=i_mi_bag
 
-[CHARDEF c_eu_edgard]				
-ID=c_man			
-NAME=Lord Edgard			
-ICON=i_pet_MAN			
-				
-CAN=MT_WALK|MT_RUN|MT_USEHANDS			
+[CHARDEF c_eu_edgard]
+ID=c_man
+NAME=Lord Edgard
+ICON=i_pet_MAN
 
-attack=195				
-ARMOR=150			
-MOVERATE=4			
-				
-BLOODCOLOR=020			
-				
-TEVENTS=e_monster			
-TEVENTS=e_character			
-TEVENTS=e_npc_stun			
+CAN=MT_WALK|MT_RUN|MT_USEHANDS
+
+attack=195
+ARMOR=150
+MOVERATE=4
+
+BLOODCOLOR=020
+
+TEVENTS=e_monster
+TEVENTS=e_character
+TEVENTS=e_npc_stun
 TEVENTS=e_summoneater
-TEVENTS=e_npc_critic				
+TEVENTS=e_npc_critic
 TEVENTS=e_npc_curse
 TEVENTS=e_npc_summoning
 
-CATEGORY=Monsters			
-				
-ON=@Create			
-color=colors_skin			
-NPC=brain_monster			
-FAME=900			
-KARMA={-5000 -9000}			
-				
-STR=6000			
-DEX=600		
-INT=50			
-				
-maxhits={29500 31000}			
-maxstam={200 240}			
-maxmana=0			
-				
-tag.experience=<eval {1900.0 2000.0}>			
+CATEGORY=Monsters
+
+ON=@Create
+color=colors_skin
+NPC=brain_monster
+FAME=900
+KARMA={-5000 -9000}
+
+STR=6000
+DEX=600
+INT=50
+
+maxhits={29500 31000}
+maxstam={200 240}
+maxmana=0
+
+tag.experience=<eval {1900.0 2000.0}>
 
 tag.npc_curse_chance=250                // 25% chance to trigger this event
 tag.npc_curse_delay=10,12               // delay between another possible strike
-tag.npc_curse_dmg=60 
-				
-tag.npc_stun_time=20 			
-Tag.npc_stun_chance=250 			
+tag.npc_curse_dmg=60
 
-tag.npc_critic_chance=250       
+tag.npc_stun_time=20
+Tag.npc_stun_chance=250
+
+tag.npc_critic_chance=250
 tag.npc_critic_dmg=35
 
-tag(npc_summoning_chance,100)               
-tag(npc_summoning_time,120)                
+tag(npc_summoning_chance,100)
+tag(npc_summoning_time,120)
 tag(npc_summoning_count,3)                 //pocet
 tag(npc_summoning_char[0],c_eu_valecnik)
 tag(npc_summoning_char[1],c_eu_valecnik)
 tag(npc_summoning_char[2],c_eu_valecnik_elitni)
-				
-//mystik			
-tag(hypnotizable,0)					
-tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str			
-tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>			
-				
-//other resists			
-tag(resist_poison,1000) //			
-tag(resist_para,1000)			
-tag(resist_summon,1000) //			
-tag(resist_bleed,1000) //
-tag(resist_curse,1000)			
-				
-//weap resists			
-tag(resist_sharp,700)			
-tag(resist_slash,700)			
-tag(resist_pierce,300)			
-tag(resist_blunt,300) 			
-				
-//magic resists			
-tag(resist_fire,300)			
-tag(resist_elect,300) 			
-tag(resist_cold,550) 			
-				
-//typ monstra			
-tag(monstertype,humanoid,65)			
-				
-//weap flags			
-tag.weapflag=dam_blunt|dam_physical			
 
-TACTICS=110.0			
-WRESTLING=120.0			
-RESIST=180.0			
+//mystik
+tag(hypnotizable,0)
+tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
+tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
+
+//other resists
+tag(resist_poison,1000) //
+tag(resist_para,1000)
+tag(resist_summon,1000) //
+tag(resist_bleed,1000) //
+tag(resist_curse,1000)
+
+//weap resists
+tag(resist_sharp,700)
+tag(resist_slash,700)
+tag(resist_pierce,300)
+tag(resist_blunt,300)
+
+//magic resists
+tag(resist_fire,300)
+tag(resist_elect,300)
+tag(resist_cold,550)
+
+//typ monstra
+tag(monstertype,humanoid,65)
+
+//weap flags
+tag.weapflag=dam_blunt|dam_physical
+
+TACTICS=110.0
+WRESTLING=120.0
+RESIST=180.0
 SpiritSpeak=35.0
 MACEFIGHTING=100.0
-FENCING=120.0 
-SWORDSMANSHIP=120.0				
+FENCING=120.0
+SWORDSMANSHIP=120.0
 PARRYING={90.0 100.0}
 
 ITEMNEWBIE=i_hair_long
-Color=0986	
-ITEMnewbie=i_sword_viking			
+Color=0986
+ITEMnewbie=i_sword_viking
 Color=0981
-ITEMnewbie=i_shield_order			
-Color=0981		
-ITEMnewbie=i_platemail_chest			
-Color=0997				
-ITEMnewbie=i_platemail_leggings			
-Color=0981		
-ITEMnewbie=i_platemail_gloves			
-Color=0997			
-ITEMnewbie=i_platemail_gorget			
-Color=0981			
-ITEMnewbie=i_platemail_arms			
+ITEMnewbie=i_shield_order
 Color=0981
-ITEMnewbie=i_helm_closed			
-Color=0997			
-ITEMnewbie=i_deathshroud_npc			
+ITEMnewbie=i_platemail_chest
+Color=0997
+ITEMnewbie=i_platemail_leggings
+Color=0981
+ITEMnewbie=i_platemail_gloves
+Color=0997
+ITEMnewbie=i_platemail_gorget
+Color=0981
+ITEMnewbie=i_platemail_arms
+Color=0981
+ITEMnewbie=i_helm_closed
+Color=0997
+ITEMnewbie=i_deathshroud_npc
 Color=0980
-ITEMnewbie=i_sandals			
+ITEMnewbie=i_sandals
 Color=0980
-ITEMnewbie=i_cape			
-Color=0980		
+ITEMnewbie=i_cape
+Color=0980
 
-ITEMnewbie=i_monster_create			
-								
-ON=@NPCRestock			
-		
+ITEMnewbie=i_monster_create
+
+ON=@NPCRestock
+
 item=i_gold
 ITEM=i_mi_pouch_high
 ITEM=i_mi_pouch_superhigh
