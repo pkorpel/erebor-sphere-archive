@@ -1,5 +1,21 @@
 /////  E L I T E   N P C  /////
 
+// Function called when the Elite is spawned (see spawns.scp)
+// arg 0: spawn UID
+[function f_spawnEliteForm]
+if (flag_spawned)
+  // NPC nema zakazany elite mode na spawnu (tag(denyElite,1)) && minimalni expy pro monstrum, ktere se muze stat elitnim je 100. 
+  if (!0<argv(0).tag(denyElite)> && <eval tag(experience)> >= 1000) 
+    arg(chanceToElite,<eval ((<tag(experience)>*20)/100)>) // sance na to, aby monstrum se stalo elitnim
+    if (<arg(chanceToElite)> > 500)
+      arg(chanceToElite,500) // min 2% a max 5% sance na elitku
+    endif
+    if (<arg(chanceToElite)> >=  {1 10000})
+      f_TransformToElite
+    endif
+  endif
+endif
+
 [function f_TransformToElite]
 if (<eval tag(npc_elite)>)    // toto npc je jiz elitnim
   return
@@ -52,6 +68,9 @@ endif
 if !(isevent(e_npc_summonKiller))
   events +e_npc_summonKiller
 endif
+
+name=Elite <name>
+tag(myNameVarColor,07a)
 
 sound=254
 NewItemSafe=i_fx_sparkle

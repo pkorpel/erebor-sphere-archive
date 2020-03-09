@@ -4124,7 +4124,6 @@ elseif (isGM)
 elseif (isnazgul)
   return 03c2
 elseif (isinmyguild)
-  //srcchangehighlight(2)
   return 044 //03c
 elseif (ispet)
   if (isPetFriend) || (isMyMaster)
