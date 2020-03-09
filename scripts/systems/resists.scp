@@ -453,7 +453,11 @@ else
   arg(damFactor,1000) // 100.0% dmg
 endif
 
-arg(damFactor,<f_hndlRsst_applyGroupResist(<eval resist_summon*is_summon>,<arg(damFactor)>)>) // reduce damage via summon resist
+if (<eval tag(npc_elite)>)             // prozatimni reseni
+  arg(damFactor,<f_hndlRsst_applyGroupResist(<eval resist_summon*<src.issummon>>,<arg(damFactor)>)>) // reduce phys+magic damage
+else
+  arg(damFactor,<f_hndlRsst_applyGroupResist(<eval resist_summon*is_summon>,<arg(damFactor)>)>) // reduce only phys damage via summon resist
+endif
 //say <arg(magFactor)>::<arg(physFactor)>-><arg(damFactor)>
 if (arg(damFactor) == 0) // no further damage will be generated
   var(absoluteResist,1)

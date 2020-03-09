@@ -53,7 +53,10 @@ f_checkStatPoints
 
 arg(expBonus,<eval (300+((<tag(npc_elite)>-500)/2))>)                // dynamicky rostouci bonus k expum podle obtiznosti elitky (300-500%)
 tag(experience,<eval (<tag(experience)>*<arg(expBonus)>)/100>)      // exp bonus pro elitky + ovlivni jeji drop gp/itemu/map/atd
-giveitem(i_mi_pouch)                            // jista odmena maly zeleny vacek
+arg(itemChance,<eval <tag(npc_elite)>-400>)
+if (<arg(itemChance)> > {1 1000})
+  giveitem(i_mi_pouch)                                       // maly zeleny vacek
+endif
 giveitem(RANDOM_REAGENT_High,<eval (<tag(npc_elite)>/10)>)   // jista odmena cene regy ginserg/garlic 50-90ks
 giveitem(RANDOM_REAGENT_High,<eval (<tag(npc_elite)>/10)>)   // jista odmena cene regy ginserg/garlic 50-90ks
 giveitem(RANDOM_REAGENT_ALL,<eval (<tag(npc_elite)>/20)>)    // jista odmena jakekoli regy 25-45ks
