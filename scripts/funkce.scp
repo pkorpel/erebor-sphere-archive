@@ -895,7 +895,7 @@ if !(strlen(<src.region.tag(noshrink)>))
       src.act.hits=<tag(myhits)>
     endif
     src.act.findlayer(layer_pack).remove
-    if(<src.act.id> == c_m_phoenix_poison) || (<src.act.id> == c_m_phoenix)// OPRAVA FENY
+    if (<src.act.id> == c_m_phoenix_poison) || (<src.act.id> == c_m_phoenix)// OPRAVA FENY
       src.act.events=-e_npc_leaper
     endif
     if (strlen(<tag(origTaming)>))
@@ -3430,7 +3430,7 @@ NAME=mazatko
 TYPE=T_EQ_SCRIPT
 
 ON=@Create
-if(<timer> > 150)
+if (<timer> > 150)
   timer = 150
 endif
 
@@ -5856,7 +5856,7 @@ on=@create
 attr=attr_invis
 
 on=@timer
-if ( (<link.amount>><link.more2>)&&(link.type==t_spawn_char) )
+if ( (<link.amount> > <link.more2>) && (link.type == t_spawn_char) )
   more1=<eval <more1>+1>
   link.timer=0
   timer 1
@@ -7500,16 +7500,16 @@ endif
 //vymena poradia e_hitsleech a e_war/e_thief (ak su nespravne -> e_hitsleech je skor) - uz NEPLATI (23.2.2013)
 //ak ma nejaky z leech eventov tak ich hodi na koniec (pouziju sa ako posledne) - PLATI
 [function f_fix_events]
-if(((profession==class_war)||(profession==class_thief)||profession==class_ranger)&&(isevent(e_hitsleech)||isevent(e_stamleech)||isevent(e_manaleech)))
-  if(<isevent(e_hitsleech)>)
+if (((profession==class_war)||(profession==class_thief)||profession==class_ranger)&&(isevent(e_hitsleech)||isevent(e_stamleech)||isevent(e_manaleech)))
+  if (<isevent(e_hitsleech)>)
     events -e_hitsleech
     events +e_hitsleech
   endif
-  if(<isevent(e_stamleech)>)
+  if (<isevent(e_stamleech)>)
     events -e_stamleech
     events +e_stamleech
   endif
-  if(<isevent(e_stamleech)>)
+  if (<isevent(e_stamleech)>)
     events -e_manaleech
     events +e_manaleech
   endif

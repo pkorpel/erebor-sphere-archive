@@ -69,9 +69,6 @@ if !(isevent(e_npc_summonKiller))
   events +e_npc_summonKiller
 endif
 
-name=Elite <name>
-tag(myNameVarColor,07a)
-
 sound=254
 NewItemSafe=i_fx_sparkle
 lastnew.COLOR=0995

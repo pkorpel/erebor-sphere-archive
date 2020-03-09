@@ -2343,6 +2343,8 @@ if (isnazgul)
 endif
 if (tag(hypno_mystik))
   messagecol(<getnamehue>,"<name>") //bez guildy, takovej Kostlivec[Vyvoleny] je docela dobrej
+elseif (<eval tag(npc_elite)>)
+  messagecol(07a,"<name> [Elite]")
 elseif (tag(myNameVarColor))
   messagecol(<tag(myNameVarColor)>,"<name>")
 else
