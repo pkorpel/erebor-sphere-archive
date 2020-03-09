@@ -163,7 +163,7 @@ ON=@UserDeath
 
 [ITEMDEF i_q035_herman_collector_08]
 ID=i_crate_small
-NAME=Bedna na hlavy vyspelych brouku.
+NAME=Bedna na hlavy brouku zabijaku.
 TYPE=t_collector
 WEIGHT=1
 
