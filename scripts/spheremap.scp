@@ -2928,6 +2928,57 @@ events=e_Cardolanske_pohrebiste
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Edgarovo Utociste Level 1]
+GROUP=Dungeon Edgarovo Utociste
+P=5847,2468,0,10
+RECT=5733,2363,5875,2465
+RECT=5832,2453,5858,2474
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Edgarovo Utociste Level 2]
+GROUP=Dungeon Edgarovo Utociste
+P=5097,3721,0,10
+RECT=5057,3687,5108,3734
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Edgarovo Utociste Level 3]
+GROUP=Dungeon Edgarovo Utociste
+P=5024,3718,0,10
+RECT=4989,3686,5039,3731
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Edgarovo Utociste Level 4]
+GROUP=Dungeon Edgarovo Utociste
+P=5097,3652,0,10
+RECT=5007,3626,5104,3673
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Edgarovo Utociste skryty poklad]
+GROUP=Dungeon Edgarovo Utociste
+P=5016,3755,0,10
+RECT=5012,3750,5021,3760
+mapplane=10
+FLAGS=00812
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
 [AREA Turnajova Arena]
 GROUP=Arena
 P=5706,294,30
