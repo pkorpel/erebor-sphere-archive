@@ -38,7 +38,7 @@ if (<eval tag(multishot_time)> < <serv.time>)
       tag(multishot_time,<serv.time>+30)
     endif
     var(multishotingmonster,<UID>)
-    newitem(i_src_changer_multishot)
+    newitemsafe(i_src_changer_multishot)
     lastnew.p=<p>
     lastnew.link=(<UID>)
   endif
