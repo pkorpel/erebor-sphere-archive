@@ -168,6 +168,7 @@ DESCRIPTION=EXIT PVP Arena
 
 ON=@STEP
 src.arenaleave
+return 1
 
 
 [ITEMDEF I_gate_arena_oprava]
