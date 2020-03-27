@@ -227,12 +227,6 @@ else //utok na playera
     act.damagecust_MvP(<arg(celk_dam)>,<hval tag(weapflag)<tag(mi_weapflags)>>,<eval tag(piercing)+typedef.tag(piercing)>)
   endif
 endif
-if (arg(origact)!=act)
-  try s("<serverTime> combatmainnpc - act changed! src:<src.id>,<src.uid>; newact: <act.id>,<act.uid>; origact:<arg(origact).id>,<arg(origact).uid>")
-endif
-if (!charExists(<act>))
-  try s("<serverTime> combatmainnpc - act doesnt exist! src:<src.id>,<src.uid>; act: <act.id>,<act.uid>")
-endif
 if (wasHarmed || (issummon && arg(isnpc)))
   if (poisoning)
     f_poisoning_Trigger(<act>)
@@ -778,7 +772,6 @@ if !(act)
   return
 elseif (!act.isChar)
   action=""
-  try s("<serverTime> noncharact uid <uid>; id <id>; act.uid <act.uid>; act.id <act.id>")
   return
 endif
 if (isfighting_ranged)
