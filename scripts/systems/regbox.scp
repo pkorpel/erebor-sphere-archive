@@ -174,7 +174,7 @@ on=@targOn_item
 if (src.targ.topobj==src.topobj)
  	if (src.targ.type == t_reagent)
     f_pridat_regy(<src.targ.uid>)
- 	elseif (src.targ.type == t_container)&&(src.targ.layer != 21)
+ 	elseif (src.targ.type == t_container)
     src.targ.contents(f_allregs(<link>))
   endif
   src.newitem i_pridat_regy
@@ -413,7 +413,7 @@ on=@targOn_item
 if (src.targ.topobj==src.topobj)
  	if (src.targ.type == t_gem) && !(src.targ.id==i_coal)
     f_pridat_gemy(<src.targ.uid>)
-  elseif (src.targ.type == t_container)&&(src.targ.layer != 21)
+  elseif (src.targ.type == t_container)
     src.targ.contents(f_allgems(<link>))
   endif
   src.newitem i_pridat_gemy
