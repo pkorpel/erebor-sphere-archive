@@ -755,7 +755,7 @@ CAN=MT_EQUIP|MT_WALK|MT_RUN|MT_USEHANDS
 
 attack=120
 ARMOR=50
-moverate=5
+moverate=3
 
 BLOODCOLOR=020
 
@@ -783,10 +783,9 @@ maxhits={6000 6500}
 maxstam={220 240}
 maxmana=0
 
-flag_immobile(1)
 tag.experience=<eval {280.0 300.0}>
 
-tag.npc_sniper_dmg=60
+tag.npc_sniper_dmg=80
 tag.npc_sniper_chance=500
 
 //mystik
@@ -952,9 +951,9 @@ ICON=i_pet_MAN
 
 CAN=MT_WALK|MT_RUN|MT_USEHANDS
 
-attack=195
+attack=220
 ARMOR=150
-MOVERATE=4
+MOVERATE=6
 
 BLOODCOLOR=020
 
@@ -965,6 +964,7 @@ TEVENTS=e_summoneater
 TEVENTS=e_npc_critic
 TEVENTS=e_npc_curse
 TEVENTS=e_npc_summoning
+TEVENTS=e_dragon_regeneration
 
 CATEGORY=Monsters
 
@@ -976,7 +976,7 @@ KARMA={-5000 -9000}
 
 STR=6000
 DEX=600
-INT=50
+INT=20
 
 maxhits={29500 31000}
 maxstam={200 240}
@@ -985,7 +985,7 @@ maxmana=0
 tag.experience=<eval {1900.0 2000.0}>
 
 tag.npc_curse_chance=250                // 25% chance to trigger this event
-tag.npc_curse_delay=10,12               // delay between another possible strike
+tag.npc_curse_delay=5,10               // delay between another possible strike
 tag.npc_curse_dmg=60
 
 tag.npc_stun_time=20
@@ -994,8 +994,11 @@ Tag.npc_stun_chance=250
 tag.npc_critic_chance=250
 tag.npc_critic_dmg=35
 
+tag.regeneration_hp=2500
+tag.regeneration_speed=10
+
 tag(npc_summoning_chance,100)
-tag(npc_summoning_time,120)
+tag(npc_summoning_time,80)
 tag(npc_summoning_count,3)                 //pocet
 tag(npc_summoning_char[0],c_eu_valecnik)
 tag(npc_summoning_char[1],c_eu_valecnik)
@@ -1016,19 +1019,19 @@ tag(resist_curse,1000)
 //weap resists
 tag(resist_sharp,700)
 tag(resist_slash,700)
-tag(resist_pierce,300)
-tag(resist_blunt,300)
+tag(resist_pierce,200)
+tag(resist_blunt,350)
 
 //magic resists
-tag(resist_fire,300)
-tag(resist_elect,300)
-tag(resist_cold,550)
+tag(resist_fire,450)
+tag(resist_elect,450)
+tag(resist_cold,150)
 
 //typ monstra
 tag(monstertype,humanoid,65)
 
 //weap flags
-tag.weapflag=dam_blunt|dam_physical
+tag.weapflag=dam_magic|dam_cold
 
 TACTICS=110.0
 WRESTLING=120.0
