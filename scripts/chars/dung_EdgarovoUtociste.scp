@@ -63,7 +63,7 @@ tag(resist_elect,250)
 tag(resist_cold,250)
 
 //typ monstra
-tag(monstertype,humanoid,90)
+tag(monstertype,humanoid,100)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -148,8 +148,6 @@ tag.npc_critic_dmg=20,25
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
 
@@ -172,7 +170,7 @@ tag(resist_elect,300)
 tag(resist_cold,300)
 
 //typ monstra
-tag(monstertype,humanoid,90)
+tag(monstertype,humanoid,100)
 
 //weap flags
 tag.weapflag=dam_blunt|dam_physical
@@ -282,7 +280,7 @@ tag(resist_elect,350)
 tag(resist_cold,200)
 
 //typ monstra
-tag(monstertype,humanoid,90)
+tag(monstertype,humanoid,100)
 
 //weap flags
 tag.weapflag=dam_slashing|dam_physical
@@ -380,7 +378,7 @@ tag(resist_cold,250)
 tag(resist_silence,350)
 
 //typ monstra
-tag(monstertype,humanoid,90)
+tag(monstertype,humanoid,100)
 //weap flags
 tag.weapflag=dam_slashing|dam_physical|dam_cold
 
@@ -451,16 +449,14 @@ STR=1000
 DEX=200
 INT=380
 
-maxhits={5600 5800}
+maxhits={8500 9000}
 maxstam={120 140}
 maxmana=1200
 
-tag.experience=<eval {250.0 275.0}>
+tag.experience=<eval {375.0 400.0}>
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
@@ -482,7 +478,7 @@ tag(resist_cold,300)
 tag(resist_silence,450)
 
 //typ monstra
-tag(monstertype,humanoid,90)
+tag(monstertype,humanoid,100)
 //weap flags
 tag.weapflag=dam_slashing|dam_physical|dam_cold
 
@@ -590,7 +586,7 @@ tag(resist_elect,350)
 tag(resist_cold,150)
 
 //typ monstra
-tag(monstertype,humanoid,90)
+tag(monstertype,humanoid,100)
 //weap flags
 tag.weapflag=dam_piercing|dam_physical
 
@@ -700,7 +696,7 @@ tag(resist_elect,350)
 tag(resist_cold,150)
 
 //typ monstra
-tag(monstertype,humanoid,90)
+tag(monstertype,humanoid,100)
 //weap flags
 tag.weapflag=dam_piercing|dam_physical
 
@@ -790,8 +786,6 @@ tag.npc_sniper_chance=500
 
 //mystik
 tag(hypnotizable,0)
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
-tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
@@ -813,7 +807,7 @@ tag(resist_elect,400)
 tag(resist_cold,200)
 
 //typ monstra
-tag(monstertype,humanoid,90)
+tag(monstertype,humanoid,100)
 //weap flags
 tag.weapflag=dam_piercing|dam_physical
 
@@ -995,7 +989,7 @@ tag.npc_critic_chance=250
 tag.npc_critic_dmg=35
 
 tag.regeneration_hp=2500
-tag.regeneration_speed=10
+tag.regeneration_speed=15
 
 tag(npc_summoning_chance,100)
 tag(npc_summoning_time,80)
@@ -1028,7 +1022,7 @@ tag(resist_elect,450)
 tag(resist_cold,150)
 
 //typ monstra
-tag(monstertype,humanoid,65)
+tag(monstertype,humanoid,100)
 
 //weap flags
 tag.weapflag=dam_magic|dam_cold
