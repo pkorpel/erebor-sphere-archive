@@ -596,6 +596,7 @@ src.sysmessage("Truhla je hlidana!")
 
 [function f_initGuardSpawn] //argv(0) - uid pokladu
 src.f_spawninit(1,<more1>,60,60,12)
+var(spawnuid).tag(denyElite,1)
 argv(0).f_guarditAdv_addSpawn(<var(spawnuid)>) //spawn
 argv(0).type=t_treasure_guarded
 topobj.newitem(i_randompotvora)
