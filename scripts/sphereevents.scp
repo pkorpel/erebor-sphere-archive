@@ -2096,7 +2096,7 @@ if (argn==52) // gate
     arg(conquer_area,<abs(<src.region.tag(bf)>)>)
     //zkontrolovat zda tam nekdo nevyhlasil valku (pak odtud nesmi gate)
     if (!strcmpi(<var(war_declarator_1).tag(war_declared_on)>,"<realm_name>_<conquer_area>"))
-      kermel.sysMessage(checkujeme war1: day: <var(war_declarator_1).tag(war_begins_day)> hour: )
+//       kermel.sysMessage(checkujeme war1: day: <var(war_declarator_1).tag(war_begins_day)> hour: )
       if (<eval <var(war_declarator_1).tag(war_begins_day)>> <= <getDay>)  //neprisel uz den valky?
         arg(checkHour, <eval <getHour>+1>)
         arg(declHour, <eval <var(war_declarator_1).tag(war_begins_hour)>>)
@@ -2112,7 +2112,7 @@ if (argn==52) // gate
       endif
     endif
     if (!strcmpi(<var(war_declarator_2).tag(war_declared_on)>,"<realm_name>_<conquer_area>"))
-      kermel.sysMessage(checkujeme war2: day: <var(war_declarator_2).tag(war_begins_day)> hour: )
+//       kermel.sysMessage(checkujeme war2: day: <var(war_declarator_2).tag(war_begins_day)> hour: )
       if (<eval <var(war_declarator_1).tag(war_begins_day)>> == <getDay>)  //neprisel uz den valky?
         arg(checkHour, <eval <getHour>+1>)
         arg(declHour, <eval <var(war_declarator_2).tag(war_begins_hour)>>)
@@ -2120,7 +2120,7 @@ if (argn==52) // gate
         if (<checkHour> == 24)
           arg(checkHour,0)
         endif
-        kermel.sysMessage(chh: <checkHour> dh: <declHour>)
+//         kermel.sysMessage(chh: <checkHour> dh: <declHour>)
         if ((<declHour> <= <checkHour>) || ((<declHour> == 0) && (<checkHour> == 23)) || ((<declHour> == 23) && (<checkHour> >= 0))) //hodinu pred valkou uz neportovat
           redmessage("Z uzemi, kteremu Mordor vyhlasil valku, nelze otvirat cestovni brany.")
           src.action= -1

@@ -80,7 +80,7 @@ endif
 //hlaska zlocince
 if(!strcmpi(<name>,<argv(0).name>))&&(more1!=finduid(<argv(0)>)) //stejne jmeno ale neni to jeho klicek - je to zlodej
  //finduid(<argv(0)>).gmpage(Autopage: Snazil jsem se bugem dostat do domu c.p. <cont.link.tag(housenumber)> jako <name>)
-kermel.sysmessage(cont: <cont> - <cont.name> dum: <cont.link> cislo: <cont.link.tag(housenumber)>)
+// kermel.sysmessage(cont: <cont> - <cont.name> dum: <cont.link> cislo: <cont.link.tag(housenumber)>)
  kermel.delayedmessage("Cas: <servertime> Autopage: Ja <argv(0)> - <argv(0).name>(<argv(0).account.name>) jsem se snazil bugem dostat do domu c.p. <cont.link.tag(housenumber)> jako <name>(<more1.account.name>)-<more1>")
 endif 
 
@@ -121,9 +121,9 @@ src.f_eqhmkeylayer
 
 if(!src.haskeyfrom(<link>))
  var(is_key_from,"")
- kermel.sysmessage(<src.name> nema klic)
+//  kermel.sysmessage(<src.name> nema klic)
  if(<link.more1>==<src>)
-  kermel.sysmessage(<src.name> je majitel, zakladam klic)
+//   kermel.sysmessage(<src.name> je majitel, zakladam klic)
   src.newitemsafe(i_key_gold)
   arg(klicek,<lastnew>)
   klicek.cont=<src.findlayer(101)>
@@ -138,7 +138,7 @@ if(!src.haskeyfrom(<link>))
   var(nalezen_krystal,0)
   link.isoccupant(<src>)   
   if(<var(whos_he)> > 0) //pritel = 1 , spoluvlastnik = 2
-   kermel.sysmessage(<src.name> je najemnik, zakladam klic)
+//    kermel.sysmessage(<src.name> je najemnik, zakladam klic)
    src.newitemsafe(i_key_gold)
    arg(klicek,<lastnew>)
    klicek.cont=<src.findlayer(101)>
@@ -907,9 +907,9 @@ if (finduid(tag.hm_lockedto))
   //opravime pokud mu chybi klicek
   if(!src.haskeyfrom(<finduid(<tag.hm_lockedto>)>))
    var(is_key_from,"")
-   kermel.sysmessage(<src.name> nema klic)
+//    kermel.sysmessage(<src.name> nema klic)
    if(<finduid(<tag.hm_lockedto>).more1>==<src>)
-    kermel.sysmessage(<src.name> je majitel, zakladam klic)
+//     kermel.sysmessage(<src.name> je majitel, zakladam klic)
     src.newitemsafe(i_key_gold)
     arg(klicek,<lastnew>)
     klicek.cont=<src.findlayer(101)>
@@ -924,7 +924,7 @@ if (finduid(tag.hm_lockedto))
     var(nalezen_krystal,0)
     finduid(<tag.hm_lockedto>).isoccupant(<src>)   
     if(<var(whos_he)> > 0) //pritel = 1 , spoluvlastnik = 2
-     kermel.sysmessage(<src.name> je najemnik, zakladam klic)
+//      kermel.sysmessage(<src.name> je najemnik, zakladam klic)
      src.newitemsafe(i_key_gold)
      arg(klicek,<lastnew>)
      klicek.cont=<src.findlayer(101)>

@@ -212,11 +212,9 @@ type=t_eq_script
 name=Manashield manasuck
 
 on=@create
-kermel.sysmessage(creating: <baseid>. dam mu timer <nastaveni_ms_manasuck_time>)
 timer=<nastaveni_ms_manasuck_time>
 
 on=@timer
-kermel.sysmessage(ubiram <nastaveni_ms_manasuck_amount>)
 if(<cont.mana> >= 0)
   cont.mana=<eval (<cont.mana>-<nastaveni_ms_manasuck_amount>)>
 else

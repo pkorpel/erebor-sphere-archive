@@ -1,9 +1,3 @@
-[function najdi_gatu]
-if(strcmpi(<baseid>,i_level_gate))
-else
- kermel.sysmessage(Gate: <uid>)
-endif
-
 [FUNCTION invistim]
 // The first whole script by GM Tim, its his own work and he is very proud:)
 // He worked on for about 2 hours, he guess a little more effects 

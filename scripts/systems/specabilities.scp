@@ -2861,7 +2861,6 @@ maxmana=<int>
  tag.remove(maxstam_m)
  tag.remove(maxmana_m)
 
-accmsg("HYPNOZA ZPET")
 accmsg("Hypnoza navrat <uid>-<name>: Osetreni navratu itemu a skillu")
 non_strelec //pokud npc strilelo /hazelo
 null_skills //monstri skilly nechceme
@@ -2872,19 +2871,14 @@ tag(hypnotizers_ball).attr=00
 flag_war=0 //nebojujmez!
 
 //zmizet panaka a jeho alarmy
-accmsg("HYPNOZA ZPET")
 accmsg("Hypnoza navrat <uid>-<name>: Likvidace mystikova alterega")
 alarmPads_delete
 findUID(<tag(moje_alter_ego)>).remove
 arg(lastchar,<lastnewchar>) //mohl by to byt bugly kun od alter ega... (stavalo se)
 if (strlen(<arg(lastchar)>))
-   kermel.sysMessage("posledni char : <lastchar>-<lastchar.name> je v <lastchar.p>")
    if (lastchar.sector == sector) //je ve stejnem sektoru
-     kermel.sysMessage("dobrej sektor")
      if (lastchar.id==c_man) //je to man
-       kermel.sysMessage("dobry ID")
        if (!strcmpi(<lastchar.name>,ship)) //a navic blbe pojmenovanej => bugly jezditko navic
-         kermel.sysMessage("removing <lastchar>")
          lastchar.remove // a hotovka :))
       endif
     endif

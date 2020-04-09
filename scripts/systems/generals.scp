@@ -19,13 +19,11 @@ endif
 
 [function makeme_encouraged]
 if(isplayer)
- kermel.sysmessage(Honor pro <name>)
  if(findid(i_honorcounter))||(tag(realm)==2)||(!isonline)
   return 0
  endif
  //src.sysmessage(jedem: <uid.name>, src: <src.name>)
  if(distancefrom(var(whos_honouring)) < nastaveni_generals_honor_distance)
-  kermel.sysmessage(Hrac <name> dostava honor)
   //src.sysmessage(dist: <distancefrom(<src>)>, nast: <nastaveni_<qval(<src.prsten.tag(leading)>,lord,)>nazguls_fear_distance>)
   newitemsafe(i_honorcounter)
   lastnew.more1=5 //o kolik srazit staty
@@ -961,7 +959,6 @@ if (tag(crystal).tag(guardspawn))
   endif
 endif
 if (arg(vytvorit))
-  kermel.smsg(Vytvarim guardspawn)
   src.NEWITEMsafe(01ea7)
   arg(newguardspawn,<lastnew>)
   newguardspawn.P=<src.targP>
@@ -979,14 +976,12 @@ endif
 
 //je-li to pevnost, zkontroluj jestli to muze tam umistit
 if((link.baseid == i_captainstone)||(link.baseid == i_mordorcaptainstone))
- kermel.smsg(umistuji k pevnosti)
  src.newitemsafe(i_pouch)
  lastnew.p = <src.targp>
  arg(ctrlpouch,<lastnew>)
  if(ctrlpouch.distancefrom(<link>) > <nastaveni_pevnosti_vzdal_guard_pevnost>)
   src.redmessage("Pevnostniho strazce nelze umistit tak daleko od pevnosti")
   if(arg(vytvorit))
-   kermel.smsg(odstranuji newguardspawn)
    newguardspawn.remove
    finduid(<tag(crystal)>).tag(guardspawn,"")
   else
@@ -1011,7 +1006,6 @@ endif
 if((link.baseid == i_captainstone)||(link.baseid == i_mordorcaptainstone))
  arg(spawn_jmeno_mesta,<finduid(<tag(crystal)>).tag(guardspawn).getNearestKeepName(<src.region.tag(realm)>)>)
 endif
-  kermel.smsg(porovnavam mesta - pevnost: <jmeno_mesta> spawns - <spawn_jmeno_mesta>)
 if (<strcmpi(<jmeno_mesta>,<spawn_jmeno_mesta>)>!=0)
   src.redmessage("Tam nemuzes strazce umistit")
   //if (<finduid(<tag(crystal)>).tag(guardspawn).more2>)

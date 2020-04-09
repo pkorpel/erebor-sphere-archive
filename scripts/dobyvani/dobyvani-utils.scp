@@ -72,10 +72,11 @@ arg(srcRealm,<getRealmName(<argv(0)>)>)
 while (<fn> <= <keeps_world_count>)
   arg(keepname,<keep_name_<srcRealm>_<fn>>)
   if (<eval found_nearest_keep> == 0)
-    kermel.smsg(prvni pevnost: <var(keep_<keepname>)>)
+//     kermel.smsg(prvni pevnost: <var(keep_<keepname>)>)
     var(found_nearest_keep,<finduid(<var(keep_<keepname>)>)>)
   else
-    kermel.smsg(druha pevnost: <var(keep_<keepname>)> vzdalenost2: <mybag.distancefrom(<var(keep_<keepname>)>)> vzdalenost1: <mybag.distancefrom(<found_nearest_keep>)>)
+
+//     kermel.smsg(druha pevnost: <var(keep_<keepname>)> vzdalenost2: <mybag.distancefrom(<var(keep_<keepname>)>)> vzdalenost1: <mybag.distancefrom(<found_nearest_keep>)>)
     if (mybag.distancefrom(<var(keep_<keepname>)>) <= mybag.distancefrom(<found_nearest_keep>) ) 
       var(found_nearest_keep,<var(keep_<keepname>)>)
     endif
