@@ -27,29 +27,34 @@ if (src.tag(level)<4)
   src.sysmessage("Jsi prilis <src.sex("nezkuseny","nezkusena")> na lov monster. Musis jeste chvili trenovat.")
   return 1
 endif
-if (src.findid(i_qf_sign))
-  if (src.findid(i_qf_sign).tag(realmQ)==1) && (tag(realmQ)==2)
+arg(srcSign,<src.findid(i_qf_sign)>)
+if (<arg(srcSign)>)
+  if (arg(srcSign).tag(realmQ)==1) && (tag(realmQ)==2)
     src.sysmessage("Co chce lovit vladce Mordoru je pro tebe nicotne.")
     return 1
   endif
-  if (src.findid(i_qf_sign).tag(realmQ)==2) && (tag(realmQ)==1)
+  if (arg(srcSign).tag(realmQ)==2) && (tag(realmQ)==1)
     src.sysmessage("Co chce lovit vladce Gondoru je pro tebe nicotne.")
     return 1
   endif
-  if (src.findid(i_qf_sign).tag(qday)!=<getDay>)
+  if (arg(srcSign).tag(qday)!=<getDay>)
     src.sysmessage("Tenhle lov uz skoncil.") 
-    src.findid(i_qf_sign).remove
+    if (<eval arg(srcSign).tag(qfcount)> >= 3)
+      f_sign_gquest_odmen_lovce(<arg(srcSign)>)
+    endif
+    arg(srcSign).remove
     return 1
   endif
 endif
-if (!(tag(qday))) || (<tag(qday)>!=<getDay>)///tady vygenerujeme quest
+
+if (<tag(qday)>!=<getDay>)  ///tady vygenerujeme quest
   tag(qday,<getDay>)
   tag(hunted,"")
   tag(hunteda,"")
   tag(huntedb,"")
   signnewquest
   <tag(hlaska)>
-elseif !(src.findid(i_qf_sign)) //tady dame quest po vygenerovani hraci
+elseif !(<arg(srcSign)>) //tady dame quest po vygenerovani hraci
   <tag(hlaska)>
   src.newequip(i_qf_sign)
   lastnew.tag(realmQ,<tag(realmQ)>)
@@ -64,37 +69,40 @@ elseif !(src.findid(i_qf_sign)) //tady dame quest po vygenerovani hraci
   if tag(huntedb) //alternativni loveny potvory
     lastnew.tag(huntedb,<tag(huntedb)>)
   endif
-elseif (<eval src.findid(i_qf_sign).tag(qfcount)> >= 3) // tady odmenime uspesne lovce
-  src.sysmessage("Odmena ti byla poslana do banky.")
-  say("<src.name> <src.sex("ulovil","ulovila")> jsi <eval src.findid(i_qf_sign).tag(qfcount)> monster. Dostanes odmenu.")
-  arg(exp_to_give,<eval (((<src.findid(i_qf_sign).tag(huntedexperience)>)*(<src.findid(i_qf_sign).tag(qfcount)>))/2)>)
-  arg(gp_to_give,<eval (((<src.findid(i_qf_sign).tag(huntedgold)>)*(<src.findid(i_qf_sign).tag(qfcount)>))*2)>)
-  if safe.finduid(#0400075A4)
-    finduid(#0400075A4).tag(givenexps,#+<arg(exp_to_give)>)
-    finduid(#0400075A4).tag(givengold,#+<arg(gp_to_give)>)
-  endif
-  tag(givengold,#+<arg(gp_to_give)>)
-  tag(givenexps,#+<arg(exp_to_give)>)
-  if !(src.tag(loveckasoutez))
-    src.tag(loveckasoutez,<arg(exp_to_give)>)
-  else
-    src.tag(loveckasoutez,#+<arg(exp_to_give)>)
-  endif
-  src.addexp(<arg(exp_to_give)>)
-  if <src.isevent.e_weekly_quest>  // Lovec plni weekly quest
-    src.f_weekly_quest_HuntingSign(<arg(exp_to_give)>)
-  endif
-  src.newitem=i_cashiers_mesec
-  lastnew.more=<arg(gp_to_give)>
-  lastnew.cont=src.findlayer(layer_bankbox)
-  src.findid(i_qf_sign).tag(qfcount,0)
-elseif (src.findid(i_qf_sign).tag(hunted)!=tag(hunted)) //klikne na jinou vyvesku
-  src.findid(i_qf_sign).remove
+elseif (<eval arg(srcSign).tag(qfcount)> >= 3) // tady odmenime uspesne lovce   
+  f_sign_gquest_odmen_lovce(<arg(srcSign)>)
+elseif (arg(srcSign).tag(hunted)!=tag(hunted)) //klikne na jinou vyvesku
+  arg(srcSign).remove
 else
   <tag(hlaska)>
-  say("<src.name> <src.sex("ulovil","ulovila")> jsi <eval src.findid(i_qf_sign).tag(qfcount)> monster, minimum jsou 3.")
+  say("<src.name> <src.sex("ulovil","ulovila")> jsi <eval arg(srcSign).tag(qfcount)> monster, minimum jsou 3.")
 endif
 return 1
+
+[function f_sign_gquest_odmen_lovce]      // argv(0) - UID jeho memory itemu
+say("<src.name> <src.sex("ulovil","ulovila")> jsi <eval argv(0).tag(qfcount)> monster. Dostanes odmenu.")
+src.classmessage("Odmena ti byla poslana do banky.")
+arg(exp_to_give,<eval (((<argv(0).tag(huntedexperience)>)*(<argv(0).tag(qfcount)>))/2)>)
+arg(gp_to_give,<eval (((<argv(0).tag(huntedgold)>)*(<argv(0).tag(qfcount)>))*2)>)
+if safe.finduid(#0400075A4)
+  finduid(#0400075A4).tag(givenexps,#+<arg(exp_to_give)>)
+  finduid(#0400075A4).tag(givengold,#+<arg(gp_to_give)>)
+endif
+tag(givengold,#+<arg(gp_to_give)>)
+tag(givenexps,#+<arg(exp_to_give)>)
+if !(src.tag(loveckasoutez))
+  src.tag(loveckasoutez,<arg(exp_to_give)>)
+else
+  src.tag(loveckasoutez,#+<arg(exp_to_give)>)
+endif
+src.addexp(<arg(exp_to_give)>)
+if <src.isevent.e_weekly_quest>  // Lovec plni weekly quest
+  src.f_weekly_quest_HuntingSign(<arg(exp_to_give)>)
+endif
+src.newitem=i_cashiers_mesec
+lastnew.more=<arg(gp_to_give)>
+lastnew.cont=src.findlayer(layer_bankbox)
+argv(0).tag(qfcount,0)
 
 [function f_sign_gquest_vysledky_seradit]
 arg(i,1)
@@ -229,7 +237,7 @@ type=t_eq_script
 name=Quest!Nemazat!
 
 on=@create
-timer=86400
+timer=172800  // 2 dny na pripadne odevzdani nasledujici den
 
 on=@timer
 remove
@@ -239,6 +247,14 @@ if !(findID(i_qf_sign)) // hrac nema aktivovany quest lovecka vyveska - early ex
   return
 endif
 arg(sign,<findID(i_qf_sign)>)
+if (<eval arg(sign).tag(finished)>)
+  return
+endif
+if (arg(Sign).tag(qday)!=<getDay>)
+  redmessage("Tvuj lov uz skoncil. Nezapomen si vyzvednout odmenu.")
+  arg(sign).tag(finished,1)
+  return
+endif    
 if !(src.isResurrectedNPC) // resurrected NPC won't count
   if (<src.obody>==<sign.tag(hunted)>)//jen quest
     sign.tag(qfcount,#+1)

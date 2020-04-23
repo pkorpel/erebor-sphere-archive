@@ -1668,6 +1668,13 @@ if (safe i_crystal_<tag.class>)
   endif
 endif
 
+arg(QuestSign,<src.findid(i_qf_sign)>)
+if (<arg(QuestSign)>)
+  if (<eval arg(QuestSign).tag(qfcount)> >= 3) 
+    classmessage("Mas ulovenych <eval arg(QuestSign).tag(qfcount)> monster, nezapomen si vybrat tvou odmenu.")
+    classmessage("Do odevzdani ti zbyva <dsToRTime(<arg(QuestSign).timerd>,1)>")
+  endif
+endif
 //pri logine spocita armorCount - armor na kudly // mozno sa neskor vyuzije aj na nieco ine
 src.armorCountLogIn
 

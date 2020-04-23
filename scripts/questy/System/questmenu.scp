@@ -25,7 +25,7 @@ questMenu_color_questActiveFont      #00F0FA
 questMenu_color_questInactiveFont    #383838
 questMenu_color_questDoneFont        #00FA55
 questMenu_color_questInactive        51
-questMenu_rows  56
+questMenu_rows  57
 //          |     Nazev questu     |           dialogName           |  1=qtag, 0=tag  |  relevantni tagy
 questMenu[0]  Zemedelec Borek           ,d_questy_borek                     ,1         ,gq002, mq002
 questMenu[1]  Alchymistka Mikkena       ,d_questy_mikena                    ,0         ,gq001
@@ -83,6 +83,7 @@ questMenu[52] Halda Molle Hatlend       ,d_hm_hatlend                       ,1  
 questMenu[53] Murdocovi Ucni            ,d_murdoc_ucni                      ,1         ,q043_tut,mq043,gq043
 questMenu[54] Zachrante Murdoca         ,d_murdoc_zachrana                  ,1         ,q044
 questMenu[55] Labyrint Zlateho Goblina  ,d_zlaty_goblin                     ,1         ,Goblin_Labyrint
+questMenu[56] Lovecka Vyveska           ,d_lovecka_vyveska                  ,0         ,loveckasoutez
 
 questMenu_bg               9270
 questMenu_width            300
@@ -2967,14 +2968,31 @@ argo.setText(0,"Labyrint Zlateho Goblina")
 argo.f_qDialogInstructions(03047)
 
 arg(walkthroughCount,<eval src.qtag(Goblin_Labyrint)>)
-if (walkthroughCount >= 5)
+if (walkthroughCount > 5)
   arg(motivationText,"Projdi labyrint vicekrat a ziskej lepsi odmenu!")
-  arg(itemChanceText,"Sance na item: <CalcDecimalNumber(<f_goblin_labyrint_item_chance(0)>,10,1)>%")
+  arg(itemChanceText,"Sance na vacek s magickym predmetem: <CalcDecimalNumber(<f_goblin_labyrint_item_chance(0)>,10,1)>%")
 else
-  arg(motivationText,"Projdi labyrint jeste <eval(6-walkThroughCount)>x a dostan sanci ziskat item!")
+  arg(motivationText,"Projdi labyrint jeste <eval (5-walkThroughCount)>x a dostan sanci ziskat vacek s magickym predmetem!")
   arg(itemChanceText," ")
 endif
 argo.setText(1,"<src.sex(Dokoncil,Dokoncila)> jsi labyrint zlateho goblina. <?motivationText?><br><br>Pocet pruchodu: <?walkthroughCount?><br><?itemChanceText?>")
+argo.htmlGump(160,80,238,130,1,0,36)
+
+[function f_isDone_d_lovecka_vyveska]
+return 0
+
+[dialog d_lovecka_vyveska]
+argo.setText(0,"Lovecka Vyveska")
+argo.f_qDialogInstructions(03001)
+
+arg(walkthroughCount,<eval src.tag(loveckasoutez)>)
+if (<src.findid(i_qf_sign)>)
+  arg(ActualHunt,"<br><br>Aktualne mas <eval src.findid(i_qf_sign).tag(qfcount)> ulovenych monster.")
+else
+  arg(ActualHunt," ")
+endif
+argo.setText(1,"<src.sex(Zucastnil,Zucastnila)> jsi se lovu na monstra.<br><br>Celkem jsi <src.sex(ziskal,ziskala)>: <eval src.tag(loveckasoutez)> bodu.<?ActualHunt?>")
+
 argo.htmlGump(160,80,238,130,1,0,36)
 
 ////////////////////////////
