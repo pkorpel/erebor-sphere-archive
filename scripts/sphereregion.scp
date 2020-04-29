@@ -1259,6 +1259,11 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
+[RegionType r_KatakombyOkultistu]
+ON=@ENTER
+src.sysmessage("Sestoupil jsi do tmaveho podzemi. Je tady takova tma, ze by se dala krajet.")
+  
+
 [RegionType r_oblast_cerne_smrti]
 
 on=@exit

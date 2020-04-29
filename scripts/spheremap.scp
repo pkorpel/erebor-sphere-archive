@@ -3871,6 +3871,17 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Katakomby Okultistu]
+GROUP=Dungeon Katakomby Okultistu
+P=5731, 3103, -18
+RECT=5680,3050,5920,3240
+mapplane=10
+FLAGS=00812
+tag.realm=3
+EVENTS=r_KatakombyOkultistu
+RAINCHANCE=00
+COLDCHANCE=00
+
 
 [AREA Sluje vstup]
 GROUP=Dungeon Sluje
