@@ -3817,6 +3817,10 @@ findid(i_bandage_bloody).dclick
 //dialog d_regy
 dialog(d_regy2)
 
+[function NightSightRemove]
+findid(i_rune_night_sight).remove
+findid(i_a_nightsight_potion).remove
+
 [function f_personal_light_level]
 //tag(packet,"04e <split4bytes(<uid>)> <hval(<argv(0)>)>")
 sendpacket(04e <split4bytes(<uid>)> <hval <argv(0)>>)

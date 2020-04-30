@@ -497,7 +497,7 @@ karma={-2000 -2999}
 
 STR={500 700}
 dex=280
-int=280
+int=340
 
 maxhits=1800
 maxstam={100 125}
@@ -644,9 +644,9 @@ ICON=i_pet_SPIDER_GIANT
 ANIM=078c7f
 CAN=MT_WALK|MT_FIRE_IMMUNE|MT_run
 
-attack=55
-ARMOR=70
-moverate=5
+attack=70
+ARMOR=90
+moverate=7
 
 RESOURCES=5 i_reag_spider_silk
 BLOODCOLOR=colors_green
@@ -655,6 +655,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_backstub
 TEVENTS=e_spider
+TEVENTS=e_summoneater_vamp
 
 CATEGORY=Monsters
 SUBSECTION=Spiders
@@ -981,6 +982,7 @@ TEVENTS=e_character
 TEVENTS=e_npc_leaper
 TEVENTS=e_npc_detect
 TEVENTS=e_npc_critic
+TEVENTS=e_summoneater
  
 CATEGORY=Monsters
 SUBSECTION=Zla Druzina 6

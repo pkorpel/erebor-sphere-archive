@@ -5162,6 +5162,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_summoning
 TEVENTS=e_parakrik
+TEVENTS=e_summoneater
 
 CATEGORY=Monsters
 SUBSECTION=Undead
