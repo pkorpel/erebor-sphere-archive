@@ -1582,9 +1582,6 @@ if (((hits)<(maxhits/2)) && !(findid(i_osklivejsmazse)))
   lastnew.timer=2000
 endif
 
-if ((src.obody==c_serpent_malej) && !(src.isplayer))
-  src.remove
-endif
 
 on=@Created
 on=@DrinkingPotion
@@ -1595,6 +1592,7 @@ if (rand(10)==1)
   lastnewchar.fame=0
   lastnewchar.tag(experience,0)
   lastnewchar.flag_conjured=1
+  lastnewchar.addMemoryFlag(<uid>,MEMORY_IPET)
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=30
   newnpc(c_serpent_malej)
@@ -1602,6 +1600,7 @@ if (rand(10)==1)
   lastnewchar.fame=0
   lastnewchar.tag(experience,0)
   lastnewchar.flag_conjured=1
+  lastnewchar.addMemoryFlag(<uid>,MEMORY_IPET)
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=30
   newnpc(c_serpent_malej)
@@ -1609,12 +1608,26 @@ if (rand(10)==1)
   lastnewchar.fame=0
   lastnewchar.tag(experience,0)
   lastnewchar.flag_conjured=1
+  lastnewchar.addMemoryFlag(<uid>,MEMORY_IPET)
   lastnewchar.newequip(i_osklivejsmazse)
   lastnew.timer=30
 endif
 
 on=@finalBlow
 on=@beforegetswing
+if ((src.obody==c_serpent_malej) && !(src.isplayer))
+  src.removefight
+  if (<tag(combatTarget)> == <src>)
+    addMemoryFlag(<src>,MEMORY_FRIEND)
+  else
+    src.tag(combatSource,<tag(combatTarget)>)
+    src.tag(combatTarget,<tag(combatTarget)>)
+    src.attack(<tag(combatTarget)>)  // At to co mlati do me, utoci na co chci ja
+  endif
+  var(ubrano,0)
+  return
+endif
+
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
