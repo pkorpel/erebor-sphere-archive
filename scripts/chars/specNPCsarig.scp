@@ -2294,7 +2294,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
 //other resists
-tag(resist_poison,350)
+tag(resist_poison,1000)
 tag(resist_para,650)
 tag(resist_summon,900)
 tag(resist_bleed,600)
@@ -2423,7 +2423,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[6]>
 
 //other resists
-tag(resist_poison,50)
+tag(resist_poison,1000)
 tag(resist_para,750)
 tag(resist_summon,900)
 tag(resist_bleed,600)
@@ -2592,7 +2592,7 @@ BLOODCOLOR=colors_gray
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_npc_regeneration
+TEVENTS=e_dragon_regeneration
 
 CATEGORY=Dungy
 SUBSECTION=Vampire Dungeon
@@ -2619,6 +2619,9 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
+
+tag(regeneration_hp,700)
+tag(regeneration_speed,10)     
 
 tag.weapflag=dam_physical
 
@@ -2687,7 +2690,7 @@ INT=450
 maxhits=500
 maxstam=200
 
-tag.experience=<eval {200.0 210.0}>
+tag.experience=<eval {50.0 60.0}>
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 

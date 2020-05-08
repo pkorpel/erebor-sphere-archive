@@ -32,7 +32,7 @@ tevents=e_npc_detect
 tevents=e_npc_massleap
 tevents=e_backstub
 tevents=e_berserk_potvora
-tevents=e_npc_regeneration
+tevents=e_dragon_regeneration
 
 on=@create
 color=1
@@ -50,6 +50,9 @@ maxmana=2000
 
 tag.experience=<eval {1800.0 2000.0}>
 tag(isBoss,1)
+
+tag(regeneration_hp,1500)
+tag(regeneration_speed,10)   
 
 tag.roundattack_damage=60,70    //dmg od - do
 tag.roundattack_time=15,20      //prodleva od - do v sek
