@@ -729,7 +729,7 @@ if (profession==class_Mystik)
 	    reduceStamina(20)
 	    classmessage("Nyni zasazujes udery energii")
 	  else
-	  	redmessage("Nejsi nato <src.sex pripravenej pripravena>...")
+	  	redmessage("Nejsi na to <src.sex(pripraveny,pripravena)>...")
 	  endif
   else
     if (<stam> > 20)
@@ -737,7 +737,7 @@ if (profession==class_Mystik)
 	    reduceStamina(20)
 	    classmessage("Nyni zasazujes mrazive udery")
 	  else
-	  	redmessage("Nejsi nato <src.sex pripravenej pripravena>...")
+	  	redmessage("Nejsi na to <src.sex(pripraveny,pripravena)>...")
 	  endif
   endif
 else
