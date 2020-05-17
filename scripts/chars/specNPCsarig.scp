@@ -2448,6 +2448,8 @@ tag(monstertype,humanoid,80)
 tag.weapflag=dam_blunt|dam_physical //ruzne
 
 tag.had=c_druid_had_elder
+tag(regeneration_hp,700)         // event na regen ziskava az v podobe hada ale je treba mu tagy dat uz ted
+tag(regeneration_speed,10)   
 
 WRESTLING=150.0 
 RESIST={120.0 170.0}
