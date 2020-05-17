@@ -79,14 +79,6 @@ endif
 target
 return 1
 
-ON=@TargOn_Char
-target
-return 1
-
-ON=@TargOn_Ground
-src.sysmessage("no ground")
-target
-return 1
 
 [dialog d_toulec_arrows]
 argo.SetLocation=180,230
