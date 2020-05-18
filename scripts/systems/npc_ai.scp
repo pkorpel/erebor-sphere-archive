@@ -1524,15 +1524,18 @@ if (isSleeping)
   return 0
 endif
 
-if(tag(nextcry) < <serv.time>)
-  tag(nextcry,<eval serv.time+(nastaveni_warcry_delay*10)>)
-  emote(crying)
-  sound(1098)
-  newitemsafe(i_warcry_srcChanger)
-  lastnew.p=<src.p>
-  lastnew.z=-100
-  lastnew.link=<uid>
-  lastnew.timerd=1
+if !(<eval tag(NPC_Warcry_delay)>)
+  tag(NPC_Warcry_delay,600)      // default 60 sec (600 dsec)
+endif
+if (tag(nextcry) < <serv.time>)
+   tag(nextcry,<eval serv.time+tag(NPC_Warcry_delay)>)
+   emote(crying)
+   sound(1098)
+   newitemsafe(i_warcry_srcChanger)
+   lastnew.p=<src.p>
+   lastnew.z=-100
+   lastnew.link=<uid>
+   lastnew.timerd=1
 endif
 
 on=@beforedoeffect
