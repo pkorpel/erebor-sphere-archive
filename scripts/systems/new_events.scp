@@ -109,6 +109,9 @@ on=@npckill
 newnpc(<obody>)
 lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
 lastnewchar.update
+lastnewchar.addMemoryFlag(<uid>,MEMORY_IPET)
+addMemoryFlag(<lastnewchar>,MEMORY_FRIEND)
+lastnewchar.attack(<tag(combatTarget)>)  // At moje kopie utoci na to co ja
 lastnewchar.events=-e_duplicator
 lastnewchar.tag(duped,-1) //uz se nebude duplikovat
 
@@ -898,6 +901,9 @@ if rand(20)==1
     lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
     lastnewchar.fame=0
     lastnewchar.tag(experience,0)
+    lastnewchar.addMemoryFlag(<uid>,MEMORY_IPET)
+    addMemoryFlag(<lastnewchar>,MEMORY_FRIEND)
+    lastnewchar.attack(<tag(combatTarget)>)  // At summon utoci na to co ja
     lastnewchar.flag_conjured=1
     lastnewchar.newequip(i_osklivejsmazse)
     lastnew.timer=20
@@ -948,6 +954,9 @@ if (chance(<tag.npc_summoning_chance>,3))
         newnpc(<tag(npc_summoning_char[<arg(i)>])>)
         lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
         lastnewchar.fame=0
+        lastnewchar.addMemoryFlag(<uid>,MEMORY_IPET)
+        addMemoryFlag(<lastnewchar>,MEMORY_FRIEND)
+        lastnewchar.attack(<tag(combatTarget)>)  // At summon utoci na muj cil
         lastnewchar.newequip(i_osklivejsmazse)
         lastnew.timer=<tag(npc_summoning_removeTime)>
         if (strlen(<tag(npc_summoner_experience)>))  //mame nejaky tag experience (i nulovy !)
@@ -1133,6 +1142,9 @@ if (chance(<tag(npc_summoning2_chance)>,3))
         newnpc(<tag(npc_summoning2_char[<arg(i)>])>)
         lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
         lastnewchar.fame=0
+        lastnewchar.addMemoryFlag(<uid>,MEMORY_IPET)
+        addMemoryFlag(<lastnewchar>,MEMORY_FRIEND)
+        lastnewchar.attack(<tag(combatTarget)>)  // At summon utoci na muj cil
         arg(i,#+1)
       endwhile
     endif
