@@ -1337,7 +1337,7 @@ INT=400
 maxhits={9000 9500}
 maxmana=2000
 
-tag.experience=<eval {200.0 220.0}>
+tag.experience=<eval {300.0 400.0}>
 tag(isBoss,1)
 
 tag.npc_curse_chance=250                // 25% chance to trigger this event
@@ -1382,7 +1382,7 @@ tag(monstertype,daemon,90)
 
 magery=120.1
 ei=110.0
-peacemaking=100.0
+peacemaking=200.0
 provocation=100.0
 PARRYING={95.0 100.0}
 TACTICS={85.0 120.0}
