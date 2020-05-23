@@ -1469,6 +1469,9 @@ if (src.isgm)
 endif
 
 on=@step
+if (src.isdead)
+  return
+endif
 if !(src.isgm)
   if ((<serv.time> - <tag(lastThrow)>) > <tag(nextUse)>*10)
     if (tag(pos1))

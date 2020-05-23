@@ -5163,6 +5163,7 @@ TEVENTS=e_character
 TEVENTS=e_npc_summoning
 TEVENTS=e_parakrik
 TEVENTS=e_summoneater
+TEVENTS=e_dragon_regeneration
 
 CATEGORY=Monsters
 SUBSECTION=Undead
@@ -5183,6 +5184,9 @@ maxstam={150 230}
 maxmana=0
 
 tag.experience=<eval {190.0 210.0}>
+
+tag(regeneration_hp,100)                 // pocet hp ktore zregeneruje
+tag(regeneration_speed,10)               // rychlost regeneracie v sekundach
 
 tag(npc_summoning_chance,250)  //25.0% chance
 tag(npc_summoning_time,30)

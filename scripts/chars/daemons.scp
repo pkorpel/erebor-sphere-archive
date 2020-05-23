@@ -1075,7 +1075,7 @@ item=i_gold
 
 /////////////////////////////////////////////////////////////
 
-[CHARDEF c_daemon_black]  //melee
+[CHARDEF c_daemon_black2]  //melee
 ID=c_balron
 NAME=Demon
 SOUND=snd_MONSTER_DAEMON1
@@ -1327,7 +1327,7 @@ STR=1000
 DEX={150 180}
 INT={120 150}
 
-maxhits={3600 4000}
+maxhits=5000
 maxstam={150 230}
 maxmana=0
 
@@ -1364,7 +1364,7 @@ tag(resist_cold,100)
 //typ monstra
 tag(monstertype,daemon)
 //weap flags
-tag.weapflag=dam_slashing|dam_physical|dam_fire
+tag.weapflag=dam_magic|dam_fire 
 
 PARRYING={55.0 95.0}
 TACTICS={80.0 100.0}

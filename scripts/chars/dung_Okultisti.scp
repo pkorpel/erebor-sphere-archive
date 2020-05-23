@@ -15,6 +15,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_bleed
 TEVENTS=e_explosiondispell
+TEVENTS=e_dragon_regeneration
 
 CATEGORY=Monsters
 SUBSECTION=NPC_evil_race
@@ -41,6 +42,9 @@ tag.npc_bleed=550 //55.0%
 tag(e_explosiondispell_chance,600) //60%
 tag(e_explosiondispell_range,5)
 tag(e_explosiondispell_time,5)
+
+tag(regeneration_hp,100)                 // pocet hp ktore zregeneruje
+tag(regeneration_speed,10)               // rychlost regeneracie v sekundach
 
 tag(hypnotizable,0)  
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
@@ -198,6 +202,8 @@ TEVENTS=e_character
 TEVENTS=e_parakrik
 TEVENTS=e_npc_curse_mana
 TEVENTS=e_summoneater
+TEVENTS=e_dragon_regeneration
+
 
 CATEGORY=Monsters
 SUBSECTION=Pirati
@@ -211,7 +217,7 @@ karma={-2000 -2999}
 
 STR={500 700}
 dex=280
-int=300
+int=360
 
 maxhits=4000
 maxstam={100 125}
@@ -222,9 +228,12 @@ tag.experience=<eval {220.0 250.0}>
 tag(poisoning_dmg,15) // affects spell_poison
 tag(poisoning_MvM_dmg,50) // affects spell_poison
 
-tag.npc_curse_mana_chance=200       // 20% chance to trigger this event
-tag.npc_curse_mana_delay=15,20      // delay between another possible strike
-tag.npc_curse_mana_dmg=40,50
+tag(npc_curse_mana_chance.200)       // 20% chance to trigger this event
+tag(npc_curse_mana_delay.15,20)      // delay between another possible strike
+tag(npc_curse_mana_dmg.40,50)
+
+tag(regeneration_hp,100)                 // pocet hp ktore zregeneruje
+tag(regeneration_speed,10)               // rychlost regeneracie v sekundach
 
 tag(hypnotizable,0) 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
@@ -260,9 +269,7 @@ peacemaking=120.0
 SpiritSpeak=50.0
 
 itemnewbie=i_spellbook
-addspell=s_poison
 addspell=s_fireball
-addspell=s_magic_reflection
 
 ITEMnewbie=i_monster_create
 ITEMNEWBIE=i_staff_gnarled
@@ -298,6 +305,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_summoning
 TEVENTS=e_summoneater
+TEVENTS=e_autoreflect
 
 CATEGORY=Monsters
 SUBSECTION=npc_evil_race
@@ -311,13 +319,13 @@ karma={-2000 -2999}
 
 STR={500 700}
 dex=280
-int=250
+int=300
 
-maxhits=5000
+maxhits={5500 6000}
 maxstam={100 125}
 maxmana=300
 
-tag.experience=<eval {270.0 300.0}>
+tag.experience=<eval {325.0 350.0}>
 
 tag(poisoning_dmg,15) // affects spell_poison
 tag(poisoning_MvM_dmg,50) // affects spell_poison
@@ -362,7 +370,6 @@ peacemaking=120.0
 SpiritSpeak=50.0
 
 itemnewbie=i_spellbook
-addspell=s_poison
 addspell=s_lightning
 
 ITEMnewbie=i_monster_create
@@ -485,6 +492,8 @@ TEVENTS=e_parakrik
 TEVENTS=e_npc_curse_mana
 TEVENTS=e_summoneater
 TEVENTS=e_npc_detect
+TEVENTS=e_autoreflect
+TEVENTS=e_dragon_regeneration
 
 CATEGORY=Monsters
 SUBSECTION=npc_evil_race
@@ -498,17 +507,20 @@ karma={-2000 -2999}
 
 STR={500 700}
 dex=280
-int=340
+int=400
 
-maxhits=1800
+maxhits={3500 4000}
 maxstam={100 125}
 maxmana=300
 
-tag.experience=<eval {195.0 200.0}>
+tag.experience=<eval {250.0 300.0}>
 
 tag.npc_curse_mana_chance=200       // 20% chance to trigger this event
 tag.npc_curse_mana_delay=15,20      // delay between another possible strike
 tag.npc_curse_mana_dmg=40,50
+
+tag.regeneration_hp=350                 // pocet hp ktore zregeneruje
+tag.regeneration_speed=10               // rychlost regeneracie v sekundach
 
 tag(hypnotizable,0) 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
@@ -542,10 +554,10 @@ EI=70.0
 magery=120.0
 peacemaking=120.0
 SpiritSpeak=50.0
+Enticement=150.0
 
 itemnewbie=i_spellbook
 addspell=s_mind_blast
-addspell=s_magic_reflection
 
 ITEMnewbie=i_monster_create
 ITEMNEWBIE=i_spellbook
@@ -658,6 +670,8 @@ TEVENTS=e_character
 TEVENTS=e_backstub
 TEVENTS=e_spider
 TEVENTS=e_summoneater_vamp
+TEVENTS=e_dragon_regeneration
+
 
 CATEGORY=Monsters
 SUBSECTION=Spiders
@@ -677,7 +691,10 @@ maxhits=3400
 maxstam={400 450}
 maxmana=0
 
-tag.experience=<eval {185.0 190.0}>
+tag.experience=<eval {240.0 250.0}>
+
+tag(regeneration_hp,100)                 // pocet hp ktore zregeneruje
+tag(regeneration_speed,10)               // rychlost regeneracie v sekundach
 
 //mystik
 tag(hypnotizable,0)
@@ -822,6 +839,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_critic
 TEVENTS=e_npc_detect
+TEVENTS=e_dragon_regeneration
 
 CATEGORY=Monsters
 SUBSECTION=Animal Monsters
@@ -845,6 +863,9 @@ tag.experience=<eval {75.0 80.0}>
 
 tag.npc_critic_chance=500         //50% chance
 tag.npc_critic_dmg=20,30          //dmg in between
+
+tag(regeneration_hp,50)                 // pocet hp ktore zregeneruje
+tag(regeneration_speed,10)               // rychlost regeneracie v sekundach
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
@@ -872,7 +893,7 @@ PARRYING=80.0
 RESIST=80.0
 TACTICS=80.0
 WRESTLING=90.0
-TAMING=95.0
+TAMING={120.0 140.0}
 SpiritSpeak=25.0
 
 ITEMnewbie=i_monster_create
@@ -890,8 +911,8 @@ ICON=i_pet_elem_earth
 ANIM=079c7f
 CAN=MT_WALK|mt_run
 
-attack=100
-ARMOR=100
+attack=135
+ARMOR=135
 MOVERATE=4
 
 BLOODCOLOR=colors_gray
@@ -902,6 +923,7 @@ TEVENTS=e_npc_knockback
 TEVENTS=e_golem
 TEVENTS=e_npc_stun
 TEVENTS=e_explosiondispell
+TEVENTS=e_npc_reactivearmor
 
 CATEGORY=Monsters
 SUBSECTION=Golems
@@ -917,18 +939,20 @@ STR=2125
 DEX=320
 INT=0
 
-maxhits=6000
+maxhits={8500 9000}
 maxstam={150 200}
 maxmana=0
 
-tag.experience=<eval {280.0 300.0}>
+tag.experience=<eval {500.0 600.0}>
 
 tag(e_explosiondispell_chance,400) //40%
 tag(e_explosiondispell_range,5)
 tag(e_explosiondispell_time,10)
 
-tag.npc_stun_time=20                 // 2 seconds of stun
-Tag.npc_stun_chance=400               //40%, defaultne 20% 
+tag(npc_stun_time,20)                 // 2 seconds of stun
+Tag(npc_stun_chance,400)               //40%, defaultne 20% 
+
+tag(reactivearmor_damagePer,30)
 
 //mystik
 tag(hypnotizable,0)
@@ -948,9 +972,9 @@ tag(resist_pierce,350)
 tag(resist_blunt,50) // skalu rozbijes hlavne drtivou zbrani
 
 //magic resists
-tag(resist_fire,400)
-tag(resist_elect,50)  //nachylnost na elektrinu
-tag(resist_cold,100)   //nachylnost na chlad
+tag(resist_fire,700)
+tag(resist_elect,450)  //nachylnost na elektrinu
+tag(resist_cold,575)   //nachylnost na chlad
 
 //typ monstra
 tag(monstertype,golem,95)
@@ -962,6 +986,7 @@ TACTICS=100.0
 WRESTLING=120.0
 RESIST=180.0
 SpiritSpeak=25.0
+Poisoning=450.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
@@ -989,6 +1014,8 @@ TEVENTS=e_npc_leaper
 TEVENTS=e_npc_detect
 TEVENTS=e_npc_critic
 TEVENTS=e_summoneater
+TEVENTS=e_npc_magicshield
+TEVENTS=e_npc_warcry
  
 CATEGORY=Monsters
 SUBSECTION=Zla Druzina 6
@@ -1010,11 +1037,14 @@ MAXMANA=0
 
 tag.experience=<eval {170.0 175.0}>
 
-tag.npc_port_timer=5
+tag(npc_port_timer,5)
 tag(npc_port_distance,6)
 
-tag.npc_critic_chance=400         //50% chance
-tag.npc_critic_dmg=15,25          //dmg in between
+tag(npc_critic_chance,400)         //50% chance
+tag(npc_critic_dmg,15,25)         //dmg in between
+
+tag(npc_magicShield,75)
+tag(NPC_Warcry_delay,100)
 
 tag(hypnotizable,0)  
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
