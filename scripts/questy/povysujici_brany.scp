@@ -47,7 +47,7 @@ SUBSECTION=System povyseni
 DESCRIPTION=Vstupni brana k mistrovskemu questu
 
 on=@step
-if (<eval src.tag(skillrank)> == 1) && (<src.tag(level)> > 5)
+if (<eval src.tag(skillrank)> == 1) && (<eval src.tag(level)> > 5)
   src.go 462,2577,10,1 // ZADAT LOKACI kam hodi pro splneni mistrovskeho questu
 else
   src.redmessage("Tato cesta neni urcena pro tebe!")

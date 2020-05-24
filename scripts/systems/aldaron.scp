@@ -6005,10 +6005,18 @@ endwhile
 
 [events e_dragon_regeneration]
 on=@npcseenewplayer
+if (<eval tag(regeneration_hp)> == 0)
+  src.accmsg("ERROR: Monstrum <name>(<uid>) <obody> nema nastaven tag regeneration_hp ikdyz ma event e_dragon_regeneration")
+  tag(regeneration_hp,100)
+endif
+if (<eval tag(regeneration_speed)> == 0)
+  src.accmsg("ERROR: Monstrum <name>(<uid>) <obody> nema nastaven tag regeneration_speed ikdyz ma event e_dragon_regeneration")
+  tag(regeneration_speed,10)
+endif
 if !(findid(i_dragon_regenerator))
   newequip(i_dragon_regenerator)
-  lastnew.tag(power,<tag(regeneration_hp)>)
-  lastnew.tag(speed,<tag(regeneration_speed)>)  
+  lastnew.tag(power,<eval tag(regeneration_hp)>)
+  lastnew.tag(speed,<eval tag(regeneration_speed)>)  
 endif
 return 0
 
@@ -6016,8 +6024,8 @@ on=@beforegetswing
 on=@aftergetswing
 if !(findid(i_dragon_regenerator))
   newequip(i_dragon_regenerator)
-  lastnew.tag(power,<tag(regeneration_hp)>)
-  lastnew.tag(speed,<tag(regeneration_speed)>)  
+  lastnew.tag(power,<eval tag(regeneration_hp)>)
+  lastnew.tag(speed,<eval tag(regeneration_speed)>)  
 endif
 return 0
 
@@ -6033,8 +6041,8 @@ on=@afterDoEffect
 on=@spelleffect
 if !(findid(i_dragon_regenerator))
   newequip(i_dragon_regenerator)
-  lastnew.tag(power,<tag(regeneration_hp)>)
-  lastnew.tag(speed,<tag(regeneration_speed)>)
+  lastnew.tag(power,<eval tag(regeneration_hp)>)
+  lastnew.tag(speed,<eval tag(regeneration_speed)>)
 endif
 return 0
 
@@ -6048,20 +6056,20 @@ timer=5
 
 on=@timer
 if (<topobj.hits> < <topobj.maxhits>)
-  arg(regen,<tag(power)>)
-  if (<eval <topobj.hits>+<tag(power)>> < <topobj.maxhits>)
+  arg(regen,<eval tag(power)>)
+  if (<eval <topobj.hits>+<eval tag(power)>> < <topobj.maxhits>)
     topobj.hits = <eval <topobj.hits>+<tag(power)>>
   else
     arg(regen,<eval (<topobj.maxhits>-<topobj.hits>)>)
     topobj.hits = <topobj.maxhits>
   endif
   topobj.emote("is regenerating.")
-  topobj.show_damage_and_hitpoints(<regen>,1)
+  topobj.show_damage_and_hitpoints(<arg(regen)>,1)
 else
   remove
   return 1
 endif
-timer=<tag(speed)>
+timer=<eval tag(speed)>
 return 1
 
 ////////////////////////////////////////

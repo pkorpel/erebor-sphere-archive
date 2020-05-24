@@ -882,7 +882,7 @@ on=@timer
 
 [function exploze]
 if (ischar)
-  if (isplayer)
+  if ((isplayer) && !(isGm))
     arg(bombarmor,<eval armorsum+(nastaveni_global_armorchange_vP_<profession.name>)>)
   else
     arg(bombarmor,<eval armorsum>)  
