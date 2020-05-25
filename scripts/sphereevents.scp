@@ -1194,7 +1194,7 @@ if (findID(i_stealthbonus))
   findID(i_stealthbonus).remove
   return
 endif
-if (<eval tag(LastStepTime)> > <eval (<serv.time>-10)>)
+if (<eval tag(LastStepTime)> > <eval (<serv.time>-20)>)
   return
 endif
 if (<eval src.tag(GM_step_resist)> > <serv.time>)
