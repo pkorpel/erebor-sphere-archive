@@ -1175,6 +1175,7 @@ if (tag(stepcount)>20)
   tag(stepcount,0)
   tag(firststeptime,<serv.time>)
 endif
+tag(LastStepTime,<serv.time>)
 
 on=@personalspace
 if !(<nastaveni_GM_Step>)
@@ -1187,6 +1188,13 @@ if (<mapplane> == 2)
   return
 endif
 if !(src.isplayer)
+  return
+endif
+if (findID(i_stealthbonus))
+  findID(i_stealthbonus).remove
+  return
+endif
+if (<eval tag(LastStepTime)> > <eval (<serv.time>-10)>)
   return
 endif
 if (<eval src.tag(GM_step_resist)> > <serv.time>)
