@@ -7349,7 +7349,7 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 175]     //Sede Pristavy
 P=743,1368
-RECT=733,1365,742,1375
+RECT=733,1365,743,1375
 tag.housenumber=175
 FLAGS=01192
 RAINCHANCE=00  
