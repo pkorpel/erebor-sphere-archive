@@ -378,7 +378,8 @@ return<arg(gold)>
 
 // must be executed upon the i_mem_treasureGenerator
 [function f_treasureGenerator_init]
-timer=<eval (cont.tag(respawn_delay)*60)+((<eval cont.tag(respawn_anomaly)>*<cont.tag(respawn_delay)>)/1000)>
+arg(anomalyEffect,<eval {0 <eval cont.tag(respawn_anomaly)>}>)
+timer=<eval ((<cont.tag(respawn_delay)>+((<arg(anomalyEffect)>*<cont.tag(respawn_delay)>)/1000))*60)>
 
 //must be executed upon the treasurer //argv(0) - reset memory
 [function f_treasure_initTreasureGenerator]
