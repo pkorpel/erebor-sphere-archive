@@ -290,7 +290,8 @@ if (src.npc)
   arg(poskozeni,<eval(((arg(poskozeni)*nastaveni_global_Mvweapdam)+500)/1000)>)
 endif
 arg(obrana,<eval ((randfakt(<obrana>,<skill_parrying.effect>)*arg(lowerac))+500)/1000>)
-var(ubrano,<eval ((((argv(0)*1000)-arg(obrana))*arg(poskozeni))+500000)/1000000>)
+arg(koef,<eval (((argv(0)*1000)-arg(obrana))+500)/1000>)
+var(ubrano,<eval ((arg(koef)*arg(poskozeni))+500)/1000>)
 var(damage_flags,<hval(argv(1))>)
 damage_final(<src>)
 return
@@ -300,8 +301,8 @@ return
 //<argv(2)>  piercing
 [function damagecust_MvP]
 arg(obrana,<eval armorsum*(1000-argv(2))>)//1000x zvetsen rad
-arg(utok,<eval argv(0)*nastaveni_global_Mvweapdam>)//1000x zvetsen rad
-var(ubrano,<eval ((arg(utok)*(1000-(arg(obrana)/nastaveni_global_MvP_armorfactor)))+500000)/1000000>)
+arg(utok,<eval ((argv(0)*nastaveni_global_Mvweapdam)+500)/1000>)
+var(ubrano,<eval ((arg(utok)*(1000-(arg(obrana)/nastaveni_global_MvP_armorfactor)))+500)/1000>)
 var(ubrano,<eval ((var(ubrano)*{<nastaveni_global_MvP_randomfactor>})+500)/1000>)
 var(damage_flags,<hval(argv(1))>)
 damage_final(<src>)
