@@ -593,7 +593,7 @@ if (src.action == -1)
         remove 
         return 1
       endif
-      if (!cont.reduceStamina(10,1))
+      if (!cont.reduceStamina(20,1))
         cont.tag.remove(isstabbing)
         remove
         return 1
