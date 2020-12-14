@@ -282,7 +282,7 @@ if (!findres(itemdef,<arg(foodId)>).can_pile)
     lastnew.bounce
     src.accMsg("vyndava z foodboxu (<uid>) <lastnew.amount> <lastnew.name> (<lastnew>).")
     arg(foodAvailable,#-<lastnew.amount>)
-    tag(food_count_<arg(foodId)>,arg(foodAvailable))
+    tag(food_count_<arg(foodId)>,<arg(foodAvailable)>)
   endwhile
 
   return
