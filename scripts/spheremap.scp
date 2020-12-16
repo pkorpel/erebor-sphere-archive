@@ -9755,7 +9755,29 @@ RECT=5921,123,6008,155
 mapplane=21
 GROUP=a test
 RAINCHANCE=00  
-COLDCHANCE=00 
+COLDCHANCE=00
+
+[AREA Novorocni Dungeon]
+GROUP=Dungeon
+P=5555,2325,0,7
+RECT=5416,2112,5690,2341
+mapplane=7
+FLAGS=0881E
+tag.nobank=1
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
+[AREA Vanocni ostrov]
+GROUP=Ostrovy
+P=149,2147,0,7
+RECT=38,1964,428,2194
+mapplane=7
+FLAGS=0301E
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=50
+COLDCHANCE=100 
 
 [function get_mapWidth]
 if (<mapplane> == 2)
