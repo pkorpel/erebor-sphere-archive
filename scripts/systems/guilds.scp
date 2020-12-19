@@ -843,3 +843,5 @@ dialog(d_guild_showGuildMembers,<eval <argn>-10>)
 [dialog d_guild_showGuildMembers_help]
 argo.setText(1," Tento seznam zobrazuje pouze cleny guildy, kteri jsou aktualne pripojeni do hry a zaroven maji zapnuty guild chat.<br>Guild chat zapnete v chat dialogu, ktery vyvolate prikazem .chat. Mate-li tedy nejaky zajem zabranit ostatnim clenum guildy, aby vas v seznamu on-line clenu videli, staci se z guild chatu odhlasit.")
 argo.f_dialog_HelpCreator("HELP - Seznam on-line clenu guildy")
+
+[EOF]

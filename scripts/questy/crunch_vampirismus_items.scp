@@ -99,3 +99,5 @@ else
  src.body=c_gargoyle
  src.vit=500
 endIF
+
+[EOF]

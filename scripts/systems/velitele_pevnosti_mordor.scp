@@ -349,3 +349,5 @@ dialog d_general_recruiter
 dialog d_general_major
 finduid(<tag(enemyscont)>).dialog(d_captain_executioner,0)
 return 1
+
+[EOF]

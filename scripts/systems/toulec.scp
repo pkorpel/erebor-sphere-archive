@@ -348,3 +348,5 @@ endif
 [function toulec]
 tag.toulec=<args>
 findtype(t_toulec).toulec_vysypat(<tag.toulec>)
+
+[EOF]

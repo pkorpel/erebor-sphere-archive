@@ -329,3 +329,5 @@ type=t_eq_script
 on=@timer
 remove
 return 1
+
+[EOF]

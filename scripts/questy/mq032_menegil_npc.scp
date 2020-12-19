@@ -627,3 +627,5 @@ if (SRC.TARG.DISTANCE > 3)
 else
   f_mq032_skladnik_manzelka
 ENDIF
+
+[EOF]

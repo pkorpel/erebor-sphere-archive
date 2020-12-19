@@ -147,3 +147,5 @@ tag.majitel=<src.serial>
 src.sysmessage("<src.sex("Stal jsi se novym majitelem","Stala jsi se novou majitelkou")> truhly.")
 on=2
 return 0
+
+[EOF]

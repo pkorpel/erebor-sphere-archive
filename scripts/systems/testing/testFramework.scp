@@ -38,3 +38,5 @@ profession=class_<argv(0)>
 if (strlen(<tag(tstOrig_Class)>))
   profession=<tag(tstOrig_Class)>
 endif
+
+[EOF]

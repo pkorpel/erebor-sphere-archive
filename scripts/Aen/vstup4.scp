@@ -53,3 +53,5 @@ ON=@TARGON_CHAR
     SRC.TARG.tag(podstavec,<UID>)
     MORE2=1
   RETURN 1
+  
+[EOF]

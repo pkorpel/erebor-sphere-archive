@@ -693,3 +693,5 @@ color=020
 ITEM=i_npc_mount
 tag.mount=i_mt_horse_brown_dk
 tag.mountcolor=0729
+
+[EOF]

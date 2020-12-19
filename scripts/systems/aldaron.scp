@@ -7932,3 +7932,5 @@ tag(explode_dmg,<golden_dragon_morph_explode_dmg[<arg(morph_number)>]>)
 
 tag(npc_stun_time,<golden_dragon_morph_npc_stun_time[<arg(morph_number)>]>)
 tag(npc_stun_chance,<golden_dragon_morph_npc_stun_chance[<arg(morph_number)>]>)
+
+[EOF]

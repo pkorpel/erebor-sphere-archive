@@ -111,3 +111,5 @@ ON = @Create
 ON = @UserDClick
 	Src.SysMessage("Nenapada te zpusob, jak to pouzit.")
 	return 1
+    
+[EOF]

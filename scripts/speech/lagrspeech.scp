@@ -64,3 +64,5 @@ else
     say("Kontaktuj GM pres page, tva postava je recidivista, ktery dostane specialni trest.")
   endif
 endif
+
+[EOF]

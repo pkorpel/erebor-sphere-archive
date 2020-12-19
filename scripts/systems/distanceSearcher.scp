@@ -188,3 +188,5 @@ if (<distancefrom(<var(distanceSearcher_SRC)>)> <= <var(distanceSearcher_DISTANC
     var(distanceSearcher_UID).f_customLink_add(<uid>,object)
   endif
 endif
+
+[EOF]

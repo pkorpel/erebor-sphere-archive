@@ -3558,3 +3558,5 @@ ON=@NPCRestock
 ITEM=loot_OGRE
 ITEM=i_gold
 ITEM=i_gem_diamond,{0 1}
+
+[EOF]

@@ -196,3 +196,4 @@ ON=@NPCRestock
 ON=@npcseenewplayer  
  SAY= "Co civis? " 
                               
+[EOF]

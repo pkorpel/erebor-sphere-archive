@@ -692,3 +692,5 @@ if (<src> == <topobj>)
   endif
 endif
 return 0
+
+[EOF]

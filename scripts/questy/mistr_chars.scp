@@ -398,3 +398,5 @@ ITEMnewbie=i_monster_create
 ON=@NPCRestock
 ITEM=loot_serpent
 item=i_gold
+
+[EOF]

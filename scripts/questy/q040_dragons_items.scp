@@ -586,3 +586,5 @@ tag.repeatedcollecting=1
 tag.fail_msg="Tento ju vubec nemel."
 
 ON=@CollectorCheck
+
+[EOF]

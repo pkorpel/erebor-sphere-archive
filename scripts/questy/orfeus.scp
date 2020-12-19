@@ -444,3 +444,5 @@ src.ACT.MOVE n 5
 
 ON=@Create
 ATTR=010
+
+[EOF]

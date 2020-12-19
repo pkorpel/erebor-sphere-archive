@@ -196,3 +196,5 @@ if (src.findid(i_cashiers_check))
 else
   say("A kde je ten sek? Nepokousej se me okrast!")
 endif
+
+[EOF]

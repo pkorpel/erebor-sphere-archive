@@ -166,3 +166,5 @@ tag.fail_msg="Nepovedlo se!"
 
 ON=@CollectorCheck
 f_collectorFixTargetId("Body of Phoenix",097F)
+
+[EOF]

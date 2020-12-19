@@ -224,3 +224,4 @@ on=@targon_ground
 src.redMessage("Je treba zamerit spawn!")
 tag(spawnID).dialog(d_guardBossSystem)
 
+[EOF]

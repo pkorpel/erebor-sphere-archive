@@ -240,3 +240,5 @@ return<src.tag(filteredmsg_<argv(0)>)>
 
 [function message_number] //arg-kolikátá v našem poli
 return<src.tag(orderfiltered_<argv(0)>)>
+
+[EOF]

@@ -210,3 +210,5 @@ ITEMnewbie=i_monster_create
 ON=@NPCRestock
 ITEM=loot_SWAMP
 ITEM=i_gold
+
+[EOF]

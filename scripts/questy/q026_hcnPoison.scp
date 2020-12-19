@@ -388,3 +388,5 @@ src.effect(3,<s_bless.effectID>,6,15,1)
 f_sound_DrinkPoiton
 remove
 return 1
+
+[EOF]

@@ -26,3 +26,5 @@ on=@unequip
 on=@userclick
   src.sysmessage("Majitel: <?finduid(<tag(owner)>).name?>")  
 return 1
+
+[EOF]

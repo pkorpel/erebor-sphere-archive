@@ -763,3 +763,5 @@ endif
 
 // Iframe: x, y, sirka, vyska, cislo textu, pozadi ano/ne, scrollbar - nefunguje
 // argo.htmlgump(220,155,485,100,20,0,36)
+
+[EOF]

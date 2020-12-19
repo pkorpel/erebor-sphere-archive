@@ -48,3 +48,5 @@ ON=@Create
 color=0658
 on=@userdclick                                                             
 message("Tento lektvar by mel vylecit i velke zanicene rany.")
+
+[EOF]

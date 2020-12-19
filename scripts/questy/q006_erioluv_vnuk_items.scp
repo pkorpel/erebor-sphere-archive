@@ -195,3 +195,5 @@ on=@potioneffect
 src.sysmessage("Niceho zvlastniho jsi si nevsimnul.")
 return 0
 on=@userdeath
+
+[EOF]

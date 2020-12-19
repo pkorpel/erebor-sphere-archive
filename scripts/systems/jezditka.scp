@@ -800,3 +800,5 @@ endif
 newitemsafe(i_mt_llama_nb)
 equip(lastnew)
 return 0
+
+[EOF]

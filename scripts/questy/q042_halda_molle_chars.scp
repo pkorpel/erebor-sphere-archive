@@ -89,3 +89,5 @@ ON=@NPCSeeNewPlayer
 if (<src.qtag(q042_hatlend_rulik)> == 4)
   attack(<src>)
 endif 
+
+[EOF]

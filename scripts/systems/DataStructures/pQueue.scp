@@ -110,3 +110,5 @@ tag.remove(<pqueue_name>_Head)
 //argv(0) index of an element
 [function f_pqueue_getPriority]
 return<eval return_nth(1,<tag(<pqueue_name>[<argv(0)>])>)>
+
+[EOF]

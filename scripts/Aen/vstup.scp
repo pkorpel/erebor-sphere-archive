@@ -800,3 +800,5 @@ ON=@TARGON_ITEM
     tag(zaviram6,<SRC.TARG.UID>)
   ENDIF
   return 1
+  
+[EOF]

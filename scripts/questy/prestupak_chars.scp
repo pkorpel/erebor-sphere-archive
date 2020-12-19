@@ -162,3 +162,5 @@ ON=@death
 if (<act.qtag(q041_paserak)> == 4)
 	act.qtag(q041_paserak,5,51)
 endif
+
+[EOF]

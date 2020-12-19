@@ -240,3 +240,5 @@ ATTR=attr_invis|attr_decay
 ON=@TIMER
 remove
 return 1
+
+[EOF]

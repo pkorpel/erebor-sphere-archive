@@ -2716,3 +2716,5 @@ ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
 item=i_gold
+
+[EOF]

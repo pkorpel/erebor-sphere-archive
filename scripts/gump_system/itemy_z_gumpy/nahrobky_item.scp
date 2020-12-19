@@ -446,3 +446,5 @@ src.message("Neumuzes to precist, ale ocividne nekdo mrtvy.")
 return 1
 endif
 ///////////////////////////////////////////////////
+
+[EOF]

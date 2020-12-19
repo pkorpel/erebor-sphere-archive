@@ -293,3 +293,5 @@ color=00481
 
 on=@userdclick
 src.sysmessage("Male klubko neuveritelne pevne nite")
+
+[EOF]

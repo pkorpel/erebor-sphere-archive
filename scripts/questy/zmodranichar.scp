@@ -139,3 +139,5 @@ endif
 on=@death	
 act.tag(zabilmnicha,1)
 newloot=i_klic_prechod
+
+[EOF]

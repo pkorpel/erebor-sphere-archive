@@ -50,3 +50,5 @@ if (SRC.TARG.DISTANCE > 3)
 else
   f_q015_paradnice
 ENDIF
+
+[EOF]

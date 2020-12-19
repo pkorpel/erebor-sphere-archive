@@ -70,3 +70,5 @@ tag(<fifo_name>_size,<eval (<f_fifo_size>+1)>)
 //works only after calling beginWork
 [function f_fifo_dec]
 tag(<fifo_name>_Size,<eval (<f_fifo_size>-1)>)
+
+[EOF]

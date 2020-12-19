@@ -831,3 +831,5 @@ else
   	say("Neotravuj me!")
   endif
 ENDIF
+
+[EOF]

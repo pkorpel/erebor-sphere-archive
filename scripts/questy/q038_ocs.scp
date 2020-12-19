@@ -2014,3 +2014,5 @@ elseif (<argn> == argo.dialog_linkButton("goodbye"))
 elseif (<argn> == argo.dialog_linkButton("q038_refuse"))
   say("Tak me neotravuj, mam praci!")
 endif
+
+[EOF]

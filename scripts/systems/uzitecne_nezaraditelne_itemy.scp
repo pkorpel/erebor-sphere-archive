@@ -780,3 +780,5 @@ while (<arg(playerNumber)> < <eval more1>) && (<arg(pctRadku)> < 26)
     argo.button(261,<lastypos>+22*<d_def_radek_vyska>,0985,0986,1,0,<eval argo.tag(thisPage)+1500>+1)  //next page
   endif
 endwhile
+
+[EOF]

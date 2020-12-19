@@ -471,3 +471,5 @@ elseif (<argn> == argo.dialog_linkButton("q029_giveCollector"))
 elseif (<argn> == argo.dialog_linkButton("Goodbye"))
   say("Tobe take hodne stesi priteli...")
 endif
+
+[EOF]

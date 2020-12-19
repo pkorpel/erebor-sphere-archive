@@ -1074,3 +1074,5 @@ ON=@NPCRestock
 item=i_gold
 ITEM=i_mi_pouch_high
 ITEM=i_mi_pouch_superhigh
+
+[EOF]

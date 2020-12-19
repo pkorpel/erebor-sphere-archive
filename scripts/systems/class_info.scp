@@ -754,3 +754,5 @@ argo.dialog_zpruhledni
 argo.texta(<argo.dialog_textpos(0,0)>,42,"<class_info_<src.profession>_name[<arg(abilita)>]>")
 argo.htmlGump(<argo.dialog_textpos(1,0)>,320,150,1,0,1)
 argo.setText(1,"<class_info_<src.profession>_description[<arg(abilita)>]>")
+
+[EOF]

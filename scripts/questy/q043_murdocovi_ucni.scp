@@ -4262,3 +4262,5 @@ else                            //neplni quest
   src.sysmessage("Runa se neda nijak smazat. Proste tam je a ty s tim nic nenadelas.")
 endif
 return 1
+
+[EOF]

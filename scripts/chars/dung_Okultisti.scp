@@ -1366,3 +1366,5 @@ ITEMnewbie=i_monster_create
 ON=@NPCRestock
 ITEM=loot_SPIDER
 item=i_gold
+
+[EOF]
