@@ -45,3 +45,4 @@ ON=@UserDClick
 Src.SysMessage("Teprve leta na mori by napovedela, jak to zuzitkovat.")
 return 1
 	
+[EOF]

@@ -12,3 +12,5 @@ if (src.targ.isevent(t_spik_trap))
   src.action=0fffffff
 endif
 return 1
+
+[EOF]

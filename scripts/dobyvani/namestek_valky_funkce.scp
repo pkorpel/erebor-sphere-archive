@@ -210,6 +210,4 @@ elseif (<argn> == argo.dialog_linkButton("nowar"))
 endif
 
 
-
-
-
+[EOF]

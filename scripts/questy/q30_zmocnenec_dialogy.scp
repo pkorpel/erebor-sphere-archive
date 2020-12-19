@@ -736,3 +736,5 @@ lastnew.color=d_uniformRealm_clothes[<src.tag.realm>] //asi by som to nemal viaz
 lastnew.tag(owner,<src.uid>)
 lastnew.tag(craftedby,<src.uid>)
 lastnew.bounce
+
+[EOF]

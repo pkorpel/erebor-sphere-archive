@@ -46,3 +46,5 @@ tag.contentscount=0
 tag.fail_msg="Pri boji jsi mu <src.sex("poskodil","poskodila")> oci a ocni bulvy."
 
 ON=@CollectorCheck
+
+[EOF]

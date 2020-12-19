@@ -318,3 +318,5 @@ RETURN 0 // Yes, you can have RETURNs in a dialog
    tag(exponat5).Name=Exponat 5,<tag(exponat5).tag(katalogovecislo)>  
    tag(exponat6).tag(katalogovecislo,<EVAL RAND(8)>+1)
    tag(exponat6).Name=Exponat 6,<tag(exponat6).tag(katalogovecislo)>  
+
+[EOF]

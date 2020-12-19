@@ -671,3 +671,5 @@ tag(war_declared_on,0)
 [function allowmedeclarator]
 tag(can_declare_war_on_Gondor,1)
 tag(can_declare_war_on_Mordor,1)
+
+[EOF]

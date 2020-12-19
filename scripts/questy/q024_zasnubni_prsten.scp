@@ -662,3 +662,4 @@ if (src.qtag(q024) == 11)
   f_quest_complete(34)  // splneni questu "Zasnubni prsten"
 endif
 
+[EOF]

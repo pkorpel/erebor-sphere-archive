@@ -44,3 +44,5 @@ ON=*pryc*
 ON=*odchod*
 SAY("Toto uzemi muzes opustit po ziskani prvniho levelu. Jak budes pripraven, navstvit Gatekeepra na lodi, on ti povi vice.")
 src.tutAddActionXP(20,greetedNPspeech,"Dobra prace! <src.sex(Oslovil,Oslovila)> jsi NPC zvolanim!")
+
+[EOF]

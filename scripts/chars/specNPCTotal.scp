@@ -1899,3 +1899,5 @@ return 0
 on=@userclick
 src.sysmessage("Na svitku je spousta necitelnych run a velky napis Ztracene me...")
 return 1
+
+[EOF]

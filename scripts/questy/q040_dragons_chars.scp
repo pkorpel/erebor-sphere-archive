@@ -830,3 +830,5 @@ if (SRC.TARG.DISTANCE > 3)
 else
   f_q040_dragons_blazen
 ENDIF
+
+[EOF]

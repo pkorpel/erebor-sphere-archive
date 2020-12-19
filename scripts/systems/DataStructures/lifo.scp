@@ -92,3 +92,5 @@ tag(<lifo_name>Head,<eval (<tag(<lifo_name>Head)>+1)%10000>)
 tag.remove(<lifo_name>Size)
 tag.remove(<lifo_name>Head)
 tag.remove(<lifo_name>Tail)
+
+[EOF]

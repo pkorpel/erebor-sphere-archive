@@ -11,3 +11,5 @@ color=00606
 ON=@userDCLICK
 src.sysmessage Opatrne, nechces aby se s tim neco stalo...
 return 1
+
+[EOF]

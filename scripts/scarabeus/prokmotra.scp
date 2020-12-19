@@ -165,3 +165,5 @@ while(<arg(p)><<pocet_menenych_polozek>+1)
   //src.accmsg("<arg(vysledny_text)>")
   arg(p,<arg(p)>+1)
 endwhile
+
+[EOF]

@@ -90,3 +90,5 @@ attr=attr_move_never
 on=@userdclick	
 src.sysmessage("Takovy nadherny snubni prsten... je skoro skoda ho rvat na ruku, jako je tva.")
 return 1
+
+[EOF]

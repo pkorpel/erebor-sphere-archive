@@ -355,3 +355,5 @@ if (SRC.TARG.DISTANCE > 3)
 else
   f_q037_zarik_varjusa
 ENDIF
+
+[EOF]

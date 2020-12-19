@@ -758,3 +758,5 @@ argo.settext(14,"i_srdiczko - c_crunch_krvavec (c_krkavec - fake :-)) | vzacna b
 argo.text(30,490,1152,14)
 argo.settext(15,"roba ma tag 'owner' -> prida 10% alchemy iba tomu koho je, ostatnem pojde nasadit ale neprida")
 argo.text(30,510,1152,15)
+
+[EOF]

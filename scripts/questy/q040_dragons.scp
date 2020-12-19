@@ -2030,3 +2030,5 @@ elseif (<argn> == argo.dialog_linkButton("q040_refuse"))
 elseif (<argn> == argo.dialog_linkButton("goodbye"))
   say("Mej se...")
 endif
+
+[EOF]

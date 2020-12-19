@@ -471,3 +471,4 @@ else
   say("Vzdyt ho nemas!")
 endif
 
+[EOF]

@@ -189,3 +189,5 @@ on=*identifikuj*
 //src.identification_i_mi_magic(<UID>)
 src.identification_i_mi_magic(<UID>,<tag.price>)
 say("Tak copak chces identifikovat?")
+
+[EOF]

@@ -468,3 +468,5 @@ ON=i_rune_summon_elem_water
 TESTIF (src.cancast s_summon_elem_water)
 src.Mana=<eval <src.Mana> - 25>
 MAKEITEM=i_scroll_summon_elem_water
+
+[EOF]

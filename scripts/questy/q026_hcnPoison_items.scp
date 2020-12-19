@@ -563,3 +563,5 @@ elseif (<eval src.qtag(q026_hcnPoison)> > 8) // have already searched the box
   src.sysMessage("V truhle uz nic neni")
   return 1
 endif
+
+[EOF]

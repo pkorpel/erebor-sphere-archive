@@ -614,3 +614,5 @@ spletl.
 [dialog d_nahrobek_0025 button]
 on=0
 return 1
+
+[EOF]

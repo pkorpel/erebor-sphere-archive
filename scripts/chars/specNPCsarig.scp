@@ -3390,3 +3390,5 @@ dorand 2
   say("Vetrelci musi byt zniceni!")
   say("Chrante obetiny! Znicte vetrelce!")
 enddo
+
+[EOF]

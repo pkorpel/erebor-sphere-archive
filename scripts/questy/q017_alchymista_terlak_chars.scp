@@ -119,3 +119,5 @@ ITEMNEWBIE=i_obsidian_heater_shield
 COLOR=00531
 NAME=Stit obrance
 ON=@NPCRestock 
+
+[EOF]

@@ -52,3 +52,5 @@ else
 	src.anim(9)
 	src.sound(02a)
 endif
+
+[EOF]

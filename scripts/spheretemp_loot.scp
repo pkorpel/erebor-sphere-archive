@@ -434,5 +434,4 @@ random_SEVENTH_CIRCLE  { i_scroll_chain_lightning 1 i_scroll_energy_field 1 i_sc
 random_EIGHTH_CIRCLE   { i_scroll_earthquake 1 i_scroll_energy_vortex 1 i_scroll_resurrection 1 i_scroll_summon_elem_air 1 i_scroll_summon_daemon 1 i_scroll_summon_elem_earth 1 i_scroll_summon_elem_fire 1 i_scroll_summon_elem_water 1 }
 
 
-
-
+[EOF]

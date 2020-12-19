@@ -74,3 +74,5 @@ NPC=brain_animal
 FAME=5
 KARMA={-1 -99}
 ITEMnewbie=i_monster_create
+
+[EOF]

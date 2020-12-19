@@ -323,3 +323,5 @@ ON=@Timer
   tag(realm,0)
   tag(timenow,(<serv.time>+108000)) //Pricist 3 hodiny
 return 1
+
+[EOF]

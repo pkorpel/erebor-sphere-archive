@@ -79,3 +79,5 @@ else
   src.sysmessage("Tak toto ti nebude na nic.")
 endif
 return 1
+
+[EOF]

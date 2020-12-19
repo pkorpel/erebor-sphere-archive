@@ -23,3 +23,5 @@
 
 [FUNCTION f_ovladani_npc]
 dialog(d_ovladani_npc)
+
+[EOF]

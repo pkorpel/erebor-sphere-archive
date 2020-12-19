@@ -313,3 +313,5 @@ if(<src.rescount(i_reag_spider_silk)>>=20)&&(<src.rescount(i_reag_nightshade)>>=
 else
 	say("Nesnaz se me podvest!")
 endif
+
+[EOF]

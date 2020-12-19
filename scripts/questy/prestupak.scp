@@ -292,3 +292,5 @@ elseif (<argv(0)> == dialog_linkButton("q041_has_items"))
   endif
 endif
 return 0
+
+[EOF]

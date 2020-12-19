@@ -102,4 +102,4 @@ return"<bowcrafting_targon_item>"
 ON=@Create
 weaponcreate(Iron)
 
-
+[EOF]

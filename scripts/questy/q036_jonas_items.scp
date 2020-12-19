@@ -20,3 +20,5 @@ tag.contentscount=0
 tag.fail_msg="Pri boji si mu znicil hlavu, skus zobrat inemu."
 
 ON=@CollectorCheck
+
+[EOF]

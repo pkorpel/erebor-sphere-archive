@@ -379,3 +379,5 @@ random_camp_monsters_level_2[1] 5,c_gargoyle
 random_camp_monsters_level_2[2] 4,c_gargoyle_stone
 random_camp_monsters_level_2[3] 3,c_ettin
 random_camp_monsters_level_2[4] 2,c_ettin_lord
+
+[EOF]
