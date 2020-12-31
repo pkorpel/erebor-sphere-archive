@@ -1,4 +1,4 @@
-﻿////////////////// vzor sriptu uzemi a jeho vyklad - co je na co ///////////////
+////////////////// vzor sriptu uzemi a jeho vyklad - co je na co ///////////////
 //[AREA cave]                 /// nazev lokace, urci nazev runy - "cave", .kde (Jsem v "cave" + souradnice)
 //CLASS=13                    /// tak tohle nevim a zajimalo by me, to co to definuje 
 //TITLE=JESKYNE               /// jmeno regionu - nevim kde se ukaze (TITLE REGION)
@@ -9762,6 +9762,7 @@ GROUP=Dungeon
 P=5555,2325,0,7
 RECT=5416,2112,5690,2341
 mapplane=7
+events=e_qv3_dejloot
 FLAGS=0881E
 tag.nobank=1
 tag.realm=3
