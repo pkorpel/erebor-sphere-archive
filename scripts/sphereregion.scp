@@ -802,6 +802,13 @@ ON=@ENTER
     src.say(Muhahahaha)
     enddo
   endif
+  
+on=@exit
+  if (src.isplayer)
+    if !(src.isGM)
+      src.f_varGate_pvp_clearequip
+    endif
+  endif  
 
 //////////////////////////////////////////////////////////////////////////
 
