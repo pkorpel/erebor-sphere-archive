@@ -1270,12 +1270,14 @@ if (act.type==t_spell)
   temporary_null
   return 0
 endif
+f_refreshCombatStats
 
 on=@itemequip
-if (act.type==t_container)
- accmsg("equipped uid=<?act?> (<?act.amount?> <?act.name?> with <?act.rescount?> items) on self at <?p?> (<?act.region.name?>)")
+if (act.type == t_container)
+  accmsg("equipped uid=<?act?> (<?act.amount?> <?act.name?> with <?act.rescount?> items) on self at <?p?> (<?act.region.name?>)")
 else
- accmsg("equipped uid=<?act?> (<?act.amount?> <?act.name?>) on self at <?p?> (<?act.region.name?>)")
+  f_refreshCombatStats
+  accmsg("equipped uid=<?act?> (<?act.amount?> <?act.name?>) on self at <?p?> (<?act.region.name?>)")
 endif
 
 on=@itemPICKUP_PACK

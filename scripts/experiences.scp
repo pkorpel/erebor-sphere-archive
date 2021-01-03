@@ -203,6 +203,14 @@ dialog d_explevel
 
 [function setplayer]
 title="(<?tag(race)?>) <?rankname?> <?titul_<tag(class)>[<titulnumber>]?>"
+f_refreshCombatStats
+f_srovnatlevel
+rarefresh
+
+//fix poradia eventov (e_war||e_thief <=> e_hitsleech)
+f_fix_events(<events>)
+
+[function f_refreshCombatStats]
 if (profession==class_mystik)
   tag(combattype,"mystik")
 else
@@ -212,11 +220,6 @@ f_getatack_<tag(combattype)>
 f_getspeed_<tag(combattype)>
 f_getmindpow
 f_getminddef
-f_srovnatlevel
-rarefresh
-
-//fix poradia eventov (e_war||e_thief <=> e_hitsleech)
-f_fix_events(<events>)
 
 [function f_levelstatbonus]
 if (tag(level)>39)
