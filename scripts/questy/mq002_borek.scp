@@ -379,7 +379,7 @@ f_qSpeech(f_mq002_Borek_DClick)
 [function f_mq002_Borek_DClick]
 if (<src.flags>&statf_dead)
   return 1
-elseif ( (<src.tag.realm>==1) || (0<src.qtag(gq002)> > 0) )
+elseif (<src.tag.realm> == 1)
   say("Zmiz gondorsky pse!")
   return 1
 endif

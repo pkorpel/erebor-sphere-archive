@@ -35,33 +35,27 @@ if (src.isplayer)
     src.redmessage("Nejprve musis promluvit s Paserakem.")
     return 1
   endif
-  if !(<src.tag(presel)>) //pokud dotycnej jeste neprechazel, tag(presel) je 0 a tudiz ho nechame prejit
-    src.srazitlevely(<more>)
-    if (<src.tag(realm)> == 2) //je to mordoran
-      src.tag(realm,1)
-      src.kills=0
-      src.karma=0
-      src.home=<home_Gondoran>
-      src.redmessage("Citis se byt <src.sex(ocisten,ocistena)> od svych byvalych hrichu. Gondor te nyni prijme.")
-    elseif (<src.tag(realm)>==1) //je to gondoran
-      src.tag(realm,2)
-      src.kills=30000
-      src.karma=-3000
-      src.home=<home_Mordoran>
-      src.redmessage("Zlo tebou prostupuje, strez se hnevu Gondorskych - nyni patris Temnemu Panu!")
-    endif
-    sound=snd_spell_polymorph
-    src.newitemsafe(i_prave_prosel_levelgatou)
-    lastnew.equip
-    src.level_gate_efekt
-    src.tag(presel,1) //uz nebude moct prejit znova
-    src.qtag(q041_paserak,10,51)
-    return 1
-  else //dotycnej uz presel
-    src.sysMessage("Kdo jednou svuj realm zradi, zpet se jiz nevrat.")
-    src.go(<morex>,<morey>,<morez>,<morem>)
-    return 0
+  src.srazitlevely(<more>)
+  if (<src.tag(realm)> == 2) //je to mordoran
+    src.tag(realm,1)
+    src.kills=0
+    src.karma=0
+    src.home=<home_Gondoran>
+    src.redmessage("Citis se byt <src.sex(ocisten,ocistena)> od svych byvalych hrichu. Gondor te nyni prijme.")
+  elseif (<src.tag(realm)>==1) //je to gondoran
+    src.tag(realm,2)
+    src.kills=30000
+    src.karma=-3000
+    src.home=<home_Mordoran>
+    src.redmessage("Zlo tebou prostupuje, strez se hnevu Gondorskych - nyni patris Temnemu Panu!")
   endif
+  sound=snd_spell_polymorph
+  src.newitemsafe(i_prave_prosel_levelgatou)
+  lastnew.equip
+  src.level_gate_efekt
+  src.tag(presel,<eval src.tag(presel)>+1) //Pocitadlo prechodu
+  src.qtag(q041_paserak,10,51)
+  return 1
 endif
 
 [function vytvor_vortexe] //args - pozice kam
@@ -242,7 +236,7 @@ DESCRIPTION=port do svatyne
 
 
 ON=@STEP
-if ((src.tag(level)<10)||(<src.tag(presel)>))
+if (<eval src.tag(level)> < 15)
   src.sysMessage("Svatyne te neprijala.")
 //  src.tag.remove(zabilmnicha)
   src.go 1142,3897
