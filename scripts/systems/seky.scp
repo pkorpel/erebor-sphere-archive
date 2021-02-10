@@ -331,7 +331,7 @@ if (src.isCarrying(<uid>))
       if (<eval more1-<val_givemoney>> < 500)
         arg(val_givemoney,#+500)
       endif
-      src.givegold(<val_givemoney>,<cont>)
+      src.givegold(<val_givemoney>)
       src.sound=037
       more1=<eval more1-<val_givemoney>>
       src.sysMessage("Vice minci nepoberes.")
@@ -340,7 +340,7 @@ if (src.isCarrying(<uid>))
       src.redMessage("Jsi <src.sex pretizeny pretizena>.")
     endif
   else
-    src.givegold(<more>,<cont>)
+    cont.givegold(<more>)
     src.sound=037
     src.sysMessage("<src.sex Vysypal Vysypala> jsi <more> gp.")
     src.AccMsg("Byl KOMPLETNE VYSYPAN mesec: <uid>. Vysypano bylo <more> gp.")

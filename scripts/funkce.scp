@@ -5112,18 +5112,20 @@ act.try updatex
 
 [function givegold]
 arg(goldyet,<eval args>)
+arg(contForGold,<uid>)
+
 while (arg(goldyet)>0)
   if (arg(goldyet)<=65535)
     src.newitemsafe(i_gold)
-    src.accmsg("gave <arg(goldyet)> gold (uid=<lastnew>) to uid=<uid> (<name>) topobj=<topobj> (<topobj.name>)")
+    src.accmsg("gave <arg(goldyet)> gold (uid=<lastnew>) to uid=<arg(contForGold)> (<arg(contForGold).name>) topobj=<topobj> (<topobj.name>)")
     lastnew.AMOUNT=<arg(goldyet)>
-    lastnew.CONT(<uid>)
+    lastnew.CONT(<arg(contForGold)>)
     arg(goldyet,0)
   else
     src.newitemsafe(i_gold)
-    src.accmsg("gave 60000 gold (uid=<lastnew>) to uid=<uid> (<name>) topobj=<topobj> (<topobj.name>)")
+    src.accmsg("gave 60000 gold (uid=<lastnew>) to uid=<arg(contForGold)> (<arg(contForGold).name>) topobj=<topobj> (<topobj.name>)")
     lastnew.AMOUNT=60000
-    lastnew.CONT(<uid>)
+    lastnew.CONT(<arg(contForGold)>)
     arg(goldyet,#-60000)
   endif
 endwhile
