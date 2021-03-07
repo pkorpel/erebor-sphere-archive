@@ -130,11 +130,14 @@ endif
 if (argv(0).npc)
   argv(0).f_crushingArrow_PvM(<arg(weapon)>)
 else
-  argv(0).f_crushingArrow_PvP(<arg(weapon)>)
+  //argv(0).f_crushingArrow_PvP(<arg(weapon)>)
 endif
 
 [function f_crushingArrow_PvM]
 arg(ca_resist,<eval tag(resist_crushingArrow)>)
+if (arg(ca_resist) == 0)   // pro pripady monster co nemaji nastaven resist nebo nebyly respawnuty po jejich nastaveni
+  arg(ca_resist,<eval tag(experience)/10>)
+endif
 if (arg(ca_resist) < 250)
   src.classMessage("Cil byl drtive zasazen!")
 elseif (arg(ca_resist) < 500)
@@ -155,6 +158,9 @@ if (arg(ca_resist) > 0)
   arg(power,#-<eval (arg(power)*arg(ca_resist))/1000>)
 endif
 arg(duration,<eval nastaveni_crushingArrow_PvM_durationBase+(<src.tag(ra_crushingArrow)>*nastaveni_crushingArrow_PvM_durationAbilityPoint)>)
+
+giveitem(i_crushingArrow_effect_memory)
+lastnew.more2=<arg(duration)>
 
 f_crushingArrow_successEffect(<argv(0)>)
 reduceResist(sharp,<arg(duration)>,<arg(power)>)
@@ -292,5 +298,24 @@ if (act.def.layer==layer_helm)
   return 1
 endif
 return 0
+
+
+[ITEMDEF i_crushingArrow_effect_memory]
+ID=i_memory
+NAME=Crushing Arrow Effect
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+topobj.effect(3,01e2f,1,50)
+topobj.sound(03A8)  // arrow hit target
+TIMER=0
+
+ON=@timer
+if (more2 > 10)
+    topobj.effect(3,01e2f,1,30)
+    timerd=10
+    more2=more2-10
+    return 1
+endif
 
 [eof]
