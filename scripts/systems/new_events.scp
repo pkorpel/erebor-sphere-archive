@@ -258,14 +258,20 @@ timer=3
 
 on=@unequip
 topobj.flag_immobile=0
-tag(ovinovac).flag_immobile=0
-tag(ovinovac).tag.remove(narusitel)
+if (npcExists(<tag(ovinovac)>))
+  tag(ovinovac).flag_immobile=0
+  tag(ovinovac).tag.remove(narusitel)
+endif
 
 on=@timer
-if (tag(ovinovac).p != topobj.p) || (tag(ovinovac).body==c_slime)
- remove
- return 1
+if (!npcExists(<tag(ovinovac)>))
+  remove
+  return 1
+elseif (tag(ovinovac).p != topobj.p) || (tag(ovinovac).body==c_slime)
+  remove
+  return 1
 endif
+
 timer=2
 return 1
 
