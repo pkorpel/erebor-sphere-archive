@@ -24,7 +24,7 @@ KARMA=-100
 STR=1000
 DEX=1000
 INT=1000
-Title=Mordorsky zemedelec
+Title=chudy mordorsky zemedelec
 
 ITEMnewbie=i_hair_afro
 color=047d
@@ -60,7 +60,7 @@ KARMA=-100
 STR=150
 DEX=150
 INT=100
-TITLE=zrucny mordorsky kovar
+TITLE=zrucny mordorsky remeslnik
 
 COOKING={55.0 78.0}
 TasteID={50.0 70.0}

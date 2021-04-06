@@ -653,30 +653,30 @@ return <eval((<eval src.qtag(gq002)> == 5) || (<eval src.qtag(mq002)> == 5) || (
 argo.f_qDialogInstructions(03118)
 
 if ( (<eval src.qtag(mq002)> == 6) || (<eval src.qtag(gq002)> == 6) )
-  argo.setText(1,"Zijes s vedomim, ze pro Borka jsi <?src.sex(udelal,udelala)?> vse, co jsi <?src.sex(mohl a ulehcil,mohla a ulehcila)?> jsi mu jeho tezky zivot.")
+  argo.setText(1,"Zijes s vedomim, ze pro Borka jsi <?src.sex("udelal","udelala")?> vse, co jsi <?src.sex("mohl, a ulehcil","mohla, a ulehcila")?> jsi mu tak aspon trochu jeho tezky zivot.")
 elseif (<eval src.qtag(gq002)> > 0) // gondorska cast
   if (<eval src.qtag(gq002)> == 1)
-    argo.setText(1,"Borek te pozadal, aby jsi <?src.sex("odmontoval","odmontovala")?> radlici z pluhu a <?src.sex("donesl","donesla")?> ji opravit.")
+    argo.setText(1,"Borek te pozadal, abys <?src.sex("vymontoval","vymontovala")?> radlici z jeho pluhu a <?src.sex("zanesl","zanesla")?> ji nechat opravit ke kovari.")
   elseif (<eval src.qtag(gq002)> == 2)
-    argo.setText(1,"Uz vis, jak vybabrat radlici z Borkova pluhu. Je na case to udelat.")
+    argo.setText(1,"Uz vis, jak vyjmout radlici z Borkova pluhu. Je na case to udelat.")
   elseif (<eval src.qtag(gq002)> == 3)
-    argo.setText(1,"Borek te pozadal, aby jsi <?src.sex("donesl","donesla")?> radlici z pluhu k oprave kovari, ktery ma svou dilnu jizne od Hurky.")
+    argo.setText(1,"Borek te pozadal, abys radlici z jeho pluhu <?src.sex("zanesl","zanesla")?> nechat opravit ke kovari, ktery zije jizne od Hurky.")
   elseif (<eval src.qtag(gq002)> == 4)
-    argo.setText(1,"Kovar ti opravil Borkovu radlici. Je cas vratit se s ni zpet.")
+    argo.setText(1,"Kovar pro tebe opravil Borkovu radlici. Je cas vratit se s ni zpet.")
   elseif (<eval src.qtag(gq002)> == 5)
-    argo.setText(1,"Vasnive jsi <?src.sex("vsunul","vsunula")?> opravenou radlici zpet do Borkova pluhu. Snad bude mit radost.")
+    argo.setText(1,"<?src.sex("Namontoval","Namontovala")?> jsi opravenou radlici zpet do Borkova pluhu. Snad bude mit radost.")
   endif
 else // mordorska cast
   if (<eval src.qtag(mq002)> == 1)
-    argo.setText(1,"Borek te pozadal, aby jsi <?src.sex("odmontoval","odmontovala")?> radlici z pluhu a <?src.sex("donesl","donesla")?> ji opravit.")
+    argo.setText(1,"Borek te pozadal, abys <?src.sex("vymontoval","vymontovala")?> radlici z jeho pluhu a <?src.sex("zanesl","zanesla")?> ji nechat opravit ke kovari.")
   elseif (<eval src.qtag(mq002)> == 2)
-    argo.setText(1,"Uz vis, jak vybabrat radlici z Borkova pluhu. Je na case to udelat.")
+    argo.setText(1,"Uz vis, jak vyjmout radlici z Borkova pluhu. Je na case to udelat.")
   elseif (<eval src.qtag(mq002)> == 3)
-    argo.setText(1,"Borek te pozadal, aby jsi <?src.sex("donesl","donesla")?> radlici z pluhu k oprave kovari na namesti.")
+    argo.setText(1,"Borek te pozadal, abys radlici z jeho pluhu <?src.sex("zanesl","zanesla")?> nechat opravit ke kovari, ktery ma svoji dilnu ve Rhunu.")
   elseif (<eval src.qtag(mq002)> == 4)
-    argo.setText(1,"Kovar ti opravil Borkovu radlici. Je cas vratit se s ni zpet.")
+    argo.setText(1,"Kovar pro tebe opravil Borkovu radlici. Je cas vratit se s ni zpet.")
   elseif (<eval src.qtag(mq002)> == 5)
-    argo.setText(1,"Vasnive jsi <?src.sex("vsunul","vsunula")?> opravenou radlici zpet do Borkova pluhu. Snad bude mit radost.")
+    argo.setText(1,"<?src.sex("Namontoval","Namontovala")?> jsi opravenou radlici zpet do Borkova pluhu. Snad bude mit radost.")
   endif
 endif
 
@@ -713,9 +713,9 @@ endif
 
 [dialog d_questy_gorug text]
 Kovar Gorug
-<?src.sex(Slibil,Slibila)?> jsi kovari, ze mu prineses kladivo, ktere mu sebrali trolove.
-Podarilo se ti ziskat od trolu Gorugovo kladivo. Ted uz mu ho jenom odnest, urcite bude stestim bez sebe.
-Kovar je ti vdecny za navraceni sveho kladiva.
+<?src.sex("Slibil","Slibila")?> jsi kovari, ze ziskas zpatky kladivo, ktere mu sebrali trollove.
+Podarilo se ti sebrat trollum Gorugovo kladivo. Ted uz mu ho jenom zanest, urcite bude stestim bez sebe.
+Kovar je ti vdecny za pomoc s trolly a vraceni sveho kladiva.
 
 [dialog d_questy_gorug button]
 on=0

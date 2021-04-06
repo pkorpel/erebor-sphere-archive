@@ -21,7 +21,7 @@ COLOR=color_clovek
 STR=1000
 DEX=1000
 INT=1000
-Title=Chudy zemedelec
+Title=chudy gondorsky zemedelec
 
 tag(noanimate,1)
 
@@ -55,7 +55,7 @@ COLOR=colors_skin
 STR=150
 DEX=150
 INT=100
-TITLE=Kovar
+TITLE=zrucny gondorsky remeslnik
 
 COOKING={55.0 78.0}
 TasteID={50.0 70.0}
