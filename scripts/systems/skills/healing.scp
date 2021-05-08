@@ -219,11 +219,8 @@ if (link!=cont)
 endif
 link.findid(i_krvaceni).remove
 if (tag(shamanheal))
-  link.hits=<eval link.hits+promilerange(<eval cont.healing+cont.anatomy>,<skill_healing.effect>)>
-  cont.classmessage("<link.name> byl uspesne osetren")
-  if (link!=cont)
-    link.classmessage("<cont.name> te osetril.")
-  endif
+  tag(shamanheal,"")
+  f_heal_common
 endif
 
 [function f_heal_common]
