@@ -180,6 +180,9 @@ endif
 if (<eval src.tag(level)> >= 200)  // Bonus na Elitni monstra
   arg(used2,#+1)
 endif
+if (<eval tamingTag(totalPoints)>)  // Znalost jezditek
+  arg(used2,#+1)
+endif
 /////
 
 argo.setlocation=5,5
@@ -383,6 +386,11 @@ if (<arg(EliteBonus)>)  // Bonus na Elitni monstra
   arg(poloha_x,#+60)
 endif
 
+if (<eval tamingTag(totalPoints)>)  // Znalost jezditek
+  argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05109)
+  argo.newTextLine(<boosty_x>+<poloha_x>+5,<boosty_y>+60,<def_questDialog_colorResponse>,"<CalcDecimalNumber(<eval ((<tamingTag(totalPoints)>*1000)/<def_taming_max_points>)>,10,1)>%") 
+  arg(poloha_x,#+55)
+endif
 /////
 
 
@@ -618,6 +626,10 @@ argo.newTextLine(683,55,<def_questDialog_colorResponse>,"Draci")
 // Bonusy 2. rada
 argo.gumppic(35,95,05006)
 argo.newTextLine(83,105,<def_questDialog_colorResponse>,"Elity")
+
+argo.gumppic(185,95,05109)
+argo.newTextLine(233,100,<def_questDialog_colorResponse>,"Znalost")
+argo.newTextLine(233,115,<def_questDialog_colorResponse>,"jezditek")
 
 argo.newTextLine(35,145,<def_questDialog_colorResponse>,"_________________________________________________________")
 argo.newTextLine(35,165,<def_questDialog_colorResponse>,"Blokace a odrazeni:")

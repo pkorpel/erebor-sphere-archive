@@ -1,3 +1,80 @@
+[defnames def_taming_stats]
+def_taming_mounts_count 17     // typu zvere ktere davaji body
+def_taming_max_points 1000     // soucet maximalnich poctu bodu
+
+def_taming_mount_chardef[0]    c_llama  // chardef zvere
+def_taming_mount_points[0]     1 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[0]  50 // max bodu za tuto zver
+
+def_taming_mount_chardef[1]    c_horse_brown_lt  // chardef zvere
+def_taming_mount_points[1]     2 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[1]  40 // max bodu za tuto zver
+
+def_taming_mount_chardef[2]    c_horse_brown_dk  // chardef zvere
+def_taming_mount_points[2]     2 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[2]  40 // max bodu za tuto zver
+
+def_taming_mount_chardef[3]    c_horse_tan  // chardef zvere
+def_taming_mount_points[3]     2 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[3]  30 // max bodu za tuto zver
+
+def_taming_mount_chardef[4]    c_horse_gray  // chardef zvere
+def_taming_mount_points[4]     2 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[4]  30 // max bodu za tuto zver
+
+def_taming_mount_chardef[5]    c_ostard_desert  // chardef zvere
+def_taming_mount_points[5]     5 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[5]  50 // max bodu za tuto zver
+
+def_taming_mount_chardef[6]    c_ostard_forest  // chardef zvere
+def_taming_mount_points[6]     5 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[6]  50 // max bodu za tuto zver
+
+def_taming_mount_chardef[7]    C_A_MUSTANG_ROAN  // chardef zvere
+def_taming_mount_points[7]     6 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[7]  30 // max bodu za tuto zver
+
+def_taming_mount_chardef[8]    C_A_MUSTANG_WIMMIMATE  // chardef zvere
+def_taming_mount_points[8]     7 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[8]  35 // max bodu za tuto zver
+
+def_taming_mount_chardef[9]    C_A_MUSTANG_REDROAN  // chardef zvere
+def_taming_mount_points[9]     9 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[9]  36 // max bodu za tuto zver
+
+def_taming_mount_chardef[10]    C_A_MUSTANG_CHOCOLATE  // chardef zvere
+def_taming_mount_points[10]     12 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[10]  48 // max bodu za tuto zver
+
+def_taming_mount_chardef[11]    C_A_MUSTANG_PAMAMINO  // chardef zvere
+def_taming_mount_points[11]     17 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[11]  51 // max bodu za tuto zver
+
+def_taming_mount_chardef[12]    C_A_MUSTANG_SKY  // chardef zvere
+def_taming_mount_points[12]     18 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[12]  54 // max bodu za tuto zver
+
+def_taming_mount_chardef[13]    C_A_MUSTANG_GREY  // chardef zvere
+def_taming_mount_points[13]     28 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[13]  56 // max bodu za tuto zver
+
+def_taming_mount_chardef[14]    C_A_MUSTANG_SKYGRAY  // chardef zvere
+def_taming_mount_points[14]     100 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[14]  100 // max bodu za tuto zver
+
+def_taming_mount_chardef[15]    C_A_MUSTANG_CRIMSON  // chardef zvere
+def_taming_mount_points[15]     100 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[15]  100 // max bodu za tuto zver
+
+def_taming_mount_chardef[16]    c_m_ridgeback  // chardef zvere
+def_taming_mount_points[16]     100 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[16]  100 // max bodu za tuto zver
+
+def_taming_mount_chardef[17]    c_mount_polar_bear  // chardef zvere
+def_taming_mount_points[17]     100 // bodu za tamnuti na spawnu
+def_taming_mount_maxpoints[17]  100 // max bodu za tuto zver
+
+ 
 [function f_tamingstart]
 action -1
 stopscriptedskills
@@ -140,6 +217,7 @@ else
   if ({0 1000} < <eval <cont.TAMING>-<link.TAMING>>) || (<link.tag(tamed)>)
     if (link.taming > 300) && (link.flag_spawned) //aby jim to nelezlo na srackach
       arg(GainBonus,<eval {500 600}>)  // Bonus k sanci na gain na spawnu
+      f_tamingMounts_stats(link)       // statistika jezditek na spawnu
     endif
     taming_success
     cont.SKILLGAIN(skill_taming,<arg(GainBonus)>)
@@ -261,4 +339,82 @@ elseif (act.taming > 0)
  endif
 endif
 return 1
+
+[function f_tamingMounts_stats] //argv(0) - Tamed mount
+arg(mount_Obody,<argv(0).Obody>)
+arg(tamingStats,<findid(i_memory_taming_stat)>)
+if (!strlen(<arg(tamingStats)>))
+  newequip(i_memory_taming_stat)
+endif
+ 
+arg(tamingCount,<eval tamingTag(tamingCount_<arg(mount_Obody)>)>)  
+if (<arg(tamingCount)> > 0)
+  tamingTag(tamingCount_<arg(mount_Obody)>,<eval arg(tamingCount)+1>)
+else
+  tamingTag(tamingCount_<arg(mount_Obody)>,1)
+endif  
+
+tamingTag(tamingPoints_<arg(mount_Obody)>,<f_mount_getPoints(<arg(mount_Obody)>,<arg(tamingCount)>+1)>)
+tamingTag(totalPoints,<f_mount_getTotalPoints>)
+
+
+[function f_mount_getPoints]   // argv(0) - Obody ; argv(1) - count
+arg(mount_Obody,<argv(0).Obody>)
+arg(i,0)
+while (arg(i) <= def_taming_mounts_count)
+  if (strmatch(<arg(mount_Obody)>,<def_taming_mount_chardef[arg(i)]>))
+    if (<eval (<argv(1)>*<def_taming_mount_points[arg(i)]>)> >= <def_taming_mount_maxpoints[arg(i)]>)
+      return <def_taming_mount_maxpoints[arg(i)]>
+    else
+      return <eval (<argv(1)>*<def_taming_mount_points[arg(i)]>)>
+    endif
+  endif
+
+  arg(i,#+1)
+endwhile
+
+return 0
+
+
+[function f_mount_getTotalPoints]
+arg(i,0)
+arg(totalPoints,0)
+while (arg(i) < def_taming_mounts_count)
+  arg(totalPoints,#+<eval tamingTag(tamingPoints_<def_taming_mount_chardef[arg(i)]>)>)
+
+  arg(i,#+1)
+endwhile
+
+return <arg(totalPoints)>
+
+
+[function tamingTag]
+arg(tamingStat,<findid(i_memory_taming_stat)>)
+if (<argvcount> >= 2) //zapisujeme novy tag
+  tamingStat.tag(<argv(0)>,"<argv(1)>")
+  return""
+elseif (<argvcount> == 1) // cteme tag
+  if !(<hval arg(tamingStat)>)
+    return""
+  endif
+  if (strlen(<tamingStat.tag(<argv(0)>)>))
+    return<tamingStat.tag(<argv(0)>)>
+  else
+    return""
+  endif
+endif
+RedMessage("spatny pocet argumentu")
+Return""
+
+[itemdef i_memory_taming_stat]
+name=Taming Statistic memory
+id=i_memory
+type=t_eq_script
+
+on=@create
+tag(totalPoints,0)
+
+on=@timer
+return 1
+
 [eof]
