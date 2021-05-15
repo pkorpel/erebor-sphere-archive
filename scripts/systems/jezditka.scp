@@ -405,15 +405,17 @@ endif
 if (npcExists(<src.tag(lastjezdik)>))
   arg(lastJezdik,<finduid(<src.tag(lastJezdik)>)>)
   arg(player,<src>)
-  src=lastJezdik
-  if (lastJezdik.body==c_llama_pack)
+  if (src.body==c_llama_pack)
+    src=lastJezdik
     player.newitem(i_mt_llama_pack)
-  elseif (lastJezdik.body==c_horse_pack)
+  elseif (src.body==c_horse_pack)
+    src=lastJezdik
     player.newitem(i_mt_horse_pack)
   else
+    logmsg("SRC: <src>; <src.name>")
     lastJezdik.dclick
     return 1
-  endif
+  endif         
   lastnew.tag(mount_pack_id,<lastJezdik.id>)
   lastnew.more2=<lastJezdik>
   lastnew.color=<lastJezdik.color>
@@ -462,25 +464,26 @@ return 1
 
 on=@targon_char
 if !(src.targ.ismypet)
- src.sysmessage "Toto neni tve zvire."
- remove
- return 1
-elseif !(src.targ.srccombatLOS)||(src.targ.distance>6)
- SRC.SYSMESSAGE "Nevidis cil."
- remove
- return 1
-else
- arg(player,<src>)
- src=src.targ
- player.dismount
- if (src.body==c_llama_pack)
-  player.newitem(i_mt_llama_pack)
- elseif (src.body==c_horse_pack)
-  player.newitem(i_mt_horse_pack)
- else
-  src.dclick
+  src.sysmessage "Toto neni tve zvire."
   remove
   return 1
+elseif !(src.targ.srccombatLOS) || (src.targ.distance > 6)
+  src.SYSMESSAGE "Nevidis cil."
+  remove
+  return 1
+else                                                                           
+  arg(player,<src>)
+  player.dismount
+  if (src.body == c_llama_pack)
+    src=src.targ
+    player.newitem(i_mt_llama_pack)
+  elseif (src.body == c_horse_pack)
+    src=src.targ
+    player.newitem(i_mt_horse_pack)
+  else
+    src.targ.dclick
+    remove
+    return 1
  endif
  arg(mymemjezdik,<lastnew>)
  mymemjezdik.tag(mount_pack_id,<src.id>)
