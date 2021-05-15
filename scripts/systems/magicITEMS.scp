@@ -1064,7 +1064,7 @@ endif
 arg(skill_sum,0)
 arg(other_sum,0)
 arg(u,0)
-while (arg(u)<200)
+while (arg(u)<150)
   if (tag(imi_value[<arg(u)>]))
     if (arg(u)<50)
       arg(skill_sum,<arg(skill_sum)>+1)
@@ -1201,7 +1201,7 @@ else
 endif
 
 arg(u,0)
-while (arg(u)<200)
+while (arg(u)<150)
   if (<?safe.mifdef_sort_<arg(itemsort)>_type_<arg(u)>_rare?>)
     arg(rare,<?safe.mifdef_sort_<arg(itemsort)>_type_<arg(u)>_rare?>)
     arg(randomstring,"<?arg(randomstring)?> <?arg(u)?> <?arg(rare)?>")
@@ -1237,7 +1237,7 @@ src.newitem <src.targ.baseid>
 arg(skill_sum,0)
 arg(other_sum,0)
 arg(u,0)
-while (arg(u)<200)
+while (arg(u)<150)
  if (src.targ.tag(imi_value[<arg(u)>]))
   if (arg(u)<50)
    arg(skill_sum,<arg(skill_sum)>+1)
