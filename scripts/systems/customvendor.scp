@@ -372,7 +372,7 @@ if (ISMYPET)
  if !(<tag.GOLD>)
   say Dnes pro tebe nemam zadne penize...
  else
-  src.findlayer(29).givegold(<tag.gold>)
+  src.f_vytvor_mesec(<gp_prize>,<src.findlayer(layer_bankbox)>) 
   src.accmsg("vybral <tag(gold)> zlata z vendora <name>(<uid>); (<src.p>)")
   say Dostal jsi <tag.gold> zlata.
   tag(gold,0)
