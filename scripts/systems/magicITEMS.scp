@@ -15,6 +15,7 @@ src.findlayer(21).contents(markmagical(<uid>))
 if (<tag(srcmagicals)> >= def_imi_exchangeAttrs)
   arg(i,1)
   while(i <= tag(srcmagicalitems))
+    src.accmsg("vymenil <finduid(<tag(magic_<arg(i)>)>).name> (<tag(magic_<arg(i)>)>) z layeru <finduid(<tag(magic_<arg(i)>)>).layer> u <name> (<uid>) na pozici <src.p> (<src.region.name>)")
     finduid(<tag(magic_<arg(i)>)>).remove
     tag.remove(magic_<arg(i)>)
     arg(i,#+1)
