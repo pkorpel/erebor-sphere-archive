@@ -1092,7 +1092,7 @@ ITEMNEWBIE=i_copper_PLATEMAIL_gauntlets
 color=color_mount_lord
 ITEMnewbie=i_sash
 color=1
-ITEMnewbie=i_cloak
+ITEMnewbie=i_cape
 color=0455
 ITEM=i_npc_mount
 
