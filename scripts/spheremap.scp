@@ -7630,7 +7630,7 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 200]     //Minas Tirith
 P=5548,3810,-20
-RECT=5542,3797,5560,3809
+RECT=5542,3797,5560,3810
 tag.housenumber=200
 FLAGS=01192
 RAINCHANCE=00  
