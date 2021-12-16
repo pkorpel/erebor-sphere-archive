@@ -4,101 +4,101 @@
 [defnames def_ChristmasQuest]
 def_christmasQuest_MemoryStone  #0400514A1  // memory item v zivem regionu
 
-// [ITEMDEF i_christmas_pig_head]
-// ID=i_pigs_head
-// NAME=Hlava zlateho prasatka
-// VALUE=50000
-// WEIGHT=0
-// 
-//   
-// CATEGORY=Eventy
-// SUBSECTION=Christmas
-// DESCRIPTION=Hlava zlateho prasete
-// 
-// ON=@Create
-// COLOR=0995
-// timer=3600
-// def_christmasQuest_MemoryStone.tag(Uriznutych_hlav,#+1)
-// 
-// ON=@userCLICK
-// if (<timer> < 1)
-//   if (topobj.isChar)
-//     topobj.sysmessage("Hlava zlateho prasete se rozpadla na kousky tlejiciho masa.")
-//   endif
-//   def_christmasQuest_MemoryStone.tag(rozpadnutych_hlav,#+1)
-//   remove
-// else
-//   src.sysmessage("Tlejici hlava zlateho prasete, asi nevydrzi dlouho cerstva.")
-// endif
-// 
-// ON=@Timer
-// def_christmasQuest_MemoryStone.tag(rozpadnutych_hlav,#+1)
-// if (topobj.isChar)
-//   topobj.sysmessage("Hlava zlateho prasete se rozpadla na kousky tlejiciho masa.")
-// endif
-// remove
-// 
-// 
-// [ITEMDEF i_christmas_bulb]
-// ID=i_virtstone_7
-// NAME=Vanocni banka
-// VALUE=50000
-// WEIGHT=0
-// 
-// CATEGORY=Eventy
-// SUBSECTION=Christmas
-// DESCRIPTION=Vanocni Banka
-// 
-// ON=@Create
-// dorand 20
-//   color=0995
-//   color=0998
-//   color=0992
-//   color=0994
-//   color=0997
-//   color=0985
-//   color=0988
-//   color=0983
-//   color=0980
-//   color=098B
-//   color=0021
-//   color=042D
-//   color=0045
-//   color=099D
-//   color=0981
-//   color=0058
-//   color=007C
-//   color=00D4
-//   color=0AC1
-//   color=0AC2 
-// enddo
-// 
-// ON=@DROPON_GROUND
-// if (playerExists(<src>)) 
-//   def_christmasQuest_MemoryStone.tag(rozbitych_banek,#+<amount>)
-//   sfx(74)      // zvuk rozbiti :-)
-//   src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
-//   remove
-// endif
-// 
-// 
-// ON=@userCLICK
-// src.sysmessage("Opatrne, at to nerozbijes.")
-// 
-//   
-// ON=@Step
-// if (src.isgm)
-//   return 0
-// endif
-// 
-// if (chance(<src.weight>,4))
-//   def_christmasQuest_MemoryStone.tag(rozslapnutych_banek,#+<amount>)
-//   src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vanocni ozdoby!")
-//   sfx(74)
-//   remove
-// else
-//   src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> vanocni ozdoby.")
-// endif
+[ITEMDEF i_christmas_pig_head]
+ID=i_pigs_head
+NAME=Hlava zlateho prasatka
+VALUE=50000
+WEIGHT=0
+ 
+   
+CATEGORY=Eventy
+SUBSECTION=Christmas
+DESCRIPTION=Hlava zlateho prasete
+ 
+ON=@Create
+COLOR=0995
+timer=3600
+def_christmasQuest_MemoryStone.tag(Uriznutych_hlav,#+1)
+ 
+ON=@userCLICK
+if (<timer> < 1)
+  if (topobj.isChar)
+    topobj.sysmessage("Hlava zlateho prasete se rozpadla na kousky tlejiciho masa.")
+  endif
+  def_christmasQuest_MemoryStone.tag(rozpadnutych_hlav,#+1)
+  remove
+else
+  src.sysmessage("Tlejici hlava zlateho prasete, asi nevydrzi dlouho cerstva.")
+endif
+
+ON=@Timer
+def_christmasQuest_MemoryStone.tag(rozpadnutych_hlav,#+1)
+if (topobj.isChar)
+  topobj.sysmessage("Hlava zlateho prasete se rozpadla na kousky tlejiciho masa.")
+endif
+remove
+
+
+[ITEMDEF i_christmas_bulb]
+ID=i_virtstone_7
+NAME=Vanocni banka
+VALUE=50000
+WEIGHT=0
+ 
+CATEGORY=Eventy
+SUBSECTION=Christmas
+DESCRIPTION=Vanocni Banka
+
+ON=@Create
+dorand 20
+  color=0995
+  color=0998
+  color=0992
+  color=0994
+  color=0997
+  color=0985
+  color=0988
+  color=0983
+  color=0980
+  color=098B
+  color=0021
+  color=042D
+  color=0045
+  color=099D
+  color=0981
+  color=0058
+  color=007C
+  color=00D4
+  color=0AC1
+  color=0AC2 
+enddo
+ 
+ON=@DROPON_GROUND
+if (playerExists(<src>)) 
+  def_christmasQuest_MemoryStone.tag(rozbitych_banek,#+<amount>)
+  sfx(74)      // zvuk rozbiti :-)
+  src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
+  remove
+endif
+ 
+ 
+ON=@userCLICK
+src.sysmessage("Opatrne, at to nerozbijes.")
+
+   
+ON=@Step
+if (src.isgm)
+  return 0
+endif
+ 
+if (chance(<src.weight>,4))
+  def_christmasQuest_MemoryStone.tag(rozslapnutych_banek,#+<amount>)
+  src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vanocni ozdoby!")
+  sfx(74)
+  remove
+else
+  src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> vanocni ozdoby.")
+endif
 
 
 [CHARDEF c_christmas_pig]
@@ -473,5 +473,7 @@ if (<eval tag(bonus_zkusenosti)> > 0)
   cont.sysmessage("Bonus za Vanocni event skoncil. Nyni mas zpet bonus <RP_rank[<eval cont.tag(RP_rank)>]> %.")
 endif
 
+ON=@TIMER
+return 1
 
 [eof]
