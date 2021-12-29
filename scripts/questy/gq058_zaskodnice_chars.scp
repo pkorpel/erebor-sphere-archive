@@ -1,0 +1,66 @@
+//////////////////////////////
+// GQ058 Zaskodnice (chars, speech)
+//////////////////////////////
+
+//////////////////////////////
+// Chars
+//////////////////////////////
+
+[chardef c_gq058_zaskodnice]
+id=c_woman
+name=Zaskodnice
+
+TEVENTS=e_character
+TEVENTS=e_monster
+TEVENTS=e_item_refuser
+TSPEECH=spk_gq058_zaskodnice
+
+CATEGORY=Moria Questy
+SUBSECTION=gq058 - Zaskodnice
+DESCRIPTION=Zaskodnice
+
+on=@UserDclick
+if (src.targ.distance > 5)
+	src.sysMessage("Zena si te nevsima, musis jit bliz.")
+else
+	f_gq058_Zaskodnice_DClick
+endif
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=tajemna elfka
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_long
+color=1148
+ITEMnewbie=i_OBSIDIAN_PLATEMAIL_GORGET
+ITEMnewbie=i_OBSIDIAN_PLATEMAIL_leggings
+ITEMnewbie=i_OBSIDIAN_FEMALE_PLATEMAIL
+ITEMnewbie=i_OBSIDIAN_PLATEMAIL_ARMS
+ITEMnewbie=i_OBSIDIAN_PLATEMAIL_GAUNTLETS
+ITEMnewbie=i_OBSIDIAN_HEATER_SHIELD
+ITEMnewbie=i_sword_broad_adamantinum
+
+//////////////////////////////
+// Speech
+//////////////////////////////
+
+[speech spk_gq058_zaskodnice]
+on = *ahoj*
+on = *ukol*
+on = *prace*
+on = *den*
+on = *zdravim*
+
+if (src.targ.distance > 5)
+	src.sysMessage("Zena si te nevsima, musis jit bliz.")
+else
+	f_gq058_Zaskodnice_DClick
+endif
+
+[eof]

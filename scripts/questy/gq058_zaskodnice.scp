@@ -1,0 +1,893 @@
+//////////////////////////////
+// GQ058 Zaskodnice (DClick, timers, items, dialog)
+//////////////////////////////
+
+//////////////////////////////
+// DClick
+//////////////////////////////
+
+[function f_gq058_Zaskodnice_DClick]
+if (src.isDead)
+  return
+elseif (<src.tag(realm)> == 2)
+  say("Co tady sakra delas? Vypadni!!!")
+  return
+elseif (<eval src.tag(rank)> < 3)
+  say("Ty jsi mi zatim k nicemu...")
+  return
+elseif !(isHourOK(getHour(),16,21))                                             
+  say("Ted se to nehodi. Prijdi jindy.")                                        
+  return                                                                        
+endif
+dialog(d_gq058_zaskodnice)
+
+//////////////////////////////
+// Timers
+//////////////////////////////
+
+[itemdef i_gq058_zaskodnice_casomira]
+ID=i_memory
+NAME=gq058 zaskodnice - casomira
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=3600
+
+ON=@CREATE
+ATTR=attr_invis|attr_movenever|attr_decay    
+
+ON=@TIMER
+src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
+serv.allclients(warmessage(2,"Gondorsky zaskodnik neuspel ve svem ukolu."))
+serv.allclients(warmessage(1,"Gondorsky zaskodnik neuspel ve svem ukolu."))
+src.redmessage("Nepodarilo se ti splnit zaskodnicky ukol dostatecne rychle.")
+
+[itemdef i_gq058_zaskodnice_dokonceni]
+ID=i_memory
+NAME=gq058 zaskodnice - dokonceni
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=345600                                                                    
+
+ON=@CREATE
+ATTR=attr_invis|attr_movenever|attr_decay    
+
+ON=@TIMER
+src.qtag(gq058_zaskodnice,190)
+src.bluemessage("Muzes se opet ucastnit zaskodnickych akci.")
+
+//////////////////////////////
+// Items
+//////////////////////////////
+
+[itemdef i_mq057_1]
+ID=i_lever
+NAME=Mechanismus brany
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=4476,2394,40
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 11) || (<eval src.qtag(gq058_zaskodnice)> == 16))
+  if !(<src.tag(realm)> == 2)
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Poskodil,Poskodila)> jsi mechanismus brany.")
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_2]
+ID=i_lever
+NAME=Ukotveni mostu
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3403,2801
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 21) || (<eval src.qtag(gq058_zaskodnice)> == 26))
+  if !(<src.tag(realm)> == 2)
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Poskodil,Poskodila)> jsi ukotveni mostu.") 
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_3]
+ID=i_lever
+NAME=Mechanismus brany
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3212,2538,60
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 31) || (<eval src.qtag(gq058_zaskodnice)> == 36))
+  if !(<src.tag(realm)> == 2) 
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Poskodil,Poskodila)> jsi mechanismus brany.") 
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_4]
+ID=i_barrel
+NAME=Sud rumu
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=2434,4039,30
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 41) || (<eval src.qtag(gq058_zaskodnice)> == 46))
+  if !(<src.tag(realm)> == 2)
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Vylil,Vylila)> jsi sud rumu.")   
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_5]
+ID=i_dirt_tile
+NAME=Stanoviste zvedu
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3120,2556,50
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 51) || (<eval src.qtag(gq058_zaskodnice)> == 56))
+  if !(<src.tag(realm)> == 2) 
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Znicil,Znicila)> jsi stanoviste zvedu.")   
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_6]
+ID=i_dirt_tile
+NAME=Obradni misto
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3974,2049
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 61) || (<eval src.qtag(gq058_zaskodnice)> == 66))
+  if !(<src.tag(realm)> == 2) 
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Znesvetil,Znesvetila)> jsi obradni misto.")    
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_7]
+ID=i_bookcase_full
+NAME=Nabozenske texty
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3433,3261,12
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 71) || (<eval src.qtag(gq058_zaskodnice)> == 76))
+  if !(<src.tag(realm)> == 2)  
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Znicil,Znicila)> jsi nabozenske texty.")
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_8]
+ID=i_book_of_truth
+NAME=Zaznamy o sazkach
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=2743,3790,27
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 81) || (<eval src.qtag(gq058_zaskodnice)> == 86))
+  if !(<src.tag(realm)> == 2)
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Pozmanil,Pozmenila)> jsi zaznamy o sazkach.") 
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_9]
+ID=i_book_of_truth
+NAME=Rozpis sluzeb strazi
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3569,2769,27
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 91) || (<eval src.qtag(gq058_zaskodnice)> == 96))
+  if !(<src.tag(realm)> == 2) 
+    src.consume(1,i_gq058_zaskodnice_casomira)
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+    src.sysmessage("<src.sex(Pozmenil,Pozmenila)> jsi rozpis sluzeb strazi.")  
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_10]
+ID=i_bucket
+NAME=Vedro
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=2895,3691,-1
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 101) || (<eval src.qtag(gq058_zaskodnice)> == 106))
+  if !(<src.tag(realm)> == 2)
+    if (src.rescount(i_potion_PoisonLess) >= 10) 
+      src.consume(1,i_gq058_zaskodnice_casomira)
+      src.consume(10,i_potion_PoisonLess)
+      src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+      src.sysmessage("<src.sex(Otravil,Otravila)> jsi vodu v jezirku.")   
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+    else
+      src.sysmessage("Nemas vse potrebne.")
+    endif
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif   
+
+[itemdef i_gq058_11]
+ID=i_flour_sack
+NAME=Pytel obili
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3245,3222,30
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 111) || (<eval src.qtag(gq058_zaskodnice)> == 116))
+  if !(<src.tag(realm)> == 2)
+    if (src.rescount(i_potion_Lava) >= 1)  
+      src.consume(1,i_gq058_zaskodnice_casomira)
+      src.consume(1,i_potion_Lava)
+      src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+      src.sysmessage("<src.sex(Umistil,Umistila)> jsi vybusninu do pytle.")   
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+    else
+      src.sysmessage("Nemas vse potrebne.")
+    endif
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_12]
+ID=i_kettle
+NAME=Kotlik na lektvary
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3883,2039,50
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 121) || (<eval src.qtag(gq058_zaskodnice)> == 126))
+  if !(<src.tag(realm)> == 2)
+    if (src.rescount(i_reag_nightshade) >= 200)   
+      src.consume(1,i_gq058_zaskodnice_casomira)
+      src.consume(200,i_reag_nightshade)
+      src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+      src.sysmessage("<src.sex(Namazal,Namazala)> jsi vnitrek kotle rulikem.") 
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+    else
+      src.sysmessage("Nemas vse potrebne.")
+    endif
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif 
+
+[itemdef i_gq058_13]
+ID=i_bucket
+NAME=Vedro
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3936,3011
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 131) || (<eval src.qtag(gq058_zaskodnice)> == 136))
+  if !(<src.tag(realm)> == 2)
+    if (src.rescount(i_potion_Poison) >= 5)  
+      src.consume(1,i_gq058_zaskodnice_casomira)
+      src.consume(5,i_potion_Poison)
+      src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+      src.sysmessage("<src.sex(Otravil,Otravila)> jsi vodu ve studni.")   
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))  
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+    else
+      src.sysmessage("Nemas vse potrebne.")
+    endif
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_14]
+ID=i_pitcher
+NAME=Karafa s vinem
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=4159,3908,45
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 141) || (<eval src.qtag(gq058_zaskodnice)> == 146))
+  if !(<src.tag(realm)> == 2)
+    if (src.rescount(i_potion_PoisonGreat) >= 3) 
+      src.consume(1,i_gq058_zaskodnice_casomira)
+      src.consume(3,i_potion_PoisonGreat)
+      src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+      src.sysmessage("<src.sex(Otravil,Otravila)> jsi vino panovnika.")   
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+    else
+      src.sysmessage("Nemas vse potrebne.")
+    endif
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_15]
+ID=i_dirt_tile
+NAME=Zaklady pevnosti
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3680,2678,-50
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 151) || (<eval src.qtag(gq058_zaskodnice)> == 156))
+  if !(<src.tag(realm)> == 2)
+    if (src.rescount(i_zmrzlavoda) >= 20)   
+      src.consume(1,i_gq058_zaskodnice_casomira)
+      src.consume(20,i_zmrzlavoda)
+      src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+      src.sysmessage("<src.sex(Narusil,Narusila)> jsi zaklady pevnosti.")  
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+    else
+      src.sysmessage("Nemas vse potrebne.")
+    endif
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_16]
+ID=i_kettle
+NAME=Krmivo
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=2500,3982,11
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 161) || (<eval src.qtag(gq058_zaskodnice)> == 166))
+  if !(<src.tag(realm)> == 2)
+    if (src.rescount(i_potion_PoisonDeadly) >= 1)
+      src.consume(1,i_gq058_zaskodnice_casomira)
+      src.consume(1,i_potion_PoisonDeadly)
+      src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+      src.sysmessage("<src.sex(Otravil,Otravila)> jsi krmivo olifanta.") 
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))  
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+    else
+      src.sysmessage("Nemas vse potrebne.")
+    endif
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+[itemdef i_gq058_17]
+ID=i_barrel
+NAME=Sud piva
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=3620,2769,6
+
+ON=@userDCLICK
+if !((<eval src.qtag(gq058_zaskodnice)> == 171) || (<eval src.qtag(gq058_zaskodnice)> == 176))
+    src.sysmessage("Nevis, co s tim.")
+    return
+endif
+if (<src.tag(realm)> == 2)
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    return
+endif
+if !(src.rescount(i_potion_Poison_fizz) >= 1)
+    src.sysmessage("Nemas vse potrebne.")
+    return
+endif
+if !(src.rescount(i_potion_Poison_weaken) >= 1)
+    src.sysmessage("Nemas vse potrebne.")
+    return
+endif
+if !(src.rescount(i_potion_Poison_clumsy) >= 1)
+    src.sysmessage("Nemas vse potrebne.")
+    return
+endif
+if !(src.rescount(i_potion_Poison_para) >= 1)
+    src.sysmessage("Nemas vse potrebne.")
+    return
+endif
+if !(src.rescount(i_potion_Poison_feeblemind) >= 1)
+     src.sysmessage("Nemas vse potrebne.")
+    return
+endif
+if !(src.rescount(i_potion_Poison_stamina) >= 1))
+    src.sysmessage("Nemas vse potrebne.")
+    return
+endif
+src.consume(1,i_gq058_zaskodnice_casomira)
+src.consume(1,i_potion_Poison_fizz)
+src.consume(1,i_potion_Poison_weaken)
+src.consume(1,i_potion_Poison_clumsy)
+src.consume(1,i_potion_Poison_para)
+src.consume(1,i_potion_Poison_feeblemind)
+src.consume(1,i_potion_Poison_stamina)
+src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+src.sysmessage("<src.sex(Vylepsil,Vylepsila)> jsi pivo v barad-durske hospode.")       
+serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
+serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+
+[itemdef i_gq058_18]
+ID=i__box_wood
+NAME=Truhla velitele
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+COLOR=098B
+p=4212,3862,20
+
+ON=@userDCLICK
+if ((<eval src.qtag(gq058_zaskodnice)> == 181) || (<eval src.qtag(gq058_zaskodnice)> == 186))
+  if !(<src.tag(realm)> == 2)
+    if (src.rescount(i_ingot_adamantinum) >= 2)  
+      src.consume(1,i_gq058_zaskodnice_casomira)
+      src.consume(2,i_ingot_adamantinum)
+      src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
+      src.sysmessage("<src.sex(Dorucil,Dorucil)> jsi uplatek haradskemu kapitanovi.")   
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+    else
+      src.sysmessage("Nemas vse potrebne.")
+    endif
+  else
+    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+  endif
+else
+  src.sysmessage("Nevis, co s tim.")
+endif
+
+//////////////////////////////
+// Dialog
+//////////////////////////////
+
+[dialog d_gq058_zaskodnice]
+argo.questDialog_create(03069,"Zaskodnice")
+arg(gq058_zaskodnice,<eval src.qtag(gq058_zaskodnice)>)
+argo.dialog_newPage("Pozdrav")
+
+argo.questDialog_baseButt(1) // Kdo jsi?
+argo.questDialog_baseButt(2) // Mohu pomoci?
+argo.questDialog_baseButt(3) // Obchodovat
+argo.questDialog_baseButt(4,29,"Zaskodnictvi") // Zaskodnictvi
+argo.questDialog_baseButt(5,52,"Prace") // Prace
+argo.questDialog_baseButt(6) // Prohlednout
+
+argo.dialog_page("Pozdrav")
+  argo.setText(argo.newTextLine,"Zdravim. <def_questDialog_colorTextEmote>*Ani se na tebe nepodivala*")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Kdo jsi?")
+  argo.setText(argo.newTextLine,"BYLA jsem kapitankou mestske straze. A BYLA jsem v tom vazne dobra. Ale nekomu se to nelibilo, takze mi pridelili tuhle uzasnou praci, pry vysluzba. Kancelarska krysa, to ted jsem.")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Mohu pomoci?")
+  argo.setText(argo.newTextLine,"Branit ti v tom nebudu. Vsechna ta lejstra tady na stole jsou objednavky zaskodnickych akci od ruznych zajmovych skupin. Staci si rict, ja nikam nejdu.")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Obchodovat")
+  argo.setText(argo.newTextLine,"Dat se krom uredniciny jeste na obchodovani? Muj zivotni sen!")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Zaskodnictvi")
+  argo.setText(argo.newTextLine,"Mam tu objednavky na relativne jednoduche a ciste prace, ale i par hodne spinavych a nebezpecnych. Skoda, ze se odtud nesmim hnout, jinak bych to vsechno vyridila sama.")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Prace")
+  if (<arg(gq058_zaskodnice)> == 0) 
+    argo.setText(argo.newTextLine,"Je potreba poskodit mechanismus vychodni brany do Mordoru tak, aby pri nasem najezdu mechanismus selhal a brana nesla zavrit.")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Rozumim, jdu na to.")
+    argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_accept_1st")
+    argo.setText(argo.newTextLine,"Hmm, mozna nekdy jindy...")
+    argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_blank")
+  elseif (<arg(gq058_zaskodnice)> == 190) 
+    argo.setText(argo.newTextLine,"Je potreba poskodit mechanismus vychodni brany do Mordoru tak, aby pri nasem najezdu mechanismus selhal a brana nesla zavrit.")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Rozumim, jdu na to.")
+    argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_accept_2nd")
+    argo.setText(argo.newTextLine,"Hmm, mozna nekdy jindy...")
+    argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_blank")
+  elseif (((<arg(gq058_zaskodnice)> % 5) == 1) || ((<arg(gq058_zaskodnice)> % 5) == 4)) 
+    if ((<arg(gq058_zaskodnice)> == 11) || (<arg(gq058_zaskodnice)> == 16))
+      argo.setText(argo.newTextLine,"Je potreba poskodit mechanismus vychodni brany do Mordoru tak, aby pri nasem najezdu mechanismus selhal a brana nesla zavrit.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 14) || (<arg(gq058_zaskodnice)> == 19) || (<arg(gq058_zaskodnice)> == 21) || (<arg(gq058_zaskodnice)> == 26))
+      argo.setText(argo.newTextLine,"Na upati Hory osudu se nachazi uzka lavka pres lavovou reku. Drevena! Staci si trochu pohrat s jejim ukotvenim a pristi oddil skretu si v lave bude moct zaplavat...")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 24) || (<arg(gq058_zaskodnice)> == 29) || (<arg(gq058_zaskodnice)> == 31) || (<arg(gq058_zaskodnice)> == 36))
+      argo.setText(argo.newTextLine,"Mordorska chamrad celkem posetile spoleha na bezpeci poskytovane Cernou branou. Budou asi prekvapeni, az po tvem zasahu nepujde zavrit a mordorske plane nam budou vydany na milost. Do toho.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 34) || (<arg(gq058_zaskodnice)> == 39) || (<arg(gq058_zaskodnice)> == 41) || (<arg(gq058_zaskodnice)> == 46))
+      argo.setText(argo.newTextLine,"Postarej se o vyliti zasob rumu v umbarske pristavni krcme. Uvidime, jak to zvedne namornikum moralku!")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 44) || (<arg(gq058_zaskodnice)> == 49) || (<arg(gq058_zaskodnice)> == 51) || (<arg(gq058_zaskodnice)> == 56))
+      argo.setText(argo.newTextLine,"Kousek jizne od Cerne brany je jedna z mordorskych pevnosti. Znic stanoviste jejich zvedu a zarid tak, ze uz nase najezdy nebudou jejich aktivitou mareny.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 54) || (<arg(gq058_zaskodnice)> == 59) || (<arg(gq058_zaskodnice)> == 61) || (<arg(gq058_zaskodnice)> == 66))
+      argo.setText(argo.newTextLine,"Ve skalach za taborem Rhun se nachazi prastare obradni misto. Par modliteb by melo omezit jeho magicky vliv.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 64) || (<arg(gq058_zaskodnice)> == 69) || (<arg(gq058_zaskodnice)> == 71) || (<arg(gq058_zaskodnice)> == 76))
+      argo.setText(argo.newTextLine,"V nurnskem chramu maji knezi mnoho nabozenskych textu. At uz se v nich pise cokoliv, je potreba je znicit. Mimochodem, do chramu vede z jihu tajna chodba!")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 74) || (<arg(gq058_zaskodnice)> == 79) || (<arg(gq058_zaskodnice)> == 81) || (<arg(gq058_zaskodnice)> == 86))
+      argo.setText(argo.newTextLine,"Nekdo si mysli, ze bude zabavne zmenit zaznamy o sazkach v arene poustniho mestecka Tahabar. Vlastne by skutecne mohlo mit neco do sebe vyvolat mezi sazkari sarvatku.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 84) || (<arg(gq058_zaskodnice)> == 89) || (<arg(gq058_zaskodnice)> == 91) || (<arg(gq058_zaskodnice)> == 96))
+      argo.setText(argo.newTextLine,"Z nejvyssich mist prisel pokyn pokusit se zmenit rozpis barad-durskych strazi na nadchazejici obdobi tak, aby byly jejich hlidky mene ostrazite.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 94) || (<arg(gq058_zaskodnice)> == 99) || (<arg(gq058_zaskodnice)> == 101) || (<arg(gq058_zaskodnice)> == 106))
+      argo.setText(argo.newTextLine,"Oaza Hagir je dulezitym obchodnim uzlem prave kvuli svemu jezirku. Zajisti pomoci vetsiho mnozstvi slabeho jedu, ze se tomuto mistu zacnou obchodnici vyhybat.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 104) || (<arg(gq058_zaskodnice)> == 109) || (<arg(gq058_zaskodnice)> == 111) || (<arg(gq058_zaskodnice)> == 116))
+      argo.setText(argo.newTextLine,"Nastraz do jednoho z pytlu obili v nurnskem mlyne tu nejsilnejsi moznou traskavinu. Zniceni celeho mlyna bude krasna prezentace sily.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 114) || (<arg(gq058_zaskodnice)> == 119) || (<arg(gq058_zaskodnice)> == 121) || (<arg(gq058_zaskodnice)> == 126))
+      argo.setText(argo.newTextLine,"Poradne vymaz kotel rhunskeho samana uctyhodnym mnozstvim ruliku. Uvidime, jak budou jeho posilnujici lektvary skretum potom chutnat...")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 124) || (<arg(gq058_zaskodnice)> == 129) || (<arg(gq058_zaskodnice)> == 131) || (<arg(gq058_zaskodnice)> == 136))
+      argo.setText(argo.newTextLine,"Otrav zdroj pitne vody v osade Bagronk. Nekolik lahvicek bezneho jedu bude stacit.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 134) || (<arg(gq058_zaskodnice)> == 139) || (<arg(gq058_zaskodnice)> == 141) || (<arg(gq058_zaskodnice)> == 146))
+      argo.setText(argo.newTextLine,"Otrav vino panovnika v jeho komnatach v haradskem palaci. Nepouzivej ale smrtici jed, at to nema tak rychle za sebou. Nebo mu aspon jeho ochutnavac predvede, co ho driv nebo pozdeji ceka.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 144) || (<arg(gq058_zaskodnice)> == 149) || (<arg(gq058_zaskodnice)> == 151) || (<arg(gq058_zaskodnice)> == 156))
+      argo.setText(argo.newTextLine,"Umisti vetsi mnozstvi nadob se zmrzlou vodou do mezer ve zdivu barad-durske pevnosti. Az prijde spravny cas, zaklady budou jejim magickym pusobenim dostatecne naruseny a usnadni nam tak celou bitvu.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 154) || (<arg(gq058_zaskodnice)> == 159) || (<arg(gq058_zaskodnice)> == 161) || (<arg(gq058_zaskodnice)> == 166))
+      argo.setText(argo.newTextLine,"Nedela mi to zadnou radost, ale potrebujeme umbarskou posadku zbavit jejich olifanta. Aby prilis netrpel, primichej mu do krmeni ampuli smrticiho jedu.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 164) || (<arg(gq058_zaskodnice)> == 169) || (<arg(gq058_zaskodnice)> == 171) || (<arg(gq058_zaskodnice)> == 176))
+      argo.setText(argo.newTextLine,"Pripravy na utok na Barad-dur vrcholi, je ale jeste potreba co nejvice oslabit skreti posadku. Vylepsi pivo v tamni hospode o vsechny existujici specializovane druhy jedu!")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(gq058_zaskodnice)> == 174) || (<arg(gq058_zaskodnice)> == 179) || (<arg(gq058_zaskodnice)> == 181) || (<arg(gq058_zaskodnice)> == 186))
+      argo.setText(argo.newTextLine,"Tento ukol je velmi dulezity a snad nam ziska potrebnou taktickou vyhodu. Musis dorucit smluveny uplatek kapitanovi haradskych strazi. Sidli v severozapadnim rohu palace a ocekava dve anamantinove cihly.")
+      argo.questDialog_HTMLGUMP
+    endif
+    if ((<arg(gq058_zaskodnice)> % 5) == 4)
+      argo.setText(argo.newTextLine,"Rozumim, jdu na to.")
+      argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_accept")
+      argo.setText(argo.newTextLine,"Hmm, mozna nekdy jindy...")
+      argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_blank")
+    endif
+  elseif ((<arg(gq058_zaskodnice)> == 183) || (<arg(gq058_zaskodnice)> == 188))
+    argo.setText(argo.newTextLine,"Musim se priznat, ze me tvoje vykony celkem ohromily. Uz tu pro tebe nemam zadne dalsi zakazky. Skoda, ze ani to neni duvod, aby me preveleli jinam. Zastav se tu za par dnu, treba se zase neco objevi.")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Bylo mi cti poslouzit nasi veci!")
+    argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_reward_last") 
+  elseif ((<arg(gq058_zaskodnice)> % 5) == 3)
+    argo.setText(argo.newTextLine,"Prace odvedena vcas a spravne. Nic min jsem ani necekala.")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Bylo mi cti poslouzit nasi veci!")
+    argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_reward")
+  elseif ((<arg(gq058_zaskodnice)> % 5) == 2)
+    argo.setText(argo.newTextLine,"To se nam moc nepovedlo, hm?")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Bohuzel ne, ale chci to hned zkusit znovu!")
+    argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_retake")
+    argo.setText(argo.newTextLine,"Ano, bylo to nad moje sily. Potrebuju si chvili odpocinout...")
+    argo.questDialog_addResponse(0,1,1,"gq058_zaskodnice_blank")
+  elseif (<arg(gq058_zaskodnice)> == 185)
+    argo.setText(argo.newTextLine,"Ne, proste ne, nic tu pro tebe nemam, zkus to zase jindy.")
+    argo.questDialog_HTMLGUMP
+  endif
+  
+argo.dialog_page("Prohlednout")
+  argo.setText(argo.newTextLine,"<def_questDialog_colorTextEmote>*Vidis znudenou valecnici v plne polni. Byla by i celkem pohledna, kdyby se aspon na malou chvili usmala.*")
+  argo.questDialog_HTMLGUMP
+  
+[dialog d_gq058_zaskodnice button]
+on=@anyButton 
+if (src.targ.distance > 10)
+	src.sysMessage("<src.sex(Odesel,Odesla)> jsi prilis daleko.")
+else
+  if (<argn> == argo.dialog_linkButton("gq058_zaskodnice_accept_1st"))
+    src.qtag(gq058_zaskodnice,11)
+    say("Skvele. A pospes si.")
+    src.newitemsafe(i_gq058_zaskodnice_casomira)
+    src.equip(lastnew)  
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))
+  elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_accept_2nd"))
+    src.qtag(gq058_zaskodnice,16)
+    say("Skvele. A pospes si.")
+    src.newitemsafe(i_gq058_zaskodnice_casomira)
+    src.equip(lastnew)
+    serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))
+    serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))  
+  elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice"))
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> -1))
+    say("Budiz. At to jde tentokrat lepe.")
+    src.newitemsafe(i_gq058_zaskodnice_casomira)
+    src.equip(lastnew) 
+    if src.qtag(gq058_zaskodnice) < 20
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")) 
+    elseif src.qtag(gq058_zaskodnice) < 30
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.")) 
+    elseif src.qtag(gq058_zaskodnice) < 40
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Cerne brane."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Cerne brane.")) 
+    elseif src.qtag(gq058_zaskodnice) < 50
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Umbaru."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Umbaru."))   
+    elseif src.qtag(gq058_zaskodnice) < 60
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k pevnosti jizne od Cerne brany."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k pevnosti jizne od Cerne brany."))  
+    elseif src.qtag(gq058_zaskodnice) < 70
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem ke Rhunu."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem ke Rhunu."))  
+    elseif src.qtag(gq058_zaskodnice) < 80
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Nurnu.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Nurnu."))  
+    elseif src.qtag(gq058_zaskodnice) < 90
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Tahabaru."))  
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Tahabaru.")) 
+    elseif src.qtag(gq058_zaskodnice) < 100
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Barad-duru.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))  
+    elseif src.qtag(gq058_zaskodnice) < 110
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Oaze Hagir.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Oaze Hagir."))  
+    elseif src.qtag(gq058_zaskodnice) < 120
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Nurnu.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Nurnu.")) 
+    elseif src.qtag(gq058_zaskodnice) < 130
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem ke Rhunu."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem ke Rhunu."))   
+    elseif src.qtag(gq058_zaskodnice) < 140
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Bagronku."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Bagronku."))   
+    elseif src.qtag(gq058_zaskodnice) < 150
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Haradu."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Haradu."))  
+    elseif src.qtag(gq058_zaskodnice) < 160
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))  
+    elseif src.qtag(gq058_zaskodnice) < 170
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Umbaru."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Umbaru."))  
+    elseif src.qtag(gq058_zaskodnice) < 180
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))  
+    else
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Haradu."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Haradu."))
+    endif    
+  elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_accept"))
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +7))
+    say("Skvele. A pospes si.")
+    src.newitemsafe(i_gq058_zaskodnice_casomira)
+    src.equip(lastnew)
+    if src.qtag(gq058_zaskodnice) < 20
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")) 
+    elseif src.qtag(gq058_zaskodnice) < 30
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.")) 
+    elseif src.qtag(gq058_zaskodnice) < 40
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Cerne brane."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Cerne brane.")) 
+    elseif src.qtag(gq058_zaskodnice) < 50
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Umbaru."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Umbaru."))   
+    elseif src.qtag(gq058_zaskodnice) < 60
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k pevnosti jizne od Cerne brany."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k pevnosti jizne od Cerne brany."))  
+    elseif src.qtag(gq058_zaskodnice) < 70
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem ke Rhunu."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem ke Rhunu."))  
+    elseif src.qtag(gq058_zaskodnice) < 80
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Nurnu.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Nurnu."))  
+    elseif src.qtag(gq058_zaskodnice) < 90
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Tahabaru."))  
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Tahabaru.")) 
+    elseif src.qtag(gq058_zaskodnice) < 100
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Barad-duru.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))  
+    elseif src.qtag(gq058_zaskodnice) < 110
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Oaze Hagir.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Oaze Hagir."))  
+    elseif src.qtag(gq058_zaskodnice) < 120
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Nurnu.")) 
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Nurnu.")) 
+    elseif src.qtag(gq058_zaskodnice) < 130
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem ke Rhunu."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem ke Rhunu."))   
+    elseif src.qtag(gq058_zaskodnice) < 140
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Bagronku."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Bagronku."))   
+    elseif src.qtag(gq058_zaskodnice) < 150
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Haradu."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Haradu."))  
+    elseif src.qtag(gq058_zaskodnice) < 160
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))  
+    elseif src.qtag(gq058_zaskodnice) < 170
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Umbaru."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Umbaru."))  
+    elseif src.qtag(gq058_zaskodnice) < 180
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Barad-duru."))  
+    else
+      serv.allclients(warmessage(2,"Gondorsky zaskodnik se vydava smerem k Haradu."))
+      serv.allclients(warmessage(1,"Gondorsky zaskodnik se vydava smerem k Haradu."))
+    endif        
+  elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_reward"))
+    src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
+    say("Tady mas svou odmenu.")
+    src.addexp(1500+<eval(<src.tag(level)>*5)>+<eval(<src.qtag(gq058_zaskodnice)*5>)>)                                                             
+    src.givegold(15000+<eval(<src.tag(level)>*100)>+<eval(<src.qtag(gq058_zaskodnice)*100>)>)
+    src.giveitem(i_mi_bag) 
+    dorand 4
+      src.giveitem(i_mi_pouch)
+      src.giveitem(i_mi_pouch_high)
+      src.giveitem(i_mi_bag)
+      src.giveitem(i_mi_bag_high)
+    enddo
+  elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_reward_last"))
+    src.qtag(gq058_zaskodnice,185)
+    say("Tady mas, smekam pred tebou...")
+    src.newitemsafe(i_gq058_zaskodnice_dokonceni)
+    src.equip(lastnew)  
+    src.addexp(2500+<eval(<src.tag(level)>*5)>+<eval(<src.qtag(gq058_zaskodnice)*5>)>)                                                             
+    src.givegold(25000+<eval(<src.tag(level)>*100)>+<eval(<src.qtag(gq058_zaskodnice)*100>)>)
+    src.giveitem(i_mi_bag_high)
+    if (profession!=class_craft)
+      src.playerBooster_add(1)
+    endif
+    dorand 3
+      src.giveitem(i_mi_pouch_superhigh)
+      src.giveitem(i_mi_bag_superHigh)
+      src.giveitem(i_pet_ostard_zostrich)
+    enddo  
+  endif
+endif
+
+[eof]
