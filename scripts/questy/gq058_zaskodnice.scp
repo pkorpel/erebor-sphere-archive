@@ -12,10 +12,13 @@ if (src.isDead)
 elseif (<src.tag(realm)> == 2)
   say("Co tady sakra delas? Vypadni!!!")
   return
-elseif (<eval src.tag(rank)> < 3)
+elseif (profession==class_craft)
+  say("Ty muzes Gondoru urcite poslouzit jinak.")
+  return
+elseif (<eval src.tag(level)> < 40)
   say("Ty jsi mi zatim k nicemu...")
   return
-elseif !(isHourOK(getHour(),16,21))                                             
+elseif !(isHourOK(getHour(),17,21))                                             
   say("Ted se to nehodi. Prijdi jindy.")                                        
   return                                                                        
 endif
@@ -31,16 +34,13 @@ NAME=gq058 zaskodnice - casomira
 TYPE=T_EQ_SCRIPT
 
 ON=@EQUIP
-TIMER=3600
-
-ON=@CREATE
-ATTR=attr_invis|attr_movenever|attr_decay    
+TIMER=3600 
 
 ON=@TIMER
-src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
+topobj.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
 serv.allclients(warmessage(2,"Gondorsky zaskodnik neuspel ve svem ukolu."))
 serv.allclients(warmessage(1,"Gondorsky zaskodnik neuspel ve svem ukolu."))
-src.redmessage("Nepodarilo se ti splnit zaskodnicky ukol dostatecne rychle.")
+topobj.redmessage("Nepodarilo se ti splnit zaskodnicky ukol dostatecne rychle.")
 
 [itemdef i_gq058_zaskodnice_dokonceni]
 ID=i_memory
@@ -48,27 +48,23 @@ NAME=gq058 zaskodnice - dokonceni
 TYPE=T_EQ_SCRIPT
 
 ON=@EQUIP
-TIMER=345600                                                                    
-
-ON=@CREATE
-ATTR=attr_invis|attr_movenever|attr_decay    
+TIMER=345600                                                                       
 
 ON=@TIMER
-src.qtag(gq058_zaskodnice,190)
-src.bluemessage("Muzes se opet ucastnit zaskodnickych akci.")
+topobj.qtag(gq058_zaskodnice,190)
+topobj.classmessage("Muzes se opet ucastnit zaskodnickych akci.")
 
 //////////////////////////////
 // Items
 //////////////////////////////
 
-[itemdef i_mq057_1]
+[itemdef i_gq058_1]
 ID=i_lever
 NAME=Mechanismus brany
 TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=4476,2394,40
 
 ON=@userDCLICK
@@ -76,15 +72,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 11) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2)
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Poskodil,Poskodila)> jsi mechanismus brany.")
+    src.classmessage("<src.sex(Poskodil,Poskodila)> jsi mechanismus brany.")
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif  
+return 1
 
 [itemdef i_gq058_2]
 ID=i_lever
@@ -93,7 +90,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3403,2801
 
 ON=@userDCLICK
@@ -101,15 +97,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 21) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2)
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Poskodil,Poskodila)> jsi ukotveni mostu.") 
+    src.classmessage("<src.sex(Poskodil,Poskodila)> jsi ukotveni mostu.") 
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif    
+return 1
 
 [itemdef i_gq058_3]
 ID=i_lever
@@ -118,7 +115,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3212,2538,60
 
 ON=@userDCLICK
@@ -126,15 +122,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 31) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2) 
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Poskodil,Poskodila)> jsi mechanismus brany.") 
+    src.classmessage("<src.sex(Poskodil,Poskodila)> jsi mechanismus brany.") 
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif 
+return 1
 
 [itemdef i_gq058_4]
 ID=i_barrel
@@ -143,7 +140,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=2434,4039,30
 
 ON=@userDCLICK
@@ -151,15 +147,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 41) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2)
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Vylil,Vylila)> jsi sud rumu.")   
+    src.classmessage("<src.sex(Vylil,Vylila)> jsi sud rumu.")   
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif   
+return 1
 
 [itemdef i_gq058_5]
 ID=i_dirt_tile
@@ -168,7 +165,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3120,2556,50
 
 ON=@userDCLICK
@@ -176,15 +172,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 51) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2) 
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Znicil,Znicila)> jsi stanoviste zvedu.")   
+    src.classmessage("<src.sex(Znicil,Znicila)> jsi stanoviste zvedu.")   
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif    
+return 1
 
 [itemdef i_gq058_6]
 ID=i_dirt_tile
@@ -193,7 +190,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3974,2049
 
 ON=@userDCLICK
@@ -201,15 +197,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 61) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2) 
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Znesvetil,Znesvetila)> jsi obradni misto.")    
+    src.classmessage("<src.sex(Znesvetil,Znesvetila)> jsi obradni misto.")    
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif    
+return 1
 
 [itemdef i_gq058_7]
 ID=i_bookcase_full
@@ -218,7 +215,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3433,3261,12
 
 ON=@userDCLICK
@@ -226,15 +222,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 71) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2)  
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Znicil,Znicila)> jsi nabozenske texty.")
+    src.classmessage("<src.sex(Znicil,Znicila)> jsi nabozenske texty.")
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif   
+return 1
 
 [itemdef i_gq058_8]
 ID=i_book_of_truth
@@ -243,7 +240,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=2743,3790,27
 
 ON=@userDCLICK
@@ -251,15 +247,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 81) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2)
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Pozmanil,Pozmenila)> jsi zaznamy o sazkach.") 
+    src.classmessage("<src.sex(Pozmenil,Pozmenila)> jsi zaznamy o sazkach.") 
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif   
+return 1
 
 [itemdef i_gq058_9]
 ID=i_book_of_truth
@@ -268,7 +265,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3569,2769,27
 
 ON=@userDCLICK
@@ -276,15 +272,16 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 91) || (<eval src.qtag(gq058_zaskodnic
   if !(<src.tag(realm)> == 2) 
     src.consume(1,i_gq058_zaskodnice_casomira)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-    src.sysmessage("<src.sex(Pozmenil,Pozmenila)> jsi rozpis sluzeb strazi.")  
+    src.classmessage("<src.sex(Pozmenil,Pozmenila)> jsi rozpis sluzeb strazi.")  
     serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))
     serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif  
+return 1
 
 [itemdef i_gq058_10]
 ID=i_bucket
@@ -293,7 +290,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=2895,3691,-1
 
 ON=@userDCLICK
@@ -303,18 +299,19 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 101) || (<eval src.qtag(gq058_zaskodni
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(10,i_potion_PoisonLess)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.sysmessage("<src.sex(Otravil,Otravila)> jsi vodu v jezirku.")   
+      src.classmessage("<src.sex(Otravil,Otravila)> jsi vodu v jezirku.")   
       serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
       serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
     else
-      src.sysmessage("Nemas vse potrebne.")
+      src.redmessage("Nemas vse potrebne.")
     endif
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif   
+endif 
+return 1  
 
 [itemdef i_gq058_11]
 ID=i_flour_sack
@@ -323,7 +320,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3245,3222,30
 
 ON=@userDCLICK
@@ -333,18 +329,19 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 111) || (<eval src.qtag(gq058_zaskodni
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(1,i_potion_Lava)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.sysmessage("<src.sex(Umistil,Umistila)> jsi vybusninu do pytle.")   
+      src.classmessage("<src.sex(Umistil,Umistila)> jsi vybusninu do pytle.")   
       serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
       serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
     else
-      src.sysmessage("Nemas vse potrebne.")
+      src.redmessage("Nemas vse potrebne.")
     endif
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif  
+return 1
 
 [itemdef i_gq058_12]
 ID=i_kettle
@@ -353,7 +350,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3883,2039,50
 
 ON=@userDCLICK
@@ -363,18 +359,19 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 121) || (<eval src.qtag(gq058_zaskodni
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(200,i_reag_nightshade)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.sysmessage("<src.sex(Namazal,Namazala)> jsi vnitrek kotle rulikem.") 
+      src.classmessage("<src.sex(Namazal,Namazala)> jsi vnitrek kotle rulikem.") 
       serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
       serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
     else
-      src.sysmessage("Nemas vse potrebne.")
+      src.redmessage("Nemas vse potrebne.")
     endif
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif 
+endif     
+return 1
 
 [itemdef i_gq058_13]
 ID=i_bucket
@@ -383,7 +380,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3936,3011
 
 ON=@userDCLICK
@@ -393,18 +389,19 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 131) || (<eval src.qtag(gq058_zaskodni
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(5,i_potion_Poison)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.sysmessage("<src.sex(Otravil,Otravila)> jsi vodu ve studni.")   
+      src.classmessage("<src.sex(Otravil,Otravila)> jsi vodu ve studni.")   
       serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))  
       serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
     else
-      src.sysmessage("Nemas vse potrebne.")
+      src.redmessage("Nemas vse potrebne.")
     endif
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif  
+return 1
 
 [itemdef i_gq058_14]
 ID=i_pitcher
@@ -413,7 +410,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=4159,3908,45
 
 ON=@userDCLICK
@@ -423,18 +419,19 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 141) || (<eval src.qtag(gq058_zaskodni
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(3,i_potion_PoisonGreat)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.sysmessage("<src.sex(Otravil,Otravila)> jsi vino panovnika.")   
+      src.classmessage("<src.sex(Otravil,Otravila)> jsi vino panovnika.")   
       serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
       serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
     else
-      src.sysmessage("Nemas vse potrebne.")
+      src.redmessage("Nemas vse potrebne.")
     endif
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif   
+return 1
 
 [itemdef i_gq058_15]
 ID=i_dirt_tile
@@ -443,7 +440,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3680,2678,-50
 
 ON=@userDCLICK
@@ -453,18 +449,19 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 151) || (<eval src.qtag(gq058_zaskodni
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(20,i_zmrzlavoda)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.sysmessage("<src.sex(Narusil,Narusila)> jsi zaklady pevnosti.")  
+      src.classmessage("<src.sex(Narusil,Narusila)> jsi zaklady pevnosti.")  
       serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
       serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
     else
-      src.sysmessage("Nemas vse potrebne.")
+      src.redmessage("Nemas vse potrebne.")
     endif
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif  
+return 1
 
 [itemdef i_gq058_16]
 ID=i_kettle
@@ -473,7 +470,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=2500,3982,11
 
 ON=@userDCLICK
@@ -483,18 +479,19 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 161) || (<eval src.qtag(gq058_zaskodni
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(1,i_potion_PoisonDeadly)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.sysmessage("<src.sex(Otravil,Otravila)> jsi krmivo olifanta.") 
+      src.classmessage("<src.sex(Otravil,Otravila)> jsi krmivo olifanta.") 
       serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol."))  
       serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
     else
-      src.sysmessage("Nemas vse potrebne.")
+      src.redmessage("Nemas vse potrebne.")
     endif
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif    
+return 1
 
 [itemdef i_gq058_17]
 ID=i_barrel
@@ -503,7 +500,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=3620,2769,6
 
 ON=@userDCLICK
@@ -512,31 +508,31 @@ if !((<eval src.qtag(gq058_zaskodnice)> == 171) || (<eval src.qtag(gq058_zaskodn
     return
 endif
 if (<src.tag(realm)> == 2)
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
     return
 endif
 if !(src.rescount(i_potion_Poison_fizz) >= 1)
-    src.sysmessage("Nemas vse potrebne.")
+    src.redmessage("Nemas vse potrebne.")
     return
 endif
 if !(src.rescount(i_potion_Poison_weaken) >= 1)
-    src.sysmessage("Nemas vse potrebne.")
+    src.redmessage("Nemas vse potrebne.")
     return
 endif
 if !(src.rescount(i_potion_Poison_clumsy) >= 1)
-    src.sysmessage("Nemas vse potrebne.")
+    src.redmessage("Nemas vse potrebne.")
     return
 endif
 if !(src.rescount(i_potion_Poison_para) >= 1)
-    src.sysmessage("Nemas vse potrebne.")
+    src.redmessage("Nemas vse potrebne.")
     return
 endif
 if !(src.rescount(i_potion_Poison_feeblemind) >= 1)
-     src.sysmessage("Nemas vse potrebne.")
+     src.redmessage("Nemas vse potrebne.")
     return
 endif
 if !(src.rescount(i_potion_Poison_stamina) >= 1))
-    src.sysmessage("Nemas vse potrebne.")
+    src.redmessage("Nemas vse potrebne.")
     return
 endif
 src.consume(1,i_gq058_zaskodnice_casomira)
@@ -547,9 +543,10 @@ src.consume(1,i_potion_Poison_para)
 src.consume(1,i_potion_Poison_feeblemind)
 src.consume(1,i_potion_Poison_stamina)
 src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-src.sysmessage("<src.sex(Vylepsil,Vylepsila)> jsi pivo v barad-durske hospode.")       
+src.classmessage("<src.sex(Vylepsil,Vylepsila)> jsi pivo v barad-durske hospode.")       
 serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
-serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
+serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol.")) 
+return 1
 
 [itemdef i_gq058_18]
 ID=i__box_wood
@@ -558,7 +555,6 @@ TYPE=t_normal
 
 ON=@Create
 attr=attr_move_never
-COLOR=098B
 p=4212,3862,20
 
 ON=@userDCLICK
@@ -568,18 +564,19 @@ if ((<eval src.qtag(gq058_zaskodnice)> == 181) || (<eval src.qtag(gq058_zaskodni
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(2,i_ingot_adamantinum)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.sysmessage("<src.sex(Dorucil,Dorucil)> jsi uplatek haradskemu kapitanovi.")   
+      src.classmessage("<src.sex(Dorucil,Dorucil)> jsi uplatek haradskemu kapitanovi.")   
       serv.allclients(warmessage(2,"Gondorsky zaskodnik splnil svuj ukol.")) 
       serv.allclients(warmessage(1,"Gondorsky zaskodnik splnil svuj ukol."))
     else
-      src.sysmessage("Nemas vse potrebne.")
+      src.redmessage("Nemas vse potrebne.")
     endif
   else
-    src.sysmessage("Toto ti ani tva pochybna cest nedovoli.")
+    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
   endif
 else
   src.sysmessage("Nevis, co s tim.")
-endif
+endif 
+return 1
 
 //////////////////////////////
 // Dialog
@@ -862,31 +859,33 @@ else
   elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_reward"))
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
     say("Tady mas svou odmenu.")
-    src.addexp(1500+<eval(<src.tag(level)>*5)>+<eval(<src.qtag(gq058_zaskodnice)*5>)>)                                                             
-    src.givegold(15000+<eval(<src.tag(level)>*100)>+<eval(<src.qtag(gq058_zaskodnice)*100>)>)
-    src.giveitem(i_mi_bag) 
-    dorand 4
+    src.addexp(500+<eval(<src.tag(level)>*5)>+<eval(<src.qtag(gq058_zaskodnice)>*5)>)                                                             
+    src.givegold(5000+<eval(<src.tag(level)>*50)>+<eval(<src.qtag(gq058_zaskodnice)>*50)>)
+    dorand 6
       src.giveitem(i_mi_pouch)
-      src.giveitem(i_mi_pouch_high)
+      src.giveitem(i_mi_pouch)
+      src.giveitem(i_mi_pouch)
       src.giveitem(i_mi_bag)
-      src.giveitem(i_mi_bag_high)
-    enddo
+      src.giveitem(i_mi_bag)
+      src.giveitem(i_mi_pouch_high)      
+    enddo   
   elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_reward_last"))
     src.qtag(gq058_zaskodnice,185)
     say("Tady mas, smekam pred tebou...")
     src.newitemsafe(i_gq058_zaskodnice_dokonceni)
     src.equip(lastnew)  
-    src.addexp(2500+<eval(<src.tag(level)>*5)>+<eval(<src.qtag(gq058_zaskodnice)*5>)>)                                                             
-    src.givegold(25000+<eval(<src.tag(level)>*100)>+<eval(<src.qtag(gq058_zaskodnice)*100>)>)
+    src.addexp(2500+<eval(<src.tag(level)>*5)>+<eval(<src.qtag(gq058_zaskodnice)>*5)>)                                                             
+    src.givegold(25000+<eval(<src.tag(level)>*50)>+<eval(<src.qtag(gq058_zaskodnice)>*50)>)
     src.giveitem(i_mi_bag_high)
-    if (profession!=class_craft)
-      src.playerBooster_add(1)
-    endif
-    dorand 3
+    src.playerBooster_add(1)
+    dorand 6
       src.giveitem(i_mi_pouch_superhigh)
+      src.giveitem(i_mi_pouch_superhigh)
+      src.giveitem(i_mi_pouch_superhigh)     
+      src.giveitem(i_mi_bag_superHigh)
       src.giveitem(i_mi_bag_superHigh)
       src.giveitem(i_pet_ostard_zostrich)
-    enddo  
+    enddo   
   endif
 endif
 
