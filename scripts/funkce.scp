@@ -4055,6 +4055,17 @@ sysMessagecol(057,"<args>")
 //sysMessagecol(5,"<args>")
 //endif
 
+[function realmMessage]
+if (<eval tag(realm)> == 1)
+  bluemessage(<args>)
+  return
+elseif (<eval tag(realm)> == 2)
+  redmessage(<args>)
+  return
+elseif (isGM)
+  greenmessage(<args>)
+endif
+
 [function disconnect]
 sendpacket(082 00)
 
