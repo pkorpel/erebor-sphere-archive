@@ -91,11 +91,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 11)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Poskodil,Poskodila)> jsi mechanismus brany.")
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -120,11 +116,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 21)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Poskodil,Poskodila)> jsi ukotveni mostu.") 
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -149,11 +141,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 31)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Poskodil,Poskodila)> jsi mechanismus brany.") 
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -178,11 +166,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 41)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Vylil,Vylila)> jsi sud rumu.")   
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -207,11 +191,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 51)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Znicil,Znicila)> jsi zaznamy zvedu.")   
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -236,11 +216,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 61)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Znesvetil,Znesvetila)> jsi obradni misto.")    
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -265,11 +241,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 71)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Znicil,Znicila)> jsi nabozenske texty.")
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -294,11 +266,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 81)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Pozmenil,Pozmenila)> jsi zaznamy o sazkach.") 
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -323,11 +291,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 91)
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
     src.classmessage("<src.sex(Pozmenil,Pozmenila)> jsi rozpis sluzeb strazi.")  
     serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-    if (src.obody == c_man)
-      src.sfx 0431
-    else
-      src.sfx 031A
-    endif
+    src.sound(src.sex(0431, 031A))
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
@@ -354,11 +318,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 101)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
       src.classmessage("<src.sex(Otravil,Otravila)> jsi vodu v jezirku.")   
       serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-      if (src.obody == c_man)
-        src.sfx 0431
-      else
-        src.sfx 031A
-      endif
+      src.sound(src.sex(0431, 031A))
       src.say("Muhahaha!")
     else
       src.redmessage("Nemas vse potrebne.")
@@ -388,11 +348,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 111)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
       src.classmessage("<src.sex(Umistil,Umistila)> jsi vybusninu do pytle.")   
       serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-      if (src.obody == c_man)
-        src.sfx 0431
-      else
-        src.sfx 031A
-      endif
+      src.sound(src.sex(0431, 031A))
       src.say("Muhahaha!")
     else
       src.redmessage("Nemas vse potrebne.")
@@ -422,11 +378,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 121)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
       src.classmessage("<src.sex(Namazal,Namazala)> jsi vnitrek kotle rulikem.") 
       serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-      if (src.obody == c_man)
-        src.sfx 0431
-      else
-        src.sfx 031A
-      endif
+      src.sound(src.sex(0431, 031A))
       src.say("Muhahaha!")
     else
       src.redmessage("Nemas vse potrebne.")
@@ -456,11 +408,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 131)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
       src.classmessage("<src.sex(Otravil,Otravila)> jsi vodu ve studni.")   
       serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-      if (src.obody == c_man)
-        src.sfx 0431
-      else
-        src.sfx 031A
-      endif
+      src.sound(src.sex(0431, 031A))
       src.say("Muhahaha!")
     else
       src.redmessage("Nemas vse potrebne.")
@@ -490,11 +438,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 141)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
       src.classmessage("<src.sex(Otravil,Otravila)> jsi vino panovnika.")   
       serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-      if (src.obody == c_man)
-        src.sfx 0431
-      else
-        src.sfx 031A
-      endif
+      src.sound(src.sex(0431, 031A))
       src.say("Muhahaha!")
     else
       src.redmessage("Nemas vse potrebne.")
@@ -524,11 +468,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 151)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
       src.classmessage("<src.sex(Narusil,Narusila)> jsi zaklady pevnosti.")  
       serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-      if (src.obody == c_man)
-        src.sfx 0431
-      else
-        src.sfx 031A
-      endif
+      src.sound(src.sex(0431, 031A))
       src.say("Muhahaha!")
     else
       src.redmessage("Nemas vse potrebne.")
@@ -558,11 +498,7 @@ if (<eval src.qtag(gq058_zaskodnice)> == 161)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
       src.classmessage("<src.sex(Otravil,Otravila)> jsi krmivo olifanta.") 
       serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-      if (src.obody == c_man)
-        src.sfx 0431
-      else
-        src.sfx 031A
-      endif
+      src.sound(src.sex(0431, 031A))
       src.say("Muhahaha!")
     else
       src.redmessage("Nemas vse potrebne.")
@@ -626,11 +562,7 @@ src.consume(1,i_potion_Poison_stamina)
 src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
 src.classmessage("<src.sex(Vylepsil,Vylepsila)> jsi pivo v barad-durske hospode.")       
 serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol.")) 
-if (src.obody == c_man)
-  src.sfx 0431
-else
-  src.sfx 031A
-endif
+src.sound(src.sex(0431, 031A))
 src.say("Muhahaha!")
 return 1
 
@@ -649,13 +581,9 @@ if (<eval src.qtag(gq058_zaskodnice)> == 181)
       src.consume(1,i_gq058_zaskodnice_casomira)
       src.consume(2,i_ingot_adamantinum)
       src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
-      src.classmessage("<src.sex(Dorucil,Dorucil)> jsi uplatek haradskemu kapitanovi.")   
+      src.classmessage("<src.sex(Dorucil,Dorucila)> jsi uplatek haradskemu kapitanovi.")   
       serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol."))
-      if (src.obody == c_man)
-        src.sfx 0431
-      else
-        src.sfx 031A
-      endif
+      src.sound(src.sex(0431, 031A))
       src.say("Muhahaha!")
     else
       src.redmessage("Nemas vse potrebne.")
