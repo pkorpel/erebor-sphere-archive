@@ -3593,8 +3593,6 @@ endif
 
 argo.htmlGump(160,80,242,130,1,0,36)
 
-[dialog d_zaskodnik text]
-
 [dialog d_zaskodnik button]
 on=0
 argo.f_qm_closeSubDialog
@@ -3661,8 +3659,6 @@ elseif (<eval src.qtag(gq058_zaskodnice)> == 185)
 endif
 
 argo.htmlGump(160,80,242,130,1,0,36)
-
-[dialog d_zaskodnice text]
 
 [dialog d_zaskodnice button]
 on=0
