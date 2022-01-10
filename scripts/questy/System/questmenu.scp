@@ -3540,6 +3540,7 @@ return 0
 return <eval(src.qtag(mq057_zaskodnik) == 185)>
 
 [dialog d_zaskodnik]
+argo.setText(0,"Zaskodnik")
 argo.f_qDialogInstructions(03085)
 
 if (((<eval src.qtag(mq057_zaskodnik)> % 10) == 4) || (<eval src.qtag(mq057_zaskodnik)> == 190))
@@ -3593,7 +3594,6 @@ endif
 argo.htmlGump(160,80,242,130,1,0,36)
 
 [dialog d_zaskodnik text]
-Zaskodnik
 
 [dialog d_zaskodnik button]
 on=0
@@ -3609,6 +3609,7 @@ argo.f_qm_closeSubDialog
 return <eval(src.qtag(gq058_zaskodnice) == 185)>
 
 [dialog d_zaskodnice]
+argo.setText(0,"Zaskodnice")
 argo.f_qDialogInstructions(03069)
 
 if (((<eval src.qtag(gq058_zaskodnice)> % 10) == 4) || (<eval src.qtag(gq058_zaskodnice)> == 190))
@@ -3662,7 +3663,6 @@ endif
 argo.htmlGump(160,80,242,130,1,0,36)
 
 [dialog d_zaskodnice text]
-Zaskodnice
 
 [dialog d_zaskodnice button]
 on=0
