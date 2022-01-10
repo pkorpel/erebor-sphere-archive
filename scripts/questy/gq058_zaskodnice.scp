@@ -731,7 +731,7 @@ argo.dialog_page("Prohlednout")
 [dialog d_gq058_zaskodnice button]
 on=@anyButton 
 if (src.targ.distance > 10)
-	src.sysMessage("<src.sex(Odesel,Odesla)> jsi prilis daleko.")
+  src.sysMessage("<src.sex(Odesel,Odesla)> jsi prilis daleko.")
 else
   if (<argn> == argo.dialog_linkButton("gq058_zaskodnice_accept_1st"))
     src.qtag(gq058_zaskodnice,11)

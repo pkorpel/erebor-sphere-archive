@@ -95,10 +95,10 @@ if (<eval src.qtag(mq057_zaskodnik)> == 11)
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  end if
+  endif
 else
   src.sysmessage("Nevis, co s tim.")
-end if
+endif
 return 1
 
 [itemdef i_mq057_2]
@@ -120,10 +120,10 @@ if (<eval src.qtag(mq057_zaskodnik)> == 21)
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  end if
+  endif
 else
   src.sysmessage("Nevis, co s tim.")
-end if  
+endif  
 return 1
 
 [itemdef i_mq057_3]
@@ -145,10 +145,10 @@ if (<eval src.qtag(mq057_zaskodnik)> == 31)
     src.say("Muhahaha!") 
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  end if
+  endif
 else
   src.sysmessage("Nevis, co s tim.")
-end if
+endif
 return 1
 
 [itemdef i_mq057_4]
@@ -170,10 +170,10 @@ if (<eval src.qtag(mq057_zaskodnik)> == 41)
     src.say("Muhahaha!")  
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  end if
+  endif
 else
   src.sysmessage("Nevis, co s tim.")
-end if   
+endif   
 return 1
 
 [itemdef i_mq057_5]
@@ -195,7 +195,7 @@ if (<eval src.qtag(mq057_zaskodnik)> == 51)
     src.say("Muhahaha!")
   else
     src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  end if
+  endif
 else
   src.sysmessage("Nevis, co s tim.")
 endif  
@@ -731,7 +731,7 @@ argo.dialog_page("Prohlednout")
 [dialog d_mq057_zaskodnik button]
 on=@anyButton 
 if (src.targ.distance > 10)
-	src.sysMessage("<src.sex(Odesel,Odesla)> jsi prilis daleko.")
+  src.sysMessage("<src.sex(Odesel,Odesla)> jsi prilis daleko.")
 else
   if (<argn> == argo.dialog_linkButton("mq057_zaskodnik_accept_1st"))
     src.qtag(mq057_zaskodnik,11)
