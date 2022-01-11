@@ -1,5 +1,5 @@
 //////////////////////////////
-// MQ057 Zaskodnik (DClick, timers, items, dialog)
+// MQ057 Zaskodnik (DClick, timers, items, dialog, funkce)
 //////////////////////////////
 // QTAG koncici na...
 // 1 = faze ukolu zadana (soucasne je equipnuty memory item i_mq057_zaskodnik_casomira na 60 minut)
@@ -85,20 +85,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 11)
-  if !(<src.tag(realm)> == 1)
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Poskodil,Poskodila)> jsi stavidlo.") 
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!")
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif
+f_mq057_userDclick(11,"<src.sex(Poskodil,Poskodila)> jsi stavidlo.")
 return 1
 
 [itemdef i_mq057_2]
@@ -110,20 +97,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 21) 
-  if !(<src.tag(realm)> == 1)    
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Znesvetil,Znesvetila)> jsi ostatky.")  
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!")
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif  
+f_mq057_userDclick(21,"<src.sex(Znesvetil,Znesvetila)> jsi ostatky.")
 return 1
 
 [itemdef i_mq057_3]
@@ -135,20 +109,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 31)
-  if !(<src.tag(realm)> == 1) 
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Odbrzdil,Odbrzdila)> jsi kola stanku.") 
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!") 
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif
+f_mq057_userDclick(31,"<src.sex(Odbrzdil,Odbrzdila)> jsi kola stanku.")
 return 1
 
 [itemdef i_mq057_4]
@@ -160,20 +121,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 41)
-  if !(<src.tag(realm)> == 1)
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Znesvetil,Znesvetila)> jsi ostatky.") 
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!")  
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif   
+f_mq057_userDclick(41,"<src.sex(Znesvetil,Znesvetila)> jsi ostatky.")
 return 1
 
 [itemdef i_mq057_5]
@@ -185,20 +133,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 51)
-  if !(<src.tag(realm)> == 1) 
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Poskodil,Poskodila)> jsi brzdny mechanismus.")   
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!")
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif  
+f_mq057_userDclick(51,"<src.sex(Poskodil,Poskodila)> jsi brzdny mechanismus.")
 return 1
 
 [itemdef i_mq057_6]
@@ -210,20 +145,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 61)
-  if !(<src.tag(realm)> == 1)    
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Znesvetil,Znesvetila)> jsi ostatky.")   
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!")
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif   
+f_mq057_userDclick(61,"<src.sex(Znesvetil,Znesvetila)> jsi ostatky.")
 return 1
 
 [itemdef i_mq057_7]
@@ -235,20 +157,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 71)
-  if !(<src.tag(realm)> == 1)    
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Znicil,Znicila)> jsi rukopis.")    
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!") 
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif    
+f_mq057_userDclick(71,"<src.sex(Znicil,Znicila)> jsi rukopis.")
 return 1
 
 [itemdef i_mq057_8]
@@ -260,20 +169,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 81)
-  if !(<src.tag(realm)> == 1)     
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Pozmenil,Pozmenila)> jsi danove zaznamy.")  
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!")
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif  
+f_mq057_userDclick(81,"<src.sex(Pozmenil,Pozmenila)> jsi danove zaznamy.")
 return 1
 
 [itemdef i_mq057_9]
@@ -285,20 +181,7 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 91)
-  if !(<src.tag(realm)> == 1)     
-    src.consume(1,i_mq057_zaskodnik_casomira)
-    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-    src.classmessage("<src.sex(Pozmenil,Pozmenila)> jsi rozpis sluzeb strazi.") 
-    serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
-    src.sound(src.sex(0431, 031A))
-    src.say("Muhahaha!")
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif 
+f_mq057_userDclick(91,"<src.sex(Pozmenil,Pozmenila)> jsi rozpis sluzeb strazi.")
 return 1
 
 [itemdef i_mq057_10]
@@ -310,26 +193,8 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 101)
-  if !(<src.tag(realm)> == 1)
-    if (src.rescount(i_potion_PoisonLess) >= 10)  
-      src.consume(1,i_mq057_zaskodnik_casomira)
-      src.consume(10,i_potion_PoisonLess)
-      src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-      src.classmessage("<src.sex(Otravil,Otravila)> jsi navnadu.")     
-      serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-      src.sound(src.sex(0431, 031A))
-      src.say("Muhahaha!")
-    else
-      src.redmessage("Nemas vse potrebne.")
-    endif
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif 
-return 1  
+f_mq057_userDclick(101,"<src.sex(Otravil,Otravila)> jsi navnadu.", 10, i_potion_PoisonLess)
+return 1 
 
 [itemdef i_mq057_11]
 ID=i_flour_sack
@@ -340,26 +205,8 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 111)
-  if !(<src.tag(realm)> == 1)
-    if (src.rescount(i_potion_Lava) >= 1)   
-      src.consume(1,i_mq057_zaskodnik_casomira)
-      src.consume(1,i_potion_Lava)
-      src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-      src.classmessage("<src.sex(Umistil,Umistila)> jsi vybusninu do pytle.")  
-      serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-      src.sound(src.sex(0431, 031A))
-      src.say("Muhahaha!")  
-    else
-      src.redmessage("Nemas vse potrebne.")
-    endif
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif  
-return 1
+f_mq057_userDclick(111,"<src.sex(Umistil,Umistila)> jsi vybusninu do pytle.", 1, i_potion_Lava)
+return 1 
 
 [itemdef i_mq057_12]
 ID=i_dirt_tile
@@ -370,26 +217,8 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 121)
-  if !(<src.tag(realm)> == 1)
-    if (src.rescount(i_reag_mandrake_root) >= 200)      
-      src.consume(1,i_mq057_zaskodnik_casomira)
-      src.consume(200,i_reag_mandrake_root)
-      src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-      src.classmessage("<src.sex(Zasadil,Zasadila)> jsi v posvatnem haji mandragoru.")   
-      serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-      src.sound(src.sex(0431, 031A))
-      src.say("Muhahaha!") 
-    else
-      src.redmessage("Nemas vse potrebne.")
-    endif
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif  
-return 1
+f_mq057_userDclick(121,"<src.sex(Zasadil,Zasadila)> jsi v posvatnem haji mandragoru.", 200, i_reag_mandrake_root)
+return 1 
 
 [itemdef i_mq057_13]
 ID=i_bucket
@@ -400,26 +229,8 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 131)
-  if !(<src.tag(realm)> == 1)
-    if (src.rescount(i_potion_Poison) >= 5)   
-      src.consume(1,i_mq057_zaskodnik_casomira)
-      src.consume(5,i_potion_Poison)  
-      src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-      src.classmessage("<src.sex(Otravil,Otravila)> jsi vodu ve studni.")       
-      serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-      src.sound(src.sex(0431, 031A))
-      src.say("Muhahaha!")
-    else
-      src.redmessage("Nemas vse potrebne.")
-    endif
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif  
-return 1
+f_mq057_userDclick(131,"<src.sex(Otravil,Otravila)> jsi vodu ve studni.", 5, i_potion_Poison)
+return 1 
 
 [itemdef i_mq057_14]
 ID=i_barrel
@@ -430,26 +241,8 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 141)
-  if !(<src.tag(realm)> == 1)
-    if (src.rescount(i_potion_PoisonGreat) >= 3)   
-      src.consume(1,i_mq057_zaskodnik_casomira)
-      src.consume(3,i_potion_PoisonGreat)
-      src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-      src.classmessage("<src.sex(Otravil,Otravila)> jsi sud s medovinou.")       
-      serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-      src.sound(src.sex(0431, 031A))
-      src.say("Muhahaha!")
-    else
-      src.redmessage("Nemas vse potrebne.")
-    endif
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif   
-return 1
+f_mq057_userDclick(141,"<src.sex(Otravil,Otravila)> jsi sud s medovinou.", 3, i_potion_PoisonGreat)
+return 1 
 
 [itemdef i_mq057_15]
 ID=i_barrel
@@ -460,26 +253,8 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 151)
-  if !(<src.tag(realm)> == 1)
-    if (src.rescount(i_zmrzlavoda) >= 20)   
-      src.consume(1,i_mq057_zaskodnik_casomira)
-      src.consume(20,i_zmrzlavoda)
-      src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-      src.classmessage("<src.sex(Nastrazil,Nastrazila)> jsi zmrzlou vodu do sudu s olejem.")      
-      serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-      src.sound(src.sex(0431, 031A))
-      src.say("Muhahaha!")
-    else
-      src.redmessage("Nemas vse potrebne.")
-    endif
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif 
-return 1
+f_mq057_userDclick(151,"<src.sex(Nastrazil,Nastrazila)> jsi zmrzlou vodu do sudu s olejem.", 20, i_zmrzlavoda)
+return 1 
 
 [itemdef i_mq057_16]
 ID=i_barrel
@@ -490,26 +265,8 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 161)
-  if !(<src.tag(realm)> == 1)
-    if (src.rescount(i_potion_PoisonDeadly) >= 1)   
-      src.consume(1,i_mq057_zaskodnik_casomira)
-      src.consume(1,i_potion_PoisonDeadly)
-      src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-      src.classmessage("<src.sex(Otravil,Otravila)> jsi exportni vino.")          
-      serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol."))
-      src.sound(src.sex(0431, 031A))
-      src.say("Muhahaha!")
-    else
-      src.redmessage("Nemas vse potrebne.")
-    endif
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif  
-return 1
+f_mq057_userDclick(161,"<src.sex(Otravil,Otravila)> jsi exportni vino.", 1, i_potion_PoisonDeadly)
+return 1 
 
 [itemdef i_mq057_17]
 ID=i_kettle
@@ -575,26 +332,8 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
-if (<eval src.qtag(mq057_zaskodnik)> == 181)
-  if !(<src.tag(realm)> == 1)
-    if (src.rescount(i_log_adamantinum) >= 2)   
-      src.consume(1,i_mq057_zaskodnik_casomira)
-      src.consume(2,i_log_adamantinum)
-      src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
-      src.classmessage("<src.sex(Spustil,Spustila)> jsi plany poplach pro gondorska vojska.")       
-      serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
-      src.sound(src.sex(0431, 031A))
-      src.say("Muhahaha!")   
-    else
-      src.redmessage("Nemas vse potrebne.")
-    endif
-  else
-    src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
-  endif
-else
-  src.sysmessage("Nevis, co s tim.")
-endif 
-return 1
+f_mq057_userDclick(181,"<src.sex(Spustil,Spustila)> jsi plany poplach pro gondorska vojska.", 2, i_log_adamantinum)
+return 1 
 
 //////////////////////////////
 // Dialog
@@ -851,6 +590,35 @@ else
     src.givegold(30000)                                                              
   endif
 endif
+
+//////////////////////////////
+// Funkce
+//////////////////////////////
+
+// argv(0) - requred tag for DClick success
+// argv(1) - classMessage text printed to the player
+// argv(2) - optional: required number of consumed resources (will be consumed on success)
+// argv(3) - optional: ID of the required resource (relates to the argv(2))
+[function f_mq057_userDclick]
+if (<eval src.qtag(mq057_zaskodnik)> != <argv(0)>)
+  src.sysmessage("Nevis, co s tim.") 
+  return
+elseif (<src.tag(realm)> == 1)
+  src.redmessage("Toto ti ani tva pochybna cest nedovoli.")  
+  return
+endif
+if (<argvcount> > 3)
+  if (src.rescount(<argv(3)>) < <argv(2)>)
+    src.redmessage("Nemas vse potrebne.")
+    return
+  endif
+  src.consume(<argv(2)>,<argv(3)>)
+endif
+src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> + 2))
+src.classmessage(<argv(1)>)    
+serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
+src.sound(src.sex(0431, 031A))
+src.say("Muhahaha!")
 
 [function f_mq057_predmety]
 src.giveitem(i_potion_PoisonLess,10)
