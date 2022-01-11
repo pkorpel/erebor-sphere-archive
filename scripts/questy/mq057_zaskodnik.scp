@@ -209,7 +209,7 @@ f_mq057_userDclick(111,"<src.sex(Umistil,Umistila)> jsi vybusninu do pytle.", 1,
 return 1 
 
 [itemdef i_mq057_12]
-ID=i_dirt_tile
+ID=i_crop_wheat1
 NAME=Posvatna puda
 TYPE=t_normal
 

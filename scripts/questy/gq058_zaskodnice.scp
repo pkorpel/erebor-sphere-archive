@@ -137,7 +137,7 @@ f_gq058_userDclick(51,"<src.sex(Znicil,Znicila)> jsi zaznamy zvedu.")
 return 1
 
 [itemdef i_gq058_6]
-ID=i_dirt_tile
+ID=i_pillow
 NAME=Obradni misto
 TYPE=t_normal
 
@@ -245,7 +245,7 @@ f_gq058_userDclick(141,"<src.sex(Otravil,Otravila)> jsi vino panovnika.", 3, i_p
 return 1
 
 [itemdef i_gq058_15]
-ID=i_dirt_tile
+ID=i_wall_stone_8
 NAME=Zaklady pevnosti
 TYPE=t_normal
 
