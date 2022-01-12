@@ -277,6 +277,10 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
+if (src.isGM)
+  dialog(d_guarditAdv)
+  return 1
+endif
 if !(<eval src.qtag(mq057_zaskodnik)> == 171)
   src.sysmessage("Nevis, co s tim.")
   return 1
@@ -307,6 +311,10 @@ if !(src.rescount(i_potion_Poison_feeblemind) >= 1)
 endif
 if !(src.rescount(i_potion_Poison_stamina) >= 1))
   src.redmessage("Nemas vse potrebne.")
+  return 1
+endif
+if (f_guarditAdv_CheckSpawns) 
+  src.redmessage("Je tu nejak moc svedku.")
   return 1
 endif
 src.consume(1,i_mq057_zaskodnik_casomira)
@@ -390,7 +398,7 @@ argo.dialog_page("Prace")
       argo.setText(argo.newTextLine,"Ve vesnici Tharbad maji stanek na kolech. Byla by skoda, kdyby ho nekdo odbrzdil a on jim potom nekam odjel.")
       argo.questDialog_HTMLGUMP
     elseif ((<arg(mq057_zaskodnik)> == 34) || (<arg(mq057_zaskodnik)> == 41))
-      argo.setText(argo.newTextLine,"V nenapadne hrobce pod chramem ve meste Dol jsou ulozeny ostatky jakehosi Barda. Mistni tam pry chodi pravidelne uctivat jeho pamatku. Jdi tam a predved jim, co si o jejich hrdinovi mysli Mordor!")
+      argo.setText(argo.newTextLine,"Na hrbitove ve meste Dol jsou ulozeny ostatky jakehosi Barda. Mistni tam pry chodi pravidelne uctivat jeho pamatku. Jdi tam a predved jim, co si o jejich hrdinovi mysli Mordor!")
       argo.questDialog_HTMLGUMP
     elseif ((<arg(mq057_zaskodnik)> == 44) || (<arg(mq057_zaskodnik)> == 51))
       argo.setText(argo.newTextLine,"Elfove v Sedych pristavech se pustili do stavby nove plachetnice. Asi budou moc smutni, az jim ta rozestavena kocabka vypluje na more a hned se potopi...")
@@ -565,29 +573,24 @@ else
   elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_reward"))
     src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +1))
     say("Zde je tva odmena, diky!")
-    src.newitemsafe(i_mq057_zaskodnik_pauza)
-    src.equip(lastnew)    
-    src.addexp(250+<eval(<src.tag(level)>*4)>+<eval(<src.qtag(mq057_zaskodnik)>*3)>)
-    if (((src.qtag(mq057_zaskodnik) % 20) == 4) && (src.qtag(mq057_zaskodnik) < 100))
+    // src.newitemsafe(i_mq057_zaskodnik_pauza)
+    // src.equip(lastnew)    
+    src.addexp(420+<eval(<src.tag(level)>*2)>)
+    if ((src.qtag(mq057_zaskodnik) % 20) == 4)
       src.giveitem(i_mi_pouch)
-    elseif (((src.qtag(mq057_zaskodnik) % 20) == 14) && (src.qtag(mq057_zaskodnik) < 100))
-      src.givegold(10000)
-    elseif (((src.qtag(mq057_zaskodnik) % 20) == 4) && (src.qtag(mq057_zaskodnik) > 100))
-      src.giveitem(i_mi_bag)
-    elseif (((src.qtag(mq057_zaskodnik) % 20) == 14) && (src.qtag(mq057_zaskodnik) > 100))
-      src.givegold(25000) 
-    endif                                                        
+    endif
+    src.givegold(2500+<eval(<src.qtag(mq057_zaskodnik)>*25)>)                                                        
   elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_reward_last"))
     src.qtag(mq057_zaskodnik,185)
     f_quest_complete(57)
     say("Tady mas, jeste jednou mockrat diky!")
     src.newitemsafe(i_mq057_zaskodnik_dokonceni)
     src.equip(lastnew)    
-    src.addexp(1500+<eval(<src.tag(level)>*4)>+<eval(<src.qtag(mq057_zaskodnik)>*3)>)                                                             
-    src.giveitem(i_mi_pouch_high)
+    src.addexp(1420+<eval(<src.tag(level)>*2)>)                                                             
+    src.giveitem(i_mi_bag_high)
     src.giveitem(i_mi_bag_high)
     src.playerBooster_add(1) 
-    src.givegold(30000)                                                              
+    src.givegold(27100)                                                              
   endif
 endif
 
@@ -600,11 +603,17 @@ endif
 // argv(2) - optional: required number of consumed resources (will be consumed on success)
 // argv(3) - optional: ID of the required resource (relates to the argv(2))
 [function f_mq057_userDclick]
-if (<eval src.qtag(mq057_zaskodnik)> != <argv(0)>)
+if (src.isGM)
+  dialog(d_guarditAdv)
+  return
+elseif (<eval src.qtag(mq057_zaskodnik)> != <argv(0)>)
   src.sysmessage("Nevis, co s tim.") 
   return
 elseif (<src.tag(realm)> == 1)
   src.redmessage("Toto ti ani tva pochybna cest nedovoli.")  
+  return
+elseif (f_guarditAdv_CheckSpawns)
+  src.redmessage("Je tu nejak moc svedku.")
   return
 endif
 if (<argvcount> > 3)
@@ -615,6 +624,7 @@ if (<argvcount> > 3)
   src.consume(<argv(2)>,<argv(3)>)
 endif
 src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> + 2))
+src.consume(1,i_mq057_zaskodnik_casomira)
 src.classmessage(<argv(1)>)    
 serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
 src.sound(src.sex(0431, 031A))

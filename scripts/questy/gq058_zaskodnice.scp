@@ -277,6 +277,10 @@ ON=@Create
 attr=attr_move_never
 
 ON=@userDCLICK
+if (src.isGM)
+  dialog(d_guarditAdv)
+  return 1
+endif
 if !(<eval src.qtag(gq058_zaskodnice)> == 171)
   src.sysmessage("Nevis, co s tim.")
   return 1
@@ -307,6 +311,10 @@ if !(src.rescount(i_potion_Poison_feeblemind) >= 1)
 endif
 if !(src.rescount(i_potion_Poison_stamina) >= 1))
   src.redmessage("Nemas vse potrebne.")
+  return 1
+endif
+if (f_guarditAdv_CheckSpawns)
+  src.redmessage("Je tu nejak moc svedku.")
   return 1
 endif
 src.consume(1,i_gq058_zaskodnice_casomira)
@@ -393,7 +401,7 @@ argo.dialog_page("Prace")
       argo.setText(argo.newTextLine,"Postarej se o vyliti zasob rumu v umbarske pristavni krcme. Uvidime, jak to zvedne namornikum moralku!")
       argo.questDialog_HTMLGUMP
     elseif ((<arg(gq058_zaskodnice)> == 44) || (<arg(gq058_zaskodnice)> == 51))
-      argo.setText(argo.newTextLine,"Kousek jizne od Cerne brany je jedna z mordorskych pevnosti. Je potreba znicit zaznamy jejich zvedu.")
+      argo.setText(argo.newTextLine,"Kousek zapadne od Cerne brany je jedna z mordorskych pevnosti. Je potreba znicit zaznamy jejich zvedu.")
       argo.questDialog_HTMLGUMP
     elseif ((<arg(gq058_zaskodnice)> == 54) || (<arg(gq058_zaskodnice)> == 61))
       argo.setText(argo.newTextLine,"Ve skalach za taborem Rhun se nachazi prastare obradni misto. Par modliteb by melo omezit jeho magicky vliv.")
@@ -478,7 +486,7 @@ else
     src.newitemsafe(i_gq058_zaskodnice_casomira)
     src.equip(lastnew)  
     serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")) 
-  elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice"))
+  elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_retake"))
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> -1))
     say("Budiz. At to jde tentokrat lepe.")
     src.newitemsafe(i_gq058_zaskodnice_casomira)
@@ -492,7 +500,7 @@ else
     elseif src.qtag(gq058_zaskodnice) < 50
       serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Umbaru."))   
     elseif src.qtag(gq058_zaskodnice) < 60
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k pevnosti jizne od Cerne brany."))  
+      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k pevnosti zapadne od Cerne brany."))  
     elseif src.qtag(gq058_zaskodnice) < 70
       serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem ke Rhunu.")) 
     elseif src.qtag(gq058_zaskodnice) < 80
@@ -534,7 +542,7 @@ else
     elseif src.qtag(gq058_zaskodnice) < 50
       serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Umbaru."))   
     elseif src.qtag(gq058_zaskodnice) < 60
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k pevnosti jizne od Cerne brany."))  
+      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k pevnosti zapadne od Cerne brany."))  
     elseif src.qtag(gq058_zaskodnice) < 70
       serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem ke Rhunu.")) 
     elseif src.qtag(gq058_zaskodnice) < 80
@@ -565,29 +573,24 @@ else
   elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_reward"))
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
     say("Tady mas svou odmenu.")
-    src.newitemsafe(i_gq058_zaskodnice_pauza)
-    src.equip(lastnew)    
-    src.addexp(250+<eval(<src.tag(level)>*4)>+<eval(<src.qtag(gq058_zaskodnice)>*3)>)    
-    if (((src.qtag(gq058_zaskodnice) % 20) == 4) && (src.qtag(gq058_zaskodnice) < 100))
+    // src.newitemsafe(i_gq058_zaskodnice_pauza)
+    // src.equip(lastnew)    
+    src.addexp(420+<eval(<src.tag(level)>*2)>)    
+    if ((src.qtag(gq058_zaskodnice) % 20) == 4)
       src.giveitem(i_mi_pouch)
-    elseif (((src.qtag(gq058_zaskodnice) % 20) == 14) && (src.qtag(gq058_zaskodnice) < 100))
-      src.givegold(10000)
-    elseif (((src.qtag(gq058_zaskodnice) % 20) == 4) && (src.qtag(gq058_zaskodnice) > 100))
-      src.giveitem(i_mi_bag)
-    elseif (((src.qtag(gq058_zaskodnice) % 20) == 14) && (src.qtag(gq058_zaskodnice) > 100))
-      src.givegold(25000) 
-    endif                                                             
+    endif
+    src.givegold(2500+<eval(<src.qtag(gq058_zaskodnice)>*25)>)                                                            
   elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_reward_last"))
     src.qtag(gq058_zaskodnice,185)
     f_quest_complete(58)
     say("Aha, tak tady teda mas...")
     src.newitemsafe(i_gq058_zaskodnice_dokonceni)
     src.equip(lastnew)      
-    src.addexp(1500+<eval(<src.tag(level)>*4)>+<eval(<src.qtag(gq058_zaskodnice)>*3)>)                                                             
-    src.giveitem(i_mi_pouch_high)
+    src.addexp(1420+<eval(<src.tag(level)>*2)>)                                                             
+    src.giveitem(i_mi_bag_high)
     src.giveitem(i_mi_bag_high)
     src.playerBooster_add(1) 
-    src.givegold(30000)     
+    src.givegold(27100)     
   endif
 endif
 
@@ -600,11 +603,17 @@ endif
 // argv(2) - optional: required number of consumed resources (will be consumed on success)
 // argv(3) - optional: ID of the required resource (relates to the argv(2))
 [function f_gq058_userDclick]
-if (<eval src.qtag(gq058_zaskodnice)> != <argv(0)>)
+if (src.isGM)
+  dialog(d_guarditAdv)
+  return
+elseif (<eval src.qtag(gq058_zaskodnice)> != <argv(0)>)
   src.sysmessage("Nevis, co s tim.")  
   return
 elseif (<src.tag(realm)> == 2)
   src.redmessage("Toto ti ani tva pochybna cest nedovoli.")  
+  return
+elseif (f_guarditAdv_CheckSpawns)
+  src.redmessage("Je tu nejak moc svedku.")
   return
 endif
 if (<argvcount> > 3)
@@ -615,6 +624,7 @@ if (<argvcount> > 3)
   src.consume(<argv(2)>,<argv(3)>)
 endif
 src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> + 2))
+src.consume(1,i_gq058_zaskodnice_casomira)
 src.classmessage(<argv(1)>)    
 serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol.")) 
 src.sound(src.sex(0431, 031A))
