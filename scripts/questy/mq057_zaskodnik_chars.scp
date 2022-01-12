@@ -1,0 +1,70 @@
+//////////////////////////////
+// MQ057 Zaskodnik (chars, speech)
+//////////////////////////////
+
+//////////////////////////////
+// Chars
+//////////////////////////////
+
+[chardef c_mq057_zaskodnik]
+id=c_man
+name=Zaskodnik
+
+TEVENTS=e_character
+TEVENTS=e_monster
+TEVENTS=e_item_refuser
+TSPEECH=spk_mq057_zaskodnik
+
+CATEGORY=Moria Questy
+SUBSECTION=mq057 - Zaskodnik
+DESCRIPTION=Zaskodnik
+
+on=@UserDclick
+if (src.targ.distance > 5)
+  src.sysMessage("Muz si te nevsima, musis jit bliz.")
+else
+  f_mq057_Zaskodnik_DClick
+endif
+
+on=@create
+NPC=brain_human
+COLOR=color_clovek
+STR=1000
+DEX=1000
+INT=1000
+Title=tajemny Haradan
+
+tag(noanimate,1)
+
+ITEMnewbie=i_hair_short
+color=1148
+ITEMnewbie=i_tunic
+color=1139
+ITEMnewbie=i_cape
+color=1139
+ITEMnewbie=i_OBSIDIAN_CHAINMAIL_COIF
+ITEMnewbie=i_Obsidian_CHAINMAIL_gorget
+ITEMnewbie=i_OBSIDIAN_CHAINMAIL_LEGGINGS
+ITEMnewbie=i_OBSIDIAN_CHAINMAIL_TUNIC
+ITEMnewbie=i_Obsidian_CHAINMAIL_sleeves
+ITEMnewbie=i_Obsidian_CHAINMAIL_gloves
+ITEMnewbie=i_crossbow_adamantinum
+
+//////////////////////////////
+// Speech
+//////////////////////////////
+
+[speech spk_mq057_zaskodnik]
+on = *ahoj*
+on = *ukol*
+on = *prace*
+on = *den*
+on = *zdravim*
+
+if (src.targ.distance > 5)
+  src.sysMessage("Muz si te nevsima, musis jit bliz.")
+else
+  f_mq057_Zaskodnik_DClick
+endif
+
+[eof]

@@ -1,0 +1,649 @@
+//////////////////////////////
+// MQ057 Zaskodnik (DClick, timers, items, dialog, funkce)
+//////////////////////////////
+// QTAG koncici na...
+// 1 = faze ukolu zadana (soucasne je equipnuty memory item i_mq057_zaskodnik_casomira na 60 minut)
+// 2 = faze ukolu nesplnena v casovem limitu (uplynulo 60 minut a zmizel memory item i_mq057_zaskodnik_casomira a je mozne nechat si stejnou fazi opet zadat)
+// 3 = faze ukolu splnena (soucasne je odstranen existujici memory item i_mq057_zaskodnik_casomira a je mozne si kdykoliv dojit pro odmenu)
+// 4 = byla vydana odmena za fazi ukolu (a je mozne nechat si zadat dalsi)
+// presne 185 = byla splnena cela serie a vydana odmena (soucasne je equipnuty memory item i_mq057_zaskodnik_dokonceni na 4 dny)
+// presne 190 = uplynuly 4 dny a je mozne nechat si opet zadat prvni fazi (zmizel memory item i_mq057_zaskodnik_dokonceni)
+//////////////////////////////
+
+//////////////////////////////
+// DClick
+//////////////////////////////
+
+[function f_mq057_Zaskodnik_DClick]
+if (src.isDead)
+  return
+elseif (<src.tag(realm)> == 1)
+  say("Co tady sakra delas? Vypadni!!!")
+  return
+elseif (profession==class_craft)
+  say("Ty muzes Mordoru urcite poslouzit jinak.")
+  return
+elseif (<eval src.tag(level)> < 40)
+  say("Ty mi zatim moc nepomuzes...")
+  return
+elseif !(isHourOK(getHour(),17,21))                                             
+  say("Promin, musis prijit jindy...")                                          
+  return
+elseif (<src.rescount(i_mq057_zaskodnik_pauza)> >= 1)
+  say("Jen tu neco dodelam, prijdi prosim za chviku...")"
+  return                                                                        
+endif
+dialog(d_mq057_zaskodnik)
+
+//////////////////////////////
+// Timers
+//////////////////////////////
+
+[itemdef i_mq057_zaskodnik_pauza]
+ID=i_memory
+NAME=mq057 zaskodnik - pauza
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=300                                                                         
+
+[itemdef i_mq057_zaskodnik_casomira]
+ID=i_memory
+NAME=mq057 zaskodnik - casomira
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=1800                                                                         
+
+ON=@TIMER
+cont.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +1))
+serv.allclients(realmMessage("Mordorsky zaskodnik neuspel ve svem ukolu."))
+cont.redmessage("Nepodarilo se ti splnit zaskodnicky ukol dostatecne rychle.")
+
+[itemdef i_mq057_zaskodnik_dokonceni]
+ID=i_memory
+NAME=mq057 zaskodnik - dokonceni
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=345600                                                                       
+
+ON=@TIMER
+cont.qtag(mq057_zaskodnik,190)
+cont.classmessage("Muzes se opet ucastnit zaskodnickych akci.")
+
+//////////////////////////////
+// Items
+//////////////////////////////
+
+[itemdef i_mq057_1]
+ID=i_lever
+NAME=Stavidlo
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(11,"<src.sex(Poskodil,Poskodila)> jsi stavidlo.")
+return 1
+
+[itemdef i_mq057_2]
+ID=i_bones
+NAME=Ostatky
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(21,"<src.sex(Znesvetil,Znesvetila)> jsi ostatky.")
+return 1
+
+[itemdef i_mq057_3]
+ID=i_lever
+NAME=Zarazka
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(31,"<src.sex(Odbrzdil,Odbrzdila)> jsi kola stanku.")
+return 1
+
+[itemdef i_mq057_4]
+ID=i_bones
+NAME=Ostatky
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(41,"<src.sex(Znesvetil,Znesvetila)> jsi ostatky.")
+return 1
+
+[itemdef i_mq057_5]
+ID=i_lever
+NAME=Zarazka
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(51,"<src.sex(Poskodil,Poskodila)> jsi brzdny mechanismus.")
+return 1
+
+[itemdef i_mq057_6]
+ID=i_bones
+NAME=Ostatky
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(61,"<src.sex(Znesvetil,Znesvetila)> jsi ostatky.")
+return 1
+
+[itemdef i_mq057_7]
+ID=i_book_of_truth
+NAME=Rukopis
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(71,"<src.sex(Znicil,Znicila)> jsi rukopis.")
+return 1
+
+[itemdef i_mq057_8]
+ID=i_book_of_truth
+NAME=Danove zaznamy
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(81,"<src.sex(Pozmenil,Pozmenila)> jsi danove zaznamy.")
+return 1
+
+[itemdef i_mq057_9]
+ID=i_book_of_truth
+NAME=Rozpis sluzeb strazi
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(91,"<src.sex(Pozmenil,Pozmenila)> jsi rozpis sluzeb strazi.")
+return 1
+
+[itemdef i_mq057_10]
+ID=i_flour_sack
+NAME=Navnada
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(101,"<src.sex(Otravil,Otravila)> jsi navnadu.", 10, i_potion_PoisonLess)
+return 1 
+
+[itemdef i_mq057_11]
+ID=i_flour_sack
+NAME=Pytel obili
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(111,"<src.sex(Umistil,Umistila)> jsi vybusninu do pytle.", 1, i_potion_Lava)
+return 1 
+
+[itemdef i_mq057_12]
+ID=i_crop_wheat1
+NAME=Posvatna puda
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(121,"<src.sex(Zasadil,Zasadila)> jsi v posvatnem haji mandragoru.", 200, i_reag_mandrake_root)
+return 1 
+
+[itemdef i_mq057_13]
+ID=i_bucket
+NAME=Vedro
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(131,"<src.sex(Otravil,Otravila)> jsi vodu ve studni.", 5, i_potion_Poison)
+return 1 
+
+[itemdef i_mq057_14]
+ID=i_barrel
+NAME=Sud medoviny
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(141,"<src.sex(Otravil,Otravila)> jsi sud s medovinou.", 3, i_potion_PoisonGreat)
+return 1 
+
+[itemdef i_mq057_15]
+ID=i_barrel
+NAME=Sud s olejem
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(151,"<src.sex(Nastrazil,Nastrazila)> jsi zmrzlou vodu do sudu s olejem.", 20, i_zmrzlavoda)
+return 1 
+
+[itemdef i_mq057_16]
+ID=i_barrel
+NAME=Sud s vinem
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(161,"<src.sex(Otravil,Otravila)> jsi exportni vino.", 1, i_potion_PoisonDeadly)
+return 1 
+
+[itemdef i_mq057_17]
+ID=i_kettle
+NAME=Polevka
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+if (src.isGM)
+  dialog(d_guarditAdv)
+  return 1
+endif
+if !(<eval src.qtag(mq057_zaskodnik)> == 171)
+  src.sysmessage("Nevis, co s tim.")
+  return 1
+endif
+if (<src.tag(realm)> == 1)
+  src.redmessage("Toto ti ani tva pochybna cest nedovoli.")
+  return 1
+endif
+if !(src.rescount(i_potion_Poison_fizz) >= 1)
+  src.redmessage("Nemas vse potrebne.")
+  return 1
+endif
+if !(src.rescount(i_potion_Poison_weaken) >= 1)
+  src.redmessage("Nemas vse potrebne.")
+  return 1
+endif
+if !(src.rescount(i_potion_Poison_clumsy) >= 1)
+  src.redmessage("Nemas vse potrebne.")
+  return 1
+endif
+if !(src.rescount(i_potion_Poison_para) >= 1)
+  src.redmessage("Nemas vse potrebne.")
+  return 1
+endif
+if !(src.rescount(i_potion_Poison_feeblemind) >= 1)
+  src.redmessage("Nemas vse potrebne.")
+  return 1
+endif
+if !(src.rescount(i_potion_Poison_stamina) >= 1))
+  src.redmessage("Nemas vse potrebne.")
+  return 1
+endif
+if (f_guarditAdv_CheckSpawns) 
+  src.redmessage("Je tu nejak moc svedku.")
+  return 1
+endif
+src.consume(1,i_mq057_zaskodnik_casomira)
+src.consume(1,i_potion_Poison_fizz)
+src.consume(1,i_potion_Poison_weaken)
+src.consume(1,i_potion_Poison_clumsy)
+src.consume(1,i_potion_Poison_para)
+src.consume(1,i_potion_Poison_feeblemind)
+src.consume(1,i_potion_Poison_stamina)
+src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
+src.classmessage("<src.sex(Vylepsil,Vylepsila)> jsi polevku.")       
+serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
+src.sound(src.sex(0431, 031A))
+src.say("Muhahaha!")
+return 1
+
+[itemdef i_mq057_18]
+ID=i_candle
+NAME=Svicka
+TYPE=t_normal
+
+ON=@Create
+attr=attr_move_never
+
+ON=@userDCLICK
+f_mq057_userDclick(181,"<src.sex(Spustil,Spustila)> jsi plany poplach pro gondorska vojska.", 2, i_log_adamantinum)
+return 1 
+
+//////////////////////////////
+// Dialog
+//////////////////////////////
+
+[dialog d_mq057_zaskodnik]
+argo.questDialog_create(03085,"Zaskodnik")
+arg(mq057_zaskodnik,<eval src.qtag(mq057_zaskodnik)>)
+argo.dialog_newPage("Pozdrav")
+
+argo.questDialog_baseButt(1) // Kdo jsi?
+argo.questDialog_baseButt(2) // Mohu pomoci?
+argo.questDialog_baseButt(3) // Obchodovat
+argo.questDialog_baseButt(4,29,"Zaskodnictvi") // Zaskodnictvi
+argo.questDialog_baseButt(5,52,"Prace") // Prace
+argo.questDialog_baseButt(6) // Prohlednout
+
+argo.dialog_page("Pozdrav")
+  argo.setText(argo.newTextLine,"Zdravim te. <def_questDialog_colorTextEmote>*Meri si te pohledem*")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Kdo jsi?")
+  argo.setText(argo.newTextLine,"Jsem oddany sluzebnik sve zeme, hrdy syn Haradu a zaprisahly nepritel Gondoru. Nic dalsiho te nemusi zajimat.")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Mohu pomoci?")
+  argo.setText(argo.newTextLine,"Rozhodne! Kazdy muzeme sve risi nejak pomoct - prosti remeslnici i neohrozeni bojovnici. Uprimne doufam, ze ty patris mezi ty druhe, protoze jinak bys mi <src.sex(byl,byla)> k nicemu. <def_questDialog_colorTextEmote>*Lehce se pousmal*")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Obchodovat")
+  argo.setText(argo.newTextLine,"Nemam nic na prodej v beznem slova smyslu. Zprostredkovavam zakazky od vlivnych osob a odmeny za jejich rychle a zdarne dokonceni.")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Zaskodnictvi")
+  argo.setText(argo.newTextLine,"Budu k tobe uprimny... Nekdy to jde snadno a bez kapky krve, jindy se moje zakazky neobejdou bez nasili a obcas mohou take byt zcela nad zamestnancovy sily. Posledni dobou je bohuzel velmi znat cinnost gondorskych zvedu nebo dokonce spehu v nasich radach.")
+  argo.questDialog_HTMLGUMP
+
+argo.dialog_page("Prace")
+  if ((<arg(mq057_zaskodnik)> == 0) || (<arg(mq057_zaskodnik)> == 190))
+    argo.setText(argo.newTextLine,"Je potreba poskodit stavidlo na hrazi v osade Linhir. Jakmile potom zaprsi, ochromi to zasobovani na jihu celeho Gondoru.")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Rozumim, jdu na to.")
+    argo.questDialog_addResponse(0,1,1,"mq057_zaskodnik_accept_1st")
+    argo.setText(argo.newTextLine,"Hmm, mozna nekdy jindy...")
+    argo.questDialog_addResponse(0,1,1,"mq057_zaskodnik_blank")
+  elseif (((<arg(mq057_zaskodnik)> % 10) == 1) || ((<arg(mq057_zaskodnik)> % 10) == 4)) 
+    if (<arg(mq057_zaskodnik)> == 11)
+      argo.setText(argo.newTextLine,"Je potreba poskodit stavidlo na hrazi v osade Linhir. Jakmile potom zaprsi, ochromi to zasobovani na jihu celeho Gondoru.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 14) || (<arg(mq057_zaskodnik)> == 21))
+      argo.setText(argo.newTextLine,"Vydej se na hrbitov pobliz osady Forondon a v hrobce tamejsiho hrdiny tam proved s jeho ostatky neco ohavneho. Zjevne nekomu lezi v zaludku i po smrti.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 24) || (<arg(mq057_zaskodnik)> == 31))
+      argo.setText(argo.newTextLine,"Ve vesnici Tharbad maji stanek na kolech. Byla by skoda, kdyby ho nekdo odbrzdil a on jim potom nekam odjel.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 34) || (<arg(mq057_zaskodnik)> == 41))
+      argo.setText(argo.newTextLine,"Na hrbitove ve meste Dol jsou ulozeny ostatky jakehosi Barda. Mistni tam pry chodi pravidelne uctivat jeho pamatku. Jdi tam a predved jim, co si o jejich hrdinovi mysli Mordor!")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 44) || (<arg(mq057_zaskodnik)> == 51))
+      argo.setText(argo.newTextLine,"Elfove v Sedych pristavech se pustili do stavby nove plachetnice. Asi budou moc smutni, az jim ta rozestavena kocabka vypluje na more a hned se potopi...")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 54) || (<arg(mq057_zaskodnik)> == 61))
+      argo.setText(argo.newTextLine,"Jeste jednou potrebuji, abys <src.sex(znesvetil,znesvetila)> hrobku. Tentokrat ale primo hrobku ereborskych trpaslicich kralu!")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 64) || (<arg(mq057_zaskodnik)> == 71))
+      argo.setText(argo.newTextLine,"V malebne vesnicce jmenem Hobitin se nachazi pribytek rodu Pytliku - ano, tech Pytliku. Zniceni dlouho ocekavaneho rukopisu urcite vysle jasny vzkaz celemu Gondoru.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 74) || (<arg(mq057_zaskodnik)> == 81))
+      argo.setText(argo.newTextLine,"Starosta Pelargiru si pry moc nehlida svoje danove zaznamy. Kdyz se nam je podari spravne pozmenit, mohli bychom zadelat na hezkou vzpouru...")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 84) || (<arg(mq057_zaskodnik)> == 91))
+      argo.setText(argo.newTextLine,"Celkem by se nam hodilo, kdyby pristi sluzbu na hradbach ve Fornostu mel strazny Ochmelka, ze zjevnych duvodu. Rozpis sluzeb by mel byt k nalezeni v nejnizsim patre pevnosti.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 94) || (<arg(mq057_zaskodnik)> == 101))
+      argo.setText(argo.newTextLine,"Esgaroth dodava ryby do velke casti Gondoru. Postarej se o to, ze z nich bude nekomu hezky spatne. A vem si s sebou radeji vetsi mnozstvi slabeho jedu.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 104) || (<arg(mq057_zaskodnik)> == 111))
+      argo.setText(argo.newTextLine,"Predstav si, ze mlynar v Calembelu spolu s obilim zkusi pomlit i vybusninu. Dokonce tu nejsilnejsi, co existuje. Z cehopak asi potom budou pect chleba, kdyz mlyn lehne na popel?")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 114) || (<arg(mq057_zaskodnik)> == 121))
+      argo.setText(argo.newTextLine,"Loriensti elfove cele dny vysedavaji v tom jejich posvatnem haji. Trochu jim ho zaplevelime. Mandragore se tam bude urcite hezky darit!")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 124) || (<arg(mq057_zaskodnik)> == 131))
+      argo.setText(argo.newTextLine,"Helmuv zleb, radoby nedobytna pevnost, to uz vime. Pristi najezd bude jeste snazsi, kdyz se nam podari otravit jejich zdroj pitne vody. Nekolik ampuli bezneho jedu by melo stacit.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 134) || (<arg(mq057_zaskodnik)> == 141))
+      argo.setText(argo.newTextLine,"Mestecko Hurka zatim unikalo nasi pozornosti. Asi uz ale nastal cas, abychom v jejich slavne hospudce trochu opeprili medovinu. Jedem. Silnym jedem.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 144) || (<arg(mq057_zaskodnik)> == 151))
+      argo.setText(argo.newTextLine,"Majak v Dol Amrothu pomaha vetsine gondorskych moreplavcu pri navigaci. Kdyz do nadoby s palivem sikovne umistis vetsi mnozstvi lahvi se zmrzlou vodou, v noci bude na pobrezi ukrutna zabava...")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 154) || (<arg(mq057_zaskodnik)> == 161))
+      argo.setText(argo.newTextLine,"Vino z Kralovstvi lesnich elfu putuje na stoly tech nejvznesenejsich gondorskych rodu. Jedna prihodne primichana ampule smrticiho jedu by mohla zasadit poradnou ranu jejich uz tak chatrnym spojenectvim.")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 164) || (<arg(mq057_zaskodnik)> == 171))
+      argo.setText(argo.newTextLine,"Mnichove z Manweho chramu v Minas Tirith se staraji o mistni chudinu. Pristi jidlo pro chude ale vyvola v meste naprosty chaos. Primichas do nej totiz vsechny zabavne druhy jedu, co te jenom napadnou!")
+      argo.questDialog_HTMLGUMP
+    elseif ((<arg(mq057_zaskodnik)> == 174) || (<arg(mq057_zaskodnik)> == 181))
+      argo.setText(argo.newTextLine,"Ted tu mam pro tebe skutecny husarsky kousek. Zapalis edorassky majak a vyvolas tak plany poplach vsech gondorskych vojsk. Par ebenovych polen by melo zajistit, ze se jim ho nepodari jen tak uhasit...")
+      argo.questDialog_HTMLGUMP
+    endif
+    if ((<arg(mq057_zaskodnik)> % 10) == 4)
+      argo.setText(argo.newTextLine,"Rozumim, jdu na to.")
+      argo.questDialog_addResponse(0,1,1,"mq057_zaskodnik_accept")
+      argo.setText(argo.newTextLine,"Hmm, mozna nekdy jindy...")
+      argo.questDialog_addResponse(0,1,1,"mq057_zaskodnik_blank")
+    endif
+  elseif (<arg(mq057_zaskodnik)> == 183)
+    argo.setText(argo.newTextLine,"Znamenite, <src.sex(splnil,splnila)> jsi vsechny vypsane zakazky! Nejakou dobu se ted budeme drzet pri zemi, ale za par dnu se tu urcite zase zastav...")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Bylo mi cti poslouzit nasi veci!")
+    argo.questDialog_addResponse(0,1,1,"mq057_zaskodnik_reward_last") 
+  elseif ((<arg(mq057_zaskodnik)> % 10) == 3)
+    argo.setText(argo.newTextLine,"Spickova prace, je radost delat s nekym takovym!")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Bylo mi cti poslouzit nasi veci!")
+    argo.questDialog_addResponse(0,1,1,"mq057_zaskodnik_reward")
+  elseif ((<arg(mq057_zaskodnik)> % 10) == 2)
+    argo.setText(argo.newTextLine,"Dostalo se ke mne, ze se ti pri plneni posledni zakazky moc nedarilo...")
+    argo.questDialog_HTMLGUMP
+    argo.setText(argo.newTextLine,"Bohuzel je to tak, ale chci to hned zkusit znovu!")
+    argo.questDialog_addResponse(0,1,1,"mq057_zaskodnik_retake")
+    argo.setText(argo.newTextLine,"Ano, bylo to nad moje sily. Potrebuju si chvili odpocinout...")
+    argo.questDialog_addResponse(0,1,1,"mq057_zaskodnik_blank")
+  elseif (<arg(mq057_zaskodnik)> == 185)
+    argo.setText(argo.newTextLine,"Jak uz jsem rikal, momentalne pro tebe nic nemam, ale urcite se tu ukaz zase za par dnu...")
+    argo.questDialog_HTMLGUMP
+  endif
+  
+argo.dialog_page("Prohlednout")
+  argo.setText(argo.newTextLine,"<def_questDialog_colorTextEmote>*Vidis nebezpecne vyhlizejiciho ozbrojence. I kdyz se na tebe zrovna chvili nediva, citis, ze si je vedom kazdeho tveho pohybu.*")
+  argo.questDialog_HTMLGUMP
+  
+[dialog d_mq057_zaskodnik button]
+on=@anyButton 
+if (src.targ.distance > 10)
+  src.sysMessage("<src.sex(Odesel,Odesla)> jsi prilis daleko.")
+else
+  if (<argn> == argo.dialog_linkButton("mq057_zaskodnik_accept_1st"))
+    src.qtag(mq057_zaskodnik,11)
+    say("Vyborne, budu te brzy cekat zpatky.")
+    src.newitemsafe(i_mq057_zaskodnik_casomira)
+    src.equip(lastnew)  
+    serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Linhiru.")) 
+  elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_retake"))
+    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> -1))
+    say("Tomu rikam odhodlani, smele do toho!")
+    src.newitemsafe(i_mq057_zaskodnik_casomira)
+    src.equip(lastnew) 
+    if src.qtag(mq057_zaskodnik) < 20
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Linhiru.")) 
+    elseif src.qtag(mq057_zaskodnik) < 30
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Forondonu.")) 
+    elseif src.qtag(mq057_zaskodnik) < 40
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Tharbadu."))
+    elseif src.qtag(mq057_zaskodnik) < 50
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Dolu."))
+    elseif src.qtag(mq057_zaskodnik) < 60
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Sedym pristavum.")) 
+    elseif src.qtag(mq057_zaskodnik) < 70
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Ereboru."))  
+    elseif src.qtag(mq057_zaskodnik) < 80
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Hobitinu."))  
+    elseif src.qtag(mq057_zaskodnik) < 90
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Pelargiru."))   
+    elseif src.qtag(mq057_zaskodnik) < 100
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Fornostu."))  
+    elseif src.qtag(mq057_zaskodnik) < 110
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Esgarothu."))  
+    elseif src.qtag(mq057_zaskodnik) < 120
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem ke Calembelu."))  
+    elseif src.qtag(mq057_zaskodnik) < 130
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Lorienu.")) 
+    elseif src.qtag(mq057_zaskodnik) < 140
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Helmove zlebu.")) 
+    elseif src.qtag(mq057_zaskodnik) < 150
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Hurce."))  
+    elseif src.qtag(mq057_zaskodnik) < 160
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Dol Amrothu."))  
+    elseif src.qtag(mq057_zaskodnik) < 170
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem ke Kralovstvi lesnich elfu.")) 
+    elseif src.qtag(mq057_zaskodnik) < 180
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Minas Tirith.")) 
+    else
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Edorasu."))
+    endif    
+  elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_accept"))
+    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +7))
+    say("Vyborne, budu te brzy cekat zpatky.")
+    src.newitemsafe(i_mq057_zaskodnik_casomira)
+    src.equip(lastnew)
+    if src.qtag(mq057_zaskodnik) < 20
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Linhiru.")) 
+    elseif src.qtag(mq057_zaskodnik) < 30
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Forondonu.")) 
+    elseif src.qtag(mq057_zaskodnik) < 40
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Tharbadu."))
+    elseif src.qtag(mq057_zaskodnik) < 50
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Dolu."))
+    elseif src.qtag(mq057_zaskodnik) < 60
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Sedym pristavum.")) 
+    elseif src.qtag(mq057_zaskodnik) < 70
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Ereboru."))  
+    elseif src.qtag(mq057_zaskodnik) < 80
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Hobitinu."))  
+    elseif src.qtag(mq057_zaskodnik) < 90
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Pelargiru."))   
+    elseif src.qtag(mq057_zaskodnik) < 100
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Fornostu."))  
+    elseif src.qtag(mq057_zaskodnik) < 110
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Esgarothu."))  
+    elseif src.qtag(mq057_zaskodnik) < 120
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem ke Calembelu."))  
+    elseif src.qtag(mq057_zaskodnik) < 130
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Lorienu.")) 
+    elseif src.qtag(mq057_zaskodnik) < 140
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Helmove zlebu.")) 
+    elseif src.qtag(mq057_zaskodnik) < 150
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Hurce."))  
+    elseif src.qtag(mq057_zaskodnik) < 160
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Dol Amrothu."))  
+    elseif src.qtag(mq057_zaskodnik) < 170
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem ke Kralovstvi lesnich elfu.")) 
+    elseif src.qtag(mq057_zaskodnik) < 180
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Minas Tirith.")) 
+    else
+      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Edorasu."))
+    endif      
+  elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_reward"))
+    src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +1))
+    say("Zde je tva odmena, diky!")
+    // src.newitemsafe(i_mq057_zaskodnik_pauza)
+    // src.equip(lastnew)    
+    src.addexp(420+<eval(<src.tag(level)>*2)>)
+    if ((src.qtag(mq057_zaskodnik) % 20) == 4)
+      src.giveitem(i_mi_pouch)
+    endif
+    src.givegold(2500+<eval(<src.qtag(mq057_zaskodnik)>*25)>)                                                        
+  elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_reward_last"))
+    src.qtag(mq057_zaskodnik,185)
+    f_quest_complete(57)
+    say("Tady mas, jeste jednou mockrat diky!")
+    src.newitemsafe(i_mq057_zaskodnik_dokonceni)
+    src.equip(lastnew)    
+    src.addexp(1420+<eval(<src.tag(level)>*2)>)                                                             
+    src.giveitem(i_mi_bag_high)
+    src.giveitem(i_mi_bag_high)
+    src.playerBooster_add(1) 
+    src.givegold(27100)                                                              
+  endif
+endif
+
+//////////////////////////////
+// Funkce
+//////////////////////////////
+
+// argv(0) - requred tag for DClick success
+// argv(1) - classMessage text printed to the player
+// argv(2) - optional: required number of consumed resources (will be consumed on success)
+// argv(3) - optional: ID of the required resource (relates to the argv(2))
+[function f_mq057_userDclick]
+if (src.isGM)
+  dialog(d_guarditAdv)
+  return
+elseif (<eval src.qtag(mq057_zaskodnik)> != <argv(0)>)
+  src.sysmessage("Nevis, co s tim.") 
+  return
+elseif (<src.tag(realm)> == 1)
+  src.redmessage("Toto ti ani tva pochybna cest nedovoli.")  
+  return
+elseif (f_guarditAdv_CheckSpawns)
+  src.redmessage("Je tu nejak moc svedku.")
+  return
+endif
+if (<argvcount> > 3)
+  if (src.rescount(<argv(3)>) < <argv(2)>)
+    src.redmessage("Nemas vse potrebne.")
+    return
+  endif
+  src.consume(<argv(2)>,<argv(3)>)
+endif
+src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> + 2))
+src.consume(1,i_mq057_zaskodnik_casomira)
+src.classmessage(<argv(1)>)    
+serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
+src.sound(src.sex(0431, 031A))
+src.say("Muhahaha!")
+
+[function f_mq057_predmety]
+src.giveitem(i_potion_PoisonLess,10)
+src.giveitem(i_potion_Lava)
+src.giveitem(i_reag_mandrake_root,200)
+src.giveitem(i_potion_Poison,5)
+src.giveitem(i_potion_PoisonGreat,3)
+src.giveitem(i_zmrzlavoda,20)
+src.giveitem(i_potion_PoisonDeadly)
+src.giveitem(i_potion_Poison_fizz)
+src.giveitem(i_potion_Poison_weaken)
+src.giveitem(i_potion_Poison_clumsy)
+src.giveitem(i_potion_Poison_para)
+src.giveitem(i_potion_Poison_feeblemind)
+src.giveitem(i_potion_Poison_stamina)
+src.giveitem(i_log_adamantinum,2)
+
+[eof]

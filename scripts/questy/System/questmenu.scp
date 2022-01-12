@@ -25,7 +25,7 @@ questMenu_color_questActiveFont      #00F0FA
 questMenu_color_questInactiveFont    #383838
 questMenu_color_questDoneFont        #00FA55
 questMenu_color_questInactive        51
-questMenu_rows  57
+questMenu_rows  59
 //          |     Nazev questu     |           dialogName           |  1=qtag, 0=tag  |  relevantni tagy
 questMenu[0]  Zemedelec Borek           ,d_questy_borek                     ,1         ,gq002, mq002
 questMenu[1]  Alchymistka Mikkena       ,d_questy_mikena                    ,0         ,gq001
@@ -84,6 +84,8 @@ questMenu[53] Murdocovi Ucni            ,d_murdoc_ucni                      ,1  
 questMenu[54] Zachrante Murdoca         ,d_murdoc_zachrana                  ,1         ,q044
 questMenu[55] Labyrint Zlateho Goblina  ,d_zlaty_goblin                     ,1         ,Goblin_Labyrint
 questMenu[56] Lovecka Vyveska           ,d_lovecka_vyveska                  ,0         ,loveckasoutez
+questMenu[57] Zaskodnik                 ,d_zaskodnik                        ,1         ,mq057_zaskodnik
+questMenu[58] Zaskodnice                ,d_zaskodnice                       ,1         ,gq058_zaskodnice
 
 questMenu_bg               9270
 questMenu_width            300
@@ -3527,6 +3529,140 @@ elseif (<argv(0)> == 50)
   setText(1,"Ember te posila do Ledove Jeskyne. Musis najit Murdoca a nebo cokoli, co by vedlo k jeho nalezeni. Pry pouzival neviditelne truhly k ukryti svych veci, kdyz vedel, ze zemre a opusti sve telo. Je mozne, ze uz je hledaji i demoni.")
 endif
 return 0	
+
+///////////////////////
+//                   //
+//  Zaskodnik        //
+//                   //
+///////////////////////
+
+[function f_isDone_d_zaskodnik]
+return <eval(src.qtag(mq057_zaskodnik) == 185)>
+
+[dialog d_zaskodnik]
+argo.setText(0,"Zaskodnik")
+argo.f_qDialogInstructions(03085)
+
+if (((<eval src.qtag(mq057_zaskodnik)> % 10) == 4) || (<eval src.qtag(mq057_zaskodnik)> == 190))
+  argo.setText(1,"Zaskodnik pro tebe ma nejspis nejakou dalsi pracicku.")
+elseif ((<eval src.qtag(mq057_zaskodnik)> % 10) == 3)
+  argo.setText(1,"Ukol uspesne splnen, je na case zajit si k zaskodnikovi pro odmenu!")
+elseif ((<eval src.qtag(mq057_zaskodnik)> % 10) == 2)
+  argo.setText(1,"Nepodarilo se ti splnit ukol dostatecne rychle, i tak je ale potreba podat zaskodnikovi hlaseni.")
+elseif ((<eval src.qtag(mq057_zaskodnik)> % 10) == 1)
+  if (<eval src.qtag(mq057_zaskodnik)> == 11) 
+    argo.setText(1,"Poskod stavidlo na hrazi v osade Linhir.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 21)
+    argo.setText(1,"Znesvet ostatky v hrobce na hrbitove pobliz osady Forondon.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 31)
+    argo.setText(1,"Odbrzdi stanek ve vesnici Tharbad.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 41)
+    argo.setText(1,"Znesvet ostatky na hrbitove ve meste Dol.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 51) 
+    argo.setText(1,"Poskod brzdny mechanismus rozestavene lode v Sedych pristavech.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 61)
+    argo.setText(1,"Znesvet ostatky v hrobce ereborskych trpaslicich kralu.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 71) 
+    argo.setText(1,"Znic rukopis v nore rodu Pytliku v Hobitine.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 81)
+    argo.setText(1,"Uprav danove zaznamy v sidle starosty v Pelargiru.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 91) 
+    argo.setText(1,"Uprav rozpis sluzeb strazi v nejnizsim patre pevnosti ve Fornostu.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 101) 
+    argo.setText(1,"Otrav ryby v okoli Esgarothu. Budes potrebovat vetsi mnozstvi slabeho jedu.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 111)
+    argo.setText(1,"Nastraz lavovou explozi do pytle s obilim v calembelskem mlyne.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 121)
+    argo.setText(1,"Zasad mandragoru v posvatnem haji v Lorienu.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 131)
+    argo.setText(1,"Otrav studnu v Helmove zlebu nekolika ampulemi bezneho jedu.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 141) 
+    argo.setText(1,"Opepri medovinu v hostinci U Skakaveho ponika nekolika davkami silneho jedu.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 151)
+    argo.setText(1,"Umisti vetsi mnozstvi lahvi se zmrzlou vodou do nadoby s palivem na vrcholku majaku ve meste Dol Amroth.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 161)
+    argo.setText(1,"Vylij jednu lahvicku smrticiho jedu do sudu s vinem ve sklepenich elfiho palace v Kralovstvi lesnich elfu.")
+  elseif (<eval src.qtag(mq057_zaskodnik)> == 171)
+    argo.setText(1,"Primichej do jidla pro chude v Manweho chramu v Minas Tirith vsechny mozne druhy specializovanych jedu.")
+  else
+    argo.setText(1,"Zapal majak v Edorasu a prihod do ohne dve ebenova polena.")
+  endif
+elseif (<eval src.qtag(mq057_zaskodnik)> == 185)
+  argo.setText(1,"<?src.sex("Splnil","Splnila")?> jsi vsechny ukoly zadane zaskodnikem a dalsi pro tebe zatim nema. Mozna casem...")
+endif
+
+argo.htmlGump(160,80,242,130,1,0,36)
+
+[dialog d_zaskodnik button]
+on=0
+argo.f_qm_closeSubDialog
+
+///////////////////////
+//                   //
+//  Zaskodnice       //
+//                   //
+///////////////////////
+
+[function f_isDone_d_zaskodnice]
+return <eval(src.qtag(gq058_zaskodnice) == 185)>
+
+[dialog d_zaskodnice]
+argo.setText(0,"Zaskodnice")
+argo.f_qDialogInstructions(03069)
+
+if (((<eval src.qtag(gq058_zaskodnice)> % 10) == 4) || (<eval src.qtag(gq058_zaskodnice)> == 190))
+  argo.setText(1,"Zaskodnice pro tebe ma nejspis nejakou dalsi pracicku.")
+elseif ((<eval src.qtag(gq058_zaskodnice)> % 10) == 3)
+  argo.setText(1,"Ukol uspesne splnen, je na case zajit si k zaskodnici pro odmenu!")
+elseif ((<eval src.qtag(gq058_zaskodnice)> % 10) == 2)
+  argo.setText(1,"Nepodarilo se ti splnit ukol dostatecne rychle, i tak je ale potreba podat zaskodnici hlaseni.")
+elseif ((<eval src.qtag(gq058_zaskodnice)> % 10) == 1)
+  if (<eval src.qtag(gq058_zaskodnice)> == 11) 
+    argo.setText(1,"Poskod mechanismus vychodni brany do Mordoru.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 21)
+    argo.setText(1,"Poskod ukotveni lavky pobliz Hory osudu.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 31)
+    argo.setText(1,"Poskod mechanismus Cerne brany.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 41)
+    argo.setText(1,"Vylej zasoby rumu v umbarske pristavni krcme.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 51) 
+    argo.setText(1,"Znic zaznamy zvedu v pevnosti kousek zapadne od Cerne brany.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 61)
+    argo.setText(1,"Prones ocistnou modlitbu na obradnim miste mezi skalami v taboru Rhun.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 71) 
+    argo.setText(1,"Znic nabozenske texty v nurnskem chramu.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 81)
+    argo.setText(1,"Pozmen zaznamy o sazkach v pousti arene mesta Tahabar.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 91)
+    argo.setText(1,"Uprav rozpis hlidek ve strazni vezi pobliz barad-durske brany.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 101)
+    argo.setText(1,"Otrav vetsim mnozstvim slabeho jedu jezirko v Oaze Hagir.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 111)
+    argo.setText(1,"Nastraz lavovou explozi do pytle s obilim v nurnskem mlyne.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 121)
+    argo.setText(1,"Vymaz kotel rhunskeho samana poradnym mnozstvim ruliku.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 131)
+    argo.setText(1,"Otrav studnu v osade Bagronk nekolika ampulemi bezneho jedu.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 141) 
+    argo.setText(1,"Okoren vino haradskeho panovnika nekolika davkami silneho jedu.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 151) 
+    argo.setText(1,"Umisti vetsi mnozstvi nadob se zmrzlou vodou do mezer ve zdivu barad-durske pevnosti.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 161)
+    argo.setText(1,"Otrav umbarskeho olifanta jednou lahvickou smrticiho jedu.")
+  elseif (<eval src.qtag(gq058_zaskodnice)> == 171)
+    argo.setText(1,"Primichej do piva v barad-durske hospode vsechny mozne druhy specializovanych jedu.")
+  else
+    argo.setText(1,"Doruc do truhly kapitana palacove straze v Haradu uplatek ve forme dvou adamantinovych cihel.")
+  endif
+elseif (<eval src.qtag(gq058_zaskodnice)> == 185)
+  argo.setText(1,"<?src.sex("Splnil","Splnila")?> jsi vsechny ukoly zadane zaskodnici a dalsi pro tebe zatim nema. Mozna casem...")
+endif
+
+argo.htmlGump(160,80,242,130,1,0,36)
+
+[dialog d_zaskodnice button]
+on=0
+argo.f_qm_closeSubDialog
 
 ///////////////////
 //               //
