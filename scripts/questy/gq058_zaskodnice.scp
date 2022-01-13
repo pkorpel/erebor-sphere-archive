@@ -58,7 +58,7 @@ TIMER=1800
 ON=@TIMER
 cont.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
 cont.newitem(i_realmMessage_announcer)
-lastnew.p=<src.p>    
+lastnew.p=<cont.p>    
 lastnew.tag(realmMessage,"Gondorsky zaskodnik neuspel ve svem ukolu.") 
 cont.redmessage("Nepodarilo se ti splnit zaskodnicky ukol dostatecne rychle.")
 
