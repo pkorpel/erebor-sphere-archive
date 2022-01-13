@@ -57,7 +57,9 @@ TIMER=1800
 
 ON=@TIMER
 cont.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
-serv.allclients(realmMessage("Gondorsky zaskodnik neuspel ve svem ukolu."))
+cont.newitem(i_realmMessage_announcer)
+lastnew.p=<cont.p>    
+lastnew.tag(realmMessage,"Gondorsky zaskodnik neuspel ve svem ukolu.") 
 cont.redmessage("Nepodarilo se ti splnit zaskodnicky ukol dostatecne rychle.")
 
 [itemdef i_gq058_zaskodnice_dokonceni]
@@ -326,7 +328,9 @@ src.consume(1,i_potion_Poison_feeblemind)
 src.consume(1,i_potion_Poison_stamina)
 src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +2))
 src.classmessage("<src.sex(Vylepsil,Vylepsila)> jsi pivo v barad-durske hospode.")       
-serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol.")) 
+src.newitem(i_realmMessage_announcer)
+lastnew.p=<src.p>    
+lastnew.tag(realmMessage,"Gondorsky zaskodnik splnil svuj ukol.") 
 src.sound(src.sex(0431, 031A))
 src.say("Muhahaha!")
 return 1
@@ -485,101 +489,96 @@ else
     say("Skvele. A pospes si.")
     src.newitemsafe(i_gq058_zaskodnice_casomira)
     src.equip(lastnew) 
-     
-    src.newitem(i_realmMessage_announcer)       // item co zarve zpravu pro G i pro M
-    lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")   
+    src.newitem(i_realmMessage_announcer)
     lastnew.p=<src.p>
-    
-    //serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")) 
+    lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")       
   elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_retake"))
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> -1))
     say("Budiz. At to jde tentokrat lepe.")
     src.newitemsafe(i_gq058_zaskodnice_casomira)
     src.equip(lastnew) 
-    
-    src.newitem(i_realmMessage_announcer)       // item co zarve zpravu pro G i pro M
+    src.newitem(i_realmMessage_announcer) 
     lastnew.p=<src.p>
     if src.qtag(gq058_zaskodnice) < 20
-      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))     // takto uprav vsechny zpravy, pak tento komentar smaz
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.") 
     elseif src.qtag(gq058_zaskodnice) < 30
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.") 
     elseif src.qtag(gq058_zaskodnice) < 40
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Cerne brane."))
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Cerne brane.")
     elseif src.qtag(gq058_zaskodnice) < 50
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Umbaru."))   
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Umbaru.")   
     elseif src.qtag(gq058_zaskodnice) < 60
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k pevnosti zapadne od Cerne brany."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k pevnosti zapadne od Cerne brany.")  
     elseif src.qtag(gq058_zaskodnice) < 70
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem ke Rhunu.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem ke Rhunu.") 
     elseif src.qtag(gq058_zaskodnice) < 80
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Nurnu."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Nurnu.")  
     elseif src.qtag(gq058_zaskodnice) < 90
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Tahabaru."))
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Tahabaru.")
     elseif src.qtag(gq058_zaskodnice) < 100
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Barad-duru.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Barad-duru.") 
     elseif src.qtag(gq058_zaskodnice) < 110
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Oaze Hagir."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Oaze Hagir.")  
     elseif src.qtag(gq058_zaskodnice) < 120
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Nurnu.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Nurnu.") 
     elseif src.qtag(gq058_zaskodnice) < 130
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem ke Rhunu."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem ke Rhunu.")  
     elseif src.qtag(gq058_zaskodnice) < 140
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Bagronku."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Bagronku.")  
     elseif src.qtag(gq058_zaskodnice) < 150
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Haradu."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Haradu.")  
     elseif src.qtag(gq058_zaskodnice) < 160
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Barad-duru."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Barad-duru.")  
     elseif src.qtag(gq058_zaskodnice) < 170
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Umbaru."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Umbaru.")  
     elseif src.qtag(gq058_zaskodnice) < 180
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Barad-duru.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Barad-duru.") 
     else
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Haradu."))
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Haradu.")
     endif    
   elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_accept"))
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +7))
     say("Skvele. A pospes si.")
     src.newitemsafe(i_gq058_zaskodnice_casomira)
-    src.equip(lastnew)
-    
-    src.newitem(i_realmMessage_announcer)       // item co zarve zpravu pro G i pro M
+    src.equip(lastnew)   
+    src.newitem(i_realmMessage_announcer)
     lastnew.p=<src.p>
     if src.qtag(gq058_zaskodnice) < 20
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")
     elseif src.qtag(gq058_zaskodnice) < 30
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.") 
     elseif src.qtag(gq058_zaskodnice) < 40
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Cerne brane."))
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Cerne brane.")
     elseif src.qtag(gq058_zaskodnice) < 50
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Umbaru."))   
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Umbaru.")   
     elseif src.qtag(gq058_zaskodnice) < 60
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k pevnosti zapadne od Cerne brany."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k pevnosti zapadne od Cerne brany.")  
     elseif src.qtag(gq058_zaskodnice) < 70
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem ke Rhunu.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem ke Rhunu.") 
     elseif src.qtag(gq058_zaskodnice) < 80
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Nurnu."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Nurnu.")  
     elseif src.qtag(gq058_zaskodnice) < 90
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Tahabaru."))
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Tahabaru.")
     elseif src.qtag(gq058_zaskodnice) < 100
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Barad-duru.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Barad-duru.") 
     elseif src.qtag(gq058_zaskodnice) < 110
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Oaze Hagir."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Oaze Hagir.")  
     elseif src.qtag(gq058_zaskodnice) < 120
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Nurnu.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Nurnu.") 
     elseif src.qtag(gq058_zaskodnice) < 130
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem ke Rhunu."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem ke Rhunu.")  
     elseif src.qtag(gq058_zaskodnice) < 140
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Bagronku."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Bagronku.")  
     elseif src.qtag(gq058_zaskodnice) < 150
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Haradu."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Haradu.")  
     elseif src.qtag(gq058_zaskodnice) < 160
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Barad-duru."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Barad-duru.")  
     elseif src.qtag(gq058_zaskodnice) < 170
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Umbaru."))  
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Umbaru.")  
     elseif src.qtag(gq058_zaskodnice) < 180
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Barad-duru.")) 
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Barad-duru.") 
     else
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k Haradu."))
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k Haradu.")
     endif       
   elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_reward"))
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> +1))
@@ -636,8 +635,10 @@ if (<argvcount> > 3)
 endif
 src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> + 2))
 src.consume(1,i_gq058_zaskodnice_casomira)
-src.classmessage(<argv(1)>)    
-serv.allclients(realmMessage("Gondorsky zaskodnik splnil svuj ukol.")) 
+src.classmessage(<argv(1)>)
+src.newitem(i_realmMessage_announcer) 
+lastnew.p=<src.p>   
+lastnew.tag(realmMessage,"Gondorsky zaskodnik splnil svuj ukol.") 
 src.sound(src.sex(0431, 031A))
 src.say("Muhahaha!")
 
