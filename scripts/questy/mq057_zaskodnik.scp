@@ -57,7 +57,9 @@ TIMER=1800
 
 ON=@TIMER
 cont.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +1))
-serv.allclients(realmMessage("Mordorsky zaskodnik neuspel ve svem ukolu."))
+cont.newitem(i_realmMessage_announcer)
+lastnew.p=<src.p>    
+lastnew.tag(realmMessage,"Mordorsky zaskodnik neuspel ve svem ukolu.") 
 cont.redmessage("Nepodarilo se ti splnit zaskodnicky ukol dostatecne rychle.")
 
 [itemdef i_mq057_zaskodnik_dokonceni]
@@ -326,7 +328,9 @@ src.consume(1,i_potion_Poison_feeblemind)
 src.consume(1,i_potion_Poison_stamina)
 src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
 src.classmessage("<src.sex(Vylepsil,Vylepsila)> jsi polevku.")       
-serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
+src.newitem(i_realmMessage_announcer)
+lastnew.p=<src.p>    
+lastnew.tag(realmMessage,"Mordorsky zaskodnik neuspel ve svem ukolu.")
 src.sound(src.sex(0431, 031A))
 src.say("Muhahaha!")
 return 1
@@ -484,91 +488,97 @@ else
     src.qtag(mq057_zaskodnik,11)
     say("Vyborne, budu te brzy cekat zpatky.")
     src.newitemsafe(i_mq057_zaskodnik_casomira)
-    src.equip(lastnew)  
-    serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Linhiru.")) 
+    src.equip(lastnew) 
+    src.newitem(i_realmMessage_announcer)
+    lastnew.p=<src.p>
+    lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Linhiru.")
   elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_retake"))
     src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> -1))
     say("Tomu rikam odhodlani, smele do toho!")
     src.newitemsafe(i_mq057_zaskodnik_casomira)
-    src.equip(lastnew) 
+    src.equip(lastnew)
+    src.newitem(i_realmMessage_announcer) 
+    lastnew.p=<src.p> 
     if src.qtag(mq057_zaskodnik) < 20
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Linhiru.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Linhiru.") 
     elseif src.qtag(mq057_zaskodnik) < 30
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Forondonu.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Forondonu.") 
     elseif src.qtag(mq057_zaskodnik) < 40
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Tharbadu."))
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Tharbadu.")
     elseif src.qtag(mq057_zaskodnik) < 50
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Dolu."))
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Dolu.")
     elseif src.qtag(mq057_zaskodnik) < 60
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Sedym pristavum.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Sedym pristavum.") 
     elseif src.qtag(mq057_zaskodnik) < 70
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Ereboru."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Ereboru.")  
     elseif src.qtag(mq057_zaskodnik) < 80
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Hobitinu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Hobitinu.")  
     elseif src.qtag(mq057_zaskodnik) < 90
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Pelargiru."))   
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Pelargiru.")   
     elseif src.qtag(mq057_zaskodnik) < 100
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Fornostu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Fornostu.")  
     elseif src.qtag(mq057_zaskodnik) < 110
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Esgarothu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Esgarothu.")  
     elseif src.qtag(mq057_zaskodnik) < 120
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem ke Calembelu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem ke Calembelu.")  
     elseif src.qtag(mq057_zaskodnik) < 130
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Lorienu.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Lorienu.") 
     elseif src.qtag(mq057_zaskodnik) < 140
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Helmove zlebu.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Helmove zlebu.") 
     elseif src.qtag(mq057_zaskodnik) < 150
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Hurce."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Hurce.")  
     elseif src.qtag(mq057_zaskodnik) < 160
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Dol Amrothu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Dol Amrothu.")  
     elseif src.qtag(mq057_zaskodnik) < 170
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem ke Kralovstvi lesnich elfu.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem ke Kralovstvi lesnich elfu.") 
     elseif src.qtag(mq057_zaskodnik) < 180
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Minas Tirith.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Minas Tirith.") 
     else
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Edorasu."))
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Edorasu.")
     endif    
   elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_accept"))
     src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +7))
     say("Vyborne, budu te brzy cekat zpatky.")
     src.newitemsafe(i_mq057_zaskodnik_casomira)
     src.equip(lastnew)
+    src.newitem(i_realmMessage_announcer) 
+    lastnew.p=<src.p>
     if src.qtag(mq057_zaskodnik) < 20
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Linhiru.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Linhiru.") 
     elseif src.qtag(mq057_zaskodnik) < 30
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Forondonu.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Forondonu.") 
     elseif src.qtag(mq057_zaskodnik) < 40
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Tharbadu."))
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Tharbadu.")
     elseif src.qtag(mq057_zaskodnik) < 50
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Dolu."))
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Dolu.")
     elseif src.qtag(mq057_zaskodnik) < 60
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Sedym pristavum.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Sedym pristavum.") 
     elseif src.qtag(mq057_zaskodnik) < 70
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Ereboru."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Ereboru.")  
     elseif src.qtag(mq057_zaskodnik) < 80
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Hobitinu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Hobitinu.")  
     elseif src.qtag(mq057_zaskodnik) < 90
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Pelargiru."))   
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Pelargiru.")   
     elseif src.qtag(mq057_zaskodnik) < 100
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Fornostu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Fornostu.")  
     elseif src.qtag(mq057_zaskodnik) < 110
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Esgarothu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Esgarothu.")  
     elseif src.qtag(mq057_zaskodnik) < 120
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem ke Calembelu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem ke Calembelu.")  
     elseif src.qtag(mq057_zaskodnik) < 130
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Lorienu.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Lorienu.") 
     elseif src.qtag(mq057_zaskodnik) < 140
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Helmove zlebu.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Helmove zlebu.") 
     elseif src.qtag(mq057_zaskodnik) < 150
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Hurce."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Hurce.")  
     elseif src.qtag(mq057_zaskodnik) < 160
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Dol Amrothu."))  
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Dol Amrothu.")  
     elseif src.qtag(mq057_zaskodnik) < 170
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem ke Kralovstvi lesnich elfu.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem ke Kralovstvi lesnich elfu.") 
     elseif src.qtag(mq057_zaskodnik) < 180
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Minas Tirith.")) 
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Minas Tirith.") 
     else
-      serv.allclients(realmMessage("Mordorsky zaskodnik se vydava smerem k Edorasu."))
+      lastnew.tag(realmMessage,"Mordorsky zaskodnik se vydava smerem k Edorasu.")
     endif      
   elseif (<argn> == argo.dialog_linkButton("mq057_zaskodnik_reward"))
     src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +1))
@@ -626,7 +636,9 @@ endif
 src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> + 2))
 src.consume(1,i_mq057_zaskodnik_casomira)
 src.classmessage(<argv(1)>)    
-serv.allclients(realmMessage("Mordorsky zaskodnik splnil svuj ukol.")) 
+src.newitem(i_realmMessage_announcer) 
+lastnew.p=<src.p>   
+lastnew.tag(realmMessage,"Mordorsky zaskodnik splnil svuj ukol.") 
 src.sound(src.sex(0431, 031A))
 src.say("Muhahaha!")
 
