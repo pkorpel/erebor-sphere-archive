@@ -49,6 +49,21 @@ serv.allclients(warmessage(1,<var(chatmessageG)>))
 serv.allclients(warmessage(2,<var(chatmessageM)>)) 
 remove
 
+
+[itemdef i_realmMessage_announcer]
+id=i_worldgem_bit
+type=00
+name=Realm Message Announcer
+
+on=@create
+attr=094
+timer=0
+
+on=@Timer
+serv.allclients(realmMessage(<tag(realmMessage)>))
+remove
+
+
 [itemdef i_War_declarator_MemoryItem_1]   // vytvari se jako posledni ingame, az cele dobyvani je osazeno a ospawnovano
 id=i_memory
 type=t_eq_script

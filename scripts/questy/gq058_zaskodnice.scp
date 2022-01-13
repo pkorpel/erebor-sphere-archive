@@ -484,15 +484,23 @@ else
     src.qtag(gq058_zaskodnice,11)
     say("Skvele. A pospes si.")
     src.newitemsafe(i_gq058_zaskodnice_casomira)
-    src.equip(lastnew)  
-    serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")) 
+    src.equip(lastnew) 
+     
+    src.newitem(i_realmMessage_announcer)       // item co zarve zpravu pro G i pro M
+    lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")   
+    lastnew.p=<src.p>
+    
+    //serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane.")) 
   elseif (<argn> == argo.dialog_linkButton("gq058_zaskodnice_retake"))
     src.qtag(gq058_zaskodnice,(<eval src.qtag(gq058_zaskodnice)> -1))
     say("Budiz. At to jde tentokrat lepe.")
     src.newitemsafe(i_gq058_zaskodnice_casomira)
     src.equip(lastnew) 
+    
+    src.newitem(i_realmMessage_announcer)       // item co zarve zpravu pro G i pro M
+    lastnew.p=<src.p>
     if src.qtag(gq058_zaskodnice) < 20
-      serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))
+      lastnew.tag(realmMessage,"Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))     // takto uprav vsechny zpravy, pak tento komentar smaz
     elseif src.qtag(gq058_zaskodnice) < 30
       serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k barad-durskemu mostu.")) 
     elseif src.qtag(gq058_zaskodnice) < 40
@@ -533,6 +541,9 @@ else
     say("Skvele. A pospes si.")
     src.newitemsafe(i_gq058_zaskodnice_casomira)
     src.equip(lastnew)
+    
+    src.newitem(i_realmMessage_announcer)       // item co zarve zpravu pro G i pro M
+    lastnew.p=<src.p>
     if src.qtag(gq058_zaskodnice) < 20
       serv.allclients(realmMessage("Gondorsky zaskodnik se vydava smerem k vychodni mordorske brane."))
     elseif src.qtag(gq058_zaskodnice) < 30
