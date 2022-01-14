@@ -423,7 +423,7 @@ argo.dialog_page("Prace")
       argo.setText(argo.newTextLine,"Oaza Hagir je dulezitym obchodnim uzlem prave kvuli svemu jezirku. Zajisti pomoci vetsiho mnozstvi slabeho jedu, ze se tomuto mistu zacnou obchodnici vyhybat.")
       argo.questDialog_HTMLGUMP
     elseif ((<arg(gq058_zaskodnice)> == 104) || (<arg(gq058_zaskodnice)> == 111))
-      argo.setText(argo.newTextLine,"Nastraz do jednoho z pytlu obili v nurnskem mlyne tu nejsilnejsi moznou traskavinu. Zniceni celeho mlyna bude krasna prezentace sily.")
+      argo.setText(argo.newTextLine,"Nastraz do jednoho z pytlu obili v nurnskem vetrnem mlyne tu nejsilnejsi moznou traskavinu. Zniceni celeho mlyna bude krasna prezentace sily.")
       argo.questDialog_HTMLGUMP
     elseif ((<arg(gq058_zaskodnice)> == 114) || (<arg(gq058_zaskodnice)> == 121))
       argo.setText(argo.newTextLine,"Poradne vymaz kotel rhunskeho samana uctyhodnym mnozstvim ruliku. Uvidime, jak budou jeho posilnujici lektvary skretum potom chutnat...")
@@ -444,7 +444,7 @@ argo.dialog_page("Prace")
       argo.setText(argo.newTextLine,"Pripravy na utok na Barad-dur vrcholi, je ale jeste potreba co nejvice oslabit skreti posadku. Vylepsi pivo v tamni hospode o vsechny existujici specializovane druhy jedu!")
       argo.questDialog_HTMLGUMP
     elseif ((<arg(gq058_zaskodnice)> == 174) || (<arg(gq058_zaskodnice)> == 181))
-      argo.setText(argo.newTextLine,"Tento ukol je velmi dulezity a snad nam ziska potrebnou taktickou vyhodu. Musis dorucit smluveny uplatek kapitanovi haradskych strazi. Sidli v severozapadnim rohu palace a ocekava dve anamantinove cihly.")
+      argo.setText(argo.newTextLine,"Tento ukol je velmi dulezity a snad nam ziska potrebnou taktickou vyhodu. Musis dorucit smluveny uplatek kapitanovi haradskych strazi. Sidli v severovychodnim rohu palace a ocekava dve adamantinove cihly.")
       argo.questDialog_HTMLGUMP
     endif
     if ((<arg(gq058_zaskodnice)> % 10) == 4)
