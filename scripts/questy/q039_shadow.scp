@@ -282,7 +282,7 @@ else
 endif
 
 [FUNCTION f_q039_has_heads]
-if (<src.RESTEST(i_q039_shadow_weapon_head_verlix)> && <src.RESTEST(i_q039_shadow_weapon_heas_mercelis)> && <src.RESTEST(i_q039_shadow_weapon_head_gloata)> && <src.RESTEST(i_q039_shadow_weapon_head_Bakchor)>)
+if (<src.RESTEST(i_q039_shadow_weapon_head_verlix)> && <src.RESTEST(i_q039_shadow_weapon_head_mercelis)> && <src.RESTEST(i_q039_shadow_weapon_head_gloata)> && <src.RESTEST(i_q039_shadow_weapon_head_Bakchor)>)
 	return 1
 else
 	return 0

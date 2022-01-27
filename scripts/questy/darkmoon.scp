@@ -291,8 +291,6 @@ id=i_worldgem_bit
 type=0
 name=Nastavovac spawnu
 
-ON=@Create
-timer=1
 
 ON=@Timer
 if(<link>)
