@@ -7416,7 +7416,7 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 181]     //Fornost
 P=1446,1093
-RECT=1437,1085,1453,1092
+RECT=1437,1085,1453,1093
 tag.housenumber=181
 FLAGS=01192
 RAINCHANCE=00  
