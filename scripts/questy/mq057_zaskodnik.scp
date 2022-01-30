@@ -330,7 +330,7 @@ src.qtag(mq057_zaskodnik,(<eval src.qtag(mq057_zaskodnik)> +2))
 src.classmessage("<src.sex(Vylepsil,Vylepsila)> jsi polevku.")       
 src.newitem(i_realmMessage_announcer)
 lastnew.p=<src.p>    
-lastnew.tag(realmMessage,"Mordorsky zaskodnik neuspel ve svem ukolu.")
+lastnew.tag(realmMessage,"Mordorsky zaskodnik splnil svuj ukol.")
 src.sound(src.sex(0431, 031A))
 src.say("Muhahaha!")
 return 1
