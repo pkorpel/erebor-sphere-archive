@@ -1414,7 +1414,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_knockback
 TEVENTS=e_cajun
-TEVENTS=e_summoneater               //smaze summona, co zasahne
+TEVENTS=e_summoneater_vamp           //smaze summona, co zasahne a posilni se
 TEVENTS=e_npc_curse_stam            //mass sani staminy
 
 CATEGORY=Monsters
@@ -1443,6 +1443,8 @@ tag(cajunDeathChardef,"c_cajun")
 tag.npc_curse_stam_chance=250       // 25% chance to trigger this event
 tag.npc_curse_stam_delay=20,25      // delay between another possible strike
 tag.npc_curse_stam_dmg=30,40        // stam reduce in between 50 and 60
+
+tag(isBoss,1)
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
@@ -1478,8 +1480,11 @@ SpiritSpeak=85.0
 ITEMnewbie=i_monster_create
 
 ON=@NPCRestock
-item=i_gold
+ITEM=i_gold
 ITEM=RANDOM_REAGENT_NECRO,{20 30}
+ITEM=RANDOM_REAGENT_NECRO,{20 30}
+ITEM=RANDOM_REAGENT_NECRO,{20 30}
+ITEM=i_mi_bag
 
 ///////////////////////////////////////////////////////////
 
@@ -1502,7 +1507,7 @@ TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_parakrik            
 TEVENTS=e_cajun
-TEVENTS=e_summoneater         //smaze summona, co zasahne
+TEVENTS=e_summoneater_vamp       //smaze summona, co zasahne
 
 CATEGORY=Monsters
 SUBSECTION=Special
