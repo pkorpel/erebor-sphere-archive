@@ -4094,7 +4094,7 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA Slizske Stoky]
+[AREA Slizke Stoky]
 GROUP=vyznamna mista
 P=5794,473,0,10
 mapplane=10
