@@ -451,42 +451,45 @@ ON=@Create
 // Veci pro cast s Nexmiriasem
 //___________________________________________________________________
 
-[events e_cajun_lord]
-
+[events e_cajun]
 on=@aftergetswing
-if rand(20)==1
-  SAY("Heru Val")
-  sfx 533
-  gohome
-  newnpc(c_cajun_child1)
-  lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-  lastnewchar.fame=0
-  lastnewchar.flag_conjured=1
-  lastnewchar.newequip(i_osklivejsmazse)
-  lastnew.timer=60
-  newnpc(c_cajun_child2)
-  lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-  lastnewchar.fame=0
-  lastnewchar.flag_conjured=1
-  lastnewchar.newequip(i_osklivejsmazse)
-  lastnew.timer=60
-  newnpc(c_cajun_child3)
-  lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
-  lastnewchar.fame=0
-  lastnewchar.flag_conjured=1
-  lastnewchar.newequip(i_osklivejsmazse)
-  lastnew.timer=60
+if ((isSleeping) || (isSilenced))
+  return 0
 endif
-if rand(20)==10
+if !(<eval tag(cajunChance)>)
+  tag(cajunChance,50)
+endif
+if (<rand(<eval tag(cajunChance)>)> == 1)
   SAY("Heru Val")
   sfx 533
-  gohome
-  newnpc(c_cajun_child3)
-  lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+  newnpc(c_cajun_child1)
+  lastnewchar.p=<eval(<src.p_x>+{-1 1})>,<eval(<src.p_y>+{-1 1})>,<p_z>,<mapplane>
   lastnewchar.fame=0
   lastnewchar.flag_conjured=1
   lastnewchar.newequip(i_osklivejsmazse)
-  lastnew.timer=60
+  lastnew.timer=600
+  newnpc(c_cajun_child2)
+  lastnewchar.p=<eval(<src.p_x>+{-1 1})>,<eval(<src.p_y>+{-1 1})>,<p_z>,<mapplane>
+  lastnewchar.fame=0
+  lastnewchar.flag_conjured=1
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=600
+  newnpc(c_cajun_child3)
+  lastnewchar.p=<eval(<src.p_x>+{-1 1})>,<eval(<src.p_y>+{-1 1})>,<p_z>,<mapplane>
+  lastnewchar.fame=0
+  lastnewchar.flag_conjured=1
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=600
+endif
+if (<rand(<eval tag(cajunChance)>)> == 10)
+  SAY("Heru Val")
+  sfx 533
+  newnpc(c_cajun_child3)
+  lastnewchar.p=<eval(<src.p_x>+{-1 1})>,<eval(<src.p_y>+{-1 1})>,<p_z>,<mapplane>
+  lastnewchar.fame=0
+  lastnewchar.flag_conjured=1
+  lastnewchar.newequip(i_osklivejsmazse)
+  lastnew.timer=600
 endif
 
 on=@beforegetswing
@@ -499,16 +502,26 @@ on=@afterDoEffect
 on=@beforegeteffect
 
 on=@death
+if !(<eval tag(cajunDeathDamage)>)
+  tag(cajunDeathDamage,50)
+endi
+if !(<eval tag(cajunDeathChardef)>)
+  tag(cajunDeathChardef,"c_cajun_child1")
+endif
+
 while (memoryfindtype(0209c))
-  memoryfindtype(0209c).link.multi_damage(100)
+  memoryfindtype(0209c).link.multi_damage(<eval tag(cajunDeathDamage)>)
   memoryfindtype(0209c).remove 
 endwhile
 SAY("Ruth Mor")
-newnpc(c_cajun)
+newnpc(<tag(cajunDeathChardef)>)
 lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
 lastnewchar.fame=0
 lastnew.timer=600
-
+newnpc(<tag(cajunDeathChardef)>)
+lastnewchar.p=<eval(<p_x>+{-1 1})>,<eval(<p_y>+{-1 1})>,<p_z>,<mapplane>
+lastnewchar.fame=0
+lastnew.timer=600
 
 [events e_ignus]
 

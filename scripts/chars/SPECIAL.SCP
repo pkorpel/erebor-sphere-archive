@@ -1405,7 +1405,7 @@ CAN=MT_WALK|mt_run
 
 attack=135
 ARMOR=100
-MOVERATE=3
+MOVERATE=5
 
 RESOURCES=28 i_ribs_raw
 BLOODCOLOR=020
@@ -1413,7 +1413,7 @@ BLOODCOLOR=020
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_npc_knockback
-TEVENTS=e_cajun_lord
+TEVENTS=e_cajun
 TEVENTS=e_summoneater               //smaze summona, co zasahne
 TEVENTS=e_npc_curse_stam            //mass sani staminy
 
@@ -1435,6 +1435,10 @@ maxstam={380 395}
 maxmana=0
 
 tag.experience=<eval {600.0 650.0}>
+
+tag(cajunChance,20)
+tag(cajunDeathDamage,100)
+tag(cajunDeathChardef,"c_cajun")
 
 tag.npc_curse_stam_chance=250       // 25% chance to trigger this event
 tag.npc_curse_stam_delay=20,25      // delay between another possible strike
@@ -1489,14 +1493,15 @@ CAN=MT_WALK|mt_run
 
 attack=60
 ARMOR=60
-MOVERATE=3
+MOVERATE=6
 
 RESOURCES=18 i_ribs_raw
 BLOODCOLOR=020
 
 TEVENTS=e_monster
 TEVENTS=e_character
-TEVENTS=e_parakrik
+TEVENTS=e_parakrik            
+TEVENTS=e_cajun
 TEVENTS=e_summoneater         //smaze summona, co zasahne
 
 CATEGORY=Monsters
@@ -1517,6 +1522,10 @@ maxstam={230 250}
 maxmana=700
 
 tag.experience=<eval {230.0 330.0}>
+
+tag(cajunChance,30)
+tag(cajunDeathDamage,50)
+tag(cajunDeathChardef,"c_cajun_child1")
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
@@ -1575,7 +1584,7 @@ CAN=MT_WALK|mt_run
 
 attack=40
 ARMOR=95
-MOVERATE=3
+MOVERATE=7
 
 RESOURCES=1 i_ribs_raw
 BLOODCOLOR=0985
@@ -1660,7 +1669,7 @@ CAN=MT_WALK|mt_run
 
 attack=40
 ARMOR=95
-MOVERATE=3
+MOVERATE=7
 
 RESOURCES=1 i_ribs_raw
 BLOODCOLOR=0985
@@ -1740,7 +1749,7 @@ CAN=MT_WALK|mt_run
 
 attack=40
 ARMOR=95
-MOVERATE=3
+MOVERATE=7
 
 RESOURCES=1 i_ribs_raw
 BLOODCOLOR=0985
