@@ -3333,15 +3333,38 @@ tag.realm=3
 RAINCHANCE=00
 COLDCHANCE=00
 
-[AREA prepadeni]
+[AREA Prepadeni]
 GROUP=Dungeony
 P=5406,4052
 RECT=5371,4017,5434,4079
-FLAGS=00012
+mapplane=10
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=30
+COLDCHANCE=20
+
+[AREA Najezd]
+GROUP=Dungeony
+P=5574,3575,3
+RECT=5501,3509,5617,3614
+mapplane=10
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=40
+COLDCHANCE=10
+
+[AREA Jesteri zatoka]
+GROUP=Dungeony
+P=5995,1557
+RECT=5956,1238,6121,1575
+mapplane=10
+FLAGS=00812
 resources=r_default_rock, r_default_water, r_default_tree
 tag.realm=3
 RAINCHANCE=20
-COLDCHANCE=20
+COLDCHANCE=10
 
 [AREA Fangorn prusmyk]
 GROUP=Stredozeme
