@@ -1533,6 +1533,15 @@ RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Namorni bitva]
+GROUP=vyznamna mista
+P=2518,3615
+RECT=2508,3592,2523,3638
+FLAGS=00012
+tag.realm=3
+RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
+RAINCHANCE=40  
+COLDCHANCE=00
 
 [AREA Mrtve mocaly]
 GROUP=vyznamna mista
