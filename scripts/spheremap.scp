@@ -3375,6 +3375,17 @@ tag.realm=3
 RAINCHANCE=20
 COLDCHANCE=10
 
+[AREA Jesteri zatoka lod]
+GROUP=Dungeony
+P=5995,1557
+RECT=5956,1238,6121,1575
+mapplane=11
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=20
+COLDCHANCE=10
+
 [AREA Fangorn prusmyk]
 GROUP=Stredozeme
 P=2064,2198
