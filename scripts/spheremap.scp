@@ -1537,6 +1537,8 @@ COLDCHANCE=00
 GROUP=vyznamna mista
 P=2518,3615
 RECT=2508,3592,2523,3638
+RECT=2523,3592,2524,3612
+RECT=2523,3612,2524,3638
 FLAGS=00012
 tag.realm=3
 RESOURCES=r_default_rock, r_default_water, r_default_tree, r_default_grass
@@ -3386,6 +3388,17 @@ tag.realm=3
 RAINCHANCE=20
 COLDCHANCE=10
 
+[AREA Strasidelny dum]   
+GROUP=Dungeony
+P=4945,1386
+RECT=4921,1340,4961,1446
+mapplane=10
+FLAGS=00812
+resources=r_default_rock, r_default_water, r_default_tree
+tag.realm=3
+RAINCHANCE=00
+COLDCHANCE=00
+
 [AREA Fangorn prusmyk]
 GROUP=Stredozeme
 P=2064,2198
@@ -5078,18 +5091,6 @@ mapplane=5
 FLAGS=00812
 tag.nobank=1
 tag.realm=3
-RAINCHANCE=00
-COLDCHANCE=00
-
-[AREA Strasidelny dum]   
-GROUP=questy
-P=4927,1386,20,5
-RECT=4921,1340,4961,1446
-mapplane=5
-FLAGS=00812
-tag.nobank=1
-tag.realm=3
-events=r_nofield
 RAINCHANCE=00
 COLDCHANCE=00
 
