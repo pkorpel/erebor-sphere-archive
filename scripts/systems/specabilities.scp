@@ -881,28 +881,6 @@ dir=<getdir(<act>)>
 vzadsafe
 
 
-[Function bankopen]
-return 
-if (<profession>!=class_craft)&&(src.isgm==0)
-  src.classMessage(Nemuzes pouzit tuto schopnost.)
-  return 0
-endif
-if (flag_dead)
-  src.sysMessage Your ghostly hand passes through the object.
-elseif (region.tag(nobank))
-  src.redmessage(Tady nemuzes pouzit tuto schopnost.)
-elseif (serv.time<tag(nextbank))&&(src.isgm==0)
-  src.classMessage(Pokusit se o otevreni banky muzes za <eval (tag(nextbank)-serv.time)/600> minut, <eval ((tag(nextbank)-serv.time)-(((tag(nextbank)-serv.time)/600)*600))/10> sekund.)
-elseif ( {0 100000} > tag(ability))
-  tag(nextbank,<eval serv.time+nastaveni_ability_openbankdelay_fail>)
-  src.classMessage(Nepovedlo se ti otevrit banku.)
-else
-  tag(nextbank,<eval serv.time+nastaveni_ability_openbankdelay_succes>)
-  src.classMessage(Povedlo se ti otevrit banku.)
-  bankself
-  stamina=0
-endif
-
 [Function longrange]
 if (isnonmobile)
   src.sysMessage("You are frozen and cannot move.")
