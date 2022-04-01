@@ -2011,12 +2011,6 @@ n_ability_default[0]  6
 n_ability[1]    ability_leapdelay
 n_ability_name[1]  Leap Delay
 n_ability_default[1]   30
-n_ability[2]    ability_openbankdelay_succes
-n_ability_name[2]  openbank delay success
-n_ability_default[2]  6000
-n_ability[3]    ability_openbankdelay_fail
-n_ability_name[3]  openbank delay fail
-n_ability_default[3]  750
 n_ability[4]    ability_resurrectiondelay_succes
 n_ability_name[4]  Resurrection delay success
 n_ability_default[4]  36000
