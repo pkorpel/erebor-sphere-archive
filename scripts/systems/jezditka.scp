@@ -474,10 +474,10 @@ elseif !(src.targ.srccombatLOS) || (src.targ.distance > 6)
 else                                                                           
   arg(player,<src>)
   player.dismount
-  if (src.body == c_llama_pack)
+  if (src.targ.body == c_llama_pack)
     src=src.targ
     player.newitem(i_mt_llama_pack)
-  elseif (src.body == c_horse_pack)
+  elseif (src.targ.body == c_horse_pack)
     src=src.targ
     player.newitem(i_mt_horse_pack)
   else
