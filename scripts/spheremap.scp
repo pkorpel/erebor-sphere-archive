@@ -8289,7 +8289,7 @@ EVENTS=r_playerhouse, r_nosumon
 
 [AREA dum 264]     //Dol Amroth
 P=2374,3072
-RECT=2361,3061,2380,3072
+RECT=2361,3061,2380,3073
 tag.housenumber=264
 FLAGS=01192
 RAINCHANCE=00  
