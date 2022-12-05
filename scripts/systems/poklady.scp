@@ -423,11 +423,13 @@ f_treasureGenerator_init
 on=@timer
 if (strlen(<cont.tag(lastTreasureChestUID)>)) // should not happen, but just to be sure
   arg(treasureTimer,<finduid(cont.tag(lastTreasureChestUID)).timer>)
-  if (<arg(treasureTimer)> < 0) //neni otevrena
-    return 0 // remove
+  if (strlen(<arg(treasureTimer)>) // false in case the chest got removed in non-standard way
+    if (<arg(treasureTimer)> < 0) //neni otevrena
+      return 0 // remove
+    endif
+    timer=<arg(treasureTimer)>+1 //respawn right after the old treasure chest is gone
+    return 1
   endif
-  timer=<arg(treasureTimer)>+1 //respawn right after the old treasure chest is gone
-  return 1
 endif
 cont.newitem(i_treasureChest)
 cont.act.p=<cont.p>
