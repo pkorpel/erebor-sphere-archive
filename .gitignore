@@ -13,6 +13,7 @@ muls/
 webout/
 scripts/web/*.st
 save/*
+!save/servTime
 !save/spheredata.scp
 !save/spherestatics.scp
 !save/spherechars.scp
