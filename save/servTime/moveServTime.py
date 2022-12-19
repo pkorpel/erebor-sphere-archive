@@ -156,6 +156,8 @@ settings = {
     }
 }
 
+reduction_time = 0
+
 
 # C O L O R   P R I N T
 NoColor = False
@@ -238,7 +240,7 @@ def load_files(path):
         exit()
 
     output_file = open(path + '.out', 'w')
-    output_file.write(line + '\r\n')
+    output_file.write(line + '\n')
 
     return save_file, output_file
 
@@ -285,36 +287,39 @@ def process_scope(line: str):
     return Scope(name, id, match)
 
 
-def process_line(line: str, scope: Scope, reduction_time: int):
+def process_line(line: str, scope: Scope):
     parts = line.split('=', 1)
     if len(parts) < 2:
         return line
 
-    context = settings[scope.name]
-    if (scope.id in context):
-        if ('default') in context[scope.id] and parts[0] in context[scope.id]['default']:
-            return recompute_pair(parts, reduction_time)
-        if ('regex') in context[scope.id]:
-            for regex in context[scope.id]['regex']:
-                if regex.fullmatch(parts[0]):
-                    return recompute_pair(parts, reduction_time)
-
-    if ('ANY' in context and parts[0] in context['ANY']):
-        line = recompute_pair(parts, reduction_time)
+    line = process_line_for_key(scope.id, line, scope, parts)
+    line = process_line_for_key('ANY', line, scope, parts)
 
     return line
 
 
-def recompute_value(time_orig: str, reduction_time: int):
+def process_line_for_key(key: str, line: str, scope: Scope, parts):
+    context = settings[scope.name]
+    if (key in context):
+        if 'default' in context[key] and parts[0] in context[key]['default']:
+            return recompute_pair(parts)
+        if 'regex' in context[key]:
+            for regex in context[key]['regex']:
+                if regex.fullmatch(parts[0]):
+                    return recompute_pair(parts)
+    return line
+
+
+def recompute_value(time_orig: str):
     time_new = int(time_orig) - reduction_time
     return str(time_new) if time_new > 0 else "0"
 
 
-def recompute_pair(parts: list[str], reduction_time: int):
-    return parts[0] + '=' + recompute_value(parts[1], reduction_time)
+def recompute_pair(parts: list[str]):
+    return parts[0] + '=' + recompute_value(parts[1])
 
 
-def process_save(save_file, output_file, reduction_time: int):
+def process_save(save_file, output_file):
     scope = Scope("None", "None", True)
     for line in save_file:
         line = line.rstrip()
@@ -322,9 +327,9 @@ def process_save(save_file, output_file, reduction_time: int):
             if line[0] == '[':
                 scope = process_scope(line)
             elif (scope.match):
-                line = process_line(line, scope, reduction_time)
+                line = process_line(line, scope)
 
-        output_file.write(line + '\r\n')
+        output_file.write(line + '\n')
 
 
 if __name__ == '__main__':
@@ -342,6 +347,6 @@ if __name__ == '__main__':
 
     print_header()
 
-    reduction_time = load_time(args.t)
+    reduction_time = int(load_time(args.t))
     save_file, output_file = load_files(args.f)
-    process_save(save_file, output_file, int(reduction_time))
+    process_save(save_file, output_file)
