@@ -2093,6 +2093,126 @@ CATEGORY=Miscellaneous
 SUBSECTION=Character Icons
 DESCRIPTION=Water Elemental
 
+[ITEMDEF 0210c]
+DEFNAME=i_pet_must_roan
+NAME=Roan
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_ROAN
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Roan
+
+[ITEMDEF 0210d]
+DEFNAME=i_pet_must_wilimate
+NAME=Wilimate
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_WIMMIMATE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Wilimate
+
+[ITEMDEF 0210e]
+DEFNAME=i_pet_must_redroan
+NAME=RedRoan
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_REDROAN
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=RedRoan
+
+[ITEMDEF 0210f]
+DEFNAME=i_pet_must_chocolate
+NAME=Chocolate
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_CHOCOLATE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Chocolate
+
+[ITEMDEF 02110]
+DEFNAME=i_pet_must_palomino
+NAME=Palomino
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_PAMAMINO
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Palomino
+
+[ITEMDEF 02111]
+DEFNAME=i_pet_must_sky
+NAME=Sky
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_SKY
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Sky
+
+[ITEMDEF 02112]
+DEFNAME=i_pet_must_grey
+NAME=Grey
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_GREY
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Grey
+
+[ITEMDEF 02113]
+DEFNAME=i_pet_must_skygrey
+NAME=SkyGrey
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_SKYGRAY
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=SkyGrey
+
+[ITEMDEF 02114]
+DEFNAME=i_pet_must_crimson
+NAME=Crimson
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_CRIMSON
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Crimson
+
+[ITEMDEF 02115]
+DEFNAME=i_pet_ridgeback
+NAME=Ridgeback
+TYPE=T_FIGURINE
+TDATA3=c_m_ridgeback
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Ridgeback
+
+[ITEMDEF 02116]
+DEFNAME=i_pet_mount_polarbear
+NAME=PolarBear
+TYPE=T_FIGURINE
+TDATA3=c_mount_polar_bear
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=Mount PolarBear
+
+[ITEMDEF 02117]
+DEFNAME=i_pet_unknown_mount_polarbear
+Name=UnknownPolarBear
+TYPE=T_FIGURINE
+TDATA3=c_mount_polar_bear
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=UnknownMountPolarBear
+
 [ITEMDEF 02118]
 DEFNAME=i_pet_bear_black
 NAME=Black Bear
@@ -2405,6 +2525,75 @@ VALUE={280 400}
 CATEGORY=Miscellaneous
 SUBSECTION=Character Icons
 DESCRIPTION=Ostard
+
+[ITEMDEF 02138]
+DEFNAME=i_pet_unknown_horse
+Name=UnknownHorse
+TYPE=T_FIGURINE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=UnknownHorse
+
+[ITEMDEF 02139]
+DEFNAME=i_pet_unknown_lama
+Name=UnknownLama
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_WIMMIMATE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=UnknownLama
+
+[ITEMDEF 0213A]
+DEFNAME=i_pet_unknown_oclock
+Name=UnknownOclock
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_WIMMIMATE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=UnknownOclock
+
+[ITEMDEF 0213B]
+DEFNAME=i_pet_unkown_orn
+Name=UnknownOrn
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_WIMMIMATE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=UnknownOrn
+
+[ITEMDEF 0213C]
+DEFNAME=i_pet_unknown_mustang
+Name=UnknownMustang
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_WIMMIMATE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=UnknownMustang
+
+[ITEMDEF 0213D]
+DEFNAME=i_pet_unknown_zostrich
+Name=UnknownZostrich
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_WIMMIMATE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=UnknownZostrich
+
+[ITEMDEF 0213E]
+DEFNAME=i_pet_unknown_ridgeback
+Name=UnknownRidgeback
+TYPE=T_FIGURINE
+TDATA3=C_A_MUSTANG_WIMMIMATE
+
+CATEGORY=Miscellaneous
+SUBSECTION=Character Icons
+DESCRIPTION=UnknownRidgeback
 
 [ITEMDEF 0213f]
 // stars
@@ -9824,10 +10013,6 @@ DUPEITEM=03f3f
 [ITEMDEF 03fe4]
 //ballista
 DUPEITEM=03f3f
-
-[ITEMDEF 03ffe]
-//big horse
-NAME=horse
 
 [ITEMDEF 0388F]
 NAME=sud

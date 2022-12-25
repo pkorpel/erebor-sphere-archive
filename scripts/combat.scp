@@ -738,18 +738,17 @@ if !(tag(speedset))
   newitemsafe(i_speedtimer)
   lastnew.p=<p>
   lastnew.removefromview
-  lastnew.attr=attr_invis
   lastnew.link=<uid>
   lastnew.timer=0
   tag(speedset,1)
 endif
 
 [itemdef i_speedtimer]
-id=i_gold
+id=i_memory
 type=t_script
 
 on=@create
-attr_Invis=1
+attr=090
 
 on=@timer
 link.timerd=<link.tag.hitspeed>

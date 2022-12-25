@@ -7654,5 +7654,10 @@ if (<hits> > 0)
   show_damage_and_hitpoints(<healed_amount>,1)
 endif
 
+[function minimalValue]  // return minimal value of two
+if (<argv(0)> < <argv(1)>)
+  return <argv(0)>
+else
+  return <argv(1)>
 
 [eof]

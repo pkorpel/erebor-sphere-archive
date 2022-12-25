@@ -386,9 +386,12 @@ if (<arg(EliteBonus)>)  // Bonus na Elitni monstra
   arg(poloha_x,#+60)
 endif
 
-if (<eval tamingTag(totalPoints)>)  // Znalost jezditek
+if (<eval src.tamingTag(totalPoints)>)  // Znalost jezditek
   argo.gumppic(<boosty_x>+<poloha_x>,<boosty_y>+5,05109)
-  argo.newTextLine(<boosty_x>+<poloha_x>+5,<boosty_y>+60,<def_questDialog_colorResponse>,"<CalcDecimalNumber(<eval ((<tamingTag(totalPoints)>*1000)/<def_taming_max_points>)>,10,1)>%") 
+  arg(tamingBonus,<eval minimalValue(<eval (<eval src.tamingTag(totalPoints)*1000>/def_taming_max_points)>,<eval src.tag(ra_MountsKnowledge)*50>)>)   // Znalost jezditek vs Abilita
+  arg(tamingBonus,<eval minimalValue(<eval arg(tamingBonus)>, <eval src.Taming>)>)                                                                    // (Znalost jezditek, Abilita) vs Taming
+  arg(tamingBonus,<eval minimalValue(<eval arg(tamingBonus)>, <eval src.AnimalLore>)>)                                                                // (Znalost jezditek, Abilita, Taming) vs Animal Lore
+  argo.newTextLine(<boosty_x>+<poloha_x>+7,<boosty_y>+60,<def_questDialog_colorResponse>,"<CalcDecimalNumber(<eval arg(tamingBonus)>,10,2)>%") 
   arg(poloha_x,#+55)
 endif
 /////
@@ -423,6 +426,9 @@ argo.button(<boosty_x>+<poloha_x>+16,<boosty_y>+46,03217,03218,1,0,3)
 argo.newTextLine(<boosty_x>+<poloha_x>+32,<boosty_y>+42,<def_questDialog_colorResponse>,"Equipy")
 argo.button(<boosty_x>+<poloha_x>+90,<boosty_y>+6,03217,03218,1,0,4)
 argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+2,<def_questDialog_colorResponse>,"Vnimani")
+argo.button(<boosty_x>+<poloha_x>+90,<boosty_y>+26,03217,03218,1,0,5)
+argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+22,<def_questDialog_colorResponse>,"Znalost")
+argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+40,<def_questDialog_colorResponse>,"Jezditek")
 
 /////spec ability
 if src.findid(<i_spec_ability_counter>)
@@ -449,6 +455,9 @@ dialog(d_boosty_equip)
 
 on=4
 dialog(d_boosty_HPsight)
+
+on=5
+dialog(d_boosty_MountsKnowledge)
 
 ////////////DIALOG X Y////////////////////////////
 [dialog d_boostyxy]
@@ -702,6 +711,98 @@ endwhile
 
 on=0
 src.tag(boostyxy,<f_boostyxyX(<src.tag.boostyxy>)>,<f_boostyxyY(<src.tag.boostyxy>)>,0,<f_boostyCas(<src.tag.boostyxy>)>)
+
+////////////DIALOG SEZNAM JEZDITEK///////////////////////
+[dialog d_boosty_MountsKnowledge]
+argo.setlocation=5,5
+argo.page(0)
+argo.resizepic(20,20,3000,500,480)
+
+arg(column,0)
+arg(row,0)
+arg(pocet,0)
+arg(poloha_x,10)  
+arg(txtIndent,60)
+
+argo.newTextLine(50,30,<def_questDialog_colorResponse>,"Znalost jezditek")  
+argo.button(495,40,0828,04CB,1,0,1)
+
+arg(movex,150)
+arg(movey,70)
+arg(i,0)
+while (arg(i) <= def_taming_mounts_count)
+  arg(tammedCount,<eval src.tamingTag(tamingCount_<def_taming_mount_chardef[i]>)>)
+  arg(tammedMax,<eval (<def_taming_mount_maxpoints[i]>/<def_taming_mount_points[i]>)>)
+  
+  if (<arg(tammedCount)> == 0)
+    argo.tilepichue(50+(<arg(movex)>*<arg(column)>),70+(<arg(movey)>*<arg(row)>),def_taming_mount_unknown[i])
+    argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,65+(<arg(movey)>*<arg(row)>),<def_questDialog_colorResponse>,"?????")
+    argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,82+(<arg(movey)>*<arg(row)>),<def_questDialog_colorResponse>,"?? / ??")
+    argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,97+(<arg(movey)>*<arg(row)>),<def_questDialog_colorResponse>,"0 %")
+  else
+    if (<arg(tammedCount)> >= <arg(tammedMax)>)
+      //arg(textColor,<?questMenu_color_questDoneFont?>)   // Nefunguje v newTextLine, je treba decimalni hodnotu
+      arg(textColor, 282)
+    else
+      arg(textColor,<def_questDialog_colorResponse>)
+    endif
+    argo.tilepichue(50+(<arg(movex)>*<arg(column)>),70+(<arg(movey)>*<arg(row)>),def_taming_mount_icon[i])
+  
+    argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,65+(<arg(movey)>*<arg(row)>),<arg(textColor)>,<def_taming_mount_name[i]>)
+    argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,82+(<arg(movey)>*<arg(row)>),<arg(textColor)>,"<eval src.tamingTag(tamingCount_<def_taming_mount_chardef[i]>)> / <eval (<def_taming_mount_maxpoints[i]>/<def_taming_mount_points[i]>)>")
+    argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,97+(<arg(movey)>*<arg(row)>),<arg(textColor)>,"<CalcDecimalNumber(<eval src.tamingTag(tamingPoints_<def_taming_mount_chardef[i]>)>,10,2)> %")
+  endif
+
+  arg(column,#+1)
+  arg(i,#+1)
+  if (!(i % 3) && (i != 0))
+    arg(column,0)
+    arg(row,#+1)
+  endif
+
+endwhile
+
+
+// def_taming_mount_chardef[0]    c_llama  // chardef zvere
+// def_taming_mount_points[0]     1 // bodu za tamnuti na spawnu
+// def_taming_mount_maxpoints[0]  50 // max bodu za tuto zver
+// def_taming_mount_name[0]       "Lama"
+// def_taming_mount_icon[0]       020F6
+// def_taming_mount_unknown[0]    02139
+
+[dialog d_boosty_MountsKnowledge button]
+on=1
+dialog(d_boosty_MountsKnowledge_legend) 
+
+
+[dialog d_boosty_MountsKnowledge_legend]
+argo.setlocation=5,5
+argo.page(0)
+argo.resizepic(20,20,3000,445,150)
+
+arg(column,0)
+arg(row,0)
+arg(pocet,0)
+arg(poloha_x,10)  
+arg(txtIndent,60)
+
+
+argo.newTextLine(50,30,<def_questDialog_colorResponse>,"Legenda")
+argo.button(440,40,0828,04CB,1,0,1)
+
+argo.tilepichue(50,70,def_taming_mount_icon[0])
+argo.newTextLine(50+<arg(txtIndent)>,65,<def_questDialog_colorResponse>,"Lama")   
+argo.newTextLine(125+<arg(txtIndent)>,65,282,"-> Nazev jezditka")
+argo.newTextLine(50+<arg(txtIndent)>,82,<def_questDialog_colorResponse>,"64 / 84")    
+argo.newTextLine(125+<arg(txtIndent)>,82,282,"-> Ochoceno celkem")        
+argo.newTextLine(125+<arg(txtIndent)>,97,282,"     / pocet ochoceni pro max bonus")
+argo.newTextLine(50+<arg(txtIndent)>,112,<def_questDialog_colorResponse>,"4,75 %")                                         
+argo.newTextLine(125+<arg(txtIndent)>,112,282,"-> Kolik % toto jezditko pridava")   
+argo.newTextLine(125+<arg(txtIndent)>,127,282,"     do celkove znalosti jezditek")
+
+[dialog d_boosty_MountsKnowledge_legend button]
+on=1
+dialog(d_boosty_MountsKnowledge) 
 
 [dialog d_boosty_HPsight]
 argo.setlocation=5,5

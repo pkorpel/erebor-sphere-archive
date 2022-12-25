@@ -138,6 +138,31 @@ else
     finduid(<more2>).remove 
   endif
   more2=<cont>
+  
+arg(tamingStats,<cont.findid(i_memory_taming_stat)>)
+if (strlen(<arg(tamingStats)>))
+  arg(oldTamingBonus,<cont.findid(i_memory_taming_bonus)>)
+  if (strlen(<arg(oldTamingBonus)>))
+    oldTamingBonus.remove
+  endif
+  arg(tamingBonus,<eval minimalValue(<eval (<eval tamingStats.tag(totalPoints)*1000>/def_taming_max_points)>,<eval cont.tag(ra_MountsKnowledge)*50>)>)    // Znalost jezditek vs Abilita
+  arg(tamingBonus,<eval minimalValue(<eval arg(tamingBonus)>, <eval src.Taming>)>)                                                                        // (Znalost jezditek, Abilita) vs Taming
+  arg(tamingBonus,<eval minimalValue(<eval arg(tamingBonus)>, <eval src.AnimalLore>)>)                                                                    // (Znalost jezditek, Abilita, Taming) vs Animal Lore
+  
+  cont.newitem(i_memory_taming_bonus)
+  arg(mylastnew,<lastnew>)
+  
+  mylastnew.tag(imi_value[101], <eval (<eval tag(imi_value[101])>*<tamingBonus>)/1000>) //demoni
+  mylastnew.tag(imi_value[102], <eval (<eval tag(imi_value[102])>*<tamingBonus>)/1000>) //draci
+  mylastnew.tag(imi_value[103], <eval (<eval tag(imi_value[103])>*<tamingBonus>)/1000>) //humanoidi
+  mylastnew.tag(imi_value[104], <eval (<eval tag(imi_value[104])>*<tamingBonus>)/1000>) //spiders+animals
+  mylastnew.tag(imi_value[105], <eval (<eval tag(imi_value[105])>*<tamingBonus>)/1000>) //eyes+golems
+  mylastnew.mif_finishitem
+  
+  mylastnew.name="TamingBonus <tamingBonus>"                                                        
+  cont.equip(<mylastnew>)
+endif  
+
 endif
 
 [function mount_unequip]
@@ -147,6 +172,10 @@ if !(<arg(mylastnewchar)>)
 endif
 if (cont.tag(hypno_mystik)) //prehazovani zviratek mezi batuzky - nic nedelat 
 else
+  arg(TamingBonus,<cont.findid(i_memory_taming_bonus)>)
+  if (strlen(<arg(TamingBonus)>))
+    TamingBonus.remove
+  endif
   if !(strcmpi("<arg(mylastnewchar).id>","mage_horse_brown"))||!(strcmpi("<mylastnewchar.id>","necro_horse_undead"))
     mylastnewchar.remove
     return 1
@@ -412,7 +441,6 @@ if (npcExists(<src.tag(lastjezdik)>))
     src=lastJezdik
     player.newitem(i_mt_horse_pack)
   else
-    logmsg("SRC: <src>; <src.name>")
     lastJezdik.dclick
     return 1
   endif         
