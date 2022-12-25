@@ -64,6 +64,8 @@ giveitem(RANDOM_REAGENT_ALL,<eval (<tag(npc_elite)>/20)>)    // jista odmena jak
 giveitem(random_JEWEL,<eval (<tag(npc_elite)>/50)>)          // jista odmena jakekoli gemy 10-18ks
 giveitem(i_gem_diamond,<eval (<tag(npc_elite)>/100)>)        // jista odmena diamanty 5-9ks
 
+enticement = 250.0
+
 events +e_npc_elite
 if !(isevent(e_dragon_regeneration))
   events +e_dragon_regeneration
