@@ -180,7 +180,7 @@ endif
 if (<eval src.tag(level)> >= 200)  // Bonus na Elitni monstra
   arg(used2,#+1)
 endif
-if (<eval tamingTag(totalPoints)>)  // Znalost jezditek
+if (<eval src.tamingTag(totalPoints)>)  // Znalost jezditek
   arg(used2,#+1)
 endif
 /////
@@ -426,9 +426,12 @@ argo.button(<boosty_x>+<poloha_x>+16,<boosty_y>+46,03217,03218,1,0,3)
 argo.newTextLine(<boosty_x>+<poloha_x>+32,<boosty_y>+42,<def_questDialog_colorResponse>,"Equipy")
 argo.button(<boosty_x>+<poloha_x>+90,<boosty_y>+6,03217,03218,1,0,4)
 argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+2,<def_questDialog_colorResponse>,"Vnimani")
-argo.button(<boosty_x>+<poloha_x>+90,<boosty_y>+26,03217,03218,1,0,5)
-argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+22,<def_questDialog_colorResponse>,"Znalost")
-argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+40,<def_questDialog_colorResponse>,"Jezditek")
+
+if (src.profession==class_ranger)
+  argo.button(<boosty_x>+<poloha_x>+90,<boosty_y>+26,03217,03218,1,0,5)
+  argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+22,<def_questDialog_colorResponse>,"Znalost")
+  argo.newTextLine(<boosty_x>+<poloha_x>+106,<boosty_y>+40,<def_questDialog_colorResponse>,"Jezditek")
+endif
 
 /////spec ability
 if src.findid(<i_spec_ability_counter>)
