@@ -221,7 +221,6 @@ ON=*prosim hezky*
   IF (<SRC.RESTEST 1000 i_gold >)
     SAY("Kdyz tak hezky prosis...")
     EMOTE("smeje se")
-    SRC.sysmessage("j") // ?  
     SRC.NEWITEM=i_Cardolanske_pohrebiste_kos_s_ovocem
     SRC.ACT.tag(podstavec,<tag(podstavec)>)
     SRC.ACT.BOUNCE
