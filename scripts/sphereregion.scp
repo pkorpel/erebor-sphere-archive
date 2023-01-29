@@ -1228,40 +1228,10 @@ ON=@ENTER
 //////////////////////////////////////////////////////////////////////////
 
 [RegionType e_Cardolanske_pohrebiste]
-ON=@ENTER
-if (src.isplayer)
-  src.sysmessage("Citis zatuchlinu a hnilobu, ktera k tobe prichazi odkudsi z hlubin podzemni chodby.")
-   src.tag(CardolanskePknihovna,"")
-   src.tag(CardolanskePpergamen,"")
-   src.tag(CardolanskePproseljsemgatouumaga,"")
-endif
 
 on=@exit
   if (src.isplayer)
-    src.sysmessage("Opoustis podzemi.")
-    IF (<src.restest 1 i_Cardolanske_pohrebiste_rybazfontany>)
-      src.sysmessage("Mazu ryby.")
-      src.consume(i_Cardolanske_pohrebiste_rybazfontany,500) 
-    endif
-    IF (<src.restest 1 i_Cardolanske_pohrebiste_klic12 >)
-      src.sysmessage("Mazu klice.")
-      src.consume(i_Cardolanske_pohrebiste_klic12,500) 
-    endif
-    IF (<src.restest 1 i_Cardolanske_pohrebiste_krystal12 >)
-      src.sysmessage("Mazu krystaly.")
-      src.consume(i_Cardolanske_pohrebiste_krystal12,500) 
-    endif
-    IF (<src.restest 1 i_Cardolanske_pohrebiste_element>)
-      src.sysmessage("Mazu elementy.")
-      src.consume(i_Cardolanske_pohrebiste_element,500) 
-    endif
-    IF (<src.restest 1 i_Cardolanske_pohrebiste_pergamen>)
-      src.sysmessage("Mazu elementy.")
-      src.consume(i_Cardolanske_pohrebiste_pergamen,500) 
-    endif
-    src.tag(CardolanskePknihovna,"")
-    src.tag(CardolanskePpergamen,"")
-    src.tag(CardolanskePproseljsemgatouumaga,"")
+    src.giveitem(i_cardolanske_pohrebiste_mazac_predmetu)
   endif
 
 //////////////////////////////////////////////////////////////////////////

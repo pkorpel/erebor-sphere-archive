@@ -13,14 +13,14 @@ ON=@dropon_ground
     if (<p_y>==<tag(podstavec).p_y>) 
       if (<p_z>==<tag(podstavec).p_z>+5)
         if(<tag(podstavec).MORE2>==1)
-          SRC.SYSMESSAGE("Kos s ovocem zmizel.")
+          src.SYSMESSAGE("Kos s ovocem zmizel.")
           SOUND 840
           effect(2,019AB,0,32)
-          SRC.NEWITEM=7960
+          src.NEWITEM=7960
           src.act.attr=012
           src.act.timer=60
           src.act.color=0433
-          SRC.ACT.P=<P>
+          src.ACT.P=<P>
           tag(podstavec).MORE2=0
           tag(podstavec).TIMER=60
           tag(podstavec).color=2446
@@ -55,8 +55,8 @@ ON=@userdclick
   RETURN 1 
 
 ON=@TARGON_CHAR
-    SRC.Sysmessage("Doufam, ze jsi zameril farmarku :)")
-    SRC.TARG.tag(podstavec,<UID>)
+    src.Sysmessage("Doufam, ze jsi zameril farmarku :)")
+    src.TARG.tag(podstavec,<UID>)
     MORE2=1
   RETURN 1
   
@@ -64,9 +64,41 @@ ON=@TARGON_CHAR
 [function f_cardolanske_pohrebiste_is_sacrificed]
 if (CardolanskePohrebiste_Podstavec.MORE2 == 0)
   src.sysmessage("Tva obet byla dostacujici, temna magie te prenesla ...")
+  src.sysmessage("Citis zatuchlinu a hnilobu, ktera k tobe prichazi odkusi z hlubin podzemi chodby.")
+  src.tag(CardolanskePknihovna,"")
+  src.tag(CardolanskePpergamen,"")
+  src.tag(CardolanskePproseljsemgatouumaga,"")
   return 0
 else
   src.sysmessage("Brana te odmita pustit dovnitr.")
   src.sysmessage("Vnimas ve svem okoli temnou magii a temna magie vyzaduje obet...")
   return 1
+
+[ITEMDEF i_cardolanske_pohrebiste_mazac_predmetu]
+ID=i_memory
+NAME=Cardolanske Pohrebiste Mazac
+TYPE=T_EQ_SCRIPT
+
+ON=@CREATE
+  timerd=1
+
+ON=@EQUIP
+tag(origZoneName,<region.name>)
+
+ON=@TIMER
+  if !(strcmpi(<region.name>,<tag(origZoneName)>))
+    topobj.say("Jsem v Cardolanskem pohrebisti! <strcmpi(<arg(zoneName)>,<tag(zoneName)>)>")
+    remove
+  endif
+  topobj.sysmessage("Opoustis podzemi.")
+  topobj.consume(i_Cardolanske_pohrebiste_rybazfontany,500)
+  topobj.consume(i_Cardolanske_pohrebiste_klic12,500) 
+  topobj.consume(i_Cardolanske_pohrebiste_krystal12,500) 
+  topobj.consume(i_Cardolanske_pohrebiste_element,500) 
+  topobj.consume(i_Cardolanske_pohrebiste_pergamen,500) 
+  topobj.tag(CardolanskePknihovna,"")
+  topobj.tag(CardolanskePpergamen,"")
+  topobj.tag(CardolanskePproseljsemgatouumaga,"")
+  remove
+
 [EOF]
