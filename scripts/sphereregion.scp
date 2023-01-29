@@ -1228,10 +1228,15 @@ ON=@ENTER
 //////////////////////////////////////////////////////////////////////////
 
 [RegionType e_Cardolanske_pohrebiste]
+on=@enter
+  if (src.isplayer)
+    src.events=+e_nohorse
+  endif
 
 on=@exit
   if (src.isplayer)
     src.giveitem(i_cardolanske_pohrebiste_mazac_predmetu)
+    src.events=-e_nohorse
   endif
 
 //////////////////////////////////////////////////////////////////////////
