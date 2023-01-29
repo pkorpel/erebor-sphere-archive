@@ -87,7 +87,6 @@ tag(origZoneName,<region.name>)
 
 ON=@TIMER
   if !(strcmpi(<region.name>,<tag(origZoneName)>))
-    topobj.say("Jsem v Cardolanskem pohrebisti! <strcmpi(<arg(zoneName)>,<tag(zoneName)>)>")
     remove
   endif
   topobj.sysmessage("Opoustis podzemi.")
