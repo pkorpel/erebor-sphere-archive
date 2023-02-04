@@ -86,18 +86,17 @@ ON=@EQUIP
 tag(origZoneName,<region.name>)
 
 ON=@TIMER
-  if !(strcmpi(<region.name>,<tag(origZoneName)>))
-    remove
+  if (strcmpi(<region.name>,<tag(origZoneName)>))
+    topobj.sysmessage("Opoustis podzemi.")
+    topobj.consume(i_Cardolanske_pohrebiste_rybazfontany,500)
+    topobj.consume(i_Cardolanske_pohrebiste_klic12,500) 
+    topobj.consume(i_Cardolanske_pohrebiste_krystal12,500) 
+    topobj.consume(i_Cardolanske_pohrebiste_element,500) 
+    topobj.consume(i_Cardolanske_pohrebiste_pergamen,500) 
+    topobj.tag(CardolanskePknihovna,"")
+    topobj.tag(CardolanskePpergamen,"")
+    topobj.tag(CardolanskePproseljsemgatouumaga,"")
   endif
-  topobj.sysmessage("Opoustis podzemi.")
-  topobj.consume(i_Cardolanske_pohrebiste_rybazfontany,500)
-  topobj.consume(i_Cardolanske_pohrebiste_klic12,500) 
-  topobj.consume(i_Cardolanske_pohrebiste_krystal12,500) 
-  topobj.consume(i_Cardolanske_pohrebiste_element,500) 
-  topobj.consume(i_Cardolanske_pohrebiste_pergamen,500) 
-  topobj.tag(CardolanskePknihovna,"")
-  topobj.tag(CardolanskePpergamen,"")
-  topobj.tag(CardolanskePproseljsemgatouumaga,"")
   remove
 
 [EOF]
