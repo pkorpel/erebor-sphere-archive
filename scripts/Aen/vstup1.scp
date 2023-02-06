@@ -84,7 +84,7 @@ TYPE=t_script
 ON=@CREATE
   tag(pouzity,"0")  
   tag(jmeno,"Dormile")
-  tak(kdo,"")
+  tag(kdo,"")
 ON=@userDclick
   tag(kdo,<SRC.UID>)  
   SRC.tag(CardolanskePpergamen,<UID>)
@@ -437,7 +437,7 @@ ON=@userDCLICK
         SRC.ACT.COLOR=00 #voda
       ENDIF   
       IF (<MORE1>==3)
-        SRC.ACT.COLOR=0731 #zeme
+        SRC.ACT.COLOR=023A #zeme
       ENDIF   
       SRC.act.cont(<UID>)
       SRC.ACT.tag(podstavec,<tag(podstavec)>) 
@@ -490,12 +490,12 @@ ON=@dropon_ground
             ENDDO
             tag(podstavec).color=00985 #voda
           ENDIF   
-          IF (<COLOR>==0731)
+          IF (<COLOR>==023A)
             DORAND 2
               SOUND=544
               SOUND=545
             ENDDO
-            tag(podstavec).color=00441 #zeme
+            tag(podstavec).color=0A8C #zeme
           ENDIF
           tag(podstavec).tag(obsazen,1)
           tag(podstavec).tag(element,<UID>)
