@@ -39,9 +39,14 @@ accinfo(<args>)
 
 [function accinfo]
 if (argvcount)
- dialog(d_account,<accountmgr.findname(<argv(0)>)>)
+  arg(findAccount, <accountmgr.findname(<argv(0)>)>)
+  if !(<arg(findAccount)>)
+    redMessage("Account <argv(0)> neexistuje!")
+  else
+    dialog(d_account,<accountmgr.findname(<argv(0)>)>)
+  endif
 else
- dialog(d_account,<account>)
+  dialog(d_account,<account>)
 endif
 
 [DIALOG d_account]
