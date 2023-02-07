@@ -43,7 +43,7 @@ if (argvcount)
   if !(<arg(findAccount)>)
     redMessage("Account <argv(0)> neexistuje!")
   else
-    dialog(d_account,<accountmgr.findname(<argv(0)>)>)
+    dialog(d_account,<arg(findAccount)>)
   endif
 else
   dialog(d_account,<account>)
