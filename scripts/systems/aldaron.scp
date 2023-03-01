@@ -1931,7 +1931,7 @@ elseif (src.profession==class_war)
 	lastnew.tag(craftedby,<src.uid>)
   src.events +e_shadow_weapon
 elseif (src.profession==class_priest)
-  src.newitemsafe(i_hammer_pick_obsidian)
+  src.newitemsafe(i_mace_obsidian)
   src.tag(shadow_weapon,<lastnew>)
   lastnew.tag(imi_value[51], 10)
   lastnew.tag(imi_value[101], 10)
@@ -2007,7 +2007,7 @@ if !(findid(i_checkstats_timer)) // iba ak ztraca expy, nech ho nepripravime nej
 endif
 
 if (tag(shadow_weapon).tag(deaths) == tag(shadow_weapon).tag(max_deaths)) // uprava smrti shadow zbrane, docasne 30, neskor bude 20
-	sysMessage("Stinova zbran byla taka slaba, ze se rozplynula ve vzduchu")
+	sysMessage("Stinova zbran byla tak slaba, ze se rozplynula ve vzduchu")
 	tag(shadow_weapon).remove
 	tag.remove(shadow_weapon)
 	events -e_shadow_weapon
@@ -2019,7 +2019,7 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if ((src.profession==class_war) || (src.profession==class_craft) || (src.profession==class_thief) || (src.profession==class_ranger))
+if ((src.profession==class_war) || (src.profession==class_craft) || (src.profession==class_thief) || (src.profession==class_ranger) || (src.profession==class_priest))
   if (act.npc) && (<eval act.tag(resist_magic)> < 999)
     act.damage_noResponse(<eval  (var(ubrano)*{<nastaveni_efekt_shadow>}/1000)>,dam_magic)
     act.effect(3,i_FX_glow_spike,6,15,1)
@@ -2027,13 +2027,13 @@ if ((src.profession==class_war) || (src.profession==class_craft) || (src.profess
     //act.say("shadow : <eval  (var(ubrano)*{<nastaveni_efekt_shadow>}/1000)>")
   endif
 endif
-return 0
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
+on=@playerKill
 
 
 [typedef t_weapon_shadow]
