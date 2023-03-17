@@ -319,7 +319,6 @@ if (src.isdead)
 	src.redmessage("Jako duch tohle nemuzes!")
 	return 1
 endif
-//if (<src.qtag(q039_shadow_weapon)> == 3)
 	if (tag(gave_blood) == 1)
 		src.sysmessage("Uz tady zadna krev neni.")
 		return 1
@@ -332,9 +331,6 @@ endif
 		timer = <tag(respawn_time)>
 		return 1
 	endif
-//else 
-//  src.sysmessage("Tady pro tebe nic neni...")
-//endif
 
 /////////////////////////////
 //// ohnivzdorna kuze ///////

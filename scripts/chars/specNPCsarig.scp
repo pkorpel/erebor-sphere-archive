@@ -2148,6 +2148,7 @@ addspell=s_summon_daemon
 
 ON=@NPCRestock
 item=i_gold
+item=i_q039_shadow_weapon_oil,1
 ITEM=I_LOG_mithril,1
 ITEM=RANDOM_REAGENT,{15 50}
 ITEM=RANDOM_REAGENT_NECRO,{15 50}
