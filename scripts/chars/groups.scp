@@ -181,18 +181,20 @@ DEFNAME=s_golem_weak
 CATEGORY=Spawn Groups
 SUBSECTION=Golems
 DESCRIPTION=Golems Weak
-ID=c_golem_copper
-ID=c_golem_iron
-ID=c_golem_silver
 ID=c_golem_golden
+ID=c_golem_silver
+ID=c_golem_iron
+ID=c_golem_copper
 ID=c_golem_verite
+ID=c_golem_iron
+ID=c_golem_golden
+ID=c_golem_silver
 
 [SPAWN s_golem_medium]
 DEFNAME=s_golem_medium
 CATEGORY=Spawn Groups
 SUBSECTION=Golems
 DESCRIPTION=Golems Medium
-ID=c_golem_verite
 ID=c_golem_valorite
 ID=c_golem_obsidian
 
@@ -201,10 +203,19 @@ DEFNAME=s_golem_strong
 CATEGORY=Spawn Groups
 SUBSECTION=Golems
 DESCRIPTION=Golems Strong
-ID=c_golem_valorite
-ID=c_golem_obsidian
+ID=c_golem_shadow
+ID=c_golem_adamantinum
+ID=c_golem_adamantinum
 ID=c_golem_adamantinum
 ID=c_golem_shadow
+
+[SPAWN s_golem_mithril_reaper_elven]
+DEFNAME=s_golem_mithril_reaper_elven
+CATEGORY=Spawn Groups
+SUBSECTION=Golems
+DESCRIPTION=Mithril Golem or Elven Reaper
+ID=c_reaper_elven
+ID=c_golem_mithril
 
 [SPAWN s_skeletons_lvl_1]
 DEFNAME=s_skeletons_lvl_1

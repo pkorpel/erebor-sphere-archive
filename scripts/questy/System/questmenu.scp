@@ -72,7 +72,7 @@ questMenu[41] Herman                    ,d_questy_herman                    ,1  
 questMenu[42] Uhrovity Jonas            ,d_questy_jonas                     ,1         ,q036_jonas
 questMenu[43] Opily Zarik               ,d_questy_zarik                     ,1         ,q037_zarik
 questMenu[44] Oblast cerne smrti        ,d_ocs                              ,1         ,q038_ocs
-questMenu[45] Shadow weapons            ,d_shadow_weapon                    ,1         ,q039_shadow_weapon
+questMenu[45] Stinove zbrane            ,d_shadow_weapon                    ,1         ,q039_shadow_weapon
 questMenu[46] Spol. Drakobijcu          ,d_dragons                          ,1         ,q040_dragons
 questMenu[47] Drakobijec Alechymista    ,d_dragons_alchymista               ,1         ,q040_dragons_alchymista
 questMenu[48] Drakobijec Rakchin        ,d_dragons_rakchin                  ,1         ,q040_dragons_rakchin
@@ -2755,23 +2755,21 @@ argo.f_qDialogInstructions(03164)
 return <eval(0<src.qtag(q039_shadow_weapon)> == 5)>
 
 [dialog d_shadow_weapon]
-argo.setText(0,"Kovar")
+argo.setText(0,"Stinove zbrane")
 argo.f_qDialogInstructions(03101)
 
 if (<src.qtag(q039_shadow_weapon)> == 1)
- argo.setText(1,"Cas pro dukazy - Prinest kovari pet lebek bossu. Jde o tato podzemi - Mahat, Carn Dumm, Mount Dorlas a Tuma Osto. Pak mi jeste prines lebku Paladina ze Ztraceneho mesta.")
+ argo.setText(1,"Cas pro dukazy - prines kovari pet lebek panu techto podzemi: Mahat, Carn Dum, Ledova jeskyne, Tumma Osto a Ztracene mesto.")
 elseif (<src.qtag(q039_shadow_weapon)> == 2)
- argo.setText(1,"Cas pro pomstu - Prines kovari ctyri hlavy zlosynu.")
+ argo.setText(1,"Cas pro pomstu - prines kovari hlavy Gloaty, Mercelis, Bakchora a Verlixe.")
 elseif (<src.qtag(q039_shadow_weapon)> == 3)
-  argo.setText(1,"Cas pro ingredience - Prines kovari - 5x Rudu z Shadow golemu, 10x Kameny ohne, 1x Vysoce horlavy olej, 1x Krev Hrdiny, 4x Ohnivzdorna kuze a 1x Drahokam jmenem Slza hor.")
+  argo.setText(1,"Cas pro ingredience - prines kovari 10 kusu rudy ze stinoveho golema, 25 kamenu ohne, 5 ohnivzdornych kuzi, vysoce horlavy olej, krev hrdiny a Slzu hor.")
 elseif (<src.qtag(q039_shadow_weapon)> == 4)
-  argo.setText(1,"Cas pro vyrobu - Pockej nez kovar vyrobi zbran.")
+  argo.setText(1,"Cas pro trpelivost - pockej, nez kovar vyrobi zbran.")
 elseif (<src.qtag(q039_shadow_weapon)> == 5)
-  argo.setText(1,"Cas pro boj - Uzij si zbran, ale zbytecne neumirej!")
+  argo.setText(1,"Cas pro boj - uzij si zbran, ale zbytecne neumirej!")
 elseif (<src.qtag(q039_shadow_weapon)> == 6)
-  argo.setText(1,"Cas pro smutek - Prilis casto jsi umiral a o zbran prisel")
-elseif (<src.qtag(q039_shadow_weapon)> == 7)
-  argo.setText(1,"Cas slibu - Dones kovari dukaz o svem odhodlani.")
+  argo.setText(1,"Cas pro smutek - vlivem tvych umrti zbran slabla, az se uplne rozplynula. Snad bude kovar ochotny vyrobit ti novou...")
 endif
 argo.htmlGump(160,80,242,130,1,0,36)
 

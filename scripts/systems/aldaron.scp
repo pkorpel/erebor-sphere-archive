@@ -1904,7 +1904,7 @@ if (src.profession==class_thief)
   lastnew.events=+t_weapon_shadow
   lastnew.bounce
   lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,10)
+  lastnew.tag(max_deaths,15)
   lastnew.tag(equip,0)
   lastnew.tag(container,<lastnew.cont.uid>)
 	lastnew.tag(craftedby,<src.uid>)
@@ -1925,7 +1925,7 @@ elseif (src.profession==class_war)
   lastnew.events=+t_weapon_shadow
   lastnew.bounce
   lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,10)
+  lastnew.tag(max_deaths,15)
   lastnew.tag(equip,0)
   lastnew.tag(container,<lastnew.cont.uid>)
 	lastnew.tag(craftedby,<src.uid>)
@@ -1946,7 +1946,7 @@ elseif (src.profession==class_priest)
   lastnew.events=+t_weapon_shadow
   lastnew.bounce
   lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,10)
+  lastnew.tag(max_deaths,15)
   lastnew.tag(equip,0)
   lastnew.tag(container,<lastnew.cont.uid>)
 	lastnew.tag(craftedby,<src.uid>)
@@ -1967,7 +1967,7 @@ elseif ((src.profession==class_ranger) || (src.profession==class_craft))
   lastnew.events=+t_weapon_shadow
   lastnew.bounce
   lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,10)
+  lastnew.tag(max_deaths,15)
   lastnew.tag(equip,0)
   lastnew.tag(container,<lastnew.cont.uid>)
 	lastnew.tag(craftedby,<src.uid>)
@@ -1988,7 +1988,7 @@ elseif ((src.profession==class_mystik) || (src.profession==class_necro) || (src.
   lastnew.events=+t_weapon_shadow
   lastnew.bounce
   lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,10)
+  lastnew.tag(max_deaths,15)
   lastnew.tag(equip,0)
   lastnew.tag(container,<lastnew.cont.uid>)
 	lastnew.tag(craftedby,<src.uid>)
@@ -2004,16 +2004,17 @@ endif
 
 if !(findid(i_checkstats_timer)) // iba ak ztraca expy, nech ho nepripravime nejakymi hlupymi resskillmi
   tag(shadow_weapon).tag(deaths,<tag(shadow_weapon).tag(deaths)>+1)
-endif
-
-if (tag(shadow_weapon).tag(deaths) == tag(shadow_weapon).tag(max_deaths)) // uprava smrti shadow zbrane, docasne 30, neskor bude 20
-	sysMessage("Stinova zbran byla tak slaba, ze se rozplynula ve vzduchu")
+  if (tag(shadow_weapon).tag(deaths) == tag(shadow_weapon).tag(max_deaths)) // uprava smrti shadow zbrane, docasne 30, neskor bude 20
+	sysMessage("Stinova zbran byla tak slaba, ze se rozplynula ve vzduchu.")
+    qtag(q039_shadow_weapon,6,45)
 	tag(shadow_weapon).remove
 	tag.remove(shadow_weapon)
 	events -e_shadow_weapon
-else
-	sysMessage("Diky tve smrti ztratila Stinova zbran cast sve sily...")
+  else
+	sysMessage("Kvuli tve smrti ztratila stinova zbran cast sve sily...")
+  endif
 endif
+
 
 [EVENTS e_shadow_weapon_dmg]
 on=@Created
@@ -2090,40 +2091,20 @@ endif
 
 ON=@userCLICK
 if (<topobj>==<src>)||(src.isgm)
-	if (tag(max_deaths) == 10)
-  	if (tag(deaths) == 0) // pre 10 smrti
-  		cont.sysMessage("Zbran se silne chveje.")
-  	elseif (tag(deaths) > 0) && (tag(deaths) < 5) // pre 10 smrti
-  		cont.sysMessage("Zbran se porad chveje silne, ale jiz ne tolik co predtim.")
-    elseif (tag(deaths) > 5) && (tag(deaths) < 9) // pre 10 smrti
-  		cont.sysMessage("Zbran se uz skoro nechveje.")
-    elseif (tag(deaths) == 9) // pre 10 smrti
-    	cont.sysMessage("Zbran se vubec nechveje.")
-  	endif
-  elseif (tag(max_deaths) == 20)
-  	if (tag(deaths) >= 0) && (tag(deaths) < 3) // pre 20 smrti
-  		cont.sysMessage("Zbran se silne chveje.")
-  	elseif (tag(deaths) > 2) && (tag(deaths) < 10) // pre 20 smrti
-  		cont.sysMessage("Zbran se porad chveje silne, ale jiz ne tolik co predtim.")
-  	elseif (tag(deaths) > 9) && (tag(deaths) < 19) // pre 20 smrti
-  		cont.sysMessage("Zbran se uz skoro nechveje.")
-  	elseif (tag(deaths) == 19) // pre 20 smrti
-	  	cont.sysMessage("Zbran se vubec nechveje.")
-	  endif
-	elseif (tag(max_deaths) == 30)
-	
-	if (tag(deaths) >= 0) && (tag(deaths) < 4) // pre 30 smrti	
-  		cont.sysMessage("Zbran se silne chveje.")
-  	elseif (tag(deaths) > 3) && (tag(deaths) < 15) // pre 30 smrti
-  		cont.sysMessage("Zbran se porad chveje silne, ale jiz ne tolik co predtim.")
-  	elseif (tag(deaths) > 14) && (tag(deaths) < 28) // pre 30 smrti
-  		cont.sysMessage("Zbran se uz skoro nechveje.")
-  	elseif (tag(deaths) == 28) || (tag(deaths) == 29 ) // pre 30 smrti	
-	  	cont.sysMessage("Zbran se vubec nechveje.")
-  	endif
+  if <eval(tag(max_deaths) - tag(deaths))> < 4
+    src.sysMessage("Zbran uz se vubec nechveje.")
+  elseif <eval(tag(max_deaths) - tag(deaths))> < 7
+    src.sysMessage("Zbran se uz skoro nechveje.")
+  elseif <eval(tag(max_deaths) - tag(deaths))> < 10
+    src.sysMessage("Zbran se porad chveje, ale uz ne tak silne.")
+  else
+    src.sysMessage("Zbran se silne chveje.")
   endif
+  src.sysMessage("Zivotnost <eval(tag(max_deaths) - tag(deaths))>/<eval(tag(max_deaths))>.") 
 endif
 
+ON=@userdeath
+    
 [FUNCTION f_shadow_weapon_check_cont]
 src.newequip(i_shadow_weapon_checker)
 lastnew.tag(weapon,<args>)
