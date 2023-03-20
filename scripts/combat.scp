@@ -126,6 +126,9 @@ if (tag(atskill)==31)//archery
 endif
 //oprava podle zniceni zbrane
 if (tag(atskill)!=43)
+  if (<eval tag(weaponuid).more1h> == 0)
+    accmsg("ERROR: utoci zbrani <tag(weaponuid).name> (<tag(weaponuid)>), ktera nema celkovou durabilitu!")
+  endif
   arg(durkvocient, <eval ((<tag(weaponuid).more1h>-<tag(weaponuid).more1l>)*1000)/<tag(weaponuid).more1h>>)
   tag(UC,<eval tag(UC)-((<eval tag(UC)>*<arg(durkvocient)>)/2000)>)
 endif
