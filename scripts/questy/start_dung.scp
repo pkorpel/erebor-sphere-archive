@@ -1990,6 +1990,7 @@ if (strlen(<src.tag(nation)>))
       elseif (src.tag(realm)==2)
       	src.qtag(mq043,1,53)
       endif
+      src.initChat
       return 1
     endif
   endif

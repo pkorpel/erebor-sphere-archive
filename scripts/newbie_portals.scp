@@ -1407,10 +1407,10 @@ initChat
 [function initChat]
 tag(chaton, chflag_all) // enable GM server wide chat notifications to players
 if (tag(realm) == 1)
-    tag(chaton, <eval tag(chaton)|chflag_good>)
+    tag(chaton, 29) // All chats without Mordor
 endif
 if (tag(realm) == 2)
-    tag(chaton, <eval tag(chaton)|chflag_evil>)
+    tag(chaton, 30) // ALL chats without Gondor
 endif
 
 [function startskills]
