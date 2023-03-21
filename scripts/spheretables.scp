@@ -65,6 +65,8 @@ scripts\chars\dung_EdgarovoUtociste.scp
 scripts\chars\dung_Okultisti.scp
 scripts\chars\summons.scp
 scripts\chars\swamp.scp
+scripts\questy\q039_shadow_weapon_chars.scp
+scripts\questy\halda_molle_char.scp
 scripts\chars\groups.scp
 scripts\dobyvani\dobyvani-utils.scp
 scripts\dobyvani\dobyvani-declarator.scp

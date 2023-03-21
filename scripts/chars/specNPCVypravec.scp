@@ -486,7 +486,7 @@ ON=@NPCRestock
 defname=c_m_sphinx
 name="sphinx"
 sound=snd_animals_lion1
-icon=i_pet_sphinx_lbr
+icon=i_pet_cat // Neexistujici i_pet_sphinx_lbr
 can=mt_walk|mt_run
 attack=15,23
 armor=60
@@ -499,7 +499,7 @@ foodtype=3 t_food, t_fruit
 
 
 anim=0ffc78c7f
-tevents=e_undiscovered
+//tevents=e_undiscovered  // Neexistujici event
 TEVENTS=e_monster
 
 CATEGORY=Dungy
