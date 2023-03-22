@@ -1,8 +1,8 @@
-//[typedef t_book_bottle]
+[typedef t_book_bottle]
 
-//[typedef t_bottle_form]
+[typedef t_bottle_form]
 
-//[typedef t_book_shrink]
+[typedef t_book_shrink]
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 [ITEMDEF i_bottle_form]
