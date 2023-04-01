@@ -1324,7 +1324,7 @@ sound(0145)
 myTarget.effect(0,9598,5,0,0)
 
 // rebounce
-if (<eval myTarget.tag(mi_rangedreflex)> > {1 99})
+if (<eval myTarget.tag(mi_rangedreflex)> > {0 99})
   myTarget.classMessage("Dyka byla magicky odrazena.")
   stamina=(<stamina>*4)/5
   if (<eval {0 2}> == 2)
@@ -1336,7 +1336,7 @@ elseif (<eval {0 2}> == 2)
 endif
 
 // block
-if (<eval myTarget.tag(mi_rangedblock)> > {1 99})
+if (<eval myTarget.tag(mi_rangedblock)> > {0 99})
   myTarget.classMessage("Dyka byla magicky zablokovana.")
   return
 elseif ({0 10000} >= <eval (tag(ra_throwing)*950)>)  //pri plny abilite 95% sance zasahu
