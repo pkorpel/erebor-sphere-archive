@@ -180,6 +180,7 @@ arg(mem,<finduid(<f_pvpLeague_getLeagueMemory>)>)
 mem.more2=<eval mem.more2>+<argv(0)>
 var(pvpLeague).f_pvpLeague_storeRank(<uid>,<eval mem.more2>)
 f_dobyvani_bonus_gain_point(<argv(0)>)
+f_easterEvent_generateEgg_PvP(<argv(0)>)
 // f_christmasEvent_generateBulb_PvP(<argv(0)>)
 
 [function f_pvpLeague_getLeagueMemory]
