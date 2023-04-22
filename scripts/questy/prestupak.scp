@@ -4,17 +4,17 @@
 //
 ///////// tagy
 //
-// q041_paserak - 0  - nema nic spolocne
-// q041_paserak - 1  - slubil priniest 50k
-// q041_paserak - 2  - priniesol 50k
-// q041_paserak - 3  - naozaj chce prestupit
-// q041_paserak - 4  - GONDOR - slubil zabitie elfa
+// q041_paserak - 0  - nema nic spolecne
+// q041_paserak - 1  - slibil prinest 10k
+// q041_paserak - 2  - prinesl 10k
+// q041_paserak - 3  - vazne chce prestoupit
+// q041_paserak - 4  - GONDOR - slibil zabit
 // q041_paserak - 5  - GONDOR - zabil elfa
-// q041_paserak - 6  - MORDOR - slubil pomoc
-// q041_paserak - 7  - MORDOR - pomohol
-// q041_paserak - 8  - slubil obdarovanie
-// q041_paserak - 9  - obdaroval
-// q041_paserak - 10 - prestupil
+// q041_paserak - 6  - MORDOR - slibil pomoct Borkovi
+// q041_paserak - 7  - MORDOR - pomohl Borkovi
+// q041_paserak - 8  - slibil prinest dary
+// q041_paserak - 9  - prinesl dary
+// q041_paserak - 10 - prestoupil
 
 //////////////// paserak
 
@@ -33,14 +33,12 @@ if (<src.flags>&statf_dead)
  return 1
 endif
 if ((<src.tag.level> < 15)||(<src.tag(realm)> < 0))
-  say("Promin, ale s tebou se nemam aktualne o cem bavit. Prijd, az budes silnejsi!")
-//elseif (<eval src.tag(presel)> == 1)
-//  say("S tebou se uz bavit nebudu!")
+  say("S tebou se nemam zatim o cem bavit. Prijd, az budes silnejsi!")
 else
   if ((<src.tag(realm)> == 1)||(<src.tag(realm)> == 2)) 
     dialog(d_q041_paserak)
   else
-    say("S tebou se bavit nebudu!")
+    say("S tebou se ani ja bavit nebudu!")
   endif
 endif
 
@@ -53,7 +51,7 @@ arg(q041_paserak,<eval src.qtag(q041_paserak)>)
 if ((<arg(q041_paserak)> == 0) || (<arg(q041_paserak)> == 10))
   argo.questDialog_baseButt(1) // Kdo jsi?
 elseif ((<arg(q041_paserak)> >= 2)&&(<arg(q041_paserak)> <= 9))
-  argo.questDialog_baseButt(1,21,"Prechod?") // Kdo jsi?
+  argo.questDialog_baseButt(1,45,"Prechod?") // Kdo jsi?
 endif 
 if ((<arg(q041_paserak)> == 0) || (<arg(q041_paserak)> == 10))
   argo.questDialog_baseButt(2,21,"Muzu pomoci?")
@@ -69,22 +67,22 @@ argo.dialog_page("Pozdrav")
   
 if ((<arg(q041_paserak)> == 0) || (<arg(q041_paserak)> == 10))
   argo.dialog_page("Kdo jsi?") // kdo jsi
-    argo.setText(argo.newTextLine,"Do toho ti nic neni, take se te na nej neptam. Pro nas obchod to neni podstatne...")
+    argo.setText(argo.newTextLine,"Do toho ti nic neni, ja te tu taky nevyslycham. A pro sluzby, ktere poskytuji, to ostatne ani neni podstatne...")
     argo.questDialog_HTMLGUMP
 elseif ((<arg(q041_paserak)> >= 2)&&(<arg(q041_paserak)> <= 9))
   argo.dialog_page("Prechod?")
     if (<src.tag(realm)> == 1)
       if (<arg(q041_paserak)> == 2)
-        argo.setText(argo.newTextLine,"Takze tobe je v Gondoru horko a rad bys do zeme neomezenych moznosti? Myslis, ze jsi dostatecne silny, abys v Mordoru prezil? Uvedom si, ze pak jiz neni cesty zpet! Pro Gondor budes zradcem navzdy!!!")
+        argo.setText(argo.newTextLine,"Takze tobe je v Gondoru horko a <src.sex("rad","rada")> bys do zeme neomezenych moznosti? Myslis, ze jsi dost <src.sex("silny","silna")>, abys v Mordoru <src.sex("prezil","prezila")>? Uvedom si taky, ze cesta zpatky muze byt narocnejsi, nez se na prvni pohled zda...")
         argo.questDialog_HTMLGUMP
-          argo.setText(argo.newTextLine,"Ano rozhodne chci prejit, jsem si vedom nenavratnosti.")
+          argo.setText(argo.newTextLine,"Ano rozhodne chci prejit, jsem si vseho <src.sex("vedom","vedoma")> a na rizika nehledim!")
           argo.questDialog_addResponse(0,1,1,"q041_want_to")
-          argo.setText(argo.newTextLine,"Jeste si to rozmyslim.")
+          argo.setText(argo.newTextLine,"Jeste si to radsi rozmyslim.")
           argo.questDialog_addResponse(0,1,1,"q041_think_about")
       elseif (<arg(q041_paserak)> == 3)
-        argo.setText(argo.newTextLine,"Dobra, ale nez do tebe budu investovat cas a penize, pak si musim overit tvuj umysl. Kousek od Roklinky se potuluje elf. Nikomu nic neudelal, vsichni ho maji radi. Ma manzelku a jedno milujici dite. <br>Zabij ho.")
+        argo.setText(argo.newTextLine,"Dobra, ale nez do tebe budu investovat cas a penize, potrebuji si byt jisty, ze to myslis vazne. Kousek od Roklinky se potuluje elf. Nikomu nic neudelal, vsichni ho maji radi. Ma manzelku a jedno milujici dite. <br>Zabij ho.")
         argo.questDialog_HTMLGUMP
-          argo.setText(argo.newTextLine,"Nesnasim elfy! Ze je elf mi pro vrazdu staci")
+          argo.setText(argo.newTextLine,"Nesnasim elfy! To, ze je elf, mi jako zaminka bohate staci.")
           argo.questDialog_addResponse(0,1,1,"q041_will_kill")
           argo.setText(argo.newTextLine,"Nezabiji nevinneho!")
           argo.questDialog_addResponse(0,1,1,"q041_wont_kill")
@@ -96,59 +94,53 @@ elseif ((<arg(q041_paserak)> >= 2)&&(<arg(q041_paserak)> <= 9))
             argo.questDialog_addResponse(0,1,1,"q041_killed_elf")
           endif
       elseif (<arg(q041_paserak)> == 8)
-        argo.setText(argo.newTextLine,"Budu ti muset zajistit nove doklady a celou novou identitu a to vsehcno neco stoji. Jak tak na tebe koukam, tak vymena xichtu by taky nebyla spatnej napad! Prines mi 50k zlatych, 10 ingotu zeleza, <eval <eval src.tag(presel)>+1>x zeleny pytlik s magickym predmetem a jedno pecene prase.")
+        argo.setText(argo.newTextLine,"Budu ti muset zajistit celou novou identitu, coz samozrejme neco stoji. Pro zacatek mi prines deset zeleznych ingotu, <eval <eval src.tag(presel)>+1>x zeleny pytlik s magickym predmetem a jedno pecene prase. A pocitej s tim, ze mi tu jeste podepises lejstro na presun decentni sumicky mezi nasimi bankovnimi ucty. Konkretne to bude krasnych <eval <eval <eval src.tag(level)>*10000>+1000000> zlataku.")
         argo.questDialog_HTMLGUMP
           if (<src.f_q041_prestup_has_items>)
-            argo.setText(argo.newTextLine,"Zde to mas, je to hodne, ale za prechod mi to stoji!")
+            argo.setText(argo.newTextLine,"Zde mas ty veci... a tady autogram, uf.")
             argo.questDialog_addResponse(0,1,1,"q041_have_items")
           else
             argo.setText(argo.newTextLine,"Dobra, dam to dohromady.")
             argo.questDialog_addResponse(0,1,1,"q041_dont_have_yet")
           endif
       elseif (<arg(q041_paserak)> == 9)
-        argo.setText(argo.newTextLine,"Ted muzes prejit...")
-        argo.questDialog_HTMLGUMP
-      elseif (<arg(q041_paserak)> == 10)
-        argo.setText(argo.newTextLine,"Rikal jsem ti, ze prechod ti mohu zajistit pouze jednou.<br>Neni jiz cesty zpet!")
+        argo.setText(argo.newTextLine,"Vsecko je zarizeny, ted uz ti staci jenom projit tamhle tim portalem...")
         argo.questDialog_HTMLGUMP
       endif
     elseif (<src.tag(realm)> == 2)
       if (<arg(q041_paserak)> == 2)
-        argo.setText(argo.newTextLine,"Dalsi co nevydrzi Marghulovu vladu? Zachtelo se ti radu a poradku? Myslis, ze jsi schopny akceptovat pravidla Gondoru? Uvedom si, ze pak jiz neni cesty zpet! Mordor te jiz zpet neprijme!!!")
+        argo.setText(argo.newTextLine,"Dalsi <src.sex("chudacek","chudinka")>, co nevydrzi Marghulovu vladu? Zachtelo se ti radu a poradku? Myslis, ze jsi <src.sex("schopny","schopna")> akceptovat pravidla Gondoru? Uvedom si taky, ze cesta zpatky muze byt narocnejsi, nez se na prvni pohled zda...")
         argo.questDialog_HTMLGUMP
-          argo.setText(argo.newTextLine,"Ano rozhodne chci prejit, jsem si vedom nenavratnosti.")
+          argo.setText(argo.newTextLine,"Ano rozhodne chci prejit, jsem si vseho <src.sex("vedom","vedoma")> a na rizika nehledim!")
           argo.questDialog_addResponse(0,1,1,"q041_want_to")
-          argo.setText(argo.newTextLine,"Jeste si to rozmyslim.")
+          argo.setText(argo.newTextLine,"Jeste si to radsi rozmyslim.")
           argo.questDialog_addResponse(0,1,1,"q041_think_about")
       elseif (<arg(q041_paserak)> == 3)
-        argo.setText(argo.newTextLine,"Dobra, ale nez do tebe budu investovat cas a penize, pak si musim overit tvuj umysl. Kousek od Nurnu na poli tezce pracuje farmar Borek. Dones mu 40 opecenych rybich steaku a 5x obycejny lektvar na osvezeni.")
+        argo.setText(argo.newTextLine,"Dobra, ale nez do tebe budu investovat cas a penize, potrebuji si byt jisty, ze to myslis vazne. Kousek od Nurnu na poli tezce pracuje farmar Borek. Dones mu ctyricet opecenych rybich stejku a pet obycejnych lektvaru na osvezeni.")
         argo.questDialog_HTMLGUMP
           argo.setText(argo.newTextLine,"Dobre, obdaruji jej!")
           argo.questDialog_addResponse(0,1,1,"q041_give_him")
-          argo.setText(argo.newTextLine,"Sam mam malo, nikomu nic nedam! Zvlast ne zdarma.")
+          argo.setText(argo.newTextLine,"<src.sex("Sam","Sama")> mam malo, nikomu nic nedam. A uz vubec ne zadarmo!")
           argo.questDialog_addResponse(0,1,1,"q041_wont_give")
       elseif ((<arg(q041_paserak)> == 6)||(<arg(q041_paserak)> == 7))
-        argo.setText(argo.newTextLine,"Udelal jsi to uz?")
+        argo.setText(argo.newTextLine,"<src.sex("Udelal","Udelala")> jsi to uz?")
         argo.questDialog_HTMLGUMP
           if (<arg(q041_paserak)> == 7)
-            argo.setText(argo.newTextLine,"Ano, dal jsem mu to.")
+            argo.setText(argo.newTextLine,"Ano, <src.sex("dal","dala")> jsem mu to.")
             argo.questDialog_addResponse(0,1,1,"q041_gave_him")
           endif
       elseif (<arg(q041_paserak)> == 8)
-        argo.setText(argo.newTextLine,"Budu ti muset zajistit nove doklady a celou novou identitu a to vsehcno neco stoji. Jak tak na tebe koukam, tak vymena xichtu by taky nebyla spatnej napad! Prines mi 50k zlatych, 10 ingotu zeleza, <eval <eval src.tag(presel)>+1>x zeleny pytlik s magickym predmetem a jedno pecene prase.")
+        argo.setText(argo.newTextLine,"Budu ti muset zajistit celou novou identitu, coz samozrejme neco stoji. Pro zacatek mi prines deset zeleznych ingotu, <eval <eval src.tag(presel)>+1>x zeleny pytlik s magickym predmetem a jedno pecene prase. A pocitej s tim, ze mi tu jeste podepises lejstro na presun decentni sumicky mezi nasimi bankovnimi ucty. Konkretne to bude krasnych <eval <eval <eval src.tag(level)>*10000>+1000000> zlataku.")
         argo.questDialog_HTMLGUMP
           if (<src.f_q041_prestup_has_items>)
-            argo.setText(argo.newTextLine,"Zde to mas, je to hodne, ale za prechod mi to stoji!")
+            argo.setText(argo.newTextLine,"Zde mas ty veci... a tady autogram, uf.")
             argo.questDialog_addResponse(0,1,1,"q041_have_items")
           else
             argo.setText(argo.newTextLine,"Dobra, dam to dohromady.")
             argo.questDialog_addResponse(0,1,1,"q041_dont_have_yet")
           endif
       elseif (<arg(q041_paserak)> == 9)
-        argo.setText(argo.newTextLine,"Ted muzes prejit...")
-        argo.questDialog_HTMLGUMP
-      elseif (<arg(q041_paserak)> == 10)
-        argo.setText(argo.newTextLine,"Rikal jsem ti, ze prechod ti mohu zajistit pouze jednou.<br>Neni jiz cesty zpet!")
+        argo.setText(argo.newTextLine,"Vsecko je zarizeny, ted uz ti staci jenom projit tamhle tim portalem...")
         argo.questDialog_HTMLGUMP
       endif
     endif
@@ -156,32 +148,32 @@ endif
 
 if ((<arg(q041_paserak)> == 0) || (<arg(q041_paserak)> == 10))
   argo.dialog_page("Muzu pomoci?")
-    argo.setText(argo.newTextLine,"Deset tisic zlatych by se mi hodilo. Mozna bychom pak nasli spolecnou rec.")
+    argo.setText(argo.newTextLine,"Jasne, vazne by se mi hodilo deset tisic zlataku. Mozna bychom pak nasli spolecnou rec.")
     argo.questDialog_HTMLGUMP
       argo.setText(argo.newTextLine,"Dobra, tak ja ti je prinesu.")
       argo.questDialog_addResponse(0,1,1,"q041_bring_money") 
 endif
 
 argo.dialog_page("Obchodovat")
-  argo.setText(argo.newTextLine,"Vypadam jako obchodnik?!")
+  argo.setText(argo.newTextLine,"Tesi me, ze asi vypadam jako sporadany obchodnik. Moje podnikani se ale venuje spise preprave veci a osob.")
   argo.questDialog_HTMLGUMP
   
 argo.dialog_page("Hledam praci")
-  argo.setText(argo.newTextLine,"Nemam pro tebe nic...")
+  argo.setText(argo.newTextLine,"Tady zadnou praci nenajdes...")
   argo.questDialog_HTMLGUMP
   
 argo.dialog_page("Nesu ti")  
   argo.setText(argo.newTextLine,"Copak mi neses?")
   argo.questDialog_HTMLGUMP
-    argo.setText(argo.newTextLine,"Vlastne nemam nic, promin.")
+    argo.setText(argo.newTextLine,"Vlastne nic, promin.")
     argo.questDialog_addResponse(0,1,1,"goodbye") 
     if ((<arg(q041_paserak)> == 1)&&(<SRC.RESTEST 10000 i_gold>))
-      argo.setText(argo.newTextLine,"Mam pre tebe penize!")
+      argo.setText(argo.newTextLine,"Mam tu pro tebe ty penize!")
       argo.questDialog_addResponse(0,1,1,"q041_give_money")
     endif
 
 argo.dialog_page("Prohlednout")
-  argo.setText(argo.newTextLine,"<def_questDialog_colorTextEmote>*Muz je po zuby ozbrojen. Je ti jasne, ze neni dobrym napadem jej rozcilit.*")
+  argo.setText(argo.newTextLine,"<def_questDialog_colorTextEmote>*Muz je po zuby ozbrojeny a velmi ostrazity. Je ti jasne, ze neni dobry napad ho rozcilit.*")
   argo.questDialog_HTMLGUMP
   
   
@@ -191,49 +183,53 @@ if (f_qReach) || (f_qIsDead) // the player is too far from the NPC or even dead!
   return
 endif
 if (<argn> == argo.dialog_linkButton("q041_want_to"))
-  say("Dobra, tak jse do toho pustime...")
+  say("Dobra, tak se do toho pustime...")
   src.qtag(q041_paserak,3,51)
 elseif (<argn> == argo.dialog_linkButton("q041_bring_money"))
   say("Tak ale honem!")
   src.qtag(q041_paserak,1,51)
 elseif (<argn> == argo.dialog_linkButton("q041_give_money"))
-	if (<SRC.RESTEST 10000 i_gold>)
-  	say("Diky ti!")
+  if (<SRC.RESTEST 10000 i_gold>)
+  	say("Ooo, to je od tebe ale mile!")
   	src.consume(10000,i_gold)
   	src.qtag(q041_paserak,2,51)
+  else
+    say("Pockat, tady mi neco nesedi...")
   endif
 elseif (<argn> == argo.dialog_linkButton("q041_think_about"))
   say("Je to na tobe...")
 elseif (<argn> == argo.dialog_linkButton("q041_will_kill"))
-  say("To jsem chtel slyset, az ho sejmes, prijd za mnou!")
+  say("Vyborne. A at ti pri umirani hezky vidi do oci!")
   src.qtag(q041_paserak,4,51)
 elseif (<argn> == argo.dialog_linkButton("q041_wont_kill"))
-  say("Jak chces, kdyby sis to rozmyslel, vis, kde mne najdes!")
+  say("Jak chces. Kdyby sis to <src.sex("rozmyslel","rozmyslela")>, vis, kde me najdes!")
 elseif (<argn> == argo.dialog_linkButton("q041_killed_elf"))
-  say("To se mi libi!")
+  say("Tak se mi to libi!")
   src.qtag(q041_paserak,8,51)
 elseif (<argn> == argo.dialog_linkButton("q041_have_items"))
   if (<src.f_q041_prestup_has_items>)
   	src.f_q041_prestup_consume_items
-    say("Dobre, todle by ti melo zajistit ochranu. Hlavne se prevlec v tomdle tam nemuzes!")
+    say("Dobre, vse by melo byt zarizene. Ted uz ti staci jenom projit tamhle tim portalem...")
     src.qtag(q041_paserak,9,51)
+  else
+    say("Pockat, tady mi neco nesedi...")
   endif
 elseif (<argn> == argo.dialog_linkButton("q041_dont_have_yet"))
   say("Tak pak prijd...")
 elseif (<argn> == argo.dialog_linkButton("q041_give_him"))
-  say("To jsem chtel slyset, az to provedes, prijd za mnou!")
+  say("To jsem chtel slyset. Az to provedes, prijd za mnou!")
   src.qtag(q041_paserak,6,51)
 elseif (<argn> == argo.dialog_linkButton("q041_wont_give"))
-  say("Jak chces, kdybysis to rozmyslel, vis, kde mne najdes!")
+  say("Jak chces. Kdyby sis to <src.sex("rozmyslel","rozmyslela")>, vis, kde mne najdes!")
 elseif (<argn> == argo.dialog_linkButton("q041_gave_him"))
-  say("To se mi libi!")
+  say("Tak se mi to libi!")
   src.qtag(q041_paserak,8,51)
 elseif (<argn> == argo.dialog_linkButton("Goodbye"))
   say("Mej se...")
 endif
 
 [function f_q041_prestup_has_items]
-if ((<src.rescount i_gold> >= 50000) && (<src.rescount i_ingot_iron> >= 10) && (<src.rescount i_mi_bag> >= <eval <eval src.tag(presel)>+1>) && (<src.rescount i_pig_roast> >= 1))
+if ((src.canPay_from_bank(<eval <eval <eval src.tag(level)>*10000>+1000000>)) && (<src.rescount i_ingot_iron> >= 10) && (<src.rescount i_mi_bag> >= <eval <eval src.tag(presel)>+1>) && (<src.rescount i_pig_roast> >= 1))
 	return 1
 else
 	return 0
@@ -251,7 +247,7 @@ src.consume(40,i_fish_cut_cooked)
 src.consume(5,i_potion_refresh)
 
 [function f_q041_prestup_consume_items]
-src.consume(50000,i_gold)
+src.pay_from_bank(<eval <eval <eval src.tag(level)>*10000>+1000000>)
 src.consume(10,i_ingot_iron)
 src.consume(<eval <eval src.tag(presel)>+1>,i_mi_bag)
 src.consume(1,i_pig_roast)
@@ -261,19 +257,19 @@ src.consume(1,i_pig_roast)
 
 [function f_q041_paserak_borek_bargain]
 if (<eval src.qtag(q041_paserak)> == 6)
-  setText(newTextLine,"Posila me za tebou Paserak, prej ti to moc nejde a naky milodar by se ti hodil...")
+  setText(newTextLine,"Posila me za tebou nas spolecny pritel. Pry by se ti hodila trocha hmotne vypomoci...")
   questDialog_addResponse(0,0,1,"q041_paserak_send_him")
 endif
 
 [function f_q041_paserak_borek_answer]
 if (<eval src.qtag(q041_paserak)> == 6)
   dialog_page("q041_paserak_send_him")
-    setText(newTextLine,"No vis, doba je tez tezka... Kazdemu by se hodila naka ta pomoc, co pro me mas?")
+    setText(newTextLine,"No vis, doba je ted tezka... kazdemu by se hodila naka ta pomoc. Co pro me mas?")
     questDialog_HTMLGUMP
-    	if (<src.f_q041_prestup_has_items_for_borek>)
-      	setText(newTextLine,"Mam pro tebe 40 opecenych rybich steaku a 5x lektvar na osvezeni!")
+      if (<src.f_q041_prestup_has_items_for_borek>)
+      	setText(newTextLine,"Mam pro tebe neco k zakousnuti a par lektvaru na osvezeni!")
       	questDialog_addResponse(0,1,1,"q041_has_items")
-     	else
+      else
       	setText(newTextLine,"Vlastne nic...")
       	questDialog_addResponse(0,1,1,"q041_doesnt_have_items")
       endif
@@ -281,12 +277,12 @@ endif
 
 [function f_q041_paserak_borek_Button] //argv(0) == button number (<argn>)
 if (<argv(0)> == dialog_linkButton("q041_doesnt_have_items"))
-  argv(1).say("Tak priste.")
+  argv(1).say("Tak holt treba priste...")
   return 1
 elseif (<argv(0)> == dialog_linkButton("q041_has_items"))
   if (<src.f_q041_prestup_has_items_for_borek>)
   	src.f_q041_prestup_consume_items_for_borek
-    argv(1).say("Och, dekuji ti!")
+    argv(1).say("Tyjo, mockrat diky!")
     src.qtag(q041_paserak,7,51)
     return 1
   endif
