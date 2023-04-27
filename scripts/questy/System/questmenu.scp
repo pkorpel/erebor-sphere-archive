@@ -78,7 +78,7 @@ questMenu[47] Drakobijec Alechymista    ,d_dragons_alchymista               ,1  
 questMenu[48] Drakobijec Rakchin        ,d_dragons_rakchin                  ,1         ,q040_dragons_rakchin
 questMenu[49] Blaznivy Drakobijec       ,d_dragons_blazen                   ,1         ,q040_dragons_blazen
 questMenu[50] Drakobijci - brneni       ,d_dragons_kovar                    ,1         ,q040_dragons_kovar
-questMenu[51] Prestupny quest           ,d_prestupak                        ,1         ,q041_paserak
+questMenu[51] Paserak                   ,d_prestupak                        ,1         ,q041_paserak
 questMenu[52] Halda Molle Hatlend       ,d_hm_hatlend                       ,1         ,q042_hatlend_rulik
 questMenu[53] Murdocovi Ucni            ,d_murdoc_ucni                      ,1         ,q043_tut,mq043,gq043
 questMenu[54] Zachrante Murdoca         ,d_murdoc_zachrana                  ,1         ,q044
@@ -2931,32 +2931,32 @@ argo.htmlGump(160,80,242,130,1,0,36)
 ///////////////////////////
 
 [function f_isDone_d_prestupak]
-return <eval(0<src.qtag(q041_paserak)> == 10)>
+return <eval(<src.qtag(q041_paserak)> == 10)>
 
 [dialog d_prestupak]
 argo.setText(0,"Paserak")
 argo.f_qDialogInstructions(03093)
 
 if (<src.qtag(q041_paserak)> == 1)
-  argo.setText(1," Nyni musis paserakovi donest obnos 10.000 zlatych.")
+  argo.setText(1,"Dokud neprineses paserakovi deset tisic zlatych, nebude se s tebou bavit.")
 elseif (<src.qtag(q041_paserak)> == 2)
-  argo.setText(1,"Donesl jsi paserakovi 10.000. Promluv s nim.")
+  argo.setText(1,"<?src.sex("Donesl","Donesla")?> jsi paserakovi deset tisic zlataku. Ted uz snad bude ochotnejsi.")
 elseif (<src.qtag(q041_paserak)> == 3)
-  argo.setText(1,"Rozhodl jsi se prestoupit k druhe strane. Opravdu to dukladne zvaz! Jiz nebude cesty zpet. Promluv si s paserakem.")
+  argo.setText(1,"<?src.sex("Rozhodl","Rozhodla")?> jsi se prestoupit k druhe strane. Zeptej se paseraka, co to bude obnaset.")
 elseif (<src.qtag(q041_paserak)> == 4)
-  argo.setText(1,"Paserak ti dal za ukol zabit nevinneho elfa. Najdes ho u roklinky. Zabij ho!")
+  argo.setText(1,"Paserak ti dal za ukol najit a zabit nevinneho elfa, ktery se pohybuje pobliz Roklinky. Pry si mam poradne vychutnat vyhasinajici zivot v jeho ocich...")
 elseif (<src.qtag(q041_paserak)> == 5)
-  argo.setText(1,"Zabil jsi elfa. Vrat se za paserakem a sdel mu, ze jsi svuj ukol splnil.")
+  argo.setText(1,"<?src.sex("Zabil","Zabila")?> jsi nevinneho elfa. Vrat se za paserakem a sdel mu, ze jsi svuj ukol <?src.sex("splnil","splnila")?>.")
 elseif (<src.qtag(q041_paserak)> == 6)
-  argo.setText(1,"Kousek od Nurnu na poli tezce pracuje farmar Borek. Dones mu 40 opecenych rybich steaku a 5x lektvar na osvezeni")
+  argo.setText(1,"Paserak ti dal za ukol prinest farmari Borkovi do Nurnu ctyricet rybich stejku a pet beznych lektvaru osvezeni.")
 elseif (<src.qtag(q041_paserak)> == 7)
-  argo.setText(1,"Borek je ti vdecny. Prokazal jsi dobrou vuli. Nyni zajdi za paserakem.")
+  argo.setText(1,"Pomoci farmari Borkovi jsi <?src.sex("prokazal","prokazala")?> dobrou vuli. Vrat se za paserakem a sdel mu, ze jsi svuj ukol <?src.sex("splnil","splnila")?>.")
 elseif (<src.qtag(q041_paserak)> == 8)
-  argo.setText(1,"Prines paserakovi 50k zlatych, 10 ingotu zeleza, <eval <eval src.tag(presel)>+1>x zeleny pytlik s magickym predmetem a jedno pecene prase")
+  argo.setText(1,"Prines paserakovi deset zeleznych ingotu, <eval <eval src.tag(presel)>+1>x zeleny pytlik s magickym predmetem a jedno pecene prase. V bance bys <?src.sex("mel","mela")?> mit pripraveno minimalne <?eval (<eval src.tag(level)>*10000)+1000000?> zlataku.")
 elseif (<src.qtag(q041_paserak)> == 9)
-  argo.setText(1,"Splnil jsi paserakovi podminky. Nyni muzes prestoupit.")
+  argo.setText(1,"<?src.sex("Splnil","Splnila")?> jsi vsechny paserakovy pozadavky. Vstupem do jeho magickeho portalu prejdes ke druhe strane.")
 elseif (<src.qtag(q041_paserak)> == 10)
-  argo.setText(1,"Presel jsi k druhe strane.")
+  argo.setText(1,"<?src.sex("Presel","Presla")?> jsi ke druhe strane.")
 endif
 argo.htmlGump(160,80,242,130,1,0,36)
 

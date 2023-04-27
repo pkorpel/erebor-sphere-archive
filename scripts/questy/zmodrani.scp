@@ -20,10 +20,6 @@ on=@step
 if (src.isgm) || (<src.tag(pred_chvili_prosel)>)
   return 0
 endif
-if (src.ismagic) 
-  src.redMessage("Je treba si sundat vsechny magicke predmety nez projdes branou!")
-  return 1
-endif
 if (src.isplayer)
   if (<src.tag(realm)> < 0) //zaporna cisla maji vyvrhelove, vyvrhel nesmi prechazet ! Zakazujeme to, proste konecna - nejtezsi RP trest. (tag presel nehraje roli)
     src.redMessage("Tve prohresky se staly prilis velkou hrozbou pro vsechny v tvem okoli.")
@@ -32,10 +28,9 @@ if (src.isplayer)
     return 1
   endif
   if !(<eval src.qtag(q041_paserak)> == 9)
-    src.redmessage("Nejprve musis promluvit s Paserakem.")
+    src.redmessage("Nejprve musis promluvit s paserakem.")
     return 1
   endif
-  src.srazitlevely(<more>)
   if (<src.tag(realm)> == 2) //je to mordoran
     src.tag(realm,1)
     src.kills=0
@@ -53,8 +48,12 @@ if (src.isplayer)
   src.newitemsafe(i_prave_prosel_levelgatou)
   lastnew.equip
   src.level_gate_efekt
-  src.tag(presel,<eval src.tag(presel)>+1) //Pocitadlo prechodu
+  if (<eval src.tag(presel)> <= 8)
+    src.tag(presel,<eval src.tag(presel)>+1) //Pocitadlo prechodu
+  endif
   src.qtag(q041_paserak,10,51)
+  src.gohome
+  src.accmsg("(<?name?>) byl po dokonceni prestupniho questu prenesen do noveho domovskeho mesta - <?src.region.name?> (<?src.p?>)")
   return 1
 endif
 
