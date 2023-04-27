@@ -94,7 +94,7 @@ elseif ((<arg(q041_paserak)> >= 2)&&(<arg(q041_paserak)> <= 9))
             argo.questDialog_addResponse(0,1,1,"q041_killed_elf")
           endif
       elseif (<arg(q041_paserak)> == 8)
-        argo.setText(argo.newTextLine,"Budu ti muset zajistit celou novou identitu, coz samozrejme neco stoji. Pro zacatek mi prines deset zeleznych ingotu, <eval <eval src.tag(presel)>+1>x zeleny pytlik s magickym predmetem a jedno pecene prase. A pocitej s tim, ze mi tu jeste podepises lejstro na presun decentni sumicky mezi nasimi bankovnimi ucty. Konkretne to bude krasnych <eval <eval <eval src.tag(level)>*10000>+1000000> zlataku.")
+        argo.setText(argo.newTextLine,"Budu ti muset zajistit celou novou identitu, coz samozrejme neco stoji. Pro zacatek mi prines deset zeleznych ingotu, <eval <eval src.tag(presel)>+1>x zeleny pytlik s magickym predmetem a jedno pecene prase. A pocitej s tim, ze mi tu jeste podepises lejstro na presun decentni sumicky mezi nasimi bankovnimi ucty. Konkretne to bude krasnych <eval (<eval src.tag(level)>*10000)+1000000> zlataku.")
         argo.questDialog_HTMLGUMP
           if (<src.f_q041_prestup_has_items>)
             argo.setText(argo.newTextLine,"Zde mas ty veci... a tady autogram, uf.")
@@ -229,7 +229,7 @@ elseif (<argn> == argo.dialog_linkButton("Goodbye"))
 endif
 
 [function f_q041_prestup_has_items]
-if ((src.canPay_from_bank(<eval <eval <eval src.tag(level)>*10000>+1000000>)) && (<src.rescount i_ingot_iron> >= 10) && (<src.rescount i_mi_bag> >= <eval <eval src.tag(presel)>+1>) && (<src.rescount i_pig_roast> >= 1))
+if ((src.canPay_from_bank(<eval (<eval src.tag(level)>*10000)+1000000>)) && (<src.rescount i_ingot_iron> >= 10) && (<src.rescount i_mi_bag> >= <eval <eval src.tag(presel)>+1>) && (<src.rescount i_pig_roast> >= 1))
 	return 1
 else
 	return 0
@@ -247,7 +247,7 @@ src.consume(40,i_fish_cut_cooked)
 src.consume(5,i_potion_refresh)
 
 [function f_q041_prestup_consume_items]
-src.pay_from_bank(<eval <eval <eval src.tag(level)>*10000>+1000000>)
+src.pay_from_bank(<eval (<eval src.tag(level)>*10000)+1000000>)
 src.consume(10,i_ingot_iron)
 src.consume(<eval <eval src.tag(presel)>+1>,i_mi_bag)
 src.consume(1,i_pig_roast)
@@ -267,11 +267,11 @@ if (<eval src.qtag(q041_paserak)> == 6)
     setText(newTextLine,"No vis, doba je ted tezka... kazdemu by se hodila naka ta pomoc. Co pro me mas?")
     questDialog_HTMLGUMP
       if (<src.f_q041_prestup_has_items_for_borek>)
-      	setText(newTextLine,"Mam pro tebe neco k zakousnuti a par lektvaru na osvezeni!")
-      	questDialog_addResponse(0,1,1,"q041_has_items")
+        setText(newTextLine,"Mam pro tebe neco k zakousnuti a par lektvaru na osvezeni!")
+        questDialog_addResponse(0,1,1,"q041_has_items")
       else
-      	setText(newTextLine,"Vlastne nic...")
-      	questDialog_addResponse(0,1,1,"q041_doesnt_have_items")
+        setText(newTextLine,"Vlastne nic...")
+        questDialog_addResponse(0,1,1,"q041_doesnt_have_items")
       endif
 endif
 
@@ -281,10 +281,13 @@ if (<argv(0)> == dialog_linkButton("q041_doesnt_have_items"))
   return 1
 elseif (<argv(0)> == dialog_linkButton("q041_has_items"))
   if (<src.f_q041_prestup_has_items_for_borek>)
-  	src.f_q041_prestup_consume_items_for_borek
+    src.f_q041_prestup_consume_items_for_borek
     argv(1).say("Tyjo, mockrat diky!")
     src.qtag(q041_paserak,7,51)
     return 1
+  else
+    argv(1).say("Aha. A kde?")
+    return 0
   endif
 endif
 return 0
