@@ -2934,10 +2934,7 @@ argo.htmlGump(160,80,242,130,1,0,36)
 return <eval(<src.qtag(q041_paserak)> == 10)>
 
 [dialog d_prestupak]
-arg(DonesItemu, <eval <eval src.tag(presel)>+1>)
-if (<DonesItemu> > 10)
-  arg(DonesItemu, 10)
-endif
+arg(DonesItemu,<eval minimalValue(<eval <eval src.tag(presel)>+1>,10)>)
 
 argo.setText(0,"Paserak")
 argo.f_qDialogInstructions(03093)

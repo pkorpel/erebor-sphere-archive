@@ -43,10 +43,7 @@ else
 endif
 
 [dialog d_q041_paserak]
-arg(DonesItemu, <eval <eval src.tag(presel)>+1>)
-if (<DonesItemu> > 10)
-  arg(DonesItemu, 10)
-endif
+arg(DonesItemu,<eval minimalValue(<eval <eval src.tag(presel)>+1>,10)>)
 
 argo.questDialog_create(03164,"Paserak")
 
@@ -234,10 +231,7 @@ elseif (<argn> == argo.dialog_linkButton("Goodbye"))
 endif
 
 [function f_q041_prestup_has_items]
-arg(DonesItemu, <eval <eval src.tag(presel)>+1>)
-if (<DonesItemu> > 10)
-  arg(DonesItemu, 10)
-endif
+arg(DonesItemu,<eval minimalValue(<eval <eval src.tag(presel)>+1>,10)>)
 
 if ((src.canPay_from_bank(<eval (<eval src.tag(level)>*10000)+1000000>)) && (<src.rescount i_ingot_iron> >= 10) && (<src.rescount i_mi_bag> >= <DonesItemu>) && (<src.rescount i_pig_roast> >= 1))
 	return 1
@@ -257,10 +251,7 @@ src.consume(40,i_fish_cut_cooked)
 src.consume(5,i_potion_refresh)
 
 [function f_q041_prestup_consume_items]
-arg(DonesItemu, <eval <eval src.tag(presel)>+1>)
-if (<DonesItemu> > 10)
-  arg(DonesItemu, 10)
-endif
+arg(DonesItemu,<eval minimalValue(<eval <eval src.tag(presel)>+1>,10)>)
 
 src.pay_from_bank(<eval (<eval src.tag(level)>*10000)+1000000>)
 src.consume(10,i_ingot_iron)
