@@ -47,13 +47,15 @@ if (src.isplayer)
   sound=snd_spell_polymorph
   src.newitemsafe(i_prave_prosel_levelgatou)
   lastnew.equip
-  src.level_gate_efekt
-  if (<eval src.tag(presel)> <= 8)
-    src.tag(presel,<eval src.tag(presel)>+1) //Pocitadlo prechodu
-  endif
+  src.tag(presel,<eval src.tag(presel)>+1) //Pocitadlo prechodu
   src.qtag(q041_paserak,10,51)
   src.gohome
-  src.accmsg("(<?name?>) byl po dokonceni prestupniho questu prenesen do noveho domovskeho mesta - <?src.region.name?> (<?src.p?>)")
+  src.level_gate_efekt
+  arg(realm,"Gondoru")
+  if (<src.tag(realm)> == 2)
+    arg(realm,"Mordoru")
+  endif
+  src.accmsg("<src.profession> level <eval src.tag(level)> dokoncil prestupni quest do <arg(realm)> (celkem <eval src.tag(presel)>x) a byl prenesen do <src.region.name> (<src.p>)")
   return 1
 endif
 
