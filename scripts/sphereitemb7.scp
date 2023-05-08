@@ -10065,7 +10065,7 @@ if (src.flag_dead)
       src.resurrect_player(<uid>)
 	endif
 else
-  src.sysmessage("Artefakt, jenz mrtve k zivotu dokaze privezt.")
+  src.sysmessage("Artefakt, jenz mrtve k zivotu dokaze privest.")
 endif
 return 1
 
