@@ -255,8 +255,8 @@ argo.dialog_page("Mohu pomoci?")
     argo.setText(argo.newTextLine,"Ano! Argola jsem potkal, vim kdo jsi a rad ti pomohu!")
     argo.questDialog_addResponse(0,1,0,"mq043_assignQuest") // short text & exit button & eixsting button
     argo.setText(argo.newTextLine,"Nekromantske texty?! Jsi blazen, od toho ruce pryc!")
-    argo.questDialog_addResponse(0,0,1,"q043_assignQuestReject") // short text & exit button & new button    
-  elseif (<arg(tagValue)> > 2)&&(<arg(tagValue)> < 50)
+    argo.questDialog_addResponse(0,0,1,"mq043_assignQuestReject") // short text & exit button & new button    
+  elseif (<arg(tagValue)> > 1)&&(<arg(tagValue)> < 50)
     argo.setText(argo.newTextLine,"Musis se nejprve osvedcit, nez ti dam dalsi ukoly!")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
@@ -1373,8 +1373,8 @@ argo.dialog_page("Mohu pomoci?")
     argo.setText(argo.newTextLine,"Ano! Argola jsem potkal, vim kdo jsi a rad ti pomohu!")
     argo.questDialog_addResponse(0,1,0,"gq043_assignQuest") // short text & exit button & existing button
     argo.setText(argo.newTextLine,"Nekromantske texty?! Jsi blazen, od toho ruce pryc!")
-    argo.questDialog_addResponse(0,0,1,"q043_assignQuestReject") // short text & exit button & new button    
-  elseif (<arg(tagValue)> > 2)&&(<arg(tagValue)> < 50)
+    argo.questDialog_addResponse(0,0,1,"gq043_assignQuestReject") // short text & exit button & new button    
+  elseif (<arg(tagValue)> > 1)&&(<arg(tagValue)> < 50)
     argo.setText(argo.newTextLine,"Musis se nejprve osvedcit, nez ti dam dalsi ukol!")
     argo.questDialog_HTMLGUMP
     argo.setText(argo.newTextLine,"Jen jsem se <src.sex(chtel,chtela)> na neco zeptat!")
@@ -1585,7 +1585,7 @@ elseif (<argn> == argo.dialog_linkButton("gq043_kronikar"))          //TORWIN BO
     endif
   else
     say("Torwinovi uz pomahas, najdes ho v pristavu Dol Amrod!")
-  endif  
+ÿ en㰐ݒ   
 
 elseif (<argn> == argo.dialog_linkButton("gq043_ember"))          //EMBER DUNG QUEST
   if (<arg(tagValue)> >= 223)
@@ -2423,7 +2423,7 @@ endif
 [dialog d_q043_hospodsky] 
 argo.questDialog_create(003150,"<name>")
 
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 argo.dialog_newPage("Pozdrav")    
   
@@ -2446,10 +2446,13 @@ if  (<arg(tagValue)> == 51) // prichazi k hospodskemu
     argo.setText(argo.newTextLine,"Uz vypadl ten ozrala?! Jestli ho nepresvedcis, nedam ti pergamen!")
     argo.questDialog_HTMLGUMP 
   elseif (<arg(tagValue)> == 53) // jde si pro odmenu k hospodskemu
-    argo.setText(argo.newTextLine,"Slava, alespon jsi ho uklidnil, dobra prace!")
+    argo.setText(argo.newTextLine,"Slava, alespon jsi ho <src.sex(uklidnil,uklidnila)>, dobra prace!")
     argo.questDialog_HTMLGUMP 
     argo.setText(argo.newTextLine,"Tak uz je pryc, hotovo! Dej mi ten pergamen, taky specham!")
     argo.questDialog_addResponse(0,1,1,"q043_hospsuccess") // short text & exit button & new button
+  elseif (<arg(tagValue)> == 54) // zrovna ziskal odmenu a muze se jednorazove hezky sundat
+    argo.setText(argo.newTextLine,"Ten svuj pergamen uz mas, tak co tu jeste okounis?")
+    argo.questDialog_HTMLGUMP 
     argo.setText(argo.newTextLine,"Dej mi jedno pivo!")
     argo.questDialog_addResponse(0,0,1,"qmur_murdocchlast") // short text & page button & new button    
   else                           // plni jinou cast questu/nedostal
@@ -2466,10 +2469,15 @@ argo.dialog_page("Mohu pomoci?")
   argo.questDialog_HTMLGUMP
 
 argo.dialog_page("Obchodovat")
-  argo.setText(argo.newTextLine,"Jestli nechces dopadnout, jako tamhleten ozrala, nechlastej!")
+  argo.setText(argo.newTextLine,"Jestli nechces dopadnout jako tamhleten ozrala, nechlastej!")
   argo.questDialog_HTMLGUMP
-  argo.setText(argo.newTextLine,"Dej mi jedno pivo!")
-  argo.questDialog_addResponse(0,0,0,"qmur_murdocchlast") // short text & page button & existing button
+  if  (<arg(tagValue)> == 51) || (<arg(tagValue)> == 54)
+    argo.setText(argo.newTextLine,"Dej mi jedno pivo!")
+    argo.questDialog_addResponse(0,0,0,"qmur_murdocchlast") // short text & page button & existing button
+  else
+    argo.setText(argo.newTextLine,"Dej mi jedno pivo!")
+    argo.questDialog_addResponse(0,0,1,"qmur_murdocchlast") // short text & page button & new button
+  endif
   
 argo.dialog_page("Hledam praci")
   argo.setText(argo.newTextLine,"Pffff, tak ji hledej jinde!")
@@ -2480,11 +2488,11 @@ argo.dialog_page("Nesu ti")
   argo.questDialog_HTMLGUMP
 
 argo.dialog_page("Prohlednout")
-  argo.setText(argo.newTextLine,"Hospodky neni vysoky, ale vcelku siroky. Beha po hospode s ladnosti slona, ale prekvapive nikdy nic nevyleje. Jeho oblicej je je upoceny a vyraz v jeho ocich napovida, ze kazdou chvili vyleti z kuze.")
+  argo.setText(argo.newTextLine,"Hospodsky neni vysoky, ale vcelku siroky. Beha po hospode s ladnosti slona, ale prekvapive nikdy nic nevyleje. Jeho oblicej je je upoceny a vyraz v jeho ocich napovida, ze kazdou chvili vyleti z kuze.")
   argo.questDialog_HTMLGUMP
   
 argo.dialog_page("qmur_murdocchlast")
-  if  (<arg(tagValue)> >= 53) // pomohl hospodskemu
+  if  (<arg(tagValue)> > 53) // pomohl hospodskemu
     argo.setText(argo.newTextLine,"Tak dobra, ted si na tebe udelam cas!")
     argo.questDialog_HTMLGUMP 
     argo.setText(argo.newTextLine,"Tak mi dej jedno pivo!")
@@ -2527,7 +2535,7 @@ elseif (<argn> == argo.dialog_linkButton("q043_hospnakup"))
   if (<arg(tagValue)> > 53)
     say("Tady mas! To je na hospodu!") 
     emote("ti nalil pivo do dzberu a podal ti ho!")   
-    src.emote("<src.sex(Vyklopil,Vyklopila)> si do sebe pivo a <src.sex(usmal,usmala)> ses na hospodskeho!")            
+    src.emote("<src.sex(Vyklopil,Vyklopila)> jsi do sebe pivo a <src.sex(usmal,usmala)> ses na hospodskeho!")            
   else
     say("Zkousis me osalit?!")
   endif
@@ -2538,7 +2546,7 @@ endif
 [dialog d_q043_ozrala]
 argo.questDialog_create(003102,"<name>")
 
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 argo.dialog_newPage("Pozdrav")    
   
@@ -2551,7 +2559,7 @@ argo.dialog_page("Pozdrav")
   elseif (<arg(tagValue)> == 52)               // chce presvedcit ozralu, aby vypadl
     argo.setText(argo.newTextLine,"*Ozrala vyrvava na celou hospodu a rozmachuje rukama, cinda pivo vsude kolem* Co ty hlupaku? Chces mi koupit zejdlik piva?")
     argo.questDialog_HTMLGUMP 
-    argo.setText(argo.newTextLine,"Mel si dost! ")
+    argo.setText(argo.newTextLine,"Mel jsi dost!")
     argo.questDialog_addResponse(0,0,1,"q043_ozrala_A1") // short text & page button & new button
     argo.setText(argo.newTextLine,"Kdyz ti ho koupim, vypijes ho na ceste domu?")
     argo.questDialog_addResponse(0,0,1,"q043_ozrala_B1") // short text & page button & new button      
@@ -2564,77 +2572,79 @@ argo.dialog_page("Prohlednout")
   argo.setText(argo.newTextLine,"Lev salonu, akorat ma vymlaceny vsechny zuby a pachne jak zumpa!")
   argo.questDialog_HTMLGUMP
 
-argo.dialog_page("q043_ozrala_A1")
-  if (<arg(tagValue)> == 52)               // check na plneni questu
-    argo.setText(argo.newTextLine,"Mel jsem malo! Ha! Co po me vlastne chces?! Ty-ty-ty *skyt* vypadas!")
-    argo.questDialog_HTMLGUMP 
-    argo.setText(argo.newTextLine,"Ne vazne, nemyslis, ze by bylo lepsi jit domu k zene a detem??")
-    argo.questDialog_addResponse(0,0,1,"q043_ozrala_A2") // short text & page button & new button
-    argo.setText(argo.newTextLine,"Ja?! Ty vypadas!")
-    argo.questDialog_addResponse(0,0,1,"q043_ozrala_blank") // short text & page button & new button      
-  else                                  
-    argo.setText(argo.newTextLine,"*Na stole lezi ozrala a nereaguje*")
-    argo.questDialog_HTMLGUMP  
-  endif  
-    
-argo.dialog_page("q043_ozrala_A2")
-  if (<arg(tagValue)> == 52)               // check na plneni questu
-    argo.setText(argo.newTextLine,"Argh! Kvuli ni piju ty hlupaku!")
-    argo.questDialog_HTMLGUMP 
-    argo.setText(argo.newTextLine,"Bez se vyspat a rano si s ni promluv, takhle svuj problem nevyresis!")
-    argo.questDialog_addResponse(0,0,1,"q043_ozrala_A3") // short text & page button & new button
-    argo.setText(argo.newTextLine,"Vypadni! Delej!")
-    argo.questDialog_addResponse(0,0,0,"q043_ozrala_blank") // short text & page button & existing button      
-  endif    
+if (<arg(tagValue)> == 52)
+  argo.dialog_page("q043_ozrala_A1")
+    if (<arg(tagValue)> == 52)               // check na plneni questu
+      argo.setText(argo.newTextLine,"Mel jsem malo! Ha! Co po me vlastne chces?! Ty-ty-ty *skyt* vypadas!")
+      argo.questDialog_HTMLGUMP 
+      argo.setText(argo.newTextLine,"Ne vazne, nemyslis, ze by bylo lepsi jit domu k zene a detem??")
+      argo.questDialog_addResponse(0,0,1,"q043_ozrala_A2") // short text & page button & new button
+      argo.setText(argo.newTextLine,"Ja?! Ty vypadas!")
+      argo.questDialog_addResponse(0,0,1,"q043_ozrala_blank") // short text & page button & new button      
+    else                                  
+      argo.setText(argo.newTextLine,"*Na stole lezi ozrala a nereaguje*")
+      argo.questDialog_HTMLGUMP  
+    endif 
+         
+  argo.dialog_page("q043_ozrala_A2")
+    if (<arg(tagValue)> == 52)               // check na plneni questu
+      argo.setText(argo.newTextLine,"Argh! Kvuli ni piju ty hlupaku!")
+      argo.questDialog_HTMLGUMP 
+      argo.setText(argo.newTextLine,"Bez se vyspat a rano si s ni promluv, takhle svuj problem nevyresis!")
+      argo.questDialog_addResponse(0,0,1,"q043_ozrala_A3") // short text & page button & new button
+      argo.setText(argo.newTextLine,"Vypadni! Delej!")
+      argo.questDialog_addResponse(0,0,0,"q043_ozrala_blank") // short text & page button & existing button      
+    endif    
   
-argo.dialog_page("q043_ozrala_A3")
-  if (<arg(tagValue)> == 52)  // check na plneni questu
-    argo.setText(argo.newTextLine,"Mas pravdu! Asi to tak bude lepsi. *usnul*")
-    argo.questDialog_HTMLGUMP 
-    argo.setText(argo.newTextLine,"Uklidnil si ho, snad to bude stacit.")
-    argo.questDialog_addResponse(0,1,1,"q043_ozrala_successA") // short text & exit button & new button 
-  endif    
+  argo.dialog_page("q043_ozrala_A3")
+    if (<arg(tagValue)> == 52)  // check na plneni questu
+      argo.setText(argo.newTextLine,"Mas pravdu! Asi to tak bude lepsi. *usnul*")
+      argo.questDialog_HTMLGUMP 
+      argo.setText(argo.newTextLine,"*<src.sex(Uklidnil,Uklidnila)> jsi ho, snad to bude stacit.*")
+      argo.questDialog_addResponse(0,1,1,"q043_ozrala_successA") // short text & exit button & new button 
+    endif    
     
-argo.dialog_page("q043_ozrala_B1")
-  if (<arg(tagValue)> == 52)  // check na plneni questu
-    argo.setText(argo.newTextLine,"Ha! To bys mi musel nalejt mnohem vic!")
-    argo.questDialog_HTMLGUMP 
-    argo.setText(argo.newTextLine,"Panak koralky a pivo! Co ty na to?!")
-    argo.questDialog_addResponse(0,0,1,"q043_ozrala_B2")    // short text & page button & new button
-    argo.setText(argo.newTextLine,"Ty se mnou chces smlouvat?")
-    argo.questDialog_addResponse(0,0,0,"q043_ozrala_blank") // short text & page button & existing button      
-  endif      
+  argo.dialog_page("q043_ozrala_B1")
+    if (<arg(tagValue)> == 52)  // check na plneni questu
+      argo.setText(argo.newTextLine,"Ha! To bys mi musel nalejt mnohem vic!")
+      argo.questDialog_HTMLGUMP 
+      argo.setText(argo.newTextLine,"Panak koralky a pivo! Co ty na to?!")
+      argo.questDialog_addResponse(0,0,1,"q043_ozrala_B2")    // short text & page button & new button
+      argo.setText(argo.newTextLine,"Ty se mnou chces smlouvat?")
+      argo.questDialog_addResponse(0,0,0,"q043_ozrala_blank") // short text & page button & existing button      
+    endif      
     
-argo.dialog_page("q043_ozrala_B2")
-  if (<arg(tagValue)> == 52)               // check na plneni questu
-    argo.setText(argo.newTextLine,"No tak.... pritlac!")
-    argo.questDialog_HTMLGUMP 
-    argo.setText(argo.newTextLine,"Dva panaky a zejdlik piva na cestu!")
-    argo.questDialog_addResponse(0,0,1,"q043_ozrala_B3") // short text & page button & new button
-    argo.setText(argo.newTextLine,"To nemuzes myslet vazne....")
-    argo.questDialog_addResponse(0,0,0,"q043_ozrala_blank") // short text & page button & existing button      
-  endif      
+  argo.dialog_page("q043_ozrala_B2")
+    if (<arg(tagValue)> == 52)               // check na plneni questu
+      argo.setText(argo.newTextLine,"No tak.... pritlac!")
+      argo.questDialog_HTMLGUMP 
+      argo.setText(argo.newTextLine,"Dva panaky a zejdlik piva na cestu!")
+      argo.questDialog_addResponse(0,0,1,"q043_ozrala_B3") // short text & page button & new button
+      argo.setText(argo.newTextLine,"To nemuzes myslet vazne....")
+      argo.questDialog_addResponse(0,0,0,"q043_ozrala_blank") // short text & page button & existing button      
+    endif      
   
-argo.dialog_page("q043_ozrala_B3")
-  if (<arg(tagValue)> == 52)               // check na plneni questu
-    argo.setText(argo.newTextLine,"Tak dobre, je cas dotlacit koralku a jit domu! *hic*")
-    argo.questDialog_HTMLGUMP 
-    argo.setText(argo.newTextLine,"Pokynout na hospodskeho, aby donesl piti.")
-    argo.questDialog_addResponse(0,1,1,"q043_ozrala_successB") // short text & exit button & new button
-  endif          
+  argo.dialog_page("q043_ozrala_B3")
+    if (<arg(tagValue)> == 52)               // check na plneni questu
+      argo.setText(argo.newTextLine,"Tak dobre, je cas dotlacit koralku a jit domu! *hic*")
+      argo.questDialog_HTMLGUMP 
+      argo.setText(argo.newTextLine,"*Pokynout na hospodskeho, aby donesl piti.*")
+      argo.questDialog_addResponse(0,1,1,"q043_ozrala_successB") // short text & exit button & new button
+    endif          
 
-argo.dialog_page("q043_ozrala_blank")
-  if (<arg(tagValue)> == 52)               // check na plneni questu
-    argo.setText(argo.newTextLine,"*Ozrala se od tebe otocil a zacal zase porvavat na celou hospodu*")
-    argo.questDialog_HTMLGUMP 
-    argo.setText(argo.newTextLine,"*Zkusit to znovu*")
-    argo.questDialog_addResponse(0,0,0,"Pozdrav") // short text & page button & existing button
-  endif            
+  argo.dialog_page("q043_ozrala_blank")
+    if (<arg(tagValue)> == 52)               // check na plneni questu
+      argo.setText(argo.newTextLine,"*Ozrala se od tebe otocil a zacal zase porvavat na celou hospodu*")
+      argo.questDialog_HTMLGUMP 
+      argo.setText(argo.newTextLine,"*Zkusit to znovu*")
+      argo.questDialog_addResponse(0,0,0,"Pozdrav") // short text & page button & existing button
+    endif            
+endif
     
 ///// button    
 [dialog d_q043_ozrala button]
 on=@anyButton
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 if (<eval src.qtag(gq043)>)
  arg(tagValue,<src.qtag(gq043)>)
@@ -2668,7 +2678,7 @@ endif
 [dialog d_q043_hrobar]
 argo.questDialog_create(003144,"<name>")           ///OBRAZEK NPC !!!DOPLNIT!!!
 
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 argo.dialog_newPage("Pozdrav")    
 argo.questDialog_baseButt(6)     // Prohlednout
@@ -2707,7 +2717,7 @@ argo.dialog_page("Prohlednout")
 ///// button    
 [dialog d_q043_hrobar button]
 on=@anyButton
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 if (<eval src.qtag(gq043)>)
  arg(tagValue,<src.qtag(gq043)>)
@@ -2743,7 +2753,7 @@ endif
 [dialog d_q043_zlodejicek]
 argo.questDialog_create(003142,"<name>") 
 
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 argo.dialog_newPage("Pozdrav")    
   
@@ -2788,7 +2798,7 @@ argo.dialog_page("Prohlednout")
 ///// button    
 [dialog d_q043_zlodejicek button]
 on=@anyButton
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 
 if (<eval src.qtag(gq043)>)
@@ -2842,7 +2852,7 @@ endif
 [dialog d_q043_namornik]
 argo.questDialog_create(003146,"<name>")           ///OBRAZEK NPC !!!DOPLNIT!!!
 
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 argo.dialog_newPage("Pozdrav")    
   
@@ -2890,7 +2900,7 @@ argo.dialog_page("Prohlednout")
 ///// button    
 [dialog d_q043_namornik button]
 on=@anyButton
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 if (<eval src.qtag(gq043)>)
  arg(tagValue,<src.qtag(gq043)>)
@@ -2944,13 +2954,13 @@ endif
 [dialog d_q043_kronikar]
 argo.questDialog_create(003141,"<name>") 
 
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 
 argo.dialog_newPage("Pozdrav")    
   
 if (<arg(tagValue)> < 250)                       
   argo.questDialog_baseButt(1)   // Kdo jsi?
-elseif (<arg(tagValue)> > 250)
+elseif (<arg(tagValue)> >= 250)
   argo.questDialog_basebutt(1,19,"Potrebuji pomoc") 
 endif
 
@@ -3560,7 +3570,7 @@ ON=@userCLICK
 src.sysmessage("Asi kniha nekromanta.")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (<f_q043_checkRealm(<tag.q043_realm>)> == 0) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3600,7 +3610,7 @@ ON=@userCLICK
 src.sysmessage("Asi brk nekromanta.")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3640,7 +3650,7 @@ ON=@userCLICK
 src.sysmessage("To je runa, kterou pouzivaji nekromanti!")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3680,7 +3690,7 @@ ON=@userCLICK
 src.sysmessage("To je runa, kterou pouzivaji nekromanti!")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3720,7 +3730,7 @@ ON=@userCLICK
 src.sysmessage("To je runa, kterou pouzivaji nekromanti!")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3760,7 +3770,7 @@ ON=@userCLICK
 src.sysmessage("Svitek plny run.")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3801,7 +3811,7 @@ ON=@userCLICK
 src.sysmessage("Na prvni pohled tezky sud.")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3842,7 +3852,7 @@ ON=@userCLICK
 src.sysmessage("Asi hul nekromanta.")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3882,7 +3892,7 @@ ON=@userCLICK
 src.sysmessage("Obycejne sperhaky. Je na nich vyryto pismeno B")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3922,7 +3932,7 @@ ON=@userCLICK
 src.sysmessage("Obycejne boty. Je na nich vyryto pismeno B")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -3962,7 +3972,7 @@ ON=@userCLICK
 src.sysmessage("Kus papiru jakoby tam nepatril.")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -4002,7 +4012,7 @@ ON=@userCLICK
 src.sysmessage("Kousek od mrtvoly se vali dalekohled.")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -4042,7 +4052,7 @@ ON=@userCLICK
 src.sysmessage("Kousek od mrtvoly se vali kniha.")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)                        // distance check
@@ -4082,7 +4092,7 @@ ON=@userCLICK
 src.sysmessage("To je runa, kterou pouzivaji nekromanti!")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)// distance check
@@ -4122,7 +4132,7 @@ ON=@userCLICK
 src.sysmessage("To je runa, kterou pouzivaji nekromanti!")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)// distance check
@@ -4162,7 +4172,7 @@ ON=@userCLICK
 src.sysmessage("To je runa, kterou pouzivaji nekromanti!")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)// distance check
@@ -4202,7 +4212,7 @@ ON=@userCLICK
 src.sysmessage("To je runa, kterou pouzivaji nekromanti!")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)// distance check
@@ -4242,7 +4252,7 @@ ON=@userCLICK
 src.sysmessage("To je runa, kterou pouzivaji nekromanti!")
 
 on=@userdclick
-arg(tagValue,<eval (<src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
+arg(tagValue,<eval (<eval src.qtag(gq043)>+<eval src.qtag(mq043)>)>)
 if (!<f_q043_checkRealm(<tag.q043_realm>)>) || (src.isDead)  // dead & realm check
   return 0
 elseif (<src.targ.distance> > 1)// distance check
