@@ -1810,10 +1810,14 @@ ON=*zdravim*
 ON=*hi*
 ON=*ahoj*
 ON=*buy*
-Say "Za maly poplatek te muzu PREVIZT do lorienu nebo z lorienu"
+Say "Za maly poplatek te muzu prevezt na druhou stranu teto reky"
 
-ON=*previzt*
+ON=*prevezt*
 ON=*prevoz*
+ON=*prevez*
+ON=*ano*
+ON=*prosim*
+ON=*dobre*
 
 if (src.findid(i_delay_lorien))
   return
