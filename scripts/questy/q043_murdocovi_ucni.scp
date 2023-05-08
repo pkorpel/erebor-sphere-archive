@@ -1585,7 +1585,7 @@ elseif (<argn> == argo.dialog_linkButton("gq043_kronikar"))          //TORWIN BO
     endif
   else
     say("Torwinovi uz pomahas, najdes ho v pristavu Dol Amrod!")
-ÿ en㰐ݒ   
+  endif
 
 elseif (<argn> == argo.dialog_linkButton("gq043_ember"))          //EMBER DUNG QUEST
   if (<arg(tagValue)> >= 223)
