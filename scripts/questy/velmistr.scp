@@ -466,7 +466,7 @@ if (<arg(q000_velmistr)> == 2) || (<arg(q000_velmistr)> == 4) // has seen Elvira
       argo.setText(argo.newTextLine,"<def_questDialog_colorTextEmote>*Elmiru tva vyzva zcela sokovala. Nejprve se jeji doprazdna uprene oci pocaly zastavovat na prekazkach, ktere ji ocelova komora kladla do cesty, pote je zdvihla k tobe. Zatla ruce v pest, dlouze se zahledela a nasledne odpoutala od zeme i cele sve podvyzivene telo.*<def_questDialog_colorTextNormal> Vim, jak sve sestre muzu pomoct...")
       argo.questDialog_HTMLGUMP
   endif
-        argo.setText(argo.newTextLine,"*Pokynout elmire, at pokracuje.*")
+        argo.setText(argo.newTextLine,"*Pokynout Elmire, at pokracuje.*")
         argo.questDialog_addResponse(0,0,1,"q000_receiveInstructions",1)
 
   argo.dialog_page("q000_receiveInstructions")
@@ -578,7 +578,7 @@ if (<arg(q000_velmistr)> == 2) || (<arg(q000_velmistr)> == 4)
     f_npcUpset(60) // 60s of crying npc - small RP mistake
     return
   elseif (<argn> == argo.dialog_linkButton("q000_wrongChoice"))
-    say("Ty me vubec neposlouchas!)
+    say("Ty me vubec neposlouchas!")
     f_npcUpset(120) // 120s of crying npc - epic player failure while reading instructions
     return
   endif
