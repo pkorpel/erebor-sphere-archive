@@ -1842,7 +1842,7 @@ TACTICS={85.0 100.0}
 WRESTLING={90.0 95.0}
 Macefighting=80.0
 MAGERY=95.0
-EI=70.0
+EI=40.0
 
 ITEMNEWBIE=i_spellbook
 addspell=s_harm
