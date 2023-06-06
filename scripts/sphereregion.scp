@@ -439,7 +439,6 @@ resources=1 w_jf10
 //resources=7 r_POKLAD5
 
 [RegionType r_tutorial_water t_water]
-RESOURCES=10 r_nothing
 resources=15 w_fish1
 resources=15 w_fish2
 resources=15 w_fish3
@@ -457,7 +456,6 @@ resources=27 l_obsidian
 //resources=0 l_mithril
 
 [RegionType r_tutorial_tree t_tree]
-RESOURCES=1000 r_nothing
 resources=3500 l_copper
 resources=2500 l_iron
 resources=250 l_verite
