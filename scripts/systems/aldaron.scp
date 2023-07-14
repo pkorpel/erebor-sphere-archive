@@ -2023,6 +2023,7 @@ on=@afterswing
 if ((src.profession==class_war) || (src.profession==class_craft) || (src.profession==class_thief) || (src.profession==class_ranger) || (src.profession==class_priest))
   if (act.npc) && (<eval act.tag(resist_magic)> < 999)
     act.damage_noResponse(<eval  (var(ubrano)*{<nastaveni_efekt_shadow>}/1000)>,dam_magic)
+    var(wasFrozen,1)
     act.effect(3,i_FX_glow_spike,6,15,1)
     //src.sysMessage("shadow : <eval  (var(ubrano)*{<nastaveni_efekt_shadow>}/1000)>")
     //act.say("shadow : <eval  (var(ubrano)*{<nastaveni_efekt_shadow>}/1000)>")

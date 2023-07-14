@@ -766,35 +766,21 @@ endif
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if (<tag(ra_stuntattack)>)
-  if (<wasHarmed> && <act.npc>)
-  	if (tag(zmrazeni))
-      if (<tag(zmrazeni)> == 1)
-      	if (tag(weaponuid).type==T_WEAPON_MACE_SMITH)
-      	  if (f_stun_getfreezebyweapon(<eval <act.tag(experience)>/10>))
-        	  if (<tag(omraceni_next)> > <serv.time>)
-    				  act.paralyze(20)
-    				  classmessage("<?sex("Omracil","Omracila")?> jsi cil!")
-    			  else
-    				  sysmessage("Prilis dlouho si cekal a rana ti nevysla")
-    			  endif
-//    if ({0 10000}<eval(tag(ra_stuntattack)*nastaveni_stuntattack_chance)) && (action==skill_macefighting)
-//      if (tag(weaponuid).type==T_WEAPON_MACE_SMITH)
-//        classmessage("<?sex("Omracil","Omracila")?> jsi cil!")
-//        act.paralyze(<eval <nastaveni_stuntattack>*10>)
-//      endif
-//    endif
-	        endif
-	      endif
-	    endif
+if (<eval tag(zmrazeni)>)
+  if (<wasHarmed> && <act.npc>)    
+    if (tag(weaponuid).type==T_WEAPON_MACE_SMITH)
+      if (f_stun_getfreezebyweapon(<eval <act.tag(experience)>/10>))
+        if (<tag(omraceni_next)> > <serv.time>)
+    	  act.paralyze(20)
+    	  classmessage("<?sex("Omracil","Omracila")?> jsi cil!")
+    	else
+    	  sysmessage("Prilis dlouho jsi <?sex("cekal","cekala")?> a rana ti nevysla.")
+    	endif
 	  endif
+	endif
+  tag(zmrazeni,0)
   endif
 endif
-  if (tag(zmrazeni))
-    if (<tag(zmrazeni)> == 1)
-    	tag(zmrazeni,0)
-    endif
-  endif
 return 0
 
 on=@finalBlow
@@ -809,48 +795,55 @@ on=@npckill
 [function f_stun_getfreezebyweapon]
 arg(exp,<argv(0)>)
 arg(koeficient,0)
-if (tag(weaponuid).type==T_WEAPON_MACE_SMITH)
-	if (profession==class_war)
-	if (tag(ra_stuntattack_ucinnost))
-		if (<tag(ra_stuntattack_ucinnost)> > 0)
-			if (<tag(ra_stuntattack_ucinnost)> < 11)
-				arg(koeficient,<tag(ra_stuntattack_ucinnost)>)
-			else
-				arg(koeficient,<eval 10+<eval <eval <tag(ra_stuntattack_ucinnost)>-10>/2>>)
-			endif 
-		endif
-	endif
-	endif
-    if ((tag(weaponuid).color)==099a)
-      if (<arg(exp)> < <eval 51+<eval <eval 51*<arg(koeficient)>/100>>>)
-      	return 1
-      endif
-    elseif ((tag(weaponuid).color)==0763)
-      if (<arg(exp)> < <eval 101+<eval <eval 101*<arg(koeficient)>/100>>>)
-      	return 1
-      endif    
-    elseif ((tag(weaponuid).color)==097f)
-      if (<arg(exp)> < <eval 151+<eval <eval 151*<arg(koeficient)>/100>>>)
-      	return 1
-      endif    
-    elseif ((tag(weaponuid).color)==0985)
-      if (<arg(exp)> < <eval 251+<eval <eval 251*<arg(koeficient)>/100>>>)
-      	return 1
-      endif   
-    elseif ((tag(weaponuid).color)==0989)
-      if (<arg(exp)> < <eval 401+<eval <eval 401*<arg(koeficient)>/100>>>)
-      	return 1
-      endif    
-    elseif ((tag(weaponuid).color)==0999)
-      if (<arg(exp)> < <eval 601+<eval <eval 601*<arg(koeficient)>/100>>>)
-      	return 1
-      endif    
-    elseif ((tag(weaponuid).color)==098b)
-      if (<arg(exp)> < <eval 901+<eval <eval 901*<arg(koeficient)>/100>>>)
-      	return 1
-      endif    
+  if (<eval tag(ra_stuntattack_ucinnost)>)
+    arg(koeficient,<tag(ra_stuntattack_ucinnost)>)
+	if (<tag(ra_stuntattack_ucinnost)> > 10)
+	  arg(koeficient,<eval 10+<eval <eval <tag(ra_stuntattack_ucinnost)>-10>/2>>)
+	endif 
+  endif
+  if ((<eval tag(weaponuid).typedef.tdata1>)==1) // copper
+    if (<arg(exp)> < <eval 51+<eval <eval 51*<arg(koeficient)>/100>>>) 
+      return 1
+    else
+      return 0
     endif
-endif
+  elseif ((<eval tag(weaponuid).typedef.tdata1>)==2) // iron
+    if (<arg(exp)> < <eval 101+<eval <eval 101*<arg(koeficient)>/100>>>) 
+      return 1
+    else
+      return 0
+    endif    
+  elseif ((<eval tag(weaponuid).typedef.tdata1>)==5) // verite
+    if (<arg(exp)> < <eval 151+<eval <eval 151*<arg(koeficient)>/100>>>) 
+      return 1
+    else
+      return 0
+    endif    
+  elseif ((<eval tag(weaponuid).typedef.tdata1>)==6) // valorite
+    if (<arg(exp)> < <eval 251+<eval <eval 251*<arg(koeficient)>/100>>>) 
+      return 1
+    else
+      return 0
+    endif   
+  elseif ((<eval tag(weaponuid).typedef.tdata1>)==7) // obsidian
+    if (<arg(exp)> < <eval 401+<eval <eval 401*<arg(koeficient)>/100>>>) 
+      return 1
+    else
+      return 0
+    endif    
+  elseif ((<eval tag(weaponuid).typedef.tdata1>)==8) // adamantinum
+    if (<arg(exp)> < <eval 601+<eval <eval 601*<arg(koeficient)>/100>>>) 
+      return 1
+    else
+      return 0
+    endif    
+  elseif ((<eval tag(weaponuid).typedef.tdata1>)==9) // mithril
+    if (<arg(exp)> < <eval 901+<eval <eval 901*<arg(koeficient)>/100>>>) 
+      return 1
+    else
+      return 0
+    endif   
+  endif
 return 0
 
 [EVENTS e_bleed_bolt]
