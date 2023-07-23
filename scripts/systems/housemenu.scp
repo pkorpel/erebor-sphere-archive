@@ -66,11 +66,13 @@ return 1
 //trigger(userdclick)
 
 [function findhouse]
-if (ishouse)
- if (issameregion(<args>))
-  var(housefound,<uid>)
- endif
+if !(ishouse)
+  return
 endif
+if !(issameregion(<args>))
+  return
+endif
+var(housefound,<uid>)
 
 [function find_crystal_topobj] //uid koho hledame
 //src.sysmessage(kr:<uid>,name:<name>,arg:<args>)
@@ -156,7 +158,7 @@ var(is_key_from,"")
 if !(safe link.ishouse)//neni linknut
  tag(hm_lockit,1)//nastaveni zakladni dostupnosti menu - od pritele domu vejs
  var(housefound,0)
- sector.allitems(findhouse(<uid>))
+ region.sectors.allitems(findhouse(<uid>))
  if (housefound)
   link=<housefound>
   src.classmessage(V tomto sektoru nalezen dum <?finduid(<housefound>).name?>. Menu prirazeno.)
