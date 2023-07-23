@@ -2021,12 +2021,10 @@ on=@Created
 on=@DrinkingPotion
 on=@afterswing
 if ((src.profession==class_war) || (src.profession==class_craft) || (src.profession==class_thief) || (src.profession==class_ranger) || (src.profession==class_priest))
-  if (act.npc) && (<eval act.tag(resist_magic)> < 999)
-    act.damage_noResponse(<eval  (var(ubrano)*{<nastaveni_efekt_shadow>}/1000)>,dam_magic)
-    var(wasFrozen,1)
+  if (act.npc) && (<eval act.tag(resist_magic)> < 1000)
+	arg(shadowBonus, <eval (var(ubrano)*({<nastaveni_efekt_shadow>}+(<src.tag(shadow_weapon_dmg)>*25)))/1000>)
+	var(ubrano,<eval (var(ubrano) + <shadowBonus>)>)
     act.effect(3,i_FX_glow_spike,6,15,1)
-    //src.sysMessage("shadow : <eval  (var(ubrano)*{<nastaveni_efekt_shadow>}/1000)>")
-    //act.say("shadow : <eval  (var(ubrano)*{<nastaveni_efekt_shadow>}/1000)>")
   endif
 endif
 on=@finalBlow
@@ -2065,12 +2063,12 @@ return 0
 
 ON=@equip
 cont.events=+e_shadow_weapon_dmg
-cont.tag(shadow_weapon_dmg,1)
+cont.tag(shadow_weapon_dmg,<eval <eval (tag(max_deaths) - tag(deaths))*10>/tag(max_deaths)>)
 //attr=014
 
 on=@unequip
 cont.events=-e_shadow_weapon_dmg
-cont.tag(shadow_weapon_dmg,0)
+cont.tag(shadow_weapon_dmg,)
 //cont = <tag(container)>
 //attr=04
 f_shadow_weapon_check_cont(<uid>)
