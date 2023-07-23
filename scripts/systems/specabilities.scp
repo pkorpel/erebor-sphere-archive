@@ -6056,19 +6056,26 @@ else
 endif
 
 [function f_thief_shieldStrike]
-if (flag_hasshield)
-  if (0<tag(zmrazeni)>)
-    if (f_thief_getfreezebyshield(<eval <act.tag(experience)>/10>))
-      arg(uderstitem_delay,<eval <tag(uderstitem_next)>-<eval 200-<eval <tag(ra_uderstitem)>*5>>>)
-      if (<arg(uderstitem_delay)> > <serv.time>)
-        act.paralyze(20)
-        classmessage("Uder stitem!")
-      else
-        sysmessage("Prilis dlouho si cekal a rana ti nevysla")
-      endif
-    endif
-  endif
+if !(0<tag(zmrazeni)>)
+  return 0
 endif
+if !(flag_hasshield)
+  return 0
+endif
+if !(f_thief_getfreezebyshield(<eval <act.tag(experience)>/10>))
+  return 0
+endif
+
+arg(uderstitem_delay,<eval <tag(uderstitem_next)>-<eval 200-<eval <tag(ra_uderstitem)>*5>>>)
+if (<arg(uderstitem_delay)> < <serv.time>)
+  sysmessage("Prilis dlouho si cekal a rana ti nevysla")
+  return 0
+endif
+
+act.paralyze(20)
+classmessage("Uder stitem!")
+return 1
+
 
 ///////////////////////////////////
 // necro - bonus zivotu na summony
