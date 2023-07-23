@@ -566,14 +566,14 @@ endif
 //
 on=9//banka
 if (tag(bankactivated))
-  if ((distancefrom(<src>) < 4) || (<region> == <src.region>))
+  if (<region> == <src.region>)
    if (<src.tag.realm>==<region.tag.houserealm>)
     src.bankself
    else
     src.sysmessage("K teto funkci nemas prava.")
    endif 
   else
-    src.sysMessage("Stojis daleko")
+    src.sysmessage("Musis byt uvnitr pole.")
   endif
 else
   potvrdit("field_aktivuj_banku", Skutecne chces aktivovat banku u tohoto pole a zaplatit za to 100 000 gp?)

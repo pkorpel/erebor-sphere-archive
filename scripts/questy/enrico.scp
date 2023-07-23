@@ -1287,7 +1287,7 @@ return 0
 if (<strlen(<argv(0)>)>)
   if (finduid(<argv(0)>))
     if (<finduid(<argv(0)>).isItem>)
-      if (finduid(<argv(0)>).type==t_housemenu) || (finduid(<argv(0)>).type==t_vendormenu)
+      if (finduid(<argv(0)>).type==t_housemenu) || (finduid(<argv(0)>).type==t_vendormenu) || (finduid(<argv(0)>).type==t_fieldmenu)
         finduid(<argv(0)>).trigger(userdclick)
         return
       endif

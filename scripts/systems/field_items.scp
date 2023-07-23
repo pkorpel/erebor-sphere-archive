@@ -159,15 +159,10 @@ return 1
 
 [typedef t_fieldmenu]
 on=@userdclick
-if((distancefrom(<src>) > 3) && !(<region> == <src.region>) && !(<src.isgm>))
- src.sysMessage("Jsi prilis daleko.")
- return 1
-endif
 if(<src.tag(hypno_mystik)>) 
  return 1
 endif
 f_fieldmenu
 return 1
-
 
 [eof]
