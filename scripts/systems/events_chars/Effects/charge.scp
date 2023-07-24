@@ -17,11 +17,15 @@ def_charge_energy         3
 // strike charges < 20
 def_charge_roundAttack    10
 
+// killingSpree charges < 30
+def_charge_killingSpree   20
+
 // additional defs
 def_charge_icon[1]    08d1
 def_charge_icon[2]    08de
 def_charge_icon[3]    08e9
 def_charge_icon[10]   0520c
+def_charge_icon[20]   05008
 
 def_charge_size_icon[1]  0186E      // fire - red
 def_charge_size_icon[2]  0186D      // mind - purple
@@ -29,16 +33,21 @@ def_charge_size_icon[3]  01870      // energy - yellow
 
 def_charge_size_icon[10] 01870      // roundAttack - yellow
 
+def_charge_size_icon[20] 01AE4      // killingSpree
+
 // executed upon player that's being charged
 // argv(0) - charge type
 // argv(1) - charge target - used to verify, whether the charge can be incremented
 [function charge_add] 
+if !(isPlayer)  // do not add charge item on something else except player
+  return 0
+endif
 if (argv(1).isPlayer)
   if (<eval argv(1).tag(realm)> == <eval tag(realm)>) && !(0<region.tag(arena)>)
     return 0 // do not increment charge if the target is player from the same realm except for the arena
   endif
-elseif (argv(1).isPet)
-  return 0 // do not increment charge if the target is a pet (mount, summon, or other)
+elseif (argv(1).isPetFriend)
+  return 0 // do not increment charge if the target is a friendly pet (mount, summon, or other)
 endif
 arg(chargeItem,<findid(i_charge)>)
 if (!strlen(<arg(chargeItem)>))
@@ -75,23 +84,27 @@ if (strlen(<arg(chargeItem)>))
 endif
 
 [dialog d_Charge]
-10,24
+10, 24
+src.tagInc("d_count")
+arg(offset_x, (<eval src.tag(d_count)> - 1) * 50)
+
 noclose=1
 nomove=1
-argo.gumppic(14,0,<hval def_charge_icon[<eval more1>]>)
+argo.gumppic(14+<offset_x>,0,<hval def_charge_icon[<eval more1>]>)
 arg(i,0)
 while (i<more2)
-  argo.tilepichue(<eval(arg(i)*14)>,45,<def_charge_size_icon[<eval more1>]>)
+  argo.tilepichue(<eval(arg(i)*14)>+<offset_x>,45,<def_charge_size_icon[<eval more1>]>)
   arg(i,#+1)
 endwhile
 
 [dialog d_charge button]
 on=0
+src.tagDec("d_count")
 return
 
 on=1 // reopen dialog -> used for reinitializing the charge number
+src.tagDec("d_count")
 dialog(d_charge)
-
 
 [itemdef i_charge]
 id=i_memory
@@ -104,11 +117,18 @@ name=Charge
 on=@unequip // more1 at this point is set to 0! It's necessary for the last "blank" timer, so that the dialog close doesn't trigger an error 
 cont.events -e_magicCharge
 cont.events -e_strikeCharge
+cont.events -e_killingSpreeCharge
+cont.f_setmainability
 
 on=@timer
-if (<more1> == 0) //marked for removal
+if (<more2> == 0)
   remove
-  return
+endif
+if (<more1> == 0) //marked for removal
+  cont.dialogclose(d_charge,0)
+  more2=0
+  timerd=1
+  return 1
 endif
 f_charge_decrease(1)
 return 1
@@ -137,16 +157,21 @@ if (more1 < 10)
 elseif (more1 == def_charge_roundAttack)
   timerd=<nastaveni_strikeCharge_roundDuration>
   arg(chargeLimit,<nastaveni_strikeCharge_roundLimit>)
+elseif (more1 == def_charge_killingSpree)
+  timerd=<def_killingSpree_chargeDuration>
+  arg(chargeLimit,<def_killingSpree_chargeLimit>)
 endif
 if (more1 != <argv(0)>)
   arg(origMore,<more1>)
   more1=<argv(0)>
   more2=1
-  if (arg(origMore) == 0) // first increase (the dialog was not shown yet)
+  if (<eval arg(origMore)> == 0) // first increase (the dialog was not shown yet)
     if (<more1> < 10)
       cont.events +e_magicCharge
     elseif (<more1> < 20)
       cont.events +e_strikeCharge
+    elseif (<more1> < 30)
+      cont.events +e_killingSpreeCharge
     endif
     dialog(d_charge)
   else
@@ -162,11 +187,9 @@ cont.dialogclose(d_charge,1)
 // executed upon charge item
 // argv(0) - number of charges to remove
 [function f_charge_decrease]
-if (more2 <= <argv(0)>)
+if (<more2> <= <argv(0)>)
   more1=0
-  more2=0 // decrease these two values manually back to initial state, which marks the charge for removal
-  timer=1
-  cont.dialogclose(d_charge,0)
+  timerd=1
   return
 endif
 more2=<eval <more2>-<argv(0)>>
@@ -174,6 +197,8 @@ if (more1 < 10)
   timer=<nastaveni_charge_dropDuration>
 elseif (more1 == def_charge_roundAttack)
   timerd=<nastaveni_strikeCharge_roundDropDuration>
+elseif (more1 == def_charge_killingSpree)
+  timerd=<def_killingSpree_chargeDropDuration>
 endif
 cont.dialogclose(d_charge,1)
 
@@ -293,5 +318,36 @@ if (<argv(0)> < 10) || (<argv(0)> > 20)
   return 0
 endif
 return 1
+
+///////////////////////////////////////////////
+//  K I L L I N G   S P R E E   C H A R G E  //
+///////////////////////////////////////////////
+
+[defnames def_killingSpree]
+def_killingSpree_chargeLimit              3 
+def_killingSpree_chargeDropDuration      50
+def_killingSpree_chargeDuration         100
+def_killingSpree_dmgBaseBonus             5
+
+[events e_killingSpreeCharge]
+on=@HitTry
+f_setmainability
+
+[function isKillingSpreeChargeType] // argv(0) - charge type
+if (<argv(0)> < 20) || (<argv(0)> > 30)
+  return 0
+endif
+return 1
+
+[function apply_killingSpree_dmg_bonus]
+if (act.isPlayer)
+  return
+endif
+
+arg(killingSpreeDmg, <eval 100+(<eval charge_get(<def_charge_killingSpree>)> * <eval (def_killingSpree_dmgBaseBonus + <eval tag(ra_killingSpree)>)>)>)
+var(ubrano,<eval (var(ubrano)*<arg(killingSpreeDmg)>)/100>)
+var(killingSpreeTarget,<act>)
+charge_decrease(1)
+
 
 [eof]
