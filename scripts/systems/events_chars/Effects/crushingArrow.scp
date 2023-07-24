@@ -95,9 +95,15 @@ events=-e_crushingArrow_noStep
 
 [dialog d_crushingArrow]
 10,24
+src.tagInc("d_count")
+arg(offset_x, (<eval src.tag(d_count)> - 1) * 50)
 noclose=1
 nomove=0
-argo.gumppic(14,0,05209)
+argo.gumppic(14+<offset_x>,0,05209)
+
+[dialog d_crushingArrow button]
+on=0
+src.tagDec("d_count")
 
 [function f_crushingArrow]
 src=<uid>

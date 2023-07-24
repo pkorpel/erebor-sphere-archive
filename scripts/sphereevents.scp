@@ -1055,7 +1055,7 @@ elseif (f_check_tag_realm) // tag realm is not damaged (some are)
     home=5247,2967,0,35 //tutorial
   endif
 endif
-if (eval(clientver)<308)||(strcmpi("<clientver>","3.0.8a")==0)
+if (eval(clientver)<308)||(strcmpi(<clientver>,"3.0.8a")==0)
   tag(clienttype,"old")
 else
   tag(clienttype,"new")
@@ -2867,6 +2867,10 @@ endif
 
 on=@DrinkingPotion
 on=@afterswing
+var(killingSpreeTarget,0)  // restart globalky
+if (isevent(e_killingSpreeCharge))
+  apply_killingSpree_dmg_bonus
+endif
 if (specability)
   if (tag(atskill)==31)
     classmessage("Skvely zasah!")
@@ -2911,6 +2915,17 @@ endif
 return 0
 
 on=@finalBlow
+if !(var(killedChar).isPlayer)
+  if (<eval tag(ra_killingSpree)>)
+    if (charge_add(<def_charge_killingSpree>,<var(killedChar)>))
+      classmessage("<sex(Dorazil,Dorazila)> jsi cil. Chut zabijet ti vzrostla!")
+    endif
+    if (<var(killingSpreeTarget)> == <var(killedChar)>)
+      charge_add(<def_charge_killingSpree>,<var(killedChar)>)
+    endif
+  endif
+endif
+
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing

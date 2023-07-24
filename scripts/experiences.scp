@@ -383,6 +383,9 @@ if (profession==class_craft)
 else
   tag(ability,<arg(ability)>)
 endif
+if (isEvent(e_killingSpreeCharge))
+  tag(ability, <eval tag(ability)> + (<eval charge_get(<def_charge_killingSpree>)> * 1654)) // with 3 points 100% main ability
+endif
 
 [function nalevel]
 tag.level=0
@@ -570,7 +573,7 @@ DIALOG d_levelbonus
 
 
 [defnames def_rearAbilities]
-def_rearAbilities_number     69
+def_rearAbilities_number     70
 def_rearAbilities_1          manareg
 def_rearAbilities_2          hitsreg
 def_rearAbilities_3          stamreg
@@ -640,6 +643,7 @@ def_rearAbilities_66         taunt
 def_rearAbilities_67         splitshot
 def_rearAbilities_68         crushingArrow
 def_rearAbilities_69         mountsKnowledge
+def_rearAbilities_70         killingSpree
 
 //   NAME                                          every PAIR consists of 'MIN-LEVEL,MAX-VALUE`
 def_rearAbilities_manareg_desc                       "Regenerace many"
@@ -857,7 +861,9 @@ def_rearAbilities_crushingArrow_class[0]             ranger
 def_rearAbilities_mountsKnowledge_desc               "Znalost jezditek"
 def_rearAbilities_mountsKnowledge[0]                 12,10,50,20
 def_rearAbilities_mountsKnowledge_class[0]           ranger
-
+def_rearAbilities_killingSpree_desc                  "Krvelacnost"
+def_rearAbilities_killingSpree[0]                    50,5,75,10,100,15,125,20
+def_rearAbilities_killingSpree_class[0]              ranger
 
 [function ratotal]
 arg(total,0)
@@ -888,7 +894,7 @@ elseif (profession==class_shaman)
 elseif (profession==class_war)
   arg(classOrigAbilCount,10)
 elseif (profession==class_ranger)
-  arg(classOrigAbilCount,6)
+  arg(classOrigAbilCount,7)
 elseif (profession==class_craft)
   arg(classOrigAbilCount,10)
 elseif (profession==class_mag)

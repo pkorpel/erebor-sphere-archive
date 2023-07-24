@@ -67,15 +67,17 @@ endif
 
 [dialog d_splitShot]
 10,24
+src.tagInc("d_count")
+arg(offset_x, (<eval src.tag(d_count)> - 1) * 50)
 noclose=1
 nomove=0
-argo.gumppic(14,0,05215)
+argo.gumppic(14+<offset_x>,0,05215)
 
 if (<nastaveni_splitShot_multihits>)    // jestli je aktivni vicenasobny vystrel
   arg(x,<eval (21-(<more2>*7))>)
   arg(i,0)
   while (i < <more2>)
-    argo.tilepichue(<eval((arg(i)*14)+arg(x))>,40,00F41)
+    argo.tilepichue(<eval((arg(i)*14)+arg(x)+<offset_x>)>,40,00F41)
     arg(i,#+1)
   endwhile
 endif
@@ -83,8 +85,10 @@ endif
 
 [dialog d_splitShot button]
 on=0
+src.tagDec("d_count")
 
 on=1 // reopen dialog -> used for reinitializing count of shots
+src.tagDec("d_count")
 dialog(d_splitShot)
 
 
