@@ -184,8 +184,9 @@ if (ischar)
           else
             var(spellpower,<eval (var(spellpower)*nastaveni_global_vMSM)/1000>)
           endif
-          if (src.tag(shadow_weapon_dmg))
-            var(spellpower,<eval (var(spellpower)*<eval nastaveni_efekt_shadow*2>)/1000>)
+          if (src.isevent(e_shadow_weapon_dmg))
+            arg(shadowBonus, <eval (var(spellpower)*({<nastaveni_efekt_shadow>}+(<src.tag(shadow_weapon_dmg)>*25)))/1000>)
+            var(spellpower,<eval (var(spellpower) + <shadowBonus>)>)
           endif
           if (0<src.tag(ra_woodoo_curse)> > 0)  // (chance(<eval <arg(chance)>*10>,2))
             if (chance(<eval 15+<src.tag(ra_woodoo_curse)>>,2))
@@ -208,7 +209,6 @@ if (ischar)
     if (ismpdepend(<var(spellnumber)>))   // utocne kouzlo (harm)
       var(spellpower,<eval (var(spellpower)-arg(spelldefense))>)
       if (var(spellpower)<1 && !<arg(hasSideEffect)>)
-
         f_spellResistedMsg
       endif
       if (var(spellnumber)==5)||(spellnumber==12)   // magic arrow || harm

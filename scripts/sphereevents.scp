@@ -3118,9 +3118,9 @@ if (action==Skill_fencing)||(tag(isstabbing))
   if (0<tag(podriznuti)>)
     tag(podriznuti,0)
   endif
-  if (0<tag(zmrazeni)>)
-    tag(zmrazeni,0)
-  endif
+//  if (0<tag(zmrazeni)>) -- Zbytecny?? :/ Pokud tag zmrazeni >0 tak se spusti v ramci e_stunattack kde se i smaze
+//    tag(zmrazeni,0)
+//  endif
 endif
 
 on=@itemequip
@@ -3159,38 +3159,40 @@ on=@npckill
 //deprecated on=@aftergetspelldamage
 
 [function f_thief_getfreezebyshield]
-arg(exp,<argv(0)>)
-if (findlayer(2))
-  if (findlayer(2).type==t_shield)
-    if ((<findlayer(2).typedef.tdata1>)==1)
-      if (<arg(exp)> < 51)
-        return 1
-      endif
-    elseif ((findlayer(2).typedef.tdata1)==2)
-      if (<arg(exp)> < 101)
-        return 1
-      endif
-    elseif ((findlayer(2).typedef.tdata1)==5)
-      if (<arg(exp)> < 151)
-        return 1
-      endif
-    elseif ((findlayer(2).typedef.tdata1)==6)
-      if (<arg(exp)> < 251)
-        return 1
-      endif
-    elseif ((findlayer(2).typedef.tdata1)==7)
-      if (<arg(exp)> < 401)
-        return 1
-      endif
-    elseif ((findlayer(2).typedef.tdata1)==8)
-      if (<arg(exp)> < 601)
-        return 1
-      endif
-    elseif ((findlayer(2).typedef.tdata1)==9)
-      if (<arg(exp)> < 901)
-        return 1
-      endif
-    endif
+if !(findlayer(2))
+  return 0
+endif
+if !(findlayer(2).type==t_shield)
+  return 0
+endif
+arg(ShieldMaterial,<findlayer(2).typedef.tdata1>)
+if (<ShieldMaterial> == 1)      // copper
+  if (<argv(0)> < 51)
+    return 1
+  endif
+elseif (<ShieldMaterial> == 2)  // iron
+  if (<argv(0)> < 101)
+    return 1
+  endif
+elseif (<ShieldMaterial> == 5)  // verite
+  if (<argv(0)> < 151)
+    return 1
+  endif
+elseif (<ShieldMaterial> == 6)  // valorite
+  if (<argv(0)> < 251)
+    return 1
+  endif
+elseif (<ShieldMaterial> == 7)  // obsidian
+  if (<argv(0)> < 401)
+    return 1
+  endif
+elseif (<ShieldMaterial> == 8)  // adamantinum
+  if (<argv(0)> < 601)
+    return 1
+  endif
+elseif (<ShieldMaterial> == 9)  // mithril
+  if (<argv(0)> < 901)
+    return 1
   endif
 endif
 return 0
