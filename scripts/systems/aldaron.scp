@@ -1890,110 +1890,48 @@ return 1
 [FUNCTION f_shadow_weapon_create] /// POTOM DOPLNIT CLASSY A ROZNE ITEMY
 if (src.profession==class_thief)
   src.newitemsafe(i_kryss_obsidian)
-  src.tag(shadow_weapon,<lastnew>)
-  lastnew.tag(imi_value[51], 10)
-  lastnew.tag(imi_value[101], 10)
-  lastnew.tag(imi_value[102], 10)
-  lastnew.tag(imi_value[103], 10)
-  lastnew.tag(imi_value[104], 10)
-  lastnew.tag(imi_value[105], 10)  
-  lastnew.mif_finishitem
-  lastnew.name=Stinova zbran
-  lastnew.color=07FFF
-  lastnew.attr=014
-  lastnew.events=+t_weapon_shadow
-  lastnew.bounce
-  lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,15)
-  lastnew.tag(equip,0)
-  lastnew.tag(container,<lastnew.cont.uid>)
-	lastnew.tag(craftedby,<src.uid>)
-  src.events +e_shadow_weapon
+  lastnew.tag(imi_value[42], 20)
+  lastnew.tag(imi_value[27], 10)
 elseif (src.profession==class_war)
   src.newitemsafe(i_sword_long_obsidian)
-  src.tag(shadow_weapon,<lastnew>)
-  lastnew.tag(imi_value[51], 10)
-  lastnew.tag(imi_value[101], 10)
-  lastnew.tag(imi_value[102], 10)
-  lastnew.tag(imi_value[103], 10)
-  lastnew.tag(imi_value[104], 10)
-  lastnew.tag(imi_value[105], 10)  
-  lastnew.mif_finishitem
-  lastnew.name=Stinova zbran
-  lastnew.color=07FFF
-  lastnew.attr=014
-  lastnew.events=+t_weapon_shadow
-  lastnew.bounce
-  lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,15)
-  lastnew.tag(equip,0)
-  lastnew.tag(container,<lastnew.cont.uid>)
-	lastnew.tag(craftedby,<src.uid>)
-  src.events +e_shadow_weapon
+  lastnew.tag(imi_value[42], 20)
+  lastnew.tag(imi_value[27], 10)
 elseif (src.profession==class_priest)
   src.newitemsafe(i_mace_obsidian)
-  src.tag(shadow_weapon,<lastnew>)
-  lastnew.tag(imi_value[51], 10)
-  lastnew.tag(imi_value[101], 10)
-  lastnew.tag(imi_value[102], 10)
-  lastnew.tag(imi_value[103], 10)
-  lastnew.tag(imi_value[104], 10)
-  lastnew.tag(imi_value[105], 10)  
-  lastnew.mif_finishitem
-  lastnew.name=Stinova zbran
-  lastnew.color=07FFF
-  lastnew.attr=014
-  lastnew.events=+t_weapon_shadow
-  lastnew.bounce
-  lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,15)
-  lastnew.tag(equip,0)
-  lastnew.tag(container,<lastnew.cont.uid>)
-	lastnew.tag(craftedby,<src.uid>)
-  src.events +e_shadow_weapon
+  lastnew.tag(imi_value[41], 20)
+  lastnew.tag(imi_value[27], 10)
 elseif ((src.profession==class_ranger) || (src.profession==class_craft))
   src.newitemsafe(i_crossbow_heavy_obsidian)
-  src.tag(shadow_weapon,<lastnew>)
-  lastnew.tag(imi_value[51], 10)
-  lastnew.tag(imi_value[101], 10)
-  lastnew.tag(imi_value[102], 10)
-  lastnew.tag(imi_value[103], 10)
-  lastnew.tag(imi_value[104], 10)
-  lastnew.tag(imi_value[105], 10)  
-  lastnew.mif_finishitem
-  lastnew.name=Stinova zbran
-  lastnew.color=07FFF
-  lastnew.attr=014
-  lastnew.events=+t_weapon_shadow
-  lastnew.bounce
-  lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,15)
-  lastnew.tag(equip,0)
-  lastnew.tag(container,<lastnew.cont.uid>)
-	lastnew.tag(craftedby,<src.uid>)
-  src.events +e_shadow_weapon
-elseif ((src.profession==class_mystik) || (src.profession==class_necro) || (src.profession==class_mag) || (src.profession==class_shaman))
+  lastnew.tag(imi_value[31], 20)
+  lastnew.tag(imi_value[27], 10)
+elseif ((src.profession==class_necro) || (src.profession==class_mag) || (src.profession==class_shaman))
   src.newitemsafe(i_staff_gnarled_obsidian)
-  src.tag(shadow_weapon,<lastnew>)
   lastnew.tag(imi_value[25], 10)
-  lastnew.tag(imi_value[101], 10)
-  lastnew.tag(imi_value[102], 10)
-  lastnew.tag(imi_value[103], 10)
-  lastnew.tag(imi_value[104], 10)
-  lastnew.tag(imi_value[105], 10)  
-  lastnew.mif_finishitem
-  lastnew.name=Stinova zbran
-  lastnew.color=07FFF
-  lastnew.attr=014
-  lastnew.events=+t_weapon_shadow
-  lastnew.bounce
-  lastnew.tag(deaths,0)
-  lastnew.tag(max_deaths,15)
-  lastnew.tag(equip,0)
-  lastnew.tag(container,<lastnew.cont.uid>)
-	lastnew.tag(craftedby,<src.uid>)
-  src.events +e_shadow_weapon
+  lastnew.tag(imi_value[16], 10)
+elseif (src.profession==class_mystik)
+  src.newitemsafe(i_staff_gnarled_obsidian)
+  lastnew.tag(imi_value[43], 20)
+  lastnew.tag(imi_value[16], 10)
 endif
+
+lastnew.tag(imi_value[101], 10)
+lastnew.tag(imi_value[102], 10)
+lastnew.tag(imi_value[103], 10)
+lastnew.tag(imi_value[104], 10)
+lastnew.tag(imi_value[105], 10)  
+lastnew.mif_finishitem
+lastnew.name=Stinova zbran
+lastnew.color=07FFF
+lastnew.attr=014
+lastnew.events=+t_weapon_shadow
+lastnew.bounce
+lastnew.tag(deaths,0)
+lastnew.tag(max_deaths,15)
+lastnew.tag(equip,0)
+lastnew.tag(container,<lastnew.cont.uid>)
+lastnew.tag(craftedby,<src.uid>)
+src.tag(shadow_weapon,<lastnew>)
+src.events +e_shadow_weapon
 //remove
 
 [EVENTS e_shadow_weapon]
@@ -2125,17 +2063,14 @@ remove
 
 
 [FUNCTION f_shadow_weapon_check]
-if ((<tag(weapon).cont.uid>) != (<tag(container)>))
-	if ((<tag(weapon).cont.uid>) != (<tag(container).cont.uid>))
-		if (tag(weapon).cont.cont.isChar) 
-			tag(weapon).cont.cont.sysMessage("Stinova zbran nebyla tva a proto se vratila k svemu pravemu majiteli...")
-		endif
-	  tag(weapon).cont = tag(container)
-	  update
-	  tag(container).cont.sysMessage("Stinova zbran se vratila zpet k tobe...")
-    logmsg("vraciam shadow zbran <tag(weapon)> do baglika majitela <tag(container).cont.uid> (meno: <tag(container).cont.name>, acc<tag(container).cont.account.name>)")
-    return 0
+if ((<tag(weapon).topobj>) != (<tag(container).topobj>))
+  if (tag(weapon).topobj.isChar) 
+    tag(weapon).topobj.sysMessage("Stinova zbran nebyla tva a proto se vratila k svemu pravemu majiteli...")
   endif
+  tag(weapon).cont = tag(container)
+  update
+  topobj.sysMessage("Stinova zbran se vratila zpet k tobe...")
+  topobj.accmsg("byla navracena shadow zbran <tag(weapon)> do baglika majitele.")
 endif
 
 ////////////////////
