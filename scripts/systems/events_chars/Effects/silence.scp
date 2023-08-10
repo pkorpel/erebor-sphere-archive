@@ -12,6 +12,9 @@ else        // argv(0) - 1 from Mind Blast Silence effect (src=mag co castil Min
   if (!<arg(staffMaterial)>)
     return 0
   endif
+  if (<src.findlayer(layer_hand2).isEvent(t_weapon_shadow)>)
+    arg(staffMaterial,material_elven) // shadow hul ma silu elvenu
+  endif
   arg(mindPower,<eval ((<src.int>*<arg(staffMaterial)>)/2)>) // for mage with 250INT -> 125-875
   arg(silenceResist,<eval tag(resist_silence)>)
   if (arg(silenceResist) >= 1000)

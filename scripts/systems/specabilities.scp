@@ -3395,7 +3395,7 @@ def_buffDmgNPC[10]    38
 
 
 [Function f_buffStaffValue]
-if (hasStaff(elven))
+if (hasStaff(elven) || <findlayer(layer_hand2).isEvent(t_weapon_shadow)>)
   return 2200
 elseif (hasStaff(eben))
   return 1500
@@ -6059,16 +6059,16 @@ endif
 if !(0<tag(zmrazeni)>)
   return 0
 endif
+tag(zmrazeni,)
 if !(flag_hasshield)
   return 0
 endif
-if !(f_thief_getfreezebyshield(<eval <act.tag(experience)>/10>))
-  return 0
-endif
-
 arg(uderstitem_delay,<eval <tag(uderstitem_next)>-<eval 200-<eval <tag(ra_uderstitem)>*5>>>)
 if (<arg(uderstitem_delay)> < <serv.time>)
   sysmessage("Prilis dlouho si cekal a rana ti nevysla")
+  return 0
+endif
+if !(f_thief_getfreezebyshield(<eval <eval act.tag(experience)>/10>))
   return 0
 endif
 

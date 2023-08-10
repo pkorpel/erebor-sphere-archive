@@ -3118,9 +3118,6 @@ if (action==Skill_fencing)||(tag(isstabbing))
   if (0<tag(podriznuti)>)
     tag(podriznuti,0)
   endif
-//  if (0<tag(zmrazeni)>) -- Zbytecny?? :/ Pokud tag zmrazeni >0 tak se spusti v ramci e_stunattack kde se i smaze
-//    tag(zmrazeni,0)
-//  endif
 endif
 
 on=@itemequip
