@@ -823,31 +823,31 @@ elseif ((<eval tag(weaponuid).typedef.tdata1>)==2) // iron
   else
     return 0
   endif    
-elseif ((<eval tag(weaponuid).typedef.tdata1>)==5) // verite
+elseif ((<eval tag(weaponuid).typedef.tdata1>)==3) // verite
   if (<argv(0)> < <eval 151+<eval <eval 151*<arg(koeficient)>/100>>>) 
     return 1
   else
     return 0
   endif    
-elseif ((<eval tag(weaponuid).typedef.tdata1>)==6) // valorite
+elseif ((<eval tag(weaponuid).typedef.tdata1>)==4) // valorite
   if (<argv(0)> < <eval 251+<eval <eval 251*<arg(koeficient)>/100>>>) 
     return 1
   else
     return 0
   endif   
-elseif ((<eval tag(weaponuid).typedef.tdata1>)==7) // obsidian
+elseif ((<eval tag(weaponuid).typedef.tdata1>)==5) // obsidian
   if (<argv(0)> < <eval 401+<eval <eval 401*<arg(koeficient)>/100>>>) 
     return 1
   else
     return 0
   endif    
-elseif ((<eval tag(weaponuid).typedef.tdata1>)==8) // adamantinum
+elseif ((<eval tag(weaponuid).typedef.tdata1>)==6) // adamantinum
   if (<argv(0)> < <eval 601+<eval <eval 601*<arg(koeficient)>/100>>>) 
     return 1
   else
     return 0
   endif    
-elseif ((<eval tag(weaponuid).typedef.tdata1>)==9) // mithril
+elseif ((<eval tag(weaponuid).typedef.tdata1>)==7) // mithril
   if (<argv(0)> < <eval 901+<eval <eval 901*<arg(koeficient)>/100>>>) 
     return 1
   else
