@@ -363,6 +363,13 @@ while (arg(i) < tag(qAssigned))
   endif
   arg(i,#+1)
 endwhile
+if (strcmpi("medium",<argv(0)>) == 0) && (<argv(1)> == 5)  // Kill opacneho realmu (jakykoliv, kdekoliv)
+  return 1
+elseif (strcmpi("high",<argv(0)>) == 0) && (<argv(1)> == 1) // Kill opacneho realmu (konkretni povolani, kdekoliv)
+  return 1
+elseif (strcmpi("high",<argv(0)>) == 0) && (<argv(1)> == 2) // Kill opacneho realmu (jakykoliv, konkretni uzemi)
+  return 1
+endif
 return 0
 
 [function f_weekly_setQuestAmount]
