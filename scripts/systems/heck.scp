@@ -753,7 +753,7 @@ while (arg(i) <= def_taming_mounts_count)
   
     argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,65+(<arg(movey)>*<arg(row)>),<arg(textColor)>,<def_taming_mount_name[i]>)
     argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,82+(<arg(movey)>*<arg(row)>),<arg(textColor)>,"<eval src.tamingTag(tamingCount_<def_taming_mount_chardef[i]>)> / <eval (<def_taming_mount_maxpoints[i]>/<def_taming_mount_points[i]>)>")
-    argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,97+(<arg(movey)>*<arg(row)>),<arg(textColor)>,"<CalcDecimalNumber(<eval src.tamingTag(tamingPoints_<def_taming_mount_chardef[i]>)>,10,2)> %")
+    argo.newTextLine(50+(<arg(movex)>*<arg(column)>)+<arg(txtIndent)>,97+(<arg(movey)>*<arg(row)>),<arg(textColor)>,"<CalcDecimalNumber(<eval src.tamingTag(tamingPoints_<def_taming_mount_chardef[i]>)>,<eval def_taming_max_points/100>,3)> %")
   endif
 
   arg(column,#+1)
