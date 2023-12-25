@@ -209,7 +209,7 @@ endif
 on=@SkillMakeItem
 if (action==skill_blacksmith)||(action==skill_Bowcraft)||(myaction==skill_Carpentry)
  if (<lastnew.quality>>170)&&(<eval(findres(skill,<myaction>).name)> > 999)&&(lastnew.isweapon)
-  if (tag(level) > {1 200})
+  if (<eval tag(level)> >= {1 200})
    craftenhanceditem
   endif
  endif
