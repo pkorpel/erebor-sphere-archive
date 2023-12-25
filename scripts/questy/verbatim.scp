@@ -529,7 +529,7 @@ on=@aftergetswing
 if rand(20)==1
   sfx(00ef)
   SAY("Beleg Val Mor Ruin")
-  fireexplosion(10)
+  fireexplosion(10,50)
   while (memoryfindtype(0209c))
     memoryfindtype(0209c).link.multi_damage(50)
     memoryfindtype(0209c).remove 

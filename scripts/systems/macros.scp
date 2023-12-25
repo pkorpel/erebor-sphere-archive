@@ -994,7 +994,7 @@ endif
 
 if (rand(12) == 1)
   SAY("Heru Beleg Ruin Val")
-  fireexplosion(10)
+  fireexplosion(10,50)
 endif
 //if rand(50)==1
 //  while (memoryfindtype(0209c)) 
@@ -1062,7 +1062,7 @@ if (rand(15) == 1)
   if (<eval tag(phoenix_fire_damage)>)
     fireexplosion(10,<eval tag(phoenix_fire_damage)>)
   else
-    fireexplosion(10)
+    fireexplosion(10,20)  // default dmg
   endif
   emote("outblazed!")
 endif
@@ -1268,7 +1268,7 @@ elseif (rand(100) == 1)
   lastnew.timer=40
 elseif (rand(20) == 1)
   SAY("Heru Beleg Ruin Val")
-  fireexplosion(10)
+  fireexplosion(10,50)
 endif
 return 0
 
