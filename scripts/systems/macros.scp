@@ -113,7 +113,7 @@ if (!((<link.uid>) == (<src.uid>)) && (src.isPlayer || src.isPet))	//dame dmg i 
       return 1
     endif
   endif
-  if (strlen(<tag(damage)>))
+  if (<eval tag(damage)>)
     src.damage_noresponse(<eval tag(damage)>,dam_fire|dam_magic,<link>)
   else
     src.damage_noresponse(<eval {50 80}>,dam_fire|dam_magic,<link>)
@@ -212,7 +212,7 @@ return 0
 [function fireexplosion]
 arg(i,0)
 while (arg(i) < <argv(0)>)
-  f_fireColumnDmg_place(<posInRange(5)>,argv(1))
+  f_fireColumnDmg_place(<posInRange(5)>,<argv(1)>)
   arg(i,#+1)
 endwhile
 return 0
