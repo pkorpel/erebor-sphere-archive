@@ -736,7 +736,7 @@ item=i_gold{700 999}
 
 
 [CHARDEF 04F]
-DEFNAME=c_test16
+DEFNAME=c_fire_giant
 NAME=Fire Giant
 ICON=i_pet_MAN
 CAN=MT_WALK|MT_run|MT_EQUIP|MT_MALE
@@ -757,8 +757,6 @@ CATEGORY=Monsters
 DESCRIPTION=Reznik pomatenec
 
 ON=@Create
-//NAME=
-Title=Reznik Pomatenec
 COLOR=00
 NPC=brain_Human
 KARMA=-6000
@@ -770,16 +768,12 @@ INT={100}
 MAXHITS={12000 12650}
 MAXSTAM={300 340}
 
-
 tag.experience=<eval {80.0 110.0}>
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot>
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
-
-
-
 
 tag.weapflag=dam_physical|dam_slashing
 tag.resist_para=<eval {500 750}>
@@ -795,7 +789,6 @@ POISONING={90.0 140.0}
 PROVOCATION=100.0
 PEACEMAKING=100.0
 SpiritSpeak=30.0
-
 
 ITEMNEWBIE=i_monster_create
 
