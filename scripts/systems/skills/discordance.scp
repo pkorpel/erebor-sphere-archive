@@ -5,33 +5,33 @@ name=discordance
 
 on=@equip
 if (<link.isitem>)
-  cont.sysmessage(Zameruj jen monstra)
+  cont.sysmessage("Zameruj jen monstra.")
   remove
   return 1
 endif
-if (<link.npc>==0)||(<link.enticement>)
-  cont.sysmessage Tohle nemuzes oslabit.
+if ((<link.npc>==0) || (<link.enticement>) || (<eval link.tag(isBoss)>))
+  cont.sysmessage("Tohle nemuzes oslabit.")
   remove
   return 1
 endif
 if (<eval(promilerange(<eval(<cont.enticement>)>,<Skill_Enticement.effect>))> < <link.tag(experience)>)
-  cont.sysmessage(Oslabeni teto prisery presahuje tve moznosti)
+  cont.sysmessage("Oslabeni teto prisery presahuje tve moznosti.")
   remove
   return 1
 endif
 cont.reveal
-if (<cont.musicianship> <{0 1025})
+if (<cont.musicianship> < {0 1025})
   morex=0
-  cont.sysmessage(You play poorly.)
-  cont.sound <cont.findtype(t_musical).typedef.tdata2>
+  cont.sysmessage("You play poorly.")
+  cont.sound(<cont.findtype(t_musical).typedef.tdata2>)
 else
   arg(power,<eval(randfakt(<eval(<cont.enticement>)>,<Skill_Enticement.effect>))>)
   if (<arg(power)> < <link.tag(experience)>)
     morex=0
-    cont.sound <cont.findtype(t_musical).typedef.tdata1>
+    cont.sound(<cont.findtype(t_musical).typedef.tdata1>)
   else
     morex=1
-    cont.sound <cont.findtype(t_musical).typedef.tdata1>
+    cont.sound(<cont.findtype(t_musical).typedef.tdata1>)
   endif
 endif
 timerd=<promilerange(<cont.enticement>,<skill_enticement.delay>)>
@@ -67,13 +67,28 @@ cont.emote("looks weakened.")
 f_discordlower(dex)
 f_discordlower(str)
 f_discordlower(int)
-arg(orig_maxhits,<cont.maxhits>)
-if (<cont.hits> > <cont.maxhits>)
-  cont.maxhits = <cont.hits>
+
+arg(diffPerc, 1000)
+if (<cont.hits> != <cont.maxhits>) // injured/s*cked up
+  arg(diffPerc, <eval ((<cont.hits>*1000) / <cont.maxhits>)>)  
 endif
 f_discordlower(maxhits)
+cont.hits = <eval (<cont.maxhits> * <arg(diffPerc)>)/1000>
+
+arg(diffPerc, 1000)
+if (<cont.mana> != <cont.maxmana>) // spent/boosted mana
+  arg(diffPerc, <eval ((<cont.mana>*1000) / <cont.maxmana>)>)  
+endif
 f_discordlower(maxmana)
+cont.mana = <eval (<cont.maxmana> * <arg(diffPerc)>)/1000>
+
+arg(diffPerc, 1000)
+if (<cont.stam> != <cont.maxstam>) // tired/enchanted
+  arg(diffPerc, <eval ((<cont.stam>*1000) / <cont.maxstam>)>)  
+endif
 f_discordlower(maxstam)
+cont.stam = <eval (<cont.maxstam> * <arg(diffPerc)>)/1000>
+
 f_discordlower(magery)
 f_discordlower(ei)
 f_discordlower(resist)
@@ -83,24 +98,15 @@ f_discordlower(macefighting)
 f_discordlower(fencing)
 f_discordlower(swordsmanship)
 f_discordlower(poisoning)
-if (cont.hits>cont.maxhits)
- cont.hits=<cont.maxhits>
-endif
-if (<orig_maxhits> < <cont.maxhits>)
- cont.maxhits=<orig_maxhits>
-endif
-if (cont.mana>cont.maxmana)
- cont.mana=<cont.maxmana>
-endif
-if (cont.stamina>cont.maxstam)
- cont.stamina=<cont.maxstam>
-endif
 
 on=@unequip
 if (<eval cont.hits> <= 0)   
   return
 endif
 cont.emote("seems to be at full strength.")
+arg(loweredMaxHits,<cont.MaxHits>)
+arg(loweredMaxMana,<cont.MaxMana>)
+arg(loweredMaxStam,<cont.MaxStam>)
 f_discordreturn(dex)
 f_discordreturn(str)
 f_discordreturn(int)
@@ -116,6 +122,11 @@ f_discordreturn(macefighting)
 f_discordreturn(fencing)
 f_discordreturn(swordsmanship)
 f_discordreturn(poisoning)
+
+cont.hits = <eval ((<eval (<cont.hits>*1000)>/<arg(loweredMaxHits)>) * cont.maxhits)/1000>
+cont.mana = <eval ((<eval (<cont.mana>*1000)>/<arg(loweredMaxMana)>) * cont.maxmana)/1000>
+cont.stam = <eval ((<eval (<cont.stam>*1000)>/<arg(loweredMaxStam)>) * cont.maxstam)/1000>
+
 cont.tag(discorded,"")
 
 on=@timer
@@ -124,10 +135,10 @@ return 1
 
 [function f_discordlower]
 arg(lower,<eval (cont.<args>*cont.tag(discorded))/1000>)
-if (cont.<args><arg(lower))
- arg(lower,<?cont.<args>?>)
+if (cont.<args> < <arg(lower)>)
+  arg(lower,<?cont.<args>?>)
 endif
-cont.<args>=<eval cont.<args>-arg(lower)>
+cont.<args>=<eval (cont.<args>-<arg(lower)>)>
 tag(lowed<args>,<arg(lower)>)
 
 [function f_discordreturn]
@@ -135,21 +146,19 @@ cont.<args>=<eval cont.<args>+tag(lowed<args>)>
 
 [function timerdelay]
 newitemSafeChar(i_timerd_univ)
-//cont.newitemsafe(i_timerd_univ)
-lastnew.attr=attr_invis
 lastnew.link=<uid>
 lastnew.p=<topobj.p>
-lastnew.removefromview
 lastnew.timerd=<args>
 
 [itemdef i_timerd_univ]
-id=i_gold
+id=i_memory
 name=timerd univ
 
-on=@timer
+ON=@Create
+attr=090
+
+ON=@Timer
 link.trigger(timer)
 remove
-return 1
-
 
 [eof]
