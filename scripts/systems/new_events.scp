@@ -196,7 +196,7 @@ endif
 
 [EVENTS e_ovinovac]
 on=@PersonalSpace
-if(<eval tag(drzim)>||src.flag_invul)
+if(isSleeping || <eval tag(drzim)> || src.flag_invul)
   return 1
 elseif src.isplayer
   tag(narusitel,<src>)
