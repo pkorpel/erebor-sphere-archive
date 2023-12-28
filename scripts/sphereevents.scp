@@ -64,15 +64,15 @@ return 0
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
-if (act.npc) && (<eval act.tag(resist_magic)> < 999)
-  act.damage_noresponse(<eval  <tag.uc>/{<nastaveni_efekt_mithril>}>,dam_magic,<uid>)
-endif
-return 0
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
+if (act.npc) && (<eval act.tag(resist_magic)> < 999)
+  act.damage_noresponse(<eval  <tag.uc>/{<nastaveni_efekt_mithril>}>,dam_magic,<uid>)
+endif
+return 0
 on=@aftergetswing
 on=@playerKill
 on=@npckill
