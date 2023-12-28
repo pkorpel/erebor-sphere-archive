@@ -88,6 +88,10 @@ endif
 src.tagInc("d_count")
 arg(offset_x, (<eval src.tag(d_count)> - 1) * 50)
 
+if (<eval more1> == 0)
+  src.accmgs("ERROR: u dialogu d_Charge mel hodnotu more1 0 = Neexistujici Charge!")
+  return
+endif
 noclose=1
 nomove=1
 argo.gumppic(14+<offset_x>,0,<hval def_charge_icon[<eval more1>]>)
