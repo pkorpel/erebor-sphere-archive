@@ -1088,7 +1088,11 @@ tag(unidentified,"")
 mif_setevents(<tag.imi_other_present>)
 
 var(magicname,"<?<def.dispid>.name?>")
-var(magicname,"<?StrFirstCap(<magicname>)?>")
+if (strlen(<var(magicname)>))
+  var(magicname,"<?StrFirstCap(<magicname>)?>")
+else
+  var(magicname," ")
+endif
 mif_setname(<?arg(skill_present)?><?arg(other_present)?>)
 name="<?magicname?>"
 attr=<attr>|attr_identified
