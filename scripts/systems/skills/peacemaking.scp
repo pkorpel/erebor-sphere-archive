@@ -1,13 +1,13 @@
 [function f_peacemaking]
 if(<findid(i_peacemaking_timer)>)
- sysmessage(Nespechej s pouzivanim skillu)
+ sysmessage("Nespechej s pouzivanim skillu.")
  return 1
 endif
 if (<flag_dead>)
  return 1 
 endif
 if !(<findtype(t_musical)>)
- sysmessage(Potrebujes nejaky hudebni nastroj.)
+ sysmessage("Potrebujes nejaky hudebni nastroj.")
  return 1
 endif
 reveal
@@ -26,26 +26,26 @@ name=peacemaking
 
 on=@equip
 timer=60
-target Koho chces zkusit uklidnit?
+target("Koho chces zkusit uklidnit?")
 
 on=@targon_item
 return 1
 
 on=@targon_char
 link=<src.targ.uid>
-if (<link.npc>==0)||(link.isSummon)
- cont.sysmessage(Tohle nemuzes uklidnit.)
+if ((<link.npc>==0) || (link.isSummon) || (<eval link.tag(isBoss)>))
+ cont.sysmessage("Tohle nemuzes uklidnit.")
  remove
  return 1
 endif
 if ((<eval(<cont.peacemaking>)> <= <eval(<link.peacemaking>)>) || (<eval(promilerange(<eval(<cont.peacemaking>)>,<SKILL_PEACEMAKING.effect>))> < <link.tag(experience)>))
- cont.sysmessage(Uklidneni teto prisery presahuje tve moznosti.)
+ cont.sysmessage("Uklidneni teto prisery presahuje tve moznosti.")
  remove
  return 1
 endif
 if (<cont.musicianship> < {0 1025})
  morex=0
- cont.sysmessage(You play poorly.)
+ cont.sysmessage("You play poorly.")
  cont.sound(<cont.findtype(t_musical).typedef.tdata2>)
 else
   arg(power,<eval(randfakt(<eval(cont.peacemaking)>,<SKILL_PEACEMAKING.effect>))>)
@@ -66,7 +66,7 @@ on=@timer
 if (more1)
   if (charExists(<link>)) //mount exists and ergo is not dead or whatever
     if (morex)
-      cont.classmessage(Uklidneni se povedlo.)  
+      cont.classmessage("Uklidneni se povedlo.")  
       arg(peacestoreact,<link.act>)
       if (link.findid(i_rune_peacemaking))
         link.act=<link.findid(i_rune_peacemaking)>
@@ -98,7 +98,7 @@ name=peacemade
 on=@equip
 cont.events +e_peacemade
 cont.action=""
-cont.emote(is falling asleep)
+cont.emote("is falling asleep")
 cont.effect(3,i_fx_sleeping,1,70,1)
 timer=90
 
@@ -107,7 +107,7 @@ if (<eval cont.hits> <= 0)
   return
 endif
 cont.events -e_peacemade
-cont.emote(woke up)
+cont.emote("woke up")
 cont.action=""
 
 on=@timer
