@@ -4757,6 +4757,9 @@ layer=77
 type=t_src_changer
 name=pullall srcChanger
 
+on=@Create
+attr=090
+
 on=@timer
 if (<eval link.hits> > 0) 
   sector.allchars(pullall_effect(<eval more1>,<link>))

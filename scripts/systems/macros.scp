@@ -236,7 +236,7 @@ if (chance(<arg(chance)>,3))
   endif
   tag(paraKrik_cd,<serv.time>+<arg(coolDown)>) // won't cry for at least the next 5s
   newitemsafe(i_src_changer_parakrik)
-  lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
+  lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>)>,<mapplane>
   emote("crying awfully.")
 endif
 
@@ -257,6 +257,7 @@ type=t_eq_script
 name=parakrik
 
 on=@create
+attr=090
 timer=1
 
 on=@timer
@@ -307,7 +308,7 @@ endif
 
 if (rand(12)==1)
   newitemsafe(i_src_changer_odinvis)
-  lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
+  lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>)>,<mapplane>
   emote("crying.")
 endif
 
@@ -326,6 +327,7 @@ type=t_eq_script
 name=src_changer
 
 on=@create
+attr=090
 timer=1
 
 on=@timer
@@ -1654,7 +1656,7 @@ on=@aftergetswing
 on=@beforedoeffect
 if ((act.isplayer) && (rand(6)==1))
   newitemsafe(i_src_changer_parakrik)
-  lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>-100)>,<mapplane>
+  lastnew.p=<eval(<p_x>)>,<eval(<p_y>)>,<eval(<p_z>)>,<mapplane>
   say("Heru Ruth Dol Kel")
 endif
 
