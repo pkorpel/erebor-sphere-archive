@@ -999,7 +999,6 @@ if (isSleeping)
   return 0
 endif
 
-f_explosiondispell_setVars
 if (chance(<tag(e_explosiondispell_chance)>,3))
   arg(server_time,<fixnumber((<serv.time>/10))>)  //server time v sekundach
   arg(rozdiel,<fixnumber(<server_time>-<tag(e_explosiondispell_last_time)>)>)
@@ -1019,6 +1018,14 @@ endif
 on=@beforeGetSwing
 on=@aftergetswing
 on=@Created
+f_explosiondispell_setVars
+emote("throws dispell bomb")
+newitemsafe(i_potion_explosiondispell)
+lastnew.p=<p>
+lastnew.attr=attr_static|attr_decay|attr_move_never 
+lastnew.trigger(userdclick)
+
+
 on=@DrinkingPotion
 on=@afterswing
 on=@finalBlow
