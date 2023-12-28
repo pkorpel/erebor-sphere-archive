@@ -51,6 +51,8 @@ tag.roundattack_chance=300    //30.0%
 
 tag.npc_bleed=200 //20.0%
 
+tag.phoenix_fire_damage=<eval {50 75}>  // dmg of phoenix fire
+
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -2325,6 +2327,8 @@ tag.roundattack_chance=200    //20.0%
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
+
+tag.phoenix_fire_damage=<eval {40 75}>  // dmg of phoenix fire
 
 tag.npc_bleed=300 //30.0%
 

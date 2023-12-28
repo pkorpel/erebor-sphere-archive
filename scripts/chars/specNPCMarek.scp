@@ -52,6 +52,8 @@ tag.npc_curse_chance=250                // 25% chance to trigger this event
 tag.npc_curse_delay=12,15               // delay between another possible strike
 tag.npc_curse_dmg=40,45                 // dmg 
 
+tag.phoenix_fire_damage=75  // dmg of phoenix fire
+
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
@@ -165,6 +167,8 @@ tag.experience=<eval {380.0 400.0}>
 tag.roundattack_damage=50,60  //dmg od - do
 tag.roundattack_time=10,12    //prodleva od - do v sek
 tag.roundattack_chance=200    //20.0%
+
+tag.phoenix_fire_damage=<eval {25 50}>  // dmg of phoenix fire
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
@@ -402,6 +406,8 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[10]>
 
+tag.phoenix_fire_damage=75  // dmg of phoenix fire
+
 tag(e_lightnings_chance,50)             // 5.0% chance
 tag(e_lightnings_range,5)
 
@@ -519,6 +525,8 @@ Tag.explode_dmg=60
 tag.roundattack_damage=50,60    //dmg od - do
 tag.roundattack_time=15,20      //prodleva od - do v sek
 tag.roundattack_chance=200      //20.0%
+
+tag.phoenix_fire_damage=<eval {25 50}>  // dmg of phoenix fire
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
@@ -932,6 +940,8 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int 
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[9]>
+
+tag.phoenix_fire_damage=75  // dmg of phoenix fire
 
 tag(e_explosiondispell_chance,100) //10% chance
 tag(e_explosiondispell_range,5)
@@ -1861,6 +1871,8 @@ tag.npc_bleed=700 //70.0%
 
 Tag.explode_dmg=70
 
+tag.phoenix_fire_damage=75  // dmg of phoenix fire
+
 tag.roundattack_damage=50,55  //dmg od - do
 tag.roundattack_time=15,17    //prodleva od - do v sek
 tag.roundattack_chance=200    //20.0%
@@ -1973,6 +1985,8 @@ tag.experience=<eval {700.0 800.0}>
 tag.roundattack_damage=30,40     //dmg od - do
 tag.roundattack_time=15,17       //prodleva od - do v sek
 tag.roundattack_chance=200       //20.0%
+
+tag.phoenix_fire_damage=<eval {25 50}>  // dmg of phoenix fire
 
 //mystik
 tag(hypnotizable,0)
@@ -2103,6 +2117,8 @@ Tag.explode_dmg=40
 tag.roundattack_damage=35,45  //dmg od - do
 tag.roundattack_time=10,12    //prodleva od - do v sek
 tag.roundattack_chance=200    //20.0%
+
+tag.phoenix_fire_damage=<eval {25 50}>  // dmg of phoenix fire
 
 //mystik
 tag(hypnotizable,0)
@@ -2813,7 +2829,7 @@ BLOODCOLOR=020
 TEVENTS=e_monster
 TEVENTS=e_character
 //TEVENTS=e_summoneater                          //smaze summona, co zasahne
-TEVENTS=e_npc_sniper                            //Pøidá dmg k útoku po ránì def= 50
+TEVENTS=e_npc_sniper                             //Pridani dmg k utoku po rane def= 50
 TEVENTS=e_NPC_multishot
 
 ON=@Create
@@ -3013,7 +3029,7 @@ BLOODCOLOR=020
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_summoneater                          //smaze summona, co zasahne
-TEVENTS=e_npc_sniper                           //Pøidá dmg k útoku po ránì def= 50
+TEVENTS=e_npc_sniper                           //Pridani dmg k utoku po rane def= 50
 TEVENTS=e_NPC_multishot
 TEVENTS=e_npc_roundattack_pullall
 TEVENTS=e_explosiondispell
@@ -3504,7 +3520,7 @@ TEVENTS=e_pushall
 TEVENTS=e_npc_reactivearmor
 TEVENTS=e_npc_roundattack
 TEVENTS=e_parakrik
-TEVENTS=e_npc_detect               //spouští detekci každých 55s
+TEVENTS=e_npc_detect               //spousti detekci kazdych 55s
 
 CATEGORY=Monsters
 SUBSECTION=Marek
@@ -3599,7 +3615,7 @@ BLOODCOLOR=020
 TEVENTS=e_monster
 TEVENTS=e_character
 TEVENTS=e_summoneater                   //smaze summona, co zasahne
-TEVENTS=e_npc_sniper                    //Pøidá dmg k útoku po ránì
+TEVENTS=e_npc_sniper                    //Pridani dmg k utoku po rane
 TEVENTS=e_npc_detect
 TEVENTS=e_npc_stun
 TEVENTS=e_dragon_regeneration

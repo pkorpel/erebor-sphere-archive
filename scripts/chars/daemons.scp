@@ -921,6 +921,8 @@ tag.npc_curse_dmg=35,40           // dmg
 
 Tag.explode_dmg=50
 
+tag.phoenix_fire_damage=<eval {25 30}>  // dmg of phoenix fire
+
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -1128,6 +1130,8 @@ tag.roundattack_chance=300   //30.0%
 tag.npc_critic_chance=250     //25% chance
 tag.npc_critic_dmg=20,25      //dmg in between
 
+tag.phoenix_fire_damage=<eval {30 40}>  // dmg of phoenix fire
+
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -1202,7 +1206,7 @@ TEVENTS=e_npc_curse
 TEVENTS=e_npc_bleed
 TEVENTS=e_summoneater
 TEVENTS=e_dragon_regeneration
-//TEVENTS=e_phoenix_fire
+TEVENTS=e_phoenix_fire
 
 CATEGORY=Monsters
 SUBSECTION=Demoni

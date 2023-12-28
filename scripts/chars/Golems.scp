@@ -2738,6 +2738,8 @@ tag(e_explosiondispell_time,30)
 
 Tag.explode_dmg=40
 
+tag.phoenix_fire_damage=<eval {50 65}>  // dmg of phoenix fire
+
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -2843,6 +2845,8 @@ Tag.explode_dmg=50
 tag(e_explosiondispell_chance,100) //10% chance
 tag(e_explosiondispell_range,6)
 tag(e_explosiondispell_time,30)
+
+tag.phoenix_fire_damage=<eval {65 80}>  // dmg of phoenix fire
 
 //mystik
 tag(hypnotizable,0)

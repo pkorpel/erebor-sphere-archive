@@ -107,26 +107,14 @@ on=@step
 if ((src.isGM) || (src.isDead))
   return 1
 endif
-if (!((<link.uid>) == (<src.uid>)) && (src.isPlayer || src.isPet))	//dame dmg i summonum a jezditkum
-  if (src.isEvent(e_fire_column_damage))
-    if (<src.tag(fireColumnDamageStep)> > <serv.time>) // if the player stepped on the firecolumn at this position in the last 2 seconds
-      return 1
-    endif
-  endif
+if (!((<link>) == (<src>)) && (src.isPlayer || src.isPet))	//dame dmg i summonum a jezditkum
   if (<eval tag(damage)>)
     src.damage_noresponse(<eval tag(damage)>,dam_fire|dam_magic,<link>)
   else
     src.damage_noresponse(<eval {50 80}>,dam_fire|dam_magic,<link>)
   endif
-  src.events=+e_fire_column_damage
-  src.tag(fireColumnDamageStep,<serv.time>+20) // 2 seconds silence
   remove
 endif
-
-[events e_fire_column_damage]
-on=@step
-tag.remove(fireColumnDamageStep)
-events=-e_fire_column_damage
 
 [function efektd]
 newitem(<i_fx_vortex>)
@@ -212,7 +200,7 @@ return 0
 [function fireexplosion]
 arg(i,0)
 while (arg(i) < <argv(0)>)
-  f_fireColumnDmg_place(<posInRange(5)>,<argv(1)>)
+  f_fireColumnDmg_place(<posInRange(5)>,<eval argv(1)>)
   arg(i,#+1)
 endwhile
 return 0
@@ -994,7 +982,7 @@ endif
 
 if (rand(12) == 1)
   SAY("Heru Beleg Ruin Val")
-  fireexplosion(10,50)
+  fireexplosion(10)
 endif
 //if rand(50)==1
 //  while (memoryfindtype(0209c)) 
@@ -1054,7 +1042,6 @@ while (memoryfindtype(0209c))
 endwhile
 
 [events e_phoenix_fire]
-
 on=@Created
 on=@DrinkingPotion
 on=@afterswing
@@ -1268,7 +1255,7 @@ elseif (rand(100) == 1)
   lastnew.timer=40
 elseif (rand(20) == 1)
   SAY("Heru Beleg Ruin Val")
-  fireexplosion(10,50)
+  fireexplosion(10)
 endif
 return 0
 

@@ -1707,6 +1707,8 @@ maxmana=0
 
 tag.experience=<eval {400.0 450.0}>
 
+tag.phoenix_fire_damage=<eval {35 50}>  // dmg of phoenix fire
+
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -1799,6 +1801,8 @@ tag.experience=<eval 900.0 950.0}>
 tag.roundattack_damage=40,50  //dmg od - do
 tag.roundattack_time=15,17    //prodleva od - do v sek
 tag.roundattack_chance=400    //40.0%
+
+tag.phoenix_fire_damage=<eval {50 75}>  // dmg of phoenix fire
 
 //mystik
 tag(hypnotizable,0)
@@ -1953,6 +1957,8 @@ tag.roundattack_chance=200    //20.0%
 
 tag.experience=<eval {1700.0 1800.0}>
 
+tag.phoenix_fire_damage=<eval {50 75}>  // dmg of phoenix fire
+
 //mystik
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe>
@@ -2090,6 +2096,8 @@ tag(poisoning_MvM_dmg,80) // affects spell_poison
 tag.npc_curse_mana_chance=250       // 25% chance to trigger this event
 tag.npc_curse_mana_delay=15,20      // delay between another possible strike
 tag.npc_curse_mana_dmg=50,60        // mana reduce in between 50 and 60
+
+tag.phoenix_fire_damage=50  // dmg of phoenix fire
 
 //mystik
 tag(hypnotizable,0)

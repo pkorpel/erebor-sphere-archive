@@ -284,6 +284,8 @@ maxmana=0
 
 tag.experience=<eval {600.0 675.0}>
 
+tag.phoenix_fire_damage=<eval {30 40}>  // dmg of phoenix fire
+
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
@@ -369,6 +371,8 @@ tag.experience=<eval {800.0 950.0}>
 tag.roundattack_damage=60,65  //dmg od - do
 tag.roundattack_time=10,12    //prodleva od - do v sek
 tag.roundattack_chance=400    //40.0%
+
+tag.phoenix_fire_damage=<eval {35 50}>  // dmg of phoenix fire
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
@@ -461,6 +465,8 @@ tag.experience=<eval {1200.0 1300.0}>
 tag.roundattack_damage=70,80  //dmg od - do
 tag.roundattack_time=5,7      //prodleva od - do v sek
 tag.roundattack_chance=200    //20.0%
+
+tag.phoenix_fire_damage=<eval {45 60}>  // dmg of phoenix fire
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
@@ -740,6 +746,8 @@ tag.multishot_chance=200                       // 20% chance pri zasahu monstra
 tag.multishot_delay=15,20                      // prodleva nez znovu
 tag.multishot_dmg=30,40                        // dmg in between 30 and 40
 
+tag.phoenix_fire_damage=<eval {35 45}>  // dmg of phoenix fire
+
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[7]>
@@ -827,6 +835,8 @@ Tag.explode_dmg=45
 tag.roundattack_damage=30,40  //dmg od - do
 tag.roundattack_time=10,12    //prodleva od - do v sek
 tag.roundattack_chance=200    //20.0%
+
+tag.phoenix_fire_damage=<eval {40 55}>  // dmg of phoenix fire
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
@@ -916,6 +926,8 @@ maxmana=0
 tag.experience=<eval {1200.0 1350.0}>
 
 Tag.explode_dmg=50
+
+tag.phoenix_fire_damage=<eval {50 65}>  // dmg of phoenix fire
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[4]>//dmg
@@ -1204,6 +1216,8 @@ tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[5]>
 
+tag.phoenix_fire_damage=<eval {40 50}>  // dmg of phoenix fire
+
 tag(monstertype,daemon,70)
 
 tag(e_explosiondispell_chance,67) //6.7% chance
@@ -1304,6 +1318,8 @@ tag.experience=<eval {900.0 999.0}>
 tag.roundattack_damage=30,40  //dmg od - do
 tag.roundattack_time=15,17    //prodleva od - do v sek
 tag.roundattack_chance=200    //20.0%
+
+tag.phoenix_fire_damage=<eval {50 65}>  // dmg of phoenix fire
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//dmg
@@ -1413,6 +1429,8 @@ tag.experience=<eval {1500.0 1700.0}>
 tag.roundattack_damage=50,60  //dmg od - do
 tag.roundattack_time=10,15    //prodleva od - do v sek
 tag.roundattack_chance=400    //40.0%
+
+tag.phoenix_fire_damage=<eval {60 80}>  // dmg of phoenix fire
 
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[1]>//int
@@ -1538,6 +1556,8 @@ tag(npc_port_distance,9)
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_Buff[2]>//str
 tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[8]>
+
+tag.phoenix_fire_damage=<eval {40 50}>  // dmg of phoenix fire
 
 tag(monstertype,daemon,70)
 

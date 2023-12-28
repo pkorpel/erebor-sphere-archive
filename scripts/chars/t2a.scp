@@ -808,6 +808,8 @@ maxmana=1000
 
 tag.experience=<eval {60.0 65.0}>
 
+tag.phoenix_fire_damage=<eval {5 10}>  // dmg of phoenix fire
+
 tag(hypnotizable,0)
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoCanBe> 
 tag.hypnotizable=<tag.hypnotizable>|<flag_hypnoLoot> 
