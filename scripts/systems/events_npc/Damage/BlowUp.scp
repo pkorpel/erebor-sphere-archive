@@ -2,7 +2,8 @@
 [events e_npc_blow_up]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 if (!(src.isPlayer))  // nenecham se mlatit ani sumony, ani jinymi npc

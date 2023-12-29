@@ -31,7 +31,8 @@ endif
 //on=@hittry
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -213,7 +214,8 @@ endif
 [events e_hcn_NPCPoison]	// sila jedu se nastavuje hodnotou tagu 'jed_sila'
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (<var(ubrano)>)
   if (act.poisonManager.f_pm_isImmune)
     return 1
@@ -238,7 +240,8 @@ on=@beforegeteffect
 [events e_hcn_madnessAbility]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 arg(chance,100) // chance in promiles
 if (strlen(<tag(hcn_madnessAbilityChance)>))
   arg(chance,<tag(hcn_madnessAbilityChance)>)
@@ -484,6 +487,7 @@ endif
 
 on=@Created
 on=@DrinkingPotion
+on=@BeforeSwing
 on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing

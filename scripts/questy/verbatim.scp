@@ -283,7 +283,8 @@ newnpc(c_magic_ooze)
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -297,7 +298,8 @@ on=@aftergetswing
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing  
+on=@BeforeSwing
+on=@AfterSwing  
 on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
@@ -315,7 +317,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
@@ -495,7 +498,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -572,7 +576,8 @@ endwhile
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -612,7 +617,8 @@ return 0
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegeteffect
 on=@beforedoeffect
@@ -621,7 +627,8 @@ on=@afterDoEffect
 [events e_menavec_ledovka]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if body!=c_gazer
   events=-e_tele_to_target
   findid(i_attack_guard).remove
@@ -854,7 +861,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1131,7 +1139,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1564,7 +1573,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 
 

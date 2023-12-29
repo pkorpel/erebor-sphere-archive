@@ -255,7 +255,8 @@ lagrpustit
 [events e_lagr_nodmg]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.isplayer)
  var(ubrano,0)
  return 1

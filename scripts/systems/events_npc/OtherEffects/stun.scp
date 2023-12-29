@@ -6,7 +6,8 @@
 [events e_npc_stun]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (<eval act.tag(resist_para)> <= 900) && (wasHarmed)
   if (<eval tag(npc_stun_nextHitTime)> > <serv.time>)
     return 0 //the min delay in between stun hits has not passed yet

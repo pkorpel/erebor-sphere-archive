@@ -4,7 +4,8 @@
 [events e_npc_critic]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.isplayer)
   if (isfighting_melee)
     if (wasHarmed)

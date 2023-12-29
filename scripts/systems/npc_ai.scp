@@ -389,7 +389,8 @@ endif
 [EVENTS e_eye]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (var(dodged) == 0)
   if !(act.tag(energyofshield))
     if (act.stamina > 7)
@@ -520,7 +521,8 @@ greykarma
 [EVENTS e_guard_nonport]  
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 guardkarma_<typedef.tag(guard)>
 return 0
 
@@ -783,7 +785,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 
 //Kopie bez picovin okolo - jen utocit na opacny realm
@@ -856,7 +859,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 
 [EVENTS e_guard]    
@@ -941,7 +945,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -1036,7 +1041,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -1119,7 +1125,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@playerKill
@@ -1253,7 +1260,8 @@ endif
 [events e_getwpn]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (action==skill_magery)
   return
 endif
@@ -1368,7 +1376,8 @@ if (src.profession!=class_war)
 endif
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegeteffect
 
@@ -1452,7 +1461,8 @@ on=@FearOfDeath  //  brzo mohu umrit  nejsem  zdravej..
      
 on=@Created
 on=@DrinkingPotion
-on=@afterswing                 //   monstrum  zasazeno
+on=@BeforeSwing
+on=@AfterSwing                 //   monstrum  zasazeno
      act.spelleffect 29 1000 //great heal
 
 on=@finalBlow
@@ -1490,7 +1500,8 @@ NEWNPC c_Cerv
 [events e_npc_knockback]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (action==skill_magery) || (var(dodged)==1)
  return 0
 endif
@@ -1542,7 +1553,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
@@ -1560,7 +1572,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 
 [events e_issumon]
@@ -1583,7 +1596,8 @@ on=@beforedoeffect
 mana=<maxMana>
 
 on=@afterDoEffect
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 mana=<maxMana>
 
 on=@finalBlow
@@ -1766,7 +1780,8 @@ return 1
 [events e_golem]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect 
 on=@afterDoEffect

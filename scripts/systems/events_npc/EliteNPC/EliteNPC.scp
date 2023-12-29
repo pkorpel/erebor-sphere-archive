@@ -105,7 +105,8 @@ lastnew.MOVE e
 [events e_npc_elite]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 var(ubrano,<eval (var(ubrano)*1200)/1000>)     // Bonus +20% do dmg od predlohy
 
 on=@finalBlow

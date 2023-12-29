@@ -41,7 +41,8 @@ endif
 ///////////////////////////
 
 [events e_q026_hcnPoisoning_NPC]
-on=@Afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (action==skill_magery) || (var(dodged)==1) || (strlen(<act.tag(energyofshield)>))
   return 0
 endif
@@ -68,6 +69,7 @@ qtag(q026_hcnPoison,2,36) // cure neleci jed z HCN !
 events=-e_q026_hcnCurePoison_check
 
 on=@Created
+on=@BeforeSwing
 on=@AfterSwing
 on=@FinalBlow
 on=@AfterGetSwing

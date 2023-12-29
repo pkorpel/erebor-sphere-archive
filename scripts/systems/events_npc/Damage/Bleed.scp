@@ -4,7 +4,8 @@
 [events e_npc_bleed]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (action==skill_magery) || (<wasHarmed>==0) || (<eval act.tag(energyofshield)>)
   return 0
 endif

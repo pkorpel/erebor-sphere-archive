@@ -15,7 +15,8 @@
 [events e_acid_damage]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 newitem(i_acid)
 arg(AciDropItem,<lastnew>)
 AciDropItem.p=<p>

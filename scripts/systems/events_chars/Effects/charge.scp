@@ -261,7 +261,8 @@ elseif (act.isPlayer) // always reduce charge if a non-charging, evil spell is c
   chargeItem.f_charge_decrease(1)
 endif
 
-on=@afterSwing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforeGetEffect
 on=@beforeGetSwing

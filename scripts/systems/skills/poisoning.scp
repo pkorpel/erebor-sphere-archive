@@ -235,7 +235,8 @@ poisonManager.f_pm_death //clears all the poisons
 
 [events e_poison]//otravuju uderem zbrani
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (action==skill_swordsmanship)||(action==skill_fencing)
   if (act)
     if (act.ischar)

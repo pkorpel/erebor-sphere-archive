@@ -3,7 +3,8 @@
 [events e_npc_summonKiller]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.isSummon)
   if (<strlen(<tag(npc_summonKillerBoost)>)>)
     arg(boost,<tag(npc_summonKillerBoost)>)

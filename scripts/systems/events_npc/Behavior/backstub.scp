@@ -14,7 +14,8 @@ endif
 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (<flag_insubstantial>==1) && (<wasHarmed>)
   flag_insubstantial=0
   update

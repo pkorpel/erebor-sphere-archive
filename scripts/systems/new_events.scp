@@ -4,7 +4,8 @@
 [events e_npc_fizzer]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (<strlen(<tag(npc_fizzer_chance)>)>)
   arg(chance,<eval tag(npc_fizzer_chance)>)
 else
@@ -54,7 +55,8 @@ events=-e_npcChangeDmg
 [events e_npcChangeDmg]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 arg(uber,<eval (<var(ubrano)>*<tag.changeDmgPercent>)/100>)
 var(ubrano,<var(ubrano)>-<arg(uber)>)
 
@@ -84,7 +86,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@npckill
 on=@playerKill
@@ -106,7 +109,8 @@ on=@afterDoEffect
 on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -139,7 +143,8 @@ on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -245,7 +250,8 @@ endif
 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@beforegeteffect
@@ -440,7 +446,8 @@ on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
 on=@beforegetswing
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -599,7 +606,8 @@ if (hits<(maxhits/2))&&(!(tag(drak)))
   invisg
 endif
 
-on=@afterswing 
+on=@BeforeSwing
+on=@AfterSwing 
 on=@finalBlow
 on=@beforegetswing
 on=@beforedoeffect 
@@ -642,7 +650,8 @@ elseif (hits>((maxhits*81)/100))&&(tag(jedem)>1)
 endif 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@beforedoeffect
@@ -654,7 +663,8 @@ on=@npckill
 [EVENTS e_balrog]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 tag(spalil,"")
 if (rand(6)==1)
   act.sysMessage("Popalil te Balroghuv ohen!")
@@ -765,7 +775,8 @@ endif
 [events e_stunattack]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if !(<eval tag(zmrazeni)>)
   return 0
 endif
@@ -859,7 +870,8 @@ return 0
 [EVENTS e_bleed_bolt]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (findlayer.layer_horse)
   if (rand(10) == 1)
     classmessage("V sedle nejsi <sex schopen schopna> s touto kusi dobre manipulovat")
@@ -888,7 +900,8 @@ on=@npckill
 [events e_dmgByLvl]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (rand(2)==1)
   act.damage_noresponse(<eval <act.tag(level)>/3>,dam_god)
   act.sysMessage("zranuju <eval <topobj.tag(level)>/3> hp")
@@ -928,7 +941,8 @@ endif
 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -985,7 +999,8 @@ endif
 on=@beforeGetSwing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1027,7 +1042,8 @@ lastnew.trigger(userdclick)
 
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1072,7 +1088,8 @@ on=@beforeGetSwing
 on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1176,7 +1193,8 @@ endif
 on=@beforeGetSwing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1204,7 +1222,8 @@ on=@beforeGetSwing
 on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1225,7 +1244,8 @@ on=@beforeGetSwing
 on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 arg(chance,200)
 if (<eval tag(stam_dmg_chance)>)
   arg(chance,<eval tag(stam_dmg_chance)>)
@@ -1248,7 +1268,8 @@ on=@npckill
 [events e_npc_curse_mana]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
@@ -1340,7 +1361,8 @@ endif
 [events e_npc_curse_stam]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing

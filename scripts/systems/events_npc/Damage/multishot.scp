@@ -9,7 +9,8 @@
 [events e_npc_multishot]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing

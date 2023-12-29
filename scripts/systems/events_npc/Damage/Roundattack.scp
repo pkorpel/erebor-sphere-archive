@@ -14,7 +14,8 @@ f_e_npc_roundattack
 on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -110,7 +111,8 @@ f_npc_roundattack_pullall
 on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect

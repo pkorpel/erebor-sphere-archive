@@ -6,7 +6,8 @@ on=@spellcast
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@beforedoeffect
 on=@beforegeteffect
 on=@aftergetswing
@@ -63,7 +64,8 @@ return 0
 [events e_mithril]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.npc) && (<eval act.tag(resist_magic)> < 999)
   act.damage_noresponse(<eval  <tag.uc>/{<nastaveni_efekt_mithril>}>,dam_magic,<uid>)
 endif
@@ -134,7 +136,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@created
@@ -424,7 +427,8 @@ on=@UserToolTip      // someone did tool tips on me.
 smsg "@UserToolTip\n"
 return 0
 
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 smsg "@Afterswing"
 return 0
 
@@ -475,7 +479,8 @@ on=@npckill
 smsg "@NPCKill <src.name>: <src>"
 return 0
 
-//on=@afterswing
+//on=@BeforeSwing
+on=@AfterSwing
 //on=@beforedoeffect
 //deprecated on=@aftergetspelldamage
 //on=@beforegeteffect
@@ -520,7 +525,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@DrinkingPotion
 
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 arg(memory,<findID(i_memory_monitorHitsLeech)>)
 if (<eval findUID(<arg(memory)>).tag(dmgValuesCount)> > 0)
   dialogclose(d_monitorHitsLeech_dialog,0) //dialog, simulace tlacitka CLOSE
@@ -605,7 +611,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@DrinkingPotion
 
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 arg(memory,<findID(i_memory_monitorStamLeech)>)
 if (<eval findUID(<arg(memory)>).tag(dmgValuesCount)> > 0)
   dialogclose(d_monitorStamLeech_dialog,0) //dialog, simulace tlacitka CLOSE
@@ -696,7 +703,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@DrinkingPotion
 
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 arg(memory,<findID(i_memory_monitorManaLeech)>)
 if (<eval findUID(<arg(memory)>).tag(dmgValuesCount)> > 0)
   dialogclose(d_monitorManaLeech_dialog,0) //dialog, simulace tlacitka CLOSE
@@ -946,7 +954,8 @@ on=@skillfail
 combat_restorepos
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (action==skill_macefighting)
   if (findlayer(2).type==t_weapon_bow_run)
     combat_restorepos
@@ -1033,7 +1042,8 @@ on=@created
 on=@aftergetswing
 on=@beforegeteffect
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1114,7 +1124,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@beforegetswing
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -2172,7 +2183,8 @@ return <act.f_spellchecklos>
 
  //tyhle prazdny triggery tu musej bejt jinak to hazi erory
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@miningact
 on=@beforedoeffect
 on=@afterDoEffect
@@ -2581,7 +2593,8 @@ tag(combatSource,<src>)
 on=@DrinkingPotion
 on=@beforegetswing
 on=@aftergetswing
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -2831,7 +2844,8 @@ if (<action> == Skill_Magery)
 endif
 on=@beforegeteffect
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
@@ -2867,7 +2881,8 @@ endif
 
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 var(killingSpreeTarget,0)  // restart globalky
 if (isevent(e_killingSpreeCharge))
   apply_killingSpree_dmg_bonus
@@ -2961,7 +2976,8 @@ if (<action> == Skill_Magery)
 endif
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (tag(ammoid))
   arg(arrowUID,<findid(<tag(ammoid)>)>)
 else
@@ -3025,7 +3041,8 @@ if (<action> == Skill_Magery)
 endif
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (specability)
   if (tag(atskill)!=31)
     classmessage("Kriticky zasah!")
@@ -3078,7 +3095,8 @@ on=@npckill
 
 [EVENTS e_thief]
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (action==Skill_fencing)||(tag(isstabbing))
   arg(holdsWarFork,<holdsOneHand(i_war_fork,01405)>)
   if (tag(isstabbing))
@@ -3289,7 +3307,8 @@ if (<action> == Skill_Magery)
 endif
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
@@ -3365,7 +3384,8 @@ on=@beforegeteffect
 on=@beforedoeffect
 on=@afterDoEffect
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -3495,7 +3515,8 @@ if !(act.isplayer)  // povolime pvp
 endif
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (strcmpi(<src.region.name>,"Jamy smrti"))  //nejsme v jamach, mazem event
   events=-e_nbCave
   return 1

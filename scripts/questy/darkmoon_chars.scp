@@ -134,7 +134,8 @@ ITEM=random_reagent,{45 55}
 [events e_darkmoon_boss]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@aftergetswing
 if (tag(time) < <serv.time>)

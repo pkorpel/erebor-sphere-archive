@@ -280,7 +280,8 @@ return 0
 [events e_daemonbonus]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (is_physical)//jinak uz se o to postaral @beforedoeffect
   var(ubrano,<eval (var(ubrano)*(100+thisdaemonbonus))/100>)
 endif
@@ -330,7 +331,8 @@ return 0
 [events e_dragonbonus]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (is_physical)//jinak uz se o to postaral @beforedoeffect
   var(ubrano,<eval (var(ubrano)*(100+(thisdragonbonus)))/100>)
 endif
@@ -376,7 +378,8 @@ return 0
 [events e_humanbonus]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (is_physical)//jinak uz se o to postaral @beforedoeffect
   var(ubrano,<eval (var(ubrano)*(100+thishumanbonus))/100>)
 endif
@@ -421,7 +424,8 @@ return 0
 [events e_spiderbonus]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (is_physical)//jinak uz se o to postaral @beforedoeffect
   var(ubrano,<eval (var(ubrano)*(100+thisspiderbonus))/100>)
 endif
@@ -470,7 +474,8 @@ return 0
 [events e_eyebonus]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (is_physical)//jinak uz se o to postaral @beforedoeffect
   var(ubrano,<eval (var(ubrano)*(100+thiseyebonus))/100>)
 endif
@@ -521,7 +526,8 @@ return 0
 [events e_hitsleech]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (0<var(leechSuppress_hits)>)
   return
 endif
@@ -572,7 +578,8 @@ return 0
 [events e_manaleech]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (0<var(leechSuppress_mana)>)
   return
 endif
@@ -626,7 +633,8 @@ return 0
 [events e_stamleech]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (0<var(leechSuppress_stamina)>)
   return
 endif
@@ -677,7 +685,8 @@ return 0
 [events e_paralysing]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.isplayer && findlayer(2))
   if (findlayer(2).type==t_weapon_mace_staff)
     return 0
@@ -762,7 +771,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
@@ -829,7 +839,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing

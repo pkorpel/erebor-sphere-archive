@@ -1,7 +1,8 @@
 [EVENTS e_mana_draining] 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.mana>10)
   act.mana=mana-10
   act.sysMessage("Neco ti vysava manu!")
@@ -19,7 +20,8 @@ on=@aftergetswing
 [EVENTS e_mana_vampire] 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.mana > 12)
   if (<eval (<hits>+<var(ubrano)>)> > 30000)
     arg(healedAmount,<eval (30000-<hits>)>)
@@ -44,7 +46,8 @@ on=@aftergetswing
 [events e_vamp_exp]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if !tag(zjisteno)
   tag(experience,<tag(experience)>+5) //ochrana proti hovadinam
   tag(puvodniexpy,<tag(experience)>) //zaznamena puvodni expy potvory
@@ -89,7 +92,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -243,7 +247,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -315,7 +320,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -398,7 +404,8 @@ return 1
 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if ((tag(neknockuj))!=1)
   tag(neknockuj,1)
   return 0
@@ -487,7 +494,8 @@ endif
 [events e_strboost]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if !(act.npc)
   act.damage_noresponse(<eval {10 20}>,dam_magic,<uid>)
 endif
@@ -647,7 +655,8 @@ remove
 [events e_ps_fanatik]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (rand(5)==1)
   dorand(5)
     SAY("Priprav se na smrt!")
@@ -675,7 +684,8 @@ say("Nyni zemrete!")
 [events e_menavec_malej]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (body!=c_gazer)
   events=-e_tele_to_target
   findid(i_attack_guard).remove
@@ -717,7 +727,8 @@ on=@beforegeteffect
 [events e_menavec]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (body!=c_gazer)
   events=-e_tele_to_target
   findid(i_attack_guard).remove
@@ -756,7 +767,8 @@ on=@beforegeteffect
 [events e_menavec_powerful]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (body!=c_gazer)
   events=-e_tele_to_target
   findid(i_attack_guard).remove
@@ -850,7 +862,8 @@ on=@beforedoeffect
 on=@afterDoEffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegeteffect
 on=@playerKill
@@ -959,7 +972,8 @@ on=@afterDoEffect
 on=@beforegeteffect
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -1029,7 +1043,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1046,7 +1061,8 @@ endwhile
 [events e_phoenix_fire]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (rand(15) == 1)
   if (<eval tag(phoenix_fire_damage)>)
     fireexplosion(10,<eval tag(phoenix_fire_damage)>)
@@ -1081,7 +1097,8 @@ return 0
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1193,7 +1210,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1202,7 +1220,8 @@ on=@beforegeteffect
 [events e_strach_lord2]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 
 if (rand(3) == 1)
   dorand 6
@@ -1467,7 +1486,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1476,7 +1496,8 @@ on=@beforegeteffect
 [events e_lowerdmg]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 var(ubrano,<eval (var(ubrano)/3)>)
 
 on=@finalBlow
@@ -1489,7 +1510,8 @@ on=@beforegeteffect
 [events e_vampire_lord]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if !(isSilenced) 
   if (!(act.findid(i_curse_drainhps)) && (rand(10)==1))
     act.newequip(i_curse_drainhp)
@@ -1542,7 +1564,8 @@ topobj.events=-e_curse_givehps
 [events e_curse_givehps]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if !(findid(i_curse_givehps))
   events=-e_curse_givehps
   return 0
@@ -1592,7 +1615,8 @@ endif
 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (rand(10)==1)
   newnpc(c_serpent_malej)
   lastnewchar.p=<eval(<p_x>+{-2 2})>,<eval(<p_y>+{-2 2})>,<p_z>,<mapplane>
@@ -1650,7 +1674,8 @@ on=@npckill
 [events e_spellparalyze]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@aftergetswing
 on=@beforedoeffect
@@ -1678,7 +1703,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1715,7 +1741,8 @@ endif
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -1727,7 +1754,8 @@ on=@beforegeteffect
 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforegetswing
 on=@aftergetswing
@@ -1852,7 +1880,8 @@ cont.sysMessage("Bozska sila z tebe vyprchala. Citis se opet jako obycejny clove
 
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if !(act.isplayer)
  var(ubrano,#*2)
 endif
@@ -1903,7 +1932,8 @@ return 0
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -1925,7 +1955,8 @@ return 0
 on=@beforegetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect

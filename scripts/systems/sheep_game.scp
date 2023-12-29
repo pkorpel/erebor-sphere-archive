@@ -718,7 +718,8 @@ endif
 events -e_sheep_game_monster
 return 0
 
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -743,7 +744,8 @@ f_sheep_game_setMonsterEvent
 on=@hit
 f_sheep_game_setMonsterEvent
 
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 f_sheep_game_setMonsterEvent
 
 on=@death

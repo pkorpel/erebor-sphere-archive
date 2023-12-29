@@ -887,7 +887,8 @@ endwhile
 /////////////////////////////
 
 [events e_weekly_dmgNPC] // Udel poskozeni monstrum
-on=@afterSwing
+on=@BeforeSwing
+on=@AfterSwing
 arg(dmgDealt,<eval var(ubrano)>)
 if (<arg(dmgDealt)> > 0)
   arg(weekly,<findid(i_memory_weekly_quest)>)
@@ -995,7 +996,8 @@ on=@beforeGetEffect
 on=@beforeDoEffect
 on=@afterDoEffect
 on=@beforeGetSwing
-on=@afterSwing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@npcKill
 on=@playerKill
@@ -1053,7 +1055,8 @@ on=@beforeDoEffect
 on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterGetSwing
-on=@afterSwing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@npcKill
 on=@DrinkingPotion
@@ -1094,7 +1097,8 @@ on=@beforeDoEffect
 on=@afterDoEffect
 on=@beforeGetSwing
 on=@afterGetSwing
-on=@afterSwing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@npcKill
 on=@DrinkingPotion
@@ -1145,7 +1149,8 @@ if (src.isPlayer) // zabil hrace
   findid(i_memory_weekly_quest).f_weekly_killPlayer
 endif
 
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforeGetEffect
 on=@beforeDoEffect

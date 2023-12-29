@@ -107,7 +107,8 @@ endif
 on=@DrinkingPotion
 tutAddActionXP(20,drinkingPotion,"<sex(Zjistil,Zjistila)> jsi, jak vypit lektvar!")
 
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.isplayer)
  var(ubrano,0)
  return 1

@@ -4,7 +4,8 @@
 [events e_npc_sniper]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (act.isplayer)
   if (isfighting_ranged)
     if (wasHarmed)

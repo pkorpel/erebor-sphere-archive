@@ -560,6 +560,7 @@ var(wasFrozen,0)
 var(swingedchar,<uid>)
 src=<argv(0)> // this helps in custom damage calls
 trigger(@beforegetswing)
+src.trigger(@beforeswing)
 var(ubrano,<handleresists(<var(ubrano)>,<hval var(damage_flags)>)>)
 if !(var(reflected)) // this is NOT a reflected strike
   if (f_dmgFinal_dodge) // first of all - try to AVOID the punch completely!

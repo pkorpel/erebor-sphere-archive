@@ -5,7 +5,8 @@
 [EVENTS e_lifeLeech]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (strlen(<tag(npc_lifeLeech)>))
   arg(lifeLeech,<eval randombetween(<tag(npc_lifeLeech)>)>)
 else
@@ -33,7 +34,8 @@ on=@npckill
 [EVENTS e_lifeLeech_vampire]
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (strlen(<tag(npc_lifeLeech)>))
   arg(hps,<randombetween(<tag(npc_lifeLeech)>)>)
 else

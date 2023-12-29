@@ -3160,7 +3160,8 @@ flag_war=0
 return 1
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 action=-1
 flag_war=0
 return 1
@@ -3198,7 +3199,8 @@ findUID(<tag(master)>).hypnoswap_back
 return 1
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 //action=-1
 //flag_war=0
 return 1
@@ -3277,7 +3279,8 @@ on=@afterDoEffect
 on=@beforeDoEffect
 on=@DrinkingPotion
 on=@beforegetswing
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@playerKill
 on=@npckill
@@ -4036,7 +4039,8 @@ on=@aftergetswing
 f_catchField_releaseNPC(<tag(catchedBy)>,<tag(catchedBy).findID(i_memory_catchField)>)
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
@@ -4128,7 +4132,8 @@ endif
 [events e_defstance]
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (is_physical) && !(act.isplayer) && (tag(ra_defstance))
   var(ubrano,<eval (var(ubrano)*(100-(<nastaveni_defstance_dmgplayer>*<tag(ra_defstance)>/10)))/100>) // o kolik zredukujem dmg
 endif
@@ -4197,7 +4202,8 @@ if (argn==32) || (argn==32)
 endif
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 
 on=@beforegetswing
@@ -4600,7 +4606,8 @@ tag.remove(pact_to)
 
 [events e_pact]
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@aftergetswing
 on=@death
@@ -4618,7 +4625,8 @@ on=@npckill
 
 [events e_bloodpact]
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@aftergetswing
 on=@gethit
@@ -4864,7 +4872,8 @@ if (argn==32) || (argn==32)
 endif
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@aftergetswing
 on=@beforegeteffect
@@ -5226,7 +5235,8 @@ src.sysmessage("Nyni jiz nejsi <src.sex(schopen,schopna)> rozpoznat rezisty.")
 
 [events e_getphysresists]
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if !(act.isplayer) &&  (<armslore> > {1.0 120.0})
   classMessage("<act.name><act.showresistsslashing>")
   classMessage("<act.name><act.showresistspiercing>")
@@ -5624,7 +5634,8 @@ endif
 [events e_vigilance]
 
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 if (is_physical) && !(act.isplayer) && (tag(ra_thief_defstance))
   var(ubrano,<eval (var(ubrano)*(70))/100>) // o kolik zredukujem dmg
 endif
@@ -6113,6 +6124,7 @@ on=@afterDoEffect
 on=@beforegeteffect
 on=@beforegetswing
 on=@aftergetswing
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 [eof]

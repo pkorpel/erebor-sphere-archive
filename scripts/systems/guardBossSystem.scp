@@ -21,7 +21,8 @@ f_guardBossSystem_onHitCheckGuards
 on=@aftergetswing
 on=@Created
 on=@DrinkingPotion
-on=@afterswing
+on=@BeforeSwing
+on=@AfterSwing
 on=@finalBlow
 on=@beforedoeffect
 on=@afterDoEffect
