@@ -2905,6 +2905,17 @@ events=e_Cardolanske_pohrebiste
 RAINCHANCE=00
 COLDCHANCE=00
 
+[AREA Veznice]
+GROUP=Dungeony
+P=3, 1268, -8 , 2 
+MAPPLANE=2
+RECT=1,1253,177,1577
+FLAGS=0081E
+tag.realm=3
+events=e_Veznice
+RAINCHANCE=00
+COLDCHANCE=00
+
 [AREA Edgarovo Utociste Level 1]
 GROUP=Dungeon Edgarovo Utociste
 P=5847,2468,0,10

@@ -1239,6 +1239,19 @@ on=@exit
 
 //////////////////////////////////////////////////////////////////////////
 
+[RegionType e_Veznice]
+on=@enter
+  if (src.isplayer)
+    src.events=+e_nohorse
+  endif
+
+on=@exit
+  if (src.isplayer)
+    src.events=-e_nohorse
+  endif  
+
+//////////////////////////////////////////////////////////////////////////
+
 [RegionType r_KatakombyOkultistu]
 ON=@ENTER
 if (src.isplayer)
