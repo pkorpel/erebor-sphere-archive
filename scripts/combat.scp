@@ -597,6 +597,7 @@ if (<var(ubrano)> > 0)
     var(killedChar,)
   endif
 endif
+var(wasFrozen,0)
 
 // args - the UID of a player the fight memories of whom should be added
 // Called upon the Character whom was hit/attacked.
@@ -655,9 +656,7 @@ endif
 
 [function dmgHits] //argv(0) hits
 if (<argv(0)> > 0)
-  if (<eval var(wasFrozen)>) //the player was frozen by this specific hit
-    var(wasFrozen,)
-  else
+  if (<eval var(wasFrozen)> == 0) //the player wasn't frozen by this specific hit
     paralyze_remove
   endif
   events=-e_getHit
