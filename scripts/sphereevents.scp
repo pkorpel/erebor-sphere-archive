@@ -2507,7 +2507,7 @@ while (act.findcont(0))
   if (profession==class_craft) //za krafty zadny expy
     arg(addfame,0)
   endif
-  if ((act.link.isplayer) && (isplayer)) // && (<eval act.link.tag(realm)> == <eval tag(realm)>)  //za kill vlastniho realmu zadne expy
+  if ((act.link.isplayer) && (isplayer)) && (<eval act.link.tag(realm)> == <eval tag(realm)>)  //za kill vlastniho realmu zadne expy
     arg(addfame,0)
   endif
   tag(added_experience_bydeath,<arg(addfame)>)
