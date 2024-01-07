@@ -1529,10 +1529,11 @@ endif
 
 
 on=@Login
-//if (src.findid(i_christmasQuest))
-//  src.findid(i_christmasQuest).timer=5
-//  src.accmsg("byl odmazan memory item Vanocniho Eventu. Hrac celkem nasbiral <src.findid(i_christmasQuest).tag(odevzdanych_banek)> Banek.")
-//endif
+if (src.findid(i_christmasQuest))
+  src.findid(i_christmasQuest).timer=5
+  src.classmessage("Vanocni Event skoncil. Celkem jsi odevzdal <src.findid(i_christmasQuest).tag(odevzdanych_banek)> vanocnich banek.")
+  src.accmsg("byl odmazan memory item Vanocniho Eventu. Hrac celkem nasbiral <src.findid(i_christmasQuest).tag(odevzdanych_banek)> vanocnich banek.")
+endif
 src.tag(d_count,)
 src.redmessage_me
 if(src==027f)||(src==0C) //Finn a Houba dostanou logy :)
