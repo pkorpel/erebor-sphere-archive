@@ -75,96 +75,96 @@ name=Opilcova kosile
 ////////////////////////////////////////////////////////////////////////////////
 // E A S T E R   Q U E S T   2 0 1 6
 
-// [ITEMDEF i_easter_egg]
-// ID=i_fruit_coconut
-// NAME=Velikonocni vejce
-// VALUE=50000
-// WEIGHT=0
-// TYPE=t_food
-// 
-// CATEGORY=Eventy
-// SUBSECTION=Easter
-// DESCRIPTION=Vejce
-// 
-// ON=@Create
-//   dorand 14
-//     color=0983
-//     color=06
-//     color=084D
-//     color=098e
-//     color=021
-//     color=0429
-//     color=0111   
-//     color=042d
-//     color=099d
-//     color=07c
-//     color=0992
-//     color=0980
-//     color=0ac1
-//     color=0985
-//   enddo
-//   
-// ON=@DROPON_GROUND
-// if (playerExists(<src>)) 
-//   sfx(74)      // zvuk rozbiti vajec :-)
-//   remove
-//   src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
-// endif
-// 
-// 
-// 
-// ON=@userCLICK
-// src.sysmessage("Velikonocni vejce, jsou opravdu krehke, tak opatrne.")
-// // sfx(74)      // zvuk rozbiti vajec :-)
-// // if (amount > 1)
-// //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-// //   remove
-// // else
-// //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-// //   remove
-// // endif
-// 
-// // ON=@Pickup_ground
-// // sfx(74)      // zvuk rozbiti vajec :-)
-// // if (amount > 1)
-// //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-// //   remove
-// // else
-// //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-// //   remove
-// // endif
-// 
-// // ON=@Pickup_pack
-// // sfx(74)      // zvuk rozbiti vajec :-)
-// // if (amount > 1)
-// //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-// //   remove
-// // else
-// //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-// //   remove
-// // endif
-// 
-// // ON=@UserDClick
-// // sfx(74)      // zvuk rozbiti vajec :-)
-// // if (amount > 1)
-// //   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
-// //   remove
-// // else
-// //   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
-// //   remove
-// // endif
-//   
-// ON=@Step
-// if (src.isgm)
-//   return 1
-// endif
-// if (<src.weight> > 3000)
-//   src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
-//   sfx(74)
+[ITEMDEF i_easter_egg]
+ID=i_fruit_coconut
+NAME=Velikonocni vejce
+VALUE=50000
+WEIGHT=0
+TYPE=t_food
+
+CATEGORY=Eventy
+SUBSECTION=Easter
+DESCRIPTION=Vejce
+
+ON=@Create
+  dorand 14
+    color=0983
+    color=06
+    color=084D
+    color=098e
+    color=021
+    color=0429
+    color=0111   
+    color=042d
+    color=099d
+    color=07c
+    color=0992
+    color=0980
+    color=0ac1
+    color=0985
+  enddo
+  
+ON=@DROPON_GROUND
+if (playerExists(<src>)) 
+  sfx(74)      // zvuk rozbiti vajec :-)
+  remove
+  src.sysmessage("Oh ne! Ty jsi je <src.sex(rozbil,rozbila)>!")
+endif
+
+
+
+ON=@userCLICK
+src.sysmessage("Velikonocni vejce, jsou opravdu krehke, tak opatrne.")
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
 //   remove
 // else
-//   src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
 // endif
+
+// ON=@Pickup_ground
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+
+// ON=@Pickup_pack
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+
+// ON=@UserDClick
+// sfx(74)      // zvuk rozbiti vajec :-)
+// if (amount > 1)
+//   src.sysmessage("Fuj, ty vejce byly zkazene a rozpadly se ti podrukama.")
+//   remove
+// else
+//   src.sysmessage("Fuj, to vejce bylo zkazene a rozpadlo se ti podrukama.")
+//   remove
+// endif
+  
+ON=@Step
+if (src.isgm)
+  return 1
+endif
+if (<src.weight> > 3000)
+  src.sysmessage("Nesiko! <src.sex(Rozslapl,Rozslapla)> jsi vejce!")
+  sfx(74)
+  remove
+else
+  src.sysmessage("Pozor! Malem jsi <src.sex(rozslapl,rozslapla)> velikonocni vejce.")
+endif
  
 [ITEMDEF i_easter_port]
 ID=i_gate_3
@@ -490,22 +490,22 @@ else
   redmessage("Neplnis Velikonocni Event, nejdrive ziskej duveru Farmare Oldy.")
 endif
 
-// [ITEMDEF i_easterQuest_wentThrough]
-// ID=i_memory
-// NAME=easterQuest
-// TYPE=T_EQ_SCRIPT
-// 
-// ON=@EQUIP
-// TIMER=2036800
-// ATTR=094
-// tag(odevzdanych_vajec,0)
-// if (finduid(#040034663)) && !(src.isgm)
-//   finduid(#040034663).tag(sberacu,#+1)
-// endif
-// 
-// ON=@timer
-// remove
-// return 1
+[ITEMDEF i_easterQuest_wentThrough]
+ID=i_memory
+NAME=easterQuest
+TYPE=T_EQ_SCRIPT
+
+ON=@EQUIP
+TIMER=2036800
+ATTR=094
+tag(odevzdanych_vajec,0)
+if (finduid(#040034663)) && !(src.isgm)
+  finduid(#040034663).tag(sberacu,#+1)
+endif
+
+ON=@timer
+remove
+return 1
 
 [ITEMDEF i_realm_gate]
 ID=i_gate_3
