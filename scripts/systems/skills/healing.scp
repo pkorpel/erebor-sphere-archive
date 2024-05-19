@@ -257,6 +257,54 @@ cont.tag.remove(gotexpforhealingnow)
 link.tag.remove(gethealedby)
 remove
 
+[function heal0]
+f_heal_value(0)
+
+[function heal1]
+f_heal_value(1)
+
+[function heal2]
+f_heal_value(2)
+
+[function heal3]
+f_heal_value(3)
+
+[function heal4]
+f_heal_value(4)
+
+[function heal5]
+f_heal_value(5)
+
+[function heal6]
+f_heal_value(6)
+
+[function heal7]
+f_heal_value(7)
+
+[function heal8]
+f_heal_value(8)
+
+[function heal9]
+f_heal_value(9)
+
+[function heal10]
+f_heal_value(10)
+
+[function heal11]
+f_heal_value(11)
+
+[function heal12]
+f_heal_value(12)
+
+[function heal13]
+f_heal_value(13)
+
+[function heal14]
+f_heal_value(14)
+
+[function heal15]
+f_heal_value(15)
+
 //samanova leceni
 [function samheal0]
 f_samHeal_value(0)
@@ -307,20 +355,39 @@ f_samHeal_value(14)
 f_samHeal_value(15)
 
 [function f_samHeal_value]
-if (profession==class_shaman)
-  if (<strlen(<equiptag(equip<eval argv(0)>)>)>)
-    if (findUID(<equiptag(equip<eval argv(0)>)>).isChar)
-      findid(i_bandage_bloody).bandaonchar(<equiptag(equip<eval argv(0)>)>)
-      healdisarm
-      stopmagery
-    else
-      src.redMessage("Cil ulozeny jako equip<eval argv(0)> je predmet!")
-    endif
-  else
-    src.redMessage("Nemas nastaveny equip<eval argv(0)>")
-  endif
-else
-  sysMessage("Pouze saman vi jak vyuzit krvave bandaze k leceni")
-endif 
+if (profession!=class_shaman)
+  redMessage("Pouze saman vi jak vyuzit krvave bandaze k leceni")
+  return 0
+endif
+f_heal_value_base(<argv(0)>,i_bandage_bloody)
+
+[function f_heal_value]
+f_heal_value_base(<argv(0)>,i_bandage)
+
+[function f_heal_value_base]
+if (<flags>&statf_dead)
+  redmessage("Jako duch nic nevylecis.")
+  return 0
+endif
+
+if (<isParalyzed>)
+  redmessage("V paralyze nemuzes lecit.")
+  return 0
+endif
+
+arg(myHealTarget,<equiptag(equip<eval argv(0)>)>)
+
+if (!<strlen(<arg(myHealTarget)>)>)
+  src.redMessage("Nemas nastaveny equip<eval argv(0)>.")
+  return 0
+endif
+
+if (!findUID(<arg(myHealTarget)>).isChar)
+  src.redMessage("Cil ulozeny jako equip<eval argv(0)> je predmet!")
+  return 0
+endif
+
+findid(argv(1)).bandaonchar(<arg(myHealTarget)>)
+stopmagery
 
 [eof]
