@@ -200,39 +200,49 @@ DUPEITEM=013b7
 
 
 [ITEMDEF 0fb4]
-//Sledge Hammer
+//Sledge Hammer - Na rozbijeni kamenu
 DEFNAME=i_hammer_sledge
-TYPE=T_WEAPON_MACE_SMITH
+NAME=Sledge hammer
+TYPE=T_WEAPON_MACE_CROOK
 FLIP=1
 RESOURCES=4 i_ingot_iron
 SKILLMAKE=TINKERING 54.1,t_tinker_tools
 WEIGHT=90
+DAM=10,16
+REQSTR=80
+TWOHANDS=Y
 CATEGORY=Items by Professions
 SUBSECTION=Blacksmiths
 DESCRIPTION=Sledge Hammer
 DUPELIST=0fb5
 
+on=@create
+HITPOINTS={31 60}
+
 on=@targon_item
-return(<blacksmithing_targon_item>)
+f_wrongBlacksmithUsage_LogMessage
+//return(<blacksmithing_targon_item>)
 
 [ITEMDEF 0fb5]
 //sledge hammer
 DUPEITEM=0fb4
 
 [ITEMDEF 0102a]
-//Hammer
+//Hammer - truhlarske
 DEFNAME=i_hammer
+NAME=Carpenters hammer
 RESOURCES=4 i_ingot_iron
 WEIGHT=40
-TYPE=T_WEAPON_MACE_SMITH
+TYPE=T_CARPENTRY
 FLIP=1
 CATEGORY=Items by Professions
 SUBSECTION=Carpenter
-DESCRIPTION=Hammer
+DESCRIPTION=Carpenter Hammer
 DUPELIST=0102b
 
-on=@targon_item
-return(<blacksmithing_targon_item>)
+on=@userdclick
+craftmenu(carpentry)
+return 1
 
 [ITEMDEF 0102b]
 //hammer
@@ -240,6 +250,7 @@ DUPEITEM=0102a
 
 [ITEMDEF 013e3]
 DEFNAME=i_hammer_smith
+NAME=Blacksmiths hammer
 WEIGHT=40
 TYPE=T_WEAPON_MACE_SMITH
 FLIP=1

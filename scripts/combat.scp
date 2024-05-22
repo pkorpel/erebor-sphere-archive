@@ -127,7 +127,18 @@ endif
 //oprava podle zniceni zbrane
 if (tag(atskill)!=43)
   if (<eval tag(weaponuid).more1h> == 0)
-    accmsg("ERROR: utoci zbrani <tag(weaponuid).name> (<tag(weaponuid)>), ktera nema celkovou durabilitu!")
+    accmsg("ERROR: utoci zbrani <tag(weaponuid).name> (<tag(weaponuid)>), ktera nema celkovou durabilitu! (<eval tag(weaponuid).more1l>/<eval tag(weaponuid).more1h>)")
+    arg(oname,<tag(weaponuid).name>)
+    arg(ocolor,<tag(weaponuid).color>)
+    arg(odur,<tag(weaponuid).more1l>)
+    tag(weaponuid).trigger(create)
+    tag(weaponuid).more1h=<tag(weaponuid).more1l>
+    if (<eval arg(odur)> > 0)
+      tag(weaponuid).more1l=<arg(odur)>
+    endif
+    tag(weaponuid).color=<arg(ocolor)>
+    tag(weaponuid).name=<arg(oname)>
+    accmsg("ERROR: zbran <tag(weaponuid).name> (<tag(weaponuid)>), byla opravena na durabilitu: <eval tag(weaponuid).more1l>/<eval tag(weaponuid).more1h>!")
   endif
   arg(durkvocient, <eval ((<tag(weaponuid).more1h>-<tag(weaponuid).more1l>)*1000)/<tag(weaponuid).more1h>>)
   tag(UC,<eval tag(UC)-((<eval tag(UC)>*<arg(durkvocient)>)/2000)>)
