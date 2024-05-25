@@ -998,8 +998,8 @@ item=i_gold
 [CHARDEF c_nurn_man_archer]
 NAME=Nurn Man
 ID=C_WOMAN
-ICON=i_pet_MAN
-CAN=MT_WALK|MT_run|MT_EQUIP|MT_feMALE
+ICON=i_pet_WOMAN
+CAN=MT_WALK|MT_run|MT_EQUIP|MT_FEMALE
 
 attack=25
 ARMOR=25
@@ -1018,7 +1018,7 @@ SUBSECTION=Zla Druzina 5
 DESCRIPTION=Archer {male}
 
 ON=@Create
-NAME=#NAMES_ELF_MALE
+NAME=#NAMES_ELF_FEMALE
 Title=The Nurn-man
 COLOR=color_npc_nurn_man
 NPC=brain_Human
@@ -1043,7 +1043,7 @@ tag.hypnotizable=<tag.hypnotizable>|<flag_BuffPower[4]>
 
 tag(monstertype,humanoid)
 
-tag(resist_poison,6500)
+tag(resist_poison,650)
 tag.resist_para=<eval {200 550}>
 tag(resist_summon,350)
 tag(resist_bleed,200)
