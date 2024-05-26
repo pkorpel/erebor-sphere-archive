@@ -387,7 +387,8 @@ if (!findUID(<arg(myHealTarget)>).isChar)
   return 0
 endif
 
-findid(argv(1)).bandaonchar(<arg(myHealTarget)>)
+stopscriptedskills
 stopmagery
+findid(argv(1)).bandaonchar(<arg(myHealTarget)>)
 
 [eof]
