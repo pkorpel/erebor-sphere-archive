@@ -634,7 +634,7 @@ return 1
 //utok do zad
 [function f_thief_fromBehind]
 if (0<tag(ra_utok_do_zad)>)
-  if (f_isBackslash(<act.dir>))
+  if (f_isBackslash(<act>))
     arg(distance,<distancefrom(<act>)>)
     if ((<arg(distance)> == 1)||(<arg(distance)> == 2))
       classmessage("Uder do zad!")

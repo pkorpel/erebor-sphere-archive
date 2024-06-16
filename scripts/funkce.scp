@@ -5254,7 +5254,9 @@ doswitch <args>
   return"-1,-1"
 enddo
 
-[function f_isBackslash] // argv(0) - dir cile               
+[function f_isBackslash] // argv(0) - cil (act) 
+face(<argv(0)>) // Otoceni thiefa na cil
+arg(actDir,<argv(0)>.dir)
 arg(minDIR,<eval (<dir>-1)>)
 arg(maxDIR,<eval (<dir>+1)>)
 
@@ -5265,11 +5267,11 @@ if (<arg(maxDir)> > 7)
   arg(maxDir,0)
 endif
 
-if (<argv(0)> == <arg(minDir)>)
+if (<arg(actDir)> == <arg(minDir)>)
   return 1
-elseif (<argv(0)> == <dir>)
+elseif (<arg(actDir)> == <dir>)
   return 1
-elseif (<argv(0)> == <arg(maxDir)>)
+elseif (<arg(actDir)> == <arg(maxDir)>)
   return 1
 else
   return 0
