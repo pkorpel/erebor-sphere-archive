@@ -5256,7 +5256,7 @@ enddo
 
 [function f_isBackslash] // argv(0) - cil (act) 
 face(<argv(0)>) // Otoceni thiefa na cil
-arg(actDir,<argv(0)>.dir)
+arg(actDir,<argv(0).dir>)
 arg(minDIR,<eval (<dir>-1)>)
 arg(maxDIR,<eval (<dir>+1)>)
 
