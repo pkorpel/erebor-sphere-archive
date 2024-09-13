@@ -308,20 +308,20 @@ class_info_class_priest_description[9] "Tato schopnost zvysuje mnozstvi staminy 
 //////////////////////////////////////////////////////////////////
 
 // class war
-class_info_class_war_abilities 11 // number of abilities == kazda pridana abilita +1
+class_info_class_war_abilities 12 // number of abilities == kazda pridana abilita +1
 // meni sa cislo v [x]
 
 class_info_class_war_name[0] Dvojity zasah
 class_info_class_war_tag[0] ra_Doubleswing
 class_info_class_war_max_points[0] 40
 class_info_class_war_function[0] none
-class_info_class_war_description[0] "Tato automaticka schopnost umoznuje valecnikovi zasahnout monstrum o 50% silneji. K teto schopnosti je treba uzivat spravne zbrane (Long sword, LBA, Double axe a 2hand axe) a mit dostatek staminy. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zvednout tak sanci na zasazeni dvojiteho zasahu."
+class_info_class_war_description[0] "Tato automaticka schopnost umoznuje valecnikovi zasahnout monstrum o 50% silneji. K teto schopnosti je treba uzivat spravne zbrane (Long sword, Broad sword, LBA, Double axe a 2hand axe) a mit dostatek staminy. Tuto schopnost je mozno 4x po deseti bodech vylepsit a zvednout tak sanci na zasazeni dvojiteho zasahu. Dvojity zasah se lze naucit od 30. urovne valecnika."
 
 class_info_class_war_name[1] Roundattack
 class_info_class_war_tag[1] ra_roundattack
 class_info_class_war_max_points[1] 40
 class_info_class_war_function[1] roundattack
-class_info_class_war_description[1] "Tato schopnost umoznuje zasahnout vsechna monstra v tesne blizkosti valecnika. K teto schopnosti je treba uzivat spravne typy obourucnich seker a mit dostatek staminy. Tuto schopnost je mozno 3x po deseti bodech vylepsit a zkratit tak dobu, kdy je mozno pouzit uder znovu."
+class_info_class_war_description[1] "Tato schopnost umoznuje zasahnout vsechna monstra v tesne blizkosti valecnika. K teto schopnosti je treba uzivat obourucni zbran a mit dostatek staminy."
 
 class_info_class_war_name[2] Omracujici uder
 class_info_class_war_tag[2] ra_stuntattack
@@ -376,6 +376,18 @@ class_info_class_war_tag[10] ra_vykryti
 class_info_class_war_max_points[10] 20
 class_info_class_war_function[10] none
 class_info_class_war_description[10] "Tato automaticka schopnost umoznuje valecnikovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+
+class_info_class_war_name[10] Vykryti stitem
+class_info_class_war_tag[10] ra_vykryti
+class_info_class_war_max_points[10] 20
+class_info_class_war_function[10] none
+class_info_class_war_description[10] "Tato automaticka schopnost umoznuje valecnikovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+
+class_info_class_war_name[11] Taunt
+class_info_class_war_tag[11] ra_taunt
+class_info_class_war_max_points[11] 20
+class_info_class_war_function[11] taunt
+class_info_class_war_description[11] "Aktivni schopnost, ktera lze pouzit na monstrum. Valecnik na zaklde sve sily a aktualniho stavu staminy silne zarve a tim nalaka cil na sebe. Na uspech ma i vliv vzdalenosti cile od valecnika. V pripade, ze taunt povede, zasazene monstrum zacne ignorovat vsechny ostatni hrace a prioritne utoci na valecnika. Pocet bodu ovlivnuje rozsah monster jenz jdou takhle nalakat a dobu po kterou nalakani bude trvat. Od 11 bodu v abilite, lze pouzit i prikaz .masstaunt, ktery takto nalaka vsechna monstra v dosahu a pro kazde z nich vyhodnocuje zda se nalaka ci nikoliv. Prikaz .taunt a .masstaunt maji oddelene timery, lze je tedy kombinovat. Schopnost Taunt se valecnik muze naucit od 30. urovne a MassTaunt od 75. urovne."
 
 
 //////////////////////////////////////////////////////////////////
@@ -495,13 +507,13 @@ class_info_class_necro_name[5] Nemrtvi - Velky Vampyr
 class_info_class_necro_tag[5] ra_velky_vampyr_vylepseni
 class_info_class_necro_max_points[5] 30
 class_info_class_necro_function[5] none
-class_info_class_necro_description[5] "Nekromant je panem summonu - zejmena nemrtvych - touto abilitou je schopen povolat jeste silnejsiho velkeho vampyra - konkretne az 3 urovne lepsich velkych vampyru (vyssi level se projevi az po kazdych 10ti bodech v teto schopnosti). Teto schopnosti se nekromant muze ucit od levelu 1."
+class_info_class_necro_description[5] "Nekromant je panem summonu - zejmena nemrtvych - touto abilitou je schopen povolat jeste silnejsiho velkeho vampyra - konkretne az 3 urovne lepsich velkych vampyru (vyssi level se projevi az po kazdych 10ti bodech v teto schopnosti). Teto schopnosti se nekromant muze ucit od levelu 10."
 
 class_info_class_necro_name[6] Nemrtvi - Kostlivy Lucistnik
 class_info_class_necro_tag[6] ra_lucistnik_vylepseni
 class_info_class_necro_max_points[6] 30
 class_info_class_necro_function[6] none
-class_info_class_necro_description[6] "Nekromant je panem summonu - zejmena nemrtvych - touto abilitou je schopen povolat jeste silnejsiho kostliveho lucistnika - konkretne az 3 urovne lepsich lucistniku (vyssi level se projevi az po kazdych 10ti bodech v teto schopnosti). Teto schopnosti se nekromant muze ucit od levelu 50."
+class_info_class_necro_description[6] "Nekromant je panem summonu - zejmena nemrtvych - touto abilitou je schopen povolat jeste silnejsiho kostliveho lucistnika - konkretne az 3 urovne lepsich lucistniku (vyssi level se projevi az po kazdych 10ti bodech v teto schopnosti). Teto schopnosti se nekromant muze ucit od levelu 25."
 
 class_info_class_necro_name[7] Nemrtvi - Satan
 class_info_class_necro_tag[7] ra_satan_vylepseni
@@ -556,7 +568,7 @@ class_info_class_necro_description[14] "Nekromant je schopen vyvolat mocne kouzl
 //////////////////////////////////////////////////////////////////
 
 // class ranger
-class_info_class_ranger_abilities 7 // number of abilities == kazda pridana abilita +1
+class_info_class_ranger_abilities 10 // number of abilities == kazda pridana abilita +1
 
 class_info_class_ranger_name[0] Sniper
 class_info_class_ranger_tag[0] none
@@ -599,6 +611,24 @@ class_info_class_ranger_tag[6] ra_splitshot
 class_info_class_ranger_max_points[6] 20
 class_info_class_ranger_function[6] splitshot
 class_info_class_ranger_description[6] "Tato schopnost umoznuje zasahnout jednim rozdelenym sipem vice nepratel v okoli primarniho cile utoku a lze ji pouzit se vsemi strelnymi zbranemi. Rozdelena strela funguje jak v PvM tak v PvP."
+
+class_info_class_ranger_name[7] Drtivy sip
+class_info_class_ranger_tag[7] ra_crushingArrow
+class_info_class_ranger_max_points[7] 20
+class_info_class_ranger_function[7] crushingArrow
+class_info_class_ranger_description[7] "Tato schopnost umoznuje zasahnout cil drtivym sipem, ktery sice cili neudeli zraneni, ale na kratkou dobu mu snizi fyzickou odolnost. Tedy vsichni utocnici se secnymi, ostrymi, tupymi a strelnymi zbranemi z tohoto efektu budou profitovat zvysenym zranenim. Cil pod vlivem teto ability je oznacen animaci terce. Pocet bodu v teto abilite ovlivnuji delku trvani a velikost snizeni fyzicke odolnosti cile. Tato abilita je dostupna od 30. levelu."
+
+class_info_class_ranger_name[8] Znalost jezditek
+class_info_class_ranger_tag[8] ra_mountsKnowledge
+class_info_class_ranger_max_points[8] 20
+class_info_class_ranger_function[8] boosty
+class_info_class_ranger_description[8] "Znalost jezditek rangera ovlivnuje vysi bonusu ziskane z jezditka na kterem prave sedi. K ziskani bonusu je potreba mit skilly Animal Taming a Animal Lore. Dale je treba mit body v teto schopnosi a ziskat samotnou znalost jednotlivych jezditek. Tuto znalost ziska ranger tamovanim jednotlivych typu jezditek na jejich spawnech. Informace o stavu znalosti lze dohledat v menu .boosty. Touto schopnosi lze ziskat az o 100% vetsi bonus z jezditka, nez bez nej. Tuto schopnost se muze ucit ranger jiz po dovrseni 12. urovne."
+
+class_info_class_ranger_name[9] Krvelacnost
+class_info_class_ranger_tag[9] ra_killingSpree
+class_info_class_ranger_max_points[9] 20
+class_info_class_ranger_function[9] none
+class_info_class_ranger_description[9] "Tato schopnost se sama aktivuje ve chvili, kdy ranger svym vystrelem dorazi svuj cil. Timto ziska bod krvelacnosti, kterych lze ziskat maximalne 3 a to opetovnym zabitim cilu v rade. Kazdy bod krvelacnosti zvysuje rangerovi sanci na kriticky zasah a navysuje poskozeni nasledujiciho vystelu. Tuto schopnost lze se ucit od 50. urovne."
 
 //////////////////////////////////////////////////////////////////
 ////////////////////////////// MYSTIK ////////////////////////////

@@ -817,10 +817,10 @@ def_rearAbilities_undeads_zivoty_desc                "Summoni - vice zivotu"
 def_rearAbilities_undeads_zivoty[0]                  0,10,50,20,100,30,150,40
 def_rearAbilities_undeads_zivoty_class[0]            necro
 def_rearAbilities_velky_vampyr_vylepseni_desc        "Summoni - lepsi vampyr"
-def_rearAbilities_velky_vampyr_vylepseni[0]          50,10,100,20,150,30
+def_rearAbilities_velky_vampyr_vylepseni[0]          10,5,20,10,30,15,40,20,50,30
 def_rearAbilities_velky_vampyr_vylepseni_class[0]    necro
 def_rearAbilities_lucistnik_vylepseni_desc           "Summoni - lepsi lucistnik"
-def_rearAbilities_lucistnik_vylepseni[0]             50,10,100,20,150,30
+def_rearAbilities_lucistnik_vylepseni[0]             25,10,50,20,100,30
 def_rearAbilities_lucistnik_vylepseni_class[0]       necro
 def_rearAbilities_satan_vylepseni_desc               "Summoni - lepsi satan"
 def_rearAbilities_satan_vylepseni[0]                 50,10,100,20,150,30
