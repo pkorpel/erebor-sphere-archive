@@ -1441,7 +1441,7 @@ if (f_canseelos(<argv(0)>)) && !(isgm) && !(flag_invisible==1)  && !(flag_insubs
     else
       stam = <stam>-<arg(damage)>
     endif
-    sysMessage("Citis, jak z tebe mocna a temna sila vysala magickou energii!")
+    sysMessage("Citis, jak z tebe mocna a temna sila vysala vydrz!")
   endif
 endif
 
