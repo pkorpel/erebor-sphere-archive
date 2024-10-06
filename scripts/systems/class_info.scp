@@ -234,7 +234,7 @@ class_info_class_thief_name[13] Vykryti stitem
 class_info_class_thief_tag[13] ra_vykryti
 class_info_class_thief_max_points[13] 20
 class_info_class_thief_function[13] none
-class_info_class_thief_description[13] "Tato automaticka schopnost umoznuje zlodejovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+class_info_class_thief_description[13] "Tato automaticka schopnost umoznuje zlodejovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlcena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
 
 //////////////////////////////////////////////////////////////////
 ////////////////////////////  PRIEST  ////////////////////////////
@@ -277,7 +277,7 @@ class_info_class_priest_name[5] Vykryti stitem
 class_info_class_priest_tag[5] ra_vykryti
 class_info_class_priest_max_points[5] 20
 class_info_class_priest_function[5] none
-class_info_class_priest_description[5] "Tato automaticka schopnost umoznuje snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+class_info_class_priest_description[5] "Tato automaticka schopnost umoznuje snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlcena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
 
 class_info_class_priest_name[6] Oziveni se
 class_info_class_priest_tag[6] ra_selfres
@@ -375,13 +375,13 @@ class_info_class_war_name[10] Vykryti stitem
 class_info_class_war_tag[10] ra_vykryti
 class_info_class_war_max_points[10] 20
 class_info_class_war_function[10] none
-class_info_class_war_description[10] "Tato automaticka schopnost umoznuje valecnikovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+class_info_class_war_description[10] "Tato automaticka schopnost umoznuje valecnikovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlcena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
 
 class_info_class_war_name[10] Vykryti stitem
 class_info_class_war_tag[10] ra_vykryti
 class_info_class_war_max_points[10] 20
 class_info_class_war_function[10] none
-class_info_class_war_description[10] "Tato automaticka schopnost umoznuje valecnikovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+class_info_class_war_description[10] "Tato automaticka schopnost umoznuje valecnikovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlcena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
 
 class_info_class_war_name[11] Taunt
 class_info_class_war_tag[11] ra_taunt
@@ -457,7 +457,7 @@ class_info_class_craft_name[9] Vykryti stitem
 class_info_class_craft_tag[9] ra_vykryti
 class_info_class_craft_max_points[9] 20
 class_info_class_craft_function[9] none
-class_info_class_craft_description[9] "Tato automaticka schopnost umoznuje remeslnikovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+class_info_class_craft_description[9] "Tato automaticka schopnost umoznuje remeslnikovi snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlcena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
 
 class_info_class_craft_name[10] Strelba zubatymi sipkami
 class_info_class_craft_tag[10] ra_bleed_bolt
@@ -604,7 +604,7 @@ class_info_class_ranger_name[5] Vykryti stitem
 class_info_class_ranger_tag[5] ra_vykryti
 class_info_class_ranger_max_points[5] 20
 class_info_class_ranger_function[5] none
-class_info_class_ranger_description[5] "Tato automaticka schopnost umoznuje snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
+class_info_class_ranger_description[5] "Tato automaticka schopnost umoznuje snizit obdrzene fyzicke zraneni tim, ze cast tohoto zraneni je pohlcena stitem. Velikost pohlceneho zraneni je zavisla na materialu, z nehoz je stit vyroben."
 
 class_info_class_ranger_name[6] Rozdelena strela
 class_info_class_ranger_tag[6] ra_splitshot
