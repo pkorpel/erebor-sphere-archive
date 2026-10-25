@@ -311,7 +311,7 @@ color=color_spruce
 [ITEMDEF i_arrow_piercing_iron_poison]
 ID=i_arrow
 NAME=poison chestnut piercing arrow%s
-RESOURCES=1 i_arrow_iron], 1 i_ingot_verite
+RESOURCES=1 i_arrow_iron, 1 i_ingot_verite
 FLIP=1
 tdata1=2
 tdata2=26
@@ -400,7 +400,7 @@ color=color_spruce
 [ITEMDEF i_arrow_piercing_iron]
 ID=i_arrow
 NAME=chestnut piercing arrow%s
-RESOURCES=1 i_arrow_iron], 1 i_ingot_verite
+RESOURCES=1 i_arrow_iron, 1 i_ingot_verite
 FLIP=1
 tdata1=2
 tdata2=26
