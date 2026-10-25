@@ -443,59 +443,6 @@ endif
 f_treasure_setType(<cont.act>,<cont>)
 return 0
 
-[itemdef i_treasureChest]
-id=i_chest_metal
-name=poklad
-category=poklady
-subsection=truhly_s_poklady
-description=vygenerovany poklad nepouzivat
-
-on=@userDClick
-tag(klikos,<src>)
-if (src.isGM)
-  src.sysmessage("Nesahej na to, rozbijes to!")
-  src.sysmessage("Kazdej dvojklik zpusobi, ze poklad do hodiny zmizi a novej bude mit mene penez, protoze se to pocita podle stari truhly!")
-  src.sysmessage("Ale kdyzs uzs na me klik, tak je tu zatim <finduid(tag(treasureKeeper)).f_treasure_count_gold>gp.")
-  src.sysmessage("Stari pokladu: <?finduid(tag(treasureKeeper)).f_treasure_count_age?>")
-  return 1
-endif
-if (<src.flags>&statf_dead)
-  src.accMsg("BUGGER hrac <src.name> (acc <src.account.name>,Lvl <eval src.tag(level)>) se pokousi otevrit poklad (UID: <uid>) na souradnicich -<p>- jako duch")
-  src.sysMessage("Tak tohle fakt nejde.")
-  return 1
-elseif (<distance> > 1)
-  src.sysMessage("Jsi prilis daleko.")
-  return 1
-endif
-arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
-if (!0<tag(wasOpened)> && treasureKeeper.f_guarditAdv_CheckSpawns) // check for guards only if the chest was not opened at all
-  src.sysmessage("Nedostanes se dovnitr, dokud je strazce nazivu!")
-  type=t_treasure_guarded
-  return 1
-elseif (type!=t_container_locked)
-  if (<eval tag(wasSpawned)>==0)  //je odemcena ale jeste nevyskocili guardi (pokud jsou)
-    timer=<d_def_treasureSpawnDelay>*60
-    tag(wasSpawned,1)
-    if (tag(treasureKeeper).findlayer(layer_bankbox))
-      if (tag(treasureKeeper).findlayer(layer_bankbox).rescount) //guards should be spawned
-        f_treasure_throwGuards
-        return 1
-      endif
-    endif
-  endif
-  if (<eval tag(wasOpened)> == 0)
-    tag(wasOpened,1)
-    treasureKeeper.f_treasure_generate(<uid>)
-    treasureKeeper.f_treasure_initTreasureGenerator
-  endif
-  src.accMsg("hrac <src.name> (acc <src.account.name>,Lvl <eval src.tag(level)>) otevrel poklad (UID: <uid>) na souradnicich -<p>-, <src.region.name>")
-  open
-  return 1
-endif
-
-on=@timer
-if (<eval tag(wasOpened)> == 0)
-  arg(treasureKeeper,<finduid(<tag(treasureKeeper)>)>)
   treasureKeeper.f_treasure_initTreasureGenerator
 endif
 return 0 // remove

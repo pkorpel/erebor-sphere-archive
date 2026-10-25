@@ -294,20 +294,6 @@ DUPELIST=0de2
 //kindling
 DUPEITEM=0de1
 
-[ITEMDEF 0f64]
-DEFNAME=i_torch
-TYPE=T_LIGHT_OUT
-TDATA3=i_torch_lit
-RESOURCES=1 i_LOG
-WEIGHT=10
-CATEGORY=Decoration - Lightsources
-SUBSECTION=Torches
-DESCRIPTION=Torch (Unlit)
-DUPELIST=0f6b
-
-ON=@Create
-MOREZ=1
-
 [ITEMDEF 0f6b]
 //torch
 DUPEITEM=0f64

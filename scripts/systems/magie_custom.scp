@@ -698,26 +698,6 @@ return <eval 2*argv(0)>,<eval 2*{<argv(1)> <argv(2)>}>
 
 
 
-[ITEMDEF i_moongate_blue_realm]
-//DEFNAME=i_moongate_blue_realm
-ID=i_moongate_blue
-TYPE=t_telepad2
-
-on=@create
-if (<src.tag.realm>)
-  tag.realm=<src.tag.realm>
-endif
-timer=<nastaveni_duration_s_gate_travel>
-
-on=@step
-if (<tag.realm>)&&(<src.tag.realm>!=<tag.realm>)&&!(src.isgm)
-  src.sysmessage("Do tehle gate nemuzes.")
-  return(1)
-endif
-
-on=@timer
-remove
-
 [function switchmagic]
 if (profession==class_Mystik)
   if !(tag(attack_type))
