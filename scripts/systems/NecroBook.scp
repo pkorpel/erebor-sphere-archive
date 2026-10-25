@@ -10,21 +10,6 @@
 // Please do not repost this script without my permission
 // If you modify this file, please leave this header intact
 /////////////////////////////////////////////////////////////////////////
-[ITEMDEF i_spellbook_necro]
-ID=i_spellbook
-name=necro spellbook
-value=300
-
-ON=@Create
-morem=1
-morex=0ff
-addspell=s_summon_creature
-color=038d
-
-on=@userdclick
-return <f_necrobook>
-
-
 [function f_necrobook]
 if (morex)&&(src.profession==class_necro)&&(morem)
 DIALOG d_nec

@@ -80,65 +80,6 @@ allskills=0
 
 ITEMnewbie=i_monster_create
 
-[CHARDEF c_h_vendor_f]
-NAME=Vendor
-id=c_woman
-can=MT_NONMOVER|MT_EQUIP|MT_FEMALE
-maxfood=04fff
-tevents=e_vendor_custom
-TEVENTS=e_monster
-
-TSPEECH=spk_vendor_custom
-
-CATEGORY=Civilized
-SUBSECTION=Tradesmen
-DESCRIPTION=Vendor female
-
-ON=@Create
-NAME=#NAMES_HUMANfeMALE
-tag(provize,10)
-tag(noanimate,1)
-title=the Vendor
-provocation=1
-COLOR=colors_skin
-FLAGS=statf_pet|statf_invul|statf_freeze
-STR=100
-DEX=0
-INT=100
-
-ON=@npcseenewplayer
-SRC.EVENTS -e_arena
-SRC.TAG.ARENA=""
-
-[CHARDEF c_h_vendor]
-NAME=Vendor
-ID=c_man
-can=MT_NONMOVER|MT_EQUIP|MT_MALE
-maxfood=04fff
-
-tevents=e_vendor_custom
-TEVENTS=e_monster
-TSPEECH=spk_vendor_custom
-CATEGORY=Civilized
-SUBSECTION=Tradesmen
-DESCRIPTION=Vendor
-
-ON=@Create
-NAME=#NAMES_HUMANMALE
-tag(provize,10)
-tag(noanimate,1)
-title=the Vendor
-provocation=1
-COLOR=colors_skin
-FLAGS=statf_pet|statf_invul|statf_freeze
-STR=100
-DEX=0
-INT=100
-
-ON=@npcseenewplayer
-SRC.EVENTS -e_arena
-SRC.TAG.ARENA=""
-
 [CHARDEF 0192]
 //Ghost robe is not automatic !
 DEFNAME=c_ghost_man
