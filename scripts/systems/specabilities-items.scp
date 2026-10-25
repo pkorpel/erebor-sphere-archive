@@ -81,25 +81,4 @@ src.catch
 on=5
 src.catchfield
 
-[ITEMDEF i_kudla]
-NAME=vrhaci nuz
-ID=i_dagger
-
-RESOURCES=2 i_ingot_iron
-DAM=3
-CATEGORY=Provisions - Weapons - Special
-SUBSECTION=iron
-DESCRIPTION=Vrhaci nuz
-SKILLMAKE=BLACKSMITHING 65.0, TINKERING 45.0
-
-on=@targon_item
-if (f_weapon_sharp_targon_item)
-  return 1
-endif
-return"<bowcrafting_targon_item>"
-	
-
-ON=@Create
-weaponcreate(Iron)
-
 [EOF]

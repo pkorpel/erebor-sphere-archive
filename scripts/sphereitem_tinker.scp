@@ -74,21 +74,6 @@ ELSE
 SRC.SYSMESSAGE("Runu je zrejme nutne necim aktivovat. Je mozne, ze magicka formule napsana na jeji povrch magicke schopnosti ozivi.")
 endif
 
-[ITEMDEF i_keg_potion]
-NAME=potion keg
-ID=i_KEG_WOOD
-TYPE=t_keg_potion
-VALUE={200 300}
-WEIGHT=40.0
-RESOURCES=8 i_BOARD, 1 i_BARREL_TAP, 1 i_BARREL_HOOPS
-SKILLMAKE=TINKERING 65.0,t_tinker_tools
-CATEGORY=Unique Items
-SUBSECTION=Tinker
-DESCRIPTION=empty potion Keg
-
-on=@create
-f_potionkeg_empty
-
 [ITEMDEF 0995]
 DEFNAME=i_mug_ceramic
 RESOURCES=3 i_ingot_iron
