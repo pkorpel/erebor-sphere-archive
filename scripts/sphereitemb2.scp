@@ -1641,13 +1641,6 @@ DESCRIPTION=Wooden Boards
 //curtains
 DUPEITEM=0980
 
-[ITEMDEF 09b2]
-DEFNAME=i_bankbox
-NAME=Bank Box
-LAYER=layer_bankbox
-TYPE=T_EQ_BANK_BOX
-TDATA2=04a
-
 [ITEMDEF 09fd]
 DEFNAME=i_sconce_lit
 TYPE=T_LIGHT_LIT

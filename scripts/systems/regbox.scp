@@ -2,19 +2,6 @@
 //////////////   R E G   B O X   //////////////
 ///////////////////////////////////////////////
 
-[ITEMDEF i_regbox]
-name="Bedynka na regy"
-id=i_crate_small_2
-type=t_container
-
-on=@create
-tag(pocet_regu,0)
-tag(max_regu,10000000)
-
-on=@userDClick
-dialog(d_regbox_menu)
-return 1
-
 [DIALOG d_regbox_menu]
 if (<eval(tag(pocet_regu) % 4)> == 0)
   arg(radku, <eval((tag(pocet_regu)/4))>)
@@ -232,26 +219,6 @@ endif
 ///////////////////////////////////////////////
 //////////////   G E M   B O X   //////////////
 ///////////////////////////////////////////////
-
-[ITEMDEF i_gembox]
-Name="Truhlicka na drahe kameny"
-ID=0e80
-type=t_container
-DupeList=09a8
-
-on=@create
-tag(pocet_gemu,0)
-tag(max_gemu,1000000)
-color=0990
-
-on=@userDClick
-dialog(d_gembox_menu)
-return 1
-
-on=@StackOn
-src.RedMessage("Truhlicku pouzivej dvojklikem")
-argo.bounce
-return 1
 
 [DIALOG d_gembox_menu]
 if (<eval(tag(pocet_gemu) % 4)> == 0)
