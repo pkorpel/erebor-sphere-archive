@@ -1434,6 +1434,16 @@ src.DIALOG D_RACEclass_background
 src.DIALOG D_RACEclass_classes
 return 1
 
+//moriaengine addition: the two real D_RACEclass_background/D_RACEclass_classes
+//dialogs above are LScript DIALOG blocks this engine's converter can't translate
+//(functions/dialogs aren't converted) - moriaengine's own #174 rework replaced this
+//whole flow with a hand-built C# dialog (RaceSelection.cs's D_RaceClassEntry).
+//Hooking it via a plain on=@dclick (not @userdclick, which this converter never
+//maps to anything) so the trigger survives a real regen instead of needing to be
+//hand-patched into the output every time (#509/#667).
+on=@dclick
+src.Dialog(d_raceclassentry)
+
 [itemdef i_rune_base]
 id=i_rune_marker
 name=Newbie rune

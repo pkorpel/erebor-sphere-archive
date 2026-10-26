@@ -989,6 +989,9 @@ TSPEECH=spk_jobbanker
 TEVENTS=e_character
 TEVENTS=e_monster
 TEVENTS=e_item_refuser
+//moriaengine addition: attaches BankerDClick.cs's e_banker TriggerGroup
+//so double-clicking this banker opens the player's own bank box (#509/#667)
+TEVENTS=e_banker
 ON=@Create
 NAME=#NAMES_HUMANMALE
 Title=Banker
@@ -1041,6 +1044,8 @@ TSPEECH=spk_jobbanker
 TEVENTS=e_character
 TEVENTS=e_monster
 TEVENTS=e_item_refuser
+//moriaengine addition: see the identical comment on C_H_BANKER above
+TEVENTS=e_banker
 ON=@Create
 NAME=#NAMES_HUMANFEMALE
 Title=Bankerka
