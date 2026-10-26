@@ -1359,14 +1359,6 @@ name=war bow n pack
 //EFFECT_ID=03709 
 //EFFECT=25,50 
 
-[itemdef 0204e]
-name=tattered robe
-
-
-[itemdef 0204f]
-name=gold robe
-
-
 [itemdef 08fe]
 name=bone tunic
 
